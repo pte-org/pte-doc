@@ -125,8 +125,8 @@ Covers FR-05, FR-09, FR-10. User stories: P1 (encryption), P2 (audit log).
 Track 4 Phase 1 first (or in parallel with Track 1 Phase 1, stubbing the audit write). All other phases can proceed in parallel across the 4 owners from there. Suggested cook invocation per track/phase, e.g.:
 
 ```
-/ck:cook plans/mock-test-security-performance/phase-01-t4-audit-table.md
-/ck:cook plans/mock-test-security-performance/phase-01-t1-timer-enforcement.md
+/ck:cook plans/quang-mock-test-security-performance/phase-01-t4-audit-table.md
+/ck:cook plans/quang-mock-test-security-performance/phase-01-t1-timer-enforcement.md
 ```
 
 ...one phase file at a time, per owner.
