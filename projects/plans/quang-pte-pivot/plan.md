@@ -10,7 +10,7 @@ This plan pivots the exam-simulation platform from APTIS format (single-skill sc
 
 ## Phases
 
-- [ ] Phase 1: Domain Model Redesign — Restructure `Question` and `Exam` entities to support 20 PTE task types with type-specific fields and config-driven multi-skill scoring mapping.
+- [x] Phase 1: Domain Model Redesign — Restructure `Question` and `Exam` entities to support 20 PTE task types with type-specific fields and config-driven multi-skill scoring mapping. [quality: approved; testing: passed]
 - [ ] Phase 2: Exam Delivery Timing — Add per-task prep-time and response-time enforcement; research and ingest official PTE timing data for all 20 task types.
 - [ ] Phase 3: AI Scoring Research & Architecture — Evaluate speech and essay-scoring vendors; design thin modality-specific wrapper interfaces and infrastructure.
 - [ ] Phase 4: Speaking Response Scoring — Implement async scoring pipeline for audio submissions; integrate speech vendor; extract Oral Fluency and Pronunciation sub-scores.

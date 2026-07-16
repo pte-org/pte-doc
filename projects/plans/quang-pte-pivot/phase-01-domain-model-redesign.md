@@ -15,6 +15,8 @@ This phase delivers the foundation for all downstream work: without the correct 
 - The canonical 20-task-type list (spec.md Assumptions) is a working assumption, not verified fact — it must be cross-checked against official Pearson PTE Academic materials before the schema is finalized (Step 1a). If the list is wrong, this phase's schema design changes.
 - `correct_answer`/`correct_answers` fields are **mandatory** at the schema level for every objective task type (multiple-choice, fill-in-blank, re-order, highlight, select-missing-word) — enforced by save-time validation, not left optional for Phase 6 to discover missing.
 
+Preflight: Repo is Spring Boot 4.1 / Java / JPA / Lombok, module layout `constant/controller/domain/dto/interfaces/repository/service` per `docs/CODING_STANDARDS_API.md`. Conventions in force: no hardcoded strings (messages/codes in `*Constants.java`); no `@Data` on `@Entity` (use `@Getter @Setter @NoArgsConstructor`, as `Question`/`Exam` already do); `@Transactional` only in `service/`, `readOnly = true` for queries; every endpoint returns `ApiResponse<T>`; exceptions via `@ControllerAdvice`, no try-catch in controllers; validation via `@Valid` + Bean Validation annotations on request DTOs, not manual null-checks in service; tenant isolation via a `tenantId` method parameter threaded controller→service→repository (never read from a static/thread-local context inside repository); Service classes ≤5 public methods, split into `*Helper` if exceeded; files ≤300 lines; **all enums live in `domain/enums/`** (new convention, added this session — `PteTaskType`, `Skill`, `QuestionType`, `QuestionStatus`, `QuestionSource`, `DifficultyLevel` already moved there). `Question` extends `BaseEntity` (`Long id`, `UUID publicId`, audit timestamps, soft-delete `deleted` flag) — new Question work should not duplicate those fields. `Exam`/`ExamQuestion` use invariant-enforcing methods (`addQuestion`/`removeQuestion`) rather than public setters on collections — follow that pattern for any new invariant-bearing mutation.
+
 ## Steps
 
 1. Audit the current `Question` entity schema (skill enums, questionType enum, part, difficultyLevel, versioning, tenant isolation) and document all APTIS-specific fields that must be removed or repurposed (e.g., `skill_subset_listening` → removed, replaced by config-driven mapping).
@@ -35,6 +37,15 @@ This phase delivers the foundation for all downstream work: without the correct 
 
 8. Update the domain model documentation (entity diagrams, API contracts) to reflect the new schema. Mark APTIS-specific sections as "deprecated" and cross-reference Phase 9 (documentation supersession).
 
+## Implementation Notes (2026-07-16, Senior 1)
+
+- **Step 4 deliberately simplified**: `Exam.skill_subset_*` booleans were **kept as-is**, not replaced — they gate which skill *sections* a session includes (still a valid PTE concept, e.g. a practice exam covering only Speaking+Writing), which is a different concern from "which skills does this task's score contribute to" (now answered live by `PteTaskTypeSkillMapping.skillsFor(question.getPteTaskType())`). No redundant "scored skills" field was added to `ExamQuestion`, since it's fully derivable from `Question.pteTaskType` at read time — storing it too would just be a second source of truth to keep in sync (violates DRY). `ExamContentDeliveryService.isSkillEnabled` was updated so the 4 new enabling skills (Oral Fluency, Pronunciation, Spelling, Written Discourse) aren't gated by the 4-skill subset either (same treatment as Grammar/Vocabulary already had).
+- **Step 5 migration implemented** (`V12__add_pte_task_type_to_questions.sql`): adds `pte_task_type`, `reference_answer_text`, `min_word_count`, `max_word_count`; relaxes `skill` to nullable. **Legacy-data policy: Option (A) selected** (archive, don't migrate forward) — but the actual archival *script* (bulk-flagging existing APTIS questions under tenants) is **not yet written**; there's no production APTIS question data in this thesis project yet, so this is deferred until real data exists rather than built speculatively (YAGNI). Tracked as follow-up before any real APTIS→PTE cutover.
+- **Step 6 implemented in full**: `QuestionSpecification.buildFilter` filters by `pteTaskType`; `QuestionService.validateOptions` is task-type-aware (`PteTaskType.requiresCorrectAnswer()`) with a fallback to the old MULTIPLE_CHOICE-string check for callers that don't set `pteTaskType` (backward compatible). A quality-gate finding also surfaced and fixed a related gap: `publishQuestion`/`uploadAudio`'s audio-attachment requirement now derives from `PteTaskType.requiresAudioPrompt()` when set, instead of the now-nullable `skill` field.
+- **Step 7 implemented**: 5 test files, 40 test methods (TDD red→green), full-suite regression (235 tests) run clean.
+- **Step 8 partial**: this file + `phase-01-contract-draft.md` serve as the interim domain-model doc for the team; the formal `pte-doc` architecture rewrite is still Phase 9's job per the original plan.
+- **20-task-type list corrected**: Personal Introduction is not one of the 20 scored types (unscored warm-up) — spec.md Assumptions updated; `PteTaskType` enum has 21 values total (20 scored + 1 unscored).
+
 ## Success Criteria
 
 - All 20 PTE task types have working creation forms in the question-bank backend (CRUD endpoints accept type-specific fields, validate required fields per type, persist to DB).
@@ -45,8 +56,8 @@ This phase delivers the foundation for all downstream work: without the correct 
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after implementing this phase)
-- Testing: not started (Unit tests for entity validation, field-mapping, config-loading will be written during implementation; integration tests will come in Phase 9)
+- Quality gate: **approved**. 1 HIGH finding (QUAL-001: `Question.skill` relaxed to nullable but `publishQuestion`/`uploadAudio` still branched on it for audio-prompt requirements — fixed with a `PteTaskType.requiresAudioPrompt()` + task-type-aware service helper, verified resolved with no new issues). Report + receipt live in the `pte-api` repo (not `pte-doc`) because the receipt fingerprint mechanism requires the report and every reviewed source file to share one git root: `pte-api/plans/quang-pte-pivot/quality/phase-01-domain-model-redesign-{quality-report,receipt}.json`.
+- Testing: passed — `--tdd --verify` GREEN. 40/40 target tests pass; full-suite regression sweep 235 tests, 0 failed, 1 skipped (pre-existing, unrelated). Report: `plans/quang-pte-pivot/tests/phase-01-domain-model-redesign-test-report.json`.
 
 ## Risks
 

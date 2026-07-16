@@ -1,0 +1,32 @@
+{
+  "phase": "phase-01-domain-model-redesign",
+  "mode": "tdd_verify",
+  "verdict": "PASSED",
+  "verified_at": "2026-07-16T00:00:00Z",
+
+  "target_files": [
+    "src/test/java/com/aptis/modules/questionbank/dto/request/CreateQuestionRequestTest.java",
+    "src/test/java/com/aptis/modules/questionbank/dto/request/UpdateQuestionRequestTest.java",
+    "src/test/java/com/aptis/modules/questionbank/service/QuestionServiceTest.java",
+    "src/test/java/com/aptis/modules/questionbank/dto/response/QuestionResponseTest.java",
+    "src/test/java/com/aptis/modules/questionbank/repository/QuestionSpecificationTest.java"
+  ],
+  "target_results": { "tests": 40, "passed": 40, "failed": 0 },
+
+  "arrange_fixes": [
+    {
+      "file": "src/test/java/com/aptis/modules/questionbank/service/QuestionServiceTest.java",
+      "reason": "3 tests had unused stubs left over from copy-paste (removed, no assertion change); 1 test (updateAiScoredWithoutCorrectAnswersSucceeds) was missing enforceOwnership()-path stubs (getSource/getTenantId/isHost/resolveCallerTenantId), causing an unrelated ACCESS_DENIED before reaching the code path under test — added the missing stubs, assertion ('should not throw') unchanged."
+    }
+  ],
+
+  "regression_sweep": {
+    "scope": "full pte-api suite (./mvnw test)",
+    "tests": 235,
+    "passed": 234,
+    "failed": 0,
+    "skipped": 1
+  },
+
+  "notes": "Skill enum extended from 6 to 10 values and QuestionType regex fixed (DRAG_DROP -> ORDERING) as part of this phase; full-suite regression sweep run to confirm no fallout beyond the switch-exhaustiveness fix already applied in ExamContentDeliveryService."
+}
