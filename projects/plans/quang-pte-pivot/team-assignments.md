@@ -1,64 +1,81 @@
-# Team Assignments: PTE Pivot (4 people, full-stack)
+# Team Assignments: PTE Pivot (2 senior + 2 mid-level, full-stack)
 
 **Date:** 2026-07-16
-**Basis:** plan.md's 9 phases, each phase owned wholly by one person (not split into backend/frontend slices). 8 substantive phases ÷ 4 people = 2 phases each; Phase 9 is shared by all four at the end.
+**Basis:** plan.md's 9 phases, each phase owned wholly by one person. Split by phase complexity/risk, not just phase order: phases with concurrency, cross-cutting architecture, or security decisions go to seniors; phases with well-specified deterministic logic or repetitive-but-mechanical volume go to mid-level devs.
 
-Placeholder names below (Dev 1–4) — swap in real names.
+Placeholder names below — swap in real names.
+
+---
+
+## Complexity read on each phase (why the split is what it is)
+
+| Phase | Complexity driver | Level needed |
+|---|---|---|
+| 1 — Domain Model | Foundational schema decisions block the whole team; mistakes here ripple everywhere | **Senior** |
+| 2 — Exam Delivery Timing | Optimistic locking on concurrent timer writes, WebSocket real-time state, auto-timeout transitions | **Senior** |
+| 3 — AI Vendor Research | Exploratory/evaluative, steps are well laid out in the plan, low blast radius if imperfect | Mid |
+| 4 — Speaking Scoring | First-of-its-kind async poller with row-locking (`SELECT FOR UPDATE SKIP LOCKED`), retry/circuit-breaker, vendor integration — sets the pattern Phase 5 will copy | **Senior** |
+| 5 — Writing Scoring | Same shape as Phase 4 but the hard pattern is already proven — largely "follow the recipe" | Mid |
+| 6 — Objective Scoring | Deterministic rule-based logic, no concurrency, no vendor, thoroughly spec'd acceptance criteria | Mid |
+| 7 — Score Aggregation & Reporting | Ties Phase 4+5+6 together, enforces authorization on report endpoints, cache-invalidation correctness, partial-aggregation edge cases | **Senior** |
+| 8 — Frontend (20 task types × 2 platforms) | High *volume*, but each task-type screen reuses a handful of component patterns (audio recorder, MC, drag-reorder, text input) once scaffolded | Mid (high-volume, needs help — see note below) |
 
 ---
 
 ## Assignment table
 
-| Dev | Phase 1 (first) | Phase 2 (second) |
+| Person | Phase A (first) | Phase B (second) |
 |---|---|---|
-| **Dev 1** | Phase 1 — Domain Model Redesign | Phase 6 — Objective Task Scoring |
-| **Dev 2** | Phase 3 — AI Scoring Research & Architecture | Phase 4 — Speaking Response Scoring |
-| **Dev 3** | Phase 2 — Exam Delivery Timing | Phase 7 — Score Aggregation & PTE 10–90 Reporting |
-| **Dev 4** | Phase 5 — Writing Response Scoring | Phase 8 — Frontend Implementation |
+| **Senior 1** | Phase 1 — Domain Model Redesign | Phase 7 — Score Aggregation & PTE 10–90 Reporting |
+| **Senior 2** | Phase 2 — Exam Delivery Timing | Phase 4 — Speaking Response Scoring |
+| **Mid 1** | Phase 3 — AI Scoring Research & Architecture | Phase 5 — Writing Response Scoring |
+| **Mid 2** | Phase 6 — Objective Task Scoring | Phase 8 — Frontend Implementation |
 
-**Phase 9 — Integration Testing & Documentation:** shared by all 4 at the end (see below).
+**Phase 9 — Integration Testing & Documentation:** shared by all 4 at the end.
 
----
-
-## Why this pairing (not just phase-number order)
-
-- **Dev 1 (1 → 6):** whoever designs the `Question`/`Exam` schema (Phase 1) is best placed to implement objective scoring (Phase 6), since it reads directly off the `correct_answer` fields that Phase 1 defines.
-- **Dev 2 (3 → 4):** AI vendor research flows directly into building the Speaking scoring pipeline — same person carries the vendor-selection context forward instead of handing off.
-- **Dev 3 (2 → 7):** both are "exam attempt lifecycle" concerns (timing state machine, then final score-state aggregation) — same mental model of `ExamAttempt`/`AttemptAnswer`.
-- **Dev 4 (5 → 8):** Writing scoring is the lightest of the four AI/domain phases, freeing Dev 4 up soonest to take on Phase 8 (frontend), which is the single largest phase (20 task types × 2 platforms — flagged HIGH complexity in plan.md Risks) and needs the most runway.
+**Senior 1 bookends the project** — architects the schema everyone depends on (Phase 1), then owns the final integration/authorization-sensitive phase (Phase 7) that ties everyone else's work together.
+**Senior 2 owns both concurrency-heavy phases** (Phase 2's timer-locking, Phase 4's poller row-locking) — same mental model (optimistic/pessimistic locking, race-condition reasoning) applies to both.
+**Mid 1** starts with research (Phase 3, low-risk if the initial vendor picks aren't perfect — Phase 3's own risk section already plans for re-evaluation), then implements Writing scoring by mirroring the pattern Senior 2 establishes in Phase 4.
+**Mid 2** starts with the most self-contained, deterministic phase (Phase 6 — good ramp-up task, hard to get subtly wrong since it's pure rule logic with unit tests), then takes on the frontend.
 
 ---
 
 ## Dependency-aware sequencing
 
-Only **Phase 1** and **Phase 3** have no upstream dependency — everything else waits on one or both of them. This means Dev 1 and Dev 2 start immediately; Dev 3 and Dev 4 have a startup gap.
+Only **Phase 1** and **Phase 3** have no upstream dependency.
 
 ```
-Day 1:         Dev1: Phase 1 (domain model)     Dev2: Phase 3 (AI vendor research)
-               Dev3: waiting on Phase 1          Dev4: waiting on Phase 1 + Phase 3
+Day 1:   Senior1: Phase 1         Mid1: Phase 3
+         Senior2: waiting on Phase 1     Mid2: waiting on Phase 1
 ```
 
-**Fill the startup gap instead of sitting idle:**
-- **Dev 3**, while waiting for Phase 1: start Phase 2's Step 1 now — it's pure research (sourcing official Pearson PTE timing values), no code/schema dependency. Have the timing-config table ready so Phase 2 implementation starts the moment Phase 1 lands.
-- **Dev 4**, while waiting for Phase 1 + Phase 3: pair with Dev 2 on the essay-scoring half of Phase 3 research (Phase 3 covers both speech and essay vendor evaluation — splitting it between Dev 2 and Dev 4 speeds it up AND gets Dev 4 the context they'll need later for Phase 5). Alternatively, start scaffolding the shared frontend shell (project structure, task-navigation component, timer-display component) that Phase 8 will need regardless of which task-type screens come first.
+- **Senior 2**, while waiting: do Phase 2 Step 1 now (pure research — sourcing official Pearson PTE timing values, no schema dependency). Timing-config table is ready the moment Phase 1 lands.
+- **Mid 2**, while waiting: scaffold the shared frontend shell (project structure, shared component skeletons: audio-recorder, MC-select, drag-reorder, text-input) that Phase 8 will need regardless of task order — doesn't need Phase 1 to start.
 
 ```
-After Phase 1 lands:   Dev1 → Phase 6     Dev3 → Phase 2 (research already done, starts coding immediately)
-After Phase 1 + 3:     Dev2 → Phase 4     Dev4 → Phase 5
-After Phase 2 lands:   Dev4 → can start Phase 8 in parallel with Phase 4/5/6 (Phase 8 mainly needs Phase 1+2's API contract, not full scoring data)
-After Phase 4+5+6:     Dev3 → Phase 7 (the last phase to unblock — flag if Phase 4 or 5 slips, since Phase 7 can't start without both)
+After Phase 1 lands:      Senior2 → Phase 2 (research already done)     Mid2 → Phase 6
+After Phase 1 + 3:        Senior2 → Phase 4 (after Phase 2)             Mid1 → Phase 5
+                                                                          (coordinate with Senior2: Mid1 should see
+                                                                           Phase 4's poller pattern before replicating
+                                                                           it in Phase 5 — a short pairing session
+                                                                           when Senior2 lands the SpeechScoringPoller
+                                                                           skeleton saves Mid1 from reinventing it)
+After Phase 1 + 2:        Mid2 → Phase 8 (needs Phase 1+2's API contract, not full scoring data — can run in
+                                            parallel with Phase 4/5/6/7)
+After Phase 4 + 5 + 6:    Senior1 → Phase 7 (last phase to unblock)
 ```
 
-**Critical path:** Phase 1 → {Phase 4, Phase 5, Phase 6} → Phase 7. Phase 7 (Dev 3's second phase) is the tightest dependency in the whole plan — it needs three other phases done first, so it's the most likely phase to start late. Dev 3 should expect a longer wait after finishing Phase 2 and use it to help test/review Phase 4/5/6 as they land, rather than sitting idle.
+**Critical path:** Phase 1 → {Phase 2, Phase 4 (Senior 2), Phase 5 (Mid 1), Phase 6 (Mid 2)} → Phase 7 (Senior 1). Senior 1 finishes Phase 1 early and then has the longest wait before Phase 7 can start — use that time productively: reviewing Phase 4/5/6 as they land (Senior 1 designed the schema they all build on, so they're well-placed to review), and pre-designing Phase 7's aggregation config/rubric mapping (Phase 7 Steps 1–2 are research/design, don't need 4/5/6's code to exist yet, only the *shape* of what they'll produce).
+
+**Phase 8 volume risk:** even with reusable components, 20 task types across 2 platforms is large (flagged HIGH in plan.md Risks). Once Mid 1 finishes Phase 5 or Senior 2 finishes Phase 4, whoever frees up first should pull frontend task-type screens off Mid 2's plate rather than going idle — treat Phase 8 as elastic capacity for whoever's done with their own two phases first.
 
 ---
 
 ## Phase 9 (Integration Testing & Documentation) — shared
 
-Not owned by one person. Split by what each dev already knows best:
-- **Dev 1:** regression tests for `examdelivery`/`iam`/`tenancy` + objective-scoring tests; owns final schema-consistency doc pass.
-- **Dev 2:** Speaking scoring integration tests (mock vendor + real sandbox if available).
-- **Dev 3:** Exam timing tests + score-aggregation tests + security/authorization audit (Phase 7's report-endpoint auth checks).
-- **Dev 4:** Writing scoring integration tests + full frontend manual QA pass (pte-app + pte-web) across all 20 task types.
+- **Senior 1:** regression tests for `examdelivery`/`iam`/`tenancy`, security/authorization audit (Phase 7's report-endpoint checks), final schema-consistency doc pass.
+- **Senior 2:** timer/concurrency edge-case tests (race conditions in Phase 2, poller idempotency in Phase 4), operations runbook for the scoring-outage alert/recovery procedure.
+- **Mid 1:** Writing + Speaking scoring integration tests (mock vendor + sandbox if available), vendor research report finalization.
+- **Mid 2:** full frontend manual QA pass (pte-app + pte-web) across all 20 task types, objective-scoring unit test coverage review.
 
 All 4 converge for the joint end-to-end pass (one full mock exam attempt, every task type) before declaring Phase 9 — and the whole pivot — done.
