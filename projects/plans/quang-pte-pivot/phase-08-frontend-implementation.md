@@ -8,6 +8,8 @@ This phase directly addresses P1 user story: "I want to take a mock exam coverin
 
 ## Design Constraints
 
+**Correction (2026-07-16, discovered during Phase 7 research):** the task-type count is **22**, not 20 — see `spec.md` Assumptions. The 2 added types (`RESPOND_TO_A_SITUATION`, `SUMMARIZE_GROUP_DISCUSSION`) are both Speaking, reusing the same audio-recording interaction pattern as Read Aloud/Repeat Sentence — no new UI widget category needed, just 2 more entries in the task-type renderer.
+
 - Frontend must **faithfully represent the 20 task types** with interactions matching real PTE as closely as possible (read-aloud audio recording, drag-reorder, multiple-choice click, type-in text input, etc.). Shortcuts are acceptable only if documented.
 - Per-task **timer display must be accurate and synchronized** with backend timers (same constraints as Phase 2): frontend displays countdown, falls back to local timer if network drops, but backend is source of truth for expiration.
 - The frontend **must not assume immediate scoring results** — Writing answers may be PENDING; UI must handle and display PENDING status gracefully (no "score unavailable" spinner that hangs; clear messaging).

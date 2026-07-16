@@ -2,13 +2,13 @@
 
 ## Requirements
 
-Restructure the `Question` and `Exam` entities to support all 20 PTE Academic task types with type-specific fields (e.g., audio prompt for Read Aloud, image for Describe Image, reference answer for scoring). Replace the current one-skill-per-question model (APTIS-era `skill_subset_*` booleans) with a config-driven multi-skill-per-task scoring mapping that allows a single task to contribute to multiple communicative and enabling skills simultaneously.
+Restructure the `Question` and `Exam` entities to support all 22 PTE Academic task types with type-specific fields (e.g., audio prompt for Read Aloud, image for Describe Image, reference answer for scoring). Replace the current one-skill-per-question model (APTIS-era `skill_subset_*` booleans) with a config-driven multi-skill-per-task scoring mapping that allows a single task to contribute to multiple communicative and enabling skills simultaneously.
 
 This phase delivers the foundation for all downstream work: without the correct question schema and skill-mapping structure, exam delivery, scoring, and reporting cannot proceed correctly.
 
 ## Design Constraints
 
-- The domain model must support the fixed 20 PTE task types; no attempt to make it infinitely generic or provider-agnostic (PTE is the only scope).
+- The domain model must support the fixed 22 PTE task types; no attempt to make it infinitely generic or provider-agnostic (PTE is the only scope).
 - Task-to-skill mapping is **config-driven** (static rubric files or data-driven config, not a dynamic DB join-table). This decision prevents migration churn and aligns with the fixed PTE taxonomy; do not introduce a generic N:N join-table.
 - The model must remain backward-compatible at the API level for the proctor module and examdelivery state machine; breaking changes to attempt state or user-facing question rendering must not occur. (The internal Question schema can change; the external API contract for "get question details" can be versioned or adapted, but the attempt lifecycle must remain stable.)
 - Multi-tenancy (tenant isolation in the question bank) must be preserved exactly as it is now; no changes to the `tenancy` module.
@@ -44,11 +44,11 @@ Preflight: Repo is Spring Boot 4.1 / Java / JPA / Lombok, module layout `constan
 - **Step 6 implemented in full**: `QuestionSpecification.buildFilter` filters by `pteTaskType`; `QuestionService.validateOptions` is task-type-aware (`PteTaskType.requiresCorrectAnswer()`) with a fallback to the old MULTIPLE_CHOICE-string check for callers that don't set `pteTaskType` (backward compatible). A quality-gate finding also surfaced and fixed a related gap: `publishQuestion`/`uploadAudio`'s audio-attachment requirement now derives from `PteTaskType.requiresAudioPrompt()` when set, instead of the now-nullable `skill` field.
 - **Step 7 implemented**: 5 test files, 40 test methods (TDD red→green), full-suite regression (235 tests) run clean.
 - **Step 8 partial**: this file + `phase-01-contract-draft.md` serve as the interim domain-model doc for the team; the formal `pte-doc` architecture rewrite is still Phase 9's job per the original plan.
-- **20-task-type list corrected**: Personal Introduction is not one of the 20 scored types (unscored warm-up) — spec.md Assumptions updated; `PteTaskType` enum has 21 values total (20 scored + 1 unscored).
+- **Task-type list corrected twice**: (1) Personal Introduction is not one of the scored types (unscored warm-up); (2) Pearson added 2 new scored types in August 2025 (`RESPOND_TO_A_SITUATION`, `SUMMARIZE_GROUP_DISCUSSION`, both Speaking) — discovered during Phase 7 research and backported here. `PteTaskType` enum now has **23 values total (22 scored + 1 unscored)**, `PteTaskTypeSkillMapping` updated to match, DTO `@Pattern` regexes updated, full test suite re-verified green (235/235). spec.md, plan.md, and phase-02/08/09 files carry pointer corrections.
 
 ## Success Criteria
 
-- All 20 PTE task types have working creation forms in the question-bank backend (CRUD endpoints accept type-specific fields, validate required fields per type, persist to DB).
+- All 22 PTE task types have working creation forms in the question-bank backend (CRUD endpoints accept type-specific fields, validate required fields per type, persist to DB).
 - Task-to-skill mapping config is versioned and loadable at runtime (if stored as files, they are in `src/main/resources/config/` and loaded by Spring; if stored in DB, a seed script populates the reference data).
 - Existing `examdelivery` state machine, `proctor` audit trail, and `iam`/`tenancy` isolation continue to work unchanged with sample PTE questions (no null-pointer exceptions, no permission errors).
 - Unit tests for `Question` entity and config-mapping service are passing (minimum 80% code coverage on new code paths).
@@ -56,7 +56,7 @@ Preflight: Repo is Spring Boot 4.1 / Java / JPA / Lombok, module layout `constan
 
 ## Quality and Testing State
 
-- Quality gate: **approved**. 1 HIGH finding (QUAL-001: `Question.skill` relaxed to nullable but `publishQuestion`/`uploadAudio` still branched on it for audio-prompt requirements — fixed with a `PteTaskType.requiresAudioPrompt()` + task-type-aware service helper, verified resolved with no new issues). Report + receipt live in the `pte-api` repo (not `pte-doc`) because the receipt fingerprint mechanism requires the report and every reviewed source file to share one git root: `pte-api/plans/quang-pte-pivot/quality/phase-01-domain-model-redesign-{quality-report,receipt}.json`.
+- Quality gate: **approved**. 1 HIGH finding (QUAL-001: `Question.skill` relaxed to nullable but `publishQuestion`/`uploadAudio` still branched on it for audio-prompt requirements — fixed with a `PteTaskType.requiresAudioPrompt()` + task-type-aware service helper, verified resolved with no new issues) + 1 NOTED finding (QUAL-002: task-type count corrected from 20 to 22, receipt reissued after the fix). Report + receipt live in the `pte-api` repo (not `pte-doc`) because the receipt fingerprint mechanism requires the report and every reviewed source file to share one git root: `pte-api/plans/quang-pte-pivot/quality/phase-01-domain-model-redesign-{quality-report,receipt}.json`.
 - Testing: passed — `--tdd --verify` GREEN. 40/40 target tests pass; full-suite regression sweep 235 tests, 0 failed, 1 skipped (pre-existing, unrelated). Report: `plans/quang-pte-pivot/tests/phase-01-domain-model-redesign-test-report.json`.
 
 ## Risks

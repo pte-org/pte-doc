@@ -6,12 +6,12 @@ Mode: Hard
 
 ## Overview
 
-This plan pivots the exam-simulation platform from APTIS format (single-skill scoring, CEFR bands) to PTE Academic format (20 official task types, multi-skill-per-task scoring, 10–90 point scale, AI-driven automated speaking/writing assessment). The pivot is structural (domain model redesign, new scoring pipeline, new exam delivery timing) and spans both backend (pte-api) and frontend (pte-app, pte-web) repositories. This is a high-fidelity simulation, not an MVP rebrand.
+This plan pivots the exam-simulation platform from APTIS format (single-skill scoring, CEFR bands) to PTE Academic format (22 official task types as of Pearson's August 2025 update, multi-skill-per-task scoring, 10–90 point scale, AI-driven automated speaking/writing assessment). The pivot is structural (domain model redesign, new scoring pipeline, new exam delivery timing) and spans both backend (pte-api) and frontend (pte-app, pte-web) repositories. This is a high-fidelity simulation, not an MVP rebrand.
 
 ## Phases
 
-- [x] Phase 1: Domain Model Redesign — Restructure `Question` and `Exam` entities to support 20 PTE task types with type-specific fields and config-driven multi-skill scoring mapping. [quality: approved; testing: passed]
-- [ ] Phase 2: Exam Delivery Timing — Add per-task prep-time and response-time enforcement; research and ingest official PTE timing data for all 20 task types.
+- [x] Phase 1: Domain Model Redesign — Restructure `Question` and `Exam` entities to support 22 PTE task types with type-specific fields and config-driven multi-skill scoring mapping. [quality: approved; testing: passed]
+- [ ] Phase 2: Exam Delivery Timing — Add per-task prep-time and response-time enforcement; research and ingest official PTE timing data for all 22 task types.
 - [ ] Phase 3: AI Scoring Research & Architecture — Evaluate speech and essay-scoring vendors; design thin modality-specific wrapper interfaces and infrastructure.
 - [ ] Phase 4: Speaking Response Scoring — Implement async scoring pipeline for audio submissions; integrate speech vendor; extract Oral Fluency and Pronunciation sub-scores.
 - [ ] Phase 5: Writing Response Scoring — Integrate essay-scoring vendor; extract Grammar, Vocabulary, Written Discourse, and Spelling sub-scores; implement rule-based objective-task scoring.
@@ -25,14 +25,14 @@ This plan pivots the exam-simulation platform from APTIS format (single-skill sc
 **Hard-mode research findings (from brainstorm/scouting session):**
 
 1. **Architecture Decisions Baked In** (from codebase scouting, not re-derived here):
-   - Task→skill scoring mapping is **config-driven**, not a DB join-table. PTE has exactly 20 fixed task types; each task type gets a static scoring-rubric config defining which skills it contributes to and their weights. Avoids DB schema churn and aligns with the fixed PTE taxonomy.
+   - Task→skill scoring mapping is **config-driven**, not a DB join-table. PTE has exactly 22 fixed task types (corrected 2026-07-16 from an initial 20 — Pearson added 2 in August 2025); each task type gets a static scoring-rubric config defining which skills it contributes to and their weights. Avoids DB schema churn and aligns with the fixed PTE taxonomy.
    - AI scoring uses **thin single-vendor wrappers per modality** (one for speech/fluency, one for essay). No generic multi-provider abstraction; only build that abstraction if a second vendor is actually added.
    - Async scoring pipeline: **no separate job-queue table**. Add `scoring_status` (PENDING/SCORED/FAILED) and `retry_count` columns directly on `AttemptAnswer`; a Spring `@Scheduled` poller picks up PENDING rows.
    - Scoring scale: PTE's official 10–90 (Overall + 4 communicative skills + 6 enabling skills). CEFR A1–C1 is fully replaced, not run in parallel.
 
 2. **Deferred Decisions (Explicit Phase Tasks)**:
    - **AI vendor selection** — No vendor is yet chosen. Phase 3 includes a concrete research-spike task: evaluate OpenAI Whisper + GPT for speech/essay, or Pearson's own ASR API, or alternatives. Results must be documented and decision made before Phase 4/5 start.
-   - **Per-task timing values** — Exact prep-time and response-time for all 20 task types are not yet sourced. Phase 2 includes a concrete data-sourcing task: consult official Pearson PTE public materials (timing is typically published) and enter values into versioned config. This task has a TODO gate: if values cannot be sourced, the timing-enforcement code is stubbed with placeholder comments, and the gate must be manually resolved before release.
+   - **Per-task timing values** — Exact prep-time and response-time for all 22 task types are not yet sourced. Phase 2 includes a concrete data-sourcing task: consult official Pearson PTE public materials (timing is typically published) and enter values into versioned config. This task has a TODO gate: if values cannot be sourced, the timing-enforcement code is stubbed with placeholder comments, and the gate must be manually resolved before release.
 
 3. **Codebase Reuse**:
    - `examdelivery` (state machine), `proctor` (audit/WebSocket), `iam`, `tenancy`, `storage`, `asset` are reused as-is. No changes to these modules are in scope; they are validated by scouting to be compatible with PTE structure.
@@ -55,7 +55,7 @@ This plan pivots the exam-simulation platform from APTIS format (single-skill sc
 
 - **HIGH: AI Vendor Selection & Latency Uncertainty** — Speech and essay scoring APIs are external dependencies with unknown latency, cost, and quality at this stage. If the chosen vendor is slow (>10s per response), async queueing alone may not provide real-time exam-like feedback. *Mitigation:* Phase 3 research-spike must include latency testing on sample data. If latency is unacceptable, fallback to cached model responses or manual scoring for some task types.
 
-- **HIGH: Per-Task Timing Data Sourcing** — Official PTE prep/response times for all 20 task types must be sourced from public Pearson materials. If Pearson's official timings are not publicly available, timing values must be estimated from publicly available sample exams (high risk of inaccuracy). *Mitigation:* Phase 2 includes a formal data-sourcing task with documented sources; if sources are insufficient, implement a TODO gate and defer to Phase 9 or a post-release patch.
+- **HIGH: Per-Task Timing Data Sourcing** — Official PTE prep/response times for all 22 task types must be sourced from public Pearson materials. If Pearson's official timings are not publicly available, timing values must be estimated from publicly available sample exams (high risk of inaccuracy). *Mitigation:* Phase 2 includes a formal data-sourcing task with documented sources; if sources are insufficient, implement a TODO gate and defer to Phase 9 or a post-release patch.
 
 - **HIGH: Frontend Complexity Across Two Repos** — Implementing task-type-specific UI for 20 task types across both pte-app (Flutter mobile) and pte-web (browser) is high-effort and high-risk for UI/UX consistency, accessibility, and timing enforcement. *Mitigation:* Phase 8 should start with a shared design system / component library spec (before coding); prioritize 4–5 high-frequency task types first (Read Aloud, Describe Image, Essay, Multiple Choice) for early testing, defer lower-frequency types to a post-MVP release or Phase 9b.
 
@@ -87,7 +87,7 @@ This plan pivots the exam-simulation platform from APTIS format (single-skill sc
 
 ## Success Criteria (High-Level)
 
-- A full mock exam attempt end-to-end: student selects exam → progresses through 20 PTE task types with correct per-task timers → submits Speaking/Writing responses (queued for scoring) → completes attempt → receives final report on 10–90 scale. Zero timeout, zero null-pointer exceptions.
+- A full mock exam attempt end-to-end: student selects exam → progresses through 22 PTE task types with correct per-task timers → submits Speaking/Writing responses (queued for scoring) → completes attempt → receives final report on 10–90 scale. Zero timeout, zero null-pointer exceptions.
 - Speaking and Writing scores are populated by AI pipeline within 5 minutes of exam submission (or documented expected latency met); no PENDING scores in final report.
 - Final score report displays Overall (10–90), 4 communicative skills (10–90 each), 6 enabling skills (10–90 each); no CEFR bands.
 - Proctor actions (force-submit, extend-time, flag-violation) work unchanged on PTE attempts; `proctor` module tests pass without modification.

@@ -8,6 +8,8 @@ This is the final quality gate before release; all P1 user stories and Success C
 
 ## Design Constraints
 
+**Correction (2026-07-16, discovered during Phase 7 research):** the task-type count is **22**, not 20 — see `spec.md` Assumptions. `pte-task-types.md` (Step 5) must catalog all 22.
+
 - **Zero regressions:** All existing tests for `iam`, `tenancy`, `proctor`, `examdelivery` must pass unchanged. Any new failures indicate a breaking change in Phases 1–8 (escalate immediately).
 - **End-to-end is non-negotiable:** At least one full exam attempt must complete successfully with Speaking, Writing, and objective tasks, resulting in a valid score report.
 - Documentation must be **internally consistent** — if docs say "timers enforced per-task" but code doesn't, docs must be updated, not vice versa (code is source of truth).

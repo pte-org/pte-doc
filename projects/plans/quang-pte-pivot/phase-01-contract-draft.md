@@ -1,9 +1,9 @@
 # Phase 1 Contract Draft (for the other 3 devs to code against today)
 
-**Status:** DRAFT — reviewed and owned by Senior 1 (Dev doing Phase 1). Committed to `pte-api` so it compiles; full migration + validation + service layer is still Senior 1's Phase 1 work in progress. Everyone else can start building against these shapes now; expect minor field renames before Phase 1 is fully merged.
+**Status:** Phase 1 is DONE (quality gate APPROVED, 235/235 tests passing) — this is now the stable contract, not a moving target. One correction since the draft first went out: the task-type count is **22, not 20** (Pearson added 2 in August 2025) — `PteTaskType` was updated to match, see below. Everyone can build against these shapes with confidence now.
 
 **Files added/changed in `pte-api`** (under `src/main/java/com/aptis/modules/questionbank/domain/`):
-- `enums/PteTaskType.java` — new enum, 20 scored item types + `PERSONAL_INTRODUCTION` (unscored).
+- `enums/PteTaskType.java` — enum, **22 scored item types** + `PERSONAL_INTRODUCTION` (unscored) = 23 values total. Includes `RESPOND_TO_A_SITUATION` and `SUMMARIZE_GROUP_DISCUSSION` (both Speaking, added to the official exam in August 2025 — not in the original brainstorm/spec, backported once discovered).
 - `enums/Skill.java` — extended from 6 to 10 values (added `ORAL_FLUENCY`, `PRONUNCIATION`, `SPELLING`, `WRITTEN_DISCOURSE`). Existing values unchanged, so nothing that reads `Skill.GRAMMAR` etc. breaks.
 - **All 6 enums in the module (`DifficultyLevel`, `QuestionSource`, `QuestionStatus`, `QuestionType`, `Skill`, `PteTaskType`) now live under `domain/enums/`**, not directly in `domain/` — new team-wide convention, see `CODING_STANDARDS_API.md` ("Enum Placement"). If you're importing any of these, the package is `com.aptis.modules.questionbank.domain.enums.*`, not `...domain.*`.
 - `PteTaskTypeSkillMapping.java` (stays in `domain/`, not an enum) — new static config class: `PteTaskTypeSkillMapping.skillsFor(PteTaskType)` returns the list of `Skill`s (with placeholder weight 1.0) that task type contributes to. **This is what Phase 4/5/6/7 call instead of reading a single `question.getSkill()` value.**
@@ -34,7 +34,7 @@ for (var contribution : contributions) {
 | PteTaskType | QuestionType | Scored by |
 |---|---|---|
 | PERSONAL_INTRODUCTION | AUDIO_RECORD | not scored |
-| READ_ALOUD, REPEAT_SENTENCE, DESCRIBE_IMAGE, RETELL_LECTURE, ANSWER_SHORT_QUESTION | AUDIO_RECORD | Phase 4 (AI) |
+| READ_ALOUD, REPEAT_SENTENCE, DESCRIBE_IMAGE, RETELL_LECTURE, ANSWER_SHORT_QUESTION, RESPOND_TO_A_SITUATION, SUMMARIZE_GROUP_DISCUSSION | AUDIO_RECORD | Phase 4 (AI, +human review per Pearson's Aug-2025 update on scripted-sounding answers) |
 | SUMMARIZE_WRITTEN_TEXT, WRITE_ESSAY | TEXT_INPUT | Phase 5 (AI) |
 | READING_FILL_IN_THE_BLANKS, READING_WRITING_FILL_IN_THE_BLANKS, LISTENING_FILL_IN_THE_BLANKS | FILL_IN_BLANK | Phase 6 (rule-based) |
 | MULTIPLE_CHOICE_READING_SINGLE_ANSWER, MULTIPLE_CHOICE_READING_MULTIPLE_ANSWER, MULTIPLE_CHOICE_LISTENING_SINGLE_ANSWER, MULTIPLE_CHOICE_LISTENING_MULTIPLE_ANSWER, HIGHLIGHT_CORRECT_SUMMARY, SELECT_MISSING_WORD | MULTIPLE_CHOICE | Phase 6 (rule-based) |
@@ -45,11 +45,12 @@ for (var contribution : contributions) {
 
 ---
 
-## Open decisions Senior 1 still needs to make before Phase 1 is "done" (not blocking others from starting today)
+## Resolved / still-open items
 
-1. **`skill` column is currently `nullable = false`** in the DB — but it's deprecated for PTE questions. Either relax the DB constraint to nullable, or have new PTE questions write some placeholder value. Doesn't block Mid/Senior 2 from coding against `pteTaskType` today.
-2. **`HIGHLIGHT_INCORRECT_WORDS`** doesn't map cleanly to any existing `QuestionType` — flagged above as a stretch-fit on `MATCHING`. Confirm or add a new `QuestionType` value if this causes friction during Phase 6/8 implementation.
-3. Actual Flyway migration script, `correct_answer` mandatory-field validation (per plan.md Phase 1 Step 6), and the legacy-APTIS-data archival script (Phase 1 Step 5) are not in this draft yet — those don't block others' compile-time contract, only the real DB migration.
+1. **RESOLVED:** `skill` column relaxed to nullable (`V12` migration) — new PTE questions leave it null, legacy APTIS rows keep their value.
+2. **STILL OPEN:** `HIGHLIGHT_INCORRECT_WORDS` doesn't map cleanly to any existing `QuestionType` — flagged as a stretch-fit on `MATCHING`. Confirm or add a new `QuestionType` value if this causes friction during Phase 6/8 implementation.
+3. **RESOLVED:** Flyway migration (`V12`) and `correct_answer`/audio-prompt mandatory-field validation are implemented and tested. **STILL OPEN:** the legacy-APTIS-data archival script (Phase 1 Step 5's second half) is deferred — no real APTIS data exists yet in this thesis project, so it wasn't built speculatively (YAGNI). Needed before any real cutover.
+4. **NEW (2026-07-16):** if Pearson adds further item types in the future, extending `PteTaskType` is additive and safe (add enum constant + `PteTaskTypeSkillMapping` entry + DTO `@Pattern` regex entry + timing-config entry in Phase 2) — no schema migration needed since `pte_task_type` is already a plain string column.
 
 ---
 
