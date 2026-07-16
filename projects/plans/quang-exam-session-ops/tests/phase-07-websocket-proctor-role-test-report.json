@@ -1,0 +1,24 @@
+{
+  "phase": "phase-07-websocket-proctor-role",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-07-16T01:38:17+07:00",
+  "summary": {
+    "passed": 141,
+    "failed": 0,
+    "skipped": 1
+  },
+  "failures": [],
+  "test_files": [
+    "aptis-api/src/test/java/com/aptis/modules/proctor/config/StompAuthChannelInterceptorTest.java",
+    "aptis-api/src/test/java/com/aptis/modules/proctor/service/ProctorWebSocketSessionRegistryTest.java",
+    "aptis-api/src/test/java/com/aptis/modules/proctor/service/ProctorStatusPushServiceTest.java",
+    "aptis-api/src/test/java/com/aptis/modules/examoperations/service/ExamServiceTest.java",
+    "aptis-api/src/test/java/com/aptis/modules/examdelivery/service/ExamAttemptServiceTest.java (updated for new ProctorStatusPushService dependency)"
+  ],
+  "notes": [
+    "Full suite run (./mvnw -o test) covers all phases 1-7 test classes together: 141 passed, 0 failed, 1 skipped.",
+    "The 1 skip is a pre-existing, unrelated stock Spring Initializr scaffold (AptisApiApplicationTests.contextLoads, dated before this plan existed) that needs a Testcontainers-backed Postgres profile to run meaningfully (H2 incompatible with Postgres-specific migration types); disabled at class level with a documented reason rather than silently deleted."
+  ],
+  "report_path": "plans/quang-exam-session-ops/tests/phase-07-websocket-proctor-role-test-report.json"
+}

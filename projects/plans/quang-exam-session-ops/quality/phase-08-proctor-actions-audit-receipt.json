@@ -1,0 +1,33 @@
+{
+  "target": "phase-08-proctor-actions-audit",
+  "verdict": "APPROVED",
+  "policy_version": "1.0.0",
+  "report_path": "aptis-doc/projects/plans/quang-exam-session-ops/quality/phase-08-proctor-actions-audit-quality-report.json",
+  "reviewed_files": [
+    "aptis-api/src/main/java/com/aptis/common/interfaces/StudentAttemptLookup.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/controller/ProctorActionController.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/controller/ProctorBroadcastController.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/domain/ExamAttempt.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/dto/ExtendTimeRequest.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/dto/ExtendTimeResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/dto/FlagViolationRequest.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/dto/FlagViolationResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/dto/ProctorActionResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/repository/ExamAttemptRepository.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/service/ExamAttemptLookupService.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/service/ProctorActionService.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/service/ProctorBroadcastService.java",
+    "aptis-api/src/main/java/com/aptis/modules/proctor/config/StompAuthChannelInterceptor.java",
+    "aptis-api/src/main/java/com/aptis/modules/proctor/domain/ProctorAction.java",
+    "aptis-api/src/main/java/com/aptis/modules/proctor/domain/ProctorActionType.java",
+    "aptis-api/src/main/java/com/aptis/modules/proctor/dto/BroadcastAnnouncement.java",
+    "aptis-api/src/main/java/com/aptis/modules/proctor/dto/BroadcastRequest.java",
+    "aptis-api/src/main/java/com/aptis/modules/proctor/repository/ProctorActionRepository.java",
+    "aptis-api/src/main/java/com/aptis/modules/proctor/service/ProctorActionAuditService.java",
+    "aptis-api/src/main/resources/db/migration/V10__proctor_actions_and_attempt_flags.sql",
+    "aptis-api/src/main/resources/db/migration/V9__create_proctor_and_exam_assignment.sql"
+  ],
+  "source_fingerprint": "sha256:d657baa014c3c64ed28955f1bbfabcb7c4d2a87c43a29214ad2624fc4d0bd148",
+  "reviewed_at": "2026-07-16T02:00:00Z",
+  "open_blocking_findings": 0
+}

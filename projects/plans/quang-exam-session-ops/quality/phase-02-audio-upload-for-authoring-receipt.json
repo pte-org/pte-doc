@@ -1,0 +1,19 @@
+{
+  "target": "phase-02-audio-upload-for-authoring",
+  "verdict": "APPROVED",
+  "policy_version": "1.0.0",
+  "report_path": "aptis-doc/projects/plans/quang-exam-session-ops/quality/phase-02-audio-upload-for-authoring-quality-report.json",
+  "reviewed_files": [
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/constant/QuestionBankApiConstants.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/constant/QuestionBankConstants.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/controller/QuestionController.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/domain/Question.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/dto/response/QuestionResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/interfaces/QuestionOperations.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/service/QuestionService.java",
+    "aptis-api/src/main/resources/db/migration/V6__add_audio_asset_id_to_questions.sql"
+  ],
+  "source_fingerprint": "sha256:99500c61e16b1e32be8ea57541a52368f91fce34c8712a305657309534f643e6",
+  "reviewed_at": "2026-07-15T23:25:00Z",
+  "open_blocking_findings": 0
+}

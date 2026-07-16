@@ -1,0 +1,41 @@
+{
+  "mode": "gate",
+  "target": "phase-05-delivery-api-filtering",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-07-16T00:10:00Z",
+  "reviewed_files": [
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/dto/RedactedQuestionResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/dto/SectionSummaryResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/service/ExamAttemptAccessGuard.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/service/ExamContentDeliveryService.java",
+    "aptis-api/src/main/java/com/aptis/modules/examoperations/repository/ExamQuestionRepository.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/constant/ExamDeliveryApiConstants.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/constant/ExamDeliveryConstants.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/service/ExamAttemptService.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/controller/ExamAttemptController.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 1
+  },
+  "findings": [
+    {
+      "id": "QUAL-001",
+      "severity": "NOTED",
+      "rule": "SEC_SERVER_SIDE_AUTHZ",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "aptis-api/src/main/java/com/aptis/modules/examdelivery/controller/ExamAttemptController.java",
+      "evidence": "Pre-existing ExamAttemptController had zero @PreAuthorize and zero ownership verification on both of its endpoints (speaking-upload, submit-answer) before this phase.",
+      "why_it_matters": "Any authenticated user could act on any other student's attempt by guessing an attemptId. Fixed opportunistically since Phase 5's new content-delivery endpoints share the exact same trust boundary.",
+      "required_action": "None — retrofitted via a shared ExamAttemptAccessGuard applied to all 4 endpoints (2 pre-existing + 2 new).",
+      "owner": "none"
+    }
+  ],
+  "report_path": "plans/quang-exam-session-ops/quality/phase-05-delivery-api-filtering-quality-report.json"
+}

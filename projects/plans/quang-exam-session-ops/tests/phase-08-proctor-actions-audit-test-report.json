@@ -1,0 +1,24 @@
+{
+  "phase": "phase-08-proctor-actions-audit",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-07-16T02:13:41+07:00",
+  "summary": {
+    "passed": 179,
+    "failed": 0,
+    "skipped": 1
+  },
+  "failures": [],
+  "test_files": [
+    "aptis-api/src/test/java/com/aptis/modules/examdelivery/domain/ExamAttemptTest.java (extended: forceSubmit, extendTime, flag)",
+    "aptis-api/src/test/java/com/aptis/modules/examdelivery/service/ProctorActionServiceTest.java (new)",
+    "aptis-api/src/test/java/com/aptis/modules/examdelivery/service/ProctorBroadcastServiceTest.java (new)",
+    "aptis-api/src/test/java/com/aptis/modules/proctor/service/ProctorActionAuditServiceTest.java (new)",
+    "aptis-api/src/test/java/com/aptis/modules/proctor/config/StompAuthChannelInterceptorTest.java (extended: STUDENT connect, topic subscription authorization, deny-by-default)"
+  ],
+  "notes": [
+    "Full suite run (./mvnw -o test) confirms zero regressions across phases 1-8: 180 tests run, 0 failures, 1 skip (the same pre-existing, unrelated AptisApiApplicationTests smoke test disabled in Phase 7).",
+    "Security-critical coverage: atomic authorization+lock (findByIdAndAssignedProctorForUpdate) verified to reject before any mutation/audit when unauthorized; force-submit idempotency verified (no duplicate audit on double-call); STOMP interceptor's new STUDENT role and deny-by-default subscription authorization verified."
+  ],
+  "report_path": "plans/quang-exam-session-ops/tests/phase-08-proctor-actions-audit-test-report.json"
+}

@@ -1,0 +1,52 @@
+{
+  "phase": "09",
+  "phase_title": "RetryRequest Entity & Approval Queue",
+  "reviewed_at": "2026-07-16T12:00:00Z",
+  "reviewer": "quality-reviewer (verify mode)",
+  "verdict": "APPROVED",
+  "findings": [
+    {
+      "id": "QUAL-001",
+      "severity": "HIGH",
+      "rule": "TRANSACTION_ISOLATION_EXPLICIT",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": [
+        "src/main/java/com/aptis/modules/examdelivery/service/ExamAttemptService.java:85",
+        "src/main/java/com/aptis/modules/examdelivery/repository/RetryRequestRepository.java:26"
+      ],
+      "evidence": "recordHeartbeat method now declares @Transactional(isolation = Isolation.READ_COMMITTED) at the outermost transactional boundary (line 85). The nested call to findMostRecent in enforceRetryGate (line 89 -> 103) uses Spring's default REQUIRED propagation, inheriting the parent isolation level rather than having its own ignored. Comment at lines 78-84 explains the design decision. RetryRequestRepository.findMostRecent no longer declares isolation level (line 26 has only @Query), with comment at lines 19-25 directing to the actual enforcement point.",
+      "why_it_matters": "Phase 9 Design Constraint Step 6 requires READ_COMMITTED isolation when checking RetryRequest status during exam start (recordHeartbeat), to ensure the check reflects the most recently committed approval state, not a stale snapshot. Nested @Transactional isolation levels are silently ignored by Spring when joining an already-open transaction; only the outermost boundary's isolation level applies. The fix ensures the requirement is actually enforced.",
+      "required_action": "None; fix verified complete. Isolation level is now correctly set on recordHeartbeat (the outermost caller), and findMostRecent is only reachable from recordHeartbeat, so all paths to enforceRetryGate/findMostRecent inherit the READ_COMMITTED isolation.",
+      "owner": "cook"
+    },
+    {
+      "id": "QUAL-002",
+      "severity": "NOTED",
+      "rule": "UNUSED_CONSTANT",
+      "status": "RESOLVED",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "src/main/java/com/aptis/modules/examdelivery/constant/ExamDeliveryConstants.java",
+      "evidence": "Constant RETRY_REVIEWER_NOT_AUTHORIZED has been removed. Grep search across entire aptis-api repository confirms zero remaining references to this constant name anywhere.",
+      "why_it_matters": "Unused constants clutter the codebase and increase cognitive load for maintainers. While not a functional defect, removing dead code improves clarity.",
+      "required_action": "None; constant removed and verified absent from entire repository.",
+      "owner": "cook"
+    }
+  ],
+  "summary": {
+    "total_findings": 2,
+    "severity_counts": {
+      "BLOCKER": 0,
+      "HIGH": 1,
+      "MEDIUM": 0,
+      "LOW": 0,
+      "NOTED": 1
+    },
+    "blocking_count": 1,
+    "verdict_justification": "Both findings from the prior review have been successfully resolved. QUAL-001 (HIGH, blocking) is now fixed: the explicit READ_COMMITTED isolation level is correctly set on recordHeartbeat (the outermost transactional boundary), ensuring the Phase 9 Design Constraint Step 6 requirement is actually enforced. findMostRecent is only reachable through recordHeartbeat, confirming no other code path bypasses this isolation control. QUAL-002 (NOTED, non-blocking) is also resolved: the unused RETRY_REVIEWER_NOT_AUTHORIZED constant has been removed from ExamDeliveryConstants.java, and grep confirms zero references remain in the repository. All other methods in ExamAttemptService.java continue to function as designed (submitAnswer, switchSection, submitAttempt each have appropriate transaction boundaries for their operations)."
+  }
+}

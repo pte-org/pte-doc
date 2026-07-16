@@ -1,0 +1,56 @@
+{
+  "mode": "gate",
+  "target": "phase-01-question-entity-and-authoring",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-07-15T22:45:00Z",
+  "reviewed_files": [
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/domain/Question.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/domain/QuestionSource.java",
+    "aptis-api/src/main/resources/db/migration/V5__add_tenant_scoping_to_questions.sql",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/repository/QuestionSpecification.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/constant/QuestionBankApiConstants.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/constant/QuestionBankConstants.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/dto/response/QuestionResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/interfaces/QuestionOperations.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/service/QuestionService.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/controller/QuestionController.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 1
+  },
+  "findings": [
+    {
+      "id": "QUAL-001",
+      "severity": "HIGH",
+      "rule": "PERF_NO_N_PLUS_ONE",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "aptis-api/src/main/java/com/aptis/modules/questionbank/service/QuestionService.java:180-215",
+      "evidence": "listQuestions() originally called assetOperations.getAssets(q.getAssetIds()) once per question inside the page .map(), producing 1+N queries per page.",
+      "why_it_matters": "Quadratic query cost on the list endpoint scales badly as question banks grow and the endpoint is called frequently during authoring.",
+      "required_action": "Batch-collect all asset IDs across the page, call assetOperations.getAssets() once, and map results back per-question via an in-memory Map keyed by AssetResponse.publicId.",
+      "owner": "cook"
+    },
+    {
+      "id": "QUAL-002",
+      "severity": "NOTED",
+      "rule": "DOC_INTENTIONAL_LIMIT_IS_A_NON_GOAL",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "aptis-doc/projects/plans/quang-exam-session-ops/phase-01-question-entity-and-authoring.md",
+      "evidence": "Phase 1's original steps (5-6) called for aptis-web (Next.js) authoring UI forms; only the aptis-api backend was implemented in this cook pass.",
+      "why_it_matters": "Backend-only completion is a deliberate scope decision for this pass, not a code defect, but should be tracked so the UI gap isn't mistaken for an oversight later.",
+      "required_action": "Out of scope for this backend cook session — track aptis-web authoring UI as separate follow-up work.",
+      "owner": "none"
+    }
+  ],
+  "report_path": "plans/quang-exam-session-ops/quality/phase-01-question-entity-and-authoring-quality-report.json"
+}

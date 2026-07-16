@@ -1,0 +1,20 @@
+{
+  "target": "phase-05-delivery-api-filtering",
+  "verdict": "APPROVED",
+  "policy_version": "1.0.0",
+  "report_path": "aptis-doc/projects/plans/quang-exam-session-ops/quality/phase-05-delivery-api-filtering-quality-report.json",
+  "reviewed_files": [
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/constant/ExamDeliveryApiConstants.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/constant/ExamDeliveryConstants.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/controller/ExamAttemptController.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/dto/RedactedQuestionResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/dto/SectionSummaryResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/service/ExamAttemptAccessGuard.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/service/ExamAttemptService.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/service/ExamContentDeliveryService.java",
+    "aptis-api/src/main/java/com/aptis/modules/examoperations/repository/ExamQuestionRepository.java"
+  ],
+  "source_fingerprint": "sha256:37c0f6e94f71b3c8216b9db0abc9cb5552256e4bedb17ba818709ac0ee218aa7",
+  "reviewed_at": "2026-07-16T00:10:00Z",
+  "open_blocking_findings": 0
+}

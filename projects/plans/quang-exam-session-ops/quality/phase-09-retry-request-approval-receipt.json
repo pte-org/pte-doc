@@ -1,0 +1,30 @@
+{
+  "phase": "09",
+  "phase_title": "RetryRequest Entity & Approval Queue",
+  "verification_completed_at": "2026-07-16T12:00:00Z",
+  "verifier": "quality-reviewer (verify mode)",
+  "status": "APPROVED",
+  "blocking_issues_resolved": 1,
+  "non_blocking_issues_resolved": 1,
+  "resolutions": [
+    {
+      "id": "QUAL-001",
+      "severity": "HIGH",
+      "prior_status": "OPEN",
+      "resolution": "Fixed by moving @Transactional(isolation = Isolation.READ_COMMITTED) from nested method RetryRequestRepository.findMostRecent to outermost caller ExamAttemptService.recordHeartbeat (line 85). Comment at lines 78-84 explains why isolation must be set on the outermost boundary. Verified: findMostRecent is only called from enforceRetryGate (line 103), which is only called from recordHeartbeat (line 89), confirming all paths inherit the READ_COMMITTED isolation.",
+      "verification_method": "Code review + grep confirmation that findMostRecent has only one call site (enforceRetryGate in ExamAttemptService.java:103) and enforceRetryGate has only one call site (recordHeartbeat in ExamAttemptService.java:89)."
+    },
+    {
+      "id": "QUAL-002",
+      "severity": "NOTED",
+      "prior_status": "OPEN",
+      "resolution": "Removed unused constant RETRY_REVIEWER_NOT_AUTHORIZED from ExamDeliveryConstants.java. Verified with grep: zero remaining references to this constant anywhere in the aptis-api repository.",
+      "verification_method": "Grep search across entire aptis-api repository for 'RETRY_REVIEWER_NOT_AUTHORIZED' returns no matches."
+    }
+  ],
+  "additional_sanity_checks": {
+    "ExamAttemptService_other_methods": "PASS",
+    "details": "Reviewed all methods in ExamAttemptService.java: submitAnswer (line 48, @Transactional), recordHeartbeat (line 86, @Transactional(isolation=READ_COMMITTED)), switchSection (line 118, @Transactional), submitAttempt (line 127, @Transactional). No unintended side effects from the edit to recordHeartbeat. enforceRetryGate remains a private helper (line 101) correctly scoped to this service."
+  },
+  "conclusion": "All prior findings resolved. Phase 9 implementation meets the Engineering Quality Contract and Phase 9 Design Constraints. Ready for deployment."
+}
