@@ -1,0 +1,17 @@
+{
+  "phase": "phase-01-domain-model-redesign",
+  "status": "RED_READY",
+  "prepared_at": "2026-07-16T00:00:00Z",
+
+  "test_files": [
+    "src/test/java/com/aptis/modules/questionbank/dto/request/CreateQuestionRequestTest.java",
+    "src/test/java/com/aptis/modules/questionbank/dto/request/UpdateQuestionRequestTest.java",
+    "src/test/java/com/aptis/modules/questionbank/service/QuestionServiceTest.java",
+    "src/test/java/com/aptis/modules/questionbank/dto/response/QuestionResponseTest.java",
+    "src/test/java/com/aptis/modules/questionbank/repository/QuestionSpecificationTest.java"
+  ],
+
+  "expected_red_reason": "CreateQuestionRequest/UpdateQuestionRequest records don't yet accept pteTaskType/referenceAnswerText/minWordCount/maxWordCount constructor args; QuestionResponse lacks matching accessors; QuestionSpecification.buildFilter(...) doesn't yet accept a pteTaskType parameter; QuestionService.createQuestion/updateQuestion don't yet enforce PteTaskType.requiresCorrectAnswer() before saving.",
+
+  "artifact_path": "plans/quang-pte-pivot/tests/phase-01-domain-model-redesign-tdd-ready.json"
+}

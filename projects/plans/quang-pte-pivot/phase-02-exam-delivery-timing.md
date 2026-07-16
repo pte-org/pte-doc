@@ -8,6 +8,8 @@ This phase directly addresses P1 user story: "I want each task timed exactly lik
 
 ## Design Constraints
 
+**Correction (2026-07-16, discovered during Phase 7 research):** the task-type count is **22**, not 20 — Pearson added `RESPOND_TO_A_SITUATION` (prep 10s / response 40s) and `SUMMARIZE_GROUP_DISCUSSION` (prep 10s / response 120s) in an August 2025 update. Every "20 task types" reference below means 22; source both new types' timing from the same official-materials research task in Step 1. See `spec.md` Assumptions and `PteTaskType.java` for the corrected enum.
+
 - Per-task timing must be **exact and immutable per exam version** — if an exam is created with a specific set of task types, the timing for those tasks is locked at exam-creation time (not changed mid-attempt). This ensures fairness and auditability.
 - Timing values **must be sourced from official Pearson PTE public materials**, not invented or estimated. If official sources are unavailable, implementation includes a TODO gate (documented in Success Criteria) that blocks release until sources are confirmed.
 - The `examdelivery` state machine (NOT_STARTED → IN_PROGRESS → SECTION_SWITCH → SUBMITTED → DISCONNECTED) and the `proctor` module (audit trail, WebSocket broadcast) must remain unchanged; timing enforcement is an additional concern, not a refactor of the state machine.
