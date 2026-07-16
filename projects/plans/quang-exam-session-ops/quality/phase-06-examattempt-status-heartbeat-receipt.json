@@ -1,0 +1,24 @@
+{
+  "target": "phase-06-examattempt-status-heartbeat",
+  "verdict": "APPROVED",
+  "policy_version": "1.0.0",
+  "report_path": "aptis-doc/projects/plans/quang-exam-session-ops/quality/phase-06-examattempt-status-heartbeat-quality-report.json",
+  "reviewed_files": [
+    "aptis-api/src/main/java/com/aptis/aptis_api/AptisApiApplication.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/constant/ExamDeliveryConstants.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/controller/ExamAttemptController.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/domain/ExamAttempt.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/domain/ExamAttemptStatus.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/dto/ExamAttemptResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/dto/HeartbeatResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/interfaces/ExamDeliveryOperations.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/repository/ExamAttemptRepository.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/service/ExamAttemptAccessGuard.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/service/ExamAttemptService.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/service/ExamAttemptTimeoutScheduler.java",
+    "aptis-api/src/main/resources/db/migration/V8__add_exam_attempt_status_heartbeat.sql"
+  ],
+  "source_fingerprint": "sha256:ecd69081a1719aea6b26200ba6c9ba192d3f925e48b748f9224a0d2e3e4e0919",
+  "reviewed_at": "2026-07-16T00:25:00Z",
+  "open_blocking_findings": 0
+}

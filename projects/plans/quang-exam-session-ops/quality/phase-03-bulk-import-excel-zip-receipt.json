@@ -1,0 +1,25 @@
+{
+  "target": "phase-03-bulk-import-excel-zip",
+  "verdict": "APPROVED",
+  "policy_version": "1.0.0",
+  "report_path": "aptis-doc/projects/plans/quang-exam-session-ops/quality/phase-03-bulk-import-excel-zip-quality-report.json",
+  "reviewed_files": [
+    "aptis-api/src/main/java/com/aptis/common/exception/GlobalExceptionHandler.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/constant/QuestionBankApiConstants.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/constant/QuestionBankConstants.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/controller/QuestionImportController.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/domain/exception/QuestionImportValidationException.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/dto/response/QuestionImportResultResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/dto/response/QuestionImportRowError.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/dto/response/QuestionImportValidationErrorResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/service/ParsedQuestionImportRow.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/service/QuestionActorResolver.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/service/QuestionImportService.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/service/QuestionImportWriter.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/service/QuestionService.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/util/ByteArrayMultipartFile.java"
+  ],
+  "source_fingerprint": "sha256:9d9f1cf18d2d877aa7596c5fede4f99b53b75158082605ba9a1eb58ae10a9ddb",
+  "reviewed_at": "2026-07-15T23:45:00Z",
+  "open_blocking_findings": 0
+}

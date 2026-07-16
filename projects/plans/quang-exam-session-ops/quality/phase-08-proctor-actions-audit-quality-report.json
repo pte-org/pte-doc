@@ -1,0 +1,82 @@
+{
+  "mode": "gate",
+  "target": "phase-08-proctor-actions-audit",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-07-16T02:00:00Z",
+  "reviewed_files": [
+    "aptis-api/src/main/resources/db/migration/V9__create_proctor_and_exam_assignment.sql",
+    "aptis-api/src/main/resources/db/migration/V10__proctor_actions_and_attempt_flags.sql",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/domain/ExamAttempt.java",
+    "aptis-api/src/main/java/com/aptis/modules/proctor/domain/ProctorActionType.java",
+    "aptis-api/src/main/java/com/aptis/modules/proctor/domain/ProctorAction.java",
+    "aptis-api/src/main/java/com/aptis/modules/proctor/repository/ProctorActionRepository.java",
+    "aptis-api/src/main/java/com/aptis/modules/proctor/service/ProctorActionAuditService.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/service/ProctorActionService.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/controller/ProctorActionController.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/dto/ExtendTimeRequest.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/dto/ExtendTimeResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/dto/FlagViolationRequest.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/dto/FlagViolationResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/dto/ProctorActionResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/service/ProctorBroadcastService.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/controller/ProctorBroadcastController.java",
+    "aptis-api/src/main/java/com/aptis/modules/proctor/dto/BroadcastRequest.java",
+    "aptis-api/src/main/java/com/aptis/modules/proctor/dto/BroadcastAnnouncement.java",
+    "aptis-api/src/main/java/com/aptis/common/interfaces/StudentAttemptLookup.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/service/ExamAttemptLookupService.java",
+    "aptis-api/src/main/java/com/aptis/modules/proctor/config/StompAuthChannelInterceptor.java",
+    "aptis-api/src/main/java/com/aptis/modules/examdelivery/repository/ExamAttemptRepository.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 1
+  },
+  "findings": [
+    {
+      "id": "QUAL-001",
+      "severity": "HIGH",
+      "rule": "TXN_RACE_HANDLED_AT_DATA_LAYER",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "aptis-api/src/main/java/com/aptis/modules/examdelivery/service/ProctorActionService.java, ExamAttemptRepository.java",
+      "evidence": "loadAssignedAttemptForUpdate() locked only ExamAttempt then separately read the lazy exam.getProctorId() afterward, unlocked — a concurrent unassignProctor() could race an in-flight proctor action, violating the CRITICAL 'authorization atomic with state change' constraint.",
+      "why_it_matters": "A revoked proctor assignment mid-action could still land a mutation if the authorization read happened before the revocation committed.",
+      "required_action": "Combine lock acquisition and authorization into one query: findByIdAndAssignedProctorForUpdate(id, proctorId) with the proctor check in the WHERE clause under PESSIMISTIC_WRITE, so the join locks both ExamAttempt and Exam rows atomically.",
+      "owner": "cook"
+    },
+    {
+      "id": "QUAL-002",
+      "severity": "MEDIUM",
+      "rule": "TXN_MIGRATION_REVERSIBLE_OR_SAFE",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "aptis-api/src/main/resources/db/migration/V10__proctor_actions_and_attempt_flags.sql",
+      "evidence": "proctor_action table (backing a BaseEntity-extending JPA entity) was missing updated_at/is_deleted columns that BaseEntity requires, relying implicitly on ddl-auto=update to paper over the gap.",
+      "why_it_matters": "Deployments with stricter ddl-auto settings (validate/none) would fail; contradicts this codebase's established explicit-migration pattern.",
+      "required_action": "Add updated_at and is_deleted columns matching BaseEntity's contract.",
+      "owner": "cook"
+    },
+    {
+      "id": "QUAL-003",
+      "severity": "NOTED",
+      "rule": "TXN_MIGRATION_REVERSIBLE_OR_SAFE",
+      "status": "RESOLVED",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "aptis-api/src/main/resources/db/migration/V9__create_proctor_and_exam_assignment.sql",
+      "evidence": "Pre-existing bug from Phase 7 (already quality-approved): the proctor table used a column literally named 'deleted' instead of BaseEntity's actual @Column(name = \"is_deleted\") mapping — would have produced an orphaned unused column alongside a Hibernate-auto-created is_deleted column under ddl-auto=update.",
+      "why_it_matters": "Same root cause as QUAL-002; fixed opportunistically while touching the same area, since the migration hadn't been run against any real database yet (safe to edit in place, not a destructive change to an already-applied migration).",
+      "required_action": "None — corrected to is_deleted while fixing QUAL-002.",
+      "owner": "none"
+    }
+  ],
+  "report_path": "plans/quang-exam-session-ops/quality/phase-08-proctor-actions-audit-quality-report.json"
+}

@@ -1,0 +1,21 @@
+{
+  "target": "phase-01-question-entity-and-authoring",
+  "verdict": "APPROVED",
+  "policy_version": "1.0.0",
+  "report_path": "aptis-doc/projects/plans/quang-exam-session-ops/quality/phase-01-question-entity-and-authoring-quality-report.json",
+  "reviewed_files": [
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/constant/QuestionBankApiConstants.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/constant/QuestionBankConstants.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/controller/QuestionController.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/domain/Question.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/domain/QuestionSource.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/dto/response/QuestionResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/interfaces/QuestionOperations.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/repository/QuestionSpecification.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/service/QuestionService.java",
+    "aptis-api/src/main/resources/db/migration/V5__add_tenant_scoping_to_questions.sql"
+  ],
+  "source_fingerprint": "sha256:a8054972779cae86162a90f8e1d1328a6f4fbde3f9a285c0aed3a30e1e46374c",
+  "reviewed_at": "2026-07-15T22:45:00Z",
+  "open_blocking_findings": 0
+}

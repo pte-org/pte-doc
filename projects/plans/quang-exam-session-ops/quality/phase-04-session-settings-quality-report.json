@@ -1,0 +1,59 @@
+{
+  "mode": "gate",
+  "target": "phase-04-session-settings",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-07-16T00:00:00Z",
+  "reviewed_files": [
+    "aptis-api/src/main/resources/db/migration/V7__add_exam_session_settings.sql",
+    "aptis-api/src/main/java/com/aptis/modules/examoperations/domain/SessionTimeOverride.java",
+    "aptis-api/src/main/java/com/aptis/modules/examoperations/repository/SessionTimeOverrideRepository.java",
+    "aptis-api/src/main/java/com/aptis/modules/examoperations/dto/TimeOverrideRequest.java",
+    "aptis-api/src/main/java/com/aptis/modules/examoperations/dto/TimeOverrideResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/examoperations/dto/ExamSettingsRequest.java",
+    "aptis-api/src/main/java/com/aptis/modules/examoperations/dto/ExamDetailResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/examoperations/domain/Exam.java",
+    "aptis-api/src/main/java/com/aptis/modules/examoperations/dto/CreateExamRequest.java",
+    "aptis-api/src/main/java/com/aptis/modules/examoperations/interfaces/ExamOperations.java",
+    "aptis-api/src/main/java/com/aptis/modules/examoperations/service/ExamService.java",
+    "aptis-api/src/main/java/com/aptis/modules/examoperations/controller/ExamController.java",
+    "aptis-api/src/main/java/com/aptis/modules/examoperations/constant/ExamOperationsApiConstants.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [
+    {
+      "id": "QUAL-001",
+      "severity": "HIGH",
+      "rule": "CORR_BOUNDARY_VALIDATION",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "aptis-api/src/main/java/com/aptis/modules/examoperations/dto/ExamSettingsRequest.java:21",
+      "evidence": "timeOverrides field lacked @Valid, so bean validation did not cascade into each TimeOverrideRequest's own @NotNull/@Min constraints.",
+      "why_it_matters": "Invalid nested rows (null skill, non-positive overrideMinutes) could cross the API boundary undetected.",
+      "required_action": "Add @Valid to the timeOverrides field.",
+      "owner": "cook"
+    },
+    {
+      "id": "QUAL-002",
+      "severity": "HIGH",
+      "rule": "CORR_BOUNDARY_VALIDATION",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "aptis-api/src/main/java/com/aptis/modules/examoperations/service/ExamService.java:120-128",
+      "evidence": "parseSkill() called skill.trim() without a null check, so a null skill (reachable before the QUAL-001 fix) threw an uncaught NullPointerException instead of a validation error.",
+      "why_it_matters": "A missing-field client error would surface as HTTP 500 instead of HTTP 400, conflating a validation failure with a system error.",
+      "required_action": "Add an explicit null/blank check before Skill.valueOf(), throwing ApiException(VALIDATION_ERROR, ...).",
+      "owner": "cook"
+    }
+  ],
+  "report_path": "plans/quang-exam-session-ops/quality/phase-04-session-settings-quality-report.json"
+}

@@ -1,0 +1,60 @@
+{
+  "mode": "gate",
+  "target": "phase-03-bulk-import-excel-zip",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-07-15T23:45:00Z",
+  "reviewed_files": [
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/domain/exception/QuestionImportValidationException.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/dto/response/QuestionImportRowError.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/dto/response/QuestionImportValidationErrorResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/dto/response/QuestionImportResultResponse.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/util/ByteArrayMultipartFile.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/service/QuestionActorResolver.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/service/ParsedQuestionImportRow.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/service/QuestionImportWriter.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/service/QuestionImportService.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/controller/QuestionImportController.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/service/QuestionService.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/constant/QuestionBankApiConstants.java",
+    "aptis-api/src/main/java/com/aptis/modules/questionbank/constant/QuestionBankConstants.java",
+    "aptis-api/src/main/java/com/aptis/common/exception/GlobalExceptionHandler.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [
+    {
+      "id": "QUAL-001",
+      "severity": "MEDIUM",
+      "rule": "OWN_SINGLE_CONCERN_OWNER",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "aptis-api/src/main/java/com/aptis/modules/questionbank/service/QuestionImportWriter.java:41-64",
+      "evidence": "writeAll() originally called Asset.create()+assetRepository.save() directly, duplicating AssetService.createAsset()'s logic, based on an incorrect assumption that going through AssetOperations would break transactional atomicity.",
+      "why_it_matters": "Splitting Asset-creation logic across two call sites creates drift risk; the underlying atomicity concern was also based on a misunderstanding of Spring's REQUIRED propagation (it joins the caller's open transaction rather than starting a new one).",
+      "required_action": "Inject AssetOperations and call assetOperations.createAsset(new CreateAssetRequest(...)) instead of touching AssetRepository/Asset.create() directly.",
+      "owner": "cook"
+    },
+    {
+      "id": "QUAL-002",
+      "severity": "MEDIUM",
+      "rule": "CORR_BOUNDARY_VALIDATION",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "aptis-api/src/main/java/com/aptis/modules/questionbank/service/QuestionImportService.java:183-253",
+      "evidence": "The extension-inferred audio MIME type (probeAudioMimeType) was never checked against AUDIO_ALLOWED_MIME_TYPES before upload, unlike the single-question audio upload path.",
+      "why_it_matters": "Unrecognized-extension audio files would upload with content-type application/octet-stream, potentially preventing browser playback, with no validation error surfaced to the importer.",
+      "required_action": "Add a row-validation check rejecting rows whose probeAudioMimeType(audioFilename) is absent from AUDIO_ALLOWED_MIME_TYPES, collected alongside other row errors.",
+      "owner": "cook"
+    }
+  ],
+  "report_path": "plans/quang-exam-session-ops/quality/phase-03-bulk-import-excel-zip-quality-report.json"
+}

@@ -1,0 +1,46 @@
+{
+  "phase": "phase-09-retry-request-approval",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-07-16T14:20:05+07:00",
+  "summary": {
+    "passed": 56,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "test_files": [
+    "aptis-api/src/test/java/com/aptis/modules/examdelivery/domain/RetryRequestTest.java (new: 26 tests)",
+    "aptis-api/src/test/java/com/aptis/modules/examdelivery/service/RetryRequestServiceTest.java (new: 18 tests)",
+    "aptis-api/src/test/java/com/aptis/modules/examdelivery/service/ExamAttemptServiceTest.java (fixed constructor + extended: 6 new tests for enforceRetryGate)"
+  ],
+  "test_coverage": {
+    "RetryRequestTest": {
+      "suite": "Domain (no mocks)",
+      "tests": 26,
+      "description": "Static factory create(), approve(), reject(), consume() state machines; edge cases and invalid transitions"
+    },
+    "RetryRequestServiceTest": {
+      "suite": "Service (Mockito mocks)",
+      "tests": 18,
+      "description": "requestRetry() happy path and error paths (not-submitted, pending-block, approved-block, budget-exhausted at boundary); listPending() tenant filtering (HOST own exams, GRADER org-assigned, unknown role sees nothing); approve() and reject() with 404 for unauthorized (not 403)"
+    },
+    "ExamAttemptServiceTest": {
+      "suite": "Service extension (Phase 9 retry gate)",
+      "tests": 12,
+      "existing": 6,
+      "new": 6,
+      "description": "Fixed constructor call (added RetryRequestRepository mock); new enforceRetryGate tests: PENDING blocks with ACCESS_DENIED, APPROVED consumes and allows, REJECTED/CONSUMED/none allow without repo save, non-NOT_STARTED skips gate"
+    }
+  },
+  "notes": [
+    "All 56 tests run successfully with zero failures.",
+    "RetryRequestTest (domain): Tests static factory with timestamp validation, state machine transitions (PENDING→APPROVED→CONSUMED, PENDING→REJECTED), error-case throws for invalid state transitions, and end-to-end flows.",
+    "RetryRequestServiceTest (service): Comprehensive coverage of 4 public methods—requestRetry() tests attempt-submitted gating, existing-request blocking (PENDING/APPROVED), and budget exhaustion at exact boundary (>= maxRetryCount); listPending() tests HOST-only, GRADER-org, and unknown-role access control; approve()/reject() test 404 for both not-found and unauthorized (tenant/role mismatch), ensuring no information disclosure.",
+    "ExamAttemptServiceTest: Constructor fix adds RetryRequestRepository @Mock and passes to service. New 6 tests cover enforceRetryGate's 3 main branches—PENDING request blocks heartbeat with ACCESS_DENIED, APPROVED request is consumed exactly once and heartbeat proceeds, REJECTED/CONSUMED/absent requests allow heartbeat without save. Verified that non-NOT_STARTED attempts skip the gate entirely.",
+    "Security-critical assertion: approve()/reject() return RESOURCE_NOT_FOUND (404) for both 'request not found' and 'tenant mismatch' cases, preventing an attacker from confirming request existence via different error codes.",
+    "Boundary condition tested: attemptsSoFar >= maxRetryCount (e.g., 2 attempts allowed, 2 so far = exhausted; 2 allowed, 1 so far = available).",
+    "All existing ExamAttemptServiceTest assertions remain unchanged in behavior; only the constructor call was fixed to accommodate the new RetryRequestRepository parameter."
+  ],
+  "report_path": "plans/quang-exam-session-ops/tests/phase-09-retry-request-approval-test-report.json"
+}

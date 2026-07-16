@@ -1,0 +1,21 @@
+{
+  "phase": "phase-06-examattempt-status-heartbeat",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-07-16T00:40:00Z",
+  "summary": {
+    "passed": 36,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "test_files": [
+    "aptis-api/src/test/java/com/aptis/modules/examdelivery/domain/ExamAttemptTest.java",
+    "aptis-api/src/test/java/com/aptis/modules/examdelivery/service/ExamAttemptServiceTest.java",
+    "aptis-api/src/test/java/com/aptis/modules/examdelivery/service/ExamAttemptAccessGuardTest.java"
+  ],
+  "infra_changes": [
+    "aptis-api/pom.xml: added spring-boot-starter-test (test scope) — repo previously had zero test infrastructure"
+  ],
+  "report_path": "plans/quang-exam-session-ops/tests/phase-06-examattempt-status-heartbeat-test-report.json"
+}
