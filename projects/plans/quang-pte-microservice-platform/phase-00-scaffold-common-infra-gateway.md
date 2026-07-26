@@ -35,8 +35,12 @@ Stand up the mono-repo skeleton every later phase builds on: Maven multi-module 
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated.
-- Testing: not started. (Unit: ApiResponse/GlobalExceptionHandler/JWT filter; integration: gateway 401 + rate-limit via Testcontainers Redis.)
+- Quality gate: **approved** (2026-07-24). 0 findings (BLOCKER/HIGH/MEDIUM/LOW/NOTED all 0). Report + receipt in the `pte-api` repo (shared git root with reviewed files): `pte-api/plans/quang-pte-microservice-platform/quality/phase-00-scaffold-common-infra-gateway-{quality-report,receipt}.json`.
+- Testing: not started — **declined by user** (cook run chose quality-only, no unit tests). Build Gate (compile) green: `mvn install` builds pte-common + gateway with gateway 5.0.0; `docker compose config` validates.
+
+## Runtime-verification TODO (could not run full stack here)
+- Gateway route namespace `spring.cloud.gateway.server.webflux.routes` and `IAM_JWKS_URI` need a live smoke test when infra + iam are up (compile-only Build Gate does not bind YAML).
+- `docker compose up` end-to-end health (Kafka KRaft, Debezium `wal_level=logical`, per-service DB init) not yet run on this machine.
 
 ## Risks
 

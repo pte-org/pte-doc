@@ -34,8 +34,12 @@ The single auth server (all other services are resource servers). Owns users, cr
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated.
-- Testing: not started.
+- Quality gate: **approved** (2026-07-24). 0 blocking; 3 NOTED (BCrypt default work factor → harden pre-prod; RLS defense-in-depth deferred per ADR-003; invalid-role→403 vs 400 semantics). Report + receipt: `pte-api/plans/quang-pte-microservice-platform/quality/phase-01-iam-auth-server-{quality-report,receipt}.json`.
+- Testing: not started — **declined by user** (quality-only cook run). Build Gate green: `mvn install` full reactor compiles (pte-common + gateway + iam).
+
+## Runtime-verification TODO (not run here — no live DB)
+- `docker compose up postgres` + `mvn -pl iam spring-boot:run` → Flyway V1 applies, login issues RS256 JWT, `/api/iam/auth/jwks` serves keys, gateway validates against it.
+- Ephemeral RSA key at startup is dev-only (tokens die on restart) — load stable key from Vault/env before release (Phase 9 security review).
 
 ## Risks
 

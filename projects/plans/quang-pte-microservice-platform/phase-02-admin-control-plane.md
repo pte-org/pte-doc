@@ -28,8 +28,13 @@ Low-traffic, high-privilege control plane where a platform admin onboards and su
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated.
-- Testing: not started.
+- Quality gate: **approved** (2026-07-24). 0 findings. Report + receipt: `pte-api/plans/quang-pte-microservice-platform/quality/phase-02-admin-control-plane-{quality-report,receipt}.json`.
+- Testing: not started — **declined by user** (quality-only cook run). Build Gate green: `mvn install -pl admin -am` compiles.
+
+## Scope note
+- Milestone 1 implements Tenant lifecycle (onboard/suspend/get/list) + outbox events. `Subscription`/`PlatformConfig`/`FeatureFlag`/kill-switch deferred (YAGNI — package/studentLimit folded onto Tenant; add when a real subscription/feature-flag flow exists).
+- iam-side consumer of `TenantOnboarded` activates in Phase 6 (event backbone); until then seed the registry directly for local dev.
+- `OutboxEntry`/`OutboxWriter`/resource-server JWT converter duplicated from iam (2nd occurrence); extract to pte-common at the 3rd service (scheduling), per DRY "3+" threshold.
 
 ## Risks
 

@@ -36,8 +36,23 @@ The critical path and the platform's most-protected service. A student starts an
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated.
-- Testing: not started.
+- Quality gate: **approved** (2026-07-24). 0 findings. Report + receipt: `pte-api/plans/quang-pte-microservice-platform/quality/phase-05-exam-delivery-core-{quality-report,receipt}.json`.
+- Testing: not started — **declined by user** (quality-only cook run). Build Gate green: full 7-module reactor `mvn install` (pte-common+gateway+iam+admin+authoring+scheduling+exam-delivery).
+
+## New architectural piece: service-to-service auth (not anticipated in original design constraints)
+Student's own JWT lacks roles for authoring's/scheduling's human-facing endpoints. Added a `/internal/**` surface on authoring+scheduling, authenticated by shared API-key header (`X-Internal-Service-Key`, `InternalApiKeyFilter` in pte-common) via a SEPARATE `SecurityFilterChain` (`@Order(1)`, narrower matcher) evaluated before the normal JWT chain (`@Order(2)`) — explicit placeholder for the mTLS/service-mesh trust ADR-003 defers. exam-delivery's clients always pass the CALLING STUDENT'S OWN identity (from its own validated JWT), never forward the raw token.
+- authoring: `GET /internal/snapshots/{publicId}` → full content incl. correct answers (`SnapshotContentResponse`), never on the public endpoint.
+- scheduling: `GET /internal/sessions/{publicId}/entitlement?studentPublicId=...` → verifies Enrollment + session OPEN before releasing composition/snapshot ref.
+
+## Implementation notes
+- Composition selects task TYPES (not individual items, matches scheduling's actual model) — every snapshot item whose type is included gets pinned in original snapshot order; a composition `timingOverrideSeconds` overrides RESPONSE time only, prep stays default.
+- `TaskTimingConfig` (`config/task-timing.json`) covers only the 3 Milestone-1 task types; unconfigured types fail fast (`TaskTimingNotConfiguredException`) rather than silently defaulting — timing values are approximate placeholders pending official Pearson sourcing (tracked risk).
+- Auto-expire: `getNextTask`/`submitAnswer` lazily auto-finalize an elapsed unanswered task and advance (no background scheduler needed for Milestone 1 — a true "expire even if the client never calls back" sweep is deferred).
+- `NotEntitledException` excluded from the `scheduling` circuit breaker's failure count (`ignore-exceptions` in application.yml) so legitimate 403s never trip the breaker.
+- Redis caches the FULL `PinnedItemView` (incl. correct answers) — acceptable for Milestone 1 (same trust zone as Postgres, single Redis instance); revisit if Redis access control diverges from DB's later.
+
+## Runtime-verification TODO
+- `docker compose up postgres redis` + run iam+authoring+scheduling+exam-delivery → full attempt lifecycle: start (pins snapshot, warms cache) → next-task → submit-answer (MCQ/Read Aloud/Write Essay) → auto-expire on elapsed timer → complete → verify authoring/scheduling can be stopped mid-attempt with the attempt still completable; verify double-attempt rejected; verify single-flight under concurrent cold-cache requests.
 
 ## Risks
 

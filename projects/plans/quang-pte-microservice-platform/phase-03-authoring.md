@@ -33,8 +33,18 @@ Question bank + exam blueprints + immutable versioned snapshots. Supports all 22
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated.
-- Testing: not started.
+- Quality gate: **approved** (2026-07-24). 1 MEDIUM (explicit blueprint save — **fixed**), 1 NOTED (snapshot immutability confirmed well-designed). Report + receipt: `pte-api/plans/quang-pte-microservice-platform/quality/phase-03-authoring-{quality-report,receipt}.json`.
+- Testing: not started — **declined by user** (quality-only cook run). Build Gate green: full reactor `mvn install` compiles (incl. pte-common shared additions + retrofitted iam/admin).
+
+## Implementation notes
+- **DRY 3rd-occurrence extraction done**: `AbstractOutboxEntry` (@MappedSuperclass) + `AbstractOutboxWriter` + `ResourceServerJwt` moved to pte-common; iam/admin retrofitted to use them (each service keeps a tiny concrete `OutboxEntry`).
+- All 22 scored task types + PERSONAL_INTRODUCTION (unscored) in `PteTaskType` with category-driven requirement flags; skill mapping in versioned `config/task-skill-mapping.json`.
+- Snapshot immutability via deep-copy in `SnapshotPublishService.freeze()` — `SnapshotItem` self-contained (options serialized to `optionsJson`), no FK to `Question`, referenced only by `sourceQuestionPublicId`.
+- MediaRef folded into `audioPromptRef`/`imagePromptRef` UUID columns (cross-service ref to media by publicId; no MediaRef entity).
+- Deferred: question update/archive endpoints; full snapshot-detail endpoint (with options/correct answers) for exam-delivery pinning — added in Phase 4/5.
+
+## Runtime-verification TODO
+- `docker compose up postgres` + run authoring → Flyway V1 applies; create question per type → validation; publish blueprint → immutable snapshot + `ExamSnapshotPublished` on outbox; host cannot write SHARED / read cross-tenant.
 
 ## Risks
 
