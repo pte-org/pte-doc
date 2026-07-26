@@ -12,7 +12,7 @@ Full rewrite of `pte-app` (Flutter) into the student-facing exam-taking client f
 
 ## Phases
 
-- [ ] Phase 0: Repo Reset & Bootstrap — delete old `features/*`+`core/*`, add missing pubspec deps, stand up feature-first skeleton + GetIt wiring + lint/test baseline [quality: not evaluated; testing: not started]
+- [x] Phase 0: Repo Reset & Bootstrap — delete old `features/*`+`core/*`, add missing pubspec deps, stand up feature-first skeleton + GetIt wiring + lint/test baseline [quality: approved (1 MEDIUM template-fidelity fix applied, 1 NOTED package-name item deferred — see phase file); testing: passed, TDD RED→GREEN]
 - [ ] Phase 1: Core Networking, Auth & Secure Session — `ApiClient`/Dio, single-flight `TokenRefreshInterceptor`, `flutter_secure_storage` `TokenStore`, `AuthBloc` with proactive pre-expiry refresh, 429 as distinct error type [quality: not evaluated; testing: not started]
 - [ ] Phase 2: Offline Answer Outbox — Drift schema keyed `(attemptPublicId, pinnedItemPublicId)`, retry-pending vs terminal-rejected status, connectivity-canary + periodic-fallback `SyncEngine`, survives process death [quality: not evaluated; testing: not started]
 - [ ] Phase 3: Session Entry & Attempt Lifecycle — `ExamAttemptRepository`/`Bloc` for start/resume/next-task, placeholder session-ID entry UI behind a swappable interface, terminal `completed` handling, resume reconciliation with outbox [quality: not evaluated; testing: not started]
