@@ -24,20 +24,22 @@ Maps to: **Foundational — supports FR-13 and all subsequent FRs; no single use
 4. Recreate the skeleton directories: `lib/core/constants/`, `lib/core/widgets/`, `lib/core/exceptions/`, `lib/core/extensions/`, `lib/core/utils/`, `lib/features/` (empty, populated starting Phase 1), and a minimal `lib/main.dart` that runs an empty `MaterialApp` (no feature wiring yet — that starts in Phase 1).
 5. Add stub `app_strings.dart`, `app_colors.dart`, `app_dimensions.dart` under `lib/core/constants/` with at least a placeholder entry each, matching the structure shown in `CODING_STANDARDS_APP.md`.
 6. Edit `pte-app/pubspec.yaml`: add `flutter_secure_storage` under `dependencies`; add `bloc_test` and `mocktail` under `dev_dependencies`; run `flutter pub get` and confirm no version resolution conflicts against the existing dependency set. Check drift's current desktop-target documentation for the pinned `drift ^2.34.0`/`sqlite3 ^3.3.3` versions and do a quick smoke build with a trivial Drift table read/write actually run on Windows — add whatever desktop-specific native-library dependency (if any) that check shows is required; do not add `sqlite3_flutter_libs` (mobile-specific) by default.
-7. Write one throwaway example feature module (e.g. `lib/features/_example/_example_module.dart`) demonstrating the GetIt registration pattern from `CODING_STANDARDS_APP.md`, confirm it registers/resolves correctly via a smoke test, then delete it once the pattern is understood and documented in a comment/reference for later phases (or keep it if the team prefers a living template — decide once, note the decision here).
+7. Write one throwaway example feature module (`lib/features/_example/_example_module.dart` + `_example_service.dart`) demonstrating the GetIt registration pattern from `CODING_STANDARDS_APP.md`, confirm it registers/resolves correctly via a test written first (RED, then GREEN once implemented). **Decision: kept as a living template** (not deleted) — `test/unit/features/_example/_example_module_test.dart` demonstrates the exact test-first pattern later phases should follow for their own `{feature}_module.dart`; delete both once Phase 1 provides a real module to copy from instead.
 8. Run `flutter analyze` and `flutter test` against the reset skeleton; fix any residual reference to deleted code (stale imports, leftover generated `.g.dart` files from the old Drift schema) until both exit zero-issue.
 9. Test: confirm `flutter pub get` succeeds with all new dependencies resolved, `flutter analyze` reports zero issues, and `flutter test` runs (even if zero test files exist yet, the command must exit 0, not error).
 
 ## Success Criteria
 
-- [ ] `pte-app/lib/features/*` and `pte-app/lib/core/*` contain no code carried over from the pre-pivot "Aptis" scaffold.
-- [ ] The three reference files' shapes are preserved somewhere citable (not deleted without a trace) for Phase 1/2 to consult.
-- [ ] `pubspec.yaml` contains `flutter_secure_storage`, `bloc_test`, `mocktail` alongside the previously-existing dependencies, and `flutter pub get` resolves cleanly; whatever desktop-specific native-SQLite dependency (if any) the drift-docs/Windows smoke-build check calls for is present and recorded — `sqlite3_flutter_libs` itself is not added, since it targets mobile.
-- [ ] Feature-first skeleton (`core/`, `features/`, constants stubs, one demonstrated GetIt module pattern) exists and matches `CODING_STANDARDS_APP.md`'s documented structure.
-- [ ] `flutter analyze` exits with zero issues on the reset skeleton.
-- [ ] `flutter test` exits 0 on the reset skeleton.
+- [x] `pte-app/lib/features/*` and `pte-app/lib/core/*` contain no code carried over from the pre-pivot "Aptis" scaffold.
+- [x] The three reference files' shapes are preserved somewhere citable (not deleted without a trace) for Phase 1/2 to consult — `pte-app/reference/` (excluded from analysis via `analysis_options.yaml`), including the exam-shell widgets and timer service beyond the original three, since they're cited by Phase 4's Design Constraints too.
+- [x] `pubspec.yaml` contains `flutter_secure_storage`, `bloc_test`, `mocktail` alongside the previously-existing dependencies, and `flutter pub get` resolves cleanly; `sqlite3_flutter_libs` confirmed **not needed** via smoke test (see Quality and Testing State) and not added.
+- [x] Feature-first skeleton (`core/`, `features/`, constants stubs, one demonstrated GetIt module pattern) exists and matches `CODING_STANDARDS_APP.md`'s documented structure.
+- [x] `flutter analyze` exits with zero issues on the reset skeleton.
+- [x] `flutter test` exits 0 on the reset skeleton.
 
 ## Quality and Testing State
 
 - Quality gate: not evaluated.
-- Testing: not started.
+- Testing: implemented via TDD — RED confirmed (missing `_example` module), then GREEN (`test/unit/features/_example/_example_module_test.dart` passes); `flutter analyze`/`flutter test` both clean on the reset skeleton.
+- **`sqlite3_flutter_libs` decision recorded**: a throwaway Drift smoke-test table (native SQLite open/insert/select) ran successfully via `flutter test` on Windows without adding `sqlite3_flutter_libs` — confirms `drift ^2.34.0`/`sqlite3 ^3.3.3` work natively on this platform for local dev/test as-is. Not added. Caveat: this was verified under `flutter test`'s host-process execution, not a packaged `flutter build windows` bundle — if native-library loading behaves differently in a built app (rather than the test runner), revisit at Phase 9's QA gate before Milestone-1 handoff. The throwaway smoke files were deleted after the determination; Phase 2 builds the real, permanent evidence via its own process-death-survival test.
+- **Environment note**: local Flutter SDK had to be upgraded (3.38.7 → 3.44.8, Dart 3.10.7 → 3.12.2) to satisfy `pubspec.yaml`'s pre-existing `environment.sdk: ^3.11.5` constraint — this was a pre-existing mismatch, not introduced by this phase; flagged to and approved by the user before upgrading.
