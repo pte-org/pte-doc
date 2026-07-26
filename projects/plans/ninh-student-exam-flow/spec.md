@@ -18,7 +18,7 @@
   Accepted when: access token silently refreshes before/at 401 using the refresh token (7-day TTL); student is never shown a login screen mid-attempt due to token expiry alone.
 
 - **[P1]** As a student, I want to start (or resume) an attempt for a given exam session, so that I can begin taking the exam.
-  Accepted when: `POST /attempts` with a `sessionPublicId` returns the current/first task; calling it again for an in-progress attempt resumes rather than restarting.
+  Accepted when: `POST /api/exam-delivery/attempts` with a `sessionPublicId` returns the current/first task; calling it again for an in-progress attempt resumes rather than restarting.
 
 - **[P1]** As a student, I want to answer an `MC_READING_SINGLE` question by selecting one option, so that my choice is recorded correctly.
   Accepted when: submitting sends the selected option's `orderIndex` as a decimal string payload tied to the exact `pinnedItemPublicId` of the current task.
@@ -30,13 +30,13 @@
   Accepted when: recording via the `record` package → `POST /objects` → `PUT` presigned URL → `POST /objects/{id}/complete` → the resulting `mediaPublicId` is submitted as the answer payload — never raw audio bytes through the transactional API.
 
 - **[P1]** As a student, I want the exam timer to reflect the server's authoritative deadline, not just my device's clock, so that I can't gain or lose time by manipulating my device.
-  Accepted when: countdown is seeded from `TaskView.serverNow`/deadlines and periodically resynced via `GET /attempts/{id}/timer`; a submit attempted past `responseDeadline` is rejected by the server and the UI reflects the terminal state rather than retrying.
+  Accepted when: countdown is seeded from `TaskView.serverNow`/deadlines and periodically resynced via `GET /api/exam-delivery/attempts/{id}/timer`; a submit attempted past `responseDeadline` is rejected by the server and the UI reflects the terminal state rather than retrying.
 
 - **[P1]** As a student, I want my answer to survive the app being killed or losing network mid-response, so that I never lose work I've already done.
   Accepted when: every answer submission goes through a local Drift-backed outbox first; killing the app after typing/recording an answer but before connectivity resumes still results in the answer being flushed and accepted once the app relaunches and connectivity returns.
 
 - **[P1]** As a student, I want to see my report after the host publishes it, and a clear "not yet published" state before that, so that I'm not confused by a missing or broken-looking score screen.
-  Accepted when: `GET /attempts/{id}` (reporting) returning 404 renders a "waiting for host to publish" state, not an error; once published, `overall`/`communicativeSkills`/`enablingSkills` render with `sufficientData:false` skills shown as "insufficient data," not blank or zero.
+  Accepted when: `GET /api/reporting/reports/attempts/{id}` returning 404 renders a "waiting for host to publish" state, not an error; once published, `overall`/`communicativeSkills`/`enablingSkills` render with `sufficientData:false` skills shown as "insufficient data," not blank or zero.
 
 - **[P2]** As a student, I want a session-ID entry screen (manual or deep-linked) to start my attempt, so that Milestone 1 is usable even before Member 3's session-discovery UI decision lands.
   Accepted when: a placeholder entry screen exists behind a swappable repository interface; replacing it later with a session-list UI requires no change to the attempt BLoC/repository contract.
@@ -49,17 +49,18 @@
 
 1. FR-01: `AuthBloc` implements login (`POST /api/iam/auth/login`), proactive token refresh before the 900s access-token TTL expires (not only reactive on 401), and logout (`POST /api/iam/auth/logout`); refresh token persisted via `flutter_secure_storage`, never in-memory-only.
 2. FR-02: JWT `roles`/`tenant_id` claims are decoded client-side for UI branching only (student vs host) and never trusted for security-sensitive logic — server re-validates every request.
-3. FR-03: `ExamAttemptRepository` wraps `POST /attempts` (start/resume) and `GET /attempts/{id}/next-task` (advance/auto-complete); `AttemptTaskResponse.completed=true` with `task:null` is handled as a first-class terminal state.
+3. FR-03: `ExamAttemptRepository` wraps `POST /api/exam-delivery/attempts` (start/resume) and `GET /api/exam-delivery/attempts/{id}/next-task` (advance/auto-complete); `AttemptTaskResponse.completed=true` with `task:null` is handled as a first-class terminal state.
 4. FR-04: A session-ID entry screen (manual/deep-link input) supplies `sessionPublicId` to FR-03, behind a swappable interface (Member-3 dependency placeholder).
-5. FR-05: Every answer submission (`POST /attempts/{id}/answers`) is written to a local Drift-backed outbox first, keyed by `(attemptPublicId, pinnedItemPublicId)`, and flushed by a background sync engine on connectivity restore — no code path submits directly to the API from a widget/BLoC.
+5. FR-05: Every answer submission (`POST /api/exam-delivery/attempts/{id}/answers`) is written to a local Drift-backed outbox first, keyed by `(attemptPublicId, pinnedItemPublicId)`, and flushed by a background sync engine — never immediately on write, and never for the row belonging to the currently-displayed task except at an explicit navigate-away/force-submit trigger (see FR-06a) — no code path submits directly to the API from a widget/BLoC.
 6. FR-06: Outbox rows distinguish **retry-pending** from **terminal-rejected** status: `NotCurrentTaskException` (stale/replayed submission) and past-`responseDeadline` rejections mark a row terminal-rejected and stop retrying; transient/network failures remain retry-pending.
-7. FR-07: `MC_READING_SINGLE` submit payload = selected option's `orderIndex` as a decimal string (e.g. `"2"`); `WRITE_ESSAY` payload = raw text; `READ_ALOUD` payload = the media service's `mediaPublicId` after a completed presigned upload.
-8. FR-08: READ_ALOUD recording uses the `record` package; upload flow is `POST /api/media/objects` → `PUT {uploadUrl}` (direct to MinIO, no Authorization header attached) → `POST /api/media/objects/{id}/complete`; recorded audio persists to a local temp file so a deferred/retried upload survives process death, and an expired (900s) `uploadUrl` triggers a fresh presign request rather than retrying the dead URL.
-9. FR-09: `TimerService` seeds a local countdown from `TaskView.serverNow` and `prepDeadline`/`responseDeadline` using `Stopwatch` (not wall-clock `DateTime.now()`), and periodically resyncs via `GET /attempts/{id}/timer`; `phase` (prep vs response) drives which UI is shown.
-10. FR-10: `POST /attempts/{id}/submit` (force-submit) is available as an explicit BLoC action.
-11. FR-11: 429 (rate-limit) responses are surfaced as a distinct retryable error type with backoff, not conflated with auth or validation failures.
-12. FR-12: `ReportBloc` renders `GET /api/reporting/reports/attempts/{id}`: a 404 (published=false-equivalent, since the API can't distinguish "not published" from "not found") renders a "waiting for host to publish" state; per-skill `sufficientData:false` renders "insufficient data," never a blank/zero score.
-13. FR-13: All new code follows `pte-app/CLAUDE.md`/`docs/CODING_STANDARDS_APP.md`: feature-first Clean Architecture, sealed-class BLoC events, immutable BLoC states (no boolean flags), `GetIt` DI per feature module, no hardcoded strings/colors, `mounted` checks after every `await`, controller disposal, 300-line file cap.
+7. FR-06a: A successful `POST /api/exam-delivery/attempts/{id}/answers` call causes the server to advance the attempt to the next task immediately — submitting is equivalent to "end this task now," not a passive save. The background outbox flush (canary/periodic tick) must therefore never flush the row belonging to the task currently displayed to the student; that row is flushed only at an explicit trigger (navigate-away, next-task fetch, or force-submit). Background flush is reserved for rows left over from a previous app session (e.g. after a kill/relaunch) or from tasks already navigated away from.
+8. FR-07: `MC_READING_SINGLE` submit payload = selected option's `orderIndex` as a decimal string (e.g. `"2"`); `WRITE_ESSAY` payload = raw text; `READ_ALOUD` payload = the media service's `mediaPublicId` after a completed presigned upload.
+9. FR-08: READ_ALOUD recording uses the `record` package; upload flow is `POST /api/media/objects` → `PUT {uploadUrl}` (direct to MinIO, no Authorization header attached) → `POST /api/media/objects/{id}/complete`; recorded audio persists to a local temp file so a deferred/retried upload survives process death, and an expired (900s) `uploadUrl` triggers a fresh presign request rather than retrying the dead URL.
+10. FR-09: `TimerService` seeds a local countdown from `TaskView.serverNow` and `prepDeadline`/`responseDeadline` using `Stopwatch` (not wall-clock `DateTime.now()`), and periodically resyncs via `GET /api/exam-delivery/attempts/{id}/timer`; `phase` (prep vs response) drives which UI is shown.
+11. FR-10: `POST /api/exam-delivery/attempts/{id}/submit` (force-submit) is available as an explicit BLoC action.
+12. FR-11: 429 (rate-limit) responses are surfaced as a distinct retryable error type with backoff, not conflated with auth or validation failures.
+13. FR-12: `ReportBloc` renders `GET /api/reporting/reports/attempts/{id}`: a 404 (published=false-equivalent, since the API can't distinguish "not published" from "not found") renders a "waiting for host to publish" state; per-skill `sufficientData:false` renders "insufficient data," never a blank/zero score.
+14. FR-13: All new code follows `pte-app/CLAUDE.md`/`docs/CODING_STANDARDS_APP.md`: feature-first Clean Architecture, sealed-class BLoC events, immutable BLoC states (no boolean flags), `GetIt` DI per feature module, no hardcoded strings/colors, `mounted` checks after every `await`, controller disposal, 300-line file cap.
 
 ---
 
