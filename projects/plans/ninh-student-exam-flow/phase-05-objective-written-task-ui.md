@@ -36,19 +36,19 @@ Maps to: **P1 Story #3 ("answer an MC_READING_SINGLE question by selecting one o
 
 ## Success Criteria
 
-- [ ] No file in this phase's `MC_READING_SINGLE`/`WRITE_ESSAY` feature code imports `ApiClient`.
-- [ ] Every answer-changed event (not just navigation) results in a debounced or immediate local outbox upsert, verified via the fake-timer test.
-- [ ] `pinnedItemPublicId` on every upsert matches the `TaskView` in scope at write time, never a stale cached value.
-- [ ] `MC_READING_SINGLE` payload is the decimal-string `orderIndex`; `WRITE_ESSAY` payload is raw untouched text — both verified by dedicated payload-shape tests, not inferred from a passing integration test alone.
-- [ ] Word-count display never blocks submission or navigation, and never shows a hard error purely for being outside `minWordCount`/`maxWordCount`.
-- [ ] Word-count widget rebuilds only via `BlocSelector` on the relevant slice of state, verified by an executed rebuild-count test, not just the widget's presence in the tree.
-- [ ] `TextEditingController` is disposed on every teardown path.
-- [ ] Navigating away from a task calls `SyncEngine.flushOne` for that task's `pinnedItemPublicId` exactly once — this, not any background trigger, is what submits the active task's answer.
+- [x] No file in this phase's `MC_READING_SINGLE`/`WRITE_ESSAY` feature code imports `ApiClient`.
+- [x] Every answer-changed event (not just navigation) results in a debounced or immediate local outbox upsert, verified via the fake-timer test.
+- [x] `pinnedItemPublicId` on every upsert matches the `TaskView` in scope at write time, never a stale cached value.
+- [x] `MC_READING_SINGLE` payload is the decimal-string `orderIndex`; `WRITE_ESSAY` payload is raw untouched text — both verified by dedicated payload-shape tests, not inferred from a passing integration test alone.
+- [x] Word-count display never blocks submission or navigation, and never shows a hard error purely for being outside `minWordCount`/`maxWordCount`.
+- [x] Word-count widget rebuilds only via `BlocSelector` on the relevant slice of state, verified by an executed rebuild-count test, not just the widget's presence in the tree.
+- [x] `TextEditingController` is disposed on every teardown path.
+- [x] Navigating away from a task calls `SyncEngine.flushOne` for that task's `pinnedItemPublicId` exactly once — this, not any background trigger, is what submits the active task's answer.
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated.
-- Testing: not started.
+- Quality gate: approved (0 findings — reviewed the flush-before-navigate/ApiClient-isolation/stale-pinnedItemPublicId/word-count-non-gating constraints directly; also re-confirmed the two simplify-pass fixes — TaskTypeDispatcher's ValueKey and WriteEssayCubit's precomputed wordCount — are present and correct). Receipt issued.
+- Testing: PASSED — 114/114 tests passing (unit + widget), covering Steps 7-13. See `tests/phase-05-objective-written-task-ui-test-report.json`.
 
 ## Risks
 
