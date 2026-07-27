@@ -32,18 +32,18 @@ Maps to: **P1 Story #1 ("log in and stay authenticated across a 15-minute access
 
 ## Success Criteria
 
-- [ ] A single concurrent burst of 401s across multiple requests triggers exactly one `/api/iam/auth/refresh` call, and all failed requests are retried with the refreshed token.
-- [ ] A token refresh occurs proactively before the 900-second access-token TTL expires, verified without waiting real wall-clock time in tests.
-- [ ] Refresh token is persisted only via `flutter_secure_storage`; no code path writes it to `SharedPreferences` or holds it exclusively in memory.
-- [ ] 429 responses produce a distinct `RateLimitException` (or equivalent), never mapped to an auth or validation exception type.
-- [ ] `AuthBloc` states are separate immutable classes; no boolean-flag state shape exists anywhere in the auth feature.
-- [ ] JWT claim decoding is demonstrably unused in any authorization-decision code path (server re-validates every request).
-- [ ] Logout clears both tokens and transitions `AuthBloc` to an unauthenticated state reachable from any prior authenticated state.
+- [x] A single concurrent burst of 401s across multiple requests triggers exactly one `/api/iam/auth/refresh` call, and all failed requests are retried with the refreshed token.
+- [x] A token refresh occurs proactively before the 900-second access-token TTL expires, verified without waiting real wall-clock time in tests.
+- [x] Refresh token is persisted only via `flutter_secure_storage`; no code path writes it to `SharedPreferences` or holds it exclusively in memory.
+- [x] 429 responses produce a distinct `RateLimitException` (or equivalent), never mapped to an auth or validation exception type.
+- [x] `AuthBloc` states are separate immutable classes; no boolean-flag state shape exists anywhere in the auth feature.
+- [x] JWT claim decoding is demonstrably unused in any authorization-decision code path (server re-validates every request).
+- [x] Logout clears both tokens and transitions `AuthBloc` to an unauthenticated state reachable from any prior authenticated state.
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated.
-- Testing: not started.
+- Quality gate: approved. 3 HIGH findings (QUAL-101 no proactive-refresh re-arm after success, QUAL-102 no Dio timeouts, QUAL-103 unhandled malformed-response TypeError stranding `AuthBloc`) were found and fixed; re-verified `APPROVED`, 1 LOW noted (route-string literals, not blocking). Report: `plans/ninh-student-exam-flow/quality/phase-01-core-networking-auth-quality-report.json`. Receipt cryptographically issued in the `pte-app` repo (cross-repo constraint — see receipt's `_note`): `pte-app/plans/ninh-student-exam-flow/quality/phase-01-core-networking-auth-receipt.json`, mirrored here for the record.
+- Testing: passed (31/31 after quality-gate fixes, `plans/ninh-student-exam-flow/tests/phase-01-core-networking-auth-test-report.json`).
 
 ## Risks
 
