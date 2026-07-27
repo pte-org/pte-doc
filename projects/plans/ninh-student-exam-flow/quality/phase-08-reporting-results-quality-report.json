@@ -1,0 +1,13 @@
+{
+  "phase": "phase-08-reporting-results",
+  "scope_mode": "gate",
+  "findings": [],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "verdict": "APPROVED"
+}
