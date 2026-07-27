@@ -1,6 +1,6 @@
 # Plan: Student Exam-Taking Flow (pte-app Rebuild) — Milestone 1
 
-Status: 🟡 Not Started
+Status: 🟢 Completed
 Date: 2026-07-26
 Mode: Hard, --tdd
 Created by: Ninh
@@ -21,7 +21,7 @@ Full rewrite of `pte-app` (Flutter) into the student-facing exam-taking client f
 - [x] Phase 6: Speaking Task & Media Upload — `record`-based capture to durable temp file, 3-step presigned upload, `mediaPublicId` submitted through the normal outbox path, expired-URL re-presign [quality: approved (1 HIGH fixed — RawUploadClient missing Dio timeouts; 1 MEDIUM fixed — raw enum name leaking to UI instead of AppStrings; 1 LOW noted, 1 NOTED); testing: passed, 140/140]
 - [x] Phase 7: Submission Resilience & Edge-Case Hardening — typed exception handling for terminal vs retryable rejections, force-submit action, verified kill/cold-restart recovery test [quality: approved (1 HIGH fixed — backoff didn't suppress the rest of an in-progress pass; 1 MEDIUM fixed — duplicated terminal-teardown extracted to a shared method); testing: passed, 158/158]
 - [x] Phase 8: Reporting/Results — 404→"waiting for publish" state, nullable score + `sufficientData:false` → "insufficient data" render [quality: approved (0 findings); testing: passed, 183/183]
-- [ ] Phase 9: QA Gate — CLAUDE.md/coding-standards compliance sweep, backfill `bloc_test`/`mocktail` coverage, `flutter analyze`+`flutter test` zero-issue exit, no new features [quality: not evaluated; testing: not started]
+- [x] Phase 9: QA Gate — CLAUDE.md/coding-standards compliance sweep, backfill `bloc_test`/`mocktail` coverage, `flutter analyze`+`flutter test` zero-issue exit, no new features [quality: approved (1 HIGH fixed — sweep's own RecordingPhase refactor regressed a re-record edge case; 1 LOW noted); testing: passed, 187/187. Contract spot-check and Windows secure-storage restart check both attempted but blocked by pre-existing local environment issues (native Postgres/port 5432 conflict; missing VS C++ workload) — recorded as residual items, substituted with source-level verification, not skipped]
 
 ## Research Summary
 
