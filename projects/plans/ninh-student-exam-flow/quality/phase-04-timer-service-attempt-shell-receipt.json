@@ -1,0 +1,27 @@
+{
+  "target": "phase-04-timer-service-attempt-shell",
+  "verdict": "APPROVED",
+  "policy_version": "1.0.0",
+  "report_path": "plans/ninh-student-exam-flow/quality/phase-04-timer-service-attempt-shell-quality-report.json",
+  "reviewed_files": [
+    "lib/core/constants/app_colors.dart",
+    "lib/core/constants/app_dimensions.dart",
+    "lib/core/constants/app_strings.dart",
+    "lib/features/exam_attempt/data/repositories/timer_repository_impl.dart",
+    "lib/features/exam_attempt/domain/repositories/timer_repository.dart",
+    "lib/features/exam_attempt/domain/timer_phase.dart",
+    "lib/features/exam_attempt/domain/timer_service.dart",
+    "lib/features/exam_attempt/domain/timer_snapshot.dart",
+    "lib/features/exam_attempt/domain/timer_state_response.dart",
+    "lib/features/exam_attempt/exam_attempt_module.dart",
+    "lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart",
+    "lib/features/exam_attempt/presentation/bloc/exam_attempt_event.dart",
+    "lib/features/exam_attempt/presentation/bloc/exam_attempt_state.dart",
+    "lib/features/exam_attempt/presentation/widgets/exam_app_bar.dart",
+    "lib/features/exam_attempt/presentation/widgets/exam_bottom_bar.dart",
+    "lib/features/exam_attempt/presentation/widgets/exam_scaffold.dart"
+  ],
+  "source_fingerprint": "sha256:a8797c7d906829984141fde3ef723c0ed975388a963fa319ef0f2d1768446ce5",
+  "reviewed_at": "2026-07-27T00:00:00Z",
+  "open_blocking_findings": 0
+}

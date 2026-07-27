@@ -1,0 +1,48 @@
+{
+  "mode": "gate",
+  "target": "phase-04-timer-service-attempt-shell",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-07-27T00:00:00Z",
+  "reviewed_files": [
+    "lib/features/exam_attempt/domain/timer_phase.dart",
+    "lib/features/exam_attempt/domain/timer_snapshot.dart",
+    "lib/features/exam_attempt/domain/timer_state_response.dart",
+    "lib/features/exam_attempt/domain/repositories/timer_repository.dart",
+    "lib/features/exam_attempt/data/repositories/timer_repository_impl.dart",
+    "lib/features/exam_attempt/domain/timer_service.dart",
+    "lib/features/exam_attempt/presentation/widgets/exam_app_bar.dart",
+    "lib/features/exam_attempt/presentation/widgets/exam_bottom_bar.dart",
+    "lib/features/exam_attempt/presentation/widgets/exam_scaffold.dart",
+    "lib/features/exam_attempt/presentation/bloc/exam_attempt_event.dart",
+    "lib/features/exam_attempt/presentation/bloc/exam_attempt_state.dart",
+    "lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart",
+    "lib/features/exam_attempt/exam_attempt_module.dart",
+    "lib/core/constants/app_strings.dart",
+    "lib/core/constants/app_dimensions.dart",
+    "lib/core/constants/app_colors.dart"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [
+    {
+      "id": "QUAL-401",
+      "severity": "MEDIUM",
+      "rule": "OBS_BACKGROUND_JOB_STATUS_VISIBLE",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "lib/features/exam_attempt/domain/timer_service.dart:27-40,144-157",
+      "evidence": "Verified against current file content: constructor now accepts `Logger? logger` defaulting to `Logger()`, stored as `_logger` (lines 27-35, 40). `_poll`'s catch clause is now `catch (e, stackTrace) { _logger.w('Timer poll failed, retrying in $interval', error: e, stackTrace: stackTrace); }` (lines 149-156), matching the shape of `ProactiveRefreshScheduler._fireRefresh`'s `_logger.w('Proactive token refresh failed, retrying in $_retryDelay', error: e, stackTrace: stackTrace)` (lib/core/network/proactive_refresh_scheduler.dart:68).",
+      "why_it_matters": "N/A — resolved. The failure path is now observable via the injected `Logger`, matching the established convention in both sibling background-retry loops (`ProactiveRefreshScheduler._fireRefresh`, `SyncEngine._flushOne`).",
+      "required_action": "None. Fix verified as matching the required pattern.",
+      "owner": "cook"
+    }
+  ],
+  "report_path": "plans/ninh-student-exam-flow/quality/phase-04-timer-service-attempt-shell-quality-report.json"
+}

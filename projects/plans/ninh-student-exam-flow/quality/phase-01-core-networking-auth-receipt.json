@@ -1,0 +1,27 @@
+{
+  "target": "phase-01-core-networking-auth",
+  "verdict": "APPROVED",
+  "policy_version": "1.0.0",
+  "report_path": "plans/ninh-student-exam-flow/quality/phase-01-core-networking-auth-quality-report.json",
+  "reviewed_files": [
+    "lib/core/config/app_config.dart",
+    "lib/core/network/api_client.dart",
+    "lib/core/network/api_exceptions.dart",
+    "lib/core/network/interceptors/auth_header_interceptor.dart",
+    "lib/core/network/interceptors/token_refresh_interceptor.dart",
+    "lib/core/network/proactive_refresh_scheduler.dart",
+    "lib/core/network/token_refresher.dart",
+    "lib/core/storage/token_store.dart",
+    "lib/features/auth/auth_module.dart",
+    "lib/features/auth/data/repositories/auth_repository_impl.dart",
+    "lib/features/auth/domain/jwt_claims.dart",
+    "lib/features/auth/domain/repositories/auth_repository.dart",
+    "lib/features/auth/presentation/bloc/auth_bloc.dart",
+    "lib/features/auth/presentation/bloc/auth_event.dart",
+    "lib/features/auth/presentation/bloc/auth_state.dart"
+  ],
+  "source_fingerprint": "sha256:c2f7155f775e3b1c94aaf2b13bbc45fa87b6ac85fa677ea09bf6a598bb914847",
+  "reviewed_at": "2026-07-27T00:00:00Z",
+  "open_blocking_findings": 0,
+  "_note": "Cryptographically issued from the pte-app repo (receipt.py requires reviewed_files and the report to share one git repo root). This copy is the human-readable record; the gating copy that ck:cook's completion-transition hook checks lives at pte-app/plans/ninh-student-exam-flow/quality/phase-01-core-networking-auth-receipt.json."
+}
