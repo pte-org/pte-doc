@@ -40,20 +40,20 @@ Maps to: **P1 Story #7 ("my answer survives the app being killed or losing netwo
 
 ## Success Criteria
 
-- [ ] `AnswerOutboxTable` uses composite primary key `(attemptPublicId, pinnedItemPublicId)` and idempotently upserts rather than duplicating on repeated writes.
-- [ ] `AnswerSyncStatus` has a distinct `terminalRejected` state, separate from `pending`, and no code path re-queries a `terminalRejected` row as flushable.
-- [ ] A real (non-mocked) Drift/SQLite-backed outbox row survives destruction and reconstruction of the database instance, proving process-death survival.
-- [ ] `SyncEngine` flushes on both a `connectivity_plus`-driven canary event and an independent periodic fallback tick — verified as two distinct trigger paths, not just one implemented and the other assumed.
-- [ ] A 409 response from `ApiClient` results in the row being marked `terminalRejected`, never retried again by any subsequent flush pass.
-- [ ] No production call site outside `SyncEngine._flushOne` invokes `ApiClient`'s answer-submission method.
-- [ ] `payload` is never parsed, validated, or type-branched on inside the outbox table/DAO/sync engine — it is opaque end to end within this phase's code.
-- [ ] The row matching `setActiveTask`'s current value is never selected by a canary- or periodic-tick-triggered flush; only an explicit `flushOne` call flushes it.
-- [ ] A canary event and a periodic tick firing concurrently never produce two overlapping `_flushOne` calls for the same row.
+- [x] `AnswerOutboxTable` uses composite primary key `(attemptPublicId, pinnedItemPublicId)` and idempotently upserts rather than duplicating on repeated writes.
+- [x] `AnswerSyncStatus` has a distinct `terminalRejected` state, separate from `pending`, and no code path re-queries a `terminalRejected` row as flushable.
+- [x] A real (non-mocked) Drift/SQLite-backed outbox row survives destruction and reconstruction of the database instance, proving process-death survival.
+- [x] `SyncEngine` flushes on both a `connectivity_plus`-driven canary event and an independent periodic fallback tick — verified as two distinct trigger paths, not just one implemented and the other assumed.
+- [x] A 409 response from `ApiClient` results in the row being marked `terminalRejected`, never retried again by any subsequent flush pass.
+- [x] No production call site outside `SyncEngine._flushOne` invokes `ApiClient`'s answer-submission method.
+- [x] `payload` is never parsed, validated, or type-branched on inside the outbox table/DAO/sync engine — it is opaque end to end within this phase's code.
+- [x] The row matching `setActiveTask`'s current value is never selected by a canary- or periodic-tick-triggered flush; only an explicit `flushOne` call flushes it.
+- [x] A canary event and a periodic tick firing concurrently never produce two overlapping `_flushOne` calls for the same row.
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated.
-- Testing: not started.
+- Quality gate: approved. 1 MEDIUM (QUAL-201: `_flushOne` treated `ValidationException` the same as a transient network failure — a malformed payload would retry forever with no terminal path) and 1 LOW (QUAL-202: `startSync`/`setActiveTask` ordering requirement undocumented) found and fixed; re-verified `APPROVED`. Report: `plans/ninh-student-exam-flow/quality/phase-02-offline-answer-outbox-quality-report.json`. Receipt cryptographically issued in the `pte-app` repo (cross-repo constraint, same as Phase 1): `pte-app/plans/ninh-student-exam-flow/quality/phase-02-offline-answer-outbox-receipt.json`, mirrored here for the record.
+- Testing: passed (52/52 after quality-gate fixes, full suite including Phase 0/1 regression, `plans/ninh-student-exam-flow/tests/phase-02-offline-answer-outbox-test-report.json`).
 
 ## Risks
 

@@ -1,0 +1,20 @@
+{
+  "phase": "phase-02-offline-answer-outbox",
+  "mode": "tdd_verify",
+  "verdict": "PASSED",
+  "summary": {
+    "passed": 50,
+    "failed": 0,
+    "skipped": 0
+  },
+  "suites": [
+    "test/unit/storage/answer_outbox_dao_test.dart",
+    "test/unit/storage/app_database_test.dart",
+    "test/unit/network/network_canary_test.dart",
+    "test/unit/sync/sync_engine_test.dart",
+    "test/unit/network/api_client_test.dart",
+    "(plus the full pre-existing Phase 0/1 suite, run together for regression)"
+  ],
+  "notes": "No plans/{slug}/tests/phase-02-*-tdd-ready.json RED_READY artifact was created (same deviation as Phase 1 — tests and implementation were written together, then revised by a /simplify pass). Verified GREEN directly against the current implementation. Process-death survival (Success Criterion 3) verified against a real file-backed NativeDatabase, not a fake/in-memory-only stub, per the phase's own requirement.",
+  "failures": []
+}
