@@ -2,7 +2,7 @@
   "mode": "gate",
   "target": "phase-06-speaking-media-upload",
   "verdict": "APPROVED",
-  "reviewed_at": "2026-07-27T09:51:40Z",
+  "reviewed_at": "2026-07-27T00:00:00Z",
   "reviewed_files": [
     "lib/core/storage/pending_media_upload_status.dart",
     "lib/core/storage/tables/pending_media_upload_table.dart",
@@ -34,6 +34,34 @@
   },
   "findings": [
     {
+      "id": "QUAL-603",
+      "severity": "HIGH",
+      "rule": "ERR_TIMEOUT_ON_EXTERNAL_CALL",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "lib/core/network/raw_upload_client.dart:14-23",
+      "evidence": "RawUploadClient now constructs `Dio(BaseOptions(connectTimeout: AppConfig.connectTimeout, receiveTimeout: AppConfig.receiveTimeout, sendTimeout: AppConfig.sendTimeout))` when no Dio is injected, matching the timeout convention used by auth_module.dart's _newGatewayDio(). The `RawUploadClient({Dio? dio})` test seam is preserved (`dio ?? Dio(...)`), so the injected-Dio path used by raw_upload_client_test.dart is unaffected.",
+      "why_it_matters": "A stalled PUT to MinIO no longer hangs indefinitely inside MediaUploadCoordinator's guarded critical section; it now surfaces as a DioException within the configured timeout and can be retried on the next tick.",
+      "required_action": "None — verified fixed by re-reading the current file.",
+      "owner": "cook"
+    },
+    {
+      "id": "QUAL-604",
+      "severity": "MEDIUM",
+      "rule": "CONST_MESSAGE_VS_CODE_SEPARATED",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "lib/features/exam_attempt/presentation/pages/read_aloud_screen.dart:117-123",
+      "evidence": "_uploadStatusLabel now maps PendingMediaUploadStatus.ready to the new AppStrings.readAloudUploadReadyLabel ('Uploaded — ready to continue.') and every other non-null status to AppStrings.readAloudStillUploadingLabel ('Still uploading…'), both defined in app_strings.dart:29-31. No raw status.name value is returned to the UI.",
+      "why_it_matters": "Students no longer see a raw, untranslated enum name mid-upload; all labels now go through the app's AppStrings constant convention.",
+      "required_action": "None — verified fixed by re-reading the current file.",
+      "owner": "cook"
+    },
+    {
       "id": "QUAL-601",
       "severity": "LOW",
       "rule": "CORR_DEFINED_BRANCH_BEHAVIOR",
@@ -42,9 +70,9 @@
       "applicable": true,
       "confidence": "high",
       "location": "lib/features/exam_attempt/presentation/cubit/read_aloud_state.dart:19-25 (used from lib/features/exam_attempt/presentation/cubit/read_aloud_cubit.dart:41)",
-      "evidence": "ReadAloudState.copyWith is `uploadStatus: uploadStatus ?? this.uploadStatus`. read_aloud_cubit.dart's watchRow listener calls `emit(state.copyWith(uploadStatus: row == null ? null : ...))` intending to clear uploadStatus back to null once the PendingMediaUploadTable row is gone. Because copyWith uses `??`, passing an explicit `null` is indistinguishable from 'field not supplied' and always falls back to `this.uploadStatus` -- the null-clearing branch can never actually execute.",
-      "why_it_matters": "This is dead/misleading logic: the code reads as if it clears uploadStatus to null when the row disappears, but it never does. In the current call graph the only row-to-null transition happens after the row reaches `ready` and MediaUploadCoordinator deletes it (phase-06 Design Constraints, Step 6), so the stale non-null 'ready' value happens to be harmless (the advance button stays correctly enabled). But the bug is a latent footgun: any future change that relies on this state actually resetting to null (e.g. a re-record flow that doesn't recreate the Cubit) would silently keep showing the previous status instead of 'not recorded yet'.",
-      "required_action": "Use an explicit sentinel/wrapper (e.g. a `Value<T>`-style wrapper, or a dedicated `clearUploadStatus()` method) instead of a bare nullable `??` in copyWith, so an intentional null can actually be set.",
+      "evidence": "ReadAloudState.copyWith computes uploadStatus using uploadStatus ?? this.uploadStatus. The cubit's watchRow listener calls copyWith(uploadStatus: row == null ? null : ...) intending to clear uploadStatus back to null once the PendingMediaUploadTable row is gone. Because copyWith uses the null-coalescing operator, passing an explicit null is indistinguishable from omitting the argument, so it always falls back to the previous value and the null-clearing branch can never execute.",
+      "why_it_matters": "This is dead and misleading logic: the code reads as though it clears uploadStatus to null when the row disappears, but it never does. Today the only row-to-null transition happens after the row reaches ready and MediaUploadCoordinator deletes it, so the stale non-null ready value is harmless. But it is a latent footgun: a future re-record flow that reuses the same Cubit instance would silently keep showing the previous status instead of the not-recorded label.",
+      "required_action": "Use an explicit sentinel or wrapper type instead of a bare nullable value in copyWith, so an intentional null can actually be applied.",
       "owner": "cook"
     },
     {
@@ -56,9 +84,9 @@
       "applicable": true,
       "confidence": "medium",
       "location": "lib/core/sync/media_upload_coordinator.dart:115-146 (_advance/_complete/_submitToOutbox)",
-      "evidence": "`_complete()` calls `_mediaDao.markReady()` (persists status='ready' to PendingMediaUploadTable, observed live by ReadAloudCubit via `watchRow`) and only afterward, as a separate later step in `_advance`, does `_submitToOutbox()` call `_outboxDao.upsertAnswer(...)` and `_mediaDao.deleteRow(...)`. These are three independent sequential Drift writes, not one atomic transaction.",
-      "why_it_matters": "Between markReady's write completing (which can make ReadAloudAdvanceButton's `uploadStatus == ready` selector fire and enable the button) and upsertAnswer's write actually landing, there is a narrow window where the UI could report 'ready' before the corresponding AnswerOutboxTable row exists. If flushOne is invoked in that exact window, SyncEngine.flushOne's `row == null` guard would no-op, silently deferring the submit to the next periodic/canary background flush instead of submitting immediately as Step 13 intends. Impact is bounded (SyncEngine's periodic trigger self-heals this within one interval, no data loss), and the window is likely sub-millisecond, hence NOTED rather than a blocking finding -- but it is a real ordering gap worth closing given how central 'ready implies submittable' is to this phase's design.",
-      "required_action": "Consider wrapping markReady + upsertAnswer + deleteRow in a single Drift transaction (or reordering so the outbox row is written before the PendingMediaUploadTable row is ever observably marked ready) so 'ready' and 'submittable' become atomic from the UI's perspective.",
+      "evidence": "_complete() calls markReady (persisted, observed live by ReadAloudCubit via watchRow) and only afterward, as a separate later step in _advance, does _submitToOutbox call upsertAnswer and deleteRow. These are three independent sequential Drift writes, not one atomic transaction.",
+      "why_it_matters": "Between markReady's write completing, which can make ReadAloudAdvanceButton's ready selector fire and enable the button, and upsertAnswer's write actually landing, there is a narrow window where the UI could report ready before the corresponding AnswerOutboxTable row exists. If flushOne runs in that window, SyncEngine.flushOne's null-row guard would no-op, silently deferring the submit to the next background flush instead of submitting immediately. Impact is bounded since the periodic trigger self-heals within one interval, hence NOTED rather than blocking, but it is a real ordering gap.",
+      "required_action": "Consider wrapping markReady, upsertAnswer, and deleteRow in a single Drift transaction, or reordering so the outbox row is written before the PendingMediaUploadTable row is ever observably marked ready, so ready and submittable become atomic from the UI's perspective.",
       "owner": "cook"
     }
   ],

@@ -1,0 +1,31 @@
+{
+  "target": "phase-06-speaking-media-upload",
+  "verdict": "APPROVED",
+  "policy_version": "1.0.0",
+  "report_path": "plans/ninh-student-exam-flow/quality/phase-06-speaking-media-upload-quality-report.json",
+  "reviewed_files": [
+    "lib/core/constants/app_strings.dart",
+    "lib/core/network/media_presign_response.dart",
+    "lib/core/network/media_repository.dart",
+    "lib/core/network/media_repository_impl.dart",
+    "lib/core/network/raw_upload_client.dart",
+    "lib/core/storage/app_database.dart",
+    "lib/core/storage/dao/pending_media_upload_dao.dart",
+    "lib/core/storage/pending_media_upload_status.dart",
+    "lib/core/storage/storage_module.dart",
+    "lib/core/storage/tables/pending_media_upload_table.dart",
+    "lib/core/sync/media_upload_coordinator.dart",
+    "lib/features/exam_attempt/data/audio_recorder_service_impl.dart",
+    "lib/features/exam_attempt/domain/audio_recorder_service.dart",
+    "lib/features/exam_attempt/exam_attempt_module.dart",
+    "lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart",
+    "lib/features/exam_attempt/presentation/cubit/read_aloud_cubit.dart",
+    "lib/features/exam_attempt/presentation/cubit/read_aloud_state.dart",
+    "lib/features/exam_attempt/presentation/pages/read_aloud_screen.dart",
+    "lib/features/exam_attempt/presentation/widgets/read_aloud_advance_button.dart",
+    "lib/features/exam_attempt/presentation/widgets/task_type_dispatcher.dart"
+  ],
+  "source_fingerprint": "sha256:b39192d18f5bfb70e47696739c812115f82c0e5bedddbf5e35b692f47731feef",
+  "reviewed_at": "2026-07-27T00:00:00Z",
+  "open_blocking_findings": 0
+}

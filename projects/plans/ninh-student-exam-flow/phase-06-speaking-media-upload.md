@@ -34,18 +34,18 @@ Maps to: **P1 Story #5 ("record and submit a READ_ALOUD audio response") | FR-08
 
 ## Success Criteria
 
-- [ ] A `READ_ALOUD` recording, once fully uploaded and completed, results in exactly one Phase 2 outbox row whose `payload` is the `mediaPublicId` string — never raw audio bytes, never an intermediate upload-state marker.
-- [ ] The raw `PUT {uploadUrl}` request never carries the app's bearer `Authorization` header, verified directly, not assumed from "it uses a different `Dio` instance."
-- [ ] An expired presigned URL encountered during a deferred upload triggers a fresh presign + retried `PUT` against the same local recording file, never a re-record and never a dead-URL retry loop.
-- [ ] A process-death mid-upload (recording done, upload/complete not yet finished) is recoverable on relaunch from the persisted `PendingMediaUploadTable` row, without re-recording.
-- [ ] Phase 2's `AnswerOutboxTable`/`SyncEngine` contain no media-upload-specific logic (no presign/URL/expiry awareness) — confirmed by code review that this phase added zero changes to Phase 2's files.
-- [ ] `MediaUploadCoordinator` retries a `recorded`-or-later row on both a connectivity-restore event and a periodic fallback tick — an offline recording is not limited to a single attempt at recording-stop time.
-- [ ] Navigating away from a `READ_ALOUD` task only proceeds once its row has reached `ready`, and triggers exactly one `SyncEngine.flushOne` call at that point.
+- [x] A `READ_ALOUD` recording, once fully uploaded and completed, results in exactly one Phase 2 outbox row whose `payload` is the `mediaPublicId` string — never raw audio bytes, never an intermediate upload-state marker.
+- [x] The raw `PUT {uploadUrl}` request never carries the app's bearer `Authorization` header, verified directly, not assumed from "it uses a different `Dio` instance."
+- [x] An expired presigned URL encountered during a deferred upload triggers a fresh presign + retried `PUT` against the same local recording file, never a re-record and never a dead-URL retry loop.
+- [x] A process-death mid-upload (recording done, upload/complete not yet finished) is recoverable on relaunch from the persisted `PendingMediaUploadTable` row, without re-recording.
+- [x] Phase 2's `AnswerOutboxTable`/`SyncEngine` contain no media-upload-specific logic (no presign/URL/expiry awareness) — confirmed by code review that this phase added zero changes to Phase 2's files.
+- [x] `MediaUploadCoordinator` retries a `recorded`-or-later row on both a connectivity-restore event and a periodic fallback tick — an offline recording is not limited to a single attempt at recording-stop time.
+- [x] Navigating away from a `READ_ALOUD` task only proceeds once its row has reached `ready`, and triggers exactly one `SyncEngine.flushOne` call at that point.
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated.
-- Testing: PASSED — 140/140 tests passing (0 failed, 0 skipped) via `flutter test` across the whole repo. New coverage for Steps 8-13: `test/unit/network/raw_upload_client_test.dart` (7 tests, Step 9 + Risks), `test/unit/storage/pending_media_upload_dao_test.dart` (5 tests, Step 11), `test/unit/sync/media_upload_coordinator_test.dart` (9 tests, Steps 8/10/11/12 plus the two simplify-pass regressions: the `_inFlightRows` guard and the `copyWith`-based state passing), `test/widget/features/exam_attempt/read_aloud_advance_button_test.dart` (5 tests, Step 13). Full report: `projects/plans/ninh-student-exam-flow/tests/phase-06-speaking-media-upload-test-report.json`. No production code was modified.
+- Quality gate: APPROVED (0 open blocking findings). First pass found 1 HIGH (`RawUploadClient`'s Dio had no connect/receive/send timeouts, unlike every other Dio instance in the app — a hung PUT would permanently strand a row inside the `_inFlightRows` guard) and 1 MEDIUM (`read_aloud_screen.dart`'s status label fell back to the raw `PendingMediaUploadStatus` enum name shown directly to the student instead of an `AppStrings` constant). Both fixed — `RawUploadClient` now builds its fallback `Dio` with `AppConfig.connectTimeout/receiveTimeout/sendTimeout`; `_uploadStatusLabel` now maps every status through `AppStrings.readAloudUploadReadyLabel`/`readAloudStillUploadingLabel`, no raw enum name reaches the UI. Re-verified APPROVED. 1 LOW noted (`ReadAloudState.copyWith`'s null-coalescing makes an intentional null-clearing emit a no-op — latent, currently harmless), 1 NOTED (three sequential non-transactional writes in `MediaUploadCoordinator._advance`/`_complete`/`_submitToOutbox` — narrow self-healing window). Receipt issued.
+- Testing: PASSED — 140/140 tests passing (0 failed, 0 skipped) via `flutter test` across the whole repo. New coverage for Steps 8-13: `test/unit/network/raw_upload_client_test.dart` (7 tests, Step 9 + Risks), `test/unit/storage/pending_media_upload_dao_test.dart` (5 tests, Step 11), `test/unit/sync/media_upload_coordinator_test.dart` (9 tests, Steps 8/10/11/12 plus the two simplify-pass regressions: the `_inFlightRows` guard and the `copyWith`-based state passing), `test/widget/features/exam_attempt/read_aloud_advance_button_test.dart` (5 tests, Step 13). Full report: `projects/plans/ninh-student-exam-flow/tests/phase-06-speaking-media-upload-test-report.json`. Production code was subsequently modified only for the 2 quality-gate fixes above (`raw_upload_client.dart`, `read_aloud_screen.dart`, `app_strings.dart`), re-verified green against the same suites.
 
 ## Risks
 
