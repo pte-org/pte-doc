@@ -1,7 +1,7 @@
 {
   "mode": "gate",
   "target": "phase-07-submission-resilience-hardening",
-  "verdict": "CHANGES_REQUIRED",
+  "verdict": "APPROVED",
   "reviewed_at": "2026-07-27T00:00:00Z",
   "reviewed_files": [
     "lib/core/network/api_exceptions.dart",
@@ -20,8 +20,8 @@
   ],
   "summary": {
     "blocker": 0,
-    "high": 1,
-    "medium": 1,
+    "high": 0,
+    "medium": 0,
     "low": 0,
     "noted": 0
   },
@@ -30,28 +30,28 @@
       "id": "QUAL-701",
       "severity": "HIGH",
       "rule": "PHASE07_BACKOFF_SUPPRESSES_ENTIRE_PASS",
-      "status": "OPEN",
+      "status": "RESOLVED",
       "introduced_by_current_change": true,
       "applicable": true,
       "confidence": "high",
-      "location": "lib/core/sync/sync_engine.dart:133-151 (esp. the `for (final answer in pending)` loop at 140-144); lib/core/sync/media_upload_coordinator.dart:108-119 (esp. the `for (final row in rows)` loop at 112-115)",
-      "evidence": "`_flush`/`scanAll` only check `_backoff.isActive` once, at the top of the method, before the loop starts. Once `_flushOne`/`_advance` catches a `RateLimitException` for one row mid-loop (registering the cooldown via `_backoff.registerRateLimited`), the loop does not re-check `_backoff.isActive` and keeps calling `_flushOne`/`_advance` for every remaining row in the same pass. Two consequences: (1) every remaining row in the pass still fires a doomed request during an active 429 burst instead of being skipped, and (2) because `RateLimitBackoff._nextInterval()` doubles `_lastInterval` on every call to `registerRateLimited`, a single pass that rate-limits on N rows compounds the exponential growth N times in one tick (e.g. two 429s in the same pass jump straight to 2s/4s instead of a single 1s step), rather than growing by one step per genuine retry cycle.",
-      "why_it_matters": "Phase 7's own Design Constraint (b) and Success Criteria explicitly require the backoff to suppress the *entire* flush/scan pass, not just the offending row (\"retrying every pending row again... only worsens the burst\"). The current code satisfies this only across passes (the next tick correctly no-ops via the top-of-method `isActive` check) but not within the pass that first hits the 429 — it keeps hammering the same rate-limited endpoint for every other pending row, and distorts the intended 1s->2s->4s exponential curve into an uncontrolled multi-step jump whenever more than one row is rate-limited in the same tick. This can leave the client backed off far longer than the real 429 signal warranted, or continue sending doomed requests during an active burst.",
-      "required_action": "Inside `_flush`'s and `scanAll`'s loops, check `_backoff.isActive` after each row/answer and break out of the loop as soon as it becomes true (or check it before each iteration), so a 429 encountered partway through a pass stops the rest of that pass immediately instead of letting every remaining row also attempt and re-register the backoff.",
+      "location": "lib/core/sync/sync_engine.dart:140-151 (`_flush`'s `for (final answer in pending)` loop); lib/core/sync/media_upload_coordinator.dart:112-119 (`scanAll`'s `for (final row in rows)` loop)",
+      "evidence": "Both loops now re-check `_backoff.isActive` immediately after each row/answer and `break` as soon as it becomes true: `sync_engine.dart` lines 150-151 (`if (_backoff.isActive) break;` right after `flushedAny = true;`) and `media_upload_coordinator.dart` lines 115-118 (`if (_backoff.isActive) break;` right after `await _advance(row);`). A 429 hit on any row now stops the rest of that same pass rather than letting every remaining row also fire and re-register/compound the backoff.",
+      "why_it_matters": "Confirmed fixed — a 429 partway through a pass now stops all remaining rows in that pass, matching phase-07's Design Constraint (b) that the backoff must suppress the entire flush/scan pass, not just the offending row.",
+      "required_action": "None — resolved.",
       "owner": "cook"
     },
     {
       "id": "QUAL-702",
       "severity": "MEDIUM",
       "rule": "DRY_DUPLICATED_TEARDOWN",
-      "status": "OPEN",
+      "status": "RESOLVED",
       "introduced_by_current_change": true,
       "applicable": true,
       "confidence": "high",
-      "location": "lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart:151-156 (_onForceSubmitRequested) and :164-169 (_emitFromResponse)",
-      "evidence": "Both call sites execute the identical 5-line terminal-teardown sequence in the same order: `_attemptPublicId = null; _syncEngine.setActiveTask(null); _syncEngine.stopSync(); _timerService.stop(); _mediaUploadCoordinator.stop(); emit(AttemptCompleted(attemptPublicId));` — copy-pasted rather than extracted into one shared private method.",
-      "why_it_matters": "This phase's Design Constraint explicitly states force-submit must reach 'the same terminal AttemptCompleted state and teardown sequence... as the natural end-of-tasks path' — which the code does today, but by duplicating the sequence verbatim rather than sharing it. Any future change to the teardown (e.g. adding `_syncEngine.dispose()`, cancelling a new subscription, or emitting an additional side effect) has to be made in both places; missing one is a silent behavioral drift between the two 'same outcome' paths this phase's own contract says must stay identical.",
-      "required_action": "Extract the shared teardown+emit sequence into one private helper (e.g. `_completeAttempt(String attemptPublicId, Emitter<ExamAttemptState> emit)`) and call it from both `_onForceSubmitRequested` and `_emitFromResponse`.",
+      "location": "lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart:161-168 (`_completeAttempt`), called from :151 (`_onForceSubmitRequested`) and :172 (`_emitFromResponse`)",
+      "evidence": "The shared teardown is now extracted into a single private method `_completeAttempt(String attemptPublicId, Emitter<ExamAttemptState> emit)` (lines 161-168) containing `_attemptPublicId = null`, `_syncEngine.setActiveTask(null)`, `_syncEngine.stopSync()`, `_timerService.stop()`, `_mediaUploadCoordinator.stop()`, and `emit(AttemptCompleted(attemptPublicId))`. Both `_onForceSubmitRequested` (line 151, after a successful `forceSubmit`) and `_emitFromResponse` (line 172, when `response.completed`) call this one method — no duplication remains.",
+      "why_it_matters": "Confirmed fixed — the two 'same outcome' paths this phase's contract requires to stay identical now share one implementation, eliminating the drift risk.",
+      "required_action": "None — resolved.",
       "owner": "cook"
     }
   ],
