@@ -1,0 +1,48 @@
+{
+  "mode": "gate",
+  "target": "phase-04-timer-service-attempt-shell",
+  "verdict": "CHANGES_REQUIRED",
+  "reviewed_at": "2026-07-27T00:00:00Z",
+  "reviewed_files": [
+    "lib/features/exam_attempt/domain/timer_phase.dart",
+    "lib/features/exam_attempt/domain/timer_snapshot.dart",
+    "lib/features/exam_attempt/domain/timer_state_response.dart",
+    "lib/features/exam_attempt/domain/repositories/timer_repository.dart",
+    "lib/features/exam_attempt/data/repositories/timer_repository_impl.dart",
+    "lib/features/exam_attempt/domain/timer_service.dart",
+    "lib/features/exam_attempt/presentation/widgets/exam_app_bar.dart",
+    "lib/features/exam_attempt/presentation/widgets/exam_bottom_bar.dart",
+    "lib/features/exam_attempt/presentation/widgets/exam_scaffold.dart",
+    "lib/features/exam_attempt/presentation/bloc/exam_attempt_event.dart",
+    "lib/features/exam_attempt/presentation/bloc/exam_attempt_state.dart",
+    "lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart",
+    "lib/features/exam_attempt/exam_attempt_module.dart",
+    "lib/core/constants/app_strings.dart",
+    "lib/core/constants/app_dimensions.dart",
+    "lib/core/constants/app_colors.dart"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 1,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [
+    {
+      "id": "QUAL-401",
+      "severity": "MEDIUM",
+      "rule": "OBS_BACKGROUND_JOB_STATUS_VISIBLE",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "lib/features/exam_attempt/domain/timer_service.dart:136-145",
+      "evidence": "`_poll`'s catch block: `catch (_) { // Silent retry — connectivity state is the Bloc's concern, not this loop's; never block on a single failed poll (mirrors the Phase 0 reference `TimerService._poll`). }` — no logging call of any kind, and `TimerService` takes no `Logger` dependency at all. `ApiClient._run` (lib/core/network/api_client.dart:43-49) also does not log — it only maps `DioException` to an `ApiException` and rethrows — so this catch block is the only place in the entire call chain a poll failure (network error, malformed `phase` field surfacing as `FormatException` from `TimerStateResponse._phaseFromWire`, etc.) could ever be observed, and it is fully silent.",
+      "why_it_matters": "The two closest sibling background-retry loops in this codebase both log on the exact same 'leave state as-is, retry next tick' path: `ProactiveRefreshScheduler._fireRefresh`'s catch logs via `_logger.w(...)` before re-arming, and `SyncEngine._flushOne`'s `on ApiException catch` logs via `_logger.w('Answer flush failed, left pending for next tick', error: e)`. `TimerService._poll` is architecturally identical (retry-on-failure, no user-facing error) but drops the failure entirely. A recurring timer-poll failure (e.g. an expired token edge case not yet caught by `TokenRefreshInterceptor`, or a backend contract drift on `TimerStateResponse.phase`) would silently freeze the countdown display with zero diagnostic trail anywhere in the stack, making the MEDIUM risk already called out in this phase's own Risks section ('poll scheduled only while foregrounded... could let the countdown silently drift') strictly harder to diagnose when it happens.",
+      "required_action": "Inject a `Logger` into `TimerService` (same optional-with-default pattern as `ProactiveRefreshScheduler`/`SyncEngine`: `Logger? logger` defaulting to `Logger()`) and log a warning with the caught error/stack trace in `_poll`'s catch block before falling through to the reschedule, matching the established convention in both sibling background-retry loops.",
+      "owner": "cook"
+    }
+  ],
+  "report_path": "plans/ninh-student-exam-flow/quality/phase-04-timer-service-attempt-shell-quality-report.json"
+}

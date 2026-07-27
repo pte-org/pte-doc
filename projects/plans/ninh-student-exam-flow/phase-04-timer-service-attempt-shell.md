@@ -44,7 +44,7 @@ Maps to: **P1 Story #6 ("the exam timer reflects the server's authoritative dead
 ## Quality and Testing State
 
 - Quality gate: not evaluated.
-- Testing: not started.
+- Testing: PASSED (unit). 79/79 tests passed, 0 failed, 0 skipped, across the full `flutter test` run. New coverage: `test/unit/features/exam_attempt/timer_service_test.dart` (Steps 8-11 plus an orphaned-timer-chain regression test), `test/unit/features/exam_attempt/timer_state_response_test.dart`, `test/unit/features/exam_attempt/timer_repository_impl_test.dart`, `test/widget/features/exam_attempt/exam_app_bar_test.dart` (Step 12, executed widget test). See `plans/ninh-student-exam-flow/tests/phase-04-timer-service-attempt-shell-test-report.json`.
 
 ## Risks
 
