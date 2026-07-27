@@ -34,16 +34,16 @@ Maps to: **P1 Story #6 ("the exam timer reflects the server's authoritative dead
 
 ## Success Criteria
 
-- [ ] Countdown arithmetic never calls `DateTime.now()` — confirmed by code review/grep as part of this phase's own check, not deferred to Phase 9.
-- [ ] Initial phase derivation from a bare `TaskView` (no prior timer poll) correctly distinguishes prep vs. response vs. already-expired, covered by tests for all three cases.
-- [ ] All poll cadence and countdown-tick tests run via the injectable `TimerScheduler` with zero real wall-clock waiting.
-- [ ] A `currentOrderIndex` change between polls is surfaced as a distinct signal from a normal countdown tick, and is observably wired to trigger a task refresh rather than being silently absorbed.
-- [ ] The shared exam shell contains no independent per-second `Timer` — the countdown display is driven exclusively by `TimerService.ticks`.
-- [ ] `ExamAppBar`'s countdown widget rebuilds only on `TimerSnapshot` changes (`BlocSelector`), not on unrelated attempt-state changes.
+- [x] Countdown arithmetic never calls `DateTime.now()` — confirmed by code review/grep as part of this phase's own check, not deferred to Phase 9.
+- [x] Initial phase derivation from a bare `TaskView` (no prior timer poll) correctly distinguishes prep vs. response vs. already-expired, covered by tests for all three cases.
+- [x] All poll cadence and countdown-tick tests run via the injectable `TimerScheduler` with zero real wall-clock waiting.
+- [x] A `currentOrderIndex` change between polls is surfaced as a distinct signal from a normal countdown tick, and is observably wired to trigger a task refresh rather than being silently absorbed.
+- [x] The shared exam shell contains no independent per-second `Timer` — the countdown display is driven exclusively by `TimerService.ticks`.
+- [x] `ExamAppBar`'s countdown widget rebuilds only on `TimerSnapshot` changes (`BlocSelector`), not on unrelated attempt-state changes.
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated.
+- Quality gate: approved (1 MEDIUM fixed — QUAL-401, `TimerService._poll`'s failure catch was fully silent with no logging, unlike the two sibling retry loops `ProactiveRefreshScheduler`/`SyncEngine`; fixed by injecting an optional `Logger` and logging a warning before rescheduling, matching the established convention). Re-verified APPROVED, receipt issued.
 - Testing: PASSED (unit). 79/79 tests passed, 0 failed, 0 skipped, across the full `flutter test` run. New coverage: `test/unit/features/exam_attempt/timer_service_test.dart` (Steps 8-11 plus an orphaned-timer-chain regression test), `test/unit/features/exam_attempt/timer_state_response_test.dart`, `test/unit/features/exam_attempt/timer_repository_impl_test.dart`, `test/widget/features/exam_attempt/exam_app_bar_test.dart` (Step 12, executed widget test). See `plans/ninh-student-exam-flow/tests/phase-04-timer-service-attempt-shell-test-report.json`.
 
 ## Risks
