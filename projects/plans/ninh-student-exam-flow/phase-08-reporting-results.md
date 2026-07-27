@@ -39,7 +39,7 @@ Maps to: **P1 Story #8 ("see my report after the host publishes it, and a clear 
 ## Quality and Testing State
 
 - Quality gate: not evaluated.
-- Testing: not started.
+- Testing: PASSED — Steps 7-10 covered (183 tests total: 158 pre-existing + 25 new across report_response_test.dart, report_repository_impl_test.dart, report_bloc_test.dart, skill_score_row_test.dart, report_screen_test.dart), 0 failures, 0 skipped. Full report: `tests/phase-08-reporting-results-test-report.json`.
 
 ## Risks
 
