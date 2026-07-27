@@ -45,7 +45,7 @@ Maps to: **P1 Story #5 ("record and submit a READ_ALOUD audio response") | FR-08
 ## Quality and Testing State
 
 - Quality gate: not evaluated.
-- Testing: not started.
+- Testing: PASSED — 140/140 tests passing (0 failed, 0 skipped) via `flutter test` across the whole repo. New coverage for Steps 8-13: `test/unit/network/raw_upload_client_test.dart` (7 tests, Step 9 + Risks), `test/unit/storage/pending_media_upload_dao_test.dart` (5 tests, Step 11), `test/unit/sync/media_upload_coordinator_test.dart` (9 tests, Steps 8/10/11/12 plus the two simplify-pass regressions: the `_inFlightRows` guard and the `copyWith`-based state passing), `test/widget/features/exam_attempt/read_aloud_advance_button_test.dart` (5 tests, Step 13). Full report: `projects/plans/ninh-student-exam-flow/tests/phase-06-speaking-media-upload-test-report.json`. No production code was modified.
 
 ## Risks
 
