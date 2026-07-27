@@ -1,7 +1,23 @@
 {
-  "phase": "phase-08-reporting-results",
-  "scope_mode": "gate",
-  "findings": [],
+  "mode": "gate",
+  "target": "phase-08-reporting-results",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-07-27T00:00:00Z",
+  "reviewed_files": [
+    "lib/core/network/api_exceptions.dart",
+    "lib/core/network/api_client.dart",
+    "lib/features/report/domain/report_response.dart",
+    "lib/features/report/domain/repositories/report_repository.dart",
+    "lib/features/report/data/repositories/report_repository_impl.dart",
+    "lib/features/report/presentation/bloc/report_event.dart",
+    "lib/features/report/presentation/bloc/report_state.dart",
+    "lib/features/report/presentation/bloc/report_bloc.dart",
+    "lib/features/report/presentation/widgets/skill_score_row.dart",
+    "lib/features/report/presentation/pages/report_screen.dart",
+    "lib/features/report/report_module.dart",
+    "lib/main.dart",
+    "lib/core/constants/app_strings.dart"
+  ],
   "summary": {
     "blocker": 0,
     "high": 0,
@@ -9,5 +25,6 @@
     "low": 0,
     "noted": 0
   },
-  "verdict": "APPROVED"
+  "findings": [],
+  "report_path": "plans/ninh-student-exam-flow/quality/phase-08-reporting-results-quality-report.json"
 }

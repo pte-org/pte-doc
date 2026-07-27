@@ -30,15 +30,15 @@ Maps to: **P1 Story #8 ("see my report after the host publishes it, and a clear 
 
 ## Success Criteria
 
-- [ ] A 404 from the reporting endpoint always renders "waiting for host to publish," never an error banner and never triggers an automatic retry loop.
-- [ ] `ReportBloc` has zero import of or dependency on Phase 2's `AnswerOutboxDao`/`SyncEngine`.
-- [ ] Every skill with `sufficientData: false` renders "insufficient data" regardless of the `score` field's value, verified by a test using a non-null `score` alongside `sufficientData: false` specifically.
-- [ ] `ReportBloc` states are four separate immutable classes with no boolean-flag shape.
-- [ ] `communicativeSkills` and `enablingSkills` share one skill-rendering widget rather than two divergent implementations.
+- [x] A 404 from the reporting endpoint always renders "waiting for host to publish," never an error banner and never triggers an automatic retry loop.
+- [x] `ReportBloc` has zero import of or dependency on Phase 2's `AnswerOutboxDao`/`SyncEngine`.
+- [x] Every skill with `sufficientData: false` renders "insufficient data" regardless of the `score` field's value, verified by a test using a non-null `score` alongside `sufficientData: false` specifically.
+- [x] `ReportBloc` states are four separate immutable classes with no boolean-flag shape.
+- [x] `communicativeSkills` and `enablingSkills` share one skill-rendering widget rather than two divergent implementations.
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated.
+- Quality gate: APPROVED (0 findings). Verified: `ReportBloc` has zero import of/dependency on `AnswerOutboxDao`/`SyncEngine`; no `RateLimitException`/backoff logic anywhere in this feature (Phase 7's backoff pattern correctly not reused); `sufficientData` checked directly wherever the insufficient-data rendering decision is made; `communicativeSkills`/`enablingSkills` share one `SkillScoreRow` widget; `published`/`publishedAt` are not used to build a second not-published check on top of the 404 path. Receipt issued.
 - Testing: PASSED — Steps 7-10 covered (183 tests total: 158 pre-existing + 25 new across report_response_test.dart, report_repository_impl_test.dart, report_bloc_test.dart, skill_score_row_test.dart, report_screen_test.dart), 0 failures, 0 skipped. Full report: `tests/phase-08-reporting-results-test-report.json`.
 
 ## Risks
