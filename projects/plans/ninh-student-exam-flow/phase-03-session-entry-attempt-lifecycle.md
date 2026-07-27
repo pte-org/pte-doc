@@ -36,19 +36,19 @@ Maps to: **P1 Story #2 ("start or resume an attempt for a given exam session") +
 
 ## Success Criteria
 
-- [ ] `ExamAttemptRepository` has no import of or dependency on `AnswerOutboxDao`/`SyncEngine`.
-- [ ] `AttemptTaskResponse.completed=true`/`task:null` renders as a dedicated terminal UI state, never the generic error state.
-- [ ] Resuming an attempt with outbox rows left over from a prior app session triggers an immediate flush attempt (via `SyncEngine.startSync`), not a passive wait for the next canary/periodic tick.
-- [ ] The placeholder session-entry screen is swappable for a different implementation of `SessionEntryRepository` with zero changes required to `ExamAttemptBloc` or `ExamAttemptRepository`.
-- [ ] `ExamAttemptBloc` events are sealed; states are separate immutable classes with no boolean-flag shape.
-- [ ] A server-driven task advance the client did not itself request (simulated in tests) does not crash or corrupt the `Bloc`'s state machine.
-- [ ] `SyncEngine.setActiveTask` is called with the correct `pinnedItemPublicId` on every task transition and with `null` on completion — verified in order, not just presence.
-- [ ] A `SessionResolutionException` from the session-entry implementation produces `AttemptError`, never a crash or a hang.
+- [x] `ExamAttemptRepository` has no import of or dependency on `AnswerOutboxDao`/`SyncEngine`.
+- [x] `AttemptTaskResponse.completed=true`/`task:null` renders as a dedicated terminal UI state, never the generic error state.
+- [x] Resuming an attempt with outbox rows left over from a prior app session triggers an immediate flush attempt (via `SyncEngine.startSync` + the new `SyncEngine.flushNow`), not a passive wait for the next canary/periodic tick.
+- [x] The placeholder session-entry screen is swappable for a different implementation of `SessionEntryRepository` with zero changes required to `ExamAttemptBloc` or `ExamAttemptRepository`.
+- [x] `ExamAttemptBloc` events are sealed; states are separate immutable classes with no boolean-flag shape.
+- [x] A server-driven task advance the client did not itself request (simulated in tests) does not crash or corrupt the `Bloc`'s state machine.
+- [x] `SyncEngine.setActiveTask` is called with the correct `pinnedItemPublicId` on every task transition and with `null` on completion — verified in order, not just presence.
+- [x] A `SessionResolutionException` from the session-entry implementation produces `AttemptError`, never a crash or a hang.
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated.
-- Testing: not started.
+- Quality gate: approved. 2 MEDIUM findings fixed (QUAL-301: unexpected non-`ApiException` failures — e.g. a malformed-response parse error — propagated uncaught, stranding the bloc in `AttemptStarting` forever, mirroring Phase 1's QUAL-103; QUAL-302: a contract-violating `completed:false, task:null` response could arm `SyncEngine` before `_emitFromResponse` rejected it, orphaning a running background sync session and risking a `StateError` on the next legitimate attempt start) and 1 LOW noted (session-entry error SnackBar shows the raw exception `toString()`, not a user-facing message — acceptable for this phase's placeholder scope); re-verified `APPROVED`. A same-session simplify pass also fixed a real functional gap: `SyncEngine.startSync` alone never triggers an immediate flush (it only arms future canary/timer triggers), so a new additive `SyncEngine.flushNow()` was added and the Bloc's resume reconciliation now calls `startSync` → `flushNow`, removing a dead `AnswerOutboxDao.queryByAttempt` call and the `AnswerOutboxDao` dependency from `ExamAttemptBloc` entirely. Report: `plans/ninh-student-exam-flow/quality/phase-03-session-entry-attempt-lifecycle-quality-report.json`. Receipt cryptographically issued in the `pte-app` repo (cross-repo constraint, same as Phase 1/2): `pte-app/plans/ninh-student-exam-flow/quality/phase-03-session-entry-attempt-lifecycle-receipt.json`, mirrored here for the record.
+- Testing: passed (62/62 after quality-gate fixes, full suite including Phase 0/1/2 regression, `plans/ninh-student-exam-flow/tests/phase-03-session-entry-attempt-lifecycle-test-report.json`).
 
 ## Risks
 
