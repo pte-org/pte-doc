@@ -1,0 +1,66 @@
+{
+  "mode": "gate",
+  "target": "phase-06-speaking-media-upload",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-07-27T09:51:40Z",
+  "reviewed_files": [
+    "lib/core/storage/pending_media_upload_status.dart",
+    "lib/core/storage/tables/pending_media_upload_table.dart",
+    "lib/core/storage/dao/pending_media_upload_dao.dart",
+    "lib/core/storage/app_database.dart",
+    "lib/core/storage/storage_module.dart",
+    "lib/core/network/media_presign_response.dart",
+    "lib/core/network/media_repository.dart",
+    "lib/core/network/media_repository_impl.dart",
+    "lib/core/network/raw_upload_client.dart",
+    "lib/features/exam_attempt/domain/audio_recorder_service.dart",
+    "lib/features/exam_attempt/data/audio_recorder_service_impl.dart",
+    "lib/core/sync/media_upload_coordinator.dart",
+    "lib/features/exam_attempt/presentation/cubit/read_aloud_state.dart",
+    "lib/features/exam_attempt/presentation/cubit/read_aloud_cubit.dart",
+    "lib/features/exam_attempt/presentation/widgets/read_aloud_advance_button.dart",
+    "lib/features/exam_attempt/presentation/pages/read_aloud_screen.dart",
+    "lib/features/exam_attempt/presentation/widgets/task_type_dispatcher.dart",
+    "lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart",
+    "lib/features/exam_attempt/exam_attempt_module.dart",
+    "lib/core/constants/app_strings.dart"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 1,
+    "noted": 1
+  },
+  "findings": [
+    {
+      "id": "QUAL-601",
+      "severity": "LOW",
+      "rule": "CORR_DEFINED_BRANCH_BEHAVIOR",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "lib/features/exam_attempt/presentation/cubit/read_aloud_state.dart:19-25 (used from lib/features/exam_attempt/presentation/cubit/read_aloud_cubit.dart:41)",
+      "evidence": "ReadAloudState.copyWith is `uploadStatus: uploadStatus ?? this.uploadStatus`. read_aloud_cubit.dart's watchRow listener calls `emit(state.copyWith(uploadStatus: row == null ? null : ...))` intending to clear uploadStatus back to null once the PendingMediaUploadTable row is gone. Because copyWith uses `??`, passing an explicit `null` is indistinguishable from 'field not supplied' and always falls back to `this.uploadStatus` -- the null-clearing branch can never actually execute.",
+      "why_it_matters": "This is dead/misleading logic: the code reads as if it clears uploadStatus to null when the row disappears, but it never does. In the current call graph the only row-to-null transition happens after the row reaches `ready` and MediaUploadCoordinator deletes it (phase-06 Design Constraints, Step 6), so the stale non-null 'ready' value happens to be harmless (the advance button stays correctly enabled). But the bug is a latent footgun: any future change that relies on this state actually resetting to null (e.g. a re-record flow that doesn't recreate the Cubit) would silently keep showing the previous status instead of 'not recorded yet'.",
+      "required_action": "Use an explicit sentinel/wrapper (e.g. a `Value<T>`-style wrapper, or a dedicated `clearUploadStatus()` method) instead of a bare nullable `??` in copyWith, so an intentional null can actually be set.",
+      "owner": "cook"
+    },
+    {
+      "id": "QUAL-602",
+      "severity": "NOTED",
+      "rule": "TXN_BOUNDARY_MATCHES_OPERATION",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "medium",
+      "location": "lib/core/sync/media_upload_coordinator.dart:115-146 (_advance/_complete/_submitToOutbox)",
+      "evidence": "`_complete()` calls `_mediaDao.markReady()` (persists status='ready' to PendingMediaUploadTable, observed live by ReadAloudCubit via `watchRow`) and only afterward, as a separate later step in `_advance`, does `_submitToOutbox()` call `_outboxDao.upsertAnswer(...)` and `_mediaDao.deleteRow(...)`. These are three independent sequential Drift writes, not one atomic transaction.",
+      "why_it_matters": "Between markReady's write completing (which can make ReadAloudAdvanceButton's `uploadStatus == ready` selector fire and enable the button) and upsertAnswer's write actually landing, there is a narrow window where the UI could report 'ready' before the corresponding AnswerOutboxTable row exists. If flushOne is invoked in that exact window, SyncEngine.flushOne's `row == null` guard would no-op, silently deferring the submit to the next periodic/canary background flush instead of submitting immediately as Step 13 intends. Impact is bounded (SyncEngine's periodic trigger self-heals this within one interval, no data loss), and the window is likely sub-millisecond, hence NOTED rather than a blocking finding -- but it is a real ordering gap worth closing given how central 'ready implies submittable' is to this phase's design.",
+      "required_action": "Consider wrapping markReady + upsertAnswer + deleteRow in a single Drift transaction (or reordering so the outbox row is written before the PendingMediaUploadTable row is ever observably marked ready) so 'ready' and 'submittable' become atomic from the UI's perspective.",
+      "owner": "cook"
+    }
+  ],
+  "report_path": "plans/ninh-student-exam-flow/quality/phase-06-speaking-media-upload-quality-report.json"
+}
