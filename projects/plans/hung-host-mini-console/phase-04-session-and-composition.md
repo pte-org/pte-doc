@@ -21,6 +21,9 @@ FR-18**
   convenience and cannot replace server transition validation.
 - Full/practice session type is represented by backend-supported values captured
   from the current DTO; no client-only session mode is invented.
+- Contract review confirmed that the current DTO has no `sessionType` field.
+  Full mock versus practice is represented by all-task versus subset
+  composition, matching scheduling-service ADR comments.
 - Composition accepts an existing immutable snapshot public ID. The session
   does not embed mutable question drafts.
 - Open/close are explicit, single-flight, non-auto-retried mutations. A 409
@@ -55,22 +58,22 @@ FR-18**
 
 ## Success Criteria
 
-- [ ] Host can list, create, and view backend-supported full/practice sessions.
-- [ ] A published snapshot can be assigned as session composition and reloaded
+- [x] Host can list, create, and view backend-supported full/practice sessions.
+- [x] A published snapshot can be assigned as session composition and reloaded
       from authoritative session detail.
-- [ ] Invalid dates/type/composition are rejected before submission.
-- [ ] Open/close controls appear only for role/status combinations supported by
+- [x] Invalid dates/type/composition are rejected before submission.
+- [x] Open/close controls appear only for role/status combinations supported by
       the backend and handle a backend 409 by reloading state.
-- [ ] Scheduling has no dependency on authoring presentation/data
+- [x] Scheduling has no dependency on authoring presentation/data
       implementations.
-- [ ] Phase-4 tests, all prior regressions, analysis, and full suite pass; runtime
+- [x] Phase-4 tests, all prior regressions, analysis, and full suite pass; runtime
       contract evidence is recorded.
 
 ## Quality and Testing State
 
-- Quality gate: not run. Planned report:
+- Quality gate: approved. Report:
   `quality/phase-04-session-and-composition-quality-report.json`.
-- Testing: not run. Planned evidence:
+- Testing: passed with the runtime gateway check pending. Evidence:
   `tests/phase-04-session-and-composition-test-report.json`.
 
 ## Risks

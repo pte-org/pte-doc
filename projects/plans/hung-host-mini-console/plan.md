@@ -32,7 +32,7 @@ started before the preceding phase review.
   `READ_ALOUD` plus reference-answer/word-count `WRITE_ESSAY` forms
 - [x] Phase 3: Blueprint & Immutable Snapshot — blueprint list/create/detail,
   question composition, and one-way snapshot publication
-- [ ] Phase 4: Session & Composition — full/practice session creation, list,
+- [x] Phase 4: Session & Composition — full/practice session creation, list,
   detail, snapshot composition, and backend-valid lifecycle actions
 - [ ] Phase 5: Enrollment & Proctor Assignment — admin-only user lookup,
   student enrollment, proctor assignment, and permission-aware UI
