@@ -55,22 +55,24 @@ Maps to: **P1 Story #8 (operational audit) | FR-16, FR-18**
 
 ## Success Criteria
 
-- [ ] Notification view renders authoritative recipient/type/subject/status/time
+- [x] Notification view renders authoritative recipient/type/subject/status/time
       with loading, empty, retryable failure, and success states.
-- [ ] Violation view renders authoritative attempt/type/detail/sequence/hash/time
+- [x] Violation view renders authoritative attempt/type/detail/sequence/hash/time
       for the selected accessible session.
-- [ ] Neither view exposes mutation actions or alters integrity fields.
-- [ ] Inaccessible tenant/session data is not rendered and does not trigger
+- [x] Neither view exposes mutation actions or alters integrity fields.
+- [x] Inaccessible tenant/session data is not rendered and does not trigger
       false logout.
-- [ ] Timestamp/malformed-response behavior is deterministic and tested.
+- [x] Timestamp/malformed-response behavior is deterministic and tested.
 - [ ] Phase-7 tests, all prior regressions, analysis, and full suite pass;
       runtime access evidence is recorded.
 
 ## Quality and Testing State
 
-- Quality gate: not run. Planned report:
+- Quality gate: deterministic source gates approved; runtime access remains
+  pending because no Docker services are running. Report:
   `quality/phase-07-notification-and-violation-audit-quality-report.json`.
-- Testing: not run. Planned evidence:
+- Testing: eight focused tests, analysis, and the complete 295-test Flutter
+  suite pass. Evidence:
   `tests/phase-07-notification-and-violation-audit-test-report.json`.
 
 ## Risks
