@@ -62,30 +62,45 @@ Maps to: **All P1 stories | FR-01 through FR-18 | Milestone-1 success criteria**
 
 ## Success Criteria
 
-- [ ] Every FR and required success criterion maps to implemented code plus
+- [x] Every FR and required success criterion maps to implemented code plus
       test/contract evidence or an explicitly recorded residual block.
-- [ ] All implemented Flutter focused tests pass.
-- [ ] `flutter analyze` and the complete `flutter test` suite exit zero.
-- [ ] Member 2 auth/exam-attempt/sync/media/report regressions pass after Host
+- [x] All implemented Flutter focused tests pass.
+- [x] `flutter analyze` and the complete `flutter test` suite exit zero.
+- [x] Member 2 auth/exam-attempt/sync/media/report regressions pass after Host
       changes.
-- [ ] Every Member-3 backend change packages successfully and has role/tenant/
+- [x] Every Member-3 backend change packages successfully and has role/tenant/
       status/pagination contract evidence.
-- [ ] Required runtime path is demonstrated or each blocked dependency is
+- [x] Required runtime path is demonstrated or each blocked dependency is
       recorded without claiming end-to-end completion.
-- [ ] New source complies with feature boundaries, state patterns, resource
+- [x] New source complies with feature boundaries, state patterns, resource
       lifecycle, hardcoded-resource rules, and size limits.
-- [ ] Test and quality artifacts exist for every implemented phase in the team
+- [x] Test and quality artifacts exist for every implemented phase in the team
       plan format.
-- [ ] Final working trees contain only approved changes and remain uncommitted
+- [x] Final working trees contain only approved changes and remain uncommitted
       until Hung's review.
 
 ## Quality and Testing State
 
-- Quality gate: not run. Final report belongs at
-  `quality/phase-09-qa-gate-quality-report.json` with a corresponding
-  implementation-repository receipt.
-- Testing: not run. Final consolidated evidence belongs at
+- Quality gate:
+  `APPROVED_WITH_RUNTIME_AND_BASELINE_FORMAT_RESIDUALS`. The architecture
+  review found and resolved one cross-feature composition violation by moving
+  BLoC creation into feature-owned entry pages.
+- Focused Phase 6-7 tests: 13 passed.
+- Host/core focused regression: 152 passed.
+- Explicit Member 2 regression: 195 passed.
+- Full Flutter gate: `flutter analyze` passed and 295 tests passed.
+- Backend gate: scoring package built successfully; 3 contract/service tests
+  passed.
+- Runtime: blocked because `docker compose ps` reports no running containers.
+  The gateway-backed login-to-audit path is not claimed as end-to-end verified.
+- Formatting: all Member 3 source is formatted. The whole-repository dry run
+  reports 81 pre-existing unrelated files and they were intentionally not
+  rewritten.
+- Canonical evidence:
+  `quality/phase-09-qa-gate-quality-report.json` and
   `tests/phase-09-qa-gate-test-report.json`.
+- Handoff: the Phase 9 repair and evidence remain uncommitted for Hung's
+  explicit review.
 
 ## Risks
 

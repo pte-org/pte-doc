@@ -1,0 +1,56 @@
+{
+  "target": "phase-09-qa-gate",
+  "tested_at": "2026-07-28",
+  "status": "PASSED_WITH_RUNTIME_AND_BASELINE_FORMAT_RESIDUALS",
+  "commands": [
+    {
+      "command": "flutter test test/unit/features/scoring_review test/widget/features/scoring_review test/unit/features/host_audit test/widget/features/host_audit",
+      "exit_code": 0,
+      "tests_passed": 13,
+      "coverage": "Phase 6 scoring review/publish and Phase 7 notification/violation audit after entry-page refactor"
+    },
+    {
+      "command": "flutter test <core-network-auth-and-all-host-focused-paths>",
+      "exit_code": 0,
+      "tests_passed": 152,
+      "coverage": "networking, auth, host console/users, authoring, scheduling, scoring review, and host audit"
+    },
+    {
+      "command": "flutter test <member-2-explicit-regression-paths>",
+      "exit_code": 0,
+      "tests_passed": 195,
+      "coverage": "integration, auth, exam attempt, report, network, storage, sync, media, and their widget tests"
+    },
+    {
+      "command": "flutter analyze",
+      "exit_code": 0,
+      "result": "No issues found"
+    },
+    {
+      "command": "flutter test --reporter compact",
+      "exit_code": 0,
+      "tests_passed": 295,
+      "result": "All tests passed"
+    },
+    {
+      "command": "mvn -pl services/scoring -am package",
+      "exit_code": 0,
+      "tests_passed": 3,
+      "result": "BUILD SUCCESS; ScoringReviewServiceTest passed 3/3"
+    }
+  ],
+  "format_gate": {
+    "command": "dart format --output=none --set-exit-if-changed lib test",
+    "status": "BASELINE_RESIDUAL",
+    "observed": "81 pre-existing files outside the Member 3 change set would be changed.",
+    "action": "Did not rewrite unrelated files; Member 3 files were formatted separately."
+  },
+  "runtime_required_path": {
+    "status": "BLOCKED",
+    "command": "docker compose ps",
+    "exit_code": 0,
+    "observed": "No containers are running.",
+    "required_prerequisite": "Gateway, IAM, authoring, scheduling, scoring, notification, proctor, databases, and authenticated Host fixtures.",
+    "residual_impact": "Login-to-audit end-to-end behavior is not claimed as runtime verified."
+  }
+}

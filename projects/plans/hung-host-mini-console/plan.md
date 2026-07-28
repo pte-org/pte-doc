@@ -36,15 +36,16 @@ started before the preceding phase review.
   detail, snapshot composition, and backend-valid lifecycle actions
 - [x] Phase 5: Enrollment & Proctor Assignment — admin-only user lookup,
   student enrollment, proctor assignment, and permission-aware UI
-- [ ] Phase 6: Scoring Review & Publish — score request, new paginated pending
+- [x] Phase 6: Scoring Review & Publish — score request, new paginated pending
   essay-review query, individual review approval, and result publication
-- [ ] Phase 7: Notification & Violation Audit — notification delivery log and
+- [x] Phase 7: Notification & Violation Audit — notification delivery log and
   per-session immutable violation audit views
-- [ ] Phase 8: Live Proctor Console — authenticated session-scoped STOMP
-  monitoring, reconnect/state recovery, and runtime verification (stretch)
-- [ ] Phase 9: QA Gate — standards/architecture sweep, full Flutter regression,
-  backend contract evidence, required-path runtime check, and final uncommitted
-  handoff review
+- [ ] Phase 8: Live Proctor Console — evaluated and blocked: the backend
+  authenticates STOMP `CONNECT` but does not enforce tenant/session/assignment
+  authorization on `SUBSCRIBE`; runtime infrastructure is also unavailable
+- [x] Phase 9: QA Gate — deterministic standards, architecture, Flutter
+  regression, and backend package gates passed; runtime and baseline-format
+  residuals are recorded, and the final repair/evidence diff awaits Hung review
 
 ## Research Summary
 
