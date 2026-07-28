@@ -75,30 +75,33 @@ FR-17, FR-18**
 
 ## Success Criteria
 
-- [ ] The new GET endpoint returns only the caller tenant's answers for the
+- [x] The new GET endpoint returns only the caller tenant's answers for the
       requested session and exact pending-review status.
-- [ ] Pagination has bounded size, deterministic ordering, and correct totals;
+- [x] Pagination has bounded size, deterministic ordering, and correct totals;
       invalid status/bounds are rejected.
-- [ ] Cross-tenant access leaks no answer/session ownership information.
-- [ ] `HOST_ADMIN` can request scoring and publish; `HOST_AUTHOR` is not shown
+- [x] Cross-tenant access leaks no answer/session ownership information.
+- [x] `HOST_ADMIN` can request scoring and publish; `HOST_AUTHOR` is not shown
       those admin-only actions.
-- [ ] Authorized Host reviewers can list and approve pending essays using the
+- [x] Authorized Host reviewers can list and approve pending essays using the
       existing individual review command.
-- [ ] Successful approval reloads authoritative queue state; no optimistic score
+- [x] Successful approval reloads authoritative queue state; no optimistic score
       mutation remains.
-- [ ] Publish conflicts/gates are displayed without false success or automatic
+- [x] Publish conflicts/gates are displayed without false success or automatic
       retry.
 - [ ] Scoring-service package/contract checks, Phase-6 Flutter tests, prior
       regressions, analysis, and full suite pass.
 
 ## Quality and Testing State
 
-- Quality gate: not run. The canonical phase summary belongs at
+- Quality gate: deterministic source gates approved; the runtime check remains
+  pending because no Docker services are running. The canonical phase summary is
+  recorded at
   `quality/phase-06-scoring-review-and-publish-quality-report.json`. Flutter
   source review artifacts belong under
   `pte-app/plans/hung-host-mini-console/quality/`; backend source review
   artifacts belong under `pte-api/plans/hung-host-mini-console/quality/`.
-- Testing: not run. All Flutter and backend contract command evidence belongs in
+- Testing: backend package/unit contracts, five focused Flutter tests, analysis,
+  and the complete 287-test Flutter suite pass. Command evidence is recorded in
   `tests/phase-06-scoring-review-and-publish-test-report.json` in `pte-doc`;
   implementation repositories do not duplicate the test plan/report.
 

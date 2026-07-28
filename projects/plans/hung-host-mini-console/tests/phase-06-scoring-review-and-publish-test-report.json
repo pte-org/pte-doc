@@ -1,0 +1,40 @@
+{
+  "target": "phase-06-scoring-review-and-publish",
+  "tested_at": "2026-07-28",
+  "status": "PASSED_WITH_RUNTIME_CHECK_PENDING",
+  "commands": [
+    {
+      "command": "mvn -pl services/scoring -am -Dtest=ScoringReviewServiceTest -Dsurefire.failIfNoSpecifiedTests=false test",
+      "exit_code": 0,
+      "tests_passed": 3,
+      "coverage": "tenant/session/status predicate, requested page metadata, bounded size, platform rejection, deterministic createdAt/id sort"
+    },
+    {
+      "command": "mvn -pl services/scoring -am package",
+      "exit_code": 0,
+      "result": "BUILD SUCCESS"
+    },
+    {
+      "command": "flutter test test/unit/features/scoring_review test/widget/features/scoring_review",
+      "exit_code": 0,
+      "tests_passed": 5
+    },
+    {
+      "command": "flutter analyze",
+      "exit_code": 0,
+      "result": "No issues found"
+    },
+    {
+      "command": "flutter test --reporter compact",
+      "exit_code": 0,
+      "tests_passed": 287
+    }
+  ],
+  "runtime_contract_check": {
+    "status": "NOT_RUN",
+    "command": "docker compose ps",
+    "observed": "No containers are running.",
+    "required_prerequisite": "Gateway, IAM, scheduling, scoring, databases, messaging infrastructure, and authenticated HOST_ADMIN/HOST_AUTHOR fixtures.",
+    "residual_impact": "The bounded score-to-review-to-publish flow is not claimed as end-to-end verified."
+  }
+}
