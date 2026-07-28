@@ -78,45 +78,48 @@ Maps to: **P3 Story #9 (live proctor console) | Stretch scope**
 
 ## Success Criteria
 
-- [ ] Unauthorized/unassigned session subscription is denied by the backend,
+- [x] Unauthorized/unassigned session subscription is denied by the backend,
       not merely hidden by the client.
-- [ ] Assigned `PROCTOR` controls work only through existing verified commands;
+- [x] Assigned `PROCTOR` controls work only through existing verified commands;
       same-tenant `HOST_ADMIN` is read-only and `HOST_AUTHOR` is denied.
-- [ ] Proctor assignment discovery derives user and tenant from JWT and returns
+- [x] Proctor assignment discovery derives user and tenant from JWT and returns
       no cross-user or cross-tenant session.
-- [ ] Live payloads have a typed envelope and do not change outbox/Kafka
+- [x] Live payloads have a typed envelope and do not change outbox/Kafka
       contracts.
-- [ ] Disconnect/reconnect is bounded, cancelable, and restores authoritative
+- [x] Disconnect/reconnect is bounded, cancelable, and restores authoritative
       current state before applying new deltas.
-- [ ] Logout/page disposal leaves no active subscription or reconnect timer.
+- [x] Logout/page disposal leaves no active subscription or reconnect timer.
 - [ ] Phase-8 tests, all required regressions, analysis, full suite, and Windows
       runtime demonstration pass; otherwise this stretch phase remains
       incomplete without blocking Phase 0–7 delivery.
 
 ## Quality and Testing State
 
-- Quality gate: **DESIGN APPROVED / IMPLEMENTATION NOT STARTED**. The approved
-  backend correction adds destination authorization before Flutter consumes the
-  stream. The previous source inspection remains recorded at:
+- Quality gate: **IMPLEMENTED / AWAITING RUNTIME VERIFICATION**. Destination
+  authorization, caller-derived assignments, typed live envelopes, bounded
+  reconnect, snapshot recovery, role-gated UI, and confirmation/single-flight
+  mutations are implemented. Evidence is recorded at:
   `quality/phase-08-live-proctor-console-quality-report.json`.
-- Testing: prerequisite inspection completed; implementation tests and runtime
-  evidence are still pending. No Flutter package or source has been added.
-  Existing evidence:
-  `tests/phase-08-live-proctor-console-test-report.json`, with runtime proof
-  required before feature completion.
+- Testing: full backend reactor, Flutter analysis, 308 Flutter tests, and
+  focused backend/Flutter tests pass. Windows packaging is blocked by the
+  missing Visual Studio toolchain, and no Compose service is running for a real
+  authenticated STOMP demonstration. Evidence:
+  `tests/phase-08-live-proctor-console-test-report.json`.
 
 ## Gate Decision (2026-07-28)
 
-Phase 8 is reactivated with Quang's approval to modify the backend. The
-authorization policy is fixed: assigned `PROCTOR` controls, same-tenant
-`HOST_ADMIN` observes, and `HOST_AUTHOR` is denied. Backend security and tests
-must land before the Flutter transport. The phase remains incomplete until
-implementation and runtime gates are recorded.
+Phase 8 implementation is committed on `hung/feat/host-mini-console`.
+The authorization policy is enforced: assigned `PROCTOR` controls,
+same-tenant `HOST_ADMIN` observes, and `HOST_AUTHOR` is denied. Automated
+gates pass, but the phase remains
+`IMPLEMENTED_AWAITING_RUNTIME_VERIFICATION` until the application stack and
+Windows build toolchain are available.
 
 ## Risks
 
 - **HIGH:** Source code may exist while local broker/gateway WebSocket routing is
-  non-operational. Mitigation: runtime proof is Step 2 and a hard prerequisite.
+  non-operational. Mitigation: runtime proof is Step 12 and remains an open
+  completion gate.
 - **HIGH:** Session subscription authorization defects could leak live
   cross-tenant data. Mitigation: explicitly test unauthorized assignment at the
   backend connection/subscription boundary.
