@@ -1,0 +1,24 @@
+{
+  "target": "phase-07-submission-resilience-hardening",
+  "verdict": "APPROVED",
+  "policy_version": "1.0.0",
+  "report_path": "plans/ninh-student-exam-flow/quality/phase-07-submission-resilience-hardening-quality-report.json",
+  "reviewed_files": [
+    "lib/core/constants/app_strings.dart",
+    "lib/core/network/api_client.dart",
+    "lib/core/network/api_exceptions.dart",
+    "lib/core/sync/media_upload_coordinator.dart",
+    "lib/core/sync/rate_limit_backoff.dart",
+    "lib/core/sync/sync_engine.dart",
+    "lib/features/exam_attempt/domain/timer_service.dart",
+    "lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart",
+    "lib/features/exam_attempt/presentation/bloc/exam_attempt_event.dart",
+    "lib/features/exam_attempt/presentation/widgets/exam_app_bar.dart",
+    "test/integration/kill_cold_restart_recovery_test.dart",
+    "test/unit/sync/media_upload_coordinator_test.dart",
+    "test/unit/sync/sync_engine_test.dart"
+  ],
+  "source_fingerprint": "sha256:44396e96bc42f8a48958ebaf94c6798a0f07fdfba998158e637a5e9e591be9c8",
+  "reviewed_at": "2026-07-27T00:00:00Z",
+  "open_blocking_findings": 0
+}

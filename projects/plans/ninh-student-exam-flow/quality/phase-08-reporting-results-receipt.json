@@ -1,0 +1,24 @@
+{
+  "target": "phase-08-reporting-results",
+  "verdict": "APPROVED",
+  "policy_version": "1.0.0",
+  "report_path": "plans/ninh-student-exam-flow/quality/phase-08-reporting-results-quality-report.json",
+  "reviewed_files": [
+    "lib/core/constants/app_strings.dart",
+    "lib/core/network/api_client.dart",
+    "lib/core/network/api_exceptions.dart",
+    "lib/features/report/data/repositories/report_repository_impl.dart",
+    "lib/features/report/domain/report_response.dart",
+    "lib/features/report/domain/repositories/report_repository.dart",
+    "lib/features/report/presentation/bloc/report_bloc.dart",
+    "lib/features/report/presentation/bloc/report_event.dart",
+    "lib/features/report/presentation/bloc/report_state.dart",
+    "lib/features/report/presentation/pages/report_screen.dart",
+    "lib/features/report/presentation/widgets/skill_score_row.dart",
+    "lib/features/report/report_module.dart",
+    "lib/main.dart"
+  ],
+  "source_fingerprint": "sha256:04f98f74442e5ff748c57725d3548190e03f15bf40d9733f4ff64ac09501094a",
+  "reviewed_at": "2026-07-27T00:00:00Z",
+  "open_blocking_findings": 0
+}
