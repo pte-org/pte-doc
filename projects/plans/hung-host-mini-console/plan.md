@@ -34,7 +34,7 @@ started before the preceding phase review.
   question composition, and one-way snapshot publication
 - [x] Phase 4: Session & Composition — full/practice session creation, list,
   detail, snapshot composition, and backend-valid lifecycle actions
-- [ ] Phase 5: Enrollment & Proctor Assignment — admin-only user lookup,
+- [x] Phase 5: Enrollment & Proctor Assignment — admin-only user lookup,
   student enrollment, proctor assignment, and permission-aware UI
 - [ ] Phase 6: Scoring Review & Publish — score request, new paginated pending
   essay-review query, individual review approval, and result publication

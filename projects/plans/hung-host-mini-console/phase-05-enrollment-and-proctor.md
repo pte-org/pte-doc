@@ -55,26 +55,26 @@ FR-18**
 
 ## Success Criteria
 
-- [ ] `HOST_ADMIN` can select an eligible student and successfully enroll them
+- [x] `HOST_ADMIN` can select an eligible student and successfully enroll them
       in a session.
-- [ ] `HOST_ADMIN` can select an eligible proctor and successfully assign them
+- [x] `HOST_ADMIN` can select an eligible proctor and successfully assign them
       to a session.
-- [ ] `HOST_AUTHOR` is never presented with an action that predictably fails
+- [x] `HOST_AUTHOR` is never presented with an action that predictably fails
       due to current IAM/proctor-assignment authorization.
-- [ ] Requests contain no client-selected tenant override and cross-tenant
+- [x] Requests contain no client-selected tenant override and cross-tenant
       resources are not exposed.
-- [ ] Duplicate/conflict/not-found/forbidden states preserve useful UI context
+- [x] Duplicate/conflict/not-found/forbidden states preserve useful UI context
       and do not cause false logout.
-- [ ] No new enrollment/proctor GET endpoint is added without evidence and Hung
+- [x] No new enrollment/proctor GET endpoint is added without evidence and Hung
       approval.
-- [ ] Phase-5 tests, prior regressions, analysis, and full suite pass; role
+- [x] Phase-5 tests, prior regressions, analysis, and full suite pass; role
       contract evidence is recorded.
 
 ## Quality and Testing State
 
-- Quality gate: not run. Planned report:
+- Quality gate: approved. Report:
   `quality/phase-05-enrollment-and-proctor-quality-report.json`.
-- Testing: not run. Planned evidence:
+- Testing: passed with runtime role checks pending. Evidence:
   `tests/phase-05-enrollment-and-proctor-test-report.json`.
 
 ## Risks
