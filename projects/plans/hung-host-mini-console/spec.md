@@ -38,8 +38,8 @@ endpoint.
   `MC_READING_SINGLE`, `READ_ALOUD`, and `WRITE_ESSAY` questions, so that I can
   prepare content for practice and full sessions.
   Accepted when: all three task types round-trip through
-  `/api/authoring/questions`, task-specific validation is enforced, and media
-  references are used instead of raw audio/image bytes.
+  `/api/authoring/questions` and task-specific validation is enforced without
+  sending student-response media through authoring.
 
 - **[P1]** As a Host user, I want shared content and my tenant's private content
   to appear in one accessible question bank, so that I can reuse platform
@@ -104,10 +104,9 @@ endpoint.
    prompt, at least two nonblank options, and exactly one selected correct
    option. The request sends task type `MC_READING_SINGLE` and visibility
    `PRIVATE`.
-7. **FR-07:** `authoring` creates `READ_ALOUD` using the media flow
-   `POST /api/media/objects` → presigned `PUT` →
-   `POST /api/media/objects/{id}/complete`, then sends the resulting media
-   reference in the question request.
+7. **FR-07:** `authoring` creates `READ_ALOUD` with the title and text prompt
+   required by the current backend task mapping. Student response audio remains
+   in the exam-attempt media flow and is not Host-authored prompt content.
 8. **FR-08:** `authoring` creates `WRITE_ESSAY` with required prompt,
    reference-answer, minimum-word-count, and maximum-word-count fields validated
    before submission.

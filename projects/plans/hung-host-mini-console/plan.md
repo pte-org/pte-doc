@@ -1,6 +1,6 @@
 # Plan: Host Mini Console (pte-app) — Milestone 1
 
-Status: 🟡 Planned
+Status: 🟡 In Progress
 Date: 2026-07-28
 Mode: Hard, --tdd
 Created by: Hung (Member 3)
@@ -28,8 +28,8 @@ started before the preceding phase review.
   login page, Host role gate, and minimal Host workspace
 - [x] Phase 1: MC Reading Single Authoring — accessible question list plus
   tenant-private `MC_READING_SINGLE` create form with exactly one correct option
-- [ ] Phase 2: Read Aloud, Essay & Media — presigned media upload,
-  `READ_ALOUD`, and `WRITE_ESSAY` task-specific forms and validation
+- [x] Phase 2: Read Aloud & Write Essay — backend-aligned text-prompt
+  `READ_ALOUD` plus reference-answer/word-count `WRITE_ESSAY` forms
 - [ ] Phase 3: Blueprint & Immutable Snapshot — blueprint list/create/detail,
   question composition, and one-way snapshot publication
 - [ ] Phase 4: Session & Composition — full/practice session creation, list,
