@@ -57,22 +57,22 @@ FR-18**
 
 ## Success Criteria
 
-- [ ] Host can list accessible blueprints and create one from accessible
+- [x] Host can list accessible blueprints and create one from accessible
       questions with deterministic ordering/composition.
-- [ ] Invalid or empty composition is rejected before an API call.
-- [ ] Publish is explicit, single-flight, and returns a snapshot rendered as
+- [x] Invalid or empty composition is rejected before an API call.
+- [x] Publish is explicit, single-flight, and returns a snapshot rendered as
       read-only.
-- [ ] The Flutter client exposes no snapshot update/delete mutation.
-- [ ] No scheduling dependency exists in the authoring feature.
+- [x] The Flutter client exposes no snapshot update/delete mutation.
+- [x] No scheduling dependency exists in the authoring feature.
 - [ ] Create → publish → fetch succeeds against the gateway or any runtime block
       is recorded without marking the phase passed.
-- [ ] Authoring regressions, Phase-3 tests, analysis, and full suite pass.
+- [x] Authoring regressions, Phase-3 tests, analysis, and full suite pass.
 
 ## Quality and Testing State
 
-- Quality gate: not run. Planned report:
+- Quality gate: approved. Report:
   `quality/phase-03-blueprint-and-snapshot-quality-report.json`.
-- Testing: not run. Planned evidence:
+- Testing: passed with the runtime gateway check pending. Evidence:
   `tests/phase-03-blueprint-and-snapshot-test-report.json`.
 
 ## Risks

@@ -30,7 +30,7 @@ started before the preceding phase review.
   tenant-private `MC_READING_SINGLE` create form with exactly one correct option
 - [x] Phase 2: Read Aloud & Write Essay — backend-aligned text-prompt
   `READ_ALOUD` plus reference-answer/word-count `WRITE_ESSAY` forms
-- [ ] Phase 3: Blueprint & Immutable Snapshot — blueprint list/create/detail,
+- [x] Phase 3: Blueprint & Immutable Snapshot — blueprint list/create/detail,
   question composition, and one-way snapshot publication
 - [ ] Phase 4: Session & Composition — full/practice session creation, list,
   detail, snapshot composition, and backend-valid lifecycle actions
