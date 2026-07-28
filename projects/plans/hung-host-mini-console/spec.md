@@ -1,7 +1,7 @@
-# Spec: Member 3 Host Mini Console
+# Spec: Hung Host Mini Console
 
 **Date:** 2026-07-28  
-**Created by:** Member 3  
+**Created by:** Hung (Member 3)  
 **Status:** Approved design
 
 ---
@@ -378,14 +378,14 @@ Phase 00 and Phase 01 are accepted when:
 The canonical specification and cross-repository roadmap live in:
 
 ```text
-pte-doc/projects/plans/member3-host-mini-console/
+pte-doc/projects/plans/hung-host-mini-console/
 ```
 
 After this spec is reviewed, detailed phase plans are created in the same
 directory. Backend-impact tracking lives in:
 
 ```text
-pte-api/plans/member3-host-mini-console/
+pte-api/plans/hung-host-mini-console/
 ```
 
 The `pte-api` plan records only backend contracts, affected files, migrations,
@@ -421,4 +421,3 @@ redefining product requirements.
   already relies on those patterns.
 - Do not establish a broad backend unit-test convention as part of Member 3.
 - Keep live proctor work as Phase 08 stretch scope.
-
