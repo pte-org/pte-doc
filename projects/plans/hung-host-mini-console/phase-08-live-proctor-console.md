@@ -72,11 +72,23 @@ Maps to: **P3 Story #9 (live proctor console) | Stretch scope**
 
 ## Quality and Testing State
 
-- Quality gate: not run. Planned report:
+- Quality gate: **BLOCKED / INCOMPLETE before implementation**. Source review
+  found no STOMP `SUBSCRIBE` destination/session authorization in the inbound
+  interceptor, and the local compose stack does not include the application
+  services needed for runtime proof. Report:
   `quality/phase-08-live-proctor-console-quality-report.json`.
-- Testing: not run. Planned evidence:
+- Testing: prerequisite inspection completed; authenticated connection, real
+  event delivery, and unauthorized-subscription denial were not demonstrated.
+  No Flutter package or source was added. Evidence:
   `tests/phase-08-live-proctor-console-test-report.json`, with runtime proof
   required before feature completion.
+
+## Gate Decision (2026-07-28)
+
+Phase 8 remains intentionally incomplete and does not block the required Phase
+0-7 handoff. Reactivation requires an approved backend subscription
+authorization contract plus a runnable authenticated stack. Client-side topic
+filtering is not an acceptable substitute.
 
 ## Risks
 

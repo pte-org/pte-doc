@@ -1,0 +1,36 @@
+{
+  "mode": "stretch-prerequisite-gate",
+  "target": "phase-08-live-proctor-console",
+  "verdict": "BLOCKED_INCOMPLETE",
+  "reviewed_at": "2026-07-28",
+  "summary": {
+    "critical_open": 1,
+    "important_open": 1,
+    "implementation_changes": 0
+  },
+  "findings": [
+    {
+      "id": "HUNG-QUAL-801",
+      "severity": "CRITICAL",
+      "status": "OPEN_BLOCKER",
+      "location": "pte-api/services/proctor/src/main/java/com/pte/proctor/config/StompAuthChannelInterceptor.java",
+      "evidence": "Only STOMP CONNECT is authenticated; SUBSCRIBE frames are returned unchanged and no destination/session assignment policy is configured.",
+      "impact": "Client-side session filtering cannot prevent an authenticated subscriber from requesting another session topic."
+    },
+    {
+      "id": "HUNG-QUAL-802",
+      "severity": "IMPORTANT",
+      "status": "OPEN_BLOCKER",
+      "location": "pte-api runtime environment",
+      "evidence": "No containers are running and docker-compose.yml contains infrastructure services only.",
+      "impact": "The mandatory authenticated gateway/proctor connection and real event cannot be reproduced."
+    }
+  ],
+  "decision": "End the optional phase without Flutter dependency, transport, BLoC, page, or speculative event model changes.",
+  "required_scope_for_future_reactivation": [
+    "Approve a backend STOMP SUBSCRIBE authorization contract.",
+    "Enforce role, tenant, session, and assignment at the broker boundary.",
+    "Provide runnable gateway/IAM/scheduling/proctor services and fixtures.",
+    "Demonstrate authorized event delivery and unauthorized subscription denial."
+  ]
+}

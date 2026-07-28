@@ -1,0 +1,54 @@
+{
+  "target": "phase-08-live-proctor-console",
+  "tested_at": "2026-07-28",
+  "status": "BLOCKED_BEFORE_IMPLEMENTATION",
+  "commands": [
+    {
+      "command": "docker compose ps",
+      "exit_code": 0,
+      "observed": "No containers are running."
+    },
+    {
+      "command": "docker compose config --services",
+      "exit_code": 0,
+      "observed": [
+        "kafka",
+        "postgres",
+        "debezium-connect",
+        "debezium-connectors-setup",
+        "jaeger",
+        "rabbitmq",
+        "schema-registry",
+        "mailpit",
+        "minio",
+        "redis"
+      ],
+      "impact": "The compose file does not start gateway, IAM, scheduling, or proctor application services."
+    },
+    {
+      "command": "Test-Path .env",
+      "exit_code": 0,
+      "observed": false
+    }
+  ],
+  "source_contract_inspection": {
+    "gateway_upgrade_path": "/api/proctor/ws/** -> ws://localhost:8086",
+    "stomp_endpoint": "/ws under /api/proctor context path",
+    "connect_authentication": "Authorization: Bearer <JWT> on STOMP CONNECT",
+    "application_prefix": "/app",
+    "broker_prefixes": [
+      "/topic",
+      "/queue"
+    ],
+    "event_topic": "/topic/proctor-sessions/{sessionPublicId}",
+    "blocking_security_finding": "StompAuthChannelInterceptor handles CONNECT only. No SUBSCRIBE destination, tenant, role, or assignment authorization is present before the simple broker accepts /topic subscriptions.",
+    "command_role": "ProctorStompController accepts PROCTOR only; no verified HOST live-monitoring authorization contract exists."
+  },
+  "runtime_proof": {
+    "authenticated_connection": "NOT_DEMONSTRATED",
+    "authorized_event": "NOT_DEMONSTRATED",
+    "unauthorized_subscription_denial": "NOT_DEMONSTRATED_AND_NOT_ENFORCED_IN_INSPECTED_SOURCE"
+  },
+  "implementation": "NOT_STARTED_BY_DESIGN",
+  "residual_action": "Backend must define and enforce SUBSCRIBE authorization for session/tenant/assignment and provide a runnable authenticated stack before Flutter transport selection."
+}
