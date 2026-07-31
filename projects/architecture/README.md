@@ -3,8 +3,8 @@
 Kiến trúc microservice cho nền tảng mô phỏng thi PTE Academic. Chốt 2026-07-24.
 
 - [ADR-001](ADR-001-microservice-boundaries.md) — Service boundaries & data ownership (9 service, cắt theo capability không theo actor)
-- [ADR-002](ADR-002-communication-and-exam-submission-saga.md) — Communication (async-first) & exam-submission saga (outbox, Kafka vs RabbitMQ)
-- [ADR-003](ADR-003-tenant-isolation-and-infrastructure.md) — Tenant isolation (3 lớp) & infrastructure stack (Redis/Kafka/Vault/Keycloak/…)
+- [ADR-002](ADR-002-communication-and-exam-submission-saga.md) — Communication (async-first) & exam-submission saga (outbox pattern; event backbone superseded-in-part 2026-07-31 — RabbitMQ polling-outbox-relay, was Kafka+Debezium)
+- [ADR-003](ADR-003-tenant-isolation-and-infrastructure.md) — Tenant isolation (3 lớp) & infrastructure stack (Redis/RabbitMQ/Vault/Keycloak/…)
 - [ADR-004](ADR-004-per-service-code-structure.md) — Cấu trúc code từng service (mono-repo, layered per-service, DB-per-service, entity/endpoint/event mỗi service)
 
 Chuẩn code: [docs/CODING_STANDARDS_MICROSERVICE.md](../../../docs/CODING_STANDARDS_MICROSERVICE.md) — layered per-service + luật phân tán, kế thừa code-quality từ CODING_STANDARDS_API.md.

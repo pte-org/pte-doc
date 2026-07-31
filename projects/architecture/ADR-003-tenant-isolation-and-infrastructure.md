@@ -34,9 +34,7 @@ Nhiều host chung 1 service KHÔNG phải vấn đề nếu xử lý đúng 3 l
 ## Infrastructure stack
 
 ### Backbone (bắt buộc)
-- **Kafka / Redpanda** — event backbone (ADR-002).
-- **Debezium** — CDC outbox, thay `@Scheduled` poll.
-- **RabbitMQ** — work queue (fan-out AI job, bulk-import, transcode, email) + load-leveling WRITE.
+- **RabbitMQ** — event backbone (outbox-relay, `AbstractOutboxRelay` polling `SELECT ... FOR UPDATE SKIP LOCKED`, ADR-002 — **Kafka/Redpanda + Debezium bị bỏ, xem ADR-002's "Superseded-in-part" note**) **+** work queue (fan-out AI job, bulk-import, transcode, email) + load-leveling WRITE — cả hai vai chạy trên cùng broker, exchange/queue tách biệt (ADR-002).
 - **Redis** — xem vai bên dưới.
 
 ### Redis — nhiều vai, phân biệt rõ (KHÔNG bao giờ source-of-truth bài thi)
@@ -102,7 +100,7 @@ Nhiều host chung 1 service KHÔNG phải vấn đề nếu xử lý đúng 3 l
 ## Consequences
 
 ~15 thành phần hạ tầng. Triển khai **theo lớp**, không cùng lúc:
-- **Nền không thể thiếu:** Kafka + Redis + Debezium + Vault + Keycloak + Linkerd mTLS + CDN + PgBouncer.
+- **Nền không thể thiếu:** RabbitMQ + Redis + Vault + Keycloak + Linkerd mTLS + CDN + PgBouncer. (Kafka + Debezium bị bỏ — xem ADR-002's "Superseded-in-part" note, 2026-07-31.)
 - **Thêm khi có bằng chứng cần:** OpenSearch, read-replica, RabbitMQ priority routing, WAF nâng cao.
 
 "Đến chốn" = mỗi thứ có một lý do không thể thay thế, KHÔNG phải dùng nhiều nhất. Mỗi component thêm = một thứ phải deploy, secure, monitor, patch.

@@ -6,7 +6,7 @@
 
 Mono-repo (`pte-api/`), Maven multi-module, database-per-service. Every service uses the uniform layered layout from the coding standard §2. This file lists each service's **concrete** content: owned entities (= DB tables), key endpoints, events emitted/consumed, sync deps.
 
-Legend: **emits** = publishes via outbox→Kafka; **consumes** = Kafka/Rabbit listener; **sync→** = guarded REST call (timeout+CB).
+Legend: **emits** = publishes via outbox→RabbitMQ (polling relay, was Kafka — see ADR-002's "Superseded-in-part" note, 2026-07-31); **consumes** = RabbitMQ listener; **sync→** = guarded REST call (timeout+CB).
 
 ---
 
