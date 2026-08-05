@@ -13,13 +13,11 @@
 
 **Bạn cần 1 API key/model thật sự hỗ trợ input audio cho `READ_ALOUD`** (2 credential đã test ở Phase 9 chỉ nhận text hoặc bị chặn thanh toán) — đây là phụ thuộc bên ngoài do leader cung cấp, không tự gỡ được. Bắt đầu với `WRITE_ESSAY` trước (chỉ cần text, LLM nào cũng dùng được) trong lúc chờ credential hỗ trợ audio.
 
-## Task 2 — Dockerize từng service
+## Task 2 — ~~Dockerize từng service~~ ✅ Đã xong (2026-08-05) — không còn việc gì ở đây cho bạn
 
-`docker-compose.yml` hiện tại chỉ chạy hạ tầng (Postgres, Kafka, Redis, RabbitMQ, MinIO, Mailpit, Jaeger, Debezium) — chưa service Java nào trong 12 service hay gateway có `Dockerfile` hay entry trong compose. Cần thêm:
+Việc này đã hoàn tất: 1 `pte-api/Dockerfile` multi-stage dùng chung (tham số hoá qua build-arg `SERVICE_MODULE` — 1 Dockerfile dùng lại cho cả 11 module thay vì mỗi service 1 file như task này ban đầu yêu cầu, gọn hơn) + `pte-api/docker-compose.services.yml` (gateway + cả 10 backend service, nối vào các service hạ tầng đã có bằng container name, không dùng `localhost`, vẫn giữ nguyên pattern env-var `${SERVICE_PORT:-default}`). `docker compose -f docker-compose.yml -f docker-compose.services.yml up --build` dựng đủ 17 container (6 hạ tầng + gateway + 10 service), tất cả đều lên `healthy`. Xem mục "Running services locally with Docker Compose" trong `pte-api/README.md` và `pte-doc/projects/plans/phat-docker-compose-services/plan.md` để biết chi tiết đầy đủ.
 
-- 1 `Dockerfile` cho mỗi service (multi-stage: stage build Maven + stage runtime JRE gọn nhẹ — đừng đóng gói JDK hay Maven cache vào image cuối).
-- Entry compose cho cả 12 service + gateway, nối vào các service hạ tầng đã có bằng container name (không phải `localhost` — cái đó chỉ chạy được khi service chạy ngoài Docker trên host).
-- Giữ nguyên pattern override env-var `${SERVICE_PORT:-default}` đã dùng xuyên suốt các file `application.yml` — đừng hardcode port trong Dockerfile.
+Lưu ý thêm: danh sách hạ tầng ở trên cũng đã cũ, không liên quan đến task này — `docker-compose.yml` hiện chạy Postgres, Redis, RabbitMQ, MinIO, Mailpit, Jaeger. Kafka/Schema Registry/Debezium đã bị bỏ toàn hệ từ 2026-07-31 (xem note "Superseded-in-part" của ADR-002) — event backbone giờ là RabbitMQ + outbox relay polling ở tầng application, không còn Kafka/Debezium CDC.
 
 ## Task 3 — Pipeline CI
 
@@ -35,5 +33,5 @@
 ## Sản phẩm bàn giao
 
 - Chấm essay bằng AI thật (không phải stub) chạy được end-to-end, chấm speaking chạy được khi có credential đủ khả năng.
-- `docker compose up` dựng được cả platform — cả hạ tầng lẫn service ứng dụng — không cần start tay từng service.
+- `docker compose up` dựng được cả platform — cả hạ tầng lẫn service ứng dụng — không cần start tay từng service. ✅ Đã có sẵn từ Task 2 ở trên.
 - 1 pipeline CI chạy trên mỗi push/PR cho cả 2 repo.

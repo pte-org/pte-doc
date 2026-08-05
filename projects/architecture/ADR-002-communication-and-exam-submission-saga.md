@@ -124,7 +124,7 @@ Chi tiết implementation: [`pte-doc/projects/plans/rabbitmq-outbox-migration/ph
 
 - **Idempotency:** mọi consumer dedup theo event ID (RabbitMQ tối thiểu at-least-once → event có thể bị giao lại). `eventId` giờ truyền qua AMQP `messageId` (message property), không còn Kafka record header.
 - **Observability:** OpenTelemetry distributed tracing — correlation ID chạy suốt saga (submit→scored→report) theo `attemptId`. Không có = không debug được 9 service. (Không đổi.)
-- **Schema versioning:** payload vẫn là **plain JSON** qua Jackson `ObjectMapper` — Avro + Schema Registry chưa từng thực sự triển khai dưới Kafka (đã deferred từ Milestone 1), migration này chỉ chính thức bỏ luôn kế hoạch đó thay vì để treo. Backward-compatible payload vẫn bắt buộc theo quy ước thường (thêm field mới nullable, không đổi/xoá field cũ).
+- **Schema versioning:** payload vẫn là **plain JSON** qua Jackson 3's `JsonMapper` — Avro + Schema Registry chưa từng thực sự triển khai dưới Kafka (đã deferred từ Milestone 1), migration này chỉ chính thức bỏ luôn kế hoạch đó thay vì để treo. Backward-compatible payload vẫn bắt buộc theo quy ước thường (thêm field mới nullable, không đổi/xoá field cũ).
 - **SKIP LOCKED, không phải ShedLock, cho outbox relay cụ thể:** `SELECT ... FOR UPDATE SKIP LOCKED` tự cho phép nhiều instance của cùng service poll đồng thời an toàn — dùng ShedLock ở đây sẽ **sai**, vì ShedLock serialize cả job về 1 instance, triệt tiêu khả năng scale ngang của relay. Đây là quyết định **riêng cho outbox relay** — các scheduled job khác trong hệ (nếu có, cần "chỉ 1 instance chạy") vẫn dùng ShedLock bình thường, không suy rộng thành "cấm ShedLock toàn hệ".
 
 ---
