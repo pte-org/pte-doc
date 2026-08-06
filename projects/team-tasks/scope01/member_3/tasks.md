@@ -34,7 +34,7 @@ Same caveat as Member 2 — no generated OpenAPI, read the actual controllers:
 
 ## Task 4 — Scoring & publish triggers
 
-- "Score this session" action → `POST /sessions/{id}/score`. This is fire-and-forget from the UI's perspective (async — scoring happens via Kafka/RabbitMQ in the background); show a pending/in-progress state, not a blocking spinner waiting for a synchronous response that will never fully reflect completion.
+- "Score this session" action → `POST /sessions/{id}/score`. This is fire-and-forget from the UI's perspective (async — scoring happens via RabbitMQ in the background); show a pending/in-progress state, not a blocking spinner waiting for a synchronous response that will never fully reflect completion.
 - Essay review queue: list answers in `AI_SCORED_PENDING_REVIEW`, host reviews and approves via scoring's review endpoint — **this is the human-in-the-loop gate for Write Essay** (ADR-002: Pearson requires human-review-on-top-of-AI for certain task types; nothing reaches the student without this step for those types).
 - "Publish" action → `POST /sessions/{id}/publish`. Once published, scores become visible to students; make this action visually distinct from "score" (it's the point of no return for visibility, host should not click it by accident).
 
