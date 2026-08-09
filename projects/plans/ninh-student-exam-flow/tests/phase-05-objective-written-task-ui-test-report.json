@@ -1,0 +1,28 @@
+{
+  "phase": "phase-05-objective-written-task-ui",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "summary": {
+    "passed": 114,
+    "failed": 0,
+    "skipped": 0
+  },
+  "suites": [
+    "test/unit/features/exam_attempt/word_count_test.dart (new — Step 11, countWords pure-function coverage: empty/whitespace-only, single word, multiple spaces, leading/trailing whitespace, tabs/newlines)",
+    "test/unit/features/exam_attempt/mc_reading_single_cubit_test.dart (new — Step 7, McReadingSingleCubit.selectOption payload-shape assertions incl. multi-digit and out-of-list-order orderIndex values, plus flushPendingEdit no-op coverage)",
+    "test/unit/features/exam_attempt/write_essay_cubit_test.dart (new — Steps 8-9, WriteEssayCubit.draftChanged payload-shape assertion and fake-DebounceScheduler-driven debounce/flush-mid-debounce/close() behavior, no real Duration sleeps)",
+    "test/widget/features/exam_attempt/task_advance_button_test.dart (new — Steps 4 and 12, executed widget test verifying flushPendingEdit -> syncEngine.flushOne -> NextTaskRequested ordering and the double-tap guard)",
+    "test/widget/features/exam_attempt/word_count_label_test.dart (new — Step 13, BlocSelector rebuild-avoidance mirroring exam_app_bar_test.dart's widget-identity-comparison pattern, plus bounds-label rendering and guidance-only-never-blocking coverage)",
+    "test/widget/features/exam_attempt/write_essay_screen_test.dart (new — Step 10, TextEditingController lifecycle/disposal across teardown)",
+    "test/widget/features/exam_attempt/task_type_dispatcher_test.dart (new — verifies ValueKey(pinnedItemPublicId) forces a fresh McReadingSingleCubit instance across consecutive same-type tasks, a same-key sanity check, and the unsupported-taskType placeholder)",
+    "test/unit/features/exam_attempt/exam_attempt_bloc_test.dart (regression, unchanged)",
+    "test/unit/features/exam_attempt/timer_service_test.dart (regression, unchanged)",
+    "test/unit/features/exam_attempt/timer_state_response_test.dart (regression, unchanged)",
+    "test/unit/features/exam_attempt/timer_repository_impl_test.dart (regression, unchanged)",
+    "test/widget/features/exam_attempt/exam_app_bar_test.dart (regression, unchanged)",
+    "test/unit/sync/sync_engine_test.dart (regression, unchanged)",
+    "(plus the full pre-existing Phase 0-4 suite, run together via `flutter test` for full-repo regression)"
+  ],
+  "notes": "Covers phase-05 Steps 7-13 directly against the new MC_READING_SINGLE/WRITE_ESSAY cubits and widgets: (1) McReadingSingleCubit.selectOption payload-shape assertion against a mocktail-mocked AnswerOutboxDao, asserting the captured payload is the literal decimal-string orderIndex ('2', '5', '12') and never the list position, ruling out an off-by-one list-index-vs-orderIndex bug; (2) WriteEssayCubit.draftChanged payload-shape assertion for 'hello world' producing an exact, untrimmed 'hello world' payload on debounce expiry; (3) debounce behavior driven entirely by a fake DebounceScheduler mirroring TimerService's _CapturingScheduler pattern -- rapid draftChanged calls produce zero upsertAnswer calls until the captured callback is invoked manually, and flushPendingEdit mid-debounce produces the upsert immediately without ever invoking the scheduled callback; (4) WriteEssayScreen's TextEditingController lifecycle verified via an executed widget test that tears the screen out of the tree and confirms no FlutterError/exception is thrown; (5) countWords tested as a pure function independent of any widget pump, covering empty string, whitespace-only, multiple spaces, leading/trailing whitespace, and tab/newline separators; (6) TaskAdvanceButton verified to call cubit.flushPendingEdit() then syncEngine.flushOne(pinnedItemPublicId) exactly once per tap (verifyInOrder-equivalent via an ordered fake-cubit call log plus mocktail verify), plus a double-tap-guard regression test; (7) WordCountLabel's BlocSelector rebuild-avoidance verified by mirroring exam_app_bar_test.dart's exact widget-identity-comparison pattern -- a state change with a different draftText but identical wordCount leaves the rendered Text instance identical, while an actual wordCount change produces a new instance -- plus coverage that being outside min/max bounds never renders an error state (guidance-only, per Design Constraints). Also added an executed widget test confirming TaskTypeDispatcher's ValueKey(pinnedItemPublicId) forces Flutter to construct a brand-new McReadingSingleCubit instance when consecutive same-type tasks have different pinnedItemPublicId values (and reuses the same instance when the key is unchanged), guarding the exact stale-state defect the key was added to fix. One test-infrastructure note: an initial widget-test draft used flutter_test's pumpEventQueue() inside testWidgets(), which hangs indefinitely because testWidgets() runs under a fake-async zone where real Timers never fire; replaced with plain tester.pump() calls (microtasks drain independently of the fake clock) -- this was caught and fixed during this same test-writing pass, not left in place. Full `flutter test` run across the whole repo (114 tests) passed with zero failures and zero skips. No production code was modified -- only new test files.",
+  "failures": []
+}

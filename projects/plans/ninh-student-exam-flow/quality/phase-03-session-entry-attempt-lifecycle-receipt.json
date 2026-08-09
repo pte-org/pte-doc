@@ -1,0 +1,25 @@
+{
+  "target": "phase-03-session-entry-attempt-lifecycle",
+  "verdict": "APPROVED",
+  "policy_version": "1.0.0",
+  "report_path": "plans/ninh-student-exam-flow/quality/phase-03-session-entry-attempt-lifecycle-quality-report.json",
+  "reviewed_files": [
+    "lib/core/constants/app_strings.dart",
+    "lib/core/sync/sync_engine.dart",
+    "lib/features/exam_attempt/data/repositories/exam_attempt_repository_impl.dart",
+    "lib/features/exam_attempt/data/repositories/manual_session_entry_repository.dart",
+    "lib/features/exam_attempt/domain/repositories/exam_attempt_repository.dart",
+    "lib/features/exam_attempt/domain/repositories/session_entry_repository.dart",
+    "lib/features/exam_attempt/domain/task_view.dart",
+    "lib/features/exam_attempt/exam_attempt_module.dart",
+    "lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart",
+    "lib/features/exam_attempt/presentation/bloc/exam_attempt_event.dart",
+    "lib/features/exam_attempt/presentation/bloc/exam_attempt_state.dart",
+    "lib/features/exam_attempt/presentation/pages/session_entry_page.dart",
+    "lib/main.dart"
+  ],
+  "source_fingerprint": "sha256:1f7e0fb893bdc5d14aa9b11555deef65cc14d8e783c2e24d47a62a9117420e1a",
+  "reviewed_at": "2026-07-27T00:00:00Z",
+  "open_blocking_findings": 0,
+  "_note": "Cryptographically issued from the pte-app repo (receipt.py requires reviewed_files and the report to share one git repo root). This copy is the human-readable record; the gating copy lives at pte-app/plans/ninh-student-exam-flow/quality/phase-03-session-entry-attempt-lifecycle-receipt.json."
+}

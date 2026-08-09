@@ -1,0 +1,23 @@
+{
+  "phase": "phase-01-core-networking-auth",
+  "mode": "tdd_verify",
+  "verdict": "PASSED",
+  "summary": {
+    "passed": 30,
+    "failed": 0,
+    "skipped": 0
+  },
+  "suites": [
+    "test/unit/storage/token_store_test.dart",
+    "test/unit/network/api_client_test.dart",
+    "test/unit/network/auth_header_interceptor_test.dart",
+    "test/unit/network/token_refresh_interceptor_test.dart",
+    "test/unit/network/token_refresher_test.dart",
+    "test/unit/network/proactive_refresh_scheduler_test.dart",
+    "test/unit/features/auth/auth_bloc_test.dart",
+    "test/unit/features/auth/auth_repository_impl_test.dart",
+    "test/unit/features/auth/jwt_claims_test.dart"
+  ],
+  "notes": "No plans/{slug}/tests/phase-01-*-tdd-ready.json RED_READY artifact exists from the original implementation session (tests and implementation landed together, and were then revised by a /simplify pass). Verified GREEN directly against the current implementation instead of against a saved RED baseline; no assertions were found weakened relative to the phase's Success Criteria.",
+  "failures": []
+}

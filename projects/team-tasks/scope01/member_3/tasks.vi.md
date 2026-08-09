@@ -34,7 +34,7 @@ Lưu ý giống Member 2 — chưa có OpenAPI sinh sẵn, đọc thẳng contro
 
 ## Task 4 — Trigger chấm điểm & publish
 
-- Hành động "Chấm session này" → `POST /sessions/{id}/score`. Về phía UI đây là fire-and-forget (chạy async qua Kafka/RabbitMQ ở nền); hiện trạng thái đang xử lý, đừng hiện spinner chặn màn hình chờ 1 response đồng bộ không bao giờ phản ánh đủ việc đã xong.
+- Hành động "Chấm session này" → `POST /sessions/{id}/score`. Về phía UI đây là fire-and-forget (chạy async qua RabbitMQ ở nền); hiện trạng thái đang xử lý, đừng hiện spinner chặn màn hình chờ 1 response đồng bộ không bao giờ phản ánh đủ việc đã xong.
 - Hàng chờ review essay: liệt kê các answer đang ở trạng thái `AI_SCORED_PENDING_REVIEW`, host review và duyệt qua endpoint review của scoring — **đây là cổng human-in-the-loop cho Write Essay** (ADR-002: Pearson yêu cầu human-review-on-top-of-AI cho 1 số loại task nhạy cảm; không có gì tới được student cho các loại task đó nếu thiếu bước này).
 - Hành động "Publish" → `POST /sessions/{id}/publish`. Sau khi publish, điểm hiện ra cho student thấy; làm cho hành động này khác biệt rõ ràng về mặt UI so với "chấm điểm" (đây là điểm không thể quay lại về mặt hiển thị, host không nên bấm nhầm).
 

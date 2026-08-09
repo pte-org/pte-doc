@@ -1,0 +1,64 @@
+{
+  "mode": "gate",
+  "target": "phase-09-qa-gate",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-07-28T00:00:00Z",
+  "reviewed_files": [
+    "lib/features/exam_attempt/presentation/cubit/read_aloud_state.dart",
+    "lib/features/exam_attempt/presentation/cubit/read_aloud_cubit.dart",
+    "lib/features/exam_attempt/presentation/pages/read_aloud_screen.dart",
+    "test/unit/features/exam_attempt/read_aloud_cubit_test.dart"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 1,
+    "noted": 0
+  },
+  "findings": [
+    {
+      "id": "QUAL-901",
+      "severity": "HIGH",
+      "rule": "CORR_DEFINED_BRANCH_BEHAVIOR",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "lib/features/exam_attempt/presentation/cubit/read_aloud_cubit.dart:60-71",
+      "evidence": "Re-read current file: stopRecording()'s null-path branch is now `if (path == null) { if (state.recordingPhase != RecordingPhase.recorded) { emit(state.copyWith(recordingPhase: RecordingPhase.idle)); } return; }`. This guards the idle transition on the phase not already being `recorded`, so a failed re-record after a prior successful recording no longer discards the `recorded` phase, while a genuinely fresh/never-recorded state (phase != recorded) still falls back to idle as before. Confirmed by the new regression test 'a failed re-record (stop() returns null after an earlier successful recording) preserves the recorded phase instead of regressing to idle' in test/unit/features/exam_attempt/read_aloud_cubit_test.dart:91-108, which asserts only a single `recorded` emission and no second emission on the subsequent null stop().",
+      "why_it_matters": "Resolved: the refactor is now behavior-preserving for this branch, matching the pre-refactor two-boolean semantics (hasRecorded left untouched on a null re-record stop).",
+      "required_action": "None — fix confirmed correct.",
+      "owner": "cook"
+    },
+    {
+      "id": "QUAL-902",
+      "severity": "MEDIUM",
+      "rule": "CORR_UNTESTED_BRANCH",
+      "status": "RESOLVED",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "test/unit/features/exam_attempt/read_aloud_cubit_test.dart",
+      "evidence": "File now exists with 4 blocTest cases: (1) startRecording emits RecordingPhase.recording after recorder.start(); (2) stopRecording with a successful path emits recorded, upserts via mediaDao.upsertRecorded, and triggers coordinator.attemptUpload; (3) stopRecording returning null from a fresh/never-recorded state falls back to idle with verifyNever on the DAO upsert; (4) the key regression case — stop() succeeds then a subsequent stop() returns null — asserts only the single `recorded` emission occurs and no regression emission follows. This directly exercises the QUAL-901 fixed branch. Independently confirmed passing as part of the full 187/187 flutter test suite.",
+      "why_it_matters": "Resolved: ReadAloudCubit's start/stop/null-path/re-record transitions now have direct unit coverage, closing the gap that let QUAL-901 go unnoticed.",
+      "required_action": "None — coverage confirmed adequate for the cubit's phase-transition logic addressed by this phase.",
+      "owner": "cook"
+    },
+    {
+      "id": "QUAL-903",
+      "severity": "LOW",
+      "rule": "CORR_DEFINED_BRANCH_BEHAVIOR",
+      "status": "OPEN",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "lib/features/exam_attempt/presentation/cubit/read_aloud_state.dart:19-24 (used from lib/features/exam_attempt/presentation/cubit/read_aloud_cubit.dart:40-42)",
+      "evidence": "Carried forward from phase 6's quality report (QUAL-601, still OPEN, unchanged by this diff): ReadAloudState.copyWith still computes `uploadStatus: uploadStatus ?? this.uploadStatus`. The cubit's watchRow listener calls `copyWith(uploadStatus: row == null ? null : ...)` intending to clear uploadStatus to null once the row disappears, but the null-coalescing operator makes an explicit null indistinguishable from an omitted argument, so the clearing branch can never execute.",
+      "why_it_matters": "Same latent footgun noted in phase 6: today the only row-to-null transition happens after a row reaches ready and gets deleted, so the stale non-null value is currently harmless, but a future flow reusing the same Cubit instance across a cleared row would silently keep showing a stale uploadStatus.",
+      "required_action": "Not blocking for this phase since it predates this diff and this diff did not touch the uploadStatus field's copyWith logic. Track as pre-existing debt (use an explicit sentinel/wrapper instead of a bare nullable in copyWith) if not already tracked from phase 6.",
+      "owner": "cook"
+    }
+  ],
+  "report_path": "plans/ninh-student-exam-flow/quality/phase-09-qa-gate-quality-report.json"
+}

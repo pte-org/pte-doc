@@ -1,0 +1,31 @@
+{
+  "mode": "gate",
+  "target": "phase-05-objective-written-task-ui",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-07-27T00:00:00Z",
+  "reviewed_files": [
+    "lib/features/exam_attempt/domain/word_count.dart",
+    "lib/features/exam_attempt/presentation/cubit/task_answer_cubit.dart",
+    "lib/features/exam_attempt/presentation/cubit/mc_reading_single_state.dart",
+    "lib/features/exam_attempt/presentation/cubit/mc_reading_single_cubit.dart",
+    "lib/features/exam_attempt/presentation/cubit/write_essay_state.dart",
+    "lib/features/exam_attempt/presentation/cubit/write_essay_cubit.dart",
+    "lib/features/exam_attempt/presentation/widgets/task_advance_button.dart",
+    "lib/features/exam_attempt/presentation/widgets/word_count_label.dart",
+    "lib/features/exam_attempt/presentation/widgets/mc_option_list.dart",
+    "lib/features/exam_attempt/presentation/pages/mc_reading_single_screen.dart",
+    "lib/features/exam_attempt/presentation/pages/write_essay_screen.dart",
+    "lib/features/exam_attempt/presentation/widgets/task_type_dispatcher.dart",
+    "lib/core/constants/app_strings.dart",
+    "lib/core/constants/app_dimensions.dart"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "report_path": "plans/ninh-student-exam-flow/quality/phase-05-objective-written-task-ui-quality-report.json"
+}

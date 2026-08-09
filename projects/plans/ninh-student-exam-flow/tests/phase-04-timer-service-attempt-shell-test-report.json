@@ -1,0 +1,21 @@
+{
+  "phase": "phase-04-timer-service-attempt-shell",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "summary": {
+    "passed": 79,
+    "failed": 0,
+    "skipped": 0
+  },
+  "suites": [
+    "test/unit/features/exam_attempt/timer_service_test.dart (new — Steps 8-11, plus regression coverage for the orphaned-timer-chain fix)",
+    "test/unit/features/exam_attempt/timer_state_response_test.dart (new — TimerStateResponse.fromJson phase-string mapping)",
+    "test/unit/features/exam_attempt/timer_repository_impl_test.dart (new — GET /api/exam-delivery/attempts/{id}/timer)",
+    "test/widget/features/exam_attempt/exam_app_bar_test.dart (new — Step 12 rebuild-avoidance, executed widget test)",
+    "test/unit/features/exam_attempt/exam_attempt_bloc_test.dart (existing, extended with a missing registerFallbackValue(TaskView) fix so its already-present TimerService mocking compiles and runs)",
+    "test/unit/sync/sync_engine_test.dart (regression, unchanged)",
+    "(plus the full pre-existing Phase 0/1/2/3 suite, run together via `flutter test` for full-repo regression)"
+  ],
+  "notes": "Covers phase-04 Steps 8-12 directly against TimerService and ExamAppBar: (1) seedFromTask phase derivation for prep/response/already-expired; (2) reconcileFromServer resetting the Stopwatch-derived remaining time and adopting response.phase directly even when the response's own serverNow/deadlines would derive a different phase; (3) taskAdvancedExternally emitted only on a currentOrderIndex change, exactly once per change; (4) dispose() cancelling the poll scheduler and closing both streams, verified via a fake TimerScheduler capturing (duration, callback) pairs with zero real-time waiting; (5) ExamAppBar's BlocSelector rebuild-avoidance, verified as an executed widget test via widget-instance identity comparison across pumps (an unrelated AttemptInProgress change leaves the countdown Text object identical; a genuine TimerSnapshot change produces a new one). Also added a targeted regression test for the startPolling-called-twice-without-stop() orphaned-chain fix: a stale callback captured by a superseded chain is confirmed inert (no duplicate fetchTimerState calls, no duplicate ticks emissions) while the live chain continues to function. Full `flutter test` run (79 tests across the whole repo) passed with zero failures and zero skips. No production code was modified — only new test files and one test-infrastructure fix (a missing mocktail registerFallbackValue in the pre-existing exam_attempt_bloc_test.dart, needed for its existing timerService.seedFromTask(any()) stub to run; the assertions themselves were not touched).",
+  "failures": []
+}
