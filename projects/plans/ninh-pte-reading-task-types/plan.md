@@ -1,6 +1,6 @@
 # Plan: 5 PTE Reading Task-Type Screens (pte-app + pte-api)
 
-Status: 🟡 Not Started
+Status: 🟢 Completed
 Date: 2026-07-28
 Mode: Standard
 Created by: Ninh
@@ -19,11 +19,11 @@ A note on prior art: `pte-app/plans/reading/plan.md` describes an earlier, unrel
 - [x] Phase 1: Backend Data Contracts & DTOs — `BlankGroupView` DTO, `TaskView`/`OptionView` updates, `OptionView.orderIndex` int→String refactor, `AttemptMapper` population [quality: approved (2 NOTED — QUAL-101 no authoring write-path for blankIndex yet, expected closed by Phase 8; QUAL-102 pre-existing FrozenOption duplication); testing: passed, 6/6]
 - [x] Phase 2: Frontend Shared Model + Banner Infra + Dev Fixtures — `TaskOption`/`TaskView` model fix+extension, gap-marker parser, header banner, passage layout, dev-only fixture preview screen [quality: approved (1 NOTED — disclosed fixtures-location deviation); testing: passed, 206/206]
 - [x] Phase 3: Frontend `MC_READING_MULTIPLE` — checkbox multi-select screen [quality: approved (0 findings); testing: passed, 214/214]
-- [ ] Phase 4: Frontend `RE_ORDER_PARAGRAPHS` — draggable paragraph reorder screen
-- [ ] Phase 5: Frontend `FILL_BLANKS_READING` (drag & drop) — inline gap targets + word-bank chips
-- [ ] Phase 6: Frontend `FILL_BLANKS_READING_WRITING` (dropdown) — inline per-gap dropdowns
-- [ ] Phase 7: Backend Payload Parsing & Scoring Engine — evaluators for all 4 new payload formats
-- [ ] Phase 8: Backend Seed Data & Fixtures — realistic DB rows for local/dev end-to-end testing
+- [x] Phase 4: Frontend `RE_ORDER_PARAGRAPHS` — draggable paragraph reorder screen [quality: approved (1 NOTED — disclosed drag-gesture-test limitation); testing: passed, 220/220]
+- [x] Phase 5: Frontend `FILL_BLANKS_READING` (drag & drop) — inline gap targets + word-bank chips [quality: approved (0 findings); testing: passed, 233/233, incl. real drag-gesture simulation]
+- [x] Phase 6: Frontend `FILL_BLANKS_READING_WRITING` (dropdown) — inline per-gap dropdowns [quality: approved (1 NOTED — dead-end-state UX bug found and fixed, advance button now always present); testing: passed, 244/244]
+- [x] Phase 7: Backend Payload Parsing & Scoring Engine — evaluators for all 4 new payload formats [quality: approved (1 NOTED — disclosed correctGapIndex schema addition); testing: passed, 19/19]
+- [x] Phase 8: Backend Seed Data & Fixtures — realistic DB rows for local/dev end-to-end testing [quality: approved (2 NOTED — RE_ORDER_PARAGRAPHS delivery-order bug found+fixed, live-verification gap disclosed); testing: passed at unit level, 4/4; live integration deferred (Docker unavailable, see phase file)]
 
 ## The 5 task types → backend enum names
 
@@ -54,6 +54,7 @@ Decisions below were established via prior investigation, clarifying questions, 
 12. **Explicitly deferred**: a confirm-dialog gate on advancing past an incomplete fill-blank task was considered and rejected — real PTE Reading lets a student skip unanswered blanks within their self-managed time budget, and `TaskAdvanceButton` is a deliberately un-forked shared component reused unmodified by every task type.
 13. **Backend scope expansion**: initially scoped Flutter-only, expanded per explicit user decision to include backend DTOs (Phase 1), scoring evaluators (Phase 7), and seed data (Phase 8) — see Phase 1/7/8 below.
 14. **Rollout ordering / backward compatibility**: `pte-app` has no released production/store build as of this plan — Phase 1 (backend `OptionView.orderIndex` type change) and Phase 2 (frontend tolerant parsing) can therefore deploy freely without ordering constraints today. **This changes the moment a build is ever released to real users**: from that point on, Phase 1's backend change must never reach a production/staging environment before a Phase-2-equivalent tolerant Flutter client has been released and adopted, since an already-installed older client doing `json['orderIndex'] as int` would crash the instant the backend starts sending a JSON string. Re-confirm "has this app shipped yet?" before ever promoting Phase 1 past a local/dev environment.
+15. **`QuestionOption.correctGapIndex` added during Phase 7 Preflight**: scoring `FILL_BLANKS_READING` (shared word bank) needs to know which specific gap each correct word belongs to, but its flat `correct: true/false` flag can't express that, and reusing `blankIndex` (Phase 1) for this would conflict with `AttemptMapper.requireHomogeneousBlankIndex`'s mixed-list guard. Resolved with one more nullable, scoring-only field (`correctGapIndex`, migration `V3__...`) that `AttemptMapper`/delivery never reads (Jackson ignores the unknown JSON key) — only `authoring`'s write side and `scoring`'s read side know about it. See Phase 7's own file for the full rationale.
 
 ## Dependencies
 
