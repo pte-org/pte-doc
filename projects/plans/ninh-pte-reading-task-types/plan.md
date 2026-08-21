@@ -17,8 +17,8 @@ A note on prior art: `pte-app/plans/reading/plan.md` describes an earlier, unrel
 ## Phases
 
 - [x] Phase 1: Backend Data Contracts & DTOs — `BlankGroupView` DTO, `TaskView`/`OptionView` updates, `OptionView.orderIndex` int→String refactor, `AttemptMapper` population [quality: approved (2 NOTED — QUAL-101 no authoring write-path for blankIndex yet, expected closed by Phase 8; QUAL-102 pre-existing FrozenOption duplication); testing: passed, 6/6]
-- [ ] Phase 2: Frontend Shared Model + Banner Infra + Dev Fixtures — `TaskOption`/`TaskView` model fix+extension, gap-marker parser, header banner, passage layout, dev-only fixture preview screen
-- [ ] Phase 3: Frontend `MC_READING_MULTIPLE` — checkbox multi-select screen
+- [x] Phase 2: Frontend Shared Model + Banner Infra + Dev Fixtures — `TaskOption`/`TaskView` model fix+extension, gap-marker parser, header banner, passage layout, dev-only fixture preview screen [quality: approved (1 NOTED — disclosed fixtures-location deviation); testing: passed, 206/206]
+- [x] Phase 3: Frontend `MC_READING_MULTIPLE` — checkbox multi-select screen [quality: approved (0 findings); testing: passed, 214/214]
 - [ ] Phase 4: Frontend `RE_ORDER_PARAGRAPHS` — draggable paragraph reorder screen
 - [ ] Phase 5: Frontend `FILL_BLANKS_READING` (drag & drop) — inline gap targets + word-bank chips
 - [ ] Phase 6: Frontend `FILL_BLANKS_READING_WRITING` (dropdown) — inline per-gap dropdowns

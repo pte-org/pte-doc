@@ -37,18 +37,20 @@ Maps to: unblocks Frontend Phases 3-6, each of which builds one new task-type sc
 
 ## Success Criteria
 
-- [ ] `TaskOption.fromJson` no longer throws on a real backend response containing options (accepts both int and string `orderIndex`).
-- [ ] `TaskView.blankGroups` parses as `null` when absent from JSON, and correctly when present.
-- [ ] `parseBlankPrompt` never throws on malformed input — verified by an explicit test case.
-- [ ] `ReadingTaskHeaderBanner`/`ReadingPassageLayout` render correctly in isolation and inside the retrofitted `MC_READING_SINGLE` screen.
-- [ ] `ReadingTaskPreviewScreen` is unreachable outside `kDebugMode`.
-- [ ] No new literal strings/colors/dimensions outside `AppStrings`/`AppColors`/`AppDimensions`.
-- [ ] `flutter analyze` and `flutter test` both pass with zero new issues.
+- [x] `TaskOption.fromJson` no longer throws on a real backend response containing options (accepts both int and string `orderIndex`).
+- [x] `TaskView.blankGroups` parses as `null` when absent from JSON, and correctly when present.
+- [x] `parseBlankPrompt` never throws on malformed input — verified by an explicit test case.
+- [x] `ReadingTaskHeaderBanner`/`ReadingPassageLayout` render correctly in isolation and inside the retrofitted `MC_READING_SINGLE` screen.
+- [x] `ReadingTaskPreviewScreen` is unreachable outside `kDebugMode` (route only registered when `kDebugMode` is true in `main.dart`).
+- [x] No new literal strings/colors/dimensions outside `AppStrings`/`AppColors`/`AppDimensions`.
+- [x] `flutter analyze` and `flutter test` both pass with zero new issues (206/206 passing, up from 187).
+
+**Deviation from the original Steps list**: `test/fixtures/reading_task_fixtures.dart` (Step 9) was relocated to `lib/features/exam_attempt/dev/reading_task_fixtures.dart` during implementation — a `lib/` file (the dev preview screen) cannot import from `test/`, so the canonical fixture source had to live in `lib/` for both the preview screen and later widget tests to share it via a normal package import. This is a corrected file location, not a scope change; the "share one canonical fixture source" intent from Design Decision 12 is preserved.
 
 ## Quality and Testing State
 
-- Quality gate: not started.
-- Testing: not started.
+- Quality gate: approved (0 blocking findings; 1 NOTED — QUAL-201, the disclosed fixtures-location deviation, resolved). Report: `pte-app/plans/ninh-pte-reading-task-types/quality/phase-02-frontend-shared-model-banner-quality-report.json`. Receipt issued.
+- Testing: PASSED — 19/19 new tests (7 `blank_prompt_parser_test.dart`, 6 `task_view_test.dart`, 1 `reading_task_header_banner_test.dart`, 4 `mc_reading_single_screen_test.dart` — added since no widget test previously existed for this screen, mirroring `write_essay_screen_test.dart`'s `BlocProvider<ExamAttemptBloc>` wrapping convention). Full suite: 206/206 passing (up from 187 before this phase), confirming zero regression to `MC_READING_SINGLE`'s existing behavior.
 
 ## Risks
 

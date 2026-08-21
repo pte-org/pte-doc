@@ -26,16 +26,16 @@ Maps to: PTE task type `MC_READING_MULTIPLE`.
 
 ## Success Criteria
 
-- [ ] Selecting multiple checkboxes writes a sorted, comma-joined `orderIndex` payload regardless of click order.
-- [ ] Deselecting all options writes an empty-string payload, not a missing/omitted write.
-- [ ] `flushPendingEdit()` is a verified no-op.
-- [ ] `TaskTypeDispatcher` correctly routes `MC_READING_MULTIPLE` to the new screen.
-- [ ] `flutter analyze` and `flutter test` both pass with zero new issues.
+- [x] Selecting multiple checkboxes writes a sorted, comma-joined `orderIndex` payload regardless of click order.
+- [x] Deselecting all options writes an empty-string payload, not a missing/omitted write.
+- [x] `flushPendingEdit()` is a verified no-op.
+- [x] `TaskTypeDispatcher` correctly routes `MC_READING_MULTIPLE` to the new screen.
+- [x] `flutter analyze` and `flutter test` both pass with zero new issues (214/214 passing, up from 206).
 
 ## Quality and Testing State
 
-- Quality gate: not started.
-- Testing: not started.
+- Quality gate: approved (0 blocking findings). Report: `pte-app/plans/ninh-pte-reading-task-types/quality/phase-03-mc-reading-multiple-quality-report.json`. Receipt issued.
+- Testing: PASSED — 6/6 new cubit tests (`mc_reading_multiple_cubit_test.dart`, including reverse-toggle-order and untoggle-to-empty cases) + 2/2 new dispatcher routing tests. Full suite: 214/214 passing.
 
 ## Risks
 
