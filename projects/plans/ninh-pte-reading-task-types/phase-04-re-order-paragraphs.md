@@ -27,16 +27,18 @@ Maps to: PTE task type `RE_ORDER_PARAGRAPHS`.
 
 ## Success Criteria
 
-- [ ] Initial paragraph order matches the server-shuffled `task.options` order exactly, never re-sorted client-side.
-- [ ] A reorder writes the correct sequence of stable identities, verified against a case where identity and position diverge.
-- [ ] `flushPendingEdit()` is a verified no-op.
-- [ ] Every paragraph tile carries a `Semantics` label reflecting its current position.
-- [ ] `flutter analyze` and `flutter test` both pass with zero new issues.
+- [x] Initial paragraph order matches the server-shuffled `task.options` order exactly, never re-sorted client-side.
+- [x] A reorder writes the correct sequence of stable identities, verified against a case where identity and position diverge from the first frame.
+- [x] `flushPendingEdit()` is a verified no-op.
+- [x] Every paragraph tile carries a `Semantics` label reflecting its current position.
+- [x] `flutter analyze` and `flutter test` both pass with zero new issues (220/220 passing, up from 214).
+
+**Deviation from Step 7 / discovered during implementation**: `ReorderableListView.onReorder` is deprecated as of this project's pinned Flutter SDK (superseded by `onReorderItem`, which pre-adjusts `newIndex` for the removed item) — used `onReorderItem` throughout instead, and the cubit's `reorder()` no longer does its own oldIndex/newIndex adjustment. Also, genuine drag-gesture simulation (`tester.drag` on `ReorderableListView`) proved unreliable in the widget-test environment, consistent with a documented limitation of this widget noted in this codebase's own history (an earlier, now-deleted pre-pivot feature hit the same issue) — `re_order_paragraphs_list_test.dart` verifies rendering/Semantics labeling instead of a full drag gesture; the payload-shape correctness that actually matters (identity vs. position) is covered by `re_order_paragraphs_cubit_test.dart`'s direct `reorder()` calls, which exercise the exact same code path a real drag would trigger.
 
 ## Quality and Testing State
 
-- Quality gate: not started.
-- Testing: not started.
+- Quality gate: approved (0 blocking findings). Report: `pte-app/plans/ninh-pte-reading-task-types/quality/phase-04-re-order-paragraphs-quality-report.json`. Receipt issued.
+- Testing: PASSED — 4/4 cubit tests (initial-order fidelity, identity-not-position payload, sequential reorders, no-op reorder) + 1 widget render/Semantics test (drag gesture not reliably simulatable, see deviation note above). Full suite: 220/220 passing.
 
 ## Risks
 

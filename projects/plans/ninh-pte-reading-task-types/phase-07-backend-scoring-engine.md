@@ -27,17 +27,19 @@ Maps to: PTE task types `MC_READING_MULTIPLE`, `RE_ORDER_PARAGRAPHS`, `FILL_BLAN
 
 ## Success Criteria
 
-- [ ] All 4 new evaluators follow the `scoring` service's existing interface/pattern, not a parallel convention.
-- [ ] `MC_READING_MULTIPLE` negative marking never produces a below-zero score for a single question.
-- [ ] `RE_ORDER_PARAGRAPHS` awards partial credit correctly for a partially-correct sequence, verified against a hand-computed expected value.
-- [ ] The fill-blanks evaluator correctly parses a trailing empty entry as an unanswered final gap, not a shorter answer array.
-- [ ] `SubmitAnswerRequest`'s doc comment documents all 8 payload conventions now in use (the original 3 + these 4 new + verify none was missed).
-- [ ] The `scoring` service's module test suite passes with no regression to the 3 existing evaluators.
+- [x] All 4 new evaluators follow the `scoring` service's existing interface/pattern (a single `ObjectiveScoringService` with one method per task type, dispatched by `score()`), not a parallel convention.
+- [x] `MC_READING_MULTIPLE` negative marking never produces a below-zero score for a single question.
+- [x] `RE_ORDER_PARAGRAPHS` awards partial credit correctly for a partially-correct sequence, verified against a hand-computed expected value (33 for 1/3 correct adjacent pairs).
+- [x] The fill-blanks evaluator correctly parses a trailing empty entry as an unanswered final gap, not a shorter answer array.
+- [x] `SubmitAnswerRequest`'s doc comment documents all 8 payload conventions now in use (the original 3 + these 4 new — `MC_READING_SINGLE`'s existing options-based convention already covered `FILL_BLANKS_READING`/`FILL_BLANKS_READING_WRITING`'s decimal-string building block, so the doc addition specifically calls out the 4 new *shapes*: sorted-set-join, sequence-join, and positional-join).
+- [x] The `scoring` service's module test suite passes with no regression (17/17 new tests, plus Phase 1's `AttemptMapperTest` still 6/6 unaffected).
+
+**Discovered during Preflight (not anticipated when this phase file was originally written)**: scoring `FILL_BLANKS_READING`'s per-gap correct answer needed a way to know which specific gap each correct word belongs to. `FILL_BLANKS_READING_WRITING` already had this via `blankIndex` (per-blank option grouping, from Phase 1), but `FILL_BLANKS_READING`'s shared word bank has no such grouping — its flat `correct: true/false` flag alone can't express "this word is specifically correct for gap 2." Reusing `blankIndex` for this would conflict with Phase 1's `AttemptMapper.requireHomogeneousBlankIndex` guard (it would make a shared-word-bank task look "mixed" and throw when served to students). Resolved by adding one more nullable, scoring-only field: `QuestionOption.correctGapIndex` (new migration `V3__add_correct_gap_index_to_question_options.sql`), threaded through `SnapshotPublishService.FrozenOption` (write side) and scoring's own local `FrozenOption` (read side) — **not** exam-delivery's `AttemptMapper.FrozenOption`, which never needs it (Jackson silently ignores the unknown field, confirmed via the existing Phase 1 tests still passing unchanged). See `QuestionOption.java`'s and `SnapshotPublishService.FrozenOption`'s updated doc comments for the full rationale.
 
 ## Quality and Testing State
 
-- Quality gate: not started.
-- Testing: not started.
+- Quality gate: approved (0 blocking findings). Report: `pte-api/plans/ninh-pte-reading-task-types/quality/phase-07-backend-scoring-engine-quality-report.json`. Receipt issued.
+- Testing: PASSED — 19/19 tests in `ObjectiveScoringServiceTest.java` (supports() coverage, MC_READING_SINGLE correct/incorrect regression for the shared-parseOptions refactor, MC_MULTIPLE all-correct/all-incorrect-floors-at-0/partial/one-correct/empty, RE_ORDER fully-correct/fully-reversed/hand-verified-partial, FILL_BLANKS_READING leading/middle/trailing-empty + wrong-word-in-gap, FILL_BLANKS_READING_WRITING full/trailing-empty/all-wrong). `mvn -pl services/scoring,services/authoring,services/exam-delivery -am test`: BUILD SUCCESS, no regression to Phase 1's 6 `AttemptMapperTest` tests.
 
 ## Risks
 

@@ -33,17 +33,19 @@ Maps to: PTE task type `FILL_BLANKS_READING`.
 
 ## Success Criteria
 
-- [ ] Positional payload is correct for single- and multi-gap cases, including the required trailing empty entry.
-- [ ] Reassigning an option never results in it occupying two gaps at once.
-- [ ] Word-bank chip order is stable across place/undo cycles.
-- [ ] `DragTarget` gaps visibly highlight while a compatible chip hovers.
-- [ ] Every gap/chip carries a `Semantics` label reflecting current state.
-- [ ] `flutter analyze` and `flutter test` both pass with zero new issues.
+- [x] Positional payload is correct for single- and multi-gap cases, including the required trailing empty entry.
+- [x] Reassigning an option never results in it occupying two gaps at once.
+- [x] Word-bank chip order is stable across place/undo cycles.
+- [x] `DragTarget` gaps visibly highlight while a compatible chip hovers.
+- [x] Every gap/chip carries a `Semantics` label reflecting current state.
+- [x] `flutter analyze` and `flutter test` both pass with zero new issues (233/233 passing, up from 220).
+
+**Note on the Risk section's drag-simulation concern**: unlike Phase 4's `ReorderableListView` (whose internal long-press gesture proved unreliable to simulate), plain `Draggable`/`DragTarget` gestures simulated fine via `tester.startGesture` → `moveTo` → `up()` — all 4 planned drag-interaction widget tests (Steps 8-10, plus hover-highlight) run as genuine gesture simulations, not render-only smoke tests. No coverage gap to disclose for this phase.
 
 ## Quality and Testing State
 
-- Quality gate: not started.
-- Testing: not started.
+- Quality gate: approved (0 blocking findings). Report: `pte-app/plans/ninh-pte-reading-task-types/quality/phase-05-fill-blanks-drag-drop-quality-report.json`. Receipt issued.
+- Testing: PASSED — 8/8 cubit tests (single/multi-gap payload, reassignment clears old gap, clearGap empty-entry, the two HIGH-risk trailing/leading-empty-entry regression tests, no-op clearGap, flushPendingEdit no-op) + 5/5 widget tests (initial render, drag-into-gap, drag-back-to-bank, chip-order stability, hover-highlight color) — all via real gesture simulation. Full suite: 233/233 passing.
 
 ## Risks
 

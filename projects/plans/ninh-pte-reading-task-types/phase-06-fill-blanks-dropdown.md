@@ -29,16 +29,20 @@ Maps to: PTE task type `FILL_BLANKS_READING_WRITING`.
 
 ## Success Criteria
 
-- [ ] Each gap's dropdown offers only that gap's own `BlankGroup.options`, never another gap's or the shared `options` field.
-- [ ] Positional payload is correct, including the required trailing empty entry.
-- [ ] `blankGroups == null`/empty renders the `StatusBanner` fallback, not a crash or blank screen.
-- [ ] Every gap's dropdown carries a `Semantics` label reflecting current state.
-- [ ] `flutter analyze` and `flutter test` both pass with zero new issues.
+- [x] Each gap's dropdown offers only that gap's own `BlankGroup.options`, never another gap's or the shared `options` field.
+- [x] Positional payload is correct, including the required trailing empty entry.
+- [x] `blankGroups == null`/empty renders the `StatusBanner` fallback, not a crash or blank screen.
+- [x] Every gap's dropdown carries a `Semantics` label reflecting current state.
+- [x] `flutter analyze` and `flutter test` both pass with zero new issues (244/244 passing, up from 233).
+
+**Additions beyond the original Steps list**:
+1. Extracted a shared `positionalPayload(List<String?>)` helper (`lib/features/exam_attempt/domain/positional_payload.dart`) and refactored Phase 5's `FillBlanksDragDropCubit` to use it — per this phase's own Step 2 instruction ("reuse or mirror Phase 5's positional-join helper... do not reimplement independently"), a pure extract-method refactor with no behavior change (Phase 5's existing tests still pass unchanged).
+2. **UX fix found during implementation**: the original design (StatusBanner-only fallback, no cubit/advance button) would leave a student permanently stuck on this task if `blankGroups` is unavailable — there would be no `TaskAdvanceButton` to move past it. Fixed by always constructing `FillBlanksDropdownCubit` (with `blankGroupCount: 0` in the fallback case) so the advance button is always present, only the body content (interactive dropdowns vs. `StatusBanner`) is conditional. Verified by a dedicated test ("the advance button is still present in the fallback state").
 
 ## Quality and Testing State
 
-- Quality gate: not started.
-- Testing: not started.
+- Quality gate: approved (0 blocking findings). Report: `pte-app/plans/ninh-pte-reading-task-types/quality/phase-06-fill-blanks-dropdown-quality-report.json`. Receipt issued.
+- Testing: PASSED — 5/5 cubit tests (single/multi-gap payload, trailing-empty-entry, re-selection isolation, flushPendingEdit no-op) + 6/6 widget tests (per-gap distinct dropdown items, cross-gap selection isolation, StatusBanner fallback for null/empty blankGroups, advance-button-always-present, populated-content renders body not fallback). Full suite: 244/244 passing.
 
 ## Risks
 
