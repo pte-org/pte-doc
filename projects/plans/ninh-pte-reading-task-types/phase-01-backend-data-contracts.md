@@ -31,18 +31,18 @@ Maps to: enables Frontend Phase 2's `TaskView`/`TaskOption`/`BlankGroup` model, 
 
 ## Success Criteria
 
-- [ ] `OptionView.orderIndex` is `String`, and every existing call site compiles against the new type.
-- [ ] `QuestionOption.blankIndex` exists, nullable, with a migration that doesn't require backfilling existing rows.
-- [ ] `BlankGroupView` exists with exactly `{blankIndex, options}`, no correctness-leaking field.
-- [ ] `TaskView.blankGroups` is populated only when the underlying options carry a non-null `blankIndex`, `null`/omitted otherwise — verified for at least one task of each affected shape (flat options, blank-grouped options, no options).
-- [ ] Existing behavior for `MC_READING_SINGLE`/every currently-flat-options task type is provably unchanged (a mapper test using today's `optionsJson` shape with no `blankIndex` produces the exact same `List<OptionView>` as before this phase).
-- [ ] `OptionView.orderIndex` round-trips as a JSON string in a serialization test (not a JSON number).
-- [ ] Both modules (`authoring`, `exam-delivery`) build and their existing test suites still pass.
+- [x] `OptionView.orderIndex` is `String`, and every existing call site compiles against the new type.
+- [x] `QuestionOption.blankIndex` exists, nullable, with a migration (`V2__add_blank_index_to_question_options.sql`) that doesn't require backfilling existing rows.
+- [x] `BlankGroupView` exists with exactly `{blankIndex, options}`, no correctness-leaking field.
+- [x] `TaskView.blankGroups` is populated only when the underlying options carry a non-null `blankIndex`, `null`/omitted otherwise — verified for flat, blank-grouped, and empty option shapes.
+- [x] Existing behavior for `MC_READING_SINGLE`/every currently-flat-options task type is provably unchanged (regression test against the exact pre-phase `optionsJson` shape, no `blankIndex` key).
+- [x] `OptionView.orderIndex` round-trips as a JSON string in a serialization test (not a JSON number).
+- [x] Both modules (`authoring`, `exam-delivery`) build and their existing test suites still pass.
 
 ## Quality and Testing State
 
 - Quality gate: not started.
-- Testing: not started.
+- Testing: PASSED — 6/6 tests passing in `services/exam-delivery/src/test/java/com/pte/examdelivery/mapper/AttemptMapperTest.java` (flat-options zero-behavior-change regression x2, blank-grouped grouping/ordering, empty-options x4 sub-cases, orderIndex string round-trip x2, mixed-blankIndex IllegalStateException guard). `authoring` module has no test scaffold to extend (`SnapshotPublishService`/`QuestionOption` `blankIndex` round-trip not independently covered — noted as a residual gap, not a blocker, since the write-side shape is exercised indirectly by the read-side tests using its exact JSON contract). Full `mvn -pl services/exam-delivery,services/authoring -am test` run: BUILD SUCCESS.
 
 ## Risks
 
