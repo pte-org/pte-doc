@@ -41,7 +41,7 @@ Maps to: enables Frontend Phase 2's `TaskView`/`TaskOption`/`BlankGroup` model, 
 
 ## Quality and Testing State
 
-- Quality gate: not started.
+- Quality gate: approved (0 blocking findings; 2 NOTED — QUAL-101: no authoring write-path exists yet to set `blankIndex` from a real request, expected to be closed by Phase 8's seed data and/or a future authoring-tooling phase, not a defect in this phase's own scope; QUAL-102: the two independently-maintained `FrozenOption` records must stay structurally in lockstep with no contract test, pre-existing pattern not introduced by this phase). Report: `pte-api/plans/ninh-pte-reading-task-types/quality/phase-01-backend-data-contracts-quality-report.json`. Receipt issued: `pte-api/plans/ninh-pte-reading-task-types/quality/phase-01-backend-data-contracts-receipt.json`.
 - Testing: PASSED — 6/6 tests passing in `services/exam-delivery/src/test/java/com/pte/examdelivery/mapper/AttemptMapperTest.java` (flat-options zero-behavior-change regression x2, blank-grouped grouping/ordering, empty-options x4 sub-cases, orderIndex string round-trip x2, mixed-blankIndex IllegalStateException guard). `authoring` module has no test scaffold to extend (`SnapshotPublishService`/`QuestionOption` `blankIndex` round-trip not independently covered — noted as a residual gap, not a blocker, since the write-side shape is exercised indirectly by the read-side tests using its exact JSON contract). Full `mvn -pl services/exam-delivery,services/authoring -am test` run: BUILD SUCCESS.
 
 ## Risks
