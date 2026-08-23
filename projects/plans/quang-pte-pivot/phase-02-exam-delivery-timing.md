@@ -2,7 +2,7 @@
 
 ## Requirements
 
-Add per-task prep-time and response-time tracking and enforcement to the exam delivery system. Each of the 20 PTE task types has its own official prep-time (e.g., 40 seconds for Describe Image) and response-time (e.g., 40 seconds for Describe Image) limits. This phase sources those values from official Pearson materials, stores them in versioned config, and implements per-task timer enforcement during exam attempts so students experience real PTE pressure.
+Add per-task prep-time and response-time tracking and enforcement to the exam delivery system. Each of the 22 PTE task types has its own official prep-time (e.g., 40 seconds for Describe Image) and response-time (e.g., 40 seconds for Describe Image) limits. This phase sources those values from official Pearson materials, stores them in versioned config, and implements per-task timer enforcement during exam attempts so students experience real PTE pressure.
 
 This phase directly addresses P1 user story: "I want each task timed exactly like the real PTE (individual prep-time and response-time limits per task type)."
 
@@ -19,7 +19,7 @@ This phase directly addresses P1 user story: "I want each task timed exactly lik
 
 ## Steps
 
-1. Research and document official PTE task-timing values: consult Pearson's public PTE Academic materials (timing is typically published in candidate guides, sample tests, or official FAQs). Create a comprehensive table mapping all 20 task types to their official prep-time (in seconds) and response-time (in seconds). Document sources (URLs, publication dates) for auditability. If official values cannot be found, escalate and document the TODO gate (see Success Criteria).
+1. Research and document official PTE task-timing values: consult Pearson's public PTE Academic materials (timing is typically published in candidate guides, sample tests, or official FAQs). Create a comprehensive table mapping all 22 task types to their official prep-time (in seconds) and response-time (in seconds). Document sources (URLs, publication dates) for auditability. If official values cannot be found, escalate and document the TODO gate (see Success Criteria).
 
 2. Design a versioned timing-config schema: store task-type timing values as a JSON or YAML file in `src/main/resources/config/pte-task-timings.json` (or as a reference table in the DB). Each entry maps a task type to { prepTimeSeconds, responseTimeSeconds }. Version the config file to track changes across exam versions.
 
@@ -41,7 +41,7 @@ This phase directly addresses P1 user story: "I want each task timed exactly lik
 
 ## Success Criteria
 
-- Official PTE task-timing values for all 20 task types are documented in a source-cited config file (either `pte-task-timings.json` or a DB seed script). Each task type has prepTimeSeconds and responseTimeSeconds.
+- Official PTE task-timing values for all 22 task types are documented in a source-cited config file (either `pte-task-timings.json` or a DB seed script). Each task type has prepTimeSeconds and responseTimeSeconds.
 - **TODO Gate (if applicable):** If official Pearson timing sources cannot be located, a TODO comment is added to the config file (e.g., "// TODO: Confirm these values with Pearson's official 2024 PTE Academic candidate guide (source URL: pending)") and the gate blocks release. This gate must be manually resolved in Phase 9 or a post-release patch once sources are confirmed.
 - An end-to-end exam attempt with per-task timers can complete without timeout/timer errors: a test student can start, progress through 3+ PTE task types, and see countdown timers for prep and response phases.
 - Proctor can extend a task's timer via the proctor dashboard; the extension is logged in the audit trail.

@@ -18,7 +18,7 @@ Placeholder names below — swap in real names.
 | 5 — Writing Scoring | Same shape as Phase 4 but the hard pattern is already proven — largely "follow the recipe" | Mid |
 | 6 — Objective Scoring | Deterministic rule-based logic, no concurrency, no vendor, thoroughly spec'd acceptance criteria | Mid |
 | 7 — Score Aggregation & Reporting | Ties Phase 4+5+6 together, enforces authorization on report endpoints, cache-invalidation correctness, partial-aggregation edge cases | **Senior** |
-| 8 — Frontend (20 task types × 2 platforms) | High *volume*, but each task-type screen reuses a handful of component patterns (audio recorder, MC, drag-reorder, text input) once scaffolded | Mid (high-volume, needs help — see note below) |
+| 8 — Frontend (22 task types × 2 platforms) | High *volume*, but each task-type screen reuses a handful of component patterns (audio recorder, MC, drag-reorder, text input) once scaffolded | Mid (high-volume, needs help — see note below) |
 
 ---
 
@@ -67,7 +67,7 @@ After Phase 4 + 5 + 6:    Senior1 → Phase 7 (last phase to unblock)
 
 **Critical path:** Phase 1 → {Phase 2, Phase 4 (Senior 2), Phase 5 (Mid 1), Phase 6 (Mid 2)} → Phase 7 (Senior 1). Senior 1 finishes Phase 1 early and then has the longest wait before Phase 7 can start — use that time productively: reviewing Phase 4/5/6 as they land (Senior 1 designed the schema they all build on, so they're well-placed to review), and pre-designing Phase 7's aggregation config/rubric mapping (Phase 7 Steps 1–2 are research/design, don't need 4/5/6's code to exist yet, only the *shape* of what they'll produce).
 
-**Phase 8 volume risk:** even with reusable components, 20 task types across 2 platforms is large (flagged HIGH in plan.md Risks). Once Mid 1 finishes Phase 5 or Senior 2 finishes Phase 4, whoever frees up first should pull frontend task-type screens off Mid 2's plate rather than going idle — treat Phase 8 as elastic capacity for whoever's done with their own two phases first.
+**Phase 8 volume risk:** even with reusable components, 22 task types across 2 platforms is large (flagged HIGH in plan.md Risks). Once Mid 1 finishes Phase 5 or Senior 2 finishes Phase 4, whoever frees up first should pull frontend task-type screens off Mid 2's plate rather than going idle — treat Phase 8 as elastic capacity for whoever's done with their own two phases first.
 
 ---
 
@@ -76,6 +76,6 @@ After Phase 4 + 5 + 6:    Senior1 → Phase 7 (last phase to unblock)
 - **Senior 1:** regression tests for `examdelivery`/`iam`/`tenancy`, security/authorization audit (Phase 7's report-endpoint checks), final schema-consistency doc pass.
 - **Senior 2:** timer/concurrency edge-case tests (race conditions in Phase 2, poller idempotency in Phase 4), operations runbook for the scoring-outage alert/recovery procedure.
 - **Mid 1:** Writing + Speaking scoring integration tests (mock vendor + sandbox if available), vendor research report finalization.
-- **Mid 2:** full frontend manual QA pass (pte-app + pte-web) across all 20 task types, objective-scoring unit test coverage review.
+- **Mid 2:** full frontend manual QA pass (pte-app + pte-web) across all 22 task types, objective-scoring unit test coverage review.
 
 All 4 converge for the joint end-to-end pass (one full mock exam attempt, every task type) before declaring Phase 9 — and the whole pivot — done.

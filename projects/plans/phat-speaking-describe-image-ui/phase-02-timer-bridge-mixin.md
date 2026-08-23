@@ -1,0 +1,24 @@
+# Phase 2: Extract `AutoRecordTimerBridgeMixin`
+
+## Requirements
+Read Aloud and Repeat Sentence keep behaving identically (including the `pinnedItemPublicId` identity guard that prevents the previously-found `TaskTypeDispatcher` dispose-timing race), but the timer-bridge boilerplate now lives in one shared mixin instead of being duplicated verbatim in each screen's `State` class — so `DescribeImageScreen` (Phase 4) can adopt it directly instead of copy-pasting a 3rd time.
+
+## Steps
+1. Create `lib/features/exam_attempt/presentation/widgets/auto_record_timer_bridge_mixin.dart`: `mixin AutoRecordTimerBridgeMixin<T extends StatefulWidget> on State<T>` holding the subscription state (`StreamSubscription<ExamAttemptState>?`) and exposing two methods: `startAutoRecordBridge({required TaskView task, required AutoRecordCubit cubit})` and `disposeAutoRecordBridge()`.
+2. Port `_forwardIfCurrentTask`'s exact logic and its full doc comment (the `pinnedItemPublicId` identity guard explaining the `TaskTypeDispatcher` dispose-timing race — end-of-frame dispose vs. microtask-delivered next-task emission, reachable via proctor-forced/rejected-submission advances that bypass the normal recorded/upload-gated advance path; this was a plan-reviewer CRITICAL finding) into the mixin's forwarding closure, verbatim, not paraphrased or shortened.
+3. `startAutoRecordBridge` must replicate the existing screens' `initState` sequence exactly: read `ExamAttemptBloc` via `context.read`, seed once from `bloc.state` immediately (covers resuming mid-task without waiting for the next tick), then subscribe to `bloc.stream.listen(...)` for the screen's lifetime. `disposeAutoRecordBridge` cancels that subscription (`unawaited(...cancel())`, matching the existing pattern).
+4. Update `lib/features/exam_attempt/presentation/pages/speaking/read_aloud_screen.dart`: `_ReadAloudScreenState` adds `with AutoRecordTimerBridgeMixin<ReadAloudScreen>`; `initState` now calls `super.initState()`, constructs `_cubit`, then calls `startAutoRecordBridge(task: widget.task, cubit: _cubit)` explicitly (no hidden override — matches this codebase's explicit-lifecycle style); `dispose` calls `disposeAutoRecordBridge()` then closes `_cubit`. Remove the now-duplicated `_timerBridgeSubscription` field and `_forwardIfCurrentTask` method from the screen itself.
+5. Apply the identical change to `lib/features/exam_attempt/presentation/pages/speaking/repeat_sentence_screen.dart` / `_RepeatSentenceScreenState`.
+6. Update both screens' class-level doc comments if they still describe the timer-bridge as owned inline (e.g. `RepeatSentenceScreen`'s doc references "same timer-bridge mechanics" duplicated from `ReadAloudScreen` — update to reference the shared mixin instead).
+7. Run the full test suite and `flutter analyze` — `read_aloud_screen_test.dart` and `repeat_sentence_screen_test.dart` (including each file's "pinnedItemPublicId mismatch is never forwarded" guard test) are the regression gate for this extraction; they must pass with zero modifications to their own assertions.
+
+## Success Criteria
+- `read_aloud_screen.dart` and `repeat_sentence_screen.dart` no longer define `_timerBridgeSubscription` or `_forwardIfCurrentTask` themselves — `grep -n "_forwardIfCurrentTask\|_timerBridgeSubscription" lib/features/exam_attempt/presentation/pages/speaking/*.dart` returns no matches (logic now lives solely in the mixin).
+- `flutter analyze` is clean.
+- Full test suite: 0 failures, same pass count as the end of Phase 1 (this phase is a pure refactor — no test cases added or removed). Record the actual count in `plan.md`'s Session Notes.
+- The identity-guard test in each screen's test file ("a snapshot for a different task (pinnedItemPublicId mismatch) is never forwarded") passes unchanged, proving the guard survived the extraction intact.
+
+## Risks
+- Shortening or losing the dispose-timing-race doc comment during extraction (this is the single most important thing to preserve — it documents a previously-real CRITICAL bug): Mitigation — copy the comment verbatim into the mixin file; do not summarize it "for brevity."
+- A mixin generic-type mismatch (`AutoRecordTimerBridgeMixin<T extends StatefulWidget> on State<T>`) causing subtle `context` resolution issues when applied to two different concrete `State` subclasses: Mitigation — `flutter analyze` clean + both screens' full test suites passing is the direct verification (a wrong generic bound would be a compile error, not a silent bug).
+- Forgetting to call `startAutoRecordBridge`/`disposeAutoRecordBridge` explicitly (since the mixin deliberately does not override `initState`/`dispose` itself): Mitigation — this is exactly what the regression suite catches; a missed call means recording never starts, which the "auto-starts recording" tests in both screen test files would fail on.

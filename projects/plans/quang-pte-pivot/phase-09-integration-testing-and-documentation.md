@@ -2,7 +2,7 @@
 
 ## Requirements
 
-Verify the entire PTE platform pivot end-to-end through comprehensive integration and regression testing. A student must be able to complete a full mock exam covering all 20 task types, receive AI-scored Speaking/Writing results, and see a final score report in the official PTE 10–90 scale, all without errors. Simultaneously, update all documentation to reflect PTE Academic scope (replacing APTIS-era content), version the codebase, and prepare for release. This phase includes final security/access-control audits and hand-off to operations.
+Verify the entire PTE platform pivot end-to-end through comprehensive integration and regression testing. A student must be able to complete a full mock exam covering all 22 task types, receive AI-scored Speaking/Writing results, and see a final score report in the official PTE 10–90 scale, all without errors. Simultaneously, update all documentation to reflect PTE Academic scope (replacing APTIS-era content), version the codebase, and prepare for release. This phase includes final security/access-control audits and hand-off to operations.
 
 This is the final quality gate before release; all P1 user stories and Success Criteria from plan.md must be verified to pass.
 
@@ -20,7 +20,7 @@ This is the final quality gate before release; all P1 user stories and Success C
 ## Steps
 
 1. Create a comprehensive integration test suite: write test cases for all major user journeys:
-   - Exam creation (admin creates exam with 20 PTE task types).
+   - Exam creation (admin creates exam with 22 PTE task types).
    - Exam attempt lifecycle: student starts exam → completes all tasks → submits → receives report.
    - Speaking task submission: audio recorded and uploaded → queued for scoring → scored within 1 minute → score appears in report.
    - Writing task submission: essay submitted → queued for scoring → scored within 1 minute → 4 sub-scores appear in report.
@@ -36,7 +36,7 @@ This is the final quality gate before release; all P1 user stories and Success C
    - `pte-web` component and integration tests.
    - Must achieve >90% pass rate; investigate and fix any failures (or escalate if failures are environment issues, not code).
 
-3. Perform a compatibility audit on the PTE domain model: verify that all 20 task types are correctly stored, retrieved, and rendered without errors. Check that Questions created in Phase 1 can be used to build Exams in Phase 2, submitted in Phase 8, and scored in Phases 4–6. Check that old APTIS question data (if migrated) doesn't interfere with PTE questions.
+3. Perform a compatibility audit on the PTE domain model: verify that all 22 task types are correctly stored, retrieved, and rendered without errors. Check that Questions created in Phase 1 can be used to build Exams in Phase 2, submitted in Phase 8, and scored in Phases 4–6. Check that old APTIS question data (if migrated) doesn't interfere with PTE questions.
 
 4. Conduct an end-to-end security audit:
    - Verify multi-tenant isolation: attempt to access exam/question data from another tenant (should fail).
@@ -47,7 +47,7 @@ This is the final quality gate before release; all P1 user stories and Success C
 5. Rewrite documentation:
    - Update `pte-doc/architecture.md` to reflect new PTE exam structure, scoring pipeline, multi-skill-per-task model.
    - Create `pte-doc/pte-score-report.md`: explains PTE 10–90 scale, communicative skills, enabling skills, how scores are computed.
-   - Create `pte-doc/pte-task-types.md`: catalog of all 20 task types with descriptions, interaction patterns, timing, skills assessed.
+   - Create `pte-doc/pte-task-types.md`: catalog of all 22 task types with descriptions, interaction patterns, timing, skills assessed.
    - Create `pte-doc/operations.md`: runbook for running the scoring pollers, handling vendor API issues, manual re-scoring, troubleshooting, and the stuck-scoring-job alert/recovery procedure introduced in Phases 4–5 (alert thresholds, how to trigger the manual `ScoringUnavailable` recovery action).
    - Archive APTIS-era content to `pte-doc/legacy/aptis-lms-spec.md` (move, not delete). Add a note: "APTIS exam format is superseded by PTE Academic (v0.1.0+). This document is retained for historical context."
    - Update `pte-doc/README.md` to explain that this is now a PTE exam simulator, not APTIS.
