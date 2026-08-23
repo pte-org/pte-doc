@@ -1,0 +1,24 @@
+# Phase 4: Remaining Conflicts & Orphan Cleanup
+
+## Requirements
+Resolve the last of the 11 marker-carrying files (`write_essay_screen.dart` duplicates, `re_order_paragraphs_list.dart`) and clear out the superseded old-path dev-preview screen, leaving zero conflict markers and zero orphaned old-path production files anywhere in `lib/`.
+
+## Steps
+1. Resolve `lib/features/exam_attempt/speaking_writing/presentation/pages/write_essay_screen.dart`'s import-block conflict: take dev's `package:pte_app/...` import style (`speaking_writing/presentation/cubit/write_essay_cubit.dart`, `presentation/widgets/{exam_scaffold,task_advance_button}.dart`, `speaking_writing/presentation/widgets/word_count_label.dart`, `speaking_writing/constants/speaking_writing_strings.dart`) — the class body is byte-identical on both sides, confirmed by direct inspection, no behavioral merge needed.
+2. Delete `lib/features/exam_attempt/presentation/pages/writing/write_essay_screen.dart` entirely (the old-path half of the same rename-conflict pair — its content, once markers are stripped, is identical to step 1's resolved file) and remove the now-empty `presentation/pages/writing/` directory.
+3. Resolve `test/widget/features/exam_attempt/write_essay_screen_test.dart`'s import conflict: point at `speaking_writing/presentation/pages/write_essay_screen.dart` (dev's side) — file stays at its current flat `test/` path.
+4. Resolve `lib/features/exam_attempt/reading/presentation/widgets/re_order_paragraphs_list.dart`: keep local's `onReorder` implementation (the `adjustedNewIndex` calculation with its doc comment explaining `ReorderableListView.onReorder`'s pre-removal-index contract) — this is the more correct implementation; dev's simpler one-line version drops the index adjustment. Confirm this is the only conflicted region in the file (the rest — imports, `Semantics` tile rendering — is already unconflicted/auto-merged).
+5. Delete `lib/features/exam_attempt/dev/reading_task_preview_screen.dart` (old flat path) — confirmed fully superseded by `lib/features/exam_attempt/reading/dev/reading_task_preview_screen.dart`'s rewritten architecture (external `examAttemptBloc` injection from `main.dart`'s real `getIt` singleton, `DevPreviewBackButton`, `ReadingStrings`, reading-only fixture picker) — and remove the now-empty `lib/features/exam_attempt/dev/` directory. Confirm via grep that no remaining file imports the old path.
+6. Verify (read-only, no edit expected) `lib/features/exam_attempt/reading/dev/{dev_attempt_repositories,speaking_writing_task_fixtures}.dart` — both already carry local's fixture/repository content with no conflict markers on disk. Confirm they still compile standalone against the shared `lib/features/exam_attempt/domain/` layer (unaffected by the reorganization). Note in the plan's Session Notes that `dev_attempt_repositories.dart`'s `Dev*Repository` classes have zero consumers post-merge (dev's rewritten preview screen no longer uses them) and `speaking_writing_task_fixtures.dart` has no preview-screen consumer at all (no `speaking_writing`-preview route exists in `main.dart`) — both are pre-existing dev-side gaps, not introduced by this merge, out of scope to wire up here.
+7. Repo-wide final marker sweep: grep for `<<<<<<<`, `=======` (that isn't inside a normal string/comment), and `>>>>>>>` across `lib/` and `test/` to confirm zero conflicted files remain anywhere, not just the 11 originally identified.
+
+## Success Criteria
+- `grep -rn "^<<<<<<<" lib/ test/` returns zero matches anywhere in the repo.
+- `lib/features/exam_attempt/presentation/pages/writing/` and `lib/features/exam_attempt/dev/` no longer exist (`Glob` returns empty for both).
+- `lib/features/exam_attempt/reading/presentation/widgets/re_order_paragraphs_list.dart`'s `onReorder` callback contains the `adjustedNewIndex` calculation, not the unadjusted one-liner.
+- `dart analyze lib/features/exam_attempt/speaking_writing/presentation/pages/write_essay_screen.dart lib/features/exam_attempt/reading/` is clean.
+- `git status` (or equivalent file listing) shows no remaining `both modified`/`added by us`/`added by them`/`deleted by us`/`deleted by them` entries for any file under `lib/` or `test/`.
+
+## Risks
+- `re_order_paragraphs_list.dart`'s bug fix is easy to lose if the merge tool auto-resolves toward dev's simpler line instead of local's adjusted one — Mitigation: this file's success criterion explicitly greps for `adjustedNewIndex`, not just "no markers remain."
+- Deleting `lib/features/exam_attempt/dev/reading_task_preview_screen.dart` without first confirming zero remaining importers would break compilation if anything still references the old path — Mitigation: step 5's grep-before-delete check; `main.dart` already confirmed (Phase 0 research) to only import the new `reading/dev/` path.

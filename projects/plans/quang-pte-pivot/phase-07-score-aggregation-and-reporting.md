@@ -56,7 +56,7 @@ This phase directly addresses P1 user story: "I want my final report to show sco
 ## Success Criteria
 
 - Official PTE Academic scoring model is documented in pte-doc (reference document with weights, skill mappings, rounding rules).
-- Score aggregation is implemented and tested: a sample exam with 20 tasks and known scores produces the correct Overall, communicative-skill, and enabling-skill scores.
+- Score aggregation is implemented and tested: a sample exam with 22 tasks and known scores produces the correct Overall, communicative-skill, and enabling-skill scores.
 - Exam report displays only the 10–90 scale (Overall, 4 communicative skills, 6 enabling skills); no CEFR bands.
 - Incomplete scoring is handled gracefully: partial aggregation is implemented — reports with PENDING/FAILED answers show clear per-task labels and a report-level "still processing" banner, never a blocked/exception response.
 - Score caching works: repeated requests for the same exam report have <10ms latency (after first request); cache is correctly invalidated within one poller cycle of a score update.
