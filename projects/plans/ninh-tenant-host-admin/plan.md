@@ -1,6 +1,6 @@
 # Plan: B2B Tenant/Host Admin — Auth Contract Fix, RBAC, Org Hierarchy, Quota Audit Trail
 
-Status: 🟡 In Progress
+Status: 🟢 All 6 phases complete (code + tests + quality gates); live E2E manual verification against a running stack still deferred to the user, per every phase's Quality notes
 Date: 2026-08-25
 Mode: Hard
 Created by: Ninh
@@ -68,15 +68,35 @@ build on a now-trustworthy session/tenant model (Phases 2–5).
       Phase 2). [quality: approved, 0 findings; testing: next build clean
       (11 routes, was 12), tsc+eslint clean; live E2E not yet run, same
       deferred gap as prior phases]
-- [ ] Phase 4: Organization Hierarchy + White-Label — new `Organization`
-      entity (1 Tenant → N), `logoUrl`/`primaryColor` on `Tenant`, N+1-safe
-      list endpoint, secure logo upload validation. [quality: pending;
-      testing: pending]
-- [ ] Phase 5: Package/Quota Audit Trail — new `QuotaTransaction` ledger
+- [x] Phase 4: Organization Hierarchy + White-Label — new `Organization`
+      entity (1 Tenant → N, own address/facilityType/independent status),
+      `logoUrl`/`primaryColor` + branding endpoint on `Tenant`, N+1-safe by
+      construction (verified by a regression test, not just eyeballed).
+      Logo file upload deferred entirely (user decision — `services/media`
+      turned out to be audio-only with no server-side byte-inspection path;
+      branding editor is a plain URL input for now). [quality: approved (1
+      BLOCKER fixed — a real JPA merge()-vs-persist() bug that would have
+      made every organization-creation call throw and roll back in
+      production despite all mocked tests passing, caught by the reviewer
+      against a live Postgres instance; 1 MEDIUM fixed — missing FK index;
+      1 LOW fixed — missing client-side hex-color validation; 1 NOTED fixed
+      — missing happy-path test); testing: 24/24 backend tests passing,
+      tsc+eslint+next build clean; live E2E not yet run, same deferred gap
+      as prior phases]
+- [x] Phase 5: Package/Quota Audit Trail — new `QuotaTransaction` ledger
       entity (`actionType` enum ready for a future deduct-on-exam-start
-      flow), optimistic locking (`@Version`) on `Tenant`'s cached counters,
-      wires the existing `LicensingView` UI shell to real data.
-      [quality: pending; testing: pending]
+      flow, deliberately no `Tenant`-owned collection so Phase 4's
+      merge/persist bug class can't recur), optimistic locking (`@Version`)
+      on `Tenant`'s cached counters with a real 409-on-conflict path, wires
+      the previously-hardcoded-empty `LicensingView` to real data end to
+      end (grant modal + filterable history view). [quality: approved, 0
+      blocking findings — explicitly re-checked for Phase 4's bug class and
+      confirmed structurally impossible here, not just avoided by
+      discipline; 2 non-blocking scope notes (grantor UUID not shown as a
+      name; history endpoint unpaginated, matching every other list
+      endpoint in the repo today); testing: 29/29 backend tests passing,
+      tsc+eslint+next build clean; live E2E not yet run, same deferred gap
+      as every prior phase]
 
 ## Research Summary
 
@@ -197,10 +217,19 @@ Decisions below were established via direct codebase/backend inspection
   grepped every call site across both apps before making the change — only
   `useSessionManager`'s internal `hasRole` and `LoginView.tsx`'s redirect
   logic touched it; both updated in Phase 0.
-- **MEDIUM**: Phase 4's `Organization` field set (beyond `name`) isn't
-  specified by the business rules beyond "branches/facilities" — Phase 4's
-  own file flags this as a question for the user before implementation,
-  rather than guessing a schema that would need a second migration pass.
+- **RESOLVED (was MEDIUM)**: Phase 4's `Organization` field set (beyond
+  `name`) wasn't specified by the business rules beyond "branches/
+  facilities" — asked the user before implementation instead of guessing a
+  schema that would need a second migration pass. Resolved:
+  address + facilityType enum (MAIN/BRANCH/TEST_CENTER) + independent
+  active/suspended status.
+- **RESOLVED (discovered + resolved mid-Phase-4)**: the plan's logo-upload
+  security constraint assumed `services/media` was a generic upload
+  building block; it turned out to be audio-only with no server-side
+  byte-inspection path (direct browser→MinIO PUT). Asked the user rather
+  than silently building new media-service infrastructure or silently
+  skipping the stated security requirement; resolved by deferring file
+  upload entirely this phase (URL-only branding editor).
 - **LOW**: Phase 5's `QuotaTransaction.actionType` enum declares `DEDUCTED`/
   `REVOKED` values that this plan never implements logic for (only
   `GRANTED`) — intentional schema forward-compatibility for a future
