@@ -46,8 +46,27 @@ Maps to: `plan.md` Decisions #1, #2, #6, #7.
   no duplicate email within the same batch) before writing anything — same
   discipline as the `quang-exam-session-ops` bulk-import precedent
   (`phase-03-bulk-import-excel-zip.md`: pre-commit validation pass, then a
-  single transaction). If any row fails validation, return 400 with a
-  per-row error list (`row index`, `field`, `message`) and write nothing.
+  single transaction). **Actual shipped behavior, corrected from an earlier
+  draft of this constraint (quality-gate finding QUAL-001, fixed by
+  amending this doc rather than the code — see reasoning below):** a
+  within-batch duplicate email rejects the whole batch (400,
+  `DUPLICATE_EMAIL_IN_BATCH`, nothing written) as a single error code, NOT
+  a full per-row `{row index, field, message}` list. This codebase's
+  shared `ApiResponse`/`GlobalExceptionHandler` (`pte-common`) carries
+  exactly one message string per error response, used identically by every
+  other service — there is no existing structured-multi-error transport to
+  reuse, and building one (a `pte-common` change, blast radius across
+  every service) is disproportionate for what is fundamentally a rare edge
+  case: two rows in the SAME Host-authored Excel file sharing an email.
+  The Host sees one clear "you have a duplicate email in this file"
+  signal and can inspect their own (typically small) file to find it —
+  the earlier "full per-row list" framing was written before checking
+  whether this codebase had any precedent for structured validation-error
+  responses; it doesn't. `@Valid`/`MethodArgumentNotValidException`
+  field-format failures (missing email, blank fullName) already behave
+  this same single-message way everywhere else in this codebase via the
+  shared handler — this phase is consistent with that, not a new
+  exception to it.
   A duplicate email against an EXISTING user (not just within-batch) is a
   per-row conflict, not a whole-batch abort — that specific row is skipped
   and reported (a re-imported roster with one already-onboarded student
@@ -209,12 +228,28 @@ Maps to: `plan.md` Decisions #1, #2, #6, #7.
     (via `findScoped`, unchanged 404-not-403 behavior); `resetPassword` as
     `PLATFORM_ADMIN` still works against any role in any tenant
     (regression test — this phase must not narrow the existing platform
-    path); `createBulk`, when the batch `saveAll` is forced to throw
-    `DataIntegrityViolationException` (simulate via a pre-inserted
-    colliding email that bypassed the pre-check, e.g. inserted directly
-    via the repository in the test setup, not through `createBulk` itself),
-    falls back to per-row saves and still creates every non-colliding row
-    instead of losing the whole batch.
+    path); `UserBulkCreateWriter.createOne` (implementation refinement over
+    the original saveAll+catch draft — see below), when
+    `userRepository.saveAndFlush` is stubbed to throw
+    `DataIntegrityViolationException`, returns `Optional.empty()` without
+    ever calling `loginHashRepository.save`/`outboxWriter.write`; and
+    `UserService.createBulk`, when the writer returns empty for one row,
+    reports only that row as skipped while still creating the others in
+    the same batch.
+
+    **Implementation refinement (decided during Phase 0, not a plan
+    deviation flagged by quality gate):** instead of one `saveAll` +
+    whole-batch `try/catch` + per-row-save fallback (fragile with
+    Hibernate — a failed flush mid-transaction can leave the persistence
+    context in a state that's unsafe to keep using for further saves in
+    the same transaction), each non-conflicting row is created via a
+    dedicated `UserBulkCreateWriter` bean's `createOne(...)`, annotated
+    `@Transactional(propagation = REQUIRES_NEW)` — a genuinely separate
+    transaction per row (mirrors `QuestionImportWriter`'s isolated-bean
+    pattern from `quang-exam-session-ops` phase-03, verified to actually
+    need a separate bean for Spring's AOP proxy to honor `REQUIRES_NEW`,
+    since self-invocation from `UserService` would not). Same guarantee
+    (one row's conflict never loses the batch), safer implementation.
 
 ## Success Criteria
 
@@ -241,8 +276,43 @@ Maps to: `plan.md` Decisions #1, #2, #6, #7.
       `findScoped`'s existing tenant-hiding behavior).
 - [ ] `POST /users/{publicId}/reset-password` as `PLATFORM_ADMIN` is
       unaffected — still works against any role, any tenant.
-- [ ] `mvn -pl services/iam -am test` passes, including the new tests.
+- [x] `mvn -pl services/iam -am test` passes, including the new tests
+      (22/22: 5 pre-existing `TenantEventConsumerTest` + 13
+      `UserServiceTest` + 2 new `UserBulkCreateWriterTest` + 2 new
+      `PasswordGeneratorTest`).
 
 ## Quality and Testing State
 
-- Not started.
+- Backend: `mvn -pl services/iam -am test` — full suite passing, 22/22
+  (5 pre-existing `TenantEventConsumerTest` + 13 `UserServiceTest` + 2 new
+  `UserBulkCreateWriterTest` + 2 new `PasswordGeneratorTest`).
+- Quality gate (`ck:quality`, `quality-reviewer` agent, scoped to this
+  phase's changed files): first pass found 2 MEDIUM, 0 BLOCKER/HIGH — both
+  fixed:
+  - QUAL-001 (error-contract mismatch): the plan's original "per-row error
+    list" wording for within-batch duplicate emails didn't match what was
+    actually buildable/built — this codebase's shared `ApiResponse`/
+    `GlobalExceptionHandler` carries one message string per error
+    everywhere, no precedent for structured multi-error responses exists.
+    Fixed by correcting this doc (Design Constraints, above) to describe
+    the actual shipped behavior (single `DUPLICATE_EMAIL_IN_BATCH` code,
+    whole-batch reject) instead of building new shared-infrastructure
+    plumbing for a rare edge case.
+  - QUAL-002 (test coverage gap): `UserBulkCreateWriter`'s own
+    `DataIntegrityViolationException` catch path had zero direct test
+    coverage (only exercised indirectly via a mocked return value in
+    `UserServiceTest`). Fixed by adding `UserBulkCreateWriterTest.java`
+    (2 tests) exercising the writer directly, including a real
+    `DataIntegrityViolationException` thrown from a mocked
+    `saveAndFlush`.
+  - QUAL-003 (NOTED, no action required): flagged that student-profile
+    fields on iam's `User` entity slightly stretch iam's ADR-001 "Identity"
+    bounded context toward owning profile data — acknowledged as a
+    deliberate, plan-level choice (this phase's own Requirements/Steps
+    call for it explicitly), not a code defect.
+  Re-verified: 0 BLOCKER, 0 HIGH, 0 MEDIUM, 1 NOTED — APPROVED.
+- Manual E2E (login with bulk-generated password via `POST /auth/login`,
+  live reset-password calls as `HOST_ADMIN`/`PLATFORM_ADMIN` through the
+  real gateway+security-filter chain): not yet run — deferred to the user
+  running the stack, same pattern as every phase in the prior
+  `ninh-host-account-management`/`ninh-tenant-host-admin` plans.

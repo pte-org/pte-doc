@@ -105,6 +105,68 @@ Maps to: `plan.md` Decisions #1, #2, #3; Research Summary items 3, 4.
   if reached directly (e.g. from the existing nav item), rather than a
   second competing UI.
 
+## Implementation Deviations (decided during Phase 4, corrections to the Design Constraints/Steps above)
+
+- **Fixed-schema Excel parsing, not arbitrary-column detection.** The
+  original `cleanRosterFile.ts` auto-detected whatever columns existed in
+  the uploaded file (generic `{fileName, columnHeaders, rows: Record<string,string>[]}`)
+  because the old fictitious backend accepted arbitrary columns too. The
+  real backend (`BulkCreateUserRow`) has fixed, named fields
+  (`email, fullName, studentCode, className, phone, dateOfBirth`) — this
+  is a hard requirement, not a stylistic choice. `cleanRosterFile.ts` was
+  rewritten to expect a header row containing recognizable variants of
+  those field names (case/punctuation-insensitive alias matching — "Full
+  Name"/"FullName"/"Name" all map to `fullName`, etc.), rejecting the file
+  upfront if no `email`/`fullName` column is found. The low-level
+  XLSX-reading/JSON-conversion primitive was kept as planned; only the
+  column-to-field mapping logic changed.
+- **`_ExamAssignment.tsx` deleted, not repurposed into a session picker.**
+  The plan's original assumption was that `RosterImport` would need an
+  in-component "which session am I importing into" step. That assumption
+  no longer held once implementation reached this phase: `RosterImport`
+  and `AddStudentForm` both now live inside `SessionDetailView` (wired in
+  this same phase), where `sessionPublicId` is already known from the
+  page's own route param — an additional picker inside the component would
+  be redundant, not simplifying anything. `/host/roster` (the one place
+  that genuinely needs "pick a session first") is handled by a hard
+  redirect to `/host/exams` instead (see below), not a rebuilt picker.
+- **`useAddStudent` calls `bulkCreateUsers` (Phase 0) with a single-row
+  array, not the plain single `POST /users`** the Design Constraints
+  sketched. Single-create requires the CALLER to supply a password
+  (designed for the different "admin sets a password directly" UX used
+  elsewhere, e.g. vendor-web's login-account creation) — using it here
+  would mean either the Host typing a password in for a student they're
+  creating, or re-implementing Decision #6's `XXXX-XXXX` readable-password
+  format in TypeScript, duplicating `PasswordGenerator.generateReadable()`.
+  Reusing the bulk endpoint (already built, same phase, same code path
+  either way) sidesteps both — still no new backend endpoint.
+- **`LearnersOverview` (tenant-wide) and the session-scoped roster ended up
+  as two separate components**, not one component rendered two ways as the
+  Design Constraints implied. `LearnersOverview.tsx` (unchanged location,
+  used on `/host/dashboard`) shows all tenant `STUDENT` accounts via
+  `GET /users`. New `StudentRosterTable.tsx` (used inside
+  `SessionDetailView`) joins this session's `GET .../enrollments` against
+  the tenant student list and additionally supports "Remove from Exam"
+  (`DELETE .../enrollments/{id}`, Phase 1) — a session-scoped action that
+  doesn't belong on the tenant-wide view. Both get the "Reset Password"
+  action as planned.
+- **Reset-password modal is a small `tenant-web`-local component**
+  (`ResetStudentPasswordModal.tsx`), not a copy of `vendor-web`'s
+  `ResetPasswordModal.tsx` or a promotion of it into `@pte/ui`.
+  `vendor-web`'s version depends on `vendor-web`-local helpers
+  (`TenantFormField`/`fieldInputClass`) that aren't shared infrastructure;
+  rebuilding on `@pte/ui`'s existing `PasswordInput` directly was simpler
+  than either copying those helpers or generalizing them for one call site
+  in a second app.
+- **`/host/roster` is a hard redirect** (`redirect("/host/exams")`, Next.js
+  server-side), not a rendered "pick a session" UI — simpler than building
+  a second session list, and `/host/exams` already *is* that list.
+- **Two separate mutations (`useCreateRosterAccounts`,
+  `useEnrollRosterAccounts`) instead of one combined `useImportRoster()`
+  hook** — `RosterImport.tsx` orchestrates both directly, which turned out
+  clearer than one hook trying to expose "which step failed" as derived
+  state.
+
 ## Steps
 
 1. Delete: `packages/api-client/src/requests/host/{imports,studentImport,students}.ts`,
@@ -179,16 +241,61 @@ Maps to: `plan.md` Decisions #1, #2, #3; Research Summary items 3, 4.
 - [ ] Reloading the page mid-way (step 1 succeeded, step 2 not yet
       confirmed) shows the recovery banner with both re-download and
       retry-enrolling actions, sourced from `sessionStorage`, not lost.
-- [ ] Grep confirms zero remaining references to the deleted
-      `host/{imports,studentImport,students}` modules anywhere in the repo.
+- [x] Grep confirms zero remaining references to the deleted
+      `host/{imports,studentImport,students}` modules anywhere in the repo
+      (also caught and removed one leftover barrel file,
+      `types/host/index.ts`, that the initial deletion pass missed).
 - [ ] From the roster list, "Reset Password" on a Student row succeeds and
       the student can log in with the new password, the old one no longer
       working; the same action is not offered/succeeds-403 for a
       `HOST_ADMIN`/`HOST_AUTHOR` row (matches Phase 0's server-side
       restriction).
-- [ ] `tsc --noEmit`, `eslint`, and `next build` clean for `tenant-web` and
+- [x] `tsc --noEmit`, `eslint`, and `next build` clean for `tenant-web` and
       `@pte/api-client`.
 
 ## Quality and Testing State
 
-- Not started.
+- Frontend: `tsc --noEmit`/`eslint`/`next build` all clean for `tenant-web`,
+  `@pte/api-client`, and `@pte/ui`. Grep sweep confirms zero remaining
+  references to any deleted dead module.
+- Quality gate (`ck:quality`, `quality-reviewer` agent, scoped to this
+  phase's files): first pass found 1 HIGH, 2 MEDIUM, 1 LOW, 2 NOTED, 0
+  BLOCKER — fixed:
+  - HIGH (`useAddStudent` had no recovery protection): the individual-add
+    path awaited `enrollStudent` inside the same mutation as
+    `bulkCreateUsers`, so an enroll failure discarded the one-time-only
+    `generatedPassword` with no recovery — the exact risk already solved
+    for the bulk path. Fixed by splitting into `useCreateStudent`
+    (create-only, persists via the existing `savePendingImport`) +
+    reusing `useEnrollRosterAccounts` for the enroll step, giving
+    "Add individually" the same recovery-banner/retry/download guarantee
+    as the Excel path — via a new shared `PendingImportBanner.tsx`
+    component (also resolves the MEDIUM below).
+  - MEDIUM (recovery banner had no dismiss action, contradicting the
+    Design Constraints' explicit "cleared ... once the Host explicitly
+    downloads and dismisses" requirement): fixed by adding a "Dismiss"
+    action (calls `clearPendingImport`) to `PendingImportBanner`.
+  - MEDIUM (`cleanRosterFile.ts` formatted genuine Excel date cells as a
+    locale display string, e.g. "1/15/08", not ISO — the backend's
+    `LocalDate` parser would reject or misinterpret it): fixed by reading
+    the workbook with `cellDates: true` + `raw: true` and formatting
+    `Date` instances to `yyyy-MM-dd` in `toCellText`; manually-typed text
+    dates and all other field types pass through unaffected.
+  - LOW (5 duplicated local `errorMessage` helpers across this phase's
+    files): extracted to one shared `errorMessage.ts`, reused by
+    `RosterImport`, `AddStudentForm`, `LearnersOverview`,
+    `StudentRosterTable`, and (cross-feature, matching how
+    `SessionDetailView` already imports `examoperations`' components)
+    `features/exams`' `SessionDetailView.tsx`.
+  - NOTED (xlsx untrusted-file-parsing dependency, no size cap): added a
+    5MB file-size check to `parseRosterFile` — cheap, addresses the
+    concrete gap even though the finding was NOTED-severity.
+  - NOTED (SSR-safety of the lazy-`useState`-sessionStorage-read pattern
+    depends on an invariant enforced by a different file): added a code
+    comment on both call sites (`RosterImport.tsx`, `AddStudentForm.tsx`)
+    documenting the dependency for a future reader.
+  Re-verified: `tsc`/`eslint`/`next build` all clean after fixes — APPROVED.
+- Manual E2E (upload roster → create accounts → download credentials →
+  enroll; add individually; reset a student's password; simulate step-2
+  failure and confirm recovery banner including dismiss): not yet run —
+  deferred to the user running the stack.

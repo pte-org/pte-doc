@@ -84,7 +84,11 @@ Maps to: `plan.md` Decisions #1, #3; Research Summary items 1, 8.
      `BulkEnrollResponse`.
    - `list(UUID sessionPublicId, CurrentUser caller)` —
      `@Transactional(readOnly = true)`. `findOwned` then map
-     `findBySession_PublicId` to `List<EnrollmentResponse>`.
+     `findBySessionId(session.getId())` to `List<EnrollmentResponse>`
+     (corrected from this doc's original `findBySession_PublicId` guess —
+     `EnrollmentRepository` already had `findBySessionId(Long sessionId)`
+     as an established convention, reused as-is rather than adding a
+     second, differently-shaped finder).
    - `unenroll(UUID sessionPublicId, UUID enrollmentPublicId, CurrentUser caller)`
      — `@Transactional`. `findOwned` the session; load the `Enrollment` by
      `publicId`, verify it belongs to this session (404
@@ -114,9 +118,40 @@ Maps to: `plan.md` Decisions #1, #3; Research Summary items 1, 8.
       roster.
 - [ ] `DELETE /sessions/{id}/enrollments/{enrollmentPublicId}` removes the
       row; the same student can be re-enrolled afterward without conflict.
-- [ ] `mvn -pl services/scheduling -am test` passes, including the new
-      tests.
+- [x] `mvn -pl services/scheduling -am test` passes, including the new
+      tests (6/6, `EnrollmentServiceTest` — this service's first-ever test
+      suite).
 
 ## Quality and Testing State
 
-- Not started.
+- Backend: `mvn -pl services/scheduling -am test` — passing (12/12 in the
+  final combined suite, after Phase 2 added its own tests to the same
+  file; this phase's own contribution was 6, then +1 fixing QUAL-001
+  below, +5 from Phase 2 = 12).
+- Quality gate (`ck:quality`, `quality-reviewer` agent, scoped to this
+  phase's files): first pass found 1 MEDIUM (QUAL-001), 0 BLOCKER/HIGH,
+  1 NOTED (QUAL-002) — fixed/addressed:
+  - QUAL-001 (test coverage gap): `bulkEnroll`'s
+    `try/catch(DataIntegrityViolationException)` fallback — the exact
+    concurrency guard this phase's Design Constraints call out — had zero
+    test coverage; every existing test only stubbed `saveAll`'s happy
+    path. Fixed: added
+    `bulkEnroll_concurrentRaceOnSave_throwsAlreadyEnrolled_writesNoOutbox`
+    (stubs `saveAll` to throw `DataIntegrityViolationException`, asserts
+    `AlreadyEnrolledException` and zero outbox writes). Also added a
+    doc-comment on `bulkEnroll` noting this catch's correctness depends on
+    `Enrollment`'s `GenerationType.IDENTITY` id strategy forcing a
+    synchronous per-row flush inside `saveAll` — flagged for re-verification
+    if that id strategy ever changes.
+  - QUAL-002 (NOTED, not actioned): reviewer observed Phase 1 and Phase 2
+    were implemented back-to-back in the same uncommitted working tree,
+    recommending a commit between phases so git-blame-based attribution
+    stays reliable across future gate re-reviews. Not actioned — the
+    project's standing instruction for this entire engagement is to never
+    create a git commit (the user commits their own work); this plan
+    follows that instruction throughout, consistent with how the prior
+    `ninh-host-account-management`/`ninh-tenant-host-admin` plans were
+    also cooked without any commits between phases.
+  Re-verified: 0 BLOCKER, 0 HIGH, 0 MEDIUM — APPROVED.
+- Manual E2E: not yet run — deferred to the user running the stack, same
+  pattern as every phase in the prior plans.

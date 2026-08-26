@@ -1,6 +1,6 @@
 # Plan: Host — Add Students to an Exam (Excel/Individual), Proctor Assignment, Exam Session UI
 
-Status: 🟡 Not started
+Status: 🟡 In progress — Phases 0-2 (backend) complete, code+tests+quality gates all APPROVED; Phase 3-5 (frontend) not started
 Date: 2026-08-26
 Mode: Hard
 Created by: Ninh
@@ -80,11 +80,23 @@ wired to any working UI":
 
 ## Phases
 
-- [ ] Phase 0: `iam` — Student profile fields + bulk account creation +
+- [x] Phase 0: `iam` — Student profile fields + bulk account creation +
       readable password format + Host-assisted Student/Proctor password
-      reset
-- [ ] Phase 1: `scheduling` — Enrollment CRUD completion (bulk-create, list, remove)
-- [ ] Phase 2: `scheduling` — ProctorAssignment CRUD completion (list, unassign)
+      reset [quality: approved (2 MEDIUM fixed — error-contract mismatch
+      corrected in the phase doc rather than adding new shared
+      infrastructure; missing direct test coverage for the
+      REQUIRES_NEW-per-row writer's concurrency fallback); testing: 22/22
+      backend tests passing]
+- [x] Phase 1: `scheduling` — Enrollment CRUD completion (bulk-create, list, remove)
+      [quality: approved (1 MEDIUM fixed — bulkEnroll's concurrency-fallback
+      catch had zero test coverage, added + documented its dependency on
+      Enrollment's IDENTITY id strategy); testing: this service's
+      first-ever test suite, 12/12 passing in the final combined file]
+- [x] Phase 2: `scheduling` — ProctorAssignment CRUD completion (list, unassign)
+      [quality: approved, 0 blocking findings (1 NOTED — EnrollmentService
+      now owns two join-entity CRUDs, a deliberate documented choice,
+      flagged only as a future-refactor trigger); testing: 12/12 passing
+      in the combined suite]
 - [ ] Phase 3: `tenant-web` — Exam Session UI (list, create w/ blueprint→snapshot picker, detail shell)
 - [ ] Phase 4: `tenant-web` — Student roster: rewire Excel import + add individual student, delete dead `/api/v1/host/**` code
 - [ ] Phase 5: `tenant-web` — Proctor management UI (create Proctor, assign/unassign per session)

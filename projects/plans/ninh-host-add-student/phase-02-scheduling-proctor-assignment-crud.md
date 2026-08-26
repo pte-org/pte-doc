@@ -77,9 +77,31 @@ Maps to: `plan.md` Decision #4; Research Summary items 1, 7, 8.
       proctors.
 - [ ] `DELETE /sessions/{id}/proctors/{assignmentPublicId}` removes the
       assignment; the same proctor can be re-assigned afterward.
-- [ ] `mvn -pl services/scheduling -am test` passes, including the new
-      tests.
+- [x] `mvn -pl services/scheduling -am test` passes, including the new
+      tests (11/11 in `EnrollmentServiceTest`, extended — 6 enrollment +
+      5 proctor-assignment tests).
 
 ## Quality and Testing State
+
+- Backend: `mvn -pl services/scheduling -am test` — 12/12 passing in the
+  final combined `EnrollmentServiceTest` suite (this phase's own 5 +
+  Phase 1's 7, after Phase 1 added one more test fixing its own
+  QUAL-001).
+- Quality gate (`ck:quality`, `quality-reviewer` agent, scoped to this
+  phase's files): **0 BLOCKER, 0 HIGH, 0 MEDIUM, 1 NOTED — APPROVED.**
+  Verified: the outbox retrofit on `assignProctor` is purely additive
+  (grepped the repo — no consumer subscribes to `ProctorAssigned`/
+  `ProctorUnassigned` yet, so nothing relies on the old silent behavior);
+  `unassignProctor`'s cross-session ownership check has the same
+  correctness as Phase 1's `unenroll` (safe `.getId()` on a LAZY proxy,
+  confirmed via `BaseEntity`'s plain `@Id` field); test depth matches this
+  module's existing convention (no controller/MVC-slice tests anywhere in
+  `scheduling`, so none added here either). NOTED (not actioned):
+  `EnrollmentService` now owns both `Enrollment` and `ProctorAssignment`
+  CRUD (8 public methods, 2 near-identical delete/list shapes) — a
+  deliberate choice already documented in `plan.md` ("Phase 1/2 extend
+  that one service class"), flagged only as a future-refactor trigger if
+  a third join-entity CRUD is ever added to this class.
+- Manual E2E: not yet run — deferred to the user running the stack.
 
 - Not started.

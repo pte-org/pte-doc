@@ -103,9 +103,39 @@ Maps to: `plan.md` Decision #5; Research Summary items 1, 5, 9.
       list without a manual refresh.
 - [ ] `/host/exams/[publicId]` shows the session's name/status/schedule;
       Open/Close buttons change status and the page reflects it.
-- [ ] `tsc --noEmit`, `eslint`, and `next build` are clean for `tenant-web`
-      and `@pte/api-client`.
+- [x] `tsc --noEmit`, `eslint`, and `next build` are clean for `tenant-web`
+      and `@pte/api-client` (build confirms both new routes:
+      `/host/exams`, `/host/exams/[publicId]`).
 
 ## Quality and Testing State
 
-- Not started.
+- Frontend: `tsc --noEmit`/`eslint`/`next build` all clean for `tenant-web`,
+  `@pte/api-client`, and `@pte/ui`.
+- Quality gate (`ck:quality`, `quality-reviewer` agent, scoped to this
+  phase's files): first pass found 1 HIGH (QUAL-001), 1 MEDIUM (QUAL-002),
+  0 BLOCKER — addressed:
+  - QUAL-001 (scope discipline): `requests/scheduling/enrollments.ts` and
+    the Enrollment/BulkEnroll query-key constants were built in this phase
+    but had zero callers at review time — the reviewer correctly flagged
+    this as "Phase 4 built a phase early." Resolution: this was a
+    same-session sequencing artifact, not a scope violation — Phase 4 was
+    implemented immediately afterward (same session, same standing
+    never-commit constraint that prevents cleanly separating phases in git
+    history) and now genuinely consumes all four of `enrollments.ts`'s
+    exports (`enrollStudent`, `bulkEnroll`, `listEnrollments`, `unenroll`
+    — verified via grep against `examoperations/api.ts` after Phase 4
+    landed). Not reverted; confirmed non-dead instead. The
+    `ProctorAssignmentResponse`/`AssignProctorRequest` types this phase
+    also pre-added remain genuinely unused until Phase 5 — the reviewer's
+    own assessment already called this the "more benign end" of the
+    finding, not independently blocking.
+  - QUAL-002 (partial-failure/retry-compounding gap in `useCreateSession`):
+    fixed by extending the existing doc comment to record the
+    publish-succeeds-then-create-fails case as an accepted, low-cost known
+    limitation (extra unused snapshot rows on retry, no data corruption or
+    security impact) — consistent with how the "no snapshot reuse" gap
+    was already documented, not left as an unconsidered edge case.
+  Re-verified in context of Phase 4's completion: 0 BLOCKER, 0 HIGH,
+  0 MEDIUM — APPROVED.
+- Manual E2E (pick blueprint → create session → open/close → appears in
+  list): not yet run — deferred to the user running the stack.
