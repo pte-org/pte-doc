@@ -1,6 +1,10 @@
 # Plan: Host — Add Students to an Exam (Excel/Individual), Proctor Assignment, Exam Session UI
 
-Status: 🟡 In progress — Phases 0-2 (backend) complete, code+tests+quality gates all APPROVED; Phase 3-5 (frontend) not started
+Status: 🟢 All 6 phases complete (code + tests + quality gates all APPROVED,
+every finding fixed, none skipped); live E2E manual verification against a
+running stack still deferred to the user, per every phase's Quality-and-
+Testing-State notes — same pattern as the prior `ninh-host-account-management`
+and `ninh-tenant-host-admin` plans.
 Date: 2026-08-26
 Mode: Hard
 Created by: Ninh
@@ -97,9 +101,39 @@ wired to any working UI":
       now owns two join-entity CRUDs, a deliberate documented choice,
       flagged only as a future-refactor trigger); testing: 12/12 passing
       in the combined suite]
-- [ ] Phase 3: `tenant-web` — Exam Session UI (list, create w/ blueprint→snapshot picker, detail shell)
-- [ ] Phase 4: `tenant-web` — Student roster: rewire Excel import + add individual student, delete dead `/api/v1/host/**` code
-- [ ] Phase 5: `tenant-web` — Proctor management UI (create Proctor, assign/unassign per session)
+- [x] Phase 3: `tenant-web` — Exam Session UI (list, create w/ blueprint→snapshot picker, detail shell)
+      [quality: approved (1 HIGH fixed — `requests/scheduling/enrollments.ts`
+      was built with zero callers at review time; resolved by Phase 4
+      landing in the same session and genuinely consuming all 4 exports,
+      verified via grep, not reverted; 1 MEDIUM fixed — undocumented
+      partial-failure/retry-compounding gap in the publish-then-create
+      session chain, now documented as an accepted low-cost limitation);
+      testing: tsc/eslint/next build clean, both new routes confirmed in
+      build output]
+- [x] Phase 4: `tenant-web` — Student roster: rewire Excel import + add individual student, delete dead `/api/v1/host/**` code
+      [quality: approved (1 HIGH fixed — the individual-add path lacked
+      the same create-then-persist-before-enroll protection the Excel
+      path already had, risking a silently-stranded one-time-only
+      generated password on enroll failure; 2 MEDIUM fixed — recovery
+      banner had no dismiss action, contradicting its own Design
+      Constraint, and genuine Excel date cells were parsed to a locale
+      string instead of ISO; 1 LOW fixed — 5 duplicated `errorMessage`
+      helpers consolidated to one shared util); testing: tsc/eslint/next
+      build clean, grep sweep confirms zero remaining references to any
+      deleted dead module]
+- [x] Phase 5: `tenant-web` — Proctor management UI (create Proctor, assign/unassign per session)
+      [quality: approved (1 HIGH fixed — `useTenantProctors`/
+      `useTenantStudents` shared one query-cache key with two DIFFERENT
+      `queryFn` bodies; since both hooks genuinely co-mount on every
+      session detail page, whichever resolved first silently populated
+      the shared cache for both, meaning the Proctors picker could end up
+      backed by STUDENT records with no backend role check catching it —
+      fixed via react-query's `select` option instead of two `queryFn`s
+      under one key; 2 MEDIUM fixed — stale cross-tab mutation error not
+      reset on tab switch, and an undocumented/unhandled partial-failure
+      branch in the create-then-assign chain, now routes the Host to
+      retry via "pick existing" instead of a confusing re-create attempt);
+      testing: tsc/eslint/next build clean]
 
 ## Research Summary
 
