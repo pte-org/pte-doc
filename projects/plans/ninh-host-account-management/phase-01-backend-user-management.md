@@ -73,7 +73,7 @@ Maps to: the two decisions recorded in `plan.md`'s Overview.
       `POST /auth/login`, the new one does.
 - [ ] `GET /users/by-tenant/{tenantId}` as `PLATFORM_ADMIN` returns exactly
       that tenant's users; returns `[]` for a tenant with none.
-- [ ] `mvn -pl services/iam -am test` passes, including the new tests.
+- [x] `mvn -pl services/iam -am test` passes, including the new tests.
 
 ## Quality-and-Testing-State
 
