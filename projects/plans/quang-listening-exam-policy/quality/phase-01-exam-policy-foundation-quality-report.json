@@ -1,0 +1,43 @@
+{
+  "mode": "gate",
+  "target": "phase-01-exam-policy-foundation",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-08-27T00:00:00Z",
+  "reviewed_files": [
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/domain/enums/ExamMode.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/domain/enums/ReplayPolicyType.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/domain/enums/AnswerIntegrityLevel.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/domain/ReplayPolicy.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/domain/ExamPolicy.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/domain/ExamSession.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/dto/request/CreateSessionRequest.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/service/SessionService.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/dto/response/ExamPolicyResponse.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/dto/response/SessionResponse.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/mapper/SessionMapper.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 1,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [
+    {
+      "id": "QUAL-001",
+      "severity": "MEDIUM",
+      "rule": "CORR_DEFINED_BRANCH_BEHAVIOR",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-api/services/scheduling/src/main/java/com/pte/scheduling/dto/response/ExamPolicyResponse.java:6-7",
+      "evidence": "ExamPolicyResponse declared deviceCheckRequired/proctorRequired as primitive boolean while SessionMapper.toPolicy() sources them from ExamPolicy's boxed Boolean fields, which can be null before @PostLoad backfill runs (e.g. a transient, never-loaded ExamPolicy).",
+      "why_it_matters": "Unboxing a null Boolean into a primitive boolean throws NPE, turning an edge case into a 500 at the API boundary instead of a handled state.",
+      "required_action": "Change ExamPolicyResponse's deviceCheckRequired/proctorRequired to boxed Boolean.",
+      "owner": "quang"
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/quang-listening-exam-policy/quality/phase-01-exam-policy-foundation-quality-report.json"
+}

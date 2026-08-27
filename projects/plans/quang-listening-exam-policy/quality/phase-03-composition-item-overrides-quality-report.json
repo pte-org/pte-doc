@@ -1,0 +1,38 @@
+{
+  "mode": "gate",
+  "target": "phase-03-composition-item-overrides",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-08-28T00:00:00Z",
+  "reviewed_files": [
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/dto/request/CompositionItemRequest.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/domain/SessionComposition.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/dto/response/CompositionItemResponse.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/mapper/SessionMapper.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/service/CompositionService.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/service/EntitlementService.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 1,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [
+    {
+      "id": "QUAL-001",
+      "severity": "MEDIUM",
+      "rule": "ABS_SAME_MEANING_NOT_JUST_SAME_SHAPE",
+      "status": "RESOLVED",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-api/services/scheduling/src/main/java/com/pte/scheduling/service/EntitlementService.java (formerly its own private toItem())",
+      "evidence": "SessionMapper.toItem() and EntitlementService.toItem() were two independent private mappers producing the same CompositionItemResponse from the same SessionComposition — adding maxPlayCount to the record required updating both, and one was missed, causing a compile error masked by incremental compilation until a clean rebuild.",
+      "why_it_matters": "Two implementations of the same mapping will drift with every future field change to CompositionItemResponse, exactly as just happened.",
+      "required_action": "Made SessionMapper.toItem() public and had EntitlementService.checkEntitlement() call it directly instead of maintaining its own copy.",
+      "owner": "quang"
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/quang-listening-exam-policy/quality/phase-03-composition-item-overrides-quality-report.json"
+}

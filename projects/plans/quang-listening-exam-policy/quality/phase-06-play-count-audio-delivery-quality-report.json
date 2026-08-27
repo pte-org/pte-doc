@@ -1,0 +1,50 @@
+{
+  "mode": "gate",
+  "target": "phase-06-play-count-audio-delivery",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-08-28T00:00:00Z",
+  "reviewed_files": [
+    "services/media/src/main/java/com/pte/media/config/SecurityConfig.java",
+    "services/media/src/main/java/com/pte/media/constant/MediaConstants.java",
+    "services/media/src/main/java/com/pte/media/domain/exception/MediaNotYetUploadedException.java",
+    "services/media/src/main/java/com/pte/media/dto/response/PresignedDownloadResponse.java",
+    "services/media/src/main/java/com/pte/media/service/PresignService.java",
+    "services/media/src/main/java/com/pte/media/controller/InternalMediaController.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/config/InternalClientConfig.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/client/dto/MediaPresignedDownloadResponse.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/client/MediaClient.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/domain/TimerState.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/domain/PinnedItem.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/constant/ExamDeliveryConstants.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/service/TimerService.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/repository/TimerStateRepository.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/service/SnapshotPinService.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/dto/response/AudioPlayResponse.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/service/AttemptService.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/controller/AttemptController.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 1,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [
+    {
+      "id": "QUAL-001",
+      "severity": "HIGH",
+      "rule": "SEC_SERVER_SIDE_AUTHZ",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "services/media/src/main/java/com/pte/media/service/PresignService.java (presignGet)",
+      "evidence": "presignGet() looked up MediaObject via findByPublicId with no tenant scoping, unlike the JWT-facing requestUpload/completeUpload which scope by caller.tenantId(). The internal endpoint relied entirely on exam-delivery's upstream entitlement check as the only tenant boundary, violating the spec's explicit NFR: \"audio URLs are presigned and tenant-scoped; never enumerable across tenants.\"",
+      "why_it_matters": "A compromised or buggy caller holding the internal service-key could request a presigned URL for another tenant's audio by publicId alone — single point of failure with no defense in depth at the data layer.",
+      "required_action": "Added tenantId as a required parameter through the full chain: PresignService.presignGet(mediaPublicId, ttlSeconds, tenantId) now uses findByPublicIdAndTenantId; InternalMediaController accepts tenantId as a query param; exam-delivery's MediaClient.presignGet passes it through; SnapshotPinService supplies entitlement.tenantId() (already available at the call site) instead of nothing.",
+      "owner": "quang"
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/quang-listening-exam-policy/quality/phase-06-play-count-audio-delivery-quality-report.json"
+}
