@@ -1,0 +1,109 @@
+{
+  "status": "RED_READY",
+  "phase": "phase-01-rsa-keypair-startattempt",
+  "description": "Phase 1: RSA Keypair Provisioning & StartAttempt Public Key Exposure",
+  "test_files": [
+    {
+      "path": "pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/config/EncryptionKeyProviderTest.java",
+      "type": "UNIT_TEST",
+      "count": 9,
+      "test_methods": [
+        "loadPrivateKeyFromPem",
+        "loadPublicKeyFromPem",
+        "exposesPublicKeyAsBase64X509",
+        "roundTripEncryptionDecryption",
+        "pemNormalizationHandlesCRLF",
+        "pemNormalizationRoundTripWithCRLF",
+        "failsFastMissingKeyNonDevProfile",
+        "failsFastMissingPublicKeyNonDevProfile",
+        "generatesEphemeralKeyInDevProfile"
+      ],
+      "coverage": "Phase 1 Steps 1-3: RSA keypair provisioning, PEM parsing, normalization, X.509 SubjectPublicKeyInfo encoding, round-trip encryption/decryption, dev/prod profile guards"
+    },
+    {
+      "path": "pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/service/AttemptServiceTest.java",
+      "type": "INTEGRATION_TEST",
+      "count": 5,
+      "test_methods": [
+        "startAttemptStrictPinnedReturnsPublicKey",
+        "startAttemptStandardPinnedReturnsNullPublicKey",
+        "startAttemptStandardPinnedPreservesOtherFields",
+        "startAttemptStrictPinnedPreservesOtherFields"
+      ],
+      "coverage": "Phase 1 Step 8: StartAttempt behavior for STRICT (returns public key) vs STANDARD (returns null) pinned attempts, field preservation"
+    }
+  ],
+  "modified_production_files": [],
+  "note_on_tester_scope": "The tester agent initially edited 2 production files (AttemptTaskResponse.java, AttemptMapper.java) plus AttemptMapperTest.java to make the new tests compile against a pre-shaped API. This violates ck:test's 'tester never touches production code' constraint, so all 3 edits were reverted by ck:cook before accepting this artifact as RED_READY. The new tests (EncryptionKeyProviderTest, AttemptServiceTest) reference the missing symbols directly instead, which produces the same RED state for the correct structural reason without any pre-existing production code being touched ahead of implementation.",
+  "missing_production_classes_causing_red": [
+    {
+      "class": "com.pte.examdelivery.config.EncryptionKeyProvider",
+      "reason": "Phase 1 Step 1: Loads/generates RSA-2048 keypair from PEM config; exposes public key as Base64 X.509 SubjectPublicKeyInfo",
+      "methods_expected": [
+        "getPrivateKey(): PrivateKey",
+        "getPublicKey(): PublicKey",
+        "getPublicKeyBase64(): String"
+      ],
+      "constructor_expected": "EncryptionKeyProvider(String privateKeyPem, String publicKeyPem, String profile)"
+    },
+    {
+      "class": "com.pte.examdelivery.dto.response.AttemptTaskResponse",
+      "reason": "Phase 1 Step 4: needs a new encryptionPublicKey field (nullable String) — currently 4-field record (attemptPublicId, attemptStatus, completed, task), test calls response.encryptionPublicKey() which does not exist yet",
+      "methods_expected": ["encryptionPublicKey(): String"]
+    },
+    {
+      "class": "com.pte.examdelivery.mapper.AttemptMapper",
+      "reason": "Phase 1 Step 5: needs a new toTaskResponse(attempt, item, timer, totalTasks, String encryptionPublicKey) overload; existing 4-arg overload must keep delegating with null so the other 3 call sites (advanceUntilLiveOrComplete, advanceAfterCurrent, toCompletedResponse) are unaffected",
+      "methods_expected": ["toTaskResponse(ExamAttempt, PinnedItemView, TimerState, int, String): AttemptTaskResponse"]
+    }
+  ],
+  "missing_atts_to_attemptservice": [
+    {
+      "class": "com.pte.examdelivery.service.AttemptService",
+      "change": "Injection of EncryptionKeyProvider into constructor",
+      "reason": "Phase 1 Step 5: createAndPin must call encryptionKeyProvider.getPublicKeyBase64() when answerIntegrityLevel == 'STRICT'",
+      "implementation_note": "Tests expect this will be used in createAndPin to pass encryptionPublicKey to mapper.toTaskResponse overload"
+    }
+  ],
+  "failing_tests_summary": {
+    "total_test_methods": 14,
+    "expected_failure_mode": "COMPILATION_ERROR - EncryptionKeyProvider class does not exist",
+    "failure_count": 32,
+    "failure_type": "cannot find symbol: class EncryptionKeyProvider"
+  },
+  "confirmation_command": "cd pte-api && bash ./mvnw test -pl services/exam-delivery -Dtest=\"EncryptionKeyProviderTest,AttemptServiceTest\"",
+  "confirmation_output_summary": {
+    "status": "BUILD_FAILURE",
+    "reason": "Compilation failure after reverting tester's out-of-scope production edits: cannot find symbol for EncryptionKeyProvider class, and cannot find symbol for AttemptTaskResponse.encryptionPublicKey() (re-verified by ck:cook, not the original tester run)",
+    "errors_sample": [
+      "[ERROR] .../EncryptionKeyProviderTest.java:[119,9] cannot find symbol: class EncryptionKeyProvider",
+      "[ERROR] .../AttemptServiceTest.java:[145,28] cannot find symbol: method encryptionPublicKey()",
+      "[ERROR]   location: variable response of type com.pte.examdelivery.dto.response.AttemptTaskResponse"
+    ],
+    "reverify_command": "cd pte-api && ./mvnw -q -pl services/exam-delivery -am test-compile -Dtest=\"EncryptionKeyProviderTest,AttemptServiceTest\""
+  },
+  "success_criteria_covered": {
+    "SR1": "EncryptionKeyProvider round-trip test (Unit): encrypt with public key, decrypt with private key, plaintext matches (Step 7)",
+    "SR2": "PEM normalization test (Unit): CRLF line endings handled correctly (Step 7a)",
+    "SR3": "StartAttempt STRICT-pinned test (Integration): returns non-null, non-empty encryptionPublicKey (Step 8)",
+    "SR4": "StartAttempt STANDARD-pinned test (Integration): returns null for encryptionPublicKey (Step 8)",
+    "SR5": "Field preservation tests ensure no breaking changes to existing behavior"
+  },
+  "next_steps_for_green": [
+    "Implement com.pte.examdelivery.config.EncryptionKeyProvider class with RSA keypair loading/generation, PEM parsing, normalization",
+    "Add EncryptionKeyProvider injection to AttemptService constructor",
+    "Update AttemptService.createAndPin to call encryptionKeyProvider.getPublicKeyBase64() only when answerIntegrityLevel == 'STRICT', pass to mapper.toTaskResponse overload",
+    "Add config properties for private-key-pem and public-key-pem with dev/prod profile guards",
+    "Run full test suite to confirm all 14 tests pass GREEN"
+  ],
+  "metadata": {
+    "generated_at": "2026-08-28T18:19:35+07:00",
+    "generator": "tdd-test-sub-agent",
+    "mode": "--tdd --prepare",
+    "phase_file_reference": "d:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-answer-submission-encryption/phase-01-rsa-keypair-startattempt.md",
+    "test_conventions_reference": [
+      "d:/DOCUMENTFPT/Github/pte-org/pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/mapper/AttemptMapperTest.java",
+      "d:/DOCUMENTFPT/Github/pte-org/pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/service/TimerServiceTest.java"
+    ]
+  }
+}

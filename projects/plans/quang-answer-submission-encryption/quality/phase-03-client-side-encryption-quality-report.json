@@ -1,0 +1,40 @@
+{
+  "mode": "gate",
+  "target": "phase-03-client-side-encryption",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-08-28T00:00:00Z",
+  "reviewed_files": [
+    "pte-app/pubspec.yaml",
+    "pte-app/lib/core/crypto/encryption_helper.dart",
+    "pte-app/lib/features/exam_attempt/domain/task_view.dart",
+    "pte-app/lib/core/network/api_client.dart",
+    "pte-app/lib/core/sync/sync_engine.dart",
+    "pte-app/lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [
+    {
+      "id": "QUAL-001",
+      "severity": "BLOCKER",
+      "rule": "ERROR_HANDLING_COMPREHENSIVE",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-app/lib/core/sync/sync_engine.dart:_flushOne",
+      "evidence": "_encryptionHelper.encrypt(...) was called inside a try block whose catch clauses only handled ApiException subtypes; a crypto exception would propagate uncaught, aborting _flush's loop for every other pending row.",
+      "why_it_matters": "Phase file Design Constraint requires encryption failures to surface as a clear error through the existing sync/retry path, never a silent fallback or an unhandled crash.",
+      "required_action": "Isolate the encrypt() call's failure surface from the network-error catch chain.",
+      "owner": "cook",
+      "outcome": "fixed",
+      "fix_description": "Extracted a private _encryptAnswer(answer, publicKey) helper wrapping encrypt() in its own try/catch; on failure it logs, marks the row terminal-rejected (ENCRYPTION_FAILED), and returns null so _flushOne returns early without falling through to either network call. Re-verified present and correctly wired, no new issues introduced, flutter analyze and full test suite pass."
+    }
+  ],
+  "report_path": "plans/quang-answer-submission-encryption/quality/phase-03-client-side-encryption-quality-report.json"
+}

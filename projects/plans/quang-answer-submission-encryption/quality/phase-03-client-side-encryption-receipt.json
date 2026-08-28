@@ -1,0 +1,18 @@
+{
+  "target": "phase-03-client-side-encryption",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\DOCUMENTFPT\\Github\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-answer-submission-encryption/quality/phase-03-client-side-encryption-quality-report.json",
+  "reviewed_files": [
+    "pte-app/lib/core/crypto/encryption_helper.dart",
+    "pte-app/lib/core/network/api_client.dart",
+    "pte-app/lib/core/sync/sync_engine.dart",
+    "pte-app/lib/features/exam_attempt/domain/task_view.dart",
+    "pte-app/lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart",
+    "pte-app/pubspec.yaml"
+  ],
+  "source_fingerprint": "sha256:dab8c4281b17dea116e4cc9bf2e10cd1aea8ee22fc2c0ea8ee7e74781300f09b",
+  "reviewed_at": "2026-08-28T00:00:00Z",
+  "open_blocking_findings": 0
+}
