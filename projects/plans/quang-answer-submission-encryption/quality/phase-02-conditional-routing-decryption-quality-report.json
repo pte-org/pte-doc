@@ -1,0 +1,24 @@
+{
+  "mode": "gate",
+  "target": "phase-02-conditional-routing-decryption",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-08-28T00:00:00Z",
+  "reviewed_files": [
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/domain/exception/SubmissionDecryptionException.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/domain/exception/AnswerIntegrityLevelMismatchException.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/constant/ExamDeliveryConstants.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/dto/request/EncryptedSubmissionRequest.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/service/SubmissionDecryptionService.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/service/AttemptService.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/controller/AttemptController.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "report_path": "plans/quang-answer-submission-encryption/quality/phase-02-conditional-routing-decryption-quality-report.json"
+}

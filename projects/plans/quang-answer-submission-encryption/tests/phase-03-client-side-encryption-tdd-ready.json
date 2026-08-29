@@ -1,0 +1,220 @@
+{
+  "status": "RED_READY",
+  "phase": "phase-03-client-side-encryption",
+  "description": "Phase 3: Client-Side Encryption (pte-app, Flutter/Dart)",
+  "test_files": [
+    {
+      "path": "pte-app/test/unit/crypto/encryption_helper_test.dart",
+      "type": "UNIT_TEST",
+      "count": 13,
+      "test_methods": [
+        "correctly parses a Base64 X.509 SubjectPublicKeyInfo public key string",
+        "throws on malformed Base64 string",
+        "throws on empty Base64 string",
+        "generates and returns an EncryptedPayload with wrappedKey, iv, and ciphertext fields",
+        "generates exactly 12-byte IV (96 bits) per encryption call",
+        "generates exactly 32-byte AES key per encryption call (verified indirectly via wrappedKey size)",
+        "produces different wrappedKey, iv, and ciphertext on consecutive calls (freshness guarantee)",
+        "produces Base64-decodable ciphertext with correct length (plaintext + GCM tag)",
+        "all returned fields are valid Base64 strings that decode without error",
+        "handles empty plaintext correctly",
+        "handles long plaintext correctly",
+        "is a value class with wrappedKey, iv, ciphertext fields"
+      ],
+      "coverage": "Phase 3 Steps 1-4: EncryptionHelper.parsePublicKey (Base64 X.509 parsing), EncryptionHelper.encrypt (AES-GCM key/IV generation, RSA-OAEP wrapping), EncryptedPayload value class, freshness guarantee (FR-06), shape/length validation"
+    },
+    {
+      "path": "pte-app/test/unit/network/api_client_test.dart",
+      "type": "UNIT_TEST",
+      "count": 4,
+      "test_methods": [
+        "submitEncryptedAnswer() posts to the encrypted answers endpoint with pinnedItemPublicId, wrappedKey, iv, and ciphertext",
+        "submitEncryptedAnswer() with 409 NOT_CURRENT_TASK maps to NotCurrentTaskException",
+        "submitEncryptedAnswer() with 409 RESPONSE_WINDOW_EXPIRED maps to ResponseWindowExpiredException",
+        "submitEncryptedAnswer() with 409 unknown message falls back to generic ConflictException"
+      ],
+      "coverage": "Phase 3 Step 5: ApiClient.submitEncryptedAnswer endpoint routing to /api/exam-delivery/attempts/{attemptPublicId}/answers/encrypted, correct body shape, 409-remap dispatch (mirrors existing submitAnswer pattern)"
+    },
+    {
+      "path": "pte-app/test/unit/sync/sync_engine_test.dart",
+      "type": "UNIT_TEST",
+      "count": 4,
+      "test_methods": [
+        "startSync with a non-null encryptionPublicKey causes _flushOne to call submitEncryptedAnswer instead of submitAnswer",
+        "startSync without encryptionPublicKey (null) keeps calling submitAnswer for STANDARD attempts",
+        "startSync with explicit null encryptionPublicKey keeps the STANDARD submission path",
+        "submitEncryptedAnswer() 409 NOT_CURRENT_TASK during encrypted submission marks terminal-rejected"
+      ],
+      "coverage": "Phase 3 Steps 6-7: SyncEngine.startSync accepts optional encryptionPublicKey parameter, caches public key for STRICT attempts, branches _flushOne on key presence (encrypted vs plain), error handling mirrors submitAnswer pattern, STANDARD attempts unaffected (regression coverage)"
+    }
+  ],
+  "modified_production_files": [],
+  "note_on_tester_scope": "The tester agent wrote only test code (correct — no production files touched). All tests fail with missing-symbol compilation errors only, confirming RED state is correctly authored. Three test files added or modified: encryption_helper_test.dart (new), api_client_test.dart (group added), sync_engine_test.dart (group added). Each test file follows existing conventions: mocktail mocks, helper methods, descriptive test names, Arrange-Act-Assert structure.",
+  "missing_production_classes_causing_red": [
+    {
+      "class": "pte_app.core.crypto.EncryptionHelper",
+      "reason": "Phase 3 Step 2: New utility class for RSA public key parsing and AES-GCM+RSA-OAEP encryption",
+      "methods_expected": [
+        "parsePublicKey(String base64SubjectPublicKeyInfo): RSAPublicKey — parses Base64 X.509 SubjectPublicKeyInfo DER via ASN1Parser",
+        "encrypt(String plaintext, RSAPublicKey publicKey): EncryptedPayload — generates fresh 32-byte AES key and 12-byte IV, encrypts via AES-GCM, wraps key via RSA-OAEP-SHA256"
+      ],
+      "dependencies": [
+        "package:pointycastle/pointycastle.dart (3.9.1+)",
+        "package:pointycastle/asn1.dart",
+        "package:pointycastle/export.dart",
+        "dart:math (Random.secure)",
+        "dart:typed_data (Uint8List)"
+      ]
+    },
+    {
+      "class": "pte_app.core.crypto.EncryptedPayload",
+      "reason": "Phase 3 Step 2: Value class mirroring server's EncryptedSubmissionRequest",
+      "fields": [
+        "wrappedKey: String — Base64-encoded RSA-wrapped AES key (256 bytes decoded for RSA-2048)",
+        "iv: String — Base64-encoded AES-GCM initialization vector (12 bytes decoded)",
+        "ciphertext: String — Base64-encoded AES-GCM ciphertext with auth tag appended (plaintext length + 16 bytes decoded)"
+      ]
+    }
+  ],
+  "missing_methods_on_apiclient": [
+    {
+      "method_signature": "submitEncryptedAnswer({required String attemptPublicId, required String pinnedItemPublicId, required String wrappedKey, required String iv, required String ciphertext}): Future<Response<void>>",
+      "reason": "Phase 3 Step 6: New endpoint for encrypted answer submissions on STRICT-pinned attempts",
+      "behavior": [
+        "POST to /api/exam-delivery/attempts/{attemptPublicId}/answers/encrypted",
+        "Body: {pinnedItemPublicId, wrappedKey, iv, ciphertext} (all Strings, Base64-encoded except pinnedItemPublicId)",
+        "Reuse existing 409-remap pattern from submitAnswer: ConflictException with message 'NOT_CURRENT_TASK' → NotCurrentTaskException, 'RESPONSE_WINDOW_EXPIRED' → ResponseWindowExpiredException, unknown → generic ConflictException",
+        "Return same Response<void> shape as submitAnswer"
+      ]
+    }
+  ],
+  "missing_constructor_parameter_on_syncengine": [
+    {
+      "parameter": "EncryptionHelper encryptionHelper",
+      "position": "new required constructor parameter (order after ApiClient, AnswerOutboxDao, NetworkCanary)",
+      "reason": "Phase 3 Step 7: SyncEngine needs EncryptionHelper to parse public key and encrypt payloads in _flushOne"
+    }
+  ],
+  "missing_method_enhancement_on_syncengine": [
+    {
+      "method_signature": "startSync(String attemptPublicId, {String? encryptionPublicKey}): void",
+      "current_signature": "startSync(String attemptPublicId): void",
+      "reason": "Phase 3 Step 6: Accept optional encryptionPublicKey parameter from StartAttempt response",
+      "behavior": [
+        "Parse and cache encryptionPublicKey via _encryptionHelper.parsePublicKey(...) only if non-null",
+        "Store in private field (e.g., _cachedPublicKey) for use in _flushOne",
+        "If null, _cachedPublicKey stays null (STANDARD attempt, no encryption needed)"
+      ]
+    },
+    {
+      "method_signature": "_flushOne(String pinnedItemPublicId): Future<void>",
+      "current_signature": "_flushOne(String pinnedItemPublicId): Future<void>",
+      "reason": "Phase 3 Step 7: Branch on _cachedPublicKey presence to encrypt or submit plain",
+      "behavior": [
+        "If _cachedPublicKey is non-null: fetch row payload, encrypt via _encryptionHelper.encrypt(row.payload, _cachedPublicKey), call _apiClient.submitEncryptedAnswer with encrypted fields",
+        "If _cachedPublicKey is null: continue with current logic, call _apiClient.submitAnswer(payload: row.payload)",
+        "Error handling: NotCurrentTaskException and ResponseWindowExpiredException (from either path) emit on taskRejectedExternally and mark terminal-rejected (existing behavior, must not change)"
+      ]
+    }
+  ],
+  "failing_tests_summary": {
+    "total_test_methods": 21,
+    "expected_failure_mode": "COMPILATION_ERROR",
+    "compilation_errors": [
+      "cannot find symbol: file 'lib/core/crypto/encryption_helper.dart' (import in encryption_helper_test.dart line 6)",
+      "cannot find symbol: class EncryptionHelper (lines 9, 18 in encryption_helper_test.dart)",
+      "cannot find symbol: class EncryptedPayload (line 224 in encryption_helper_test.dart)",
+      "cannot find symbol: method submitEncryptedAnswer(...) on ApiClient (lines 464, 513, 553, 593 in api_client_test.dart)",
+      "cannot find symbol: named parameter 'encryptionPublicKey' on SyncEngine.startSync (lines 489, 557, 592 in sync_engine_test.dart)",
+      "cannot find symbol: method submitEncryptedAnswer(...) on _MockApiClient (lines 475, 495, 573 in sync_engine_test.dart)"
+    ],
+    "failure_count": 6,
+    "failure_type": "All compilation errors — not a single test runs; compilation fails first"
+  },
+  "confirmation_command": "cd pte-app && flutter test test/unit/crypto/encryption_helper_test.dart test/unit/network/api_client_test.dart test/unit/sync/sync_engine_test.dart 2>&1 | grep -E '(Error|Test)' | head -20",
+  "confirmation_output_summary": {
+    "status": "BUILD_FAILURE — COMPILATION",
+    "reason": "Missing production classes and methods: EncryptionHelper, EncryptedPayload, ApiClient.submitEncryptedAnswer, SyncEngine.startSync encryptionPublicKey parameter",
+    "sample_errors": [
+      "test/unit/crypto/encryption_helper_test.dart:6:8: Error: Error when reading 'lib/core/crypto/encryption_helper.dart': The system cannot find the path specified",
+      "test/unit/crypto/encryption_helper_test.dart:9:8: Error: 'EncryptionHelper' isn't a type.",
+      "test/unit/crypto/encryption_helper_test.dart:224:23: Error: Method not found: 'EncryptedPayload'.",
+      "test/unit/network/api_client_test.dart:464:25: Error: The method 'submitEncryptedAnswer' isn't defined for the type 'ApiClient'.",
+      "test/unit/sync/sync_engine_test.dart:489:39: Error: The named parameter 'encryptionPublicKey' isn't defined."
+    ]
+  },
+  "success_criteria_mapped_to_tests": {
+    "FR-02 (Tamper Detection)": "parsePublicKey correctly parses server's public key; encrypt generates fresh key/IV per call; two consecutive encrypts produce different ciphertexts (unpredictable to attacker)",
+    "FR-06 (Fresh Key/IV)": "encrypt generates exactly 12-byte IV and 32-byte AES key per call; consecutive calls produce different keys and IVs — EncryptionHelper.encrypt test suite",
+    "FR-07 (STANDARD Unaffected)": "startSync without encryptionPublicKey (or null) keeps calling submitAnswer exactly as before — SyncEngine regression tests",
+    "P1 Story #1 (Tamper Detection)": "EncryptionHelper round-trip shape assertions (ciphertext = plaintext + 16 bytes tag, wrappedKey = 256 bytes) verify encryption is working per spec",
+    "P2 Story #3 (Fresh Key/IV)": "Freshness guarantee test confirms no IV/key reuse across submissions",
+    "P1 Story #4 (STANDARD Unchanged)": "startSync with null/absent encryptionPublicKey calls submitAnswer with exact same body shape as pre-Phase-3"
+  },
+  "test_file_contents": [
+    {
+      "path": "test/unit/crypto/encryption_helper_test.dart",
+      "preview": "13 tests covering EncryptionHelper.parsePublicKey (X.509 Base64 parsing with real RSA-2048 key), EncryptionHelper.encrypt (fresh AES-256 key, 12-byte IV per call, AES-GCM + RSA-OAEP-SHA256 wrapping, shape/length validation, empty/long plaintext handling), EncryptedPayload value class"
+    },
+    {
+      "path": "test/unit/network/api_client_test.dart",
+      "preview": "4 tests covering ApiClient.submitEncryptedAnswer: correct endpoint route, correct body shape (pinnedItemPublicId, wrappedKey, iv, ciphertext), 409-remap dispatch (NOT_CURRENT_TASK → NotCurrentTaskException, RESPONSE_WINDOW_EXPIRED → ResponseWindowExpiredException, unknown → ConflictException)"
+    },
+    {
+      "path": "test/unit/sync/sync_engine_test.dart",
+      "preview": "4 tests covering SyncEngine.startSync with optional encryptionPublicKey parameter: non-null key branches to submitEncryptedAnswer; null/absent keeps submitAnswer (regression); error handling (409 NOT_CURRENT_TASK) works same for encrypted path"
+    }
+  ],
+  "critical_test_notes": [
+    "Real RSA-2048 public key used in all tests (generated via openssl, not hand-typed) — Base64: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmkRv1ibV6X9T/mPzAkvP68kJ7v+nhkV99yPj3EMYdGtrS4t8+41k6UJFKNKFe4ea7AfGQnl68XFgwQsezrOqEe5D2ildsNi6t8+MGfxbYFmN2QH4F/u2eTPjCH31RNeeuY0p0pjlL7nD2hX9GhGjRzz1juhu0Mvc5qPIVEsJKMjPpY/vhpccmPLtDU240hq5roEOV/NObL8HywJjiP8i9NUimPvDq8aA5f5lMdBj0ui3skCaF1J4lBVOST5KRjDBmAEGMloMbZstN2Q5LiVZWk1AQzL18zHQ9sNp0FzxlyD/iVXsYJEYCzYB4KoGttreCDyhzIeYnqZnyZia70jCwQIDAQAB",
+    "parsePublicKey test uses X.509 SubjectPublicKeyInfo DER format (Base64) exactly as Phase 1 Java outputs via Base64.getEncoder().encodeToString(publicKey.getEncoded())",
+    "encrypt test verifies IV is exactly 12 bytes after Base64 decode (96 bits for AES-GCM)",
+    "encrypt test verifies wrapped key is exactly 256 bytes after Base64 decode (RSA-2048 key size)",
+    "Ciphertext test verifies length consistency: decoded ciphertext = plaintext length + 16 (GCM auth tag)",
+    "Freshness test confirms two consecutive encrypt calls on same plaintext produce different IV, wrappedKey, ciphertext",
+    "Empty plaintext test verifies 16-byte ciphertext (just the GCM tag)",
+    "Long plaintext test (10000 bytes) verifies scaling: ciphertext = 10000 + 16",
+    "All Base64 decoding tests verify fields are valid Base64 (no malformed data bubbles up)",
+    "ApiClient tests mock Dio, no real HTTP calls",
+    "SyncEngine tests mock AnswerOutboxDao and ApiClient, use StreamController for canary, test in-memory state branching",
+    "SyncEngine encryptionPublicKey parameter is optional (null by default) to maintain backward compatibility with existing STANDARD-attempt code",
+    "Error handling in encrypted path mirrors plain path: NotCurrentTaskException/ResponseWindowExpiredException mark terminal-rejected AND emit on taskRejectedExternally; generic ConflictException marks terminal-rejected but does NOT emit"
+  ],
+  "integration_test_scenarios_not_yet_written": [
+    "Step 9: Cross-platform interop test — Dart encrypt + Java Phase-2 decrypt round-trip (confirms MGF1-SHA256 and IV length interop before implementation)",
+    "Step 10: E2E happy path — STRICT-pinned attempt submits encrypted answer via real exam-delivery endpoint, server decrypts and persists plaintext correctly",
+    "Step 10: E2E regression — STANDARD-pinned attempt continues submitting plain payload, byte-for-byte identical to pre-Phase-3 shape"
+  ],
+  "next_steps_for_green": [
+    "Create EncryptionHelper class in lib/core/crypto/encryption_helper.dart with parsePublicKey and encrypt methods",
+    "Create EncryptedPayload value class (wrappedKey, iv, ciphertext String fields) in same file",
+    "Implement parsePublicKey via pointycastle ASN1Parser (phase file Preflight step 2 has exact parse sequence)",
+    "Implement encrypt: seed FortunaRandom from Random.secure (32 bytes), generate fresh 32-byte AES key and 12-byte IV, AES-GCM encrypt, RSA-OAEP-SHA256 wrap",
+    "Verify pointycastle 3.9.1 is in pubspec.yaml; run flutter pub get",
+    "Add EncryptionHelper as required constructor parameter to SyncEngine",
+    "Enhance SyncEngine.startSync to accept optional encryptionPublicKey parameter, parse and cache via parsePublicKey",
+    "Enhance SyncEngine._flushOne to branch on cached public key: if non-null, encrypt and call submitEncryptedAnswer; if null, call submitAnswer (unchanged)",
+    "Add submitEncryptedAnswer method to ApiClient: POST /api/exam-delivery/attempts/{attemptPublicId}/answers/encrypted with body {pinnedItemPublicId, wrappedKey, iv, ciphertext}",
+    "Reuse existing 409-remap catch block from submitAnswer (ConflictException → NotCurrentTaskException/ResponseWindowExpiredException by message)",
+    "Update AttemptTaskResponse in domain/task_view.dart to add nullable encryptionPublicKey field, parsed from JSON",
+    "Update exam_attempt_bloc.dart (or the call site in your bloc) to thread encryptionPublicKey from StartAttempt response into SyncEngine.startSync call",
+    "Run all Phase 3 tests — should go GREEN",
+    "Write and run the four remaining integration tests (Steps 9-10, cross-platform and E2E)"
+  ],
+  "metadata": {
+    "generated_at": "2026-08-28T20:15:00+07:00",
+    "generator": "tdd-test-sub-agent",
+    "mode": "--tdd --prepare",
+    "phase_file_reference": "d:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-answer-submission-encryption/phase-03-client-side-encryption.md",
+    "test_conventions_reference": [
+      "d:/DOCUMENTFPT/Github/pte-org/pte-app/test/unit/network/api_client_test.dart",
+      "d:/DOCUMENTFPT/Github/pte-org/pte-app/test/unit/sync/sync_engine_test.dart"
+    ],
+    "test_execution_mode": "flutter test (Dart VM)",
+    "test_framework": "flutter_test + mocktail",
+    "confirmation_timestamp": "2026-08-28T20:12:00+07:00",
+    "tests_written_count": 21,
+    "tests_that_fail_red_count": 21,
+    "failure_type": "COMPILATION_ERRORS_ONLY — no test fails for a test-authoring reason"
+  }
+}

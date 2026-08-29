@@ -1,0 +1,24 @@
+{
+  "mode": "gate",
+  "target": "phase-05-device-check-gate",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-08-28T00:00:00Z",
+  "reviewed_files": [
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/dto/request/StartAttemptRequest.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/domain/ExamAttempt.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/domain/exception/DeviceCheckRequiredException.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/constant/ExamDeliveryConstants.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/service/AttemptService.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/domain/exception/AlreadyAttemptedException.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/domain/PinnedExamSnapshot.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/controller/AttemptController.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": []
+}
