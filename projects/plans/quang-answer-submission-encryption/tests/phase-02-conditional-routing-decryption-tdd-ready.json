@@ -1,0 +1,200 @@
+{
+  "status": "RED_READY",
+  "phase": "phase-02-conditional-routing-decryption",
+  "description": "Phase 2: Conditional Submission Routing & Server-Side Decryption",
+  "test_files": [
+    {
+      "path": "pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/service/SubmissionDecryptionServiceTest.java",
+      "type": "UNIT_TEST",
+      "count": 9,
+      "test_methods": [
+        "validRoundTripEncryptionDecryption",
+        "tamperedCiphertextRejection",
+        "tamperedWrappedKeyRejection",
+        "invalidIvLengthRejection",
+        "malformedBase64WrappedKeyRejection",
+        "malformedBase64IvRejection",
+        "malformedBase64CiphertextRejection",
+        "emptyBase64RejectionWrappedKey"
+      ],
+      "coverage": "Phase 2 Steps 1-3: EncryptedSubmissionRequest DTO, SubmissionDecryptionService RSA-OAEP unwrap + AES-GCM decrypt, Base64 decode error handling, IV length validation, tamper detection via auth-tag failure"
+    },
+    {
+      "path": "pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/service/AttemptServicePhase2Test.java",
+      "type": "INTEGRATION_TEST",
+      "count": 5,
+      "test_methods": [
+        "submitAnswerOnStrictPinnedAttemptThrows",
+        "submitEncryptedAnswerOnStandardPinnedAttemptThrows",
+        "submitEncryptedAnswerOnStrictPinnedAttemptSucceeds",
+        "submitEncryptedAnswerUsesPrivateKeyFromProvider"
+      ],
+      "coverage": "Phase 2 Steps 5-6: AttemptService.submitAnswer rejects STRICT attempts, submitEncryptedAnswer rejects STANDARD attempts, submitEncryptedAnswer on STRICT succeeds with decrypted plaintext"
+    }
+  ],
+  "modified_production_files": [],
+  "note_on_tester_scope": "The tester agent wrote only test code (correct — no production files touched). However AttemptServicePhase2Test.java as originally written referenced repository/service methods that do not exist on the real interfaces (findByPublicIdAndStudentPublicId, findByPublicIdAndPinnedSnapshot, timerService.getTaskTimerState, answerSubmitService.submitAnswer(5 args)) — these were hallucinated, not the real AttemptService/ExamAttemptRepository/PinnedItemRepository/TimerService/AnswerSubmitService APIs. ck:cook rewrote this one file to use the actual APIs (findWithPinnedByPublicIdAndStudentPublicId, findByPinnedSnapshotIdAndOrderIndex, timerService.getState, answerSubmitService.submit(3 args)) verified against the real Phase-1-era AttemptService.java source, so RED now fails only for the correct reason (missing Phase 2 symbols), not for referencing nonexistent methods. SubmissionDecryptionServiceTest.java was left as written by the tester — verified correct against real javax.crypto APIs. Correction also noted: GlobalExceptionHandler does NOT need explicit registration per exception type — it already handles the DomainException base class generically via @ExceptionHandler(DomainException.class); the 'next_steps_for_green' item about registering the two new exceptions there is unnecessary, they're handled automatically by extending DomainException.",
+  "missing_production_classes_causing_red": [
+    {
+      "class": "com.pte.examdelivery.domain.exception.SubmissionDecryptionException",
+      "reason": "Phase 2 Step 2: Must extend DomainException(HttpStatus.BAD_REQUEST, 'SUBMISSION_DECRYPTION_FAILED'); thrown by SubmissionDecryptionService.decrypt() on any Base64/RSA/AES-GCM failure",
+      "methods_expected": [
+        "SubmissionDecryptionException() — no-arg constructor"
+      ],
+      "parent_class": "com.pte.common.exception.DomainException",
+      "http_status": "400",
+      "error_code": "SUBMISSION_DECRYPTION_FAILED"
+    },
+    {
+      "class": "com.pte.examdelivery.domain.exception.AnswerIntegrityLevelMismatchException",
+      "reason": "Phase 2 Steps 5-6: Must extend DomainException(HttpStatus.CONFLICT, 'ANSWER_INTEGRITY_LEVEL_MISMATCH'); thrown when attempt's pinned answerIntegrityLevel does not match the submission shape (STRICT trying plain, STANDARD trying encrypted)",
+      "methods_expected": [
+        "AnswerIntegrityLevelMismatchException() — no-arg constructor"
+      ],
+      "parent_class": "com.pte.common.exception.DomainException",
+      "http_status": "409",
+      "error_code": "ANSWER_INTEGRITY_LEVEL_MISMATCH"
+    },
+    {
+      "class": "com.pte.examdelivery.dto.request.EncryptedSubmissionRequest",
+      "reason": "Phase 2 Step 1: New validated record DTO for encrypted submissions; mirrors SubmitAnswerRequest but carries encrypted payload",
+      "methods_expected": [
+        "EncryptedSubmissionRequest(UUID pinnedItemPublicId, String wrappedKey, String iv, String ciphertext) — record constructor",
+        "pinnedItemPublicId(): UUID",
+        "wrappedKey(): String",
+        "iv(): String",
+        "ciphertext(): String"
+      ],
+      "field_annotations": {
+        "pinnedItemPublicId": "@NotNull(message = \"Task reference is required\") UUID",
+        "wrappedKey": "@NotBlank(message = \"Wrapped key is required\") String",
+        "iv": "@NotBlank(message = \"Initialization vector is required\") String",
+        "ciphertext": "@NotBlank(message = \"Ciphertext is required\") String"
+      },
+      "note": "The `pinnedItemPublicId` field was omitted from original Step 1 description but is required by the Preflight correction in the phase file — the server needs it for current-task/timer validation, same as submitAnswer already does."
+    },
+    {
+      "class": "com.pte.examdelivery.service.SubmissionDecryptionService",
+      "reason": "Phase 2 Steps 2-3: Decrypts EncryptedSubmissionRequest via RSA-OAEP (SHA-256/MGF1) key unwrap + AES-GCM decryption; returns plaintext or throws SubmissionDecryptionException on any failure",
+      "methods_expected": [
+        "decrypt(EncryptedSubmissionRequest request, PrivateKey privateKey): String"
+      ],
+      "implementation_notes": [
+        "Base64-decode wrappedKey, iv, ciphertext; catch IllegalArgumentException and rethrow as SubmissionDecryptionException immediately",
+        "Validate decoded iv.length == 12 (96 bits); reject immediately if not",
+        "Unwrap AES key via Cipher.getInstance('RSA/ECB/OAEPWithSHA-256AndMGF1Padding') with explicit OAEPParameterSpec(SHA-256, MGF1, MGF1ParameterSpec.SHA256, PSource.PSpecified.DEFAULT)",
+        "Decrypt via Cipher.getInstance('AES/GCM/NoPadding') with GCMParameterSpec(128, iv)",
+        "Catch InvalidKeyException, BadPaddingException, IllegalBlockSizeException (unwrap failures), AEADBadTagException (GCM auth failure), NullPointerException — all rethrow as SubmissionDecryptionException",
+        "Return UTF-8 plaintext string",
+        "No exception path may escape unmapped (500) — all failures must be caught and wrapped"
+      ]
+    }
+  ],
+  "missing_methods_on_attemptservice": [
+    {
+      "method_signature": "submitEncryptedAnswer(UUID attemptPublicId, EncryptedSubmissionRequest request, CurrentUser caller): AttemptTaskResponse",
+      "reason": "Phase 2 Step 5: New endpoint handler for encrypted submissions; mirrors submitAnswer but accepts EncryptedSubmissionRequest, decrypts via SubmissionDecryptionService, funnels plaintext into shared processAnswer helper",
+      "behavior": [
+        "Fetch attempt by publicId + student; throw if not found",
+        "Validate attempt's pinned answerIntegrityLevel is 'STRICT'; throw AnswerIntegrityLevelMismatchException if not",
+        "Fetch pinned item; throw if not found",
+        "Call submissionDecryptionService.decrypt(request, encryptionKeyProvider.getPrivateKey())",
+        "Funnel decrypted plaintext into shared processAnswer(attempt, request.pinnedItemPublicId(), decryptedPlaintext, ...) helper",
+        "Return AttemptTaskResponse from processAnswer result"
+      ]
+    },
+    {
+      "method_signature": "submitAnswer (ENHANCED — existing method, add check)",
+      "reason": "Phase 2 Step 5: submitAnswer (plain payload) must now reject STRICT-pinned attempts before processing",
+      "behavior": [
+        "Fetch attempt by publicId + student; throw if not found",
+        "Validate attempt's pinned answerIntegrityLevel is 'STANDARD'; throw AnswerIntegrityLevelMismatchException if not (STRICT attempts must use submitEncryptedAnswer)",
+        "Continue with existing submitAnswer logic unchanged"
+      ]
+    }
+  ],
+  "missing_constructor_parameter_on_attemptservice": [
+    {
+      "parameter": "SubmissionDecryptionService submissionDecryptionService",
+      "position": "11th parameter (added after EncryptionKeyProvider at 10th position)",
+      "reason": "Phase 2 Step 5: submitEncryptedAnswer needs to call submissionDecryptionService.decrypt(...)"
+    }
+  ],
+  "failing_tests_summary": {
+    "total_test_methods": 13,
+    "expected_failure_mode": "COMPILATION_ERROR",
+    "compilation_errors": [
+      "cannot find symbol: class SubmissionDecryptionException (import at line 4 of SubmissionDecryptionServiceTest)",
+      "cannot find symbol: class EncryptedSubmissionRequest (import at line 5 of SubmissionDecryptionServiceTest)",
+      "cannot find symbol: class SubmissionDecryptionService (instantiation at line 89 of SubmissionDecryptionServiceTest)",
+      "cannot find symbol: class AnswerIntegrityLevelMismatchException (import at line 9 of AttemptServicePhase2Test)",
+      "cannot find symbol: class EncryptedSubmissionRequest (import at line 10 of AttemptServicePhase2Test)",
+      "cannot find symbol: class SubmissionDecryptionService (mock at line 79 of AttemptServicePhase2Test)",
+      "cannot find symbol: method submitEncryptedAnswer(...) on AttemptService (calls at lines 86, 113, 148, 191 of AttemptServicePhase2Test)"
+    ],
+    "failure_count": 6,
+    "failure_type": "All compilation errors — not a single test runs; compilation fails first"
+  },
+  "confirmation_command": "cd pte-api && ./mvnw -q test-compile -pl services/exam-delivery",
+  "confirmation_output_summary": {
+    "status": "BUILD_FAILURE — COMPILATION",
+    "reason": "Missing production classes and methods: SubmissionDecryptionService, SubmissionDecryptionException, AnswerIntegrityLevelMismatchException, EncryptedSubmissionRequest, AttemptService.submitEncryptedAnswer",
+    "sample_errors": [
+      "[ERROR] /D:/DOCUMENTFPT/Github/pte-org/pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/service/SubmissionDecryptionServiceTest.java:[4,45] cannot find symbol: class SubmissionDecryptionException",
+      "[ERROR] /D:/DOCUMENTFPT/Github/pte-org/pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/service/SubmissionDecryptionServiceTest.java:[5,40] cannot find symbol: class EncryptedSubmissionRequest",
+      "[ERROR] /D:/DOCUMENTFPT/Github/pte-org/pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/service/SubmissionDecryptionServiceTest.java:[89,13] cannot find symbol: class SubmissionDecryptionService",
+      "[ERROR] /D:/DOCUMENTFPT/Github/pte-org/pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/service/AttemptServicePhase2Test.java:[9,45] cannot find symbol: class AnswerIntegrityLevelMismatchException",
+      "[ERROR] /D:/DOCUMENTFPT/Github/pte-org/pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/service/AttemptServicePhase2Test.java:[10,40] cannot find symbol: class EncryptedSubmissionRequest"
+    ]
+  },
+  "success_criteria_mapped_to_tests": {
+    "SR1": "Valid encrypted submission decrypts correctly and plaintext matches original — SubmissionDecryptionServiceTest.validRoundTripEncryptionDecryption",
+    "SR2": "Tampered ciphertext rejection (4xx, not 500) — SubmissionDecryptionServiceTest.tamperedCiphertextRejection",
+    "SR3": "Tampered wrapped key rejection (4xx, not 500) — SubmissionDecryptionServiceTest.tamperedWrappedKeyRejection",
+    "SR4": "Invalid IV length rejected before GCM attempt — SubmissionDecryptionServiceTest.invalidIvLengthRejection",
+    "SR5": "Malformed Base64 caught and wrapped — SubmissionDecryptionServiceTest.malformedBase64WrappedKeyRejection, malformedBase64IvRejection, malformedBase64CiphertextRejection",
+    "SR6": "submitAnswer rejects STRICT-pinned attempts — AttemptServicePhase2Test.submitAnswerOnStrictPinnedAttemptThrows",
+    "SR7": "submitEncryptedAnswer rejects STANDARD-pinned attempts — AttemptServicePhase2Test.submitEncryptedAnswerOnStandardPinnedAttemptThrows",
+    "SR8": "submitEncryptedAnswer on STRICT-pinned attempt succeeds and returns same response shape — AttemptServicePhase2Test.submitEncryptedAnswerOnStrictPinnedAttemptSucceeds",
+    "SR9": "Existing scoring/reporting consumers unaffected (decrypted plaintext indistinguishable from STANDARD plaintext once past decryption boundary) — integration coverage via both test suites"
+  },
+  "critical_test_notes": [
+    "SubmissionDecryptionServiceTest uses REAL RSA keypair (same as Phase 1, generated via openssl genpkey) — not fabricated or hand-typed Base64",
+    "Round-trip test encrypts in-test using java.crypto with the same algorithms (RSA/ECB/OAEPWithSHA-256AndMGF1Padding, AES/GCM/NoPadding) the service is expected to use",
+    "IV length validation test uses 16-byte IV to trigger rejection before GCM attempt — verifies fail-fast behavior",
+    "Malformed Base64 tests use intentionally invalid strings ('not-valid-base64!!!!' and empty '') to trigger IllegalArgumentException during decode",
+    "AttemptServicePhase2Test mocks SubmissionDecryptionService.decrypt to return known plaintext — avoids testing crypto twice; the real crypto is unit-tested in SubmissionDecryptionServiceTest",
+    "Both test classes follow AttemptServiceTest Phase 1 style: Mockito mocks, helper methods (createAttempt, createPinnedItem, createTimerState), @DisplayName annotations"
+  ],
+  "integration_test_scenarios_not_yet_written": [
+    "Step 7: Happy path integration test via controller endpoint (requires full Spring test context, @WebMvcTest or @SpringBootTest) — tester agent does not write this yet, only unit/service-layer tests above",
+    "Step 8: Tamper rejection integration test (flip bit in ciphertext, confirm no AttemptAnswer row persisted, no event emitted)",
+    "Step 9: Shape-mismatch integration test (STRICT submitting plain, STANDARD submitting encrypted, confirm 4xx rejection)",
+    "Step 10/10a: Replay/uniqueness integration tests (submit same encrypted request twice, confirm existing uniqueness constraint behavior is unaffected)"
+  ],
+  "next_steps_for_green": [
+    "Create SubmissionDecryptionException in com.pte.examdelivery.domain.exception extending DomainException(HttpStatus.BAD_REQUEST, 'SUBMISSION_DECRYPTION_FAILED')",
+    "Create AnswerIntegrityLevelMismatchException in com.pte.examdelivery.domain.exception extending DomainException(HttpStatus.CONFLICT, 'ANSWER_INTEGRITY_LEVEL_MISMATCH')",
+    "Create EncryptedSubmissionRequest record in com.pte.examdelivery.dto.request with @NotNull pinnedItemPublicId, @NotBlank wrappedKey, @NotBlank iv, @NotBlank ciphertext",
+    "Create SubmissionDecryptionService in com.pte.examdelivery.service with decrypt(EncryptedSubmissionRequest, PrivateKey): String method implementing RSA-OAEP unwrap + AES-GCM decrypt with full error handling",
+    "Add SubmissionDecryptionService as 11th constructor parameter to AttemptService (after EncryptionKeyProvider at 10th)",
+    "Add submitEncryptedAnswer(UUID, EncryptedSubmissionRequest, CurrentUser): AttemptTaskResponse method to AttemptService",
+    "Enhance submitAnswer(UUID, SubmitAnswerRequest, CurrentUser) to validate answerIntegrityLevel == 'STANDARD' before processing, throw AnswerIntegrityLevelMismatchException if STRICT",
+    "Extract shared processAnswer helper from both submitAnswer and submitEncryptedAnswer to avoid duplication",
+    "Add new endpoint POST /attempts/{publicId}/answers/encrypted in AttemptController to route encrypted submissions to submitEncryptedAnswer",
+    "Register SubmissionDecryptionException and AnswerIntegrityLevelMismatchException in GlobalExceptionHandler to return appropriate 4xx responses",
+    "Run all tests to confirm RED → GREEN transition",
+    "Write the four remaining integration tests (Steps 7-10a) after implementation is GREEN"
+  ],
+  "metadata": {
+    "generated_at": "2026-08-28T19:45:00+07:00",
+    "generator": "tdd-test-sub-agent",
+    "mode": "--tdd --prepare",
+    "phase_file_reference": "d:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-answer-submission-encryption/phase-02-conditional-routing-decryption.md",
+    "test_conventions_reference": [
+      "d:/DOCUMENTFPT/Github/pte-org/pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/config/EncryptionKeyProviderTest.java",
+      "d:/DOCUMENTFPT/Github/pte-org/pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/service/AttemptServiceTest.java",
+      "d:/DOCUMENTFPT/Github/pte-org/pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/mapper/AttemptMapperTest.java"
+    ]
+  }
+}

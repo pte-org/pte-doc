@@ -1,0 +1,53 @@
+{
+  "mode": "gate",
+  "target": "phase-04-policy-pinning",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-08-28T00:00:00Z",
+  "reviewed_files": [
+    "services/scheduling/src/main/java/com/pte/scheduling/dto/response/EntitlementResponse.java",
+    "services/scheduling/src/main/java/com/pte/scheduling/service/EntitlementService.java",
+    "services/scheduling/src/main/java/com/pte/scheduling/mapper/SessionMapper.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/client/dto/SchedulingEntitlementResponse.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/domain/PinnedExamSnapshot.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/domain/PinnedItem.java",
+    "services/exam-delivery/src/main/java/com/pte/examdelivery/service/SnapshotPinService.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 1,
+    "medium": 1,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [
+    {
+      "id": "QUAL-004",
+      "severity": "HIGH",
+      "rule": "BOUNDARY_NULL_SAFETY",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "services/scheduling/src/main/java/com/pte/scheduling/mapper/SessionMapper.java:33-40",
+      "evidence": "SessionMapper.toPolicy() called .name() on enums without null-checking; Phase 4's new call site in EntitlementService.checkEntitlement() exposed the latent gap.",
+      "why_it_matters": "A silent fallback to a default policy could quietly weaken a REAL_EXAM session's guarantees, which is worse than a clear failure.",
+      "required_action": "Added an explicit null check at the top of toPolicy() that throws IllegalStateException with a clear message (mapped to 500 INTERNAL_ERROR by the existing generic handler) instead of NPE-ing on .name(), and instead of silently substituting a weaker default policy.",
+      "owner": "quang"
+    },
+    {
+      "id": "QUAL-005",
+      "severity": "MEDIUM",
+      "rule": "BOUNDARY_DEFENSIVE_CODING",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "medium",
+      "location": "services/exam-delivery/src/main/java/com/pte/examdelivery/service/SnapshotPinService.java:47-51",
+      "evidence": "pin() assigned entitlement.policy() fields to non-nullable PinnedExamSnapshot columns without checking policy or its fields for null first.",
+      "why_it_matters": "A NULL constraint violation from Hibernate is a much less clear failure mode than an explicit, existing domain exception.",
+      "required_action": "Extended the existing entitlement null-check to also cover entitlement.policy(), replayPolicyType, and answerIntegrityLevel, reusing EntitlementCheckFailedException (same pattern as the existing entitlement==null check immediately above it).",
+      "owner": "quang"
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/quang-listening-exam-policy/quality/phase-04-policy-pinning-quality-report.json"
+}

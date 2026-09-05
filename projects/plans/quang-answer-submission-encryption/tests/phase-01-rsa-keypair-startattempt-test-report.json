@@ -1,0 +1,31 @@
+{
+  "status": "PASSED",
+  "mode": "--tdd --verify",
+  "phase": "phase-01-rsa-keypair-startattempt",
+  "red_ready_artifact": "plans/quang-answer-submission-encryption/tests/phase-01-rsa-keypair-startattempt-tdd-ready.json",
+  "implementation_files": [
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/config/EncryptionKeyProvider.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/dto/response/AttemptTaskResponse.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/mapper/AttemptMapper.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/service/AttemptService.java",
+    "pte-api/services/exam-delivery/src/main/resources/application.yml"
+  ],
+  "test_files_touched_during_green": [
+    "pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/config/EncryptionKeyProviderTest.java",
+    "pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/service/AttemptServiceTest.java"
+  ],
+  "notes": [
+    "Reverted 3 production-code edits (AttemptTaskResponse.java, AttemptMapper.java, AttemptMapperTest.java) that the tester agent made during --tdd --prepare, since tester must not touch production code; re-verified RED held for the correct reason afterward.",
+    "Replaced EncryptionKeyProviderTest's PEM fixtures with a real openssl-generated RSA-2048 keypair — the original fixtures were fabricated Base64 that failed to decode as valid PKCS8/X509 DER (verified with `openssl pkey -in ... -noout -text`), which would have caused GREEN to fail for the wrong reason (invalid key data, not a real implementation defect).",
+    "AttemptServiceTest's STRICT-path tests were missing a mock for the new required EncryptionKeyProvider collaborator; added @Mock field + per-test stub (STANDARD tests correctly leave it unstubbed under Mockito's strict-stubs default, since that code path never calls it)."
+  ],
+  "command": "cd pte-api && ./mvnw -q -pl services/exam-delivery test",
+  "results": {
+    "EncryptionKeyProviderTest": { "run": 9, "failures": 0, "errors": 0, "skipped": 0 },
+    "AttemptMapperTest": { "run": 6, "failures": 0, "errors": 0, "skipped": 0 },
+    "AttemptServiceTest": { "run": 4, "failures": 0, "errors": 0, "skipped": 0 },
+    "ProctorCommandConsumerTest": { "run": 5, "failures": 0, "errors": 0, "skipped": 0, "note": "pre-existing, unrelated — confirms no regression" },
+    "TimerServiceTest": { "run": 5, "failures": 0, "errors": 0, "skipped": 0, "note": "pre-existing, unrelated — confirms no regression" }
+  },
+  "total": { "run": 29, "failures": 0, "errors": 0, "skipped": 0 }
+}
