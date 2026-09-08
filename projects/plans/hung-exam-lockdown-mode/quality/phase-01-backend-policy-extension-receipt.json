@@ -1,0 +1,22 @@
+{
+  "target": "phase-01-backend-policy-extension",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:/GitHub/PTE-org",
+  "report_path": "pte-doc/projects/plans/hung-exam-lockdown-mode/quality/phase-01-backend-policy-extension-quality-report.json",
+  "reviewed_files": [
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/client/dto/SchedulingEntitlementResponse.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/domain/PinnedExamSnapshot.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/dto/response/AttemptTaskResponse.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/mapper/AttemptMapper.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/service/SnapshotPinService.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/domain/ExamPolicy.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/domain/enums/LockdownMode.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/dto/request/PatchExamPolicyRequest.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/dto/response/ExamPolicyResponse.java",
+    "pte-api/services/scheduling/src/main/java/com/pte/scheduling/service/SessionService.java"
+  ],
+  "source_fingerprint": "sha256:d30f2f6e944992651f0bda4aaf85fcbe21d01ac9a9d612eeb010a2acb65343a7",
+  "reviewed_at": "2026-09-08T20:44:00Z",
+  "open_blocking_findings": 0
+}
