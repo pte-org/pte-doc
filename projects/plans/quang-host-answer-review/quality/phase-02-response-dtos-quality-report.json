@@ -1,0 +1,39 @@
+{
+  "target": "phase-02-response-dtos",
+  "mode": "gate",
+  "verdict": "APPROVED",
+  "reviewed_files": [
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/constant/ScoringConstants.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/dto/response/AnswerPayloadKind.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/dto/response/AnswerOptionView.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/dto/response/DecodedAnswerPayload.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/service/AnswerPayloadDecoder.java"
+  ],
+  "conventions_checked_against": [
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/service/ObjectiveScoringService.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/dto/response/TaskView.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/dto/response/ScoringAnswerResponse.java"
+  ],
+  "design_deviation_from_phase_plan": "Phase file suggested an AnswerPayloadDecoder interface + per-task-type Strategy map + @JsonTypeInfo polymorphic DTOs. Deviated: implemented as one concrete @Service class (mirrors ObjectiveScoringService's own single-class/private-helpers shape) and one flat record with nullable/mutually-exclusive fields (mirrors TaskView's convention) instead of Jackson polymorphism, which has zero precedent anywhere else in this codebase. Existing convention outranks the generic suggestion per preflight rules.",
+  "findings": [
+    {
+      "id": "P2-01",
+      "severity": "LOW",
+      "rule": "defensive-null-handling",
+      "location": "pte-api/services/scoring/src/main/java/com/pte/scoring/service/AnswerPayloadDecoder.java:69",
+      "applicable": true,
+      "confidence": "high",
+      "introduced_by_current_change": true,
+      "summary": "AUDIO_ANSWER_TASK_TYPES.contains(answer.getTaskType()) will throw NullPointerException if taskType is ever null — Set.of(...)'s contains() rejects a null argument (unlike HashSet, which returns false).",
+      "failure_scenario": "ScoringAnswer.taskType is currently @Column(nullable = false) and always set by AnswerIngestConsumer at ingest time, so this cannot happen via any live code path today. If that constraint or the ingest path ever changes, decode() would throw for every task type, not just audio ones, rather than degrading to UNRECOGNIZED like every other malformed-input case in this class already does.",
+      "required_action": "Optional hardening: guard with `answer.getTaskType() != null && AUDIO_ANSWER_TASK_TYPES.contains(...)`, or route through a null-safe check before the Set lookup. Not blocking — no reachable path triggers it today.",
+      "blocking": false,
+      "outcome": "fixed"
+    }
+  ],
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "noted_count": 1,
+  "receipt_status": "skipped_cross_repo_boundary",
+  "receipt_note": "Same limitation as phase-01: plan/report live in pte-doc, reviewed files live in pte-api (separate git repos, non-repo parent). Result recorded directly in the phase file's Quality and Testing State."
+}

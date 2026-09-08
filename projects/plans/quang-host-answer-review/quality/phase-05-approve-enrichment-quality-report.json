@@ -1,0 +1,38 @@
+{
+  "target": "phase-05-approve-enrichment",
+  "mode": "gate",
+  "verdict": "APPROVED",
+  "reviewed_files": [
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/domain/enums/ScoringAnswerStatus.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/service/AttemptCompletionService.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/messaging/consumer/AiScoringWorker.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/domain/ScoringAnswer.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/service/ScoringReviewService.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/controller/ScoringReviewController.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/dto/request/SubmitTeacherScoreRequest.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/dto/response/ScoringAnswerResponse.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/dto/response/AnswerListItemResponse.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/dto/response/AnswerReviewDetailResponse.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/mapper/ScoringAnswerMapper.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/constant/ScoringConstants.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/repository/ScoringAnswerRepository.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/domain/exception/ReviewNotPendingException.java (deleted)"
+  ],
+  "conventions_checked_against": [
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/service/AiScoringDispatcher.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/dto/request/SubmitAnswerRequest.java"
+  ],
+  "verification_performed": [
+    "grep confirmed exactly 5 files referenced AI_SCORED_PENDING_REVIEW/REVIEW_REQUIRED_TASK_TYPES/ReviewNotPendingException/REVIEW_NOT_PENDING before this phase; all 5 updated, none left dangling.",
+    "grep confirmed no test file constructs ScoringReviewService directly (constructor signature changed 3 params -> 3 different params); mvn test-compile passed clean.",
+    "Deployed to local Docker (scoring container rebuilt); Hibernate ddl-auto=update added teacher_score/teacher_scored_at columns and the new composite index without error; container reports healthy.",
+    "Queried the running scoring_answers table before deploy: 0 rows total, confirming no in-flight AI_SCORED_PENDING_REVIEW rows needed backfilling (plan.md's MEDIUM risk item) — moot in this environment, but explicitly verified rather than assumed.",
+    "TASK_TYPE_WRITE_ESSAY confirmed still used by AiScoringDispatcher's routing logic (decides AI-queue vs objective-scoring dispatch) — not dead code after removing the review-required branch."
+  ],
+  "findings": [],
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "noted_count": 0,
+  "receipt_status": "skipped_cross_repo_boundary",
+  "receipt_note": "Same limitation as prior phases — result recorded directly in the phase file's Quality and Testing State."
+}
