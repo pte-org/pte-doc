@@ -400,6 +400,17 @@ void startAttemptReturnsNoneLockdownForPracticeSession() {
 - **Receipt:** quality/phase-01-backend-policy-extension-receipt.json
 - **Notes:** Implementation already exists in codebase. All lockdownMode fields, DTOs, and mapping logic confirmed present and following existing patterns (mirrors answerIntegrityLevel architecture).
 
+### FR-07 Extension (2026-09-09)
+
+Extension done via `lockdown-mode-override` plan (separate plan).
+
+- **Quality:** skipped_by_user
+- **Testing:** 12/12 passed (`SessionServiceLockdownTest`)
+- **Files added:**
+  - `services/scheduling/src/main/java/com/pte/scheduling/dto/request/CreateSessionRequest.java` (+6th field)
+  - `services/scheduling/src/main/java/com/pte/scheduling/service/SessionService.java` (override logic + validation)
+  - `services/scheduling/src/test/java/com/pte/scheduling/service/SessionServiceLockdownTest.java` (+3 tests, +3 null args)
+
 ## Files Changed
 
 - `services/scheduling/src/main/java/com/pte/scheduling/domain/enums/LockdownMode.java` (new)
