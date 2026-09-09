@@ -94,7 +94,19 @@ Research Summary items 2, 3, 6 (list-endpoint reuse).
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated yet (pending `/ck:quality --gate`).
+- Quality gate: APPROVED after fixing 2 MEDIUM + 1 LOW finding.
+  QUAL-001 (MEDIUM): `CREATE_PROGRAM_TEXT.namePlaceholder` was a hardcoded
+  `"e.g. Khối 12"` literal shown even to Center-family tenants — fixed by
+  making it a template function of the live `programLabel`. QUAL-002
+  (MEDIUM): `ProgramDetailView` never read `isError`/`error` from
+  `useProgram`, so a failed fetch (404/403/network) fell through to an
+  infinite loading skeleton instead of an error state — fixed by adding
+  an explicit error branch with a back-to-list link. QUAL-003 (LOW): the
+  student-search input had no accessible name for screen readers — fixed
+  with `aria-label`. One NOTED item (QUAL-004, pre-existing repo-wide
+  `DataTable` convention where a fetch error is indistinguishable from a
+  genuinely empty list — already present in `features/exams`, not
+  introduced by this phase, left as-is).
 - Testing: no automated test framework runs in `tenant-web` (same
   no-precedent finding as Phase 6). Verified via
   `pnpm --filter tenant-web lint` (clean), `pnpm --filter tenant-web build`
