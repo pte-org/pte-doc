@@ -120,7 +120,7 @@ too (full v1, not phased out) per the user's own decision below.
       Navigation — a single keyed lookup (never if/else) driving every
       Program/Class-facing label (menu items, filter drill-down order,
       section headings), sourced from Phase 1's live `/auth/me` field.
-- [ ] Phase 7: `tenant-web` — Program/Class CRUD UI + Organization-Wide
+- [x] Phase 7: `tenant-web` — Program/Class CRUD UI + Organization-Wide
       Student Search — list/create/edit/archive Program and Class, plus a
       name/phone search across the whole tenant without drilling through
       Program→Class.

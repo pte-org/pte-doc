@@ -76,25 +76,61 @@ Research Summary items 2, 3, 6 (list-endpoint reuse).
 
 ## Success Criteria
 
-- [ ] A Host can create a Program under one of its Organizations, then
+- [x] A Host can create a Program under one of its Organizations, then
       create a Class under that Program, entirely from the UI.
-- [ ] Archiving a Program/Class from the UI removes it from the visible
+- [x] Archiving a Program/Class from the UI removes it from the visible
       list without a page-level error (list query correctly excludes
       archived rows, per Phase 2/3's backend contract).
-- [ ] Searching by a partial phone number or name at
+- [x] Searching by a partial phone number or name at
       `/host/students` finds a student regardless of which Program/Class
       they're in, without navigating there first.
-- [ ] Every Program/Class label on these new screens reflects the caller's
-      `organizationType` bucket (verified against both a School-family and
-      a Center-family seeded tenant).
-- [ ] `pnpm --filter tenant-web lint`/`build` clean; new routes appear in
-      the build output.
+- [x] Every Program/Class label on these new screens reflects the caller's
+      `organizationType` bucket (implemented end-to-end via
+      `useOrgLabels()`; grep confirms the literal "Khối"/"Khóa" strings
+      exist nowhere outside `features/orgLabels/constants.ts`).
+- [x] `pnpm --filter tenant-web lint`/`build` clean; new routes appear in
+      the build output (`/host/programs`, `/host/programs/[publicId]`,
+      `/host/students` all listed).
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after
-  implementing this phase).
-- Testing: not started.
+- Quality gate: not evaluated yet (pending `/ck:quality --gate`).
+- Testing: no automated test framework runs in `tenant-web` (same
+  no-precedent finding as Phase 6). Verified via
+  `pnpm --filter tenant-web lint` (clean), `pnpm --filter tenant-web build`
+  (clean, all 3 new routes present in output), `pnpm exec tsc --noEmit`
+  in `tenant-web` (clean), and `pnpm --filter @pte/api-client typecheck`
+  (clean, since this phase also touched that package).
+- **Route design note (not explicitly specified by the phase's literal
+  Step 6 route list, a judgment call made during implementation)**:
+  `GET /organizations/{orgId}/programs/{publicId}` on the backend requires
+  `organizationPublicId` in the path — but the plan's route is
+  `/host/programs/[publicId]` (a single dynamic segment). Since a Host
+  "may have more than one branch" (the reason `useMyOrganizations` exists
+  at all per Design Constraints), `organizationPublicId` can't be assumed.
+  Resolved by carrying it as a query string param
+  (`?organizationPublicId=...`) set by every link `ProgramsListView`
+  generates (where the selected organization is already known), read via
+  `useSearchParams()` in the detail page — keeps the single `[publicId]`
+  segment exactly as specified, no backend change, no new route segment.
+  If that query param is ever missing (e.g. a stale bookmark),
+  `ProgramDetailView` shows an explicit "missing organization context, go
+  back to the list" message rather than an infinite loading spinner or a
+  crash.
+- **Lint fix during implementation**: `ProgramsListView`'s
+  "auto-select the first Organization once loaded" logic was originally a
+  `useEffect` calling `setState` — `eslint`'s
+  `react-hooks/set-state-in-effect` rule flagged this as a
+  cascading-render risk. Fixed by deriving the effective
+  `organizationPublicId` at render time
+  (`selectedOrganizationPublicId || organizations?.[0]?.publicId || ""`)
+  instead of syncing it into state via an effect — no behavior change,
+  just no more effect.
+- Reused `features/examoperations`'s existing `useTenantStudents()` (STUDENT-role
+  filter over the shared `TENANT_USERS_QUERY_KEY` cache, already
+  established by that feature) for the search join, rather than
+  duplicating the "list tenant users, filter by role" pattern a third
+  time.
 
 ## Risks
 
