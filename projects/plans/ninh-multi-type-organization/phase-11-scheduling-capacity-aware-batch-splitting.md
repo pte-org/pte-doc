@@ -1,0 +1,175 @@
+# Phase 11: scheduling — Capacity-Aware Batch Splitting
+
+## Requirements
+
+When bulk-creating exam sessions for a whole Program (Phase 10), a Host
+should be able to specify a per-session capacity; if the Program's roster
+exceeds it, the system splits the roster into multiple sessions instead of
+enrolling everyone into one unbounded session. **`scheduling` has zero
+capacity concept anywhere today** (confirmed by reading `ExamSession.java`
+in full — no field even resembling it) — this phase's first job is
+introducing the minimal version, then building the splitting logic on top.
+This is explicitly the riskiest, most exploratory phase in this plan.
+
+Maps to: `plan.md` Decision 4 (capacity-aware batch-splitting); Research
+Summary item 4; `plan.md` Risks (capacity is the least-precedented part of
+this entire plan).
+
+## Design Constraints
+
+- **Minimal capacity concept, not a room/resource-booking system.** A
+  single nullable `capacity` (Integer) field directly on `ExamSession` —
+  `null` means unlimited (fully backward-compatible with every existing
+  session, none of which set it). No new `ExamRoom`/`Resource` entity, no
+  scheduling-conflict detection — out of scope, this is deliberately the
+  smallest thing that unblocks the splitting feature.
+- **Splitting logic stays FE-orchestrated, same reasoning as Phase 10** —
+  no new backend bulk-orchestration endpoint. `scheduling`'s only new
+  responsibility is (a) accepting an optional `capacity` on session
+  creation and (b) **defensively enforcing it** in `bulkEnroll` (reject if
+  the request would push the session over capacity), so the FE's
+  client-side batch math is never the only thing standing between a Host
+  and an over-capacity session — even if the FE has a bug, the backend
+  refuses. This tradeoff (FE computes the split, backend only guards the
+  ceiling) is deliberately documented here rather than building a second,
+  more complex backend orchestration endpoint whose own correctness would
+  need equally exploratory design work; revisit if this proves
+  insufficient in practice.
+- `bulkEnroll`'s existing dedupe/already-enrolled logic is untouched —
+  capacity enforcement is an additional check layered on top, evaluated
+  against `existing enrollment count + toCreate.size()`, not a replacement
+  for the existing logic.
+- **The capacity check must be race-safe, not a plain read-then-write.**
+  A naive "`SELECT COUNT(*) ...` then `if (count + n > capacity)` then
+  `saveAll(...)`" is a classic TOCTOU race: two concurrent `bulkEnroll`
+  calls against the *same* session (double-submit, a client retry after a
+  timeout whose first request actually succeeded, or two of Phase 10/this
+  phase's own batches accidentally targeting the same session) can both
+  read the same pre-write count, both compute "fits," and both commit —
+  overshooting capacity and defeating this phase's own stated guarantee
+  that the backend enforces the ceiling even when the FE's batch math has
+  a bug. Fix: take a **pessimistic write lock on the `ExamSession` row**
+  for the duration of the count-check-then-insert. Add
+  `@Lock(LockModeType.PESSIMISTIC_WRITE)` on a new
+  `ExamSessionRepository.findWithLockByPublicId(UUID publicId)` (or reuse/
+  extend the existing `findWithLockByPublicIdAndTenantId` already used by
+  `SessionService.open()`/`patchPolicy()` if its lock scope fits — check
+  that method first rather than assuming a new one is needed), and have
+  `bulkEnroll` fetch the session through the locked query before computing
+  `existingEnrollmentCount`. The lock is held for the same transaction as
+  the `saveAll(...)`, so a second concurrent `bulkEnroll` call against the
+  same session blocks until the first one's transaction commits or rolls
+  back — exactly the same pattern `SessionService` already uses for its
+  own pre-open composition/policy race (mirror it, don't invent a new
+  concurrency primitive).
+- New failure mode needs its own exception (`SessionCapacityExceededException`,
+  mapped to a 4xx, not silently truncating the enrollment list — a partial
+  silent enroll would be worse than a clear rejection the FE can react to
+  by creating another batch/session).
+- FE batch-splitting math: given a roster of size N and a Host-specified
+  capacity C, create `ceil(N / C)` sessions, each session name suffixed
+  (`"{name} - Batch 1"`, `"- Batch 2"`, ...), each getting its own
+  `POST /sessions` + `POST /sessions/{id}/enrollments/bulk` call in
+  sequence (not parallel — keep failure/retry semantics simple and
+  observable, matching this repo's existing sequential-orchestration
+  precedent from Phase 10). Because each batch targets a distinct,
+  newly-created session, the FE's own sequential loop does not by itself
+  create the concurrent-same-session scenario the backend lock guards
+  against — that scenario is about defense against *retries*/*double-submits*
+  hitting one session, not the normal multi-session batch flow.
+- `ddl-auto: update` — no Flyway migration for the new nullable column.
+
+## Steps
+
+1. `services/scheduling/src/main/java/com/pte/scheduling/domain/ExamSession.java`
+   — add nullable `capacity` (Integer).
+   `dto/request/CreateSessionRequest.java` — add optional `capacity`.
+   `dto/response/SessionResponse.java` — add `capacity`.
+   `mapper/SessionMapper.java` — pass it through.
+2. `domain/exception/SessionCapacityExceededException.java`;
+   `web/SchedulingExceptionHandler.java` — map it to a 409, consistent with
+   how `AlreadyEnrolledException`/`AlreadyAssignedException` are already
+   handled (check the existing handler's status-code convention for
+   conflict-shaped errors before picking one).
+3. `repository/ExamSessionRepository.java` — add (or confirm/reuse)
+   `findWithLockByPublicId(UUID)` /
+   `findWithLockByPublicIdAndTenantId(UUID, UUID)` annotated
+   `@Lock(LockModeType.PESSIMISTIC_WRITE)`, mirroring the lock already used
+   by `SessionService.open()`/`patchPolicy()`.
+4. `service/EnrollmentService.java` — `bulkEnroll(...)`: fetch the session
+   via the pessimistic-lock query (not the plain `findOwned`), hold the
+   lock through the whole method. After computing `toCreate` (post-dedupe,
+   post-already-enrolled-filter), if `session.getCapacity() != null` and
+   `existingEnrollmentCount + toCreate.size() > session.getCapacity()`,
+   throw `SessionCapacityExceededException` **before** calling
+   `enrollmentRepository.saveAll(...)` (fail closed, no partial commit,
+   lock released on transaction end either way).
+5. `service/SessionService.java` — `create(...)` passes `request.capacity()`
+   through to the new entity field (no validation beyond "positive if
+   present" — a `@Positive` on the DTO field is enough).
+6. Tests: extend `EnrollmentServiceTest.java` — `bulkEnroll` respects
+   `capacity` (rejects overflow, allows exact-fit, allows under-capacity,
+   `capacity == null` behaves exactly as before — a regression test that
+   every pre-existing `bulkEnroll` test still passes unmodified); **a
+   concurrency regression test**: simulate 2 threads (or 2 sequential
+   transactions manipulating the lock directly, whichever this repo's
+   existing test infra supports — check how, if at all, other concurrency
+   guards in this codebase are tested, e.g. the `saveAll`
+   `DataIntegrityViolationException` fallback tests, before picking an
+   approach) calling `bulkEnroll` against the same near-capacity session
+   at once; assert the combined committed enrollment count never exceeds
+   `capacity` (one call succeeds, the other is rejected or correctly
+   partially rejected — never both fully committing over the limit).
+7. `tenant-web`: `features/exams/api/index.ts` — extend
+   `useBulkCreateSessionForProgram` (Phase 10) with the batch-splitting
+   loop described in Design Constraints; `CreateSessionForProgramModal.tsx`
+   gains a "students per session" input (optional — omitting it keeps
+   Phase 10's original single-session behavior); surface each batch's
+   progress/result distinctly (e.g. "Batch 2 of 3 enrolled") rather than
+   one opaque spinner for the whole operation.
+8. `tsc --noEmit`, `eslint`, `next build`; `mvn -pl services/scheduling test`.
+
+## Success Criteria
+
+- [ ] Creating a session with `capacity` set and bulk-enrolling exactly
+      that many students succeeds; one more than capacity is rejected with
+      a clear error, and zero enrollments are created on that rejected
+      call (no partial commit).
+- [ ] **Two concurrent `bulkEnroll` calls against the same session, whose
+      combined size would exceed capacity but neither alone would, never
+      both commit — the final enrollment count is provably `<= capacity`,
+      verified by a dedicated concurrency regression test, not just the
+      single-threaded overflow test.**
+- [ ] Every pre-existing `bulkEnroll`/session-creation test (no `capacity`
+      set) still passes unmodified — confirms this is additive, not a
+      breaking change to the existing contract.
+- [ ] A Program roster larger than one Host-specified capacity is split
+      into the correct number of sessions from the FE, each within
+      capacity, with zero students duplicated or missing across the
+      batches (verified by summing enrollments across all created sessions
+      and comparing to the roster count).
+- [ ] `mvn -pl services/scheduling test` and `pnpm --filter tenant-web lint`/`build`
+      both clean.
+
+## Quality and Testing State
+
+- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after
+  implementing this phase).
+- Testing: not started.
+
+## Risks
+
+- **This is the plan's own flagged riskiest phase.** No precedent for
+  capacity or splitting anywhere in the repo; the FE-computes/backend-guards
+  split of responsibility is a reasoned tradeoff, not a proven pattern —
+  budget real review time here during quality gate, don't rubber-stamp it
+  because every individual piece looks small in isolation.
+- The capacity check was originally specified as a plain read-then-write
+  (TOCTOU race under concurrent `bulkEnroll` calls against the same
+  session) — closed via a pessimistic write lock mirroring
+  `SessionService`'s existing lock pattern, with its own dedicated
+  concurrency regression test (see Success Criteria) so this isn't only
+  "fixed on paper."
+- Sequential (not parallel) batch creation is slower for very large
+  Programs — accepted for simplicity/observability; revisit only if a real
+  Program size makes this noticeably slow in practice.
