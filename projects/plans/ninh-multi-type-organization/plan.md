@@ -142,7 +142,7 @@ too (full v1, not phased out) per the user's own decision below.
       a plain read-then-write), and teaches Phase 10's orchestration to
       split a Program's roster into capacity-sized batches, each its own
       session.
-- [ ] Phase 12: `admin` + `tenant-web` — Class Merge/Split — bulk-move all
+- [x] Phase 12: `admin` + `tenant-web` — Class Merge/Split — bulk-move all
       students from one Class into another, or split one Class into two,
       building on Phase 3's transfer primitive.
 - [ ] Phase 13: `admin` + `tenant-web` — Audit Log + Excel Export + Program
