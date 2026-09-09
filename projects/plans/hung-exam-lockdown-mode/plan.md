@@ -95,3 +95,18 @@ Suggested invocation:
 /ck:cook pte-doc/projects/plans/hung-exam-lockdown-mode/phase-04-flutter-service-layer.md
 /ck:cook pte-doc/projects/plans/hung-exam-lockdown-mode/phase-05-ui-error-handling.md
 ```
+
+## Teacher Override Extension (FR-07) — 2026-09-09
+
+Phase 1 originally documented override via `PATCH /sessions/{id}/policy` only.
+This extension adds override at session creation time.
+
+**FR-07**: Teacher có thể override `LockdownMode` khi tạo session thông qua
+`CreateSessionRequest.lockdownMode` (optional, 6th field). Override thắng ExamMode default.
+
+- `CreateSessionRequest.lockdownMode` (optional, nullable)
+- Teacher override wins over `ExamMode` default
+- Validation: `PRACTICE + STRICT` → HTTP 400 (`IllegalArgumentException`)
+
+See: [spec.md](spec.md) "Teacher Override Extension (FR-07)" and
+[phase-01-backend-policy-extension.md](phase-01-backend-policy-extension.md) Step 3 (extended section)

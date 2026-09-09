@@ -137,6 +137,50 @@ if (request.lockdownMode() != null) {
 }
 ```
 
+#### CreateSessionRequest — Teacher Override (FR-07)
+
+**File:** `services/scheduling/src/main/java/com/pte/scheduling/dto/request/CreateSessionRequest.java`
+
+Add optional 6th field for teacher override:
+
+```java
+public record CreateSessionRequest(
+        @NotBlank String name,
+        @NotNull UUID snapshotPublicId,
+        @NotNull @Future Instant opensAt,
+        @NotNull Instant closesAt,
+        /** Null defaults to MOCK_TEST. */
+        ExamMode examMode,
+        /** Optional teacher override — null means use ExamMode default.
+         *  Validation: STRICT is not allowed when examMode is PRACTICE. */
+        LockdownMode lockdownMode  // NEW
+) {
+}
+```
+
+Update `SessionService.create()` to honor override:
+
+```java
+ExamMode mode = request.examMode() != null ? request.examMode() : ExamMode.MOCK_TEST;
+ExamPolicy policy = ExamPolicy.forMode(mode);
+
+// Teacher override: lockdownMode takes precedence if set
+if (request.lockdownMode() != null) {
+    if (mode == ExamMode.PRACTICE && request.lockdownMode() == LockdownMode.STRICT) {
+        throw new IllegalArgumentException(
+                "LockdownMode.STRICT is not allowed for PRACTICE exams");
+    }
+    policy.setLockdownMode(request.lockdownMode());
+}
+
+session.setPolicy(policy);
+```
+
+Add 3 test cases to `SessionServiceLockdownTest`:
+- `create_withTeacherOverride_lockdownModeOverridesDefault` — PRACTICE override to STANDARD
+- `create_withTeacherOverride_strictOnRealExam_usesStrict` — REAL_EXAM explicit STRICT
+- `create_withTeacherOverride_strictOnPractice_rejected` — PRACTICE + STRICT → 400 reject
+
 ### Step 4: Propagate Through Exam-Delivery Service
 
 **File:** `services/exam-delivery/src/main/java/com/pte/examdelivery/client/dto/SchedulingEntitlementResponse.java`

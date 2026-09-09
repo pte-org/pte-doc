@@ -311,6 +311,33 @@ Offline-first: violations lưu local trước, sync lên backend khi có network
 - **Proctor response time** < 30s for critical violations
 - **Student experience** (no negative feedback about lockdown UX)
 
+## Teacher Override Extension (FR-07)
+
+**FR-07**: Teacher có thể override `LockdownMode` khi tạo session thông qua field
+`lockdownMode` (optional, 6th field) trong `CreateSessionRequest`. Override thắng ExamMode default.
+
+**Validation rule**: Combination `examMode = PRACTICE` + `lockdownMode = STRICT`
+bị reject với HTTP 400 (`IllegalArgumentException`).
+
+**Default mapping (khi teacher không override)**:
+- `PRACTICE` → `NONE`
+- `MOCK_TEST` → `STANDARD`
+- `REAL_EXAM` → `STRICT`
+
+**Override matrix**:
+
+| Teacher override | PRACTICE | MOCK_TEST | REAL_EXAM |
+|---|---|---|---|
+| NONE | ✅ | ✅ | ✅ |
+| STANDARD | ✅ | ✅ | ✅ |
+| STRICT | ❌ reject | ✅ | ✅ |
+| null (default) | NONE | STANDARD | STRICT |
+
+**Files affected**:
+- `services/scheduling/src/main/java/com/pte/scheduling/dto/request/CreateSessionRequest.java`
+- `services/scheduling/src/main/java/com/pte/scheduling/service/SessionService.java`
+- `services/scheduling/src/test/java/com/pte/scheduling/service/SessionServiceLockdownTest.java`
+
 ## Open Questions
 
 1. **Multiple monitors**: Block secondary displays or just ensure fullscreen on primary?
