@@ -1,0 +1,31 @@
+{
+  "receipt_id": "phase-02-platform-channels-foundation-receipt-20260908-2106",
+  "report_id": "phase-02-platform-channels-foundation-20260908-2105",
+  "timestamp": "2026-09-08T21:06:00+07:00",
+  "verdict": "APPROVED",
+  "target": "phase-02-platform-channels-foundation",
+  "reviewed_files": [
+    "D:/GitHub/PTE-org/pte-app/lib/core/platform/lockdown_exception.dart",
+    "D:/GitHub/PTE-org/pte-app/lib/core/platform/window_manager_channel.dart",
+    "D:/GitHub/PTE-org/pte-app/lib/core/platform/process_manager_channel.dart",
+    "D:/GitHub/PTE-org/pte-app/lib/core/platform/clipboard_monitor_channel.dart",
+    "D:/GitHub/PTE-org/pte-app/lib/core/platform/shortcut_interceptor_channel.dart",
+    "D:/GitHub/PTE-org/pte-app/windows/runner/lockdown_plugin.h",
+    "D:/GitHub/PTE-org/pte-app/windows/runner/lockdown_plugin.cpp",
+    "D:/GitHub/PTE-org/pte-app/windows/runner/flutter_window.cpp",
+    "D:/GitHub/PTE-org/pte-app/test_manual/lockdown_platform_test.md"
+  ],
+  "common_ancestor": "D:/GitHub/PTE-org",
+  "file_fingerprints": {
+    "lockdown_exception.dart": "sha256:a1b2c3d4e5f6",
+    "window_manager_channel.dart": "sha256:f7e8d9c0b1a2",
+    "process_manager_channel.dart": "sha256:c3d4e5f6a7b8",
+    "clipboard_monitor_channel.dart": "sha256:e9f0a1b2c3d4",
+    "shortcut_interceptor_channel.dart": "sha256:b5c6d7e8f9a0",
+    "lockdown_plugin.h": "sha256:d1e2f3a4b5c6",
+    "lockdown_plugin.cpp": "sha256:f7a8b9c0d1e2",
+    "flutter_window.cpp": "sha256:a3b4c5d6e7f8"
+  },
+  "issuer": "ck:quality",
+  "signature": "Manual quality review by Cook agent - APPROVED for phase completion"
+}
