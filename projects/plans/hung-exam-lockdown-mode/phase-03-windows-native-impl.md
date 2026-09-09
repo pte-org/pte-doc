@@ -1,6 +1,6 @@
 # Phase 3: Native Windows Implementation
 
-**Status:** Ready  
+**Status:** Blocked (verification toolchain unavailable)  
 **Depends on:** Phase 2 (Platform Channels Foundation)  
 **Estimated effort:** 2 weeks  
 **Risk:** CRITICAL (native C++ code, Windows hooks, UAC permissions)
@@ -23,86 +23,20 @@ Implement Windows C++ native plugin for lockdown enforcement: fullscreen enforce
 - [ ] Unit tests (C++ mock tests for hook installation)
 - [ ] Manual QA on Windows 10/11
 
-## Steps
+## Implementation State
 
-### Step 1: Create Windows Plugin Shell
+The Windows plugin implementation now includes persistent EventChannel sinks, keyboard hook interception, clipboard format-listener handling, process enumeration and termination, reversible fullscreen state, and runner message forwarding. Dart platform-channel documentation is Windows-only, and no macOS lockdown implementation is present.
 
-**File:** `windows/runner/lockdown_plugin.h`
+## Quality and Testing State
 
-```cpp
-#ifndef LOCKDOWN_PLUGIN_H
-#define LOCKDOWN_PLUGIN_H
+- **Quality**: Blocked. The quality gate could not run because Flutter, Dart, CMake, the Microsoft C++ compiler, and Python are unavailable in PATH.
+- **Testing**: Blocked. Unit tests could not run because Flutter and Dart are unavailable in PATH. User selected tests=yes and quality=yes.
+- **Build Gate**: Blocked. Windows native compilation could not run because CMake and the Microsoft C++ compiler are unavailable in PATH.
+- **Static checks**: Passed. Editor diagnostics and `git diff --check` reported no errors.
+- **Commit**: Not created because required verification gates did not pass.
 
-#include <flutter/method_channel.h>
-#include <flutter/event_channel.h>
-#include <flutter/plugin_registrar_windows.h>
-#include <windows.h>
-#include <tlhelp32.h>
-#include <memory>
-#include <string>
-#include <vector>
+## Notes
 
-namespace lockdown {
-
-class LockdownPlugin {
- public:
-  static void RegisterWithRegistrar(flutter::PluginRegistrarWindows* registrar);
-
-  LockdownPlugin();
-  virtual ~LockdownPlugin();
-
- private:
-  // Window management
-  void EnforceFullscreen(const flutter::EncodableValue* args, 
-                         std::unique_ptr<flutter::MethodResult<>> result);
-  void ExitFullscreen(const flutter::EncodableValue* args,
-                      std::unique_ptr<flutter::MethodResult<>> result);
-
-  // Process management
-  void GetRunningProcesses(const flutter::EncodableValue* args,
-                           std::unique_ptr<flutter::MethodResult<>> result);
-  void TerminateProcess(const flutter::EncodableValue* args,
-                        std::unique_ptr<flutter::MethodResult<>> result);
-
-  // Clipboard
-  void BlockExternalPaste(const flutter::EncodableValue* args,
-                          std::unique_ptr<flutter::MethodResult<>> result);
-  void ClearClipboard(const flutter::EncodableValue* args,
-                      std::unique_ptr<flutter::MethodResult<>> result);
-  void UnblockClipboard(const flutter::EncodableValue* args,
-                        std::unique_ptr<flutter::MethodResult<>> result);
-
-  // Shortcuts
-  void BlockSystemShortcuts(const flutter::EncodableValue* args,
-                            std::unique_ptr<flutter::MethodResult<>> result);
-  void UnblockSystemShortcuts(const flutter::EncodableValue* args,
-                              std::unique_ptr<flutter::MethodResult<>> result);
-
-  // Event streaming (violations)
-  void SendViolationEvent(const std::string& event_type);
-
-  // Hooks
-  static LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam);
-  static LRESULT CALLBACK ClipboardProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
-  HWND window_handle_;
-  HHOOK keyboard_hook_;
-  HWND clipboard_listener_;
-  bool fullscreen_active_;
-  bool shortcuts_blocked_;
-  bool clipboard_blocked_;
-
-  std::unique_ptr<flutter::EventSink<>> window_event_sink_;
-  std::unique_ptr<flutter::EventSink<>> process_event_sink_;
-  std::unique_ptr<flutter::EventSink<>> shortcut_event_sink_;
-
-  static LockdownPlugin* instance_;  // For static hook callbacks
-};
-
-}  // namespace lockdown
-
-#endif  // LOCKDOWN_PLUGIN_H
-```
-
----
-
+- **Windows-only scope**: macOS implementation is deferred per the project specification.
+- **Windows UAC**: Process termination may require elevation for protected processes; this remains a runtime permission concern for Phase 4.
+- **Manual QA**: Windows 10/11 manual QA remains pending until the native build can be executed.
