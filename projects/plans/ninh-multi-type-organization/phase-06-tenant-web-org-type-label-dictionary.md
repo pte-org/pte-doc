@@ -84,29 +84,93 @@ source); Research Summary items 1, 8, 14.
 
 ## Success Criteria
 
-- [ ] A School-family tenant's Host sees "Khối"/"Lớp" everywhere the
+- [x] A School-family tenant's Host sees "Khối"/"Lớp" everywhere the
       dictionary is wired; a Center-family tenant sees "Khóa"/"Lớp" — same
       component code, different data.
-- [ ] A tenant with `organizationType: null` (pre-Phase-1 tenant, per
+- [x] A tenant with `organizationType: null` (pre-Phase-1 tenant, per
       Research Summary item 14) shows the documented default bucket's
       labels, never a blank string or a crash.
-- [ ] No component contains an `if (organizationType === "SCHOOL")`-style
+- [x] No component contains an `if (organizationType === "SCHOOL")`-style
       branch anywhere — grep confirms the dictionary/bucket-map is the only
       place org-type is compared to a literal.
-- [ ] Reloading the page (F5) never shows a label from a previous
+- [x] Reloading the page (F5) never shows a label from a previous
       session/tenant, even if the browser has stale `localStorage` data
       from a prior login.
-- [ ] `pnpm --filter tenant-web lint` and `pnpm --filter tenant-web build`
+- [x] `pnpm --filter tenant-web lint` and `pnpm --filter tenant-web build`
       both clean.
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after
-  implementing this phase).
-- Testing: not started.
+- Quality gate: APPROVED, 0 findings. Reviewer independently confirmed:
+  zero `organizationType ===` comparisons outside `features/orgLabels/`;
+  `sessionStorage.ts`'s `PteSession` untouched; the F5-staleness reasoning
+  holds (no persister, no `staleTime` override); the 3 Server-to-Client
+  Component conversions carry no regression (the original
+  `exams/[publicId]/page.tsx` had no data-fetching/`generateMetadata`/
+  `revalidate` beyond the `params` unwrap); `DashboardChrome.tsx`'s net
+  diff is a doc-comment only, genuinely a no-op; and the bucket map's
+  literal values exactly match vendor-web's `ORGANIZATION_TYPE_OPTIONS`
+  with no drift.
+- Testing: no automated test framework runs in `tenant-web` today (no
+  existing precedent in this app to extend — confirmed by grep, matches
+  Phase 2's "no precedent" finding pattern for other repos). Verified
+  instead via `pnpm --filter tenant-web lint` (clean) and
+  `pnpm --filter tenant-web build` (clean — `next build`'s static-page
+  generation + TypeScript pass is the closest thing to an integration
+  check this app has) and a manual grep sweep confirming zero
+  `organizationType ===` comparisons anywhere outside
+  `features/orgLabels/`.
+- **Bucketing choice confirmed with the user before implementing** (per
+  this phase's own Design Constraint): SCHOOL/UNIVERSITY -> SCHOOL_FAMILY
+  (Khối), TRAINING_CENTER/CORPORATE -> CENTER_FAMILY (Khóa), default
+  bucket for `null`/unmapped = CENTER_FAMILY. Implemented exactly as
+  confirmed.
+- **RSC boundary finding (not anticipated by the phase's Step 4 wording,
+  discovered during `next build`)**: the phase's Design Constraints
+  offered an alternative to touching every `page.tsx` — give
+  `DashboardChrome` a `navItems: NavItem[] | ((labels) => NavItem[])`
+  prop and resolve internally. This does not work in this Next.js
+  version: a Server Component `page.tsx` cannot pass a *function* prop to
+  a `"use client"` component (`next build` fails with "Functions cannot
+  be passed directly to Client Components"). Reverted `DashboardChrome`
+  to its original plain `NavItem[]` prop (zero net change to that file)
+  and instead followed Step 4 literally: `dashboard/page.tsx`,
+  `exams/page.tsx`, and `exams/[publicId]/page.tsx` all gained `"use
+  client"` + a direct `useOrgLabels()` + `buildHostNav(labels)` call.
+  `exams/[publicId]/page.tsx` additionally switched from an `async`
+  Server Component reading `params: Promise<...>` to a Client Component
+  using `useParams()` from `next/navigation`, since Client Components
+  can't be `async`/await a params Promise. This also resolved a
+  correctness question about *when* `useOrgLabels()`'s underlying
+  `useCurrentUser()` call fires relative to `RequireAuth`'s auth gate: it
+  fires only after the page component itself renders, which `RequireAuth`
+  already gates — same lifecycle as the pre-existing `HeaderActions`
+  call, no new pre-auth fetch introduced.
+- **F5 staleness (Step 6) verified, no extra plumbing needed**:
+  `apps/tenant-web/app/providers.tsx` creates a plain in-memory
+  `QueryClient` via `useState(() => new QueryClient())` with no persister
+  (no `persistQueryClient`/localStorage sync anywhere in `tenant-web` —
+  confirmed by grep). A real F5 destroys the entire JS heap, so the
+  `QueryClient` — and therefore any cached `useCurrentUser()` result — is
+  always empty on a fresh page load regardless of `localStorage`
+  contents; `useCurrentUser()`'s `useQuery` call (`features/auth/api.ts`)
+  has no `staleTime` override, so even a warm-cache scenario would
+  refetch on mount. No `staleTime: 0`/`refetchOnMount: "always"` addition
+  was needed. Residual (out-of-scope) observation: logging out and back
+  in as a *different* user *without* a full page reload (client-side
+  `router.replace`, no reload) could theoretically show a
+  stale-for-a-moment label, since logout doesn't call
+  `queryClient.clear()` — this is a pre-existing gap in the session-switch
+  flow unrelated to org-labels specifically (it would affect the header's
+  cached user name too), not something this phase's file scope covers;
+  flagged here rather than silently fixed or silently ignored.
+- `pnpm --filter tenant-web lint` — clean. `pnpm --filter tenant-web
+  build` — clean (`next build`, including static generation for
+  `/host/programs`, the new skeleton route).
 
 ## Risks
 
 - The School/Center bucket mapping is this plan's own inference from a
   4-value free-text field, not explicitly specified — flagged above and in
-  `plan.md` Risks for user confirmation.
+  `plan.md` Risks for user confirmation. **Resolved**: confirmed with the
+  user before implementation (see Quality and Testing State above).

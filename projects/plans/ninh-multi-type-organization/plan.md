@@ -116,7 +116,7 @@ too (full v1, not phased out) per the user's own decision below.
       `scheduling.EnrollmentService`'s pattern of one service class owning
       two join-entity CRUDs (assign/list/unassign), scoped to Class and
       Program respectively.
-- [ ] Phase 6: `tenant-web` — Org-Type Label Dictionary + Label-Driven
+- [x] Phase 6: `tenant-web` — Org-Type Label Dictionary + Label-Driven
       Navigation — a single keyed lookup (never if/else) driving every
       Program/Class-facing label (menu items, filter drill-down order,
       section headings), sourced from Phase 1's live `/auth/me` field.
