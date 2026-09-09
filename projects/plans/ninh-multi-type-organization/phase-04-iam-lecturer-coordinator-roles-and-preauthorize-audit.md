@@ -6,8 +6,10 @@ Adds `LECTURER` and `PROGRAM_COORDINATOR` as first-class `Role` enum values
 ("Lecturer is just like a Proctor" — a genuine new role, not folded into an
 existing one), lets a Host create accounts with these roles, and — because
 this enum is consumed by `@PreAuthorize` expressions across every service
-in the repo — performs a real, reviewed audit of all 26
-`@PreAuthorize`-bearing controllers to confirm nothing breaks.
+in the repo — performs a real, reviewed audit of all `@PreAuthorize`-bearing
+controllers to confirm nothing breaks (26 named at plan-writing time; 31
+by the time this phase actually executed — see the audit table's
+correction note).
 
 Maps to: `plan.md` Decision 2; Research Summary items 6, 7.
 
@@ -19,9 +21,12 @@ Maps to: `plan.md` Decision 2; Research Summary items 6, 7.
   and Phases 12/13's new controllers don't exist yet when this phase's
   audit runs, so they cannot be reviewed here. **Phase 13 (the last phase)
   is responsible for a final, consolidated re-audit** covering every
-  `@PreAuthorize`-bearing file added by Phases 2/3/5/12/13 on top of this
-  phase's original 26 — see Phase 13's own Design Constraints/Steps for the
-  exact mechanics. This phase's own scope is: the original 26 files, the
+  `@PreAuthorize`-bearing file added by Phases 5/12/13 on top of this
+  phase's 31 (Phases 2/3's files are already absorbed into this phase's own
+  audit table, rows 27-31 — see its correction note; Phase 13 must still
+  independently re-grep rather than trust "31" as a given baseline, per
+  this file's Risks section) — see Phase 13's own Design Constraints/Steps
+  for the exact mechanics. This phase's own scope is: the 31 files, the
   2 new enum values, and `HOST_ASSIGNABLE_ROLES`. Do not treat this
   phase's Success Criteria as "the audit is done" — it's the first,
   necessary pass, not the complete one.
@@ -99,28 +104,110 @@ Maps to: `plan.md` Decision 2; Research Summary items 6, 7.
 
 ## Success Criteria
 
-- [ ] All 26 of this phase's original `@PreAuthorize`-bearing files (see
-      Step 3's list) are individually reviewed and classified; the
-      classification is recorded in this file (append a table/list here
-      once done) — zero files skipped, zero files marked "assumed fine"
-      without being opened. (Files added by later phases are explicitly
-      Phase 13's responsibility, not this phase's — see Design
-      Constraints.)
-- [ ] Zero controllers found with an exclusion-style (`!hasRole`) check
+- [x] All `@PreAuthorize`-bearing files that actually existed in the repo
+      when this phase executed are individually reviewed and classified;
+      the classification is recorded in this file — zero files skipped,
+      zero files marked "assumed fine" without being opened. This turned
+      out to be 31, not the 26 originally listed in Step 3 (that list was
+      a plan-writing-time snapshot; Phases 2/3, already implemented and
+      committed by the time this phase ran, had added 5 more — see the
+      audit table's correction note and rows 27-31). Files from phases not
+      yet implemented at all (5/12/13) remain Phase 13's responsibility.
+- [x] Zero controllers found with an exclusion-style (`!hasRole`) check
       that would unintentionally admit `LECTURER`/`PROGRAM_COORDINATOR` —
       or, if one is found, it's fixed and documented here, not silently
       left.
-- [ ] A `HOST_ADMIN` can successfully create a `LECTURER` and a
+- [x] A `HOST_ADMIN` can successfully create a `LECTURER` and a
       `PROGRAM_COORDINATOR` account via the existing `POST /users`.
-- [ ] `mvn -pl services/iam test` passes.
-- [ ] `pnpm --filter tenant-web build` and `pnpm --filter @pte/ui lint`
-      both stay clean after the `SessionRole` widening.
+- [x] `mvn -pl services/iam test` passes.
+- [x] `pnpm --filter tenant-web build` stays clean after the `SessionRole`
+      widening. (`pnpm --filter @pte/ui lint` as originally written in
+      Step 7 does not exist — `packages/ui/package.json` only defines a
+      `typecheck` script, no `lint` script; ran
+      `pnpm --filter @pte/ui typecheck` instead, which is the actual
+      equivalent check and passes clean. Documented here rather than
+      silently skipped.)
+
+### Audit table (Step 3/4 — original 26 files)
+
+All 26 read in full. Classification legend: **(a)** explicit
+`hasRole`/`hasAnyRole` allow-list, safe by construction — a new enum value
+is never implicitly granted; **(b)** exclusion-style check; **(c)**
+something else.
+
+**Correction (post-quality-gate):** the Step 3 grep that produced this
+26-file list was run against the plan-writing-time snapshot of the repo,
+not re-run against the tree as it actually stood when this phase executed.
+By execution time, Phases 2 and 3 (both already implemented and committed
+earlier in this same plan) had added 5 more `@PreAuthorize`-bearing
+controllers that the original list never named — the Design Constraints'
+carve-out only names Phase 5/12/13 as "don't exist yet," which correctly
+implies Phases 1-3's controllers (already built by the time Phase 4 runs)
+were always in scope, not excluded. The quality gate caught this
+undercount; all 5 are added below (rows 27-31) rather than left
+unaudited. Total is **31 files**, not 26.
+
+| # | File | Service | Expression(s) | Class |
+|---|------|---------|----------------|-------|
+| 1 | `ScoringReviewController` | scoring | `hasAnyRole('HOST_ADMIN','HOST_AUTHOR')` | (a) |
+| 2 | `SessionController` | scheduling | class: `hasAnyRole('HOST_ADMIN','HOST_AUTHOR')`; 2 methods: `hasRole('HOST_ADMIN')` | (a) |
+| 3 | `ProctorAssignmentController` | scheduling | `hasRole('HOST_ADMIN')` | (a) |
+| 4 | `EnrollmentController` | scheduling | class: `hasAnyRole('HOST_ADMIN','HOST_AUTHOR')`; 1 method: `hasRole('HOST_ADMIN')` | (a) |
+| 5 | `InternalMediaController` | media | `hasRole('INTERNAL_SERVICE')` | (a) |
+| 6 | `UserController` | iam | class: `hasAnyRole('PLATFORM_ADMIN','HOST_ADMIN')`; 1 method: `hasRole('PLATFORM_ADMIN')`; `resetPassword` has no method override — delegated to `UserService#resetPassword`'s `HOST_RESETTABLE_ROLES.containsAll(...)` check (also an allow-list, currently `{STUDENT, PROCTOR}` — a Host still cannot reset a Lecturer/Coordinator's password; that's an existing restriction, not a regression, and out of this plan's scope to widen) | (a) |
+| 7 | `AttemptController` | exam-delivery | `hasRole('STUDENT')` | (a) |
+| 8 | `TenantController` | admin | `hasRole('PLATFORM_ADMIN')` | (a) |
+| 9 | `OrganizationController` | admin | `hasRole('PLATFORM_ADMIN')` | (a) |
+| 10 | `InternalSnapshotController` | authoring | `hasRole('INTERNAL_SERVICE')` | (a) |
+| 11 | `InternalExportController` | scoring | `hasRole('INTERNAL_SERVICE')` | (a) |
+| 12 | `InternalSessionController` | scheduling | `hasRole('INTERNAL_SERVICE')` | (a) |
+| 13 | `InternalRebuildController` | reporting | `hasRole('INTERNAL_SERVICE_BOOTSTRAP')` | (a) |
+| 14 | `RebuildController` | reporting | `hasRole('HOST_ADMIN')` | (a) |
+| 15 | `ReportController` | reporting | `hasAnyRole('STUDENT','HOST_ADMIN','HOST_AUTHOR','PLATFORM_ADMIN','PLATFORM_AUTHOR')` | (a) |
+| 16 | `ProctorRoleRequiredException` | proctor | Not a check site — the exception type thrown by #17's manual check; listed for completeness | (c), no-op |
+| 17 | `ProctorStompController` | proctor | `@PreAuthorize` doesn't enforce on `@MessageMapping`; manual check `if (!currentUser.hasRole("PROCTOR")) throw ...` in one shared `currentUser(Principal)` helper every handler routes through. Syntactically a negation, but semantically a single-role allow-list (reject unless exactly `PROCTOR`) — functionally identical to `hasRole('PROCTOR')`, not a "reject on some other condition" pattern. `LECTURER`/`PROGRAM_COORDINATOR` still fail this check. Confirmed via repo-wide grep for `!.*hasRole` — this is the only such site in the entire codebase. | (b)-shaped, (a)-safe |
+| 18 | `ViolationAuditController` | proctor | `hasAnyRole('PROCTOR','HOST_ADMIN','HOST_AUTHOR')` | (a) |
+| 19 | `ProctorSessionController` | proctor | `hasRole('PROCTOR')` | (a) |
+| 20 | `NotificationLogController` | notification | `hasAnyRole('HOST_ADMIN','HOST_AUTHOR')` | (a) |
+| 21 | `TimerController` | exam-delivery | `hasRole('STUDENT')` | (a) |
+| 22 | `InternalExportController` | exam-delivery | `hasRole('INTERNAL_SERVICE')` | (a) |
+| 23 | `SnapshotController` | authoring | `hasAnyRole('PLATFORM_ADMIN','PLATFORM_AUTHOR','HOST_ADMIN','HOST_AUTHOR')` | (a) |
+| 24 | `QuestionController` | authoring | `hasAnyRole('PLATFORM_ADMIN','PLATFORM_AUTHOR','HOST_ADMIN','HOST_AUTHOR')` | (a) |
+| 25 | `BlueprintController` | authoring | `hasAnyRole('PLATFORM_ADMIN','PLATFORM_AUTHOR','HOST_ADMIN','HOST_AUTHOR')` | (a) |
+| 26 | `ResourceServerJwt` | pte-common | Not a check site — maps the JWT `roles` claim to `ROLE_*` authorities generically (`setAuthoritiesClaimName`/`setAuthorityPrefix`, no hardcoded role list). Re-read in full this session (not trusted from prior research note) — confirmed unchanged and still fully role-agnostic. `AccessTokenIssuer.java` (iam) also re-read: `user.getRoles().stream().map(Role::name).toList()` — also fully generic, no switch/hardcoded list. | (c), confirmed generic |
+| 27 | `ClassController` | admin (Phase 3) | `hasAnyRole('HOST_ADMIN','HOST_AUTHOR')`, no method-level overrides | (a) |
+| 28 | `ClassMembershipController` | admin (Phase 3) | `hasAnyRole('HOST_ADMIN','HOST_AUTHOR')` | (a) |
+| 29 | `HostOrganizationController` | admin (Phase 2) | `hasAnyRole('HOST_ADMIN','HOST_AUTHOR')` | (a) |
+| 30 | `ProgramController` | admin (Phase 2) | `hasAnyRole('HOST_ADMIN','HOST_AUTHOR')`, no method-level overrides | (a) |
+| 31 | `StudentEnrollmentController` | scheduling (Phase 3) | `hasAnyRole('HOST_ADMIN','HOST_AUTHOR')` | (a) |
+
+**Result: zero files in category (b)** (a true exclusion-style check that
+would unintentionally admit a new role), across all 31. File #17's manual
+check is syntactically negated but semantically an allow-list of one,
+confirmed by a repo-wide `grep` for any other `!.*hasRole` pattern in
+`services/*/src/main/java` and `pte-common/src/main/java` — no other hits.
+No fix was needed anywhere.
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after
-  implementing this phase).
-- Testing: not started.
+- Quality gate: APPROVED after fix (1 HIGH found + fixed — QUAL-001: the
+  audit's file list/count (26) was a plan-writing-time snapshot, not
+  re-verified against the tree as it stood when this phase actually
+  executed; Phases 2/3, already committed by then, had added 5 more
+  `@PreAuthorize` controllers that were never named or classified. Closed
+  by re-running the grep, adding rows 27-31 to the audit table, and
+  correcting every "26" reference in this file to 31 — all 5 turned out to
+  be the same safe `hasAnyRole('HOST_ADMIN','HOST_AUTHOR')` allow-list
+  pattern as the original 26, so no unintended widening actually existed,
+  but the audit's completeness claim needed to be honest about what it
+  actually covered).
+- Testing: done — `UserProvisioningHelperTest` (new, 8 tests — no test of
+  this class existed before; `UserServiceTest` mocks it out entirely, so
+  `resolveAndAuthorizeRoles`'s actual `HOST_ASSIGNABLE_ROLES` allow-list
+  logic was previously untested by anything). `mvn -pl services/iam -am
+  test` — BUILD SUCCESS, 34/34. `pnpm --filter @pte/ui typecheck` — clean.
+  `pnpm --filter tenant-web build` — clean (TypeScript + Turbopack build
+  both succeed).
 
 ## Risks
 
@@ -134,3 +221,12 @@ Maps to: `plan.md` Decision 2; Research Summary items 6, 7.
   the whole plan comes from Phase 13's consolidated re-audit, not from
   this phase alone. If Phase 13 is ever dropped/skipped, this residual gap
   must be called out explicitly, not silently absorbed.
+- **Realized risk, now fixed**: this phase's own file list (Step 3) was
+  written once at plan-creation time and then trusted verbatim during
+  execution instead of being re-derived — by execution time Phases 2/3 had
+  already added 5 more `@PreAuthorize` files that the stale list didn't
+  name (see the audit table's correction note, rows 27-31). **Phase 13
+  must independently re-run its own `grep -r "@PreAuthorize"` against the
+  tree at that time rather than trusting this phase's "31" as a given
+  baseline** — the same staleness failure mode could recur if any phase
+  between now and Phase 13 adds more `@PreAuthorize` sites.

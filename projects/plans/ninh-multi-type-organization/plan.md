@@ -106,7 +106,7 @@ too (full v1, not phased out) per the user's own decision below.
       adds the matching guard to Class archive/deactivate, and a new small
       `scheduling` read endpoint (a student's current enrollments) so the
       transfer flow can warn about a pending exam request.
-- [ ] Phase 4: `iam` — `LECTURER` + `PROGRAM_COORDINATOR` Roles + Cross-Service
+- [x] Phase 4: `iam` — `LECTURER` + `PROGRAM_COORDINATOR` Roles + Cross-Service
       `@PreAuthorize` Audit (Pass 1 of 2) — adds the 2 enum values, widens
       `UserProvisioningHelper.HOST_ASSIGNABLE_ROLES`, and reviews the 26
       `@PreAuthorize`-bearing controllers that exist at this point in the
