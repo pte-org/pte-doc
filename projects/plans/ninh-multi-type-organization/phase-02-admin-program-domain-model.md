@@ -123,17 +123,17 @@ items 2, 3.
 
 ## Success Criteria
 
-- [ ] A `HOST_ADMIN` can list its own tenant's Organizations
+- [x] A `HOST_ADMIN` can list its own tenant's Organizations
       (`GET /organizations`) without any platform-admin involvement.
-- [ ] Creating 2 Programs with the same name under 2 *different*
+- [x] Creating 2 Programs with the same name under 2 *different*
       Organizations of the same tenant both succeed; the same name twice
       under the *same* Organization is rejected.
-- [ ] Archiving a Program removes it from `GET .../programs` (list) but it
+- [x] Archiving a Program removes it from `GET .../programs` (list) but it
       remains fetchable by `GET .../programs/{publicId}` (get-by-id still
       works — archive is a visibility/lifecycle flag, not a hard delete).
-- [ ] A Host from Tenant A requesting a Program that belongs to Tenant B's
+- [x] A Host from Tenant A requesting a Program that belongs to Tenant B's
       Organization gets 404, not the Program's data.
-- [ ] `mvn -pl services/admin test` passes, including all new tests from
+- [x] `mvn -pl services/admin test` passes, including all new tests from
       Step 8.
 - [ ] (Cross-phase — verify once Phase 3 has landed, not blocking this
       phase's own completion): `ProgramService.archive()` rejects when the
@@ -143,9 +143,16 @@ items 2, 3.
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after
-  implementing this phase).
-- Testing: not started.
+- Quality gate: APPROVED (1 MEDIUM found + fixed — `ProgramServiceTest`'s
+  archive-exclusion test only proved service pass-through, not that
+  `DeletedFalse` actually filters at the JPA/SQL level; closed by adding
+  `spring-boot-starter-data-jpa-test` + H2 (test-scope only) and a real
+  `@DataJpaTest` — `ProgramRepositoryTest` — proving the derived query
+  against a live embedded database).
+- Testing: done — `ProgramTest` (4), `ProgramMapperTest` (1),
+  `ProgramRepositoryTest` (3, `@DataJpaTest`), `ProgramServiceTest` (14),
+  `OrganizationServiceTest` (+2 for `listForCaller`/`getForCaller`).
+  `mvn -pl services/admin -am test` — BUILD SUCCESS, 53/53.
 
 ## Risks
 

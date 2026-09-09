@@ -89,7 +89,7 @@ too (full v1, not phased out) per the user's own decision below.
       event payload today, just never consumed) and exposes it on
       `GET /auth/me` so the Host FE has a live, re-fetchable source for
       label selection.
-- [ ] Phase 2: `admin` — Program Domain Model (Host self-service CRUD under
+- [x] Phase 2: `admin` — Program Domain Model (Host self-service CRUD under
       Organization) — new `Program` entity + status lifecycle + soft-delete
       (first real use of `BaseEntity.deleted`, currently unused anywhere in
       the repo) + the first-ever HOST_ADMIN-scoped self-service endpoints in
