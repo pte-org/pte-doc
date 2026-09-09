@@ -96,7 +96,7 @@ too (full v1, not phased out) per the user's own decision below.
       `admin` (today `TenantController`/`OrganizationController` are
       PLATFORM_ADMIN-only). Ships `archive()` without an active-children
       guard (nothing to check yet); Phase 3 retrofits that guard.
-- [ ] Phase 3: `admin` (+small `scheduling` addition) — Class Domain Model +
+- [x] Phase 3: `admin` (+small `scheduling` addition) — Class Domain Model +
       Student Assignment — `StudentClass` entity under Program,
       `ClassMembership` join entity (1-N enforced by a DB unique constraint
       on `studentPublicId`), assign/unassign/transfer, a new tenant-wide

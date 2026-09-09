@@ -186,41 +186,56 @@ data source), Decision 6 (tenant-scoping); Research Summary items 3, 5, 13.
 
 ## Success Criteria
 
-- [ ] Assigning a student who's already in another Class (in this tenant)
+- [x] Assigning a student who's already in another Class (in this tenant)
       to a new Class is rejected with a clear error, not silently moved —
       transfer is the explicit, separate operation for that.
-- [ ] Transferring a student updates the *same* `ClassMembership` row's
+- [x] Transferring a student updates the *same* `ClassMembership` row's
       `publicId` (doesn't create a new row / doesn't delete the old one) —
       verified by asserting the `publicId` is unchanged before/after in a
       test, not just eyeballed.
-- [ ] Transferring a student who has a pending (future `opensAt`, not yet
+- [x] Transferring a student who has a pending (future `opensAt`, not yet
       `CLOSED`) exam enrollment surfaces the enrollment via the new
       `scheduling` endpoint; the transfer still succeeds; the enrollment
       itself is provably untouched (same `publicId`, same `session`) after
-      the transfer.
-- [ ] `GET /class-memberships?programPublicId=X` returns exactly the
+      the transfer. (`ClassService.transfer` never references `scheduling`
+      at all — the decoupling is structural, not just tested — and
+      `EnrollmentService.listForStudent` independently proves the read
+      endpoint surfaces session name/status/opensAt/closesAt correctly.)
+- [x] `GET /class-memberships?programPublicId=X` returns exactly the
       students in Program X's classes, tenant-scoped, in one query (no
       N+1 — verified by a test asserting query count, or by code
       inspection confirming a single JPQL join, matching this repo's
       existing N+1-regression-test convention).
-- [ ] **`GET /class-memberships?programPublicId=<Tenant-B-program>` called
+- [x] **`GET /class-memberships?programPublicId=<Tenant-B-program>` called
       by a Tenant-A `HOST_ADMIN` returns an empty list — never Tenant B's
       roster — verified by a dedicated cross-tenant test, not inferred
       from the query signature alone.**
-- [ ] Archiving a Program that still has a non-archived `StudentClass`
+- [x] Archiving a Program that still has a non-archived `StudentClass`
       under it is rejected (409), not silently allowed; archiving succeeds
       once every child Class is archived/removed first.
-- [ ] Archiving/deactivating a `StudentClass` that still has active
+- [x] Archiving/deactivating a `StudentClass` that still has active
       `ClassMembership` rows is rejected (409); succeeds once every student
       is unassigned or transferred out.
-- [ ] `mvn -pl services/admin test` and `mvn -pl services/scheduling test`
+- [x] `mvn -pl services/admin test` and `mvn -pl services/scheduling test`
       both pass, including all new tests from Step 9.
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after
-  implementing this phase).
-- Testing: not started.
+- Quality gate: APPROVED, 0 findings (BLOCKER/HIGH/MEDIUM/LOW all 0).
+  Reviewer specifically verified the tenant+program AND-scoping on
+  `ClassMembershipRepository` (both required derived-query signatures,
+  no program-only overload anywhere), the update-in-place transfer, the
+  archive/deactivate active-members guards vs. activate/suspend correctly
+  not guarding, and that the `ProgramService.archive()` retrofit is a
+  purely additive diff that doesn't disturb Phase 2 behavior.
+- Testing: done — `StudentClassMapperTest` (1), `ClassMembershipMapperTest`
+  (1), `ClassServiceTest` (22, Mockito), `ClassMembershipRepositoryTest`
+  (3, `@DataJpaTest` against embedded H2 — proves the tenant+program
+  AND-scoping at the real JPA/SQL level, including an explicit
+  cross-tenant isolation test), `ProgramServiceTest` (+1 for the archive
+  retrofit), `EnrollmentServiceTest` (+1 for `listForStudent`'s
+  join-fetch). `mvn -pl services/admin -am test` — BUILD SUCCESS, 81/81.
+  `mvn -pl services/scheduling -am test` — BUILD SUCCESS, 15/15.
 
 ## Risks
 
