@@ -135,7 +135,7 @@ too (full v1, not phased out) per the user's own decision below.
       Sessions for a Whole Program — FE-orchestrated: resolve the Program's
       roster (Phase 3's endpoint), create session(s), call the existing
       `bulkEnroll`. No new inter-service call.
-- [ ] Phase 11: `scheduling` — Capacity-Aware Batch Splitting — the riskiest,
+- [x] Phase 11: `scheduling` — Capacity-Aware Batch Splitting — the riskiest,
       most exploratory phase. `scheduling` has zero capacity concept today;
       this phase introduces a minimal `capacity` field on `ExamSession`,
       enforces it in `bulkEnroll` under a pessimistic lock (race-safe, not

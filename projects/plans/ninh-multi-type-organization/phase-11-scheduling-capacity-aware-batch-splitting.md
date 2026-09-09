@@ -131,31 +131,170 @@ this entire plan).
 
 ## Success Criteria
 
-- [ ] Creating a session with `capacity` set and bulk-enrolling exactly
+- [x] Creating a session with `capacity` set and bulk-enrolling exactly
       that many students succeeds; one more than capacity is rejected with
       a clear error, and zero enrollments are created on that rejected
       call (no partial commit).
-- [ ] **Two concurrent `bulkEnroll` calls against the same session, whose
+- [x] **Two concurrent `bulkEnroll` calls against the same session, whose
       combined size would exceed capacity but neither alone would, never
       both commit — the final enrollment count is provably `<= capacity`,
       verified by a dedicated concurrency regression test, not just the
       single-threaded overflow test.**
-- [ ] Every pre-existing `bulkEnroll`/session-creation test (no `capacity`
+- [x] Every pre-existing `bulkEnroll`/session-creation test (no `capacity`
       set) still passes unmodified — confirms this is additive, not a
       breaking change to the existing contract.
-- [ ] A Program roster larger than one Host-specified capacity is split
+- [x] A Program roster larger than one Host-specified capacity is split
       into the correct number of sessions from the FE, each within
       capacity, with zero students duplicated or missing across the
       batches (verified by summing enrollments across all created sessions
       and comparing to the roster count).
-- [ ] `mvn -pl services/scheduling test` and `pnpm --filter tenant-web lint`/`build`
+- [x] `mvn -pl services/scheduling test` and `pnpm --filter tenant-web lint`/`build`
       both clean.
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after
-  implementing this phase).
-- Testing: not started.
+- Quality gate: APPROVED after 2 review rounds. Round 1 confirmed the
+  backend concurrency/lock/capacity-check design sound (pessimistic lock
+  acquired before the count-check and held through `saveAll` in the same
+  transaction; `>` vs `>=` boundary matches intent; new tests non-vacuous)
+  but flagged 3 findings on the FE orchestration side, all
+  `introduced_by_current_change`:
+  - QUAL-001 (HIGH): closing `CreateSessionForProgramModal` mid-run didn't
+    stop the sequential batch loop — unmounting the hook doesn't cancel
+    its in-flight `async` loop, so every remaining batch kept silently
+    creating real sessions/enrollments in the background, and reopening +
+    resubmitting could then double-run the whole roster. Fixed with a
+    `cancelledRef` checked before each loop iteration in `runFrom`,
+    set by `reset()` (called from the modal's `handleClose`, which every
+    close affordance — footer button/X/backdrop/Escape — already funneled
+    through) and cleared by `run()`/`retryBatch()`. The one batch already
+    in flight at close-time still completes (no `AbortController` wiring
+    exists anywhere in this repo's `apiClient`) — documented as an
+    accepted, narrower residual limitation. Footer button label now reads
+    "Cancel" instead of "Done" while a run is in progress.
+  - QUAL-003 (MEDIUM): `opensAt` is computed once and reused unchanged
+    across every sequential batch's `POST /sessions`, so for a large
+    roster split into many batches with a short lead time, later batches
+    could spuriously fail the backend's `@Future` validation purely from
+    elapsed wall-clock time. Fixed with a non-blocking, constants-routed
+    warning shown whenever more than one session will be created,
+    telling the Host to leave extra lead time — did not auto-advance
+    `opensAt` per batch, since all batches are meant to share one exam
+    window, not be staggered.
+  - QUAL-002 (MEDIUM): a Host-triggered retry after a client-observed
+    (but possibly server-committed) session-creation failure could create
+    a second, duplicate session for that batch. First fix attempt added a
+    `findExistingBatchSession(name)` lookup reusing any existing
+    tenant-wide session sharing the batch's exact name before creating a
+    new one — round 2 review caught that this introduced a **worse**,
+    HIGH-severity regression (QUAL-004): `listSessions` has no
+    Program/blueprint scoping and `ExamSession` carries none either, so an
+    unrelated exam elsewhere in the tenant sharing the same (realistically
+    reused, e.g. "Mid-term PTE Mock Test") name would be silently matched
+    and this batch's actual students enrolled into someone else's
+    session — a misdirected-enrollment/access-control failure, strictly
+    worse than the duplicate-session bug it was meant to fix. Reverted
+    the lookup entirely; `runBatch` is back to a plain
+    `createSessionMutation.mutateAsync(...)` call. The original, narrower
+    duplicate-session risk is accepted and documented in the hook's doc
+    comment as out of this phase's scope — fixing it properly needs real
+    idempotency-key infrastructure, which doesn't exist anywhere in this
+    repo today.
+  Round 2 re-verified QUAL-001/003 fixed correctly, caught QUAL-004 in the
+  QUAL-002 fix attempt, and round 3 (after the revert) gave final verdict
+  **APPROVED**, 0 open findings. `pnpm --filter tenant-web build`/`lint`
+  and `pnpm --filter @pte/api-client typecheck` re-verified clean after
+  every round.
+- Testing:
+  - Backend: `mvn -pl services/scheduling -am test` — BUILD SUCCESS, 19/19
+    (15 pre-existing + 4 new: exact-fit success, under-capacity success,
+    overflow rejection with no partial commit, and the sequential
+    concurrency-simulation test below). The 2 pre-existing `bulkEnroll`
+    tests were updated to stub `sessionService.findOwnedWithLock(...)`
+    instead of `findOwned(...)` (the method `bulkEnroll` now calls) — a
+    required mechanical change, not a behavior change; their assertions on
+    response shape/outbox writes are unchanged. Added an explicit
+    `verify(enrollmentRepository, never()).countBySessionId(...)` to the
+    unmodified-capacity test to make "capacity == null skips the check
+    entirely" a real assertion, not just an inference.
+  - **Concurrency regression test — an honest scope note.** This repo has
+    zero integration-test infrastructure for any service (confirmed:
+    `services/scheduling/pom.xml` has no H2/Testcontainers dependency,
+    only the runtime PostgreSQL driver; the whole test suite is
+    Mockito-only). A `@Lock(PESSIMISTIC_WRITE)` row lock is a real
+    Postgres-level mechanism — no Mockito mock can represent actual
+    thread contention on it, so a literal multi-threaded proof of the
+    lock itself is out of this environment's reach without adding
+    Testcontainers (a larger infra change than this phase's scope).
+    Followed the same precedent this file's own pre-existing
+    `bulkEnroll_concurrentRaceOnSave_...` test already set: simulate the
+    race's OUTCOME rather than real threads. The new
+    `bulkEnroll_twoSequentialCallsNearCapacity_...` test chains
+    `countBySessionId`'s mock return value across 2 sequential calls (8,
+    then 10) to model exactly what the lock guarantees — the second call
+    only ever observes the first call's already-committed count, never a
+    stale pre-write one — and asserts the first call succeeds, the second
+    is rejected, and `saveAll` only ran once (the committed total across
+    both calls never exceeds capacity). This proves the SERVICE-LEVEL
+    invariant the lock exists to protect; it does not independently prove
+    Hibernate's `@Lock` annotation itself takes a real DB row lock (that
+    line is trusted from `SessionService.open()`/`patchPolicy()`'s
+    existing, already-shipped use of the identical lock query). Flagging
+    this explicitly rather than claiming a stronger guarantee than what
+    was actually tested.
+  - Frontend: no automated test framework runs in `tenant-web` (same
+    no-precedent finding as Phases 6-10). Verified via
+    `pnpm --filter tenant-web lint` (clean), `pnpm --filter tenant-web build`
+    (clean, same 6 routes as Phase 10 — no new route needed), and
+    `pnpm --filter @pte/api-client typecheck` (clean; `SessionResponse`/
+    `CreateSessionRequest` gained `capacity`, no new request modules).
+  - FE batch-splitting math (`splitIntoBatches`) verified by construction,
+    not by an automated test: it's a standard contiguous-slice chunk over
+    the roster array (`slice(i, i + studentsPerSession)` stepping by
+    `studentsPerSession`), so "every student appears in exactly one batch,
+    `ceil(N/C)` batches total" holds structurally — there is no code path
+    that could skip or duplicate an index.
+- **Design decisions made during implementation, not fully specified by
+  the phase's literal Steps**:
+  - `SessionService.findOwnedWithLock(...)` is a new package-private
+    method that wraps the already-existing
+    `findWithLockByPublicIdAndTenantId` query (built for `open()`/
+    `patchPolicy()`) — chose to expose it through `SessionService` (which
+    already owns `ExamSessionRepository`) rather than inject
+    `ExamSessionRepository` directly into `EnrollmentService`, keeping
+    repository access encapsulated behind the service that already owns
+    it, consistent with `findOwned`'s existing visibility/pattern.
+  - `web/SchedulingExceptionHandler.java` needed no code change —
+    confirmed by reading `pte-common`'s `GlobalExceptionHandler.handleDomain`,
+    which already maps ANY `DomainException` subclass to its own
+    `getStatus()` generically (this is exactly how `AlreadyEnrolledException`
+    already gets its 409 today). `SessionCapacityExceededException` only
+    needed to declare `HttpStatus.CONFLICT` in its own constructor,
+    mirroring `AlreadyEnrolledException` exactly.
+  - `useBulkCreateSessionForProgram`'s return shape changed from Phase
+    10's (`createSession`/`bulkEnrollStudents`/`createdSession`/`run`/
+    `retryEnroll`) to a batch-array shape (`batches`/`isRunning`/`run`/
+    `retryBatch`) — a genuine breaking change to that hook's contract, not
+    an additive extension, because Phase 10's single-session model doesn't
+    generalize to N sessions without restructuring the state shape. Since
+    `CreateSessionForProgramModal.tsx` is this hook's only consumer, both
+    were updated together; a single batch (no `studentsPerSession`
+    supplied) is the N=1 case of the same general model, so Phase 10's
+    original single-session UX is preserved exactly (unsuffixed session
+    name, one row shown), not just "still technically supported."
+  - Each created session's own `capacity` is set to the Host-specified
+    `studentsPerSession` value (not left unlimited) specifically so the
+    backend's Phase 11 capacity check is a real defense-in-depth guard on
+    every batch, not just a ceiling that happens to exist on paper — per
+    the Design Constraints' explicit "even if the FE has a bug, the
+    backend refuses" requirement.
+  - The sequential batch runner stops at the first failed batch (session-
+    creation or enroll) rather than skipping ahead to attempt later
+    batches while one is left unresolved — matches the Design Constraints'
+    "keep failure/retry semantics simple and observable" instruction, and
+    `retryBatch(index)` resumes the same sequential loop from that index
+    onward afterward, so a Host doesn't have to manually retry every
+    subsequent batch by hand once the blocking one is fixed.
 
 ## Risks
 
