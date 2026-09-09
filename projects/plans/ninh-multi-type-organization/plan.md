@@ -112,7 +112,7 @@ too (full v1, not phased out) per the user's own decision below.
       `@PreAuthorize`-bearing controllers that exist at this point in the
       plan for unintended widening. Deliberately does not (cannot) cover
       controllers added by later phases — Phase 13 closes that out.
-- [ ] Phase 5: `admin` — Lecturer/Coordinator Assignment CRUD — mirrors
+- [x] Phase 5: `admin` — Lecturer/Coordinator Assignment CRUD — mirrors
       `scheduling.EnrollmentService`'s pattern of one service class owning
       two join-entity CRUDs (assign/list/unassign), scoped to Class and
       Program respectively.

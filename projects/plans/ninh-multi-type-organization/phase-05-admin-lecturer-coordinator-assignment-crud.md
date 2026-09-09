@@ -82,23 +82,41 @@ Maps to: `plan.md` Decision 2; Research Summary item 6.
 
 ## Success Criteria
 
-- [ ] A `HOST_ADMIN` can assign a `LECTURER` user to a `StudentClass`, list
+- [x] A `HOST_ADMIN` can assign a `LECTURER` user to a `StudentClass`, list
       assignees, and unassign — the same user can be reassigned to a
       different Class afterward.
-- [ ] A `HOST_ADMIN` can do the same for `PROGRAM_COORDINATOR` on a
+- [x] A `HOST_ADMIN` can do the same for `PROGRAM_COORDINATOR` on a
       `Program`.
-- [ ] Assigning the same user to the same Class twice is rejected (DB
+- [x] Assigning the same user to the same Class twice is rejected (DB
       unique constraint, not a silent duplicate row).
-- [ ] Assigning to a Class/Program belonging to a different tenant is a
+- [x] Assigning to a Class/Program belonging to a different tenant is a
       404.
-- [ ] `mvn -pl services/admin test` passes, including all new tests from
+- [x] `mvn -pl services/admin test` passes, including all new tests from
       Step 7.
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after
-  implementing this phase).
-- Testing: not started.
+- Quality gate: APPROVED, 0 findings. Reviewer independently verified the
+  `findOwned` rename/visibility-widening was rename-only (no logic
+  change, no stale doc references left), that the `null`-collaborator
+  pattern in `AssignmentServiceTest` is safe (`findOwned` never
+  dereferences the null fields), the duplicate-assignment DB-constraint
+  pattern matches `EnrollmentService.assignProctor` exactly, the
+  `hasAnyRole`/`hasRole('HOST_ADMIN')` auth split matches
+  `EnrollmentController` exactly, and both assign+unassign write outbox
+  events from day one (no retrofit gap).
+- Testing: done — `AssignmentServiceTest` (new, 14 tests — assign/list/
+  unassign for both Lecturer and Coordinator, duplicate-assignment
+  rejected via the DB unique constraint (`DataIntegrityViolationException`
+  → `LecturerAlreadyAssignedException`/`CoordinatorAlreadyAssignedException`),
+  cross-tenant 404 for both, unassign-then-reassign works for both).
+  `ClassService.findOwned`/`ProgramService.findOwned` widened from
+  `private` to package-private and reused directly by `AssignmentService`
+  (no duplicated tenant-check logic) — exercised as real objects (not
+  mocked) in `AssignmentServiceTest`'s `setUp()`, so the tenant-check path
+  is genuinely tested end-to-end within the service layer, not just
+  assumed correct because Phase 2/3's own tests already covered it.
+  `mvn -pl services/admin -am test` — BUILD SUCCESS, 95/95.
 
 ## Risks
 
