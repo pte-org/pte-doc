@@ -124,7 +124,7 @@ too (full v1, not phased out) per the user's own decision below.
       Student Search — list/create/edit/archive Program and Class, plus a
       name/phone search across the whole tenant without drilling through
       Program→Class.
-- [ ] Phase 8: `tenant-web` — Student Import/Assign-to-Class + Transfer UI —
+- [x] Phase 8: `tenant-web` — Student Import/Assign-to-Class + Transfer UI —
       reuses the existing `xlsx` roster-parsing utility and bulk-account
       creation flow, targets Class assignment instead of session
       enrollment, adds the transfer-with-pending-exam-warning flow.
