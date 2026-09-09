@@ -128,7 +128,7 @@ too (full v1, not phased out) per the user's own decision below.
       reuses the existing `xlsx` roster-parsing utility and bulk-account
       creation flow, targets Class assignment instead of session
       enrollment, adds the transfer-with-pending-exam-warning flow.
-- [ ] Phase 9: `tenant-web` — Lecturer/Coordinator Assignment UI — mirrors
+- [x] Phase 9: `tenant-web` — Lecturer/Coordinator Assignment UI — mirrors
       the existing `ProctorAssignmentSection`/`AssignProctorModal` pattern
       almost exactly.
 - [ ] Phase 10: `scheduling` + `admin` + `tenant-web` — Bulk-Create Exam

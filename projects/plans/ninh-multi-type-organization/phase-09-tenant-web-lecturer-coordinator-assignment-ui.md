@@ -56,22 +56,66 @@ Maps to: `plan.md` Decision 2; Research Summary items 6, 9.
 
 ## Success Criteria
 
-- [ ] A Host can assign an existing `LECTURER` user to a Class, see them
+- [x] A Host can assign an existing `LECTURER` user to a Class, see them
       listed, and unassign — the same user can be reassigned to a
       different Class afterward.
-- [ ] A Host can create a brand-new Lecturer account inline and have it
+- [x] A Host can create a brand-new Lecturer account inline and have it
       assigned in one flow; if the assignment step fails after account
       creation, the Host is routed to "pick existing" pre-selected on that
       new account, not left stuck.
-- [ ] The same 2 behaviors work identically for Program Coordinator on a
+- [x] The same 2 behaviors work identically for Program Coordinator on a
       Program.
-- [ ] `pnpm --filter tenant-web lint`/`build` clean.
+- [x] `pnpm --filter tenant-web lint`/`build` clean.
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after
-  implementing this phase).
-- Testing: not started.
+- Quality gate: APPROVED, 0 findings on first pass. Reviewer independently
+  verified: (1) `useLecturerAssignments`/`useCoordinatorAssignments` read
+  `queryClient.getQueryData(TENANT_USERS_QUERY_KEY)` directly inside
+  `queryFn` rather than closing over a stale `.data` snapshot, matching
+  `useProctorAssignments`'s race-avoidance pattern exactly; (2) cache
+  invalidation is correctly scoped per-Class (Lecturer) and per-Program
+  (Coordinator); (3) the partial-failure "create succeeds, assign fails ->
+  route to Existing tab pre-selected on the new account" handling is wired
+  correctly in both `AssignLecturerModal` and `AssignCoordinatorModal`,
+  reproducing the fix for the bug class already hit once in
+  `ninh-host-add-student` Phase 5 (QUAL-001); (4) no hardcoded JSX strings;
+  (5) all new api-client types/paths match the real backend DTOs/
+  `@RequestMapping`s in `services/admin` field-for-field and path-for-path.
+- Testing: no automated test framework runs in `tenant-web` (same
+  no-precedent finding as Phases 6-8). Verified via
+  `pnpm --filter tenant-web lint` (clean), `pnpm --filter tenant-web build`
+  (clean, all 6 routes present, unchanged route list from Phase 8 —
+  Lecturer/Coordinator UI is wired into existing
+  `/host/programs/[publicId]` and
+  `/host/programs/[publicId]/classes/[classPublicId]` routes, no new
+  routes needed), and `pnpm --filter @pte/api-client typecheck` (clean,
+  since this phase also added `types/admin/assignment.ts` and 2 new
+  request modules).
+- **Design decisions made during implementation, not fully specified by
+  the phase's literal Steps**:
+  - Backend's `LecturerAssignmentResponse`/`ProgramCoordinatorAssignmentResponse`
+    (Phase 5) carry a generic `assigneePublicId` field (not
+    `lecturerPublicId`/`coordinatorPublicId`) — read directly from
+    `services/admin/.../dto/response/{LecturerAssignmentResponse,ProgramCoordinatorAssignmentResponse}.java`
+    rather than assumed, and mirrored verbatim into the new
+    `packages/api-client/src/types/admin/assignment.ts` types.
+  - `useTenantLecturers()`/`useTenantCoordinators()` reuse the exact same
+    `TENANT_USERS_QUERY_KEY` (`["tenantUsers"]`, imported from
+    `features/exams/constants`) and `queryFn` as `useTenantProctors`
+    (exams) and `useTenantStudents` (examoperations) — one shared
+    `GET /users` cache entry per tenant, split four ways via `select`, per
+    this repo's established convention (see `useTenantProctors`'s doc
+    comment). No new endpoint or query key needed.
+  - Per the Design Constraints, `LecturerAssignmentSection`/
+    `CoordinatorAssignmentSection` omit the roles-legend block that
+    `ProctorAssignmentSection` has — there's no `role` sub-field on either
+    assignment table (Phase 5 confirmed), so that section has no
+    equivalent here.
+  - Wired `LecturerAssignmentSection` into `ClassDetailView` (below the
+    existing roster table) and `CoordinatorAssignmentSection` into
+    `ProgramDetailView` (below the existing `ClassesSection`) — both
+    existing detail views from Phases 7/8, no new routes required.
 
 ## Risks
 
