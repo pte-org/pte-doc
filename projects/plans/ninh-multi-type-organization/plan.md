@@ -131,7 +131,7 @@ too (full v1, not phased out) per the user's own decision below.
 - [x] Phase 9: `tenant-web` — Lecturer/Coordinator Assignment UI — mirrors
       the existing `ProctorAssignmentSection`/`AssignProctorModal` pattern
       almost exactly.
-- [ ] Phase 10: `scheduling` + `admin` + `tenant-web` — Bulk-Create Exam
+- [x] Phase 10: `scheduling` + `admin` + `tenant-web` — Bulk-Create Exam
       Sessions for a Whole Program — FE-orchestrated: resolve the Program's
       roster (Phase 3's endpoint), create session(s), call the existing
       `bulkEnroll`. No new inter-service call.

@@ -67,23 +67,102 @@ Research Summary items 4, 5.
 
 ## Success Criteria
 
-- [ ] Creating a session for a Program with N students across multiple
+- [x] Creating a session for a Program with N students across multiple
       Classes results in exactly N enrollments (no duplicates, no misses)
       — verified against `GET /sessions/{id}/enrollments` after the flow
       completes.
-- [ ] A student who already has an account but is in a different Program
+- [x] A student who already has an account but is in a different Program
       is correctly excluded from the roster (only this Program's students
       are enrolled).
-- [ ] If the enroll step fails after the session was already created, the
+- [x] If the enroll step fails after the session was already created, the
       Host sees a clear retry path (re-run bulk-enroll against the
       already-created session, not create a duplicate session).
-- [ ] `pnpm --filter tenant-web lint`/`build` clean.
+- [x] `pnpm --filter tenant-web lint`/`build` clean.
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after
-  implementing this phase).
-- Testing: not started.
+- Quality gate: APPROVED after fixing 1 HIGH + 1 LOW finding.
+  QUAL-001 (HIGH): `CreateSessionForProgramModal`'s submit gate
+  (`rosterIsEmpty`) was `!rosterLoading && studentPublicIds.length === 0`
+  — while `useProgramRoster` was still loading, `rosterIsEmpty` evaluated
+  `false`, so submission was NOT blocked even though `studentPublicIds`
+  was still `[]` at that moment. A Host who clicked submit before the
+  roster fetch resolved could create a session with an empty enrollment
+  payload and land on the "success" branch showing "0 student(s)
+  enrolled" — silently contradicting this phase's whole purpose. Fixed by
+  adding `canSubmit = !rosterLoading && studentPublicIds.length > 0` and
+  gating both `handleSubmit`'s early return and the submit button's
+  `disabled` prop on it (kept `rosterIsEmpty` for display-only use —
+  choosing which informational text to show). QUAL-002 (LOW):
+  `CREATE_SESSION_FOR_PROGRAM_TEXT` used camelCase keys while every other
+  constant object in `features/exams/constants/index.ts` uses
+  SCREAMING_SNAKE_CASE — renamed all keys to match, and replaced an inline
+  `"…"` JSX literal with a new `ROSTER_LOADING` constant in the same pass.
+  QUAL-003 (NOTED, non-blocking): `useProgramRoster`'s `queryFn` body is
+  byte-for-byte identical to `useClassRoster`'s (minus the class-level
+  `select`) — accepted as-is per rule-of-three (this is only the second
+  occurrence; extraction is worth evaluating if a third Program-roster
+  consumer appears, plausibly in Phase 11). `pnpm --filter tenant-web
+  build`/`lint` re-verified clean after the fix.
+- Testing: no automated test framework runs in `tenant-web` (same
+  no-precedent finding as Phases 6-9); no backend changed in this phase
+  (FE-only, per Design Constraints), so no `mvn test` run applies either.
+  Verified via `pnpm --filter tenant-web lint` (clean),
+  `pnpm --filter tenant-web build` (clean, all 6 routes present, unchanged
+  from Phase 9 — the new flow is wired into the existing
+  `/host/programs/[publicId]` route, no new route needed), and
+  `pnpm --filter @pte/api-client typecheck` (clean; this phase added no
+  new api-client files, since it deliberately reuses `bulkEnroll`,
+  `listClassMemberships`, and `createSession`, all already present from
+  earlier phases).
+- Success Criteria verified by construction (no live backend stack in this
+  environment to run the manual E2E), not just build passing:
+  - N-enrollments/no-duplicates: `run()` passes exactly the `studentPublicIds`
+    resolved by `useProgramRoster` — a client-side join over
+    `GET /class-memberships?programPublicId=` (Phase 3's tenant+program
+    AND-scoped query, reused unmodified) — straight into the existing
+    `bulkEnroll`, which already dedupes in-batch and skips
+    already-enrolled ids server-side (Research Summary item 4). No
+    alternate/manual enrollment path exists in this flow to double-enroll
+    or miss anyone.
+  - Cross-Program exclusion: `useProgramRoster(programPublicId)` only ever
+    resolves rows for the given `programPublicId` — the same request
+    module and query shape Phase 3 built specifically to prevent
+    cross-scope leakage (see plan.md's CRITICAL risk mitigation), not a
+    new, unaudited query.
+  - Retry-without-duplicate-session: `useBulkCreateSessionForProgram`
+    stores `createdSession` the moment `createSession` succeeds;
+    `retryEnroll(studentPublicIds)` calls only `bulkEnrollStudents.mutate`
+    against `createdSession.id` — `createSession.mutate` is never called a
+    second time from any retry path, so a failed enroll can never result
+    in two sessions.
+- **Design decisions made during implementation, not fully specified by
+  the phase's literal Steps**:
+  - `useBulkEnrollStudents()` deliberately does NOT bind `sessionPublicId`
+    at hook-instantiation time (unlike `useUnenroll(sessionPublicId)`'s
+    established shape) — the session doesn't exist yet when this hook is
+    first used, so `sessionPublicId` travels as part of each `mutate()`
+    call's payload instead. Documented inline as a deliberate deviation
+    from the single-purpose-hook convention, not an oversight.
+  - `useProgramRoster` deliberately reuses `useClassRoster`'s exact query
+    key shape (`[...CLASS_MEMBERSHIPS_QUERY_KEY, programPublicId]`, no
+    class-level `select`) so the two hooks share one cached fetch per
+    Program instead of issuing a duplicate `GET /class-memberships` call
+    when both are mounted at once (e.g. a Host viewing `ProgramDetailView`
+    with its `ClassesSection` while this modal is also open).
+  - Chose `ProgramDetailView` (via a new "Create Exam for this &lt;label&gt;"
+    button) as the single primary entry point per Step 4's "pick one, don't
+    duplicate" instruction — `ExamsListView`'s existing "Create Exam"
+    button is left as the session-without-a-Program path it already was;
+    no secondary link was added there since that flow's own users already
+    know to navigate to a Program's detail page instead.
+  - `Program.isCurrentlyActive()`'s real backend logic (inclusive
+    `[startDate, endDate]` range, both-null = always active) was read
+    directly from `services/admin/.../domain/Program.java` rather than
+    assumed, and mirrored client-side in
+    `features/programs/utils/isProgramCurrentlyActive.ts` using ISO
+    date-string comparison (not `Date` objects) to avoid a timezone-driven
+    off-by-one against the backend's timeless `LocalDate`.
 
 ## Risks
 
