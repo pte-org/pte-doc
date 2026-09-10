@@ -1,0 +1,41 @@
+{
+  "target": "phase-03-list-endpoint",
+  "mode": "gate",
+  "verdict": "APPROVED",
+  "reviewed_files": [
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/domain/ScoringAnswer.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/repository/ScoringAnswerRepository.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/dto/response/AnswerListItemResponse.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/dto/response/AnswerListResponse.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/domain/exception/InvalidAnswerStatusException.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/service/ScoringReviewService.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/controller/ScoringReviewController.java"
+  ],
+  "conventions_checked_against": [
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/controller/InternalExportController.java",
+    "pte-api/services/reporting/src/main/java/com/pte/reporting/service/ReportService.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/domain/exception/AnswerNotFoundException.java"
+  ],
+  "design_deviation_from_phase_plan": "Phase file left keyset-vs-offset pagination open. Chose Spring Data's offset Page/Pageable (explicit page/size query params, not the client-facing Sort/Pageable auto-binding) rather than reusing InternalExportController's keyset-cursor pattern: keyset exists there for a system-to-system full-tenant historical export; this is an interactive single-tenant host review screen where offset paging is simpler and sufficient — deliberately two different patterns for two different access shapes, not an inconsistency.",
+  "findings": [
+    {
+      "id": "P3-01",
+      "severity": "LOW",
+      "rule": "input-validation",
+      "location": "pte-api/services/scoring/src/main/java/com/pte/scoring/controller/ScoringReviewController.java (boundedPage, fixed during this review)",
+      "applicable": true,
+      "confidence": "high",
+      "introduced_by_current_change": true,
+      "summary": "PageRequest.of(page, size) throws IllegalArgumentException for a negative page index, which GlobalExceptionHandler has no specific mapping for and would surface as an unintended 500 instead of a client error.",
+      "failure_scenario": "A host (or a buggy client) calls GET /answers?page=-1 and gets HTTP 500 instead of a clean 400 or a coerced first page.",
+      "required_action": "Fixed inline: added boundedPage() clamping any null/negative page to 0, mirroring the existing boundedSize() pattern already in this controller.",
+      "blocking": false,
+      "outcome": "fixed"
+    }
+  ],
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "noted_count": 1,
+  "receipt_status": "skipped_cross_repo_boundary",
+  "receipt_note": "Same limitation as prior phases — result recorded directly in the phase file's Quality and Testing State."
+}
