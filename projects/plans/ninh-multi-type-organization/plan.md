@@ -145,7 +145,7 @@ too (full v1, not phased out) per the user's own decision below.
 - [x] Phase 12: `admin` + `tenant-web` — Class Merge/Split — bulk-move all
       students from one Class into another, or split one Class into two,
       building on Phase 3's transfer primitive.
-- [ ] Phase 13: `admin` + `tenant-web` — Audit Log + Excel Export + Program
+- [x] Phase 13: `admin` + `tenant-web` — Audit Log + Excel Export + Program
       Dashboard + Final Consolidated `@PreAuthorize` Audit (Pass 2 of 2) —
       a new append-only `AuditLog` table retrofitted into every prior
       phase's mutation path (Program/Class/membership/assignment/merge-split),
