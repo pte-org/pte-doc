@@ -1,0 +1,140 @@
+{
+    "bodyFont":  "ARIMO",
+    "bodyFontFamily":  "Arimo",
+    "colorMode":  "LIGHT",
+    "colorVariant":  "FIDELITY",
+    "customColor":  "#0b5fae",
+    "designMd":  "---\nname: Standardized Assessment Test Delivery System\ncolors:\n  surface: \u0027#f7f9ff\u0027\n  surface-dim: \u0027#d1dbe8\u0027\n  surface-bright: \u0027#f7f9ff\u0027\n  surface-container-lowest: \u0027#ffffff\u0027\n  surface-container-low: \u0027#edf4ff\u0027\n  surface-container: \u0027#e4effd\u0027\n  surface-container-high: \u0027#dfe9f7\u0027\n  surface-container-highest: \u0027#d9e3f1\u0027\n  on-surface: \u0027#121d26\u0027\n  on-surface-variant: \u0027#414751\u0027\n  inverse-surface: \u0027#27313c\u0027\n  inverse-on-surface: \u0027#e8f2ff\u0027\n  outline: \u0027#727783\u0027\n  outline-variant: \u0027#c1c6d3\u0027\n  surface-tint: \u0027#0a5fae\u0027\n  primary: \u0027#004787\u0027\n  on-primary: \u0027#ffffff\u0027\n  primary-container: \u0027#0b5fae\u0027\n  on-primary-container: \u0027#c5daff\u0027\n  inverse-primary: \u0027#a6c8ff\u0027\n  secondary: \u0027#555f6e\u0027\n  on-secondary: \u0027#ffffff\u0027\n  secondary-container: \u0027#d9e3f5\u0027\n  on-secondary-container: \u0027#5b6574\u0027\n  tertiary: \u0027#00522d\u0027\n  on-tertiary: \u0027#ffffff\u0027\n  tertiary-container: \u0027#196c40\u0027\n  on-tertiary-container: \u0027#9aeab3\u0027\n  error: \u0027#ba1a1a\u0027\n  on-error: \u0027#ffffff\u0027\n  error-container: \u0027#ffdad6\u0027\n  on-error-container: \u0027#93000a\u0027\n  primary-fixed: \u0027#d5e3ff\u0027\n  primary-fixed-dim: \u0027#a6c8ff\u0027\n  on-primary-fixed: \u0027#001c3b\u0027\n  on-primary-fixed-variant: \u0027#004786\u0027\n  secondary-fixed: \u0027#d9e3f5\u0027\n  secondary-fixed-dim: \u0027#bdc7d8\u0027\n  on-secondary-fixed: \u0027#121c29\u0027\n  on-secondary-fixed-variant: \u0027#3e4756\u0027\n  tertiary-fixed: \u0027#a4f4bc\u0027\n  tertiary-fixed-dim: \u0027#88d7a1\u0027\n  on-tertiary-fixed: \u0027#00210f\u0027\n  on-tertiary-fixed-variant: \u0027#00522c\u0027\n  background: \u0027#f7f9ff\u0027\n  on-background: \u0027#121d26\u0027\n  surface-variant: \u0027#d9e3f1\u0027\ntypography:\n  headline-lg:\n    fontFamily: Arimo\n    fontSize: 20px\n    fontWeight: \u0027700\u0027\n    lineHeight: 28px\n  headline-md:\n    fontFamily: Arimo\n    fontSize: 18px\n    fontWeight: \u0027700\u0027\n    lineHeight: 24px\n  instruction-bold:\n    fontFamily: Arimo\n    fontSize: 16px\n    fontWeight: \u0027700\u0027\n    lineHeight: 24px\n  body-passage:\n    fontFamily: Arimo\n    fontSize: 16px\n    fontWeight: \u0027400\u0027\n    lineHeight: 25.6px\n  body-regular:\n    fontFamily: Arimo\n    fontSize: 14px\n    fontWeight: \u0027400\u0027\n    lineHeight: 20px\n  body-bold:\n    fontFamily: Arimo\n    fontSize: 14px\n    fontWeight: \u0027700\u0027\n    lineHeight: 20px\n  timer-tabular:\n    fontFamily: Arimo\n    fontSize: 14px\n    fontWeight: \u0027700\u0027\n    lineHeight: 20px\n    letterSpacing: 0.02em\n  label-meta:\n    fontFamily: Arimo\n    fontSize: 13px\n    fontWeight: \u0027400\u0027\n    lineHeight: 18px\n  label-bold:\n    fontFamily: Arimo\n    fontSize: 13px\n    fontWeight: \u0027700\u0027\n    lineHeight: 18px\n  caption:\n    fontFamily: Arimo\n    fontSize: 11px\n    fontWeight: \u0027400\u0027\n    lineHeight: 14px\nrounded:\n  sm: 0.125rem\n  DEFAULT: 0.25rem\n  md: 0.375rem\n  lg: 0.5rem\n  xl: 0.75rem\n  full: 9999px\nspacing:\n  gutter: 1rem\n  margin: 1rem\n  space-xs: 0.25rem\n  space-sm: 0.5rem\n  space-md: 1rem\n  space-lg: 1.5rem\n  space-xl: 2rem\n---\n\n## Brand \u0026 Style\n\nThis design system defines a high-stakes, institutional examination delivery engine modeled on high-security academic testing environments. The interface prioritizes cognitive clarity, visual neutrality, and zero distraction. Every visual flourish—gradients, soft elevations, glassmorphism, or expressive curvature—is strictly eliminated in favor of predictable, utilitarian affordances.\n\nThe experience addresses test candidates operating under strict time limits. The system conveys absolute procedural authority, algorithmic fairness, and technical reliability. Visual styling aligns strictly with rigorous academic standards: high-contrast typography, structural grid alignment, crisp 1-pixel borders, and disciplined layout density.\n\n## Colors\n\nThe palette uses a deliberate, high-legibility institutional color scheme:\n\n- **Canvas \u0026 Panels**: The root canvas background is pure white (`#FFFFFF`). Subordinate containers, item review panels, metadata banners, and card components use a calm, neutral grey (`#F4F5F7`).\n- **Primary Brand**: Primary interactions, navigational advancement, and active indicator bars use `#0B5FAE`. On hover, the primary state shifts to `#094C8C`. Focused states receive a sharp, non-blurred `2px solid #0B5FAE` outline with an explicit `2px` offset.\n- **Typography Scale**: High-priority text and candidate reading materials utilize `#1F2933` (primary). Metadata, timestamps, item directives, and sub-labels utilize `#5A6473` (secondary). Disabled typography, inactive placeholders, and locked states rely on `#8A94A6`.\n- **Dividers \u0026 Structural Borders**: Crisp architectural division is maintained via `#C9CFD9` (primary interface border) and `#D8DCE3` (structural header/chrome dividers).\n- **Status \u0026 Alerts**:\n  - Critical/Error: `#D93A3A` foreground / `#B02525` dark accent, accompanied by `#FDECEC` light background fill.\n  - Active/Success: `#2E7D4F` for verified completion indicators and confirmation states.\n  - Warning/Notice: `#E0A912` warning state accompanied by `#FFF6E5` light notice fill.\n  - Track \u0026 Inactive Fill: Unfilled progress bars and disabled control buttons use `#E4E7EB` and `#D8DCE3`.\n\n## Typography\n\nThe design system standardizes on pure utilitarian sans-serif typography (system fallbacks: `Arial`, `Helvetica`, sans-serif). Type scale rules prioritize reading speed and eliminate visual strain:\n\n- **Passage \u0026 Prompt Text**: Prompt prompts and stimulus texts are set at `16px` with a fixed line height ratio of `1.6` (`25.6px`) to ensure comfortable scanning during prolonged reading tasks.\n- **Item Directions \u0026 Task Prompts**: Instructions directly informing user mechanics (e.g., \"Read the text below and speak your answer into the microphone.\") are set at `16px` bold (`#1F2933`).\n- **Data \u0026 Timers**: All session counters, question indices (\"Item 9 of 20\"), and countdown clocks use `font-variant-numeric: tabular-nums` to eliminate jitter as digits cycle.\n- **Metadata**: Supplemental notices, helper instructions, and disabled item badges are maintained at `13px` (`#5A6473`).\n\n## Layout \u0026 Spacing\n\nThe test delivery canvas relies on an immutable fixed-frame model optimized for standard desktop test-center displays (minimum viewport 1024x768px):\n\n- **Header / Top Bar**: Anchored to the top of the viewport. Height is fixed at exactly `56px`, framed by a bottom border of `1px solid #D8DCE3`.\n- **Footer / Bottom Navigation Bar**: Anchored to the bottom of the viewport. Height is fixed at exactly `56px`, bordered by a top divider of `1px solid #D8DCE3`.\n- **Content Area**: Positioned centrally between the top and bottom chrome. The core assessment content max-width is strictly capped at `960px` to prevent excessive line lengths in reading passages and to align question inputs with immediate field of view.\n- **Vertical Hierarchy**: Spacing between instructions, content stimuli, recording widgets, and response inputs follows a rigid 8px grid (`8px`, `16px`, `24px`, `32px`).\n\n## Elevation \u0026 Depth\n\nThis system avoids decorative dimensional depth. Elevation is communicated entirely through 2D planar layering and 1px borders:\n\n- **Borders \u0026 Dividers**: Visual separation relies on `1px solid #C9CFD9` or `#D8DCE3`. Surfaces remain flat.\n- **Shadow Treatment**: UI components, inputs, and cards feature no elevation (`box-shadow: none`). The sole permissible exception is critical floating dialogs (e.g., \"Time Expired\" alert or \"Submit Exam\" modal verification), which use a restrained utility shadow: `0 1px 2px rgba(0, 0, 0, 0.08)`.\n- **Panels**: Distinction between foreground active zones and background structural containers is conveyed via surface color stepping (`#FFFFFF` on `#F4F5F7`).\n\n## Shapes\n\nThe geometric form language is strictly squared and restrained:\n\n- **Border Radius**: A strict maximum radius of `3px` is enforced on buttons, cards, text inputs, status containers, audio widgets, and modal boxes.\n- **Progress Bars \u0026 Trackers**: The recording status indicator bar and exam timeline track use sharp, square ends (`0px` radius).\n- **Prohibitions**: Rounded pills, circle button tags, circular avatars, and soft rounded modals are prohibited.\n\n## Components\n\n### Persistent Exam Chrome\n- **Top App Bar**: Viewport fixed, `56px` height, background `#FFFFFF`, bottom border `1px solid #D8DCE3`. Contains institutional wordmark/logo on the far left, exam subject title (`14px` bold `#1F2933`), candidate identifier, audio check utility icon, question indicator (\"Item 9 of 20\" in `13px` `#5A6473`), and clock countdown display (\"Time remaining: 00:24:17\" with clock glyph in tabular numbers).\n- **Bottom Navigation Bar**: Viewport fixed, `56px` height, background `#FFFFFF`, top border `1px solid #D8DCE3`. Displays \"Save \u0026 Exit\" button aligned flush left; \"Previous\" and \"Next\" action buttons grouped flush right.\n\n### Buttons\n- Height is fixed at `36px` with horizontal padding of `16px` and a uniform border radius of `3px`. Font size is `14px` bold.\n- **Primary Action (e.g., Next)**: Background `#0B5FAE`, text `#FFFFFF`, border none. Hover state `#094C8C`.\n- **Secondary Action (e.g., Previous, Audio Playback)**: Background `#FFFFFF`, text `#0B5FAE`, border `1px solid #0B5FAE`. Hover state `#F4F5F7`.\n- **Disabled State**: Background `#E4E7EB`, text `#8A94A6`, border none, cursor `not-allowed`.\n\n### Audio / Recording Status Box\n- Fixed width `420px`, centered horizontally within the task pane.\n- Background `#F4F5F7`, border `1px solid #C9CFD9`, border radius `3px`, padding `16px`.\n- Layout: Contains widget status title (`14px` bold `#1F2933`), active state descriptor line (`13px` `#5A6473`, e.g., \"Recording in 3 seconds...\"), and an embedded recording progress bar.\n- Progress bar uses a height of `6px`, flat track background of `#D8DCE3`, square terminals, and dynamic `#0B5FAE` active playback/capture fill.\n\n### Text Inputs \u0026 Passage Textareas\n- Background `#FFFFFF`, border `1px solid #C9CFD9`, border radius `3px`, padding `10px 12px`.\n- Focus state: Border color transitions to `#0B5FAE` accompanied by an outline of `2px solid #0B5FAE`.\n- Word counter display: Positioned bottom right beneath textarea, styled in `13px` `#5A6473` (e.g., \"Word count: 184\").\n\n### Multiple Choice \u0026 Checkbox Controls\n- Checkboxes: `18px x 18px` square, `2px` radius, `1px solid #C9CFD9` resting border. Active state `#0B5FAE` with a white checkmark.\n- Radio buttons: `18px x 18px` standard circle, `1px solid #C9CFD9` border. Selected state exhibits an inner `#0B5FAE` solid disc.\n- Option row container: Full-width stacked list item, background `#FFFFFF`, border `1px solid #C9CFD9`, `3px` radius, hover background `#F4F5F7`.",
+    "font":  "ARIMO",
+    "headlineFont":  "ARIMO",
+    "headlineFontFamily":  "Arimo",
+    "labelFont":  "ARIMO",
+    "labelFontFamily":  "Arimo",
+    "namedColors":  {
+                        "background":  "#f7f9ff",
+                        "error":  "#ba1a1a",
+                        "error_container":  "#ffdad6",
+                        "inverse_on_surface":  "#e8f2ff",
+                        "inverse_primary":  "#a6c8ff",
+                        "inverse_surface":  "#27313c",
+                        "on_background":  "#121d26",
+                        "on_error":  "#ffffff",
+                        "on_error_container":  "#93000a",
+                        "on_primary":  "#ffffff",
+                        "on_primary_container":  "#c5daff",
+                        "on_primary_fixed":  "#001c3b",
+                        "on_primary_fixed_variant":  "#004786",
+                        "on_secondary":  "#ffffff",
+                        "on_secondary_container":  "#5b6574",
+                        "on_secondary_fixed":  "#121c29",
+                        "on_secondary_fixed_variant":  "#3e4756",
+                        "on_surface":  "#121d26",
+                        "on_surface_variant":  "#414751",
+                        "on_tertiary":  "#ffffff",
+                        "on_tertiary_container":  "#9aeab3",
+                        "on_tertiary_fixed":  "#00210f",
+                        "on_tertiary_fixed_variant":  "#00522c",
+                        "outline":  "#727783",
+                        "outline_variant":  "#c1c6d3",
+                        "primary":  "#004787",
+                        "primary_container":  "#0b5fae",
+                        "primary_fixed":  "#d5e3ff",
+                        "primary_fixed_dim":  "#a6c8ff",
+                        "secondary":  "#555f6e",
+                        "secondary_container":  "#d9e3f5",
+                        "secondary_fixed":  "#d9e3f5",
+                        "secondary_fixed_dim":  "#bdc7d8",
+                        "surface":  "#f7f9ff",
+                        "surface_bright":  "#f7f9ff",
+                        "surface_container":  "#e4effd",
+                        "surface_container_high":  "#dfe9f7",
+                        "surface_container_highest":  "#d9e3f1",
+                        "surface_container_low":  "#edf4ff",
+                        "surface_container_lowest":  "#ffffff",
+                        "surface_dim":  "#d1dbe8",
+                        "surface_tint":  "#0a5fae",
+                        "surface_variant":  "#d9e3f1",
+                        "tertiary":  "#00522d",
+                        "tertiary_container":  "#196c40",
+                        "tertiary_fixed":  "#a4f4bc",
+                        "tertiary_fixed_dim":  "#88d7a1"
+                    },
+    "overrideNeutralColor":  "#1f2933",
+    "overridePrimaryColor":  "#0b5fae",
+    "overrideSecondaryColor":  "#5a6473",
+    "overrideTertiaryColor":  "#2e7d4f",
+    "roundness":  "ROUND_FOUR",
+    "spacing":  {
+                    "gutter":  "1rem",
+                    "margin":  "1rem",
+                    "space-lg":  "1.5rem",
+                    "space-md":  "1rem",
+                    "space-sm":  "0.5rem",
+                    "space-xl":  "2rem",
+                    "space-xs":  "0.25rem"
+                },
+    "spacingScale":  2,
+    "typography":  {
+                       "body-bold":  {
+                                         "fontFamily":  "Arimo",
+                                         "fontSize":  "14px",
+                                         "fontWeight":  "700",
+                                         "lineHeight":  "20px"
+                                     },
+                       "body-passage":  {
+                                            "fontFamily":  "Arimo",
+                                            "fontSize":  "16px",
+                                            "fontWeight":  "400",
+                                            "lineHeight":  "25.6px"
+                                        },
+                       "body-regular":  {
+                                            "fontFamily":  "Arimo",
+                                            "fontSize":  "14px",
+                                            "fontWeight":  "400",
+                                            "lineHeight":  "20px"
+                                        },
+                       "caption":  {
+                                       "fontFamily":  "Arimo",
+                                       "fontSize":  "11px",
+                                       "fontWeight":  "400",
+                                       "lineHeight":  "14px"
+                                   },
+                       "headline-lg":  {
+                                           "fontFamily":  "Arimo",
+                                           "fontSize":  "20px",
+                                           "fontWeight":  "700",
+                                           "lineHeight":  "28px"
+                                       },
+                       "headline-md":  {
+                                           "fontFamily":  "Arimo",
+                                           "fontSize":  "18px",
+                                           "fontWeight":  "700",
+                                           "lineHeight":  "24px"
+                                       },
+                       "instruction-bold":  {
+                                                "fontFamily":  "Arimo",
+                                                "fontSize":  "16px",
+                                                "fontWeight":  "700",
+                                                "lineHeight":  "24px"
+                                            },
+                       "label-bold":  {
+                                          "fontFamily":  "Arimo",
+                                          "fontSize":  "13px",
+                                          "fontWeight":  "700",
+                                          "lineHeight":  "18px"
+                                      },
+                       "label-meta":  {
+                                          "fontFamily":  "Arimo",
+                                          "fontSize":  "13px",
+                                          "fontWeight":  "400",
+                                          "lineHeight":  "18px"
+                                      },
+                       "timer-tabular":  {
+                                             "fontFamily":  "Arimo",
+                                             "fontSize":  "14px",
+                                             "fontWeight":  "700",
+                                             "letterSpacing":  "0.02em",
+                                             "lineHeight":  "20px"
+                                         }
+                   }
+}

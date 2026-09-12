@@ -1,0 +1,19 @@
+Baseline captured 2026-09-12 before ck:cook implementation.
+Command: flutter test --reporter compact
+Repository: D:\GitHub\pte-org\pte-app
+Exit code: 1
+Result: 476 passed, 84 failed (test runner output also includes the compile
+failure below; exact counts are retained from the compact runner summary).
+
+Known baseline failure groups:
+- test/unit/core/security/lockdown_service_test.dart: logger 2.7.0 override
+  signature mismatch.
+- test/unit/storage/local_violation_dao_test.dart: invalid const values and
+  undefined LockdownMode.
+- exam_attempt widget tests: unregistered LockdownService in test GetIt setup.
+- repeat_sentence_screen_test.dart: existing timer text/state expectations.
+- write_essay_screen_test.dart: existing ExamScaffold/GetIt setup causes the
+  editor finder to fail before interaction assertions.
+
+Disposition: pre-existing baseline. Phase 0 owns compile/test blocker repair or
+an explicit named stop; later phase results must report only new regressions.

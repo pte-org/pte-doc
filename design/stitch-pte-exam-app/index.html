@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PTE Exam App — Stitch export</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f4f5f7; color: #1f2933; font: 15px/1.5 Arial, sans-serif; }
+    header { padding: 28px max(24px, calc((100vw - 1440px)/2)); background: #fff; border-bottom: 1px solid #c9cfd9; }
+    h1 { font-size: 26px; margin: 0 0 8px; }
+    p { margin: 8px 0; }
+    a { color: #0b5fae; }
+    nav { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 16px 0; }
+    input { display: block; width: min(100%, 600px); padding: 10px 12px; border: 1px solid #c9cfd9; border-radius: 3px; font: inherit; }
+    main { max-width: 1488px; margin: auto; padding: 24px; }
+    #screens { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 20px; }
+    article { padding: 16px; background: #fff; border: 1px solid #c9cfd9; border-radius: 3px; }
+    article[hidden] { display: none; }
+    .preview { display: flex; align-items: center; justify-content: center; min-height: 240px; background: #f4f5f7; }
+    .preview img { display: block; width: 100%; height: 280px; object-fit: contain; }
+    h2 { font-size: 16px; margin: 12px 0 6px; }
+    .meta { color: #5a6473; font-size: 13px; }
+    .links { display: flex; gap: 16px; margin-top: 12px; }
+    a:focus-visible, input:focus-visible { outline: 2px solid #0b5fae; outline-offset: 3px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PTE Exam App — Stitch</h1>
+    <p id="summary">Đang đọc danh sách thiết kế…</p>
+    <p>Bấm ảnh để mở toàn bộ màn hình ở độ phân giải gốc. Các bản thiết kế trùng tên được giữ riêng.</p>
+    <nav aria-label="Tài liệu">
+      <a href="https://stitch.withgoogle.com/projects/72925006002767125" target="_blank" rel="noreferrer">Project Stitch</a>
+      <a href="DESIGN.md">Design system</a>
+      <a href="manifest.json">Danh mục và SHA-256</a>
+      <a href="README.md">Thông tin bộ export</a>
+    </nav>
+    <label for="search">Tìm màn hình hoặc tài liệu</label>
+    <input id="search" type="search" placeholder="Ví dụ: Read Aloud, Listening, tokens…">
+  </header>
+  <main>
+    <p id="result-count" role="status"></p>
+    <div id="screens"></div>
+    <noscript>Bật JavaScript để xem thư viện. Có thể mở ảnh trực tiếp trong thư mục screens.</noscript>
+  </main>
+  <script src="gallery-data.js"></script>
+  <script src="gallery.js"></script>
+</body>
+</html>

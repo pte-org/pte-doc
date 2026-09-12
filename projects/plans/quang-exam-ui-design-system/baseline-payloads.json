@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-09-12",
+  "source": "pte-app cubit serialization and existing payload tests before UI migration",
+  "comparison": "The refactor changes presentation composition only; rerun the source tests listed below when the state layer changes.",
+  "entries": [
+    {"taskType": "PERSONAL_INTRODUCTION", "transport": "media-upload", "answerPayload": null, "sourceTest": "test/unit/features/exam_attempt/auto_record_cubit_test.dart"},
+    {"taskType": "READ_ALOUD", "transport": "media-upload", "answerPayload": null, "sourceTest": "test/unit/features/exam_attempt/auto_record_cubit_test.dart"},
+    {"taskType": "REPEAT_SENTENCE", "transport": "media-upload", "answerPayload": null, "sourceTest": "test/unit/features/exam_attempt/auto_record_cubit_test.dart"},
+    {"taskType": "DESCRIBE_IMAGE", "transport": "media-upload", "answerPayload": null, "sourceTest": "test/unit/features/exam_attempt/auto_record_cubit_test.dart"},
+    {"taskType": "RE_TELL_LECTURE", "transport": "media-upload", "answerPayload": null, "sourceTest": "test/unit/features/exam_attempt/auto_record_cubit_test.dart"},
+    {"taskType": "ANSWER_SHORT_QUESTION", "transport": "media-upload", "answerPayload": null, "sourceTest": "test/unit/features/exam_attempt/auto_record_cubit_test.dart"},
+    {"taskType": "SUMMARIZE_GROUP_DISCUSSION", "transport": "media-upload", "answerPayload": null, "sourceTest": "test/unit/features/exam_attempt/auto_record_cubit_test.dart"},
+    {"taskType": "RESPOND_TO_A_SITUATION", "transport": "media-upload", "answerPayload": null, "sourceTest": "test/unit/features/exam_attempt/auto_record_cubit_test.dart"},
+    {"taskType": "SUMMARIZE_WRITTEN_TEXT", "transport": "answer-outbox", "answerPayload": "sample summary", "emptyPayload": "", "sourceTest": "test/unit/features/exam_attempt/write_essay_cubit_test.dart"},
+    {"taskType": "WRITE_ESSAY", "transport": "answer-outbox", "answerPayload": "sample essay", "emptyPayload": "", "sourceTest": "test/unit/features/exam_attempt/write_essay_cubit_test.dart"},
+    {"taskType": "SUMMARIZE_SPOKEN_TEXT", "transport": "answer-outbox", "answerPayload": "sample summary", "emptyPayload": "", "sourceTest": "test/unit/features/exam_attempt/write_essay_cubit_test.dart"},
+    {"taskType": "WRITE_FROM_DICTATION", "transport": "answer-outbox", "answerPayload": "sample dictated sentence", "emptyPayload": "", "sourceTest": "test/unit/features/exam_attempt/write_essay_cubit_test.dart"},
+    {"taskType": "FILL_BLANKS_READING_WRITING", "transport": "answer-outbox", "answerPayload": "0,1,2", "emptyPayload": ",,", "sourceTest": "test/unit/features/exam_attempt/fill_blanks_dropdown_cubit_test.dart"},
+    {"taskType": "MC_READING_MULTIPLE", "transport": "answer-outbox", "answerPayload": "0,2", "emptyPayload": "", "sourceTest": "test/unit/features/exam_attempt/mc_reading_multiple_cubit_test.dart"},
+    {"taskType": "RE_ORDER_PARAGRAPHS", "transport": "answer-outbox", "answerPayload": "3,0,1,2", "emptyPayload": "0,1,2,3", "sourceTest": "test/unit/features/exam_attempt/re_order_paragraphs_cubit_test.dart"},
+    {"taskType": "FILL_BLANKS_READING", "transport": "answer-outbox", "answerPayload": "2,,0", "emptyPayload": ",,", "sourceTest": "test/unit/features/exam_attempt/fill_blanks_drag_drop_cubit_test.dart"},
+    {"taskType": "MC_READING_SINGLE", "transport": "answer-outbox", "answerPayload": "1", "emptyPayload": "", "sourceTest": "test/unit/features/exam_attempt/mc_reading_single_cubit_test.dart"},
+    {"taskType": "MC_LISTENING_MULTIPLE", "transport": "answer-outbox", "answerPayload": "0,2", "emptyPayload": "", "sourceTest": "test/unit/features/exam_attempt/mc_reading_multiple_cubit_test.dart"},
+    {"taskType": "FILL_BLANKS_LISTENING", "transport": "answer-outbox", "answerPayload": "2,,0", "emptyPayload": ",,", "sourceTest": "test/unit/features/exam_attempt/fill_blanks_dropdown_cubit_test.dart"},
+    {"taskType": "HIGHLIGHT_CORRECT_SUMMARY", "transport": "answer-outbox", "answerPayload": "1", "emptyPayload": "", "sourceTest": "test/unit/features/exam_attempt/mc_reading_single_cubit_test.dart"},
+    {"taskType": "MC_LISTENING_SINGLE", "transport": "answer-outbox", "answerPayload": "1", "emptyPayload": "", "sourceTest": "test/unit/features/exam_attempt/mc_reading_single_cubit_test.dart"},
+    {"taskType": "SELECT_MISSING_WORD", "transport": "answer-outbox", "answerPayload": "1", "emptyPayload": "", "sourceTest": "test/unit/features/exam_attempt/mc_reading_single_cubit_test.dart"},
+    {"taskType": "HIGHLIGHT_INCORRECT_WORDS", "transport": "answer-outbox", "answerPayload": "0,2", "emptyPayload": "", "sourceTest": "test/unit/features/exam_attempt/mc_reading_multiple_cubit_test.dart"}
+  ]
+}
