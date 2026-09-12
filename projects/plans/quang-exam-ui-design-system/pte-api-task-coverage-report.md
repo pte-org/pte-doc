@@ -128,8 +128,8 @@ that the seven Listening types other than the first verified
 `MC_LISTENING_SINGLE` path have no implemented/verified task-specific payload
 encoding. They fall back to raw text or `UNRECOGNIZED` instead of a reliable
 structured answer representation. This is the primary cross-layer contract
-gap: FE cannot reliably serialize answers and BE cannot reliably score or
-review them until the shapes are frozen.
+gap: FE already produces payload strings, but cannot guarantee compatibility
+with BE scoring/review semantics until the shapes are frozen.
 
 This affects at least:
 
@@ -240,10 +240,13 @@ The following backend foundations are not missing:
    version the exact representation for multiple selections, typed blanks,
    highlighted tokens, missing-word choices and dictation text. Add contract
    tests that can be shared by FE serialization and BE decoding/scoring.
-2. **Add timing for the seven Listening types.** Add a parameterized guard (for
-   example, `EnumSource(PteTaskType.class)`) asserting that `timingFor()` does
-   not throw for any enum value. This removes the full-length pinning blocker
-   and prevents the gap from recurring when a new task type is added.
+2. **Add timing for the seven Listening types.** Add the seven entries as
+   explicitly non-production placeholders and add a parameterized guard for
+   those seven values asserting that `timingFor()` does not throw. Once a
+   shared `PteTaskType` catalog exists in `pte-common`, upgrade that guard to
+   `EnumSource(PteTaskType.class)` for all 23 values; do not make the larger
+   vocabulary move a prerequisite for the immediate pinning fix. This removes
+   the full-length pinning blocker and prevents the known gap from recurring.
 3. **Run FE and BE work in parallel after step 1:**
    - FE continues the Token → Component → Template refactor and implements
      `option-select`, `typed-blanks`, `token-selection` and related templates

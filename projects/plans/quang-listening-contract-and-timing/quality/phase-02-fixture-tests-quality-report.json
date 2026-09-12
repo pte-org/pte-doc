@@ -1,0 +1,40 @@
+{
+  "target": "phase-02-fixture-tests",
+  "mode": "gate",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-12T14:30:29Z",
+  "reviewed_files": [
+    "pte-app/lib/features/exam_attempt/domain/listening_payload.dart",
+    "pte-app/lib/features/exam_attempt/listening/presentation/cubit/mc_listening_single_cubit.dart",
+    "pte-app/lib/features/exam_attempt/listening/presentation/cubit/mc_listening_multiple_cubit.dart",
+    "pte-app/lib/features/exam_attempt/listening/presentation/cubit/fill_blanks_listening_cubit.dart",
+    "pte-app/lib/features/exam_attempt/listening/presentation/cubit/highlight_correct_summary_cubit.dart",
+    "pte-app/lib/features/exam_attempt/listening/presentation/cubit/select_missing_word_cubit.dart",
+    "pte-app/lib/features/exam_attempt/listening/presentation/cubit/highlight_incorrect_words_cubit.dart",
+    "pte-app/lib/features/exam_attempt/listening/presentation/cubit/summarize_spoken_text_cubit.dart",
+    "pte-app/lib/features/exam_attempt/listening/presentation/cubit/write_from_dictation_cubit.dart",
+    "pte-app/lib/features/exam_attempt/listening/presentation/widgets/fill_blanks_input_widget.dart",
+    "pte-app/test/features/exam_attempt/listening/listening_payload_contract_test.dart",
+    "pte-api/services/scoring/src/test/java/com/pte/scoring/service/ListeningPayloadFixtureSchemaTest.java",
+    "pte-api/services/scoring/src/test/resources/fixtures/listening-payload-contract.json"
+  ],
+  "conventions_checked_against": [
+    "pte-app/lib/features/exam_attempt/domain/positional_payload.dart",
+    "pte-app/test/unit/features/exam_attempt/re_order_paragraphs_cubit_test.dart",
+    "pte-api/services/scoring/src/test/java/com/pte/scoring/service/ObjectiveScoringServiceTest.java",
+    "pte-api/services/scoring/src/test/java/com/pte/scoring/config/RabbitMqConfigTest.java"
+  ],
+  "findings": [],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "noted_count": 0,
+  "receipt_status": "skipped_cross_repo_boundary",
+  "receipt_note": "The plan/report lives in pte-doc while reviewed production/test files live in pte-app and pte-api; these are separate git repositories under the pte-org parent. receipt.py requires one repository containing the report and every reviewed file, so no cryptographic receipt is issued."
+}

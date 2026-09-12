@@ -1,0 +1,26 @@
+{
+  "phase": "phase-02-fixture-tests",
+  "mode": "all",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-12T14:30:29Z",
+  "summary": {
+    "passed": 637,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "test_commands": [
+    "flutter analyze [11 changed Dart files]",
+    "flutter test test/features/exam_attempt/listening/listening_payload_contract_test.dart",
+    "mvn -pl services/scoring -am -Dtest=ListeningPayloadFixtureSchemaTest -Dsurefire.failIfNoSpecifiedTests=false test",
+    "flutter test",
+    "mvn -pl services/scoring -am test"
+  ],
+  "validation_notes": [
+    "Canonical pte-doc fixture and both vendored copies are byte-identical by SHA-256.",
+    "Targeted Dart contract test passed 3/3 tests; targeted Java schema test passed 1/1 test.",
+    "Full pte-app suite passed 585/585 tests.",
+    "Full scoring reactor passed 52/52 tests: 24 pte-common and 28 scoring tests."
+  ],
+  "report_path": "projects/plans/quang-listening-contract-and-timing/tests/phase-02-fixture-tests-test-report.json"
+}
