@@ -53,8 +53,9 @@ AI scoring or vendor calibration.
 
 ## Explicitly Deferred
 
-- Real speech/ASR and essay provider adapters, credentials, latency/cost PoC,
-  calibration and rubric validation.
+- Real speech/ASR and essay provider adapters are now tracked and implemented
+  in the follow-up plan `quang-ai-provider-adapters`; credentials,
+  latency/cost PoC, calibration and rubric validation remain deferred there.
 - Retry/idempotency redesign for the existing RabbitMQ transaction/publish
   boundary; it remains documented technical debt.
 - Score aggregation/reporting and authoring seed/content migration.

@@ -1,0 +1,79 @@
+{
+  "mode": "gate",
+  "target": "phase-01-provider-contract-and-adapters",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-13T07:50:07Z",
+  "reviewed_files": [
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/config/AiProviderConfig.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/config/AiProviderProperties.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/client/MediaClient.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/messaging/consumer/AiScoringWorker.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/vendor/AiProviderException.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/vendor/AiScoreResult.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/vendor/SpeechScoringClient.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/vendor/stub/StubEssayScoringClient.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/vendor/stub/StubSpeechScoringClient.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/vendor/openai/OpenAiCompatibleChatClient.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/vendor/openai/OpenAiCompatibleEssayScoringClient.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/vendor/openai/OpenAiCompatibleSpeechScoringClient.java",
+    "pte-api/services/scoring/src/main/resources/application.yml",
+    "pte-api/services/scoring/src/test/java/com/pte/scoring/messaging/consumer/AiScoringWorkerTest.java",
+    "pte-api/services/scoring/src/test/java/com/pte/scoring/vendor/AiScoreResultTest.java",
+    "pte-api/services/scoring/src/test/java/com/pte/scoring/vendor/openai/OpenAiCompatibleEssayScoringClientTest.java",
+    "pte-api/services/scoring/src/test/java/com/pte/scoring/vendor/openai/OpenAiCompatibleSpeechScoringClientTest.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 3
+  },
+  "findings": [
+    {
+      "id": "QUAL-AI-001",
+      "severity": "NOTED",
+      "rule": "DOC_INTENTIONAL_LIMIT_IS_A_NON_GOAL",
+      "status": "ACCEPTED_DEBT",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-api/services/scoring/src/main/java/com/pte/scoring/vendor/openai/OpenAiCompatibleSpeechScoringClient.java:24",
+      "evidence": "The adapter documents that provider support for input_audio and PTE calibration are separate release gates.",
+      "why_it_matters": "Transport compatibility alone does not establish pronunciation/fluency score validity.",
+      "required_action": "Validate the selected provider and calibrate against approved PTE reference samples before enabling production scoring.",
+      "owner": "none"
+    },
+    {
+      "id": "QUAL-AI-002",
+      "severity": "NOTED",
+      "rule": "ERR_RETRY_POLICY_SOUND",
+      "status": "ACCEPTED_DEBT",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-api/services/scoring/src/main/java/com/pte/scoring/service/AiScoringDispatcher.java:14-28",
+      "evidence": "The existing transaction/publish boundary and RabbitMQ retry/DLQ policy are unchanged by this phase.",
+      "why_it_matters": "Provider failure handling is bounded by existing queue behavior, while publish atomicity remains a separate reliability concern.",
+      "required_action": "Track the existing outbox bridge/idempotency work separately; do not treat this adapter phase as resolving it.",
+      "owner": "none"
+    },
+    {
+      "id": "QUAL-AI-003",
+      "severity": "NOTED",
+      "rule": "OBS_EXTERNAL_CALL_DURATION_TRACKED",
+      "status": "ACCEPTED_DEBT",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "medium",
+      "location": "pte-api/services/scoring/src/main/java/com/pte/scoring/vendor/openai/OpenAiCompatibleChatClient.java:55-69",
+      "evidence": "The provider call has timeouts but this phase does not add provider latency/success metrics.",
+      "why_it_matters": "Operational rollout needs visibility into provider latency, failures and saturation.",
+      "required_action": "Add metrics/tracing around provider calls before enabling production traffic.",
+      "owner": "none"
+    }
+  ],
+  "receipt_status": "skipped_cross_repo_boundary",
+  "receipt_note": "The plan/report lives in pte-doc while reviewed source and tests live in pte-api, a separate git repository under the pte-org parent.",
+  "report_path": "projects/plans/quang-ai-provider-adapters/quality/phase-01-provider-contract-and-adapters-quality-report.json"
+}

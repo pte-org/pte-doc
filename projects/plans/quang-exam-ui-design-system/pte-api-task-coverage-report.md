@@ -10,7 +10,8 @@
 
 The backend has the complete PTE Academic/UKVI task taxonomy, but it does not
 yet provide a complete production-ready exam. The remaining gaps are
-production timing verification, real AI scoring, and complete fixtures/seeds:
+production timing verification, production-valid AI scoring, and complete
+fixtures/seeds:
 
 In this report, **P0 means a blocker for a complete/full-length exam or
 release readiness**. It does not mean that the whole platform is unavailable:
@@ -24,9 +25,9 @@ the affected types.
 | Task timing | 23/23 configured | **All task types have config; 7 Listening values remain non-production placeholders** |
 | Delivery transport | Generic attempt/question/answer APIs | Payload transport is generic, not task-complete |
 | Objective scoring | 12/22 scored task types | All 5 Reading types and all 7 deterministic Listening types are covered |
-| AI scoring route | 10/22 scored task types | All 10 AI-shaped types route through RabbitMQ, but clients are deterministic stubs |
+| AI scoring route | 10/22 scored task types | All 10 AI-shaped types route through RabbitMQ; provider adapters are opt-in and calibration is pending |
 | Scored-task routing | 22/22 scored task types | All scored types have a route; AI output remains non-production |
-| Development seed data | 5/23 task types | Only the 5 Reading types have a dedicated seed runner |
+| Development seed data | 23/23 task types | Opt-in full-exam seed runner covers every task type with validated demo content; media refs remain placeholders |
 | Task-specific release tests | Improved | Deterministic scoring and AI route boundaries are covered; full fixtures/provider tests remain |
 
 For the baseline, this report uses Pearson's current PTE Academic/UKVI
@@ -80,22 +81,24 @@ Evidence:
 
 ### P0 — Current AI scoring is a pipeline stub, not real PTE scoring
 
-All ten routed AI types are wired to:
+All ten routed AI types are wired to a provider boundary:
 
 - `StubSpeechScoringClient`: used for seven speech-shaped tasks, returns a
   fixed score of `65` and does not read or analyze audio.
-- `StubEssayScoringClient`: used for three text-shaped tasks, returns a fixed
-  score of `60` and does not call an LLM or scoring provider.
+- `StubEssayScoringClient`: used for three text-shaped tasks in the default
+  mode, returns a fixed score of `60` and does not call an LLM or scoring provider.
 
-This is enough to exercise queue/status/event plumbing, but it cannot produce
-valid candidate scores. A production-ready implementation still needs real
-speech/ASR scoring for the speaking types, real writing evaluation for the
-writing types, provider error handling and a verified score mapping.
+The opt-in `openai-compatible` adapters now send authenticated text/audio
+requests and reject malformed/out-of-range results. This is still not valid
+PTE scoring without provider selection, calibration, rate/cost controls and a
+verified score mapping.
 
 Evidence:
 
 - `services/scoring/src/main/java/com/pte/scoring/vendor/stub/StubSpeechScoringClient.java:10-32`
 - `services/scoring/src/main/java/com/pte/scoring/vendor/stub/StubEssayScoringClient.java:10-33`
+- `services/scoring/src/main/java/com/pte/scoring/vendor/openai/OpenAiCompatibleEssayScoringClient.java:1-60`
+- `services/scoring/src/main/java/com/pte/scoring/vendor/openai/OpenAiCompatibleSpeechScoringClient.java:1-100`
 - `services/scoring/src/main/java/com/pte/scoring/messaging/consumer/AiScoringWorker.java:87-92`
 
 ### Resolved — Listening payload contract and timing unblock
@@ -123,25 +126,26 @@ Evidence:
 - `services/scoring/src/main/java/com/pte/scoring/service/AnswerPayloadDecoder.java:27-38`
 - `services/scoring/src/main/java/com/pte/scoring/dto/response/AnswerPayloadKind.java:4-19`
 
-### P1 — Seed data covers only Reading
+### Resolved — Full-exam development seed coverage
 
-The only authoring seed runner is
-`services/authoring/src/main/java/com/pte/authoring/seed/ReadingTaskSeedRunner.java`.
-It creates the 5 Reading task types. There is no dedicated backend seed data
-for the 8 Speaking types, 2 Writing types or 8 Listening types, so a complete
-local PTE exam cannot be assembled from the existing dev seed alone.
+`FullExamTaskSeedRunner` now loads a classpath fixture containing one question
+for each of the 23 task types, validates every question through the existing
+enum-driven `QuestionValidationHelper`, composes the questions in PTE section
+order, and publishes one full-exam blueprint. It is idempotent by a stable
+blueprint sentinel and runs only under the opt-in `seed-full-exam` profile.
 
-Missing dedicated seed coverage: **18 task types**.
+The fixture uses generic demo content and deterministic placeholder audio/image
+UUIDs. It provides authoring/snapshot structure for local UI and delivery work,
+but does not upload media or claim production question-bank content.
 
-This is a development/content readiness gap, not a domain-schema gap. The
-authoring endpoint can accept the types through `PteTaskType` and the generic
-request model.
+This remains a development/content fixture, not a domain-schema change.
 
 Evidence:
 
-- `services/authoring/src/main/java/com/pte/authoring/seed/ReadingTaskSeedRunner.java:26-27`
-- `services/authoring/src/main/java/com/pte/authoring/seed/ReadingTaskSeedRunner.java:100-168`
-- `services/authoring/src/main/java/com/pte/authoring/dto/request/CreateQuestionRequest.java:10-23`
+- `services/authoring/src/main/java/com/pte/authoring/seed/FullExamTaskSeedRunner.java:1-191`
+- `services/authoring/src/main/resources/seed/full-exam-task-fixtures.json:1-268`
+- `services/authoring/src/test/java/com/pte/authoring/seed/FullExamTaskSeedRunnerTest.java:1-150`
+- `services/authoring/src/main/java/com/pte/authoring/service/QuestionValidationHelper.java:35-53`
 
 ## Baseline task matrix (pre follow-up)
 
@@ -252,12 +256,14 @@ The following backend foundations are not missing:
 4. **Completed — deterministic Listening objective scoring.** All seven
    deterministic Listening types are now routed through
    `ObjectiveScoringService` with reference-contract and regression tests.
-5. **Next — replace the AI stubs with provider adapters.** Keep this separate from
-   the transactional answer API. Speech scoring needs a safe media-byte or
-   download path; writing scoring needs a real provider/rubric mapping.
-6. Add complete dev seed/fixture content and task-specific integration tests
-   for all 23 types. The full-length backend readiness gate is reached after
-   the contract, timing, scoring and fixture/test work are all verified.
+5. **Next — configure and validate the provider adapters.** Keep this separate
+   from the transactional answer API. The OpenAI-compatible text/audio
+   boundary now exists behind `SCORING_AI_PROVIDER=openai-compatible`; speech
+   calibration, provider reliability and verified rubric mappings remain.
+6. **Completed for structural demo coverage — add full dev seed/fixture content.**
+   `seed-full-exam` now creates one validated question per type and publishes
+   an ordered 23-item blueprint. Media-backed E2E execution and task-specific
+   integration tests against a live stack remain separate verification work.
 
 ## Scan limitations
 
