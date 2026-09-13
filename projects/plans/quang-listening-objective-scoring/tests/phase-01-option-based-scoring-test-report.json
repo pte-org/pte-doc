@@ -1,0 +1,23 @@
+{
+  "phase": "phase-01-option-based-scoring",
+  "mode": "all",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-12T15:24:00Z",
+  "summary": {
+    "passed": 29,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "test_commands": [
+    "mvn -pl services/scoring -am -DskipTests compile",
+    "mvn -pl services/scoring -am '-Dtest=ObjectiveScoringServiceTest' '-Dsurefire.failIfNoSpecifiedTests=false' test",
+    "mvn -pl services/scoring -am test"
+  ],
+  "validation_notes": [
+    "ObjectiveScoringServiceTest passed 29/29, including all four option-based Listening task types and malformed Re-order options.",
+    "Full scoring reactor passed 65/65: 24 pte-common and 41 scoring tests.",
+    "No persistence, event, API, or frontend schema changed."
+  ],
+  "report_path": "projects/plans/quang-listening-objective-scoring/tests/phase-01-option-based-scoring-test-report.json"
+}

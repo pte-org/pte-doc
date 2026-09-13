@@ -1,0 +1,23 @@
+{
+  "mode": "gate",
+  "target": "phase-02-reference-scoring",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-12T15:41:00Z",
+  "reviewed_files": [
+    "pte-doc/projects/fixtures/listening-payload-contract.md",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/constant/ScoringConstants.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/service/ObjectiveScoringService.java",
+    "pte-api/services/scoring/src/test/java/com/pte/scoring/service/ObjectiveScoringServiceTest.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "receipt_status": "skipped_cross_repo_boundary",
+  "receipt_note": "The plan/report lives in pte-doc while reviewed source and tests live in pte-api, a separate git repository under the pte-org parent.",
+  "report_path": "projects/plans/quang-listening-objective-scoring/quality/phase-02-reference-scoring-quality-report.json"
+}

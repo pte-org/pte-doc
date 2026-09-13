@@ -1,0 +1,30 @@
+{
+  "target": "phase-01-option-based-scoring",
+  "mode": "gate",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-12T15:24:00Z",
+  "reviewed_files": [
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/constant/ScoringConstants.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/service/ObjectiveScoringService.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/domain/event/AnswerScoredEvent.java",
+    "pte-api/services/scoring/src/test/java/com/pte/scoring/service/ObjectiveScoringServiceTest.java"
+  ],
+  "conventions_checked_against": [
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/messaging/consumer/ScoringCommandConsumer.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/service/AiScoringDispatcher.java",
+    "pte-api/services/scoring/src/test/java/com/pte/scoring/service/ObjectiveScoringServiceTest.java"
+  ],
+  "findings": [],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "noted_count": 0,
+  "receipt_status": "skipped_cross_repo_boundary",
+  "receipt_note": "The plan/report lives in pte-doc while reviewed source and tests live in pte-api, a separate git repository under the pte-org parent."
+}

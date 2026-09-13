@@ -9,8 +9,8 @@
 ## Executive summary
 
 The backend has the complete PTE Academic/UKVI task taxonomy, but it does not
-yet provide a complete operational exam. The largest gaps are in delivery
-timing and scoring:
+yet provide a complete production-ready exam. The remaining gaps are
+production timing verification, real AI scoring, and complete fixtures/seeds:
 
 In this report, **P0 means a blocker for a complete/full-length exam or
 release readiness**. It does not mean that the whole platform is unavailable:
@@ -21,13 +21,13 @@ the affected types.
 |---|---:|---|
 | Task taxonomy | 23/23 enum values | No task name is missing from the domain enum |
 | Authoring schema and required-field validation | 23/23 accepted by the enum-driven validator | Generic authoring path exists for every task |
-| Task timing | 16/23 configured | **Full-length sessions including 7 Listening tasks can fail during snapshot pinning** |
+| Task timing | 23/23 configured | **All task types have config; 7 Listening values remain non-production placeholders** |
 | Delivery transport | Generic attempt/question/answer APIs | Payload transport is generic, not task-complete |
-| Objective scoring | 5/22 scored task types | All 5 Reading types are covered |
-| AI scoring route | 2/22 scored task types | Only `READ_ALOUD` and `WRITE_ESSAY`; both use deterministic stubs |
-| Scored-task routing | 7/22 scored task types | **15 scored types remain `PENDING`** |
+| Objective scoring | 12/22 scored task types | All 5 Reading types and all 7 deterministic Listening types are covered |
+| AI scoring route | 10/22 scored task types | All 10 AI-shaped types route through RabbitMQ, but clients are deterministic stubs |
+| Scored-task routing | 22/22 scored task types | All scored types have a route; AI output remains non-production |
 | Development seed data | 5/23 task types | Only the 5 Reading types have a dedicated seed runner |
-| Task-specific release tests | Incomplete | No dedicated tests were found for the 7 missing-timing Listening types |
+| Task-specific release tests | Improved | Deterministic scoring and AI route boundaries are covered; full fixtures/provider tests remain |
 
 For the baseline, this report uses Pearson's current PTE Academic/UKVI
 format: 9 scored Speaking & Writing question types plus the unscored Personal
@@ -40,30 +40,17 @@ Introduction is for familiarization and does not contribute to the score. See
 
 ## Immediate missing / incomplete work
 
-### P0 — Full-length sessions are blocked by 7 Listening task types
+### Resolved — Listening timing coverage (placeholder values)
 
-The following task types are absent from
-`services/exam-delivery/src/main/resources/config/task-timing.json`:
 
-- `SUMMARIZE_SPOKEN_TEXT`
-- `MC_LISTENING_MULTIPLE`
-- `FILL_BLANKS_LISTENING`
-- `HIGHLIGHT_CORRECT_SUMMARY`
-- `SELECT_MISSING_WORD`
-- `HIGHLIGHT_INCORRECT_WORDS`
-- `WRITE_FROM_DICTATION`
+All 23 task types now have entries in
+`services/exam-delivery/src/main/resources/config/task-timing.json`, so the
+conditional `SnapshotPinService` failure caused by a missing `timingFor()`
+entry is removed. The seven Listening values are explicitly marked
+non-production placeholders and still require authoritative timing-source
+verification before release.
 
-`SnapshotPinService` filters `content.items()` by `includedTaskTypes` before it
-calls `toPinnedItem()`. Inside `toPinnedItem()`, `TaskTimingConfig.timingFor()`
-throws when a type is not configured. Therefore the gap is conditional: a
-Reading/Speaking-only session, or any section-scoped session that excludes
-these seven types, can still pin and run. A session configuration that includes
-one of them fails during attempt snapshot pinning. This blocks assembling a
-complete three-section/full-length exam; it is not a platform-wide outage.
 
-The timing values currently in the file are also explicitly documented as
-approximate placeholders. They must be verified against the authoritative
-Pearson timing source before release.
 
 Evidence:
 
@@ -71,24 +58,14 @@ Evidence:
 - `services/exam-delivery/src/main/java/com/pte/examdelivery/config/TaskTimingConfig.java:34-38`
 - `services/exam-delivery/src/main/java/com/pte/examdelivery/service/SnapshotPinService.java:101-114`
 
-### P0 — Scoring is incomplete for 15 scored task types
+### Resolved — Scored-task routing covers all 22 scored types
 
-`ObjectiveScoringService` supports only the 5 Reading types. `AiScoringDispatcher`
-supports only `READ_ALOUD` and `WRITE_ESSAY`. The remaining scored types are
-left untouched by `ScoringCommandConsumer`, so their rows stay `PENDING`.
-`AttemptCompletionService` treats `PENDING` as non-terminal; consequently a
-session containing one of these answers cannot reach fully-scored completion.
-
-The 15 currently un-routed scored types are:
-
-- Speaking: `REPEAT_SENTENCE`, `DESCRIBE_IMAGE`, `RE_TELL_LECTURE`,
-  `ANSWER_SHORT_QUESTION`, `SUMMARIZE_GROUP_DISCUSSION`,
-  `RESPOND_TO_A_SITUATION`
-- Writing: `SUMMARIZE_WRITTEN_TEXT`
-- Listening: `SUMMARIZE_SPOKEN_TEXT`, `MC_LISTENING_SINGLE`,
-  `MC_LISTENING_MULTIPLE`, `FILL_BLANKS_LISTENING`,
-  `HIGHLIGHT_CORRECT_SUMMARY`, `SELECT_MISSING_WORD`,
-  `HIGHLIGHT_INCORRECT_WORDS`, `WRITE_FROM_DICTATION`
+`ObjectiveScoringService` covers 12 deterministic types and the centralized
+`AiScoringTaskCatalog`/`AiScoringDispatcher` covers the remaining 10 AI-shaped
+types. `ScoringCommandConsumer` therefore has a routing path for all 22 scored
+types; none is left untouched solely because its task type is unknown to the
+current scoring layer. AI routing is not equivalent to production-valid
+scoring: those clients remain deterministic stubs until the provider phase.
 
 `PERSONAL_INTRODUCTION` is intentionally excluded from this count because it
 is unscored by Pearson.
@@ -96,18 +73,19 @@ is unscored by Pearson.
 Evidence:
 
 - `services/scoring/src/main/java/com/pte/scoring/service/ObjectiveScoringService.java:18-43`
-- `services/scoring/src/main/java/com/pte/scoring/service/AiScoringDispatcher.java:32-44`
+- `services/scoring/src/main/java/com/pte/scoring/service/AiScoringTaskCatalog.java:1-42`
+- `services/scoring/src/main/java/com/pte/scoring/service/AiScoringDispatcher.java:32-51`
 - `services/scoring/src/main/java/com/pte/scoring/messaging/consumer/ScoringCommandConsumer.java:92-100`
 - `services/scoring/src/main/java/com/pte/scoring/service/AttemptCompletionService.java:24-40`
 
 ### P0 — Current AI scoring is a pipeline stub, not real PTE scoring
 
-The two routed AI types are wired to:
+All ten routed AI types are wired to:
 
-- `StubSpeechScoringClient`: returns a fixed score of `65` and does not read
-  or analyze audio.
-- `StubEssayScoringClient`: returns a fixed score of `60` and does not call an
-  LLM or scoring provider.
+- `StubSpeechScoringClient`: used for seven speech-shaped tasks, returns a
+  fixed score of `65` and does not read or analyze audio.
+- `StubEssayScoringClient`: used for three text-shaped tasks, returns a fixed
+  score of `60` and does not call an LLM or scoring provider.
 
 This is enough to exercise queue/status/event plumbing, but it cannot produce
 valid candidate scores. A production-ready implementation still needs real
@@ -120,30 +98,24 @@ Evidence:
 - `services/scoring/src/main/java/com/pte/scoring/vendor/stub/StubEssayScoringClient.java:10-33`
 - `services/scoring/src/main/java/com/pte/scoring/messaging/consumer/AiScoringWorker.java:87-92`
 
-### P0 — Listening payload contract is not frozen or verified end-to-end
+### Resolved — Listening payload contract and timing unblock
 
-The answer API accepts an opaque `payload`, which is appropriate for a shared
-transport contract. However, the scoring review decoder explicitly documents
-that the seven Listening types other than the first verified
-`MC_LISTENING_SINGLE` path have no implemented/verified task-specific payload
-encoding. They fall back to raw text or `UNRECOGNIZED` instead of a reliable
-structured answer representation. This is the primary cross-layer contract
-gap: FE already produces payload strings, but cannot guarantee compatibility
-with BE scoring/review semantics until the shapes are frozen.
+The answer API keeps `payload` opaque, while the cross-repo contract is now
+frozen and tested in `pte-doc`, `pte-app`, and `pte-api`. The scoring review
+decoder now has explicit structured representations for typed gap values and
+highlighted transcript indices. The seven Listening timing entries are also
+present as clearly marked non-production placeholders, so a complete
+Listening configuration no longer fails only because `timingFor()` is missing.
 
-This affects at least:
+The deterministic/AI routing gap is resolved for the known 22 scored types.
+`SUMMARIZE_SPOKEN_TEXT` now has an AI route through the text stub; production
+spoken-summary scoring remains separate provider work.
 
-- `SUMMARIZE_SPOKEN_TEXT`
-- `MC_LISTENING_MULTIPLE`
-- `FILL_BLANKS_LISTENING`
-- `HIGHLIGHT_CORRECT_SUMMARY`
-- `SELECT_MISSING_WORD`
-- `HIGHLIGHT_INCORRECT_WORDS`
-- `WRITE_FROM_DICTATION`
-
-The contracts need to be specified and tested for option selection, typed
-blanks, token selection and positional word scoring before scoring/review is
-considered complete.
+Option-based Listening scoring is implemented through the existing objective
+scorer for `MC_LISTENING_SINGLE`, `MC_LISTENING_MULTIPLE`,
+`HIGHLIGHT_CORRECT_SUMMARY`, and `SELECT_MISSING_WORD`; typed blanks, token
+selection, and dictation partial credit are now implemented as reference-based
+objective scoring. Spoken-summary AI scoring remains separate work.
 
 Evidence:
 
@@ -171,7 +143,11 @@ Evidence:
 - `services/authoring/src/main/java/com/pte/authoring/seed/ReadingTaskSeedRunner.java:100-168`
 - `services/authoring/src/main/java/com/pte/authoring/dto/request/CreateQuestionRequest.java:10-23`
 
-## Full task matrix
+## Baseline task matrix (pre follow-up)
+
+The matrix below is the original scan captured before the contract, timing,
+deterministic-scoring and AI-route follow-ups. Use the current implementation
+delta and executive summary above for the post-phase status.
 
 Legend: `✅` present in the scanned layer; `⚠️` present but partial or stubbed;
 `❌` missing/blocking; `N/A` intentionally not applicable.
@@ -217,6 +193,25 @@ variant and `FILL_BLANKS_READING` for the drag-and-drop variant.
 | Highlight Incorrect Words | ✅ | ❌ | ❌ blocked at pin | ❌ not routed | Blocked |
 | Write from Dictation | ✅ | ❌ | ❌ blocked at pin | ❌ not routed | Blocked |
 
+## Current implementation delta (2026-09-12)
+
+The original Listening matrix above was captured before the contract/timing
+follow-up and the deterministic scoring slices. Current status is:
+
+| Listening type | Timing/delivery | Scoring |
+|---|---|---|
+| `MC_LISTENING_SINGLE` | Unblocked | Objective complete |
+| `MC_LISTENING_MULTIPLE` | Unblocked* | Objective complete |
+| `HIGHLIGHT_CORRECT_SUMMARY` | Unblocked* | Objective complete |
+| `SELECT_MISSING_WORD` | Unblocked* | Objective complete |
+| `SUMMARIZE_SPOKEN_TEXT` | Unblocked* | AI route stub; provider pending |
+| `FILL_BLANKS_LISTENING` | Unblocked* | Objective complete |
+| `HIGHLIGHT_INCORRECT_WORDS` | Unblocked* | Objective complete |
+| `WRITE_FROM_DICTATION` | Unblocked* | Objective complete; partial credit |
+
+`*` Unblocked by the contract/timing follow-up, but the seven new timing
+values remain explicitly non-production placeholders.
+
 ## What is already sufficient
 
 The following backend foundations are not missing:
@@ -236,28 +231,31 @@ The following backend foundations are not missing:
 
 ## Recommended implementation order
 
-1. **Freeze the payload contract for the seven Listening types.** Specify and
+1. **Completed — freeze the payload contract for the seven Listening types.** Specify and
    version the exact representation for multiple selections, typed blanks,
    highlighted tokens, missing-word choices and dictation text. Add contract
    tests that can be shared by FE serialization and BE decoding/scoring.
-2. **Add timing for the seven Listening types.** Add the seven entries as
+2. **Completed for demo — add timing for the seven Listening types.** Add the seven entries as
    explicitly non-production placeholders and add a parameterized guard for
    those seven values asserting that `timingFor()` does not throw. Once a
    shared `PteTaskType` catalog exists in `pte-common`, upgrade that guard to
    `EnumSource(PteTaskType.class)` for all 23 values; do not make the larger
    vocabulary move a prerequisite for the immediate pinning fix. This removes
-   the full-length pinning blocker and prevents the known gap from recurring.
-3. **Run FE and BE work in parallel after step 1:**
+   the conditional missing-timing pinning blocker and prevents the known gap from recurring. Production timing verification remains.
+3. **Continue FE and BE work in parallel against the frozen contract:**
    - FE continues the Token → Component → Template refactor and implements
      `option-select`, `typed-blanks`, `token-selection` and related templates
      against the frozen contract.
-   - BE adds scoring routes for the 15 currently un-routed scored types,
-     selecting objective or AI strategy and verified partial-credit rules per
-     task.
-4. **Replace the AI stubs with provider adapters.** Keep this separate from
+   - BE route coverage is complete for all 22 scored types. The next BE
+     scoring step is replacing the ten deterministic AI stubs with provider
+     adapters and verified rubric/score mappings.
+4. **Completed — deterministic Listening objective scoring.** All seven
+   deterministic Listening types are now routed through
+   `ObjectiveScoringService` with reference-contract and regression tests.
+5. **Next — replace the AI stubs with provider adapters.** Keep this separate from
    the transactional answer API. Speech scoring needs a safe media-byte or
    download path; writing scoring needs a real provider/rubric mapping.
-5. Add complete dev seed/fixture content and task-specific integration tests
+6. Add complete dev seed/fixture content and task-specific integration tests
    for all 23 types. The full-length backend readiness gate is reached after
    the contract, timing, scoring and fixture/test work are all verified.
 

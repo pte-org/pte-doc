@@ -57,6 +57,23 @@ and position of empty entries must still be preserved when a non-empty gap
 exists later in the answer. For multi-selection and transcript word-index
 selection, an empty string represents no selected values.
 
+## Objective scoring reference encodings
+
+The following answer-key conventions are used by `pte-api` objective scoring;
+they are stored in the existing `correctAnswerText` field and are distinct
+from the student's raw `payload`:
+
+| Task type | `correctAnswerText` reference | Scoring rule |
+|---|---|---|
+| `FILL_BLANKS_LISTENING` | JSON string array, one expected value per gap, e.g. `["rapid","forest"]` | One point per case-insensitive normalized exact word/phrase; no fuzzy matching or penalty. |
+| `HIGHLIGHT_INCORRECT_WORDS` | JSON integer array of unique zero-based transcript token positions, e.g. `[3,7,11]` | +1 for each expected position selected, -1 for each other selected position, floor at zero. |
+| `WRITE_FROM_DICTATION` | Canonical sentence as plain text | One point per ordered reference word matched after deterministic case/punctuation normalization; partial credit applies. |
+
+Malformed answer-key references score zero and are rejected from receiving
+implicit credit. These conventions are versioned with the application scoring
+plan and must be represented by authoring fixtures before production content is
+published.
+
 ## Change control
 
 This contract and its JSON fixture are manually maintained cross-repository
