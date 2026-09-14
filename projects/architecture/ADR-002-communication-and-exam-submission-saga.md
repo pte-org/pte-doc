@@ -35,6 +35,10 @@
 | reporting | (consume) | event | build read model từ stream (đường chính, steady-state) |
 | reporting | exam-delivery, scoring | **sync pull, rebuild-only** | Không phải đường chính — chỉ khi cần dựng lại read model từ đầu (mất data, bootstrap instance mới). Xem mục Rebuild bên dưới |
 | exam-delivery ↔ media | sync | presigned URL (upload/fetch) |
+| scheduling → authoring | sync | fetch snapshot metadata lúc tạo `SnapshotRef` |
+| proctor → scheduling | sync | xác nhận session/assignment |
+| scoring → media | sync | fetch audio để chấm speaking |
+| reporting → (publish) | event | `AttemptPublished` — quyết định publish materialize ở reporting, notification consume |
 
 **Auth:** iam ký JWT asymmetric. Các service validate **local bằng JWKS public key**, không call iam mỗi request → iam sập, token còn hạn vẫn dùng được, attempt không gián đoạn.
 
@@ -139,3 +143,21 @@ Chi tiết implementation: [`pte-doc/projects/plans/rabbitmq-outbox-migration/ph
 - **mất khả năng replay-from-beginning kiểu Kafka** — bù bằng rebuild sync-pull cho reporting (mục trên), nhưng đây là cơ chế mới xây riêng, không "miễn phí" như Kafka retention.
 - **thêm consumer mới không tự động replay lại lịch sử** — nếu sau này có service mới cần dựng read-model từ đầu, phải tự xây sync-pull endpoint như reporting đã làm, không có sẵn cơ chế chung.
 - **per-aggregate ordering không còn tự động** — nơi cần (2 trường hợp: proctor→exam-delivery, exam-delivery→scoring) phải tự ràng buộc single-queue + concurrency=1 + relay phía producer chạy đúng 1 instance; đây là ràng buộc triển khai phải nhớ, không phải Kafka partition lo hộ.
+
+---
+
+## As-built reconciliation — 2026-09-14
+
+ADR này là ADR chính xác nhất trong bộ (đã được cập nhật 2026-07-31 theo migration RabbitMQ). Đối chiếu lần này chỉ bổ sung, không sửa quyết định.
+
+**Đúng như mô tả:** outbox `AbstractOutboxRelay` (`@Scheduled fixedDelay 2000ms`, `FOR UPDATE SKIP LOCKED`) + `AbstractOutboxWriter` + `AbstractOutboxCleanupJob` (cron 03:00 UTC) đều nằm trong `pte-common/messaging/`; mọi service có outbox đều có entity `OutboxEntry` riêng trong DB của nó.
+
+**Bổ sung — idempotency là Postgres, không phải Redis.** Dedup chạy bằng bảng `ProcessedEvent` per-service (`AbstractProcessedEvent` trong `pte-common`), hiện có ở iam, scheduling, exam-delivery, scoring, reporting, notification. ADR-003 liệt kê "idempotency dedup" là một vai của Redis — **sai so với as-built**, và bảng Postgres là lựa chọn đúng hơn: dedup phải bền và atomic với business write, Redis thì không.
+
+**Bổ sung — điểm KHÔNG ghi ngược về exam-delivery.** Consumer duy nhất của exam-delivery là `ProctorCommandConsumer`. Không có consumer `AnswerScored` / `AttemptPublished` (ADR-004 bản gốc mô tả có — đã sửa). Điểm sống ở `scoring`, projection sống ở `reporting`; `ExamAttempt` không mang trạng thái SCORED/PUBLISHED. Đây **củng cố** bất biến ADR-001 #1: sau khi submit, exam-delivery không còn bị bất kỳ luồng nghiệp vụ nào ghi vào.
+
+**Bổ sung — vòng đời publish.** `scheduling` phát `PublishRequested` → `reporting.PublishConsumer` xử lý → `reporting` phát `AttemptPublished` → `notification` consume. Khớp với ghi chú "published là quyết định nội bộ của reporting" ở mục Rebuild.
+
+**"Guarded" là thật — đã kiểm chứng.** 6/8 sync client có `@CircuitBreaker` (Resilience4j) kèm `fallbackMethod` và instance cấu hình sẵn (`sliding-window-size: 10`, `failure-rate-threshold: 50%`, `wait-duration-in-open-state: 10s`): exam-delivery→{authoring, scheduling, media}, proctor→scheduling, scheduling→authoring, scoring→media. Timeout đặt ở `InternalClientConfig` (connect 2s / read 3s) và mọi call mang `X-Internal-Service-Key`.
+
+Hai client **chưa** có CB: `reporting.ExamDeliveryExportClient` và `reporting.ScoringExportClient` — đường rebuild-only, chạy thủ công, không nằm trên request path nào. Chấp nhận được, ghi lại để không nhầm là sót.
