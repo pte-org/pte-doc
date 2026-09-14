@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "error": "#ba1a1a",
+          "on-surface-variant": "#434654",
+          "on-primary": "#ffffff",
+          "surface-container": "#e7eeff",
+          "tertiary-container": "#0e826a",
+          "surface-tint": "#2653d2",
+          "primary-fixed": "#dce1ff",
+          "surface-variant": "#d8e3fa",
+          "outline-variant": "#c4c5d6",
+          "on-tertiary-container": "#e9fff5",
+          "tertiary-fixed-dim": "#77d8bc",
+          "on-tertiary-fixed-variant": "#005141",
+          "on-primary-container": "#fbf9ff",
+          "on-secondary-fixed-variant": "#004c6c",
+          "surface": "#f9f9ff",
+          "tertiary-fixed": "#94f5d7",
+          "on-primary-fixed-variant": "#003ab2",
+          "on-secondary-fixed": "#001e2e",
+          "on-tertiary-fixed": "#002019",
+          "on-secondary-container": "#00567b",
+          "inverse-on-surface": "#ebf1ff",
+          "on-error": "#ffffff",
+          "on-error-container": "#93000a",
+          "secondary-fixed-dim": "#85cfff",
+          "on-primary-fixed": "#001550",
+          "on-secondary": "#ffffff",
+          "inverse-surface": "#263143",
+          "secondary": "#00658e",
+          "on-surface": "#111c2d",
+          "surface-bright": "#f9f9ff",
+          "error-container": "#ffdad6",
+          "surface-container-high": "#dee8ff",
+          "secondary-container": "#7fccfe",
+          "primary": "#204ece",
+          "surface-container-highest": "#d8e3fa",
+          "background": "#f9f9ff",
+          "secondary-fixed": "#c7e7ff",
+          "surface-container-lowest": "#ffffff",
+          "inverse-primary": "#b6c4ff",
+          "surface-container-low": "#f0f3ff",
+          "tertiary": "#006753",
+          "primary-fixed-dim": "#b6c4ff",
+          "primary-container": "#4169e8",
+          "outline": "#747686",
+          "on-tertiary": "#ffffff",
+          "on-background": "#111c2d",
+          "surface-dim": "#cfdaf2"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "space-xl": "2rem",
+          "margin-sm": "1rem",
+          "margin": "2rem",
+          "space-sm": "0.5rem",
+          "space-md": "1rem",
+          "gutter": "1.5rem",
+          "space-lg": "1.5rem",
+          "gutter-sm": "1rem",
+          "space-xs": "0.25rem"
+        },
+        "fontFamily": {
+          "body-lg": ["Plus Jakarta Sans"],
+          "headline-xl-mobile": ["Plus Jakarta Sans"],
+          "button-text": ["Plus Jakarta Sans"],
+          "data-metric": ["Plus Jakarta Sans"],
+          "label-sm": ["Plus Jakarta Sans"],
+          "label-md": ["Plus Jakarta Sans"],
+          "body-md": ["Plus Jakarta Sans"],
+          "headline-lg": ["Plus Jakarta Sans"],
+          "headline-md": ["Plus Jakarta Sans"],
+          "headline-xl": ["Plus Jakarta Sans"],
+          "headline-sm": ["Plus Jakarta Sans"],
+          "body-sm": ["Plus Jakarta Sans"]
+        },
+        "fontSize": {
+          "body-lg": ["1rem", {"lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400"}],
+          "headline-xl-mobile": ["1.625rem", {"lineHeight": "2.125rem", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+          "button-text": ["0.875rem", {"lineHeight": "1.25rem", "letterSpacing": "0.005em", "fontWeight": "400"}],
+          "data-metric": ["1.75rem", {"lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+          "label-sm": ["0.75rem", {"lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600"}],
+          "label-md": ["0.875rem", {"lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "500"}],
+          "body-md": ["0.875rem", {"lineHeight": "1.375rem", "letterSpacing": "0em", "fontWeight": "400"}],
+          "headline-lg": ["1.5rem", {"lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+          "headline-md": ["1.25rem", {"lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+          "headline-xl": ["2rem", {"lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+          "headline-sm": ["1.125rem", {"lineHeight": "1.5rem", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+          "body-sm": ["0.75rem", {"lineHeight": "1.125rem", "letterSpacing": "0em", "fontWeight": "400"}]
+        }
+      }
+    }
+  }</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-screen w-64 bg-surface-container-lowest z-50 flex flex-col justify-between overflow-y-auto shadow-[rgba(145,158,171,0.3)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_12px_24px_-4px]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-sm"><div class="w-9 h-9 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-headline-sm font-bold shadow-[0_2px_8px_rgba(65,105,232,0.3)]">VP</div><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm font-bold text-on-surface tracking-tight leading-tight">Vendor Portal</span><span class="font-label-sm text-label-sm text-on-surface-variant">Institutional Admin</span></div></div><nav class="flex flex-col px-space-md py-space-sm space-y-1" data-active-classes="bg-surface-container-high text-primary font-semibold"><div class="px-space-sm pt-space-sm pb-1"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">HOME</span></div><a class="flex items-center h-10 px-space-md rounded-[7px] text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="dashboard" href="#">Dashboard</a><div class="px-space-sm pt-space-md pb-1"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">TENANTS</span></div><a class="flex items-center h-10 px-space-md rounded-[7px] text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="tenants" href="#">Tenants</a><a class="flex items-center h-10 px-space-md rounded-[7px] text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="licences-and-quota" href="#">Licences &amp; Quota</a><div class="px-space-sm pt-space-md pb-1"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">CONTENT</span></div><a aria-current="page" class="flex items-center h-10 px-space-md rounded-[7px] transition-all bg-surface-container-high text-primary font-semibold" data-path="question-bank" href="#">Question Bank</a><a class="flex items-center h-10 px-space-md rounded-[7px] text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="exam-blueprints" href="#">Exam Blueprints</a><div class="px-space-sm pt-space-md pb-1"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">SETTINGS</span></div><a class="flex items-center h-10 px-space-md rounded-[7px] text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="platform-users" href="#">Platform Users</a><a class="flex items-center h-10 px-space-md rounded-[7px] text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="settings" href="#">Settings</a></nav></div><div class="p-space-md"><div class="p-space-md rounded-[7px] bg-surface-container-low shadow-[rgba(145,158,171,0.2)_0px_0px_2px_0px]"><div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-tertiary shrink-0 animate-pulse"></span><span class="font-label-sm text-label-sm font-semibold text-tertiary">All systems operational</span></div><p class="mt-1 text-[11px] leading-4 text-on-surface-variant font-body-sm">Updated 2 min ago</p></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest z-40 flex items-center justify-between px-space-lg shadow-[rgba(145,158,171,0.3)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_4px_12px_-4px]"><div class="flex items-center text-body-sm font-body-sm text-on-surface-variant"><a class="hover:text-primary transition-colors" href="#">Platform</a><span class="mx-2 text-outline-variant">/</span><span class="font-semibold text-on-surface">Overview</span></div><div class="flex items-center gap-space-md"><div class="relative w-72"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full h-10 pl-9 pr-3 text-body-sm font-body-sm bg-surface-container-low rounded-[7px] border border-outline focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all text-on-surface placeholder:text-outline" placeholder="Search tenants, exams, users..." type="text"/></div><button aria-label="Notifications" class="relative w-10 h-10 rounded-[7px] flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full ring-2 ring-surface-container-lowest"></span></button><div class="h-6 w-px bg-outline-variant"></div><div class="flex items-center gap-space-sm pl-1"><div class="w-9 h-9 rounded-full bg-surface-container-high text-primary font-headline-sm font-bold flex items-center justify-center">AD</div><div class="text-left hidden sm:block"><div class="font-label-md text-label-md font-semibold text-on-surface leading-tight">Admin User</div><div class="font-body-sm text-body-sm text-on-surface-variant leading-none">Super Administrator</div></div></div></div></header><main class="relative pt-16 bg-background min-h-screen"><div class="max-w-[1440px] mx-auto p-space-xl"><div class="flex flex-col w-full">
+<!-- Page Header & Action Bar -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-lg">
+<div class="flex flex-col">
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm mb-1">
+<span class="hover:text-primary transition-colors cursor-pointer">Content</span>
+<span class="text-outline-variant font-normal">/</span>
+<span class="text-on-surface font-semibold">Question Bank</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">Question bank</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-2xl">Kho ngữ liệu và câu hỏi khảo thí trung tâm cho bài thi PTE Academic và PTE Core</p>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="h-10 px-4 rounded-[7px] bg-surface-container-high text-primary font-button-text text-button-text font-semibold hover:bg-surface-variant transition-all flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">file_upload</span>
+<span>Nhập file Excel</span>
+</button>
+<button class="h-10 px-4 rounded-[7px] bg-primary text-on-primary font-button-text text-button-text font-semibold hover:bg-primary/90 transition-all flex items-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>+ New question</span>
+</button>
+</div>
+</div>
+<!-- Row 1: Stat Metric Tiles -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md mb-space-lg">
+<!-- Stat 1: Total -->
+<div class="bg-surface-container-lowest p-space-md rounded-[7px] shadow-[rgba(145,158,171,0.30)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_12px_24px_-4px] flex items-center gap-space-md transition-all hover:shadow-[rgba(145,158,171,0.30)_0px_0px_3px_0px,rgba(145,158,171,0.18)_0px_16px_32px_-4px]">
+<div class="w-10 h-10 rounded-[7px] bg-primary-fixed flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[22px]">inventory_2</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Tổng câu hỏi</span>
+<span class="px-1.5 py-0.2 bg-surface-container-high text-on-surface-variant rounded font-body-sm text-[10px]">Toàn hệ thống</span>
+</div>
+<span class="font-data-metric text-data-metric text-on-surface font-bold mt-0.5 leading-none">1,284</span>
+</div>
+</div>
+<!-- Stat 2: Mint / Published -->
+<div class="bg-surface-container-lowest p-space-md rounded-[7px] shadow-[rgba(145,158,171,0.30)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_12px_24px_-4px] flex items-center gap-space-md transition-all hover:shadow-[rgba(145,158,171,0.30)_0px_0px_3px_0px,rgba(145,158,171,0.18)_0px_16px_32px_-4px]">
+<div class="w-10 h-10 rounded-[7px] bg-tertiary-fixed flex items-center justify-center text-tertiary shrink-0">
+<span class="material-symbols-outlined text-[22px]">verified</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Đã xuất bản</span>
+<div class="flex items-baseline gap-2 mt-0.5">
+<span class="font-data-metric text-data-metric text-on-surface font-bold leading-none">1,102</span>
+<span class="font-body-sm text-body-sm text-tertiary font-semibold">85.8%</span>
+</div>
+</div>
+</div>
+<!-- Stat 3: Cream / In Review -->
+<div class="bg-surface-container-lowest p-space-md rounded-[7px] shadow-[rgba(145,158,171,0.30)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_12px_24px_-4px] flex items-center gap-space-md transition-all hover:shadow-[rgba(145,158,171,0.30)_0px_0px_3px_0px,rgba(145,158,171,0.18)_0px_16px_32px_-4px]">
+<div class="w-10 h-10 rounded-[7px] bg-secondary-fixed flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[22px]">pending_actions</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Đang chờ duyệt</span>
+<div class="flex items-baseline gap-2 mt-0.5">
+<span class="font-data-metric text-data-metric text-on-surface font-bold leading-none">46</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">3 chuyên gia</span>
+</div>
+</div>
+</div>
+<!-- Stat 4: Sky / Draft -->
+<div class="bg-surface-container-lowest p-space-md rounded-[7px] shadow-[rgba(145,158,171,0.30)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_12px_24px_-4px] flex items-center gap-space-md transition-all hover:shadow-[rgba(145,158,171,0.30)_0px_0px_3px_0px,rgba(145,158,171,0.18)_0px_16px_32px_-4px]">
+<div class="w-10 h-10 rounded-[7px] bg-surface-container-high flex items-center justify-center text-on-secondary-container shrink-0">
+<span class="material-symbols-outlined text-[22px]">edit_document</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Bản nháp</span>
+<div class="flex items-baseline gap-2 mt-0.5">
+<span class="font-data-metric text-data-metric text-on-surface font-bold leading-none">136</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Lưu tự động</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Row 2: 8/4 split with integrated right filter rail (280px) -->
+<div class="flex flex-col lg:flex-row gap-space-lg items-start">
+<!-- Main Left Area (Expanded table content) -->
+<div class="flex-1 w-full min-w-0 bg-surface-container-lowest rounded-[7px] p-space-lg shadow-[rgba(145,158,171,0.30)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_12px_24px_-4px]">
+<!-- Search & Controls Bar -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-md mb-space-md pb-space-md border-b-0 bg-surface-container-low/40 p-space-md rounded-[7px]">
+<div class="flex items-center gap-space-md flex-1 max-w-lg">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full h-10 pl-9 pr-3 text-body-sm font-body-sm bg-surface-container-lowest rounded-[7px] text-on-surface placeholder:text-outline focus:outline-none shadow-sm" placeholder="Tìm theo mã câu hỏi, đoạn văn bản, từ khóa..." type="text" value="glacier"/>
+</div>
+</div>
+<div class="flex items-center justify-between sm:justify-end gap-space-md shrink-0">
+<div class="flex items-center bg-surface-container-high rounded-[7px] p-0.5">
+<button aria-label="List View" class="w-8 h-8 rounded-[5px] bg-surface-container-lowest text-primary shadow-xs flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[18px]">table_rows</span>
+</button>
+<button aria-label="Grid View" class="w-8 h-8 rounded-[5px] text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+</button>
+</div>
+<div class="h-5 w-px bg-outline-variant/60 hidden sm:block"></div>
+<button class="h-9 px-3 rounded-[7px] bg-surface-container-lowest text-on-surface font-label-md text-label-md flex items-center gap-1.5 shadow-sm hover:bg-surface-container-low transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">swap_vert</span>
+<span>Sắp xếp: Mới nhất</span>
+</button>
+</div>
+</div>
+<!-- Filter status bar pill count -->
+<div class="flex flex-wrap items-center justify-between gap-2 mb-space-md">
+<div class="flex items-center gap-2">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">1,284 câu hỏi</span>
+<span class="text-outline-variant">•</span>
+<span class="font-body-sm text-body-sm text-primary font-medium">3 bộ lọc đang áp dụng</span>
+<div class="hidden sm:flex items-center gap-1.5 ml-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[9999px] bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+              Speaking
+              <button class="hover:text-error transition-colors flex items-center"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[9999px] bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+              Read Aloud
+              <button class="hover:text-error transition-colors flex items-center"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[9999px] bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+              Published
+              <button class="hover:text-error transition-colors flex items-center"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+</div>
+</div>
+<button class="font-label-sm text-label-sm text-outline hover:text-error transition-colors">Xóa bộ lọc</button>
+</div>
+<!-- Dense Table -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface text-[12px] font-semibold uppercase tracking-wider">
+<th class="py-3 px-3 rounded-l-[7px]">Mã ID</th>
+<th class="py-3 px-3">Loại câu hỏi</th>
+<th class="py-3 px-3 min-w-[240px]">Trích đoạn đề</th>
+<th class="py-3 px-3">Độ khó</th>
+<th class="py-3 px-3 text-right">Lượt dùng</th>
+<th class="py-3 px-3">Trạng thái</th>
+<th class="py-3 px-3">Cập nhật</th>
+<th class="py-3 px-3 rounded-r-[7px] text-center w-10"></th>
+</tr>
+</thead>
+<tbody class="text-body-sm font-body-sm divide-y-0">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group">
+<td class="py-3 px-3 font-mono font-medium text-primary text-[13px] tracking-tight">PTE-RA-0921</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-[4px] bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Read Aloud</span>
+</td>
+<td class="py-3 px-3">
+<div class="truncate max-w-xs font-medium text-on-surface" title="Climate change has accelerated the retreat of alpine glaciers in southern hemispheres, impacting local hydrology.">
+                  Climate change has accelerated the retreat of alpine glaciers in southern hemispheres...
+                </div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="text-primary text-[11px] tracking-widest leading-none font-bold">●●●<span class="text-outline-variant font-normal">○○</span></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant [font-feature-settings:'tnum']">3.0</span>
+</div>
+</td>
+<td class="py-3 px-3 text-right font-semibold text-on-surface [font-feature-settings:'tnum']">1,420</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center h-6 px-2.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm font-semibold">Published</span>
+</td>
+<td class="py-3 px-3 text-on-surface-variant text-[12px] [font-feature-settings:'tnum'] whitespace-nowrap">18/03/2025</td>
+<td class="py-3 px-3 text-center">
+<button class="w-8 h-8 rounded-[5px] hover:bg-surface-container flex items-center justify-center text-outline hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group">
+<td class="py-3 px-3 font-mono font-medium text-primary text-[13px] tracking-tight">PTE-RO-0432</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-[4px] bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Re-order</span>
+</td>
+<td class="py-3 px-3">
+<div class="truncate max-w-xs font-medium text-on-surface" title="The agricultural revolution enabled sustained demographic expansion and permanently reshaped social hierarchies.">
+                  The agricultural revolution enabled sustained demographic expansion and permanently reshaped...
+                </div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="text-primary text-[11px] tracking-widest leading-none font-bold">●●●●<span class="text-outline-variant font-normal">○</span></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant [font-feature-settings:'tnum']">4.2</span>
+</div>
+</td>
+<td class="py-3 px-3 text-right font-semibold text-on-surface [font-feature-settings:'tnum']">894</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center h-6 px-2.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-sm text-label-sm font-semibold">In review</span>
+</td>
+<td class="py-3 px-3 text-on-surface-variant text-[12px] [font-feature-settings:'tnum'] whitespace-nowrap">17/03/2025</td>
+<td class="py-3 px-3 text-center">
+<button class="w-8 h-8 rounded-[5px] hover:bg-surface-container flex items-center justify-center text-outline hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group">
+<td class="py-3 px-3 font-mono font-medium text-primary text-[13px] tracking-tight">PTE-DI-0188</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-[4px] bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Describe Image</span>
+</td>
+<td class="py-3 px-3">
+<div class="truncate max-w-xs font-medium text-on-surface" title="Bar chart representing renewable energy adoption across ASEAN member states from 2010 to 2024.">
+                  Bar chart representing renewable energy adoption across ASEAN member states from 2010 to 2024...
+                </div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="text-primary text-[11px] tracking-widest leading-none font-bold">●●<span class="text-outline-variant font-normal">○○○</span></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant [font-feature-settings:'tnum']">2.1</span>
+</div>
+</td>
+<td class="py-3 px-3 text-right font-semibold text-on-surface [font-feature-settings:'tnum']">612</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center h-6 px-2.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm font-semibold">Published</span>
+</td>
+<td class="py-3 px-3 text-on-surface-variant text-[12px] [font-feature-settings:'tnum'] whitespace-nowrap">16/03/2025</td>
+<td class="py-3 px-3 text-center">
+<button class="w-8 h-8 rounded-[5px] hover:bg-surface-container flex items-center justify-center text-outline hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group">
+<td class="py-3 px-3 font-mono font-medium text-primary text-[13px] tracking-tight">PTE-SW-0056</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-[4px] bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Summ. Written</span>
+</td>
+<td class="py-3 px-3">
+<div class="truncate max-w-xs font-medium text-on-surface" title="Autonomous oceanic gliders allow deep-sea data collection without traditional ship-based expedition costs.">
+                  Autonomous oceanic gliders allow deep-sea data collection without traditional ship-based expedition...
+                </div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="text-primary text-[11px] tracking-widest leading-none font-bold">●●●●●</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant [font-feature-settings:'tnum']">5.0</span>
+</div>
+</td>
+<td class="py-3 px-3 text-right font-semibold text-on-surface [font-feature-settings:'tnum']">0</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center h-6 px-2.5 rounded-full bg-surface-container-high text-on-secondary-container font-label-sm text-label-sm font-semibold">Draft</span>
+</td>
+<td class="py-3 px-3 text-on-surface-variant text-[12px] [font-feature-settings:'tnum'] whitespace-nowrap">15/03/2025</td>
+<td class="py-3 px-3 text-center">
+<button class="w-8 h-8 rounded-[5px] hover:bg-surface-container flex items-center justify-center text-outline hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group">
+<td class="py-3 px-3 font-mono font-medium text-primary text-[13px] tracking-tight">PTE-FB-0771</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-[4px] bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Fill Blanks</span>
+</td>
+<td class="py-3 px-3">
+<div class="truncate max-w-xs font-medium text-on-surface" title="The synthesis of novel polymers necessitates precise thermal control during subsequent polymerization phases.">
+                  The synthesis of novel polymers necessitates precise thermal control during subsequent...
+                </div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="text-primary text-[11px] tracking-widest leading-none font-bold">●●●<span class="text-outline-variant font-normal">○○</span></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant [font-feature-settings:'tnum']">3.5</span>
+</div>
+</td>
+<td class="py-3 px-3 text-right font-semibold text-on-surface [font-feature-settings:'tnum']">2,380</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center h-6 px-2.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm font-semibold">Published</span>
+</td>
+<td class="py-3 px-3 text-on-surface-variant text-[12px] [font-feature-settings:'tnum'] whitespace-nowrap">14/03/2025</td>
+<td class="py-3 px-3 text-center">
+<button class="w-8 h-8 rounded-[5px] hover:bg-surface-container flex items-center justify-center text-outline hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group">
+<td class="py-3 px-3 font-mono font-medium text-primary text-[13px] tracking-tight">PTE-WD-0312</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-[4px] bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Write Dictation</span>
+</td>
+<td class="py-3 px-3">
+<div class="truncate max-w-xs font-medium text-on-surface" title="Statistical analysis reveals a significant correlation between sleep hygiene and cognitive task performance.">
+                  Statistical analysis reveals a significant correlation between sleep hygiene and cognitive...
+                </div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="text-primary text-[11px] tracking-widest leading-none font-bold">●●●●<span class="text-outline-variant font-normal">○</span></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant [font-feature-settings:'tnum']">3.8</span>
+</div>
+</td>
+<td class="py-3 px-3 text-right font-semibold text-on-surface [font-feature-settings:'tnum']">1,114</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center h-6 px-2.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm font-semibold">Published</span>
+</td>
+<td class="py-3 px-3 text-on-surface-variant text-[12px] [font-feature-settings:'tnum'] whitespace-nowrap">12/03/2025</td>
+<td class="py-3 px-3 text-center">
+<button class="w-8 h-8 rounded-[5px] hover:bg-surface-container flex items-center justify-center text-outline hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 7 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group">
+<td class="py-3 px-3 font-mono font-medium text-primary text-[13px] tracking-tight">PTE-RS-0229</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-[4px] bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Repeat Sent.</span>
+</td>
+<td class="py-3 px-3">
+<div class="truncate max-w-xs font-medium text-on-surface" title="Please make sure your lab reports are submitted before Friday afternoon at 5 PM.">
+                  Please make sure your lab reports are submitted before Friday afternoon at 5 PM.
+                </div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="text-primary text-[11px] tracking-widest leading-none font-bold">●<span class="text-outline-variant font-normal">○○○○</span></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant [font-feature-settings:'tnum']">1.4</span>
+</div>
+</td>
+<td class="py-3 px-3 text-right font-semibold text-on-surface [font-feature-settings:'tnum']">3,050</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center h-6 px-2.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm font-semibold">Published</span>
+</td>
+<td class="py-3 px-3 text-on-surface-variant text-[12px] [font-feature-settings:'tnum'] whitespace-nowrap">10/03/2025</td>
+<td class="py-3 px-3 text-center">
+<button class="w-8 h-8 rounded-[5px] hover:bg-surface-container flex items-center justify-center text-outline hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-lg mt-space-md">
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span>Hiển thị</span>
+<select class="h-8 px-2 bg-surface-container-low rounded-[5px] text-on-surface font-semibold text-body-sm focus:outline-none">
+<option>10</option>
+<option>25</option>
+<option>50</option>
+</select>
+<span>hàng • <strong>1–10</strong> trên <strong>1,284</strong> câu hỏi</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-[5px] bg-surface-container-low text-outline flex items-center justify-center cursor-not-allowed opacity-60" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-[5px] bg-primary text-on-primary font-semibold text-body-sm flex items-center justify-center shadow-xs" type="button">1</button>
+<button class="w-8 h-8 rounded-[5px] hover:bg-surface-container-high text-on-surface font-medium text-body-sm flex items-center justify-center transition-colors" type="button">2</button>
+<button class="w-8 h-8 rounded-[5px] hover:bg-surface-container-high text-on-surface font-medium text-body-sm flex items-center justify-center transition-colors" type="button">3</button>
+<span class="px-1 text-outline">...</span>
+<button class="w-8 h-8 rounded-[5px] hover:bg-surface-container-high text-on-surface font-medium text-body-sm flex items-center justify-center transition-colors" type="button">129</button>
+<button class="w-8 h-8 rounded-[5px] bg-surface-container-low hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right Filter Rail (280px) INSIDE content area -->
+<aside class="w-full lg:w-[280px] shrink-0 bg-surface-container-lowest rounded-[7px] p-space-md shadow-[rgba(145,158,171,0.30)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_12px_24px_-4px] flex flex-col gap-space-md">
+<!-- Rail Header -->
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">filter_list</span>
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">Bộ lọc câu hỏi</h2>
+</div>
+<button class="font-label-sm text-label-sm text-primary hover:underline font-semibold" type="button">Đặt lại</button>
+</div>
+<!-- Facet Group 1: KỸ NĂNG -->
+<div class="bg-surface-container-low/50 rounded-[7px] p-space-sm">
+<button class="w-full flex items-center justify-between text-left group" type="button">
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider text-on-surface-variant group-hover:text-primary transition-colors">KỸ NĂNG</span>
+<span class="material-symbols-outlined text-outline text-[18px] group-hover:text-primary transition-colors">expand_less</span>
+</button>
+<div class="mt-space-sm space-y-2">
+<label class="flex items-center justify-between text-body-sm font-body-sm cursor-pointer hover:text-primary select-none">
+<div class="flex items-center gap-2">
+<input checked="" class="w-4 h-4 rounded text-primary accent-primary cursor-pointer" type="checkbox"/>
+<span class="font-medium text-on-surface">Speaking</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline-variant [font-feature-settings:'tnum']">340</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm cursor-pointer hover:text-primary select-none">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded text-primary accent-primary cursor-pointer" type="checkbox"/>
+<span class="text-on-surface">Writing</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline-variant [font-feature-settings:'tnum']">210</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm cursor-pointer hover:text-primary select-none">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded text-primary accent-primary cursor-pointer" type="checkbox"/>
+<span class="text-on-surface">Reading</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline-variant [font-feature-settings:'tnum']">384</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm cursor-pointer hover:text-primary select-none">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded text-primary accent-primary cursor-pointer" type="checkbox"/>
+<span class="text-on-surface">Listening</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline-variant [font-feature-settings:'tnum']">350</span>
+</label>
+</div>
+</div>
+<!-- Facet Group 2: LOẠI CÂU HỎI (Scrollable) -->
+<div class="bg-surface-container-low/50 rounded-[7px] p-space-sm">
+<button class="w-full flex items-center justify-between text-left group" type="button">
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider text-on-surface-variant group-hover:text-primary transition-colors">LOẠI CÂU HỎI (PTE)</span>
+<span class="material-symbols-outlined text-outline text-[18px] group-hover:text-primary transition-colors">expand_less</span>
+</button>
+<div class="mt-space-sm max-h-48 overflow-y-auto pr-1 space-y-2">
+<label class="flex items-center justify-between text-body-sm font-body-sm cursor-pointer hover:text-primary select-none">
+<div class="flex items-center gap-2">
+<input checked="" class="w-4 h-4 rounded text-primary accent-primary cursor-pointer" type="checkbox"/>
+<span class="font-medium text-on-surface">Read Aloud</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-semibold [font-feature-settings:'tnum']">84</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm cursor-pointer hover:text-primary select-none">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded text-primary accent-primary cursor-pointer" type="checkbox"/>
+<span class="text-on-surface">Repeat Sentence</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline-variant [font-feature-settings:'tnum']">112</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm cursor-pointer hover:text-primary select-none">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded text-primary accent-primary cursor-pointer" type="checkbox"/>
+<span class="text-on-surface">Describe Image</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline-variant [font-feature-settings:'tnum']">65</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm cursor-pointer hover:text-primary select-none">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded text-primary accent-primary cursor-pointer" type="checkbox"/>
+<span class="text-on-surface">Re-order Paragraphs</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline-variant [font-feature-settings:'tnum']">48</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm cursor-pointer hover:text-primary select-none">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded text-primary accent-primary cursor-pointer" type="checkbox"/>
+<span class="text-on-surface">Fill in the Blanks</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline-variant [font-feature-settings:'tnum']">95</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm cursor-pointer hover:text-primary select-none">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded text-primary accent-primary cursor-pointer" type="checkbox"/>
+<span class="text-on-surface">Write from Dictation</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline-variant [font-feature-settings:'tnum']">72</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm cursor-pointer hover:text-primary select-none">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded text-primary accent-primary cursor-pointer" type="checkbox"/>
+<span class="text-on-surface">Summarize Text</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline-variant [font-feature-settings:'tnum']">42</span>
+</label>
+</div>
+</div>
+<!-- Facet Group 3: ĐỘ KHÓ -->
+<div class="bg-surface-container-low/50 rounded-[7px] p-space-sm">
+<button class="w-full flex items-center justify-between text-left group" type="button">
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider text-on-surface-variant group-hover:text-primary transition-colors">ĐỘ KHÓ</span>
+<span class="material-symbols-outlined text-outline text-[18px] group-hover:text-primary transition-colors">expand_less</span>
+</button>
+<div class="mt-space-sm space-y-2">
+<label class="flex items-center justify-between text-body-sm font-body-sm cursor-pointer hover:text-primary select-none">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded text-primary accent-primary cursor-pointer" type="checkbox"/>
+<span class="text-on-surface">Dễ (Level 1–2)</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline-variant [font-feature-settings:'tnum']">312</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm cursor-pointer hover:text-primary select-none">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded text-primary accent-primary cursor-pointer" type="checkbox"/>
+<span class="text-on-surface">Trung bình (Level 3)</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline-variant [font-feature-settings:'tnum']">680</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm cursor-pointer hover:text-primary select-none">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded text-primary accent-primary cursor-pointer" type="checkbox"/>
+<span class="text-on-surface">Khó (Level 4–5)</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline-variant [font-feature-settings:'tnum']">292</span>
+</label>
+</div>
+</div>
+<!-- Facet Group 4: TRẠNG THÁI -->
+<div class="bg-surface-container-low/50 rounded-[7px] p-space-sm">
+<button class="w-full flex items-center justify-between text-left group" type="button">
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider text-on-surface-variant group-hover:text-primary transition-colors">TRẠNG THÁI</span>
+<span class="material-symbols-outlined text-outline text-[18px] group-hover:text-primary transition-colors">expand_less</span>
+</button>
+<div class="mt-space-sm space-y-2">
+<label class="flex items-center justify-between text-body-sm font-body-sm cursor-pointer hover:text-primary select-none">
+<div class="flex items-center gap-2">
+<input checked="" class="w-4 h-4 rounded text-primary accent-primary cursor-pointer" type="checkbox"/>
+<span class="font-medium text-on-surface">Published</span>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary font-bold [font-feature-settings:'tnum']">1,102</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm cursor-pointer hover:text-primary select-none">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded text-primary accent-primary cursor-pointer" type="checkbox"/>
+<span class="text-on-surface">In review</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-bold [font-feature-settings:'tnum']">46</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm cursor-pointer hover:text-primary select-none">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded text-primary accent-primary cursor-pointer" type="checkbox"/>
+<span class="text-on-surface">Draft</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline-variant [font-feature-settings:'tnum']">136</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm cursor-pointer hover:text-primary select-none">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded text-primary accent-primary cursor-pointer" type="checkbox"/>
+<span class="text-on-surface">Retired</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline-variant [font-feature-settings:'tnum']">18</span>
+</label>
+</div>
+</div>
+<!-- Quick Psychometrics Info Card -->
+<div class="p-space-md rounded-[7px] bg-primary/5 flex flex-col gap-2">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+<span class="font-label-sm text-label-sm font-bold">Chuẩn hóa khảo thí</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Câu hỏi được định cỡ theo lý thuyết ứng đáp câu hỏi (IRT) và đối chuẩn thang điểm PTE 10-90.
+        </p>
+</div>
+</aside>
+</div>
+</div></div></main></div></body></html>

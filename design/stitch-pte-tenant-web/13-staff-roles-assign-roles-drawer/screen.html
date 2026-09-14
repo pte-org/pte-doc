@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>PTE Assessment Platform</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-surface-variant":"#434654","surface-variant":"#d8e3fa","tertiary-container":"#466ae3","secondary":"#4f5f7a","on-primary":"#ffffff","tertiary":"#2850c9","on-error-container":"#93000a","surface-container-lowest":"#ffffff","on-tertiary":"#ffffff","surface-bright":"#f9f9ff","on-secondary":"#ffffff","secondary-fixed":"#d5e3ff","on-primary-fixed-variant":"#003ab2","on-secondary-fixed":"#0a1c33","on-tertiary-fixed":"#001551","surface-container-highest":"#d8e3fa","primary-fixed-dim":"#b6c4ff","on-primary-container":"#fbf9ff","on-tertiary-fixed-variant":"#0039b4","outline":"#747686","surface-dim":"#cfdaf2","error-container":"#ffdad6","on-primary-fixed":"#001550","primary-container":"#4169e8","surface-container":"#e7eeff","surface-container-low":"#f0f3ff","primary":"#204ece","surface":"#f9f9ff","secondary-fixed-dim":"#b7c7e6","inverse-surface":"#263143","error":"#ba1a1a","tertiary-fixed-dim":"#b7c4ff","tertiary-fixed":"#dce1ff","on-secondary-container":"#53637e","inverse-on-surface":"#ebf1ff","surface-tint":"#2653d2","on-secondary-fixed-variant":"#374761","surface-container-high":"#dee8ff","background":"#f9f9ff","inverse-primary":"#b6c4ff","on-background":"#111c2d","on-error":"#ffffff","primary-fixed":"#dce1ff","on-tertiary-container":"#fcf9ff","on-surface":"#111c2d","outline-variant":"#c4c5d6","secondary-container":"#d0e0ff"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{"space-lg":"1.5rem","space-xl":"1.875rem","gutter-mobile":"1rem","space-xs":"0.25rem",gutter:"1.5rem","margin-mobile":"1rem","space-sm":"0.5rem","space-md":"1rem","space-xxl":"3rem",margin:"1.875rem"},fontFamily:{"body-secondary":["Plus Jakarta Sans"],"button-label":["Plus Jakarta Sans"],"page-title-h4":["Plus Jakarta Sans"],"tabular-data":["Plus Jakarta Sans"],"display-h3":["Plus Jakarta Sans"],"display-h2":["Plus Jakarta Sans"],"caption-small":["Plus Jakarta Sans"],"subtitle-h6":["Plus Jakarta Sans"],"card-title-h5":["Plus Jakarta Sans"],"body-base":["Plus Jakarta Sans"],"display-h1":["Plus Jakarta Sans"],"display-h1-mobile":["Plus Jakarta Sans"]},fontSize:{"body-secondary":["14px",{lineHeight:"21px",letterSpacing:"0",fontWeight:"400"}],"button-label":["14px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"400"}],"page-title-h4":["21px",{lineHeight:"26px",letterSpacing:"-0.005em",fontWeight:"600"}],"tabular-data":["14px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"500"}],"display-h3":["24px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"display-h2":["30px",{lineHeight:"36px",letterSpacing:"-0.015em",fontWeight:"600"}],"caption-small":["12px",{lineHeight:"16px",letterSpacing:"0",fontWeight:"400"}],"subtitle-h6":["16px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"600"}],"card-title-h5":["18px",{lineHeight:"26px",letterSpacing:"0",fontWeight:"600"}],"body-base":["14px",{lineHeight:"21px",letterSpacing:"0",fontWeight:"400"}],"display-h1":["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"600"}],"display-h1-mobile":["28px",{lineHeight:"34px",letterSpacing:"-0.015em",fontWeight:"600"}]}}}};</script></head><body class="bg-[#F2F6FA] font-body-base text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-[270px] bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20)]"><div class="flex flex-col flex-1 overflow-y-auto px-4"><div class="h-[60px] flex items-center gap-3 px-2 mt-2"><div class="w-9 h-9 rounded-xl bg-primary-container flex items-center justify-center text-on-primary font-subtitle-h6 text-subtitle-h6 shadow-sm">P</div><div class="flex flex-col"><span class="font-subtitle-h6 text-subtitle-h6 text-on-surface leading-tight tracking-tight">PTE Institute</span><span class="font-caption-small text-caption-small text-secondary">Assessment Tenant</span></div></div><nav class="flex flex-col mt-2" data-active-classes="bg-primary-container text-on-primary font-medium rounded-xl shadow-[0px_4px_10px_rgba(65,105,232,0.25)]"><div class="mt-3 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Home</div><a aria-current="page" class="h-[45px] px-3 flex items-center gap-3 transition-all duration-150 bg-primary-container text-on-primary font-medium rounded-xl shadow-[0px_4px_10px_rgba(65,105,232,0.25)]" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Dashboard</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Learners</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="learners" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Learners</span></a><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="programmes" href="#"><span class="material-symbols-outlined text-[20px]">school</span><span>Programmes</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Delivery</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="exam-sessions" href="#"><span class="material-symbols-outlined text-[20px]">event_available</span><span>Exam sessions</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Assessment</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="scoring-review" href="#"><span class="material-symbols-outlined text-[20px]">fact_check</span><span>Scoring review</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Data</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="audit-log" href="#"><span class="material-symbols-outlined text-[20px]">history_edu</span><span>Audit log</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Settings</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="staff-and-roles" href="#"><span class="material-symbols-outlined text-[20px]">badge</span><span>Staff &amp; roles</span></a><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="platform-settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Settings</span></a></nav></div><div class="p-4 flex flex-col gap-3"><div class="bg-surface-container-low p-3.5 rounded-xl shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20)]"><div class="flex items-center justify-between mb-1.5"><span class="font-caption-small text-caption-small font-semibold text-on-surface">Licence Usage</span><span class="font-tabular-data text-tabular-data text-secondary">97%</span></div><div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden mb-2"><div class="bg-primary-container h-full rounded-full" style="width: 97.2%"></div></div><div class="flex items-center justify-between"><span class="font-caption-small text-caption-small text-secondary">486 / 500 learner seats</span><a class="font-caption-small text-caption-small text-primary font-semibold hover:underline" href="#">Request more seats</a></div></div><div class="flex items-center gap-3 px-2 py-2 rounded-xl bg-surface-container-lowest"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col min-w-0 flex-1"><span class="font-body-base text-body-base font-semibold text-on-surface truncate">Nguyễn Quản Trị</span><span class="font-caption-small text-caption-small text-secondary truncate">Host Admin</span></div><button class="text-secondary hover:text-on-surface"><span class="material-symbols-outlined text-[18px]">logout</span></button></div></div></aside><div class="pl-[270px]"><header class="fixed top-0 left-[270px] right-0 h-[70px] bg-surface-container-lowest shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-4"><button class="w-9 h-9 flex items-center justify-center rounded-xl text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">menu</span></button><div class="flex items-center gap-2 text-secondary font-body-base text-body-base"><span class="hover:text-on-surface cursor-pointer">Host</span><span>/</span><span class="text-on-surface font-medium">Assessment Ops</span></div></div><div class="flex items-center gap-3"><button class="w-10 h-10 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">search</span></button><button class="relative w-10 h-10 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span></button><div class="h-6 w-px bg-surface-variant mx-1"></div><div class="flex items-center gap-3 pl-1"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-body-base text-body-base font-semibold text-on-surface leading-snug">Nguyễn Quản Trị</span><span class="font-caption-small text-caption-small text-secondary">Host Admin</span></div></div></div></header><main class="relative pt-[70px] min-h-screen bg-[#F2F6FA]"><div class="max-w-[1200px] mx-auto p-space-lg"><div class="flex flex-col w-full relative">
+<!-- Page Header & Actions -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-space-xl">
+<div class="flex flex-col">
+<h1 class="font-page-title-h4 text-page-title-h4 text-on-surface">Staff &amp; roles</h1>
+<p class="font-body-base text-body-base text-secondary mt-1">Quản lý nhân sự viện đào tạo, phân quyền truy cập hệ thống và phạm vi quản trị theo chi nhánh &amp; lớp học.</p>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<button class="h-[38px] px-[18px] rounded-[7px] bg-[#ECF2FF] text-[#3359D2] hover:bg-[#DCE8FF] font-button-label text-button-label transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Xuất danh sách (CSV)</span>
+</button>
+<button class="h-[38px] px-[18px] rounded-[7px] bg-primary-container text-on-primary hover:bg-tertiary-container shadow-[0_2px_6px_rgba(65,105,232,0.28)] font-button-label text-button-label transition-all flex items-center gap-2" onclick="document.getElementById('assign-role-drawer').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span>+ Invite staff</span>
+</button>
+</div>
+</div>
+<!-- Row 1: Stat Tiles (4 Pastel Cards) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter mb-space-xl">
+<!-- Tile 1: Tổng nhân sự -->
+<div class="bg-surface-container-lowest rounded-[7px] p-6 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex items-start gap-4">
+<div class="w-12 h-12 rounded-[7px] bg-[#ECF2FF] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#3359D2] text-[24px]">group</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-base text-body-base text-secondary">Tổng nhân sự</span>
+<span class="font-display-h3 text-display-h3 text-on-surface mt-0.5">28</span>
+<span class="font-caption-small text-caption-small text-[#088068] mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+          24 đang hoạt động
+        </span>
+</div>
+</div>
+<!-- Tile 2: Giám thị & Coi thi -->
+<div class="bg-surface-container-lowest rounded-[7px] p-6 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex items-start gap-4">
+<div class="w-12 h-12 rounded-[7px] bg-[#E6FFFA] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#088068] text-[24px]">verified_user</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-base text-body-base text-secondary truncate" title="Giám thị &amp; Coi thi (Proctor)">Giám thị (Proctor)</span>
+<span class="font-display-h3 text-display-h3 text-on-surface mt-0.5">12</span>
+<span class="font-caption-small text-caption-small text-secondary mt-1">100% Pearson Accredited</span>
+</div>
+</div>
+<!-- Tile 3: Giảng viên chấm thi -->
+<div class="bg-surface-container-lowest rounded-[7px] p-6 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex items-start gap-4">
+<div class="w-12 h-12 rounded-[7px] bg-[#E8F7FF] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#0E729F] text-[24px]">rate_review</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-base text-body-base text-secondary truncate" title="Giáo viên chấm thi (Lecturer)">Giáo viên chấm thi</span>
+<span class="font-display-h3 text-display-h3 text-on-surface mt-0.5">8</span>
+<span class="font-caption-small text-caption-small text-secondary mt-1">Speaking &amp; Writing</span>
+</div>
+</div>
+<!-- Tile 4: Điều phối viên -->
+<div class="bg-surface-container-lowest rounded-[7px] p-6 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex items-start gap-4">
+<div class="w-12 h-12 rounded-[7px] bg-[#FEF5E5] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#9C6400] text-[24px]">hub</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-base text-body-base text-secondary truncate" title="Điều phối viên (Coordinator)">Điều phối viên</span>
+<span class="font-display-h3 text-display-h3 text-on-surface mt-0.5">5</span>
+<span class="font-caption-small text-caption-small text-secondary mt-1">3 chi nhánh đào tạo</span>
+</div>
+</div>
+</div>
+<!-- Filter & Action Toolbar -->
+<div class="bg-surface-container-lowest rounded-[7px] p-4 mb-space-lg shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<div class="flex flex-wrap items-center gap-3 flex-1">
+<!-- Search Input -->
+<div class="relative min-w-[280px] max-w-[340px] flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-secondary">search</span>
+<input class="w-full h-[42px] pl-9 pr-3 rounded-[7px] font-body-base text-body-base text-on-surface placeholder:text-secondary/70 focus:outline-none focus:ring-2 focus:ring-primary/20 bg-surface-container-lowest shadow-[0_0_0_1px_#7C8FAC]" placeholder="Tìm kiếm nhân sự, email, mã..." type="text"/>
+</div>
+<!-- Role Filter -->
+<div class="relative">
+<select class="h-[42px] pl-3 pr-8 rounded-[7px] font-body-base text-body-base text-on-surface bg-surface-container-lowest appearance-none cursor-pointer shadow-[0_0_0_1px_#7C8FAC] focus:outline-none focus:ring-2 focus:ring-primary/20">
+<option>Tất cả vai trò</option>
+<option>HOST_ADMIN</option>
+<option>HOST_AUTHOR</option>
+<option>PROGRAM_COORDINATOR</option>
+<option>LECTURER</option>
+<option>PROCTOR</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-[18px] text-secondary">expand_more</span>
+</div>
+<!-- Scope Filter -->
+<div class="relative">
+<select class="h-[42px] pl-3 pr-8 rounded-[7px] font-body-base text-body-base text-on-surface bg-surface-container-lowest appearance-none cursor-pointer shadow-[0_0_0_1px_#7C8FAC] focus:outline-none focus:ring-2 focus:ring-primary/20">
+<option>Tất cả phạm vi / Chi nhánh</option>
+<option>Cơ sở Cầu Giấy</option>
+<option>Cơ sở Đống Đa</option>
+<option>Cơ sở Quận 1 (TP.HCM)</option>
+<option>Toàn hệ thống</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-[18px] text-secondary">expand_more</span>
+</div>
+<!-- Status Filter -->
+<div class="relative">
+<select class="h-[42px] pl-3 pr-8 rounded-[7px] font-body-base text-body-base text-on-surface bg-surface-container-lowest appearance-none cursor-pointer shadow-[0_0_0_1px_#7C8FAC] focus:outline-none focus:ring-2 focus:ring-primary/20">
+<option>Tất cả trạng thái</option>
+<option>Đang hoạt động</option>
+<option>Chờ xác thực 2FA</option>
+<option>Tạm khóa</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-[18px] text-secondary">expand_more</span>
+</div>
+</div>
+<!-- Right Side Toolbar Info -->
+<div class="flex items-center gap-3 shrink-0">
+<span class="font-tabular-data text-tabular-data text-secondary">Hiển thị <strong class="text-on-surface font-semibold">8</strong> trong 28 nhân sự</span>
+<div class="h-4 w-px bg-surface-variant"></div>
+<button class="font-button-label text-button-label text-primary hover:underline flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+<span>Đặt lại bộ lọc</span>
+</button>
+</div>
+</div>
+<!-- Staff Table -->
+<div class="bg-surface-container-lowest rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="h-[48px] bg-[#F2F6FA] text-on-surface font-subtitle-h6 text-subtitle-h6 text-[13px] tracking-wide">
+<th class="w-12 pl-5 pr-2 py-3">
+<input class="w-[18px] h-[18px] rounded-[4px] cursor-pointer accent-[#4169E8]" type="checkbox"/>
+</th>
+<th class="py-3 px-4 font-semibold text-on-surface">Nhân sự &amp; Định danh</th>
+<th class="py-3 px-4 font-semibold text-on-surface">Vai trò (System roles)</th>
+<th class="py-3 px-4 font-semibold text-on-surface">Phạm vi quản trị (Scope)</th>
+<th class="py-3 px-4 font-semibold text-on-surface">Hoạt động gần nhất</th>
+<th class="py-3 px-4 font-semibold text-on-surface">Trạng thái</th>
+<th class="w-14 py-3 pr-5 pl-2 text-right"></th>
+</tr>
+</thead>
+<tbody class="divide-y-0">
+<!-- Row 1 (Selected Row triggers Drawer) -->
+<tr class="h-[64px] hover:bg-[#F6F9FC] transition-colors cursor-pointer bg-[#ECF2FF]/30" onclick="document.getElementById('assign-role-drawer').classList.remove('hidden')">
+<td class="pl-5 pr-2 py-3" onclick="event.stopPropagation()">
+<input checked="" class="w-[18px] h-[18px] rounded-[4px] cursor-pointer accent-[#4169E8]" type="checkbox"/>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-[#ECF2FF] text-[#3359D2] font-semibold text-[13px] flex items-center justify-center shrink-0">
+                  HN
+                </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface font-medium leading-none">TS. Nguyễn Hải Nam</span>
+<span class="font-mono text-[11px] px-1.5 py-0.5 rounded-[4px] bg-[#F2F6FA] text-secondary">USR-PRC-002</span>
+</div>
+<span class="font-caption-small text-caption-small text-secondary truncate mt-1">nam.nh@pteinstitute.edu.vn</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="text-[11px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-[4px] bg-white text-[#2A3547] shadow-[0_0_0_1px_#7C8FAC]">HOST_ADMIN</span>
+<span class="text-[11px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-[4px] bg-white text-[#2A3547] shadow-[0_0_0_1px_#7C8FAC]">PROCTOR</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-1.5 text-secondary font-body-base text-[13px]">
+<span class="truncate max-w-[200px] text-on-surface">Cơ sở Cầu Giấy, Lớp PTE-79-A</span>
+<span class="text-[11px] px-1.5 py-0.5 rounded-full bg-surface-container font-medium text-primary shrink-0">+2</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="font-tabular-data text-[13px] text-secondary">Hôm nay 09:14</span>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#E6FFFA] text-[#088068] text-[12px] font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                Đang hoạt động
+              </span>
+</td>
+<td class="pr-5 pl-2 py-3 text-right" onclick="event.stopPropagation()">
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="h-[64px] hover:bg-[#F6F9FC] transition-colors cursor-pointer" onclick="document.getElementById('assign-role-drawer').classList.remove('hidden')">
+<td class="pl-5 pr-2 py-3" onclick="event.stopPropagation()">
+<input class="w-[18px] h-[18px] rounded-[4px] cursor-pointer accent-[#4169E8]" type="checkbox"/>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-[#E8F7FF] text-[#0E729F] font-semibold text-[13px] flex items-center justify-center shrink-0">
+                  KD
+                </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface font-medium leading-none">ThS. Lê Kim Dung</span>
+<span class="font-mono text-[11px] px-1.5 py-0.5 rounded-[4px] bg-[#F2F6FA] text-secondary">USR-EXM-008</span>
+</div>
+<span class="font-caption-small text-caption-small text-secondary truncate mt-1">dung.lk@pteinstitute.edu.vn</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="text-[11px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-[4px] bg-white text-[#2A3547] shadow-[0_0_0_1px_#7C8FAC]">LECTURER</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="text-on-surface font-body-base text-[13px] truncate max-w-[240px] block">Tổ bộ môn Speaking &amp; Writing, Cơ sở Đống Đa</span>
+</td>
+<td class="py-3 px-4">
+<span class="font-tabular-data text-[13px] text-secondary">Hôm qua 16:45</span>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#E6FFFA] text-[#088068] text-[12px] font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                Đang hoạt động
+              </span>
+</td>
+<td class="pr-5 pl-2 py-3 text-right" onclick="event.stopPropagation()">
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="h-[64px] hover:bg-[#F6F9FC] transition-colors cursor-pointer" onclick="document.getElementById('assign-role-drawer').classList.remove('hidden')">
+<td class="pl-5 pr-2 py-3" onclick="event.stopPropagation()">
+<input class="w-[18px] h-[18px] rounded-[4px] cursor-pointer accent-[#4169E8]" type="checkbox"/>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-[#FEF5E5] text-[#9C6400] font-semibold text-[13px] flex items-center justify-center shrink-0">
+                  MC
+                </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface font-medium leading-none">Vũ Minh Châu</span>
+<span class="font-mono text-[11px] px-1.5 py-0.5 rounded-[4px] bg-[#F2F6FA] text-secondary">USR-ADM-004</span>
+</div>
+<span class="font-caption-small text-caption-small text-secondary truncate mt-1">chau.vm@pteinstitute.edu.vn</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="text-[11px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-[4px] bg-white text-[#2A3547] shadow-[0_0_0_1px_#7C8FAC]">PROGRAM_COORDINATOR</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="text-on-surface font-body-base text-[13px] truncate max-w-[240px] block">Cơ sở Quận 1 (TP.HCM)</span>
+</td>
+<td class="py-3 px-4">
+<span class="font-tabular-data text-[13px] text-secondary">2 giờ trước</span>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#E6FFFA] text-[#088068] text-[12px] font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                Đang hoạt động
+              </span>
+</td>
+<td class="pr-5 pl-2 py-3 text-right" onclick="event.stopPropagation()">
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="h-[64px] hover:bg-[#F6F9FC] transition-colors cursor-pointer" onclick="document.getElementById('assign-role-drawer').classList.remove('hidden')">
+<td class="pl-5 pr-2 py-3" onclick="event.stopPropagation()">
+<input class="w-[18px] h-[18px] rounded-[4px] cursor-pointer accent-[#4169E8]" type="checkbox"/>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-[#E6FFFA] text-[#088068] font-semibold text-[13px] flex items-center justify-center shrink-0">
+                  QT
+                </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface font-medium leading-none">Lê Quốc Trung</span>
+<span class="font-mono text-[11px] px-1.5 py-0.5 rounded-[4px] bg-[#F2F6FA] text-secondary">USR-ENG-012</span>
+</div>
+<span class="font-caption-small text-caption-small text-secondary truncate mt-1">trung.lq@pteinstitute.edu.vn</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="text-[11px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-[4px] bg-white text-[#2A3547] shadow-[0_0_0_1px_#7C8FAC]">PROCTOR</span>
+<span class="text-[11px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-[4px] bg-white text-[#2A3547] shadow-[0_0_0_1px_#7C8FAC]">HOST_AUTHOR</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="text-on-surface font-body-base text-[13px] truncate max-w-[240px] block">Toàn hệ thống (Phòng Lab &amp; IT)</span>
+</td>
+<td class="py-3 px-4">
+<span class="font-tabular-data text-[13px] text-secondary">Hôm nay 08:30</span>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#E6FFFA] text-[#088068] text-[12px] font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                Đang hoạt động
+              </span>
+</td>
+<td class="pr-5 pl-2 py-3 text-right" onclick="event.stopPropagation()">
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="h-[64px] hover:bg-[#F6F9FC] transition-colors cursor-pointer" onclick="document.getElementById('assign-role-drawer').classList.remove('hidden')">
+<td class="pl-5 pr-2 py-3" onclick="event.stopPropagation()">
+<input class="w-[18px] h-[18px] rounded-[4px] cursor-pointer accent-[#4169E8]" type="checkbox"/>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-[#FDEDE8] text-[#BE452B] font-semibold text-[13px] flex items-center justify-center shrink-0">
+                  TA
+                </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface font-medium leading-none">ThS. Đặng Tuấn Anh</span>
+<span class="font-mono text-[11px] px-1.5 py-0.5 rounded-[4px] bg-[#F2F6FA] text-secondary">USR-PRC-005</span>
+</div>
+<span class="font-caption-small text-caption-small text-secondary truncate mt-1">anh.dt@pteinstitute.edu.vn</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="text-[11px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-[4px] bg-white text-[#2A3547] shadow-[0_0_0_1px_#7C8FAC]">PROCTOR</span>
+<span class="text-[11px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-[4px] bg-white text-[#2A3547] shadow-[0_0_0_1px_#7C8FAC]">LECTURER</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="text-on-surface font-body-base text-[13px] truncate max-w-[240px] block">Cơ sở Cầu Giấy</span>
+</td>
+<td class="py-3 px-4">
+<span class="font-tabular-data text-[13px] text-secondary">3 ngày trước</span>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#FEF5E5] text-[#9C6400] text-[12px] font-semibold">
+<span class="material-symbols-outlined text-[14px]">pending</span>
+                Chờ xác thực 2FA
+              </span>
+</td>
+<td class="pr-5 pl-2 py-3 text-right" onclick="event.stopPropagation()">
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination Footer -->
+<div class="p-4 bg-surface-container-lowest flex items-center justify-between shadow-[inset_0_1px_0_0_#F2F6FA]">
+<span class="font-caption-small text-caption-small text-secondary">Trang 1 / 4 (Tổng 28 cán bộ)</span>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center text-secondary hover:bg-surface-container transition-colors disabled:opacity-40" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-[7px] bg-primary-container text-on-primary font-caption-small font-semibold flex items-center justify-center shadow-sm">1</button>
+<button class="w-8 h-8 rounded-[7px] text-secondary hover:bg-surface-container font-caption-small flex items-center justify-center">2</button>
+<button class="w-8 h-8 rounded-[7px] text-secondary hover:bg-surface-container font-caption-small flex items-center justify-center">3</button>
+<button class="w-8 h-8 rounded-[7px] text-secondary hover:bg-surface-container font-caption-small flex items-center justify-center">4</button>
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center text-secondary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- RIGHT SLIDE-OVER DRAWER (OPEN BY DEFAULT) -->
+<div class="fixed inset-0 z-50 overflow-hidden flex justify-end" id="assign-role-drawer">
+<!-- Semi-transparent backdrop -->
+<div class="fixed inset-0 bg-[#2A3547]/40 transition-opacity" onclick="document.getElementById('assign-role-drawer').classList.add('hidden')"></div>
+<!-- Slide-over panel (420px wide) -->
+<div class="relative w-full max-w-[420px] bg-surface-container-lowest h-full flex flex-col z-10 shadow-[0px_0px_4px_0px_rgba(145,158,171,0.30),0px_24px_48px_-8px_rgba(145,158,171,0.20)]">
+<!-- Drawer Header -->
+<div class="p-6 pb-4 flex items-start justify-between bg-surface-container-lowest shadow-[inset_0_-1px_0_0_#F2F6FA]">
+<div class="flex flex-col">
+<h2 class="font-card-title-h5 text-card-title-h5 text-on-surface">Phân quyền &amp; Phạm vi (Assign roles)</h2>
+<span class="font-body-base text-[13px] text-secondary mt-1">TS. Nguyễn Hải Nam · nam.nh@pteinstitute.edu.vn</span>
+</div>
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors" onclick="document.getElementById('assign-role-drawer').classList.add('hidden')">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Drawer Body (Scrollable) -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6">
+<!-- Section 1: Role Checkbox Group -->
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="font-subtitle-h6 text-[14px] text-on-surface font-semibold">Vai trò hệ thống (Roles)</span>
+<span class="font-caption-small text-caption-small text-secondary">2 vai trò đã chọn</span>
+</div>
+<div class="space-y-3">
+<!-- Role 1: HOST_ADMIN -->
+<label class="flex items-start gap-3 p-3 rounded-[7px] bg-[#F2F6FA]/60 hover:bg-[#F2F6FA] cursor-pointer transition-colors">
+<input checked="" class="w-[18px] h-[18px] rounded-[4px] mt-0.5 accent-[#4169E8]" type="checkbox"/>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-subtitle-h6 text-[13px] text-on-surface font-semibold">HOST_ADMIN</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded-[4px] bg-[#ECF2FF] text-[#3359D2] font-semibold uppercase tracking-wider">Root</span>
+</div>
+<span class="font-caption-small text-caption-small text-secondary mt-1 leading-normal">Toàn quyền quản trị đơn vị khảo thí, quản lý bản quyền license và cấu hình hệ thống.</span>
+</div>
+</label>
+<!-- Role 2: HOST_AUTHOR -->
+<label class="flex items-start gap-3 p-3 rounded-[7px] bg-[#F2F6FA]/60 hover:bg-[#F2F6FA] cursor-pointer transition-colors">
+<input class="w-[18px] h-[18px] rounded-[4px] mt-0.5 accent-[#4169E8]" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-subtitle-h6 text-[13px] text-on-surface font-semibold">HOST_AUTHOR</span>
+<span class="font-caption-small text-caption-small text-secondary mt-1 leading-normal">Quyền biên soạn đề thi, cấu hình blueprint và quản lý ngân hàng câu hỏi.</span>
+</div>
+</label>
+<!-- Role 3: PROGRAM_COORDINATOR -->
+<label class="flex items-start gap-3 p-3 rounded-[7px] bg-[#F2F6FA]/60 hover:bg-[#F2F6FA] cursor-pointer transition-colors">
+<input class="w-[18px] h-[18px] rounded-[4px] mt-0.5 accent-[#4169E8]" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-subtitle-h6 text-[13px] text-on-surface font-semibold">PROGRAM_COORDINATOR</span>
+<span class="font-caption-small text-caption-small text-secondary mt-1 leading-normal">Điều phối khoá học, tạo lớp, duyệt danh sách học viên và gán giảng viên.</span>
+</div>
+</label>
+<!-- Role 4: PROCTOR -->
+<label class="flex items-start gap-3 p-3 rounded-[7px] bg-[#F2F6FA]/60 hover:bg-[#F2F6FA] cursor-pointer transition-colors">
+<input checked="" class="w-[18px] h-[18px] rounded-[4px] mt-0.5 accent-[#4169E8]" type="checkbox"/>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-subtitle-h6 text-[13px] text-on-surface font-semibold">PROCTOR (Giám thị)</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded-[4px] bg-[#E6FFFA] text-[#088068] font-semibold uppercase tracking-wider">Exam Ops</span>
+</div>
+<span class="font-caption-small text-caption-small text-secondary mt-1 leading-normal">Giám sát ca thi, check-in thí sinh, xử lý sự cố phòng máy và ký biên bản.</span>
+</div>
+</label>
+<!-- Role 5: LECTURER -->
+<label class="flex items-start gap-3 p-3 rounded-[7px] bg-[#F2F6FA]/60 hover:bg-[#F2F6FA] cursor-pointer transition-colors">
+<input class="w-[18px] h-[18px] rounded-[4px] mt-0.5 accent-[#4169E8]" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-subtitle-h6 text-[13px] text-on-surface font-semibold">LECTURER (Giảng viên)</span>
+<span class="font-caption-small text-caption-small text-secondary mt-1 leading-normal">Chấm điểm bài thi thử, xem báo cáo học viên và phúc khảo bài Speaking/Writing.</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Section 2: Scope Picker -->
+<div class="space-y-3">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-subtitle-h6 text-[14px] text-on-surface font-semibold">Phạm vi quản trị (Scoped access)</span>
+<span class="font-caption-small text-caption-small text-primary font-semibold">3 đơn vị trong phạm vi</span>
+</div>
+<p class="font-caption-small text-caption-small text-secondary mt-0.5">Chỉ định chi nhánh, chương trình và lớp học mà nhân sự được phép thao tác.</p>
+</div>
+<!-- Branch Scope -->
+<div class="p-3.5 rounded-[7px] bg-[#F2F6FA] space-y-3">
+<span class="font-caption-small text-[11px] font-semibold uppercase tracking-wider text-secondary block">1. Chi nhánh đào tạo</span>
+<div class="space-y-2">
+<label class="flex items-center gap-2.5 text-on-surface font-body-base text-[13px] cursor-pointer">
+<input checked="" class="w-[16px] h-[16px] rounded-[4px] accent-[#4169E8]" type="checkbox"/>
+<span>Cơ sở Cầu Giấy (Hà Nội)</span>
+</label>
+<label class="flex items-center gap-2.5 text-secondary font-body-base text-[13px] cursor-pointer">
+<input class="w-[16px] h-[16px] rounded-[4px] accent-[#4169E8]" type="checkbox"/>
+<span>Cơ sở Đống Đa</span>
+</label>
+<label class="flex items-center gap-2.5 text-secondary font-body-base text-[13px] cursor-pointer">
+<input class="w-[16px] h-[16px] rounded-[4px] accent-[#4169E8]" type="checkbox"/>
+<span>Cơ sở Quận 1 (TP.HCM)</span>
+</label>
+</div>
+</div>
+<!-- Program Scope -->
+<div class="p-3.5 rounded-[7px] bg-[#F2F6FA] space-y-3">
+<span class="font-caption-small text-[11px] font-semibold uppercase tracking-wider text-secondary block">2. Chương trình &amp; Lớp phụ trách</span>
+<label class="flex items-start gap-2.5 text-on-surface font-body-base text-[13px] cursor-pointer">
+<input checked="" class="w-[16px] h-[16px] rounded-[4px] mt-0.5 accent-[#4169E8]" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">PTE Intensive Autumn 2026</span>
+<span class="font-caption-small text-[11px] text-[#088068] mt-0.5">Đã chọn 2 lớp: PTE-79-A, PTE-79-B</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Section 3: 2FA & Audit Security Box -->
+<div class="p-3.5 rounded-[7px] bg-[#E8F7FF] flex items-start gap-3">
+<span class="material-symbols-outlined text-[#0E729F] text-[20px] shrink-0 mt-0.5">verified_user</span>
+<div class="flex flex-col">
+<span class="font-subtitle-h6 text-[12px] text-[#0E729F] font-semibold">Bảo mật tài khoản 2FA</span>
+<p class="font-caption-small text-caption-small text-on-surface/80 mt-0.5 leading-normal">Đã kích hoạt 2FA qua TOTP Authenticator. Lần phân quyền gần nhất: 18/09/2026 bởi Nguyễn Quản Trị.</p>
+</div>
+</div>
+</div>
+<!-- Drawer Footer -->
+<div class="p-4 bg-surface-container-lowest flex items-center justify-between gap-3 shadow-[inset_0_1px_0_0_#F2F6FA]">
+<button class="h-[38px] px-3.5 rounded-[7px] text-[#BE452B] hover:bg-[#FDEDE8] font-button-label text-button-label transition-colors">
+          Thu hồi quyền (Revoke)
+        </button>
+<div class="flex items-center gap-2">
+<button class="h-[38px] px-4 rounded-[7px] text-secondary hover:bg-surface-container font-button-label text-button-label transition-colors" onclick="document.getElementById('assign-role-drawer').classList.add('hidden')">
+            Hủy
+          </button>
+<button class="h-[38px] px-5 rounded-[7px] bg-primary-container text-on-primary hover:bg-tertiary-container shadow-[0_2px_6px_rgba(65,105,232,0.28)] font-button-label text-button-label transition-all" onclick="document.getElementById('assign-role-drawer').classList.add('hidden')">
+            Lưu thay đổi
+          </button>
+</div>
+</div>
+</div>
+</div>
+</div></div></main></div></body></html>

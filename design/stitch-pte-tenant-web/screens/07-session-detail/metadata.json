@@ -1,0 +1,8 @@
+{
+  "name": "projects/2518511518052928179/screens/e03bf8a7e30941b7b079c1a93f59794e",
+  "title": "T7 - Session Detail",
+  "deviceType": "DESKTOP",
+  "width": 2560,
+  "height": 2440,
+  "route": "tenant-web /host/exams/[publicId]"
+}

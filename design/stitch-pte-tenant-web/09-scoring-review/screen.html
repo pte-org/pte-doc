@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>PTE Assessment Platform</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-surface-variant":"#434654","surface-variant":"#d8e3fa","tertiary-container":"#466ae3","secondary":"#4f5f7a","on-primary":"#ffffff","tertiary":"#2850c9","on-error-container":"#93000a","surface-container-lowest":"#ffffff","on-tertiary":"#ffffff","surface-bright":"#f9f9ff","on-secondary":"#ffffff","secondary-fixed":"#d5e3ff","on-primary-fixed-variant":"#003ab2","on-secondary-fixed":"#0a1c33","on-tertiary-fixed":"#001551","surface-container-highest":"#d8e3fa","primary-fixed-dim":"#b6c4ff","on-primary-container":"#fbf9ff","on-tertiary-fixed-variant":"#0039b4","outline":"#747686","surface-dim":"#cfdaf2","error-container":"#ffdad6","on-primary-fixed":"#001550","primary-container":"#4169e8","surface-container":"#e7eeff","surface-container-low":"#f0f3ff","primary":"#204ece","surface":"#f9f9ff","secondary-fixed-dim":"#b7c7e6","inverse-surface":"#263143","error":"#ba1a1a","tertiary-fixed-dim":"#b7c4ff","tertiary-fixed":"#dce1ff","on-secondary-container":"#53637e","inverse-on-surface":"#ebf1ff","surface-tint":"#2653d2","on-secondary-fixed-variant":"#374761","surface-container-high":"#dee8ff","background":"#f9f9ff","inverse-primary":"#b6c4ff","on-background":"#111c2d","on-error":"#ffffff","primary-fixed":"#dce1ff","on-tertiary-container":"#fcf9ff","on-surface":"#111c2d","outline-variant":"#c4c5d6","secondary-container":"#d0e0ff"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{"space-lg":"1.5rem","space-xl":"1.875rem","gutter-mobile":"1rem","space-xs":"0.25rem",gutter:"1.5rem","margin-mobile":"1rem","space-sm":"0.5rem","space-md":"1rem","space-xxl":"3rem",margin:"1.875rem"},fontFamily:{"body-secondary":["Plus Jakarta Sans"],"button-label":["Plus Jakarta Sans"],"page-title-h4":["Plus Jakarta Sans"],"tabular-data":["Plus Jakarta Sans"],"display-h3":["Plus Jakarta Sans"],"display-h2":["Plus Jakarta Sans"],"caption-small":["Plus Jakarta Sans"],"subtitle-h6":["Plus Jakarta Sans"],"card-title-h5":["Plus Jakarta Sans"],"body-base":["Plus Jakarta Sans"],"display-h1":["Plus Jakarta Sans"],"display-h1-mobile":["Plus Jakarta Sans"]},fontSize:{"body-secondary":["14px",{lineHeight:"21px",letterSpacing:"0",fontWeight:"400"}],"button-label":["14px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"400"}],"page-title-h4":["21px",{lineHeight:"26px",letterSpacing:"-0.005em",fontWeight:"600"}],"tabular-data":["14px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"500"}],"display-h3":["24px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"display-h2":["30px",{lineHeight:"36px",letterSpacing:"-0.015em",fontWeight:"600"}],"caption-small":["12px",{lineHeight:"16px",letterSpacing:"0",fontWeight:"400"}],"subtitle-h6":["16px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"600"}],"card-title-h5":["18px",{lineHeight:"26px",letterSpacing:"0",fontWeight:"600"}],"body-base":["14px",{lineHeight:"21px",letterSpacing:"0",fontWeight:"400"}],"display-h1":["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"600"}],"display-h1-mobile":["28px",{lineHeight:"34px",letterSpacing:"-0.015em",fontWeight:"600"}]}}}};</script></head><body class="bg-[#F2F6FA] font-body-base text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-[270px] bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20)]"><div class="flex flex-col flex-1 overflow-y-auto px-4"><div class="h-[60px] flex items-center gap-3 px-2 mt-2"><div class="w-9 h-9 rounded-xl bg-primary-container flex items-center justify-center text-on-primary font-subtitle-h6 text-subtitle-h6 shadow-sm">P</div><div class="flex flex-col"><span class="font-subtitle-h6 text-subtitle-h6 text-on-surface leading-tight tracking-tight">PTE Institute</span><span class="font-caption-small text-caption-small text-secondary">Assessment Tenant</span></div></div><nav class="flex flex-col mt-2" data-active-classes="bg-primary-container text-on-primary font-medium rounded-xl shadow-[0px_4px_10px_rgba(65,105,232,0.25)]"><div class="mt-3 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Home</div><a aria-current="page" class="h-[45px] px-3 flex items-center gap-3 transition-all duration-150 bg-primary-container text-on-primary font-medium rounded-xl shadow-[0px_4px_10px_rgba(65,105,232,0.25)]" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Dashboard</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Learners</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="learners" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Learners</span></a><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="programmes" href="#"><span class="material-symbols-outlined text-[20px]">school</span><span>Programmes</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Delivery</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="exam-sessions" href="#"><span class="material-symbols-outlined text-[20px]">event_available</span><span>Exam sessions</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Assessment</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="scoring-review" href="#"><span class="material-symbols-outlined text-[20px]">fact_check</span><span>Scoring review</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Data</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="audit-log" href="#"><span class="material-symbols-outlined text-[20px]">history_edu</span><span>Audit log</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Settings</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="staff-and-roles" href="#"><span class="material-symbols-outlined text-[20px]">badge</span><span>Staff &amp; roles</span></a><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="platform-settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Settings</span></a></nav></div><div class="p-4 flex flex-col gap-3"><div class="bg-surface-container-low p-3.5 rounded-xl shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20)]"><div class="flex items-center justify-between mb-1.5"><span class="font-caption-small text-caption-small font-semibold text-on-surface">Licence Usage</span><span class="font-tabular-data text-tabular-data text-secondary">97%</span></div><div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden mb-2"><div class="bg-primary-container h-full rounded-full" style="width: 97.2%"></div></div><div class="flex items-center justify-between"><span class="font-caption-small text-caption-small text-secondary">486 / 500 learner seats</span><a class="font-caption-small text-caption-small text-primary font-semibold hover:underline" href="#">Request more seats</a></div></div><div class="flex items-center gap-3 px-2 py-2 rounded-xl bg-surface-container-lowest"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col min-w-0 flex-1"><span class="font-body-base text-body-base font-semibold text-on-surface truncate">Nguyễn Quản Trị</span><span class="font-caption-small text-caption-small text-secondary truncate">Host Admin</span></div><button class="text-secondary hover:text-on-surface"><span class="material-symbols-outlined text-[18px]">logout</span></button></div></div></aside><div class="pl-[270px]"><header class="fixed top-0 left-[270px] right-0 h-[70px] bg-surface-container-lowest shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-4"><button class="w-9 h-9 flex items-center justify-center rounded-xl text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">menu</span></button><div class="flex items-center gap-2 text-secondary font-body-base text-body-base"><span class="hover:text-on-surface cursor-pointer">Host</span><span>/</span><span class="text-on-surface font-medium">Assessment Ops</span></div></div><div class="flex items-center gap-3"><button class="w-10 h-10 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">search</span></button><button class="relative w-10 h-10 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span></button><div class="h-6 w-px bg-surface-variant mx-1"></div><div class="flex items-center gap-3 pl-1"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-body-base text-body-base font-semibold text-on-surface leading-snug">Nguyễn Quản Trị</span><span class="font-caption-small text-caption-small text-secondary">Host Admin</span></div></div></div></header><main class="relative pt-[70px] min-h-screen bg-[#F2F6FA]"><div class="max-w-[1200px] mx-auto p-space-lg"><div class="flex flex-col w-full pb-12 space-y-6">
+<!-- BREADCRUMB & PAGE HEADER -->
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+<div class="flex flex-col space-y-1.5">
+<nav class="flex items-center gap-2 font-caption-small text-caption-small text-secondary">
+<span class="hover:text-on-surface cursor-pointer">Host</span>
+<span>/</span>
+<span class="text-primary font-semibold">Scoring review</span>
+</nav>
+<div class="flex items-center gap-3">
+<h1 class="font-page-title-h4 text-page-title-h4 text-on-surface">Scoring review (Duyệt &amp; phúc khảo bài thi)</h1>
+<span class="px-2.5 py-0.5 rounded-full bg-[#E8F7FF] text-[#0074BA] font-caption-small text-caption-small font-semibold">Pearson AI v4.2 Active</span>
+</div>
+<p class="font-body-base text-body-base text-secondary max-w-3xl">
+        Theo dõi tiến trình chấm tự động của Pearson AI Engine, kiểm tra các bài thi bất thường (flagged/low confidence) và phân công giám khảo phúc khảo Speaking &amp; Writing.
+      </p>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-wrap items-center gap-2.5 shrink-0">
+<button class="h-[38px] px-3.5 rounded-[7px] bg-[#ECF2FF] text-[#3359D2] hover:bg-[#dbe7ff] font-button-label text-button-label flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Xuất báo cáo điểm (Excel/CSV)</span>
+</button>
+<button class="h-[38px] px-3.5 rounded-[7px] bg-[#ECF2FF] text-[#3359D2] hover:bg-[#dbe7ff] font-button-label text-button-label flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span>Cấu hình AI Scoring Policy</span>
+</button>
+<button class="h-[38px] px-4 rounded-[7px] bg-primary-container text-on-primary hover:bg-[#3359D2] font-button-label text-button-label flex items-center gap-2 shadow-[0px_4px_10px_rgba(65,105,232,0.25)] transition-all">
+<span class="material-symbols-outlined text-[18px]">how_to_reg</span>
+<span>Phân công phúc khảo hàng loạt</span>
+</button>
+</div>
+</div>
+<!-- STAT TILES ROW (4 Cards) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-lg">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-[7px] p-space-lg shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-caption-small text-caption-small font-semibold text-secondary uppercase tracking-wider">Chờ duyệt điểm (Pending Review)</span>
+<div class="flex items-baseline gap-2 mt-2">
+<span class="font-display-h3 text-display-h3 text-on-surface">18</span>
+<span class="font-caption-small text-caption-small text-secondary font-medium">bài thi</span>
+</div>
+<div class="flex items-center gap-1 mt-2 text-[#0074BA] font-caption-small text-caption-small">
+<span class="material-symbols-outlined text-[15px]">schedule</span>
+<span>5 ca thi gần nhất</span>
+</div>
+</div>
+<div class="w-11 h-11 rounded-[7px] bg-[#E8F7FF] text-[#0074BA] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">pending_actions</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-[7px] p-space-lg shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-caption-small text-caption-small font-semibold text-secondary uppercase tracking-wider">Nghi vấn bất thường (Flagged by AI)</span>
+<div class="flex items-baseline gap-2 mt-2">
+<span class="font-display-h3 text-display-h3 text-error">07</span>
+<span class="font-caption-small text-caption-small text-error font-semibold">Cần xử lý gấp</span>
+</div>
+<div class="flex items-center gap-1 mt-2 text-[#9C6400] font-caption-small text-caption-small">
+<span class="material-symbols-outlined text-[15px]">headphones</span>
+<span>Cần giáo viên nghe lại audio</span>
+</div>
+</div>
+<div class="w-11 h-11 rounded-[7px] bg-[#FEF5E5] text-[#9C6400] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">warning</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-[7px] p-space-lg shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-caption-small text-caption-small font-semibold text-secondary uppercase tracking-wider">Đang phúc khảo (In Re-evaluation)</span>
+<div class="flex items-baseline gap-2 mt-2">
+<span class="font-display-h3 text-display-h3 text-on-surface">12</span>
+<span class="font-caption-small text-caption-small text-secondary font-medium">hồ sơ</span>
+</div>
+<div class="flex items-center gap-1 mt-2 text-[#5D38DE] font-caption-small text-caption-small">
+<span class="material-symbols-outlined text-[15px]">group</span>
+<span>3 giám khảo đang chấm</span>
+</div>
+</div>
+<div class="w-11 h-11 rounded-[7px] bg-[#EBE6FF] text-[#5D38DE] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">rate_review</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest rounded-[7px] p-space-lg shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-caption-small text-caption-small font-semibold text-secondary uppercase tracking-wider">Đã chốt &amp; Xuất bảng điểm</span>
+<div class="flex items-baseline gap-2 mt-2">
+<span class="font-display-h3 text-display-h3 text-[#088068]">284</span>
+<span class="font-caption-small text-caption-small text-[#088068] font-semibold">Hoàn tất</span>
+</div>
+<div class="flex items-center gap-1 mt-2 text-[#088068] font-caption-small text-caption-small">
+<span class="material-symbols-outlined text-[15px]">verified</span>
+<span>Tỷ lệ khớp AI 98.6%</span>
+</div>
+</div>
+<div class="w-11 h-11 rounded-[7px] bg-[#E6FFFA] text-[#088068] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">task_alt</span>
+</div>
+</div>
+</div>
+<!-- MAIN TABLE WRAPPER WITH TABS & TOOLBAR -->
+<div class="bg-surface-container-lowest rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] overflow-hidden">
+<!-- NAVIGATION TABS -->
+<div class="flex items-center overflow-x-auto px-space-lg bg-surface-container-lowest">
+<button class="h-[50px] px-4 flex items-center gap-2 font-subtitle-h6 text-subtitle-h6 text-primary border-b-2 border-primary shrink-0 transition-colors">
+<span>Tất cả bài thi cần xử lý</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-container text-on-primary text-[11px] font-bold">37</span>
+</button>
+<button class="h-[50px] px-4 flex items-center gap-2 font-body-base text-body-base text-secondary hover:text-on-surface border-b-2 border-transparent shrink-0 transition-colors">
+<span>AI Flagged / Nghi vấn</span>
+<span class="px-1.5 py-0.2 rounded-full bg-[#FDEDE8] text-[#BE452B] font-caption-small text-caption-small font-bold">7</span>
+</button>
+<button class="h-[50px] px-4 flex items-center gap-2 font-body-base text-body-base text-secondary hover:text-on-surface border-b-2 border-transparent shrink-0 transition-colors">
+<span>Đang phúc khảo</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container text-secondary font-caption-small text-caption-small font-semibold">12</span>
+</button>
+<button class="h-[50px] px-4 flex items-center gap-2 font-body-base text-body-base text-secondary hover:text-on-surface border-b-2 border-transparent shrink-0 transition-colors">
+<span>Chờ phê duyệt chốt điểm</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container text-secondary font-caption-small text-caption-small font-semibold">18</span>
+</button>
+<button class="h-[50px] px-4 flex items-center gap-2 font-body-base text-body-base text-secondary hover:text-on-surface border-b-2 border-transparent shrink-0 transition-colors">
+<span>Lịch sử đã công bố điểm</span>
+</button>
+</div>
+<!-- FILTER TOOLBAR -->
+<div class="p-space-lg bg-[#F8FAFD] flex flex-col xl:flex-row xl:items-center justify-between gap-3">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 flex-1">
+<!-- Search Input -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-[18px]">search</span>
+<input class="w-full h-[40px] pl-9 pr-3 rounded-[7px] bg-surface-container-lowest text-on-surface font-body-base text-body-base shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/20 placeholder:text-secondary/70" placeholder="Tìm thí sinh, SBD, mã bài..." type="text"/>
+</div>
+<!-- Exam Session Dropdown -->
+<div class="relative">
+<select class="w-full h-[40px] px-3 rounded-[7px] bg-surface-container-lowest text-on-surface font-body-base text-body-base shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/20 appearance-none pr-8">
+<option>Tất cả ca thi (Mới nhất: PTE-A-114)</option>
+<option>PTE-A-115 (18/09/2026)</option>
+<option>PTE-A-114 (18/09/2026)</option>
+<option>PTE-A-112 (17/09/2026)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-[18px]">expand_more</span>
+</div>
+<!-- Skill Check Dropdown -->
+<div class="relative">
+<select class="w-full h-[40px] px-3 rounded-[7px] bg-surface-container-lowest text-on-surface font-body-base text-body-base shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/20 appearance-none pr-8">
+<option>Tất cả kỹ năng (S, W, R, L)</option>
+<option>Speaking (Gặp lỗi âm thanh)</option>
+<option>Writing (Off-topic suspect)</option>
+<option>Reading &amp; Listening</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-[18px]">expand_more</span>
+</div>
+<!-- AI Confidence Level Dropdown -->
+<div class="relative">
+<select class="w-full h-[40px] px-3 rounded-[7px] bg-surface-container-lowest text-on-surface font-body-base text-body-base shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/20 appearance-none pr-8">
+<option>Tất cả độ tin cậy AI</option>
+<option>Nghi vấn / Thấp (&lt; 85%)</option>
+<option>Trung bình (85% - 95%)</option>
+<option>Độ tin cậy cao (&gt; 95%)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+<!-- Right Utility Actions -->
+<div class="flex items-center gap-2 justify-end shrink-0">
+<button class="h-[40px] px-3 rounded-[7px] bg-surface-container-lowest hover:bg-surface-container text-secondary hover:text-on-surface shadow-sm font-button-label text-button-label flex items-center gap-1.5 transition-colors" title="Làm mới">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+<span>Làm mới AI</span>
+</button>
+<button class="h-[40px] px-3 rounded-[7px] bg-surface-container-lowest hover:bg-surface-container text-secondary hover:text-on-surface shadow-sm font-button-label text-button-label flex items-center gap-1 transition-colors" title="Xóa lọc">
+<span class="material-symbols-outlined text-[18px]">filter_alt_off</span>
+<span>Xóa lọc</span>
+</button>
+</div>
+</div>
+<!-- DATA TABLE -->
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-base text-body-base">
+<thead class="bg-[#F8FAFD] text-secondary font-subtitle-h6 text-[13px] uppercase tracking-wider">
+<tr>
+<th class="w-10 px-4 py-3.5 text-center">
+<input class="w-4 h-4 rounded text-primary focus:ring-primary/20" type="checkbox"/>
+</th>
+<th class="px-4 py-3.5">Thí sinh &amp; SBD</th>
+<th class="px-4 py-3.5">Ca thi &amp; Thời gian</th>
+<th class="px-4 py-3.5 text-center">Điểm AI (Overall)</th>
+<th class="px-4 py-3.5">Chi tiết 4 kỹ năng</th>
+<th class="px-4 py-3.5">Cảnh báo AI &amp; Lý do</th>
+<th class="px-4 py-3.5">Giám khảo phân công</th>
+<th class="px-4 py-3.5">Trạng thái</th>
+<th class="px-4 py-3.5 text-right">Thao tác</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-variant/40 bg-surface-container-lowest">
+<!-- ROW 1 (High Alert Speaking) -->
+<tr class="hover:bg-[#F6F9FC] transition-colors">
+<td class="px-4 py-4 text-center">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary/20" type="checkbox"/>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-[#D0E0FF] text-primary font-bold flex items-center justify-center shrink-0 text-sm">
+                  HN
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface font-semibold truncate">Nguyễn Hoàng Nam</span>
+<div class="flex items-center gap-1.5 font-caption-small text-caption-small text-secondary">
+<span class="font-mono bg-surface-container px-1 py-0.2 rounded text-[11px] text-on-surface">SBD-PTE-014</span>
+<span>•</span>
+<span>Lớp PTE-79-A</span>
+</div>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="inline-block px-2 py-0.5 rounded bg-surface-container text-on-surface font-semibold text-[12px] w-max">PTE-A-114</span>
+<span class="font-caption-small text-caption-small text-secondary mt-1">18/09/2026 08:30</span>
+</div>
+</td>
+<td class="px-4 py-4 text-center whitespace-nowrap">
+<div class="inline-flex flex-col items-center">
+<span class="font-display-h3 text-display-h3 text-primary leading-none">68</span>
+<span class="font-caption-small text-caption-small text-secondary mt-0.5">/ 90 chuẩn</span>
+</div>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<div class="flex items-center gap-1 font-caption-small text-caption-small font-semibold">
+<!-- Highlighted Flagged Speaking Skill -->
+<span class="px-2 py-1 rounded bg-[#FDEDE8] text-[#BE452B] flex items-center gap-0.5 shadow-sm" title="Mic ngắt quãng 2 câu">
+<span class="material-symbols-outlined text-[13px]">mic_off</span> S: 62
+                </span>
+<span class="px-2 py-1 rounded bg-surface-container-low text-secondary">W: 58</span>
+<span class="px-2 py-1 rounded bg-surface-container-low text-secondary">R: 71</span>
+<span class="px-2 py-1 rounded bg-surface-container-low text-secondary">L: 74</span>
+</div>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-start gap-1.5 p-2 rounded-[7px] bg-[#FDEDE8] text-[#BE452B] max-w-xs">
+<span class="material-symbols-outlined text-[16px] shrink-0 mt-0.5">error</span>
+<div class="flex flex-col font-caption-small text-caption-small leading-tight">
+<span class="font-semibold">Audio quality drop (74% conf)</span>
+<span class="text-[11px] opacity-90 mt-0.5">Mic ngắt quãng ở câu Describe Image #3</span>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-[#EBE6FF] text-[#5D38DE] flex items-center justify-center text-xs font-semibold">PT</div>
+<span class="font-body-base text-body-base text-on-surface text-sm">ThS. Trần P. Thảo</span>
+</div>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#FEF5E5] text-[#9C6400] font-caption-small text-caption-small font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#9C6400]"></span>
+                Cần thẩm định
+              </span>
+</td>
+<td class="px-4 py-4 text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1.5">
+<button class="px-2.5 py-1.5 rounded-[7px] bg-primary-container text-on-primary hover:bg-[#3359D2] font-caption-small text-caption-small font-semibold flex items-center gap-1 transition-all" onclick="document.getElementById('scoring-drawer').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[15px]">edit_note</span>
+<span>Phúc khảo</span>
+</button>
+<button class="w-8 h-8 rounded-[7px] hover:bg-surface-container text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 2 (Score Discrepancy) -->
+<tr class="hover:bg-[#F6F9FC] transition-colors">
+<td class="px-4 py-4 text-center">
+<input class="w-4 h-4 rounded text-primary focus:ring-primary/20" type="checkbox"/>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-[#FEF5E5] text-[#9C6400] font-bold flex items-center justify-center shrink-0 text-sm">
+                  TH
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface font-semibold truncate">Trần Thu Hà</span>
+<div class="flex items-center gap-1.5 font-caption-small text-caption-small text-secondary">
+<span class="font-mono bg-surface-container px-1 py-0.2 rounded text-[11px] text-on-surface">SBD-PTE-028</span>
+<span>•</span>
+<span>Lớp PTE-Target-65</span>
+</div>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="inline-block px-2 py-0.5 rounded bg-surface-container text-on-surface font-semibold text-[12px] w-max">PTE-A-114</span>
+<span class="font-caption-small text-caption-small text-secondary mt-1">18/09/2026 08:30</span>
+</div>
+</td>
+<td class="px-4 py-4 text-center whitespace-nowrap">
+<div class="inline-flex flex-col items-center">
+<span class="font-display-h3 text-display-h3 text-[#9C6400] leading-none">54</span>
+<span class="font-caption-small text-caption-small text-secondary mt-0.5">/ 90 chuẩn</span>
+</div>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<div class="flex items-center gap-1 font-caption-small text-caption-small font-semibold">
+<span class="px-2 py-1 rounded bg-[#FEF5E5] text-[#9C6400]">S: 48</span>
+<span class="px-2 py-1 rounded bg-surface-container-low text-secondary">W: 66</span>
+<span class="px-2 py-1 rounded bg-surface-container-low text-secondary">R: 52</span>
+<span class="px-2 py-1 rounded bg-surface-container-low text-secondary">L: 55</span>
+</div>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-start gap-1.5 p-2 rounded-[7px] bg-[#FEF5E5] text-[#9C6400] max-w-xs">
+<span class="material-symbols-outlined text-[16px] shrink-0 mt-0.5">trending_down</span>
+<div class="flex flex-col font-caption-small text-caption-small leading-tight">
+<span class="font-semibold">Score discrepancy &gt; 15đ</span>
+<span class="text-[11px] opacity-90 mt-0.5">Speaking AI thấp bất thường so với mocktest</span>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-[#DCE8FF] text-primary flex items-center justify-center text-xs font-semibold">HN</div>
+<span class="font-body-base text-body-base text-on-surface text-sm">TS. Nguyễn Hải Nam</span>
+</div>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#EBE6FF] text-[#5D38DE] font-caption-small text-caption-small font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#5D38DE] animate-pulse"></span>
+                Đang thẩm định
+              </span>
+</td>
+<td class="px-4 py-4 text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1.5">
+<button class="px-2.5 py-1.5 rounded-[7px] bg-[#ECF2FF] text-[#3359D2] hover:bg-[#dbe7ff] font-caption-small text-caption-small font-semibold flex items-center gap-1 transition-all" onclick="document.getElementById('scoring-drawer').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[15px]">visibility</span>
+<span>Xem tiến độ</span>
+</button>
+<button class="w-8 h-8 rounded-[7px] hover:bg-surface-container text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 3 (Learner Appeal) -->
+<tr class="hover:bg-[#F6F9FC] transition-colors">
+<td class="px-4 py-4 text-center">
+<input class="w-4 h-4 rounded text-primary focus:ring-primary/20" type="checkbox"/>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-[#E8F7FF] text-[#0074BA] font-bold flex items-center justify-center shrink-0 text-sm">
+                  MQ
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface font-semibold truncate">Đỗ Minh Quân</span>
+<div class="flex items-center gap-1.5 font-caption-small text-caption-small text-secondary">
+<span class="font-mono bg-surface-container px-1 py-0.2 rounded text-[11px] text-on-surface">SBD-PTE-051</span>
+<span>•</span>
+<span>Lớp PTE-Intensive-04</span>
+</div>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="inline-block px-2 py-0.5 rounded bg-surface-container text-on-surface font-semibold text-[12px] w-max">PTE-A-112</span>
+<span class="font-caption-small text-caption-small text-secondary mt-1">17/09/2026 14:00</span>
+</div>
+</td>
+<td class="px-4 py-4 text-center whitespace-nowrap">
+<div class="inline-flex flex-col items-center">
+<span class="font-display-h3 text-display-h3 text-on-surface leading-none">79</span>
+<span class="font-caption-small text-caption-small text-secondary mt-0.5">/ 90 chuẩn</span>
+</div>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<div class="flex items-center gap-1 font-caption-small text-caption-small font-semibold">
+<span class="px-2 py-1 rounded bg-surface-container-low text-secondary">S: 78</span>
+<span class="px-2 py-1 rounded bg-[#E8F7FF] text-[#0074BA]">W: 76</span>
+<span class="px-2 py-1 rounded bg-surface-container-low text-secondary">R: 82</span>
+<span class="px-2 py-1 rounded bg-surface-container-low text-secondary">L: 80</span>
+</div>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-start gap-1.5 p-2 rounded-[7px] bg-[#E8F7FF] text-[#0074BA] max-w-xs">
+<span class="material-symbols-outlined text-[16px] shrink-0 mt-0.5">assignment_turned_in</span>
+<div class="flex flex-col font-caption-small text-caption-small leading-tight">
+<span class="font-semibold">Yêu cầu từ học viên</span>
+<span class="text-[11px] opacity-90 mt-0.5">Phí phúc khảo Writing #2 đã xác nhận</span>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-[7px] bg-[#FEF5E5] text-[#9C6400] text-xs font-semibold">
+<span class="material-symbols-outlined text-[14px]">person_add</span>
+                Chưa phân công
+              </span>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#FEF5E5] text-[#9C6400] font-caption-small text-caption-small font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#9C6400]"></span>
+                Cần thẩm định
+              </span>
+</td>
+<td class="px-4 py-4 text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1.5">
+<button class="px-2.5 py-1.5 rounded-[7px] bg-primary-container text-on-primary hover:bg-[#3359D2] font-caption-small text-caption-small font-semibold flex items-center gap-1 transition-all">
+<span class="material-symbols-outlined text-[15px]">person_add</span>
+<span>Giao việc</span>
+</button>
+<button class="w-8 h-8 rounded-[7px] hover:bg-surface-container text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 4 (High Confidence - Fast Track) -->
+<tr class="hover:bg-[#F6F9FC] transition-colors">
+<td class="px-4 py-4 text-center">
+<input class="w-4 h-4 rounded text-primary focus:ring-primary/20" type="checkbox"/>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-[#E6FFFA] text-[#088068] font-bold flex items-center justify-center shrink-0 text-sm">
+                  QA
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface font-semibold truncate">Phạm Quỳnh Anh</span>
+<div class="flex items-center gap-1.5 font-caption-small text-caption-small text-secondary">
+<span class="font-mono bg-surface-container px-1 py-0.2 rounded text-[11px] text-on-surface">SBD-PTE-089</span>
+<span>•</span>
+<span>Lớp PTE-Target-79</span>
+</div>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="inline-block px-2 py-0.5 rounded bg-surface-container text-on-surface font-semibold text-[12px] w-max">PTE-A-114</span>
+<span class="font-caption-small text-caption-small text-secondary mt-1">18/09/2026 08:30</span>
+</div>
+</td>
+<td class="px-4 py-4 text-center whitespace-nowrap">
+<div class="inline-flex flex-col items-center">
+<span class="font-display-h3 text-display-h3 text-[#088068] leading-none">83</span>
+<span class="font-caption-small text-caption-small text-secondary mt-0.5">/ 90 chuẩn</span>
+</div>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<div class="flex items-center gap-1 font-caption-small text-caption-small font-semibold">
+<span class="px-2 py-1 rounded bg-surface-container-low text-secondary">S: 82</span>
+<span class="px-2 py-1 rounded bg-surface-container-low text-secondary">W: 84</span>
+<span class="px-2 py-1 rounded bg-surface-container-low text-secondary">R: 81</span>
+<span class="px-2 py-1 rounded bg-surface-container-low text-secondary">L: 85</span>
+</div>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-start gap-1.5 p-2 rounded-[7px] bg-[#E6FFFA] text-[#088068] max-w-xs">
+<span class="material-symbols-outlined text-[16px] shrink-0 mt-0.5">check_circle</span>
+<div class="flex flex-col font-caption-small text-caption-small leading-tight">
+<span class="font-semibold">AI Confidence 99.2%</span>
+<span class="text-[11px] opacity-90 mt-0.5">Dữ liệu âm thanh &amp; ngữ pháp hoàn hảo</span>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="font-caption-small text-caption-small text-secondary italic">Pearson Engine AI Auto</span>
+</div>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#E8F7FF] text-[#0074BA] font-caption-small text-caption-small font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#0074BA]"></span>
+                Đã thẩm định - Chờ duyệt
+              </span>
+</td>
+<td class="px-4 py-4 text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1.5">
+<button class="px-3 py-1.5 rounded-[7px] bg-[#088068] text-on-primary hover:bg-[#066753] font-caption-small text-caption-small font-semibold flex items-center gap-1 transition-all">
+<span class="material-symbols-outlined text-[15px]">done_all</span>
+<span>Duyệt chốt</span>
+</button>
+<button class="w-8 h-8 rounded-[7px] hover:bg-surface-container text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 5 (Writing Off-topic) -->
+<tr class="hover:bg-[#F6F9FC] transition-colors">
+<td class="px-4 py-4 text-center">
+<input class="w-4 h-4 rounded text-primary focus:ring-primary/20" type="checkbox"/>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-[#FEF5E5] text-[#9C6400] font-bold flex items-center justify-center shrink-0 text-sm">
+                  VD
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface font-semibold truncate">Lê Văn Đạt</span>
+<div class="flex items-center gap-1.5 font-caption-small text-caption-small text-secondary">
+<span class="font-mono bg-surface-container px-1 py-0.2 rounded text-[11px] text-on-surface">SBD-PTE-072</span>
+<span>•</span>
+<span>Lớp PTE-50-Fast</span>
+</div>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="inline-block px-2 py-0.5 rounded bg-surface-container text-on-surface font-semibold text-[12px] w-max">PTE-A-115</span>
+<span class="font-caption-small text-caption-small text-secondary mt-1">18/09/2026 10:45</span>
+</div>
+</td>
+<td class="px-4 py-4 text-center whitespace-nowrap">
+<div class="inline-flex flex-col items-center">
+<span class="font-display-h3 text-display-h3 text-on-surface leading-none">48</span>
+<span class="font-caption-small text-caption-small text-secondary mt-0.5">/ 90 chuẩn</span>
+</div>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<div class="flex items-center gap-1 font-caption-small text-caption-small font-semibold">
+<span class="px-2 py-1 rounded bg-surface-container-low text-secondary">S: 54</span>
+<span class="px-2 py-1 rounded bg-[#FDEDE8] text-[#BE452B]">W: 39</span>
+<span class="px-2 py-1 rounded bg-surface-container-low text-secondary">R: 47</span>
+<span class="px-2 py-1 rounded bg-surface-container-low text-secondary">L: 52</span>
+</div>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-start gap-1.5 p-2 rounded-[7px] bg-[#FEF5E5] text-[#9C6400] max-w-xs">
+<span class="material-symbols-outlined text-[16px] shrink-0 mt-0.5">text_fields</span>
+<div class="flex flex-col font-caption-small text-caption-small leading-tight">
+<span class="font-semibold">Writing off-topic suspect</span>
+<span class="text-[11px] opacity-90 mt-0.5">Essay #2 nghi vấn dùng template spam từ</span>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-[#EBE6FF] text-[#5D38DE] flex items-center justify-center text-xs font-semibold">PT</div>
+<span class="font-body-base text-body-base text-on-surface text-sm">ThS. Trần P. Thảo</span>
+</div>
+</td>
+<td class="px-4 py-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#EBE6FF] text-[#5D38DE] font-caption-small text-caption-small font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#5D38DE]"></span>
+                Đang thẩm định
+              </span>
+</td>
+<td class="px-4 py-4 text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1.5">
+<button class="px-2.5 py-1.5 rounded-[7px] bg-[#ECF2FF] text-[#3359D2] hover:bg-[#dbe7ff] font-caption-small text-caption-small font-semibold flex items-center gap-1 transition-all" onclick="document.getElementById('scoring-drawer').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[15px]">edit_note</span>
+<span>Phúc khảo</span>
+</button>
+<button class="w-8 h-8 rounded-[7px] hover:bg-surface-container text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- TABLE FOOTER & PAGINATION -->
+<div class="p-space-lg bg-surface-container-lowest flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-2 font-caption-small text-caption-small text-secondary">
+<span>Hiển thị 5 trên 37 bài thi cần rà soát</span>
+<span>•</span>
+<div class="flex items-center gap-1">
+<span>Hàng trên mỗi trang:</span>
+<select class="bg-surface-container px-2 py-1 rounded font-medium text-on-surface focus:outline-none">
+<option>10</option>
+<option selected="">20</option>
+<option>50</option>
+</select>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center text-secondary hover:bg-surface-container transition-colors disabled:opacity-40" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center bg-primary-container text-on-primary font-caption-small text-caption-small font-semibold">1</button>
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center text-secondary hover:bg-surface-container font-caption-small text-caption-small">2</button>
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center text-secondary hover:bg-surface-container font-caption-small text-caption-small">3</button>
+<span class="px-1 text-secondary text-sm">...</span>
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center text-secondary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- SLIDE-OVER DRAWER / MODAL: EXAMINER SCORING REVIEW PREVIEW -->
+<div class="fixed inset-0 z-50 overflow-hidden bg-black/40 flex justify-end transition-opacity duration-300" id="scoring-drawer">
+<!-- Backdrop dismiss overlay -->
+<div class="absolute inset-0" onclick="document.getElementById('scoring-drawer').classList.add('hidden')"></div>
+<!-- Drawer Panel -->
+<div class="relative w-full max-w-2xl bg-surface-container-lowest h-full shadow-[0px_0px_4px_0px_rgba(145,158,171,0.30),0px_24px_48px_-8px_rgba(145,158,171,0.20)] flex flex-col z-10 overflow-y-auto">
+<!-- Drawer Header -->
+<div class="p-space-lg bg-[#F8FAFD] flex items-start justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-[#FDEDE8] text-[#BE452B] font-caption-small text-caption-small font-bold">Flagged #03</span>
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface">Phúc khảo kỹ năng: Speaking - Describe Image #03</span>
+</div>
+<div class="flex items-center gap-3 mt-1.5 font-caption-small text-caption-small text-secondary">
+<span class="font-semibold text-on-surface">Thí sinh: Nguyễn Hoàng Nam</span>
+<span>•</span>
+<span class="font-mono">SBD-PTE-014</span>
+<span>•</span>
+<span>Ca thi: PTE-A-114</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full text-secondary hover:bg-surface-container hover:text-on-surface flex items-center justify-center transition-colors" onclick="document.getElementById('scoring-drawer').classList.add('hidden')">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Drawer Content -->
+<div class="p-space-lg flex flex-col space-y-6 flex-1">
+<!-- AUDIO WAVEFORM PLAYER -->
+<div class="p-4 rounded-[7px] bg-[#F2F6FA] flex flex-col space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#0074BA] text-[20px]">graphic_eq</span>
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface text-sm">Ghi âm thí sinh (Describe Image)</span>
+</div>
+<span class="font-caption-small text-caption-small font-mono text-secondary">00:18 / 00:38</span>
+</div>
+<!-- Waveform Visualizer Simulation -->
+<div class="h-14 bg-surface-container-lowest rounded-[7px] p-2 flex items-center justify-between gap-1">
+<!-- Simulated Waveform Bars -->
+<div class="w-1 bg-[#4169E8] h-4 rounded-full"></div>
+<div class="w-1 bg-[#4169E8] h-8 rounded-full"></div>
+<div class="w-1 bg-[#4169E8] h-10 rounded-full"></div>
+<div class="w-1 bg-[#4169E8] h-5 rounded-full"></div>
+<div class="w-1 bg-[#4169E8] h-7 rounded-full"></div>
+<div class="w-1 bg-[#4169E8] h-11 rounded-full"></div>
+<div class="w-1 bg-[#4169E8] h-8 rounded-full"></div>
+<div class="w-1 bg-[#4169E8] h-6 rounded-full"></div>
+<!-- Alert Region (Sec 14-16) with orange highlight -->
+<div class="w-1 bg-[#BE452B] h-12 rounded-full animate-pulse" title="Micro giật méo tiếng"></div>
+<div class="w-1 bg-[#BE452B] h-11 rounded-full animate-pulse"></div>
+<div class="w-1 bg-[#BE452B] h-10 rounded-full animate-pulse"></div>
+<!-- Continuing Waveform -->
+<div class="w-1 bg-surface-variant h-8 rounded-full"></div>
+<div class="w-1 bg-surface-variant h-6 rounded-full"></div>
+<div class="w-1 bg-surface-variant h-9 rounded-full"></div>
+<div class="w-1 bg-surface-variant h-5 rounded-full"></div>
+<div class="w-1 bg-surface-variant h-7 rounded-full"></div>
+<div class="w-1 bg-surface-variant h-10 rounded-full"></div>
+<div class="w-1 bg-surface-variant h-4 rounded-full"></div>
+<div class="w-1 bg-surface-variant h-3 rounded-full"></div>
+</div>
+<!-- Player Controls -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-[7px] bg-surface-container-lowest text-secondary hover:text-on-surface flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[18px]">replay_5</span>
+</button>
+<button class="w-9 h-9 rounded-[7px] bg-primary-container text-on-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[20px]">pause</span>
+</button>
+<button class="w-8 h-8 rounded-[7px] bg-surface-container-lowest text-secondary hover:text-on-surface flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[18px]">forward_5</span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-caption-small text-caption-small text-secondary">Tốc độ:</span>
+<button class="px-2 py-0.5 rounded bg-surface-container-lowest text-on-surface font-caption-small text-caption-small font-semibold shadow-sm">1.0x</button>
+</div>
+</div>
+</div>
+<!-- AI SPEECH TRANSCRIPTION COMPARISON -->
+<div class="flex flex-col space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface text-sm">AI Speech-to-Text Transcript</span>
+<span class="font-caption-small text-caption-small text-[#9C6400] font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">info</span>
+              Từ gạch chân bị nhiễu micro
+            </span>
+</div>
+<div class="p-3.5 rounded-[7px] bg-[#F8FAFD] font-body-base text-body-base leading-relaxed text-on-surface text-sm">
+            "The given bar chart illustrates the demographic changes across five European nations from 2010 to 2025. 
+            Overall, it is noticeable that <span class="bg-[#FEF5E5] text-[#9C6400] underline font-semibold px-1 py-0.5 rounded">Germany [audio clipped 74%]</span> experienced the highest upward trend, whereas 
+            <span class="bg-[#FEF5E5] text-[#9C6400] underline font-semibold px-1 py-0.5 rounded">Italy remained stable [stutter detected]</span> throughout the entire projected period."
+          </div>
+</div>
+<!-- EXAMINER MANUAL RUBRIC SCORING (PEARSON PTE 0 - 5) -->
+<div class="flex flex-col space-y-4">
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface text-sm">Bảng chấm tay Pearson PTE (Thang điểm 0 - 5)</span>
+<!-- Fluency -->
+<div class="flex items-center justify-between p-3 rounded-[7px] bg-surface-container-lowest shadow-[0px_0px_2px_0px_rgba(145,158,171,0.25)]">
+<div class="flex flex-col">
+<span class="font-body-base text-body-base font-semibold text-on-surface text-sm">Oral Fluency (Độ lưu loát)</span>
+<span class="font-caption-small text-caption-small text-secondary">Nhịp điệu tự nhiên, không ngắt quãng do dự</span>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="w-7 h-7 rounded bg-surface-container text-secondary font-semibold text-xs hover:bg-surface-variant">1</button>
+<button class="w-7 h-7 rounded bg-surface-container text-secondary font-semibold text-xs hover:bg-surface-variant">2</button>
+<button class="w-7 h-7 rounded bg-surface-container text-secondary font-semibold text-xs hover:bg-surface-variant">3</button>
+<button class="w-7 h-7 rounded bg-primary-container text-on-primary font-semibold text-xs shadow-sm">4</button>
+<button class="w-7 h-7 rounded bg-surface-container text-secondary font-semibold text-xs hover:bg-surface-variant">5</button>
+</div>
+</div>
+<!-- Pronunciation -->
+<div class="flex items-center justify-between p-3 rounded-[7px] bg-surface-container-lowest shadow-[0px_0px_2px_0px_rgba(145,158,171,0.25)]">
+<div class="flex flex-col">
+<span class="font-body-base text-body-base font-semibold text-on-surface text-sm">Pronunciation (Phát âm &amp; Trọng âm)</span>
+<span class="font-caption-small text-caption-small text-secondary">Rõ nguyên âm, phụ âm cuối và ngữ điệu</span>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="w-7 h-7 rounded bg-surface-container text-secondary font-semibold text-xs hover:bg-surface-variant">1</button>
+<button class="w-7 h-7 rounded bg-surface-container text-secondary font-semibold text-xs hover:bg-surface-variant">2</button>
+<button class="w-7 h-7 rounded bg-primary-container text-on-primary font-semibold text-xs shadow-sm">3</button>
+<button class="w-7 h-7 rounded bg-surface-container text-secondary font-semibold text-xs hover:bg-surface-variant">4</button>
+<button class="w-7 h-7 rounded bg-surface-container text-secondary font-semibold text-xs hover:bg-surface-variant">5</button>
+</div>
+</div>
+<!-- Content -->
+<div class="flex items-center justify-between p-3 rounded-[7px] bg-surface-container-lowest shadow-[0px_0px_2px_0px_rgba(145,158,171,0.25)]">
+<div class="flex flex-col">
+<span class="font-body-base text-body-base font-semibold text-on-surface text-sm">Content (Mô tả biểu đồ)</span>
+<span class="font-caption-small text-caption-small text-secondary">Bao quát xu hướng chính, số liệu và kết luận</span>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="w-7 h-7 rounded bg-surface-container text-secondary font-semibold text-xs hover:bg-surface-variant">1</button>
+<button class="w-7 h-7 rounded bg-surface-container text-secondary font-semibold text-xs hover:bg-surface-variant">2</button>
+<button class="w-7 h-7 rounded bg-surface-container text-secondary font-semibold text-xs hover:bg-surface-variant">3</button>
+<button class="w-7 h-7 rounded bg-primary-container text-on-primary font-semibold text-xs shadow-sm">4</button>
+<button class="w-7 h-7 rounded bg-surface-container text-secondary font-semibold text-xs hover:bg-surface-variant">5</button>
+</div>
+</div>
+</div>
+<!-- SCORE ADJUSTMENT SUMMARY -->
+<div class="p-3.5 rounded-[7px] bg-[#E8F7FF] flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-caption-small text-caption-small text-[#0074BA] font-semibold uppercase">Điểm Speaking quy đổi</span>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-body-base text-body-base text-secondary line-through">58/90 (AI)</span>
+<span class="material-symbols-outlined text-primary text-[16px]">arrow_forward</span>
+<span class="font-display-h3 text-display-h3 text-primary">64/90</span>
+<span class="px-2 py-0.5 rounded bg-[#E6FFFA] text-[#088068] font-caption-small text-caption-small font-bold">+6 điểm</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[#0074BA] text-[28px]">verified_user</span>
+</div>
+<!-- EXAMINER REASON TEXTAREA -->
+<div class="flex flex-col space-y-1.5">
+<label class="font-subtitle-h6 text-subtitle-h6 text-on-surface text-sm">Lý do điều chỉnh điểm &amp; Ghi chú thẩm định</label>
+<textarea class="w-full p-3 rounded-[7px] bg-surface-container-lowest text-on-surface font-body-base text-body-base text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/20 placeholder:text-secondary/60" rows="3">Thí sinh phát âm đúng trọng âm và ngữ điệu tự nhiên. Micro phòng máy bị nhiễu nền ở giây thứ 14-16 dẫn đến AI nhận diện ngắt quãng không chính xác. Đã cộng phục hồi 6 điểm Oral Fluency.</textarea>
+</div>
+</div>
+<!-- Drawer Footer Actions -->
+<div class="p-space-lg bg-[#F8FAFD] flex items-center justify-end gap-3 shrink-0">
+<button class="h-[38px] px-4 rounded-[7px] bg-surface-container-lowest text-secondary hover:text-on-surface hover:bg-surface-container font-button-label text-button-label transition-colors" onclick="document.getElementById('scoring-drawer').classList.add('hidden')">
+          Giữ nguyên điểm AI
+        </button>
+<button class="h-[38px] px-5 rounded-[7px] bg-primary-container text-on-primary hover:bg-[#3359D2] font-button-label text-button-label shadow-sm flex items-center gap-1.5 transition-all" onclick="document.getElementById('scoring-drawer').classList.add('hidden')">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Lưu điểm phúc khảo</span>
+</button>
+</div>
+</div>
+</div>
+</div></div></main></div></body></html>

@@ -1,0 +1,8 @@
+{
+  "name": "projects/2518511518052928179/screens/eacec569ff7942a08e74cd8126d40d64",
+  "title": "T10 - Audit Log",
+  "deviceType": "DESKTOP",
+  "width": 2560,
+  "height": 3262,
+  "route": "tenant-web /host/audit-log"
+}

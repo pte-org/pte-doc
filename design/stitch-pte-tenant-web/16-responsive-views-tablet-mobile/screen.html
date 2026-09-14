@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>PTE Assessment Platform</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"tertiary-container":"#466ae3","on-primary-container":"#fbf9ff","on-primary":"#ffffff","surface-container-low":"#f0f3ff","inverse-primary":"#b6c4ff","on-background":"#111c2d","secondary-fixed-dim":"#b7c7e6","surface-dim":"#cfdaf2","surface-bright":"#f9f9ff","surface-variant":"#d8e3fa","tertiary-fixed-dim":"#b7c4ff","outline-variant":"#c4c5d6","on-tertiary":"#ffffff","outline":"#747686","tertiary-fixed":"#dce1ff","secondary":"#4f5f7a","surface-container-high":"#dee8ff","on-secondary-container":"#53637e","on-tertiary-fixed-variant":"#0039b4","primary":"#204ece","inverse-surface":"#263143","primary-fixed-dim":"#b6c4ff","surface-tint":"#2653d2","on-secondary-fixed-variant":"#374761","on-secondary-fixed":"#0a1c33","error":"#ba1a1a","on-tertiary-fixed":"#001551","primary-container":"#4169e8","secondary-container":"#d0e0ff","background":"#f9f9ff","tertiary":"#2850c9","on-primary-fixed-variant":"#003ab2","on-error-container":"#93000a","on-surface":"#111c2d","error-container":"#ffdad6","on-primary-fixed":"#001550","surface-container-highest":"#d8e3fa","surface":"#f9f9ff","inverse-on-surface":"#ebf1ff","on-surface-variant":"#434654","primary-fixed":"#dce1ff","on-error":"#ffffff","surface-container":"#e7eeff","secondary-fixed":"#d5e3ff","on-secondary":"#ffffff","surface-container-lowest":"#ffffff","on-tertiary-container":"#fcf9ff"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{"space-xs":"0.25rem","margin":"1.875rem","space-xl":"1.875rem","margin-mobile":"1rem","gutter-mobile":"1rem","space-md":"1rem","space-xxl":"3rem","space-sm":"0.5rem","space-lg":"1.5rem","gutter":"1.5rem"},fontFamily:{"display-h2":["Plus Jakarta Sans"],"body-base":["Plus Jakarta Sans"],"tabular-data":["Plus Jakarta Sans"],"body-secondary":["Plus Jakarta Sans"],"card-title-h5":["Plus Jakarta Sans"],"display-h1":["Plus Jakarta Sans"],"subtitle-h6":["Plus Jakarta Sans"],"button-label":["Plus Jakarta Sans"],"caption-small":["Plus Jakarta Sans"],"page-title-h4":["Plus Jakarta Sans"],"display-h3":["Plus Jakarta Sans"],"display-h1-mobile":["Plus Jakarta Sans"]},fontSize:{"display-h2":["30px",{lineHeight:"36px",letterSpacing:"-0.015em",fontWeight:"600"}],"body-base":["14px",{lineHeight:"21px",letterSpacing:"0",fontWeight:"400"}],"tabular-data":["14px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"500"}],"body-secondary":["14px",{lineHeight:"21px",letterSpacing:"0",fontWeight:"400"}],"card-title-h5":["18px",{lineHeight:"26px",letterSpacing:"0",fontWeight:"600"}],"display-h1":["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"600"}],"subtitle-h6":["16px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"600"}],"button-label":["14px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"400"}],"caption-small":["12px",{lineHeight:"16px",letterSpacing:"0",fontWeight:"400"}],"page-title-h4":["21px",{lineHeight:"26px",letterSpacing:"-0.005em",fontWeight:"600"}],"display-h3":["24px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"display-h1-mobile":["28px",{lineHeight:"34px",letterSpacing:"-0.015em",fontWeight:"600"}]}}}};</script></head><body class="bg-[#F2F6FA] font-body-base text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-[270px] bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20)]"><div class="flex flex-col flex-1 overflow-y-auto px-4"><div class="h-[60px] flex items-center gap-3 px-2 mt-2"><div class="w-9 h-9 rounded-xl bg-primary-container flex items-center justify-center text-on-primary font-subtitle-h6 text-subtitle-h6 shadow-sm">P</div><div class="flex flex-col"><span class="font-subtitle-h6 text-subtitle-h6 text-on-surface leading-tight tracking-tight">PTE Institute</span><span class="font-caption-small text-caption-small text-secondary">Assessment Tenant</span></div></div><nav class="flex flex-col mt-2" data-active-classes="bg-primary-container text-on-primary font-medium rounded-xl shadow-[0px_4px_10px_rgba(65,105,232,0.25)]"><div class="mt-3 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Home</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Dashboard</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Learners</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="learners" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Learners</span></a><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="programmes" href="#"><span class="material-symbols-outlined text-[20px]">school</span><span>Programmes</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Delivery</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="exam-sessions" href="#"><span class="material-symbols-outlined text-[20px]">event_available</span><span>Exam sessions</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Assessment</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="scoring-review" href="#"><span class="material-symbols-outlined text-[20px]">fact_check</span><span>Scoring review</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Data</div><a aria-current="page" class="h-[45px] px-3 flex items-center gap-3 bg-primary-container text-on-primary font-medium rounded-xl shadow-[0px_4px_10px_rgba(65,105,232,0.25)]" data-path="audit-log" href="#"><span class="material-symbols-outlined text-[20px] text-on-primary">history_edu</span><span>Audit log</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Settings</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="staff-and-roles" href="#"><span class="material-symbols-outlined text-[20px]">badge</span><span>Staff &amp; roles</span></a><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="platform-settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Settings</span></a></nav></div><div class="p-4 flex flex-col gap-3"><div class="bg-surface-container-low p-3.5 rounded-xl shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20)]"><div class="flex items-center justify-between mb-1.5"><span class="font-caption-small text-caption-small font-semibold text-on-surface">Licence Usage</span><span class="font-tabular-data text-tabular-data text-secondary">97%</span></div><div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden mb-2"><div class="bg-primary-container h-full rounded-full" style="width: 97.2%"></div></div><div class="flex items-center justify-between"><span class="font-caption-small text-caption-small text-secondary">486 / 500 learner seats</span><a class="font-caption-small text-caption-small text-primary font-semibold hover:underline" href="#">Request more seats</a></div></div><div class="flex items-center gap-3 px-2 py-2 rounded-xl bg-surface-container-lowest"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col min-w-0 flex-1"><span class="font-body-base text-body-base font-semibold text-on-surface truncate">Nguyễn Quản Trị</span><span class="font-caption-small text-caption-small text-secondary truncate">Host Admin</span></div><button class="text-secondary hover:text-on-surface"><span class="material-symbols-outlined text-[18px]">logout</span></button></div></div></aside><div class="pl-[270px]"><header class="fixed top-0 left-[270px] right-0 h-[70px] bg-surface-container-lowest shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-4"><button class="w-9 h-9 flex items-center justify-center rounded-xl text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">menu</span></button><div class="flex items-center gap-2 text-secondary font-body-base text-body-base"><span class="hover:text-on-surface cursor-pointer">Host</span><span>/</span><span class="text-on-surface font-medium">Assessment Ops</span></div></div><div class="flex items-center gap-3"><button class="w-10 h-10 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">search</span></button><button class="relative w-10 h-10 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span></button><div class="h-6 w-px bg-surface-variant mx-1"></div><div class="flex items-center gap-3 pl-1"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-body-base text-body-base font-semibold text-on-surface leading-snug">Nguyễn Quản Trị</span><span class="font-caption-small text-caption-small text-secondary">Host Admin</span></div></div></div></header><main class="relative pt-[70px] min-h-screen bg-[#F2F6FA]"><div class="max-w-[1200px] mx-auto p-space-lg"><div class="flex flex-col w-full">
+<!-- Top Breadcrumb & Page Meta -->
+<div class="flex flex-col gap-3 mb-space-lg">
+<div class="flex items-center gap-2 text-secondary font-body-base text-body-base">
+<span class="hover:text-primary transition-colors cursor-pointer">Host</span>
+<span class="text-outline-variant">/</span>
+<span class="hover:text-primary transition-colors cursor-pointer">System &amp; UI</span>
+<span class="text-outline-variant">/</span>
+<span class="text-on-surface font-semibold">Responsive Views (T16)</span>
+</div>
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+<div class="flex flex-col gap-1 max-w-3xl">
+<div class="flex flex-wrap items-center gap-2.5">
+<h1 class="font-page-title-h4 text-page-title-h4 text-on-surface tracking-tight">
+            Responsive Views — Quy chuẩn hiển thị đa thiết bị (Tablet &amp; Mobile)
+          </h1>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary-container text-primary font-caption-small text-caption-small font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            Breakpoint Spec · 768px Tablet &amp; 390px Mobile
+          </span>
+</div>
+<p class="font-body-base text-body-base text-secondary leading-relaxed mt-1">
+          Bộ quy chuẩn chuyển đổi giao diện responsive cho ứng dụng Tenant Admin: thanh điều hướng thu gọn dạng Off-canvas Drawer / Bottom Sheet, bảng dữ liệu chuyển sang thẻ danh sách (Card List view), lưới thống kê tự động xuống hàng và phím tắt thao tác nhanh trên thiết bị cảm ứng.
+        </p>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<button class="h-[38px] px-4 rounded-[7px] bg-surface-container-lowest text-on-surface font-button-label text-button-label hover:bg-surface-container transition-all flex items-center gap-2 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_4px_12px_-2px_rgba(145,158,171,0.12)]" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">token</span>
+<span>Xem tài liệu Breakpoints</span>
+</button>
+<button class="h-[38px] px-4 rounded-[7px] bg-primary-container text-on-primary font-button-label text-button-label hover:bg-primary transition-all flex items-center gap-2 shadow-[0px_4px_10px_rgba(65,105,232,0.25)]" type="button">
+<span class="material-symbols-outlined text-[18px]">rule_folder</span>
+<span>Áp dụng Viewport Rules</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Interactive Viewport Filter Pills / Mode Switcher -->
+<div class="bg-surface-container-lowest p-2 rounded-[7px] mb-space-lg shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center gap-1.5 overflow-x-auto py-1" id="viewportSwitcher">
+<button class="view-btn px-3.5 py-1.5 rounded-[7px] bg-primary-container text-on-primary font-button-label text-button-label flex items-center gap-2 transition-all shadow-sm" data-view="all" type="button">
+<span class="material-symbols-outlined text-[16px]">devices</span>
+<span>Tất cả thiết bị (All-in-one Showcase)</span>
+</button>
+<button class="view-btn px-3.5 py-1.5 rounded-[7px] text-secondary hover:text-on-surface hover:bg-surface-container-low font-button-label text-button-label flex items-center gap-2 transition-all" data-view="tablet" type="button">
+<span class="material-symbols-outlined text-[16px]">tablet_mac</span>
+<span>Tablet View (768px)</span>
+</button>
+<button class="view-btn px-3.5 py-1.5 rounded-[7px] text-secondary hover:text-on-surface hover:bg-surface-container-low font-button-label text-button-label flex items-center gap-2 transition-all" data-view="mobile" type="button">
+<span class="material-symbols-outlined text-[16px]">phone_iphone</span>
+<span>Mobile View (390px)</span>
+</button>
+<button class="view-btn px-3.5 py-1.5 rounded-[7px] text-secondary hover:text-on-surface hover:bg-surface-container-low font-button-label text-button-label flex items-center gap-2 transition-all" data-view="bottomsheet" type="button">
+<span class="material-symbols-outlined text-[16px]">vertical_align_top</span>
+<span>Mobile Bottom Sheet &amp; Navigation</span>
+</button>
+</div>
+<div class="flex items-center gap-3 px-2 text-secondary font-caption-small text-caption-small">
+<span class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-[#088068]"></span>
+        WCAG Touch Compliant (≥44px)
+      </span>
+<span class="text-outline-variant">|</span>
+<span class="tabular-nums font-medium text-on-surface">Auto Scaled Preview</span>
+</div>
+</div>
+<!-- SECTION 1: Breakpoint & Layout Transformation Rules -->
+<section class="mb-space-lg">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-5 bg-primary rounded-full"></span>
+<h2 class="font-card-title-h5 text-card-title-h5 text-on-surface">1. Ma trận Kiến trúc Chuyển đổi Viewport</h2>
+</div>
+<span class="font-caption-small text-caption-small text-secondary">Token System Standard</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Desktop Spec Card -->
+<div class="bg-surface-container-lowest p-5 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">desktop_windows</span>
+</div>
+<span class="px-2 py-0.5 rounded-[7px] bg-surface-container text-on-surface font-caption-small text-caption-small font-semibold">
+              Desktop ≥ 1200px
+            </span>
+</div>
+<h3 class="font-subtitle-h6 text-subtitle-h6 text-on-surface mb-2">Desktop Canvas (1440px+)</h3>
+<p class="font-body-base text-body-base text-secondary text-sm mb-4">
+            Trải nghiệm tối đa với thanh điều hướng cố định và mật độ thông tin cao.
+          </p>
+<ul class="flex flex-col gap-2.5 font-caption-small text-caption-small text-on-surface-variant">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span><strong>Sidebar cố định:</strong> 270px hiển thị đầy đủ menu phân cấp và licence quota.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span><strong>Lưới số liệu:</strong> 4 cột cân bằng (Metric Cards span 3/12).</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span><strong>Dữ liệu:</strong> Bảng toàn vẹn 8-10 cột, có phân trang và drawer ngữ cảnh cạnh phải.</span>
+</li>
+</ul>
+</div>
+<div class="mt-4 pt-3 border-t border-surface-container flex items-center justify-between text-secondary font-caption-small text-caption-small">
+<span>Tỷ lệ hiển thị: 100%</span>
+<span class="text-primary font-medium">Fixed 12-Col</span>
+</div>
+</div>
+<!-- Tablet Spec Card -->
+<div class="bg-surface-container-lowest p-5 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<div class="w-10 h-10 rounded-xl bg-secondary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">tablet_mac</span>
+</div>
+<span class="px-2 py-0.5 rounded-[7px] bg-[#E8F7FF] text-[#0E729F] font-caption-small text-caption-small font-semibold">
+              Tablet 768px – 1024px
+            </span>
+</div>
+<h3 class="font-subtitle-h6 text-subtitle-h6 text-on-surface mb-2">Tablet Landscape/Portrait</h3>
+<p class="font-body-base text-body-base text-secondary text-sm mb-4">
+            Tối ưu cho iPad / máy tính bảng giám thị thi (Proctor Pad) tại phòng Lab.
+          </p>
+<ul class="flex flex-col gap-2.5 font-caption-small text-caption-small text-on-surface-variant">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#0E729F] shrink-0 mt-0.5">check_circle</span>
+<span><strong>Off-canvas Menu:</strong> Thu gọn Sidebar, mở qua Hamburger top bar.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#0E729F] shrink-0 mt-0.5">check_circle</span>
+<span><strong>Lưới số liệu:</strong> Tự động dồn 2x2 hàng (Span 6/12) với chiều cao đồng bộ.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#0E729F] shrink-0 mt-0.5">check_circle</span>
+<span><strong>Bảng cuộn ngang:</strong> Frozen cột Tên thí sinh + thao tác nhanh (Quick Action ⋮).</span>
+</li>
+</ul>
+</div>
+<div class="mt-4 pt-3 border-t border-surface-container flex items-center justify-between text-secondary font-caption-small text-caption-small">
+<span>Gutter: 16px (Mobile/Pad)</span>
+<span class="text-[#0E729F] font-medium">Offcanvas Nav</span>
+</div>
+</div>
+<!-- Mobile Spec Card -->
+<div class="bg-surface-container-lowest p-5 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<div class="w-10 h-10 rounded-xl bg-[#FEF5E5] flex items-center justify-center text-[#9C6400]">
+<span class="material-symbols-outlined text-[22px]">smartphone</span>
+</div>
+<span class="px-2 py-0.5 rounded-[7px] bg-[#FEF5E5] text-[#9C6400] font-caption-small text-caption-small font-semibold">
+              Mobile 375px – 480px
+            </span>
+</div>
+<h3 class="font-subtitle-h6 text-subtitle-h6 text-on-surface mb-2">Mobile Compact View</h3>
+<p class="font-body-base text-body-base text-secondary text-sm mb-4">
+            Dành cho Trưởng điểm thi (Host Admin) di chuyển và kiểm tra đột xuất tại phòng thi.
+          </p>
+<ul class="flex flex-col gap-2.5 font-caption-small text-caption-small text-on-surface-variant">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#9C6400] shrink-0 mt-0.5">check_circle</span>
+<span><strong>Bottom Navigation Bar:</strong> Thanh tab cố định đáy màn hình (4 mục chính).</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#9C6400] shrink-0 mt-0.5">check_circle</span>
+<span><strong>Card List thay Bảng:</strong> Thẻ ứng viên độc lập, chạm mở rộng xem chi tiết.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#9C6400] shrink-0 mt-0.5">check_circle</span>
+<span><strong>Bottom Sheet Drawer:</strong> Lọc dữ liệu, gán máy thi mở từ đáy lên với drag bar.</span>
+</li>
+</ul>
+</div>
+<div class="mt-4 pt-3 border-t border-surface-container flex items-center justify-between text-secondary font-caption-small text-caption-small">
+<span>Touch target: ≥ 44px</span>
+<span class="text-[#9C6400] font-medium">Bottom-First</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: Side-by-side Device Simulation Showcase -->
+<section class="mb-space-lg">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-5 bg-tertiary-container rounded-full"></span>
+<h2 class="font-card-title-h5 text-card-title-h5 text-on-surface">2. Mô phỏng Thực tế (Live Viewport Simulators)</h2>
+</div>
+<div class="flex items-center gap-2 text-secondary font-caption-small text-caption-small">
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">touch_app</span> Tương tác kéo cuộn &amp; nút bấm
+        </span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- TABLET SIMULATOR (768px frame representation) - Spans 7 cols on LG -->
+<div class="lg:col-span-7 flex flex-col gap-3">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">tablet</span>
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface">Khung thiết bị Tablet (768 × 1024)</span>
+</div>
+<span class="font-caption-small text-caption-small text-secondary bg-surface-container px-2 py-0.5 rounded-[7px]">
+            Aspect Ratio: 4:3
+          </span>
+</div>
+<!-- Tablet Device Frame -->
+<div class="bg-surface-container-lowest rounded-2xl shadow-[0px_0px_3px_0px_rgba(145,158,171,0.35),0px_20px_40px_-6px_rgba(145,158,171,0.18)] overflow-hidden border border-surface-container">
+<!-- Tablet Top Bar Mock -->
+<div class="h-14 bg-surface-container-lowest px-4 flex items-center justify-between border-b border-surface-container">
+<div class="flex items-center gap-3">
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[20px]">menu</span>
+</button>
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-lg bg-primary-container flex items-center justify-center text-on-primary font-subtitle-h6 text-xs">P</div>
+<span class="font-subtitle-h6 text-sm text-on-surface">PTE Institute</span>
+</div>
+</div>
+<!-- Notice in device -->
+<div class="hidden sm:flex items-center gap-1.5 px-2 py-1 rounded-[7px] bg-surface-container-low text-secondary font-caption-small text-caption-small">
+<span class="material-symbols-outlined text-[14px] text-primary">aspect_ratio</span>
+<span>768px Tablet View</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[18px]">search</span>
+</button>
+<button class="relative w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[18px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error"></span>
+</button>
+<div class="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-on-primary text-xs font-semibold">
+                NQ
+              </div>
+</div>
+</div>
+<!-- Tablet Canvas Inner Body -->
+<div class="p-4 bg-[#F2F6FA] space-y-4 max-h-[620px] overflow-y-auto">
+<!-- Tablet Status Alert -->
+<div class="bg-surface-container-lowest p-3 rounded-[7px] flex items-center justify-between gap-2 shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">info</span>
+<span class="font-caption-small text-caption-small text-secondary">
+                  Ca thi hiện tại: <strong class="text-on-surface font-semibold">PTE Academic Sáng (09:00 - 11:30)</strong> · Phòng Lab A
+                </span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-[#E6FFFA] text-[#088068] font-caption-small text-caption-small font-semibold shrink-0">
+                Đang vận hành
+              </span>
+</div>
+<!-- Tablet 2x2 Stat Cards -->
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-surface-container-lowest p-3.5 rounded-[7px] shadow-sm">
+<div class="flex items-center justify-between text-secondary mb-1">
+<span class="font-caption-small text-caption-small">Tổng thí sinh</span>
+<span class="material-symbols-outlined text-[16px] text-primary">groups</span>
+</div>
+<div class="font-display-3 text-2xl font-bold text-on-surface">1,248</div>
+<div class="font-caption-small text-caption-small text-[#088068] flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[13px]">trending_up</span> +14.2% so với tháng trước
+                </div>
+</div>
+<div class="bg-surface-container-lowest p-3.5 rounded-[7px] shadow-sm">
+<div class="flex items-center justify-between text-secondary mb-1">
+<span class="font-caption-small text-caption-small">Ca thi hôm nay</span>
+<span class="material-symbols-outlined text-[16px] text-[#0E729F]">calendar_month</span>
+</div>
+<div class="font-display-3 text-2xl font-bold text-on-surface">4 ca thi</div>
+<div class="font-caption-small text-caption-small text-secondary mt-0.5">
+                  128/130 vị trí sẵn sàng
+                </div>
+</div>
+<div class="bg-surface-container-lowest p-3.5 rounded-[7px] shadow-sm">
+<div class="flex items-center justify-between text-secondary mb-1">
+<span class="font-caption-small text-caption-small">Tỷ lệ hoàn thành</span>
+<span class="material-symbols-outlined text-[16px] text-[#088068]">verified</span>
+</div>
+<div class="font-display-3 text-2xl font-bold text-on-surface">98.4%</div>
+<div class="font-caption-small text-caption-small text-secondary mt-0.5">
+                  AI Scoring xác thực ngay
+                </div>
+</div>
+<div class="bg-surface-container-lowest p-3.5 rounded-[7px] shadow-sm">
+<div class="flex items-center justify-between text-secondary mb-1">
+<span class="font-caption-small text-caption-small">License Quota</span>
+<span class="material-symbols-outlined text-[16px] text-[#9C6400]">pie_chart</span>
+</div>
+<div class="font-display-3 text-2xl font-bold text-on-surface">486 / 500</div>
+<div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden mt-1.5">
+<div class="bg-primary-container h-full rounded-full" style="width: 97.2%"></div>
+</div>
+</div>
+</div>
+<!-- Tablet Table with Horizontal Scroll Indicator -->
+<div class="bg-surface-container-lowest p-3.5 rounded-[7px] shadow-sm">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<h4 class="font-subtitle-h6 text-sm text-on-surface font-semibold">Danh sách thí sinh ca 09:00</h4>
+<span class="px-2 py-0.2 rounded-full bg-surface-container text-secondary text-[11px]">32 thí sinh</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="text-[11px] text-secondary hidden sm:inline">Vuốt ngang bảng</span>
+<span class="material-symbols-outlined text-secondary text-[16px]">swipe</span>
+</div>
+</div>
+<!-- Filter Pills row in Tablet -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-2 mb-2 text-xs">
+<button class="px-2.5 py-1 rounded-[7px] bg-primary-container text-on-primary font-medium shrink-0" type="button">Tất cả (32)</button>
+<button class="px-2.5 py-1 rounded-[7px] bg-surface-container text-secondary shrink-0" type="button">Lab A (16)</button>
+<button class="px-2.5 py-1 rounded-[7px] bg-surface-container text-secondary shrink-0" type="button">Lab B (16)</button>
+<button class="px-2.5 py-1 rounded-[7px] bg-surface-container text-secondary shrink-0" type="button">Đang thi (28)</button>
+<button class="px-2.5 py-1 rounded-[7px] bg-surface-container text-secondary shrink-0" type="button">Cảnh báo (1)</button>
+</div>
+<!-- Condensed Table with Frozen First Column -->
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-base text-body-base text-xs">
+<thead>
+<tr class="text-secondary border-b border-surface-container h-9">
+<th class="font-semibold px-2">Họ &amp; Tên thí sinh</th>
+<th class="font-semibold px-2">Phòng / Máy</th>
+<th class="font-semibold px-2">Phần thi</th>
+<th class="font-semibold px-2">Trạng thái</th>
+<th class="font-semibold px-2 text-right">Thao tác</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low">
+<tr class="h-11 hover:bg-surface-container-low/50 transition-colors">
+<td class="px-2 font-medium text-on-surface">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center font-bold text-[10px] text-primary">LN</div>
+<div>
+<div>Lê Hoàng Nam</div>
+<div class="text-[10px] text-secondary">SBD: 0921-A</div>
+</div>
+</div>
+</td>
+<td class="px-2 text-secondary">Lab A · M-04</td>
+<td class="px-2">Speaking (Part 2)</td>
+<td class="px-2">
+<span class="px-2 py-0.5 rounded-full bg-[#E8F7FF] text-[#0E729F] font-semibold text-[11px]">Đang làm bài</span>
+</td>
+<td class="px-2 text-right">
+<button class="w-7 h-7 rounded-[7px] hover:bg-surface-container text-secondary hover:text-on-surface" type="button">⋮</button>
+</td>
+</tr>
+<tr class="h-11 hover:bg-surface-container-low/50 transition-colors">
+<td class="px-2 font-medium text-on-surface">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-[#E6FFFA] flex items-center justify-center font-bold text-[10px] text-[#088068]">TM</div>
+<div>
+<div>Trần Mai Phương</div>
+<div class="text-[10px] text-secondary">SBD: 0922-A</div>
+</div>
+</div>
+</td>
+<td class="px-2 text-secondary">Lab A · M-07</td>
+<td class="px-2">Writing (Essay)</td>
+<td class="px-2">
+<span class="px-2 py-0.5 rounded-full bg-[#E8F7FF] text-[#0E729F] font-semibold text-[11px]">Đang làm bài</span>
+</td>
+<td class="px-2 text-right">
+<button class="w-7 h-7 rounded-[7px] hover:bg-surface-container text-secondary hover:text-on-surface" type="button">⋮</button>
+</td>
+</tr>
+<tr class="h-11 hover:bg-surface-container-low/50 transition-colors">
+<td class="px-2 font-medium text-on-surface">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-[#FDEDE8] flex items-center justify-center font-bold text-[10px] text-[#BE452B]">DQ</div>
+<div>
+<div>Đỗ Quốc Anh</div>
+<div class="text-[10px] text-secondary">SBD: 0923-A</div>
+</div>
+</div>
+</td>
+<td class="px-2 text-secondary">Lab A · M-11</td>
+<td class="px-2">Reading</td>
+<td class="px-2">
+<span class="px-2 py-0.5 rounded-full bg-[#FDEDE8] text-[#BE452B] font-semibold text-[11px]">Cảnh báo Mic</span>
+</td>
+<td class="px-2 text-right">
+<button class="w-7 h-7 rounded-[7px] hover:bg-surface-container text-secondary hover:text-on-surface" type="button">⋮</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- MOBILE SIMULATOR FRAME (iPhone 15 / 390px portrait mockup) - Spans 5 cols on LG -->
+<div class="lg:col-span-5 flex flex-col gap-3">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">smartphone</span>
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface">Khung Mobile (390 × 844 px)</span>
+</div>
+<span class="font-caption-small text-caption-small text-[#088068] bg-[#E6FFFA] px-2 py-0.5 rounded-[7px]">
+            Touch-Optimized
+          </span>
+</div>
+<!-- Phone Mockup Container -->
+<div class="mx-auto w-full max-w-[390px] bg-[#111c2d] p-3 rounded-[38px] shadow-[0px_20px_45px_-10px_rgba(17,28,45,0.4)]">
+<!-- Inner Phone Glass/Chassis -->
+<div class="bg-[#F2F6FA] rounded-[30px] overflow-hidden flex flex-col h-[740px] relative">
+<!-- Mobile Status Bar -->
+<div class="h-10 bg-surface-container-lowest flex items-center justify-between px-6 pt-1 text-on-surface select-none shrink-0">
+<span class="text-xs font-semibold tracking-tight">9:41</span>
+<!-- Dynamic Island Notch Mock -->
+<div class="w-24 h-4 bg-[#111c2d] rounded-full mx-auto"></div>
+<div class="flex items-center gap-1.5 text-xs text-on-surface">
+<span class="material-symbols-outlined text-[13px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[13px]">wifi</span>
+<span class="material-symbols-outlined text-[15px]">battery_full</span>
+</div>
+</div>
+<!-- Mobile App Header -->
+<div class="h-14 bg-surface-container-lowest px-4 flex items-center justify-between shrink-0 shadow-sm">
+<div class="flex items-center gap-2.5">
+<button class="w-9 h-9 rounded-[7px] flex items-center justify-center text-secondary hover:bg-surface-container active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[22px]">menu</span>
+</button>
+<div class="w-8 h-8 rounded-xl bg-primary-container flex items-center justify-center text-on-primary font-bold text-sm">P</div>
+<div class="flex flex-col">
+<span class="font-subtitle-h6 text-xs text-on-surface leading-tight">PTE Institute</span>
+<span class="text-[10px] text-secondary">Host Tenant</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="relative w-9 h-9 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error"></span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary text-xs font-bold">
+                  NQ
+                </div>
+</div>
+</div>
+<!-- Mobile Scrollable Main Content -->
+<div class="flex-1 overflow-y-auto p-3.5 space-y-3.5">
+<!-- Urgent Exam Banner Card -->
+<div class="bg-surface-container-lowest p-3.5 rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 rounded-full bg-[#FEF5E5] text-[#9C6400] text-[11px] font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#9C6400] animate-ping"></span>
+                    Sắp diễn ra lúc 14:00
+                  </span>
+<span class="text-[11px] text-secondary font-tabular-data">Hôm nay</span>
+</div>
+<div class="font-subtitle-h6 text-sm text-on-surface font-semibold">
+                  Ca thi PTE-INT-09 · Phòng Lab A
+                </div>
+<div class="text-xs text-secondary mt-0.5 flex items-center gap-2">
+<span>30 thí sinh</span>
+<span>•</span>
+<span>Giám thị: Lê Quốc Dũng</span>
+</div>
+<!-- Quick Mobile Action Buttons (Min height 44px for Touch) -->
+<div class="grid grid-cols-2 gap-2 mt-3 pt-2.5 border-t border-surface-container">
+<button class="h-11 rounded-[7px] bg-primary-container text-on-primary font-button-label text-xs font-medium flex items-center justify-center gap-1.5 active:bg-primary transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+<span>+ Tạo ca thi</span>
+</button>
+<button class="h-11 rounded-[7px] bg-surface-container text-on-surface font-button-label text-xs font-medium flex items-center justify-center gap-1.5 active:bg-surface-container-high transition-all" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary">qr_code_scanner</span>
+<span>Quét QR Thí sinh</span>
+</button>
+</div>
+</div>
+<!-- Converted Mobile Card List (Replacement for Wide Table) -->
+<div class="space-y-2.5">
+<div class="flex items-center justify-between px-1">
+<span class="font-subtitle-h6 text-xs text-on-surface font-semibold uppercase tracking-wider">
+                    Thí sinh đang thi (Live Cards)
+                  </span>
+<button class="text-xs text-primary font-medium flex items-center gap-1" id="openMobileFilterBtn" type="button">
+<span class="material-symbols-outlined text-[14px]">tune</span> Bộ lọc (2)
+                  </button>
+</div>
+<!-- Candidate Card 1 -->
+<div class="bg-surface-container-lowest p-3.5 rounded-xl shadow-sm flex flex-col gap-2.5 active:scale-[0.99] transition-transform">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-xl bg-secondary-container flex items-center justify-center text-primary font-bold text-xs shrink-0">
+                        NH
+                      </div>
+<div>
+<div class="font-subtitle-h6 text-sm text-on-surface">Nguyễn Hoàng Nam</div>
+<div class="text-xs text-secondary font-tabular-data">SBD-014 · PTE Academic</div>
+</div>
+</div>
+<button class="w-8 h-8 rounded-[7px] text-secondary flex items-center justify-center hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-2 text-xs bg-[#F8FAFC] p-2 rounded-lg">
+<div>
+<span class="text-secondary block text-[10px]">Vị trí ngồi</span>
+<span class="font-medium text-on-surface">Lab A · Máy 12</span>
+</div>
+<div>
+<span class="text-secondary block text-[10px]">Thời gian làm bài</span>
+<span class="font-medium text-on-surface">00:42:15</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="px-2.5 py-1 rounded-full bg-[#E8F7FF] text-[#0E729F] font-semibold text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">mic</span> Đang làm bài (Speaking)
+                    </span>
+<button class="text-primary text-xs font-semibold flex items-center gap-0.5" type="button">
+                      Chi tiết <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Candidate Card 2 -->
+<div class="bg-surface-container-lowest p-3.5 rounded-xl shadow-sm flex flex-col gap-2.5 active:scale-[0.99] transition-transform">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-xl bg-[#E6FFFA] flex items-center justify-center text-[#088068] font-bold text-xs shrink-0">
+                        TM
+                      </div>
+<div>
+<div class="font-subtitle-h6 text-sm text-on-surface">Trần Mai Anh</div>
+<div class="text-xs text-secondary font-tabular-data">SBD-018 · PTE Academic</div>
+</div>
+</div>
+<button class="w-8 h-8 rounded-[7px] text-secondary flex items-center justify-center hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-2 text-xs bg-[#F8FAFC] p-2 rounded-lg">
+<div>
+<span class="text-secondary block text-[10px]">Vị trí ngồi</span>
+<span class="font-medium text-on-surface">Lab B · Máy 04</span>
+</div>
+<div>
+<span class="text-secondary block text-[10px]">Trạng thái giám thị</span>
+<span class="font-medium text-[#088068]">Passport verified</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="px-2.5 py-1 rounded-full bg-[#E6FFFA] text-[#088068] font-semibold text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">check_circle</span> Check-in thành công
+                    </span>
+<button class="text-primary text-xs font-semibold flex items-center gap-0.5" type="button">
+                      Cấp máy thi <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Quick License Metric Mobile Widget -->
+<div class="bg-surface-container-lowest p-3 rounded-xl shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+</div>
+<div class="flex flex-col">
+<span class="font-subtitle-h6 text-xs text-on-surface">Licence: 486 / 500</span>
+<span class="text-[10px] text-secondary">Đạt 97.2% hạn mức khả dụng</span>
+</div>
+</div>
+<button class="px-2.5 py-1 rounded-[7px] bg-secondary-container text-primary text-[11px] font-semibold" type="button">
+                  Nâng gói
+                </button>
+</div>
+</div>
+<!-- Mobile Bottom Navigation Bar (Fixed 4 tabs) -->
+<div class="h-16 bg-surface-container-lowest border-t border-surface-container flex items-center justify-around px-2 shrink-0 z-10">
+<button class="flex flex-col items-center justify-center text-primary gap-0.5 w-16 h-12" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="text-[10px] font-semibold">Tổng quan</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary hover:text-on-surface gap-0.5 w-16 h-12" type="button">
+<span class="material-symbols-outlined text-[20px]">event_available</span>
+<span class="text-[10px]">Ca thi</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary hover:text-on-surface gap-0.5 w-16 h-12" type="button">
+<span class="material-symbols-outlined text-[20px]">group</span>
+<span class="text-[10px]">Học viên</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary hover:text-on-surface gap-0.5 w-16 h-12" type="button">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+<span class="text-[10px]">Cài đặt &amp; Thêm</span>
+</button>
+</div>
+<!-- iOS Home Indicator -->
+<div class="h-4 bg-surface-container-lowest flex items-center justify-center shrink-0">
+<div class="w-32 h-1 bg-outline-variant rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: Mobile Bottom Sheets & Touch Interactions Component Specs -->
+<section class="mb-space-lg">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-5 bg-primary-container rounded-full"></span>
+<h2 class="font-card-title-h5 text-card-title-h5 text-on-surface">3. Quy chuẩn Mobile Bottom Sheet &amp; Tương tác Chạm (Touch Ergonomics)</h2>
+</div>
+<span class="font-caption-small text-caption-small text-secondary">Spec Preview Component</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Live Mobile Drawer / Bottom Sheet Preview Card -->
+<div class="lg:col-span-6 bg-surface-container-lowest p-5 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="px-2.5 py-1 rounded-[7px] bg-secondary-container text-primary font-caption-small text-caption-small font-semibold">
+              Live Bottom Sheet Component
+            </span>
+<span class="text-xs text-secondary font-tabular-data">Target: 390px Viewport</span>
+</div>
+<h3 class="font-subtitle-h6 text-subtitle-h6 text-on-surface mb-1">
+            Bottom Sheet: Bộ lọc nhanh danh sách thí sinh (Filter Sheet)
+          </h3>
+<p class="font-body-base text-body-base text-secondary text-sm mb-4">
+            Được kích hoạt khi người dùng bấm nút "Bộ lọc" trên màn hình di động, thay thế cho popup modal desktop.
+          </p>
+<!-- Embedded Mini Mobile Bottom Sheet Container Simulation -->
+<div class="bg-[#2A3547]/30 p-3 rounded-2xl">
+<div class="bg-surface-container-lowest rounded-t-2xl p-4 shadow-xl flex flex-col gap-3.5">
+<!-- Drag Handle Bar -->
+<div class="w-12 h-1.5 bg-outline-variant rounded-full mx-auto"></div>
+<div class="flex items-center justify-between pb-1 border-b border-surface-container">
+<span class="font-subtitle-h6 text-sm text-on-surface font-semibold">Lọc danh sách thí sinh</span>
+<button class="text-xs text-primary font-medium hover:underline" type="button">Xóa tất cả</button>
+</div>
+<!-- Filter Criteria 1: Phòng Lab -->
+<div>
+<label class="block text-xs font-semibold text-on-surface mb-1.5">Phòng thi (Lab Location)</label>
+<div class="grid grid-cols-3 gap-2">
+<button class="h-10 rounded-[7px] bg-primary-container text-on-primary text-xs font-medium flex items-center justify-center" type="button">
+                    Tất cả
+                  </button>
+<button class="h-10 rounded-[7px] bg-surface-container text-secondary text-xs font-medium flex items-center justify-center hover:bg-surface-container-high" type="button">
+                    Lab A (16)
+                  </button>
+<button class="h-10 rounded-[7px] bg-surface-container text-secondary text-xs font-medium flex items-center justify-center hover:bg-surface-container-high" type="button">
+                    Lab B (16)
+                  </button>
+</div>
+</div>
+<!-- Filter Criteria 2: Trạng thái thi -->
+<div>
+<label class="block text-xs font-semibold text-on-surface mb-1.5">Trạng thái làm bài</label>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 rounded-full bg-[#E8F7FF] text-[#0E729F] font-semibold text-xs flex items-center gap-1 cursor-pointer">
+<span class="material-symbols-outlined text-[14px]">check</span> Đang thi
+                  </span>
+<span class="px-3 py-1.5 rounded-full bg-surface-container text-secondary font-medium text-xs cursor-pointer">
+                    Đã hoàn thành
+                  </span>
+<span class="px-3 py-1.5 rounded-full bg-[#FDEDE8] text-[#BE452B] font-semibold text-xs flex items-center gap-1 cursor-pointer">
+                    Cảnh báo vi phạm (1)
+                  </span>
+</div>
+</div>
+<!-- Sticky Action Buttons for Mobile Bottom Sheet -->
+<div class="grid grid-cols-2 gap-3 pt-2">
+<button class="h-11 rounded-[7px] bg-surface-container text-on-surface font-button-label text-sm flex items-center justify-center active:bg-surface-variant" type="button">
+                  Đặt lại
+                </button>
+<button class="h-11 rounded-[7px] bg-primary-container text-on-primary font-button-label text-sm font-medium flex items-center justify-center shadow-md active:bg-primary" type="button">
+                  Áp dụng bộ lọc (12)
+                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Touch Ergonomics Rules & Implementation Guidelines -->
+<div class="lg:col-span-6 flex flex-col gap-4">
+<div class="bg-surface-container-lowest p-5 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)]">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary text-[22px]">fingerprint</span>
+<h3 class="font-subtitle-h6 text-subtitle-h6 text-on-surface">Quy chuẩn Thiết kế Chạm (Touch Ergonomics)</h3>
+</div>
+<div class="space-y-3 font-body-base text-body-base text-sm text-secondary">
+<div class="p-3 bg-surface-container-low rounded-xl flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center shrink-0 font-bold text-xs">
+                44
+              </div>
+<div>
+<div class="font-semibold text-on-surface text-sm">Vùng bấm tối thiểu (Minimum Touch Target ≥ 44×44px)</div>
+<div class="text-xs text-secondary mt-0.5">
+                  Tất cả nút bấm, icon action menu (⋮), checkbox và thẻ chọn lọc phải có kích thước tối thiểu 44px hoặc đệm padding vô hình để tránh bấm nhầm khi di chuyển.
+                </div>
+</div>
+</div>
+<div class="p-3 bg-surface-container-low rounded-xl flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-secondary-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">phone_iphone</span>
+</div>
+<div>
+<div class="font-semibold text-on-surface text-sm">Vùng an toàn (Safe Area Insets) cho iOS &amp; Android</div>
+<div class="text-xs text-secondary mt-0.5">
+                  Thanh Bottom Navigation và nút hành động cố định luôn có khoảng đệm <code>padding-bottom: env(safe-area-inset-bottom)</code> để không bị che khuất bởi thanh Home Indicator.
+                </div>
+</div>
+</div>
+<div class="p-3 bg-surface-container-low rounded-xl flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-[#FEF5E5] text-[#9C6400] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">mouse</span>
+</div>
+<div>
+<div class="font-semibold text-on-surface text-sm">Loại bỏ phụ thuộc trạng thái Hover</div>
+<div class="text-xs text-secondary mt-0.5">
+                  Mọi thông tin trong tooltip hoặc thao tác ẩn sau hover trên Desktop đều được đưa ra dạng tap-to-reveal hoặc hiển thị trực quan thông qua nhãn Badge và icon rõ ràng.
+                </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Breakpoint Checklist Table -->
+<div class="bg-surface-container-lowest p-5 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)]">
+<div class="flex items-center justify-between mb-3">
+<h4 class="font-subtitle-h6 text-sm text-on-surface font-semibold">Tóm tắt Thông số Breakpoints CSS</h4>
+<span class="text-xs text-secondary font-medium">Tailwind Config Ready</span>
+</div>
+<div class="grid grid-cols-3 gap-2 text-center text-xs">
+<div class="p-2.5 rounded-lg bg-surface-container">
+<span class="block text-secondary text-[11px]">sm (Mobile)</span>
+<span class="font-bold text-on-surface text-sm">375px – 640px</span>
+<span class="block text-[10px] text-primary mt-0.5">Stack Cards + Nav Bottom</span>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container">
+<span class="block text-secondary text-[11px]">md/lg (Tablet)</span>
+<span class="font-bold text-on-surface text-sm">768px – 1024px</span>
+<span class="block text-[10px] text-primary mt-0.5">2-Col Grid + Offcanvas</span>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container">
+<span class="block text-secondary text-[11px]">xl/2xl (Desktop)</span>
+<span class="font-bold text-on-surface text-sm">1200px+</span>
+<span class="block text-[10px] text-primary mt-0.5">Persistent 270px Sidebar</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Client-side Script for Filter Pill Interaction -->
+<script>
+    (function() {
+      const switcher = document.getElementById('viewportSwitcher');
+      if (!switcher) return;
+
+      const buttons = switcher.querySelectorAll('.view-btn');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          buttons.forEach(b => {
+            b.classList.remove('bg-primary-container', 'text-on-primary', 'shadow-sm');
+            b.classList.add('text-secondary', 'hover:text-on-surface', 'hover:bg-surface-container-low');
+          });
+          btn.classList.remove('text-secondary', 'hover:text-on-surface', 'hover:bg-surface-container-low');
+          btn.classList.add('bg-primary-container', 'text-on-primary', 'shadow-sm');
+        });
+      });
+
+      const openFilterBtn = document.getElementById('openMobileFilterBtn');
+      if (openFilterBtn) {
+        openFilterBtn.addEventListener('click', () => {
+          alert('Mở Mobile Filter Bottom Sheet (Mô phỏng bộ lọc trên điện thoại)');
+        });
+      }
+    })();
+  </script>
+</div></div></main></div></body></html>

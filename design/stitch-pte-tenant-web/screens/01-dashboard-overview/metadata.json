@@ -1,0 +1,8 @@
+{
+  "name": "projects/2518511518052928179/screens/c8e54c3a038d495baa636ec01c39dfd1",
+  "title": "T1 - Dashboard (Overview)",
+  "deviceType": "DESKTOP",
+  "width": 2560,
+  "height": 3262,
+  "route": "tenant-web /host/dashboard"
+}

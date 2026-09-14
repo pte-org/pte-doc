@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "error": "#ba1a1a",
+          "on-surface-variant": "#434654",
+          "on-primary": "#ffffff",
+          "surface-container": "#e7eeff",
+          "tertiary-container": "#0e826a",
+          "surface-tint": "#2653d2",
+          "primary-fixed": "#dce1ff",
+          "surface-variant": "#d8e3fa",
+          "outline-variant": "#c4c5d6",
+          "on-tertiary-container": "#e9fff5",
+          "tertiary-fixed-dim": "#77d8bc",
+          "on-tertiary-fixed-variant": "#005141",
+          "on-primary-container": "#fbf9ff",
+          "on-secondary-fixed-variant": "#004c6c",
+          "surface": "#f9f9ff",
+          "tertiary-fixed": "#94f5d7",
+          "on-primary-fixed-variant": "#003ab2",
+          "on-secondary-fixed": "#001e2e",
+          "on-tertiary-fixed": "#002019",
+          "on-secondary-container": "#00567b",
+          "inverse-on-surface": "#ebf1ff",
+          "on-error": "#ffffff",
+          "on-error-container": "#93000a",
+          "secondary-fixed-dim": "#85cfff",
+          "on-primary-fixed": "#001550",
+          "on-secondary": "#ffffff",
+          "inverse-surface": "#263143",
+          "secondary": "#00658e",
+          "on-surface": "#111c2d",
+          "surface-bright": "#f9f9ff",
+          "error-container": "#ffdad6",
+          "surface-container-high": "#dee8ff",
+          "secondary-container": "#7fccfe",
+          "primary": "#204ece",
+          "surface-container-highest": "#d8e3fa",
+          "background": "#f9f9ff",
+          "secondary-fixed": "#c7e7ff",
+          "surface-container-lowest": "#ffffff",
+          "inverse-primary": "#b6c4ff",
+          "surface-container-low": "#f0f3ff",
+          "tertiary": "#006753",
+          "primary-fixed-dim": "#b6c4ff",
+          "primary-container": "#4169e8",
+          "outline": "#747686",
+          "on-tertiary": "#ffffff",
+          "on-background": "#111c2d",
+          "surface-dim": "#cfdaf2"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "space-xl": "2rem",
+          "margin-sm": "1rem",
+          "margin": "2rem",
+          "space-sm": "0.5rem",
+          "space-md": "1rem",
+          "gutter": "1.5rem",
+          "space-lg": "1.5rem",
+          "gutter-sm": "1rem",
+          "space-xs": "0.25rem"
+        },
+        "fontFamily": {
+          "body-lg": ["Plus Jakarta Sans"],
+          "headline-xl-mobile": ["Plus Jakarta Sans"],
+          "button-text": ["Plus Jakarta Sans"],
+          "data-metric": ["Plus Jakarta Sans"],
+          "label-sm": ["Plus Jakarta Sans"],
+          "label-md": ["Plus Jakarta Sans"],
+          "body-md": ["Plus Jakarta Sans"],
+          "headline-lg": ["Plus Jakarta Sans"],
+          "headline-md": ["Plus Jakarta Sans"],
+          "headline-xl": ["Plus Jakarta Sans"],
+          "headline-sm": ["Plus Jakarta Sans"],
+          "body-sm": ["Plus Jakarta Sans"]
+        },
+        "fontSize": {
+          "body-lg": ["1rem", {"lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400"}],
+          "headline-xl-mobile": ["1.625rem", {"lineHeight": "2.125rem", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+          "button-text": ["0.875rem", {"lineHeight": "1.25rem", "letterSpacing": "0.005em", "fontWeight": "400"}],
+          "data-metric": ["1.75rem", {"lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+          "label-sm": ["0.75rem", {"lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600"}],
+          "label-md": ["0.875rem", {"lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "500"}],
+          "body-md": ["0.875rem", {"lineHeight": "1.375rem", "letterSpacing": "0em", "fontWeight": "400"}],
+          "headline-lg": ["1.5rem", {"lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+          "headline-md": ["1.25rem", {"lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+          "headline-xl": ["2rem", {"lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+          "headline-sm": ["1.125rem", {"lineHeight": "1.5rem", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+          "body-sm": ["0.75rem", {"lineHeight": "1.125rem", "letterSpacing": "0em", "fontWeight": "400"}]
+        }
+      }
+    }
+  }</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-screen w-64 bg-surface-container-lowest z-50 flex flex-col justify-between overflow-y-auto shadow-[rgba(145,158,171,0.3)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_12px_24px_-4px]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-sm"><div class="w-9 h-9 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-headline-sm font-bold shadow-[0_2px_8px_rgba(65,105,232,0.3)]">VP</div><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm font-bold text-on-surface tracking-tight leading-tight">Vendor Portal</span><span class="font-label-sm text-label-sm text-on-surface-variant">Institutional Admin</span></div></div><nav class="flex flex-col px-space-md py-space-sm space-y-1" data-active-classes="bg-surface-container-high text-primary font-semibold"><div class="px-space-sm pt-space-sm pb-1"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">HOME</span></div><a class="flex items-center h-10 px-space-md rounded-[7px] text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="dashboard" href="#">Dashboard</a><div class="px-space-sm pt-space-md pb-1"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">TENANTS</span></div><a class="flex items-center h-10 px-space-md rounded-[7px] text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="tenants" href="#">Tenants</a><a class="flex items-center h-10 px-space-md rounded-[7px] text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="licences-and-quota" href="#">Licences &amp; Quota</a><div class="px-space-sm pt-space-md pb-1"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">CONTENT</span></div><a class="flex items-center h-10 px-space-md rounded-[7px] text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="question-bank" href="#">Question Bank</a><a aria-current="page" class="flex items-center h-10 px-space-md rounded-[7px] transition-all bg-surface-container-high text-primary font-semibold" data-path="exam-blueprints" href="#">Exam Blueprints</a><div class="px-space-sm pt-space-md pb-1"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">SETTINGS</span></div><a class="flex items-center h-10 px-space-md rounded-[7px] text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="platform-users" href="#">Platform Users</a><a class="flex items-center h-10 px-space-md rounded-[7px] text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="settings" href="#">Settings</a></nav></div><div class="p-space-md"><div class="p-space-md rounded-[7px] bg-surface-container-low shadow-[rgba(145,158,171,0.2)_0px_0px_2px_0px]"><div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-tertiary shrink-0 animate-pulse"></span><span class="font-label-sm text-label-sm font-semibold text-tertiary">All systems operational</span></div><p class="mt-1 text-[11px] leading-4 text-on-surface-variant font-body-sm">Updated 2 min ago</p></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest z-40 flex items-center justify-between px-space-lg shadow-[rgba(145,158,171,0.3)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_4px_12px_-4px]"><div class="flex items-center text-body-sm font-body-sm text-on-surface-variant"><a class="hover:text-primary transition-colors" href="#">Platform</a><span class="mx-2 text-outline-variant">/</span><span class="font-semibold text-on-surface">Overview</span></div><div class="flex items-center gap-space-md"><div class="relative w-72"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full h-10 pl-9 pr-3 text-body-sm font-body-sm bg-surface-container-low rounded-[7px] border border-outline focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all text-on-surface placeholder:text-outline" placeholder="Search tenants, exams, users..." type="text"/></div><button aria-label="Notifications" class="relative w-10 h-10 rounded-[7px] flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full ring-2 ring-surface-container-lowest"></span></button><div class="h-6 w-px bg-outline-variant"></div><div class="flex items-center gap-space-sm pl-1"><div class="w-9 h-9 rounded-full bg-surface-container-high text-primary font-headline-sm font-bold flex items-center justify-center">AD</div><div class="text-left hidden sm:block"><div class="font-label-md text-label-md font-semibold text-on-surface leading-tight">Admin User</div><div class="font-body-sm text-body-sm text-on-surface-variant leading-none">Super Administrator</div></div></div></div></header><main class="relative pt-16 bg-background min-h-screen"><div class="max-w-[1440px] mx-auto p-space-xl"><div class="flex flex-col w-full">
+<!-- Top Bar: Breadcrumb, Page Title & Dual Actions -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md mb-space-lg">
+<div class="flex flex-col space-y-1">
+<nav class="flex items-center space-x-2 text-label-sm font-label-sm text-on-surface-variant">
+<span class="hover:text-primary transition-colors cursor-pointer">Content</span>
+<span class="text-outline-variant">/</span>
+<span class="hover:text-primary transition-colors cursor-pointer">Exam Blueprints</span>
+<span class="text-outline-variant">/</span>
+<span class="text-on-surface font-semibold">PTE Academic Standard</span>
+</nav>
+<div class="flex items-center gap-space-sm pt-1">
+<h1 class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">Blueprint — PTE Academic Standard</h1>
+<span class="h-6 px-2.5 rounded-full font-label-sm text-label-sm inline-flex items-center font-semibold bg-surface-container-high text-primary">v2.4 Draft</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Cấu hình cấu trúc đề thi, số lượng câu hỏi và quy tắc rút đề tự động theo chuẩn Pearson PTE Official.</p>
+</div>
+<!-- Action Group -->
+<div class="flex items-center gap-space-sm shrink-0 self-start md:self-auto">
+<button class="h-10 px-space-md rounded-[7px] bg-[#ECF2FF] hover:bg-[#DDE7FF] text-[#4169E8] font-button-text text-button-text font-medium transition-colors flex items-center gap-1.5 shadow-[rgba(145,158,171,0.15)_0px_2px_4px_0px]" type="button">
+<span class="material-symbols-outlined text-[18px]">bookmark_border</span>
+        Lưu nháp
+      </button>
+<button class="h-10 px-space-md rounded-[7px] bg-[#4169E8] hover:bg-[#3359D2] text-on-primary font-button-text text-button-text font-medium transition-colors flex items-center gap-1.5 shadow-[rgba(65,105,232,0.3)_0px_4px_12px_0px]" type="button">
+<span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+        Xuất bản blueprint
+      </button>
+</div>
+</div>
+<!-- Two-Pane Grid: Left Span 8 (~66%), Right Span 4 (~33%) -->
+<div class="grid grid-cols-12 gap-gutter items-start">
+<!-- Left Pane: Ordered Parts & Configurable Task Slots -->
+<div class="col-span-12 lg:col-span-8 flex flex-col space-y-space-md">
+<!-- Phần 1: Speaking & Writing -->
+<section class="bg-surface-container-lowest rounded-[7px] p-space-lg shadow-[rgba(145,158,171,0.30)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_12px_24px_-4px] transition-all">
+<!-- Section Header -->
+<div class="flex items-center justify-between pb-space-md border-b-0 cursor-pointer" onclick="toggleSection('part-1-tasks', 'chevron-1')">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-[7px] bg-[#ECF2FF] text-[#4169E8] flex items-center justify-center font-headline-sm font-bold shadow-[rgba(65,105,232,0.15)_0px_2px_6px_0px]">
+              01
+            </div>
+<div>
+<div class="flex items-center gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Phần 1: Speaking &amp; Writing</h2>
+<span class="h-6 px-2.5 rounded-full font-label-sm text-label-sm inline-flex items-center font-semibold bg-[#E8F7FF] text-[#0E729F]">Active Proctoring</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Thời lượng: 54–67 phút • 7 dạng câu hỏi • Tiêu chuẩn âm thanh AI scoring</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">28 CÂU</span>
+<button aria-label="Toggle section" class="w-8 h-8 rounded-[7px] hover:bg-surface-container-low flex items-center justify-center text-on-surface-variant transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px] transform transition-transform" id="chevron-1">expand_less</span>
+</button>
+</div>
+</div>
+<!-- Task Rows Container -->
+<div class="mt-space-md flex flex-col space-y-2" id="part-1-tasks">
+<!-- Task Item 1: Read Aloud -->
+<div class="p-3 bg-surface-container-low/60 hover:bg-surface-container-low rounded-[7px] flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 transition-colors">
+<div class="flex items-center gap-2.5 min-w-[200px]">
+<span class="material-symbols-outlined text-outline cursor-grab hover:text-on-surface text-[18px]">drag_indicator</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Read Aloud (RA)</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Speaking • Nghe và đọc to</span>
+</div>
+</div>
+<!-- Configuration Controls -->
+<div class="flex items-center flex-wrap gap-2.5 ml-auto">
+<!-- Stepper -->
+<div class="flex items-center bg-surface-container-lowest rounded-[7px] px-1 py-0.5 shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px]">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, -1)" type="button">-</button>
+<span class="font-label-md text-label-md font-bold px-2 text-on-surface item-count">6</span>
+<span class="font-label-sm text-label-sm text-outline-variant pr-1">câu</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, 1)" type="button">+</button>
+</div>
+<!-- Time Inputs -->
+<div class="flex items-center gap-1.5 text-body-sm text-on-surface-variant">
+<div class="bg-surface-container-lowest px-2 py-1 rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase">Prep</span>
+<input class="w-9 font-label-sm text-label-sm text-right bg-transparent text-on-surface focus:outline-none focus:text-primary" type="text" value="40s"/>
+</div>
+<div class="bg-surface-container-lowest px-2 py-1 rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase">Rec</span>
+<input class="w-9 font-label-sm text-label-sm text-right bg-transparent text-on-surface focus:outline-none focus:text-primary" type="text" value="40s"/>
+</div>
+</div>
+<!-- Selection Rule Select -->
+<div class="relative">
+<select class="h-8 pl-2 pr-7 bg-surface-container-lowest text-body-sm font-body-sm text-on-surface rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] appearance-none focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option selected="">Ngẫu nhiên từ kho</option>
+<option>Theo phân bổ độ khó</option>
+<option>Câu cố định (Bộ chuẩn)</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Task Item 2: Repeat Sentence -->
+<div class="p-3 bg-surface-container-low/60 hover:bg-surface-container-low rounded-[7px] flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 transition-colors">
+<div class="flex items-center gap-2.5 min-w-[200px]">
+<span class="material-symbols-outlined text-outline cursor-grab hover:text-on-surface text-[18px]">drag_indicator</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Repeat Sentence (RS)</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Speaking • Lặp lại câu nghe được</span>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-2.5 ml-auto">
+<div class="flex items-center bg-surface-container-lowest rounded-[7px] px-1 py-0.5 shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px]">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, -1)" type="button">-</button>
+<span class="font-label-md text-label-md font-bold px-2 text-on-surface item-count">10</span>
+<span class="font-label-sm text-label-sm text-outline-variant pr-1">câu</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, 1)" type="button">+</button>
+</div>
+<div class="flex items-center gap-1.5 text-body-sm text-on-surface-variant">
+<div class="bg-surface-container-lowest px-2 py-1 rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase">Prep</span>
+<input class="w-9 font-label-sm text-label-sm text-right bg-transparent text-on-surface focus:outline-none focus:text-primary" type="text" value="3s"/>
+</div>
+<div class="bg-surface-container-lowest px-2 py-1 rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase">Rec</span>
+<input class="w-9 font-label-sm text-label-sm text-right bg-transparent text-on-surface focus:outline-none focus:text-primary" type="text" value="15s"/>
+</div>
+</div>
+<div class="relative">
+<select class="h-8 pl-2 pr-7 bg-surface-container-lowest text-body-sm font-body-sm text-on-surface rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] appearance-none focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option>Ngẫu nhiên từ kho</option>
+<option selected="">Theo phân bổ độ khó</option>
+<option>Câu cố định (Bộ chuẩn)</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Task Item 3: Describe Image -->
+<div class="p-3 bg-surface-container-low/60 hover:bg-surface-container-low rounded-[7px] flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 transition-colors">
+<div class="flex items-center gap-2.5 min-w-[200px]">
+<span class="material-symbols-outlined text-outline cursor-grab hover:text-on-surface text-[18px]">drag_indicator</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Describe Image (DI)</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Speaking • Mô tả biểu đồ, hình ảnh</span>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-2.5 ml-auto">
+<div class="flex items-center bg-surface-container-lowest rounded-[7px] px-1 py-0.5 shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px]">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, -1)" type="button">-</button>
+<span class="font-label-md text-label-md font-bold px-2 text-on-surface item-count">4</span>
+<span class="font-label-sm text-label-sm text-outline-variant pr-1">câu</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, 1)" type="button">+</button>
+</div>
+<div class="flex items-center gap-1.5 text-body-sm text-on-surface-variant">
+<div class="bg-surface-container-lowest px-2 py-1 rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase">Prep</span>
+<input class="w-9 font-label-sm text-label-sm text-right bg-transparent text-on-surface focus:outline-none focus:text-primary" type="text" value="25s"/>
+</div>
+<div class="bg-surface-container-lowest px-2 py-1 rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase">Rec</span>
+<input class="w-9 font-label-sm text-label-sm text-right bg-transparent text-on-surface focus:outline-none focus:text-primary" type="text" value="40s"/>
+</div>
+</div>
+<div class="relative">
+<select class="h-8 pl-2 pr-7 bg-surface-container-lowest text-body-sm font-body-sm text-on-surface rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] appearance-none focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option selected="">Ngẫu nhiên từ kho</option>
+<option>Theo phân bổ độ khó</option>
+<option>Câu cố định (Bộ chuẩn)</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Task Item 4: Re-tell Lecture -->
+<div class="p-3 bg-surface-container-low/60 hover:bg-surface-container-low rounded-[7px] flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 transition-colors">
+<div class="flex items-center gap-2.5 min-w-[200px]">
+<span class="material-symbols-outlined text-outline cursor-grab hover:text-on-surface text-[18px]">drag_indicator</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Re-tell Lecture (RL)</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Speaking • Thuật lại bài giảng audio</span>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-2.5 ml-auto">
+<div class="flex items-center bg-surface-container-lowest rounded-[7px] px-1 py-0.5 shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px]">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, -1)" type="button">-</button>
+<span class="font-label-md text-label-md font-bold px-2 text-on-surface item-count">2</span>
+<span class="font-label-sm text-label-sm text-outline-variant pr-1">câu</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, 1)" type="button">+</button>
+</div>
+<div class="flex items-center gap-1.5 text-body-sm text-on-surface-variant">
+<div class="bg-surface-container-lowest px-2 py-1 rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase">Prep</span>
+<input class="w-9 font-label-sm text-label-sm text-right bg-transparent text-on-surface focus:outline-none focus:text-primary" type="text" value="10s"/>
+</div>
+<div class="bg-surface-container-lowest px-2 py-1 rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase">Rec</span>
+<input class="w-9 font-label-sm text-label-sm text-right bg-transparent text-on-surface focus:outline-none focus:text-primary" type="text" value="40s"/>
+</div>
+</div>
+<div class="relative">
+<select class="h-8 pl-2 pr-7 bg-surface-container-lowest text-body-sm font-body-sm text-on-surface rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] appearance-none focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option selected="">Ngẫu nhiên từ kho</option>
+<option>Theo phân bổ độ khó</option>
+<option>Câu cố định (Bộ chuẩn)</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Task Item 5: Answer Short Question -->
+<div class="p-3 bg-surface-container-low/60 hover:bg-surface-container-low rounded-[7px] flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 transition-colors">
+<div class="flex items-center gap-2.5 min-w-[200px]">
+<span class="material-symbols-outlined text-outline cursor-grab hover:text-on-surface text-[18px]">drag_indicator</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Answer Short Question (ASQ)</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Speaking • Trả lời câu hỏi ngắn gọn</span>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-2.5 ml-auto">
+<div class="flex items-center bg-surface-container-lowest rounded-[7px] px-1 py-0.5 shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px]">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, -1)" type="button">-</button>
+<span class="font-label-md text-label-md font-bold px-2 text-on-surface item-count">5</span>
+<span class="font-label-sm text-label-sm text-outline-variant pr-1">câu</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, 1)" type="button">+</button>
+</div>
+<div class="flex items-center gap-1.5 text-body-sm text-on-surface-variant">
+<div class="bg-surface-container-lowest px-2 py-1 rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase">Prep</span>
+<input class="w-9 font-label-sm text-label-sm text-right bg-transparent text-on-surface focus:outline-none focus:text-primary" type="text" value="3s"/>
+</div>
+<div class="bg-surface-container-lowest px-2 py-1 rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase">Rec</span>
+<input class="w-9 font-label-sm text-label-sm text-right bg-transparent text-on-surface focus:outline-none focus:text-primary" type="text" value="10s"/>
+</div>
+</div>
+<div class="relative">
+<select class="h-8 pl-2 pr-7 bg-surface-container-lowest text-body-sm font-body-sm text-on-surface rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] appearance-none focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option selected="">Ngẫu nhiên từ kho</option>
+<option>Theo phân bổ độ khó</option>
+<option>Câu cố định (Bộ chuẩn)</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Task Item 6: Summarize Written Text -->
+<div class="p-3 bg-surface-container-low/60 hover:bg-surface-container-low rounded-[7px] flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 transition-colors">
+<div class="flex items-center gap-2.5 min-w-[200px]">
+<span class="material-symbols-outlined text-outline cursor-grab hover:text-on-surface text-[18px]">drag_indicator</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Summarize Written Text (SWT)</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Writing • Tóm tắt văn bản 1 câu</span>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-2.5 ml-auto">
+<div class="flex items-center bg-surface-container-lowest rounded-[7px] px-1 py-0.5 shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px]">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, -1)" type="button">-</button>
+<span class="font-label-md text-label-md font-bold px-2 text-on-surface item-count">1</span>
+<span class="font-label-sm text-label-sm text-outline-variant pr-1">câu</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, 1)" type="button">+</button>
+</div>
+<div class="flex items-center gap-1.5 text-body-sm text-on-surface-variant">
+<div class="bg-surface-container-lowest px-2 py-1 rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase">Time</span>
+<input class="w-9 font-label-sm text-label-sm text-right bg-transparent text-on-surface focus:outline-none focus:text-primary" type="text" value="10m"/>
+</div>
+</div>
+<div class="relative">
+<select class="h-8 pl-2 pr-7 bg-surface-container-lowest text-body-sm font-body-sm text-on-surface rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] appearance-none focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option selected="">Ngẫu nhiên từ kho</option>
+<option>Theo phân bổ độ khó</option>
+<option>Câu cố định (Bộ chuẩn)</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Task Item 7: Write Essay -->
+<div class="p-3 bg-surface-container-low/60 hover:bg-surface-container-low rounded-[7px] flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 transition-colors">
+<div class="flex items-center gap-2.5 min-w-[200px]">
+<span class="material-symbols-outlined text-outline cursor-grab hover:text-on-surface text-[18px]">drag_indicator</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Write Essay (WE)</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Writing • Viết luận học thuật 200–300 từ</span>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-2.5 ml-auto">
+<div class="flex items-center bg-surface-container-lowest rounded-[7px] px-1 py-0.5 shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px]">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, -1)" type="button">-</button>
+<span class="font-label-md text-label-md font-bold px-2 text-on-surface item-count">1</span>
+<span class="font-label-sm text-label-sm text-outline-variant pr-1">câu</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, 1)" type="button">+</button>
+</div>
+<div class="flex items-center gap-1.5 text-body-sm text-on-surface-variant">
+<div class="bg-surface-container-lowest px-2 py-1 rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase">Time</span>
+<input class="w-9 font-label-sm text-label-sm text-right bg-transparent text-on-surface focus:outline-none focus:text-primary" type="text" value="20m"/>
+</div>
+</div>
+<div class="relative">
+<select class="h-8 pl-2 pr-7 bg-surface-container-lowest text-body-sm font-body-sm text-on-surface rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] appearance-none focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option>Ngẫu nhiên từ kho</option>
+<option>Theo phân bổ độ khó</option>
+<option selected="">Câu cố định (Bộ chuẩn)</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Phần 2: Reading -->
+<section class="bg-surface-container-lowest rounded-[7px] p-space-lg shadow-[rgba(145,158,171,0.30)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_12px_24px_-4px] transition-all">
+<div class="flex items-center justify-between pb-space-md cursor-pointer" onclick="toggleSection('part-2-tasks', 'chevron-2')">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-[7px] bg-[#FDEDE8] text-[#eb6834] flex items-center justify-center font-headline-sm font-bold shadow-[rgba(235,104,52,0.15)_0px_2px_6px_0px]">
+              02
+            </div>
+<div>
+<div class="flex items-center gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Phần 2: Reading</h2>
+<span class="h-6 px-2.5 rounded-full font-label-sm text-label-sm inline-flex items-center font-semibold bg-[#E6FFFA] text-[#088068]">Standard Paced</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Thời lượng: 29–30 phút • 5 dạng câu hỏi • Single continuous timer</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">14 CÂU</span>
+<button aria-label="Toggle section" class="w-8 h-8 rounded-[7px] hover:bg-surface-container-low flex items-center justify-center text-on-surface-variant transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px] transform transition-transform" id="chevron-2">expand_less</span>
+</button>
+</div>
+</div>
+<div class="mt-space-md flex flex-col space-y-2" id="part-2-tasks">
+<!-- Fill in the Blanks (R&W) -->
+<div class="p-3 bg-surface-container-low/60 hover:bg-surface-container-low rounded-[7px] flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 transition-colors">
+<div class="flex items-center gap-2.5 min-w-[200px]">
+<span class="material-symbols-outlined text-outline cursor-grab hover:text-on-surface text-[18px]">drag_indicator</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Fill in the Blanks (R&amp;W)</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Reading &amp; Writing • Dropdown cloze test</span>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-2.5 ml-auto">
+<div class="flex items-center bg-surface-container-lowest rounded-[7px] px-1 py-0.5 shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px]">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, -1)" type="button">-</button>
+<span class="font-label-md text-label-md font-bold px-2 text-on-surface item-count">5</span>
+<span class="font-label-sm text-label-sm text-outline-variant pr-1">câu</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, 1)" type="button">+</button>
+</div>
+<div class="relative">
+<select class="h-8 pl-2 pr-7 bg-surface-container-lowest text-body-sm font-body-sm text-on-surface rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] appearance-none focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option selected="">Ngẫu nhiên từ kho</option>
+<option>Theo phân bổ độ khó</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Multiple Choice (Multiple) -->
+<div class="p-3 bg-surface-container-low/60 hover:bg-surface-container-low rounded-[7px] flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 transition-colors">
+<div class="flex items-center gap-2.5 min-w-[200px]">
+<span class="material-symbols-outlined text-outline cursor-grab hover:text-on-surface text-[18px]">drag_indicator</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Multiple Choice (Multiple)</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Reading • Chọn nhiều đáp án</span>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-2.5 ml-auto">
+<div class="flex items-center bg-surface-container-lowest rounded-[7px] px-1 py-0.5 shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px]">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, -1)" type="button">-</button>
+<span class="font-label-md text-label-md font-bold px-2 text-on-surface item-count">2</span>
+<span class="font-label-sm text-label-sm text-outline-variant pr-1">câu</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, 1)" type="button">+</button>
+</div>
+<div class="relative">
+<select class="h-8 pl-2 pr-7 bg-surface-container-lowest text-body-sm font-body-sm text-on-surface rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] appearance-none focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option selected="">Ngẫu nhiên từ kho</option>
+<option>Theo phân bổ độ khó</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Re-order Paragraphs -->
+<div class="p-3 bg-surface-container-low/60 hover:bg-surface-container-low rounded-[7px] flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 transition-colors">
+<div class="flex items-center gap-2.5 min-w-[200px]">
+<span class="material-symbols-outlined text-outline cursor-grab hover:text-on-surface text-[18px]">drag_indicator</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Re-order Paragraphs</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Reading • Sắp xếp đoạn văn</span>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-2.5 ml-auto">
+<div class="flex items-center bg-surface-container-lowest rounded-[7px] px-1 py-0.5 shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px]">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, -1)" type="button">-</button>
+<span class="font-label-md text-label-md font-bold px-2 text-on-surface item-count">2</span>
+<span class="font-label-sm text-label-sm text-outline-variant pr-1">câu</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, 1)" type="button">+</button>
+</div>
+<div class="relative">
+<select class="h-8 pl-2 pr-7 bg-surface-container-lowest text-body-sm font-body-sm text-on-surface rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] appearance-none focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option selected="">Ngẫu nhiên từ kho</option>
+<option>Theo phân bổ độ khó</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Fill in the Blanks (Reading) -->
+<div class="p-3 bg-surface-container-low/60 hover:bg-surface-container-low rounded-[7px] flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 transition-colors">
+<div class="flex items-center gap-2.5 min-w-[200px]">
+<span class="material-symbols-outlined text-outline cursor-grab hover:text-on-surface text-[18px]">drag_indicator</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Fill in the Blanks (Reading)</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Reading • Drag and drop ô trống</span>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-2.5 ml-auto">
+<div class="flex items-center bg-surface-container-lowest rounded-[7px] px-1 py-0.5 shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px]">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, -1)" type="button">-</button>
+<span class="font-label-md text-label-md font-bold px-2 text-on-surface item-count">4</span>
+<span class="font-label-sm text-label-sm text-outline-variant pr-1">câu</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, 1)" type="button">+</button>
+</div>
+<div class="relative">
+<select class="h-8 pl-2 pr-7 bg-surface-container-lowest text-body-sm font-body-sm text-on-surface rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] appearance-none focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option selected="">Ngẫu nhiên từ kho</option>
+<option>Theo phân bổ độ khó</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Multiple Choice (Single) -->
+<div class="p-3 bg-surface-container-low/60 hover:bg-surface-container-low rounded-[7px] flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 transition-colors">
+<div class="flex items-center gap-2.5 min-w-[200px]">
+<span class="material-symbols-outlined text-outline cursor-grab hover:text-on-surface text-[18px]">drag_indicator</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Multiple Choice (Single)</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Reading • Chọn một đáp án đúng</span>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-2.5 ml-auto">
+<div class="flex items-center bg-surface-container-lowest rounded-[7px] px-1 py-0.5 shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px]">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, -1)" type="button">-</button>
+<span class="font-label-md text-label-md font-bold px-2 text-on-surface item-count">1</span>
+<span class="font-label-sm text-label-sm text-outline-variant pr-1">câu</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, 1)" type="button">+</button>
+</div>
+<div class="relative">
+<select class="h-8 pl-2 pr-7 bg-surface-container-lowest text-body-sm font-body-sm text-on-surface rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] appearance-none focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option selected="">Ngẫu nhiên từ kho</option>
+<option>Theo phân bổ độ khó</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Phần 3: Listening -->
+<section class="bg-surface-container-lowest rounded-[7px] p-space-lg shadow-[rgba(145,158,171,0.30)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_12px_24px_-4px] transition-all">
+<div class="flex items-center justify-between pb-space-md cursor-pointer" onclick="toggleSection('part-3-tasks', 'chevron-3')">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-[7px] bg-[#E6FFFA] text-[#1baf7a] flex items-center justify-center font-headline-sm font-bold shadow-[rgba(27,175,122,0.15)_0px_2px_6px_0px]">
+              03
+            </div>
+<div>
+<div class="flex items-center gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Phần 3: Listening</h2>
+<span class="h-6 px-2.5 rounded-full font-label-sm text-label-sm inline-flex items-center font-semibold bg-[#E8F7FF] text-[#0E729F]">Audio Sync</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Thời lượng: 30–43 phút • 8 dạng câu hỏi • Audio một lần phát</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">10 CÂU</span>
+<button aria-label="Toggle section" class="w-8 h-8 rounded-[7px] hover:bg-surface-container-low flex items-center justify-center text-on-surface-variant transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px] transform transition-transform" id="chevron-3">expand_less</span>
+</button>
+</div>
+</div>
+<div class="mt-space-md flex flex-col space-y-2" id="part-3-tasks">
+<!-- Summarize Spoken Text -->
+<div class="p-3 bg-surface-container-low/60 hover:bg-surface-container-low rounded-[7px] flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 transition-colors">
+<div class="flex items-center gap-2.5 min-w-[200px]">
+<span class="material-symbols-outlined text-outline cursor-grab hover:text-on-surface text-[18px]">drag_indicator</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Summarize Spoken Text (SST)</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Listening • Tóm tắt đoạn nói 50–70 từ</span>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-2.5 ml-auto">
+<div class="flex items-center bg-surface-container-lowest rounded-[7px] px-1 py-0.5 shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px]">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, -1)" type="button">-</button>
+<span class="font-label-md text-label-md font-bold px-2 text-on-surface item-count">1</span>
+<span class="font-label-sm text-label-sm text-outline-variant pr-1">câu</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, 1)" type="button">+</button>
+</div>
+<div class="bg-surface-container-lowest px-2 py-1 rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase">Time</span>
+<input class="w-9 font-label-sm text-label-sm text-right bg-transparent text-on-surface focus:outline-none focus:text-primary" type="text" value="10m"/>
+</div>
+<div class="relative">
+<select class="h-8 pl-2 pr-7 bg-surface-container-lowest text-body-sm font-body-sm text-on-surface rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] appearance-none focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option selected="">Ngẫu nhiên từ kho</option>
+<option>Theo phân bổ độ khó</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Multiple Choice (Multiple) -->
+<div class="p-3 bg-surface-container-low/60 hover:bg-surface-container-low rounded-[7px] flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 transition-colors">
+<div class="flex items-center gap-2.5 min-w-[200px]">
+<span class="material-symbols-outlined text-outline cursor-grab hover:text-on-surface text-[18px]">drag_indicator</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Multiple Choice, Multiple Answers</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Listening • Nghe trắc nghiệm nhiều đáp án</span>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-2.5 ml-auto">
+<div class="flex items-center bg-surface-container-lowest rounded-[7px] px-1 py-0.5 shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px]">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, -1)" type="button">-</button>
+<span class="font-label-md text-label-md font-bold px-2 text-on-surface item-count">1</span>
+<span class="font-label-sm text-label-sm text-outline-variant pr-1">câu</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, 1)" type="button">+</button>
+</div>
+<div class="relative">
+<select class="h-8 pl-2 pr-7 bg-surface-container-lowest text-body-sm font-body-sm text-on-surface rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] appearance-none focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option selected="">Ngẫu nhiên từ kho</option>
+<option>Theo phân bổ độ khó</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Fill in the Blanks (Listening) -->
+<div class="p-3 bg-surface-container-low/60 hover:bg-surface-container-low rounded-[7px] flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 transition-colors">
+<div class="flex items-center gap-2.5 min-w-[200px]">
+<span class="material-symbols-outlined text-outline cursor-grab hover:text-on-surface text-[18px]">drag_indicator</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Fill in the Blanks (FIB-L)</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Listening • Nghe và gõ từ còn thiếu</span>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-2.5 ml-auto">
+<div class="flex items-center bg-surface-container-lowest rounded-[7px] px-1 py-0.5 shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px]">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, -1)" type="button">-</button>
+<span class="font-label-md text-label-md font-bold px-2 text-on-surface item-count">2</span>
+<span class="font-label-sm text-label-sm text-outline-variant pr-1">câu</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, 1)" type="button">+</button>
+</div>
+<div class="relative">
+<select class="h-8 pl-2 pr-7 bg-surface-container-lowest text-body-sm font-body-sm text-on-surface rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] appearance-none focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option selected="">Ngẫu nhiên từ kho</option>
+<option>Theo phân bổ độ khó</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Highlight Correct Summary -->
+<div class="p-3 bg-surface-container-low/60 hover:bg-surface-container-low rounded-[7px] flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 transition-colors">
+<div class="flex items-center gap-2.5 min-w-[200px]">
+<span class="material-symbols-outlined text-outline cursor-grab hover:text-on-surface text-[18px]">drag_indicator</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Highlight Correct Summary (HCS)</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Listening • Chọn tóm tắt chuẩn xác</span>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-2.5 ml-auto">
+<div class="flex items-center bg-surface-container-lowest rounded-[7px] px-1 py-0.5 shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px]">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, -1)" type="button">-</button>
+<span class="font-label-md text-label-md font-bold px-2 text-on-surface item-count">2</span>
+<span class="font-label-sm text-label-sm text-outline-variant pr-1">câu</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, 1)" type="button">+</button>
+</div>
+<div class="relative">
+<select class="h-8 pl-2 pr-7 bg-surface-container-lowest text-body-sm font-body-sm text-on-surface rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] appearance-none focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option selected="">Ngẫu nhiên từ kho</option>
+<option>Theo phân bổ độ khó</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Write from Dictation -->
+<div class="p-3 bg-surface-container-low/60 hover:bg-surface-container-low rounded-[7px] flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 transition-colors">
+<div class="flex items-center gap-2.5 min-w-[200px]">
+<span class="material-symbols-outlined text-outline cursor-grab hover:text-on-surface text-[18px]">drag_indicator</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Write From Dictation (WFD)</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Listening • Nghe và chép lại câu</span>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-2.5 ml-auto">
+<div class="flex items-center bg-surface-container-lowest rounded-[7px] px-1 py-0.5 shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px]">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, -1)" type="button">-</button>
+<span class="font-label-md text-label-md font-bold px-2 text-on-surface item-count">4</span>
+<span class="font-label-sm text-label-sm text-outline-variant pr-1">câu</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary rounded" onclick="stepCount(this, 1)" type="button">+</button>
+</div>
+<div class="relative">
+<select class="h-8 pl-2 pr-7 bg-surface-container-lowest text-body-sm font-body-sm text-on-surface rounded-[7px] shadow-[rgba(145,158,171,0.2)_0px_1px_3px_0px] appearance-none focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option selected="">Ngẫu nhiên từ kho</option>
+<option>Theo phân bổ độ khó</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Pane: Summary & Validation (Sticky, Span 4) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col space-y-space-md lg:sticky lg:top-20">
+<!-- Tổng quan Blueprint Card -->
+<div class="bg-surface-container-lowest rounded-[7px] p-space-lg shadow-[rgba(145,158,171,0.30)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_12px_24px_-4px]">
+<div class="flex items-center justify-between pb-space-sm">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Tổng quan Blueprint</h3>
+<span class="material-symbols-outlined text-outline text-[20px]">tune</span>
+</div>
+<!-- Metric Callouts -->
+<div class="grid grid-cols-2 gap-space-md mt-space-sm pt-space-xs">
+<div class="p-3.5 rounded-[7px] bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block">Tổng câu hỏi</span>
+<div class="flex items-baseline gap-1.5 mt-1">
+<span class="font-data-metric text-data-metric text-on-surface [font-feature-settings:'tnum']">52</span>
+<span class="font-label-md text-label-md text-on-surface-variant">câu</span>
+</div>
+<span class="font-body-sm text-body-sm text-tertiary flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+              Đầy đủ 20 dạng bài
+            </span>
+</div>
+<div class="p-3.5 rounded-[7px] bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block">Thời lượng dự kiến</span>
+<div class="flex items-baseline gap-1.5 mt-1">
+<span class="font-data-metric text-data-metric text-on-surface [font-feature-settings:'tnum']">118</span>
+<span class="font-label-md text-label-md text-on-surface-variant">phút</span>
+</div>
+<span class="font-body-sm text-body-sm text-tertiary flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+              Chuẩn PTE (115-120m)
+            </span>
+</div>
+</div>
+<!-- Duration Breakdown Horizontal Stacked Bar -->
+<div class="mt-space-lg">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Phân bổ thời lượng theo kỹ năng</span>
+<span class="font-label-sm text-label-sm text-outline [font-feature-settings:'tnum']">118m total</span>
+</div>
+<!-- Stacked Bar (49.1% Speaking & Writing, 25.4% Reading, 25.4% Listening) -->
+<div class="w-full h-3 rounded-full bg-surface-container flex overflow-hidden p-0.5 gap-0.5">
+<div class="h-full rounded-full bg-[#2a78d6] transition-all hover:opacity-90" style="width: 49.1%;" title="Speaking &amp; Writing: 58m"></div>
+<div class="h-full rounded-full bg-[#eb6834] transition-all hover:opacity-90" style="width: 25.4%;" title="Reading: 30m"></div>
+<div class="h-full rounded-full bg-[#1baf7a] transition-all hover:opacity-90" style="width: 25.4%;" title="Listening: 30m"></div>
+</div>
+<!-- Direct Labels Beneath Stacked Bar -->
+<div class="grid grid-cols-3 gap-2 mt-3 pt-1">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#2a78d6] shrink-0"></span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface truncate">Speak &amp; Write</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant pl-4 [font-feature-settings:'tnum']">58 phút (49%)</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#eb6834] shrink-0"></span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface truncate">Reading</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant pl-4 [font-feature-settings:'tnum']">30 phút (25%)</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#1baf7a] shrink-0"></span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface truncate">Listening</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant pl-4 [font-feature-settings:'tnum']">30 phút (25%)</span>
+</div>
+</div>
+</div>
+<!-- Bank Availability Progress -->
+<div class="mt-space-lg pt-space-md bg-surface-container-low/50 -mx-space-lg px-space-lg pb-space-sm rounded-b-[7px]">
+<div class="flex items-center justify-between text-body-sm">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Tỉ lệ câu hỏi sẵn sàng trong kho</span>
+<span class="font-label-sm text-label-sm font-bold text-tertiary [font-feature-settings:'tnum']">1,420 / 52 yêu cầu (27x)</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-variant mt-2 overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 100%;"></div>
+</div>
+</div>
+</div>
+<!-- Kiểm tra hợp lệ (Validation) Card -->
+<div class="bg-surface-container-lowest rounded-[7px] p-space-lg shadow-[rgba(145,158,171,0.30)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_12px_24px_-4px]">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary animate-pulse"></span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Kiểm tra hợp lệ</h3>
+</div>
+<span class="h-6 px-2.5 rounded-full font-label-sm text-label-sm inline-flex items-center font-semibold bg-[#E6FFFA] text-[#088068]">4/4 Đạt chuẩn</span>
+</div>
+<!-- Validation Rule Verification Rows -->
+<div class="mt-space-sm flex flex-col space-y-2.5">
+<!-- Verification Row 1 -->
+<div class="flex items-start justify-between p-2.5 rounded-[7px] bg-surface-container-low/70 hover:bg-surface-container-low transition-colors">
+<div class="flex items-start gap-2.5 pr-2">
+<div class="w-6 h-6 rounded-full bg-[#E6FFFA] text-[#088068] flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface leading-snug">Số câu Speaking &amp; Writing đúng chuẩn Pearson</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">28 câu cấu hình • Cho phép dung sai 0%</span>
+</div>
+</div>
+<span class="h-5 px-2 rounded-full font-label-sm text-label-sm font-semibold bg-[#E6FFFA] text-[#088068] shrink-0 inline-flex items-center">Đạt</span>
+</div>
+<!-- Verification Row 2 -->
+<div class="flex items-start justify-between p-2.5 rounded-[7px] bg-surface-container-low/70 hover:bg-surface-container-low transition-colors">
+<div class="flex items-start gap-2.5 pr-2">
+<div class="w-6 h-6 rounded-full bg-[#E6FFFA] text-[#088068] flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface leading-snug">Kho câu hỏi có đủ 100% câu đã xuất bản</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Toàn bộ 20/20 task type đã duyệt QC</span>
+</div>
+</div>
+<span class="h-5 px-2 rounded-full font-label-sm text-label-sm font-semibold bg-[#E6FFFA] text-[#088068] shrink-0 inline-flex items-center">Đạt</span>
+</div>
+<!-- Verification Row 3 -->
+<div class="flex items-start justify-between p-2.5 rounded-[7px] bg-surface-container-low/70 hover:bg-surface-container-low transition-colors">
+<div class="flex items-start gap-2.5 pr-2">
+<div class="w-6 h-6 rounded-full bg-[#E6FFFA] text-[#088068] flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface leading-snug">Tổng thời lượng dưới 120 phút</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Hiện tại: 118m (Giới hạn tối đa: 120m)</span>
+</div>
+</div>
+<span class="h-5 px-2 rounded-full font-label-sm text-label-sm font-semibold bg-[#E6FFFA] text-[#088068] shrink-0 inline-flex items-center">Đạt</span>
+</div>
+<!-- Verification Row 4 -->
+<div class="flex items-start justify-between p-2.5 rounded-[7px] bg-surface-container-low/70 hover:bg-surface-container-low transition-colors">
+<div class="flex items-start gap-2.5 pr-2">
+<div class="w-6 h-6 rounded-full bg-[#E6FFFA] text-[#088068] flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface leading-snug">Phân bổ độ khó đồng đều</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Mode: Level 3.2 (Khoảng cân bằng 3.0–3.5)</span>
+</div>
+</div>
+<span class="h-5 px-2 rounded-full font-label-sm text-label-sm font-semibold bg-[#E6FFFA] text-[#088068] shrink-0 inline-flex items-center">Đạt</span>
+</div>
+</div>
+<!-- Pro-tip info banner -->
+<div class="mt-space-md p-3 rounded-[7px] bg-[#ECF2FF] flex items-center gap-2.5 text-body-sm text-[#4169E8]">
+<span class="material-symbols-outlined text-[20px] shrink-0">info</span>
+<span>Blueprint này đã sẵn sàng gán vào các kỳ thi định kỳ hoặc tạo ca thi thử mock test.</span>
+</div>
+</div>
+</div>
+</div>
+<script>
+    function toggleSection(contentId, chevronId) {
+      const content = document.getElementById(contentId);
+      const chevron = document.getElementById(chevronId);
+      if (!content || !chevron) return;
+      
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        chevron.classList.remove('rotate-180');
+      } else {
+        content.classList.add('hidden');
+        chevron.classList.add('rotate-180');
+      }
+    }
+
+    function stepCount(btn, delta) {
+      const container = btn.parentElement;
+      const countEl = container.querySelector('.item-count');
+      if (!countEl) return;
+      let val = parseInt(countEl.textContent, 10) || 0;
+      val = Math.max(1, val + delta);
+      countEl.textContent = val;
+    }
+  </script>
+</div></div></main></div></body></html>

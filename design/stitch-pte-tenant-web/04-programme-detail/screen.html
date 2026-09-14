@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>PTE Assessment Platform</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-surface-variant":"#434654","surface-variant":"#d8e3fa","tertiary-container":"#466ae3","secondary":"#4f5f7a","on-primary":"#ffffff","tertiary":"#2850c9","on-error-container":"#93000a","surface-container-lowest":"#ffffff","on-tertiary":"#ffffff","surface-bright":"#f9f9ff","on-secondary":"#ffffff","secondary-fixed":"#d5e3ff","on-primary-fixed-variant":"#003ab2","on-secondary-fixed":"#0a1c33","on-tertiary-fixed":"#001551","surface-container-highest":"#d8e3fa","primary-fixed-dim":"#b6c4ff","on-primary-container":"#fbf9ff","on-tertiary-fixed-variant":"#0039b4","outline":"#747686","surface-dim":"#cfdaf2","error-container":"#ffdad6","on-primary-fixed":"#001550","primary-container":"#4169e8","surface-container":"#e7eeff","surface-container-low":"#f0f3ff","primary":"#204ece","surface":"#f9f9ff","secondary-fixed-dim":"#b7c7e6","inverse-surface":"#263143","error":"#ba1a1a","tertiary-fixed-dim":"#b7c4ff","tertiary-fixed":"#dce1ff","on-secondary-container":"#53637e","inverse-on-surface":"#ebf1ff","surface-tint":"#2653d2","on-secondary-fixed-variant":"#374761","surface-container-high":"#dee8ff","background":"#f9f9ff","inverse-primary":"#b6c4ff","on-background":"#111c2d","on-error":"#ffffff","primary-fixed":"#dce1ff","on-tertiary-container":"#fcf9ff","on-surface":"#111c2d","outline-variant":"#c4c5d6","secondary-container":"#d0e0ff"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{"space-lg":"1.5rem","space-xl":"1.875rem","gutter-mobile":"1rem","space-xs":"0.25rem",gutter:"1.5rem","margin-mobile":"1rem","space-sm":"0.5rem","space-md":"1rem","space-xxl":"3rem",margin:"1.875rem"},fontFamily:{"body-secondary":["Plus Jakarta Sans"],"button-label":["Plus Jakarta Sans"],"page-title-h4":["Plus Jakarta Sans"],"tabular-data":["Plus Jakarta Sans"],"display-h3":["Plus Jakarta Sans"],"display-h2":["Plus Jakarta Sans"],"caption-small":["Plus Jakarta Sans"],"subtitle-h6":["Plus Jakarta Sans"],"card-title-h5":["Plus Jakarta Sans"],"body-base":["Plus Jakarta Sans"],"display-h1":["Plus Jakarta Sans"],"display-h1-mobile":["Plus Jakarta Sans"]},fontSize:{"body-secondary":["14px",{lineHeight:"21px",letterSpacing:"0",fontWeight:"400"}],"button-label":["14px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"400"}],"page-title-h4":["21px",{lineHeight:"26px",letterSpacing:"-0.005em",fontWeight:"600"}],"tabular-data":["14px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"500"}],"display-h3":["24px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"display-h2":["30px",{lineHeight:"36px",letterSpacing:"-0.015em",fontWeight:"600"}],"caption-small":["12px",{lineHeight:"16px",letterSpacing:"0",fontWeight:"400"}],"subtitle-h6":["16px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"600"}],"card-title-h5":["18px",{lineHeight:"26px",letterSpacing:"0",fontWeight:"600"}],"body-base":["14px",{lineHeight:"21px",letterSpacing:"0",fontWeight:"400"}],"display-h1":["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"600"}],"display-h1-mobile":["28px",{lineHeight:"34px",letterSpacing:"-0.015em",fontWeight:"600"}]}}}};</script></head><body class="bg-[#F2F6FA] font-body-base text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-[270px] bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20)]"><div class="flex flex-col flex-1 overflow-y-auto px-4"><div class="h-[60px] flex items-center gap-3 px-2 mt-2"><div class="w-9 h-9 rounded-xl bg-primary-container flex items-center justify-center text-on-primary font-subtitle-h6 text-subtitle-h6 shadow-sm">P</div><div class="flex flex-col"><span class="font-subtitle-h6 text-subtitle-h6 text-on-surface leading-tight tracking-tight">PTE Institute</span><span class="font-caption-small text-caption-small text-secondary">Assessment Tenant</span></div></div><nav class="flex flex-col mt-2" data-active-classes="bg-primary-container text-on-primary font-medium rounded-xl shadow-[0px_4px_10px_rgba(65,105,232,0.25)]"><div class="mt-3 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Home</div><a aria-current="page" class="h-[45px] px-3 flex items-center gap-3 transition-all duration-150 bg-primary-container text-on-primary font-medium rounded-xl shadow-[0px_4px_10px_rgba(65,105,232,0.25)]" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Dashboard</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Learners</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="learners" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Learners</span></a><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="programmes" href="#"><span class="material-symbols-outlined text-[20px]">school</span><span>Programmes</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Delivery</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="exam-sessions" href="#"><span class="material-symbols-outlined text-[20px]">event_available</span><span>Exam sessions</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Assessment</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="scoring-review" href="#"><span class="material-symbols-outlined text-[20px]">fact_check</span><span>Scoring review</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Data</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="audit-log" href="#"><span class="material-symbols-outlined text-[20px]">history_edu</span><span>Audit log</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Settings</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="staff-and-roles" href="#"><span class="material-symbols-outlined text-[20px]">badge</span><span>Staff &amp; roles</span></a><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="platform-settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Settings</span></a></nav></div><div class="p-4 flex flex-col gap-3"><div class="bg-surface-container-low p-3.5 rounded-xl shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20)]"><div class="flex items-center justify-between mb-1.5"><span class="font-caption-small text-caption-small font-semibold text-on-surface">Licence Usage</span><span class="font-tabular-data text-tabular-data text-secondary">97%</span></div><div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden mb-2"><div class="bg-primary-container h-full rounded-full" style="width: 97.2%"></div></div><div class="flex items-center justify-between"><span class="font-caption-small text-caption-small text-secondary">486 / 500 learner seats</span><a class="font-caption-small text-caption-small text-primary font-semibold hover:underline" href="#">Request more seats</a></div></div><div class="flex items-center gap-3 px-2 py-2 rounded-xl bg-surface-container-lowest"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col min-w-0 flex-1"><span class="font-body-base text-body-base font-semibold text-on-surface truncate">Nguyễn Quản Trị</span><span class="font-caption-small text-caption-small text-secondary truncate">Host Admin</span></div><button class="text-secondary hover:text-on-surface"><span class="material-symbols-outlined text-[18px]">logout</span></button></div></div></aside><div class="pl-[270px]"><header class="fixed top-0 left-[270px] right-0 h-[70px] bg-surface-container-lowest shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-4"><button class="w-9 h-9 flex items-center justify-center rounded-xl text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">menu</span></button><div class="flex items-center gap-2 text-secondary font-body-base text-body-base"><span class="hover:text-on-surface cursor-pointer">Host</span><span>/</span><span class="text-on-surface font-medium">Assessment Ops</span></div></div><div class="flex items-center gap-3"><button class="w-10 h-10 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">search</span></button><button class="relative w-10 h-10 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span></button><div class="h-6 w-px bg-surface-variant mx-1"></div><div class="flex items-center gap-3 pl-1"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-body-base text-body-base font-semibold text-on-surface leading-snug">Nguyễn Quản Trị</span><span class="font-caption-small text-caption-small text-secondary">Host Admin</span></div></div></div></header><main class="relative pt-[70px] min-h-screen bg-[#F2F6FA]"><div class="max-w-[1200px] mx-auto p-space-lg"><div class="flex flex-col w-full">
+<!-- Breadcrumb and Context Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+<div class="flex flex-col">
+<div class="flex items-center gap-2 font-caption-small text-caption-small text-secondary mb-1.5">
+<span class="hover:text-on-surface cursor-pointer">Host</span>
+<span>/</span>
+<a class="hover:text-primary transition-colors" data-path="programmes" href="#">Programmes</a>
+<span>/</span>
+<span class="text-on-surface font-medium">PTE Intensive Autumn 2026</span>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<h1 class="font-page-title-h4 text-page-title-h4 text-on-surface tracking-tight">
+          PTE Intensive Autumn 2026
+        </h1>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#E6FFFA] text-[#088068] font-caption-small text-caption-small font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+          Active
+        </span>
+</div>
+<p class="font-body-base text-body-base text-secondary mt-1">
+        Cơ sở Cầu Giấy · 15/08/2026 – 07/11/2026 (Tuần 6 / 12)
+      </p>
+</div>
+<!-- Header Actions -->
+<div class="flex items-center gap-3 shrink-0 self-start md:self-auto">
+<button class="h-[40px] px-[18px] bg-[#ECF2FF] text-[#3359D2] hover:bg-[#DCE8FF] rounded-[7px] font-button-label text-button-label transition-colors duration-150 inline-flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+<span>Edit programme</span>
+</button>
+<button class="h-[40px] px-[18px] bg-[#4169E8] text-white hover:bg-[#3359D2] rounded-[7px] font-button-label text-button-label shadow-[0_2px_6px_rgba(65,105,232,0.28)] transition-all duration-150 inline-flex items-center gap-2" onclick="document.getElementById('modal-create-class').scrollIntoView({behavior: 'smooth'})" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>Add class</span>
+</button>
+</div>
+</div>
+<!-- Row 1: Four compact stat tiles -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter mb-space-xl">
+<!-- Stat 1: Learners -->
+<div class="bg-surface-container-lowest rounded-[7px] p-5 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex items-center gap-4">
+<div class="w-12 h-12 rounded-[7px] bg-[#ECF2FF] text-[#204ece] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">group</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-secondary text-body-secondary text-[#5A6A85]">Learners</span>
+<div class="flex items-baseline gap-2 mt-0.5">
+<span class="font-display-h3 text-display-h3 text-on-surface font-tabular-data tabular-nums">128</span>
+<span class="font-caption-small text-caption-small text-[#088068] font-medium">+12 this term</span>
+</div>
+</div>
+</div>
+<!-- Stat 2: Classes -->
+<div class="bg-surface-container-lowest rounded-[7px] p-5 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex items-center gap-4">
+<div class="w-12 h-12 rounded-[7px] bg-[#E8F7FF] text-[#0E729F] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">view_agenda</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-secondary text-body-secondary text-[#5A6A85]">Classes</span>
+<div class="flex items-baseline gap-2 mt-0.5">
+<span class="font-display-h3 text-display-h3 text-on-surface font-tabular-data tabular-nums">6</span>
+<span class="font-caption-small text-caption-small text-secondary">Across 3 shifts</span>
+</div>
+</div>
+</div>
+<!-- Stat 3: Sessions delivered -->
+<div class="bg-surface-container-lowest rounded-[7px] p-5 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex items-center gap-4">
+<div class="w-12 h-12 rounded-[7px] bg-[#E6FFFA] text-[#088068] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">task_alt</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-secondary text-body-secondary text-[#5A6A85]">Sessions delivered</span>
+<div class="flex items-baseline gap-2 mt-0.5">
+<span class="font-display-h3 text-display-h3 text-on-surface font-tabular-data tabular-nums">24</span>
+<span class="font-caption-small text-caption-small text-secondary">of 72 planned</span>
+</div>
+</div>
+</div>
+<!-- Stat 4: Avg overall -->
+<div class="bg-surface-container-lowest rounded-[7px] p-5 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex items-center gap-4">
+<div class="w-12 h-12 rounded-[7px] bg-[#FEF5E5] text-[#9C6400] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">speed</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-secondary text-body-secondary text-[#5A6A85]">Avg overall</span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="font-display-h3 text-display-h3 text-on-surface font-tabular-data tabular-nums">62</span>
+<span class="font-subtitle-h6 text-subtitle-h6 text-secondary font-tabular-data tabular-nums">/ 90</span>
+<span class="font-caption-small text-caption-small text-[#088068] font-medium ml-1">▲ 4.2</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Row 2: Card "Classes" -->
+<section class="bg-surface-container-lowest rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] p-6 mb-space-xl">
+<!-- Card Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4">
+<div>
+<h2 class="font-card-title-h5 text-card-title-h5 text-[#2A3547]">Classes</h2>
+<p class="font-body-secondary text-body-secondary text-[#5A6A85] mt-0.5">
+          Danh sách các lớp đang vận hành trong kỳ
+        </p>
+</div>
+<div class="flex items-center gap-3">
+<button class="h-[38px] px-4 bg-[#ECF2FF] text-[#3359D2] hover:bg-[#DCE8FF] rounded-[7px] font-button-label text-button-label transition-colors duration-150 inline-flex items-center gap-1.5" onclick="document.getElementById('modal-merge-classes').scrollIntoView({behavior: 'smooth'})" type="button">
+<span class="material-symbols-outlined text-[18px]">call_merge</span>
+<span>Merge classes</span>
+</button>
+<button class="h-[38px] px-4 bg-[#4169E8] text-white hover:bg-[#3359D2] rounded-[7px] font-button-label text-button-label shadow-[0_2px_6px_rgba(65,105,232,0.28)] transition-all duration-150 inline-flex items-center gap-1.5" onclick="document.getElementById('modal-create-class').scrollIntoView({behavior: 'smooth'})" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>Add class</span>
+</button>
+</div>
+</div>
+<!-- Classes Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="h-12 bg-transparent text-[#2A3547] font-subtitle-h6 text-caption-small uppercase tracking-wider text-outline border-b border-[#DFE5EF]">
+<th class="py-3 px-4 font-semibold">Class</th>
+<th class="py-3 px-4 font-semibold">Lecturer</th>
+<th class="py-3 px-4 font-semibold text-right">Learners</th>
+<th class="py-3 px-4 font-semibold text-right">Sessions</th>
+<th class="py-3 px-4 font-semibold text-right">Avg score</th>
+<th class="py-3 px-4 font-semibold text-center">Status</th>
+<th class="py-3 px-4 font-semibold text-right w-12"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#F2F6FA] text-body-base font-body-base">
+<!-- Class 1 -->
+<tr class="h-14 hover:bg-[#F6F9FC] transition-colors duration-150">
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-subtitle-h6 text-subtitle-h6 text-primary cursor-pointer hover:underline">PTE-79-A</span>
+<span class="font-caption-small text-caption-small text-secondary">T2 / T4 · 18:00–20:00 · Lab 1</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2.5">
+<img class="w-8 h-8 rounded-full object-cover shrink-0" data-alt="Professional studio portrait of an Asian female academic lecturer with glasses wearing navy blazer, warm bright library background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTogl2rOmCCiipcKPIxGPI2RPbznaK6D9VAyYLDqSayfAHjzKeLqofUndrl5UyqU0AwQuGLDPhDlqYgjshjYRn4iytadXHfsJQucCLoouIhOush3NI0dyqSN2OhWSBsW8LHf1YgtmxqXPop4vBLPljCcfiFtvhxi1rg6K0db22kEXnM6Sun-pzb4nBGqUEWoPZBIDFv-Ru0nLtfxgJTYQ8NQNrSeH37jxcq3-kUmvdnC5vaeSNwhcN"/>
+<div class="flex flex-col min-w-0">
+<span class="font-tabular-data text-tabular-data text-on-surface font-medium truncate">ThS. Trần Phương Thảo</span>
+<span class="font-caption-small text-caption-small text-secondary">Senior Pearson Trainer</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums text-on-surface">
+<span class="font-semibold">24</span> <span class="text-secondary font-normal">/ 25</span>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums text-on-surface">
+<span class="font-semibold text-primary">8</span> <span class="text-secondary font-normal">/ 12</span>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums">
+<span class="font-semibold text-[#088068]">64.5</span>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#E6FFFA] text-[#088068] font-caption-small text-caption-small font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span>
+                Active
+              </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="w-8 h-8 rounded-[7px] text-secondary hover:bg-surface-container hover:text-on-surface flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Class 2 -->
+<tr class="h-14 hover:bg-[#F6F9FC] transition-colors duration-150">
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-subtitle-h6 text-subtitle-h6 text-primary cursor-pointer hover:underline">PTE-79-B</span>
+<span class="font-caption-small text-caption-small text-secondary">T3 / T5 · 18:30–20:30 · Lab 2</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2.5">
+<img class="w-8 h-8 rounded-full object-cover shrink-0" data-alt="Portrait of an Asian male university educator wearing crisp white shirt and dark vest, smiling gently with clean academic backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYxj_AuaXM1igXfAGYdqNaCrAdCoVCpjoXaRHWScPHVzbY-XGXzGeEGimkS6QQSplvPZXzhgwKOdIXfsSPpCGgJDn0RFrTfKhllPw4VpnbymdE8HDyPu1kFQruj36c-1TKU18vMuuLpAZ5zP61sazgK5eW7qkJsGqjlpTmRJs3SAiN0DibXvacPdcGnSzA0bncO-5Fnio3_6DBqWWioE8GHA81TkmQEv6KkXKiCe1NFzS1k7tflaCp"/>
+<div class="flex flex-col min-w-0">
+<span class="font-tabular-data text-tabular-data text-on-surface font-medium truncate">TS. Nguyễn Hải Nam</span>
+<span class="font-caption-small text-caption-small text-secondary">Lead Assessment Specialist</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums text-on-surface">
+<span class="font-semibold">22</span> <span class="text-secondary font-normal">/ 25</span>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums text-on-surface">
+<span class="font-semibold text-primary">8</span> <span class="text-secondary font-normal">/ 12</span>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums">
+<span class="font-semibold text-[#088068]">61.2</span>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#E6FFFA] text-[#088068] font-caption-small text-caption-small font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span>
+                Active
+              </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="w-8 h-8 rounded-[7px] text-secondary hover:bg-surface-container hover:text-on-surface flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Class 3 -->
+<tr class="h-14 hover:bg-[#F6F9FC] transition-colors duration-150">
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-subtitle-h6 text-subtitle-h6 text-primary cursor-pointer hover:underline">PTE-80-A</span>
+<span class="font-caption-small text-caption-small text-secondary">T2 / T4 / T6 · 14:00–16:00 · Lab 3</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2.5">
+<img class="w-8 h-8 rounded-full object-cover shrink-0" data-alt="Portrait headshot of an Asian female instructor with styled short hair wearing modern charcoal jacket in bright classroom setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8uO3LftJNcgLUCRVh5yXZIRoEw25fGhr2-dvkO9JKPtsvUCu97uwl4EScLTzWGRu46OMrJNIk_TVJGkQscH1bRDSrGh8aqCvqi1qW3DB0XSe6cm_s7GkyY8rS_92zB3ZJiKmInQ-QvkKQW5hjlccczLOa_CxKkSSPJEYb_VeXDoWMjLl3neFnItDaFLLS0qgEil6RjllGTMJCW6OUVol6aPgGjgrTu_CDdGWGogf2_PWO38haVXkc"/>
+<div class="flex flex-col min-w-0">
+<span class="font-tabular-data text-tabular-data text-on-surface font-medium truncate">ThS. Lê Hoàng Yến</span>
+<span class="font-caption-small text-caption-small text-secondary">Lecturer &amp; Proctor</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums text-on-surface">
+<span class="font-semibold">18</span> <span class="text-secondary font-normal">/ 25</span>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums text-on-surface">
+<span class="font-semibold text-primary">6</span> <span class="text-secondary font-normal">/ 12</span>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums">
+<span class="font-semibold text-[#0E729F]">58.4</span>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#E6FFFA] text-[#088068] font-caption-small text-caption-small font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span>
+                Active
+              </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="w-8 h-8 rounded-[7px] text-secondary hover:bg-surface-container hover:text-on-surface flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Class 4 -->
+<tr class="h-14 hover:bg-[#F6F9FC] transition-colors duration-150">
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-subtitle-h6 text-subtitle-h6 text-primary cursor-pointer hover:underline">PTE-80-B</span>
+<span class="font-caption-small text-caption-small text-secondary">T3 / T5 · 09:00–11:00 · Lab 1</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2.5">
+<img class="w-8 h-8 rounded-full object-cover shrink-0" data-alt="Portrait of a young Asian male academic researcher wearing wireframe glasses and blue oxford shirt in modern university laboratory." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC51uH4fuaK4vUHRVRaQ4UmZud-0_rSco6eSMg4XLQ-j76nkfE6C-UkBP5g8Vsuwr3PNauroE0VabojrF92sj3LxrVA1vonWJL9XW5H9eocCBbcbj3iVok4D9bjE4WODx07c8Q5lGsEuhmh9T-zs0xu8iJVR_Qb6D9030EAcKzlWWEXrVzHIoMVQQfMZNSP1B9uTgMO8j3KP3gb6bMGAZbH7o4iVRrR8lNFUJivJddHuVt2vCvn7on6"/>
+<div class="flex flex-col min-w-0">
+<span class="font-tabular-data text-tabular-data text-on-surface font-medium truncate">ThS. Đặng Tuấn Anh</span>
+<span class="font-caption-small text-caption-small text-secondary">Language Specialist</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums text-on-surface">
+<span class="font-semibold">14</span> <span class="text-secondary font-normal">/ 25</span>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums text-on-surface">
+<span class="font-semibold text-primary">5</span> <span class="text-secondary font-normal">/ 12</span>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums">
+<span class="font-semibold text-[#0E729F]">57.0</span>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#E8F7FF] text-[#0E729F] font-caption-small text-caption-small font-semibold">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                Pending merge
+              </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="w-8 h-8 rounded-[7px] text-secondary hover:bg-surface-container hover:text-on-surface flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Class 5 -->
+<tr class="h-14 hover:bg-[#F6F9FC] transition-colors duration-150">
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-subtitle-h6 text-subtitle-h6 text-primary cursor-pointer hover:underline">PTE-81-A</span>
+<span class="font-caption-small text-caption-small text-secondary">Thứ 7 / CN · 08:30–11:30 · Lab 4</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2.5">
+<img class="w-8 h-8 rounded-full object-cover shrink-0" data-alt="Close up portrait of a confident Asian female teacher smiling gently with neat blazer against clean white architectural wall." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGtsseHLT4E3emxlJQc9hpehMcZT6efml811n8T5rrPTGIgyMMa0KKtUNRyp2vJRj7AoHdrp8FyEI913wui8YGZyZ05M8rClgGqo9sEnHRrCgCfcIvToPF8BDzQgZ8TvwCmDAGFjGG2_-_gXBkie9535_zeMHXGuObiIGNhyS9lIxbLQUFoWGKSHSLAIiIqyLArAqRHsdwez6ekuqNj9rtZkjJzv6g780-ilarD-SMFPE-Frdeb-Vz"/>
+<div class="flex flex-col min-w-0">
+<span class="font-tabular-data text-tabular-data text-on-surface font-medium truncate">ThS. Phạm Mai Lan</span>
+<span class="font-caption-small text-caption-small text-secondary">Senior Lecturer</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums text-on-surface">
+<span class="font-semibold">25</span> <span class="text-secondary font-normal">/ 25</span>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums text-on-surface">
+<span class="font-semibold text-secondary">0</span> <span class="text-secondary font-normal">/ 12</span>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums text-secondary">
+              —
+            </td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#FEF5E5] text-[#9C6400] font-caption-small text-caption-small font-semibold">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+                Scheduled
+              </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="w-8 h-8 rounded-[7px] text-secondary hover:bg-surface-container hover:text-on-surface flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Class 6 -->
+<tr class="h-14 hover:bg-[#F6F9FC] transition-colors duration-150">
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-subtitle-h6 text-subtitle-h6 text-primary cursor-pointer hover:underline">PTE-82-C</span>
+<span class="font-caption-small text-caption-small text-secondary">Sprint mock test · 20/08–28/08 · Lab 2</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2.5">
+<img class="w-8 h-8 rounded-full object-cover shrink-0" data-alt="Portrait of an experienced Asian male educational proctor in dark navy suit with soft indoor lighting and quiet study hall background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANUQGBYl2RemCcZF3IKVF-RD89zuHRyXxrouiRD5IdYhQefMNrFTMeeW4aygkcs2Mpps9kTS0ieAQwEg2C9PLQdm1VL_8m6YJ2pMaCUNZBVwOqfLH_JygL_C4JJYdugR_wUjdgOTPnJOzhqGJZShrx65QKILhANvIYX49dlGjp5oWhzPjUzmQB-CdUlvI97l4pgQwCys6a6mqcy1IlPYapd-VaznDspDPErknvOEllfnfyUweIRMxh"/>
+<div class="flex flex-col min-w-0">
+<span class="font-tabular-data text-tabular-data text-on-surface font-medium truncate">TS. Vũ Đức Minh</span>
+<span class="font-caption-small text-caption-small text-secondary">Chief Evaluator</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums text-on-surface">
+<span class="font-semibold">25</span> <span class="text-secondary font-normal">/ 25</span>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums text-on-surface">
+<span class="font-semibold text-secondary">4</span> <span class="text-secondary font-normal">/ 4</span>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums">
+<span class="font-semibold text-[#088068]">68.8</span>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container text-secondary font-caption-small text-caption-small font-semibold">
+<span class="material-symbols-outlined text-[14px]">done_all</span>
+                Completed
+              </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="w-8 h-8 rounded-[7px] text-secondary hover:bg-surface-container hover:text-on-surface flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Row 3: Card "Coordinators & lecturers" -->
+<section class="bg-surface-container-lowest rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] p-6 mb-space-xl">
+<!-- Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4">
+<div>
+<h2 class="font-card-title-h5 text-card-title-h5 text-[#2A3547]">Coordinators &amp; lecturers</h2>
+<p class="font-body-secondary text-body-secondary text-[#5A6A85] mt-0.5">
+          Đội ngũ học thuật phụ trách chương trình
+        </p>
+</div>
+<button class="h-[38px] px-4 bg-[#ECF2FF] text-[#3359D2] hover:bg-[#DCE8FF] rounded-[7px] font-button-label text-button-label transition-colors duration-150 inline-flex items-center gap-1.5 self-start sm:self-auto" type="button">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span>+ Assign staff</span>
+</button>
+</div>
+<!-- Staff Roster Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="h-12 bg-transparent text-[#2A3547] font-subtitle-h6 text-caption-small uppercase tracking-wider text-outline border-b border-[#DFE5EF]">
+<th class="py-3 px-4 font-semibold">Staff member</th>
+<th class="py-3 px-4 font-semibold">Role</th>
+<th class="py-3 px-4 font-semibold text-right">Assigned date</th>
+<th class="py-3 px-4 font-semibold text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#F2F6FA] text-body-base font-body-base">
+<!-- Row 1 -->
+<tr class="h-14 hover:bg-[#F6F9FC] transition-colors duration-150">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 rounded-full object-cover shrink-0" data-alt="Academic portrait of a distinguished Asian male university department head in tailored grey suit against minimalist white office." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOoLXLSrKh9JMoUm4O6-UkcttRBO8PGhvnk6eYLm57kP0lAqpXfLoePlYQII7oulC3E-EOaJrIxaQGMCEYIrZB7n428OgeTPM2cux1uZAalFcPBokF87YqypjMtyTuoPWxklrn5jaY-BYWLWMcjQoXwFlYuysAt99m6SMtghMxnvIX5Gz0MqXroVjYTCeN8cnGgWBt4cZ79W1ikOIaVIiSIWIpKTuFesxgff-l1Bl9B97Ob0EuvHL0"/>
+<div class="flex flex-col min-w-0">
+<span class="font-tabular-data text-tabular-data text-on-surface font-semibold truncate">TS. Nguyễn Hải Nam</span>
+<span class="font-caption-small text-caption-small text-secondary truncate">nam.nguyen@pteinstitute.edu.vn</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-[4px] bg-[#F2F6FA] text-[#2A3547] font-caption-small text-[11px] font-semibold tracking-wide">
+                PROGRAM_COORDINATOR
+              </span>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums text-secondary">
+              10/08/2026
+            </td>
+<td class="py-3 px-4 text-right">
+<button class="font-button-label text-button-label text-[#BE452B] hover:text-[#93000a] hover:underline transition-colors" type="button">
+                Unassign
+              </button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="h-14 hover:bg-[#F6F9FC] transition-colors duration-150">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 rounded-full object-cover shrink-0" data-alt="Portrait photo of a young professional Asian female instructor with warm smile, dark neat cardigan, modern classroom ambient light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoA8wbWufWGuzAo1SEdguBc9Xj_mAZXk9JQe32_HIrO53DILB6FWYKCL3CCaLvAB0L1ZTgo1P7vY2tZdIhvzWt9f_I0YyvhpIZ0OJq3zKLtn5vasL3XhAdZZbYIijDoRBx6dFK2CFX0Z6A5804OxH6CaqsRNtBWGhdti2cYwEQqNKllUekn0R7biHV2Erl8VM8Hx1x4I1AhmHMKctM434Zc8rHSll5CKd2q6vUIQR1GmZRAFZdwSeP"/>
+<div class="flex flex-col min-w-0">
+<span class="font-tabular-data text-tabular-data text-on-surface font-semibold truncate">ThS. Trần Phương Thảo</span>
+<span class="font-caption-small text-caption-small text-secondary truncate">thao.tran@pteinstitute.edu.vn</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-[4px] bg-[#F2F6FA] text-[#2A3547] font-caption-small text-[11px] font-semibold tracking-wide">
+                LECTURER
+              </span>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums text-secondary">
+              12/08/2026
+            </td>
+<td class="py-3 px-4 text-right">
+<button class="font-button-label text-button-label text-[#BE452B] hover:text-[#93000a] hover:underline transition-colors" type="button">
+                Unassign
+              </button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="h-14 hover:bg-[#F6F9FC] transition-colors duration-150">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 rounded-full object-cover shrink-0" data-alt="Portrait of an Asian female academic specialist wearing minimalist navy knitwear with glasses in soft educational studio light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpNkdknnxgTvBI7-lEVB0izqMfp0OjZEK3VFpnK5wQhzjgzZ3tQd_IM64c5uIXnm6MY_zGL0DGr4P-0B2BvWcb1MnKE3CMc6RdA4HcpT4AJaPWGTwh4Bq-70iEcyqjqf4lV3jCXmmIgV7FWT7UyfhZYXskyudlFYKdgw-sGqId-kjNFNqESkrmyp2Gzh2wA1hW3sUwx6qLa3TpQX1-N8PFKpEXnP8EGwEgd-KjLzPLnRLMWLP7PFDg"/>
+<div class="flex flex-col min-w-0">
+<span class="font-tabular-data text-tabular-data text-on-surface font-semibold truncate">ThS. Lê Hoàng Yến</span>
+<span class="font-caption-small text-caption-small text-secondary truncate">yen.le@pteinstitute.edu.vn</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-[4px] bg-[#F2F6FA] text-[#2A3547] font-caption-small text-[11px] font-semibold tracking-wide">
+                LECTURER
+              </span>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums text-secondary">
+              12/08/2026
+            </td>
+<td class="py-3 px-4 text-right">
+<button class="font-button-label text-button-label text-[#BE452B] hover:text-[#93000a] hover:underline transition-colors" type="button">
+                Unassign
+              </button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="h-14 hover:bg-[#F6F9FC] transition-colors duration-150">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 rounded-full object-cover shrink-0" data-alt="Portrait headshot of an Asian male teacher in crisp tailored charcoal blazer smiling calmly in bright modern office space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8FLWMGBv2Uij3ferbOmeAKFvYuZp3CH7z-S1Zl8NKfIzYKRjokA11V1_mTrkavWbH4DIzLy94ZQ1164E8U_iFErq_BMZM9u3gu5Ka6VLHSk2NBIWLxvL4bUV_0jd1oil2ERDGWgIRlD4mOoIUyZP27ib1ue03_oG8ygEz-Cwm3A6FjMc13TmOg8fYOe7LH1FQNxZOTMY4HyH9I5spOQqHWPd9OuJ-ciNMu2yfCaL8MuZsLIMaLyE8"/>
+<div class="flex flex-col min-w-0">
+<span class="font-tabular-data text-tabular-data text-on-surface font-semibold truncate">ThS. Đặng Tuấn Anh</span>
+<span class="font-caption-small text-caption-small text-secondary truncate">tuananh.dang@pteinstitute.edu.vn</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-[4px] bg-[#F2F6FA] text-[#2A3547] font-caption-small text-[11px] font-semibold tracking-wide">
+                LECTURER
+              </span>
+</td>
+<td class="py-3 px-4 text-right font-tabular-data tabular-nums text-secondary">
+              14/08/2026
+            </td>
+<td class="py-3 px-4 text-right">
+<button class="font-button-label text-button-label text-[#BE452B] hover:text-[#93000a] hover:underline transition-colors" type="button">
+                Unassign
+              </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Modal previews section -->
+<section class="mt-4 pt-6 pb-12">
+<div class="flex items-center gap-3 mb-6">
+<div class="h-4 w-1 bg-primary rounded-full"></div>
+<div>
+<h2 class="font-card-title-h5 text-card-title-h5 text-[#2A3547]">Modal previews: Create class &amp; Merge classes</h2>
+<p class="font-caption-small text-caption-small text-secondary">
+          High-fidelity modal inspection states implemented according to technical design specifications
+        </p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- (a) Modal "Create class" -->
+<div class="lg:col-span-6 w-full max-w-[480px] mx-auto bg-surface-container-lowest rounded-[7px] shadow-[0px_0px_4px_0px_rgba(145,158,171,0.30),0px_24px_48px_-8px_rgba(145,158,171,0.20)] p-6" id="modal-create-class">
+<div class="flex items-start justify-between pb-3 border-b border-[#F2F6FA]">
+<div>
+<h3 class="font-card-title-h5 text-card-title-h5 text-[#2A3547]">Create class</h3>
+<p class="font-caption-small text-caption-small text-[#5A6A85] mt-1">
+              Thêm lớp học mới vào chương trình PTE Intensive Autumn 2026
+            </p>
+</div>
+<button class="w-8 h-8 rounded-[7px] text-secondary hover:bg-surface-container flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<form class="flex flex-col gap-4 mt-5" onsubmit="event.preventDefault();">
+<!-- Class name & Capacity -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<div class="sm:col-span-2 flex flex-col">
+<label class="font-subtitle-h6 text-body-secondary text-[#2A3547] mb-1">
+                Class name <span class="text-error">*</span>
+</label>
+<input class="h-[42px] px-3.5 rounded-[7px] bg-white text-on-surface font-body-base text-body-base outline-none border border-[#7C8FAC] focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Ví dụ: PTE-79-C" type="text" value="PTE-79-C"/>
+</div>
+<div class="flex flex-col">
+<label class="font-subtitle-h6 text-body-secondary text-[#2A3547] mb-1">
+                Capacity
+              </label>
+<input class="h-[42px] px-3.5 rounded-[7px] bg-white text-on-surface font-body-base text-body-base outline-none border border-[#7C8FAC] focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all font-tabular-data tabular-nums text-right" type="number" value="25"/>
+</div>
+</div>
+<!-- Schedule fields -->
+<div class="flex flex-col">
+<label class="font-subtitle-h6 text-body-secondary text-[#2A3547] mb-1">
+              Schedule <span class="text-error">*</span>
+</label>
+<div class="relative">
+<input class="w-full h-[42px] pl-3.5 pr-10 rounded-[7px] bg-white text-on-surface font-body-base text-body-base outline-none border border-[#7C8FAC] focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" type="text" value="Thứ 3 / Thứ 5 · 18:30–20:30"/>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-secondary text-[20px] pointer-events-none">
+                schedule
+              </span>
+</div>
+<span class="font-caption-small text-caption-small text-secondary mt-1">2 buổi / tuần · Tổng 24 giờ đào tạo</span>
+</div>
+<!-- Room / Branch -->
+<div class="flex flex-col">
+<label class="font-subtitle-h6 text-body-secondary text-[#2A3547] mb-1">
+              Room / Branch
+            </label>
+<div class="relative">
+<select class="w-full h-[42px] pl-3.5 pr-10 rounded-[7px] bg-white text-on-surface font-body-base text-body-base outline-none border border-[#7C8FAC] focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+<option selected="">Phòng Lab 3 - Cầu Giấy</option>
+<option>Phòng Lab 1 - Cầu Giấy</option>
+<option>Phòng Lab 2 - Cầu Giấy</option>
+<option>Phòng Lab 4 (Proctor Room)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-secondary text-[20px] pointer-events-none">
+                expand_more
+              </span>
+</div>
+</div>
+<!-- Lecturer Picker Dropdown -->
+<div class="flex flex-col">
+<label class="font-subtitle-h6 text-body-secondary text-[#2A3547] mb-1">
+              Assigned lecturer
+            </label>
+<div class="relative">
+<select class="w-full h-[42px] pl-3.5 pr-10 rounded-[7px] bg-white text-on-surface font-body-base text-body-base outline-none border border-[#7C8FAC] focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+<option selected="">ThS. Trần Phương Thảo (Senior Pearson Trainer)</option>
+<option>TS. Nguyễn Hải Nam (Lead Assessment Specialist)</option>
+<option>ThS. Lê Hoàng Yến (Lecturer &amp; Proctor)</option>
+<option>ThS. Đặng Tuấn Anh (Language Specialist)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-secondary text-[20px] pointer-events-none">
+                expand_more
+              </span>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="flex items-center justify-end gap-3 pt-4 mt-2 border-t border-[#F2F6FA]">
+<button class="h-[38px] px-4 bg-transparent text-[#2A3547] hover:bg-surface-container rounded-[7px] font-button-label text-button-label transition-colors" type="button">
+              Cancel
+            </button>
+<button class="h-[38px] px-5 bg-[#4169E8] text-white hover:bg-[#3359D2] rounded-[7px] font-button-label text-button-label shadow-[0_2px_6px_rgba(65,105,232,0.28)] transition-all" type="submit">
+              Create class
+            </button>
+</div>
+</form>
+</div>
+<!-- (b) Modal "Merge classes" -->
+<div class="lg:col-span-6 w-full max-w-[520px] mx-auto bg-surface-container-lowest rounded-[7px] shadow-[0px_0px_4px_0px_rgba(145,158,171,0.30),0px_24px_48px_-8px_rgba(145,158,171,0.20)] p-6" id="modal-merge-classes">
+<div class="flex items-start justify-between pb-3 border-b border-[#F2F6FA]">
+<div>
+<h3 class="font-card-title-h5 text-card-title-h5 text-[#2A3547]">Merge classes</h3>
+<p class="font-caption-small text-caption-small text-[#5A6A85] mt-1">
+              Gộp học viên giữa hai lớp thuộc cùng chương trình học
+            </p>
+</div>
+<button class="w-8 h-8 rounded-[7px] text-secondary hover:bg-surface-container flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<form class="flex flex-col gap-4 mt-5" onsubmit="event.preventDefault();">
+<!-- Source Class -->
+<div class="flex flex-col">
+<label class="font-subtitle-h6 text-body-secondary text-[#2A3547] mb-1">
+              Source class (Lớp chuyển đi)
+            </label>
+<div class="relative">
+<select class="w-full h-[42px] pl-3.5 pr-10 rounded-[7px] bg-white text-on-surface font-body-base text-body-base outline-none border border-[#7C8FAC] focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer font-tabular-data">
+<option selected="">PTE-80-B (14 học viên) · T3/T5 09:00</option>
+<option>PTE-81-A (25 học viên)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-secondary text-[20px] pointer-events-none">
+                expand_more
+              </span>
+</div>
+</div>
+<!-- Transfer Arrow Visual -->
+<div class="flex items-center justify-center py-1">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">south</span>
+</div>
+</div>
+<!-- Target Class -->
+<div class="flex flex-col">
+<label class="font-subtitle-h6 text-body-secondary text-[#2A3547] mb-1">
+              Target class (Lớp tiếp nhận)
+            </label>
+<div class="relative">
+<select class="w-full h-[42px] pl-3.5 pr-10 rounded-[7px] bg-white text-on-surface font-body-base text-body-base outline-none border border-[#7C8FAC] focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer font-tabular-data">
+<option selected="">PTE-80-A (18 học viên) · T2/T4/T6 14:00</option>
+<option>PTE-79-A (24 học viên)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-secondary text-[20px] pointer-events-none">
+                expand_more
+              </span>
+</div>
+</div>
+<!-- Capacity and Math Preview Line -->
+<div class="p-3 bg-surface-container-low rounded-[7px] flex items-center justify-between font-body-base text-body-base">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-[18px] text-primary">functions</span>
+<span>Tổng số học viên sau gộp:</span>
+</div>
+<div class="font-tabular-data text-tabular-data font-semibold text-on-surface">
+              18 + 14 = <span class="text-primary text-[15px]">32 learners</span>
+</div>
+</div>
+<!-- Warning Callout -->
+<div class="p-3.5 bg-[#FEF5E5] rounded-[7px] flex items-start gap-3 text-[#9C6400]">
+<span class="material-symbols-outlined text-[20px] shrink-0 mt-0.5">warning</span>
+<div class="flex flex-col text-caption-small font-caption-small leading-relaxed">
+<span class="font-semibold">Lưu ý quan trọng</span>
+<span>Học viên giữ nguyên lịch sử bài thi. Thao tác này không hoàn tác được và lớp PTE-80-B sẽ chuyển sang trạng thái đã lưu trữ sau khi gộp thành công.</span>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="flex items-center justify-end gap-3 pt-4 mt-2 border-t border-[#F2F6FA]">
+<button class="h-[38px] px-4 bg-transparent text-[#2A3547] hover:bg-surface-container rounded-[7px] font-button-label text-button-label transition-colors" type="button">
+              Huỷ
+            </button>
+<button class="h-[38px] px-5 bg-[#4169E8] text-white hover:bg-[#3359D2] rounded-[7px] font-button-label text-button-label shadow-[0_2px_6px_rgba(65,105,232,0.28)] transition-all" type="submit">
+              Xác nhận gộp lớp
+            </button>
+</div>
+</form>
+</div>
+</div>
+</section>
+</div>
+<script>
+  (function() {
+    // Synchronize sidebar active state for Programmes under LEARNERS
+    const navLinks = document.querySelectorAll('aside nav a[data-path]');
+    navLinks.forEach(link => {
+      if (link.getAttribute('data-path') === 'programmes') {
+        link.className = 'h-[45px] px-3 flex items-center gap-3 rounded-xl bg-primary-container text-on-primary font-medium shadow-[0px_4px_10px_rgba(65,105,232,0.25)] transition-all duration-150';
+      } else {
+        link.className = 'h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150';
+      }
+    });
+  })();
+</script></div></main></div></body></html>

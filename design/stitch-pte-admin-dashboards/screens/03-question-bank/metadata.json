@@ -1,0 +1,8 @@
+{
+  "name": "projects/3859337323953452143/screens/00f8f5742154452ab556d8ccc4db8d88",
+  "title": "V6: Question Bank",
+  "deviceType": "DESKTOP",
+  "width": 2560,
+  "height": 2504,
+  "route": "vendor-web /admin/questions"
+}
