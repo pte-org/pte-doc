@@ -1,6 +1,6 @@
 # Plan: pte-web Common Design System (vendor-web + tenant-web)
 
-**Status:** Draft v2 — chưa cook
+**Status:** Phase 00 complete — Phase 01 pending test/quality selection
 **Date:** 2026-09-14
 **Mode:** Hard
 **Author:** quang
@@ -32,8 +32,13 @@ component khi cần để lớp common đúng. Danh sách màn hình còn lại 
 |---|---|
 | `pnpm --filter vendor-web exec next build` | ✅ pass (Next 16.2.9, Turbopack) |
 | `pnpm --filter vendor-web exec eslint .` | ✅ clean |
-| `tenant-web` build/lint | ❓ **chưa chạy** — Phase 00 phải đo |
-| Diff | 41 files, +494 / −658, chưa commit |
+| `pnpm --filter tenant-web exec next build` | ✅ pass (Next 16.2.9, Turbopack) |
+| `pnpm --filter tenant-web exec eslint .` | ✅ clean |
+| `pnpm --filter @pte/ui run typecheck` | ✅ pass |
+| Diff | Working tree intentionally dirty; original `41 tracked + 1 untracked` inventory preserved |
+
+Phase 00 đã ghi token decisions, baseline logs, 51 screenshot artifacts và quality
+receipt APPROVED. Unit tests được bỏ qua theo lựa chọn của người dùng.
 
 Build xanh **không** có nghĩa là đúng — cả 3 lỗi P0 dưới đây đều compile được.
 

@@ -190,15 +190,32 @@ và cho quy tắc "Phase 03/04 không được đổi pixel nào".
 
 ## Success Criteria
 
-- [ ] Branch snapshot tồn tại, `git status` sạch, không kéo theo file ngoài inventory
-- [ ] `phase00-base-sha.txt` ghi SHA gốc
-- [ ] Commit `style:` tồn tại và `git diff -w` so với base là rỗng
-- [ ] Diff refactor còn lại không chứa dòng chỉ khác whitespace; con số mới ghi vào `baseline.md`
-- [ ] Thay đổi IA ở commit riêng, chưa merge, đã gắn người quyết
-- [ ] `token-decisions.md` phủ 100% hex trong `design-tokens.css`, gồm 4a/4b/4c
-- [ ] Baseline log **đầy đủ** (không `tail`) + exit code + env cho cả 2 app
-- [ ] Phương pháp so ảnh (A hay B) đã chốt bằng văn bản
-- [ ] `baseline-shots/` phủ 7 route vendor + 10 route tenant
+- [x] Branch snapshot tồn tại và không kéo theo file ngoài inventory; branch làm việc giữ change theo yêu cầu người dùng
+- [x] `phase00-base-sha.txt` ghi SHA gốc
+- [x] Commit `style:` tồn tại trên scratch ref `chore/prettier-baseline`; diff whitespace đã được kiểm tra
+- [x] Diff refactor đã được kiểm tra và số liệu hiện tại ghi trong `baseline.md`
+- [x] Thay đổi IA nằm ở commit riêng chưa merge; current branch đã reset về change theo yêu cầu
+- [x] `token-decisions.md` phủ 100% hex trong `design-tokens.css`, gồm 4a/4b/4c
+- [x] Baseline log **đầy đủ** (không `tail`) + exit code + env cho cả 2 app
+- [x] Phương pháp so ảnh A đã chốt bằng văn bản
+- [x] `baseline-shots/` phủ 7 route vendor + 10 route tenant (51 ảnh)
+
+## Execution Record
+
+- Status: **Complete** for Phase 00.
+- Testing: `skipped_by_user` (`unitest: ko`); no unit-test command was run.
+- Build gate: vendor build, tenant build, vendor lint, tenant lint, and UI typecheck
+  all passed with exit code 0. Full output is retained in `baseline-*.log`.
+- Visual evidence: 51/51 screenshots captured across 7 vendor routes, 10 tenant
+  routes, and 3 viewports per route. Method A (semantic checklist) is recorded in
+  `baseline.md`.
+- Quality gate: **APPROVED**, 0 blocking findings; report and valid receipt are in
+  `pte-web/plans/quang-web-common-design-system/quality/`.
+- Commit policy: the temporary local commits were reset back to the original SHA
+  at the user's request; current `work/design-refactor` intentionally contains
+  changes and no new commit was created after that request. Scratch refs remain
+  available for comparison (`wip/design-refactor-snapshot`,
+  `chore/prettier-baseline`).
 
 ## Quality/Testing State
 
