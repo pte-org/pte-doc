@@ -93,18 +93,34 @@ không cần `RestClient` hoặc endpoint nội bộ giữa các module.
 
 ## Acceptance
 
-- [ ] Upload → complete → presigned download chạy qua app.
-- [ ] Audio prompt lưu đúng duration; non-audio prompt không đi qua WAV reader.
-- [ ] Cross-tenant media lookup không làm lộ existence hoặc URL.
-- [ ] `attempt`/`scoring` gọi `MediaService`, không gọi `MediaClient`.
-- [ ] `V5__media.sql` chạy được trên database monolith trống.
-- [ ] Không có artifact outbox/projection mới trong app.
-- [ ] Test media nguồn và test app xanh.
-- [ ] `ApplicationModules.verify()` pass.
+- [ ] Upload → complete → presigned download chạy qua app. **(logic port xong,
+      kiểm chứng bằng unit test với mock MinIO; chưa chạy runtime thật với MinIO
+      daemon)**
+- [x] Audio prompt lưu đúng duration; non-audio prompt không đi qua WAV reader.
+- [x] Cross-tenant media lookup không làm lộ existence hoặc URL.
+- [ ] `attempt`/`scoring` gọi `MediaService`, không gọi `MediaClient`. **(chưa áp
+      dụng được — `attempt`/`scoring` chưa port tới, Phase 07/08; public API
+      `MediaService.presignGet` đã sẵn sàng cho khi đó)**
+- [ ] `V5__media.sql` chạy được trên database monolith trống. **(chưa chạy thật —
+      không có Postgres daemon trong phiên này)**
+- [x] Không có artifact outbox/projection mới trong app.
+- [x] Test media nguồn và test app xanh (services/media giữ nguyên, không đổi;
+      `app` 181/181).
+- [x] `ApplicationModules.verify()` pass.
 
 ---
 
 ## Quality and Testing State
 
-Chưa thực thi. Sau khi code xong phải cập nhật số test, quality report và receipt
-trước khi bắt đầu Phase 05.
+**Testing: passed.** Port hoàn tất, gộp chung một lượt cook với Phase 05 (Itembank +
+Assessment) theo quyết định nén phase 8→5 (Phase A). Test riêng: 13/13
+(`PresignServiceTest`, ported + thêm 1 case TTL cap). Full `mvn -pl app test`:
+181/181 xanh (142 cũ + 39 mới của cả Phase A). `ApplicationModules.verify()` pass.
+Report: [phase-04-05-media-itembank-assessment-test-report.json](tests/phase-04-05-media-itembank-assessment-test-report.json).
+
+Quality gate: chưa chạy — xem trạng thái chung ở
+[phase-05-itembank-assessment.md](phase-05-itembank-assessment.md#quality-and-testing-state).
+
+`docker compose up` / MinIO thật **chưa kiểm chứng runtime** (không có Docker/MinIO
+daemon trong phiên này) — port dựa trên đọc code + unit test với repository/MinioClient
+mock.

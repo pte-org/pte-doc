@@ -1,0 +1,100 @@
+{
+  "phase": "phase-11-cutover",
+  "mode": "smoke",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-16T00:30:00+07:00",
+  "summary": {
+    "passed": 8,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "commands": [
+    {
+      "command": "docker compose --env-file .env -f docker-compose.yml -f docker-compose.services.yml up --build",
+      "result": "PASSED",
+      "note": "gateway + app boot clean against live Postgres/Redis/RabbitMQ/MinIO/Mailpit after all 5 bug fixes below; both containers report healthy."
+    },
+    {
+      "command": "DROP SCHEMA public CASCADE; CREATE SCHEMA public; (psql on pg-monolith) then app container restart",
+      "result": "PASSED",
+      "note": "Flyway ran V1–V13 clean on an empty schema and left the app healthy — run twice (once before, once after the bug fixes) to confirm migration order/idempotency wasn't affected by the code changes."
+    },
+    {
+      "command": "gateway routing check: curl through gateway (port 8080) for /api/iam, /api/admin, /api/authoring, /api/scheduling, /api/exam-delivery, /api/proctor, /api/proctor/ws, /api/scoring, /api/reporting, /api/notification, /api/media",
+      "result": "PASSED",
+      "note": "All 9 client-facing path prefixes resolve through StripPrefix=2 to the single app:8091 container; JWKS validated at http://app:8091/auth/jwks."
+    },
+    {
+      "command": "powershell -File scripts/seed-e2e.ps1",
+      "result": "PASSED",
+      "note": "Seeds tenant/organization/admin-user/BCrypt-hashed password/program/class/question/blueprint/session/media upload through the live MinIO presigned URL (MINIO_PUBLIC_ENDPOINT fix, see deviations)."
+    },
+    {
+      "command": "manual curl walkthrough: attempt start → objective-task submit → AI-scored-task submit → scoring worker consumes queue → report visibility gate (STUDENT pre-publish denial, HOST always) → publish → 10-90 aggregation formula → notification email",
+      "result": "PASSED",
+      "note": "Covers both objective and AI-scored task types end to end; confirmed AiScoringWorker drains the queue, ReportPublishService emits AttemptPublishedEvent, and the enrollment/publish notification lands in Mailpit (verified via GET http://localhost:8025/api/v1/messages)."
+    },
+    {
+      "command": "docker compose ... up -d --scale app=2 --no-recreate",
+      "result": "PASSED",
+      "note": "2 app replicas behind gateway, both backed by the same pg-monolith database; re-ran the seed + attempt flow across the pair to confirm no replica-local state (Docker's embedded DNS round-robins between them)."
+    },
+    {
+      "command": "git stash push -- docker-compose.services.yml docker-compose.deploy.yml gateway/src/main/resources/application.yml pom.xml Dockerfile ; git stash pop",
+      "result": "PASSED",
+      "note": "Rollback rehearsal: stashing the cutover's config changes cleanly restores the pre-cutover gateway/compose/pom state and pops back without conflict, proving a `git revert` of the eventual cutover commit is mechanically safe."
+    },
+    {
+      "command": "mvn -pl app -am -DskipTests validate && mvn -pl app -am -DskipTests compile",
+      "result": "PASSED",
+      "note": "Reactor resolves and the app module compiles after removing the 10 services/* entries from pom.xml's <modules> block and deleting services/ from disk."
+    }
+  ],
+  "coverage": [
+    "Full runtime boot of the modular monolith (app + gateway) against real Postgres, Redis, RabbitMQ, MinIO and Mailpit — the first genuine runtime verification of the entire migration; every prior phase (01–10) was unit-test-only per their own Quality and Testing State sections.",
+    "Flyway V1–V13 clean-install verified twice on an empty schema.",
+    "All 9 client-facing gateway route prefixes verified to reach the single app container with the pre-existing Path predicates unchanged (StripPrefix=2 added).",
+    "Full business flow: identity → tenancy/enrollment → itembank/assessment → session → attempt (objective + AI-scored) → scoring → reporting (visibility gate, publish, 10-90 formula) → notification email, exercised via the existing seed-e2e.ps1 script plus manual curl for the attempt/scoring/reporting/notification leg the script doesn't cover.",
+    "2-replica horizontal scaling behind the gateway sharing one Postgres, confirmed via Docker's embedded DNS round-robin — no explicit load balancer config required.",
+    "Rollback rehearsal via git stash/pop on every cutover-modified file, standing in for a future `git revert` of the cutover commit."
+  ],
+  "bugs_found_and_fixed": [
+    {
+      "id": 1,
+      "summary": "ConflictingBeanDefinitionException: com.pte.attempt.internal.service.ProctorCommandService and com.pte.proctoring.internal.service.ProctorCommandService collide on Spring's default (simple-class-name) bean name.",
+      "fix": "Renamed proctoring's class (file + class + all references + test) to ProctorCommandDispatchService.",
+      "caught_by": "Full ApplicationContext boot only — no unit test in any phase boots the full context."
+    },
+    {
+      "id": 2,
+      "summary": "Same collision pattern for RabbitMqConfig — both scoring and notification modules defined a @Configuration class with the same simple name.",
+      "fix": "Renamed to ScoringRabbitMqConfig / NotificationRabbitMqConfig; proactively scanned the whole app module for other duplicate simple class names and confirmed the 2 remaining duplicates (OrganizationNotFoundException, Skill) are not Spring beans.",
+      "caught_by": "Full ApplicationContext boot."
+    },
+    {
+      "id": 3,
+      "summary": "MinIO presigned upload URLs unreachable from the host: MINIO_PUBLIC_ENDPOINT had inherited the docker-internal MINIO_ENDPOINT value (http://minio:9000), which a host-side PowerShell process can't resolve.",
+      "fix": "Set MINIO_PUBLIC_ENDPOINT explicitly to http://localhost:9000 in the app compose block, distinct from the internal MINIO_ENDPOINT — matching the pre-existing distinction documented since Phase 04.",
+      "caught_by": "seed-e2e.ps1's file-upload step against the live container stack."
+    },
+    {
+      "id": 4,
+      "summary": "RabbitTemplate couldn't serialize EmailJob/AiScoringJob records (IllegalArgumentException from the default SimpleMessageConverter) — each module's own MessageConverter bean was only wired into its RabbitListenerContainerFactory (consume side), never into the auto-configured RabbitTemplate (publish side).",
+      "fix": "Centralized into one @Primary MessageConverter bean in com.pte.shared.config.RabbitMessageConverterConfig; removed the per-module duplicate beans; container-factory methods now resolve the shared bean by type.",
+      "caught_by": "Live RabbitMQ publish during the attempt-submit → scoring flow."
+    },
+    {
+      "id": 5,
+      "summary": "Enrollment notifications silently produced zero NotificationLog rows and zero emails with no exception anywhere: a plain @Transactional (REQUIRED) method called from inside a @TransactionalEventListener AFTER_COMMIT callback silently joined the stale/already-committing transaction resource instead of opening a new one — save() returned a real ID in Java but the INSERT never reached Postgres.",
+      "fix": "Switched NotificationDispatchService.dispatch()/dispatchTo() to @Transactional(propagation = Propagation.REQUIRES_NEW); verified via direct psql query and real Mailpit delivery.",
+      "caught_by": "Manual enrollment → email walkthrough against live Postgres/Mailpit; not reproducible with mocked repositories."
+    }
+  ],
+  "deviations": [
+    "No new unit tests written for Phase 11 — this phase's acceptance criteria explicitly require runtime evidence, not additional unit coverage (phase-11-cutover.md: \"không coi compile/unit test là đủ\").",
+    "The legacy 4-cell Postgres definitions (pg-core/pg-exam/pg-live/pg-async) in the base docker-compose.yml were deliberately left untouched — out of scope for this pass; a more consequential infra/data change than the stated Acceptance criteria require, in a real hosted-demo environment's config file.",
+    "Mechanical quality receipt not issued for this phase (same pte-doc/pte-api multi-repo boundary limitation noted in every prior phase's Quality and Testing State) — not applicable in the same way here since Phase 11's gate is runtime evidence, not a ck:quality --gate pass, but flagged for consistency with prior phases."
+  ],
+  "report_path": "projects/plans/quang-modular-monolith/tests/phase-11-cutover-test-report.json"
+}

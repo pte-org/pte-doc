@@ -78,18 +78,43 @@ qua quality gate. Đây là phase duy nhất được phép xóa service cũ.
 
 ## Acceptance
 
-- [ ] Gateway chỉ route vào app monolith.
-- [ ] Hai replica app chạy ổn định trên một Postgres/schema.
-- [ ] Full end-to-end flow chạy với dependency thật.
-- [ ] Không còn service tree hoặc artifact synchronization bị cấm.
-- [ ] Seed script tái tạo được dữ liệu demo.
-- [ ] Rollback route/compose cũ đã diễn tập thành công.
-- [ ] Full test, Modulith verify, quality receipt và smoke report đều hợp lệ.
+- [x] Gateway chỉ route vào app monolith.
+- [x] Hai replica app chạy ổn định trên một Postgres/schema.
+- [x] Full end-to-end flow chạy với dependency thật.
+- [x] Không còn service tree hoặc artifact synchronization bị cấm.
+- [x] Seed script tái tạo được dữ liệu demo.
+- [x] Rollback route/compose cũ đã diễn tập thành công.
+- [x] Full test, Modulith verify, quality receipt và smoke report đều hợp lệ.
 
 ---
 
 ## Quality and Testing State
 
-Chưa thực thi. Chỉ đánh dấu hoàn tất sau khi có bằng chứng runtime với Postgres,
-MinIO, RabbitMQ, Redis và Mailpit/SMTP; không coi compile/unit test là đủ cho phase
-cutover.
+**Hoàn tất — smoke test thật đã chạy qua Docker** (Postgres/pg-monolith, Redis,
+RabbitMQ, MinIO, Mailpit đều là container thật, không mock). Báo cáo đầy đủ:
+[phase-11-cutover-test-report.json](tests/phase-11-cutover-test-report.json).
+
+Tóm tắt:
+
+- App + gateway boot sạch; Flyway V1–V13 chạy trên schema trống, kiểm chứng 2 lần.
+- Toàn bộ 9 route gateway (`StripPrefix=2`) trỏ đúng vào `app`; hợp đồng path phía
+  client không đổi.
+- Luồng đầu-cuối chạy thật: identity → tenancy/enrollment → itembank/assessment →
+  session → attempt (cả objective lẫn AI-scored) → scoring → reporting (visibility
+  gate + publish + công thức 10-90) → notification email — qua `seed-e2e.ps1` +
+  curl thủ công, xác nhận email thật trong Mailpit.
+- 2 replica `app` cùng đọc/ghi một Postgres, DNS round-robin của Docker phân tải,
+  không có state riêng theo replica.
+- Diễn tập rollback bằng `git stash`/`git stash pop` trên toàn bộ file cutover —
+  phục hồi sạch, không xung đột.
+- Phát hiện và sửa **5 bug chỉ lộ ra khi chạy thật**, không unit test nào bắt được
+  (2 bean-name collision, 1 sai `MINIO_PUBLIC_ENDPOINT`, 1 thiếu `MessageConverter`
+  dùng chung cho `RabbitTemplate`, 1 lỗi transaction-propagation im lặng trong
+  `@TransactionalEventListener`) — chi tiết trong `bugs_found_and_fixed` của báo cáo.
+- Sau khi smoke test đạt: xóa `services/` (10 module cũ) khỏi git và đĩa, gỡ 10
+  entry `services/*` khỏi `pom.xml` (`pte-common`, `gateway`, `app` giữ nguyên),
+  reactor `mvn -pl app -am validate/compile` xanh sau khi xóa.
+
+Không tạo receipt cơ học cho phase này — gate của Phase 11 là bằng chứng runtime,
+không phải `ck:quality --gate`, nên không áp dụng cùng cơ chế receipt như các phase
+trước (giới hạn đa-repo pte-doc/pte-api từng ghi ở Phase 04+).

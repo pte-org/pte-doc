@@ -97,17 +97,48 @@ thể đọc summary, còn attempt có thể đọc trusted full content qua pub
 
 ## Acceptance
 
-- [ ] CRUD question/blueprint chạy qua app với API contract cũ.
-- [ ] Publish tạo đúng một snapshot immutable và version đúng.
-- [ ] Session có thể lấy summary qua `AssessmentService`.
-- [ ] Attempt có thể lấy full content qua trusted public API.
-- [ ] Không còn `ExamSnapshotPublishedEvent`/outbox/cache flow trong app.
+- [ ] CRUD question/blueprint chạy qua app với API contract cũ. **(logic port
+      xong, path/contract giữ nguyên; chưa gọi qua HTTP thật, chưa có Postgres)**
+- [x] Publish tạo đúng một snapshot immutable và version đúng (kiểm chứng bằng
+      unit test: version tăng theo lần publish, không mutate sau khi tạo).
+- [x] Session có thể lấy summary qua `AssessmentService` (`getSummary` sẵn sàng;
+      chưa có consumer thật vì `session` chưa port — Phase 06).
+- [x] Attempt có thể lấy full content qua trusted public API (`getFullContent`
+      sẵn sàng; chưa có consumer thật — Phase 07).
+- [x] Không còn `ExamSnapshotPublishedEvent`/outbox/cache flow trong app.
 - [ ] `V6__itembank.sql` và `V7__assessment.sql` validate được trên Postgres.
-- [ ] Test authoring nguồn và test app xanh.
-- [ ] `ApplicationModules.verify()` pass với dependency một chiều.
+      **(chưa chạy thật — không có Postgres daemon trong phiên này)**
+- [x] Test authoring nguồn và test app xanh (services/authoring giữ nguyên,
+      không đổi; `app` 181/181).
+- [x] `ApplicationModules.verify()` pass với dependency một chiều (thêm
+      `@NamedInterface` cho 2 subpackage của itembank — xem deviation).
 
 ---
 
 ## Quality and Testing State
 
-Chưa thực thi. Cập nhật sau khi hoàn tất port và kiểm tra answer-key boundary.
+**Testing: passed.** Gộp chung một lượt cook với Phase 04 (Media) theo quyết định nén
+phase 8→5 (Phase A — xem `plan.md`). Test riêng: 26/26 (`QuestionValidationHelperTest`
+ported 5, `ItembankServiceTest` 9 gồm freeze()/rotation/access-policy,
+`BlueprintServiceTest` 5, `SnapshotPublishServiceTest` 7). Full `mvn -pl app test`:
+181/181 xanh. `ApplicationModules.verify()` pass với dependency một chiều
+`assessment → itembank → shared` (thêm `@NamedInterface` cho
+`itembank.domain.enums` và `itembank.dto.response` — xem deviation trong report).
+Report: [phase-04-05-media-itembank-assessment-test-report.json](tests/phase-04-05-media-itembank-assessment-test-report.json).
+
+**Quality gate: APPROVED** (0 blocker/high/medium/low/noted) qua review độc lập
+(`quality-reviewer`), phạm vi toàn bộ Phase A (media + itembank + assessment).
+Report: [phase-04-05-media-itembank-assessment-quality-report.json](quality/phase-04-05-media-itembank-assessment-quality-report.json).
+
+Receipt cơ học (`receipt.py issue`) **chưa phát hành được**: script yêu cầu report
+và toàn bộ file được review nằm chung một Git repo, nhưng trong môi trường này
+`pte-doc` (chứa report) và `pte-api` (chứa code) là hai Git repo tách biệt —
+không có root chung để tính fingerprint. Đây là giới hạn hạ tầng đa-repo, không
+phải lỗ hổng trong bản thân review. Nội dung APPROVED/0-finding vẫn là ghi nhận
+hợp lệ; chỉ thiếu artefact fingerprint cơ học.
+
+Answer-key boundary: `AssessmentService.getFullContent` (full-fidelity, có đáp án)
+tách riêng khỏi `getSummary` (answer-stripped); chỉ `attempt` (Phase 07, chưa tới) sẽ
+gọi `getFullContent`. Chưa có ArchUnit rule riêng chặn *ai* gọi `getFullContent` —
+ghi nhận là rủi ro còn mở, review đã nêu ở [red-team trước đó](plan.md), cân nhắc bổ
+sung ở Phase 07 khi có caller thật để kiểm chứng.

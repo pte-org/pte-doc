@@ -85,18 +85,44 @@ qua public in-process API.
 
 ## Acceptance
 
-- [ ] Host tạo, cấu hình, mở và đóng session qua app.
-- [ ] Composition lấy từ assessment summary, không có snapshot ref cache.
-- [ ] Attempt có thể nhận entitlement qua public API.
-- [ ] Bulk enrollment không vượt capacity dưới race.
-- [ ] Proctoring có thể kiểm tra assignment mà không dùng HTTP client.
-- [ ] `V8__session.sql` chạy được trên Postgres monolith.
-- [ ] Test scheduling nguồn và test app xanh.
-- [ ] `ApplicationModules.verify()` pass.
+- [ ] Host tạo, cấu hình, mở và đóng session qua app. **(logic port xong, path/
+      contract giữ nguyên; chưa gọi qua HTTP thật, chưa có Postgres)**
+- [x] Composition lấy từ assessment summary, không có snapshot ref cache
+      (`CompositionService` gọi `AssessmentService.getSummary` mỗi lần, không có
+      bảng `SnapshotRef`/`SnapshotRefItem`).
+- [x] Attempt có thể nhận entitlement qua public API (`SessionService.checkEntitlement`
+      sẵn sàng; chưa có consumer thật — Phase 07).
+- [x] Bulk enrollment không vượt capacity dưới race (pessimistic write lock giữ
+      suốt check-then-insert, kiểm chứng bằng unit test 2 lời gọi tuần tự).
+- [x] Proctoring có thể kiểm tra assignment mà không dùng HTTP client
+      (`SessionService.checkProctorAssignment` sẵn sàng; chưa có consumer thật —
+      Phase 09).
+- [ ] `V8__session.sql` chạy được trên Postgres monolith. **(chưa chạy thật —
+      không có Postgres daemon trong phiên này)**
+- [x] Test scheduling nguồn và test app xanh (services/scheduling giữ nguyên,
+      không đổi; `app` 209/209).
+- [x] `ApplicationModules.verify()` pass (thêm `@NamedInterface` cho
+      `assessment.dto.response` và `session.dto.response`).
 
 ---
 
 ## Quality and Testing State
 
-Chưa thực thi. Cập nhật sau khi entitlement/composition boundary ổn định để bắt đầu
-Phase 07 — mốc luồng thi đầu-cuối.
+**Testing: passed.** 28 test mới (`SessionLifecycleServiceTest` 8 — ported từ
+`SessionServiceLockdownTest`, `EnrollmentServiceTest` 12 — ported, bỏ phần verify
+outbox, `EntitlementServiceTest` 6 mới, `CompositionServiceTest` 2 mới). Full
+`mvn -pl app test`: 209/209 xanh. `ApplicationModules.verify()` pass.
+Report: [phase-06-session-test-report.json](tests/phase-06-session-test-report.json).
+
+**Quality gate: APPROVED** (0 blocker/high/medium/low/noted sau khi sửa 1 finding
+HIGH — thiếu `@NamedInterface` cho `session.dto.response`, cùng mẫu với
+itembank/assessment). Report: [phase-06-session-quality-report.json](quality/phase-06-session-quality-report.json).
+
+Receipt cơ học **chưa phát hành được** — cùng giới hạn đa-repo đã ghi ở Phase A
+(`pte-doc` và `pte-api` là hai Git repo tách biệt trong môi trường này).
+
+Deviation: `HostCommandService` (`requestScoring`/`requestPublish`) và 2 endpoint
+`/score`, `/publish` trên `SessionController` **chưa port** — trong source chỉ phát
+outbox event cho `scoring`/`reporting`, hai module chưa tồn tại. Sẽ port khi làm
+Phase 08 và Phase 10. `SnapshotFetchFailedException` và `EmptyCompositionException`
+(dead code, không nơi nào throw trong source) không port.

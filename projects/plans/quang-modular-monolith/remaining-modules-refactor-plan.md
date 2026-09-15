@@ -124,14 +124,21 @@ Trước khi chuyển phase:
 
 | Phase | Trạng thái | Điều kiện bắt đầu |
 |---|---|---|
-| 04 Media | Chưa bắt đầu | Phase 03 receipt hợp lệ; MinIO test strategy sẵn sàng |
-| 05 Itembank + Assessment | Chưa bắt đầu | Phase 04 app xanh |
-| 06 Session | Chưa bắt đầu | Phase 05 snapshot API ổn định |
-| 07 Attempt | Chưa bắt đầu | Phase 06 entitlement/composition xanh |
-| 08 Scoring | Chưa bắt đầu | Phase 07 end-to-end flow xanh |
-| 09 Proctoring + Notification | Chưa bắt đầu | Phase 08 queue/vendor/email boundary ổn định |
-| 10 Reporting | Chưa bắt đầu | Phase 09 event/public query boundary ổn định |
-| 11 Cutover | Chưa bắt đầu | Phase 10 direct-reporting + full smoke test đạt |
+| 04 Media | **Hoàn tất** (gộp Phase A với 05) | Phase 03 receipt hợp lệ; MinIO test strategy sẵn sàng |
+| 05 Itembank + Assessment | **Hoàn tất** — port xong, 181/181 test xanh, quality gate APPROVED | Phase 04 app xanh |
+| 06 Session | **Hoàn tất** — port xong, 209/209 test xanh, quality gate APPROVED | Phase 05 snapshot API ổn định (đã sẵn sàng — `AssessmentService.getSummary`) |
+| 07 Attempt ★ | **Hoàn tất** — port xong, 301/301 test xanh, quality gate APPROVED | Phase 06 entitlement/composition xanh (đã sẵn sàng — `SessionService.checkEntitlement`) |
+| 08 Scoring | **Hoàn tất** — port xong, 382/382 test xanh, quality gate APPROVED | Phase 07 end-to-end flow xanh (đã sẵn sàng — `AttemptService.forceSubmit`, `AttemptAnswer` là dữ liệu canonical) |
+| 09 Proctoring + Notification | **Hoàn tất** — port xong, 428/428 test xanh, quality gate APPROVED | Phase 08 queue/vendor/email boundary ổn định (đã sẵn sàng — RabbitMQ chỉ còn dùng cho AI scoring work queue, không còn sync artifact) |
+| 10 Reporting | **Hoàn tất** — port xong, 479/479 test xanh, quality gate APPROVED | Phase 09 event/public query boundary ổn định (đã sẵn sàng — event dời sang `reporting.dto.event.AttemptPublishedEvent`, notification's listener nhận thật) |
+| 11 Cutover | **Hoàn tất** — smoke test thật qua Docker đạt, 5 bug runtime-only đã sửa, `services/` đã xóa, `pom.xml` đã gỡ 10 module cũ | Phase 10 direct-reporting + full smoke test đạt |
 
-Bước tiếp theo là mở [phase-04-media.md](phase-04-media.md), bổ sung path test
-thực tế nếu cần, rồi bắt đầu Phase 04.
+Phase A (04+05), Phase 06 (Session), Phase 07 (Attempt ★ — mốc luồng thi
+đầu-cuối), Phase 08 (Scoring), Phase 09 (Proctoring + Notification), Phase 10
+(Reporting — xóa bỏ hoàn toàn `AnswerProjection`) và Phase 11 (Cutover — xóa
+hẳn `services/`, gateway chỉ route vào `app`, 2 replica xác nhận trên một
+Postgres) đã hoàn tất. Toàn bộ kế hoạch modular-monolith đã xong; xem
+[phase-11-cutover.md](phase-11-cutover.md#quality-and-testing-state) và
+[tests/phase-11-cutover-test-report.json](tests/phase-11-cutover-test-report.json)
+cho bằng chứng runtime đầy đủ. Còn lại: người dùng tự commit khi sẵn sàng
+(Cook không tự commit theo yêu cầu).

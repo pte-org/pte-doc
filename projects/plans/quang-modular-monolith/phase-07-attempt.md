@@ -102,18 +102,50 @@ không được gọi lại session, assessment hoặc media để lấy nội d
 
 ## Acceptance
 
-- [ ] Luồng thi đầu-cuối chạy hoàn toàn trong app.
-- [ ] Sau khi pin, attempt không còn gọi HTTP/client sang module khác.
-- [ ] Plain/encrypted answer không thể dùng sai integrity level.
-- [ ] Pinned snapshot immutable và media URL có TTL/duration đúng.
-- [ ] Application event answer/attempt không tạo projection chung.
-- [ ] `V9__attempt.sql` chạy được trên Postgres monolith.
-- [ ] Test exam-delivery nguồn và test app xanh.
-- [ ] `ApplicationModules.verify()` pass.
+- [ ] Luồng thi đầu-cuối chạy hoàn toàn trong app. **(logic port xong, kiểm chứng
+      bằng 92 unit test; chưa chạy HTTP thật, chưa có Postgres/Redis)**
+- [x] Sau khi pin, attempt không còn gọi HTTP/client sang module khác
+      (`SnapshotPinService.pin()` là vòng gọi duy nhất tới session/assessment/media;
+      không phương thức nào khác trong `AttemptLifecycleService` chạm module khác).
+- [x] Plain/encrypted answer không thể dùng sai integrity level
+      (`requireIntegrityLevel` chặn cả hai chiều, kiểm chứng bằng
+      `AttemptLifecycleServiceEncryptedSubmissionTest`).
+- [x] Pinned snapshot immutable và media URL có TTL/duration đúng (deep-copy field
+      values, không giữ tham chiếu id sống — kiểm chứng bằng `SnapshotPinServiceTest`).
+- [x] Application event answer/attempt không tạo projection chung — **chưa phát
+      event nào cả** (không outbox, không projection); event thật sẽ thêm khi
+      Phase 08/09/10 có consumer.
+- [ ] `V9__attempt.sql` chạy được trên Postgres monolith. **(chưa chạy thật —
+      không có Postgres daemon trong phiên này)**
+- [x] Test exam-delivery nguồn và test app xanh (services/exam-delivery giữ
+      nguyên, không đổi; `app` 301/301).
+- [x] `ApplicationModules.verify()` pass (thêm `@NamedInterface` cho
+      `media.dto.response`).
 
 ---
 
 ## Quality and Testing State
 
-Chưa thực thi. Đây là phase cần ưu tiên quality gate và smoke test cao nhất vì là
-mốc demo end-to-end trước khi bắt đầu Scoring.
+**Testing: passed.** 92 test mới — `AttemptLifecycleServiceTest` + 5 file tách theo
+hành vi (submitAnswer/playAudio/submitAttempt/heartbeat/encrypted-submission, ported
+từ 6 file test nguồn), `SnapshotPinServiceTest` (ported, 3 client HTTP thay bằng
+session/assessment/media mock), `AttemptMapperTest`/`TimerServiceTest`/
+`HeartbeatServiceTest`/`SubmissionDecryptionServiceTest`/`TaskTimingConfigTest`/
+`EncryptionKeyProviderTest` (ported nguyên trạng), `ProctorCommandServiceTest` (mới).
+Full `mvn -pl app test`: 301/301 xanh. `ApplicationModules.verify()` pass.
+Report: [phase-07-attempt-test-report.json](tests/phase-07-attempt-test-report.json).
+
+**Quality gate: APPROVED** (0 blocker/high/medium/low/noted, review độc lập —
+đây là phase được soi kỹ nhất vì là mốc demo end-to-end).
+Report: [phase-07-attempt-quality-report.json](quality/phase-07-attempt-quality-report.json).
+
+Receipt cơ học **chưa phát hành được** — cùng giới hạn đa-repo đã ghi ở các phase
+trước (`pte-doc`/`pte-api` là hai Git repo tách biệt trong môi trường này).
+
+Deviation: không port `MockExamController` (dev-only stub thời chưa có backend
+thật, nay itembank/assessment/session/media đã chạy thật nên hết lý do tồn tại),
+`InternalExportController` + `AnswerExportItem`/`AttemptExportItem` (Phase 10 sẽ
+query trực tiếp bảng của attempt thay vì qua export/projection), và bỏ 6 exception
+không còn đường throw trong monolith (4 wrapper 503 cho lỗi gọi HTTP không còn xảy
+ra khi là in-process call, `AttemptNotInProgressException` chết trong source,
+`NotEntitledException` trùng với bản của `session`).
