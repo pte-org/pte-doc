@@ -15,6 +15,33 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 - Không tự `new Subscription()` — chỉ gọi `activate()`.
 - `REVOKED` một mã đã redeem → huỷ Subscription sinh ra từ nó. **Không kèm chuyển tiền** — hoàn tiền không làm ở plan này.
 
+- Preflight: license-code state changes stay in billing-owned entities and repositories; the redeem path uses a single conditional update before calling the public `SubscriptionActivationService`, while revoke uses a transactional domain update and only cancels the linked subscription. Controllers enforce `PLATFORM_ADMIN`/`HOST_ADMIN`; all user-facing codes live in `BillingConstants`; the redeem route remains behind the existing rate-limit filter. No session mutation is added before Phase 11, so scheduled/open/closed exam handling remains an explicit TODO.
+
+## Files
+
+- `pte-api/app/src/main/java/com/pte/billing/domain/LicenseCode.java`
+- `pte-api/app/src/main/java/com/pte/billing/domain/enums/LicenseCodeStatus.java`
+- `pte-api/app/src/main/java/com/pte/billing/domain/Subscription.java`
+- `pte-api/app/src/main/java/com/pte/billing/internal/constant/BillingConstants.java`
+- `pte-api/app/src/main/java/com/pte/billing/internal/controller/LicenseCodeController.java`
+- `pte-api/app/src/main/java/com/pte/billing/internal/controller/LicenseCodeRedeemController.java`
+- `pte-api/app/src/main/java/com/pte/billing/internal/dto/request/IssueLicenseCodeRequest.java`
+- `pte-api/app/src/main/java/com/pte/billing/internal/dto/request/RedeemLicenseCodeRequest.java`
+- `pte-api/app/src/main/java/com/pte/billing/internal/dto/request/RevokeLicenseCodeRequest.java`
+- `pte-api/app/src/main/java/com/pte/billing/internal/dto/response/LicenseCodeResponse.java`
+- `pte-api/app/src/main/java/com/pte/billing/internal/exception/LicenseCodeException.java`
+- `pte-api/app/src/main/java/com/pte/billing/internal/repository/LicenseCodeRepository.java`
+- `pte-api/app/src/main/java/com/pte/billing/internal/repository/SubscriptionRepository.java`
+- `pte-api/app/src/main/java/com/pte/billing/internal/service/LicenseCodeExpirationService.java`
+- `pte-api/app/src/main/java/com/pte/billing/internal/service/LicenseCodeGenerator.java`
+- `pte-api/app/src/main/java/com/pte/billing/internal/service/LicenseCodePersistenceService.java`
+- `pte-api/app/src/main/java/com/pte/billing/internal/service/LicenseCodeService.java`
+- `pte-api/app/src/main/java/com/pte/identity/internal/config/SecurityConfig.java`
+- `pte-api/app/src/main/java/com/pte/shared/web/RateLimitFilter.java`
+- `pte-api/app/src/main/resources/application.yml`
+- `pte-api/app/src/main/resources/db/migration/V19__billing_license_code.sql`
+- `pte-api/.env.example`
+
 ## Steps
 
 1. Enum `LicenseCodeStatus` (`ISSUED`, `REDEEMED`, `REVOKED`, `EXPIRED`).
@@ -65,9 +92,12 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 ## Quality and Testing State
 
-- Quality gate: chưa chạy
-- Testing: chưa bắt đầu
+- Decision checkpoint: unit tests = yes; quality gate = yes (user confirmed).
+- Quality gate: **approved**, 0 blocking/advisory/noted findings. Report: `quality/phase-06-license-code-quality-report.json`. Cryptographic receipt skipped because this report is in `pte-doc` while source files are in the separate `pte-api` repository.
+- Testing result: **passed**, `530` tests, `0` failures, `0` errors, `0` skipped. Report: `tests/phase-06-license-code-test-report.json`.
 
 ## Session Notes
 
-_(trống)_
+- Implemented individual SecureRandom bearer-code issue, atomic redeem, differentiated invalid-state errors, redemption expiry checks, admin revoke, subscription cancellation, expiration job, and a route-specific Redis-backed rate limit.
+- Redeem calls the public `SubscriptionActivationService`; no Phase 6 production code constructs `Subscription` directly. Session cancellation for scheduled/open/closed exams remains an explicit Phase 11 TODO.
+- `LicenseCodeServiceTest`, `LicenseCodeGeneratorTest`, and `LicenseCodeExpirationServiceTest` passed as part of the full app regression suite: `.\mvnw.cmd -pl app test`.

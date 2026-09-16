@@ -8,6 +8,8 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 ## Design Constraints
 
+- Preflight: Phase 11 implementation is in scope; preserve the DB-backed overlap guarantee, subscription-window validation, capacity validation, scheduled-only subscription changes, and public cross-module facades.
+
 - **Chống trùng khung giờ phải ở tầng DB**, không phải tầng application. Check-then-insert ở app chỉ đúng chừng nào *mọi* đường tạo kỳ thi đều nhớ khoá — một endpoint mới quên là thủng và không có gì báo. Flyway đang chạy nên viết được exclusion constraint.
 - **Hai làn khác nhau được phép trùng giờ.** Ràng buộc khoá trên `subscription_id`, không trên `tenant_id`.
 - `capacity` chuyển từ tuỳ chọn (`null` = không giới hạn) thành **bắt buộc**. "Không giới hạn" mất nghĩa khi mọi kỳ thi đều thuộc một gói có cap.
@@ -78,9 +80,13 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 ## Quality and Testing State
 
-- Quality gate: chưa chạy
-- Testing: chưa bắt đầu
+- Decision checkpoint: unit tests = yes; quality gate = yes (user confirmed).
+- Quality gate: APPROVED — no blocking findings; report: `quality/phase-11-session-subscription-constraints-quality-report.json`.
+- Testing: PASSED — focused Phase 11 suite 44/44 and full app regression suite 571/571; report: `tests/phase-11-session-subscription-constraints-test-report.json`.
 
 ## Session Notes
 
-_(trống)_
+- Implemented the DB-backed `subscription_id`/`license_key` session binding, mandatory capacity, PostgreSQL `btree_gist` exclusion constraint, and application conflict translation.
+- Added tenant-scoped active-subscription resolution, deterministic public-ID lock ordering for subscription changes, actual enrollment-count validation, and enrollment license propagation.
+- Added scheduled-session cancellation on redeemed-license revocation through public module facades and after-commit student notifications.
+- PostgreSQL concurrent overlap/deadlock smoke was not run because the local Docker daemon was unavailable; unit coverage and static quality review passed.

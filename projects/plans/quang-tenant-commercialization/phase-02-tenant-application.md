@@ -62,8 +62,20 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 ## Quality and Testing State
 
 - Quality gate: chưa chạy
-- Testing: chưa bắt đầu
+- Testing: `TenantApplicationServiceTest` viết xong (9 test: submit x3, approve x3, reject x2 + implicit not-found), **chưa chạy được** — sandbox không có Java/Maven.
 
 ## Session Notes
 
-_(trống)_
+Implement 2026-09-16. Module `com.pte.billing` mới, toàn bộ dưới `billing.internal.*` trừ `package-info.java` + `BillingService` (facade rỗng — chưa ai gọi vào billing, đúng quy ước "không phình speculative" của `IdentityService`).
+
+**File mới:** `TenantApplicationStatus`, `TenantApplication` (entity), `V15__billing_tenant_application.sql`, `TenantApplicationRepository`, 3 exception (`TenantApplicationNotFoundException`, `RequestedCodeAlreadyUsedException`, `ApplicationNotPendingException`), `BillingConstants`, 2 request DTO + 2 response DTO, `TenantApplicationMapper`, `TenantApplicationService`, `TenantApplicationController`, `TenantApplicationServiceTest`.
+
+**Đụng sang module khác (đúng hướng `billing → tenancy`, `billing → identity`):**
+- `TenantLifecycleService.createFromApplication(...)` — logic giống `onboard()` nhưng validate lại uniqueness thay vì tin caller (thời gian trôi giữa lúc nộp đơn và lúc duyệt).
+- `TenancyService` facade +`existsByCode`, +`createTenant` (trả về entity `Tenant`, không phải DTO nội bộ — `tenancy.domain` đã có `@NamedInterface` sẵn từ trước).
+- `IdentityService` facade +`createHostAdmin`, trả `HostAdminCreated` — **phải để record này ở top-level `com.pte.identity`, không nested trong `IdentityService`**: Spring Modulith không coi type nested trong facade là "exposed" dù facade nằm ở module root. Bài học rút ra giữa chừng khi IDE báo `MODULITH_TYPE_REF_VIOLATION`.
+- `IdentityServiceTest` sửa constructor call (3 tham số thay vì 1).
+
+**Route thật khác với plan gốc:** repo này không dùng tiền tố `/api/` (xác nhận qua `TenantController`/`AuthController` hiện có) — dùng `/applications` (public) và `/admin/applications` (PLATFORM_ADMIN) thay vì `/api/applications`/`/api/admin/applications` như plan.md ghi. Thêm `/applications` vào `SecurityConfig.PUBLIC_PATHS` — path chính xác, không wildcard, vì controller không map method nào khác lên đúng path đó.
+
+**Chưa kiểm chứng được (như Phase 1):** `mvn test`, và riêng phase này còn một khoảng trống test đáng nói — **unique partial index `uq_application_code_active` không kiểm chứng được bằng `@DataJpaTest`** vì quy ước hiện tại của repo (H2 + Hibernate `create-drop`, Flyway tắt) không chạy migration SQL thật, nên index tay viết trong `V15` không tồn tại trong schema test. Chỉ có nhánh kiểm tra ở tầng application (`TenantApplicationService.submit()`) được test; DB-level index cần verify thủ công trên Postgres thật.

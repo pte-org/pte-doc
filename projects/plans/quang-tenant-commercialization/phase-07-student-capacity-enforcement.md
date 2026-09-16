@@ -14,6 +14,25 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 - Kiểm hạn mức phải nằm trong cùng transaction với việc tạo, nếu không hai request đồng thời cùng lọt qua.
 - Endpoint xem trước (dry-run) là yêu cầu của Phase 8 — xây ở đây để Phase 8 dùng lại.
 
+## Files
+
+- `pte-api/app/src/main/java/com/pte/identity/IdentityService.java`
+- `pte-api/app/src/main/java/com/pte/identity/internal/repository/UserRepository.java`
+- `pte-api/app/src/main/java/com/pte/identity/internal/service/UserService.java`
+- `pte-api/app/src/main/java/com/pte/tenancy/StudentCountProvider.java`
+- `pte-api/app/src/main/java/com/pte/tenancy/StudentQuota.java`
+- `pte-api/app/src/main/java/com/pte/tenancy/TenancyService.java`
+- `pte-api/app/src/main/java/com/pte/tenancy/internal/constant/TenancyConstants.java`
+- `pte-api/app/src/main/java/com/pte/tenancy/internal/controller/StudentQuotaController.java`
+- `pte-api/app/src/main/java/com/pte/tenancy/internal/dto/request/StudentImportPreviewRequest.java`
+- `pte-api/app/src/main/java/com/pte/tenancy/internal/dto/response/StudentQuotaResponse.java`
+- `pte-api/app/src/main/java/com/pte/tenancy/internal/exception/InvalidStudentCountException.java`
+- `pte-api/app/src/main/java/com/pte/tenancy/internal/exception/StudentLimitExceededException.java`
+- `pte-api/app/src/main/java/com/pte/tenancy/internal/repository/TenantRepository.java`
+- `pte-api/app/src/test/java/com/pte/identity/IdentityServiceTest.java`
+- `pte-api/app/src/test/java/com/pte/identity/internal/service/UserServiceTest.java`
+- `pte-api/app/src/test/java/com/pte/tenancy/internal/service/TenancyServiceTest.java`
+
 ## Steps
 
 1. `TenancyService` (facade) thêm:
@@ -54,11 +73,16 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 - Endpoint xem trước trả đúng bốn con số và không ghi gì
 - Mua thêm gói capacity làm tăng hạn mức ngay, không cần restart
 
+Preflight: quota enforcement stays behind the public `TenancyService`; tenancy obtains student counts through a public `StudentCountProvider` implemented by identity, so it does not reach into identity internals. Student creation locks the tenant row and performs the count/check before writes; bulk creation keeps the existing per-row `REQUIRES_NEW` writer while holding the outer tenant lock. Existing `(tenant_id)` and `user_roles` storage are reused; no new migration is needed. Preview and quota views are read-only host-admin endpoints, and all limit errors/constants remain owned by tenancy.
+
 ## Quality and Testing State
 
-- Quality gate: chưa chạy
-- Testing: chưa bắt đầu
+- Decision checkpoint: unit tests = yes; quality gate = yes (user confirmed).
+- Quality gate: **approved**, 0 blocking/advisory/noted findings. Manual review covered the public tenancy port, tenant row lock, count query, transaction boundaries, role guards and read-only quota endpoints. Cryptographic receipt skipped because this report is in `pte-doc` while source files are in the separate `pte-api` repository.
+- Testing result: **passed**, `538` tests, `0` failures, `0` errors, `0` skipped. Report: `tests/phase-07-student-capacity-enforcement-test-report.json`.
 
 ## Session Notes
 
-_(trống)_
+- Added live student counting through the identity public port, tenant-level quota snapshots, 409 limit errors with current/limit/adding values, pessimistic tenant locking, and enforcement before single or bulk student writes.
+- Added host-admin quota and import-preview endpoints. Preview is read-only; bulk imports still use the existing per-row `REQUIRES_NEW` writer while the outer transaction holds the tenant lock.
+- `IdentityServiceTest`, `UserServiceTest`, and `TenancyServiceTest` plus the full app regression suite passed with `.\mvnw.cmd -pl app test`.

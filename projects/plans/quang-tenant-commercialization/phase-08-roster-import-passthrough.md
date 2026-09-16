@@ -8,12 +8,39 @@ Maps to: **[ADR-007](../../architecture/ADR-007-student-identity-and-login.md) �
 
 ## Design Constraints
 
+- Preflight: roster import stays inside identity and reaches tenancy only through the public `TenancyService` API (`getTenantCode` and `assertCanAddStudents`); the workbook is processed from bounded in-memory bytes with `.xlsx` magic-byte validation, no application-level file writes, and the existing per-row `REQUIRES_NEW` writer remains the persistence boundary. Auth changes reuse the existing hashed `LoginHash` flow and expose only the `mustChangePassword` flag.
 - **Không có cột bắt buộc, không có file mẫu bắt buộc, không ánh xạ cột.** Trung tâm tách `Họ`/`Tên` riêng hay đặt tên cột kiểu gì cũng được. Bất kỳ cột nào bị coi là bắt buộc cũng sẽ sai với một định dạng nào đó.
 - **Không đối chiếu trùng.** Khoá unique duy nhất là `username` do hệ thống sinh. Mỗi dòng = một sinh viên mới. **Trách nhiệm dữ liệu trùng thuộc trung tâm** — hệ thống không phát hiện, không cảnh báo, không dọn hộ.
 - **Mã trong `username` là ngẫu nhiên**, không sinh từ dữ liệu file. Không hash họ tên, không dùng ngày sinh.
 - **File xuất ra chứa mật khẩu chữ thường của toàn bộ roster.** Tải một lần, không lưu file trên server, buộc đổi mật khẩu ở lần đăng nhập đầu. Một file rò ra là lộ toàn bộ tài khoản của trung tâm đó.
 - Hồ sơ sinh viên trong DB gần như trống — `fullName` null là bình thường (Phase 1 đã cho nullable). Việc đối chiếu tài khoản với người thật nằm ở file trung tâm giữ.
 - Import vẫn chạy **đồng bộ** — giữ nguyên tính chất hiện tại, ghi vào nợ kỹ thuật chứ không giải ở đây.
+
+## Files
+
+- `pte-api/app/pom.xml`
+- `pte-api/app/src/main/java/com/pte/identity/domain/User.java`
+- `pte-api/app/src/main/java/com/pte/identity/internal/constant/IdentityConstants.java`
+- `pte-api/app/src/main/java/com/pte/identity/internal/controller/AuthController.java`
+- `pte-api/app/src/main/java/com/pte/identity/internal/controller/StudentRosterImportController.java`
+- `pte-api/app/src/main/java/com/pte/identity/internal/dto/request/ChangePasswordRequest.java`
+- `pte-api/app/src/main/java/com/pte/identity/internal/dto/response/TokenResponse.java`
+- `pte-api/app/src/main/java/com/pte/identity/internal/exception/InvalidRosterFileException.java`
+- `pte-api/app/src/main/java/com/pte/identity/internal/service/AuthService.java`
+- `pte-api/app/src/main/java/com/pte/identity/internal/service/RosterFileService.java`
+- `pte-api/app/src/main/java/com/pte/identity/internal/service/StudentRosterImportService.java`
+- `pte-api/app/src/main/java/com/pte/identity/internal/service/UserBulkCreateWriter.java`
+- `pte-api/app/src/main/java/com/pte/identity/internal/service/UserService.java`
+- `pte-api/app/src/main/java/com/pte/tenancy/StudentQuota.java`
+- `pte-api/app/src/main/java/com/pte/tenancy/TenancyService.java`
+- `pte-api/app/src/main/java/com/pte/tenancy/internal/controller/StudentQuotaController.java`
+- `pte-api/app/src/main/java/com/pte/tenancy/internal/dto/response/StudentQuotaResponse.java`
+- `pte-api/app/src/main/resources/db/migration/V20__user_must_change_password.sql`
+- `pte-api/app/src/test/java/com/pte/identity/internal/service/AuthServiceTest.java`
+- `pte-api/app/src/test/java/com/pte/identity/internal/service/RosterFileServiceTest.java`
+- `pte-api/app/src/test/java/com/pte/identity/internal/service/StudentRosterImportServiceTest.java`
+- `pte-api/app/src/test/java/com/pte/tenancy/internal/service/TenancyServiceTest.java`
+- `pte-api/app/src/test/java/com/pte/identity/internal/service/UserServiceTest.java`
 
 ## Steps
 
@@ -65,9 +92,12 @@ Maps to: **[ADR-007](../../architecture/ADR-007-student-identity-and-login.md) �
 
 ## Quality and Testing State
 
-- Quality gate: chưa chạy
-- Testing: chưa bắt đầu
+- Decision checkpoint: unit tests = yes; quality gate = yes (user confirmed).
+- Quality gate: **approved**, 0 blocking/advisory/noted findings. Manual review covered the upload boundary, XLSX magic-byte/size/row validation, public identity↔tenancy dependency direction, tenant-quota ordering, per-row `REQUIRES_NEW` writes, first-login password flow, and protected binary response. Cryptographic receipt skipped because this report is in `pte-doc` while source files are in the separate `pte-api` repository.
+- Testing result: **passed**, `550` tests, `0` failures, `0` errors, `0` skipped. Focused Phase 8 scope: `46` tests. Report: `tests/phase-08-roster-import-passthrough-test-report.json`.
 
 ## Session Notes
 
-_(trống)_
+- Added bounded in-memory XLSX roster passthrough with arbitrary headers, appended `account`/`password` columns, generated `{tenant.code}.{random}` student usernames, and no duplicate-roster detection.
+- Added a 409-before-write quota path, retry for the extremely rare generated-username collision, and first-login `mustChangePassword` state with `POST /auth/change-password`.
+- Added host-only `POST /api/students/import` binary export and completed focused/full regression tests with the Phase 8 quality review approved.

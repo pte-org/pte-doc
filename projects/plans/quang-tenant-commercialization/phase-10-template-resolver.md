@@ -8,6 +8,8 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 ## Design Constraints
 
+Preflight: preserve the existing assessment snapshot ownership and mapper/repository conventions; keep resolver persistence under assessment internals, expose generation only through `AssessmentService`, read item bank content only through `ItembankService`/`QuestionFreezeView`, and keep seed/content out of human-facing host responses before the exam opens. Use a deterministic database ordering query rather than application `RANDOM()`, validate all slots before writing any snapshot, snapshot section weights with the generated content, and remove manual authoring/private-item write paths before removing the enum value.
+
 - **Kiểm đủ câu TRƯỚC khi sinh.** Kho thiếu câu cho một slot → 422 kèm tên task type thiếu. Không bao giờ phát đề thiếu câu rồi báo sau.
 - **Lưu `randomSeed`.** Đề đã phát phải tái tạo được để audit và để khiếu nại điểm có cơ sở. Random không lưu seed là random không giải trình được.
 - **Seed và nội dung snapshot không lộ ra ngoài `assessment` trước `opensAt`.** Không endpoint nào trả `randomSeed` hay nội dung câu hỏi cho host trước giờ thi — nếu không thì "random đề" chỉ là trang trí.
@@ -70,9 +72,12 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 ## Quality and Testing State
 
-- Quality gate: chưa chạy
-- Testing: chưa bắt đầu
+- Decision checkpoint: unit tests = yes; quality gate = yes (user confirmed).
+- Quality gate: **approved**, 0 blocking/advisory/noted findings. Manual review covered deterministic seeded selection, pre-write availability validation, snapshot deep-copy ownership, immutable section-weight capture, public facade boundaries, platform-only authoring/read surfaces, and the SHARED/APPROVED item-bank invariant. Cryptographic receipt skipped because this report is in `pte-doc` while reviewed source files live in the separate `pte-api` repository.
+- Testing result: **passed**, 561 tests, 0 failures, 0 errors, 0 skipped. Focused Phase 10 scope: 37 tests. Report: `tests/phase-10-template-resolver-test-report.json`.
 
 ## Session Notes
 
-_(trống)_
+- Added deterministic template resolver with aggregate per-task-type reservation, all-slot 422 validation, deep-copied snapshot content, random seed, and immutable section weights.
+- Removed manual blueprint authoring/publish routes and retired the PRIVATE visibility value; platform question writes now create SHARED/APPROVED items with a database tenant-null invariant.
+- Updated reporting to read weights from the attempt's pinned snapshot provenance and added host exposure/security-surface coverage.

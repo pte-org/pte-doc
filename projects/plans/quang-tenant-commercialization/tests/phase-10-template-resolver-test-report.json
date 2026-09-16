@@ -1,0 +1,25 @@
+{
+  "phase": "phase-10-template-resolver",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-16T16:54:21Z",
+  "summary": {
+    "passed": 561,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "command": ".\\mvnw.cmd -pl app test",
+  "compile_command": ".\\mvnw.cmd -pl app -DskipTests compile",
+  "scope": "Phase 10 template resolver, snapshot, item-bank, reporting, and host exposure tests plus full app regression suite",
+  "phase_tests": {
+    "TemplateResolverServiceTest": 5,
+    "SnapshotPublishServiceTest": 3,
+    "ScoreAggregationServiceTest": 14,
+    "ItembankServiceTest": 11,
+    "BlueprintServiceTest": 3,
+    "TemplateExposureSecurityTest": 1
+  },
+  "focused_phase_tests": 37,
+  "regression_tests": 561
+}

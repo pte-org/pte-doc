@@ -15,6 +15,36 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 - Không tự `new Subscription()` — chỉ gọi `SubscriptionActivationService.activate()`.
 - Secret PayOS (`clientId`, `apiKey`, `checksumKey`) đọc từ biến môi trường, **không** commit vào repo, thêm vào `.env.example` dạng rỗng.
 
+- Preflight: Billing giữ entity/repository/service/controller nội bộ và response DTO riêng; PayOS được cô lập trong `internal/vendor/payos`. Order giữ snapshot amount/currency, dùng sequence riêng cho `orderCode`, partial unique index chống pending trùng và pessimistic lock để webhook idempotent. Webhook `/api/webhooks/payos` được permit công khai nhưng vẫn đi qua rate-limit filter; payload/signature và amount/currency từ PayOS đều được validate trước khi kích hoạt. Luồng tạo order reserve DB trước rồi mới gọi PayOS, sau đó cập nhật payment link trong transaction ngắn; job hết hạn chỉ chuyển order sau khi huỷ link thành công.
+
+## Files
+
+- `app/src/main/java/com/pte/billing/domain/Order.java`
+- `app/src/main/java/com/pte/billing/domain/PaymentTransaction.java`
+- `app/src/main/java/com/pte/billing/domain/enums/OrderStatus.java`
+- `app/src/main/java/com/pte/billing/internal/controller/OrderController.java`
+- `app/src/main/java/com/pte/billing/internal/controller/PayOsWebhookController.java`
+- `app/src/main/java/com/pte/billing/internal/dto/request/CreateOrderRequest.java`
+- `app/src/main/java/com/pte/billing/internal/dto/response/OrderResponse.java`
+- `app/src/main/java/com/pte/billing/internal/exception/OrderException.java`
+- `app/src/main/java/com/pte/billing/internal/exception/PayOsException.java`
+- `app/src/main/java/com/pte/billing/internal/exception/PaymentWebhookException.java`
+- `app/src/main/java/com/pte/billing/internal/repository/OrderRepository.java`
+- `app/src/main/java/com/pte/billing/internal/repository/PaymentTransactionRepository.java`
+- `app/src/main/java/com/pte/billing/internal/service/OrderExpirationService.java`
+- `app/src/main/java/com/pte/billing/internal/service/OrderPersistenceService.java`
+- `app/src/main/java/com/pte/billing/internal/service/OrderService.java`
+- `app/src/main/java/com/pte/billing/internal/service/PayOsWebhookService.java`
+- `app/src/main/java/com/pte/billing/internal/service/PaymentTransactionPersistenceService.java`
+- `app/src/main/java/com/pte/billing/internal/vendor/payos/PayOsClient.java`
+- `app/src/main/java/com/pte/billing/internal/vendor/payos/PayOsConfig.java`
+- `app/src/main/java/com/pte/billing/internal/vendor/payos/PayOsProperties.java`
+- `app/src/main/java/com/pte/billing/internal/constant/BillingConstants.java`
+- `app/src/main/java/com/pte/identity/internal/config/SecurityConfig.java`
+- `app/src/main/resources/application.yml`
+- `app/src/main/resources/db/migration/V18__billing_order_payment.sql`
+- `.env.example`
+
 ## Steps
 
 1. Enum `OrderStatus` (`PENDING`, `PAID`, `CANCELLED`, `EXPIRED`).
@@ -67,9 +97,17 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 ## Quality and Testing State
 
-- Quality gate: chưa chạy
-- Testing: chưa bắt đầu
+- Decision checkpoint: unit tests = no (user confirmed skip); quality gate = yes (user confirmed).
+- Testing decision: skipped_by_user (not_started; user confirmed no).
+- Quality decision: user confirmed yes; gate completed.
+- Quality result: **APPROVED**, 0 blocking/advisory/noted findings. Report: `quality/phase-05-payos-purchase-quality-report.json`. Cryptographic receipt skipped because this report is in `pte-doc` while source files are in the separate `pte-api` repository.
+- Testing result: skipped by user, not started, per checkpoint decision.
+
+- Quality gate: **approved**, report and user decision are recorded above.
+- Testing: **skipped_by_user**, not started, because the user selected no.
 
 ## Session Notes
 
-_(trống)_
+- Implemented order reservation/payment-link flow, PayOS REST/HMAC adapter, public webhook verification, idempotent order locking, append-only transaction audit, and stale-order cancellation job.
+- PayOS signature construction was checked against the current official API and webhook-signature documentation; the implementation signs the documented five create-link fields and sorts webhook `data` keys alphabetically.
+- `.\mvnw.cmd -pl app -DskipTests compile` passed. Unit tests were intentionally not run because the user selected no. Runtime Flyway/PostgreSQL and PayOS integration remain unverified while Docker/credentials are unavailable.

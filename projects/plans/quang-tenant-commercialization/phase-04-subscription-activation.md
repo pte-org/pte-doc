@@ -14,6 +14,8 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 - `licenseKey` unique toàn cục, dạng người đọc được, **bất biến** theo vòng đời Subscription.
 - `STUDENT_CAPACITY` đi nhánh khác hoàn toàn: không sinh Subscription, gọi thẳng `QuotaTransactionService.grant()`.
 
+- Preflight: Billing tiếp tục dùng entity/repository/service/controller nội bộ, DTO response và constants lỗi thuộc module; cross-module tenancy chỉ đi qua `TenancyService`. Subscription lưu scalar `tenantId`/`planId`, dùng `publicId` ở API, `@PreAuthorize` tường minh, và lịch chạy theo `@Scheduled` hiện có. Phase 4 dùng route root-level `/subscriptions` theo convention monolith, không thêm prefix `/api`.
+
 ## Steps
 
 1. Enum `SubscriptionStatus` (`ACTIVE`, `EXPIRED`, `CANCELLED`).
@@ -53,9 +55,21 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 ## Quality and Testing State
 
-- Quality gate: chưa chạy
-- Testing: chưa bắt đầu
+- Decision checkpoint: unit tests = no (user confirmed skip); quality gate = yes (user confirmed).
+- Testing decision: skipped_by_user (not_started; user confirmed no).
+- Quality decision: user confirmed yes; gate pending.
+- Quality result: **APPROVED**, 0 blocking/advisory/noted findings. Report: `quality/phase-04-subscription-activation-quality-report.json`. Cryptographic receipt skipped because this report is in `pte-doc` while source files are in the separate `pte-api` repository.
+- Testing result: **skipped by user**, not started, per the Phase 4 checkpoint decision.
+
+- Quality gate: **approved**, report and user decision are recorded above.
+- Testing: **skipped_by_user**, not started, because the user selected no.
 
 ## Session Notes
 
 _(trống)_
+
+- Implemented `SubscriptionStatus`, `ActivationSource`, `Subscription`, V17 schema/indexes, readable SecureRandom license keys with bounded collision retry, and one activation path for both plan families.
+- `EXAM_PACKAGE` snapshots cap and expiry from activation time; `STUDENT_CAPACITY` writes through `TenancyService.grantQuota()` to the existing quota ledger and creates no Subscription.
+- `BillingService` exposes non-ORM active-subscription views for future session validation; `/subscriptions` returns only rows whose status and timestamps are both currently valid.
+- Expiry job runs every minute by default and updates ACTIVE rows with `expiresAt <= now`; app reads remain defensive if the scheduler has not run yet.
+- Build Gate passed with `.\mvnw.cmd -pl app -DskipTests compile` (`BUILD SUCCESS`). Tests were intentionally not run because the user selected no. Docker/PostgreSQL runtime migration validation remains unavailable while Docker Desktop is stopped.

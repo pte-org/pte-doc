@@ -1,0 +1,22 @@
+{
+  "phase": "phase-08-roster-import-passthrough",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-16T16:04:17Z",
+  "summary": {
+    "passed": 550,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "command": ".\\mvnw.cmd -pl app test",
+  "scope": "Phase 8 roster import tests plus full app regression suite",
+  "phase_tests": {
+    "AuthServiceTest": 12,
+    "RosterFileServiceTest": 6,
+    "StudentRosterImportServiceTest": 3,
+    "UserBulkCreateWriterTest": 3,
+    "UserServiceTest": 16,
+    "TenancyServiceTest": 6
+  }
+}

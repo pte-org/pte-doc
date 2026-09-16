@@ -1,0 +1,47 @@
+{
+  "mode": "gate",
+  "target": "phase-08-roster-import-passthrough",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-16T16:04:17Z",
+  "reviewed_files": [
+    "pte-api/app/pom.xml",
+    "pte-api/app/src/main/java/com/pte/identity/domain/User.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/constant/IdentityConstants.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/controller/AuthController.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/controller/StudentRosterImportController.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/dto/request/ChangePasswordRequest.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/dto/response/TokenResponse.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/exception/InvalidRosterFileException.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/service/AuthService.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/service/RosterFileService.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/service/StudentRosterImportService.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/service/UserBulkCreateWriter.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/service/UserService.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/StudentQuota.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/TenancyService.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/internal/controller/StudentQuotaController.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/internal/dto/response/StudentQuotaResponse.java",
+    "pte-api/app/src/main/resources/db/migration/V20__user_must_change_password.sql"
+  ],
+  "conventions_checked_against": [
+    "pte-api/app/src/main/java/com/pte/identity/internal/controller/UserController.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/service/UserBulkCreateWriter.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/service/AuthService.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/TenancyService.java",
+    "pte-api/app/src/main/java/com/pte/shared/exception/GlobalExceptionHandler.java",
+    "pte-api/app/src/main/resources/db/migration/V19__billing_license_code.sql"
+  ],
+  "findings": [],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "noted_count": 0,
+  "receipt_status": "skipped_cross_repo_boundary",
+  "receipt_note": "The quality report lives in pte-doc while reviewed source files live in the separate pte-api repository; the local receipt script cannot fingerprint files across repository roots."
+}

@@ -1,7 +1,7 @@
 # Plan: Thương mại hoá tenant & định danh sinh viên
 
-Status: 🟡 In progress — Phase 1 code written, chưa chạy test (xem Session Notes phase-01)
-Date: 2026-09-16
+Status: 🟡 In progress — Phase 11 implemented, tested, and quality-approved; Phase 1/2 checklist state remains pending its own recorded gates
+Date: 2026-09-17
 Mode: Hard
 Created by: Quang
 Specs: [ADR-006](../../architecture/ADR-006-commercialization-and-exam-templates.md) · [ADR-007](../../architecture/ADR-007-student-identity-and-login.md)
@@ -18,15 +18,15 @@ Kèm theo: gỡ ràng buộc email-unique-toàn-cục đang chặn một ngườ
 
 - [ ] Phase 1: Nền tảng định danh — `Tenant.code`, `User.username`, chuyển login sang `findByUsername`, backfill toàn bộ user hiện có
 - [ ] Phase 2: Đăng ký & thẩm định tổ chức — `TenantApplication`, giữ chỗ mã từ lúc nộp đơn, duyệt → tạo Tenant + user OWNER
-- [ ] Phase 3: Catalog gói & tham số nền tảng — `Plan` (EXAM_PACKAGE / STUDENT_CAPACITY), `PlatformSetting.freeStudentLimit`
-- [ ] Phase 4: Lõi kích hoạt Subscription — `Subscription` + `licenseKey`, **một nơi duy nhất sinh Subscription**, snapshot cap từ Plan
-- [ ] Phase 5: Mua gói qua PayOS — `Order` + `orderCode` sequence, tạo payment link, webhook verify chữ ký + idempotent
-- [ ] Phase 6: Mã kích hoạt — `LicenseCode` phát lẻ, redeem atomic, `REVOKED` huỷ luôn Subscription
-- [ ] Phase 7: Enforce hạn mức sinh viên — `Tenant.studentLimit` từ cột trang trí thành ràng buộc thật, kiểm theo lô
-- [ ] Phase 8: Import roster passthrough — nhận file bất kỳ, sinh N tài khoản, xuất lại file + cột `account`/`password`
-- [ ] Phase 9: Catalog template đề — `ExamTemplate` + `TemplateSection` (% điểm, Σ=100) + `TemplateSlot`, platform-owned
-- [ ] Phase 10: Sinh đề từ template — random có seed, kiểm đủ câu trước khi sinh, rút đường soạn đề thủ công, kho đề chỉ còn SHARED
-- [ ] Phase 11: Ràng buộc kỳ thi ↔ gói — C1–C4, exclusion constraint chống trùng khung giờ, đổi gói khi còn `SCHEDULED`
+- [x] Phase 3: Catalog gói & tham số nền tảng — `Plan` (EXAM_PACKAGE / STUDENT_CAPACITY), `PlatformSetting.freeStudentLimit` [quality: approved; testing: passed]
+- [x] Phase 4: Lõi kích hoạt Subscription — `Subscription` + `licenseKey`, **một nơi duy nhất sinh Subscription**, snapshot cap từ Plan [quality: approved; testing: skipped_by_user]
+- [x] Phase 5: Mua gói qua PayOS — `Order` + `orderCode` sequence, tạo payment link, webhook verify chữ ký + idempotent [quality: approved; testing: passed]
+- [x] Phase 6: Mã kích hoạt — `LicenseCode` phát lẻ, redeem atomic, `REVOKED` huỷ luôn Subscription [quality: approved; testing: passed]
+- [x] Phase 7: Enforce hạn mức sinh viên — `Tenant.studentLimit` từ cột trang trí thành ràng buộc thật, kiểm theo lô [quality: approved; testing: passed]
+- [x] Phase 8: Import roster passthrough — nhận file bất kỳ, sinh N tài khoản, xuất lại file + cột `account`/`password` [quality: approved; testing: passed]
+- [x] Phase 9: Catalog template đề — `ExamTemplate` + `TemplateSection` (% điểm, Σ=100) + `TemplateSlot`, platform-owned [quality: approved; testing: passed]
+- [x] Phase 10: Sinh đề từ template — random có seed, kiểm đủ câu trước khi sinh, rút đường soạn đề thủ công, kho đề chỉ còn SHARED [quality: approved; testing: passed]
+- [x] Phase 11: Ràng buộc kỳ thi ↔ gói — C1–C4, exclusion constraint chống trùng khung giờ, đổi gói khi còn `SCHEDULED` [quality: approved; testing: passed]
 - [ ] Phase 12: Trùng slot sinh viên — phát hiện bằng một query, loại khỏi lô, thông báo tenant
 - [ ] Phase 13: Điểm có trọng số & đình chỉ tenant — `Σ(điểm phần × %)`, `suspendedUntil` mặc định 0
 

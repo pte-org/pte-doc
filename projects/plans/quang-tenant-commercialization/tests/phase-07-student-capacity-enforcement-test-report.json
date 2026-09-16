@@ -1,0 +1,19 @@
+{
+  "phase": "phase-07-student-capacity-enforcement",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-16T15:48:17Z",
+  "summary": {
+    "passed": 538,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "command": ".\\mvnw.cmd -pl app test",
+  "scope": "Phase 7 quota-enforcement tests plus full app regression suite",
+  "phase_tests": {
+    "TenancyServiceTest": 6,
+    "IdentityServiceTest": 4,
+    "UserServiceTest": 15
+  }
+}

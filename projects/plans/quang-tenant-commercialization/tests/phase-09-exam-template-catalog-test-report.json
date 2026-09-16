@@ -1,0 +1,21 @@
+{
+  "phase": "phase-09-exam-template-catalog",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-16T16:23:10Z",
+  "summary": {
+    "passed": 559,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "command": ".\\mvnw.cmd -pl app test",
+  "compile_command": ".\\mvnw.cmd -pl app -DskipTests compile",
+  "scope": "Phase 9 template catalog tests plus full app regression suite",
+  "phase_tests": {
+    "TemplateServiceTest": 8,
+    "ItembankServiceTest": 10
+  },
+  "focused_phase_tests": 18,
+  "regression_tests": 559
+}

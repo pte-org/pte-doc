@@ -1,0 +1,42 @@
+{
+  "mode": "gate",
+  "target": "phase-07-student-capacity-enforcement",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-16T15:48:17Z",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/identity/IdentityService.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/repository/UserRepository.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/service/UserService.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/StudentCountProvider.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/StudentQuota.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/TenancyService.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/internal/constant/TenancyConstants.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/internal/controller/StudentQuotaController.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/internal/dto/request/StudentImportPreviewRequest.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/internal/dto/response/StudentQuotaResponse.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/internal/exception/InvalidStudentCountException.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/internal/exception/StudentLimitExceededException.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/internal/repository/TenantRepository.java"
+  ],
+  "conventions_checked_against": [
+    "pte-api/app/src/main/java/com/pte/identity/internal/service/UserBulkCreateWriter.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/controller/UserController.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/internal/service/QuotaTransactionService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/repository/ExamSessionRepository.java",
+    "pte-api/app/src/main/java/com/pte/shared/exception/GlobalExceptionHandler.java",
+    "pte-api/app/src/main/resources/db/migration/V3__tenancy.sql"
+  ],
+  "findings": [],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "noted_count": 0,
+  "receipt_status": "skipped_cross_repo_boundary",
+  "receipt_note": "The quality report lives in pte-doc while reviewed source files live in the separate pte-api repository; the local receipt script cannot fingerprint files across repository roots."
+}
