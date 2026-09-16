@@ -14,7 +14,6 @@ Maps to: **[ADR-007](../../architecture/ADR-007-student-identity-and-login.md) �
 - `email` nullable và **bỏ unique** — chỉ có nghĩa với đường tạo sinh viên. Các vai trò khác vẫn phải có email và `email` = `username` nên vẫn unique trên thực tế.
 - `fullName` chuyển sang nullable (Phase 8 cần, gộp luôn vào đây để chỉ một lần đụng bảng `users`).
 - **Sửa thẳng `V2__identity.sql` và `V3__tenancy.sql`**, không thêm migration mới. Lịch sử migration nên kể câu chuyện của production — mà production chưa tồn tại. Cả đội `docker compose down -v` rồi dựng lại.
-- **`V3__tenancy.sql` cũng bị [plan RLS](../quang-row-level-security/plan.md) P2 sửa** (đổi `organizations.tenant_id`/`quota_transactions.tenant_id` sang `UUID`). **RLS P2 merge trước, phase này rebase lên trên.** Một lần `docker compose down -v` chung cho cả hai plan.
 
 ## Steps
 
@@ -56,8 +55,22 @@ Maps to: **[ADR-007](../../architecture/ADR-007-student-identity-and-login.md) �
 ## Quality and Testing State
 
 - Quality gate: chưa chạy
-- Testing: chưa bắt đầu
+- Testing: code + test đã viết (`AuthServiceTest` 8 vai trò + 3 test lỗi, `UserRepositoryTest` 2 test), **chưa chạy được** — sandbox không có Java/Maven/Docker. Cần chạy `mvn test` thật trước khi merge.
 
 ## Session Notes
 
-_(trống)_
+Implement 2026-09-16. File đã sửa/tạo:
+
+**Migration:** `V2__identity.sql` (thêm `username` NOT NULL UNIQUE, `email`/`full_name` nullable), `V3__tenancy.sql` (thêm `tenants.code` NOT NULL UNIQUE).
+
+**Entity/service:** `Tenant.java` (+`code`), `User.java` (+`username`, `email`/`fullName` nullable), `TenantLifecycleService.onboard()` (validate + set `code`), `UserService.create()`/`UserBulkCreateWriter.createOne()` (set `username = email`, duplicate check chuyển sang `existsByUsername`), `AuthService.login()` (`findByUsername` thay `findByEmail`), `LoginRequest` (field `username` thay `email`).
+
+**Mới:** `TenantCodeAlreadyUsedException`, `UsernameGenerator` (`{tenant.code}.{random}`, chưa gọi ở đâu — Phase 8 dùng).
+
+**DTO đụng theo:** `OnboardTenantRequest` (+`code`, có validate regex), `TenantResponse`/`TenantMapper` (+`code`).
+
+**Test/call site đã vá để không vỡ compile:** `TenantLifecycleServiceTest` (thêm `code` vào request + helper), 4 file `@DataJpaTest` trong `enrollment.internal.repository` (thêm `tenant.setCode(...)` trước khi save), `UserServiceTest` (stub `existsByUsername` thay `existsByEmail`), `README.md` + `scripts/seed-e2e.ps1` (bootstrap SQL + login body thêm `username`).
+
+**Chưa làm trong phase này (đúng như thiết kế, Phase 8 lo):** roster import chưa gọi `UsernameGenerator`; `UserService.createBulk()` vẫn `username = email` cho STUDENT.
+
+**Việc còn nợ trước khi merge:** chạy `mvn clean test` thật (không chạy được trong sandbox này), xác nhận `AuthServiceTest`/`UserRepositoryTest` xanh, và soi lại `ddl-auto: validate` khởi động không lỗi.

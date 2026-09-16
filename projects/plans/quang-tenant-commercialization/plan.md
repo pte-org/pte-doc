@@ -1,6 +1,6 @@
 # Plan: Thương mại hoá tenant & định danh sinh viên
 
-Status: 🔵 Not started
+Status: 🟡 In progress — Phase 1 code written, chưa chạy test (xem Session Notes phase-01)
 Date: 2026-09-16
 Mode: Hard
 Created by: Quang
@@ -81,11 +81,7 @@ P4 + P10 ──> P11 ──> P12 ──> P13
 
 **Hạ tầng đã xác minh:**
 - Flyway đang chạy (`flyway.enabled: true`, `ddl-auto: validate`, `V1..V13`) → **viết được SQL thủ công**: exclusion constraint, partial index, extension đều trong tầm.
-- **Hệ thống chưa có dữ liệu thật** → P1 sửa thẳng `V2__identity.sql` và `V3__tenancy.sql` thay vì thêm migration mới; cả đội `docker compose down -v` một lần. Đây là **ngoại lệ duy nhất**; từ Phase 2 trở đi chỉ thêm migration mới và không bao giờ sửa migration đã tồn tại nữa.
-
-- **Dải migration: plan này dùng `V21`–`V32`.** `V14`–`V20` đã được [plan RLS](../quang-row-level-security/plan.md) giữ chỗ — RLS là **Phase 0**, land trước Phase 2 của plan này. Đừng lấy số dưới `V21`.
-
-- **`V3__tenancy.sql` bị hai plan cùng sửa** — RLS P2 đổi `organizations.tenant_id` và `quota_transactions.tenant_id` từ `BIGINT` sang `UUID`; P1 của plan này thêm `tenants.code`. Thứ tự chốt: **RLS P2 merge trước** (đổi kiểu cột, ảnh hưởng sâu hơn), P1 của plan này **rebase lên trên**, rồi cả đội `docker compose down -v` **một lần cho cả hai plan** — không phải hai lần.
+- **Hệ thống chưa có dữ liệu thật** → P1 sửa thẳng `V2__identity.sql` và `V3__tenancy.sql` thay vì thêm migration mới; cả đội `docker compose down -v` một lần. Đây là **ngoại lệ duy nhất**; từ Phase 2 trở đi chỉ thêm `V15`, `V16`, … và không bao giờ sửa migration đã tồn tại nữa.
 
 ## Rủi ro
 

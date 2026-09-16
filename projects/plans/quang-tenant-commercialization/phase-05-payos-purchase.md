@@ -23,7 +23,7 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 3. Entity `PaymentTransaction`: append-only, **không sửa sau khi tạo**. `orderCode`, `rawPayload`, `signatureValid`, `receivedAt`, `processed`.
 
-4. Migration `V24__billing_order_payment.sql` + sequence `order_code_seq` (bắt đầu từ một số đủ lớn để không đụng dải test của PayOS).
+4. Migration `V18__billing_order_payment.sql` + sequence `order_code_seq` (bắt đầu từ một số đủ lớn để không đụng dải test của PayOS).
 
 5. `PayOsProperties` (`@ConfigurationProperties`): `clientId`, `apiKey`, `checksumKey`, `returnUrl`, `cancelUrl`, `baseUrl`. Validate có mặt lúc khởi động — thiếu secret phải nổ lúc start, không phải lúc tenant bấm mua.
 

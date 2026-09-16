@@ -24,7 +24,7 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 4. Entity `TemplateSlot`: FK `template_section_id`, `taskType` (`PteTaskType`), `questionCount` (int > 0), `orderIndex`.
 
-5. Migration `V27__assessment_exam_template.sql`, index trên `(status)`.
+5. Migration `V21__assessment_exam_template.sql`, index trên `(status)`.
 
 6. `TemplateService` — CRUD cho `PLATFORM_AUTHOR` / `PLATFORM_ADMIN`:
    - Lưu `DRAFT` không kiểm tổng %

@@ -23,7 +23,7 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 2. Entity `TenantApplication` (`billing/domain/`): `orgName`, `orgType`, `requestedCode`, `contactEmail`, `contactPhone`, `taxCode`, `status` (`PENDING`/`APPROVED`/`REJECTED`), `reviewedBy`, `reviewedAt`, `rejectReason`.
 
-3. Migration `V21__billing_tenant_application.sql`. `requested_code` có **unique partial index** trên các đơn còn giữ chỗ:
+3. Migration `V15__billing_tenant_application.sql`. `requested_code` có **unique partial index** trên các đơn còn giữ chỗ:
    ```sql
    CREATE UNIQUE INDEX uq_application_code_active
      ON tenant_applications (requested_code)
