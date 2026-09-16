@@ -19,7 +19,7 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 1. `ExamSnapshot` thêm: `templatePublicId`, `randomSeed` (long), `sectionWeights` (JSON hoặc bảng con `SnapshotSectionWeight` — chọn bảng con để `reporting` query được mà không parse JSON).
 
-2. Migration `V22__assessment_snapshot_template.sql` + bảng `snapshot_section_weights`.
+2. Migration `V28__assessment_snapshot_template.sql` + bảng `snapshot_section_weights`.
 
 3. `QuestionRepository.findRandomByTaskType(taskType, limit, seed)` — dùng `ORDER BY md5(id::text || :seed)` để random **tất định theo seed**, không dùng `RANDOM()` (không tái tạo được). Chỉ lấy câu `SHARED` và `status = APPROVED`.
 

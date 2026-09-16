@@ -20,7 +20,7 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 2. Entity `Subscription`: `tenantId`, `planId`, `licenseKey` (unique), `startsAt`, `expiresAt`, `maxStudentsPerSession` (**snapshot**), `status`, `activationSource` (`PAYMENT`/`LICENSE_CODE`).
 
-3. Migration `V17__billing_subscription.sql`, index trên `(tenant_id, status)` — truy vấn "gói nào của tenant này còn dùng được" chạy ở mọi lần tạo kỳ thi.
+3. Migration `V23__billing_subscription.sql`, index trên `(tenant_id, status)` — truy vấn "gói nào của tenant này còn dùng được" chạy ở mọi lần tạo kỳ thi.
 
 4. `LicenseKeyGenerator`: `PTE-{PLAN_CODE}-{YYYY}-{6 ký tự}`, phần ngẫu nhiên từ `SecureRandom`, bỏ ký tự dễ nhìn nhầm (`0`/`O`, `1`/`I`/`l`). Trùng thì bắt `DataIntegrityViolationException` rồi sinh lại, giới hạn số lần thử.
 

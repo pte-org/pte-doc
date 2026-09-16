@@ -30,7 +30,7 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 3. `AttemptReport` thêm điểm từng phần + trọng số đã áp dụng, để phiếu điểm giải thích được con số tổng.
 
-4. Migration `V25__reporting_section_scores.sql`.
+4. Migration `V31__reporting_section_scores.sql`.
 
 5. Test: snapshot có trọng số 30/20/25/25, điểm phần 80/60/70/90 → tổng = 76.5.
 
@@ -40,7 +40,7 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 ### Phần B — đình chỉ tenant
 
-8. `Tenant` thêm `suspendedUntil` (Instant, nullable). Migration `V26__tenant_suspension.sql`.
+8. `Tenant` thêm `suspendedUntil` (Instant, nullable). Migration `V32__tenant_suspension.sql`.
 
 9. `TenantLifecycleService.suspend(publicId, days)`:
    - `days == 0` hoặc null → `suspendedUntil = null` (không tự hết hạn)

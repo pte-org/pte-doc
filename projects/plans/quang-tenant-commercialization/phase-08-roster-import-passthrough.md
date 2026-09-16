@@ -25,7 +25,7 @@ Maps to: **[ADR-007](../../architecture/ADR-007-student-identity-and-login.md) �
 
 3. Giới hạn đầu vào: kích thước file tối đa, số dòng tối đa, chỉ chấp nhận `.xlsx`. Vượt → 422 nói rõ giới hạn. Đây là endpoint nhận file từ bên ngoài nên validate là bắt buộc, không phải tuỳ chọn.
 
-4. `User` thêm `mustChangePassword` (boolean, mặc định `false`); migration `V20__user_must_change_password.sql`. Tài khoản sinh viên tạo qua import đặt `true`.
+4. `User` thêm `mustChangePassword` (boolean, mặc định `false`); migration `V26__user_must_change_password.sql`. Tài khoản sinh viên tạo qua import đặt `true`.
 
 5. `AuthService.login()`: trả thêm cờ `mustChangePassword` trong `TokenResponse`. Không chặn đăng nhập — FE dựa vào cờ này để ép sang màn đổi mật khẩu.
 

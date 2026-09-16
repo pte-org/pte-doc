@@ -18,7 +18,7 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 1. `EnrollmentRepository.findConflictingEnrollments(tenantId, studentPublicIds, opensAt, closesAt)` — một câu, join `enrollments` với `exam_sessions`, trả về `(studentPublicId, conflictingSessionPublicId, conflictingSessionName)`.
 
-2. Index hỗ trợ: `exam_sessions (tenant_id, opens_at, closes_at)`. Migration `V24__session_conflict_index.sql`. Đo `EXPLAIN` trên dữ liệu giả 10.000 enrollment trước khi chốt index.
+2. Index hỗ trợ: `exam_sessions (tenant_id, opens_at, closes_at)`. Migration `V30__session_conflict_index.sql`. Đo `EXPLAIN` trên dữ liệu giả 10.000 enrollment trước khi chốt index.
 
 3. `BulkEnrollResponse` thêm nhánh thứ ba:
    ```java

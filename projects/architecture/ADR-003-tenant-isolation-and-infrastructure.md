@@ -20,6 +20,24 @@ Nhiều tenant chung một ứng dụng **không** phải vấn đề nếu xử
 
 > RLS bây giờ khả thi hơn lúc viết ADR gốc: Flyway đang chạy nên viết được `CREATE POLICY` trong migration. Và nó **cấp bách hơn** — [ADR-006](ADR-006-commercialization-and-exam-templates.md)/[ADR-007](ADR-007-student-identity-and-login.md) thêm `subscription_id`, `license_key`, `tenant.code`; càng nhiều cột tenant-scoped thì càng nhiều chỗ quên `WHERE`.
 
+**Kế hoạch triển khai: [plans/quang-row-level-security](../plans/quang-row-level-security/plan.md)** (7 phase, chốt 2026-09-16). Định vị là **Phase 0 của thương mại hoá** — phải land trước Phase 2 của [plan commercialization](../plans/quang-tenant-commercialization/plan.md), vì từ phase đó trở đi mỗi bảng tenant-scoped mới sinh ra đều cần policy. Dải migration `V14`–`V20` đã giữ chỗ cho RLS; commercialization dời xuống `V21`–`V32`.
+
+Phạm vi: **33 bảng có policy** — 23 Class A (`tenant_id` NOT NULL, so khớp thẳng) và 10 Class B (`tenant_id` nullable, `NULL` = nội dung platform: đọc được nhưng tenant **không** được ghi `NULL`). Chỉ `flyway_schema_history` nằm ngoài.
+
+#### Bốn cái bẫy đã xác minh trên repo này
+
+Ghi ra vì cả bốn đều **im lặng**: hệ thống trông như đã được bảo vệ trong khi không.
+
+1. **App đang connect bằng `APP_DB_USER`, mà đó là `POSTGRES_USER` của image `postgres:17` — tức superuser.** Superuser bypass RLS **vô điều kiện**; `FORCE ROW LEVEL SECURITY` cũng không vá được. Chừng nào app còn dùng credential đó, mọi `CREATE POLICY` viết ra đều là trang trí. Bắt buộc tách một role runtime **không sở hữu bảng** (`pte_app`) — không phải "cách gọn hơn", là cách **duy nhất**.
+
+2. **`identity_student_directory` là VIEW** (`V4__enrollment.sql`), join `users` + `user_roles`. View trong Postgres mặc định chạy bằng quyền **owner**, nên **bỏ qua RLS của bảng gốc**. Bật RLS trên `users` xong mà quên view này thì bề mặt roster sinh viên vẫn hở nguyên. Cần `WITH (security_invoker = true)` (Postgres 15+; ta đang chạy 17).
+
+3. **Xác thực là một vòng xoay chết.** Đăng nhập phải đọc `users` + `login_hashes` **trước khi** biết người dùng là ai → chưa có tenant context → policy lọc mất chính hàng cần tìm → **không tenant user nào đăng nhập được**. Nguy hiểm gấp đôi vì `PLATFORM_ADMIN` (có `tenant_id = NULL`) **vẫn vào bình thường** — người test đầu tiên thường là admin, nên lỗi lọt qua khâu kiểm thử. Lối ra: hàm `SECURITY DEFINER` hẹp cho riêng bước tra cứu credential, đặt **cùng migration** với policy, và phải có test đếm số hàm loại này để chúng không sinh sôi.
+
+4. **Nhiều permissive policy được `OR` với nhau, không phải `AND`.** Tách `USING` và `WITH CHECK` thành hai `CREATE POLICY` là mở toang bảng: policy thứ hai thiếu `USING` nên mặc định cho phép, `OR` vào là mọi hàng hiện ra. Một bảng **một** policy, mang cả hai mệnh đề.
+
+**RLS là lưới cộng thêm, không thay thế.** Predicate `WHERE tenant_id = ?` ở tầng application **giữ nguyên** — rút đi là lỗi kiến trúc.
+
 ### Lớp 2 — Cô lập tài nguyên (hàng xóm ồn ào)
 
 - **Rate limit per-tenant** — `shared/web/RateLimitFilter` + `RateLimitConfig`, token bucket đếm trên Redis. **Có thật, đang chạy.**
@@ -65,7 +83,7 @@ Nhiều tenant chung một ứng dụng **không** phải vấn đề nếu xử
 
 | Thứ | Vì sao vẫn cần |
 |---|---|
-| **Row-Level Security** | Lỗ hổng cô lập tenant lớn nhất. Ưu tiên số một |
+| **Row-Level Security** | Lỗ hổng cô lập tenant lớn nhất. Ưu tiên số một. **Đã có plan: [quang-row-level-security](../plans/quang-row-level-security/plan.md), 7 phase, chưa bắt đầu** |
 | **Metrics + alerting** (Prometheus/Grafana) | Chỉ có tracing. Không đo được thì mọi quyết định về tải đều là đoán — và đây là điều kiện tiên quyết để xét tách lại theo ADR-005 |
 | **Log tập trung** (Loki/ELK) | Log hiện nằm trong container |
 | **Statement timeout** | Van cuối cho query chạy loạn |

@@ -13,7 +13,8 @@ Maps to: **[ADR-007](../../architecture/ADR-007-student-identity-and-login.md) �
 - `Tenant.code` chỉ thêm cột ở phase này; việc *đặt* nó thuộc Phase 2 (lúc duyệt đơn).
 - `email` nullable và **bỏ unique** — chỉ có nghĩa với đường tạo sinh viên. Các vai trò khác vẫn phải có email và `email` = `username` nên vẫn unique trên thực tế.
 - `fullName` chuyển sang nullable (Phase 8 cần, gộp luôn vào đây để chỉ một lần đụng bảng `users`).
-- **Sửa thẳng `V2__identity.sql` và `V3__tenancy.sql`**, không thêm `V14`. Lịch sử migration nên kể câu chuyện của production — mà production chưa tồn tại. Cả đội `docker compose down -v` rồi dựng lại.
+- **Sửa thẳng `V2__identity.sql` và `V3__tenancy.sql`**, không thêm migration mới. Lịch sử migration nên kể câu chuyện của production — mà production chưa tồn tại. Cả đội `docker compose down -v` rồi dựng lại.
+- **`V3__tenancy.sql` cũng bị [plan RLS](../quang-row-level-security/plan.md) P2 sửa** (đổi `organizations.tenant_id`/`quota_transactions.tenant_id` sang `UUID`). **RLS P2 merge trước, phase này rebase lên trên.** Một lần `docker compose down -v` chung cho cả hai plan.
 
 ## Steps
 

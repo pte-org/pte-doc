@@ -21,7 +21,7 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 2. Entity `LicenseCode`: `code` (unique), `planId`, `status`, `issuedBy`, `issuedAt`, `codeExpiresAt`, `redeemedByTenantId`, `redeemedAt`, `subscriptionId` (null tới khi redeem), `revokeReason`.
 
-3. Migration `V19__billing_license_code.sql`, index trên `code`.
+3. Migration `V25__billing_license_code.sql`, index trên `code`.
 
 4. `LicenseCodeGenerator`: chuỗi từ `SecureRandom`, tối thiểu 16 ký tự hữu ích, bỏ ký tự dễ nhìn nhầm, chia nhóm bằng dấu gạch cho dễ đọc/gõ.
 

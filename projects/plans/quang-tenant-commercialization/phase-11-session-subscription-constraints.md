@@ -21,7 +21,7 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 2. `Enrollment` thêm `licenseKey` (denormalize). Ghi rõ trong Javadoc: cột này phục vụ **đối soát mức license**, không phải yêu cầu về tính đúng đắn — kiểm cap chỉ cần `session_id`.
 
-3. Migration `V23__session_subscription.sql`:
+3. Migration `V29__session_subscription.sql`:
    ```sql
    CREATE EXTENSION IF NOT EXISTS btree_gist;
 

@@ -24,7 +24,7 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
    - `free_student_limit` — hạn mức sinh viên miễn phí khi tenant mới được duyệt
    - `suspension_default_days` = `0` — đình chỉ không tự hết hạn (Phase 13)
 
-4. Migration `V16__billing_plan_catalog.sql` + seed `PlatformSetting`.
+4. Migration `V22__billing_plan_catalog.sql` + seed `PlatformSetting`.
 
 5. `PlanService`: CRUD cho `PLATFORM_ADMIN`. Validate theo `type`:
    - `EXAM_PACKAGE` → `durationDays > 0` và `maxStudentsPerSession > 0` bắt buộc, `extraStudentSlots` phải null
