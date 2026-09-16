@@ -26,10 +26,10 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
    CREATE EXTENSION IF NOT EXISTS btree_gist;
 
    ALTER TABLE exam_sessions
-     ADD COLUMN subscription_id UUID,
-     ADD COLUMN license_key VARCHAR(64);
-   -- backfill cho dữ liệu cũ nếu có, rồi SET NOT NULL
-   ALTER TABLE exam_sessions ALTER COLUMN capacity SET NOT NULL;
+     ADD COLUMN subscription_id UUID NOT NULL,
+     ADD COLUMN license_key VARCHAR(64) NOT NULL,
+     ALTER COLUMN capacity SET NOT NULL;
+   -- NOT NULL thẳng, không backfill: chưa có dữ liệu thật
 
    ALTER TABLE exam_sessions ADD CONSTRAINT no_overlap_per_subscription
      EXCLUDE USING gist (subscription_id WITH =, tstzrange(opens_at, closes_at) WITH &&);

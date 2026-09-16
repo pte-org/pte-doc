@@ -80,13 +80,14 @@ P4 + P10 ──> P11 ──> P12 ──> P13
 - Postgres extension `btree_gist` — P11
 
 **Hạ tầng đã xác minh:**
-- Flyway đang chạy (`flyway.enabled: true`, `ddl-auto: validate`, `V1..V13`) → **viết được SQL thủ công**: exclusion constraint, partial index, extension đều trong tầm. Migration mới bắt đầu từ `V14`.
+- Flyway đang chạy (`flyway.enabled: true`, `ddl-auto: validate`, `V1..V13`) → **viết được SQL thủ công**: exclusion constraint, partial index, extension đều trong tầm.
+- **Hệ thống chưa có dữ liệu thật** → P1 sửa thẳng `V2__identity.sql` và `V3__tenancy.sql` thay vì thêm migration mới; cả đội `docker compose down -v` một lần. Đây là **ngoại lệ duy nhất**; từ Phase 2 trở đi chỉ thêm `V14`, `V15`, … và không bao giờ sửa migration đã tồn tại nữa.
 
 ## Rủi ro
 
 | Rủi ro | Phase | Xử lý |
 |---|---|---|
-| **P1 làm hỏng đăng nhập của toàn bộ user hiện có** | 1 | Backfill `username = email` cho **mọi** user kể cả sinh viên cũ. Không sinh username mới cho sinh viên cũ — làm vậy là đá họ ra khỏi hệ thống. Test đăng nhập cho từng vai trò trước khi sang phase khác |
+| P1 đổi khoá đăng nhập | 1 | **Rủi ro thấp — hệ thống chưa có dữ liệu thật (chốt 2026-09-16)**, nên không cần backfill và không có user nào để mất. Vẫn test đăng nhập từng vai trò trước khi sang phase khác: rẻ, và là thứ duy nhất chứng minh không vai trò nào bị bỏ sót |
 | Hai đơn đăng ký cùng xin một `Tenant.code` | 2 | Giữ chỗ ngay khi tạo `TenantApplication`, không phải lúc duyệt. Đơn bị từ chối thì trả mã |
 | Webhook PayOS xử lý hai lần → hai Subscription | 5 | Dedup theo `orderCode`, và `activate()` là nơi duy nhất sinh Subscription |
 | Hai request redeem cùng một mã | 6 | `UPDATE ... WHERE code = ? AND status = 'ISSUED'` rồi kiểm affected rows. **Không** đọc-rồi-ghi |

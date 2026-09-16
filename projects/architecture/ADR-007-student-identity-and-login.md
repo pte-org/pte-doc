@@ -125,9 +125,9 @@ Hệ quả: `User.fullName` phải chuyển thành nullable, và hồ sơ sinh v
 
 ### Migration
 
-Backfill `username = email` cho **toàn bộ** user hiện có, kể cả sinh viên. Không sinh username mới cho sinh viên cũ — làm vậy là đá họ ra khỏi hệ thống và bắt trung tâm phát lại tài khoản cho toàn bộ roster.
+**Hệ thống chưa có dữ liệu thật (xác nhận 2026-09-16)** → không có gì để migrate. Schema viết thẳng dạng cuối cùng trong các migration hiện có (`V2__identity.sql`, `V3__tenancy.sql`), DB dựng lại từ đầu.
 
-Sinh viên tạo **từ sau** thay đổi này mới dùng tài khoản sinh tự động. Hai thế hệ tài khoản cùng tồn tại — chấp nhận được vì `username` là một cột phẳng, không phải một định dạng được parse ở đâu cả.
+Nếu sau này cần áp mô hình này lên một hệ đã có dữ liệu thì cách đúng là **backfill `username = email` cho toàn bộ user, kể cả sinh viên** — không sinh username mới cho sinh viên cũ, vì làm vậy là đá họ ra khỏi hệ thống và bắt trung tâm phát lại tài khoản cho cả roster. Hai thế hệ tài khoản cùng tồn tại được, vì `username` là một cột phẳng, không phải định dạng được parse ở đâu cả.
 
 ---
 
