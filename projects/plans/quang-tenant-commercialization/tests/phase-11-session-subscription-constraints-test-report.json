@@ -1,0 +1,31 @@
+{
+  "phase": "phase-11-session-subscription-constraints",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-16T17:21:27Z",
+  "summary": {
+    "passed": 571,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "command": ".\\mvnw.cmd -pl app test",
+  "focused_command": ".\\mvnw.cmd -pl app \"-Dtest=BillingServiceTest,SessionLifecycleServiceTest,EnrollmentServiceTest,SessionCancelledNotificationListenerTest,SubscriptionRevokedSessionListenerTest,ModuleStructureTest,LicenseCodeServiceTest\" test",
+  "compile_command": ".\\mvnw.cmd -pl app clean compile",
+  "scope": "Phase 11 session/subscription constraints, enrollment capacity and license propagation, billing lock facade, subscription-revocation cancellation notifications, module structure, plus the full app regression suite",
+  "phase_tests": {
+    "BillingServiceTest": 2,
+    "SessionLifecycleServiceTest": 13,
+    "EnrollmentServiceTest": 15,
+    "SessionCancelledNotificationListenerTest": 1,
+    "SubscriptionRevokedSessionListenerTest": 1,
+    "LicenseCodeServiceTest": 9,
+    "ModuleStructureTest": 3
+  },
+  "focused_phase_tests": 44,
+  "regression_tests": 571,
+  "integration_constraints": {
+    "postgres_concurrent_overlap": "not_run_docker_unavailable",
+    "postgres_cross_swap_deadlock": "not_run_docker_unavailable"
+  }
+}

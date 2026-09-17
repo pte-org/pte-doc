@@ -1,26 +1,34 @@
 # Architecture Decision Records — PTE Platform
 
-Kiến trúc microservice cho nền tảng mô phỏng thi PTE Academic. Chốt 2026-07-24, **đối chiếu as-built 2026-09-14**.
+Kiến trúc nền tảng mô phỏng thi PTE Academic. Chốt 2026-07-24, thu gọn về monolith 2026-09-15, **toàn bộ ADR viết lại theo hiện trạng 2026-09-16**.
 
-- [ADR-001](ADR-001-microservice-boundaries.md) — Service boundaries & data ownership (10 service, cắt theo capability không theo actor) · *reconciliation: cell DB topology, drift phạm vi `admin`*
-- [ADR-002](ADR-002-communication-and-exam-submission-saga.md) — Communication (async-first) & exam-submission saga (outbox pattern; event backbone superseded-in-part 2026-07-31 — RabbitMQ polling-outbox-relay, was Kafka+Debezium) · *ADR chính xác nhất trong bộ*
-- [ADR-003](ADR-003-tenant-isolation-and-infrastructure.md) — Tenant isolation (3 lớp) & infrastructure stack · ⚠️ *lệch nhiều nhất so với as-built — đọc mục reconciliation trước*
-- [ADR-004](ADR-004-per-service-code-structure.md) — Cấu trúc code từng service (mono-repo, layered per-service, DB-per-service, entity/endpoint/event mỗi service) · *đã viết lại theo code thực tế*
-- [ADR-005](ADR-005-deployment-topology.md) — Deployment topology: single-host, 4 cell Postgres, edge Caddy + gateway, danh sách SPOF, điều kiện để tách nhiều host
+**Kiến trúc hiện tại:** một Spring Modulith monolith — 1 Maven module (`app`), 12 module nghiệp vụ dưới `com.pte.*`, 1 Postgres (schema quản bằng Flyway), không gateway. Hạ tầng: Redis, RabbitMQ, MinIO, Jaeger, Caddy.
 
-## Trạng thái đối chiếu (2026-09-14)
+## Nền tảng kiến trúc
+
+- [ADR-001](ADR-001-module-boundaries.md) — **Module boundaries & data ownership**: 12 module cắt theo capability, 5 bất biến, cách ranh giới được ép (quy ước package, chưa có test xác minh)
+- [ADR-002](ADR-002-communication-and-scoring-lifecycle.md) — **Giao tiếp & vòng đời chấm điểm**: gọi in-process qua facade; RabbitMQ chỉ còn vai work-queue; chấm điểm **host-gated** với cổng publish
+- [ADR-003](ADR-003-tenant-isolation-and-infrastructure.md) — **Tenant isolation & hạ tầng**: 3 lớp cô lập, stack đang chạy thật, và danh sách thẳng thắn những gì chưa có (RLS, metrics, statement timeout)
+- [ADR-004](ADR-004-per-module-code-structure.md) — **Cấu trúc code từng module**: layout chuẩn, quy ước, inventory entity/controller/service của cả 12 module
+- [ADR-005](ADR-005-deployment-topology.md) — **Deployment topology**: một host, Caddy edge, danh sách SPOF, điều kiện để xét tách lại
+- [ADR-008](ADR-008-modulith-reconciliation.md) — **Quyết định thu gọn về monolith**: ánh xạ service cũ → module mới, cái giá đã trả, nợ kỹ thuật
+
+## Nghiệp vụ
+
+- [ADR-006](ADR-006-commercialization-and-exam-templates.md) — **Thương mại hoá tenant (bán sỉ cho tổ chức)**: bounded context `billing`, đăng ký → thẩm định → mua gói qua PayOS **hoặc** redeem mã, Subscription là license instance có `licenseKey`, đề sinh từ template thay vì soạn tay, kho đề chỉ còn SHARED
+- [ADR-007](ADR-007-student-identity-and-login.md) — **Định danh sinh viên & đăng nhập**: `username` sinh có tiền tố `Tenant.code`, import roster là passthrough (không diễn giải cột, xuất lại file + `account`/`password`), email không còn là khoá với `STUDENT`
+
+## Trạng thái (2026-09-16)
 
 | | |
 |---|---|
-| **Giữ được** | 5/5 bất biến ADR-001. exam-delivery không call gì trong lúc thi (3 sync client bị giới hạn trong `SnapshotPinService`). Outbox + saga host-gated đúng thiết kế. Circuit breaker có thật trên 6/8 sync client. Hash-chain audit ở proctor có thật. |
-| **Lệch có lý do** | Cell Postgres thay 10 instance · Spring Cloud Gateway thay Kong/APISIX · `ProcessedEvent` (Postgres) thay Redis dedup · warm-on-pin thay job pre-warm · cell connection budget thay PgBouncer · internal key thay Linkerd mTLS · iam tự làm auth server thay Keycloak. |
-| **Lỗ hổng thật** | **RLS chưa có** (tenant isolation lớp 1 đang hoàn toàn ở tầng app) · **không có metrics/log aggregation** (chỉ tracing) · bulk create user của iam chạy đồng bộ trên `pg-core` · chưa có statement timeout · mỗi service 1 replica. |
-| **Cần chốt** | Phạm vi `admin` đã phình thành org/program/class — giữ hay tách bounded context riêng? Chốt trước khi có consumer runtime bám vào 25 event của nó. |
-
-Chuẩn code: [docs/CODING_STANDARDS_MICROSERVICE.md](../../../docs/CODING_STANDARDS_MICROSERVICE.md) — layered per-service + luật phân tán, kế thừa code-quality từ CODING_STANDARDS_API.md.
+| **Đánh đổi lớn nhất** | Lý do gốc để chọn microservice — cô lập tài nguyên vật lý cho đường thi — **đã mất**. Một tiến trình, một pool, một DB. Xem [ADR-008](ADR-008-modulith-reconciliation.md) |
+| **Lỗ hổng thật** | **RLS chưa có** (cô lập tenant hoàn toàn ở tầng app) · không có metrics/log aggregation · chưa có statement timeout · bulk import chạy đồng bộ · 1 replica là SPOF toàn hệ · ranh giới module chưa có test xác minh |
+| **Món rẻ nhất nên làm trước** | `ApplicationModules.verify()` — biến ranh giới module từ quy ước thành ràng buộc |
+| **Cần chốt** | ADR-006 và ADR-007 đều **0 câu hỏi treo**. Việc tiếp theo là plan triển khai — ADR-007 phải làm cùng ADR-006 vì `Tenant.code` cần có từ lúc duyệt đơn |
 
 ## Ba trụ cột quyết định
 
-1. **Lý do chọn microservice:** cô lập tài nguyên vật lý cho critical path (exam-delivery), không phải team scaling.
-2. **Nguyên tắc bất biến:** dependency chỉ đi VÀO exam-delivery qua event; snapshot immutable pin lúc tạo attempt; data ownership tuyệt đối; control plane ngoài critical path; service = capability, actor = RBAC + scope.
-3. **Đến chốn ≠ nhiều nhất:** triển khai hạ tầng theo lớp, mỗi thứ một lý do không thể thay thế.
+1. **Vì sao monolith:** chi phí vận hành cho đội 4 người, đổi lấy việc mất cô lập tài nguyên vật lý — đánh đổi có ý thức, không phải sơ suất.
+2. **Bất biến kỹ thuật:** snapshot bất biến pin lúc tạo attempt · `attempt` không gọi ra ngoài giữa lúc thi · control plane ngoài critical path · module = capability, actor = RBAC + scope · ownership dữ liệu ép bằng ranh giới package `internal/`.
+3. **Bất biến thương mại:** nền tảng bán sỉ cho tổ chức — sinh viên không bao giờ là bên thanh toán.
