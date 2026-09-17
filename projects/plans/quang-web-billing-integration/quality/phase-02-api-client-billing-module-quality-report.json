@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "mode": "gate",
+  "target": "phase-02-api-client-billing-module",
+  "plan": "pte-doc/projects/plans/quang-web-billing-integration/plan.md",
+  "generated_at": "2026-09-17",
+  "verdict": "APPROVED",
+  "reviewed_files": { "pte-web": ["packages/api-client/src/types/billing/index.ts", "packages/api-client/src/requests/billing/applications.ts", "packages/api-client/src/requests/billing/plans.ts", "packages/api-client/src/requests/billing/orders.ts", "packages/api-client/src/requests/billing/subscriptions.ts", "packages/api-client/src/requests/billing/licenseCodes.ts", "packages/api-client/src/requests/billing/platformSettings.ts", "packages/api-client/src/requests/billing/quota.ts", "packages/api-client/src/requests/index.ts", "packages/api-client/src/types/index.ts"] },
+  "findings": [],
+  "counts": { "blocking": 0, "advisory": 0, "noted": 0 },
+  "design_constraint_compliance": [
+    { "constraint": "Billing calls are owned by api-client", "status": "met", "evidence": "All billing request functions are under requests/billing and exported centrally." },
+    { "constraint": "DTOs match the monolith billing contract", "status": "met", "evidence": "Types cover applications, plans, orders, subscriptions, license codes, settings, and quota." },
+    { "constraint": "No demo billing data remains", "status": "met", "evidence": "Demo data modules were removed and endpoint tests pass." }
+  ],
+  "verification_performed": { "build_gate": ["api-client TypeScript typecheck — success"], "tests": ["api-client Vitest — 170 tests, 0 failures"] },
+  "notes": ["No commit or push was performed."]
+}

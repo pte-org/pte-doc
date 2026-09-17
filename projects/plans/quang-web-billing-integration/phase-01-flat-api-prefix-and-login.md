@@ -1,8 +1,17 @@
 # Phase 1: Versioned REST API, Nginx edge và login username
 
-Status: 🔵 Replanned — chưa triển khai theo contract REST/Nginx mới
+Status: 🟡 In progress — implementing the approved REST/Nginx contract
 
 ## Requirements
+
+## Confirmed decisions
+
+- Breaking migration: callers must move to `/api/v1/...`; no legacy `/api/...`
+  compatibility alias is required.
+- Nginx replaces Caddy in the production and local Compose topology; the
+  migration does not preserve a Caddy rollback path.
+- PayOS webhook target is `https://<public-domain>/api/v1/webhooks/payos`,
+  forwarded unchanged to `app:8091`.
 
 Phase này thay thế bản triển khai cũ dùng Caddy handle_path. Backend, frontend, script và edge phải nhìn thấy cùng một contract:
 
@@ -21,6 +30,14 @@ Không dựng lại UI ngoài việc cập nhật hai LoginView để nhập use
 Maps to: [spec.md](spec.md) · [ADR-007](../../architecture/ADR-007-student-identity-and-login.md) · [ADR-008](../../architecture/ADR-008-modulith-reconciliation.md)
 
 ## Design Constraints
+
+Preflight: Spring Boot 4 modular monolith uses class/method Spring MVC mappings,
+the frontend centralizes paths in `packages/api-client`, and the current edge
+uses Caddy `handle_path` to hide the backend's bare paths. This phase changes
+the public contract at all three boundaries together. Internal controllers under
+`/internal/**` and the STOMP transport endpoint `/ws` remain outside the public
+REST prefix. Existing package/module names are retained; only public URLs,
+edge configuration, and login field semantics change.
 
 - Public REST path luôn bắt đầu /api/v1/; route UI /admin/* không phải API route.
 - Resource path dùng plural kebab-case và stable public identifier.
@@ -121,11 +138,17 @@ Maps to: [spec.md](spec.md) · [ADR-007](../../architecture/ADR-007-student-iden
 ## Quality and Testing State
 
 - Decision checkpoint: unit tests = yes; quality gate = yes.
-- Current state: kết quả 575 backend + 138 FE của thiết kế Caddy cũ được giữ làm historical evidence, không phải gate đạt cho phase mới.
-- Build: not started for this revised phase.
-- Testing: not started for this revised phase.
-- Quality gate: not evaluated for this revised phase.
+- Current state: implementation complete for the revised REST/Nginx contract.
+- Build: PASSED — backend compile; tenant-web and vendor-web production builds; merged Compose validation.
+- Testing: PASSED — backend 576/576 tests; api-client 170/170 tests; frontend typecheck and lint.
+- Quality gate: APPROVED — no blocking findings; runtime smoke checks remain pending because Docker Linux engine was unavailable.
 
 ## Session Notes
+
+## Cook result — 2026-09-17
+
+- Implementation and source-level quality gate: `APPROVED`.
+- Backend compile/tests, frontend typecheck/lint/build, route contract checks, and merged Compose validation pass.
+- Runtime smoke checks are explicitly pending because the local Docker Linux engine was unavailable.
 
 2026-09-17 — Người dùng chốt production dùng Nginx trước; managed load balancer để phase tương lai. Phase 1 cũ phải được chạy lại vì backend route trần và Caddy handle_path không còn phù hợp với contract REST độc lập.
