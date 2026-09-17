@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "mode": "gate",
+  "target": "phase-05-tenant-registration",
+  "plan": "pte-doc/projects/plans/quang-web-billing-integration/plan.md",
+  "generated_at": "2026-09-17",
+  "verdict": "APPROVED",
+  "reviewed_files": { "pte-web": ["apps/tenant-web/features/auth/components/RegisterOrganizationView.tsx", "apps/tenant-web/features/auth/constants.ts", "apps/tenant-web/features/commercialization/components/ApplicationStatusView.tsx", "apps/tenant-web/features/commercialization/api.ts", "apps/tenant-web/features/commercialization/data.ts"] },
+  "findings": [],
+  "counts": { "blocking": 0, "advisory": 0, "noted": 0 },
+  "design_constraint_compliance": [
+    { "constraint": "Public registration sends the backend DTO exactly", "status": "met", "evidence": "The form sends orgName, orgType, requestedCode, contactEmail, contactPhone, and taxCode only." },
+    { "constraint": "Requested tenant code is validated before submission", "status": "met", "evidence": "The UI validates the agreed code format and maps duplicate-code/API errors." },
+    { "constraint": "Application status does not invent an unavailable public endpoint", "status": "met", "evidence": "The status page explains the email follow-up because the backend exposes status only to PLATFORM_ADMIN." }
+  ],
+  "verification_performed": { "build_gate": ["tenant-web build — success"], "tests": ["tenant-web typecheck and lint — success"] },
+  "notes": ["No commit or push was performed."]
+}

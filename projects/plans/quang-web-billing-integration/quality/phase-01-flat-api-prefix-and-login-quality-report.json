@@ -5,117 +5,66 @@
   "plan": "pte-doc/projects/plans/quang-web-billing-integration/plan.md",
   "generated_at": "2026-09-17",
   "verdict": "APPROVED",
-  "stacks_detected": [
-    "java-21-spring-boot-4-modulith",
-    "typescript-nextjs-16-turborepo-pnpm"
-  ],
   "reviewed_files": {
     "pte-api": [
-      "app/src/main/java/com/pte/assessment/internal/controller/TemplateAdminController.java",
-      "app/src/main/java/com/pte/assessment/internal/controller/TemplateController.java",
-      "app/src/main/java/com/pte/billing/internal/controller/LicenseCodeController.java",
-      "app/src/main/java/com/pte/billing/internal/controller/LicenseCodeRedeemController.java",
-      "app/src/main/java/com/pte/billing/internal/controller/OrderController.java",
-      "app/src/main/java/com/pte/billing/internal/controller/PayOsWebhookController.java",
       "app/src/main/java/com/pte/identity/internal/config/SecurityConfig.java",
-      "app/src/main/java/com/pte/identity/internal/controller/StudentRosterImportController.java",
-      "app/src/main/java/com/pte/tenancy/internal/controller/StudentQuotaController.java",
       "app/src/test/java/com/pte/RouteContractTest.java",
-      "deploy/api-routes.caddy",
-      "scripts/seed-e2e.ps1"
+      "deploy/nginx.local.conf",
+      "deploy/nginx.bootstrap.conf.template",
+      "deploy/nginx.conf.template",
+      "deploy/nginx-entrypoint.sh",
+      "docker-compose.services.yml",
+      "docker-compose.deploy.yml",
+      ".github/workflows/deploy-production.yml"
     ],
     "pte-web": [
-      "apps/tenant-web/features/auth/components/LoginView.tsx",
-      "apps/tenant-web/features/auth/constants.ts",
-      "apps/vendor-web/features/auth/components/LoginView.tsx",
-      "apps/vendor-web/features/auth/constants.ts",
-      "package.json",
-      "pnpm-workspace.yaml",
-      "packages/api-client/package.json",
-      "packages/api-client/vitest.config.ts",
-      "packages/api-client/src/requests/account/index.ts",
-      "packages/api-client/src/requests/admin/auditLogs.ts",
-      "packages/api-client/src/requests/admin/classMemberships.ts",
-      "packages/api-client/src/requests/admin/classes.ts",
-      "packages/api-client/src/requests/admin/coordinatorAssignments.ts",
-      "packages/api-client/src/requests/admin/lecturerAssignments.ts",
-      "packages/api-client/src/requests/admin/organizations.ts",
-      "packages/api-client/src/requests/admin/programs.ts",
-      "packages/api-client/src/requests/admin/studentRoster.ts",
-      "packages/api-client/src/requests/auth/index.ts",
-      "packages/api-client/src/requests/auth/auth.test.ts",
-      "packages/api-client/src/requests/authoring/blueprints.ts",
       "packages/api-client/src/requests/endpoints.test.ts",
-      "packages/api-client/src/requests/organization/index.ts",
-      "packages/api-client/src/requests/question/index.ts",
-      "packages/api-client/src/requests/quota/index.ts",
-      "packages/api-client/src/requests/scheduling/enrollments.ts",
-      "packages/api-client/src/requests/scheduling/proctorAssignments.ts",
-      "packages/api-client/src/requests/scheduling/sessions.ts",
-      "packages/api-client/src/requests/scheduling/studentEnrollments.ts",
-      "packages/api-client/src/requests/scoring/answers.ts",
-      "packages/api-client/src/requests/tenant/index.ts",
-      "packages/api-client/src/requests/user/index.ts",
-      "packages/api-client/src/types/account/index.ts",
-      "packages/api-client/src/types/auth/index.ts",
-      "packages/ui/src/hooks/createSessionApiClient.ts"
+      "packages/api-client/src/requests/auth/auth.test.ts",
+      "packages/ui/src/hooks/createSessionApiClient.ts",
+      "apps/tenant-web/lib/navigation.tsx",
+      "apps/vendor-web/features/auth/constants.ts"
     ]
   },
-  "findings": [],
-  "counts": {
-    "blocking": 0,
-    "advisory": 0,
-    "noted": 0
-  },
-  "design_constraint_compliance": [
+  "findings": [
     {
-      "constraint": "/api stays as the UI-vs-API namespace boundary, with the reason recorded in the Caddy config",
-      "status": "met",
-      "evidence": "deploy/api-routes.caddy carries an explicit comment naming the four vendor-web pages (/admin/applications, /admin/plans, /admin/settings, /admin/license-codes) that would collide if the prefix were dropped."
-    },
-    {
-      "constraint": "Strip the prefix at Caddy, not via server.servlet.context-path (which would move actuator and break the Docker healthcheck)",
-      "status": "met",
-      "evidence": "Single handle_path /api/* in api-routes.caddy; no context-path in application.yml; the separate `handle /actuator/*` rule is untouched."
-    },
-    {
-      "constraint": "All eight controllers that hardcoded /api drop it",
-      "status": "met",
-      "evidence": "grep for '\"/api' across pte-api main sources returns only prose in comments. Enforced going forward by RouteContractTest."
-    },
-    {
-      "constraint": "Do not rename requests/scheduling, requests/authoring etc. in this phase",
-      "status": "met",
-      "evidence": "Directory names unchanged; only path strings inside were edited, keeping the diff reviewable."
-    },
-    {
-      "constraint": "loginStudent stops mapping username onto an email field",
-      "status": "met",
-      "evidence": "requests/auth/index.ts loginStudent now passes username straight through; auth.test.ts pins the behaviour."
-    },
-    {
-      "constraint": "Login input must not be type=\"email\" (student usernames are {tenant.code}.{random})",
-      "status": "met",
-      "evidence": "Both LoginView.tsx use type=\"text\" with an inline comment explaining the constraint."
+      "id": "QUAL-P1-001",
+      "severity": "NOTED",
+      "rule": "RUNTIME_VERIFICATION",
+      "status": "OPEN",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "local Docker runtime",
+      "evidence": "docker info cannot connect to dockerDesktopLinuxEngine in this workstation session.",
+      "why_it_matters": "nginx -t, container health, WebSocket, MinIO, PayOS webhook, and Certbot renewal still require a live runtime.",
+      "required_action": "Run the documented runtime smoke checks after Docker Desktop Linux engine or the Oracle VPS is available.",
+      "owner": "operator"
     }
+  ],
+  "counts": { "blocking": 0, "advisory": 0, "noted": 1 },
+  "design_constraint_compliance": [
+    { "constraint": "Public Spring routes use /api/v1 and no legacy service prefix", "status": "met", "evidence": "RouteContractTest passes and source inventory uses /api/v1 or /internal only." },
+    { "constraint": "Nginx forwards the API path without stripping it", "status": "met", "evidence": "Local and production templates proxy /api/v1/ to app:8091 without rewrite." },
+    { "constraint": "Caddy is removed from the production Compose topology", "status": "met", "evidence": "Compose config passes and exposes only Nginx ports 80/443 in the deploy overlay." }
   ],
   "verification_performed": {
     "build_gate": [
-      "pte-api: ./mvnw -pl app -DskipTests compile — BUILD SUCCESS",
-      "pte-web: pnpm build — 2 successful, 2 total (after clearing a pre-existing stale .next cache in tenant-web, unrelated to this change)"
+      "pte-api: .\\mvnw.cmd -pl app -DskipTests compile — BUILD SUCCESS",
+      "pte-web: tenant-web build — success",
+      "pte-web: vendor-web build — success",
+      "Compose merged config — success"
     ],
     "tests": [
-      "pte-api: ./mvnw -pl app test — 575 tests, 0 failures, 0 errors (includes ModuleStructureTest and the new RouteContractTest)",
-      "pte-web: pnpm test — 138 tests, 0 failures"
+      "pte-api: .\\mvnw.cmd -pl app test — 576 tests, 0 failures, 0 errors",
+      "pte-web: api-client tests — 170 tests, 0 failures",
+      "pte-web: tenant/vendor typecheck and lint — success"
     ],
-    "mutation_checks": [
-      "Reintroduced /api/iam/auth/login into AUTH_ENDPOINTS → 2 FE tests failed as intended; file restored and re-verified.",
-      "Reintroduced class-level @RequestMapping(\"/api/orders\") on OrderController → 2 backend tests failed as intended; file restored and re-verified.",
-      "Reintroduced method-level @GetMapping(\"/api/plans\") on PlanController → 2 backend tests failed as intended, proving findMergedAnnotation resolves meta-annotated mappings rather than silently skipping them; file restored and re-verified."
+    "runtime": [
+      "Not run: Docker Linux engine unavailable in the local session"
     ]
   },
   "notes": [
-    "Receipt fingerprinting is disabled for this repo (.ck.json qualityReceiptGate.enabled = false): pte-org spans separate git repos with no common root, so a report stored in pte-doc cannot hash files in pte-api/pte-web.",
-    "Every assertion above was confirmed by running the command, not inferred. The three mutation checks exist because a route/contract test that cannot fail is worse than no test — it manufactures confidence."
+    "Quality receipt fingerprinting remains disabled because pte-api and pte-web are separate repositories and the report is stored in pte-doc.",
+    "No commit or push was performed."
   ]
 }

@@ -1,6 +1,6 @@
 # Plan: Nối pte-web với REST API thương mại hoá
 
-Status: 🟡 Replanned — Phase 1 cũ đã được triển khai nhưng bị supersede bởi quyết định REST/Nginx mới
+Status: ✅ Cooked — implementation and automated verification complete; runtime smoke checks pending
 Date: 2026-09-17
 Mode: Hard
 Created by: Quang
@@ -8,6 +8,26 @@ Spec: [spec.md](spec.md) · Brainstorm: [260917-web-api-nginx-brainstorm.md](../
 Related: [ADR-006](../../architecture/ADR-006-commercialization-and-exam-templates.md) · [ADR-007](../../architecture/ADR-007-student-identity-and-login.md) · [plan backend](../quang-tenant-commercialization/plan.md)
 
 ## Overview
+
+## Cook execution status — 2026-09-17
+
+- Phases 1–7: implementation complete; all quality reports are `APPROVED`.
+- Automated verification: backend compile and 576 tests pass; api-client 170 tests pass; tenant/vendor typecheck, lint, and production builds pass.
+- Compose contract validation passes with Nginx exposing only ports 80/443 in the deploy overlay.
+- Runtime-only checks remain pending until Docker Desktop Linux engine or the Oracle VPS is available: `nginx -t`, container health, PayOS webhook, WebSocket, MinIO presigned URL, and Certbot renewal.
+- No commit or push was performed.
+
+## Confirmed decisions
+
+- This is a breaking migration: the canonical public contract becomes
+  `/api/v1/...`; the old `/api/...` contract is not retained as a compatibility
+  alias.
+- Production uses Nginx as the edge. Caddy is removed from the Compose and
+  deployment topology; no Caddy rollback path is required.
+- PayOS must call `https://<public-domain>/api/v1/webhooks/payos`; Nginx forwards
+  that path unchanged to the monolith.
+- The current tenant, admin, and media domains remain in use. A future managed
+  load balancer is out of scope and must preserve this public API contract.
 
 Backend đã có các module thương mại hoá và FE đã dựng sẵn màn hình cho cả hai app, nhưng contract API còn mang dấu vết microservice và phụ thuộc vào proxy cắt path. Plan này nối FE với backend bằng một REST API versioned, đồng thời thay Caddy bằng Nginx ở edge trước mắt.
 
@@ -20,13 +40,13 @@ Mục tiêu không phải dựng lại UI. Mục tiêu là:
 
 ## Phases
 
-- [ ] Phase 1: API contract versioning + REST route migration + Nginx + login username (chặn tất cả)
-- [ ] Phase 2: api-client module billing — types + requests, chưa đụng UI
-- [ ] Phase 3: vendor-web — duyệt đơn đăng ký tổ chức
-- [ ] Phase 4: vendor-web — catalog gói, tham số nền tảng, mã kích hoạt
-- [ ] Phase 5: tenant-web — đăng ký tổ chức + theo dõi đơn (luồng công khai)
-- [ ] Phase 6: tenant-web — mua gói qua PayOS + lịch sử đơn hàng
-- [ ] Phase 7: tenant-web — nhập mã kích hoạt, gói đang có, hạn mức sinh viên
+- [~] Phase 1: API contract versioning + REST route migration + Nginx + login username (chặn tất cả) — source gate complete; runtime smoke pending
+- [x] Phase 2: api-client module billing — types + requests, chưa đụng UI
+- [x] Phase 3: vendor-web — duyệt đơn đăng ký tổ chức
+- [x] Phase 4: vendor-web — catalog gói, tham số nền tảng, mã kích hoạt
+- [x] Phase 5: tenant-web — đăng ký tổ chức + theo dõi đơn (luồng công khai)
+- [x] Phase 6: tenant-web — mua gói qua PayOS + lịch sử đơn hàng
+- [x] Phase 7: tenant-web — nhập mã kích hoạt, gói đang có, hạn mức sinh viên
 
 ## Thứ tự và phụ thuộc
 

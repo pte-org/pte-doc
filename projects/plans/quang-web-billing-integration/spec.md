@@ -1,7 +1,12 @@
 # Spec: REST API versioning và Nginx edge
 
 **Date:** 2026-09-17
-**Status:** Ready
+**Status:** Approved
+
+**Confirmed decisions (2026-09-17):** This is a breaking migration to
+`/api/v1/...`; the old `/api/...` contract will not be retained. Production uses
+Nginx instead of Caddy, with no Caddy rollback path. PayOS uses
+`https://<public-domain>/api/v1/webhooks/payos` and Nginx forwards it unchanged.
 
 ## Problem Statement
 
@@ -60,4 +65,3 @@ API hiện phụ thuộc vào việc Caddy cắt prefix: frontend gọi `/api/..
 - The current three public domains remain: tenant, vendor/admin, and media.
 - Nginx runs as the production edge on the current single VPS; Certbot owns certificate issuance/renewal.
 - The backend remains a single Spring Boot modular monolith and listens internally on `8091`.
-

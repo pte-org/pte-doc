@@ -66,9 +66,15 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 ## Quality and Testing State
 
-- Quality gate: chưa chạy
-- Testing: chưa bắt đầu
+- Quality gate: APPROVED — inline quality audit; no blocking findings.
+- Testing: PASSED — tenant-web typecheck, lint, and production build; PayOS runtime smoke test pending live environment.
 
 ## Session Notes
+
+## Cook result — 2026-09-17
+
+- Implementation and quality gate: `APPROVED`.
+- Checkout/orders/payment status use the real API; pending orders are reused and polled; typecheck, lint, and build pass.
+- PayOS sandbox/webhook runtime validation remains pending on a live environment.
 
 _(trống)_

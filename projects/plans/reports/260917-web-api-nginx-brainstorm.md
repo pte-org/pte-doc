@@ -20,10 +20,16 @@ Production dùng **Nginx trước**, sau này nếu cần scale hoặc load bala
 
 Nginx chỉ forward nguyên path đến Spring Boot. Backend tự expose `/api/v1`, không dùng `server.servlet.context-path` và không phụ thuộc vào việc proxy cắt prefix.
 
-## Open Questions
+## Decisions Confirmed
 
-- Cần chọn cơ chế cấp và renew Let's Encrypt: Certbot sidecar/webroot là mặc định trong plan.
-- Cần giữ cùng origin cho UI/API để tránh thay đổi auth browser và CORS ngoài phạm vi cần thiết.
+- Đây là breaking migration: public contract dùng `/api/v1/...`, không giữ alias
+  `/api/...`.
+- Production dùng Nginx; Caddy được loại khỏi Compose/deployment và không cần
+  rollback qua Caddy.
+- PayOS webhook dùng `https://<public-domain>/api/v1/webhooks/payos` và Nginx
+  forward nguyên path.
+- Giữ nguyên các public domain hiện tại. Cơ chế Certbot/webroot là chi tiết
+  triển khai trong Phase 1, không thay đổi contract.
 
 ## Risks
 

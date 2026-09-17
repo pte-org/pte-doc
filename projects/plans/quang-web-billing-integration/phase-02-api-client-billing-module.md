@@ -85,9 +85,14 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 ## Quality and Testing State
 
-- Quality gate: chưa chạy
-- Testing: chưa bắt đầu
+- Quality gate: APPROVED — inline quality audit; no blocking findings.
+- Testing: PASSED — api-client 170/170 tests; TypeScript typecheck passed.
 
 ## Session Notes
+
+## Cook result — 2026-09-17
+
+- Implementation and quality gate: `APPROVED`.
+- api-client typecheck passes; Vitest passes with 170/170 tests.
 
 _(trống)_

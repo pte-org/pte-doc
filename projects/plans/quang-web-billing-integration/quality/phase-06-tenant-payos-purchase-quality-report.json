@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "mode": "gate",
+  "target": "phase-06-tenant-payos-purchase",
+  "plan": "pte-doc/projects/plans/quang-web-billing-integration/plan.md",
+  "generated_at": "2026-09-17",
+  "verdict": "APPROVED",
+  "reviewed_files": { "pte-web": ["apps/tenant-web/features/commercialization/api.ts", "apps/tenant-web/features/commercialization/components/PlanCatalogView.tsx", "apps/tenant-web/features/commercialization/components/CheckoutView.tsx", "apps/tenant-web/features/commercialization/components/OrdersView.tsx", "apps/tenant-web/features/commercialization/components/PaymentStatusView.tsx"], "pte-api": ["app/src/main/java/com/pte/billing/internal/controller/OrderController.java", "app/src/main/java/com/pte/billing/internal/controller/PayOsWebhookController.java"] },
+  "findings": [],
+  "counts": { "blocking": 0, "advisory": 0, "noted": 0 },
+  "design_constraint_compliance": [
+    { "constraint": "The webhook is the source of payment truth", "status": "met", "evidence": "PaymentStatusView reads orders from the backend and does not trust return URL state." },
+    { "constraint": "Pending payments are polled and duplicate checkout is prevented", "status": "met", "evidence": "Pending orders are reused and polling follows the selected or first pending order." },
+    { "constraint": "PayOS payment URLs are returned by the backend", "status": "met", "evidence": "Checkout creates an order through api-client and redirects only when paymentLinkUrl is present." }
+  ],
+  "verification_performed": { "build_gate": ["tenant-web build — success", "pte-api compile — success"], "tests": ["tenant-web typecheck and lint — success", "pte-api test — 576 tests, 0 failures, 0 errors"], "runtime": ["PayOS sandbox/webhook smoke test requires a live deployment and is not run in this local session"] },
+  "notes": ["No commit or push was performed."]
+}

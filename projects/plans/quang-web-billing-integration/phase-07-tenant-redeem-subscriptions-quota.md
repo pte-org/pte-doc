@@ -67,9 +67,14 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 ## Quality and Testing State
 
-- Quality gate: chưa chạy
-- Testing: chưa bắt đầu
+- Quality gate: APPROVED — inline quality audit; no blocking findings.
+- Testing: PASSED — tenant-web typecheck, lint, and production build.
 
 ## Session Notes
+
+## Cook result — 2026-09-17
+
+- Implementation and quality gate: `APPROVED`.
+- Redeem, subscriptions, and quota use real API responses and typed error mapping; typecheck, lint, and build pass.
 
 _(trống)_
