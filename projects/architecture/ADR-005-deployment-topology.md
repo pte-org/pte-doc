@@ -19,8 +19,7 @@ Internet
        ├─ {TENANT_DOMAIN} /*                   → web-tenant  (Next.js)
        ├─ {ADMIN_DOMAIN}  /api/*               → app:8091
        ├─ {ADMIN_DOMAIN}  /*                   → web-vendor  (Next.js)
-       └─ {MEDIA_DOMAIN}                       → minio
-            └─ app ── postgres · redis · rabbitmq · minio · jaeger
+       └─ app ── postgres · redis · rabbitmq · jaeger
 ```
 
 Tất cả trên một Docker network `pte-network`, một máy. Route API tách thành `deploy/api-routes.caddy` và `import` vào cả hai domain — một nơi khai báo, hai nơi dùng.
@@ -63,7 +62,7 @@ Hệ quả có lợi cần biết: **viết được SQL thủ công.** Những 
 |---|---|
 | `app` | 512m–1g |
 | `postgres` | 1g |
-| `rabbitmq` / `redis` / `minio` / `jaeger` | 512m / 256m / 512m / 512m |
+| `rabbitmq` / `redis` / `jaeger` | 512m / 256m / 512m |
 | `web-tenant`, `web-vendor` | 512m mỗi cái |
 | `caddy` | không giới hạn |
 

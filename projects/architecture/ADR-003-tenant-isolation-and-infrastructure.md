@@ -61,7 +61,7 @@ Ghi ra vì cả bốn đều **im lặng**: hệ thống trông như đã đư�
 | **Postgres** | Nguồn sự thật duy nhất. Schema quản lý bằng Flyway (`V1..V13`), `ddl-auto: validate` | Chạy |
 | **Redis** | Cache snapshot đã pin (`PinnedSnapshotCacheService`) + đếm rate limit | Chạy |
 | **RabbitMQ** | Work-queue: job chấm AI, gửi email. **Không** phải event backbone | Chạy |
-| **MinIO** | Object storage cho audio/ảnh — không nhét blob vào Postgres | Chạy |
+| **Cloudinary** | Object storage cho media authoring audio/ảnh — không nhét blob vào Postgres | Chạy |
 | **Jaeger** | Tracing qua OpenTelemetry (`micrometer-tracing-bridge-otel` + OTLP) | Chạy |
 | **Mailpit** | SMTP giả lập cho môi trường dev | Chạy (dev) |
 | **Caddy** | TLS/ACME, reverse proxy edge | Chạy |

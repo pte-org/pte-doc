@@ -121,7 +121,7 @@ Chỉ expose attempt ở trạng thái `PUBLISHED`.
 ### media — lưu trữ nhị phân
 **Sở hữu:** `MediaObject`
 **controller:** `Media`, `InternalMedia`
-**service:** `PresignService` (MinIO presigned URL, TTL ngắn)
+**service:** `CloudinaryMediaService` (signed direct upload, TTL ngắn)
 
 ### shared — hạ tầng dùng chung (không phải bounded context)
 `domain/BaseEntity`, `security/CurrentUser`, `web/RateLimitFilter` + `RateLimitConfig`, `config/RabbitMessageConverterConfig`, `audit/`, `exception/`

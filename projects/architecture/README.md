@@ -2,7 +2,7 @@
 
 Kiến trúc nền tảng mô phỏng thi PTE Academic. Chốt 2026-07-24, thu gọn về monolith 2026-09-15, **toàn bộ ADR viết lại theo hiện trạng 2026-09-16**.
 
-**Kiến trúc hiện tại:** một Spring Modulith monolith — 1 Maven module (`app`), 12 module nghiệp vụ dưới `com.pte.*`, 1 Postgres (schema quản bằng Flyway), không gateway. Hạ tầng: Redis, RabbitMQ, MinIO, Jaeger, Caddy.
+**Kiến trúc hiện tại:** một Spring Modulith monolith — 1 Maven module (`app`), 12 module nghiệp vụ dưới `com.pte.*`, 1 Postgres (schema quản bằng Flyway), không gateway. Hạ tầng: Redis, RabbitMQ, Cloudinary, Jaeger, Caddy.
 
 ## Nền tảng kiến trúc
 
