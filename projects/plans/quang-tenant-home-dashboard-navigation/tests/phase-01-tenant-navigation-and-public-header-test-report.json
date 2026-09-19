@@ -1,0 +1,25 @@
+{
+  "phase": "phase-01-tenant-navigation-and-public-header",
+  "mode": "e2e",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-19T10:37:18.6379061Z",
+  "summary": {
+    "passed": 10,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "command": "node run.js /tmp/playwright-test-tenant-home-dashboard-navigation.js",
+  "evidence": [
+    "signed-out Home has no Dashboard link and retains Sign in/Register",
+    "unauthenticated dashboard access redirects to /login",
+    "authenticated Home has exactly one Dashboard link",
+    "authenticated Home refresh stays at / and preserves pte.session",
+    "Dashboard navigation reaches /host/dashboard",
+    "sidebar has no Home link and has one Overview link to /host/dashboard",
+    "logo, PTE Prep, and School Portal each navigate to /",
+    "brand navigation preserves the serialized pte.session",
+    "browser Back returns to the dashboard after brand navigation",
+    "expired fixture leaves public / public under existing token-presence semantics"
+  ]
+}

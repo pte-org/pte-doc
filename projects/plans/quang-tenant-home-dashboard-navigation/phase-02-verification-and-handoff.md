@@ -76,10 +76,12 @@ do not delete unrelated generated or user files as part of this plan.
 
 ## Quality and Testing State
 
-- Quality: not evaluated.
-- Testing: not started.
-- Results must be filled in only after the commands and browser checks are
-  actually run by the implementation workflow.
+- Quality: Phase 01 quality gate approved; final diff/scope review passed.
+- Testing: passed. Tenant lint, TypeScript, Prettier, production build, and the
+  signed-in/signed-out Playwright smoke matrix were run. The expired fixture
+  kept `/` public under the existing token-presence session semantics.
+- These results were recorded from the implementation workflow; final plan
+  completion remains at the hard-mode handoff checkpoint.
 
 ## Handoff criteria
 

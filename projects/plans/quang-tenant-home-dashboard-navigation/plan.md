@@ -1,6 +1,6 @@
 # Plan: Tenant Home and Dashboard Navigation
 
-**Status:** Draft — implementation not started  
+**Status:** Implementation and verification complete — handoff confirmation pending
 **Date:** 2026-09-19  
 **Mode:** Hard  
 **Testing mode:** Default testing, no `--tdd`  
@@ -180,9 +180,14 @@ test framework solely for this small navigation change.
 
 ## Handoff
 
-Ready to implement with:
+Phase 01 implementation and Phase 02 verification have been executed. The
+hard-mode completion transition is pending explicit handoff confirmation.
 
-```text
-/ck:cook --hard pte-doc/projects/plans/quang-tenant-home-dashboard-navigation/plan.md
-```
+Evidence:
+
+- Quality gate: `quality/phase-01-tenant-navigation-and-public-header-receipt.json`
+- Browser/static test report:
+  `tests/phase-01-tenant-navigation-and-public-header-test-report.json`
+- Changed production files are limited to the three planned tenant files.
+- No vendor/admin files were changed.
 

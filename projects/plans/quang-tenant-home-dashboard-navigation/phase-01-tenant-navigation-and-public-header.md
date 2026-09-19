@@ -36,6 +36,11 @@ Dashboard action.
 - Do not auto-redirect an authenticated visitor from `/` to the dashboard.
 - Preserve the existing login success redirect and `RequireAuth` protection.
 
+Preflight: the tenant keeps route constants in `features/auth/constants.ts`,
+client session hooks in `@pte/ui`, and explicit logout behavior in account
+actions. Public `/` remains outside `RequireAuth`; this phase is limited to the
+three planned tenant files and uses ordinary Next `Link` navigation.
+
 ## Dependency-ordered steps
 
 1. Record the current dirty-worktree baseline for `tenant-web` and confirm
@@ -67,10 +72,12 @@ Dashboard action.
 
 ## Quality and Testing State
 
-- Quality: not evaluated.
-- Testing: not started.
-- Planned checks are listed in Phase 02; no tests or production code are being
-  changed during planning.
+- Quality: approved by the Phase 01 quality gate; receipt issued at
+  `quality/phase-01-tenant-navigation-and-public-header-receipt.json`.
+- Testing: passed through tenant lint, TypeScript, Prettier, production build,
+  and the ephemeral Playwright smoke matrix recorded in
+  `tests/phase-01-tenant-navigation-and-public-header-test-report.json`.
+- No new test framework or out-of-scope production file was added.
 
 ## Exit criteria
 
