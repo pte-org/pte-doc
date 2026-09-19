@@ -16,3 +16,14 @@
 - Completed the manual code review with no blocker/high finding. Fresh deployed
   smoke remains deployment-gated because the credential action mutates an
   account and sends an external email.
+- Started Iteration 3: Student rows must not expose credential email; the plan
+  records both UI removal and backend enforcement before implementation.
+- Completed Iteration 3 locally: removed the Student action and enforced the
+  backend boundary. Full backend regression passed 694 tests; tenant typecheck,
+  lint, and build passed.
+- Started Iteration 4: expose account usernames and add a Student-only,
+  no-email one-time password generation flow for credential verification.
+- Completed Iteration 4 locally: Student and Exam Staff now show Account,
+  Student has a no-email one-time Generate password action, and Exam Staff keeps
+  Send email. Full backend regression passed 695 tests; API-client passed 228;
+  tenant typecheck, lint, and build passed. Deployment smoke remains pending.

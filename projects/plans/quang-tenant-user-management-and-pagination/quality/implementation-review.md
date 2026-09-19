@@ -23,6 +23,17 @@
   details contain no password or hash.
 - Credential actions are tenant-scoped and role-authorized before hash rotation
   or event publication.
+- Student Search has no credential-email action, and the backend rejects a
+  Student target before hash lookup, hash rotation, or event publication.
+- Exam Staff retains the credential-email action for Proctor and Examiner
+  targets.
+- Student and Exam Staff display the tenant-scoped login username in an
+  `Account` column.
+- Student password generation is Host-authorized, Student-only, rotates the
+  hash, sets first-login change, emits no email event, and returns plaintext
+  only in the immediate response.
+- Student create/import continues to use its existing one-time credential
+  result/download path.
 
 ## Observations
 
@@ -37,7 +48,8 @@
 
 ## Verification evidence
 
-- Backend full suite: 693 tests passed, 0 failures, 0 errors, 0 skipped.
-- API-client suite: 225 tests passed.
-- Tenant/vendor typecheck, lint, and production builds passed.
+- Backend full suite: 695 tests passed, 0 failures, 0 errors, 0 skipped.
+- API-client suite: 228 tests passed.
+- Tenant typecheck, lint, and production build passed; prior vendor checks
+  remain recorded above.
 - Manual review completed after implementation; no blocker/high finding.

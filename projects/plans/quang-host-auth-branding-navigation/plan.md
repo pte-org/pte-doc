@@ -1,9 +1,14 @@
 # Plan: Host Auth, Branding & Home Navigation
 
-Status: Implemented locally; production deployment and real-account login remain pending
+Status: Superseded — see `../quang-tenant-home-dashboard-navigation/spec.md`
 Date: 2026-09-19
 Timezone: Asia/Saigon
 Target: `pte-web` (`tenant-web` and `vendor-web`)
+
+> This earlier plan captured an incorrect interpretation that Home should clear
+> the session. It is retained as history only. The tenant-only behavior in the
+> new spec keeps the session, removes Home from the sidebar, preserves Overview,
+> and adds Dashboard to the public Home header.
 
 ## Overview
 

@@ -1,7 +1,7 @@
 # Spec: Tenant user management and pagination
 
 **Date:** 2026-09-19  
-**Status:** Iteration 2 specified; implementation in progress
+**Status:** Iteration 4 implemented locally; deployment smoke pending
 
 ## Problem
 
@@ -137,6 +137,28 @@ Delivery
   action result with a copy affordance and an explicit one-time warning.
 - Suspended/reactivated state actions SHALL remain available through the same
   menu and retain confirmation for suspension.
+
+### Student action boundary
+
+- Student rows SHALL NOT expose `Send email`.
+- Student account details SHALL continue to expose only safe metadata and
+  first-login state.
+- The credential-email endpoint SHALL reject Student targets before reading or
+  changing the login hash.
+- Proctor and Examiner targets SHALL retain the credential-email action.
+
+### Account and password visibility
+
+- Student and Exam Staff tables SHALL display the login username in an
+  `Account` column.
+- Existing passwords SHALL NOT be returned from GET endpoints or persisted in
+  plaintext.
+- Student `Generate password` SHALL rotate a fresh temporary password without
+  sending email and return it once to the authorized Host.
+- The one-time result SHALL include the username and password with copy support
+  and an explicit warning that closing it loses the plaintext credential.
+- Student create/import SHALL continue to show/download generated credentials
+  only in the existing one-time result flow.
 
 ### Host account visibility
 

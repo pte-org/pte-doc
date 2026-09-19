@@ -1,7 +1,7 @@
 # Brainstorm: Tenant users, exam staff, and production pagination
 
 **Date:** 2026-09-19  
-**Status:** Iteration 2 planned; implementation in progress
+**Status:** Iteration 4 implemented locally; deployment smoke pending
 
 ## Ideas explored
 
@@ -115,3 +115,41 @@
 - Passwords are generated with the server `SecureRandom` generator and are
   delivered over the authenticated response/email queue only once.
 - Production smoke tests must intercept all credential-changing requests.
+
+## Iteration 3: Student credential-email scope
+
+**Date:** 2026-09-19
+
+### User direction
+
+- Students must not have a `Send email` action.
+
+### Decision
+
+- Remove the Student UI action, confirmation dialog, and one-time credential
+  result flow from Student Search.
+- Keep account details, username, first-login state, and lifecycle actions for
+  Students.
+- Enforce the same boundary in the backend credential-email service so a direct
+  request cannot rotate a Student password or publish a credential email.
+- Keep credential email available for Proctor and Examiner rows.
+
+## Iteration 4: Visible account and one-time password verification
+
+**Date:** 2026-09-19
+
+### User direction
+
+- Host should be able to see the account and password information needed to
+  verify generated credentials.
+
+### Decision
+
+- Add the login username as an `Account` column on Student and Exam Staff
+  tables.
+- Never display or persist an existing password; only its hash exists.
+- Keep Student free of email delivery, but add a Host-only `Generate password`
+  action that rotates a fresh temporary password and displays it once.
+- Keep the existing Exam Staff `Send email` flow and one-time result.
+- Preserve the existing one-time credential result/download after Student
+  creation or Excel import.
