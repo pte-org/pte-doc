@@ -1,0 +1,27 @@
+{
+  "mode": "gate",
+  "target": "phase-04-cross-app-regression-and-handoff",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-20T16:30:00+07:00",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/shared/web/ApiResponse.java",
+    "pte-api/app/src/main/java/com/pte/shared/exception/DomainException.java",
+    "pte-api/app/src/main/java/com/pte/shared/exception/GlobalExceptionHandler.java",
+    "pte-web/packages/api-client/src/client/apiError.ts",
+    "pte-web/packages/api-client/src/client/client.ts",
+    "pte-web/packages/api-client/src/client/client.test.ts",
+    "pte-web/packages/api-client/src/client/errorMessage.ts",
+    "pte-web/packages/api-client/src/client/index.ts",
+    "docs/CODING_STANDARDS_API.md",
+    "pte-web/docs/CODING_STANDARDS_WEB.md"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "report_path": "pte-doc/projects/plans/quang-friendly-api-error-messages/quality/phase-04-cross-app-regression-and-handoff-quality-report.json"
+}

@@ -1,0 +1,81 @@
+{
+  "target": "phase-04-cross-app-regression-and-handoff",
+  "verified_at": "2026-09-20T16:45:00+07:00",
+  "unit_tests": {
+    "status": "SKIPPED_BY_USER",
+    "scope": "Phase 2-4 unit tests and backend/API-client test reruns",
+    "note": "The Phase 1 API-client suite previously passed 232 tests; no test command was rerun after the user explicitly disabled unit tests."
+  },
+  "gates": [
+    {
+      "command": "pte-api/.\\mvnw.cmd -pl app -DskipTests compile",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "command": "pte-web/corepack pnpm --filter @pte/api-client typecheck",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "command": "pte-web/corepack pnpm --filter vendor-web exec tsc --noEmit",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "command": "pte-web/corepack pnpm --filter vendor-web lint",
+      "status": "PASS_WITH_EXISTING_WARNING",
+      "exit_code": 0,
+      "warning": "Existing @next/next/no-img-element warning in QuestionEditorForm.tsx:272."
+    },
+    {
+      "command": "pte-web/corepack pnpm --filter vendor-web build",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "command": "pte-web/corepack pnpm --filter tenant-web exec tsc --noEmit",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "command": "pte-web/corepack pnpm --filter tenant-web lint",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "command": "pte-web/corepack pnpm --filter tenant-web build",
+      "status": "PASS",
+      "exit_code": 0
+    }
+  ],
+  "static_scans": [
+    {
+      "pattern": "error.message|Error .message|ApiError.message",
+      "scope": "pte-web/apps/vendor-web and pte-web/apps/tenant-web TypeScript source",
+      "status": "PASS",
+      "matches": 0
+    },
+    {
+      "pattern": "row.reason",
+      "scope": "tenant roster UI",
+      "status": "PASS",
+      "note": "Skipped-row reasons are mapped through a friendly message catalog."
+    }
+  ],
+  "contract_review": {
+    "legacy_envelope": "Preserved by the three-argument ApiResponse constructor and legacy message field.",
+    "additive_envelope": "ApiResponse code and userMessage fields are optional and parsed by api-client.",
+    "structured_data": "DomainException data remains passed through GlobalExceptionHandler and ApiError.details retains the response body."
+  },
+  "browser_smoke": {
+    "status": "PASS",
+    "command": "Playwright inline smoke against http://localhost:3300/login and http://localhost:3301/login",
+    "flows": [
+      "Invalid login on tenant-web shows Username or password is incorrect.",
+      "Invalid login on vendor-web shows Username or password is incorrect.",
+      "Neither page exposes INVALID_LOGIN, Unauthorized, Exception, or ApiError."
+    ],
+    "credentials": "Synthetic invalid credentials only; no production credential used."
+  }
+}
