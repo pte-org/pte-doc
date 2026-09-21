@@ -1,0 +1,31 @@
+{
+  "target": "phase-02-runtime-profiles-and-template-pinning",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-task-type-catalog-template-runtime-contract/quality/phase-02-runtime-profiles-and-template-pinning-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/itembank/QuestionTypeService.java",
+    "pte-api/app/src/main/java/com/pte/itembank/TaskRuntimeProfileDescriptor.java",
+    "pte-api/app/src/main/java/com/pte/itembank/TaskRuntimeProfileRegistry.java",
+    "pte-api/app/src/main/java/com/pte/itembank/TaskRuntimeProfileService.java",
+    "pte-api/app/src/main/java/com/pte/itembank/domain/TaskRuntimeProfile.java",
+    "pte-api/app/src/main/java/com/pte/itembank/domain/enums/TaskRuntimeProfileStatus.java",
+    "pte-api/app/src/main/java/com/pte/itembank/dto/response/QuestionTypeResponse.java",
+    "pte-api/app/src/main/java/com/pte/itembank/internal/exception/TaskRuntimeProfileException.java",
+    "pte-api/app/src/main/java/com/pte/itembank/internal/repository/TaskRuntimeProfileRepository.java",
+    "pte-api/app/src/main/java/com/pte/scoretemplate/domain/ScoreTemplateItem.java",
+    "pte-api/app/src/main/java/com/pte/scoretemplate/dto/response/ScoreTemplateItemResponse.java",
+    "pte-api/app/src/main/java/com/pte/scoretemplate/internal/mapper/ScoreTemplateMapper.java",
+    "pte-api/app/src/main/java/com/pte/scoretemplate/internal/service/ScoreTemplateAdminService.java",
+    "pte-api/app/src/main/resources/db/migration/V45__task_runtime_profiles_and_template_pins.sql",
+    "pte-api/app/src/test/java/com/pte/itembank/QuestionTypeCatalogMigrationTest.java",
+    "pte-api/app/src/test/java/com/pte/itembank/QuestionTypeServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/itembank/TaskRuntimeProfileRegistryTest.java",
+    "pte-api/app/src/test/java/com/pte/itembank/TaskRuntimeProfileServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/scoretemplate/internal/service/ScoreTemplateAdminServiceTest.java"
+  ],
+  "source_fingerprint": "sha256:cfe0c30441c32298c9b53f5970969c86f8b629b07106cc4a2a3621e01654a2ed",
+  "reviewed_at": "2026-09-21T18:47:24.9616156Z",
+  "open_blocking_findings": 0
+}
