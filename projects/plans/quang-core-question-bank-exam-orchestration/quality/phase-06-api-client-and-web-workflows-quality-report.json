@@ -1,0 +1,34 @@
+{
+  "mode": "gate",
+  "target": "phase-06-api-client-and-web-workflows",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-21T16:17:07+07:00",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-web/packages/api-client/src/requests/scheduling/examOrchestration.ts",
+    "D:/GitHub/pte-org/pte-web/packages/api-client/src/types/scheduling/index.ts",
+    "D:/GitHub/pte-org/pte-web/packages/api-client/src/requests/scoretemplate/index.ts",
+    "D:/GitHub/pte-org/pte-web/apps/tenant-web/features/exams/components/CreateExamWizard.tsx",
+    "D:/GitHub/pte-org/pte-web/apps/tenant-web/features/exams/api/index.ts",
+    "D:/GitHub/pte-org/pte-web/apps/vendor-web/features/scoretemplate/components/ScoreTemplateListView.tsx",
+    "D:/GitHub/pte-org/pte-web/apps/vendor-web/features/scoretemplate/components/ScoreTemplateEditorView.tsx",
+    "D:/GitHub/pte-org/pte-web/packages/api-client/src/client/errorMessage.ts"
+  ],
+  "summary": { "blocker": 0, "high": 0, "medium": 0, "low": 0, "noted": 1 },
+  "findings": [
+    {
+      "id": "QUAL-001-P6",
+      "severity": "NOTED",
+      "rule": "FE_ACCESSIBLE_INTERACTIVE_ELEMENT",
+      "status": "ACCEPTED_DEBT",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-web/apps/vendor-web/features/questionbank/components/QuestionEditorForm.tsx:272",
+      "evidence": "Vendor lint reports one existing @next/next/no-img-element warning outside the changed workflow screens; lint has zero errors.",
+      "why_it_matters": "The image should eventually use the repository's optimized media path for performance, but it is unrelated to exam orchestration.",
+      "required_action": "Track separately; do not block this workflow release on the pre-existing warning.",
+      "owner": "none"
+    }
+  ],
+  "report_path": "D:/GitHub/pte-org/pte-doc/projects/plans/quang-core-question-bank-exam-orchestration/quality/phase-06-api-client-and-web-workflows-quality-report.json"
+}

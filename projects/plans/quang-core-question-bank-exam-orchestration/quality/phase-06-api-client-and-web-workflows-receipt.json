@@ -1,0 +1,20 @@
+{
+  "target": "phase-06-api-client-and-web-workflows",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-core-question-bank-exam-orchestration/quality/phase-06-api-client-and-web-workflows-quality-report.json",
+  "reviewed_files": [
+    "pte-web/apps/tenant-web/features/exams/api/index.ts",
+    "pte-web/apps/tenant-web/features/exams/components/CreateExamWizard.tsx",
+    "pte-web/apps/vendor-web/features/scoretemplate/components/ScoreTemplateEditorView.tsx",
+    "pte-web/apps/vendor-web/features/scoretemplate/components/ScoreTemplateListView.tsx",
+    "pte-web/packages/api-client/src/client/errorMessage.ts",
+    "pte-web/packages/api-client/src/requests/scheduling/examOrchestration.ts",
+    "pte-web/packages/api-client/src/requests/scoretemplate/index.ts",
+    "pte-web/packages/api-client/src/types/scheduling/index.ts"
+  ],
+  "source_fingerprint": "sha256:3821d5efb118bc865d4311dc0b2c73996c3cad940b2584a80b884df7463a550c",
+  "reviewed_at": "2026-09-21T16:17:07+07:00",
+  "open_blocking_findings": 0
+}

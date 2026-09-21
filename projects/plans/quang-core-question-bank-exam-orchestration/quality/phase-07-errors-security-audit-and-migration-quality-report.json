@@ -1,0 +1,33 @@
+{
+  "mode": "gate",
+  "target": "phase-07-errors-security-audit-and-migration",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-21T16:17:07+07:00",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/shared/exception/DomainException.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/constant/SessionConstants.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/exception/LegacySessionCreateRequiresNewWorkflowException.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/scoretemplate/internal/controller/ScoreTemplateController.java",
+    "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/scoretemplate/internal/controller/ScoreTemplateControllerSecurityTest.java",
+    "D:/GitHub/pte-org/pte-web/packages/api-client/src/client/errorMessage.ts",
+    "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/migration/V42__exam_orchestration_core.sql"
+  ],
+  "summary": { "blocker": 0, "high": 0, "medium": 0, "low": 0, "noted": 1 },
+  "findings": [
+    {
+      "id": "QUAL-001-P7",
+      "severity": "NOTED",
+      "rule": "DOC_INTENTIONAL_LIMIT_IS_A_NON_GOAL",
+      "status": "ACCEPTED_DEBT",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-api/app/src/main/java/com/pte/shared/audit/AuditLogService.java:record",
+      "evidence": "Tenant audit rows require a tenant ID, so global platform template approval/activation actions are not recorded by the tenant audit service; exam lifecycle actions are recorded.",
+      "why_it_matters": "Platform governance needs a separate platform-level audit sink before compliance-grade audit completeness can be claimed.",
+      "required_action": "Add a platform audit store or nullable/global audit partition before production compliance sign-off; never insert platform events with a fabricated tenant ID.",
+      "owner": "none"
+    }
+  ],
+  "report_path": "D:/GitHub/pte-org/pte-doc/projects/plans/quang-core-question-bank-exam-orchestration/quality/phase-07-errors-security-audit-and-migration-quality-report.json"
+}

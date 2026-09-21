@@ -1,0 +1,36 @@
+{
+  "mode": "gate",
+  "target": "phase-05-deterministic-generation-and-forms",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-21T16:17:07+07:00",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/internal/service/ExamGenerationService.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/internal/service/SnapshotPublishService.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/domain/ExamSnapshot.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/domain/ExamForm.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/domain/FormAssignment.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/domain/ExamGenerationJob.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/ExamOrchestrationService.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/EntitlementService.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/migration/V43__snapshot_generation_provenance.sql",
+    "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/assessment/internal/service/ExamGenerationServiceTest.java"
+  ],
+  "summary": { "blocker": 0, "high": 0, "medium": 0, "low": 0, "noted": 1 },
+  "findings": [
+    {
+      "id": "QUAL-001-P5",
+      "severity": "NOTED",
+      "rule": "DOC_INTENTIONAL_LIMIT_IS_A_NON_GOAL",
+      "status": "ACCEPTED_DEBT",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-api/app/src/main/java/com/pte/session/internal/service/ExamOrchestrationService.java:generate",
+      "evidence": "Persistent job, progress and idempotency fields exist, while the current implementation generates forms synchronously in the request transaction and does not persist a FAILED job after rollback.",
+      "why_it_matters": "Large unique-form audiences can hold a transaction for too long and do not yet have durable worker retry semantics.",
+      "required_action": "Before production scale rollout, move generation to a bounded worker with a separate failure transition/retry transaction and keep publish blocked until SUCCEEDED.",
+      "owner": "none"
+    }
+  ],
+  "report_path": "D:/GitHub/pte-org/pte-doc/projects/plans/quang-core-question-bank-exam-orchestration/quality/phase-05-deterministic-generation-and-forms-quality-report.json"
+}

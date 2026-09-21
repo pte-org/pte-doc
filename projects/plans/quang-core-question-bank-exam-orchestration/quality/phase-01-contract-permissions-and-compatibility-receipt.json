@@ -1,0 +1,18 @@
+{
+  "target": "phase-01-contract-permissions-and-compatibility",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-core-question-bank-exam-orchestration/quality/phase-01-contract-permissions-and-compatibility-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/scoretemplate/internal/controller/ScoreTemplateController.java",
+    "pte-api/app/src/main/java/com/pte/session/domain/enums/SessionStatus.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/controller/SessionController.java",
+    "pte-doc/projects/plans/quang-core-question-bank-exam-orchestration/phase-01-contract-permissions-and-compatibility.md",
+    "pte-web/apps/tenant-web/features/exams/constants/index.ts",
+    "pte-web/packages/api-client/src/types/scheduling/index.ts"
+  ],
+  "source_fingerprint": "sha256:ff013b5db42f4173eef8604a5d8be8894bc978bf6784723b666dfd72e30a69b9",
+  "reviewed_at": "2026-09-21T16:17:07+07:00",
+  "open_blocking_findings": 0
+}

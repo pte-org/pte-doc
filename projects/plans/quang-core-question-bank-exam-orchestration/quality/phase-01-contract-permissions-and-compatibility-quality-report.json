@@ -1,0 +1,32 @@
+{
+  "mode": "gate",
+  "target": "phase-01-contract-permissions-and-compatibility",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-21T16:17:07+07:00",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/domain/enums/SessionStatus.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/controller/SessionController.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/scoretemplate/internal/controller/ScoreTemplateController.java",
+    "D:/GitHub/pte-org/pte-web/packages/api-client/src/types/scheduling/index.ts",
+    "D:/GitHub/pte-org/pte-web/apps/tenant-web/features/exams/constants/index.ts",
+    "D:/GitHub/pte-org/pte-doc/projects/plans/quang-core-question-bank-exam-orchestration/phase-01-contract-permissions-and-compatibility.md"
+  ],
+  "summary": { "blocker": 0, "high": 0, "medium": 0, "low": 0, "noted": 1 },
+  "findings": [
+    {
+      "id": "QUAL-001-P1",
+      "severity": "NOTED",
+      "rule": "API_BREAKING_CHANGE_DECLARED",
+      "status": "ACCEPTED_DEBT",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-api/app/src/main/java/com/pte/session/internal/controller/SessionController.java:old POST /sessions",
+      "evidence": "The old skills-only payload cannot express template, audience, form and reuse rules; the route now fails closed with LEGACY_SESSION_CREATE_REQUIRES_NEW_WORKFLOW.",
+      "why_it_matters": "Stale clients receive a controlled migration response instead of silently creating an unsafe scheduled exam.",
+      "required_action": "Remove the compatibility boundary after all clients migrate to POST /sessions/drafts and runtime telemetry confirms no remaining callers.",
+      "owner": "none"
+    }
+  ],
+  "report_path": "D:/GitHub/pte-org/pte-doc/projects/plans/quang-core-question-bank-exam-orchestration/quality/phase-01-contract-permissions-and-compatibility-quality-report.json"
+}
