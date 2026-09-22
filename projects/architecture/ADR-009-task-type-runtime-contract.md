@@ -1,5 +1,9 @@
 # ADR-009: Versioned Task-Type Runtime Contract
 
+> Dynamic logical task identities and reusable screen contracts are defined by
+> [ADR-010](ADR-010-dynamic-task-type-screen-contract.md). This ADR remains the
+> historical standard-runtime decision and is not rewritten.
+
 **Date:** 2026-09-22
 **Status:** Accepted
 **Scope:** `pte-api`, `pte-web`, `pte-app`
