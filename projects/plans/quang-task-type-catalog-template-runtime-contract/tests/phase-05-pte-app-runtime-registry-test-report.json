@@ -1,0 +1,21 @@
+{
+  "phase": "phase-05-pte-app-runtime-registry",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-22T17:54:00+07:00",
+  "commands": [
+    "flutter analyze",
+    "flutter test test/widget/features/exam_attempt/task_type_dispatcher_test.dart test/unit/features/exam_attempt/task_view_test.dart test/unit/features/exam_attempt/exam_attempt_repository_impl_test.dart test/unit/features/exam_attempt/reading_task_header_labels_test.dart test/unit/features/exam_attempt/exam_ui_preview_catalog_test.dart test/unit/features/exam_attempt/task_type_registry_test.dart",
+    "flutter test"
+  ],
+  "summary": {
+    "focused_passed": 38,
+    "full_suite_passed": 553,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "analyzer_issues": 0
+  },
+  "failures": [],
+  "report_path": "pte-doc/projects/plans/quang-task-type-catalog-template-runtime-contract/tests/phase-05-pte-app-runtime-registry-test-report.json"
+}

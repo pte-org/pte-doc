@@ -85,12 +85,46 @@ rolling back a shared migration or deleting volumes/data.
 
 ## Quality and Testing State
 
-Status at plan creation: testing not started; quality not evaluated.
+Status: cross-repo verification completed on 2026-09-22. The implementation
+and automated gates are approved; two operator-only notes remain before strict
+enforcement is enabled: an authenticated positive browser walkthrough and a
+deployment observability/metrics check. Neither is treated as a code failure.
 
-Required before phase completion:
+Evidence:
 
-- Full backend, web/API-client, Flutter, migration and browser/manual matrix.
-- `git diff --check` in every affected repository.
-- Final mandatory `ck:quality --gate` receipt rerun after all fixes.
-- Handoff note containing exact passed commands, failures with scope, migration
-  evidence, feature-flag state and rollback readiness.
+- Test report: `tests/phase-08-rollout-verification-test-report.json`.
+- Quality report: `quality/phase-08-rollout-verification-quality-report.json`.
+- Final quality receipt: `quality/phase-08-rollout-verification-and-adr-receipt.json`.
+- Compatibility matrix: `compatibility-matrix.md`.
+- Operator runbook: `operator-runbook.md`.
+- Runtime fixtures: `fixtures/phase-08-runtime-contract-fixtures.json`.
+- Architecture decision: `pte-doc/projects/architecture/ADR-009-task-type-runtime-contract.md`.
+
+Verification results:
+
+- Backend compile passed; focused Phase 4 tests passed 52/52 and the full
+  backend suite passed 774/774.
+- Fresh disposable Postgres applied V1-V48 successfully. The persistent local
+  database upgraded from V38 to V48; a second startup was an idempotent V48
+  no-op. The active catalog has 23 rows, 22 scored rows, 23 runtime profiles,
+  and zero duplicate active codes.
+- API client typecheck and 269 tests passed. Vendor-web lint and production
+  build passed; the only lint output is the pre-existing unrelated `<img>`
+  warning in `QuestionEditorForm.tsx`.
+- `flutter analyze` reported no issues and the full Flutter suite passed 553
+  tests.
+- Playwright public login smoke passed at `http://localhost:3301/login`:
+  the login form rendered and no raw machine error code was visible.
+- `git diff --check` is required and recorded for all four affected repositories;
+  the final handoff must keep any unrelated dirty-worktree changes visible.
+
+Manual/deferred boundary:
+
+- The authenticated catalog -> draft -> Author submit -> Admin activate ->
+  snapshot -> app preflight -> render walkthrough needs approved local
+  credentials and realistic account data. It is documented in the runbook and
+  was not inferred from a failed or unauthenticated request.
+- The local actuator profile exposes health/info only. Audit action constants
+  and failure records are implemented; the greenfield local database has no
+  business audit rows. Production metrics/audit verification is required
+  before setting `ATTEMPT_ALLOW_LEGACY_MISSING_MANIFEST=false`.

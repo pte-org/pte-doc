@@ -74,6 +74,11 @@ immutable snapshot data, not a mutable catalog join.
 
 ## Design Constraints
 
+- Preflight: Java 21/Spring Modulith conventions, immutable
+  `SnapshotPublishService`/`SnapshotPinService` boundaries, attempt ownership
+  and locking, public assessment/session facades, additive API DTO
+  constructors, V44–V46 migrations and fail-closed error constants were
+  checked against the Phase 4 implementation.
 - Do not resolve runtime behavior from a live catalog lookup at attempt time.
 - Do not trust client-provided capability names as executable configuration.
 - Do not use a skip policy for a task that belongs to a frozen exam.
@@ -83,7 +88,17 @@ immutable snapshot data, not a mutable catalog join.
 
 ## Quality and Testing State
 
-Status at plan creation: testing not started; quality not evaluated.
+Status: reverified on the working tree on 2026-09-22. The Spring constructor
+selection issue found during Phase 8 was fixed by explicitly wiring the
+production `CapabilityNegotiationService` constructor. Decision: unit tests=yes;
+quality gate=yes.
+
+- Focused backend tests: 52 passed, 0 failed, 0 errors, 0 skipped.
+- Full backend suite: 774 passed, 0 failed, 0 errors, 0 skipped.
+- Test report: `tests/phase-04-snapshot-capability-contract-test-report.json`.
+- Quality report/receipt: `quality/phase-04-snapshot-capability-contract-quality-report.json` and the corresponding receipt.
+- PostgreSQL upgrade and idempotent rerun verification was completed in Phase 8;
+  the former QUAL-004 note is closed.
 
 Required before phase completion:
 

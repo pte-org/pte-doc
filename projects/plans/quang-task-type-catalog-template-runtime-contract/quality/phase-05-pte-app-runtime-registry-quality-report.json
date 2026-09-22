@@ -1,0 +1,50 @@
+{
+  "mode": "gate",
+  "target": "phase-05-pte-app-runtime-registry",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-22T17:54:00+07:00",
+  "reviewed_files": [
+    "pte-app/lib/core/constants/task_type_meta.dart",
+    "pte-app/lib/features/exam_attempt/constants/exam_attempt_error_message.dart",
+    "pte-app/lib/features/exam_attempt/constants/exam_attempt_strings.dart",
+    "pte-app/lib/features/exam_attempt/data/repositories/exam_attempt_repository_impl.dart",
+    "pte-app/lib/features/exam_attempt/dev/exam_ui_preview_catalog.dart",
+    "pte-app/lib/features/exam_attempt/dev/exam_ui_preview_stimulus.dart",
+    "pte-app/lib/features/exam_attempt/domain/attempt_preflight.dart",
+    "pte-app/lib/features/exam_attempt/domain/client_capability_manifest.dart",
+    "pte-app/lib/features/exam_attempt/domain/repositories/exam_attempt_repository.dart",
+    "pte-app/lib/features/exam_attempt/domain/task_view.dart",
+    "pte-app/lib/features/exam_attempt/listening/presentation/widgets/listening_task_header_labels.dart",
+    "pte-app/lib/features/exam_attempt/presentation/model/task_view_ui_adapter.dart",
+    "pte-app/lib/features/exam_attempt/presentation/pages/session_entry_page.dart",
+    "pte-app/lib/features/exam_attempt/presentation/widgets/task_type_dispatcher.dart",
+    "pte-app/lib/features/exam_attempt/reading/presentation/widgets/reading_task_header_labels.dart",
+    "pte-app/test/unit/features/exam_attempt/exam_attempt_repository_impl_test.dart",
+    "pte-app/test/unit/features/exam_attempt/task_type_registry_test.dart",
+    "pte-app/test/widget/features/exam_attempt/task_type_dispatcher_test.dart"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 1
+  },
+  "findings": [
+    {
+      "id": "QUAL-005",
+      "severity": "NOTED",
+      "rule": "CROSS_REPO_RUNTIME_SMOKE",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-app/lib/features/exam_attempt/data/repositories/exam_attempt_repository_impl.dart:13",
+      "evidence": "The app sends the additive capability manifest and parses the preflight/runtime contract; unit and widget suites pass, but no live authenticated API/app smoke was run in this phase.",
+      "why_it_matters": "The backend contract is already implemented, while an end-to-end authenticated request still depends on the local stack and test account.",
+      "required_action": "Run authenticated preflight/start and one supported/unsupported runtime delivery check in Phase 8 when the local stack is available.",
+      "owner": "none"
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/quang-task-type-catalog-template-runtime-contract/quality/phase-05-pte-app-runtime-registry-quality-report.json"
+}
