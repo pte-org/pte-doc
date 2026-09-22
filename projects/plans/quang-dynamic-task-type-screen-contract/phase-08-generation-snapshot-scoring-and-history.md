@@ -144,10 +144,14 @@ Do not expose decoder stack traces or raw enum exceptions.
 - Preserve existing generation seed, algorithm, pool policy, and template
   version provenance.
 
+- Preflight: dynamic generation, complete snapshot/pin provenance, custom
+  scoring dispatch, answer decoding, and historical label stability were
+  reviewed.
+
 ## Quality and Testing State
 
-Quality: not evaluated.
-Testing: not started.
+Quality: approved; receipt: quality/phase-08-generation-snapshot-scoring-and-history-receipt.json
+Testing: passed; report: tests/phase-08-generation-snapshot-scoring-and-history-test-report.json
 
 Required tests:
 

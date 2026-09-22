@@ -128,10 +128,13 @@ Frontend availability is advisory; the 409 response is authoritative.
   not import scoretemplate repositories or events, and scoretemplate does not
   write usage rows directly.
 
+- Preflight: catalog endpoints, role ownership, availability normalization,
+  publication usage, uniqueness, and runtime-lock paths were reviewed.
+
 ## Quality and Testing State
 
-Quality: not evaluated.
-Testing: not started.
+Quality: approved; receipt: quality/phase-04-dynamic-catalog-api-ownership-and-locks-receipt.json
+Testing: passed; report: tests/phase-04-dynamic-catalog-api-ownership-and-locks-test-report.json
 
 Required tests:
 

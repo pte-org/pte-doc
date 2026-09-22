@@ -126,10 +126,14 @@ scoring behavior are locked. You can still update its display name.”
 - Use server response as the authority for lock/readiness.
 - Keep the legacy API client functions as compatibility adapters.
 
+- Preflight: API-client contracts, task-type form normalization and warnings,
+  constants-only messages, score-template policy UX, and readiness gates were
+  reviewed.
+
 ## Quality and Testing State
 
-Quality: not evaluated.
-Testing: not started.
+Quality: approved; receipt: quality/phase-09-vendor-web-authoring-and-readiness-ux-receipt.json
+Testing: passed with authenticated walkthrough pending; report: tests/phase-09-vendor-web-authoring-and-readiness-ux-test-report.json
 
 Required tests:
 

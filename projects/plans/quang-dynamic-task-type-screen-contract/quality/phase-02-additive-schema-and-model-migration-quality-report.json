@@ -1,0 +1,25 @@
+{
+  "mode": "gate",
+  "target": "phase-02-additive-schema-and-model-migration",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-22T16:35:00Z",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-doc/projects/plans/quang-dynamic-task-type-screen-contract/phase-02-additive-schema-and-model-migration.md",
+    "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/migration/V49__dynamic_task_type_identity.sql",
+    "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/migration/V50__task_runtime_capability_registry.sql",
+    "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/migration/V51__question_task_type_key_dual_identity.sql",
+    "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/migration/V52__template_policy_and_contract_columns.sql",
+    "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/migration/V53__task_type_publication_usage.sql",
+    "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/migration/V54__snapshot_task_contract_provenance.sql",
+    "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/migration/V55__score_template_runtime_min_app_version.sql",
+    "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/migration/V56__canonicalize_runtime_capabilities.sql",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/domain/QuestionTypeDefinition.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/domain/TaskRuntimeContract.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/domain/SnapshotItem.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/domain/PinnedItem.java"
+  ],
+  "summary": { "blocker": 0, "high": 0, "medium": 0, "low": 0, "noted": 0 },
+  "findings": [],
+  "notes": ["The H2 test harness emits existing schema-generation warnings for PostgreSQL array mappings; the full suite still passes."],
+  "report_path": "quality/phase-02-additive-schema-and-model-migration-quality-report.json"
+}

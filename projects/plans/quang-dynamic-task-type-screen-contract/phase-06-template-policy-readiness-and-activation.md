@@ -141,10 +141,14 @@ Never render a joined Java exception string or raw enum parsing error.
 - Preserve single-active template and immutable published-version behavior.
 - Cross-module calls use ScoreTemplateService and itembank public facades.
 
+- Preflight: STANDARD_PTE invariants, CUSTOM policy, readiness diagnostics,
+  question-bank feasibility, activation flags, and publication locking were
+  reviewed.
+
 ## Quality and Testing State
 
-Quality: not evaluated.
-Testing: not started.
+Quality: approved; receipt: quality/phase-06-template-policy-readiness-and-activation-receipt.json
+Testing: passed; report: tests/phase-06-template-policy-readiness-and-activation-test-report.json
 
 Required tests:
 

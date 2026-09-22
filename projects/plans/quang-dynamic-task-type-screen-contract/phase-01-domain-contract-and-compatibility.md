@@ -129,10 +129,13 @@ the primary UI text.
 - Do not promise that backend can inspect an installed app binary.
 - Public module facades remain the only cross-module dependency.
 
+- Preflight: the spec, compatibility adapter, runtime boundary, and ADR delta
+  were reviewed before persistence and runtime implementation.
+
 ## Quality and Testing State
 
-Quality: not evaluated.
-Testing: not started.
+Quality: approved; receipt: quality/phase-01-domain-contract-and-compatibility-receipt.json
+Testing: passed; report: tests/phase-01-domain-contract-and-compatibility-test-report.json
 
 Required tests to write in this phase:
 

@@ -121,10 +121,13 @@ compatibility error, not a Java enum exception or raw stack trace.
   invariants.
 - Use the public item-bank facade for assessment and scoretemplate consumers.
 
+- Preflight: task-key writes, standard enum adapters, question validation,
+  counts, freeze reads, and approved shared-pool queries were reviewed.
+
 ## Quality and Testing State
 
-Quality: not evaluated.
-Testing: not started.
+Quality: approved; receipt: quality/phase-05-question-bank-logical-task-identity-receipt.json
+Testing: passed; report: tests/phase-05-question-bank-logical-task-identity-test-report.json
 
 Required tests:
 

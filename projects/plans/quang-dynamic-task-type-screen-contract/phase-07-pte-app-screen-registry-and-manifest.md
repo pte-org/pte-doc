@@ -111,10 +111,14 @@ messaging and distinguish it from an unknown screen contract.
 - The app can use snapshot display metadata but cannot invent scoring behavior.
 - Preserve no-content-before-open and attempt state machine invariants.
 
+- Preflight: Flutter screen registry, renderer/contract matching, manifest
+  capabilities, preflight parsing, and terminal unsupported-task behavior were
+  reviewed.
+
 ## Quality and Testing State
 
-Quality: not evaluated.
-Testing: not started.
+Quality: approved; receipt: quality/phase-07-pte-app-screen-registry-and-manifest-receipt.json
+Testing: passed; report: tests/phase-07-pte-app-screen-registry-and-manifest-test-report.json
 
 Required tests:
 

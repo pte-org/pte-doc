@@ -1,0 +1,18 @@
+{
+  "mode": "gate",
+  "target": "phase-06-template-policy-readiness-and-activation",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-22T16:35:00Z",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-doc/projects/plans/quang-dynamic-task-type-screen-contract/phase-06-template-policy-readiness-and-activation.md",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/scoretemplate/internal/service/ScoreTemplateAdminService.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/scoretemplate/internal/service/ScoreTemplateActivationValidator.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/scoretemplate/ScoreTemplateService.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/scoretemplate/internal/service/TaskTypeScoringMethods.java",
+    "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/scoretemplate/internal/service/ScoreTemplateAdminServiceTest.java",
+    "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/scoretemplate/internal/service/ScoreTemplateActivationValidatorTest.java"
+  ],
+  "summary": { "blocker": 0, "high": 0, "medium": 0, "low": 0, "noted": 0 },
+  "findings": [],
+  "report_path": "quality/phase-06-template-policy-readiness-and-activation-quality-report.json"
+}

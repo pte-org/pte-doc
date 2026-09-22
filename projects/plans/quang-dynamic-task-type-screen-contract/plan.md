@@ -1,6 +1,7 @@
 # Follow-on Plan: Dynamic Task Type and Screen Contract
 
-Status: Proposed; implementation not started
+Status: Implemented; awaiting hard completion confirmation. Strict rollout
+remains disabled pending authenticated walkthrough and operator review.
 Date: 2026-09-22
 Scope: pte-api + pte-web + pte-app + pte-doc
 Plan type: Hard follow-on/superseding plan; the prior standard-runtime plan is
@@ -430,16 +431,16 @@ path.
 
 ## Phases
 
-- [ ] Phase 1 — Domain contract, compatibility policy, and ADR delta
-- [ ] Phase 2 — Additive schema and model migration
-- [ ] Phase 3 — Capability registry and dynamic runtime resolver
-- [ ] Phase 4 — Dynamic task-type API, uniqueness, ownership, and locks
-- [ ] Phase 5 — Question-bank logical task identity
-- [ ] Phase 6 — Template policy, composition, and readiness enforcement
-- [ ] Phase 7 — pte-app screen registry, manifest, and unsupported state
-- [ ] Phase 8 — Generation, snapshot provenance, scoring, and history
-- [ ] Phase 9 — Vendor-web authoring and template readiness UX
-- [ ] Phase 10 — Rollout, audit/metrics, compatibility verification, and ADR handoff
+- [x] Phase 1 — Domain contract, compatibility policy, and ADR delta
+- [x] Phase 2 — Additive schema and model migration
+- [x] Phase 3 — Capability registry and dynamic runtime resolver
+- [x] Phase 4 — Dynamic task-type API, uniqueness, ownership, and locks
+- [x] Phase 5 — Question-bank logical task identity
+- [x] Phase 6 — Template policy, composition, and readiness enforcement
+- [x] Phase 7 — pte-app screen registry, manifest, and unsupported state
+- [x] Phase 8 — Generation, snapshot provenance, scoring, and history
+- [x] Phase 9 — Vendor-web authoring and template readiness UX
+- [x] Phase 10 — Rollout, audit/metrics, compatibility verification, and ADR handoff
 
 ## Red-team and risk register
 
@@ -489,10 +490,22 @@ path.
   friendly errors are covered.
 - Every phase has focused tests and a passing mandatory ck:quality --gate.
 
-## Handoff
+## Verification handoff
 
-This bundle is planning-only. No Java, TypeScript, Dart, database, or
-deployment source has been changed.
+All ten phases are implemented and have an approved quality receipt plus a
+test report under `quality/` and `tests/`. The final automated gates are:
+
+- Backend: clean compile and 786 tests passed with 0 failures, errors, or
+  skips.
+- Vendor web: API client 273 tests passed; TypeScript, lint, and production
+  build passed. Lint retains one existing `<img>` optimization warning.
+- Flutter: analyze passed and 553 tests passed.
+- Diff hygiene: `git diff --check` passed in all three source repositories.
+
+Authenticated browser walkthrough and production metrics/audit inspection are
+explicitly pending approved credentials/operator authorization. The rollout
+flags remain off by default; no production deployment, data mutation, commit,
+or push was performed.
 
 After review, run:
 
@@ -500,5 +513,5 @@ After review, run:
 /ck:cook --hard --tests --quality --checks-all-phases D:\GitHub\pte-org\pte-doc\projects\plans\quang-dynamic-task-type-screen-contract\plan.md
 ~~~
 
-The cook run must confirm tests and the quality gate before each phase and
-record outcomes in that phase's Quality and Testing State section.
+The cook run outcomes are recorded in each phase's Quality and Testing State
+section and in the corresponding quality/test artifacts.

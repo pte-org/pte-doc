@@ -1,0 +1,14 @@
+{
+  "phase": "phase-05-question-bank-logical-task-identity",
+  "mode": "all-phases",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-22T16:36:00Z",
+  "summary": { "passed": 40, "failed": 0, "skipped": 0 },
+  "failures": [],
+  "checks": [
+    "Question validation, itembank, and task-key focused suite: 40 passed",
+    "Full backend regression: 786 passed, 0 failed, 0 errors, 0 skipped",
+    "Standard enum adapter and custom task-key query review: passed"
+  ],
+  "report_path": "tests/phase-05-question-bank-logical-task-identity-test-report.json"
+}

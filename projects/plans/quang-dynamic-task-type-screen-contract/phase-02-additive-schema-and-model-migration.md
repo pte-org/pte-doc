@@ -137,10 +137,13 @@ Migration errors are operator-facing:
   over-limit array. Do not serialize capability lists into an unbounded JSON
   execution blob.
 
+- Preflight: the additive V49-V56 migration chain, legacy columns, indexes,
+  and nullable compatibility fields were reviewed before the model changes.
+
 ## Quality and Testing State
 
-Quality: not evaluated.
-Testing: not started.
+Quality: approved; receipt: quality/phase-02-additive-schema-and-model-migration-receipt.json
+Testing: passed; report: tests/phase-02-additive-schema-and-model-migration-test-report.json
 
 Required tests:
 

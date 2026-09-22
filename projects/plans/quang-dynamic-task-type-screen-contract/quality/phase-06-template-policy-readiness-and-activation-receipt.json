@@ -1,0 +1,19 @@
+{
+  "target": "phase-06-template-policy-readiness-and-activation",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-dynamic-task-type-screen-contract/quality/phase-06-template-policy-readiness-and-activation-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/scoretemplate/ScoreTemplateService.java",
+    "pte-api/app/src/main/java/com/pte/scoretemplate/internal/service/ScoreTemplateActivationValidator.java",
+    "pte-api/app/src/main/java/com/pte/scoretemplate/internal/service/ScoreTemplateAdminService.java",
+    "pte-api/app/src/main/java/com/pte/scoretemplate/internal/service/TaskTypeScoringMethods.java",
+    "pte-api/app/src/test/java/com/pte/scoretemplate/internal/service/ScoreTemplateActivationValidatorTest.java",
+    "pte-api/app/src/test/java/com/pte/scoretemplate/internal/service/ScoreTemplateAdminServiceTest.java",
+    "pte-doc/projects/plans/quang-dynamic-task-type-screen-contract/phase-06-template-policy-readiness-and-activation.md"
+  ],
+  "source_fingerprint": "sha256:2e42ffb28029edacff9b076ae66bfeeff2e13212475abcf9506b59b7191b7c38",
+  "reviewed_at": "2026-09-22T16:35:00Z",
+  "open_blocking_findings": 0
+}

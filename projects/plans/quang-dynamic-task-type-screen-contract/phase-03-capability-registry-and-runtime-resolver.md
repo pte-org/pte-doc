@@ -123,10 +123,13 @@ first failure only.
   clients migrate.
 - A resolver failure is explicit; never fall back to a different screen.
 
+- Preflight: registry ownership, semantic allowlisting, retired-readable
+  resolution, batch resolution, and client contract semantics were reviewed.
+
 ## Quality and Testing State
 
-Quality: not evaluated.
-Testing: not started.
+Quality: approved; receipt: quality/phase-03-capability-registry-and-runtime-resolver-receipt.json
+Testing: passed; report: tests/phase-03-capability-registry-and-runtime-resolver-test-report.json
 
 Required tests:
 

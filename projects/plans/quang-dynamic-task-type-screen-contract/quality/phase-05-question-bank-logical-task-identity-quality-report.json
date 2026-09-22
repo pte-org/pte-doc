@@ -1,0 +1,19 @@
+{
+  "mode": "gate",
+  "target": "phase-05-question-bank-logical-task-identity",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-22T16:35:00Z",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-doc/projects/plans/quang-dynamic-task-type-screen-contract/phase-05-question-bank-logical-task-identity.md",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/domain/Question.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/ItembankService.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/internal/service/QuestionValidationHelper.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/internal/repository/QuestionRepository.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/QuestionTypeService.java",
+    "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/itembank/ItembankServiceTest.java",
+    "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/itembank/internal/service/QuestionValidationHelperTest.java"
+  ],
+  "summary": { "blocker": 0, "high": 0, "medium": 0, "low": 0, "noted": 0 },
+  "findings": [],
+  "report_path": "quality/phase-05-question-bank-logical-task-identity-quality-report.json"
+}
