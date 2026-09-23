@@ -65,8 +65,61 @@ Thiết lập canonical data contract trong `scoring`. Chưa cần hoàn thiện
 - Không đổi enrollment membership constraint trong phase này.
 - Preflight: `ScoreTemplateService`/`AttemptService` xác nhận module contract đi qua root-package facade và DTO; `BaseEntity` là convention cho publicId/timestamps; `application.yml` dùng `ddl-auto: validate`, Flyway hiện đến V57. Giữ assignment/scoring state trong `scoring`, không truy cập repository `internal` xuyên module; migration mới phải tương thích các `raw_score`/`teacher_score` đã tồn tại.
 
+## Files
+
+- `pte-api/app/src/main/java/com/pte/scoring/ScoringService.java`
+- `pte-api/app/src/main/java/com/pte/scoring/domain/ScoringAnswer.java`
+- `pte-api/app/src/main/java/com/pte/scoring/domain/ExaminerAnswerScore.java`
+- `pte-api/app/src/main/java/com/pte/scoring/domain/ExaminerAssignmentBatch.java`
+- `pte-api/app/src/main/java/com/pte/scoring/domain/ExaminerAttemptAssignment.java`
+- `pte-api/app/src/main/java/com/pte/scoring/domain/ScoreSourceAudit.java`
+- `pte-api/app/src/main/java/com/pte/scoring/domain/ScoringSessionState.java`
+- `pte-api/app/src/main/java/com/pte/scoring/domain/enums/AiProviderCategory.java`
+- `pte-api/app/src/main/java/com/pte/scoring/domain/enums/AssignmentBatchMode.java`
+- `pte-api/app/src/main/java/com/pte/scoring/domain/enums/AssignmentBatchStatus.java`
+- `pte-api/app/src/main/java/com/pte/scoring/domain/enums/ExaminerAnswerScoreStatus.java`
+- `pte-api/app/src/main/java/com/pte/scoring/domain/enums/ScoreSource.java`
+- `pte-api/app/src/main/java/com/pte/scoring/domain/enums/ScoreSourceSelectionScope.java`
+- `pte-api/app/src/main/java/com/pte/scoring/dto/response/AiEligibleAttemptView.java`
+- `pte-api/app/src/main/java/com/pte/scoring/dto/response/ExaminerScoringWorkItemView.java`
+- `pte-api/app/src/main/java/com/pte/scoring/dto/response/HostScoreReviewView.java`
+- `pte-api/app/src/main/java/com/pte/scoring/dto/response/ReportScoringAnswerView.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/messaging/consumer/AiScoringWorker.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/repository/ExaminerAnswerScoreRepository.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/repository/ExaminerAssignmentBatchRepository.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/repository/ExaminerAttemptAssignmentRepository.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/repository/ScoreSourceAuditRepository.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/repository/ScoringAnswerRepository.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/repository/ScoringSessionStateRepository.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/service/ExaminerWorkQueryService.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/service/ScoringEligibilityQueryService.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/service/ScoringReviewReadQueryService.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/vendor/AiScoreResult.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/vendor/openai/OpenAiCompatibleChatClient.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/vendor/stub/StubEssayScoringClient.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/vendor/stub/StubSpeechScoringClient.java`
+- `pte-api/app/src/main/resources/db/migration/V58__examiner_scoring_foundation.sql`
+- `pte-api/app/src/test/java/com/pte/scoring/ScoringServiceTest.java`
+- `pte-api/app/src/test/java/com/pte/scoring/ExaminerScoringWorkItemViewTest.java`
+- `pte-api/app/src/test/java/com/pte/scoring/domain/ExaminerWorkflowEntityTest.java`
+- `pte-api/app/src/test/java/com/pte/scoring/domain/ScoringAnswerWorkflowTest.java`
+- `pte-api/app/src/test/java/com/pte/scoring/internal/messaging/consumer/AiScoringWorkerTest.java`
+- `pte-api/app/src/test/java/com/pte/scoring/internal/service/ExaminerWorkQueryServiceTest.java`
+- `pte-api/app/src/test/java/com/pte/scoring/internal/service/ScoringEligibilityQueryServiceTest.java`
+- `pte-api/app/src/test/java/com/pte/scoring/internal/vendor/AiScoreResultTest.java`
+
+## Phase Checkpoint
+
+- Unit tests: yes
+- `ck:quality`: yes
+- Hard-mode confirmation: pending
+
 ## Quality and Testing State
 
-- quality: not evaluated
-- testing: not started
+- quality: approved
+- quality report: [phase-01-scoring-foundation-quality-report.json](quality/phase-01-scoring-foundation-quality-report.json)
+- quality receipt: [phase-01-scoring-foundation-receipt.json](quality/phase-01-scoring-foundation-receipt.json)
+- testing: passed
+- testing report: [phase-01-scoring-foundation-test-report.json](tests/phase-01-scoring-foundation-test-report.json)
+- Testing detail: fresh verification ran 125 Maven tests (0 failures/errors/skips); two PostgreSQL migration scenarios also passed in the earlier Phase 01 verification recorded in the report.
 - Kế hoạch: unit/domain + worker/service tests; migration integration trên DB trống/có dữ liệu; serialization/security tests; modulith verification.

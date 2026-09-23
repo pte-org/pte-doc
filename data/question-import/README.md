@@ -14,6 +14,9 @@ the API, write to PostgreSQL, or touch any real database.
   the current PteTaskType enum.
 - manifest.json: record counts, source mapping, and normalization warnings.
 - media-manifest.json: unique external media URLs and their task types.
+- local-question-seed.sql: explicit local-only PostgreSQL seed, generated but
+  never executed by the normalization scripts.
+- local-question-seed-manifest.json: seed counts, exclusions, and media policy.
 
 Each normalized record follows the question authoring shape:
 
@@ -62,9 +65,32 @@ Warnings are deliberately not silently repaired by inventing content:
 These records remain available in their task-type file for review, but should
 not be sent to an importer until the warning is resolved.
 
-FILL_IN_THE_BLANKS_DROPDOWN keeps orderIndex scoped within each blank, matching
-the delivery/scoring option shape. The current API validation code should be
-verified for this per-blank identity before a real database import.
+FILL_IN_THE_BLANKS_DROPDOWN keeps the source option order scoped within each
+blank. The local SQL seed remaps that field to a globally unique orderIndex per
+question because the current QuestionValidationHelper rejects duplicate
+orderIndex values; blankIndex is preserved for delivery/scoring grouping.
+
+## Local SQL seed
+
+The generated `local-question-seed.sql` is not a Flyway migration and is not
+run by any script in this repository. It contains only records that satisfy
+the current question-type contract: 14,840 questions and 34,135 options. The
+2,442 records with unresolved prompt/answer/image/word-count warnings remain
+in the canonical JSON for review and are excluded from the approved seed.
+
+The seed inserts deterministic UUIDs, keeps questions `APPROVED`/`SHARED` for
+local exam generation, and is idempotent by those UUIDs. Review it before any
+explicit local execution. Its external audio URLs are stored in
+`media_objects.secure_url` and referenced from `questions.audio_prompt_ref`;
+no media is uploaded to Cloudinary. This is a local import compatibility path,
+not a change to the current API authoring contract.
+
+Regenerate the artifact after changing the normalized data:
+
+    node tools/generate-local-question-seed.js --force
+
+The generator only reads JSON and writes the two seed artifacts. It does not
+connect to PostgreSQL, call the API, or modify the local database.
 
 ## Rebuild
 
