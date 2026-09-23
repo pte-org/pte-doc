@@ -1,0 +1,3928 @@
+[
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Shared Study Space",
+    "promptText": "You manage a small local library and have arranged a space within it for community members to study and work. Upon a routine check, you find that the area is cluttered with personal items left behind. You need to address this issue with the community members. What would you say to the community members?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/2/1/rts_1-1745567409_8982992.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "I wanted to talk about the condition of our shared study space in the library. This area is a valuable resource for our community. To maintain its usefulness and ensure it remains welcoming for everyone, I kindly ask that you please clean up after yourselves, respect the furniture, and keep the space tidy. Your cooperation is greatly appreciated in keeping our library a conducive place for learning and collaboration. Thank you for your understanding and help.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 2,
+      "num": 1,
+      "name": "#1 Shared Study Space",
+      "nameWithoutNum": "Shared Study Space",
+      "kind": "practice",
+      "examCount": 28,
+      "labels": [
+        {
+          "label": "#1",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Deadline Extension",
+    "promptText": "During a team meeting on Tuesday, your supervisor asks if you can complete and submit a comprehensive project update for a client by Friday. However, you're waiting on essential feedback from a key team member who's out of the office until Thursday. What would you say to your supervisor?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/3/2/rts_2-1745567616_113619.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Actually, I might need a bit more time to get that project update ready for the client. The thing is, I'm waiting on some important feedback from one of our team members who's out until Thursday. It's really cutting it close for me to compile everything and make sure it's all good by Friday. I was hoping we could maybe push the deadline to Monday? This way, I can make sure everything's on point. Really appreciate your understanding on this!",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 3,
+      "num": 2,
+      "name": "#2 Deadline Extension",
+      "nameWithoutNum": "Deadline Extension",
+      "kind": "practice",
+      "examCount": 21,
+      "labels": [
+        {
+          "label": "#2",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "A Spa Day",
+    "promptText": "You book a spa day based on glowing reviews and a wide range of services listed online. When you arrive, half the services are unavailable, and the facilities are not as advertised. How do you address this with the spa manager?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/4/3/rts_3-1745567900_788893.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "It was quite a letdown to see many services aren't available and the facilities aren't as great as I expected. I was looking forward to the full experience. To make up for this gap between what was advertised and what's provided, could we maybe work out a partial refund or perhaps a voucher for a future visit when all services are back? I think that'd be a fair way to ensure I still get the relaxing experience I was excited about.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 4,
+      "num": 3,
+      "name": "#3 A Spa Day",
+      "nameWithoutNum": "A Spa Day",
+      "kind": "practice",
+      "examCount": 19,
+      "labels": [
+        {
+          "label": "#3",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Addressing Concerns Over Car Borrowing",
+    "promptText": "You've lent your car to a friend for a weekend trip. Upon its return, you notice the interior is much dirtier than before. You need to discuss this with your friend to address the care of your property and the importance of respecting the agreements made. What would you say to your friend?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/5/4/rts_4-1745567910_5012915.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey, I noticed the car's interior is much dirtier than before. We agreed to keep it clean, and I'm a bit disappointed. I understand accidents happen, but I think it's fair to find a solution, like sharing the cleaning cost or maybe you could take it for professional cleaning. This way, we respect our agreement and maintain our friendship",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 5,
+      "num": 4,
+      "name": "#4 Addressing Concerns Over Car Borrowing",
+      "nameWithoutNum": "Addressing Concerns Over Car Borrowing",
+      "kind": "practice",
+      "examCount": 22,
+      "labels": [
+        {
+          "label": "#4",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Addressing Equipment Care",
+    "promptText": "You are the captain of a community sports team and have provided team equipment for everyone's use. After a few weeks, you notice that the equipment is often left outside, not stored properly, and some items are starting to show wear and tear much faster than expected. What would you say to your team?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/6/5/rts_5-1745567606_3556745.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey team, I've noticed our equipment isn't being put away properly and it's wearing out faster than it should. It's crucial we all pitch in to take care of what we share. Let's make sure to store everything correctly after use and check for any damage. Maybe we can set up a quick equipment check at the end of practice? This way, we ensure everything lasts longer and is ready for us whenever we need it. Thanks for understanding and helping out.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 6,
+      "num": 5,
+      "name": "#5 Addressing Equipment Care",
+      "nameWithoutNum": "Addressing Equipment Care",
+      "kind": "practice",
+      "examCount": 24,
+      "labels": [
+        {
+          "label": "#5",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Group Project",
+    "promptText": "You're responsible for a crucial part of a group project due in a week. You've been waiting on important data from another group member, which they've just informed you will be delayed. This setback affects your ability to complete your section on time. What would you say to your group members?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/7/6/rts_6-1745568017_4805722.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "I know we're tight on time with the presentation, but I heard you can't finish your slides until Thursday. That's cutting it really close for us to review and practice together. Could you maybe prioritize getting the critical parts done first, so we have something to work with earlier? Or, if there's a part of your workload we can redistribute to help speed things up. We need a solid plan to ensure we're all prepped and ready for a great presentation.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 7,
+      "num": 6,
+      "name": "#6 Group Project",
+      "nameWithoutNum": "Group Project",
+      "kind": "practice",
+      "examCount": 26,
+      "labels": [
+        {
+          "label": "#6",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Heavy Lifts",
+    "promptText": "You're at the gym, finishing up your workout, when your workout buddy asks if you're available to spot him for his heavy lifts tomorrow morning. However, you realize you have a doctor's appointment scheduled at the same time. What would you say to him?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/8/7/rts_7-1745567793_052683.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "I would love to help you out, but unfortunately, I have a doctor's appointment tomorrow morning, so I won't be available to spot you at that time. How about we plan for later in the afternoon or another day this week? I'm definitely down to spot you, but l just need to work around this appointment. Let me know what works best for you, and let's do it together.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 8,
+      "num": 7,
+      "name": "#7 Heavy Lifts",
+      "nameWithoutNum": "Heavy Lifts",
+      "kind": "practice",
+      "examCount": 20,
+      "labels": [
+        {
+          "label": "#7",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "A photography Lesson",
+    "promptText": "You sign up for a photography lesson advertised as covering a wide range of techniques and offering hands-on practice. However, when you attend the lesson, you find that only basic topics are covered, and there's minimal opportunity for practical application. How do you address this with the lesson organizer?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/9/8/rts_8-1745567635_6523805.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hi, I have some concerns about the photography lesson. The content was nowhere near as advanced as advertised. I expected hands-on practice and in-depth exploration of techniques, but it was disappointingly basic, I feel let down and frustrated, considering the investment made in this opportunity. Could we discuss potential solutions, like a refund or additional sessions focusing on the promised topics? l want to ensure future participants receive the quality they expect.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 9,
+      "num": 8,
+      "name": "#8 A photography Lesson",
+      "nameWithoutNum": "A photography Lesson",
+      "kind": "practice",
+      "examCount": 25,
+      "labels": [
+        {
+          "label": "#8",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "A Delayed Project",
+    "promptText": "You've organized a group project with your classmates, and everyone agreed on their roles and deadlines. However, one member consistently fails to deliver their part on time, causing delays for the entire group. What would you say to your classmate?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/10/9/rts_9-1745567965_687908.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "I wanted to talk about our group project. I've noticed that we're facing delays because some parts aren't coming in on time. I totally get that plans can go wrong sometimes, but meeting deadlines is crucial for the success of our project. Is there anything I can do to help or any challenges you're facing? Let's figure out a plan together to make sure we will get our project back on track.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 10,
+      "num": 9,
+      "name": "#9 A Delayed Project",
+      "nameWithoutNum": "A Delayed Project",
+      "kind": "practice",
+      "examCount": 29,
+      "labels": [
+        {
+          "label": "#9",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Addressing Pet Care",
+    "promptText": "You've entrusted a friend to take care of your pet while you're away, but when you return, you find your pet's food bowl empty, the water dish dirty, and your pet visibly stressed. You need to address this with your friend. What would you say to your friend?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/11/10/rts_10-1745567574_38634.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey, I noticed my pet seemed stressed and the food and water dishes weren't as I expected upon my return. I appreciate your help, but I'm concerned about their well-being. Maybe next time, we could set reminders for feeding and cleaning? Or if it's too much, I understand and can arrange alternative care. Let's find a solution that works for both of us and ensures my pet's happiness and health.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 11,
+      "num": 10,
+      "name": "#10 Addressing Pet Care",
+      "nameWithoutNum": "Addressing Pet Care",
+      "kind": "practice",
+      "examCount": 28,
+      "labels": [
+        {
+          "label": "#10",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Addressing Shared Kitchen Hygiene",
+    "promptText": "You're the manager of a shared kitchen in your office, and you've noticed that some employees are leaving dirty dishes in the sink and not cleaning up spills on the counters. This is causing unpleasant odors and attracting pests. You need to remind them of the importance of cleaning up for everyone's convenience and health. What would you say?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/12/11/rts_11-1745567688_4752007.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "I've noticed some issues in the kitchen lately that we need to address. It's important for all of us to keep the shared space clean and tidy. Leaving dirty dishes in the sink and spills on the counters not only creates unpleasant odors but also attracts pests, which can be a health concern for everyone. Let's all pitch in and make sure we clean up after ourselves to maintain a clean and hygienic kitchen environment. Thanks for your cooperation!",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 12,
+      "num": 11,
+      "name": "#11 Addressing Shared Kitchen Hygiene",
+      "nameWithoutNum": "Addressing Shared Kitchen Hygiene",
+      "kind": "practice",
+      "examCount": 26,
+      "labels": [
+        {
+          "label": "#11",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "A Messy Gym",
+    "promptText": "You notice that the communal gym equipment at your apartment complex has been left in disarray with weights scattered all over the floor and machines left unattended. You decide to send a friendly reminder to your neighbors. What would you say to your neighbors?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/13/12/rts_12-1745567976_035958.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey neighbors, just a quick heads up about the gym. I noticed that things are a bit messy lately – weights all over, machines left hanging. Let's all pitch in to keep it tidy. I think that it's more enjoyable and convenient for everyone when it's clean and organized. So, if you see something out of place, please do your part and put it back where it belongs. Thanks for keeping our gym a great place to work out!",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 13,
+      "num": 12,
+      "name": "#12 A Messy Gym",
+      "nameWithoutNum": "A Messy Gym",
+      "kind": "practice",
+      "examCount": 12,
+      "labels": [
+        {
+          "label": "#12",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "A Communal Garden",
+    "promptText": "You manage a communal garden, and during your latest visit, you notice several plants have been trampled, and gardening tools are scattered everywhere. You need to address the community to encourage care and shared responsibility for the garden's upkeep. What would you say to the community members?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/14/13/rts_13-1745567740_3967462.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "I've noticed our beloved garden has faced some neglect recently, with damaged plants and tools left out. Let's work together to maintain our shared space. I propose a rotating schedule for gardening duties and a designated area for tool storage. This way, we ensure our garden thrives and remains a place of joy for everyone. Your cooperation and respect for this shared treasure are greatly appreciated. Let's keep our garden beautiful together.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 14,
+      "num": 13,
+      "name": "#13 A Communal Garden",
+      "nameWithoutNum": "A Communal Garden",
+      "kind": "practice",
+      "examCount": 24,
+      "labels": [
+        {
+          "label": "#13",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Team Project",
+    "promptText": "After a team project meeting, you notice that tasks are frequently being misunderstood or forgotten, leading to delays and frustration. You need to address the team to encourage clear communication, timely updates, and shared responsibility for the project's success. What would you say to the team?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/15/14/rts_14-1745567750_9377255.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Well, I've noticed we're facing challenges with task clarity and follow-through, which is affecting our project's timeline and morale. To enhance our efficiency, let's implement a shared digital task board for real-time updates and responsibility tracking. This will help everyone stay informed and accountable. Additionally, I propose weekly check-ins where we can address any confusion and adjust plans as needed. Let's work together to make this a success.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 15,
+      "num": 14,
+      "name": "#14 Team Project",
+      "nameWithoutNum": "Team Project",
+      "kind": "practice",
+      "examCount": 31,
+      "labels": [
+        {
+          "label": "#14",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "A Mess Bike",
+    "promptText": "You've lent your bicycle to a friend for a few days, but when they return it, you notice it's covered in mud, the tires are deflated, and there are scratches on the frame. You're disappointed with the lack of care and want to remind your friend. What would you say to your friend?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/16/15/rts_15-1745567996_4403207.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Can we talk a bit about bike? I noticed my bike's pretty messed up after you borrowed it. It's all good, but next time, could you be a bit more careful? It's essential to take care of borrowed stuff. Maybe we could chat about setting some ground rules for borrowing things in the future, like making sure it's returned in the same condition. Let's make sure we're on the same page next time. Appreciate it, man!",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 16,
+      "num": 15,
+      "name": "#15 A Mess Bike",
+      "nameWithoutNum": "A Mess Bike",
+      "kind": "practice",
+      "examCount": 18,
+      "labels": [
+        {
+          "label": "#15",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Dietary Restrictions",
+    "promptText": "You've organized a dinner with your friends at your place. However, when they arrive, you notice they've brought food without considering dietary restrictions or allergies of others. You need to remind them to be mindful of everyone's dietary needs for a successful and inclusive gathering. What would you say to your friends?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/17/16/rts_16-1745567985_8355203.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey everyone, thanks for coming to the dinner. However I noticed some of the dishes might not be suitable for everyone due to dietary restrictions or allergies. Let's make sure we're mindful of everyone's needs next time we gather. Maybe we can create a list of dishes beforehand or ask each other about dietary preferences to ensure everyone can enjoy the food. Thanks for understanding and making our gatherings more inclusive!",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 17,
+      "num": 16,
+      "name": "#16 Dietary Restrictions",
+      "nameWithoutNum": "Dietary Restrictions",
+      "kind": "practice",
+      "examCount": 26,
+      "labels": [
+        {
+          "label": "#16",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "A Hiking Trip",
+    "promptText": "You've organized a group hiking trip with your friends, and everyone's excited to hit the trails. However, upon arrival at the meeting point, you notice some of them have brought single-use plastic water bottles and snack wrappers, leaving behind litter. You need to remind them to respect the environment. What would you say to your friends?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/18/17/rts_17-1745567530_527288.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey everyone, before we hit the trails, let's chat about keeping our environment clean. I noticed some single-use plastic and snack wrappers left behind. Let's be mindful and pack out all our trash to leave no trace and preserve the beauty of nature for others to enjoy. Bringing reusable water bottles and snacks in reusable containers can help minimize waste. Thanks for helping keep our hiking experience enjoyable and eco-friendly!",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 18,
+      "num": 17,
+      "name": "#17 A Hiking Trip",
+      "nameWithoutNum": "A Hiking Trip",
+      "kind": "practice",
+      "examCount": 27,
+      "labels": [
+        {
+          "label": "#17",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "A Cleanup",
+    "promptText": "You've organized a beach cleanup event with your friends to help protect marine life and preserve the coastline. However, upon arriving at the beach, you notice some participants tossing their trash on the sand instead of using the designated bins. What would you say to your friends?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/19/18/rts_18-1745567932_6523051.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey everyone, thanks for joining us for the beach cleanup! Let's remember to keep our beautiful coastline clean by using the designated trash bins. Tossing trash on the sand can harm marine life and spoil the beach for others. By disposing of our trash responsibly, we can help protect the environment and ensure everyone has a safe and enjoyable time at the beach. Let's work together to keep our beaches clean and beautiful!",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 19,
+      "num": 18,
+      "name": "#18 A Cleanup",
+      "nameWithoutNum": "A Cleanup",
+      "kind": "practice",
+      "examCount": 28,
+      "labels": [
+        {
+          "label": "#18",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Noise Control",
+    "promptText": "You've organized a group study session with your classmates at your apartment. However, when they arrive, you notice some of them are not following the agreed-upon noise level and are causing disturbances to your neighbors. You need to remind them to be considerate of others. What would you say to your classmates?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/20/19/rts_19-1745567656_8677475.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey guys, thanks for coming over for our study session! Just a quick reminder, let's keep the noise level down so we don't disturb our neighbors. They've been really cool about letting us use the apartment, so let's be respectful in return. Maybe we can use headphones or lower our voices to ensure everyone can focus. Thanks for understanding and helping create a conducive environment for studying!",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 20,
+      "num": 19,
+      "name": "#19 Noise Control",
+      "nameWithoutNum": "Noise Control",
+      "kind": "practice",
+      "examCount": 13,
+      "labels": [
+        {
+          "label": "#19",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Barbecue Party",
+    "promptText": "You've organized a barbecue with your friends at your place. However, upon their arrival, you notice some of your friends are using your kitchen utensils carelessly. You need to remind everyone to handle the utensils with care to maintain their quality and keep ourselves safe. What would you say to your friends?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/21/20/rts_20-1745567646_0260866.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey guys, thanks for coming over for the barbecue! Just a quick heads up, let's be careful with the kitchen utensils to avoid any accidents. I noticed some of them were getting a bit banged up. It's important to handle them with care to keep them in good shape and prevent any injuries. Let's enjoy the barbecue safely and make sure we clean up properly afterward. Thanks for understanding!",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 21,
+      "num": 20,
+      "name": "#20 Barbecue Party",
+      "nameWithoutNum": "Barbecue Party",
+      "kind": "practice",
+      "examCount": 22,
+      "labels": [
+        {
+          "label": "#20",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Team-building Activity",
+    "promptText": "You've organized a team-building activity for your colleagues at a local park. However, upon arrival, you notice some team members are not participating actively and seem disengaged. You need to remind everyone of the importance of teamwork and encourage active participation to maximize the benefits of the activity. What would you say to your colleagues?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/22/21/rts_21-1745567760_8873549.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey everyone, thanks for joining us for today’s activity! Let's make sure we're all actively participating to get the most out of it. Remember, teamwork is key to our success, and by working together, we can achieve great things. Let's engage in the activities, share ideas, and support each other throughout. Together, we can strengthen our bond as a team and accomplish our goals more effectively. Let's dive in and make the most of this opportunity!",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 22,
+      "num": 21,
+      "name": "#21 Team-building Activity",
+      "nameWithoutNum": "Team-building Activity",
+      "kind": "practice",
+      "examCount": 25,
+      "labels": [
+        {
+          "label": "#21",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Community Garden Project",
+    "promptText": "You've organized a community garden project with your neighbors, and everyone's excited to start planting. However, upon arrival, you notice some garden beds are neglected, with weeds growing rampant. You need to remind everyone of their responsibility to maintain their assigned plots to ensure the success of the garden. What would you say to your neighbors?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/23/22/rts_22-1745567677_3848546.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey everyone, thanks for being part of our project. But I noticed some of the garden beds are a bit neglected, with weeds taking over. Let's all remember our responsibility to maintain our assigned plots. Weeding regularly and keeping the beds tidy will help ensure the success of our garden. Together, we can create a beautiful and thriving green space for everyone to enjoy. Let's work together to keep our garden healthy and flourishing!",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 23,
+      "num": 22,
+      "name": "#22 Community Garden Project",
+      "nameWithoutNum": "Community Garden Project",
+      "kind": "practice",
+      "examCount": 24,
+      "labels": [
+        {
+          "label": "#22",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Book Club",
+    "promptText": "You've organized a weekly book club meeting with your friends, and everyone's excited to discuss the latest read. However, upon arrival, you notice some attendees haven't finished the book and are unable to participate fully in the discussion. You need to remind everyone of the importance of reading the assigned material. What would you say to your friends?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/24/23/rts_23-1745567709_0309386.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey everyone, thanks for joining our book club meeting! Just a friendly reminder, it's important to read the assigned book before our discussions to get the most out of our meetings. That way, we can all actively participate and share our thoughts and insights. If you haven't finished the book yet, no worries! Let's try to catch up before our next meeting so we can all have a meaningful discussion together. Happy reading!",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 24,
+      "num": 23,
+      "name": "#23 Book Club",
+      "nameWithoutNum": "Book Club",
+      "kind": "practice",
+      "examCount": 26,
+      "labels": [
+        {
+          "label": "#23",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Movie Night",
+    "promptText": "You've organized a monthly movie night with your friends, and everyone's excited to watch a classic film together. However, upon arrival, you notice some guests bringing loud snacks that could disturb others during the movie. You need to remind everyone to bring quiet snacks to ensure an enjoyable viewing experience for everyone. What would you say to your friends?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/25/24/rts_24-1745567551_4468012.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey everyone, thanks for coming to movie night! Just a quick reminder, let's try to bring snacks that won't be too noisy during the movie. Loud wrappers and crunchy snacks can be distracting for others. Let's opt for quieter options like popcorn, chocolate, or fruit. That way, we can all enjoy the movie without any interruptions. Thanks for understanding, and let's have a great time together!",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 25,
+      "num": 24,
+      "name": "#24 Movie Night",
+      "nameWithoutNum": "Movie Night",
+      "kind": "practice",
+      "examCount": 22,
+      "labels": [
+        {
+          "label": "#24",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Proper Gear",
+    "promptText": "You've organized a weekend hiking trip with your friends, and everyone's excited to hit the trails. However, upon arrival, you notice some of them are not wearing proper hiking shoes, which could lead to discomfort and injuries during the hike. You need to remind everyone to wear appropriate footwear. What would you say to your friends?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/26/25/rts_25-1745567698_7595625.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey everyone, before we start our hiking adventure, let's make sure we're all wearing suitable footwear. Proper hiking shoes will provide the support and protection we need for the trails ahead, reducing the risk of discomfort and injuries. If anyone doesn't have the right shoes, let's see if we can borrow or rent some nearby. It's essential for everyone's safety and enjoyment. So be sure to put on the proper gear.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 26,
+      "num": 25,
+      "name": "#25 Proper Gear",
+      "nameWithoutNum": "Proper Gear",
+      "kind": "practice",
+      "examCount": 17,
+      "labels": [
+        {
+          "label": "#25",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Checking Presentation Slides",
+    "promptText": "Your colleague asks if you can review the presentation slides they've prepared for an upcoming meeting. However, you realize you have several urgent tasks to complete by the end of the day. You need to politely ask for more time to ensure you can give their slides the attention they deserve. What would you say to your colleague?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/27/26/rts_26-1745567667_073962.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey, I appreciate you reaching out about the presentation slides. But I have a few urgent tasks to attend to today, so I may not be able to review them thoroughly right away. Would it be possible to have until tomorrow morning to give them a proper look? I want to ensure I can provide valuable feedback. Thanks for understanding!",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 27,
+      "num": 26,
+      "name": "#26 Checking Presentation Slides",
+      "nameWithoutNum": "Checking Presentation Slides",
+      "kind": "practice",
+      "examCount": 22,
+      "labels": [
+        {
+          "label": "#26",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Feasible Options",
+    "promptText": "You're planning a weekend getaway with friends, and they're discussing the activities they want to do. However, you realize some of the suggestions might not be feasible due to time constraints or budget limitations. You need to gently guide the conversation towards more realistic options without dampening the excitement. What would you say to your friends?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/28/27/rts_27-1745567954_9241798.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey everyone, I'm loving all the ideas for our weekend getaway! Just a heads up, I think some of the activities might be a bit tricky to fit into our schedule or budget. How about we brainstorm some alternative options that are more practical but still super fun? We want to make the most of our time together without stressing about logistics. Let's keep the excitement going and find the perfect balance of adventure and affordability!",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 28,
+      "num": 27,
+      "name": "#27 Feasible Options",
+      "nameWithoutNum": "Feasible Options",
+      "kind": "practice",
+      "examCount": 23,
+      "labels": [
+        {
+          "label": "#27",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Food Choice",
+    "promptText": "You're hosting a dinner party for friends, and they're suggesting elaborate dishes that require a lot of preparation. However, you realize you have limited time and resources to cook such elaborate meals. You need to gently steer the conversation towards simpler, yet equally delicious. What would you say to your friends?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/29/28/rts_28-1745567869_086754.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey everyone, I'm excited about our dinner party! Some of the dishes suggested sound amazing, but I'm worried they might be too time-consuming given my schedule. How about we focus on simpler recipes that still pack a punch in flavor? Maybe we can opt for some crowd-pleasers like pasta dishes, grilled meats, or hearty salads that are easy to prepare but still delicious. Let's keep it stress-free and enjoyable for everyone!",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 29,
+      "num": 28,
+      "name": "#28 Food Choice",
+      "nameWithoutNum": "Food Choice",
+      "kind": "practice",
+      "examCount": 23,
+      "labels": [
+        {
+          "label": "#28",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Birthday Activity",
+    "promptText": "You're organizing a team outing to celebrate a colleague's birthday-Dave, and everyone's suggesting different activities. However, you realize that some options might not be suitable due to varying preferences and physical abilities. You need to gently guide the discussion towards inclusive activities that everyone can enjoy regardless of their interests or limitations. What would you say to your colleagues?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/30/29/rts_29-1745567584_3918984.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey team, I'm thrilled about planning our outing for Dave's birthday! Let's consider activities that everyone can participate in comfortably. How about we go for a picnic in the park or have a game night at someone's place? These options cater to various interests and physical abilities, ensuring everyone has a great time. Let's focus on creating inclusive and enjoyable memories together!",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 30,
+      "num": 29,
+      "name": "#29 Birthday Activity",
+      "nameWithoutNum": "Birthday Activity",
+      "kind": "practice",
+      "examCount": 30,
+      "labels": [
+        {
+          "label": "#29",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Group Presentation",
+    "promptText": "You're preparing for a group presentation, and your team members suggest incorporating complex charts and graphs into the slides. However, you realize that these visuals might confuse the audience and distract from the main points. You need to gently steer the discussion towards simpler and clearer visuals that enhance understanding. What would you say to your team members?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/31/30/rts_30-1745567943_1456807.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey guys, I appreciate the suggestion for the presentation slides. However, let's aim for simpler visuals to ensure our audience grasps the main points easily. How about we use straightforward charts and diagrams that highlight key information without overwhelming them? This way, we can enhance understanding and keep everyone engaged throughout the presentation. Let's prioritize clarity and effectiveness in our visuals.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 31,
+      "num": 30,
+      "name": "#30 Group Presentation",
+      "nameWithoutNum": "Group Presentation",
+      "kind": "practice",
+      "examCount": 26,
+      "labels": [
+        {
+          "label": "#30",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "A Charity Event",
+    "promptText": "You're coordinating a charity event for your company, and your team proposes hosting a silent auction to raise funds. However, you realize that organizing the auction might require more resources and time than anticipated. You need to gently guide the discussion towards simpler fundraising ideas. What would you say to your team?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/32/31/rts_31-1745567921_0719368.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey team, I love the idea of a silent auction for our charity event, but let's consider simpler alternatives that are equally effective. How about organizing a bake sale or a raffle instead? These options require less time and resources to set up but still have the potential to raise significant funds for our cause. Let's brainstorm some creative ideas that align with our goals and resources.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 32,
+      "num": 31,
+      "name": "#31 A Charity Event",
+      "nameWithoutNum": "A Charity Event",
+      "kind": "practice",
+      "examCount": 26,
+      "labels": [
+        {
+          "label": "#31",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Wellness Program",
+    "promptText": "You're organizing a company-wide wellness program, and your team proposes implementing a mandatory daily yoga session for all employees. However, you realize that not everyone may be interested in or able to participate in yoga. You need to gently guide the discussion towards alternative wellness activities that accommodate different preferences and abilities. What would you say to your team?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/33/32/rts_32-1745567771_0232.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey team, I appreciate the suggestion for the wellness program. However, let's consider offering a variety of activities to cater to everyone's interests and abilities. How about incorporating options like walking or jogging groups, meditation sessions, or even desk stretches? This way, we can ensure that everyone can participate in activities that resonate with them and contribute to their overall well-being. Let's make our wellness program inclusive and enjoyable for all.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 33,
+      "num": 32,
+      "name": "#32 Wellness Program",
+      "nameWithoutNum": "Wellness Program",
+      "kind": "practice",
+      "examCount": 23,
+      "labels": [
+        {
+          "label": "#32",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Enhancing Customer Service Process",
+    "promptText": "Your team is discussing how to enhance the company's customer service process, and someone suggests increasing the use of automated systems to handle customer inquiries. However, you realize this might weaken the interpersonal connection with customers. What would you say to your team?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/34/33/rts_33-1745568027_8861952.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey team, I appreciate the suggestion to increase automation in our customer service process. However, we also need to consider the importance of maintaining a personal touch with our customers. Perhaps we can explore ways to use automation for routine inquiries while reserving human interaction for more complex issues or situations where empathy and understanding are crucial. This way, we can strike a balance between efficiency and building strong customer relationships.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 34,
+      "num": 33,
+      "name": "#33 Enhancing Customer Service Process",
+      "nameWithoutNum": "Enhancing Customer Service Process",
+      "kind": "practice",
+      "examCount": 31,
+      "labels": [
+        {
+          "label": "#33",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "A Team-building Event",
+    "promptText": "You're coordinating a team-building event for your department, and your team suggests going to an amusement park. However, you realize that some team members may not enjoy rides or have health conditions that prevent them from participating fully. What would you say to your team?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/35/34/rts_34-1745568006_699798.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "That sounds like a fun idea, but let's consider activities that cater to everyone's preferences and abilities. How about a team picnic in the park with games like frisbee, soccer, or a scavenger hunt? It allows for socializing, physical activity, and relaxation, ensuring everyone feels included and comfortable participating. Plus, it's a great opportunity to bond outside of the office setting.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 35,
+      "num": 34,
+      "name": "#34 A Team-building Event",
+      "nameWithoutNum": "A Team-building Event",
+      "kind": "practice",
+      "examCount": 22,
+      "labels": [
+        {
+          "label": "#34",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Destination Choice",
+    "promptText": "You and your friends are planning a vacation. Someone suggests going to a faraway foreign country, but you realize one friend might have a fear of flying and some of them have a relatively tight budget. You need to carefully propose an alternative suggestion to ensure everyone can enjoy the trip. What would you say to your friends?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/36/35/rts_35-1745567562_2459943.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "As we plan our vacation, let's consider everyone's preferences and needs. While a faraway foreign country sounds intriguing, we should also think about alternative destinations that accommodate different budget levels and travel preferences. How about exploring a nearby city or taking a road trip to a neighboring state? This way, we can still have an exciting adventure while ensuring everyone feels comfortable and included in the trip.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 36,
+      "num": 35,
+      "name": "#35 Destination Choice",
+      "nameWithoutNum": "Destination Choice",
+      "kind": "practice",
+      "examCount": 29,
+      "labels": [
+        {
+          "label": "#35",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Choosing a Place",
+    "promptText": "You're planning a birthday celebration for a friend, and the group is discussing potential venues. One suggestion is to go to a loud and crowded nightclub, but you know that some friends prefer quieter and more intimate settings. What would you say to the group?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/37/36/rts_36-1745567879_7963188.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hi! I would like to discuss an issue we have encountered with choosing the right venue for our friend's birthday celebration.\nThe background is that while some of us enjoy loud and crowded nightclubs, others prefer quieter and more intimate settings.\nIn the situation, what I can think of is to pick a compromise location.\nBesides, another thing that comes to my mind is to take a quick vote.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 37,
+      "num": 36,
+      "name": "#36 Choosing a Place",
+      "nameWithoutNum": "Choosing a Place",
+      "kind": "practice",
+      "examCount": 27,
+      "labels": [
+        {
+          "label": "#36",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Activity Preference",
+    "promptText": "You're organizing a team-building event for your colleagues, and one suggestion is to participate in an escape room activity. However, you realize that some team members may feel uncomfortable or anxious in enclosed spaces. What would you say to your colleagues?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/38/37/rts_37-1745567625_9408965.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "While the escape room idea sounds fun, let's consider everyone's comfort. How about we explore outdoor activities like a team picnic in the park, a friendly sports match, or even a creative workshop where everyone can express themselves freely? By offering a variety of options, we ensure that everyone can participate comfortably and enjoyably, fostering stronger team bonds without leaving anyone out. Let's brainstorm more ideas together to find the perfect fit for our team!",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 38,
+      "num": 37,
+      "name": "#37 Activity Preference",
+      "nameWithoutNum": "Activity Preference",
+      "kind": "practice",
+      "examCount": 21,
+      "labels": [
+        {
+          "label": "#37",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Postponing a Deadline",
+    "promptText": "You're in the library working on your thesis when suddenly you receive a message from your advisor asking if you can submit a progress report by Friday. You hope to request more time since the reference materials you reserved won't be available from the library until Thursday. What would you say to your advisor?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/39/38/rts_38-1745567719_9443235.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear professor, I've just received your email about the progress report due this Friday. I'm eager to share my work, but I've hit a snag - the key reference materials I need from the library won't be available until Thursday. Could we possibly extend the deadline to next Monday? This would give me enough time to include all the necessary information and ensure the report is as detailed and accurate as possible. Thanks for considering my request.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 39,
+      "num": 38,
+      "name": "#38 Postponing a Deadline",
+      "nameWithoutNum": "Postponing a Deadline",
+      "kind": "practice",
+      "examCount": 33,
+      "labels": [
+        {
+          "label": "#38",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "A Flawed Project",
+    "promptText": "You're a project manager who has just reviewed a team's project draft due next week. You notice several critical sections are incomplete, and the overall quality is below expectations. You need to address these issues promptly while motivating the team to improve their work before the deadline. What would you say to your team?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/40/39/rts_39-1745567837_1048996.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hi guys, I've gone through our project draft and noticed some areas need more attention. Some critical sections are still incomplete, and we need to elevate our overall quality. Let's use this as a chance to pull together and show what we're capable of. I propose we organize a quick meeting tomorrow to discuss our strategy and allocate tasks efficiently. This way, everyone knows what's needed, and we can ensure a strong finish.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 40,
+      "num": 39,
+      "name": "#39 A Flawed Project",
+      "nameWithoutNum": "A Flawed Project",
+      "kind": "practice",
+      "examCount": 26,
+      "labels": [
+        {
+          "label": "#39",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Soccer Team",
+    "promptText": "You're the coach of a youth soccer team and you've just watched them lose a game because of a lack of teamwork and coordination. You want to address the situation in a way that motivates them to improve their teamwork for the next game without discouraging them. What would you say to your soccer team?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/41/40/rts_40-1745567890_2640471.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey guys, today’s game was rough. But it’s not the end. We've all seen what we can do when we click together, right? So, here's the plan: we're going to zero in on teamwork at practice. I'm talking about drills that get us talking, moving, and playing as one unit. Soccer's a team sport, and our strength is in our unity. Let's take this as a push to level up together.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 41,
+      "num": 40,
+      "name": "#40 Soccer Team",
+      "nameWithoutNum": "Soccer Team",
+      "kind": "practice",
+      "examCount": 18,
+      "labels": [
+        {
+          "label": "#40",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Low Morale",
+    "promptText": "You're the head of a small department in a company, and you've noticed that the team's morale has been low due to the high workload and tight deadlines. You want to address the issue to motivate them and discuss potential solutions to manage the workload more effectively without overwhelming anyone. What would you say to your team?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/42/41/rts_41-1745567595_8080747.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey team, I've noticed we've all been feeling the heat with our recent workload and deadlines. I get it and I appreciate every bit of effort you've put in. Let's have a chat about this in our next meeting, alright? I'm thinking we can brainstorm some ways to manage our tasks better. Maybe we can prioritize our projects or even discuss flexible working hours. Your well-being is our top priority.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 42,
+      "num": 41,
+      "name": "#41 Low Morale",
+      "nameWithoutNum": "Low Morale",
+      "kind": "practice",
+      "examCount": 23,
+      "labels": [
+        {
+          "label": "#41",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Low Participation",
+    "promptText": "You're the leader of a book club that has been meeting virtually for the past few months. Recently, you've noticed that participation has dropped, and fewer people are joining the discussions. You want to revive interest and encourage more members to actively participate in the book club's meetings and discussions. What would you say to your club?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/43/42/rts_42-1745567815_6997473.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Lately, I've noticed our virtual meet-ups aren't as bustling as before, and I miss seeing all your faces and hearing your insights. Let's shake things up! How about next time we each bring a friend, or perhaps we could vote on a genre we've never explored together? I'm also thinking of introducing a monthly 'book of the month' award based on our discussions. I believe we can make our book club even more engaging and fun.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 43,
+      "num": 42,
+      "name": "#42 Low Participation",
+      "nameWithoutNum": "Low Participation",
+      "kind": "practice",
+      "examCount": 30,
+      "labels": [
+        {
+          "label": "#42",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Coaching a Basketball Team",
+    "promptText": "You're coaching a youth basketball team, and you've noticed that the team's performance has been inconsistent. The players show potential during practice but struggle to maintain focus and teamwork during games. You want to find a way to improve their game-time performance and help them play more cohesively as a team. What would you say to your team?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/44/43/rts_43-1745567803_4532294.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey team, I've seen how hard you all work in practice, and you've got so much talent. But during games, it feels like we're not quite clicking together as we should. How about we start some new drills that focus specifically on teamwork and communication? Also, let's have a quick huddle before each game to set our focus and hype each other up. Together, I know we can bring our A-game every time.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 44,
+      "num": 43,
+      "name": "#43 Coaching a Basketball Team",
+      "nameWithoutNum": "Coaching a Basketball Team",
+      "kind": "practice",
+      "examCount": 20,
+      "labels": [
+        {
+          "label": "#43",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Enhancing Collaboration",
+    "promptText": "You're tasked with leading a team to develop a new software feature within a tight deadline. The team is talented but new to working together, and progress has been slower than expected. To meet the deadline, you need to find ways to enhance collaboration and efficiency among team members without causing burnout. What would you say to your team?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/45/44/rts_44-1745567826_5884266.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey team, I've noticed we're a bit behind on our project timeline. You're all doing great, but since we're a new team, it takes time to find our groove. Let's try a couple of things to boost our workflow: first, daily quick stand-up meetings to share updates and hurdles. Also, how about pairing up on trickier tasks? Two heads are often better than one, and it's a great way to speed things up without overworking anyone.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 45,
+      "num": 44,
+      "name": "#44 Enhancing Collaboration",
+      "nameWithoutNum": "Enhancing Collaboration",
+      "kind": "practice",
+      "examCount": 25,
+      "labels": [
+        {
+          "label": "#44",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Alternate Plans",
+    "promptText": "You've arranged a weekend hiking trip with friends, but as the date approaches, you notice the weather forecast predicts heavy rain. You need to discuss with your friends whether to proceed with the hike, postpone it, or plan an alternative indoor activity for the weekend. What would you say to your friends?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/46/45/rts_45-1745567858_511429.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "So, I've been checking the weather for our hiking weekend, and it looks like we're in for some heavy rain. I'm thinking it might not be the best idea to hike in that. How do you all feel about postponing the hike to another weekend? Alternatively, we could switch gears and plan something indoors instead, like a game night or a movie marathon at my place. Let me know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 46,
+      "num": 45,
+      "name": "#45 Alternate Plans",
+      "nameWithoutNum": "Alternate Plans",
+      "kind": "practice",
+      "examCount": 19,
+      "labels": [
+        {
+          "label": "#45",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Overwhelmed with Work",
+    "promptText": "You've been feeling overwhelmed with work and personal commitments lately, realizing you need a better balance. You decide to speak with your manager about adjusting your workload or finding a more flexible working arrangement to manage stress and maintain productivity without compromising the quality of your work. What would you say to your boss?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/47/46/rts_46-1745567847_9782033.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey boss, lately I've been feeling a bit stretched thin between work and my personal life, and I'm concerned about burning out. I was hoping we could chat about possibly adjusting my workload or exploring flexible work options. I believe with a slight shift, I can manage my responsibilities more effectively and maintain our standards of quality. I'm committed to my role and want to ensure I'm performing at my best. Could we schedule a time to discuss this further?",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 47,
+      "num": 46,
+      "name": "#46 Overwhelmed with Work",
+      "nameWithoutNum": "Overwhelmed with Work",
+      "kind": "practice",
+      "examCount": 18,
+      "labels": [
+        {
+          "label": "#46",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Loud Music",
+    "promptText": "Your neighbor has been playing loud music late at night, making it difficult for you to sleep. You want to address the situation diplomatically to maintain a good relationship with your neighbor while ensuring the noise is reduced during late hours. What would you say to your neighbor?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/48/47/rts_47-1745567730_564162.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hello, I hope you're doing well. But I wanted to chat about something that's been a bit tricky for me. I've noticed the music can get pretty loud at night. I totally get the need to unwind and enjoy your tunes, but it's been tough for me to get some rest. Would you mind turning it down a bit after 10 PM? I'd really appreciate it, and it would help me out a lot.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 48,
+      "num": 47,
+      "name": "#47 Loud Music",
+      "nameWithoutNum": "Loud Music",
+      "kind": "practice",
+      "examCount": 26,
+      "labels": [
+        {
+          "label": "#47",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Missing Books",
+    "promptText": "You're leading a community book club, and during this month's meeting, you discover several books are missing from the club's library. You want to address the issue respectfully, reminding members to return books on time for everyone's benefit. What would you say to your members?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/49/48/rts_48-1745567782_3961468.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey guys, hope you’re all enjoying our picks! I’ve noticed a few of our shared books haven’t made their way back to our library. Totally understand things can slip our minds, but let’s try to keep track and return them when done. This way, everyone gets a chance to enjoy. If you’ve got a book or two, no worries, just bring them to our next meet-up. Maybe we can set up a quick check-in system for our books?",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 49,
+      "num": 48,
+      "name": "#48 Missing Books",
+      "nameWithoutNum": "Missing Books",
+      "kind": "practice",
+      "examCount": 25,
+      "labels": [
+        {
+          "label": "#48",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Party",
+    "promptText": "You are going to have a party with your classmates at home. You will prepare barbecue and salad to treat them, but you do not know their dietary restrictions. You made a phone call to ask them about this, but they did not answer the call. Please leave a message to them.",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/50/49/rts_49-1745567541_0521836.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": null,
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 50,
+      "num": 49,
+      "name": "#49 Party",
+      "nameWithoutNum": "Party",
+      "kind": "complete",
+      "examCount": 15,
+      "labels": [
+        {
+          "label": "#49",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Chip Discount",
+    "promptText": "You bought some chips at a supermarket with a discount of 2 for 3 dollars, but when you checked out, you found a mistake because you were charged 3 dollars each. What would you say to the assistant?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/51/50/rts_(c)_50-1770969586_287253.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Respected assistant, I hope you are doing well.\nI would like to discuss an issue we have encountered with my purchase.\nIt appears that the chips are on sale 2 for 3 dollars, yet I was charged 3 dollars for each at checkout.\nI would appreciate your opinion on this matter. Thank you for your consideration.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 51,
+      "num": 50,
+      "name": "#50 Chip Discount",
+      "nameWithoutNum": "Chip Discount",
+      "kind": "complete",
+      "examCount": 31,
+      "labels": [
+        {
+          "label": "#50",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Italian Food",
+    "promptText": "You are going to eat outside with your friends and they want to eat Italian food. You don't like Italian food, but you want to dine out with them. What would you say to your friends?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/52/51/rts_51-1750663901_9384947.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey guys, I want to talk to you about something.\nWe seem to have a little issue with our dinner choice.\nIt's like you want to eat Italian food, but I don't like it, though I still want to dine out with you.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 52,
+      "num": 51,
+      "name": "#51 Italian Food",
+      "nameWithoutNum": "Italian Food",
+      "kind": "complete",
+      "examCount": 48,
+      "labels": [
+        {
+          "label": "#51",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Dinner with Colleague",
+    "promptText": "You plan to have dinner with your colleague and maybe later go to watch a movie, but right now you feel sick, and you have a headache and may have a cold. You see your colleague is having a coffee in the lunch room. What should you say?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/53/52/rts_52-1750664039_7641025.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey colleague, I want to talk to you about something.\nWe seem to have a little issue with our dinner and movie plan.\nIt's like I originally planned to have dinner and watch a movie with you, but I’m feeling unwell now. I have a bad headache and think I might be catching a cold, so I’m afraid I can’t make it today.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 53,
+      "num": 52,
+      "name": "#52 Dinner with Colleague",
+      "nameWithoutNum": "Dinner with Colleague",
+      "kind": "complete",
+      "examCount": 24,
+      "labels": [
+        {
+          "label": "#52",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Sharing the Cost",
+    "promptText": "You live in the same building as your colleague Mike, and if you and Mike each drive to work, you both have to pay the company for parking. You want to commute to work with him every day and share the cost. What would you say to him?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/54/53/rts_(c)_53-1786583209_902898.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hi Mike, since we live in the same building and both drive to work, I was wondering if we could commute together every day.\nWe could share the parking cost, which would save both of us some money.\nIt would also be more convenient and give us a chance to chat on the way.\nWhat do you think?",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 54,
+      "num": 53,
+      "name": "#53 Sharing the Cost",
+      "nameWithoutNum": "Sharing the Cost",
+      "kind": "complete",
+      "examCount": 129,
+      "labels": [
+        {
+          "label": "#53",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Restaurant Order",
+    "promptText": "You were eating in a restaurant and you ordered a hamburger, but you were served fish and chips. What would you say to the waiter?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/55/54/rts_54-1750664219_1759858.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": null,
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 55,
+      "num": 54,
+      "name": "#54 Restaurant Order",
+      "nameWithoutNum": "Restaurant Order",
+      "kind": "complete",
+      "examCount": 2,
+      "labels": [
+        {
+          "label": "#54",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Lost Bag",
+    "promptText": "You and your friends had dinner at a restaurant yesterday. You think you left a bag at the restaurant. You sat at the table next to the window. You had college materials inside the bag. You call the manager of the restaurant and what would you say to the manager?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/56/55/rts_55-1750664536_3632135.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Respected manager, I hope you are doing well.\nI would like to discuss an issue we have encountered with a lost bag at your restaurant.\nIt appears that I had dinner there yesterday and left my bag beside the window table, which contains my college materials inside.\nI would appreciate your opinion on this matter. Thank you for your consideration.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 56,
+      "num": 55,
+      "name": "#55 Lost Bag",
+      "nameWithoutNum": "Lost Bag",
+      "kind": "complete",
+      "examCount": 112,
+      "labels": [
+        {
+          "label": "#55",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Late for Appointment",
+    "promptText": "You are thirty minutes late for your doctor's appointment at 10 am. You need to explain to the receptionist and ask if the doctor could see you later today. What would you say to the receptionist?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/57/56/rts_(c)_56-1772619972_8104522.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Respected receptionist, I hope you are doing well.\nI would like to discuss an issue we have encountered with my medical appointment.\nIt appears that I am thirty minutes late for my 10 am doctor's appointment, and I wonder if the doctor can see me later today.\nI would appreciate your opinion on this matter. Thank you for your consideration.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 57,
+      "num": 56,
+      "name": "#56 Late for Appointment",
+      "nameWithoutNum": "Late for Appointment",
+      "kind": "complete",
+      "examCount": 220,
+      "labels": [
+        {
+          "label": "#56",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Farewell Gift",
+    "promptText": "Your manager Joe is about to retire and he is going to travel in another country. You want to give him a farewell gift. How should you discuss with your colleagues what gift to prepare for the manager?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/58/57/rts_57-1750762552_0196004.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey guys, I want to talk to you about something.\nWe seem to have a little issue with the farewell gift for our manager Joe.\nIt's like Joe will retire and travel abroad, and I want to figure out a proper gift for him together with all of you.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 58,
+      "num": 57,
+      "name": "#57 Farewell Gift",
+      "nameWithoutNum": "Farewell Gift",
+      "kind": "complete",
+      "examCount": 66,
+      "labels": [
+        {
+          "label": "#57",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Complaint about Waiter",
+    "promptText": "You have finished your dinner at a restaurant. The manager comes to ask you how the food was. You think the dishes were good, but you want to complain about the waiter's service and the fact that the coffee you ordered has not arrived. What would you say to the manager?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/59/58/rts_58-1750762754_5185373.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Respected manager, I hope you are doing well.\nI would like to discuss an issue we have encountered with my dining experience.\nIt appears that the food was good, but I am unsatisfied with the waiter’s service and the coffee I ordered has not been served yet.\nI would appreciate your opinion on this matter. Thank you for your consideration.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 59,
+      "num": 58,
+      "name": "#58 Complaint about Waiter",
+      "nameWithoutNum": "Complaint about Waiter",
+      "kind": "complete",
+      "examCount": 128,
+      "labels": [
+        {
+          "label": "#58",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Essay Extension",
+    "promptText": "You have an essay due tomorrow, but you have been feeling sick for the past two weeks. You went to the clinic and got a doctor's note. You feel bad about now but have to ask your professor for an extension until the weekend. You go to the professor's office. What do you say to him?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/60/59/rts_59-1750842839_2335103.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": null,
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 60,
+      "num": 59,
+      "name": "#59 Essay Extension",
+      "nameWithoutNum": "Essay Extension",
+      "kind": "complete",
+      "examCount": 3,
+      "labels": [
+        {
+          "label": "#59",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Sam's Cafe",
+    "promptText": "You have a dinner date with a friend, and she wants to go to Sam's Cafe which only serves sandwiches, coffee, tea, etc. You want to eat in another restaurant with a lot of food. What do you say to your friend?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/61/60/rts_(c)_60-1779934526_8188853.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey, I want to talk to you about something.\nWe seem to have a little issue with our dinner place.\nIt's like you want to go to Sam's Cafe that only sells sandwiches, coffee and tea, but I hope we can pick another restaurant with more kinds of food.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 61,
+      "num": 60,
+      "name": "#60 Sam's Cafe",
+      "nameWithoutNum": "Sam's Cafe",
+      "kind": "complete",
+      "examCount": 202,
+      "labels": [
+        {
+          "label": "#60",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Call and Dinner",
+    "promptText": "You are preparing dinner, and your friend is calling you to discuss a problem with one of her children. You really want to help your friend to solve her problem, but you are busy now, so you hope your friend could call you later. What do you say to your friend?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/62/61/rts_(c)_61-1783666468_1724348.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey friend, I want to talk to you about something.\nWe seem to have a little issue with our talk right now.\nIt's like I am preparing dinner at the moment, though I am willing to help you deal with a problem involving one of your children, I hope you can call me later.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 62,
+      "num": 61,
+      "name": "#61 Call and Dinner",
+      "nameWithoutNum": "Call and Dinner",
+      "kind": "complete",
+      "examCount": 96,
+      "labels": [
+        {
+          "label": "#61",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "History Assignment",
+    "promptText": "You've just completed a history assignment and you're keen on improving it before submission. You decide to seek feedback from your classmate, Ali, who always seems to excel in history. How do you approach Ali for feedback, and what specific questions do you ask to gain insights on how to enhance your assignment?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/63/62/rts_62-1750902208_3997147.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey Ali, I want to talk to you about something.\nWe seem to have a little issue with my finished history assignment.\nIt's like I have finished my history assignment and I want to improve it before handing it in, so I hope you can give me some advice to make it better.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 63,
+      "num": 62,
+      "name": "#62 History Assignment",
+      "nameWithoutNum": "History Assignment",
+      "kind": "complete",
+      "examCount": 18,
+      "labels": [
+        {
+          "label": "#62",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Wet Floor",
+    "promptText": "You are walking up the stairs in front of your apartment and almost slip on the wet floor. You tell one of your neighbors about it. What would you say?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/64/63/rts_63-1749799812_2527344.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": null,
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 64,
+      "num": 63,
+      "name": "#63 Wet Floor",
+      "nameWithoutNum": "Wet Floor",
+      "kind": "complete",
+      "examCount": 24,
+      "labels": [
+        {
+          "label": "#63",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Baby Carer",
+    "promptText": "You have a new baby and find it challenging to manage cooking and taking care of the baby simultaneously. You want to ask a friend for advice on how they manage to balance cooking with baby care. How do you approach this conversation and what specific questions do you ask to get helpful tips?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/65/64/rts_64-1750902450_0610716.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": null,
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 65,
+      "num": 64,
+      "name": "#64 Baby Carer",
+      "nameWithoutNum": "Baby Carer",
+      "kind": "complete",
+      "examCount": 2,
+      "labels": [
+        {
+          "label": "#64",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Garden Care",
+    "promptText": "You're about to go on vacation and are worried that no one will take care of your garden plants. You want to ask your neighbor if they could help. One morning, you see her standing at the door and want to ask if she could water the plants twice a week. What should you say to your neighbor?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/66/65/rts_65-1749957973_572271.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hi neighbour, I want to talk to you about something.\nWe seem to have a little issue with my garden plants during my vacation.\nIt's like I’m going away on holiday soon and I’m worried there’s nobody to look after my plants. I saw you standing at your door just now, could you please help water them twice a week while I’m gone?\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 66,
+      "num": 65,
+      "name": "#65 Garden Care",
+      "nameWithoutNum": "Garden Care",
+      "kind": "complete",
+      "examCount": 23,
+      "labels": [
+        {
+          "label": "#65",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Asking for Leave",
+    "promptText": "You have an appointment and need to leave work early to accompany a relative. How do you request permission from your employer for early departure? What key points should you address to ensure your request is understood and approved?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/67/66/rts_66-1750079997_8714035.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": null,
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 67,
+      "num": 66,
+      "name": "#66 Asking for Leave",
+      "nameWithoutNum": "Asking for Leave",
+      "kind": "complete",
+      "examCount": 6,
+      "labels": [
+        {
+          "label": "#66",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Package",
+    "promptText": "You are expecting an important package to be delivered while you are not at home for about an hour. Since the package requires a signature upon delivery, you decide to ask your neighbor for help. How would you politely request your neighbor to sign for the package and let them know that you will pick it up once you return?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/68/67/rts_67-1750489508_8370469.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey neighbour, I want to talk to you about something.\nWe seem to have a little issue with my delivery package.\nIt's like I will be out for an hour, my important package needs a signature, could you sign for it and I will come to get it after I return home.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 68,
+      "num": 67,
+      "name": "#67 Package",
+      "nameWithoutNum": "Package",
+      "kind": "complete",
+      "examCount": 11,
+      "labels": [
+        {
+          "label": "#67",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Subway",
+    "promptText": "Your colleague drives to work, but the traffic is heavy every day. How should you suggest she take the subway for several reasons?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/69/68/rts_68-1750902841_0586617.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": null,
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 69,
+      "num": 68,
+      "name": "#68 Subway",
+      "nameWithoutNum": "Subway",
+      "kind": "complete",
+      "examCount": 1,
+      "labels": [
+        {
+          "label": "#68",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Spoiled Food",
+    "promptText": "You recently bought some food from a store, but after opening it at home, you realized it was spoiled. You decide to go back to the store and speak to the manager about the issue. How would you explain the situation and request a solution?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/70/69/rts_69-1750489828_3746316.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": null,
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 70,
+      "num": 69,
+      "name": "#69 Spoiled Food",
+      "nameWithoutNum": "Spoiled Food",
+      "kind": "complete",
+      "examCount": 6,
+      "labels": [
+        {
+          "label": "#69",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Cat",
+    "promptText": "You are planning to be away from home for three days and need someone to take care of your cat. You decide to ask your friend Monica for help. How would you explain the situation and request her assistance in feeding your cat while you are away?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/71/70/rts_70-1750489896_9044735.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey Monica, I want to talk to you about something.\nWe seem to have a little issue with my cat care these three days.\nIt's like I will leave home for three days and I hope you can help feed my cat during my absence.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 71,
+      "num": 70,
+      "name": "#70 Cat",
+      "nameWithoutNum": "Cat",
+      "kind": "complete",
+      "examCount": 28,
+      "labels": [
+        {
+          "label": "#70",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Borrowed Book",
+    "promptText": "You borrowed a book from your friend Anita, but she now wants it back. How would you politely arrange to return the book to her, and possibly discuss a convenient time for her to pick it up?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/72/71/rts_(c)_71-1781590535_6711347.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey Anita, I want to talk to you about something.\nWe seem to have a little issue with the book I borrowed from you.\nIt's like you want your book back, and I’d like to figure out a suitable time for you to come and get it.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 72,
+      "num": 71,
+      "name": "#71 Borrowed Book",
+      "nameWithoutNum": "Borrowed Book",
+      "kind": "complete",
+      "examCount": 10,
+      "labels": [
+        {
+          "label": "#71",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Noisy Library",
+    "promptText": "You have an assignment due next week. Now you are in the library, but someone next to you is playing a video without headphones. You are too distracted to focus on your study. You should have a conversation with him to make sure you have a quiet place. What would you say?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/73/72/rts_72-1750490217_673805.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": null,
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 73,
+      "num": 72,
+      "name": "#72 Noisy Library",
+      "nameWithoutNum": "Noisy Library",
+      "kind": "complete",
+      "examCount": 5,
+      "labels": [
+        {
+          "label": "#72",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Poor Living Conditions",
+    "promptText": "You recently moved into a rental apartment, but you've noticed that the living conditions are not as expected. You decide to speak with the landlord about the issues. How would you explain the problems you're experiencing and request a solution?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/74/73/rts_73-1750490318_6986637.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": null,
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 74,
+      "num": 73,
+      "name": "#73 Poor Living Conditions",
+      "nameWithoutNum": "Poor Living Conditions",
+      "kind": "complete",
+      "examCount": 3,
+      "labels": [
+        {
+          "label": "#73",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Wrong Delivery",
+    "promptText": "You received a letter that was mistakenly delivered to your address, and it belongs to your neighbor. How would you approach your neighbor and politely return the letter to them?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/75/74/rts_74-1750490387_5330064.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey neighbour, I want to talk to you about something.\nWe seem to have a little issue with a misdelivered letter.\nIt's like a letter was wrongly sent to my house and it actually belongs to you, so I come to give it back to you.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 75,
+      "num": 74,
+      "name": "#74 Wrong Delivery",
+      "nameWithoutNum": "Wrong Delivery",
+      "kind": "complete",
+      "examCount": 10,
+      "labels": [
+        {
+          "label": "#74",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Late to School",
+    "promptText": "You are late to school today and need to explain the situation to your teacher. How would you apologize for being late and provide a reasonable explanation for your delay?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/76/75/rts_75-1750490476_0564277.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": null,
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 76,
+      "num": 75,
+      "name": "#75 Late to School",
+      "nameWithoutNum": "Late to School",
+      "kind": "complete",
+      "examCount": 2,
+      "labels": [
+        {
+          "label": "#75",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Rescheduling Meeting",
+    "promptText": "You need to change the meeting time with your colleague. How would you approach them to request a new time, and what key points should you cover, including suggesting alternative times, considering their availability, and ensuring the rescheduling is convenient for both parties?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/77/76/rts_76-1750491016_3242102.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": null,
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 77,
+      "num": 76,
+      "name": "#76 Rescheduling Meeting",
+      "nameWithoutNum": "Rescheduling Meeting",
+      "kind": "complete",
+      "examCount": 4,
+      "labels": [
+        {
+          "label": "#76",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Lost Wallet",
+    "promptText": "You’re at a salon and you want to get a haircut, but you realize that you left your wallet in your taxi. You don’t have the taxi number and you don’t have any other payment methods with you. What will you tell the stylist in order to resolve this situation?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/78/77/rts_77-1750665843_02421.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": null,
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 78,
+      "num": 77,
+      "name": "#77 Lost Wallet",
+      "nameWithoutNum": "Lost Wallet",
+      "kind": "complete",
+      "examCount": 0,
+      "labels": [
+        {
+          "label": "#77",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Broken Car",
+    "promptText": "Your car has broken down, and you know a girl is waiting for you. How do you approach this situation to inform her of the delay and ask for assistance or suggest alternative arrangements? What specific details do you include to ensure clear communication and to propose a solution that accommodates both of your needs?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/79/78/rts_78-1750491207_9373817.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey, I want to talk to you about something.\nWe seem to have a little issue with my transportation to meet you.\nIt's like my car has broken down, which will make me late. I wonder if you can wait for me or we can make other plans to meet each other.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 79,
+      "num": 78,
+      "name": "#78 Broken Car",
+      "nameWithoutNum": "Broken Car",
+      "kind": "complete",
+      "examCount": 10,
+      "labels": [
+        {
+          "label": "#78",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Renting Bikes",
+    "promptText": "You overheard your colleagues discussing renting bikes, which sounds really fun and you are interested in it. Speak to your colleagues to inquire about the details, such as the cost of renting and how and where you can rent a bike.",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/80/79/rts_79-1750665535_4957628.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey colleagues, I want to talk to you about something.\nWe seem to have a little issue with asking about bike rental.\nIt's like I overheard you talking about renting bikes, and it sounds really fun. I’m quite interested, so I want to ask some details including the rental cost, the rental methods and the place to rent bikes.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 80,
+      "num": 79,
+      "name": "#79 Renting Bikes",
+      "nameWithoutNum": "Renting Bikes",
+      "kind": "complete",
+      "examCount": 11,
+      "labels": [
+        {
+          "label": "#79",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Umbrella",
+    "promptText": "You've just arrived at the office and realized that it's pouring outside. You didn't bring an umbrella and know that one of your colleagues, who sits near you, often has a spare umbrella. How do you approach your colleague to ask for an umbrella, and what specific points do you include to ensure a positive response?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/81/80/rts_80-1750665396_060335.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey colleague, I want to talk to you about something.\nWe seem to have a little issue with going out after work.\nIt's like it’s pouring rain outside right now, and I didn’t bring an umbrella. I know you usually keep a spare umbrella, so could I borrow yours temporarily? I will return it to you as soon as possible.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 81,
+      "num": 80,
+      "name": "#80 Umbrella",
+      "nameWithoutNum": "Umbrella",
+      "kind": "complete",
+      "examCount": 25,
+      "labels": [
+        {
+          "label": "#80",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Final Project",
+    "promptText": "You need help with your final project and want to ask your teacher for assistance. How do you approach your teacher to explain the situation and what specific points do you include to ensure you get the support you need?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/82/81/rts_81-1750491720_7080402.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Respected teacher, I hope you are doing well.\nI would like to discuss an issue we have encountered with my final project.\nIt appears that I have met some difficulties while finishing my final project, and I really need your professional guidance and help to complete it properly.\nI would appreciate your opinion on this matter. Thank you for your consideration.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 82,
+      "num": 81,
+      "name": "#81 Final Project",
+      "nameWithoutNum": "Final Project",
+      "kind": "complete",
+      "examCount": 3,
+      "labels": [
+        {
+          "label": "#81",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Wall Painting",
+    "promptText": "You've been living in your apartment for a few years and feel that a fresh coat of paint would brighten up the space. You want to ask your landlord for permission to paint the walls yourself. How do you approach this conversation and what specific points do you bring up to get a positive response?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/83/82/rts_82-1750491952_6626728.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Respected landlord, I hope you are doing well.\nI would like to discuss an issue we have encountered with my apartment.\nIt appears that I have lived in this apartment for several years, and repainting the walls can brighten the space. I hope to get your permission to paint the walls by myself, and I will keep the wall color appropriate and restore it when moving out.\nI would appreciate your opinion on this matter. Thank you for your consideration.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 83,
+      "num": 82,
+      "name": "#82 Wall Painting",
+      "nameWithoutNum": "Wall Painting",
+      "kind": "complete",
+      "examCount": 7,
+      "labels": [
+        {
+          "label": "#82",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "New Classroom",
+    "promptText": "The computer in the classroom broke down, so the professor moved the class to another room. However, you don't know how to get to the new classroom and you are already late. How should you call your classmate and ask for help?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/84/83/rts_83-1750664805_6634169.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey mate, I want to talk to you about something.\nWe seem to have a little issue with the classroom.\nIt's like the computer in the classroom broke down, the professor moved the class to another room. I don't know how to get to the new classroom and I am already late, can you tell me the way?\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 84,
+      "num": 83,
+      "name": "#83 New Classroom",
+      "nameWithoutNum": "New Classroom",
+      "kind": "complete",
+      "examCount": 0,
+      "labels": [
+        {
+          "label": "#83",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Lazy Roommate",
+    "promptText": "You have a roommate, but he usually does not clean the common areas. You cannot stand dirty common areas. You're going to talk to him. What are you going to say?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/85/84/rts_84-1750664689_8431723.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey roommate, I want to talk to you about something.\nWe seem to have a little issue with the shared living spaces.\nIt's like you rarely clean the common areas, and I feel uncomfortable when those areas get dirty.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 85,
+      "num": 84,
+      "name": "#84 Lazy Roommate",
+      "nameWithoutNum": "Lazy Roommate",
+      "kind": "complete",
+      "examCount": 1,
+      "labels": [
+        {
+          "label": "#84",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Absence for Tutorial",
+    "promptText": "You have a tutorial at 3 P.M. on Monday afternoon, but unfortunately there is a competition that you need to attend at the same time. What would you say to your teacher?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/86/85/rts_85-1750663460_8139315.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Respected teacher, I hope you are doing well.\nI would like to discuss an issue we have encountered with my Monday tutorial arrangement.\nIt appears that I have a tutorial at 3 p.m. on Monday, yet I have to take part in a competition at the exact same time.\nI would appreciate your opinion on this matter. Thank you for your consideration.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 86,
+      "num": 85,
+      "name": "#85 Absence for Tutorial",
+      "nameWithoutNum": "Absence for Tutorial",
+      "kind": "complete",
+      "examCount": 1,
+      "labels": [
+        {
+          "label": "#85",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Cafe Job",
+    "promptText": "You are interested in applying for a job in the school cafe. You know that the boss is looking for someone with experience, which you are actually currently lacking. However, you are eager to learn and determined to work hard. What do you have to say to get this chance?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/87/86/rts_86-1750663215_9516106.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Respected boss, I hope you are doing well.\nI would like to discuss an issue we have encountered with my application for the school cafe job.\nIt appears that I’m eager to apply for this position. Though I don’t have relevant work experience now, I am quick to learn and willing to put in lots of effort for the job.\nI would appreciate your opinion on this matter. Thank you for your consideration.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 87,
+      "num": 86,
+      "name": "#86 Cafe Job",
+      "nameWithoutNum": "Cafe Job",
+      "kind": "complete",
+      "examCount": 8,
+      "labels": [
+        {
+          "label": "#86",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Movie Delay",
+    "promptText": "You went to watch a movie with a friend, but the car broke down on the way and made your friend wait for a long time. What should you say to your friend?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/88/87/rts_87-1750597536_829373.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey friend, I want to talk to you about something.\nWe seem to have a little issue with our movie trip.\nIt's like my car broke down on the road, which kept you waiting for a really long time.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 88,
+      "num": 87,
+      "name": "#87 Movie Delay",
+      "nameWithoutNum": "Movie Delay",
+      "kind": "complete",
+      "examCount": 14,
+      "labels": [
+        {
+          "label": "#87",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Dessert",
+    "promptText": "You invite some friends to your party, and one of them wants to bring some dessert. You have already prepared the dessert. So you hope your friend can bring something else (for example: fruit, cake, etc..). What should you say to your friend?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/89/88/rts_88-1750597491_669804.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey friend, I want to talk to you about something.\nWe seem to have a little issue with food for my party.\nIt's like I’ve already prepared all the desserts, so could you bring some fruit instead?\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 89,
+      "num": 88,
+      "name": "#88 Dessert",
+      "nameWithoutNum": "Dessert",
+      "kind": "complete",
+      "examCount": 14,
+      "labels": [
+        {
+          "label": "#88",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Walk in Countryside",
+    "promptText": "Your friend Susan suggests having a walk in the countryside tomorrow. You would love to, but you have seen the weather forecast and it might rain tomorrow. You want to wait and see the weather tomorrow morning, and decide then. What would you say to Susan right now?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/90/89/rts_89-1750597356_759735.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey Susan, I want to talk to you about something.\nWe seem to have a little issue with our countryside walk tomorrow.\nIt's like I checked the weather forecast and it may rain tomorrow. I think we can check the weather tomorrow morning and make a decision later.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 90,
+      "num": 89,
+      "name": "#89 Walk in Countryside",
+      "nameWithoutNum": "Walk in Countryside",
+      "kind": "complete",
+      "examCount": 56,
+      "labels": [
+        {
+          "label": "#89",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Flight Canceled",
+    "promptText": "You previously called the taxi driver and informed him that you were going to the airport, but now you have to change your destination to go home due to the flight cancel. You want to tell the driver where your home address is and how to get there. What should you say to the driver?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/91/90/rts_90-1750597262_3349745.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey driver, I want to talk to you about something.\nWe seem to have a little issue with the destination.\nIt's like I originally told you to head to the airport, but my flight got cancelled, so I need to change the destination to my home. I’ll tell you my home address and guide you on the way there.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 91,
+      "num": 90,
+      "name": "#90 Flight Canceled",
+      "nameWithoutNum": "Flight Canceled",
+      "kind": "complete",
+      "examCount": 27,
+      "labels": [
+        {
+          "label": "#90",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Late for Meeting",
+    "promptText": "You are ten minutes late for a meeting because of a traffic jam. How should you explain to your colleagues?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/92/91/rts_91-1750494225_45763.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey everyone, I want to talk to you about something.\nWe seem to have a little issue with my arrival for the meeting.\nIt's like I was stuck in a traffic jam, which made me ten minutes late for this meeting.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 92,
+      "num": 91,
+      "name": "#91 Late for Meeting",
+      "nameWithoutNum": "Late for Meeting",
+      "kind": "complete",
+      "examCount": 14,
+      "labels": [
+        {
+          "label": "#91",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Working Remotely",
+    "promptText": "You will be on vacation and you want to discuss with your boss how to work efficiently, such as working remotely or something like that. What should you say to your boss?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/93/92/rts_92-1750494337_4516668.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Respected boss, I hope you are doing well.\nI would like to discuss an issue we have encountered with work arrangements during my upcoming vacation.\nIt appears that I’m going to take a vacation soon, and I’d like to talk about efficient work solutions like remote working.\nI would appreciate your opinion on this matter. Thank you for your consideration.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 93,
+      "num": 92,
+      "name": "#92 Working Remotely",
+      "nameWithoutNum": "Working Remotely",
+      "kind": "complete",
+      "examCount": 2,
+      "labels": [
+        {
+          "label": "#92",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Sports Club",
+    "promptText": "Your friend invited you to join a sports club. You are interested in the sports but you cannot join because of your family and your job, and because you need to travel. What do you say to your friend?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/94/93/rts_93-1750596879_5506465.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey friend, I want to talk to you about something.\nWe seem to have a little issue with joining the sports club you recommended.\nIt's like I’m interested in the sports there, but I can’t sign up due to my family matters, work duties and frequent trips.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 94,
+      "num": 93,
+      "name": "#93 Sports Club",
+      "nameWithoutNum": "Sports Club",
+      "kind": "complete",
+      "examCount": 13,
+      "labels": [
+        {
+          "label": "#93",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Project Extension",
+    "promptText": "You are taking business night classes and your project is going to be due soon, but your computer is broken and there are some visitors to see you. You want to ask your professor for an extension over the weekend. You go to the professor's office. What do you say to him?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/95/94/rts_(c)_94-1761568043_8833244.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Respected professor, I hope you are doing well.\nI would like to discuss an issue we have encountered with my upcoming project submission.\nIt appears that my computer is broken and I have visitors coming over, so I hope to ask for an extension for the project over the weekend.\nI would appreciate your opinion on this matter. Thank you for your consideration.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 95,
+      "num": 94,
+      "name": "#94 Project Extension",
+      "nameWithoutNum": "Project Extension",
+      "kind": "complete",
+      "examCount": 15,
+      "labels": [
+        {
+          "label": "#94",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Wind",
+    "promptText": "Your classmate is on vacation and your are at her home. The strong wind damaged the furniture on the balcony, so you want to inform your classmates so that she could be mentally prepared. What do you say to her?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/96/95/rts_95-1750494824_3173547.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey Lily, I want to talk to you about something.\nWe seem to have a little issue with the balcony furniture at your house.\nIt's like the strong wind damaged the furniture on your balcony. I'm calling to tell you so you can be mentally prepared.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 96,
+      "num": 95,
+      "name": "#95 Wind",
+      "nameWithoutNum": "Wind",
+      "kind": "complete",
+      "examCount": 25,
+      "labels": [
+        {
+          "label": "#95",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Missing Pages",
+    "promptText": "You borrowed a book from the university library. But while reading it, you notice that two pages have been torn out, but you didn't do it. What do you say to the librarian when you return the book?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/97/96/rts_96-1752030590_8443358.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Respected librarian, I hope you are doing well.\nI would like to discuss an issue we have encountered with this library book I borrowed.\nIt appears that two pages inside the book are torn out, and I did not tear them.\nI would appreciate your opinion on this matter. Thank you for your consideration.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 97,
+      "num": 96,
+      "name": "#96 Missing Pages",
+      "nameWithoutNum": "Missing Pages",
+      "kind": "complete",
+      "examCount": 6,
+      "labels": [
+        {
+          "label": "#96",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Project Deadline",
+    "promptText": "You're working on a group project with three other classmates and you have a deadline coming up soon. One of your group members has not contributed anything so far and is not responding to your messages. What would you say to your group member and your other teammates?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/118/97/rts_(c)_97-1761830266_9194388.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey guys, I want to talk to you about something.\nWe seem to have a little issue with our group project.\nIt's like the deadline is coming up soon, one group member hasn't contributed anything and doesn't reply to our messages.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 118,
+      "num": 97,
+      "name": "#97 Project Deadline",
+      "nameWithoutNum": "Project Deadline",
+      "kind": "complete",
+      "examCount": 10,
+      "labels": [
+        {
+          "label": "#97",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Wrong File",
+    "promptText": "You have submitted a wrong file to your manager. Please apologize to him for it.",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/108/99/rts_99-1753078863_1691177.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Respected manager, I hope you are doing well.\nI would like to discuss an issue we have encountered with my submitted file.\nIt appears that I mistakenly sent you the incorrect file, and I sincerely apologize for this careless mistake.\nI would appreciate your opinion on this matter. Thank you for your consideration.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 108,
+      "num": 99,
+      "name": "#99 Wrong File",
+      "nameWithoutNum": "Wrong File",
+      "kind": "complete",
+      "examCount": 6,
+      "labels": [
+        {
+          "label": "#99",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Chemistry Exam",
+    "promptText": "You’re studying for the upcoming chemistry final exam. You understand most topics, but the “organic chemistry reaction mechanisms” still confuse you. Your study partner got an A in last year’s chemistry class. Ask them to explain the key concepts and share their study notes. What would you say?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/109/100/rts_100-1753346019_988494.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey partner, I want to talk to you about something.\nWe seem to have a little issue with my chemistry exam preparation.\nIt's like I’m reviewing for the coming chemistry final, most topics are clear to me, yet organic chemistry reaction mechanisms are really confusing. You earned an A in chemistry last year, so I hope you can explain its key concepts and share your study notes with me.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 109,
+      "num": 100,
+      "name": "#100 Chemistry Exam",
+      "nameWithoutNum": "Chemistry Exam",
+      "kind": "practice",
+      "examCount": 19,
+      "labels": [
+        {
+          "label": "#100",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Asking for a Ride",
+    "promptText": "You haven’t taken a taxi, and you want to ask your colleague for a ride. What should you say to your colleague?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/106/103/rts_103-1751625651_2734175.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey colleague, I want to talk to you about something.\nWe seem to have a little issue with my way home.\nIt's like I didn’t take a taxi, so I wonder if I can get a ride with you.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 106,
+      "num": 103,
+      "name": "#103 Asking for a Ride",
+      "nameWithoutNum": "Asking for a Ride",
+      "kind": "complete",
+      "examCount": 7,
+      "labels": [
+        {
+          "label": "#103",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Meal Invitation",
+    "promptText": "A friend, Mike, invites you to a meal and asks if you have any dietary restrictions. You don't have any, but your partner is allergic to milk.\nWhat would you say to him?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/119/104/rts_(c)_104-1765851058_94881.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey Mike, I want to talk to you about something.\nWe seem to have a little issue with dietary requirements for your dinner.\nIt's like I don't have any dietary restrictions, but my partner is allergic to milk.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 119,
+      "num": 104,
+      "name": "#104 Meal Invitation",
+      "nameWithoutNum": "Meal Invitation",
+      "kind": "complete",
+      "examCount": 25,
+      "labels": [
+        {
+          "label": "#104",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Only One Book",
+    "promptText": "You need to read a book for your class. However, there is only one of these books in the library, and another student is already reading it. How would you ask the student to give you the book later?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/Respond_to_a_situation_volume/original/e2aa63f0abe2811a107bbf79f96a4c4e/Respond_to_a_situation_volume.mp3?1753774083",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey mate, I want to talk to you about something.\nWe seem to have a little issue with the class book from the library.\nIt's like there is only one copy available, and I need it for my class, so could you pass it to me once you finish reading?\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 110,
+      "num": 105,
+      "name": "#105 Only One Book",
+      "nameWithoutNum": "Only One Book",
+      "kind": "practice",
+      "examCount": 30,
+      "labels": [
+        {
+          "label": "#105",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Assignment Extension",
+    "promptText": "You’ve been given a deadline for an assignment, but due to a personal emergency, you need more time to finish it. How would you approach your professor to request an extension and ensure the situation is handled appropriately? What would you say?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/112/107/rts_(c)_107-1757918093_6826155.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Respected professor, I hope you are doing well.\nI would like to discuss an issue we have encountered with my assignment deadline.\nIt appears that I met an unexpected personal emergency, so I need extra time to complete this assignment.\nI would appreciate your opinion on this matter. Thank you for your consideration.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 112,
+      "num": 107,
+      "name": "#107 Assignment Extension",
+      "nameWithoutNum": "Assignment Extension",
+      "kind": "complete",
+      "examCount": 15,
+      "labels": [
+        {
+          "label": "#107",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Milk Carton",
+    "promptText": "You are shopping in a supermarket and accidentally drop the carton of milk you are holding, causing the milk to spill onto the floor. What would you say to a store stuff member?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/120/108/rts_(c)_108-1777108863_288605.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Respected staff member, I hope you are doing well.\nI would like to discuss an issue we have encountered with the spilled milk on the floor.\nIt appears that I accidentally dropped the carton of milk I was holding and the milk spilled onto the floor.\nI would appreciate your opinion on this matter. Thank you for your consideration.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 120,
+      "num": 108,
+      "name": "#108 Milk Carton",
+      "nameWithoutNum": "Milk Carton",
+      "kind": "complete",
+      "examCount": 28,
+      "labels": [
+        {
+          "label": "#108",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Train Route",
+    "promptText": "Your friend is planning to work far from their home and is considering driving. However, you believe taking the train could be a more convenient option because driving to work may cause you to get stuck in traffic, while taking the train is not only cheaper but also gives you time to do other things. How would you recommend the train as the better choice?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/114/109/rts_(c)_109-1789607568_4636228.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey buddy, I want to talk to you about something.\nWe seem to have a little issue with your travel choice for the far trip.\nIt's like you're hesitating between driving and taking the train, and I think the train is much more convenient. You can avoid traffic jams and tiring long-distance driving, and you can relax or enjoy the scenery during the whole ride. Finally, taking the train is cheaper.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 114,
+      "num": 109,
+      "name": "#109 Train Route",
+      "nameWithoutNum": "Train Route",
+      "kind": "complete",
+      "examCount": 6,
+      "labels": [
+        {
+          "label": "#109",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Housework",
+    "promptText": "Your flatmate doesn't follow the schedule to complete housework. What would you say to him or her?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/115/110/rts_(c)_110-1757686870_634246.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey flatmate, I want to talk to you about something.\nWe seem to have a little issue with our housework schedule.\nIt's like you haven't finished your housework following our agreed schedule.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 115,
+      "num": 110,
+      "name": "#110 Housework",
+      "nameWithoutNum": "Housework",
+      "kind": "complete",
+      "examCount": 10,
+      "labels": [
+        {
+          "label": "#110",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Dairy Product",
+    "promptText": "You and your family are going to a friend's house for dinner. You're worried that your friend may not know that your wife, Lilly, can't have dairy products, so you decide to call your friend in advance to let them know. What would you say?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/123/113/rts_(c)_113-1774866421_9061978.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hey Jack, I want to talk to you about something.\nWe seem to have a little issue with the dinner at your house tonight.\nIt's like my wife Lilly can’t eat any dairy products at all. I’m calling you early just to let you know this dietary restriction before you start cooking.\nAnd I'd like to know what you think.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 123,
+      "num": 113,
+      "name": "#113 Dairy Product",
+      "nameWithoutNum": "Dairy Product",
+      "kind": "complete",
+      "examCount": 24,
+      "labels": [
+        {
+          "label": "#113",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "When to Meet",
+    "promptText": "You are meeting a friend this weekend, but you haven't decided on a specific time yet. You need to discuss when to meet. What would you say to the friend?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/124/114/rts_(c)_114-1785221774_195895.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": null,
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 124,
+      "num": 114,
+      "name": "#114 When to Meet",
+      "nameWithoutNum": "When to Meet",
+      "kind": "complete",
+      "examCount": 6,
+      "labels": [
+        {
+          "label": "#114",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "RESPOND_TO_A_SITUATION",
+    "taskTypeKey": "RESPOND_TO_A_SITUATION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Mistake in Report",
+    "promptText": "There was a mistake in the report you gave your manager last night. You hope he hasn't seen it yet, so you call him today to explain what happened.\nWhat would you say?",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/respond_situations/audios/125/115/rts_(c)_115-1789782952_9927456.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": null,
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/speaking/respond_situations.json",
+      "cleanFile": "speaking/respond_situations.json",
+      "id": 125,
+      "num": 115,
+      "name": "#115 Mistake in Report",
+      "nameWithoutNum": "Mistake in Report",
+      "kind": "complete",
+      "examCount": 2,
+      "labels": [
+        {
+          "label": "#115",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  }
+]
