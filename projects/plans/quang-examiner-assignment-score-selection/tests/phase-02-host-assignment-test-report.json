@@ -1,0 +1,21 @@
+{
+  "phase": "phase-02-host-assignment",
+  "mode": "default",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-23T14:20:00Z",
+  "summary": {
+    "passed": 171,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "verification_details": [
+    "Fresh backend regression command: .\\mvnw.cmd -pl app '-Dtest=*Scoring*Test,*Examiner*Test,*AiScoreResultTest,*AnswerPayloadDecoderFixtureTest,*ListeningPayloadFixtureSchemaTest,ModuleStructureTest,UserRepositoryTest,UserServiceTest' '-Dlogging.level.root=ERROR' test — 169 tests passed, 0 failures/errors/skips.",
+    "Database integration command: .\\mvnw.cmd -pl app '-Dtest=ExaminerAssignmentDatabaseIntegrationTest' test — 2 tests passed, 0 failures/errors/skips. Concurrent confirm committed one assignment exactly once using the real H2 batch-row PESSIMISTIC_WRITE lock; the session-row lock facade was mocked and is not verified by this test. The 40-attempt/2-Examiner service+H2-repository preview/commit benchmark passed with p95 129 ms over 20 measured runs after 3 warmups.",
+    "Rebuilt the local API container from current pte-api source. Flyway validated 61 migrations and applied V58–V61; API actuator health returned UP and the container became healthy. The PostgreSQL data volume was preserved.",
+    "Visible-browser Host smoke passed: login, Exams list, session detail, Examiner directory, and assignment overview. Relevant API requests returned 200; no browser page or console errors were observed.",
+    "Created one random-pooled preview through the Host UI: valid PREVIEWED allocation for 2 attempts and 21 eligible answers to Demo Examiner. Confirm was not clicked. A DB read verified one PREVIEWED batch and zero examiner assignments for the session; this preview expires after its 30-minute TTL.",
+    "Benchmark scope: assignment service and H2 JPA repositories were real; session, enrollment, attempt, eligibility and identity facades were mocked. For the concurrency case, only the batch-row lock was exercised; the session-row lock was mocked. This is not an HTTP/full-stack or PostgreSQL p95 measurement. The local Host preview remains unconfirmed: it covers 2 seeded attempts/21 eligible answers, and no assignment was committed in the seed database."
+  ],
+  "report_path": "pte-doc/projects/plans/quang-examiner-assignment-score-selection/tests/phase-02-host-assignment-test-report.json"
+}

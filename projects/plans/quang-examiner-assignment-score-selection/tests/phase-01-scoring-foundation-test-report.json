@@ -1,18 +1,19 @@
 {
   "phase": "phase-01-scoring-foundation",
-  "mode": "unit",
+  "mode": "all",
   "verdict": "PASSED",
-  "reviewed_at": "2026-09-23T07:13:31Z",
+  "reviewed_at": "2026-09-23T07:47:58Z",
   "summary": {
-    "passed": 125,
+    "passed": 129,
     "failed": 0,
     "skipped": 0
   },
   "failures": [],
   "verification_details": [
-    "Fresh invocation: 125 Maven unit tests passed, including ModuleStructureTest and all scoring unit/service tests; 0 failures, 0 errors, 0 skipped.",
-    "Earlier Phase 01 verification also applied V1-V57 plus V58 to a disposable empty PostgreSQL database; new workflow tables remained empty.",
-    "Earlier Phase 01 verification applied V1-V57 plus V58 to a disposable PostgreSQL database with legacy raw_score=83 and teacher_score=71; both values remained unchanged and new AI provenance/source fields remained null."
+    "Fresh invocation: 126 Maven unit tests passed, including ModuleStructureTest and all scoring unit/service tests; 0 failures, 0 errors, 0 skipped.",
+    "V1-V59 applied in Flyway-style per-migration transactions to a disposable empty PostgreSQL database; all five workflow tables were empty and the four new foreign keys were present.",
+    "V1-V59 applied to a disposable PostgreSQL database containing legacy raw_score=83 and teacher_score=71; both values remained unchanged and new AI provenance/source fields remained null.",
+    "Relational-constraint smoke checks accepted a valid batch/assignment/answer/score/source selection and rejected missing or cross-scope batches, orphan or metadata-mismatched scores, unassigned Examiner scores, and missing or wrong-answer selected-score references."
   ],
   "report_path": "pte-doc/projects/plans/quang-examiner-assignment-score-selection/tests/phase-01-scoring-foundation-test-report.json"
 }

@@ -53,6 +53,21 @@ Mở rộng per-session Host review hiện tại mà không làm mất `teacherS
 - Host-only API; toàn bộ mutation tenant-scoped, versioned/atomic và bị chặn sau publication lock.
 - Approval/publication logic thuộc Reporting/Phase 05, không sao chép readiness logic ở FE.
 
+## Files
+
+- Backend Host review/source selection: `../pte-api/app/src/main/java/com/pte/scoring/internal/controller/HostScoreReviewController.java`, `../pte-api/app/src/main/java/com/pte/scoring/internal/service/ScoringReviewReadQueryService.java`, `../pte-api/app/src/main/java/com/pte/scoring/internal/service/ScoreSourceSelectionService.java`, `../pte-api/app/src/main/java/com/pte/scoring/internal/service/ScorePublicationLockService.java`, `../pte-api/app/src/main/java/com/pte/scoring/internal/repository/ScoreSourceAuditRepository.java`, `../pte-api/app/src/main/java/com/pte/scoring/domain/ScoreSourceAudit.java`.
+- Scoring facade/domain source-selection contract: `../pte-api/app/src/main/java/com/pte/scoring/ScoringService.java`, `../pte-api/app/src/main/java/com/pte/scoring/domain/ScoringAnswer.java`, `../pte-api/app/src/main/java/com/pte/scoring/domain/ExaminerAnswerScore.java`, `../pte-api/app/src/main/java/com/pte/scoring/domain/enums/ScoringMethod.java`.
+- Backend contracts/constants: `../pte-api/app/src/main/java/com/pte/scoring/dto/request/SelectScoreSourceRequest.java`, `../pte-api/app/src/main/java/com/pte/scoring/dto/response/HostScoreReviewResponse.java`, `../pte-api/app/src/main/java/com/pte/scoring/dto/response/ScoreSourceSelectionPreviewResponse.java`, `../pte-api/app/src/main/java/com/pte/scoring/dto/response/ScoreSourceSelectionResultResponse.java`, `../pte-api/app/src/main/java/com/pte/scoring/dto/response/ScoreSourceAuditResponse.java`, `../pte-api/app/src/main/java/com/pte/scoring/internal/constant/ScoreReviewConstants.java`, `../pte-api/app/src/main/java/com/pte/scoring/domain/ScoringDomainConstants.java`.
+- Backend tests: `../pte-api/app/src/test/java/com/pte/scoring/internal/service/ScoringReviewReadQueryServiceTest.java`, `../pte-api/app/src/test/java/com/pte/scoring/internal/service/ScoreSourceSelectionServiceTest.java`.
+- API client and Host UI: `../pte-web/packages/api-client/src/requests/scoring/scoreReview.ts`, `../pte-web/packages/api-client/src/requests/scoring/scoreReview.test.ts`, `../pte-web/packages/api-client/src/types/scoring/index.ts`, `../pte-web/apps/tenant-web/features/exams/api/index.ts`, `../pte-web/apps/tenant-web/features/exams/components/HostScoreReviewPanel.tsx`, `../pte-web/apps/tenant-web/features/exams/components/SessionDetailView.tsx`.
+
+## Phase Checkpoint
+
+- Unit tests: yes (user confirmed for Phases 03–05 on 2026-09-23)
+- `ck:quality`: yes (user confirmed for Phases 03–05 on 2026-09-23)
+- Hard-mode confirmation: required after the final test/quality gates for this implementation batch.
+- Preflight: Host review reads through the scoring module boundary; source selection is answer-level and atomically versioned/audited. AI provenance and Examiner submission state are separate; legacy Host `teacherScore` is not treated as an Examiner source. Publication cutoff is Phase 05 and is fixed to CLOSED by user decision A.
+
 ## Quality and Testing State
 
 - quality: not evaluated

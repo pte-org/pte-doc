@@ -34,20 +34,19 @@ Khép vòng từ Host approval tới Student report. Reporting không còn aggre
    - Lưu dữ liệu report cần cho Student một cách bất biến: overall/section scores, template revision, cohort/publication version và selected per-answer inputs hoặc snapshot đủ tái tạo/audit.
    - Chốt với `AttemptReport`/report read model hiện hành cách thêm snapshot không phá API tương thích; report reads của Student dùng snapshot đã publish, không gọi live aggregation.
    - Ngăn duplicate report/publication races bằng unique keys và state transition có transaction semantics.
+   - Giữ tương thích với report đã `published` trước V62 nhưng chưa có snapshot: tiếp tục đọc theo raw-score aggregation legacy và trả `immutableSnapshot=false`; UI phải cảnh báo đây là kết quả cũ chưa được freeze. Report publish qua workflow mới luôn phải có snapshot.
 
 5. **Host/Student UI integration**
    - Host review panel nhận readiness summary, nút approve/publish chỉ bật khi đủ điều kiện, confirmation nêu cohort count và version/cutoff.
    - Publish failure trả actionable missing answer summary; không báo thành công giả hoặc publish một phần.
    - Student report visibility tiếp tục ẩn trước Host publish; sau publish hiển thị snapshot. Không expose source/provenance nội bộ cho Student trừ khi API đã có yêu cầu rõ.
 
-## Publication cutoff — điểm cần quyết định trước khi triển khai
+## Publication cutoff — quyết định đã chốt
 
-Spec không bắt buộc exam/session đóng trước khi publish, nhưng session có thể nhận attempt nộp sau preflight. Plan không tự thêm `CLOSED` làm điều kiện. Trước P05, Host/Product cần chọn một contract:
-
-- **Phương án A — publish sau khi đóng session:** cohort ổn định; readiness bao phủ mọi submitted attempt của session; đơn giản nhất để giữ nghĩa “toàn session”.
-- **Phương án B — snapshot cohort theo cutoff:** Host publish mọi attempt đã submit tại cutoff; attempt nộp sau không có report cho tới một đợt approval/publish tiếp theo. Cần định nghĩa rõ đợt bổ sung không bị xem là sửa/re-publish score đã công bố.
-
-Không triển khai một trong hai theo suy đoán. Chọn phương án ảnh hưởng acceptance, state machine, Student visibility và test publish atomicity.
+- **Phương án A (2026-09-23):** chỉ publish sau khi session ở trạng thái `CLOSED`.
+- Backend khóa session ở trạng thái đóng trước khi xác định cohort, sau đó thiết lập publication barrier và snapshot toàn bộ submitted attempts đủ điều kiện trong cùng transaction.
+- Nếu có blocker, toàn bộ lệnh publish thất bại; Student không thấy snapshot một phần. Sau khi barrier đã được thiết lập, score/source mutations không được làm thay đổi kết quả đã publish.
+- UI hiển thị trạng thái đóng, readiness, cohort count và xác nhận publish; trạng thái UI không thay thế backend invariant.
 
 ## Kiểm chứng và acceptance
 
@@ -63,12 +62,32 @@ Không triển khai một trong hai theo suy đoán. Chọn phương án ảnh h
 
 ## Design Constraints
 
-- Không yêu cầu session `CLOSED` nếu chưa có quyết định product; cutoff semantics phải được xác nhận trước phase.
+- Bắt buộc session `CLOSED` trước khi publish theo quyết định product A; backend xác minh và khóa trạng thái session.
 - Readiness là backend invariant, không phải FE-only disable state.
 - Publish không partial; snapshot visibility chỉ bật sau khi toàn cohort snapshot thành công.
 - Report dùng selected score per answer và pinned template weights; objective/UNSCORED semantics không đổi.
 - Student read path đọc immutable snapshot; report không được tính lại từ mutable scores.
+- Các report đã publish trước V62 không có snapshot được giữ nguyên khả năng truy cập bằng aggregation legacy, có cờ `immutableSnapshot=false` và warning UI; đây là compatibility exception, không áp dụng cho report publish mới.
 - Lock/version coordination giữa source selection, Examiner submission và publication phải được kiểm thử concurrent.
+
+## Files
+
+- Reporting snapshot/publication and cohort aggregation: `../pte-api/app/src/main/java/com/pte/reporting/internal/service/ReportPublishService.java`, `../pte-api/app/src/main/java/com/pte/reporting/internal/service/ReportSnapshot.java`, `../pte-api/app/src/main/java/com/pte/reporting/internal/service/ReportSnapshotCodec.java`, `../pte-api/app/src/main/java/com/pte/reporting/internal/service/ReportSnapshotScoreInput.java`, `../pte-api/app/src/main/java/com/pte/reporting/internal/service/ReportService.java`, `../pte-api/app/src/main/java/com/pte/reporting/internal/service/ScoreAggregationService.java`, `../pte-api/app/src/main/java/com/pte/reporting/internal/service/ReportScoreAggregation.java`, `../pte-api/app/src/main/java/com/pte/reporting/internal/constant/ReportingConstants.java`, `../pte-api/app/src/main/java/com/pte/reporting/domain/AttemptReport.java`, `../pte-api/app/src/main/java/com/pte/reporting/domain/ReportingDomainConstants.java`.
+- Batched pinned score context/template reads: `../pte-api/app/src/main/java/com/pte/attempt/AttemptService.java`, `../pte-api/app/src/main/java/com/pte/attempt/internal/service/AttemptSummaryQueryService.java`, `../pte-api/app/src/main/java/com/pte/attempt/internal/repository/ExamAttemptRepository.java`, `../pte-api/app/src/main/java/com/pte/attempt/dto/response/AttemptScoreContextView.java`, `../pte-api/app/src/main/java/com/pte/scoretemplate/ScoreTemplateService.java`, `../pte-api/app/src/main/java/com/pte/scoretemplate/internal/repository/ScoreTemplateRepository.java`.
+- Reporting API/contracts/migration: `../pte-api/app/src/main/java/com/pte/reporting/internal/controller/ReportPublishController.java`, `../pte-api/app/src/main/java/com/pte/reporting/internal/controller/ReportController.java`, `../pte-api/app/src/main/java/com/pte/reporting/internal/dto/response/ReportPublicationBlockerResponse.java`, `../pte-api/app/src/main/java/com/pte/reporting/internal/dto/response/ReportPublicationReadinessResponse.java`, `../pte-api/app/src/main/java/com/pte/reporting/internal/dto/response/ReportPublicationSummaryResponse.java`, `../pte-api/app/src/main/resources/db/migration/V62__examiner_score_selection_and_report_snapshots.sql`, `../pte-api/app/src/main/resources/db/migration/V64__published_attempt_report_lookup.sql`.
+- Student report projection and persistence query: `../pte-api/app/src/main/java/com/pte/reporting/internal/dto/response/ReportResponse.java`, `../pte-api/app/src/main/java/com/pte/reporting/internal/mapper/ReportMapper.java`, `../pte-api/app/src/main/java/com/pte/reporting/internal/repository/AttemptReportRepository.java`.
+- Cross-module publication cutoff/score barrier: `../pte-api/app/src/main/java/com/pte/session/SessionService.java`, `../pte-api/app/src/main/java/com/pte/session/internal/service/SessionLifecycleService.java`, `../pte-api/app/src/main/java/com/pte/session/internal/constant/SessionConstants.java`, `../pte-api/app/src/main/java/com/pte/scoring/internal/service/ScorePublicationLockService.java`, `../pte-api/app/src/main/java/com/pte/scoring/internal/service/AiScoringResultPersistenceService.java`, `../pte-api/app/src/main/java/com/pte/scoring/internal/messaging/consumer/AiScoringWorker.java`, `../pte-api/app/src/main/java/com/pte/attempt/internal/service/AttemptLifecycleService.java`, `../pte-api/app/src/main/java/com/pte/attempt/internal/service/ProctorCommandService.java`.
+- Scoring facade, source records, and assignment publication fence: `../pte-api/app/src/main/java/com/pte/scoring/ScoringService.java`, `../pte-api/app/src/main/java/com/pte/scoring/domain/ScoringAnswer.java`, `../pte-api/app/src/main/java/com/pte/scoring/domain/ExaminerAnswerScore.java`, `../pte-api/app/src/main/java/com/pte/scoring/domain/enums/ScoringMethod.java`, `../pte-api/app/src/main/java/com/pte/scoring/internal/service/ExaminerAssignmentService.java`.
+- Backend tests: `../pte-api/app/src/test/java/com/pte/reporting/internal/service/ReportPublishServiceTest.java`, `../pte-api/app/src/test/java/com/pte/reporting/internal/service/ReportSnapshotCodecTest.java`, `../pte-api/app/src/test/java/com/pte/reporting/internal/service/ReportServiceTest.java`, `../pte-api/app/src/test/java/com/pte/reporting/internal/service/ScoreAggregationServiceTest.java`, `../pte-api/app/src/test/java/com/pte/scoring/internal/service/AiScoringResultPersistenceServiceTest.java`, `../pte-api/app/src/test/java/com/pte/scoring/internal/messaging/consumer/AiScoringWorkerTest.java`, `../pte-api/app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServiceTest.java`, `../pte-api/app/src/test/java/com/pte/attempt/internal/service/ProctorCommandServiceTest.java`, `../pte-api/app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java`.
+- API client and web: `../pte-web/packages/api-client/src/requests/reporting/reports.ts`, `../pte-web/packages/api-client/src/requests/reporting/reports.test.ts`, `../pte-web/packages/api-client/src/types/reporting/index.ts`, `../pte-web/apps/tenant-web/features/exams/components/ReportPublicationPanel.tsx`, `../pte-web/apps/tenant-web/features/exams/components/SessionDetailView.tsx`, `../pte-web/apps/tenant-web/features/reports/StudentReportsView.tsx`, `../pte-web/apps/tenant-web/app/(dashboard)/student/results/page.tsx`, `../pte-web/apps/tenant-web/lib/navigation.tsx`, `../pte-web/apps/tenant-web/lib/navigationConstants.ts`.
+- Attempt/score-template exception-message constants: `../pte-api/app/src/main/java/com/pte/attempt/internal/constant/AttemptConstants.java`, `../pte-api/app/src/main/java/com/pte/attempt/domain/AttemptDomainConstants.java`, `../pte-api/app/src/main/java/com/pte/attempt/domain/PinnedItem.java`, `../pte-api/app/src/main/java/com/pte/attempt/internal/service/SnapshotPinService.java`, `../pte-api/app/src/main/java/com/pte/scoretemplate/internal/constant/ScoreTemplateConstants.java`, `../pte-api/app/src/main/java/com/pte/scoretemplate/ScoreTemplateService.java`, `../pte-api/app/src/main/java/com/pte/scoretemplate/internal/service/ScoreTemplateAdminService.java`, `../pte-api/app/src/main/java/com/pte/scoretemplate/internal/controller/ScoreTemplateController.java`.
+
+## Phase Checkpoint
+
+- Unit tests: yes (user confirmed for Phases 03–05 on 2026-09-23)
+- `ck:quality`: yes (user confirmed for Phases 03–05 on 2026-09-23)
+- Hard-mode confirmation: required after the final test/quality gates for this implementation batch.
+- Preflight: cutoff A is enforced in `SessionService.lockClosedForReportPublication`; publish reads a closed session cohort, validates selected scoring inputs through the scoring facade, persists immutable report snapshots atomically, and Student reads only published snapshots. Each snapshot distinguishes the exam content snapshot from the pinned score-template public ID/version. Objective answers without a score remain excluded from aggregation without blocking publish. Scoring writes are fenced by the publication lock; AI vendor calls run outside DB transactions and are revalidated under row locks before persistence.
 
 ## Quality and Testing State
 

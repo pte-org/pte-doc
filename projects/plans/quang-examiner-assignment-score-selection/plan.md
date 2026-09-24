@@ -3,7 +3,7 @@
 **Spec:** [spec.md](spec.md)  
 **Mode:** Hard · **Test:** default (chưa bật `--tdd`)  
 **Phạm vi:** P1 assignment, Examiner scoring, Host source selection/approval, Student report; P3 cấu hình tái sử dụng bị hoãn.  
-**Trạng thái:** Draft plan — chưa triển khai.
+**Trạng thái:** Đang triển khai — Phase 01 implementation/quality đã hoàn tất theo bằng chứng hiện có; reviewer follow-up độc lập sau remediation V59 còn pending. Người dùng xác nhận hoàn tất Phase 02 sau khi acceptance checks pass và quality APPROVED; Phase 03 đang được triển khai. Unit tests và quality gate được xác nhận cho từng Phase 03–05. Publication cutoff được chốt là chỉ publish sau khi session CLOSED.
 
 ---
 
@@ -28,7 +28,7 @@
 9. Source selection là state theo answer, thao tác all/section/task type áp dụng lên tập hiện hữu và có audit. Nguồn không xóa hai score gốc.
 10. Publish preflight toàn bộ report cohort: không publish một phần khi câu AI-eligible thiếu selected publishable score. Student chỉ đọc snapshot đã publish; dữ liệu sau publish không làm report đổi âm thầm.
 11. Dùng public module API/facade, không truy cập repository/package `internal` xuyên module và không thêm FK xuyên bounded context nếu kiến trúc hiện tại tránh kiểu liên kết đó.
-12. Không tự thêm điều kiện session phải CLOSED. Ảnh hưởng của publish khi session còn nhận attempt được ghi thành rủi ro cần Host xác nhận trước khi triển khai Phase 05.
+12. Chỉ cho phép publish report sau khi session ở trạng thái CLOSED; không publish report cuối khi session còn nhận attempt. Cohort/aggregation của report được xác định từ dữ liệu hợp lệ tại cutoff đóng session.
 
 ## Kiến trúc và ownership đề xuất
 
@@ -69,9 +69,9 @@ P01 dựng public contracts/migration trước; P02/P03 cùng dùng assignment o
 
 | Phase | Stories | Kết quả có thể kiểm chứng |
 |---|---|---|
-| [01 — Scoring foundation](phase-01-scoring-foundation.md) | P1 Examiner, Host source review; FR-02–04, 09–18 nền tảng | Eligibility từ pinned template; provenance thật/stub; assignment/score/selection/audit persistence và public facades sẵn sàng. |
-| [02 — Host assignment](phase-02-host-assignment.md) | P1 manual/random; FR-01–08, 18 | Preview/confirm manual mapping và pooled 40/2 = 20/20; conflict hiển thị; retry/supplement ổn định. |
-| [03 — Examiner queue](phase-03-examiner-workflow.md) | P1 Examiner; FR-03, 04, 09–11, 18 | Examiner riêng tư list/detail/audio và nộp 0–100 blind, ownership enforced. |
+| [01 — Scoring foundation](phase-01-scoring-foundation.md) | P1 Examiner, Host source review; FR-02–04, 09–18 nền tảng | **Complete (2026-09-23):** quality APPROVED; 126 Maven tests pass; V1–V59 validated on disposable empty/legacy PostgreSQL databases with relational-constraint smoke checks. Reviewer follow-up after V59 remediation remains pending. |
+| [02 — Host assignment](phase-02-host-assignment.md) | P1 manual/random; FR-01–08, 18 | **Completed (2026-09-23; hard-mode confirmation received).** Quality APPROVED; 169 prior backend regression tests + 2 H2 database integration tests passed; concurrent confirm persisted one assignment under the batch-row lock (session-row lock mocked), 40-attempt/2-Examiner service+repository p95 was 129 ms across 20 runs, and Host browser smoke passed. HTTP/PostgreSQL performance was not measured; no assignment was committed to the seeded local session. |
+| [03 — Examiner queue](phase-03-examiner-workflow.md) | P1 Examiner; FR-03, 04, 09–11, 18 | **In progress (2026-09-23).** Examiner private list/detail/audio and blind 0–100 submission, with server-enforced ownership. Unit tests and quality gate: yes. |
 | [04 — Host score review](phase-04-host-score-review.md) | P1 Host chọn nguồn/duyệt; FR-11–15, 18 | Review hai nguồn và trạng thái; preview/apply all/section/task type; audit/availability đúng subset. |
 | [05 — Reporting publication](phase-05-report-publication.md) | P1 Host approval + Student report; FR-12, 15–18 | Readiness gate, selected-score aggregation + pinned weights, atomic visibility/snapshot, Student result không drift. |
 
@@ -106,7 +106,7 @@ P3 tái sử dụng mapping giữa session được giữ ngoài MVP; không t�
 |---|---|
 | Selected Program/Class scopes có thể giao nhau dù membership hiện chỉ cho một Class/student | Resolve effective scope qua Enrollment API, union/dedupe theo attempt; không thay membership schema; conflict khi manual mappings khác Examiner. |
 | Membership/roster đổi giữa preview và confirm | Lưu snapshot batch, revalidate tenant/session/status/eligibility lúc confirm; assignment đã commit không phụ thuộc roster tương lai. Nêu rõ cách xử lý attempt rời audience trong khoảng preview. |
-| Publish khi session còn mở có thể bỏ lỡ attempt nộp sau cutoff | Không tự yêu cầu CLOSED. Chốt semantics: cohort cutoff và publish đợt bổ sung, hay chỉ publish sau đóng session. Cần trả lời trước P05. |
+| Publish khi session còn mở có thể bỏ lỡ attempt nộp sau cutoff | **Decision A (2026-09-23):** chỉ publish report sau khi session CLOSED; không snapshot/publish final report khi session còn mở. |
 | Stub/legacy AI rawScore không có provenance | Chặn nguồn AI mặc định; không backfill provenance từ config hiện tại. Xác định quy trình local seed/re-score để kiểm thử AI publication. |
 | Session-level publish lớn khó làm trong một DB transaction | Dùng publication state/barrier; snapshot có thể staging nhưng không Student-visible cho tới khi toàn bộ cohort sẵn sàng. Retry phải idempotent. |
 | Hai examiner score/source/publish chạy đồng thời | Row/version lock hoặc optimistic version và unique keys; các mutation sau published bị reject; test race. |
@@ -118,8 +118,8 @@ P3 tái sử dụng mapping giữa session được giữ ngoài MVP; không t�
 
 | Phase | Quality | Testing |
 |---|---|---|
-| 01 | not evaluated | not started |
-| 02 | not evaluated | not started |
+| 01 | APPROVED | passed — 126 Maven tests; V1–V59 empty/legacy migration and constraints smoke checks |
+| 02 | APPROVED (inline fallback; zero open blocking findings) | passed — 169 backend regression tests + 2 H2 service/repository integration tests; 40/2 p95 129 ms; Host browser smoke passed. HTTP/PostgreSQL p95 not measured. |
 | 03 | not evaluated | not started |
 | 04 | not evaluated | not started |
 | 05 | not evaluated | not started |
@@ -128,10 +128,10 @@ P3 tái sử dụng mapping giữa session được giữ ngoài MVP; không t�
 
 ## Handoff
 
-Sau khi semantics publication cutoff được xác nhận, triển khai theo phase bằng:
+Publication cutoff đã được xác nhận là chỉ publish sau khi session CLOSED. Các phase còn lại đã được chọn unit tests=yes và quality=yes; tiếp tục theo hard-mode bằng:
 
 ```text
-/ck:cook --hard --tdd pte-doc/projects/plans/quang-examiner-assignment-score-selection/plan.md
+/ck:cook --hard pte-doc/projects/plans/quang-examiner-assignment-score-selection/plan.md
 ```
 
-`ck:cook` cần xác nhận lựa chọn test và `ck:quality` từng phase; tài liệu phase ghi state ban đầu là `not evaluated` / `not started`.
+Không bật `--tdd`; các checkpoint đã lưu `unit tests=yes` và `ck:quality=yes` cho Phase 03–05. Hard mode vẫn cần xác nhận người dùng sau gate từng phase, trước khi đánh dấu phase đó hoàn tất.

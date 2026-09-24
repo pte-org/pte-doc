@@ -99,6 +99,7 @@ Thiết lập canonical data contract trong `scoring`. Chưa cần hoàn thiện
 - `pte-api/app/src/main/java/com/pte/scoring/internal/vendor/stub/StubEssayScoringClient.java`
 - `pte-api/app/src/main/java/com/pte/scoring/internal/vendor/stub/StubSpeechScoringClient.java`
 - `pte-api/app/src/main/resources/db/migration/V58__examiner_scoring_foundation.sql`
+- `pte-api/app/src/main/resources/db/migration/V59__enforce_examiner_scoring_references.sql`
 - `pte-api/app/src/test/java/com/pte/scoring/ScoringServiceTest.java`
 - `pte-api/app/src/test/java/com/pte/scoring/ExaminerScoringWorkItemViewTest.java`
 - `pte-api/app/src/test/java/com/pte/scoring/domain/ExaminerWorkflowEntityTest.java`
@@ -112,7 +113,8 @@ Thiết lập canonical data contract trong `scoring`. Chưa cần hoàn thiện
 
 - Unit tests: yes
 - `ck:quality`: yes
-- Hard-mode confirmation: pending
+- Hard-mode confirmation: confirmed by user on 2026-09-23; proceed to Phase 02 using the recorded build/test/migration/quality evidence.
+- Independent reviewer follow-up for the V59 remediation was still pending at handoff; user explicitly chose to continue without waiting. Do not treat that follow-up as completed.
 
 ## Quality and Testing State
 
@@ -121,5 +123,5 @@ Thiết lập canonical data contract trong `scoring`. Chưa cần hoàn thiện
 - quality receipt: [phase-01-scoring-foundation-receipt.json](quality/phase-01-scoring-foundation-receipt.json)
 - testing: passed
 - testing report: [phase-01-scoring-foundation-test-report.json](tests/phase-01-scoring-foundation-test-report.json)
-- Testing detail: fresh verification ran 125 Maven tests (0 failures/errors/skips); two PostgreSQL migration scenarios also passed in the earlier Phase 01 verification recorded in the report.
+- Testing detail: 126 Maven tests passed (0 failures/errors/skips); V1-V59 passed on disposable empty and legacy-data PostgreSQL databases, plus relational-constraint smoke checks.
 - Kế hoạch: unit/domain + worker/service tests; migration integration trên DB trống/có dữ liệu; serialization/security tests; modulith verification.

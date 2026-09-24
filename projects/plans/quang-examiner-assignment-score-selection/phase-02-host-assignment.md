@@ -75,8 +75,67 @@ Thêm workflow Host vào session detail để chọn Class/Program và Examiner,
 - Audience/membership/attempts/examiner identities lấy qua module APIs; tenant scope ở server.
 - Roster thay đổi sau commit không làm đổi assignment; không thay `ClassMembership` schema nếu không có quyết định riêng.
 
+## Phase Checkpoint
+
+- Unit/integration tests: yes (`ck:cook --hard` default)
+- `ck:quality`: yes (`ck:cook --hard` default)
+- Hard-mode confirmation: confirmed by the user's `ck-cook --hard` request; implementation may proceed.
+- Preflight: reviewed `SessionService`, `SessionClassAssignmentService`, `EnrollmentModuleService`, `AttemptService`/`AttemptSummaryQueryService`, `ScoringService`/eligibility query, `IdentityService` and existing assignment entities/migrations. Cross-module access must remain via public facades; assignment creation will serialize on the tenant-owned session row and persist the exact preview snapshot.
+- Working-tree preservation: tenant-web already has user changes in `SessionDetailView.tsx` plus class/exam operations; preserve these and patch only the minimum integration points.
+
+## Files
+
+- `pte-api/app/src/main/java/com/pte/identity/IdentityService.java`
+- `pte-api/app/src/main/java/com/pte/identity/internal/repository/UserRepository.java`
+- `pte-api/app/src/main/java/com/pte/identity/internal/service/UserService.java` (suspend/reactivate share the Examiner row lock)
+- `pte-api/app/src/main/java/com/pte/identity/dto/response/ExaminerIdentityView.java`
+- `pte-api/app/src/main/java/com/pte/identity/dto/response/package-info.java`
+- `pte-api/app/src/main/java/com/pte/session/SessionService.java`
+- `pte-api/app/src/main/java/com/pte/session/internal/service/SessionLifecycleService.java`
+- `pte-api/app/src/main/java/com/pte/scoring/domain/enums/AssignmentScopeType.java`
+- `pte-api/app/src/main/java/com/pte/scoring/domain/enums/AssignmentBatchStatus.java`
+- `pte-api/app/src/main/java/com/pte/scoring/domain/ExaminerAssignmentBatch.java`
+- `pte-api/app/src/main/java/com/pte/scoring/domain/ExaminerAttemptAssignment.java`
+- `pte-api/app/src/main/java/com/pte/scoring/dto/request/CreateExaminerAssignmentPreviewRequest.java`
+- `pte-api/app/src/main/java/com/pte/scoring/dto/response/ExaminerAssignmentBatchSummaryResponse.java`
+- `pte-api/app/src/main/java/com/pte/scoring/dto/response/ExaminerAssignmentConflictResponse.java`
+- `pte-api/app/src/main/java/com/pte/scoring/dto/response/ExaminerAssignmentLoadResponse.java`
+- `pte-api/app/src/main/java/com/pte/scoring/dto/response/ExaminerAssignmentOverviewResponse.java`
+- `pte-api/app/src/main/java/com/pte/scoring/dto/response/ExaminerAssignmentPreviewResponse.java`
+- `pte-api/app/src/main/java/com/pte/scoring/dto/response/ExaminerAssignmentScopeReferenceResponse.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/controller/ExaminerAssignmentController.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/exception/InvalidExaminerAssignmentException.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/exception/StaleExaminerAssignmentPreviewException.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/repository/ExaminerAssignmentBatchRepository.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/repository/ExaminerAttemptAssignmentRepository.java`
+- `pte-api/app/src/main/resources/db/migration/V60__bound_examiner_assignment_history.sql`
+- `pte-api/app/src/main/resources/db/migration/V61__mark_stale_examiner_assignment_previews.sql`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/service/AssignmentScopeKey.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/service/ExaminerAssignmentAllocator.java`
+- `pte-api/app/src/main/java/com/pte/scoring/internal/service/ExaminerAssignmentService.java`
+- `pte-api/app/src/test/java/com/pte/scoring/internal/service/ExaminerAssignmentAllocatorTest.java`
+- `pte-api/app/src/test/java/com/pte/scoring/internal/service/ExaminerAssignmentServiceTest.java`
+- `pte-api/app/src/test/java/com/pte/scoring/internal/service/ExaminerAssignmentDatabaseIntegrationTest.java`
+- `pte-api/app/src/test/java/com/pte/scoring/internal/repository/ExaminerAssignmentRepositoryTest.java`
+- `pte-api/app/src/test/java/com/pte/identity/internal/repository/UserRepositoryTest.java`
+- `pte-api/app/src/test/java/com/pte/identity/internal/service/UserServiceTest.java`
+- `pte-web/apps/tenant-web/features/exams/api/index.ts`
+- `pte-web/apps/tenant-web/features/exams/components/ExaminerAssignmentSection.tsx`
+- `pte-web/apps/tenant-web/features/exams/components/SessionDetailView.tsx` (Phase 02 import/render integration only; preserve the user's existing roster/class edits)
+- `pte-web/apps/tenant-web/features/exams/components/index.ts`
+- `pte-web/apps/tenant-web/features/exams/constants/index.ts`
+- `pte-web/packages/api-client/src/requests/index.ts`
+- `pte-web/packages/api-client/src/requests/scoring/assignments.ts`
+- `pte-web/packages/api-client/src/requests/scoring/assignments.test.ts`
+- `pte-web/packages/api-client/src/requests/user/index.ts` (load all bounded active-Examiner pages)
+- `pte-web/packages/api-client/src/requests/user/index.test.ts`
+- `pte-web/packages/api-client/src/types/scoring/index.ts`
+
 ## Quality and Testing State
 
-- quality: not evaluated
-- testing: not started
-- Kế hoạch: service/property + DB concurrency tests; Host component tests; p95 integration benchmark; tenant/isolation tests.
+- quality: APPROVED via ck:quality inline fallback; QUAL-026 and the preview/overview UI findings are resolved; zero open blocking findings
+- testing: passed — 169 backend regression tests plus 2 H2 database-backed service integration tests
+- test report: [phase-02-host-assignment-test-report.json](tests/phase-02-host-assignment-test-report.json)
+- Testing detail: the earlier targeted backend regression suite passed 169 tests; the added H2 integration suite passed 2 tests, including concurrent confirm (one persisted assignment) and 40-attempt/2-Examiner preview+commit p95 of 129 ms across 20 measured runs after 3 warmups. The concurrency case exercises the real batch-row `PESSIMISTIC_WRITE` lock; the session-row lock facade is mocked and not covered. The assignment service and JPA repositories were real; session/enrollment/attempt/eligibility/identity facades were mocked, so this is not HTTP/full-stack or PostgreSQL performance evidence. The 283 API-client tests, tenant-web production build, targeted ESLint, H2 repository checks, and isolated PostgreSQL V60/V61 checks also passed. Host browser smoke passed (login, session detail, Examiner directory, assignment preview); preview remains unconfirmed and no assignment was committed to the seeded local session.
+- Quality remediation: confirm locks active Examiner user rows through assignment commit; identity suspend/reactivate use the same aggregate lock. Overview bounds batch history by page, aggregates loads in SQL, expires overdue previews, and stores per-attempt eligible-answer counts. Stale candidate/Examiner previews and previews whose per-attempt eligible-answer counts change persist terminal STALE state. Host UI distinguishes query failures from empty data, exposes retry, clears stale confirmation feedback, identifies the affected batch, loads all bounded Examiner pages, and disables previews when their expiry time passes.
+- Quality report: [phase-02-host-assignment-quality-report.json](quality/phase-02-host-assignment-quality-report.json); receipt verification is recorded after issuance.
