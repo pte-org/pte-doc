@@ -58,6 +58,10 @@ make an unsupported frozen task a visible, non-navigable update state.
 
 ## Design Constraints
 
+- Preflight: Flutter 3.41/Dart 3.11 conventions, the existing task screen
+  family ownership, answer outbox/serializer boundaries, the V40 legacy alias
+  seam and the Phase 4 additive `taskTypeCode`/`runtime`/capability contract
+  were checked before implementation.
 - Flutter must not depend on Java enum names, database IDs or implementation
   class names.
 - Server data cannot contain executable widget names, scripts or dynamic code.
@@ -68,7 +72,14 @@ make an unsupported frozen task a visible, non-navigable update state.
 
 ## Quality and Testing State
 
-Status at plan creation: testing not started; quality not evaluated.
+Status: checks passed. Decision: unit/widget tests=yes; quality gate=yes.
+
+- `flutter analyze`: no issues found.
+- Focused registry/dispatcher/repository tests: 38 passed.
+- Full Flutter suite: 553 passed, 0 failed, 0 skipped.
+- Test report: `tests/phase-05-pte-app-runtime-registry-test-report.json`.
+- Quality report/receipt: `quality/phase-05-pte-app-runtime-registry-quality-report.json` and the corresponding receipt.
+- Live authenticated API/app smoke is noted and deferred to Phase 8.
 
 Required before phase completion:
 

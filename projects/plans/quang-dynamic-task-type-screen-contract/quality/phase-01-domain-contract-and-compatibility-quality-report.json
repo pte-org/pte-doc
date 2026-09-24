@@ -1,0 +1,20 @@
+{
+  "mode": "gate",
+  "target": "phase-01-domain-contract-and-compatibility",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-22T16:35:00Z",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-doc/projects/plans/quang-dynamic-task-type-screen-contract/phase-01-domain-contract-and-compatibility.md",
+    "D:/GitHub/pte-org/pte-doc/projects/plans/quang-dynamic-task-type-screen-contract/spec.md",
+    "D:/GitHub/pte-org/pte-doc/projects/architecture/ADR-009-task-type-runtime-contract.md",
+    "D:/GitHub/pte-org/pte-doc/projects/architecture/ADR-010-dynamic-task-type-screen-contract.md",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/TaskTypeCodeCompatibility.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/TaskTypeKeyNormalizer.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/TaskRuntimeProfileDescriptor.java",
+    "D:/GitHub/pte-org/pte-web/packages/api-client/src/types/questiontype/index.ts",
+    "D:/GitHub/pte-org/pte-app/lib/core/constants/task_type_meta.dart"
+  ],
+  "summary": { "blocker": 0, "high": 0, "medium": 0, "low": 0, "noted": 0 },
+  "findings": [],
+  "report_path": "quality/phase-01-domain-contract-and-compatibility-quality-report.json"
+}

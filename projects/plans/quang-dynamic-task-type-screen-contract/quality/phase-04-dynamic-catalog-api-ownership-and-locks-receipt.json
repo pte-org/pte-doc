@@ -1,0 +1,19 @@
+{
+  "target": "phase-04-dynamic-catalog-api-ownership-and-locks",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-dynamic-task-type-screen-contract/quality/phase-04-dynamic-catalog-api-ownership-and-locks-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/itembank/QuestionTypeService.java",
+    "pte-api/app/src/main/java/com/pte/itembank/TaskTypePublicationUsageService.java",
+    "pte-api/app/src/main/java/com/pte/itembank/internal/controller/TaskTypeController.java",
+    "pte-api/app/src/main/java/com/pte/itembank/internal/repository/QuestionTypeRepository.java",
+    "pte-api/app/src/test/java/com/pte/itembank/QuestionTypeServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/itembank/internal/controller/QuestionTypeControllerSecurityTest.java",
+    "pte-doc/projects/plans/quang-dynamic-task-type-screen-contract/phase-04-dynamic-catalog-api-ownership-and-locks.md"
+  ],
+  "source_fingerprint": "sha256:7ab3cbffedcda550bfc8f2d70f425508490baacc47ed6bd8b636ca376630d9d7",
+  "reviewed_at": "2026-09-22T16:35:00Z",
+  "open_blocking_findings": 0
+}

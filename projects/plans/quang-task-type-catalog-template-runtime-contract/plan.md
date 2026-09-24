@@ -1,6 +1,6 @@
 # Plan: Task-Type Catalog, Versioned Template and Runtime Contract
 
-Status: Ready for implementation — decisions confirmed; local data greenfield
+Status: In progress — Phases 1–8 implemented and verified; two operator-only rollout checks remain before strict enforcement
 Date: 2026-09-22
 Scope: pte-api + pte-web + pte-app + pte-doc
 Plan type: Follow-on architecture and compatibility plan; it does not replace or overwrite completed plans.
@@ -187,12 +187,12 @@ migration report must list unrecognized legacy values rather than guessing.
 
 - [x] 1. [Phase 1 — Canonical Codes, Catalog Lifecycle and Idempotent Backfill](phase-01-canonical-codes-catalog-backfill.md)
 - [x] 2. [Phase 2 — Allowlisted Runtime Profiles and Template Pinning](phase-02-runtime-profiles-and-template-pinning.md)
-- [ ] 3. [Phase 3 — Template Approval Lifecycle and Readiness Validation](phase-03-template-lifecycle-and-readiness.md)
-- [ ] 4. [Phase 4 — Snapshot Provenance and Capability Negotiation](phase-04-snapshot-capability-contract.md)
-- [ ] 5. [Phase 5 — pte-app Runtime Registry and No-Silent-Skip Delivery](phase-05-pte-app-runtime-registry.md)
-- [ ] 6. [Phase 6 — BE Behavior/Scoring Seam and Future Custom Extension Boundary](phase-06-be-behavior-scoring-extension-seam.md)
-- [ ] 7. [Phase 7 — Vendor-Web Catalog, Template UX and Friendly Errors](phase-07-vendor-web-catalog-template-ux.md)
-- [ ] 8. [Phase 8 — Rollout, Observability, Cross-Repo Verification and ADR Handoff](phase-08-rollout-verification-and-adr.md)
+- [x] 3. [Phase 3 — Template Approval Lifecycle and Readiness Validation](phase-03-template-lifecycle-and-readiness.md)
+- [x] 4. [Phase 4 — Snapshot Provenance and Capability Negotiation](phase-04-snapshot-capability-contract.md)
+- [x] 5. [Phase 5 — pte-app Runtime Registry and No-Silent-Skip Delivery](phase-05-pte-app-runtime-registry.md)
+- [x] 6. [Phase 6 — BE Behavior/Scoring Seam and Future Custom Extension Boundary](phase-06-be-behavior-scoring-extension-seam.md)
+- [x] 7. [Phase 7 — Vendor-Web Catalog, Template UX and Friendly Errors](phase-07-vendor-web-catalog-template-ux.md)
+- [x] 8. [Phase 8 — Rollout, Observability, Cross-Repo Verification and ADR Handoff](phase-08-rollout-verification-and-adr.md)
 
 ## Dependency graph
 

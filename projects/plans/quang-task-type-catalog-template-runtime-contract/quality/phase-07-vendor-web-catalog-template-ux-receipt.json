@@ -1,0 +1,27 @@
+{
+  "target": "phase-07-vendor-web-catalog-template-ux",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-task-type-catalog-template-runtime-contract/quality/phase-07-vendor-web-catalog-template-ux-quality-report.json",
+  "reviewed_files": [
+    "pte-web/apps/vendor-web/features/questiontemplate/api.ts",
+    "pte-web/apps/vendor-web/features/questiontemplate/components/QuestionTemplateView.tsx",
+    "pte-web/apps/vendor-web/features/questiontemplate/components/QuestionTypeEditorModal.tsx",
+    "pte-web/apps/vendor-web/features/questiontemplate/constants.ts",
+    "pte-web/apps/vendor-web/features/questiontemplate/errorMessage.ts",
+    "pte-web/apps/vendor-web/features/scoretemplate/components/ScoreTemplateDetailView.tsx",
+    "pte-web/apps/vendor-web/features/scoretemplate/components/ScoreTemplateEditorView.tsx",
+    "pte-web/apps/vendor-web/features/scoretemplate/components/ScoreTemplateListView.tsx",
+    "pte-web/apps/vendor-web/features/scoretemplate/constants.ts",
+    "pte-web/apps/vendor-web/features/scoretemplate/errorMessage.ts",
+    "pte-web/apps/vendor-web/features/scoretemplate/taskTypeReadiness.ts",
+    "pte-web/packages/api-client/src/requests/questiontype/index.test.ts",
+    "pte-web/packages/api-client/src/requests/questiontype/index.ts",
+    "pte-web/packages/api-client/src/types/questiontype/index.ts",
+    "pte-web/packages/api-client/src/types/scoretemplate/index.ts"
+  ],
+  "source_fingerprint": "sha256:da82eb61a1cb47a14ecd2b5597ac07bdb929030239484d394543b2a7faa65faa",
+  "reviewed_at": "2026-09-22T18:15:21+07:00",
+  "open_blocking_findings": 0
+}

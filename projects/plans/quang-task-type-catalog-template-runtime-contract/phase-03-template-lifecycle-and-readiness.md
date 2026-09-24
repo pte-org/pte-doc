@@ -50,6 +50,11 @@ active source for exam generation.
 
 ## Design Constraints
 
+- Preflight: Java 21/Spring Modulith conventions, the existing
+  `ScoreTemplateStatus` lifecycle and V41 rejection metadata, method-level
+  controller role annotations, `ScoreTemplateActivationValidator`, public
+  `ScoreTemplateService` readiness facade, and shared `AuditLogService` were
+  checked before implementation.
 - One active template family/version at a time, enforced transactionally by the
   existing database uniqueness rule and service lock/flush ordering.
 - Activation must pin runtime profiles and scoring versions before changing any
@@ -88,7 +93,18 @@ active source for exam generation.
 
 ## Quality and Testing State
 
-Status at plan creation: testing not started; quality not evaluated.
+Status: checks passed; awaiting the `--hard` completion confirmation before
+marking this phase complete. Decision: unit tests=yes; quality gate=yes.
+
+Test report: `tests/phase-03-template-lifecycle-and-readiness-test-report.json`
+(37 passed, 0 failed, 0 skipped).
+
+Quality gate: `APPROVED`; report
+`quality/phase-03-template-lifecycle-and-readiness-quality-report.json` and
+receipt
+`quality/phase-03-template-lifecycle-and-readiness-receipt.json`.
+One non-blocking note remains: live PostgreSQL migration verification is
+deferred to Phase 8.
 
 Required before phase completion:
 

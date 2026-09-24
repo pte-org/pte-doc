@@ -1,0 +1,38 @@
+{
+  "phase": "phase-07-vendor-web-catalog-template-ux",
+  "mode": "unit-and-build",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-22T18:15:21+07:00",
+  "commands": [
+    "pnpm --filter @pte/api-client typecheck",
+    "pnpm --filter @pte/api-client test",
+    "pnpm --filter vendor-web lint",
+    "pnpm --filter vendor-web build",
+    "git diff --check"
+  ],
+  "summary": {
+    "api_client_tests_passed": 269,
+    "api_client_test_failures": 0,
+    "api_client_typecheck": "passed",
+    "vendor_web_lint": "passed",
+    "vendor_web_build_and_typescript": "passed",
+    "diff_check": "passed",
+    "unrelated_warnings": 1,
+    "failed": 0
+  },
+  "coverage_intent": [
+    "old and new task-type request adapters share the /api/v1/question-types wire contract",
+    "active catalog cache invalidation covers old and new query keys",
+    "runtime profile fields remain additive and optional for legacy callers",
+    "empty catalog, all-used section and incompatible runtime diagnostics are constant-backed",
+    "selected task rows with missing or incompatible profiles block the activation affordance",
+    "catalog/template/profile machine codes map to friendly feature-owned copy",
+    "Platform Author/Admin route and activation permission rendering remains unchanged"
+  ],
+  "deferred": [
+    "vendor-web has no dedicated component-test runner in its package configuration; changed TSX is covered by Next TypeScript compilation, lint and static review",
+    "authenticated browser smoke is deferred until a local authenticated account and dev-server flow are available; Phase 8 owns the cross-repo walkthrough"
+  ],
+  "failures": [],
+  "report_path": "pte-doc/projects/plans/quang-task-type-catalog-template-runtime-contract/tests/phase-07-vendor-web-catalog-template-ux-test-report.json"
+}

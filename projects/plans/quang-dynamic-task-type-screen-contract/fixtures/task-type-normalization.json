@@ -1,0 +1,20 @@
+{
+  "key": [
+    { "input": " read_aloud_plus ", "expected": "READ_ALOUD_PLUS" },
+    { "input": "\uff52\uff45\uff41\uff44\uff3f\uff41\uff4c\uff4f\uff55\uff44\uff3f\uff50\uff4c\uff55\uff53", "expected": "READ_ALOUD_PLUS" },
+    { "input": "\u2003read_aloud_plus\u00a0", "expected": "READ_ALOUD_PLUS" },
+    { "input": "AB", "expected": "AB" },
+    { "input": "ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_01", "expected": "ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_01" },
+    { "input": "read aloud", "error": "TASK_TYPE_KEY_INVALID" },
+    { "input": "A", "error": "TASK_TYPE_KEY_INVALID" },
+    { "input": "ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_012", "error": "TASK_TYPE_KEY_INVALID" },
+    { "input": "1_READ_ALOUD", "error": "TASK_TYPE_KEY_INVALID" },
+    { "input": "_READ_ALOUD", "error": "TASK_TYPE_KEY_INVALID" }
+  ],
+  "displayName": [
+    { "input": "Read   Aloud", "expected": "read aloud" },
+    { "input": " Read\u00a0Aloud ", "expected": "read aloud" },
+    { "input": "\u3000Read\u2003Aloud\u00a0", "expected": "read aloud" },
+    { "input": "READ ALOUD", "expected": "read aloud" }
+  ]
+}

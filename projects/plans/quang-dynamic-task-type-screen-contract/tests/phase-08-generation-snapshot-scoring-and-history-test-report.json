@@ -1,0 +1,15 @@
+{
+  "phase": "phase-08-generation-snapshot-scoring-and-history",
+  "mode": "all-phases",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-22T16:36:00Z",
+  "summary": { "passed": 108, "failed": 0, "skipped": 0 },
+  "failures": [],
+  "checks": [
+    "Snapshot/generation/attempt focused suite: 49 passed",
+    "Scoring/decoder focused suite: 59 passed",
+    "Full backend regression: 786 passed, 0 failed, 0 errors, 0 skipped",
+    "Dynamic task-key provenance and scoring review: passed"
+  ],
+  "report_path": "tests/phase-08-generation-snapshot-scoring-and-history-test-report.json"
+}

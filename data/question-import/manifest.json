@@ -1,0 +1,402 @@
+{
+  "schemaVersion": "question-import-v2",
+  "generatedAt": "2026-09-23T06:41:54.294Z",
+  "sourceDataset": "D:\\DOCUMENTFPT\\SEMESTER_9\\data_clean",
+  "sourceRoot": "data",
+  "outputRoot": "data/question-import",
+  "databaseTouched": false,
+  "recordCount": 17362,
+  "canonicalTaskTypeCount": 21,
+  "unsupportedRecordCount": 80,
+  "warningCounts": {
+    "CORRECT_ANSWER_MISSING": 625,
+    "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 10610,
+    "IMAGE_URL_MISSING": 1224,
+    "PROMPT_TEXT_MISSING": 625,
+    "UNSUPPORTED_TASK_TYPE": 80,
+    "WORD_COUNT_MISSING": 593
+  },
+  "taskTypes": {
+    "ANSWER_SHORT_QUESTION": {
+      "section": "SPEAKING",
+      "file": "by-task-type/ANSWER_SHORT_QUESTION.json",
+      "count": 2361,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 2361
+      }
+    },
+    "DESCRIBE_IMAGE": {
+      "section": "SPEAKING",
+      "file": "by-task-type/DESCRIBE_IMAGE.json",
+      "count": 1224,
+      "warningCounts": {
+        "IMAGE_URL_MISSING": 1224
+      }
+    },
+    "FILL_IN_THE_BLANKS_DRAG_AND_DROP": {
+      "section": "READING",
+      "file": "by-task-type/FILL_IN_THE_BLANKS_DRAG_AND_DROP.json",
+      "count": 1051,
+      "warningCounts": {}
+    },
+    "FILL_IN_THE_BLANKS_DROPDOWN": {
+      "section": "READING",
+      "file": "by-task-type/FILL_IN_THE_BLANKS_DROPDOWN.json",
+      "count": 1136,
+      "warningCounts": {}
+    },
+    "FILL_IN_THE_BLANKS_TYPE_IN": {
+      "section": "LISTENING",
+      "file": "by-task-type/FILL_IN_THE_BLANKS_TYPE_IN.json",
+      "count": 289,
+      "warningCounts": {
+        "CORRECT_ANSWER_MISSING": 289,
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 289,
+        "PROMPT_TEXT_MISSING": 289
+      }
+    },
+    "HIGHLIGHT_CORRECT_SUMMARY": {
+      "section": "LISTENING",
+      "file": "by-task-type/HIGHLIGHT_CORRECT_SUMMARY.json",
+      "count": 60,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 60
+      }
+    },
+    "HIGHLIGHT_INCORRECT_WORDS": {
+      "section": "LISTENING",
+      "file": "by-task-type/HIGHLIGHT_INCORRECT_WORDS.json",
+      "count": 336,
+      "warningCounts": {
+        "CORRECT_ANSWER_MISSING": 336,
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 336,
+        "PROMPT_TEXT_MISSING": 336
+      }
+    },
+    "MC_LISTENING_MULTIPLE": {
+      "section": "LISTENING",
+      "file": "by-task-type/MC_LISTENING_MULTIPLE.json",
+      "count": 70,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 70
+      }
+    },
+    "MC_LISTENING_SINGLE": {
+      "section": "LISTENING",
+      "file": "by-task-type/MC_LISTENING_SINGLE.json",
+      "count": 87,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 87
+      }
+    },
+    "MC_READING_MULTIPLE": {
+      "section": "READING",
+      "file": "by-task-type/MC_READING_MULTIPLE.json",
+      "count": 67,
+      "warningCounts": {}
+    },
+    "MC_READING_SINGLE": {
+      "section": "READING",
+      "file": "by-task-type/MC_READING_SINGLE.json",
+      "count": 115,
+      "warningCounts": {}
+    },
+    "RE_ORDER_PARAGRAPHS": {
+      "section": "READING",
+      "file": "by-task-type/RE_ORDER_PARAGRAPHS.json",
+      "count": 772,
+      "warningCounts": {}
+    },
+    "RE_TELL_LECTURE": {
+      "section": "SPEAKING",
+      "file": "by-task-type/RE_TELL_LECTURE.json",
+      "count": 551,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 551
+      }
+    },
+    "READ_ALOUD": {
+      "section": "SPEAKING",
+      "file": "by-task-type/READ_ALOUD.json",
+      "count": 1443,
+      "warningCounts": {}
+    },
+    "REPEAT_SENTENCE": {
+      "section": "SPEAKING",
+      "file": "by-task-type/REPEAT_SENTENCE.json",
+      "count": 2846,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 2846
+      }
+    },
+    "RESPOND_TO_A_SITUATION": {
+      "section": "SPEAKING",
+      "file": "by-task-type/RESPOND_TO_A_SITUATION.json",
+      "count": 109,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 109
+      }
+    },
+    "SELECT_MISSING_WORD": {
+      "section": "LISTENING",
+      "file": "by-task-type/SELECT_MISSING_WORD.json",
+      "count": 89,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 89
+      }
+    },
+    "SUMMARIZE_SPOKEN_TEXT": {
+      "section": "LISTENING",
+      "file": "by-task-type/SUMMARIZE_SPOKEN_TEXT.json",
+      "count": 593,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 593,
+        "WORD_COUNT_MISSING": 593
+      }
+    },
+    "SUMMARIZE_WRITTEN_TEXT": {
+      "section": "WRITING",
+      "file": "by-task-type/SUMMARIZE_WRITTEN_TEXT.json",
+      "count": 416,
+      "warningCounts": {}
+    },
+    "WRITE_ESSAY": {
+      "section": "WRITING",
+      "file": "by-task-type/WRITE_ESSAY.json",
+      "count": 448,
+      "warningCounts": {}
+    },
+    "WRITE_FROM_DICTATION": {
+      "section": "LISTENING",
+      "file": "by-task-type/WRITE_FROM_DICTATION.json",
+      "count": 3219,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 3219
+      }
+    }
+  },
+  "sourceFiles": [
+    {
+      "file": "listening/fib_ls.json",
+      "sourceTaskTypeKey": "FILL_IN_THE_BLANKS_TYPE_IN",
+      "taskTypeKey": "FILL_IN_THE_BLANKS_TYPE_IN",
+      "section": "LISTENING",
+      "count": 289,
+      "warningCounts": {
+        "CORRECT_ANSWER_MISSING": 289,
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 289,
+        "PROMPT_TEXT_MISSING": 289
+      }
+    },
+    {
+      "file": "listening/highlight_correct_summaries.json",
+      "sourceTaskTypeKey": "HIGHLIGHT_CORRECT_SUMMARY",
+      "taskTypeKey": "HIGHLIGHT_CORRECT_SUMMARY",
+      "section": "LISTENING",
+      "count": 60,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 60
+      }
+    },
+    {
+      "file": "listening/highlight_incorrect_words.json",
+      "sourceTaskTypeKey": "HIGHLIGHT_INCORRECT_WORDS",
+      "taskTypeKey": "HIGHLIGHT_INCORRECT_WORDS",
+      "section": "LISTENING",
+      "count": 336,
+      "warningCounts": {
+        "CORRECT_ANSWER_MISSING": 336,
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 336,
+        "PROMPT_TEXT_MISSING": 336
+      }
+    },
+    {
+      "file": "listening/l_mcm.json",
+      "sourceTaskTypeKey": "MC_LISTENING_MULTIPLE",
+      "taskTypeKey": "MC_LISTENING_MULTIPLE",
+      "section": "LISTENING",
+      "count": 70,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 70
+      }
+    },
+    {
+      "file": "listening/l_mcs.json",
+      "sourceTaskTypeKey": "MC_LISTENING_SINGLE",
+      "taskTypeKey": "MC_LISTENING_SINGLE",
+      "section": "LISTENING",
+      "count": 87,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 87
+      }
+    },
+    {
+      "file": "listening/select_missing_words.json",
+      "sourceTaskTypeKey": "SELECT_MISSING_WORD",
+      "taskTypeKey": "SELECT_MISSING_WORD",
+      "section": "LISTENING",
+      "count": 89,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 89
+      }
+    },
+    {
+      "file": "listening/summarize_spoken_texts.json",
+      "sourceTaskTypeKey": "SUMMARIZE_SPOKEN_TEXT",
+      "taskTypeKey": "SUMMARIZE_SPOKEN_TEXT",
+      "section": "LISTENING",
+      "count": 593,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 593,
+        "WORD_COUNT_MISSING": 593
+      }
+    },
+    {
+      "file": "listening/write_from_dictations.json",
+      "sourceTaskTypeKey": "WRITE_FROM_DICTATION",
+      "taskTypeKey": "WRITE_FROM_DICTATION",
+      "section": "LISTENING",
+      "count": 3219,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 3219
+      }
+    },
+    {
+      "file": "reading/fib_rd.json",
+      "sourceTaskTypeKey": "FILL_IN_THE_BLANKS_DRAG_AND_DROP",
+      "taskTypeKey": "FILL_IN_THE_BLANKS_DRAG_AND_DROP",
+      "section": "READING",
+      "count": 1051,
+      "warningCounts": {}
+    },
+    {
+      "file": "reading/fib_wr.json",
+      "sourceTaskTypeKey": "FILL_IN_THE_BLANKS_DROPDOWN",
+      "taskTypeKey": "FILL_IN_THE_BLANKS_DROPDOWN",
+      "section": "READING",
+      "count": 1136,
+      "warningCounts": {}
+    },
+    {
+      "file": "reading/r_mcm.json",
+      "sourceTaskTypeKey": "MC_READING_MULTIPLE",
+      "taskTypeKey": "MC_READING_MULTIPLE",
+      "section": "READING",
+      "count": 67,
+      "warningCounts": {}
+    },
+    {
+      "file": "reading/r_mcs.json",
+      "sourceTaskTypeKey": "MC_READING_SINGLE",
+      "taskTypeKey": "MC_READING_SINGLE",
+      "section": "READING",
+      "count": 115,
+      "warningCounts": {}
+    },
+    {
+      "file": "reading/ro.json",
+      "sourceTaskTypeKey": "RE_ORDER_PARAGRAPHS",
+      "taskTypeKey": "RE_ORDER_PARAGRAPHS",
+      "section": "READING",
+      "count": 772,
+      "warningCounts": {}
+    },
+    {
+      "file": "speaking/answer_questions.json",
+      "sourceTaskTypeKey": "ANSWER_SHORT_QUESTION",
+      "taskTypeKey": "ANSWER_SHORT_QUESTION",
+      "section": "SPEAKING",
+      "count": 2361,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 2361
+      }
+    },
+    {
+      "file": "speaking/describe_images.json",
+      "sourceTaskTypeKey": "DESCRIBE_IMAGE",
+      "taskTypeKey": "DESCRIBE_IMAGE",
+      "section": "SPEAKING",
+      "count": 1224,
+      "warningCounts": {
+        "IMAGE_URL_MISSING": 1224
+      }
+    },
+    {
+      "file": "speaking/read_alouds.json",
+      "sourceTaskTypeKey": "READ_ALOUD",
+      "taskTypeKey": "READ_ALOUD",
+      "section": "SPEAKING",
+      "count": 1443,
+      "warningCounts": {}
+    },
+    {
+      "file": "speaking/repeat_sentences.json",
+      "sourceTaskTypeKey": "REPEAT_SENTENCE",
+      "taskTypeKey": "REPEAT_SENTENCE",
+      "section": "SPEAKING",
+      "count": 2846,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 2846
+      }
+    },
+    {
+      "file": "speaking/respond_situations.json",
+      "sourceTaskTypeKey": "RESPOND_TO_A_SITUATION",
+      "taskTypeKey": "RESPOND_TO_A_SITUATION",
+      "section": "SPEAKING",
+      "count": 109,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 109
+      }
+    },
+    {
+      "file": "speaking/retell_lectures.json",
+      "sourceTaskTypeKey": "RE_TELL_LECTURE",
+      "taskTypeKey": "RE_TELL_LECTURE",
+      "section": "SPEAKING",
+      "count": 551,
+      "warningCounts": {
+        "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT": 551
+      }
+    },
+    {
+      "file": "writing/summarize_written_texts.json",
+      "sourceTaskTypeKey": "SUMMARIZE_WRITTEN_TEXT",
+      "taskTypeKey": "SUMMARIZE_WRITTEN_TEXT",
+      "section": "WRITING",
+      "count": 416,
+      "warningCounts": {}
+    },
+    {
+      "file": "writing/write_emails.json",
+      "sourceTaskTypeKey": "WRITE_EMAIL",
+      "taskTypeKey": null,
+      "section": "WRITING",
+      "count": 80,
+      "warningCounts": {
+        "UNSUPPORTED_TASK_TYPE": 80
+      }
+    },
+    {
+      "file": "writing/write_essays.json",
+      "sourceTaskTypeKey": "WRITE_ESSAY",
+      "taskTypeKey": "WRITE_ESSAY",
+      "section": "WRITING",
+      "count": 448,
+      "warningCounts": {}
+    }
+  ],
+  "unsupported": {
+    "WRITE_EMAIL": {
+      "file": "quarantine/WRITE_EMAIL.json",
+      "count": 80
+    }
+  },
+  "media": {
+    "audioUrlCount": 10610,
+    "imageUrlCount": 0,
+    "audioHostCounts": {
+      "dl26yht2ovo33.cloudfront.net": 10610
+    }
+  }
+}

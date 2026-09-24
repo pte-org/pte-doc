@@ -1,0 +1,87 @@
+{
+  "fixtureVersion": "PHASE_08_RUNTIME_CONTRACT_V1",
+  "purpose": "Compatibility fixtures for catalog, template, snapshot and capability readers. These fixtures contain no credentials, answer keys or media URLs.",
+  "canonicalAliases": [
+    {
+      "legacy": "FILL_BLANKS_READING_WRITING",
+      "canonical": "FILL_IN_THE_BLANKS_DROPDOWN",
+      "mappingVersion": "LEGACY_PTE_V1"
+    },
+    {
+      "legacy": "FILL_BLANKS_READING",
+      "canonical": "FILL_IN_THE_BLANKS_DRAG_AND_DROP",
+      "mappingVersion": "LEGACY_PTE_V1"
+    },
+    {
+      "legacy": "FILL_BLANKS_LISTENING",
+      "canonical": "FILL_IN_THE_BLANKS_TYPE_IN",
+      "mappingVersion": "LEGACY_PTE_V1"
+    }
+  ],
+  "legacyCatalogResponse": {
+    "id": "fixture-legacy-question-type",
+    "code": "FILL_BLANKS_READING",
+    "name": "Fill in the Blanks (Reading)",
+    "shortName": "FIB-R",
+    "section": "READING",
+    "scored": true,
+    "active": true
+  },
+  "newRuntimeProfile": {
+    "taskTypeCode": "FILL_IN_THE_BLANKS_DRAG_AND_DROP",
+    "profileKey": "PTE.FILL_IN_THE_BLANKS_DRAG_AND_DROP",
+    "profileVersion": 1,
+    "behaviorKey": "FILL_BLANKS",
+    "rendererKey": "FILL_IN_THE_BLANKS_DRAG_AND_DROP_V1",
+    "answerSchemaVersion": 1,
+    "scoringProfileKey": "OBJECTIVE",
+    "scoringProfileVersion": 1,
+    "requiredClientCapabilities": ["DRAG_AND_DROP"],
+    "status": "ACTIVE"
+  },
+  "publishedSnapshot": {
+    "templateVersion": 3,
+    "runtimeMappingVersion": "CANONICAL_V1",
+    "runtimeMappingStatus": "RESOLVED_CANONICAL",
+    "items": [
+      {
+        "taskType": "FILL_BLANKS_READING",
+        "taskTypeCode": "FILL_IN_THE_BLANKS_DRAG_AND_DROP",
+        "runtime": {
+          "behaviorKey": "FILL_BLANKS",
+          "rendererKey": "FILL_IN_THE_BLANKS_DRAG_AND_DROP_V1",
+          "answerSchemaVersion": 1,
+          "scoringProfileKey": "OBJECTIVE",
+          "scoringProfileVersion": 1,
+          "requiredClientCapabilities": ["DRAG_AND_DROP"]
+        },
+        "expectedReaderOutcome": "Prefer taskTypeCode/runtime; legacy taskType remains parseable."
+      },
+      {
+        "taskType": "READ_ALOUD",
+        "taskTypeCode": "READ_ALOUD",
+        "runtime": {
+          "behaviorKey": "RECORD_RESPONSE",
+          "rendererKey": "READ_ALOUD_V1",
+          "answerSchemaVersion": 1,
+          "scoringProfileKey": "AI_SPEECH",
+          "scoringProfileVersion": 1,
+          "requiredClientCapabilities": ["AUDIO_RECORDING"]
+        },
+        "expectedReaderOutcome": "Renderer is selected from the pinned profile, not the mutable catalog."
+      }
+    ]
+  },
+  "unsupportedRuntime": {
+    "taskTypeCode": "READ_ALOUD",
+    "profileKey": "PTE.READ_ALOUD",
+    "profileVersion": 1,
+    "behaviorKey": "RECORD_RESPONSE",
+    "rendererKey": "UNKNOWN_RENDERER_V99",
+    "answerSchemaVersion": 99,
+    "scoringProfileKey": "AI_SPEECH",
+    "scoringProfileVersion": 1,
+    "requiredClientCapabilities": ["AUDIO_RECORDING"],
+    "expectedOutcome": "Preflight/start blocks with an actionable compatibility message; delivery never silently advances."
+  }
+}

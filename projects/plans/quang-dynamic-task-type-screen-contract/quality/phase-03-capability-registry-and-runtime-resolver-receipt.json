@@ -1,0 +1,20 @@
+{
+  "target": "phase-03-capability-registry-and-runtime-resolver",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-dynamic-task-type-screen-contract/quality/phase-03-capability-registry-and-runtime-resolver-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/itembank/SemanticVersion.java",
+    "pte-api/app/src/main/java/com/pte/itembank/TaskRuntimeContractDescriptor.java",
+    "pte-api/app/src/main/java/com/pte/itembank/TaskRuntimeContractService.java",
+    "pte-api/app/src/main/java/com/pte/itembank/TaskRuntimeProfileRegistry.java",
+    "pte-api/app/src/test/java/com/pte/itembank/SemanticVersionTest.java",
+    "pte-api/app/src/test/java/com/pte/itembank/TaskRuntimeContractServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/itembank/TaskRuntimeProfileRegistryTest.java",
+    "pte-doc/projects/plans/quang-dynamic-task-type-screen-contract/phase-03-capability-registry-and-runtime-resolver.md"
+  ],
+  "source_fingerprint": "sha256:1ee2014d3c7bd6cdd2caa0e13898a40b3fbbe81e7ea6846818e9304c75addbd6",
+  "reviewed_at": "2026-09-22T16:35:00Z",
+  "open_blocking_findings": 0
+}

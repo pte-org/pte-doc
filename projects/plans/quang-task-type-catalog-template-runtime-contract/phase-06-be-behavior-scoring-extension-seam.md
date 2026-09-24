@@ -74,7 +74,30 @@ enabled in this release.
 
 ## Quality and Testing State
 
-Status at plan creation: testing not started; quality not evaluated.
+Status: implemented and verified on 2026-09-22. The BE registry now resolves
+scoring by the allowlisted runtime profile key/version, while legacy templates
+without a runtime descriptor remain readable through a compatibility adapter.
+Template validation and scoring reject a profile/scoring-method mismatch with a
+structured friendly diagnostic. Attempt-local snapshot context also retains
+the immutable score-template version; existing timing and runtime scoring
+profile fields remain pinned per item.
+
+### Future custom-task extension boundary
+
+This release intentionally supports only the standard `PteTaskType` catalog.
+If a future product decision introduces a genuinely new interaction or scoring
+behavior, the platform must first register a globally unique semantic code and
+an immutable profile version in BE and `pte-app`. That profile must define the
+answer schema, validation rules, renderer/capability contract, scoring strategy,
+raw-score range and versioned test fixtures. Platform ownership, authorization,
+security review and snapshot pinning must be approved before any authoring UI
+can expose it. Database rows may select an allowlisted key/version only; they
+must never contain a Java/Dart class name, formula, script or dynamic loader
+instruction. Configuration-only changes to an existing profile continue to be
+template data and do not require an app release.
+
+Focused tests: 145 passed. Full backend suite: 774 passed with 0 failures,
+errors or skipped tests.
 
 Required before phase completion:
 

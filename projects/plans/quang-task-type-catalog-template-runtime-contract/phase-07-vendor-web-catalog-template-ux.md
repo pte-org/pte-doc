@@ -68,7 +68,31 @@ adapter and centralize user-facing messages.
 
 ## Quality and Testing State
 
-Status at plan creation: testing not started; quality not evaluated.
+Status: implemented and verified on 2026-09-22. Vendor-web now presents the
+standard PTE task-type catalog, keeps the old question-type API/query contract
+through additive aliases, filters new template rows by active runtime
+readiness, and maps catalog/template/profile failures to feature-owned friendly
+copy. Platform Author/Admin visibility and activation permissions remain
+unchanged; the server remains the final validation authority.
+
+The editor distinguishes an empty active catalog, a section whose active rows
+are already used, and rows whose explicit runtime profile is not usable. It
+keeps legacy responses without runtime metadata selectable during the additive
+compatibility window, while blocking activation when a selected row is missing
+or has an incompatible profile.
+
+Automated evidence is recorded in:
+
+- `tests/phase-07-vendor-web-catalog-template-ux-test-report.json`
+- `quality/phase-07-vendor-web-catalog-template-ux-quality-report.json`
+- `quality/phase-07-vendor-web-catalog-template-ux-receipt.json`
+
+The vendor-web package has no dedicated component-test runner in its package
+configuration. Its changed TSX was type-checked by the production Next build,
+linted, and reviewed with static assertions for constant-backed copy and raw
+machine-code suppression. Authenticated browser smoke remains deferred until a
+local authenticated account/dev-server flow is available; it is rechecked in
+Phase 8.
 
 Required before phase completion:
 
