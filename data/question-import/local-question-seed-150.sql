@@ -966,5 +966,32 @@ BEGIN
     END IF;
 END $$;
 
-COMMIT;
+-- Audio duration is required for the dynamic preparation window of the five
+-- audio-prompt Speaking task types used by the local full-skill demo.
+DO $$
+DECLARE updated_media_count INTEGER;
+BEGIN
+    UPDATE media_objects
+    SET duration_seconds = CASE public_id
+        WHEN '3b90fbbe-0756-5338-bee1-d201b672a7a1'::uuid THEN 6
+        WHEN '8fc9b4c6-261c-5176-8c1b-5b19a69f938f'::uuid THEN 72
+        WHEN '452e2a9d-2841-56b7-8b2b-5e0091bc5b86'::uuid THEN 4
+        WHEN '8212261c-d432-4f9b-a171-e6f015c26029'::uuid THEN 81
+        WHEN 'b9bef14e-4ca9-5af4-88ca-8014f73543fa'::uuid THEN 15
+        ELSE duration_seconds
+    END
+    WHERE public_id IN (
+        '3b90fbbe-0756-5338-bee1-d201b672a7a1'::uuid,
+        '8fc9b4c6-261c-5176-8c1b-5b19a69f938f'::uuid,
+        '452e2a9d-2841-56b7-8b2b-5e0091bc5b86'::uuid,
+        '8212261c-d432-4f9b-a171-e6f015c26029'::uuid,
+        'b9bef14e-4ca9-5af4-88ca-8014f73543fa'::uuid
+    );
 
+    GET DIAGNOSTICS updated_media_count = ROW_COUNT;
+    IF updated_media_count <> 5 THEN
+        RAISE EXCEPTION 'Local audio duration metadata update expected 5 rows but updated %', updated_media_count;
+    END IF;
+END $$;
+
+COMMIT;
