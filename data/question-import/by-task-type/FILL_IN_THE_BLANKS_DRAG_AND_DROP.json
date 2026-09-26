@@ -4,7 +4,7 @@
     "taskTypeKey": "FILL_IN_THE_BLANKS_DRAG_AND_DROP",
     "taskTypeSection": "READING",
     "title": "Botswana",
-    "promptText": "Although Botswana is rich in diamonds, it has high unemployment and stratified socioeconomic classes. In 1999, the nation {{1}} its first budget deficit in 16 years {{2}} of a slump in the international diamond market. Yet Botswana {{3}} one of the wealthiest and most stable countries on the African {{4}} .",
+    "promptText": "Although Botswana is rich in diamonds, it has high unemployment and stratified socioeconomic classes. In 1999, the nation {{0}} its first budget deficit in 16 years {{1}} of a slump in the international diamond market. Yet Botswana {{2}} one of the wealthiest and most stable countries on the African {{3}} .",
     "audioPromptUrl": null,
     "imagePromptUrl": null,
     "referenceAnswerText": null,
