@@ -1,0 +1,163 @@
+# Phase 2 — Tenant-Wide Classes List View
+
+**Goal:** Build `ClassesListView` that fetches all classes in the
+tenant via `useAllTenantClasses()`, displays them in a DataTable with
+program filter, and renders the correct empty state (CTA varies based
+on whether tenant has any programs at all).
+
+**Covers:** P1 Story #2, P2 Story #4, P2 Story #5
+
+---
+
+## Tasks
+
+### 2.1 Add new constants
+
+File: `apps/tenant-web/features/classes/constants/index.ts`
+
+Add:
+
+```ts
+export const CLASSES_LIST_TEXT = {
+  title: (label: string) => `All ${label}s`,
+  subtitle: (classLabel: string, programLabel: string) =>
+    `Browse every ${classLabel.toLowerCase()} across all ${programLabel.toLowerCase()}.`,
+  programFilterLabel: (label: string) => `Filter by ${label}`,
+  programFilterAll: "All",
+  emptyNoProgramsTitle: (programLabel: string) => `No ${programLabel.toLowerCase()} yet`,
+  emptyNoProgramsDescription: (programLabel: string) =>
+    `Create a ${programLabel.toLowerCase()} first, then add ${classLabel}s to it.`,
+  emptyNoProgramsCta: (programLabel: string) => `+ Create ${programLabel}`,
+  emptyNoClassesTitle: (classLabel: string) =>
+    `No ${classLabel.toLowerCase()} yet`,
+  emptyNoClassesDescription: (programLabel: string) =>
+    `This ${programLabel.toLowerCase()} has no ${classLabel.toLowerCase()} yet — add one.`,
+  emptyNoClassesCta: (classLabel: string) => `+ Create ${classLabel}`,
+} as const;
+
+export const CLASSES_LIST_TABLE_HEADERS = {
+  NAME: "Name",
+  PROGRAM: "Program",
+  STUDENT_COUNT: "Students",
+  STATUS: "Status",
+  ACTIONS: "Actions",
+} as const;
+```
+
+### 2.2 Build `ClassesListView`
+
+File: `apps/tenant-web/features/classes/components/ClassesListView.tsx`
+
+Sketch (≤ 200 lines, ≤ 150 for the component function per coding
+standard rule 4):
+
+```tsx
+"use client";
+import { useMemo, useState, type ReactElement } from "react";
+import Link from "next/link";
+import { Alert, Badge, Button, DataTable, PageHeader, Select, type DataTableColumn } from "@pte/ui";
+import { useOrgLabels } from "@/features/orgLabels/useOrgLabels";
+import { useMyOrganizations, usePrograms } from "@/features/programs/api";
+import { useAllTenantClasses } from "../api";
+import {
+  CLASSES_LIST_TABLE_HEADERS,
+  CLASSES_LIST_TEXT,
+  CLASS_STATUS_LABELS,
+  CLASS_STATUS_VARIANT,
+} from "../constants";
+
+export const ClassesListView = (): ReactElement => {
+  const labels = useOrgLabels();
+  const { data: organizations } = useMyOrganizations();
+  const [programFilter, setProgramFilter] = useState<string>("ALL");
+  const { data: classes, isLoading, isError, error } = useAllTenantClasses();
+  const filtered = useMemo(
+    () => (classes ?? []).filter((c) => programFilter === "ALL" || c.programPublicId === programFilter),
+    [classes, programFilter],
+  );
+  // ... handle loading/error/empty states, then DataTable
+};
+```
+
+Empty state branching (inline conditional per agreed UX):
+
+```tsx
+const totalPrograms = (programs ?? []).length;
+
+if (!isLoading && filtered.length === 0) {
+  if (totalPrograms === 0) {
+    return <EmptyStateNoPrograms />;
+  }
+  return <EmptyStateNoClasses />;
+}
+```
+
+Each empty state is a local inline JSX block (not a separate file), per
+the agreed inline-conditional approach. If the file grows past 300
+lines, extract them.
+
+### 2.3 Update the route to render the view
+
+File: `apps/tenant-web/app/(dashboard)/host/classes/page.tsx`
+
+Replace the Phase 1 stub `<div>Coming soon…</div>` with:
+
+```tsx
+import { ClassesListView } from "@/features/classes/components";
+// ...
+<DashboardChrome ...>
+  <ClassesListView />
+</DashboardChrome>
+```
+
+### 2.4 Action menu per row
+
+Reuse `useClassStatusMutations` from
+`features/classes/api/index.ts:82`. Each row links to the existing
+class detail page:
+
+```
+/host/programs/{programPublicId}/classes/{classPublicId}?organizationPublicId={organizationPublicId}
+```
+
+Use `next/link` (coding standard rule 10), not raw `<a>`.
+
+Action menu options (must match `ClassesSection.tsx:60-106` for
+parity): Edit / Activate / Deactivate / Suspend / Archive.
+
+### 2.5 Student count column
+
+For MVP, render `"—"` (em dash) — the spec marks this as out of scope
+for sprint 1. The N+1 of joining tenant-wide class list with
+memberships per class is not worth the latency at MVP scale. Add a
+follow-up backlog item if needed.
+
+---
+
+## Design Constraints
+
+- File ≤ 300 lines — extract sub-components if needed (per agreed
+  inline-conditional approach, expect ~200 lines).
+- No hardcoded strings — all in `constants/index.ts`.
+- No inline styles — Tailwind only.
+- TanStack Query only — no `fetch()`.
+- `next/link` for all internal navigation.
+
+## Quality and Testing State
+
+- quality: not evaluated
+- testing: not started (manual verify against spec acceptance criteria)
+
+## Success Criteria (this phase)
+
+- [ ] `/host/classes` lists every class across all programs in the
+  current tenant.
+- [ ] Each row shows: class name, program name, student count ("—"),
+  status badge, action menu.
+- [ ] Program filter dropdown filters the list (cached, < 500ms
+  perceived).
+- [ ] Empty state when tenant has 0 programs: shows "No programs yet"
+  + CTA → `/host/programs`.
+- [ ] Empty state when tenant has programs but no classes: shows
+  "No classes yet" + CTA → first program's class creation flow.
+- [ ] `pnpm build`, `pnpm lint`, `pnpm typecheck` all pass.

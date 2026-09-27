@@ -86,4 +86,4 @@ Hiện tại ở tenant-web, user có thể thêm student bằng cách nhập `c
 ## [NEEDS CLARIFICATION]
 
 - [x] ~~Backend có endpoint `GET /api/v1/classes?tenantId=` chưa, hay phải gọi nested qua programs?~~ → **Đã xác nhận: không có endpoint tenant-wide. Dùng `useAllTenantClasses()` fan-out pattern (đã có trong code).**
-- [ ] Role guard cho nav item: hiện chỉ `HOST_ADMIN` trong `HOST_ROLES`. STAFF/TEACHER có cần thêm quyền không? (Block /ck:plan nếu muốn mở rộng)
+- [x] ~~Role guard cho nav item: hiện chỉ `HOST_ADMIN` trong `HOST_ROLES`. STAFF/TEACHER có cần thêm quyền không?~~ → **Đã xác nhận: HOST_ADMIN only. STAFF/TEACHER không có trong tenant-web hiện tại — chỉ extend khi có feature yêu cầu.**
