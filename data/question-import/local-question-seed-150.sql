@@ -966,31 +966,44 @@ BEGIN
     END IF;
 END $$;
 
--- Audio duration is required for the dynamic preparation window of the five
--- audio-prompt Speaking task types used by the local full-skill demo.
+-- Audio duration is required for the dynamic preparation window of the four
+-- audio-prompt Speaking task types present in the 150-question subset:
+-- REPEAT_SENTENCE (6 s), RE_TELL_LECTURE (72 s), ANSWER_SHORT_QUESTION (4 s),
+-- RESPOND_TO_A_SITUATION (15 s). SUMMARIZE_GROUP_DISCUSSION is not included
+-- in this subset so its media UUID is not listed here.
+-- Uses a JOIN so all 9 media objects per type are covered (not just the 4
+-- external-seed UUIDs), preventing MissingAudioDurationException on any attempt.
 DO $$
-DECLARE updated_media_count INTEGER;
+DECLARE remaining_null INTEGER;
 BEGIN
-    UPDATE media_objects
-    SET duration_seconds = CASE public_id
-        WHEN '3b90fbbe-0756-5338-bee1-d201b672a7a1'::uuid THEN 6
-        WHEN '8fc9b4c6-261c-5176-8c1b-5b19a69f938f'::uuid THEN 72
-        WHEN '452e2a9d-2841-56b7-8b2b-5e0091bc5b86'::uuid THEN 4
-        WHEN '8212261c-d432-4f9b-a171-e6f015c26029'::uuid THEN 81
-        WHEN 'b9bef14e-4ca9-5af4-88ca-8014f73543fa'::uuid THEN 15
-        ELSE duration_seconds
+    UPDATE media_objects mo
+    SET duration_seconds = CASE q.pte_task_type
+        WHEN 'REPEAT_SENTENCE'        THEN 6
+        WHEN 'RE_TELL_LECTURE'        THEN 72
+        WHEN 'ANSWER_SHORT_QUESTION'  THEN 4
+        WHEN 'RESPOND_TO_A_SITUATION' THEN 15
     END
-    WHERE public_id IN (
-        '3b90fbbe-0756-5338-bee1-d201b672a7a1'::uuid,
-        '8fc9b4c6-261c-5176-8c1b-5b19a69f938f'::uuid,
-        '452e2a9d-2841-56b7-8b2b-5e0091bc5b86'::uuid,
-        '8212261c-d432-4f9b-a171-e6f015c26029'::uuid,
-        'b9bef14e-4ca9-5af4-88ca-8014f73543fa'::uuid
-    );
+    FROM questions q
+    WHERE mo.public_id = q.audio_prompt_ref
+      AND q.deleted = false
+      AND mo.duration_seconds IS NULL
+      AND q.pte_task_type IN (
+          'REPEAT_SENTENCE', 'RE_TELL_LECTURE',
+          'ANSWER_SHORT_QUESTION', 'RESPOND_TO_A_SITUATION'
+      );
 
-    GET DIAGNOSTICS updated_media_count = ROW_COUNT;
-    IF updated_media_count <> 5 THEN
-        RAISE EXCEPTION 'Local audio duration metadata update expected 5 rows but updated %', updated_media_count;
+    SELECT COUNT(*) INTO remaining_null
+    FROM media_objects mo
+    JOIN questions q ON mo.public_id = q.audio_prompt_ref
+    WHERE q.deleted = false
+      AND q.pte_task_type IN (
+          'REPEAT_SENTENCE', 'RE_TELL_LECTURE',
+          'ANSWER_SHORT_QUESTION', 'RESPOND_TO_A_SITUATION'
+      )
+      AND mo.duration_seconds IS NULL;
+
+    IF remaining_null <> 0 THEN
+        RAISE EXCEPTION 'Local audio duration metadata update failed: % media objects still have NULL duration_seconds', remaining_null;
     END IF;
 END $$;
 
