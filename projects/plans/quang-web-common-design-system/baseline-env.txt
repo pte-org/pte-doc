@@ -1,0 +1,10 @@
+base-sha: 79c693d2ac7566692a37102371510c923457b5d6
+original-base-sha: 79c693d2ac7566692a37102371510c923457b5d6
+node: v22.15.0
+pnpm: 11.8.0
+next-vendor: Next.js v16.2.9
+next-tenant: Next.js v16.2.9
+date: 2026-09-14T14:02:38.2495151+07:00
+branch: work/design-refactor
+tests: skipped_by_user
+quality: requested

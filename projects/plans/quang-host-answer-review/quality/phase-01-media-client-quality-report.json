@@ -1,0 +1,38 @@
+{
+  "target": "phase-01-media-client",
+  "mode": "gate",
+  "verdict": "APPROVED",
+  "reviewed_files": [
+    "pte-api/services/scoring/pom.xml",
+    "pte-api/services/scoring/src/main/resources/application.yml",
+    "pte-api/docker-compose.services.yml",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/client/dto/MediaPresignedDownloadResponse.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/client/MediaClient.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/config/InternalClientConfig.java",
+    "pte-api/services/scoring/src/test/java/com/pte/scoring/client/MediaClientTest.java"
+  ],
+  "conventions_checked_against": [
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/client/MediaClient.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/config/InternalClientConfig.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/controller/ScoringReviewController.java"
+  ],
+  "findings": [
+    {
+      "id": "P1-01",
+      "severity": "LOW",
+      "rule": "test-clarity",
+      "location": "pte-api/services/scoring/src/test/java/com/pte/scoring/client/MediaClientTest.java:24-29 (builderFor)",
+      "applicable": true,
+      "confidence": "medium",
+      "introduced_by_current_change": true,
+      "summary": "builderFor() uses a single-element array as an out-parameter to hand back the bound MockRestServiceServer, since a lambda-captured local can't be reassigned.",
+      "required_action": "Optional cleanup: return a small record (e.g. record Fixture(RestClient.Builder builder, MockRestServiceServer server)) instead of the array hack. Not blocking — test intent is still clear and both tests read correctly.",
+      "blocking": false
+    }
+  ],
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "noted_count": 1,
+  "receipt_status": "skipped_cross_repo_boundary",
+  "receipt_note": "plan/report live in pte-doc, reviewed files live in pte-api — separate git repos under a non-repo parent (pte-org). receipt.py requires one git repo covering both. Same limitation and same handling as quang-answer-submission-encryption and quang-listening-exam-policy: receipt skipped, result recorded directly in the phase file's Quality and Testing State."
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "mode": "gate",
+  "target": "phase-01-flat-api-prefix-and-login",
+  "plan": "pte-doc/projects/plans/quang-web-billing-integration/plan.md",
+  "generated_at": "2026-09-17",
+  "verdict": "APPROVED",
+  "reviewed_files": {
+    "pte-api": [
+      "app/src/main/java/com/pte/identity/internal/config/SecurityConfig.java",
+      "app/src/test/java/com/pte/RouteContractTest.java",
+      "deploy/nginx.local.conf",
+      "deploy/nginx.bootstrap.conf.template",
+      "deploy/nginx.conf.template",
+      "deploy/nginx-entrypoint.sh",
+      "docker-compose.services.yml",
+      "docker-compose.deploy.yml",
+      ".github/workflows/deploy-production.yml"
+    ],
+    "pte-web": [
+      "packages/api-client/src/requests/endpoints.test.ts",
+      "packages/api-client/src/requests/auth/auth.test.ts",
+      "packages/ui/src/hooks/createSessionApiClient.ts",
+      "apps/tenant-web/lib/navigation.tsx",
+      "apps/vendor-web/features/auth/constants.ts"
+    ]
+  },
+  "findings": [
+    {
+      "id": "QUAL-P1-001",
+      "severity": "NOTED",
+      "rule": "RUNTIME_VERIFICATION",
+      "status": "OPEN",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "local Docker runtime",
+      "evidence": "docker info cannot connect to dockerDesktopLinuxEngine in this workstation session.",
+      "why_it_matters": "nginx -t, container health, WebSocket, MinIO, PayOS webhook, and Certbot renewal still require a live runtime.",
+      "required_action": "Run the documented runtime smoke checks after Docker Desktop Linux engine or the Oracle VPS is available.",
+      "owner": "operator"
+    }
+  ],
+  "counts": { "blocking": 0, "advisory": 0, "noted": 1 },
+  "design_constraint_compliance": [
+    { "constraint": "Public Spring routes use /api/v1 and no legacy service prefix", "status": "met", "evidence": "RouteContractTest passes and source inventory uses /api/v1 or /internal only." },
+    { "constraint": "Nginx forwards the API path without stripping it", "status": "met", "evidence": "Local and production templates proxy /api/v1/ to app:8091 without rewrite." },
+    { "constraint": "Caddy is removed from the production Compose topology", "status": "met", "evidence": "Compose config passes and exposes only Nginx ports 80/443 in the deploy overlay." }
+  ],
+  "verification_performed": {
+    "build_gate": [
+      "pte-api: .\\mvnw.cmd -pl app -DskipTests compile — BUILD SUCCESS",
+      "pte-web: tenant-web build — success",
+      "pte-web: vendor-web build — success",
+      "Compose merged config — success"
+    ],
+    "tests": [
+      "pte-api: .\\mvnw.cmd -pl app test — 576 tests, 0 failures, 0 errors",
+      "pte-web: api-client tests — 170 tests, 0 failures",
+      "pte-web: tenant/vendor typecheck and lint — success"
+    ],
+    "runtime": [
+      "Not run: Docker Linux engine unavailable in the local session"
+    ]
+  },
+  "notes": [
+    "Quality receipt fingerprinting remains disabled because pte-api and pte-web are separate repositories and the report is stored in pte-doc.",
+    "No commit or push was performed."
+  ]
+}

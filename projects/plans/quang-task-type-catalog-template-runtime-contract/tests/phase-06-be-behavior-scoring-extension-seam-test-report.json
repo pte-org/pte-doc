@@ -1,0 +1,28 @@
+{
+  "phase": "phase-06-be-behavior-scoring-extension-seam",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-22T18:03:00+07:00",
+  "commands": [
+    ".\\mvnw.cmd -pl app -DskipTests compile",
+    ".\\mvnw.cmd -pl app test '-Dtest=TaskRuntimeProfileRegistryTest,TaskRuntimeProfileServiceTest,TaskTypeScoringMethodsTest,ScoreTemplateAdminServiceTest,ScoringMethodResolverTest,ScoringCommandServiceTest,ObjectiveScoringServiceTest,SnapshotPinServiceTest,AttemptSummaryQueryServiceTest,ScoreAggregationServiceTest'",
+    ".\\mvnw.cmd -pl app test"
+  ],
+  "summary": {
+    "focused_passed": 145,
+    "full_suite_passed": 774,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "coverage_intent": [
+    "all 23 standard runtime profiles, including PERSONAL_INTRODUCTION as UNSCORED",
+    "canonical and legacy task-code normalization",
+    "tampered behavior/schema/scoring profile rejection",
+    "legacy templates without runtime metadata",
+    "objective scoring and scoring command regression",
+    "template-version propagation into attempt scoring context"
+  ],
+  "failures": [],
+  "report_path": "pte-doc/projects/plans/quang-task-type-catalog-template-runtime-contract/tests/phase-06-be-behavior-scoring-extension-seam-test-report.json"
+}

@@ -1,0 +1,37 @@
+{
+  "phase": "phase-07-attempt",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-15T17:38:02+07:00",
+  "summary": {
+    "passed": 301,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "commands": [
+    {
+      "command": "mvn -pl app -am -DskipTests compile",
+      "result": "PASSED"
+    },
+    {
+      "command": "mvn -pl app test",
+      "result": "PASSED",
+      "tests": 301
+    }
+  ],
+  "coverage": [
+    "AttemptLifecycleServiceTest + 5 sibling files (submitAnswer/playAudio/submitAttempt/heartbeat/encrypted-submission): ported from services/exam-delivery's 6 AttemptService test files — full state-machine coverage (startAttempt encryptionPublicKey gating, blank-payload acceptance, pessimistic-lock choke point on every currentOrderIndex/playCount mutator, plain-vs-encrypted routing enforcement).",
+    "SnapshotPinServiceTest: ported, with SchedulingClient/AuthoringClient/MediaClient replaced by SessionService/AssessmentService/MediaService mocks; dynamic prep-timing, audio/image presign branches, and a new test asserting a presign failure propagates media's own exception unmodified (no more 503-shaped AudioResolutionFailedException wrapper).",
+    "AttemptMapperTest, TimerServiceTest, HeartbeatServiceTest, SubmissionDecryptionServiceTest, TaskTimingConfigTest, EncryptionKeyProviderTest: ported unchanged (pure logic, no HTTP client dependency).",
+    "ProctorCommandServiceTest (new): forceSubmit in-progress/already-submitted/unknown-attempt paths — no direct source test existed (only exercised indirectly via the RabbitMQ consumer this port doesn't carry)."
+  ],
+  "deviations": [
+    "No outbox/event publishing anywhere in this phase — AnswerSubmitService/ProctorCommandService/AttemptLifecycleService.completeAttempt persist state only; AnswerSubmitted/AttemptSubmitted events deferred to Phase 08-10 when scoring/reporting/notification exist to receive them.",
+    "Dropped as unreachable in-process: EntitlementCheckFailedException, SnapshotContentFetchFailedException, AudioResolutionFailedException, ImageResolutionFailedException (503-shaped defensive wrappers around a null HTTP response — impossible once the call is a Java method that either returns data or throws). Also dropped: AttemptNotInProgressException (dead code, never thrown in source) and attempt's own NotEntitledException (session's own propagates unmodified instead).",
+    "MockExamController (source: @Profile(\"mock-exam-delivery\") dev-only in-memory stub predating the real backend) not ported — its reason to exist is gone now that itembank/assessment/session/media are real and working in the monolith.",
+    "InternalExportController + AnswerExportItem/AttemptExportItem (keyset-paginated export feeding a reporting read-model rebuild) not ported, along with the matching findSubmittedForExport repository queries — Phase 10 will query attempt's own tables directly, per the plan's no-projection mandate.",
+    "com.pte.media.dto.response required a @NamedInterface package-info.java (same pattern as itembank/assessment/session) — attempt is the first module to consume MediaService's response type cross-module."
+  ],
+  "report_path": "projects/plans/quang-modular-monolith/tests/phase-07-attempt-test-report.json"
+}

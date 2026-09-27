@@ -1,0 +1,43 @@
+{
+  "phase": "phase-10-reporting",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-15T23:05:00+07:00",
+  "summary": {
+    "passed": 479,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "commands": [
+    {
+      "command": "mvn -pl app -am clean compile",
+      "result": "PASSED"
+    },
+    {
+      "command": "mvn -pl app test",
+      "result": "PASSED",
+      "tests": 479
+    },
+    {
+      "command": "mvn -pl app test -Dtest=ModuleStructureTest",
+      "result": "PASSED",
+      "tests": 3
+    }
+  ],
+  "coverage": [
+    "ReportServiceTest (10, new): lazy AttemptReport creation pulled from AttemptService only on first access; STUDENT visibility (published+own-student only), HOST visibility (own tenant any time), platform-user cross-tenant allowed; concurrent-create DataIntegrityViolationException recovered via re-query.",
+    "ReportPublishServiceTest (6, new): publishes every unpublished submitted attempt in a session (creating the AttemptReport row on demand if missing), skips already-published ones, emits exactly one AttemptPublishedEvent per newly-published attempt via ApplicationEventPublisher, mixed-batch call verified for correct event count.",
+    "ScoreAggregationServiceTest (13, new): 10-90 scaling formula (0->10, 100->90, 50->50, multi-answer averaging, Math.round behavior) verified with concrete numbers; overall = average of only communicative skills with sufficient data, an enabling skill having data never affects overall; one answer contributing to multiple mapped skills reflected in both; zero-contributing-answer skills report insufficientData.",
+    "ReportMapperTest (6, new): pure mapping — 4 communicative/6 enabling skill split, published/publishedAt/attemptPublicId/sessionPublicId/overall carried through correctly.",
+    "AttemptSummaryQueryServiceTest (6, new, attempt module): findSubmitted maps a SUBMITTED ExamAttempt field-by-field, throws AttemptNotFoundException when missing or not SUBMITTED; findSubmittedForSession maps a list, empty stays empty.",
+    "ScoredAnswerQueryServiceTest (7, new, scoring module): findScoredForAttempt filters by SCORED status only and maps to ScoredAnswerView(taskType, rawScore) correctly.",
+    "ScoringServiceTest (3, new): trivial delegation to ScoredAnswerQueryService, arguments/result passed through unchanged.",
+    "AttemptPublishedNotificationListenerTest (existing, hand-fixed): import updated from the now-deleted com.pte.notification.dto.event.AttemptPublishedEvent to com.pte.reporting.dto.event.AttemptPublishedEvent (record grew a sessionPublicId field); verified still green."
+  ],
+  "deviations": [
+    "No source unit tests ported directly — services/reporting's tests target a local AnswerProjection-backed data-access pattern that no longer exists (replaced by a live cross-module pull via ScoringService/AttemptService); used as behavioral reference only, every test written fresh against the new architecture.",
+    "AttemptPublishedEvent relocated from com.pte.notification.dto.event (Phase 09 placeholder, since reporting didn't exist yet) to com.pte.reporting.dto.event (Phase 10) — the publisher now owns the event type, matching the StudentEnrolledEvent/ViolationDetectedEvent precedent exactly (producer owns the type, consumer imports it), avoiding a reporting->notification dependency that would have been inconsistent with every other cross-module event in this migration."
+  ],
+  "report_path": "projects/plans/quang-modular-monolith/tests/phase-10-reporting-test-report.json"
+}

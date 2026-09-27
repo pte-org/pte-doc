@@ -1,0 +1,48 @@
+{
+  "mode": "gate",
+  "target": "phase-04-subscription-activation",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-16T14:49:35Z",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/billing/BillingService.java",
+    "pte-api/app/src/main/java/com/pte/billing/SubscriptionView.java",
+    "pte-api/app/src/main/java/com/pte/billing/domain/Subscription.java",
+    "pte-api/app/src/main/java/com/pte/billing/domain/enums/ActivationSource.java",
+    "pte-api/app/src/main/java/com/pte/billing/domain/enums/SubscriptionStatus.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/constant/BillingConstants.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/controller/SubscriptionController.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/dto/response/SubscriptionActivationResponse.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/dto/response/SubscriptionResponse.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/exception/SubscriptionActivationException.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/repository/SubscriptionRepository.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/service/LicenseKeyGenerator.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/service/SubscriptionActivationService.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/service/SubscriptionExpirationService.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/service/SubscriptionPersistenceService.java",
+    "pte-api/app/src/main/resources/db/migration/V17__billing_subscription.sql",
+    "pte-api/app/src/main/java/com/pte/tenancy/TenancyService.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/internal/constant/TenancyConstants.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/internal/service/QuotaTransactionService.java"
+  ],
+  "conventions_checked_against": [
+    "pte-api/app/src/main/java/com/pte/identity/IdentityService.java",
+    "pte-api/app/src/main/java/com/pte/session/SessionService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/repository/ExamSessionRepository.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/internal/controller/TenantController.java",
+    "pte-api/app/src/main/java/com/pte/shared/exception/GlobalExceptionHandler.java",
+    "pte-api/app/src/main/resources/db/migration/V16__billing_plan_catalog.sql"
+  ],
+  "findings": [],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "noted_count": 0,
+  "receipt_status": "skipped_cross_repo_boundary",
+  "receipt_note": "The plan/report lives in pte-doc while reviewed source files live in pte-api, separate git repositories under the pte-org parent. receipt.py requires one git repo containing the report and every reviewed file, so no cryptographic receipt is issued."
+}

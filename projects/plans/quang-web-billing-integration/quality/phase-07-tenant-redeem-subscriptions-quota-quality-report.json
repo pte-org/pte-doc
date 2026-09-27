@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "mode": "gate",
+  "target": "phase-07-tenant-redeem-subscriptions-quota",
+  "plan": "pte-doc/projects/plans/quang-web-billing-integration/plan.md",
+  "generated_at": "2026-09-17",
+  "verdict": "APPROVED",
+  "reviewed_files": { "pte-web": ["apps/tenant-web/features/commercialization/api.ts", "apps/tenant-web/features/commercialization/components/RedeemLicenseView.tsx", "apps/tenant-web/features/commercialization/components/SubscriptionsView.tsx", "apps/tenant-web/features/commercialization/components/QuotaView.tsx", "apps/tenant-web/features/commercialization/constants.ts"], "pte-api": ["app/src/main/java/com/pte/billing/internal/controller/LicenseCodeRedeemController.java", "app/src/main/java/com/pte/billing/internal/controller/SubscriptionController.java", "app/src/main/java/com/pte/tenancy/internal/controller/StudentQuotaController.java"] },
+  "findings": [],
+  "counts": { "blocking": 0, "advisory": 0, "noted": 0 },
+  "design_constraint_compliance": [
+    { "constraint": "Redeem errors are mapped by backend error code", "status": "met", "evidence": "The UI distinguishes invalid, expired, redeemed, revoked, and capacity outcomes." },
+    { "constraint": "Subscriptions are rendered from the backend result", "status": "met", "evidence": "The UI does not re-filter the backend subscription list by status." },
+    { "constraint": "Quota displays usage and preview feedback", "status": "met", "evidence": "QuotaView renders used/limit, warning thresholds, and import preview results." }
+  ],
+  "verification_performed": { "build_gate": ["tenant-web build — success", "pte-api compile — success"], "tests": ["tenant-web typecheck and lint — success", "pte-api test — 576 tests, 0 failures, 0 errors"] },
+  "notes": ["No commit or push was performed."]
+}

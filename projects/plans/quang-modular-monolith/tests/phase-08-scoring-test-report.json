@@ -1,0 +1,37 @@
+{
+  "phase": "phase-08-scoring",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-15T18:10:00+07:00",
+  "summary": {
+    "passed": 382,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "commands": [
+    {
+      "command": "mvn -pl app -am -DskipTests compile",
+      "result": "PASSED"
+    },
+    {
+      "command": "mvn -pl app test",
+      "result": "PASSED",
+      "tests": 382
+    }
+  ],
+  "coverage": [
+    "ObjectiveScoringServiceTest (40 tests), AiScoringTaskCatalogTest (3), AiScoringDispatcherTest (3), AnswerPayloadDecoderFixtureTest (5, vendored fixture copied to app/src/test/resources/fixtures/listening-payload-contract.json), ListeningPayloadFixtureSchemaTest (1), AiScoreResultTest (2): ported from services/scoring, package/import paths updated only, logic unchanged.",
+    "AiScoringWorkerTest (4 tests): ported with outboxWriter/attemptCompletionService mocks removed — AiScoringWorker's constructor dropped both dependencies (no outbox in the monolith; AttemptCompletionService's only consumer, AttemptScored, had zero listeners anywhere in the microservice codebase either, confirmed dead code).",
+    "ScoringIngestServiceTest (4, new): idempotent upsert from AttemptService.getSubmittedAnswersForSession — already-ingested answerPublicId left untouched, concurrent-insert DataIntegrityViolationException swallowed.",
+    "ScoringCommandServiceTest (5, new): ingest-then-score orchestration — objective type scores synchronously and saves, AI type dispatches (dispatch owns its own save), unsupported type stays untouched.",
+    "ScoringReviewServiceTest (7, new): tenant isolation (wrong tenant/not found -> AnswerNotFoundException), AUDIO payload presign via MediaService (success merges URL; MediaService.presignGet throwing is caught, not propagated — different failure contract than the old HTTP client which returned null), teacherScore independent of rawScore.",
+    "SubmittedAnswerQueryServiceTest (4, new, in attempt module): AttemptAnswer+PinnedItem+ExamAttempt -> SubmittedAnswerView field-by-field mapping.",
+    "EntitlementServiceTest +3 (in session module): new verifyHostAccess(sessionPublicId, tenantId) — found-in-tenant no-op, not-found/wrong-tenant throws SessionNotFoundException."
+  ],
+  "deviations": [
+    "Not ported: client/MediaClientTest, config/RabbitMqConfigTest, messaging/consumer/AnswerIngestConsumerTest, vendor/openai/OpenAiCompatible*Test — MediaClient/AnswerIngestConsumer dropped entirely (see production deviations); RabbitMqConfig/OpenAI vendor tests are bean-wiring/HTTP-mechanics tests, same precedent as prior phases skipping that class of test.",
+    "No test exists in source for ScoringCommandConsumer (host-triggered scoring command) — ScoringCommandServiceTest was written from scratch since the monolith's ScoringCommandService has no direct source counterpart test to port from."
+  ],
+  "report_path": "projects/plans/quang-modular-monolith/tests/phase-08-scoring-test-report.json"
+}

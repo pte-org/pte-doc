@@ -1,0 +1,40 @@
+{
+  "phase": "phase-04-media + phase-05-itembank-assessment",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-15T16:19:31+07:00",
+  "summary": {
+    "passed": 181,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "commands": [
+    {
+      "command": "mvn -pl app -am -DskipTests compile",
+      "result": "PASSED"
+    },
+    {
+      "command": "mvn -pl app test",
+      "result": "PASSED",
+      "tests": 181
+    },
+    {
+      "command": "mvn -pl app test -Dtest=com.pte.assessment.**",
+      "result": "PASSED",
+      "tests": 12
+    }
+  ],
+  "coverage": [
+    "PresignServiceTest (com.pte.media.internal.service): ported unchanged from services/media, plus new TTL-cap assertion.",
+    "QuestionValidationHelperTest (com.pte.itembank.internal.service): ported from services/authoring.",
+    "ItembankServiceTest: create SHARED-write-forbidden for a host caller; get cross-tenant PRIVATE denial; freeze() field-by-field deep copy and RE_ORDER_PARAGRAPHS delivery-order rotation (ported from services/authoring's SnapshotPublishServiceTest.deliveryOrder, now owned by itembank per the freeze API boundary).",
+    "BlueprintServiceTest: buildItem delegates existence/accessibility to ItembankService.get (never a repository); itembank's QuestionNotFoundException propagates unmodified; invalid section rejected.",
+    "SnapshotPublishServiceTest: empty-blueprint rejection; freeze() sourced only from ItembankService.freeze (no itembank repository access); version increments across repeated publish; frozen optionsJson retains correct/correctGapIndex for a later scoring phase to parse; getContent/getSummary not-found paths."
+  ],
+  "deviations": [
+    "ModuleStructureTest required adding @NamedInterface package-info.java to itembank.domain.enums and itembank.dto.response — Spring Modulith's default module API is the root package only, not subpackages; assessment's cross-module use of PteTaskType/PteSection/QuestionFreezeView needed the explicit opt-in. No behavior change, boundary-declaration fix only.",
+    "Design changed from spec: assessment.BlueprintService/SnapshotPublishService (source: services/authoring) called QuestionRepository directly pre-split; ported versions call ItembankService.get/freeze instead, per Phase 05 Design Constraints (assessment never touches itembank's repository). Externally observable behavior (404 on missing/inaccessible question, identical snapshot content) is unchanged."
+  ],
+  "report_path": "projects/plans/quang-modular-monolith/tests/phase-04-05-media-itembank-assessment-test-report.json"
+}

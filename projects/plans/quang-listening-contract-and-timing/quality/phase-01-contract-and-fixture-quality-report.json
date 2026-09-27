@@ -1,0 +1,45 @@
+{
+  "target": "phase-01-contract-and-fixture",
+  "mode": "gate",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-12T14:24:03Z",
+  "reviewed_files": [
+    "pte-doc/projects/fixtures/listening-payload-contract.md",
+    "pte-doc/projects/fixtures/listening-payload-contract.json",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/dto/request/SubmitAnswerRequest.java"
+  ],
+  "conventions_checked_against": [
+    "pte-app/lib/features/exam_attempt/domain/positional_payload.dart",
+    "pte-app/lib/features/exam_attempt/listening/presentation/cubit/mc_listening_multiple_cubit.dart",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/dto/request/SubmitAnswerRequest.java",
+    "pte-doc/projects/plans/quang-answer-submission-encryption/quality/phase-01-rsa-keypair-startattempt-quality-report.json"
+  ],
+  "findings": [
+    {
+      "id": "QUAL-001",
+      "severity": "NOTED",
+      "rule": "CORR_BOUNDARY_VALIDATION",
+      "status": "OPEN",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-app/lib/features/exam_attempt/domain/positional_payload.dart:6",
+      "evidence": "The existing shared serializer joins gap values with commas but does not itself reject a comma inside a value. The v1 contract now explicitly reserves comma as the positional delimiter and requires FE validation or input restriction before serialization.",
+      "why_it_matters": "An unrestricted comma would make a typed answer ambiguous and could shift later gap values during backend parsing.",
+      "required_action": "Address in the Listening input/serializer test phase before enabling arbitrary typed gap text in production; this pre-existing enforcement gap is outside Phase 1's documentation-only scope.",
+      "owner": "cook"
+    }
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 1
+  },
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "noted_count": 1,
+  "receipt_status": "skipped_cross_repo_boundary",
+  "receipt_note": "The plan/report lives in pte-doc while one reviewed source file lives in pte-api; these are separate git repositories under the pte-org parent. receipt.py requires one repository containing the report and every reviewed file, so no cryptographic receipt is issued. The APPROVED gate result is recorded here and in the phase state."
+}

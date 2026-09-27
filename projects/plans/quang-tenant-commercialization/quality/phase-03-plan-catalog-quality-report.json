@@ -1,0 +1,53 @@
+{
+  "mode": "gate",
+  "target": "phase-03-plan-catalog",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-16T14:35:25Z",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/billing/domain/Plan.java",
+    "pte-api/app/src/main/java/com/pte/billing/domain/PlatformSetting.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/constant/BillingConstants.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/controller/PlanController.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/controller/PlatformSettingController.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/dto/request/PlanRequest.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/dto/request/PlatformSettingRequest.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/dto/response/PlanResponse.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/dto/response/PlatformSettingResponse.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/exception/PlanNotFoundException.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/exception/PlanStateException.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/exception/PlanValidationException.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/exception/PlatformSettingInvalidException.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/exception/PlatformSettingNotFoundException.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/mapper/PlanMapper.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/mapper/PlatformSettingMapper.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/repository/PlanRepository.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/repository/PlatformSettingRepository.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/service/PlanService.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/service/PlatformSettingService.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/service/TenantApplicationService.java",
+    "pte-api/app/src/main/resources/db/migration/V16__billing_plan_catalog.sql",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/PlanServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/PlatformSettingServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/TenantApplicationServiceTest.java"
+  ],
+  "conventions_checked_against": [
+    "pte-api/app/src/main/java/com/pte/billing/internal/controller/TenantApplicationController.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/internal/controller/TenantController.java",
+    "pte-api/app/src/main/java/com/pte/itembank/ItembankService.java",
+    "pte-api/app/src/main/java/com/pte/shared/exception/GlobalExceptionHandler.java",
+    "pte-api/app/src/main/resources/db/migration/V15__billing_tenant_application.sql"
+  ],
+  "findings": [],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "noted_count": 0,
+  "receipt_status": "skipped_cross_repo_boundary",
+  "receipt_note": "The plan/report lives in pte-doc while reviewed source and test files live in pte-api, separate git repositories under the pte-org parent. receipt.py requires one git repo containing the report and every reviewed file, so no cryptographic receipt is issued. The APPROVED gate result is recorded here and in the phase state."
+}

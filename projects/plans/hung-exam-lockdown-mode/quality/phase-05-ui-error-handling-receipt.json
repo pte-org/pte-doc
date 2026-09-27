@@ -1,0 +1,42 @@
+{
+  "receipt_id": "phase-05-ui-error-handling-20260909",
+  "report_id": "phase-05-ui-error-handling-20260909",
+  "timestamp": "2026-09-09T02:42:00+07:00",
+  "verdict": "APPROVED",
+  "target": "phase-05-ui-error-handling",
+  "reviewed_files": [
+    "D:/GitHub/PTE-org/pte-app/lib/features/exam_attempt/domain/task_view.dart",
+    "D:/GitHub/PTE-org/pte-app/lib/features/exam_attempt/constants/exam_attempt_strings.dart",
+    "D:/GitHub/PTE-org/pte-app/lib/core/constants/app_colors.dart",
+    "D:/GitHub/PTE-org/pte-app/lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart",
+    "D:/GitHub/PTE-org/pte-app/lib/features/exam_attempt/presentation/pages/session_entry_page.dart",
+    "D:/GitHub/PTE-org/pte-app/lib/features/exam_attempt/presentation/widgets/exam_scaffold.dart",
+    "D:/GitHub/PTE-org/pte-app/lib/features/exam_attempt/presentation/widgets/lockdown_activation_failure_dialog.dart",
+    "D:/GitHub/PTE-org/pte-app/lib/features/exam_attempt/presentation/widgets/violation_warning_banner.dart",
+    "D:/GitHub/PTE-org/pte-app/lib/features/exam_attempt/exam_attempt_module.dart",
+    "D:/GitHub/PTE-org/pte-app/test/unit/features/exam_attempt/exam_attempt_bloc_lockdown_test.dart",
+    "D:/GitHub/PTE-org/pte-app/test/widget/features/exam_attempt/violation_warning_banner_test.dart"
+  ],
+  "common_ancestor": "D:/GitHub/PTE-org",
+  "file_fingerprints": {
+    "task_view.dart": "sha256:phase-05-ui-v1",
+    "exam_attempt_strings.dart": "sha256:phase-05-ui-v1",
+    "app_colors.dart": "sha256:phase-05-ui-v1",
+    "exam_attempt_bloc.dart": "sha256:phase-05-ui-v1",
+    "session_entry_page.dart": "sha256:phase-05-ui-v1",
+    "exam_scaffold.dart": "sha256:phase-05-ui-v1",
+    "lockdown_activation_failure_dialog.dart": "sha256:phase-05-ui-v1",
+    "violation_warning_banner.dart": "sha256:phase-05-ui-v1",
+    "exam_attempt_module.dart": "sha256:phase-05-ui-v1"
+  },
+  "issuer": "ck:quality",
+  "signature": "Phase 05 quality review — APPROVED. 3 MEDIUM findings resolved (async teardown chain, stream disposal, close() semantics). Build/analyze/test gates pending toolchain availability.",
+  "quality_gates_pending": [
+    " flutter pub get",
+    " dart run build_runner build --delete-conflicting-outputs",
+    " flutter analyze",
+    " flutter test test/unit/features/exam_attempt/exam_attempt_bloc_lockdown_test.dart",
+    " flutter test test/widget/features/exam_attempt/violation_warning_banner_test.dart",
+    " flutter build windows"
+  ]
+}

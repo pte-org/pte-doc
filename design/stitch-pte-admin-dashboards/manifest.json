@@ -1,0 +1,58 @@
+{
+  "sourceUrl": "https://stitch.withgoogle.com/projects/3859337323953452143",
+  "projectId": "3859337323953452143",
+  "title": "PTE Admin Dashboards",
+  "capturedAt": "2026-09-14",
+  "screens": [
+    {
+      "id": "a0315201f5a74856b826349b35f1daff",
+      "title": "Tenants List",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 2436,
+      "screenshot": "screens/01-tenants-list/screen.png",
+      "html": "screens/01-tenants-list/screen.html",
+      "route": "vendor-web /admin/tenants"
+    },
+    {
+      "id": "64b68ac2606f4905a2ad65e051384707",
+      "title": "V3: Tenant Detail",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 2438,
+      "screenshot": "screens/02-tenant-detail/screen.png",
+      "html": "screens/02-tenant-detail/screen.html",
+      "route": "vendor-web /admin/tenants/[publicId]"
+    },
+    {
+      "id": "00f8f5742154452ab556d8ccc4db8d88",
+      "title": "V6: Question Bank",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 2504,
+      "screenshot": "screens/03-question-bank/screen.png",
+      "html": "screens/03-question-bank/screen.html",
+      "route": "vendor-web /admin/questions"
+    },
+    {
+      "id": "06aed4f811ac40e5aa9d249b3decfa45",
+      "title": "V8: Exam Blueprint Builder",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 4264,
+      "screenshot": "screens/04-exam-blueprint-builder/screen.png",
+      "html": "screens/04-exam-blueprint-builder/screen.html",
+      "route": "vendor-web /admin/exams"
+    },
+    {
+      "id": "d106a836d1824656a1e2e90d90a55bc0",
+      "title": "V4: Licences & Quota",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 2546,
+      "screenshot": "screens/05-licences-quota/screen.png",
+      "html": "screens/05-licences-quota/screen.html",
+      "route": "vendor-web /admin/licenses"
+    }
+  ]
+}

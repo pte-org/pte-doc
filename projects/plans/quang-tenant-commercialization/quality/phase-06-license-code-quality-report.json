@@ -1,0 +1,51 @@
+{
+  "mode": "gate",
+  "target": "phase-06-license-code",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-16T15:35:27Z",
+  "reviewed_files": [
+    "pte-api/.env.example",
+    "pte-api/app/src/main/java/com/pte/billing/domain/LicenseCode.java",
+    "pte-api/app/src/main/java/com/pte/billing/domain/Subscription.java",
+    "pte-api/app/src/main/java/com/pte/billing/domain/enums/LicenseCodeStatus.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/constant/BillingConstants.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/controller/LicenseCodeController.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/controller/LicenseCodeRedeemController.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/dto/request/IssueLicenseCodeRequest.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/dto/request/RedeemLicenseCodeRequest.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/dto/request/RevokeLicenseCodeRequest.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/dto/response/LicenseCodeResponse.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/exception/LicenseCodeException.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/repository/LicenseCodeRepository.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/repository/SubscriptionRepository.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/service/LicenseCodeExpirationService.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/service/LicenseCodeGenerator.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/service/LicenseCodePersistenceService.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/service/LicenseCodeService.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/config/SecurityConfig.java",
+    "pte-api/app/src/main/java/com/pte/shared/web/RateLimitFilter.java",
+    "pte-api/app/src/main/resources/application.yml",
+    "pte-api/app/src/main/resources/db/migration/V19__billing_license_code.sql"
+  ],
+  "conventions_checked_against": [
+    "pte-api/app/src/main/java/com/pte/billing/internal/service/SubscriptionActivationService.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/service/SubscriptionPersistenceService.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/controller/OrderController.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/config/SecurityConfig.java",
+    "pte-api/app/src/main/java/com/pte/shared/exception/GlobalExceptionHandler.java",
+    "pte-api/app/src/main/resources/db/migration/V18__billing_order_payment.sql"
+  ],
+  "findings": [],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "noted_count": 0,
+  "receipt_status": "skipped_cross_repo_boundary",
+  "receipt_note": "The quality report lives in pte-doc while reviewed source files live in the separate pte-api repository; the local receipt script cannot fingerprint files across repository roots."
+}

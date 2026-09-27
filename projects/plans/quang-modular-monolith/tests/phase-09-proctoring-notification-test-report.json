@@ -1,0 +1,45 @@
+{
+  "phase": "phase-09-proctoring-notification",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-15T22:38:00+07:00",
+  "summary": {
+    "passed": 428,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "commands": [
+    {
+      "command": "mvn -pl app -am clean compile",
+      "result": "PASSED"
+    },
+    {
+      "command": "mvn -pl app test",
+      "result": "PASSED",
+      "tests": 428
+    },
+    {
+      "command": "mvn -pl app test -Dtest=ModuleStructureTest",
+      "result": "PASSED",
+      "tests": 3
+    }
+  ],
+  "coverage": [
+    "HashChainServiceTest (10, new): determinism, every input field changes the output hash, null detail/prevHash treated as empty string.",
+    "ProctorSessionServiceTest (6, new): idempotent resume on an already-ACTIVE session (no re-check of assignment), fresh open calls SessionService.checkProctorAssignment and persists using its returned tenantId, assignment-check exception propagates unmodified with no ProctorSession saved, close() no-ops on an already-ended session, findOwned throws ProctorSessionNotFoundException on miss.",
+    "ViolationServiceTest (3, new): flag() on ACTIVE session advances sequence/hash, saves the session, publishes exactly one ViolationDetectedEvent, broadcasts via SimpMessagingTemplate; flag() on an inactive session throws and touches neither the event publisher, messaging template, nor either repository's save; listForSession delegates to the tenant-scoped repository query.",
+    "ProctorCommandServiceTest (2, new): issueCommand() on an ACTIVE session calls AttemptService.forceSubmit and broadcasts; on an inactive session throws without touching AttemptService/messagingTemplate.",
+    "NotificationDispatchServiceTest (3, new): dispatch() with a null recipient logs+skips without touching the repository or RabbitTemplate (explicit missing-recipient policy); dispatch()/dispatchTo() with a real recipient saves a NotificationLog and enqueues an EmailJob with the log's own publicId.",
+    "NotificationLogServiceTest (1, new): list() delegates to the tenant-scoped repository query and maps via the mapper.",
+    "EmailWorkerTest (8, new): happy path marks SENT; missing log is a no-op; already-terminal log (SENT/FAILED) is a redelivery no-op; mailSender throwing propagates (so RabbitMQ retry advice fires) without marking SENT; onDeadLettered marks a PENDING log FAILED but leaves an already-SENT log untouched (no overwriting a race).",
+    "EnrollmentNotificationListenerTest (2, new), ViolationNotificationListenerTest (4, new, including 0/1/3-host-admin fanout counts), AttemptPublishedNotificationListenerTest (2, new): each listener resolves via IdentityService and passes straight through to NotificationDispatchService (dispatch owns the null-recipient policy, listeners don't duplicate it).",
+    "IdentityServiceTest +3 (new method coverage): findByTenantIdAndRole delegates to UserRepository.findByTenantIdAndRolesContaining.",
+    "EnrollmentServiceTest +2 (session module): enrollStudent publishes one StudentEnrolledEvent; bulkEnroll publishes one StudentEnrolledEvent per newly-created enrollment, not per already-enrolled/duplicate-in-batch id."
+  ],
+  "deviations": [
+    "No source unit tests existed to port: services/proctor has zero unit tests, services/notification has only a low-value RabbitMqConfig bean-wiring test (not ported, same precedent as skipping this test class in prior phases). Every proctoring/notification test in this phase is written from scratch.",
+    "A repo-wide linter/auto-formatter extracted string literals into named constants across several files touched in Phase 08 and Phase 09 (ScoringConstants, ProctorConstants, NotificationConstants, and the exception/config/vendor classes that reference them) after implementation; verified with a clean rebuild and the full test suite — no behavior change, all 428 tests still green."
+  ],
+  "report_path": "projects/plans/quang-modular-monolith/tests/phase-09-proctoring-notification-test-report.json"
+}

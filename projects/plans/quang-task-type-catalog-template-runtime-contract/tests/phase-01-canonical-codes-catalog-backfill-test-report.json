@@ -1,0 +1,13 @@
+{
+  "phase": "phase-01-canonical-codes-catalog-backfill",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-21T18:15:08.8809309Z",
+  "summary": {
+    "passed": 15,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "report_path": "pte-doc/projects/plans/quang-task-type-catalog-template-runtime-contract/tests/phase-01-canonical-codes-catalog-backfill-test-report.json"
+}

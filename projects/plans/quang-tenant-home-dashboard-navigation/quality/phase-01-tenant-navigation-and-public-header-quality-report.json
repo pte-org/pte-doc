@@ -1,0 +1,19 @@
+{
+  "mode": "gate",
+  "target": "phase-01-tenant-navigation-and-public-header",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-19T10:35:17.4217523Z",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-web/apps/tenant-web/features/auth/components/DashboardChrome.tsx",
+    "D:/GitHub/pte-org/pte-web/apps/tenant-web/features/public/components/PublicHeader.tsx",
+    "D:/GitHub/pte-org/pte-web/apps/tenant-web/lib/navigation.tsx"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": []
+}

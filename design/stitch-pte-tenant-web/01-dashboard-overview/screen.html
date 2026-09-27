@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>PTE Assessment Platform</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-surface-variant":"#434654","surface-variant":"#d8e3fa","tertiary-container":"#466ae3","secondary":"#4f5f7a","on-primary":"#ffffff","tertiary":"#2850c9","on-error-container":"#93000a","surface-container-lowest":"#ffffff","on-tertiary":"#ffffff","surface-bright":"#f9f9ff","on-secondary":"#ffffff","secondary-fixed":"#d5e3ff","on-primary-fixed-variant":"#003ab2","on-secondary-fixed":"#0a1c33","on-tertiary-fixed":"#001551","surface-container-highest":"#d8e3fa","primary-fixed-dim":"#b6c4ff","on-primary-container":"#fbf9ff","on-tertiary-fixed-variant":"#0039b4","outline":"#747686","surface-dim":"#cfdaf2","error-container":"#ffdad6","on-primary-fixed":"#001550","primary-container":"#4169e8","surface-container":"#e7eeff","surface-container-low":"#f0f3ff","primary":"#204ece","surface":"#f9f9ff","secondary-fixed-dim":"#b7c7e6","inverse-surface":"#263143","error":"#ba1a1a","tertiary-fixed-dim":"#b7c4ff","tertiary-fixed":"#dce1ff","on-secondary-container":"#53637e","inverse-on-surface":"#ebf1ff","surface-tint":"#2653d2","on-secondary-fixed-variant":"#374761","surface-container-high":"#dee8ff","background":"#f9f9ff","inverse-primary":"#b6c4ff","on-background":"#111c2d","on-error":"#ffffff","primary-fixed":"#dce1ff","on-tertiary-container":"#fcf9ff","on-surface":"#111c2d","outline-variant":"#c4c5d6","secondary-container":"#d0e0ff"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{"space-lg":"1.5rem","space-xl":"1.875rem","gutter-mobile":"1rem","space-xs":"0.25rem",gutter:"1.5rem","margin-mobile":"1rem","space-sm":"0.5rem","space-md":"1rem","space-xxl":"3rem",margin:"1.875rem"},fontFamily:{"body-secondary":["Plus Jakarta Sans"],"button-label":["Plus Jakarta Sans"],"page-title-h4":["Plus Jakarta Sans"],"tabular-data":["Plus Jakarta Sans"],"display-h3":["Plus Jakarta Sans"],"display-h2":["Plus Jakarta Sans"],"caption-small":["Plus Jakarta Sans"],"subtitle-h6":["Plus Jakarta Sans"],"card-title-h5":["Plus Jakarta Sans"],"body-base":["Plus Jakarta Sans"],"display-h1":["Plus Jakarta Sans"],"display-h1-mobile":["Plus Jakarta Sans"]},fontSize:{"body-secondary":["14px",{lineHeight:"21px",letterSpacing:"0",fontWeight:"400"}],"button-label":["14px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"400"}],"page-title-h4":["21px",{lineHeight:"26px",letterSpacing:"-0.005em",fontWeight:"600"}],"tabular-data":["14px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"500"}],"display-h3":["24px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"display-h2":["30px",{lineHeight:"36px",letterSpacing:"-0.015em",fontWeight:"600"}],"caption-small":["12px",{lineHeight:"16px",letterSpacing:"0",fontWeight:"400"}],"subtitle-h6":["16px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"600"}],"card-title-h5":["18px",{lineHeight:"26px",letterSpacing:"0",fontWeight:"600"}],"body-base":["14px",{lineHeight:"21px",letterSpacing:"0",fontWeight:"400"}],"display-h1":["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"600"}],"display-h1-mobile":["28px",{lineHeight:"34px",letterSpacing:"-0.015em",fontWeight:"600"}]}}}};</script></head><body class="bg-[#F2F6FA] font-body-base text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-[270px] bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20)]"><div class="flex flex-col flex-1 overflow-y-auto px-4"><div class="h-[60px] flex items-center gap-3 px-2 mt-2"><div class="w-9 h-9 rounded-xl bg-primary-container flex items-center justify-center text-on-primary font-subtitle-h6 text-subtitle-h6 shadow-sm">P</div><div class="flex flex-col"><span class="font-subtitle-h6 text-subtitle-h6 text-on-surface leading-tight tracking-tight">PTE Institute</span><span class="font-caption-small text-caption-small text-secondary">Assessment Tenant</span></div></div><nav class="flex flex-col mt-2" data-active-classes="bg-primary-container text-on-primary font-medium rounded-xl shadow-[0px_4px_10px_rgba(65,105,232,0.25)]"><div class="mt-3 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Home</div><a aria-current="page" class="h-[45px] px-3 flex items-center gap-3 transition-all duration-150 bg-primary-container text-on-primary font-medium rounded-xl shadow-[0px_4px_10px_rgba(65,105,232,0.25)]" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Dashboard</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Learners</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="learners" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Learners</span></a><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="programmes" href="#"><span class="material-symbols-outlined text-[20px]">school</span><span>Programmes</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Delivery</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="exam-sessions" href="#"><span class="material-symbols-outlined text-[20px]">event_available</span><span>Exam sessions</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Assessment</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="scoring-review" href="#"><span class="material-symbols-outlined text-[20px]">fact_check</span><span>Scoring review</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Data</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="audit-log" href="#"><span class="material-symbols-outlined text-[20px]">history_edu</span><span>Audit log</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Settings</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="staff-and-roles" href="#"><span class="material-symbols-outlined text-[20px]">badge</span><span>Staff &amp; roles</span></a><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="platform-settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Settings</span></a></nav></div><div class="p-4 flex flex-col gap-3"><div class="bg-surface-container-low p-3.5 rounded-xl shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20)]"><div class="flex items-center justify-between mb-1.5"><span class="font-caption-small text-caption-small font-semibold text-on-surface">Licence Usage</span><span class="font-tabular-data text-tabular-data text-secondary">97%</span></div><div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden mb-2"><div class="bg-primary-container h-full rounded-full" style="width: 97.2%"></div></div><div class="flex items-center justify-between"><span class="font-caption-small text-caption-small text-secondary">486 / 500 learner seats</span><a class="font-caption-small text-caption-small text-primary font-semibold hover:underline" href="#">Request more seats</a></div></div><div class="flex items-center gap-3 px-2 py-2 rounded-xl bg-surface-container-lowest"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col min-w-0 flex-1"><span class="font-body-base text-body-base font-semibold text-on-surface truncate">Nguyễn Quản Trị</span><span class="font-caption-small text-caption-small text-secondary truncate">Host Admin</span></div><button class="text-secondary hover:text-on-surface"><span class="material-symbols-outlined text-[18px]">logout</span></button></div></div></aside><div class="pl-[270px]"><header class="fixed top-0 left-[270px] right-0 h-[70px] bg-surface-container-lowest shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-4"><button class="w-9 h-9 flex items-center justify-center rounded-xl text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">menu</span></button><div class="flex items-center gap-2 text-secondary font-body-base text-body-base"><span class="hover:text-on-surface cursor-pointer">Host</span><span>/</span><span class="text-on-surface font-medium">Assessment Ops</span></div></div><div class="flex items-center gap-3"><button class="w-10 h-10 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">search</span></button><button class="relative w-10 h-10 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span></button><div class="h-6 w-px bg-surface-variant mx-1"></div><div class="flex items-center gap-3 pl-1"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-body-base text-body-base font-semibold text-on-surface leading-snug">Nguyễn Quản Trị</span><span class="font-caption-small text-caption-small text-secondary">Host Admin</span></div></div></div></header><main class="relative pt-[70px] min-h-screen bg-[#F2F6FA]"><div class="max-w-[1200px] mx-auto p-space-lg"><div class="flex flex-col w-full gap-space-lg">
+<!-- Top Level Header with Metadata & Period Filter -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2 text-secondary font-caption-small text-caption-small mb-1">
+<span>Platform</span>
+<span>/</span>
+<span class="text-on-surface font-semibold">Dashboard</span>
+</div>
+<h1 class="font-page-title-h4 text-page-title-h4 text-on-surface tracking-tight">Overview</h1>
+<p class="font-body-base text-body-base text-secondary">Hanoi Language Institute · 3 chi nhánh · Khoá mùa thu 2026</p>
+</div>
+<!-- Date Range Filter Pill -->
+<div class="relative inline-flex items-center">
+<div class="flex items-center gap-2 px-3.5 py-2 bg-surface-container-lowest rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] cursor-pointer hover:bg-surface-container-low transition-colors duration-150">
+<span class="material-symbols-outlined text-[18px] text-secondary">calendar_today</span>
+<span class="font-body-base text-body-base text-[#2A3547] font-normal">Học kỳ hiện tại (Thu 2026)</span>
+<span class="material-symbols-outlined text-[18px] text-secondary ml-1">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Row 1: 4 Key Indicator Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Active Learners -->
+<div class="bg-surface-container-lowest p-6 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex items-center gap-4">
+<div class="w-11 h-11 rounded-[7px] bg-[#ECF2FF] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#4169E8] text-[22px]">group</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-secondary text-body-secondary text-secondary truncate">Learners active</span>
+<span class="font-display-h3 text-display-h3 text-[#2A3547] tracking-tight">486</span>
+</div>
+</div>
+<!-- Attempts This Month -->
+<div class="bg-surface-container-lowest p-6 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex items-center gap-4">
+<div class="w-11 h-11 rounded-[7px] bg-[#E8F7FF] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#0E729F] text-[22px]">assignment_turned_in</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-secondary text-body-secondary text-secondary truncate">Attempts this month</span>
+<span class="font-display-h3 text-display-h3 text-[#2A3547] tracking-tight">1,204</span>
+</div>
+</div>
+<!-- Awaiting Scoring Review -->
+<div class="bg-surface-container-lowest p-6 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex items-center gap-4">
+<div class="w-11 h-11 rounded-[7px] bg-[#FEF5E5] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#9C6400] text-[22px]">rate_review</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-secondary text-body-secondary text-secondary truncate">Awaiting scoring review</span>
+<span class="font-display-h3 text-display-h3 text-[#2A3547] tracking-tight">28</span>
+</div>
+</div>
+<!-- Sessions This Week -->
+<div class="bg-surface-container-lowest p-6 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex items-center gap-4">
+<div class="w-11 h-11 rounded-[7px] bg-[#E6FFFA] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#088068] text-[22px]">event_seat</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-secondary text-body-secondary text-secondary truncate">Sessions this week</span>
+<span class="font-display-h3 text-display-h3 text-[#2A3547] tracking-tight">9</span>
+</div>
+</div>
+</div>
+<!-- Row 2: 8/4 Grid Split (Attempts Delivery Chart & Licence Quota) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-stretch">
+<!-- Chart Card (8 cols) -->
+<div class="lg:col-span-8 bg-surface-container-lowest p-6 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col justify-between">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 gap-3">
+<div>
+<h2 class="font-card-title-h5 text-card-title-h5 text-[#2A3547]">Attempts delivered</h2>
+<p class="font-body-secondary text-body-secondary text-secondary">Bài thi thử theo tháng</p>
+</div>
+<div class="flex items-center gap-4">
+<!-- Small Legend -->
+<div class="hidden sm:flex items-center gap-3 text-caption-small font-caption-small text-secondary">
+<span class="inline-flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#2a78d6]"></span> PTE Academic
+            </span>
+<span class="inline-flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#eb6834]"></span> PTE Core
+            </span>
+</div>
+<!-- Period Selector -->
+<div class="flex items-center gap-1 px-3 py-1.5 bg-[#F2F6FA] rounded-[7px] text-[#2A3547] font-body-secondary text-body-secondary cursor-pointer hover:bg-surface-variant transition-colors">
+<span>12 tháng qua</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Accessible Inline SVG Dual Bar Chart -->
+<div class="relative w-full pt-4 pb-1">
+<svg class="w-full h-[220px] overflow-visible" preserveaspectratio="none" viewbox="0 0 680 200">
+<!-- Clean Horizontal Gridlines -->
+<line stroke="#E5EAEF" stroke-dasharray="3 3" stroke-width="1" x1="30" x2="675" y1="20" y2="20"></line>
+<line stroke="#E5EAEF" stroke-dasharray="3 3" stroke-width="1" x1="30" x2="675" y1="70" y2="70"></line>
+<line stroke="#E5EAEF" stroke-dasharray="3 3" stroke-width="1" x1="30" x2="675" y1="120" y2="120"></line>
+<line stroke="#DFE5EF" stroke-width="1" x1="30" x2="675" y1="170" y2="170"></line>
+<!-- Y-Axis Numeric References -->
+<text fill="#7C8FAC" font-family="Plus Jakarta Sans" font-size="11" x="5" y="24">150</text>
+<text fill="#7C8FAC" font-family="Plus Jakarta Sans" font-size="11" x="5" y="74">100</text>
+<text fill="#7C8FAC" font-family="Plus Jakarta Sans" font-size="11" x="12" y="124">50</text>
+<text fill="#7C8FAC" font-family="Plus Jakarta Sans" font-size="11" x="18" y="174">0</text>
+<!-- Bars group: 12 months with 2 series each (#2a78d6 and #eb6834), 4px rounded tops -->
+<!-- T1 -->
+<g class="cursor-pointer group">
+<title>Tháng 1: PTE Academic 65, PTE Core 30</title>
+<rect class="transition-opacity group-hover:opacity-85" fill="#2a78d6" height="65" rx="4" ry="4" width="16" x="42" y="105"></rect>
+<rect class="transition-opacity group-hover:opacity-85" fill="#eb6834" height="30" rx="4" ry="4" width="16" x="60" y="140"></rect>
+<text fill="#7C8FAC" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="59" y="188">T1</text>
+</g>
+<!-- T2 -->
+<g class="cursor-pointer group">
+<title>Tháng 2: PTE Academic 72, PTE Core 38</title>
+<rect class="transition-opacity group-hover:opacity-85" fill="#2a78d6" height="72" rx="4" ry="4" width="16" x="94" y="98"></rect>
+<rect class="transition-opacity group-hover:opacity-85" fill="#eb6834" height="38" rx="4" ry="4" width="16" x="112" y="132"></rect>
+<text fill="#7C8FAC" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="111" y="188">T2</text>
+</g>
+<!-- T3 -->
+<g class="cursor-pointer group">
+<title>Tháng 3: PTE Academic 95, PTE Core 45</title>
+<rect class="transition-opacity group-hover:opacity-85" fill="#2a78d6" height="95" rx="4" ry="4" width="16" x="146" y="75"></rect>
+<rect class="transition-opacity group-hover:opacity-85" fill="#eb6834" height="45" rx="4" ry="4" width="16" x="164" y="125"></rect>
+<text fill="#7C8FAC" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="163" y="188">T3</text>
+</g>
+<!-- T4 -->
+<g class="cursor-pointer group">
+<title>Tháng 4: PTE Academic 110, PTE Core 52</title>
+<rect class="transition-opacity group-hover:opacity-85" fill="#2a78d6" height="110" rx="4" ry="4" width="16" x="198" y="60"></rect>
+<rect class="transition-opacity group-hover:opacity-85" fill="#eb6834" height="52" rx="4" ry="4" width="16" x="216" y="118"></rect>
+<text fill="#7C8FAC" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="215" y="188">T4</text>
+</g>
+<!-- T5 -->
+<g class="cursor-pointer group">
+<title>Tháng 5: PTE Academic 124, PTE Core 60</title>
+<rect class="transition-opacity group-hover:opacity-85" fill="#2a78d6" height="124" rx="4" ry="4" width="16" x="250" y="46"></rect>
+<rect class="transition-opacity group-hover:opacity-85" fill="#eb6834" height="60" rx="4" ry="4" width="16" x="268" y="110"></rect>
+<text fill="#7C8FAC" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="267" y="188">T5</text>
+</g>
+<!-- T6 -->
+<g class="cursor-pointer group">
+<title>Tháng 6: PTE Academic 135, PTE Core 70</title>
+<rect class="transition-opacity group-hover:opacity-85" fill="#2a78d6" height="135" rx="4" ry="4" width="16" x="302" y="35"></rect>
+<rect class="transition-opacity group-hover:opacity-85" fill="#eb6834" height="70" rx="4" ry="4" width="16" x="320" y="100"></rect>
+<text fill="#7C8FAC" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="319" y="188">T6</text>
+</g>
+<!-- T7 -->
+<g class="cursor-pointer group">
+<title>Tháng 7: PTE Academic 140, PTE Core 68</title>
+<rect class="transition-opacity group-hover:opacity-85" fill="#2a78d6" height="140" rx="4" ry="4" width="16" x="354" y="30"></rect>
+<rect class="transition-opacity group-hover:opacity-85" fill="#eb6834" height="68" rx="4" ry="4" width="16" x="372" y="102"></rect>
+<text fill="#7C8FAC" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="371" y="188">T7</text>
+</g>
+<!-- T8 -->
+<g class="cursor-pointer group">
+<title>Tháng 8: PTE Academic 130, PTE Core 74</title>
+<rect class="transition-opacity group-hover:opacity-85" fill="#2a78d6" height="130" rx="4" ry="4" width="16" x="406" y="40"></rect>
+<rect class="transition-opacity group-hover:opacity-85" fill="#eb6834" height="74" rx="4" ry="4" width="16" x="424" y="96"></rect>
+<text fill="#7C8FAC" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="423" y="188">T8</text>
+</g>
+<!-- T9 -->
+<g class="cursor-pointer group">
+<title>Tháng 9: PTE Academic 148, PTE Core 82</title>
+<rect class="transition-opacity group-hover:opacity-85" fill="#2a78d6" height="148" rx="4" ry="4" width="16" x="458" y="22"></rect>
+<rect class="transition-opacity group-hover:opacity-85" fill="#eb6834" height="82" rx="4" ry="4" width="16" x="476" y="88"></rect>
+<text fill="#7C8FAC" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="475" y="188">T9</text>
+</g>
+<!-- T10 -->
+<g class="cursor-pointer group">
+<title>Tháng 10: PTE Academic 115, PTE Core 64</title>
+<rect class="transition-opacity group-hover:opacity-85" fill="#2a78d6" height="115" rx="4" ry="4" width="16" x="510" y="55"></rect>
+<rect class="transition-opacity group-hover:opacity-85" fill="#eb6834" height="64" rx="4" ry="4" width="16" x="528" y="106"></rect>
+<text fill="#7C8FAC" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="527" y="188">T10</text>
+</g>
+<!-- T11 -->
+<g class="cursor-pointer group">
+<title>Tháng 11: PTE Academic 108, PTE Core 58</title>
+<rect class="transition-opacity group-hover:opacity-85" fill="#2a78d6" height="108" rx="4" ry="4" width="16" x="562" y="62"></rect>
+<rect class="transition-opacity group-hover:opacity-85" fill="#eb6834" height="58" rx="4" ry="4" width="16" x="580" y="112"></rect>
+<text fill="#7C8FAC" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="579" y="188">T11</text>
+</g>
+<!-- T12 -->
+<g class="cursor-pointer group">
+<title>Tháng 12: PTE Academic 120, PTE Core 62</title>
+<rect class="transition-opacity group-hover:opacity-85" fill="#2a78d6" height="120" rx="4" ry="4" width="16" x="614" y="50"></rect>
+<rect class="transition-opacity group-hover:opacity-85" fill="#eb6834" height="62" rx="4" ry="4" width="16" x="632" y="108"></rect>
+<text fill="#7C8FAC" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="631" y="188">T12</text>
+</g>
+</svg>
+</div>
+</div>
+<!-- Licence Quota Card (4 cols) -->
+<div class="lg:col-span-4 bg-surface-container-lowest p-6 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col justify-between">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<h2 class="font-card-title-h5 text-card-title-h5 text-[#2A3547]">Licence</h2>
+<span class="material-symbols-outlined text-secondary text-[20px]">verified_user</span>
+</div>
+<p class="font-body-secondary text-body-secondary text-secondary">Tỷ lệ sử dụng giấy phép khảo thí</p>
+<!-- Figure -->
+<div class="mt-4 flex items-baseline gap-2">
+<span class="font-display-h1-mobile text-display-h1-mobile font-semibold text-[#2A3547]">486 / 500</span>
+<span class="font-caption-small text-caption-small text-secondary font-medium">seats</span>
+</div>
+<!-- 6px Progress Bar -->
+<div class="w-full bg-[#E5EAEF] h-1.5 rounded-full overflow-hidden mt-3">
+<div class="bg-[#4169E8] h-full rounded-full transition-all duration-300" style="width: 97.2%"></div>
+</div>
+<!-- Warning Callout Pill -->
+<div class="mt-4 inline-flex items-center gap-2 px-3 py-2 bg-[#FEF5E5] rounded-[7px] text-[#9C6400]">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+<span class="font-caption-small text-caption-small font-semibold">97% đã dùng — còn 14 chỗ</span>
+</div>
+</div>
+<!-- Action Button -->
+<div class="pt-6">
+<button class="w-full h-[38px] px-[18px] py-2 bg-[#ECF2FF] text-[#3359D2] hover:bg-[#DCE8FF] rounded-[7px] font-button-label text-button-label font-normal transition-colors duration-150 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+<span>Request more seats</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Row 3: Upcoming Sessions Table (12 cols) -->
+<div class="bg-surface-container-lowest p-6 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col gap-4">
+<div class="flex items-center justify-between pb-1">
+<div>
+<h2 class="font-card-title-h5 text-card-title-h5 text-[#2A3547]">Upcoming sessions</h2>
+<p class="font-body-secondary text-body-secondary text-secondary">Lịch các ca thi sắp diễn ra tại các điểm</p>
+</div>
+<a class="font-body-secondary text-body-secondary text-[#3359D2] hover:underline font-medium inline-flex items-center gap-1" href="#">
+<span>Xem tất cả</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Table Container -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="h-12 bg-transparent text-[#2A3547] font-subtitle-h6 text-[14px]">
+<th class="py-3 px-4 font-semibold">Date &amp; time</th>
+<th class="py-3 px-4 font-semibold">Session code</th>
+<th class="py-3 px-4 font-semibold">Exam</th>
+<th class="py-3 px-4 font-semibold">Branch</th>
+<th class="py-3 px-4 font-semibold text-right">Enrolled / capacity</th>
+<th class="py-3 px-4 font-semibold">Proctor</th>
+<th class="py-3 px-4 font-semibold">Status</th>
+<th class="py-3 px-4 font-semibold text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#E5EAEF] text-body-base font-body-base">
+<!-- Row 1 -->
+<tr class="h-14 hover:bg-[#F6F9FC] transition-colors duration-150">
+<td class="py-3.5 px-4 text-[#2A3547] whitespace-nowrap">14/09 08:30</td>
+<td class="py-3.5 px-4 font-mono text-[13px] text-secondary tracking-tight">PTE-A-114</td>
+<td class="py-3.5 px-4 font-medium text-[#2A3547] whitespace-nowrap">PTE Academic Standard</td>
+<td class="py-3.5 px-4 text-secondary whitespace-nowrap">Cầu Giấy</td>
+<td class="py-3.5 px-4 text-right font-tabular-data text-tabular-data text-[#2A3547] whitespace-nowrap">42 / 48</td>
+<td class="py-3.5 px-4 text-[#2A3547] whitespace-nowrap">Nguyễn Thị Hương</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[7px] bg-[#E8F7FF] text-[#0E729F] font-caption-small text-caption-small font-semibold">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                Scheduled
+              </span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<a class="font-body-base text-body-base text-[#3359D2] hover:underline font-medium" href="#">View</a>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="h-14 hover:bg-[#F6F9FC] transition-colors duration-150">
+<td class="py-3.5 px-4 text-[#2A3547] whitespace-nowrap">14/09 14:00</td>
+<td class="py-3.5 px-4 font-mono text-[13px] text-secondary tracking-tight">PTE-C-052</td>
+<td class="py-3.5 px-4 font-medium text-[#2A3547] whitespace-nowrap">PTE Core Rapid</td>
+<td class="py-3.5 px-4 text-secondary whitespace-nowrap">Quận 1</td>
+<td class="py-3.5 px-4 text-right font-tabular-data text-tabular-data text-[#2A3547] whitespace-nowrap">24 / 24</td>
+<td class="py-3.5 px-4 text-[#2A3547] whitespace-nowrap">Trần Văn Bình</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[7px] bg-[#E8F7FF] text-[#0E729F] font-caption-small text-caption-small font-semibold">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                Scheduled
+              </span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<a class="font-body-base text-body-base text-[#3359D2] hover:underline font-medium" href="#">View</a>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="h-14 hover:bg-[#F6F9FC] transition-colors duration-150">
+<td class="py-3.5 px-4 text-[#2A3547] whitespace-nowrap">15/09 09:00</td>
+<td class="py-3.5 px-4 font-mono text-[13px] text-secondary tracking-tight">PTE-A-115</td>
+<td class="py-3.5 px-4 font-medium text-[#2A3547] whitespace-nowrap">PTE Academic Standard</td>
+<td class="py-3.5 px-4 text-secondary whitespace-nowrap">Cầu Giấy</td>
+<td class="py-3.5 px-4 text-right font-tabular-data text-tabular-data text-[#2A3547] whitespace-nowrap">18 / 48</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[7px] bg-[#FEF5E5] text-[#9C6400] font-caption-small text-caption-small font-medium">
+                Chưa phân công
+              </span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[7px] bg-[#FEF5E5] text-[#9C6400] font-caption-small text-caption-small font-semibold">
+<span class="material-symbols-outlined text-[14px]">edit_note</span>
+                Draft
+              </span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<a class="font-body-base text-body-base text-[#3359D2] hover:underline font-medium" href="#">View</a>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="h-14 hover:bg-[#F6F9FC] transition-colors duration-150">
+<td class="py-3.5 px-4 text-[#2A3547] whitespace-nowrap">16/09 13:30</td>
+<td class="py-3.5 px-4 font-mono text-[13px] text-secondary tracking-tight">PTE-A-116</td>
+<td class="py-3.5 px-4 font-medium text-[#2A3547] whitespace-nowrap">PTE Academic Standard</td>
+<td class="py-3.5 px-4 text-secondary whitespace-nowrap">Đống Đa</td>
+<td class="py-3.5 px-4 text-right font-tabular-data text-tabular-data text-[#2A3547] whitespace-nowrap">35 / 40</td>
+<td class="py-3.5 px-4 text-[#2A3547] whitespace-nowrap">Lê Hoàng Long</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[7px] bg-[#E8F7FF] text-[#0E729F] font-caption-small text-caption-small font-semibold">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                Scheduled
+              </span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<a class="font-body-base text-body-base text-[#3359D2] hover:underline font-medium" href="#">View</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Row 4: 6/6 Grid Split (Recent Activity & Action Items) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-stretch">
+<!-- Left: Recent Activity (6 cols) -->
+<div class="lg:col-span-6 bg-surface-container-lowest p-6 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div>
+<h2 class="font-card-title-h5 text-card-title-h5 text-[#2A3547]">Recent activity</h2>
+<p class="font-body-secondary text-body-secondary text-secondary">Nhật ký tác vụ trong ngày</p>
+</div>
+<span class="material-symbols-outlined text-secondary text-[20px]">history</span>
+</div>
+<!-- Vertical Timeline -->
+<div class="relative pl-6 pt-2 pb-2">
+<!-- Timeline line -->
+<div class="absolute left-2 top-3 bottom-4 w-px bg-[#E5EAEF]"></div>
+<div class="space-y-6">
+<!-- Entry 1 -->
+<div class="relative flex items-start gap-3">
+<div class="absolute -left-6 top-1.5 w-2.5 h-2.5 rounded-full bg-[#088068] ring-4 ring-white"></div>
+<span class="font-tabular-data text-[12px] text-secondary font-medium w-11 shrink-0 pt-0.5">09:30</span>
+<p class="font-body-base text-body-base text-[#2A3547] leading-tight">
+                Nguyễn Văn An hoàn thành bài thi thử <span class="font-semibold">(PTE-A-113 - 76 điểm)</span>
+</p>
+</div>
+<!-- Entry 2 -->
+<div class="relative flex items-start gap-3">
+<div class="absolute -left-6 top-1.5 w-2.5 h-2.5 rounded-full bg-[#4169E8] ring-4 ring-white"></div>
+<span class="font-tabular-data text-[12px] text-secondary font-medium w-11 shrink-0 pt-0.5">10:00</span>
+<p class="font-body-base text-body-base text-[#2A3547] leading-tight">
+                Phiên PTE-A-114 bắt đầu tại Cầu Giấy <span class="text-secondary">(42 thí sinh)</span>
+</p>
+</div>
+<!-- Entry 3 -->
+<div class="relative flex items-start gap-3">
+<div class="absolute -left-6 top-1.5 w-2.5 h-2.5 rounded-full bg-[#9C6400] ring-4 ring-white"></div>
+<span class="font-tabular-data text-[12px] text-secondary font-medium w-11 shrink-0 pt-0.5">11:15</span>
+<p class="font-body-base text-body-base text-[#2A3547] leading-tight">
+                28 bài chờ chấm lại từ phòng thi số 2
+              </p>
+</div>
+<!-- Entry 4 -->
+<div class="relative flex items-start gap-3">
+<div class="absolute -left-6 top-1.5 w-2.5 h-2.5 rounded-full bg-[#0E729F] ring-4 ring-white"></div>
+<span class="font-tabular-data text-[12px] text-secondary font-medium w-11 shrink-0 pt-0.5">14:20</span>
+<p class="font-body-base text-body-base text-[#2A3547] leading-tight">
+                Giảng viên Trần Mai đã giao bài luyện Speaking lớp PTE-79-A
+              </p>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-4 mt-2">
+<a class="font-body-secondary text-body-secondary text-[#3359D2] hover:underline font-medium inline-flex items-center gap-1" href="#">
+<span>Xem đầy đủ nhật ký hệ thống</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+</div>
+</div>
+<!-- Right: Cần xử lý (6 cols) -->
+<div class="lg:col-span-6 bg-surface-container-lowest p-6 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<div>
+<h2 class="font-card-title-h5 text-card-title-h5 text-[#2A3547]">Cần xử lý</h2>
+<p class="font-body-secondary text-body-secondary text-secondary">Cảnh báo và tác vụ ưu tiên cao</p>
+</div>
+<span class="px-2 py-0.5 rounded-[7px] bg-[#FDEDE8] text-[#B5342B] font-caption-small text-caption-small font-semibold">5 việc tồn đọng</span>
+</div>
+<!-- 5 Interactive Rows -->
+<div class="flex flex-col">
+<!-- Row 1: Critical -->
+<div class="py-3 flex items-center justify-between hover:bg-[#F6F9FC] -mx-3 px-3 rounded-[7px] cursor-pointer transition-colors duration-150">
+<div class="flex items-center gap-3 min-w-0">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[7px] bg-[#FDEDE8] text-[#B5342B] font-caption-small text-caption-small font-semibold shrink-0">
+<span class="material-symbols-outlined text-[14px]">error</span>
+                3 bài chấm lỗi
+              </span>
+<span class="font-body-base text-body-base text-[#2A3547] truncate">Chi tiết lỗi AI scoring</span>
+</div>
+<span class="material-symbols-outlined text-secondary text-[20px] shrink-0 ml-2">chevron_right</span>
+</div>
+<!-- Row 2: Warning -->
+<div class="py-3 flex items-center justify-between hover:bg-[#F6F9FC] -mx-3 px-3 rounded-[7px] cursor-pointer transition-colors duration-150">
+<div class="flex items-center gap-3 min-w-0">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[7px] bg-[#FEF5E5] text-[#9C6400] font-caption-small text-caption-small font-semibold shrink-0">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                Licence 97%
+              </span>
+<span class="font-body-base text-body-base text-[#2A3547] truncate">486 / 500 ghế đã phân bổ</span>
+</div>
+<span class="material-symbols-outlined text-secondary text-[20px] shrink-0 ml-2">chevron_right</span>
+</div>
+<!-- Row 3: Warning -->
+<div class="py-3 flex items-center justify-between hover:bg-[#F6F9FC] -mx-3 px-3 rounded-[7px] cursor-pointer transition-colors duration-150">
+<div class="flex items-center gap-3 min-w-0">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[7px] bg-[#FEF5E5] text-[#9C6400] font-caption-small text-caption-small font-semibold shrink-0">
+<span class="material-symbols-outlined text-[14px]">person_alert</span>
+                PTE-A-114 chưa có giám thị
+              </span>
+<span class="font-body-base text-body-base text-[#2A3547] truncate">Phiên thi ngày mai</span>
+</div>
+<span class="material-symbols-outlined text-secondary text-[20px] shrink-0 ml-2">chevron_right</span>
+</div>
+<!-- Row 4: Info -->
+<div class="py-3 flex items-center justify-between hover:bg-[#F6F9FC] -mx-3 px-3 rounded-[7px] cursor-pointer transition-colors duration-150">
+<div class="flex items-center gap-3 min-w-0">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[7px] bg-[#E8F7FF] text-[#0E729F] font-caption-small text-caption-small font-semibold shrink-0">
+<span class="material-symbols-outlined text-[14px]">sync</span>
+                Import roster đang chạy
+              </span>
+<span class="font-body-base text-body-base text-[#2A3547] truncate">File K62_Students.xlsx</span>
+</div>
+<span class="material-symbols-outlined text-secondary text-[20px] shrink-0 ml-2">chevron_right</span>
+</div>
+<!-- Row 5: Good -->
+<div class="py-3 flex items-center justify-between hover:bg-[#F6F9FC] -mx-3 px-3 rounded-[7px] cursor-pointer transition-colors duration-150">
+<div class="flex items-center gap-3 min-w-0">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[7px] bg-[#E6FFFA] text-[#088068] font-caption-small text-caption-small font-semibold shrink-0">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                Đã dựng lại báo cáo
+              </span>
+<span class="font-body-base text-body-base text-[#2A3547] truncate">Điểm thi khoá tháng 8/2026</span>
+</div>
+<span class="material-symbols-outlined text-secondary text-[20px] shrink-0 ml-2">chevron_right</span>
+</div>
+</div>
+</div>
+<div class="pt-4 mt-2">
+<button class="w-full h-[38px] px-[18px] py-2 bg-surface-container-low text-secondary hover:text-[#2A3547] hover:bg-surface-variant rounded-[7px] font-button-label text-button-label font-normal transition-colors duration-150 flex items-center justify-center gap-2">
+<span>Xem tất cả thông báo hệ thống</span>
+</button>
+</div>
+</div>
+</div>
+</div></div></main></div></body></html>

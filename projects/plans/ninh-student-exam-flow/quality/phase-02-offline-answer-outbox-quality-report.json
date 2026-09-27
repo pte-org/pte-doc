@@ -1,0 +1,58 @@
+{
+  "mode": "gate",
+  "target": "phase-02-offline-answer-outbox",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-07-27T00:00:00Z",
+  "reviewed_files": [
+    "lib/core/storage/answer_sync_status.dart",
+    "lib/core/storage/tables/answer_outbox_table.dart",
+    "lib/core/storage/dao/answer_outbox_dao.dart",
+    "lib/core/storage/app_database.dart",
+    "lib/core/storage/storage_module.dart",
+    "lib/core/network/network_canary.dart",
+    "lib/core/sync/sync_engine.dart",
+    "lib/core/network/api_exceptions.dart",
+    "lib/core/network/api_client.dart",
+    "lib/main.dart"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 1,
+    "noted": 0
+  },
+  "findings": [
+    {
+      "id": "QUAL-201",
+      "severity": "MEDIUM",
+      "rule": "ERR_RETRY_POLICY_SOUND",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "lib/core/sync/sync_engine.dart:122-154 (_flushOne)",
+      "evidence": "_flushOne treated every ApiException subtype identically as transient/leave-pending, including ValidationException (a malformed payload that will never succeed by retrying) and AuthException, with no retry limit or terminal path for non-retryable failures.",
+      "why_it_matters": "A ValidationException row would retry every canary/periodic cycle indefinitely with no user-visible signal and no bound — functionally equivalent to data loss for the student, since the task never resolves.",
+      "required_action": "Distinguish non-retryable ApiException subtypes (at minimum ValidationException) from genuinely transient ones and route them to a terminal state, or document the forever-retry as an explicit non-goal.",
+      "owner": "cook",
+      "resolution": "_flushOne now has a dedicated on ValidationException catch calling markTerminalRejected (same treatment as a 409 ConflictException, since a malformed payload is non-retryable for the same reason). AuthException remains left-pending with an explicit documented rationale (session-level failure, not row-specific; terminal-rejecting one row wouldn't fix anything) and an explicit non-goal note that no bounded retry/backoff exists yet for that case. Verified via new tests covering both the ValidationException->markTerminalRejected path and the AuthException->left-pending path; catch-order confirmed non-shadowed (ValidationException/ConflictException clauses precede the generic ApiException clause)."
+    },
+    {
+      "id": "QUAL-202",
+      "severity": "LOW",
+      "rule": "DOC_INTENTIONAL_LIMIT_IS_A_NON_GOAL",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "medium",
+      "location": "lib/core/sync/sync_engine.dart:55-71 (startSync / setActiveTask)",
+      "evidence": "startSync immediately wires background flush triggers with no documented guidance that setActiveTask should be established before or atomically with it, leaving an undocumented window where a background trigger could flush a task's row before it's marked active.",
+      "why_it_matters": "The phase's own Risks section calls the active-task exclusion the highest-blast-radius property in this phase, depending partly on correct caller behavior from Phase 3 — an undocumented ordering requirement is tribal knowledge that a future caller could easily miss.",
+      "required_action": "Document on startSync that callers must establish the active task before or atomically with starting background flush.",
+      "owner": "cook",
+      "resolution": "startSync's doc comment now explicitly states the ordering requirement and why it matters."
+    }
+  ],
+  "report_path": "plans/ninh-student-exam-flow/quality/phase-02-offline-answer-outbox-quality-report.json"
+}

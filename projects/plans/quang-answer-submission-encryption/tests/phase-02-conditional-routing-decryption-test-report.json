@@ -1,0 +1,35 @@
+{
+  "status": "PASSED",
+  "mode": "--tdd --verify",
+  "phase": "phase-02-conditional-routing-decryption",
+  "red_ready_artifact": "plans/quang-answer-submission-encryption/tests/phase-02-conditional-routing-decryption-tdd-ready.json",
+  "implementation_files": [
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/domain/exception/SubmissionDecryptionException.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/domain/exception/AnswerIntegrityLevelMismatchException.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/constant/ExamDeliveryConstants.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/dto/request/EncryptedSubmissionRequest.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/service/SubmissionDecryptionService.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/service/AttemptService.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/controller/AttemptController.java"
+  ],
+  "test_files_touched_during_green": [
+    "pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/service/AttemptServicePhase2Test.java",
+    "pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/service/AttemptServiceTest.java"
+  ],
+  "notes": [
+    "AttemptServicePhase2Test.java as written by the tester referenced hallucinated repository/service methods that don't exist (findByPublicIdAndStudentPublicId, findByPublicIdAndPinnedSnapshot, timerService.getTaskTimerState, answerSubmitService.submitAnswer(5 args)). Rewrote the file using the real APIs verified against AttemptService.java's actual source (findWithPinnedByPublicIdAndStudentPublicId, findByPinnedSnapshotIdAndOrderIndex, timerService.getState, answerSubmitService.submit(3 args)).",
+    "AttemptServiceTest.java (Phase 1's file) required a mechanical update to add the new required SubmissionDecryptionService constructor mock, since AttemptService's constructor grew an 11th parameter in Phase 2.",
+    "Confirmed via AnswerSubmitService/AnswerAlreadySubmittedException's existing doc comment that the DB unique constraint on (attempt, pinned_item) already guards against replay/duplicate submissions — this applies transparently to decrypted plaintext with no new code, resolving the plan's flagged replay-protection risk without additional work."
+  ],
+  "command": "cd pte-api && ./mvnw -q -pl services/exam-delivery test",
+  "results": {
+    "SubmissionDecryptionServiceTest": { "run": 8, "failures": 0, "errors": 0, "skipped": 0 },
+    "AttemptServicePhase2Test": { "run": 4, "failures": 0, "errors": 0, "skipped": 0 },
+    "AttemptServiceTest": { "run": 4, "failures": 0, "errors": 0, "skipped": 0, "note": "Phase 1, unaffected by Phase 2 behavior — confirms no regression" },
+    "EncryptionKeyProviderTest": { "run": 9, "failures": 0, "errors": 0, "skipped": 0, "note": "Phase 1, unrelated — confirms no regression" },
+    "AttemptMapperTest": { "run": 6, "failures": 0, "errors": 0, "skipped": 0, "note": "pre-existing, unrelated — confirms no regression" },
+    "ProctorCommandConsumerTest": { "run": 5, "failures": 0, "errors": 0, "skipped": 0, "note": "pre-existing, unrelated — confirms no regression" },
+    "TimerServiceTest": { "run": 5, "failures": 0, "errors": 0, "skipped": 0, "note": "pre-existing, unrelated — confirms no regression" }
+  },
+  "total": { "run": 41, "failures": 0, "errors": 0, "skipped": 0 }
+}

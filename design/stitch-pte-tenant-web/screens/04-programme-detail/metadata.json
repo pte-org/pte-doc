@@ -1,0 +1,8 @@
+{
+  "name": "projects/2518511518052928179/screens/bf30cf6b16de464ca8a6e8cd846c6535",
+  "title": "T4 - Programme Detail",
+  "deviceType": "DESKTOP",
+  "width": 2560,
+  "height": 4372,
+  "route": "tenant-web /host/programs/[publicId]"
+}

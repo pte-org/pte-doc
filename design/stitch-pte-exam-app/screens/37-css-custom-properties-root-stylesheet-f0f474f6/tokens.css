@@ -1,0 +1,274 @@
+/**
+ * PTE Academic CBT Delivery System — CSS Custom Properties (:root)
+ * Compiled from Tokens Studio & Style Dictionary Token Repository
+ * Compatible with modern CSS, Tailwind v3/v4 theme extensions, and Web Components.
+ */
+
+:root {
+  /* ==========================================================================
+     1. COLOR SYSTEM & SEMANTICS
+     ========================================================================== */
+
+  /* Brand Colors */
+  --pte-color-brand-primary: #0B5FAE;
+  --pte-color-brand-primary-hover: #094C8B;
+  --pte-color-brand-primary-active: #073B6D;
+  --pte-color-brand-primary-light: #EBF3FC;
+  --pte-color-brand-primary-subtle: #F0F6FF;
+  --pte-color-brand-navy-dark: #002244;
+
+  /* Surfaces & Backgrounds */
+  --pte-color-surface-canvas: #F7F9FF;
+  --pte-color-surface-card: #FFFFFF;
+  --pte-color-surface-subtle: #F1F4F9;
+  --pte-color-surface-muted: #F8FAFC;
+
+  /* Borders & Dividers */
+  --pte-color-border-default: #C9CFD9;
+  --pte-color-border-subtle: #E2E7EE;
+  --pte-color-border-active: #0B5FAE;
+  --pte-color-border-muted: #94A3B8;
+
+  /* Text & Typography Colors */
+  --pte-color-text-primary: #1E293B;
+  --pte-color-text-secondary: #475569;
+  --pte-color-text-muted: #64748B;
+  --pte-color-text-inverse: #FFFFFF;
+
+  /* Status Colors */
+  --pte-color-status-warning-fill: #FEF3C7;
+  --pte-color-status-warning-text: #B45309;
+  --pte-color-status-warning-border: #FCD34D;
+
+  --pte-color-status-danger-fill: #FEF2F2;
+  --pte-color-status-danger-text: #DC2626;
+  --pte-color-status-danger-border: #FECACA;
+
+  --pte-color-status-success-fill: #DCFCE7;
+  --pte-color-status-success-text: #16A34A;
+  --pte-color-status-success-border: #86EFAC;
+
+  /* Interactive States (e.g. Highlight Incorrect Words) */
+  --pte-color-interactive-highlight-bg: #D9EBFF;
+  --pte-color-interactive-highlight-text: #0B5FAE;
+  --pte-color-interactive-highlight-border: #0B5FAE;
+
+  /* ==========================================================================
+     2. TYPOGRAPHY FOUNDATIONS
+     ========================================================================== */
+
+  /* Font Families */
+  --pte-font-family-primary: 'Arimo', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --pte-font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Font Weights */
+  --pte-font-weight-regular: 400;
+  --pte-font-weight-medium: 500;
+  --pte-font-weight-semibold: 600;
+  --pte-font-weight-bold: 700;
+
+  /* Font Sizes */
+  --pte-font-size-xs: 11px;
+  --pte-font-size-sm: 12px;
+  --pte-font-size-base: 13px;
+  --pte-font-size-md: 14px;
+  --pte-font-size-lg: 16px;
+  --pte-font-size-xl: 18px;
+  --pte-font-size-2xl: 20px;
+  --pte-font-size-3xl: 24px;
+
+  /* Line Heights */
+  --pte-line-height-tight: 16px;
+  --pte-line-height-snug: 18px;
+  --pte-line-height-normal: 22px;
+  --pte-line-height-relaxed: 24px;
+  --pte-line-height-loose: 26px;
+  --pte-line-height-heading: 28px;
+  --pte-line-height-display: 32px;
+
+  /* Letter Spacing */
+  --pte-letter-spacing-tight: -0.01em;
+  --pte-letter-spacing-snug: -0.005em;
+  --pte-letter-spacing-normal: normal;
+  --pte-letter-spacing-wide: +0.01em;
+  --pte-letter-spacing-mono: +0.02em;
+
+  /* ==========================================================================
+     3. SPACING & SPATIAL RHYTHM (4px Base Grid)
+     ========================================================================== */
+  --pte-spacing-0: 0px;
+  --pte-spacing-1: 4px;
+  --pte-spacing-2: 8px;
+  --pte-spacing-3: 12px;
+  --pte-spacing-4: 16px;
+  --pte-spacing-5: 20px;
+  --pte-spacing-6: 24px;
+  --pte-spacing-8: 32px;
+  --pte-spacing-10: 40px;
+  --pte-spacing-12: 48px;
+
+  /* ==========================================================================
+     4. RADII, BORDERS & SHADOWS
+     ========================================================================== */
+  --pte-radius-none: 0px;
+  --pte-radius-xs: 2px;
+  --pte-radius-sm: 3px;
+  --pte-radius-md: 4px;
+  --pte-radius-lg: 6px;
+  --pte-radius-xl: 8px;
+  --pte-radius-full: 9999px;
+
+  --pte-border-width-none: 0px;
+  --pte-border-width-hairline: 1px;
+  --pte-border-width-active: 1.5px;
+  --pte-border-width-strong: 2px;
+  --pte-border-width-accent: 4px;
+
+  --pte-shadow-none: none;
+  --pte-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --pte-shadow-dropdown: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  /* ==========================================================================
+     5. COMPONENT-SPECIFIC TOKENS
+     ========================================================================== */
+
+  /* Header & Footer Persistent Chrome */
+  --pte-header-height: 56px;
+  --pte-header-bg: var(--pte-color-surface-card);
+  --pte-header-border-bottom: var(--pte-border-width-hairline) solid var(--pte-color-border-default);
+
+  --pte-footer-height: 64px;
+  --pte-footer-bg: var(--pte-color-surface-card);
+  --pte-footer-border-top: var(--pte-border-width-hairline) solid var(--pte-color-border-default);
+
+  /* Buttons */
+  --pte-button-primary-bg: var(--pte-color-brand-primary);
+  --pte-button-primary-hover-bg: var(--pte-color-brand-primary-hover);
+  --pte-button-primary-active-bg: var(--pte-color-brand-primary-active);
+  --pte-button-primary-text: var(--pte-color-text-inverse);
+  --pte-button-primary-height: 38px;
+  --pte-button-primary-radius: var(--pte-radius-md);
+  --pte-button-primary-padding: 0 var(--pte-spacing-6);
+
+  --pte-button-secondary-bg: transparent;
+  --pte-button-secondary-border: var(--pte-border-width-hairline) solid var(--pte-color-brand-primary);
+  --pte-button-secondary-text: var(--pte-color-brand-primary);
+  --pte-button-secondary-height: 38px;
+  --pte-button-secondary-radius: var(--pte-radius-md);
+  --pte-button-secondary-padding: 0 var(--pte-spacing-4);
+
+  /* Instruction Card */
+  --pte-instruction-card-bg: var(--pte-color-surface-card);
+  --pte-instruction-card-border: var(--pte-border-width-hairline) solid var(--pte-color-border-default);
+  --pte-instruction-card-accent-border: var(--pte-border-width-accent) solid var(--pte-color-brand-primary);
+  --pte-instruction-card-radius: var(--pte-radius-md);
+  --pte-instruction-card-padding: var(--pte-spacing-4) var(--pte-spacing-5);
+
+  /* Audio Stimulus Player */
+  --pte-audio-player-bg: var(--pte-color-brand-primary-subtle);
+  --pte-audio-player-border: var(--pte-border-width-hairline) solid var(--pte-color-border-default);
+  --pte-audio-player-radius: var(--pte-radius-lg);
+  --pte-audio-player-padding: var(--pte-spacing-4) var(--pte-spacing-5);
+
+  /* Form & Choice Rows */
+  --pte-choice-row-radius: var(--pte-radius-md);
+  --pte-choice-row-padding: 14px 18px;
+  --pte-choice-row-border-default: var(--pte-border-width-hairline) solid var(--pte-color-border-default);
+  --pte-choice-row-border-selected: var(--pte-border-width-active) solid var(--pte-color-brand-primary);
+  --pte-choice-row-bg-default: var(--pte-color-surface-card);
+  --pte-choice-row-bg-selected: var(--pte-color-brand-primary-light);
+
+  /* FIB Drag & Drop Tokens */
+  --pte-fib-token-height: 32px;
+  --pte-fib-token-padding: 6px 14px;
+  --pte-fib-token-radius: var(--pte-radius-md);
+  --pte-fib-token-border: var(--pte-border-width-active) solid var(--pte-color-brand-primary);
+  --pte-fib-token-bg-available: var(--pte-color-surface-card);
+  --pte-fib-token-text-available: var(--pte-color-brand-primary);
+  --pte-fib-token-bg-placed: var(--pte-color-brand-primary-light);
+  --pte-fib-slot-border-empty: var(--pte-border-width-active) dashed var(--pte-color-border-muted);
+  --pte-fib-slot-bg-empty: var(--pte-color-surface-subtle);
+
+  /* Workstation Reading Viewport Constraint */
+  --pte-layout-max-reading-width: 1160px;
+}
+
+/* ==========================================================================
+   6. TYPOGRAPHIC UTILITY CLASSES (Composite Shortcuts)
+   ========================================================================== */
+
+.pte-typography-display-lg {
+  font-family: var(--pte-font-family-primary);
+  font-size: var(--pte-font-size-3xl);
+  line-height: var(--pte-line-height-display);
+  font-weight: var(--pte-font-weight-bold);
+  letter-spacing: var(--pte-letter-spacing-tight);
+}
+
+.pte-typography-display-sm {
+  font-family: var(--pte-font-family-primary);
+  font-size: var(--pte-font-size-2xl);
+  line-height: var(--pte-line-height-heading);
+  font-weight: var(--pte-font-weight-semibold);
+  letter-spacing: var(--pte-letter-spacing-snug);
+}
+
+.pte-typography-heading-md {
+  font-family: var(--pte-font-family-primary);
+  font-size: var(--pte-font-size-xl);
+  line-height: var(--pte-line-height-loose);
+  font-weight: var(--pte-font-weight-semibold);
+  letter-spacing: var(--pte-letter-spacing-normal);
+}
+
+.pte-typography-heading-sm {
+  font-family: var(--pte-font-family-primary);
+  font-size: var(--pte-font-size-lg);
+  line-height: var(--pte-line-height-relaxed);
+  font-weight: var(--pte-font-weight-semibold);
+  letter-spacing: var(--pte-letter-spacing-normal);
+}
+
+.pte-typography-body-lg {
+  font-family: var(--pte-font-family-primary);
+  font-size: var(--pte-font-size-lg);
+  line-height: var(--pte-line-height-loose);
+  font-weight: var(--pte-font-weight-regular);
+}
+
+.pte-typography-body-md {
+  font-family: var(--pte-font-family-primary);
+  font-size: var(--pte-font-size-md);
+  line-height: var(--pte-line-height-normal);
+  font-weight: var(--pte-font-weight-regular);
+}
+
+.pte-typography-body-md-bold {
+  font-family: var(--pte-font-family-primary);
+  font-size: var(--pte-font-size-md);
+  line-height: var(--pte-line-height-normal);
+  font-weight: var(--pte-font-weight-semibold);
+}
+
+.pte-typography-body-sm {
+  font-family: var(--pte-font-family-primary);
+  font-size: var(--pte-font-size-base);
+  line-height: var(--pte-line-height-snug);
+  font-weight: var(--pte-font-weight-regular);
+}
+
+.pte-typography-caption {
+  font-family: var(--pte-font-family-primary);
+  font-size: var(--pte-font-size-sm);
+  line-height: var(--pte-line-height-tight);
+  font-weight: var(--pte-font-weight-medium);
+  letter-spacing: var(--pte-letter-spacing-wide);
+}
+
+.pte-typography-mono-sm {
+  font-family: var(--pte-font-family-mono);
+  font-size: var(--pte-font-size-sm);
+  line-height: var(--pte-line-height-tight);
+  font-weight: var(--pte-font-weight-regular);
+  letter-spacing: var(--pte-letter-spacing-mono);
+}

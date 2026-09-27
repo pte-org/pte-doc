@@ -1,0 +1,17 @@
+{
+  "mode": "gate",
+  "target": "phase-07-pte-app-screen-registry-and-manifest",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-22T16:35:00Z",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-doc/projects/plans/quang-dynamic-task-type-screen-contract/phase-07-pte-app-screen-registry-and-manifest.md",
+    "D:/GitHub/pte-org/pte-app/lib/core/constants/task_type_meta.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/domain/client_capability_manifest.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/domain/attempt_preflight.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/domain/task_view.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/model/task_view_ui_adapter.dart"
+  ],
+  "summary": { "blocker": 0, "high": 0, "medium": 0, "low": 0, "noted": 0 },
+  "findings": [],
+  "report_path": "quality/phase-07-pte-app-screen-registry-and-manifest-quality-report.json"
+}

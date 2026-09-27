@@ -1,0 +1,22 @@
+{
+  "mode": "gate",
+  "target": "phase-08-generation-snapshot-scoring-and-history",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-22T16:35:00Z",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-doc/projects/plans/quang-dynamic-task-type-screen-contract/phase-08-generation-snapshot-scoring-and-history.md",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/internal/service/SnapshotPublishService.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/domain/SnapshotItem.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/service/SnapshotPinService.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/domain/PinnedItem.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/ScoringMethodResolver.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/ObjectiveScoringService.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/AnswerPayloadDecoder.java",
+    "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/assessment/internal/service/SnapshotPublishServiceTest.java",
+    "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/attempt/internal/service/SnapshotPinServiceTest.java",
+    "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/scoring/internal/service/ObjectiveScoringServiceTest.java"
+  ],
+  "summary": { "blocker": 0, "high": 0, "medium": 0, "low": 0, "noted": 0 },
+  "findings": [],
+  "report_path": "quality/phase-08-generation-snapshot-scoring-and-history-quality-report.json"
+}

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>PTE Assessment Platform</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"tertiary-container":"#466ae3","on-primary-container":"#fbf9ff","on-primary":"#ffffff","surface-container-low":"#f0f3ff","inverse-primary":"#b6c4ff","on-background":"#111c2d","secondary-fixed-dim":"#b7c7e6","surface-dim":"#cfdaf2","surface-bright":"#f9f9ff","surface-variant":"#d8e3fa","tertiary-fixed-dim":"#b7c4ff","outline-variant":"#c4c5d6","on-tertiary":"#ffffff","outline":"#747686","tertiary-fixed":"#dce1ff","secondary":"#4f5f7a","surface-container-high":"#dee8ff","on-secondary-container":"#53637e","on-tertiary-fixed-variant":"#0039b4","primary":"#204ece","inverse-surface":"#263143","primary-fixed-dim":"#b6c4ff","surface-tint":"#2653d2","on-secondary-fixed-variant":"#374761","on-secondary-fixed":"#0a1c33","error":"#ba1a1a","on-tertiary-fixed":"#001551","primary-container":"#4169e8","secondary-container":"#d0e0ff","background":"#f9f9ff","tertiary":"#2850c9","on-primary-fixed-variant":"#003ab2","on-error-container":"#93000a","on-surface":"#111c2d","error-container":"#ffdad6","on-primary-fixed":"#001550","surface-container-highest":"#d8e3fa","surface":"#f9f9ff","inverse-on-surface":"#ebf1ff","on-surface-variant":"#434654","primary-fixed":"#dce1ff","on-error":"#ffffff","surface-container":"#e7eeff","secondary-fixed":"#d5e3ff","on-secondary":"#ffffff","surface-container-lowest":"#ffffff","on-tertiary-container":"#fcf9ff"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{"space-xs":"0.25rem","margin":"1.875rem","space-xl":"1.875rem","margin-mobile":"1rem","gutter-mobile":"1rem","space-md":"1rem","space-xxl":"3rem","space-sm":"0.5rem","space-lg":"1.5rem","gutter":"1.5rem"},fontFamily:{"display-h2":["Plus Jakarta Sans"],"body-base":["Plus Jakarta Sans"],"tabular-data":["Plus Jakarta Sans"],"body-secondary":["Plus Jakarta Sans"],"card-title-h5":["Plus Jakarta Sans"],"display-h1":["Plus Jakarta Sans"],"subtitle-h6":["Plus Jakarta Sans"],"button-label":["Plus Jakarta Sans"],"caption-small":["Plus Jakarta Sans"],"page-title-h4":["Plus Jakarta Sans"],"display-h3":["Plus Jakarta Sans"],"display-h1-mobile":["Plus Jakarta Sans"]},fontSize:{"display-h2":["30px",{lineHeight:"36px",letterSpacing:"-0.015em",fontWeight:"600"}],"body-base":["14px",{lineHeight:"21px",letterSpacing:"0",fontWeight:"400"}],"tabular-data":["14px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"500"}],"body-secondary":["14px",{lineHeight:"21px",letterSpacing:"0",fontWeight:"400"}],"card-title-h5":["18px",{lineHeight:"26px",letterSpacing:"0",fontWeight:"600"}],"display-h1":["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"600"}],"subtitle-h6":["16px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"600"}],"button-label":["14px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"400"}],"caption-small":["12px",{lineHeight:"16px",letterSpacing:"0",fontWeight:"400"}],"page-title-h4":["21px",{lineHeight:"26px",letterSpacing:"-0.005em",fontWeight:"600"}],"display-h3":["24px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"display-h1-mobile":["28px",{lineHeight:"34px",letterSpacing:"-0.015em",fontWeight:"600"}]}}}};</script></head><body class="bg-[#F2F6FA] font-body-base text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-[270px] bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20)]"><div class="flex flex-col flex-1 overflow-y-auto px-4"><div class="h-[60px] flex items-center gap-3 px-2 mt-2"><div class="w-9 h-9 rounded-xl bg-primary-container flex items-center justify-center text-on-primary font-subtitle-h6 text-subtitle-h6 shadow-sm">P</div><div class="flex flex-col"><span class="font-subtitle-h6 text-subtitle-h6 text-on-surface leading-tight tracking-tight">PTE Institute</span><span class="font-caption-small text-caption-small text-secondary">Assessment Tenant</span></div></div><nav class="flex flex-col mt-2" data-active-classes="bg-primary-container text-on-primary font-medium rounded-xl shadow-[0px_4px_10px_rgba(65,105,232,0.25)]"><div class="mt-3 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Home</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Dashboard</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Learners</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="learners" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Learners</span></a><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="programmes" href="#"><span class="material-symbols-outlined text-[20px]">school</span><span>Programmes</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Delivery</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="exam-sessions" href="#"><span class="material-symbols-outlined text-[20px]">event_available</span><span>Exam sessions</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Assessment</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="scoring-review" href="#"><span class="material-symbols-outlined text-[20px]">fact_check</span><span>Scoring review</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Data</div><a aria-current="page" class="h-[45px] px-3 flex items-center gap-3 bg-primary-container text-on-primary font-medium rounded-xl shadow-[0px_4px_10px_rgba(65,105,232,0.25)]" data-path="audit-log" href="#"><span class="material-symbols-outlined text-[20px] text-on-primary">history_edu</span><span>Audit log</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Settings</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="staff-and-roles" href="#"><span class="material-symbols-outlined text-[20px]">badge</span><span>Staff &amp; roles</span></a><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="platform-settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Settings</span></a></nav></div><div class="p-4 flex flex-col gap-3"><div class="bg-surface-container-low p-3.5 rounded-xl shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20)]"><div class="flex items-center justify-between mb-1.5"><span class="font-caption-small text-caption-small font-semibold text-on-surface">Licence Usage</span><span class="font-tabular-data text-tabular-data text-secondary">97%</span></div><div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden mb-2"><div class="bg-primary-container h-full rounded-full" style="width: 97.2%"></div></div><div class="flex items-center justify-between"><span class="font-caption-small text-caption-small text-secondary">486 / 500 learner seats</span><a class="font-caption-small text-caption-small text-primary font-semibold hover:underline" href="#">Request more seats</a></div></div><div class="flex items-center gap-3 px-2 py-2 rounded-xl bg-surface-container-lowest"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col min-w-0 flex-1"><span class="font-body-base text-body-base font-semibold text-on-surface truncate">Nguyễn Quản Trị</span><span class="font-caption-small text-caption-small text-secondary truncate">Host Admin</span></div><button class="text-secondary hover:text-on-surface"><span class="material-symbols-outlined text-[18px]">logout</span></button></div></div></aside><div class="pl-[270px]"><header class="fixed top-0 left-[270px] right-0 h-[70px] bg-surface-container-lowest shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-4"><button class="w-9 h-9 flex items-center justify-center rounded-xl text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">menu</span></button><div class="flex items-center gap-2 text-secondary font-body-base text-body-base"><span class="hover:text-on-surface cursor-pointer">Host</span><span>/</span><span class="text-on-surface font-medium">Assessment Ops</span></div></div><div class="flex items-center gap-3"><button class="w-10 h-10 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">search</span></button><button class="relative w-10 h-10 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span></button><div class="h-6 w-px bg-surface-variant mx-1"></div><div class="flex items-center gap-3 pl-1"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-body-base text-body-base font-semibold text-on-surface leading-snug">Nguyễn Quản Trị</span><span class="font-caption-small text-caption-small text-secondary">Host Admin</span></div></div></div></header><main class="relative pt-[70px] min-h-screen bg-[#F2F6FA]"><div class="max-w-[1200px] mx-auto p-space-lg"><div class="flex flex-col w-full">
+<!-- Interactive script for active sidebar matching & tabs sync -->
+<script>
+    (function () {
+      // Sync Shell Sidebar active state to 'Settings'
+      try {
+        const auditLink = document.querySelector('a[data-path="audit-log"]');
+        if (auditLink) {
+          auditLink.className =
+            "h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150";
+          const icon = auditLink.querySelector(".material-symbols-outlined");
+          if (icon) icon.className = "material-symbols-outlined text-[20px]";
+        }
+        const settingsLink = document.querySelector(
+          'a[data-path="platform-settings"]',
+        );
+        if (settingsLink) {
+          settingsLink.className =
+            "h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base bg-primary-container text-on-primary font-medium shadow-[0px_4px_10px_rgba(65,105,232,0.25)]";
+          const icon = settingsLink.querySelector(".material-symbols-outlined");
+          if (icon)
+            icon.className =
+              "material-symbols-outlined text-[20px] text-on-primary";
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    })();
+  </script>
+<!-- Top Breadcrumb & Page Header -->
+<div class="flex flex-col gap-2 mb-6">
+<div class="flex items-center gap-2 text-secondary font-caption-small text-caption-small">
+<span class="hover:text-primary cursor-pointer transition-colors">Host</span>
+<span class="text-outline-variant">/</span>
+<span class="hover:text-primary cursor-pointer transition-colors">System &amp; Security</span>
+<span class="text-outline-variant">/</span>
+<span class="text-on-surface font-semibold">Cài đặt hệ thống (Settings)</span>
+</div>
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+<div>
+<div class="flex items-center gap-3">
+<h1 class="font-display-h2 text-display-h2 text-on-surface">
+            Cài đặt hệ thống (System Settings)
+          </h1>
+<span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[7px] bg-[#E6FFFA] text-[#088068] font-caption-small text-caption-small font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068] animate-pulse"> </span>
+            Tenant Cluster Active
+          </span>
+</div>
+<p class="font-body-base text-body-base text-secondary mt-1 max-w-[780px]">
+          Quản trị thông số tổ chức, cấu hình kết nối Pearson VUE Engine, chính
+          sách bảo mật 2FA và chỉ số hạ tầng khảo thí.
+        </p>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<button class="h-[38px] px-4 rounded-[7px] bg-secondary-container text-primary hover:bg-[#DCE8FF] font-button-label text-button-label flex items-center gap-2 transition-colors duration-150" onclick="triggerToast('Nhật ký thay đổi hệ thống 7 ngày qua đã tải xong.')" type="button">
+<span class="material-symbols-outlined text-[18px]">history</span>
+<span>Xem nhật ký thay đổi</span>
+</button>
+<button class="h-[38px] px-4.5 rounded-[7px] bg-primary-container text-on-primary hover:bg-[#3359D2] font-button-label text-button-label flex items-center gap-2 shadow-[0px_4px_10px_rgba(65,105,232,0.25)] transition-all duration-150" onclick="saveAllSettings()" type="button">
+<span class="material-symbols-outlined text-[18px]">check</span>
+<span>Lưu tất cả thay đổi</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Main Grid: Left Sub-Nav & Right Settings Stack -->
+<div class="grid grid-cols-12 gap-gutter items-start">
+<!-- LEFT COLUMN (Sub-navigation tabs & System status card) -->
+<div class="col-span-12 lg:col-span-4 xl:col-span-3 flex flex-col gap-space-md sticky top-[90px]">
+<!-- Sub-Nav Card -->
+<div class="bg-surface-container-lowest rounded-[7px] p-3 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col gap-1">
+<div class="px-3 pt-2 pb-2">
+<span class="font-caption-small text-caption-small font-semibold uppercase text-secondary tracking-wider">Danh mục cấu hình</span>
+</div>
+<button class="nav-tab-item flex items-center justify-between w-full h-[42px] px-3.5 rounded-[7px] bg-secondary-container text-primary font-body-base text-body-base font-semibold text-left transition-all" data-target="sec-tenant" onclick="scrollToSection('sec-tenant', this)" type="button">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[20px]">corporate_fare</span>
+<span>Cấu hình tổ chức</span>
+</div>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+<button class="nav-tab-item flex items-center justify-between w-full h-[42px] px-3.5 rounded-[7px] text-secondary hover:bg-surface-container hover:text-on-surface font-body-base text-body-base text-left transition-all" data-target="sec-pearson" onclick="scrollToSection('sec-pearson', this)" type="button">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[20px]">test_clone</span>
+<span>Pearson VUE &amp; LACS</span>
+</div>
+<span class="px-1.5 py-0.5 rounded-[4px] bg-[#E6FFFA] text-[#088068] font-caption-small text-caption-small text-[10px] font-bold">Sync</span>
+</button>
+<button class="nav-tab-item flex items-center justify-between w-full h-[42px] px-3.5 rounded-[7px] text-secondary hover:bg-surface-container hover:text-on-surface font-body-base text-body-base text-left transition-all" data-target="sec-security" onclick="scrollToSection('sec-security', this)" type="button">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[20px]">shield_lock</span>
+<span>Bảo mật &amp; Xác thực 2FA</span>
+</div>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+<button class="nav-tab-item flex items-center justify-between w-full h-[42px] px-3.5 rounded-[7px] text-secondary hover:bg-surface-container hover:text-on-surface font-body-base text-body-base text-left transition-all" data-target="sec-license" onclick="scrollToSection('sec-license', this)" type="button">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[20px]">card_membership</span>
+<span>Bản quyền &amp; Gói License</span>
+</div>
+<span class="px-1.5 py-0.5 rounded-[4px] bg-[#FDEDE8] text-[#BE452B] font-caption-small text-caption-small text-[10px] font-bold">97%</span>
+</button>
+<button class="nav-tab-item flex items-center justify-between w-full h-[42px] px-3.5 rounded-[7px] text-secondary hover:bg-surface-container hover:text-on-surface font-body-base text-body-base text-left transition-all" onclick="triggerToast('Cổng kết nối Webhooks &amp; SMS Gateway đang kích hoạt theo API key tenant.')" type="button">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[20px]">notifications_active</span>
+<span>Thông báo &amp; Webhooks</span>
+</div>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+<!-- Infrastructure Health Mini-Card -->
+<div class="bg-surface-container-lowest rounded-[7px] p-4 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col gap-3">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#088068] animate-ping"> </span>
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface">Hạ tầng thi cử</span>
+</div>
+<span class="px-2 py-0.5 rounded-[7px] bg-[#E6FFFA] text-[#088068] font-caption-small text-caption-small font-semibold">Uptime 99.98%</span>
+</div>
+<p class="font-caption-small text-caption-small text-secondary">
+          Máy chủ đệm cục bộ LACS kết nối đồng bộ 14 trạm máy phòng thi tại cơ
+          sở PTE Institute Vietnam.
+        </p>
+<!-- Live Sparkline Ping Indicator -->
+<div class="bg-surface-container-low p-2.5 rounded-[7px] flex flex-col">
+<div class="flex justify-between items-center mb-1">
+<span class="font-caption-small text-caption-small text-secondary">Latency Pearson Cloud</span>
+<span class="font-tabular-data text-tabular-data text-on-surface font-semibold">18 ms</span>
+</div>
+<svg class="w-full h-8 text-primary overflow-visible" fill="none" stroke="currentColor" stroke-width="1.75" viewbox="0 0 200 30">
+<path d="M0 24 L25 21 L50 25 L75 16 L100 18 L125 12 L150 16 L175 11 L200 14" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div class="flex items-center justify-between text-secondary font-caption-small text-caption-small pt-1">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-[#088068]">verified</span>
+            ISO 27001 Certified
+          </span>
+<span class="font-mono">v4.2.6-rel</span>
+</div>
+</div>
+<!-- Quick Document Callout -->
+<div class="bg-gradient-to-br from-surface-container to-surface-container-high rounded-[7px] p-4 flex flex-col gap-2">
+<div class="flex items-center gap-2 text-primary font-semibold">
+<span class="material-symbols-outlined text-[20px]">menu_book</span>
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface">Pearson VUE Runbook</span>
+</div>
+<p class="font-caption-small text-caption-small text-secondary">
+          Hướng dẫn tích hợp cổng thi chuẩn quốc tế và quy trình cấp phép máy
+          trạm giám thị.
+        </p>
+<a class="text-primary font-button-label text-button-label font-semibold inline-flex items-center gap-1 hover:underline" href="#">
+<span>Mở cẩm nang quản trị</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- RIGHT COLUMN (Form sections stack) -->
+<div class="col-span-12 lg:col-span-8 xl:col-span-9 flex flex-col gap-space-lg">
+<!-- CARD 1: Tenant Organization Profile -->
+<div class="bg-surface-container-lowest rounded-[7px] p-6 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col gap-5" id="sec-tenant">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-card-title-h5 text-card-title-h5 text-on-surface font-semibold">
+              Thông tin đơn vị khảo thí (Tenant Organization Profile)
+            </h2>
+<p class="font-caption-small text-caption-small text-secondary mt-0.5">
+              Thông số nhận diện thương hiệu, tên miền riêng và thông tin pháp
+              nhân quản trị kỳ thi.
+            </p>
+</div>
+<span class="px-2.5 py-1 rounded-[7px] bg-[#E8F7FF] text-[#0E729F] font-caption-small text-caption-small font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+            Bản quyền chính thức
+          </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Tenant Name -->
+<div class="flex flex-col gap-1.5 md:col-span-2">
+<label class="font-body-base text-body-base font-semibold text-on-surface">Tên cơ sở / Đơn vị tổ chức thi</label>
+<input class="h-[42px] px-3.5 rounded-[7px] text-on-surface font-body-base text-body-base bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" style="border: 1px solid #7c8fac" type="text" value="PTE Institute Vietnam (Assessment Tenant)"/>
+</div>
+<!-- Tenant UID -->
+<div class="flex flex-col gap-1.5">
+<label class="font-body-base text-body-base font-semibold text-on-surface flex items-center gap-1.5">
+<span>Mã định danh Tenant (Tenant UID)</span>
+<span class="material-symbols-outlined text-[16px] text-secondary" title="Khóa cứng mã Pearson VUE Provider">help</span>
+</label>
+<div class="relative">
+<input class="h-[42px] px-3.5 w-full rounded-[7px] bg-surface-container-low font-mono font-tabular-data text-tabular-data text-primary font-bold cursor-not-allowed" readonly="" style="border: 1px solid #c4c5d6" type="text" value="TNT-PTE-VN-0824"/>
+<span class="absolute right-3 top-2.5 text-secondary material-symbols-outlined text-[18px]">lock</span>
+</div>
+</div>
+<!-- Custom Domain -->
+<div class="flex flex-col gap-1.5">
+<label class="font-body-base text-body-base font-semibold text-on-surface">Tên miền truy cập phụ (Custom Domain)</label>
+<div class="relative flex items-center">
+<input class="h-[42px] pl-3.5 pr-20 w-full rounded-[7px] text-on-surface font-body-base text-body-base focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" style="border: 1px solid #7c8fac" type="text" value="portal.pteinstitute.edu.vn"/>
+<span class="absolute right-3 px-2 py-0.5 rounded-[4px] bg-[#E6FFFA] text-[#088068] font-caption-small text-caption-small font-semibold">SSL Active</span>
+</div>
+</div>
+<!-- Admin Contact Email -->
+<div class="flex flex-col gap-1.5">
+<label class="font-body-base text-body-base font-semibold text-on-surface">Email liên hệ quản trị</label>
+<input class="h-[42px] px-3.5 rounded-[7px] text-on-surface font-body-base text-body-base focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" style="border: 1px solid #7c8fac" type="email" value="ops-admin@pteinstitute.edu.vn"/>
+</div>
+<!-- Lab Technical Support Hotline -->
+<div class="flex flex-col gap-1.5">
+<label class="font-body-base text-body-base font-semibold text-on-surface">Hotline hỗ trợ kỹ thuật phòng Lab</label>
+<input class="h-[42px] px-3.5 rounded-[7px] text-on-surface font-body-base text-body-base focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" style="border: 1px solid #7c8fac" type="text" value="(+84) 028-3829-9118 (Ext: 104)"/>
+</div>
+<!-- Logo & Favicon Management -->
+<div class="md:col-span-2 bg-surface-container-low p-4 rounded-[7px] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-[7px] bg-surface-container-lowest flex items-center justify-center shadow-sm overflow-hidden p-1" style="border: 1px solid #c4c5d6">
+<!-- Brand Emblem Mock -->
+<div class="w-full h-full rounded-[5px] bg-primary flex flex-col items-center justify-center text-on-primary font-display-h3 text-display-h3 font-bold leading-none">
+                  PTE
+                </div>
+</div>
+<div class="flex flex-col">
+<span class="font-body-base text-body-base font-semibold text-on-surface">Logo hiển thị phòng thi &amp; Phiếu điểm</span>
+<span class="font-caption-small text-caption-small text-secondary">Định dạng PNG, SVG trong suốt. Kích thước khuyến nghị 400x120px
+                  (Max 2MB)</span>
+<span class="font-caption-small text-caption-small text-primary font-medium mt-0.5">pte_institute_brandmark_hires.svg (48 KB)</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="h-[36px] px-3.5 rounded-[7px] bg-surface-container-lowest text-on-surface hover:bg-surface-container font-button-label text-button-label flex items-center gap-1.5 transition-colors" onclick="triggerToast('Vui lòng chọn tệp hình ảnh SVG hoặc PNG mới.')" style="border: 1px solid #7c8fac" type="button">
+<span class="material-symbols-outlined text-[18px]">upload_file</span>
+<span>Thay đổi logo</span>
+</button>
+<button class="h-[36px] px-3 rounded-[7px] text-error hover:bg-[#FDEDE8] font-button-label text-button-label transition-colors" onclick="triggerToast('Đã khôi phục logo mặc định của Tenant.')" type="button">
+                Gỡ bỏ
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- CARD 2: Pearson VUE Engine & LACS Caching Integration -->
+<div class="bg-surface-container-lowest rounded-[7px] p-6 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col gap-5" id="sec-pearson">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-card-title-h5 text-card-title-h5 text-on-surface font-semibold">
+              Cấu hình khảo thí &amp; Pearson VUE Engine Integration
+            </h2>
+<p class="font-caption-small text-caption-small text-secondary mt-0.5">
+              Đồng bộ dữ liệu đề thi, kết nối chấm điểm tự động AI Scoring Core
+              và chế độ phòng thi.
+            </p>
+</div>
+<span class="px-2.5 py-1 rounded-[7px] bg-[#E6FFFA] text-[#088068] font-caption-small text-caption-small font-semibold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-[#088068]"> </span>
+            Connected (18ms)
+          </span>
+</div>
+<!-- Endpoint URL -->
+<div class="flex flex-col gap-1.5">
+<label class="font-body-base text-body-base font-semibold text-on-surface">Pearson Tenant API Endpoint URL</label>
+<div class="flex gap-2">
+<div class="relative flex-1">
+<input class="h-[42px] px-3.5 w-full rounded-[7px] text-on-surface font-mono font-tabular-data text-tabular-data focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" style="border: 1px solid #7c8fac" type="text" value="https://api.pearsonvue-cloud.internal/v4.2/stream"/>
+<span class="absolute right-3 top-3 text-[#088068] material-symbols-outlined text-[18px]">check_circle</span>
+</div>
+<button class="h-[42px] px-4 rounded-[7px] bg-secondary-container text-primary hover:bg-[#DCE8FF] font-button-label text-button-label flex items-center gap-1.5 shrink-0" onclick="triggerToast('Đang kiểm tra kết nối API Pearson... Phản hồi 200 OK (18ms)')" type="button">
+<span class="material-symbols-outlined text-[18px]">network_ping</span>
+<span>Test Ping</span>
+</button>
+</div>
+</div>
+<!-- LACS Mode: Radio Cards -->
+<div class="flex flex-col gap-2">
+<label class="font-body-base text-body-base font-semibold text-on-surface">Chế độ lưu trữ &amp; truyền tải đề thi (LACS Assessment
+            Delivery)</label>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+<!-- Option 1: Selected -->
+<label class="relative flex items-start gap-3.5 p-4 rounded-[7px] bg-secondary-container/40 cursor-pointer transition-all" style="border: 2px solid #4169e8">
+<input checked="" class="mt-1 w-4 h-4 text-primary accent-primary" name="lacs_mode" type="radio"/>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface font-semibold">Phòng lab Hybrid Offline Caching</span>
+<span class="px-1.5 py-0.5 rounded-[4px] bg-primary text-on-primary font-caption-small text-caption-small text-[10px] font-bold">Khuyên dùng</span>
+</div>
+<span class="font-caption-small text-caption-small text-secondary mt-1">
+                  Bảo mật tối đa, mã hóa AES-256 đề thi tại máy chủ Local Server
+                  (LACS), tự đồng bộ điểm số lên Pearson Cloud ngay khi phòng
+                  khảo thí có mạng. Chống rớt mạng phòng thi.
+                </span>
+</div>
+</label>
+<!-- Option 2 -->
+<label class="relative flex items-start gap-3.5 p-4 rounded-[7px] bg-surface-container-low hover:bg-surface-container cursor-pointer transition-all" style="border: 1px solid #7c8fac">
+<input class="mt-1 w-4 h-4 text-primary accent-primary" name="lacs_mode" type="radio"/>
+<div class="flex flex-col">
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface font-semibold">Cloud Realtime Streaming</span>
+<span class="font-caption-small text-caption-small text-secondary mt-1">
+                  Truyền tải âm thanh và đề thi trực tiếp từ Cloud Pearson. Yêu
+                  cầu đường truyền cáp quang tối thiểu 500Mbps và tỷ lệ rớt gói &lt;
+                  0.1%.
+                </span>
+</div>
+</label>
+</div>
+</div>
+<!-- AI Engine & Auto-flag threshold -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+<!-- AI Model version -->
+<div class="flex flex-col gap-1.5">
+<label class="font-body-base text-body-base font-semibold text-on-surface">Phiên bản AI Scoring Engine (Audio &amp; NLP)</label>
+<div class="relative">
+<select class="h-[42px] px-3.5 pr-8 w-full rounded-[7px] text-on-surface font-body-base text-body-base bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary appearance-none" style="border: 1px solid #7c8fac">
+<option selected="">
+                  Pearson AI Audio/NLP Core v4.2.6 (Mới nhất)
+                </option>
+<option>Pearson AI Audio/NLP Core v4.1.9 (LTS Enterprise)</option>
+<option>Pearson Diagnostic Engine v3.9.0 (Thử nghiệm)</option>
+</select>
+<span class="material-symbols-outlined text-[20px] text-secondary absolute right-3 top-2.5 pointer-events-none">arrow_drop_down</span>
+</div>
+<span class="font-caption-small text-caption-small text-secondary">Đã xác thực chuẩn âm học PTE Academic 2026</span>
+</div>
+<!-- Auto-flag threshold -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-body-base text-body-base font-semibold text-on-surface">Ngưỡng tự động gửi phúc khảo (AI Flag)</label>
+<span class="font-tabular-data text-tabular-data text-primary font-bold" id="thresholdValue">&lt; 75% tin cậy</span>
+</div>
+<div class="flex items-center gap-3 pt-2">
+<input class="w-full accent-primary h-2 bg-surface-container rounded-lg cursor-pointer" id="thresholdRange" max="90" min="50" oninput="document.getElementById('thresholdValue').innerText = '&lt; ' + this.value + '% tin cậy'" type="range" value="75"/>
+</div>
+<span class="font-caption-small text-caption-small text-secondary">Bài thi có độ lệch phân tích âm thanh dưới ngưỡng sẽ tự động
+              chuyển sang hàng chờ Hội đồng Chấm thi thẩm định.</span>
+</div>
+</div>
+</div>
+<!-- CARD 3: Security & Access Control -->
+<div class="bg-surface-container-lowest rounded-[7px] p-6 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col gap-5" id="sec-security">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-card-title-h5 text-card-title-h5 text-on-surface font-semibold">
+              Chính sách bảo mật &amp; Kiểm soát truy cập (Security &amp;
+              Compliance)
+            </h2>
+<p class="font-caption-small text-caption-small text-secondary mt-0.5">
+              Thiết lập quy chuẩn phòng thi nghiêm ngặt, cách ly mạng máy trạm
+              và lưu vết nhật ký ISO 27001.
+            </p>
+</div>
+<span class="material-symbols-outlined text-[24px] text-primary p-1.5 rounded-[7px] bg-secondary-container">security</span>
+</div>
+<!-- 2FA Enforcement Switch Row -->
+<div class="flex items-center justify-between p-4 rounded-[7px] bg-surface-container-low">
+<div class="flex items-start gap-3">
+<div class="w-9 h-9 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">phonelink_lock</span>
+</div>
+<div class="flex flex-col">
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface font-semibold">Bắt buộc xác thực 2 yếu tố (Enforce 2FA)</span>
+<span class="font-caption-small text-caption-small text-secondary mt-0.5">
+                Mọi tài khoản Host Admin, Giám khảo (Scorer), Giám thị
+                (Invigilator) đều phải kích hoạt Authenticator App (TOTP).
+              </span>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" id="twofaToggle" type="checkbox"/>
+<div class="w-11 h-6 bg-[#C4C5D6] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Session Timeout -->
+<div class="flex flex-col gap-1.5">
+<label class="font-body-base text-body-base font-semibold text-on-surface">Thời gian hết hạn phiên làm việc (Session Timeout)</label>
+<div class="relative">
+<select class="h-[42px] px-3.5 pr-8 w-full rounded-[7px] text-on-surface font-body-base text-body-base bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary appearance-none" style="border: 1px solid #7c8fac">
+<option>15 phút không thao tác</option>
+<option selected="">30 phút không thao tác (Tiêu chuẩn)</option>
+<option>60 phút không thao tác</option>
+<option>Hết hiệu lực ngay khi đóng tab</option>
+</select>
+<span class="material-symbols-outlined text-[20px] text-secondary absolute right-3 top-2.5 pointer-events-none">arrow_drop_down</span>
+</div>
+<span class="font-caption-small text-caption-small text-secondary">Tự động đăng xuất màn hình giám sát khi proctor rời trạm.</span>
+</div>
+<!-- Audit Retention -->
+<div class="flex flex-col gap-1.5">
+<label class="font-body-base text-body-base font-semibold text-on-surface">Lưu trữ nhật ký kiểm toán (Audit Log Retention)</label>
+<div class="relative">
+<select class="h-[42px] px-3.5 pr-8 w-full rounded-[7px] text-on-surface font-body-base text-body-base bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary appearance-none" style="border: 1px solid #7c8fac">
+<option>180 ngày</option>
+<option selected="">365 ngày (Tuân thủ ISO 27001 &amp; PTE)</option>
+<option>730 ngày (2 năm)</option>
+<option>Vĩnh viễn (Lưu trữ kho lạnh Glacier)</option>
+</select>
+<span class="material-symbols-outlined text-[20px] text-secondary absolute right-3 top-2.5 pointer-events-none">arrow_drop_down</span>
+</div>
+<span class="font-caption-small text-caption-small text-secondary">Nhật ký hành vi thi cử và can thiệp điểm số không thể sửa đổi
+              (WORM).</span>
+</div>
+</div>
+<!-- IP Whitelist for Exam Terminals -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-body-base text-body-base font-semibold text-on-surface">Khóa IP máy trạm thi cử (Exam Lab IP Whitelist)</label>
+<button class="text-primary font-caption-small text-caption-small font-semibold hover:underline flex items-center gap-1" onclick="addIpRow()" type="button">
+<span class="material-symbols-outlined text-[15px]">add</span>
+              Thêm dải IP phòng lab
+            </button>
+</div>
+<p class="font-caption-small text-caption-small text-secondary -mt-0.5">
+            Chỉ những thiết bị gửi yêu cầu từ các dải CIDR này mới được phép tải
+            đề và kích hoạt ứng dụng thi PTE Secure Lock Browser.
+          </p>
+<div class="flex flex-col gap-2 p-3 rounded-[7px] bg-surface-container-low" id="ipListContainer">
+<!-- IP item 1 -->
+<div class="flex items-center justify-between bg-surface-container-lowest px-3 py-2 rounded-[5px] shadow-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[18px] text-primary">lan</span>
+<span class="font-mono font-tabular-data text-tabular-data text-on-surface font-semibold">118.70.124.0/24</span>
+<span class="px-2 py-0.5 rounded-[4px] bg-surface-container text-secondary font-caption-small text-caption-small">Phòng Lab A (Tầng 3)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded-[4px] bg-[#E6FFFA] text-[#088068] font-caption-small text-caption-small font-bold">Active</span>
+<button class="text-secondary hover:text-error transition-colors p-1" onclick="this.parentElement.parentElement.remove()" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<!-- IP item 2 -->
+<div class="flex items-center justify-between bg-surface-container-lowest px-3 py-2 rounded-[5px] shadow-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[18px] text-primary">lan</span>
+<span class="font-mono font-tabular-data text-tabular-data text-on-surface font-semibold">14.238.10.0/24</span>
+<span class="px-2 py-0.5 rounded-[4px] bg-surface-container text-secondary font-caption-small text-caption-small">Phòng Lab B (Tầng 4 VIP)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded-[4px] bg-[#E6FFFA] text-[#088068] font-caption-small text-caption-small font-bold">Active</span>
+<button class="text-secondary hover:text-error transition-colors p-1" onclick="this.parentElement.parentElement.remove()" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- CARD 4: License & Seat Quota Management -->
+<div class="bg-surface-container-lowest rounded-[7px] p-6 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col gap-5" id="sec-license">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-card-title-h5 text-card-title-h5 text-on-surface font-semibold">
+              Quản lý bản quyền &amp; Định mức chỗ ngồi (License &amp; Seat
+              Quota)
+            </h2>
+<p class="font-caption-small text-caption-small text-secondary mt-0.5">
+              Giám sát hạn mức tài khoản thí sinh, chứng nhận phân bổ bản quyền
+              Pearson toàn cầu.
+            </p>
+</div>
+<span class="px-2.5 py-1 rounded-[7px] bg-[#FDEDE8] text-[#BE452B] font-caption-small text-caption-small font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+            Sắp đạt giới hạn (97%)
+          </span>
+</div>
+<!-- License Overview Card -->
+<div class="bg-gradient-to-r from-surface-container-low via-surface-container to-surface-container-low p-5 rounded-[7px] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-[7px] bg-primary text-on-primary flex items-center justify-center shadow-md shrink-0">
+<span class="material-symbols-outlined text-[28px]">workspace_premium</span>
+</div>
+<div class="flex flex-col">
+<span class="font-subtitle-h6 text-subtitle-h6 text-on-surface font-bold">Enterprise Assessment Tier</span>
+<div class="flex items-center gap-2 font-caption-small text-caption-small text-secondary mt-0.5">
+<span>Mã Hợp Đồng: #PTE-VN-2024-9981</span>
+<span>•</span>
+<span class="text-on-surface font-medium">Hạn hiệu lực: 31/12/2026</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="h-[38px] px-3.5 rounded-[7px] bg-surface-container-lowest text-on-surface hover:bg-surface-container font-button-label text-button-label flex items-center gap-1.5 shadow-sm transition-colors" onclick="triggerToast('Đang tạo và tải xuống chứng nhận bản quyền Pearson Tenant PDF...')" style="border: 1px solid #7c8fac" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Xuất chứng nhận PDF</span>
+</button>
+<button class="h-[38px] px-4 rounded-[7px] bg-primary-container text-on-primary hover:bg-[#3359D2] font-button-label text-button-label flex items-center gap-1.5 shadow-[0px_4px_10px_rgba(65,105,232,0.25)] transition-colors" onclick="triggerToast('Yêu cầu cấp thêm 200 seat khảo thí đã gửi tới Pearson Enterprise Account Manager.')" type="button">
+<span class="material-symbols-outlined text-[18px]">add_task</span>
+<span>Nâng cấp gói bản quyền</span>
+</button>
+</div>
+</div>
+<!-- Seat Quota Progress & Analytics -->
+<div class="flex flex-col gap-2 pt-1">
+<div class="flex items-center justify-between">
+<span class="font-body-base text-body-base font-semibold text-on-surface">Định mức chỗ ngồi khảo thí (Candidate Seat Allocation)</span>
+<span class="font-tabular-data text-tabular-data text-primary font-bold">486 / 500 Seats (97.2%)</span>
+</div>
+<div class="w-full bg-surface-container-high h-3 rounded-full overflow-hidden p-0.5 flex">
+<div class="bg-primary h-full rounded-full transition-all duration-500" style="width: 97.2%"></div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3 text-secondary font-caption-small text-caption-small">
+<div class="bg-surface-container-low p-3 rounded-[7px] flex flex-col">
+<span class="text-secondary">Đã kích hoạt thi</span>
+<span class="font-tabular-data text-tabular-data text-on-surface text-[18px] font-bold mt-1">486 thí sinh</span>
+<span class="text-[#088068] font-medium mt-0.5">↑ 14 hồ sơ hôm nay</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-[7px] flex flex-col">
+<span class="text-secondary">Hạn mức khả dụng còn lại</span>
+<span class="font-tabular-data text-tabular-data text-[#BE452B] text-[18px] font-bold mt-1">14 seats</span>
+<span class="text-[#BE452B] font-medium mt-0.5">Khẩn cấp cần bổ sung</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-[7px] flex flex-col">
+<span class="text-secondary">Số lượt thi hoàn tất tháng này</span>
+<span class="font-tabular-data text-tabular-data text-on-surface text-[18px] font-bold mt-1">1,248 ca thi</span>
+<span class="text-[#088068] font-medium mt-0.5">Hoàn thành 100% SLA</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Floating Notification / Actions Banner -->
+<div class="fixed bottom-6 right-6 max-w-[420px] bg-inverse-surface text-inverse-on-surface px-4 py-3 rounded-[7px] shadow-2xl flex items-center gap-3 translate-y-24 opacity-0 transition-all duration-300 z-50 pointer-events-none" id="toastBanner">
+<span class="material-symbols-outlined text-[20px] text-inverse-primary" id="toastIcon">info</span>
+<span class="font-body-base text-body-base text-inverse-on-surface flex-1 leading-snug" id="toastMsg">Thao tác hoàn tất.</span>
+</div>
+<!-- Client JavaScript for Navigation, Toast, and Actions -->
+<script>
+    function triggerToast(msg, icon = "info") {
+      const banner = document.getElementById("toastBanner");
+      const textEl = document.getElementById("toastMsg");
+      const iconEl = document.getElementById("toastIcon");
+      if (!banner || !textEl) return;
+      textEl.innerText = msg;
+      if (iconEl) iconEl.innerText = icon;
+      banner.classList.remove("translate-y-24", "opacity-0");
+      banner.classList.add("translate-y-0", "opacity-100");
+      setTimeout(() => {
+        banner.classList.remove("translate-y-0", "opacity-100");
+        banner.classList.add("translate-y-24", "opacity-0");
+      }, 3500);
+    }
+
+    function saveAllSettings() {
+      triggerToast(
+        "Tất cả cấu hình hệ thống và chứng chỉ đã được lưu thành công trên Pearson Core.",
+        "check_circle",
+      );
+    }
+
+    function scrollToSection(id, btn) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      document.querySelectorAll(".nav-tab-item").forEach((item) => {
+        item.classList.remove(
+          "bg-secondary-container",
+          "text-primary",
+          "font-semibold",
+        );
+        item.classList.add("text-secondary");
+      });
+      if (btn) {
+        btn.classList.add(
+          "bg-secondary-container",
+          "text-primary",
+          "font-semibold",
+        );
+        btn.classList.remove("text-secondary");
+      }
+    }
+
+    function addIpRow() {
+      const promptIp = prompt(
+        "Nhập địa chỉ IP hoặc dải CIDR phòng Lab mới (vd: 192.168.1.0/24):",
+        "118.69.200.0/24",
+      );
+      if (!promptIp) return;
+      const container = document.getElementById("ipListContainer");
+      const newDiv = document.createElement("div");
+      newDiv.className =
+        "flex items-center justify-between bg-surface-container-lowest px-3 py-2 rounded-[5px] shadow-sm";
+      newDiv.innerHTML = `
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[18px] text-primary">lan</span>
+          <span class="font-mono font-tabular-data text-tabular-data text-on-surface font-semibold">${promptIp}</span>
+          <span class="px-2 py-0.5 rounded-[4px] bg-surface-container text-secondary font-caption-small text-caption-small">Phòng Lab Mới</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="px-1.5 py-0.5 rounded-[4px] bg-[#E6FFFA] text-[#088068] font-caption-small text-caption-small font-bold">Active</span>
+          <button type="button" onclick="this.parentElement.parentElement.remove()" class="text-secondary hover:text-error transition-colors p-1">
+            <span class="material-symbols-outlined text-[18px]">delete</span>
+          </button>
+        </div>
+      `;
+      container.appendChild(newDiv);
+      triggerToast(`Đã thêm dải IP ${promptIp} vào whitelist máy thi.`);
+    }
+  </script>
+</div></div></main></div></body></html>

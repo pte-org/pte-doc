@@ -1,0 +1,58 @@
+{
+  "mode": "gate",
+  "target": "phase-08-quality-and-release-verification",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-15T08:52:08+07:00",
+  "reviewed_files": [
+    "pte-api/pte-common/src/main/java/com/pte/common/web/PageMeta.java",
+    "pte-api/pte-common/src/main/java/com/pte/common/web/PagedResult.java",
+    "pte-api/services/admin/src/main/java/com/pte/admin/messaging/",
+    "pte-api/services/admin/src/main/java/com/pte/admin/client/",
+    "pte-api/services/admin/src/main/java/com/pte/admin/controller/StudentRosterController.java",
+    "pte-api/services/admin/src/main/java/com/pte/admin/controller/InternalRebuildController.java",
+    "pte-api/services/admin/src/main/java/com/pte/admin/domain/StudentRosterEntry.java",
+    "pte-api/services/admin/src/main/java/com/pte/admin/service/StudentRosterQueryService.java",
+    "pte-api/services/admin/src/main/java/com/pte/admin/service/StudentRosterRebuildService.java",
+    "pte-api/services/admin/src/main/resources/db/",
+    "pte-api/services/iam/src/main/java/com/pte/iam/controller/InternalExportController.java",
+    "pte-api/services/iam/src/main/java/com/pte/iam/domain/event/UserReactivatedEvent.java",
+    "pte-api/services/iam/src/main/java/com/pte/iam/service/UserService.java",
+    "pte-api/gateway/src/main/java/com/pte/gateway/config/SecurityConfig.java",
+    "pte-web/packages/api-client/src/requests/admin/studentRoster.ts",
+    "pte-web/packages/api-client/src/types/admin/studentRoster.ts",
+    "pte-web/packages/api-client/src/requests/user/index.ts",
+    "pte-web/packages/ui/src/components/PaginationControls.tsx",
+    "pte-web/apps/tenant-web/features/studentSearch/"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "verification": [
+    "mvn -q -pl services/iam,services/admin -am -DskipTests package: passed",
+    "@pte/api-client typecheck: passed",
+    "@pte/ui typecheck: passed",
+    "tenant-web typecheck and lint: passed",
+    "vendor-web typecheck: passed",
+    "tenant-web and vendor-web production builds: passed",
+    "Local Docker IAM/Admin/Gateway services healthy; gateway actuator health returned HTTP 200",
+    "RabbitMQ admin.user-events queue has one consumer, zero messages, zero DLQ messages, and the User.* binding is declared",
+    "Authenticated roster acceptance: paging, newest-first default, size cap, past-page boundary, four-field search, Program/Class/Assigned/Unassigned filters, cross-tenant isolation, and stable ties passed",
+    "Authenticated lifecycle acceptance: suspend blocks login and updates projection; reactivate restores login and projection; cross-tenant action rejected",
+    "Browser walkthrough: initial load, Program/Class filters, Add, Import, suspend/reactivate, Unassigned, empty state, narrow viewport, and API request wiring passed",
+    "Temporary browser acceptance users and roster rows removed; verification query returned zero residual rows",
+    "git diff --check: passed for pte-api and pte-web"
+  ],
+  "notes": [
+    "Unit tests were skipped by explicit user preference (unitest: ko).",
+    "A HIGH finding for missing Admin-to-IAM HTTP timeouts was resolved by adding configurable connect/read timeouts to StudentExportClient and application configuration.",
+    "Verification was performed against the local Docker deployment. Live VPS deployment and live-domain smoke testing were not executed in this cook and remain release-operator steps.",
+    "The pre-existing IAM ddl-auto ownership warning for tenant_registry remains unrelated to this change.",
+    "No commit or push was created. Cross-repository quality receipt was not issued because the changed scope spans pte-api, pte-web, and pte-doc repositories."
+  ],
+  "report_path": "projects/plans/quang-tenant-student-roster-pagination/quality/phase-08-quality-and-release-verification-quality-report.json"
+}

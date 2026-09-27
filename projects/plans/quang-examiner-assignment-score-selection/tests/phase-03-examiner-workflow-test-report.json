@@ -1,0 +1,23 @@
+﻿{
+    "phase":  "phase-03-examiner-workflow",
+    "mode":  "unit",
+    "verdict":  "PASSED",
+    "reviewed_at":  "2026-09-23T16:45:01Z",
+    "summary":  {
+                    "passed":  31,
+                    "failed":  0,
+                    "skipped":  0
+                },
+    "failures":  [
+
+                 ],
+    "verification_details":  [
+                                 "Final clean backend command (exit 0), working directory D:\\DOCUMENTFPT\\Github\\pte-org\\pte-api: .\\mvnw.cmd -f .\\pom.xml -pl app -Dtest=ExaminerScoringServiceTest,SnapshotPromptQueryServiceTest,CloudinaryMediaServiceTest,ExaminerAssignmentDatabaseIntegrationTest -Dlogging.level.root=ERROR -Dlogging.level.org.hibernate.SQL=OFF -Dspring.jpa.show-sql=false -Dsurefire.useFile=false clean test. Maven compiled 795 production source files and 135 test source files, then reported 29 tests run, 0 failures, 0 errors, 0 skipped: ExaminerScoringServiceTest 17, SnapshotPromptQueryServiceTest 4, CloudinaryMediaServiceTest 6, ExaminerAssignmentDatabaseIntegrationTest 2.",
+                                 "Final API-client unit command (exit 0), working directory D:\\DOCUMENTFPT\\Github\\pte-org\\pte-web\\packages\\api-client: .\\node_modules\\.bin\\vitest.cmd run src/requests/scoring/examiner.test.ts. Vitest reported 1 file, 2 tests passed.",
+                                 "H2 integration test context bootstrapped the application's Spring Data JPA repositories, checking repository query definitions are accepted; existing Phase 02 assignment integration tests passed 2/2, including 40-attempt/2-Examiner preview+commit p95 71 ms on H2 and concurrent confirm idempotency. These do not exercise the new prompt/media/queue queries against production PostgreSQL data.",
+                                 "Coverage: one tenant-scoped bulk prompt query with duplicate pinned item IDs deduplicated; one bulk media resolution call after assignment ownership and prompt verification; null media IDs handled; media signing failure propagates to retryable detail error. CloudinaryMediaService unit tests cover deduplicated one-query tenant-scoped lookup, tenant-owned/shared media, TTL upper bound, missing/cross-tenant and pending-upload fail-closed behavior.",
+                                 "Exploratory runs during remediation found and fixed null media-map key handling and Mockito matcher setup; final clean Maven run passed all 29 backend tests. API-client test then passed 2/2, for 31 total. An earlier run before adding bulk-media tests passed 23 tests and is superseded.",
+                                 "Remaining limits: H2 test was Phase 02-owned and did not modify or specifically execute the new queue/prompt/media repository methods; actual production PostgreSQL migration/query behavior, HTTP @PreAuthorize, and browser/E2E role navigation were not exercised."
+                             ],
+    "report_path":  "pte-doc/projects/plans/quang-examiner-assignment-score-selection/tests/phase-03-examiner-workflow-test-report.json"
+}

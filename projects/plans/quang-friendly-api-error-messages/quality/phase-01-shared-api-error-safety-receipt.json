@@ -1,0 +1,17 @@
+{
+  "target": "phase-01-shared-api-error-safety",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-friendly-api-error-messages/quality/phase-01-shared-api-error-safety-quality-report.json",
+  "reviewed_files": [
+    "pte-web/packages/api-client/src/client/apiError.ts",
+    "pte-web/packages/api-client/src/client/client.test.ts",
+    "pte-web/packages/api-client/src/client/client.ts",
+    "pte-web/packages/api-client/src/client/errorMessage.ts",
+    "pte-web/packages/api-client/src/client/index.ts"
+  ],
+  "source_fingerprint": "sha256:35a47a41df8ba332fe83f7e9c0d0790460d90746ba4cdacb8342a097e757f992",
+  "reviewed_at": "2026-09-20T15:04:00+07:00",
+  "open_blocking_findings": 0
+}

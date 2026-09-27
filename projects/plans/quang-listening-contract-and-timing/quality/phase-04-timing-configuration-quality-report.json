@@ -1,0 +1,43 @@
+{
+  "target": "phase-04-timing-configuration",
+  "mode": "gate",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-12T14:37:29Z",
+  "reviewed_files": [
+    "pte-api/services/exam-delivery/src/main/resources/config/task-timing.json",
+    "pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/config/TaskTimingConfigTest.java"
+  ],
+  "conventions_checked_against": [
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/config/TaskTimingConfig.java",
+    "pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/service/SnapshotPinServiceTest.java",
+    "pte-api/services/exam-delivery/src/main/resources/config/task-timing.json"
+  ],
+  "findings": [
+    {
+      "id": "QUAL-001",
+      "severity": "NOTED",
+      "rule": "CHG_SAFE_CONFIG_DEFAULT",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-api/services/exam-delivery/src/main/resources/config/task-timing.json:2",
+      "evidence": "The seven new Listening entries are active configuration values, but the file comment explicitly labels each as a temporary, unsourced, non-production placeholder.",
+      "why_it_matters": "Deploying these values as official exam timing could give candidates incorrect prep/response windows even though snapshot pinning succeeds.",
+      "required_action": "Replace and independently verify all seven values, including section/timer semantics, before production release; this is the explicit release gate for this phase.",
+      "owner": "product/research"
+    }
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 1
+  },
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "noted_count": 1,
+  "receipt_status": "skipped_cross_repo_boundary",
+  "receipt_note": "The plan/report lives in pte-doc while reviewed config/test files live in pte-api, a separate git repository under the pte-org parent. receipt.py requires one repository containing the report and every reviewed file, so no cryptographic receipt is issued."
+}

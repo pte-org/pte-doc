@@ -1,0 +1,8 @@
+{
+  "name": "projects/3859337323953452143/screens/64b68ac2606f4905a2ad65e051384707",
+  "title": "V3: Tenant Detail",
+  "deviceType": "DESKTOP",
+  "width": 2560,
+  "height": 2438,
+  "route": "vendor-web /admin/tenants/[publicId]"
+}

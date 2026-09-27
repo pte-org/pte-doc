@@ -1,0 +1,4254 @@
+[
+  {
+    "id": 554,
+    "num": 132,
+    "name": "#132 Faint Sound",
+    "name_without_num": "Faint Sound",
+    "labels": [
+      {
+        "label": "#132",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Listening to the soft rustle of the leaves, it's a sound that you simply cannot hear without silence. What you can sense in the noisy environment becomes suddenly vivid in the quiet. How clear and pure the sound is! It's fascinating, but it's also soothing. Suddenly, it's as if another realm has touched your auditory sense and you think, hey I hadn't realized that something so faint, so subtle could be so ...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\ncalming",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/smw_132/original/7f0143fbbd6b8edcd748c112981358fc/smw_132.mp3?1732265018",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "calming",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "illusory",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "disturbing",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "inaudible",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 0
+  },
+  {
+    "id": 414,
+    "num": 119,
+    "name": "#119 Forgiving",
+    "name_without_num": "Forgiving",
+    "labels": [
+      {
+        "label": "#119",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Nature’s instruments for survival can be a Godsent until they begin to affect us in destructive ways. Someone’s negative characteristics can cloud their favorable traits to such an extent that we cannot see the positive anymore. In our biased minds, this person has become purely evil. It’s pretty difficult not to feel repulsed by someone who doesn’t have any positive traits – let alone forgive them. So, we might want to look beyond the vast specter of negativity and see that the people we resent are also carrying good within them and that it’s human to possess both evil and...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\ngood",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220114-SMW-8_volume/original/620b8a0449f323956d79229ca1c39fab/20220114-SMW-8_volume.mp3?1642405760",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "negativity",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "good",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "positivity",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "purity",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 67
+  },
+  {
+    "id": 413,
+    "num": 118,
+    "name": "#118 Calm and Pressure",
+    "name_without_num": "Calm and Pressure",
+    "labels": [
+      {
+        "label": "#118",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Research suggests that some are more susceptible than others, especially those who are self-conscious, anxious, and afraid of being judged negatively by others. So, how can we avoid choking when it really counts? First, it helps to practice under stressful conditions. In a study on expert dart players, researchers found that those who hadn’t practiced under stress performed worse when anxious compared to those who had become accustomed to pressure. Secondly, many performers extol the virtues of a pre-performance routine, whether it’s taking a few deep breaths, repeating a cue word, or doing a rhythmic sequence of movements, studies on golfing, bowling, and water polo, find that short rituals can lead to more consistent and accurate performance under...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\npressure",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220114-SMW-6/original/a8678d81392150af23b05e2037071003/20220114-SMW-6.mp3?1642405298",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "their breath",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "water",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "pressure",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "duress",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 20
+  },
+  {
+    "id": 412,
+    "num": 117,
+    "name": "#117 Personality Tests",
+    "name_without_num": "Personality Tests",
+    "labels": [
+      {
+        "label": "#117",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Today, personality testing is a multi-billion dollar industry used by individuals, schools, and companies. But none of these tests, including the MBTI, the Big Five, the DiSC assessment, the Process Communication Model, and the Enneagram, actually reveal truths about personality. In fact, it’s up for debate whether personality is a stable, measurable feature of an individual at all. Part of the problem is the way the tests are constructed. Each is based on a different set of metrics to define personality: the Myers-Briggs, for instance, focuses on features like introversion and extroversion to classify people into personality “types,” while the Big Five scores participants on five different traits. Most are self-reported, meaning the results are based on questions participants answer about...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nthemselves",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220114-SMW-5/original/b33b220d1974fbc27ac46070c9615061/20220114-SMW-5.mp3?1642405166",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "their families",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "their colleagues",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "themselves",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "their parents",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 16
+  },
+  {
+    "id": 411,
+    "num": 116,
+    "name": "#116 Filtering Tools",
+    "name_without_num": "Filtering Tools",
+    "labels": [
+      {
+        "label": "#116",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "One of the biggest surprises of the Internet is we thought when the Internet came out it would provide everyone new fundamental tools to learn about the world around them, and it would actually remove the censorship and information that we get. We basically all have our own responsibility to become our own filters. We have, and that’s why it seems to me the educational system has to provide those tools those filtering tools. And that’s one of the reasons why I think science is so important because of its built-in filtering tools. It recognizes that we all want to believe and as Richard Feynman said, “The person you have to question most is yourself.” Knowing that you want to believe when you read something that validates your beliefs, you should be skeptical of it and your beliefs and you should look out for other sources. So we have to train people that one source on the Internet is not good enough you have to search broadly to see if it’s...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nvalidated",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220114-SMW-4/original/1ea2e7e00b78c2ffc48fccdfbe05dbbc/20220114-SMW-4.mp3?1642405025",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "skeptical",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "important",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "validated",
+        "correct": true
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 17
+  },
+  {
+    "id": 410,
+    "num": 115,
+    "name": "#115 Marshmallow Test",
+    "name_without_num": "Marshmallow Test",
+    "labels": [
+      {
+        "label": "#115",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "By now a lot has been said about the marshmallow test. You guys probably know about this where children are asked you can eat this one marshmallow now or if you wait until I come back you can get two marshmallows. People talk about this in terms of the resolution that little kids have and how good they are at resisting temptation and stuff but there’s something that’s often overlooked here which is that one of the most common strategies that kids use was simply covering their eyes. Just clapping their hands over their eyes so they’re not looking at the marshmallow. And it turns out that’s a very effective strategy. And so when we think about minimizing temptations whatever your temptations are in life just think about the ways that you can actually contractually minimize that temptation so it’s not there, not a fake thing or anything. Oh yeah, if it’s in the back of the cabinet I won’t do it but like actually get rid of the...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\ntemptation",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220114-SMW-3_volume/original/a83a3150eb24bf89f2eb16f7555a2cef/20220114-SMW-3_volume.mp3?1642404927",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "temptation",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "marshmallow",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "kids",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "test",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 11
+  },
+  {
+    "id": 409,
+    "num": 114,
+    "name": "#114 Art Never Die",
+    "name_without_num": "Art Never Die",
+    "labels": [
+      {
+        "label": "#114",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "I do not think that the arts are dependent on philanthropic efforts, which might sound to be at odds with what I do for a living but I think that what is remarkable about the arts is that you cannot kill them. They will not die. I think of this particularly with the art form that I come out of, poetry. It actually is beautifully partnered by various social media because it can travel and be sent out in a way that fiction is a little bit trickier because fiction is...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\na longer form",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220114-SMW-2/original/d1913b933cc86660ac71341429ac8f53/20220114-SMW-2.mp3?1642404810",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "a longer form",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "a shorter form",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "remarkable",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "dependent",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 4
+  },
+  {
+    "id": 408,
+    "num": 113,
+    "name": "#113 Great Conversation",
+    "name_without_num": "Great Conversation",
+    "labels": [
+      {
+        "label": "#113",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "What are the essential elements that make a conversation truly a great conversation? And humility would be one basic design principle that we should all start from. The kind of humility I’m talking about is the kind that you can’t set aside. Because the world is an incredibly complicated place. None of us can ever have the full lock on truth. We can only see the world from a particular vantage point. And that means that our knowledge is going to be going to have special insight because of our vantage point but it’s also going to be limited because of our vantage point. And so that sort of like limited knowledge that we can have about the world means that we must enter into any conversation with a deep sense of...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nhumility",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220114-SMW-1/original/8469c89cb82d5904a0d62740eb9ec04d/20220114-SMW-1.mp3?1642404709",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "curiosity",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "humility",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "exploration",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "presence",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 7
+  },
+  {
+    "id": 407,
+    "num": 112,
+    "name": "#112 Over Control",
+    "name_without_num": "Over Control",
+    "labels": [
+      {
+        "label": "#112",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Do you need rigid systems in place all the time? People who compulsively control everything usually do so to protect themselves and others from making mistakes or getting hurt. While having systems in place isn’t a bad thing, being too rigid can also be problematic. According to NY based mental health counselor, Diane Webb, a person with over-controlling tendencies can get triggered by anxiety if even just one thing isn’t in place. Instead, try to ground yourself and focus on the things that you can...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\ncontrol",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220115-SMW-5_volume/original/8ab961b387af6d5394dc6bc3b9200eec/20220115-SMW-5_volume.mp3?1642404568",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "protect",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "control",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "avoid",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "intertwine",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 6
+  },
+  {
+    "id": 406,
+    "num": 111,
+    "name": "#111 Oil Price",
+    "name_without_num": "Oil Price",
+    "labels": [
+      {
+        "label": "#111",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "A supply curve shows how much of a good suppliers are willing and able to supply at different prices. As with the demand curve, there’s a supply curve for every good and service. And again the ideas are the same, so let’s look at the supply curve for oil. We see an intuitive relationship between price and the quantity supplied. As the price goes up, the quantity of oil that companies are willing to supply increases. In this example, in a low price, five dollars per barrel, let’s say 10 million barrels of oil are supplied per day. At twenty dollars per barrel, 25 million barrels are supplied, and at fifty-five dollars per barrel, 50 million barrels are supplied. So in general, a higher price means...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\na greater quantity supplied",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220115-SMW-4_volume/original/e9f4a50a406d51298259f125b917e3c4/20220115-SMW-4_volume.mp3?1642404355",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "a smaller quantity supplied",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "a greater quantity supplied",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "higher quality",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "lower quality",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 2
+  },
+  {
+    "id": 405,
+    "num": 110,
+    "name": "#110 Lying to Ourselves",
+    "name_without_num": "Lying to Ourselves",
+    "labels": [
+      {
+        "label": "#110",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Why is lying to ourselves a problem? We need to tell ourselves the truth when we can, for the simple reason that we often pay a very high price for the short-term calm of our lies. We miss key opportunities for growth and learning. We're not very nice to be around. We develop harmful systems. And not least, the truth will out. When we don't let it emerge, it has a tendency to reveal itself through involuntary often physical symptoms. We become insomniac or impotent. An eyelid starts twitching. We acquire a stutter, and scream in our sleep and lose energy. We fall into depression. We owe it to ourselves to dare to start to confront ...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nour real nature",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220115-SMW-3_volume/original/30cc85f6dfb6620f48eee83345a6e145/20220115-SMW-3_volume.mp3?1642404396",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "our real nature",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "our lies",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "depression",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "growth and learning",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 4
+  },
+  {
+    "id": 404,
+    "num": 109,
+    "name": "#109 Wine's Price and Quality",
+    "name_without_num": "Wine's Price and Quality",
+    "labels": [
+      {
+        "label": "#109",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "One experiment in Australia showed that people rated the same wine higher when they thought it was $53 rather than $16 or $6. But get this, the experimenters had actually made that wine objectively worse by adding tartaric acid. It didn’t matter — the price tag overwhelmed their taste buds. In another study, scientists scanned the brains of people tasting wines that they thought were either $10 or $90. In reality, it was the same wine, but when they thought it was expensive, their brains showed more activity in a region associated with pleasant tastes and smells. So expensive wines may actually taste...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nbetter",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220115-SMW-2_volume/original/c011a75dd84ad807ca5374043904000a/20220115-SMW-2_volume.mp3?1642404432",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "worse",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "sweeter",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "better",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "bitterer",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 2
+  },
+  {
+    "id": 403,
+    "num": 108,
+    "name": "#108 Mistaking Repression",
+    "name_without_num": "Mistaking Repression",
+    "labels": [
+      {
+        "label": "#108",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Do you keep strong emotions bottled up inside? Perhaps you always tell the people around you that you’re all right, and that they shouldn’t worry about you, even though you’re not in the best shape. While you may appear calm on the outside, hiding your negative emotions can have a negative impact. According to clinical psychologist, Victoria Tarratt, suppressing your emotions is said to affect blood pressure, memory, and self esteem. It can also aggravate depression and anxiety in the long term. So instead of repressing how you feel, acknowledge your emotion in a safe environment. Identifying your emotion can be...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nbeneficial",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220115-SMW-1_volume/original/ee8ab057fb94457ad0a3f44c3f24b170/20220115-SMW-1_volume.mp3?1642404456",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "beneficial",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "negative",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "harmful",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "strong",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 4
+  },
+  {
+    "id": 402,
+    "num": 107,
+    "name": "#107 Bullet Journaling",
+    "name_without_num": "Bullet Journaling",
+    "labels": [
+      {
+        "label": "#107",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "So for me the act of bullet journaling is an act of thinking, it’s an act of unplugging and actually processing the information, and in my community I’ve found that that’s also provided significant value to people who get caught up in the rush of everyday life. It’s a moment that you can take back. It’s a moment where you can really have the luxury of sitting down and starting to digest the things that you otherwise can easily be overwhelmed by. I think one thing that we often kind of forget is just because something is convenient does not make it efficient. So a lot of times data entry, if you type for example, happens a lot faster but in that process, a lot gets lost because you’re just kind of parroting the source and I think that it’s really important to actually hear what’s being said than just simply kind of spitting it back out onto paper. So when you’re writing a lot of the time what you want to do is reduce the amount of information that you’re capturing only down to...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nwhat truly matters",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220113-SMW-8/original/387a3718f34e94fd3bdea5f9fd2670fa/20220113-SMW-8.mp3?1642346771",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "bullet journaling",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "what truly matters",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "data entry",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "the luxury",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 1
+  },
+  {
+    "id": 401,
+    "num": 106,
+    "name": "#106 Grow Your Empathy",
+    "name_without_num": "Grow Your Empathy",
+    "labels": [
+      {
+        "label": "#106",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "It’s amazing—just think about this the next time you’re talking to somebody: how long do you talk to somebody you’ve just met before you really notice what color their eyes are? What shape is their eyebrow What color clothing are they wearing? If it’s a woman or a man, are they wearing jewelry? What is it? Where did it come from? How are they sitting? What clue am I getting from them? We don’t notice one another nearly as much as we think we do. And I found it has built up my empathy—at least I think it has. But I find myself much more comfortable with other people. This is an amazing thing: I find other people less annoying! Isn’t that funny. Because I get a little more empathy about what they’re going through or what I think they’re going through or what I can hear from things they say, and instead of being annoyed by them I think: ‘I think I know where this is coming from and it explains it.’ And just getting the explanation of what might otherwise be annoying behavior or an annoying thing they’re saying, the annoyance kind of evaporates. It’s not that empathy is making me a better person, it just gives me a little more patience. I find—and I think other people who have studied empathy have found—that there’s more patience associated with...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nempathy",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220113-SMW-7_volume/original/723350aef15f9e7ba4f01f9203ac8942/20220113-SMW-7_volume.mp3?1642346662",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "empathy",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "comfort",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "annoyance",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "happiness",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 1
+  },
+  {
+    "id": 400,
+    "num": 105,
+    "name": "#105 Splitting",
+    "name_without_num": "Splitting",
+    "labels": [
+      {
+        "label": "#105",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "In families, workplace, community, there is people you can realize, oh yeah, they are doing that. They’re seducing this person and attacking that person. And then they divide the community by doing that. They get other people that agree with them to attack the people they’re attacking. And in mental health terms, it’s called splitting. For you split people into all good and all bad. And splitting is associated with borderline and narcissistic personality disorders. People honestly see the world in these all-good, all-bad ways. But it’s contagious. And so they tell half the people, you’re wonderful, and half people, you’re terrible. And those people start fighting each other. And while they’re fighting each other, the high-conflict person gets to dominate the community. So I’m calling this the community. It could be the family. It could be the workplace. It could be a neighborhood. We see this in all areas of life, when there’s...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\na high-conflict person",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220113-SMW-6_volume/original/0337981baad0815a2d1467ccfbbbab40/20220113-SMW-6_volume.mp3?1661214763",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "a fight",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "a community",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "a high-conflict person",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "a personality",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 2
+  },
+  {
+    "id": 399,
+    "num": 104,
+    "name": "#104 Triggers",
+    "name_without_num": "Triggers",
+    "labels": [
+      {
+        "label": "#104",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "They see triggers all over the world. What are triggers? Triggers are cases where you take a part of your nervous system and you say, if someone says that word they can control my nervous system and make me afraid and anxious. That’s a terrible idea. We should not be teaching our kids to see the world as being full of triggers. We should teach them to live in a world that is physically quite safe but full of offensive statements and ideas especially on the Internet. A sad commentary on the state of the business world now is that Google is being sued from both sides, from women who say that they’re victims of a hostile climate, and from conservatives and white men, who say that conservatives and white men are discriminated against. So in our current era, everybody feels they’re...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\na victim",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220113-SMW-5_volume/original/3e9eca44a8bdb70d0082c98ee9bb2323/20220113-SMW-5_volume.mp3?1642346414",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "a victim",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "conservatives",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "commentators",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "white men",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 2
+  },
+  {
+    "id": 398,
+    "num": 103,
+    "name": "#103 Cognitive Therapy",
+    "name_without_num": "Cognitive Therapy",
+    "labels": [
+      {
+        "label": "#103",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "The first study that used mindfulness-based cognitive therapy with depression it was pretty spectacular. It was done at Oxford University and it was done with people whose depression is so severe that nothing helps, no medication helps, electric shock doesn’t help, medicine psychiatry doesn’t know what to do. People get depressed very deeply, they recover and then they get depressed again. So with that group they use mindfulness-based cognitive therapy and they found that it cut the rate of relapse (of having depression again) by 50 percent. If this were a drug, some pharmaceutical company would be making billions of dollars, but it’s not a drug. It’s free basically. So mindfulness-based cognitive therapy works very well for...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\ndepression",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220113-SMW-4_volume/original/9c35bfcce95fd06c7083d8701784df7e/20220113-SMW-4_volume.mp3?1642346277",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "depression",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "drugs",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "relapse",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "companies",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 2
+  },
+  {
+    "id": 397,
+    "num": 102,
+    "name": "#102 Attention Economy",
+    "name_without_num": "Attention Economy",
+    "labels": [
+      {
+        "label": "#102",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "So we always had an attention economy, whether it was on radio or television there's always been a race for our attention and it's a zero sum game. If one TV station gets more of your attention the other TV station gets less. But now because we're spending more and more time on screens and there’s so many things competing for our attention we really feel it. And on the attention economy with social media and with the Internet and our screens, everything needs your...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nattention",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220113-SMW-3_volume/original/d9b2a5b1a21b5184d55da7ebd01f06d0/20220113-SMW-3_volume.mp3?1642346022",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "attention",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "action",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "affection",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 3
+  },
+  {
+    "id": 396,
+    "num": 101,
+    "name": "#101 Wikipedia",
+    "name_without_num": "Wikipedia",
+    "labels": [
+      {
+        "label": "#101",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "If Wikipedia had been around a couple hundred years ago we probably would have had an article that says that the sun revolves around the Earth because that was what we understood to be true. We no longer understand that to be true thanks to advances in science and physics, but if tomorrow we were to wake up and learn that in fact time being relative really does upend the way that we think about the world Wikipedia would have to evolve in order to describe that. So we're not really in the business of truth or facts, we're in the business of what is known, and what has been determined through consensus—scientific consensus or otherwise. And I think that that actually provides some clarity on how to understand what information you're looking at. One thing that I think is really unique about Wikipedia is there's only one version for the whole public. There’s no feed that’s curated for you or for me. We all are looking at...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nthe same version of the article",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220113-SMW-2_volume/original/abf92bc9d803f780d7a8e40ef48e0db3/20220113-SMW-2_volume.mp3?1642345916",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "scientific consensus",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "the same version of the article",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "the sun revolving around the Earth",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "the truth or facts",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 2
+  },
+  {
+    "id": 395,
+    "num": 100,
+    "name": "#100 Decision Fatigue",
+    "name_without_num": "Decision Fatigue",
+    "labels": [
+      {
+        "label": "#100",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "So decision fatigue is when you find yourself literally exhausted by the amount of decisions that you have to make, because we're constantly inundated by so many different things from so many different channels. All that information requires our attention, and a lot of that information actually requires us to act. And acting on information is essentially making a decision. So do you want to go watch this movie? Do you want to go on this trip? Do you want to respond to this email? Do you? Do you? Do you? Do you? You have to constantly keep asking yourself and you're making decisions. And over time, the more you allow yourself to be inundated by without taking a step back, the more exhausted you get. It might not be physically. Right. You can make decisions all day long, and you can still run a marathon but our mind also has a limited amount of energy. Your ability to make decisions becomes worse, it can really quickly degrade when you're...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nconstantly making decisions",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220113-SMW-1_volume/original/0dfef566ed2b74fa6543cfae04f60e87/20220113-SMW-1_volume.mp3?1642345794",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "constantly making decisions",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "running a marathon",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "watching a movie",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 1
+  },
+  {
+    "id": 394,
+    "num": 99,
+    "name": "#99 Chronic Loneliness",
+    "name_without_num": "Chronic Loneliness",
+    "labels": [
+      {
+        "label": "#99",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Chronic loneliness can also change your body on a cellular level. Research has found that lonely people have 209 different gene expressions in some of their white blood cells, including increased activity of pro-inflammatory transcription factor. Now, inflammation is an important response to injury, but chronic inflammation wreaks havoc on your body. As a result, we see that poor social relationships show a 29% increase in coronary heart disease and 32% increase of a stroke. Overall, people with strong social relationships have a 50% increased likelihood of survival overall – that means they are much less likely to die over the same period of time, making loneliness as deadly of a risk factor as smoking 15 cigarettes a day, lack of exercise, or obesity! So yes, loneliness can increase...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nyour chance of death",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220111-SMW-3_volume/original/6fa2239bda04277837f811526313da40/20220111-SMW-3_volume.mp3?1642144106",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "chances of social relationships",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "the possibility of smoking",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "your chance of death",
+        "correct": true
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 0
+  },
+  {
+    "id": 393,
+    "num": 98,
+    "name": "#98 Introverts and Extroverts",
+    "name_without_num": "Introverts and Extroverts",
+    "labels": [
+      {
+        "label": "#98",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Society has some pretty typical stereotypes for introverts and extroverts. One is cuddled up with a book in bed and the other is out being the life of the party. But there's actually a big misunderstanding about what truly makes someone one or the other. Being introverted or extroverted isn't dictated by how you spend your free time. It all depends on how you recharge when you're feeling low. Introverts do it alone. Extroverts with others. How someone recharges may not seem like a huge deal, but it has some interesting impacts. One's social life, career, even internet usage can be affected. And these differences aren't just external. The brains of introverts and extroverts are actually surprisingly...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\ndifferent",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220111-SMW-2_volume/original/09fb0a4c082a8434a0728bd3c40d02c9/20220111-SMW-2_volume.mp3?1642143968",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "different",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "typical",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "huge",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 0
+  },
+  {
+    "id": 392,
+    "num": 97,
+    "name": "#97 Spending on Experiences",
+    "name_without_num": "Spending on Experiences",
+    "labels": [
+      {
+        "label": "#97",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Buying time is often seen as one of the best ways to spend your money in that it allows you to focus on the most joyous aspects, while offloading the more laborious aspects to someone else who will happily do them. The gig economy has made this more accessible than ever before – allowing people to spend more of their time for the things that truly matter, even if it means having a little less in the bank account. This might mean paying someone to do the dishes so you can read a book to your child in bed, or it could mean purchasing a more expensive ticket to be able to spend some time with family. Material possessions also draw a lot of attention when it comes to the relation between wealth and happiness. The research is clear on this too – spend on experiences, not things. The reason is that experiences are exclusive, nobody can feel what you felt on that trip with your best friend. Nobody can buy that ...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nexclusivity",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220111-SMW-1_volume/original/04ada68f79b517fdd146337cf0904317/20220111-SMW-1_volume.mp3?1642143827",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "tickets",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "attention",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "exclusivity",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "solution",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 1
+  },
+  {
+    "id": 391,
+    "num": 96,
+    "name": "#96 Communication Tip",
+    "name_without_num": "Communication Tip",
+    "labels": [
+      {
+        "label": "#96",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "I try only to say three important things when I talk to people. No more than three. If it's one thing that's maybe even better, but usually there's a lot to say. When I make notes on what I want to talk about, if I see I'm going on past three to four and five I start eliminating them or seeing if I can fold them into the other things. Because three things are really all I can remember and I don't work from notes when I talk to people and I advise other people not to. I never read it because reading just excommunicates you; it’s not communication it’s excommunication, in my view. So I can't remember more than three things, and I don’t think they can remember more than three things, so what’s the point of telling them stuff they’re not going to remember? So I stick to...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nthree",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220112-SMW-7_volume/original/8d8a4a85dd4dad4da74286a42a74eda1/20220112-SMW-7_volume.mp3?1642081371",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "one",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "three",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "four or five",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 1
+  },
+  {
+    "id": 390,
+    "num": 95,
+    "name": "#95 What You Want",
+    "name_without_num": "What You Want",
+    "labels": [
+      {
+        "label": "#95",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "The listening is critical to the transformation. Parker Palmer said that, \"Before I can tell my life what I want to do with it, I have to listen to my life telling me who I am.\" How many of us do that? So if we want to desire differently, mine your life for those stories when you were engaged in deeply meaningful and fulfilling action, and see if there's a pattern. I promise you, if you go through your life and you identify three, four, five of these fulfillment stories, you will probably begin to see a pattern emerge. And that's your life telling you something about where you find fulfillment in your desires. We usually wanna get to the transformation and the change right away, but before we can go there, we have to simply take the time to...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nlisten",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220112-SMW-6/original/0fadc86e212aebe8ded4766b09efe559/20220112-SMW-6.mp3?1642081250",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "desire",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "listen",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "change",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "go",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 0
+  },
+  {
+    "id": 389,
+    "num": 94,
+    "name": "#94 Meeting Impression",
+    "name_without_num": "Meeting Impression",
+    "labels": [
+      {
+        "label": "#94",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Imagine that you are in charge of a company and are hiring for a new position. Here are the candidates. Without thinking about it too much, which one would you choose? My guess is that you went for one of those in the middle and avoided the people on the ends. Why? Because research shows that we tend to unconsciously think those toward in the middle of a group are more important. Some of the work has examined the TV quiz show, The Weakest Link, in which contestants stand in a semi-circle and vote one another off. Those standing towards the middle of the semi-circle won the game on average 45% of the time, whilst those standing the one of the ends won just 10% of the time. So if you want to make a good impression during a meeting make sure you sit...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\ntowards the middle of the group",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220112-SMW-5/original/d7d679c0fa5b09e3f89e0c7a99d5ef67/20220112-SMW-5.mp3?1642081087",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "on the ends",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "towards the middle of the group",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "in a semi-circle",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "in a new position",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 0
+  },
+  {
+    "id": 388,
+    "num": 93,
+    "name": "#93 Personality",
+    "name_without_num": "Personality",
+    "labels": [
+      {
+        "label": "#93",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Recent studies do suggest that some of your personality is related to your genetics, but there are plenty of other factors, too. Many of these studies break down personality using the five-factor model, or the Big Five. It puts personality traits into five general categories: extraversion, agreeableness, conscientiousness, openness to experience, and neuroticism. That last one is also sometimes called emotional stability. The degree to which each of these traits shows up in your personality is pretty stable, for the most part. But it does change throughout your life. For example, as people age, studies suggest that they tend to become more conscientious. And life events like getting married have been shown to increase emotional stability. So, sure, your personality can...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nchange",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220112-SMW-4/original/e06adc3f4a34223d5a9ecf04b273b008/20220112-SMW-4.mp3?1642080903",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "be stable",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "show up",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "change",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "break down",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 0
+  },
+  {
+    "id": 387,
+    "num": 92,
+    "name": "#92 Learn and Sleep",
+    "name_without_num": "Learn and Sleep",
+    "labels": [
+      {
+        "label": "#92",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "But scientists have found that there might be a way to boost the part of the learning process that happens during sleep. Sleep plays a vital role in how you create and store memories. While you're awake, you learn all sorts of new stuff, taking in facts and experiences just from going about your everyday life. That's when your brain encodes memories, making new connections between neurons so you can remember it all later. Then, when you go to sleep, your brain goes through the consolidation phase of memory formation. Scientists aren't totally sure how that works, but they think your brain turns all that stuff you just learned into solid, long term memories by reactivating them and strengthening those...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nnew connections",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220112-SMW-3/original/7b60e0b8103d93899fbf5b2387bb76de/20220112-SMW-3.mp3?1642080778",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "memories",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "new words and their translations",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "new connections",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "new families",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 0
+  },
+  {
+    "id": 386,
+    "num": 91,
+    "name": "#91 Sleep Cycle",
+    "name_without_num": "Sleep Cycle",
+    "labels": [
+      {
+        "label": "#91",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Each night your brain moves through several sleep cycles. At the start of each cycle you enter light sleep, then move into deep sleep, then dream, and finally move back into light sleep. These cycles take about 90 minutes each, and you will feel most refreshed if you wake up at the end of a cycle because then you are closest to your normal waking state. To increase the chances of this, decide when you want to wake up then count back in 90-minute blocks until you find a time close to when want you to go to sleep. So let's imagine that you want to wake at 8 a.m. Chunking back in ninety-minute blocks would look like this: and so you should aim to fall asleep around either eleven o'clock, or half past twelve, at night. And so if you want to wake up feeling especially alert and refreshed, simply follow...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nthe 90 minute rule",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220112-SMW-2_volume/original/de9a1efe8da5f61bf69c674bedd2fc0b/20220112-SMW-2_volume.mp3?1642080638",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "the 90 minute rule",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "your normal waking state",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "several sleep cycles",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "your feelings",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 0
+  },
+  {
+    "id": 385,
+    "num": 90,
+    "name": "#90 Goal-setting",
+    "name_without_num": "Goal-setting",
+    "labels": [
+      {
+        "label": "#90",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Goal-setting is fascinating because it's sort of a broken process in many respects. This is the way a goal works: You say to yourself, \"When I achieve, whatever the thing is, that's how I'll know… I'll have succeeded, and I'm gonna do everything I can to get to that point as quickly as possible.\" What that means is you exist in a failure state for a long time until you reach that goal, if it’s a long-range goal. And so, as you evaluate your process, all you get is the negative feedback of not having achieved that goal. Perhaps as you move close to it, there's some positive feedback, but if the goal is really the end state that you're seeking out, there's a lot of failure ...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nbefore you get there",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/20220112-SMW-1_volume/original/9798a6602cf020001015aafbe4e2d713/20220112-SMW-1_volume.mp3?1642080413",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "after you reach that goal",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "before you get there",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "if you reach that goal",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 0
+  },
+  {
+    "id": 316,
+    "num": 72,
+    "name": "#72 Flowers",
+    "name_without_num": "Flowers",
+    "labels": [
+      {
+        "label": "#72",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Earlier this year, I was driving through the countryside with a girl of six, and she pointed out some flowers by the wayside. I asked her what she thought flowers were for. She gave a very thoughtful answer. \"Two things,\" she said, \"to make the world pretty and to help the bees make honey for us.\" I thought that this was a very nice answer and I was very sorry to have to tell her that this wasn't ...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\ntrue",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/flower_volume/original/1d7cc3ac6ee4c86a4aab36eba4fbb6fd/flower_volume.mp3?1623319984",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "wrong",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "true",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "worthy",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "changing",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "complete",
+    "exam_count": 60
+  },
+  {
+    "id": 286,
+    "num": 73,
+    "name": "#73 Depression",
+    "name_without_num": "Depression",
+    "labels": [
+      {
+        "label": "#73",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "We all get depressed, bad stuff happens to us, we all get depressed, we feel lousy, we feel withdrawn. We feel sort of a sense of grief when we're taking much pleasure and we withdrawal and then we get better. We cope, we heal, we deal with the things in life, what’s the deal with you that you can't do that and there is this Learning sense given that all of us have periods of being depressed and come around to the end when you look at people who instead go down and stay down there to this crippled extent. There's always these little voices between the lines thereof come on, pull yourself together, we all deal with this sort of thing. I would make the argument throughout here that depression is as real of a biological disorder as this juvenile diabetes. And you don't sit down a diabetic and say oh come on, what’s would this influence that starts begging yourself and pull together you will see this is just as much of biological ...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\ndisorders",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/depression_volume/original/b1ba29380655d656c45725aa94a5f181/depression_volume.mp3?1623319972",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "medicines",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "treatments",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "reactions",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "actions",
+        "correct": false
+      },
+      {
+        "label": "E",
+        "choice": "disorders",
+        "correct": true
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "complete",
+    "exam_count": 25
+  },
+  {
+    "id": 175,
+    "num": 56,
+    "name": "#56 Food Preference",
+    "name_without_num": "Food Preference",
+    "labels": [
+      {
+        "label": "#56",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Parents and other adults with whom children have close contact have a powerful influence on children's food preferences. Children are very sensitive to the reactions of those around them. And if they see others enjoying a particular food, they will be inclined more favourably towards that food. Thus, if parents want to persuade their children to eat more vegetables than rather than simply telling them what to eat, it's more effective to demonstrate that they themselves ...(beep)\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\neat plenty of vegetables every day",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/smw55_volume/original/611221179597ef5571a091dc824c4b88/smw55_volume.mp3?1623319849",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "has health benefits",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "is recommended by doctors",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "eat plenty of vegetables every day",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "contains natural sugars",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 76
+  },
+  {
+    "id": 165,
+    "num": 52,
+    "name": "#52 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#52",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Our oceans are really very well traveled on the surface, but in terms of the deep sea, uh, IT's probably the one area of our planet that hasn't been explored. The first visit by a human to the ocean floor was in nineteen sixty when the u s navy sent a vehicle to the mariana trench, the deepest part of the ocean. Anyway, what exactly do we know about the deep sea? Well, we define it as two hundred meters below the surface of the ocean. And around that point sunlight begins to disappear and temperatures begin to drop a thousand meters and beyond. There's complete darkness, very little oxygen, and pressures that are a thousand times greater than at the earth's surface. However, somehow it's full of life life that has a huge effect on our own lives, because half of the oxygen we breathe is generated by living things in the ocean. So in the future, scientists are going to try and find out more about oh,\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nthe creatures that exist there",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/smw51/original/52ffc71503f2f055325c4a0384637cfb/smw51.mp3",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "the surface of the ocean",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "the quality of the air",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "the creatures that exist there",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "the light which is produced",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 19
+  },
+  {
+    "id": 164,
+    "num": 51,
+    "name": "#51 Migration",
+    "name_without_num": "Migration",
+    "labels": [
+      {
+        "label": "#51",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "In the nineteenth century, there were several periods when large numbers of people moved from one place to another around the world. In many cases, people move to another continent. These mass migrations were on a much larger scale than any previous migrations in history. One major movement was from europe to the americas, australia and africa. This migration of europeans involved around sixty million people over one hundred years. Another mass migration was from russia to siberia and central asia. Another was from china, india and japan to southeast asia. These large movements of people were made possible by the new cheap and fast means of.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\ntransportation",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/migration/original/69d4809c799ac080fe81d460c8def2fc/migration.mp3?1625648412",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "transition",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "internet",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "transportation",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "airlines",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 13
+  },
+  {
+    "id": 161,
+    "num": 50,
+    "name": "#50 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#50",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "In some ways, mental development is related to social development. In school age, children between the ages of six and twelve children move from being able to think only on a concrete level. That is about real objects they can touch to being capable of abstract thought in their social development. Children gradually acquire interpersonal reasoning skills. They learn to understand the feelings of other people, and also learned that a person's actions or words don't always reflect their.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\ninner feelings",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW37_volume/original/677137e821d1ef1791b991c52686b3bd/129SMW37_volume.mp3?1623319793",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "interpersonal relationship",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "inner feelings",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "living condition",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "personality",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 9
+  },
+  {
+    "id": 159,
+    "num": 49,
+    "name": "#49 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#49",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Bread and cereals have a long history. The first bread was made in the nile valley about ten thousand years ago. The people used stones to crush the grain into coarse flour, and then they made the flour into primitive forms of bread. Primitive bread was not like the bread we know today, because it was simply flour dough dried on heated stones. The invention of ovens came later. Levin breads and cakes, which are made to rise by the action of yeast, were also a discovery of the ancient egyptians. The egyptians were the first people to master the art of baking. News of this new wonder food spread to other places in the middle east. Soon, other people were collecting seed, cultivating land and inventing ways to turn grain into flour. Baking used to be a social activity. While some homes had their own ovens, many families had to bake their dough and communal bakeries to identify their loaves. Each household would make a distinctive mark on the bread, sometimes with a special stamp bearing the family.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nname",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW36_volume/original/780009b214f5f123dc2af2726f4908bb/129SMW36_volume.mp3?1623319787",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "members",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "economic standard",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "figures",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "name",
+        "correct": true
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 6
+  },
+  {
+    "id": 155,
+    "num": 47,
+    "name": "#47 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#47",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Psychology is a relatively new science. Like other sciences, psychology must be able to state laws. A law is a way of organizing knowledge about something so that we can make predictions. When enough knowledge is gained about a subject, a scientist can state precisely what will happen under certain conditions. We experimental psychologists are interested in developing laws about human behavior, so we'll be able to understand and predict what people do and why they do it. Of course, to develop laws about human behavior, we must assume there's some regularity to it. We can't be psychologists without making the assumption the behaviour follows.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\ncertain patterns",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW34_volume/original/17c85d908a076df0c38e2081d9d8d78f/129SMW34_volume.mp3?1623319765",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "certain patterns",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "the leaders",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "random events",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "previous knowledge",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 8
+  },
+  {
+    "id": 153,
+    "num": 46,
+    "name": "#46 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#46",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "The complex process inside a leaf takes energy from the sun and uses it to convert water and carbon dioxide into sugars. During this process, photosynthesis plants convert light energy into chemical energy. All leaves carry out photosynthesis in basically the same way. First, the pores on the leaves, outer skin open up and taking molecules of carbon dioxide. Water absorbed by the roots is transported upward through the plant, and it enters the leaf through its stem, carbon dioxide, and water. These are the raw materials for photosynthesis. Once carbon dioxide and water are present, photosynthesis can.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nbegin",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW33_volume/original/b4804407bfe80207790001d71d858d05/129SMW33_volume.mp3?1623319755",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "continue",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "disappear",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "suspend",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "begin",
+        "correct": true
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 10
+  },
+  {
+    "id": 151,
+    "num": 45,
+    "name": "#45 Avalanche",
+    "name_without_num": "Avalanche",
+    "labels": [
+      {
+        "label": "#45",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Avalanche, as are a constant threat on mountain highways. The rogers pass stretch of the trans Canada is at risk of being buried in snow from November to April every year. This is why the highway now has a sophisticated defense system. The best way. It's important to control an avalanche when it's small. So a slide is set off while it's still small before it builds up into a serious danger. A team of snow technicians monitors the snow pack. They sort of read the snow and try to predict when it's likely to slide. They studied data from the weather stations in the mountains. As the danger increases, they drop explosives on to test slopes to see if the snow can be made a ...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nslide",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW32_volume/original/7841e079e9a071214254488babeb4813/129SMW32_volume.mp3?1623319752",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "melt",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "slide",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "collapse",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "spread",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 4
+  },
+  {
+    "id": 148,
+    "num": 44,
+    "name": "#44 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#44",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Are you going to be more effective and happy as a specialist or as a generalist? Do you find real satisfaction in the precision order and system of a clearly laid out job? Or are you one of those people who tend to grow impatient with anything that looks like a routine job? There are great many careers in which the emphasis is on specialization. You find these careers in engineering and in accounting, in production, in statistical work and in teaching. But there is an increasing demand for people who are able to take in a great area at a glance. There is, in other words, a demand for people who are capable of seeing the forest rather than the trees of making overall.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\njudgements",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW31_01_volume/original/94f31fc234cb55e37d6452f075af5be0/129SMW31_01_volume.mp3?1623319737",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "suggestions",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "indications",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "judgements",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "enhance",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 4
+  },
+  {
+    "id": 146,
+    "num": 43,
+    "name": "#43 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#43",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "The theory of personality types suggests there are pairs of what are known as type preferences. Type preferences are not the same as character traits that can be worked on and changed, rather, their preferred ways of being in the world different, um, different ways of experiencing daily life. One well known pair of type preferences is extraversion introversion, some people are extrovert sand, some are introvert extroverted people are by nature continuously aware of events outside of themselves, extravert stern outward to the world around them to pick up uh, ideas, values and interests. Extravert therefore usually have a variety of interests and sort of take an active approach to life. Introversion is just the opposite. Introvert look inward for resources, introvert, spur, soo fewer interests. But on a much deeper level, they sort of take a reflective approach to life. What I mean is they involve themselves in inner events, ideas and impressions. Introverted people usually prefer to learn in private.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nindividual ways",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW30_01_volume/original/c30f302c14786788b73160d3b8b0e569/129SMW30_01_volume.mp3?1623319727",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "individual ways",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "mysterious ways",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "odd ways",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "unconcerned ways",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 0
+  },
+  {
+    "id": 142,
+    "num": 42,
+    "name": "#42 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#42",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "The interior of a cave is divided into three zones. The entrance zone may serve as a place of shelter for animals or people. Prehistoric humans used entrance zones of caves as shelters and burial grounds. Therefore, such zones are of interest to archaeologists as they provide clues to the habitat of early human beings. The next zone is called the twilight zone. The twilight zone is sheltered from direct sunlight and his home to a large, diverse population of animals, such as salamanders, bats, and during severe winters bears the third zone. The dark zone is the true cave environment, perpetually dark, it has only slight seasonal changes in.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nin temperature",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW29_01_volume/original/a9dea4ef81936bcdf1dedd18822569ea/129SMW29_01_volume.mp3?1623319714",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "in temperature",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "in appearance",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "in wetness",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "in airpressure",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 1
+  },
+  {
+    "id": 138,
+    "num": 41,
+    "name": "#41 Drums",
+    "name_without_num": "Drums",
+    "labels": [
+      {
+        "label": "#41",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Drums can be divided according to shape. Some of the types are tubular vessel and frame drums. One of the most common tubular drums is the long drum. A lot of long drums are cylindrical. They have the same diameter from top to bottom, like this polynesian drum. This drum was carved from a length of tree trunks and has a single skinhead for vessel drums. We have the kettle drum. Kettle drums have a single membrane stretched over a pot or vessel body vessel. Drums come in a variety of sizes, from the very large drums of africa to the very compact and portable drums, like this one from hawaii. The third type I want you to see is the frame drum. A frame drum consists of one or two membranes stretched over a simple frame, which is usually made of thin.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nwood",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW28_01_volume/original/66f4ad9109658162a12a7dc395b8ad6e/129SMW28_01_volume.mp3?1623319698",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "iron",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "wood",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "plastic",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "glasses",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 4
+  },
+  {
+    "id": 132,
+    "num": 39,
+    "name": "#39 Jazz",
+    "name_without_num": "Jazz",
+    "labels": [
+      {
+        "label": "#39",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Early jazz musicians were active in many cities and towns throughout the southern United States. It was new Orleans with its long tradition of african american music that was the home of many fathers of jazz. After world war one, the musicians of new Orleans joined the general northward migration of African Americans. The first great national center of jazz was chicago. From there, the music entered the mainstream and even gave its name to the decade of the nineteen twenties. Jazz blending African American folk roots with elements of popular music and European classical traditions has been called America....\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nclassical music",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW26_volume/original/ef6dee9c88317a224fc36f19183eb0ac/129SMW26_volume.mp3?1623319686",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "pop music",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "classical music",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "unique music",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "national music",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 6
+  },
+  {
+    "id": 130,
+    "num": 38,
+    "name": "#38 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#38",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "The word science comes from a latin verb. Meaning to know science is a way of knowing. It emerges from our curiosity about ourselves and our world. Striving to understand is one of our basic drives who are scientists. Scientists are people who ask questions about nature and who believe that these questions can be answered. Scientists are explorers who are passionate about.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\ndiscovery",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW25_volume/original/1c61b3dbbadec646807745371fb0e5c3/129SMW25_volume.mp3?1623319683",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "math",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "discovery",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "space",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "humanity",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 4
+  },
+  {
+    "id": 120,
+    "num": 35,
+    "name": "#35 Computerized Workplace",
+    "name_without_num": "Computerized Workplace",
+    "labels": [
+      {
+        "label": "#35",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "The computerized workplace can be hazardous to your health. If you don't take preventative measures today, we'll go over what some of these hazards are, and more importantly, what can be done about them. One major complaint may be the biggest complaint of people who spend time at the computer is eyestrain. To help ease the strain on the eyes, the computer screen should be about two feet from your eyes. The entire screen should be in focus. The brightness and contrast should be adjusted for best readability. A good way to relieve eyestrain is to look away from the screen, frequently focus your eyes on objects that are far away, like something outside the building across the street, or the tree in the...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nparking lot",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW21_volume/original/a5345875e6a91c483108889fa00d2516/129SMW21_volume.mp3?1623319643",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "on the cellphones",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "in the movies",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "parking lot",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "in your brain",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 1
+  },
+  {
+    "id": 119,
+    "num": 34,
+    "name": "#34 Pain Management",
+    "name_without_num": "Pain Management",
+    "labels": [
+      {
+        "label": "#34",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "There have been several influential studies in pain management, some of the most interesting of these study, endorphins, the body's own natural painkillers, for example. We now know that exercise stimulates the production of endorphins. Lack of exercise, on the other hand, not only shuts down endorphin production, but can also lead to muscle deterioration. This is why you see a lot of pain specialist prescribing exercise for patients with chronic pain. Another interesting area involves the power of the placebo effect. We've known for some time that a sugar pill or other inactive placebo can sometimes make a sick person feel better. Somehow the power of suggestion or faith in the doctor for the drug will start a process of healing. We now think a neural chemical component, what may actually happen is the placebo effect allow some people to sort of tap into the supply of endorphins.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nin their own brains",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/11111_volume/original/df1fbd547068146f84d4113209e6f90b/11111_volume.mp3?1623319641",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "in their own brains",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "in their hearts",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "of their feelings",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "from the muscle",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 1
+  },
+  {
+    "id": 115,
+    "num": 32,
+    "name": "#32 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#32",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Our knowledge of the oceans a hundred years ago was confined to the two dimensional shape of the sea surface. And the hazards of navigation presented by the irregularities in depth of the shallow water close to the land. The open sea was deep and mysterious, and anyone who gave more than a passing thought to the bottom confines of the oceans probably assumed that the sea bed was flat. Sir james clark ross had obtained a sounding of over two thousand four hundred fathoms in eighteen thirty nine. But it was not until eighteen sixty nine when h m s porcupine was put at the disposal of the royal society for several cruises, that a series of deep soundings was obtained in the atlantic. And the first samples were collected by dredging the bottom shortly after this, the famous h m s challenger expedition established the study of the sea floor as a subject worthy of the most qualified physicists. And geologists at burst of activity associated with the laying of submarine cables soon confirmed the challenges. Observation that many parts of the ocean were two to three miles deep, and the existence of underwater features of considerable.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nmagnitude",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW18/original/c98667349d40ca30f70e3fa76774020c/129SMW18.mp3?1565490601",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "significance",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "worth",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "value",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "magnitude",
+        "correct": true
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 0
+  },
+  {
+    "id": 113,
+    "num": 31,
+    "name": "#31 Man-made Disease",
+    "name_without_num": "Man-made Disease",
+    "labels": [
+      {
+        "label": "#31",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "In the early days of the settlement of Australia, enterprising settlers unwisely introduced the European rabbit. This rabbit had no natural enemies in the antipodes, so that it multiplied with that promiscuous abandon characteristic of rabbits. It overran a whole continent. It caused devastation by burrowing, and by devouring the herbage, which might have maintained millions of sheep and cattle. Scientists discovered that this particular variety of rabbit, and apparently no other animal most susceptible to a fatal virus disease, myxomatosis. By infecting animals and letting them loose in the burrows, local epidemics of this disease could be created. Later, it was found that there was a type of mosquito which acted as the carrier of this disease and pass it on to the rabbits. So while the rest of the world was trying to get rid of mosquitoes, Australia was encouraging this one. It effectively spread the disease all over the continent and drastically reduced the rabbit population. It later became apparent that rabbits were developing a degree of resistance to this disease, so that the rabbit population was unlikely to be completely exterminated. There were hopes, however, that the problem of the rabbit would become...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nmanageable",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW17_volume/original/2f82d89a4a72ab5f843a2f83c868a714/129SMW17_volume.mp3?1623319617",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "manageable",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "widespread",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "out of control",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "troublesome",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 0
+  },
+  {
+    "id": 108,
+    "num": 30,
+    "name": "#30 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#30",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "The adolescent, with his passion for sincerity, always respects a parent who admits that he is wrong or ignorant, or even that he has been unfair or unjust. What the child cannot forgive is the parents' refusal to admit these charges, if the child knows them to be true. Victorian parents believed that they kept their dignity by retreating behind an unreasoning authoritarian attitude. In fact, they did nothing of the kind, but children were then too cowed to let them know how they really felt. Today, we tend to go to the other extreme. But on the whole, this is a healthier attitude both for the child and the parent. It is always wiser and safer to face up...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nto reality",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW15_volume/original/ca2df6bcbde22226483601c50d8f22c6/129SMW15_volume.mp3?1623319601",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "for reality",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "on reality",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "at reality",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "to reality",
+        "correct": true
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 2
+  },
+  {
+    "id": 170,
+    "num": 54,
+    "name": "#54 Hiroshi Ishiguro",
+    "name_without_num": "Hiroshi Ishiguro",
+    "labels": [
+      {
+        "label": "#54",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Hiroshi Ishiguro, a robot engineer from a soccer university, makes Geminoids so extremely realistic human robots. It's important that they look exactly like real people for Ishiguro to carry out his research. He's interested in understanding philosophical questions such as what is identity and what might happen if a person and their robot double were able to be in two places at the same time. His gemini, drogue, ox have rubber skin, and their heads are controlled by motors. These move the head, blink, twitch, shrug the shoulders, and make the robot appear to be breathing. During conversations, as well as this, there are motors which are connected to a computer, microphone and camera. These scan the controllers voice and face movements then send messages back to the robot which copies them. The robots body and skin stop at his chest though, and he has no robotic legs, so you won't see him...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nwalking round",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/smw53/original/3a99a58d99829610b6eab993b0885706/smw53.mp3",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "acting differently",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "walking round",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "appearing elsewhere",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "discussing politics",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 31
+  },
+  {
+    "id": 128,
+    "num": 37,
+    "name": "#37 Biology",
+    "name_without_num": "Biology",
+    "labels": [
+      {
+        "label": "#37",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Biology is considered one of the natural sciences. It is the science of life and life's processes. And like life science is better understood by observing it then by trying to create a precise definition. Over the next fifteen weeks, we will be observing the science of biology. In many ways, biology is the most demanding of all sciences. This is partly because living systems are so complex. Biology is also a multi disciplinary science. It requires knowledge of chemistry, physics, and mathematics. And of all the sciences, biology is the most linked to the social sciences, and ...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nhumanities",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/biology/original/c541363c096fbcc9d4ba0a4370e1b7b3/biology.mp3?1677551174",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "nature",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "religions",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "humanities",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "politics",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 3
+  },
+  {
+    "id": 124,
+    "num": 36,
+    "name": "#36 Stress",
+    "name_without_num": "Stress",
+    "labels": [
+      {
+        "label": "#36",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Management requires a great deal of energy and effort more than most people care to make. One factor that affects managers and inhibits their capacity to provide leadership is stress. Stress has lots of causes, work overload, criticism from workers, and can have negative health effects, including loss of sleep. It's a fact: managers have to deal with stress. Some handle it by making time to be by themselves. Most have some favorite place or pastime, a beach to walk on, maybe a stream to fish in or a game to play with the kids. It's important to have some form of rest and relaxation, creating art, working with your hands, gardening, playing sports. The list goes on. Rest doesn't always mean inactivity. For some people exercise ...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nis rest",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/rest/original/89bbdfc79b6ded0e90bc027222167e53/rest.mp3?1670762129",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "is capacity",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "is stress",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "is a waste of time",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "is rest",
+        "correct": true
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 1
+  },
+  {
+    "id": 116,
+    "num": 33,
+    "name": "#33 Insurance",
+    "name_without_num": "Insurance",
+    "labels": [
+      {
+        "label": "#33",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Each kind of insurance protects its policy holder against possible financial loss. Life insurance pays your family a certain sum upon your death. The purpose of life insurance is to provide your family with financial security and immediate a state that will allow them to maintain the household after you die. Health insurance protects you against large medical expenses. When you pay premiums to your insurance company, you can ensure payment of your medical bills. Another kind property liability insurance is sometimes called casualty insurance, because it covers the cost of accidents like automobile accidents, fire and theft. If you're like most people, your home is the largest single investment you make in your life. This is why most homeowners have some type of property liability ...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\ninsurance",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/smw33/original/7cb00666feb3d1c3d1e63d57b73f1a38/smw33.mp3?1607393949",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "problems",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "security",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "insurance",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "accident",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 0
+  },
+  {
+    "id": 172,
+    "num": 55,
+    "name": "#55 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#55",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Let's see what's happening on the seabed. Ok. So these really remarkable features are known as black smokers. Don't forget, we're now two and a half kilometers down. The light. It's all pitch black. What we're seeing is the lights from the submersible. So imagine you're looking at this out from your porthole and it supports...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nall this fabulous life",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/smw54_volume/original/d7ea8fcd045f9ea647735e6db1cc02fb/smw54_volume.mp3?1623319838",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "a very tall structure",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "fish which need light",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "you can’t see anything",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "all this fabulous life",
+        "correct": true
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 42
+  },
+  {
+    "id": 168,
+    "num": 53,
+    "name": "#53 Animal Domestication",
+    "name_without_num": "Animal Domestication",
+    "labels": [
+      {
+        "label": "#53",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Not all wild animals can become domestic animals. In fact, only fourteen species are fully domestic. According to one scientist, he says that six things must be true before it can happen. Without these six things, it's impossible for an animal to become domestic. Firstly, the animal must eat inexpensive food that's readily available, so humans can feed it easily. Secondly, the animal must grow fast, because slow growing animals are unhelpful to humans. It also needs to breed easily. If the animal doesn't have babies, the species will soon disappear. The animals shouldn't be frightened when placed in a small space, because this is dangerous to humans. Finally, it helps if the animal lives in a group in its natural environment. If the group has a social structure, the human can become its leader. If one animal in the group accepts the human as leader, the others will probably.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nfollow",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/smw52_volume/original/ac3524fdd972f89f7d42d354c8e3b854/smw52_volume.mp3?1623319825",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "accept",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "follow",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "repeat",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "continue",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 18
+  },
+  {
+    "id": 103,
+    "num": 29,
+    "name": "#29 Problem of Youth",
+    "name_without_num": "Problem of Youth",
+    "labels": [
+      {
+        "label": "#29",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "People are always talking about 'the problem of youth'. If there is one-which I take leave to doubt-then it is older people who create it, not the young themselves. Let us get down to fundamentals and agree that the young are after all human beings-people just like their elders. There is only one difference between an old man and a young one: the young man has a glorious future before him and the old one has a splendid future behind him: and maybe that is where the rub is. \nWhen I was a teenager, I felt that I was just young and uncertain-that I was a new boy in a huge school, and I would have been very pleased to be regarded as something so interesting as a problem. For one thing, being a problem gives you a certain identity, and that is one of the things the young are busily engaged in...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nseeking",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW14_volume/original/6c133920212c3a1d9395d47697d7e53f/129SMW14_volume.mp3?1623319586",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "seeking",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "wondering",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "escaping",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "chatting",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 1
+  },
+  {
+    "id": 95,
+    "num": 28,
+    "name": "#28 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#28",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Atmospheric pressure can support a column of water after ten meters high, but plants can move water much higher. The sequoia tree can pump water to its very tough, more than one hundred meters above the ground. Until the end of the nineteenth century, the movement of water in trees and other tall plants was a mystery. Some gardeners hypothesized that the living cells of plants acted as palms, but many experiments demonstrated that the stance of plants in which all the cells are killed can still move water to appreciable heights. Other explanations for the movement of water in plants have been based on root pressure, a push on the water from the roots at the bottom of the plant. The root pressure is not nearly great enough to push water to the tops of tall trees. Furthermore, the conifers, which are among the tallest trees, have unusually low.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nroot pressures",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW13_volume/original/e982a55eaa12b941c7fad9558c0184e8/129SMW13_volume.mp3?1623319566",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "pressures",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "atmospheric pressure",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "root pressures",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "water pressure",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 1
+  },
+  {
+    "id": 92,
+    "num": 27,
+    "name": "#27 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#27",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Yeah, inferential statistics is a formalized body of methods for solving another class of problems that present great difficulties for the unaided human mind. This general class of problems characteristically involves attempts to make predictions using a sample of observations, for example, a school superintendent wishes to determine the proportion of children in a large school system who come to school without breakfast, have been vaccinated for flu or whatever. Having little knowledge of statistics, the superintendent would know that it is unnecessary and inefficient. To question each child. The proportion for the entire district could be estimated fairly accurately from a sample of a few as a hundred children bus. This is inferential statistics is to predict or estimate characteristics of a population from a knowledge of the characteristics of only a sample.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nof the population",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW12_volume/original/5dccf4158e7ba47ea69e7654aeeae424/129SMW12_volume.mp3?1623319558",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "of the population",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "of observations",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "of the children",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "of the child",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 1
+  },
+  {
+    "id": 89,
+    "num": 26,
+    "name": "#26 Body Tolerance",
+    "name_without_num": "Body Tolerance",
+    "labels": [
+      {
+        "label": "#26",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Cells cannot remain alive outside certain limits of temperature. In much narrow limits mark the boundaries of effective functioning. Enzyme systems of mammals and birds are most efficient only within a narrow range around thirty seven degrees centigrade. A departure of a few degrees from this value seriously impairs their functioning. Even though cells can survive wider fluctuations, the integrated actions of bodily systems are impaired. Other animals have a wider tolerance for changes of bodily ...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\ntemperature",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/smw_26_volume/original/bf04d10aa41bb51123baaf01314f974c/smw_26_volume.mp3?1623319546",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "shape",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "temperature",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "difference",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "structure",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 1
+  },
+  {
+    "id": 82,
+    "num": 23,
+    "name": "#23 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#23",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "I'd like to know more about psychology. I think it's a very interesting subject to study. I'd like to know why I do the things I do. Looking at how the brain works and how we behave might make me understand people more. I'd particularly like to study child psychology. I love looking at children, playing, thinking, drawing, doing anything, really. But what makes them tick? What goes on in their little minds? Or perhaps I should say their big minds. If we all knew more about child psychology, perhaps we could do more to be a positive influence on children. Being a psychologist must be a very interesting job, listening to people talk all day and then analyzing their behavior. I wonder if they ever get.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nbored",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW07_volume/original/9b8d3244a6d11398a134858531c3ccd8/129SMW07_volume.mp3?1623319529",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "disapointed",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "excited",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "bored",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "success",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 0
+  },
+  {
+    "id": 78,
+    "num": 20,
+    "name": "#20 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#20",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Quality of life is important to all of us. It's something we all try to improve. I'm just wondering how easy it is to improve your quality of life. The biggest things that affect how happy you are are your job, house, holidays, and friends. Of course, there are others. It's quITe difficult to change these things. If you don't like your job, IT can be difficult to find a better one. My job really affects my quality of life. If it's really stressful, my quality of life goes down. You also need somewhere nice to live. That can be difficult to change. It's important to find a home that feels like home. Holidays can add a lot to your happiness, but we don't have lots of those. And then there are friends. They really improve.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nquality of life",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW04_volume/original/0f89153356bb998cedfee20ae5e5fdec/129SMW04_volume.mp3?1623319517",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "quality of life",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "working efficiency",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "social ability",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "living enviroment",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 0
+  },
+  {
+    "id": 77,
+    "num": 19,
+    "name": "#19 Happiest Times",
+    "name_without_num": "Happiest Times",
+    "labels": [
+      {
+        "label": "#19",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "University is one of the happiest times of our life. If you go to university, that is I totally loved my university days. I also loved my university. I had three great years of being a student. It was the first time I lived alone without my parents. I had to cook, wash and clean for myself. I loved it. I had complete freedom. I also loved the studying. It was much more interesting than studying at school. It was nice to just wander along to a lecture, do the reading, and then do the assignments. I really felt like I was learning something. I also loved the social life at university. It's almost twenty four seven. There always parties and things to do. You have to get the right balance between.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nstudying and partying",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW03/original/21afe1313ca22085daf0e16a496bb558/129SMW03.mp3?1628822086",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "work and life",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "studying and partying",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "friends and parents",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "studying and computer games",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 1
+  },
+  {
+    "id": 76,
+    "num": 18,
+    "name": "#18 Pyramid",
+    "name_without_num": "Pyramid",
+    "labels": [
+      {
+        "label": "#18",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "The Pyramids in Cairo are my favourite buildings in the whole world. I knew all about them when I was very young. They have always fascinated me. They really are one of the world’s wonders. People still don’t know how they were built. I think they are probably the greatest architectural achievement ever. Even the tallest buildings today are easy to build. The Pyramids were almost impossible to build, but they did it. Two things fascinate me about The Pyramids – their beautiful shape and their mystery. I love looking at photos of The Pyramids. When I visited Egypt, their beauty blew me away. And the great thing was I also felt their mystery. The Pyramids are full of hidden secrets, history and ...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nmysteries",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW02/original/d8b425132809f277744c04b57570dffa/129SMW02.mp3?1619085018",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "ghosts",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "jewelries",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "superstitions",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "mysteries",
+        "correct": true
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 1
+  },
+  {
+    "id": 75,
+    "num": 17,
+    "name": "#17 Road Rage",
+    "name_without_num": "Road Rage",
+    "labels": [
+      {
+        "label": "#17",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "I don’t understand road rage. It is a problem that is getting worse all over the world. People are turning into monsters when they get behind the wheel of a car. They think the road belongs to them. They think they don’t have to follow speed limits or consider other drivers. I wonder why this is. What is it about cars and driving that turns normal people into maniacs? Some people simply hoot and shake their fists. The funny thing is that they also do the same things to make other drivers angry. Serious road rage happens when someone gets out of their car and gets angry. They can punch the other diver and sometimes even kill them. Why would you want to kill someone because they overtook you?\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nCrazy",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW01/original/9b882c5c2e16ebb543dab839bb6860f7/129SMW01.mp3?1608293898",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "Funny",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "Cool",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "Crazy",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "Amazing",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 1
+  },
+  {
+    "id": 88,
+    "num": 25,
+    "name": "#25 Sustained Economic Growth",
+    "name_without_num": "Sustained Economic Growth",
+    "labels": [
+      {
+        "label": "#25",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "China, which has both enjoyed sustained economic growth, face worrying challenges, there are worrying indications that social progress is starting to lag behind economic performance. With the slowdown in the rate of reduction in child deaths, a special concern, the un notes that china spends five per cent of its gdp on health, but public spending now amounts to less than two percent of gdp. The erosion of public funding, it says, has resulted in a mismatch between need and provision. With per capita spending in urban areas, three point five times that in rural areas, between seventy and eighty percent of the rural population have no health insurance. Children living in the poorest parts of rural China, face far greater health risks. And the gap is...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nwidening",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/smw25_volume/original/d6ac9598b66f78d3695ba868b42a705a/smw25_volume.mp3?1623319544",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "unchanged",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "narrowing",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "disappearing",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "widening",
+        "correct": true
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "complete",
+    "exam_count": 23
+  },
+  {
+    "id": 85,
+    "num": 24,
+    "name": "#24 Looking Younger",
+    "name_without_num": "Looking Younger",
+    "labels": [
+      {
+        "label": "#24",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "The other day I saw an advert on the internet asking for volunteers to test a new skin cream. It was an anti aging product. How is it possible for a cream or lotion to stop us looking old? I don't think any skin care goods can make us look younger. I certainly don't believe cosmetics companies that say their expensive creams can remove wrinkles. They just want to make lots of money. Why do people believe them? How do they know their creams work? They did not test their products on thousands of people over fifty years. I think if a person uses an anti aging cream for fifty years, they would not even look a year younger when they are sixty. This means it's a huge waste of money. Only healthy living can keep us.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nlooking younger",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW09/original/cfbca8e98a469420bceba6a10c443e10/129SMW09.mp3?1722472419",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "immortal",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "looking whiter",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "looking younger",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "healthier",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 2
+  },
+  {
+    "id": 80,
+    "num": 22,
+    "name": "#22 Ozone Layer",
+    "name_without_num": "Ozone Layer",
+    "labels": [
+      {
+        "label": "#22",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "I first heard about the ozone layer about twenty years ago. I was still in school. I thought it was interesting, but I didn't take it seriously. It was a bit like science fiction. I mean, how could there be a giant hole in the atmosphere? Over the years, more and more scientists spoke about the ozone layer. Global warming became a serious issue. Important people like al gore made movies about it. We all know today that the thinning ozone layer is perhaps the most serious crisis we face. Even though many people have changed their lifestyles, we are still damaging the ozone layer. We need to do something really drastic to stop this. We all need to stop driving cars and stop using.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\ncoal",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/coal_volume/original/9d8fdc169876e16af2e048b6fe1c08df/coal_volume.mp3?1623319525",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "water",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "television",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "oxygen",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "coal",
+        "correct": true
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 3
+  },
+  {
+    "id": 79,
+    "num": 21,
+    "name": "#21 Crime",
+    "name_without_num": "Crime",
+    "labels": [
+      {
+        "label": "#21",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Why do we have crime? When will it all stop? IT's sad that there is so much crime in our society. It hurts so many people. Most people in the world just want to live happily and be good neighbors. Why do some people turn to crime? Money is a big reason. Many criminals pickpocket, steal, kidnap or even kill people to get money. There are many terrible crimes in the world. Perhaps the worst is ethnic cleansing. This is a crime against humanity. Many people are killed because of their color or religion. People who commit this crime really go to prison. Have you ever been a victim of crime? What do you think we need to do to reduce crime rates? Perhaps you should run.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nto your government",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW05_volume/original/5d9424ab5a9f6515d4d0913c94411ac9/129SMW05_volume.mp3?1623319521",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "to your government",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "to your family",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "to your boss",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "to your friends",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 2
+  },
+  {
+    "id": 157,
+    "num": 48,
+    "name": "#48 Worker Bee",
+    "name_without_num": "Worker Bee",
+    "labels": [
+      {
+        "label": "#48",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "The body of the worker bee is divided into three segments, head, thorax, and abdomen. On the head are the mandible zwitter jar, like organs, which enable the bees to perform the necessary high duties and to mold the wax and build their combs. The honey bee's four wings and six legs, are fastened to the thorax. Located in the abdomen are the honey sac and the sting with its highly developed poison sac. The sting is used by the workers for self defense and for the protection of their colony. The worker uses her sting only once for in doing so she ...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nloses her life",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW35_volume/original/442cdaf99cf0a67fddb132f1eb87d6cd/129SMW35_volume.mp3?1653955348",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "rescues herself",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "loses her dignity",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "loses her life",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "kills the enemy",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 8
+  },
+  {
+    "id": 134,
+    "num": 40,
+    "name": "#40 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#40",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Land animals move easily through air, because air does not slow them down. Sea creatures, on the other hand, have to move through water, which is hundreds of times thicker than air. A sea animal has to push itself through water in order to move. Sea animals use many different ways to swim, creep or glide through water. Fish are able to swim by bending their bodies into waves. They have flattened fins and tails that push against the water, like, or blades converting their body waves into forward movement. The size of officious tail contributes to the swimming speed. Small tail fins are found in slow swimmers, like the eel. The medium sized tail of the base is linked with a medium to fast swimming speed. Long pointed tail lobes, like those on the marlin, are found only on fast.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nswimmers",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/129SMW27_volume/original/d7f4a2debe19b1d559831770ff7296ae/129SMW27_volume.mp3?1623319689",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "mammals",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "runners",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "vehicles",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "swimmers",
+        "correct": true
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 2
+  },
+  {
+    "id": 56,
+    "num": 16,
+    "name": "#16 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#16",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Too many students search for material by going to what they think is the right shelf in the library, finding little or nothing and then reporting back to their tutor that there's nothing on it in the library. If you have some authors and titles in mind, look them up in the catalogue - they may not be where you think- and look at adjacent entries in the catalogue and on the shelves. The catalogue may lead you to restricted loan collections, reserve stacks or departmental collections, which may not always be obvious. You should also check the subject catalogue, trying to think of related terms. Other places to look would be the references shelves and newspaper section, though a problem here is finding [BEEP)\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nthe article you 're looking for",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/3.33_volume/original/4111eedf3b7d2f92152771d9b223deb6/3.33_volume.mp3?1623319454",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "out where books are kept",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "yourself in the reference section",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "the article you 're looking for",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "time to go to the library",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 1
+  },
+  {
+    "id": 55,
+    "num": 15,
+    "name": "#15 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#15",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Scientists distinguish two basic ways in which we receive information from the outside world through the sense of touch: active and passive, or to put it more simply, touching and being touched. Being touched, or passive tactile awareness, includes sensing external pressure and temperature acting on parts of the body, and this gives us clues as to the nature of our environment. Active touching is when we explore our surrounding with our hands, feet, mouth, and so on. Because it's difficult to guess what some objects are really like with the eyes alone - for example, their weight, hardness or softness, roughness or smoothness, etc. - touching them gives us a much fuller understanding of the objects around us. Yet, how touch works is very complex and [BEEP)\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nstill poorly understood",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/3.34_volume/original/47215f5e3e8f88395a56a61199d2a592/3.34_volume.mp3?1623319451",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "is surely misunderstood",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "still poorly understood",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "will surely be understood",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "is rarely understood",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 0
+  },
+  {
+    "id": 50,
+    "num": 10,
+    "name": "#10 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#10",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "In nineteenth century Britain - and indeed in the first half of the twentieth century - many of the urban poor lived in extremely cramped conditions. Overcrowding, damp, and poor sanitation affected the daily lives of the majority of the population, with serious implications for their own and their children's health. Novelists have a major role to play in reflecting their times to their readers who may otherwise ignore social problems, and the portrayal of the wretched living conditions of the impoverished by such writers as Charles Dickens in the nineteenth century and George Orwell in the twentieth was instrumental in - - - .\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nbringing the situation to the attention of the public",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/SMW_156_volume/original/aec5f5b5da2139946d12ef4b0dbe636a/SMW_156_volume.mp3?1623319439",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "portraying those living conditions in a literary way",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "bringing the situation to the attention of the public",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "making use of their own experience of poverty",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "helping the poor to gain agood education",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 0
+  },
+  {
+    "id": 48,
+    "num": 8,
+    "name": "#8 Parents' Attitude",
+    "name_without_num": "Parents' Attitude",
+    "labels": [
+      {
+        "label": "#8",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "When parents are asked how they handle their very unruly children, most will admit that they are likely to use physical forms of punishment. This is not to say that a parent generally hits their child each and every time they are bad. Nevertheless, parents generally use physical punishment as a last resort, after having unsuccessfully tried other forms of discipline with children who have become very bad. Those who believe in physical punishment, however, are unaware of the fact that it does not lead to better children. In fact, the opposite is true. \nResearch findings show that children from homes where corporal punishment is the norm exhibit more anti-social behavior than children whose parents seldom or never hit them. For example, children whose parents systematically use corporal punishment are more often than not behind any classroom disruptions. Such children not only create discipline problems at school, but they are also overly aggressive. In addition, they have extremely low self-esteem and a negative attitude to those around them. On the other hand, children whose parents use less harsh methods of discipline have a healthier attitude towards their school environment and (BEEP)\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\npeers",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/3.5_volume/original/c4ced4bae7c7a89319ad375082879b86/3.5_volume.mp3?1623319433",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "partners",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "parents",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "peers",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "punishment",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 1
+  },
+  {
+    "id": 46,
+    "num": 6,
+    "name": "#6 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#6",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "As I mentioned last week, we're going to look today at fiction writing, writing stories, and in particular at authors who have a reputation for creating characters in their books who are known as 'unreliable narrators'. Now what does that mean exactly? Well Originally, in the nineteenth century, it tended to simply mean that - as a reader - you just couldn't trust what the narrator of a story was telling you. This might have been because they were not giving you important information, or because they themselves as a character in their own story lacked some kind of personal insight. In later works of literature, this 'unreliability' was used by authors more deliberately, um, with the direct intention of making a story more complicated for a reader to understand - perhaps a crime novel，or a thriller. Nowadays, there's a lot more humour in unreliable narration and it's often used to make first-person characters enjoyable to read about. So, what all that tells us as a general starting point is that this type of narration - - - .\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nhas changed over time",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/SMW_35_volume/original/d2fdf4d25092e79bef254db687bbe129/SMW_35_volume.mp3?1623319426",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "suits some writers better than others",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "is becoming more popular",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "has changed over time",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "make s reading easier",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 4
+  },
+  {
+    "id": 44,
+    "num": 4,
+    "name": "#4 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#4",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Most, if not all, young men and women have dreams of the future which include themselves, their families, and possibly their country. At one time or another, they evaluate and criticize their own society, and think of the changes they would like to make. For most people, however, the biggest contribution they can make to their society's development and change is through the careers they will follow, rather than through direct political action. For the lucky few，their careers will be interesting as well as allowing them to make a measurable contribution to the growth of their country. This is why it is important to know something about the career aspirations of young people and the reasons for their interest in these ideal careers. At the same time, it is equally important to consider whether their aspirations are [BEEP]\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nrealistic",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/2.16_volume/original/0ee006db7b322f1aac19445956ecd699/2.16_volume.mp3?1623319420",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "hopeful",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "realistic",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "successful",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "fulfilling",
+        "correct": false
+      },
+      {
+        "label": "E",
+        "choice": "obtained",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 4
+  },
+  {
+    "id": 42,
+    "num": 2,
+    "name": "#2 SMW",
+    "name_without_num": "SMW",
+    "labels": [
+      {
+        "label": "#2",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "So, just a few weeks ago excavators of a remote archeological site in southeastem Asia reported an exciting find under the ground, They found evidence of a writing system which dates back thousands of years. Three blocks of flat rock with odd symbols which look like ancient forms of writing were discovered. Well，this find could reveal much about an advanced, independent urban culture which historians believe may have lived in that area. However，many scholars are sceptical about the authenticity of the blocks，which they suspect - - - .\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\ncould very possibly be fake",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/SMW_115_volume/original/bb442aafa102cbdd8631f2e42d9ccde5/SMW_115_volume.mp3?1623319416",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "are much older than expected",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "could very possibly be fake",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "belonged to that culture",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 6
+  },
+  {
+    "id": 41,
+    "num": 1,
+    "name": "#1 Paper Money",
+    "name_without_num": "Paper Money",
+    "labels": [
+      {
+        "label": "#1",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "The Chinese were, as far as we know, the inventors of paper money and because it was so easy to move compared with coins, it was named \"flying money\". They were also the first to experience an economic problem which has become all too familiar: by the 12th century, there was money in circulation to cause serious inflation. In Europe, it wasn't until about 1400 that bankers in Spain and Italy began to honor \"bills of exchange\", which were a kind of private paper money not in general use. They were documents used by those involved in a business transaction in which payment was made through a third party to avoid the cost of foreign exchange. However, it is the Swedes who are generally credited with producing the first proper European bank [BEEP]\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nnotes",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/1.25_volume/original/d95b40c6e899a5432b77ac64f377a7d1/1.25_volume.mp3?1623319413",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "notes",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "accounts",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "drafts",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "paper",
+        "correct": false
+      },
+      {
+        "label": "E",
+        "choice": "charges",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 13
+  },
+  {
+    "id": 54,
+    "num": 14,
+    "name": "#14 Body Function",
+    "name_without_num": "Body Function",
+    "labels": [
+      {
+        "label": "#14",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "We learn most about ourselves and the way we function, both physically and mentally, when things go wrong. For a long time it was thought that the brain acted as a whole in governing the body's functions. Then, in 1861, Paul Broca, a French anatomist and anthropologist, discovered that different parts of the brain different functions. After carrying out a postmortem examination on a patient who had had a severe speech impediment, he discovered, as he had expected, damage to a section of the left frontal lobe of the brain. The left side of the brain governs language ability. The patient's problem had been that he could only utter one syllable, though he fully [BEEP]\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nunderstood spoken language",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/1.24_volume/original/ae50571d983178f1295e2d0c496eb15c/1.24_volume.mp3?1623319448",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "ignored people speaking",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "participated in conversations",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "understood spoken language",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "understood foreign languages",
+        "correct": false
+      },
+      {
+        "label": "E",
+        "choice": "used language",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 3
+  },
+  {
+    "id": 45,
+    "num": 5,
+    "name": "#5 Greenhouse Gas",
+    "name_without_num": "Greenhouse Gas",
+    "labels": [
+      {
+        "label": "#5",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Easy",
+        "color": "12d3bf",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "How much the Earth's climate will change in the future depends, among other things, on how quickly and to what extent the concentration of greenhouse gases in the atmosphere increases. If we take no action to limit future greenhouse gas emissions, it is estimated that there will be a rise in temperature of 0.2 to 0.3°C every ten years. This is a far greater rate of warming than anything that has occurred over the past ten thousand years. \nOne set of predictions claims that some regions of the world will warm more quickly than others, and rainfall will also increase in some areas and decrease in others. These changes will affect the sea level, which could rise by 50cm over the next century. All this will affect humans through the effects it has on water resources ...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nfood production and health",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/earth_volume/original/c03f6afda03009bbf1493c348279e837/earth_volume.mp3?1757918131",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "good production and wealth",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "food production and health",
+        "correct": true
+      },
+      {
+        "label": "C",
+        "choice": "full production and wealth",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 5
+  },
+  {
+    "id": 49,
+    "num": 9,
+    "name": "#9 Mobile Phone",
+    "name_without_num": "Mobile Phone",
+    "labels": [
+      {
+        "label": "#9",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "These days nearly everyone with a mobile phone is able to take photographs or even make a video, but originally cameras were so large and heavy that photography's appeal as a pastime was limited to a few enthusiasts. Also, the time needed for the exposure meant that your subjects, if you were photographing people, had to remain still for what must have seemed like a very long time. Movement would come out as a blur in the picture or, if someone walked across the view of the lens, would not register at all, which is why early photographs of city streets appear deserted. In other words, all pictures had to be posed. However, as early as the 1880s, manufacturers in both Europe and America began producing miniature models, some of them small enough to be hidden in people's clothing. Cameras came in all shapes and sizes. Handbags, walking stick handles and tie-pins were among the oddest and were collectively known as \"detective cameras\". This was not because they were used in police work, but because the user could move about without attracting attention [BEEP)\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nas they took pictures",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/2.15_volume/original/a6cc9c803fe6abc0636c8854df3c1d4f/2.15_volume.mp3?1623319437",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "asking to take pictures",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "as they shot films",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "by taking holiday snaps",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "as they took pictures",
+        "correct": true
+      },
+      {
+        "label": "E",
+        "choice": "as they take pictures",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 2
+  },
+  {
+    "id": 43,
+    "num": 3,
+    "name": "#3 Microscope",
+    "name_without_num": "Microscope",
+    "labels": [
+      {
+        "label": "#3",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "When you first examine something under a microscope, say a leaf from a plant, you're amazed at how much detail there is and it's detail that you simply cannot see without magnification. And what you can see with the naked eye becomes suddenly huge under the lens. \nHow big everything looks is astonishing but it's also amazingly intricate. Suddenly it's as if another world has opened up in front of your eyes and you think, hey, I hadn't realized that something so small, so tiny, could be so- --.\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\ncomplex",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/SMW_36/original/2c87be541648f4fff6c8584ec90db2cd/SMW_36.mp3",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "complex",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "unreal",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "confusing",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "invisible",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 4
+  },
+  {
+    "id": 47,
+    "num": 7,
+    "name": "#7 Sun Clock",
+    "name_without_num": "Sun Clock",
+    "labels": [
+      {
+        "label": "#7",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "OK, so the date of the invention of the first clock is disputed among historians but it's agreed that the first method for telling the time was the movement of the sun across the sky. When the sun was directly ahead, it was midday and when it was on the horizon, it was early morning or early evening, according to whether it was in the east or the west. However, this method was problematic in terms of accuracy: but nevertheless, it's been used for countless years, from early humanity to - - - .\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\ncurrent days",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/SMW_116_volume/original/dc0f54fd72a85bd38d213184520a8fac/SMW_116_volume.mp3?1623319428",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "ancient civilisations",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "desert tribes",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "historical periods",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "current days",
+        "correct": true
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 2
+  },
+  {
+    "id": 52,
+    "num": 12,
+    "name": "#12 Study of Humanities",
+    "name_without_num": "Study of Humanities",
+    "labels": [
+      {
+        "label": "#12",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "It's been suggested that we get rid of the study of humanities altogether. Some say studying subjects like history, philosophy, politics, literature, anthropology, and so on, has no intrinsic value and why should we waste time and energy on courses of study that won't lead directly to a cut and dried career. They say that what the world needs now is specialists, not generalists. Well, I have to say, I couldn't disagree more. Of course we want to produce well-informed, literate, highly functioning citizens who make solid contributions to society. That's an idea that still holds sway - but that's not the reason that I believe studying the humanities is valuable. People who study a breadth of topics, and who have a diverse range of interests, are actually better problem solvers. This broad education means they can approach an issue - - - .\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nfrom a number of angles",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/SMW_75_volume/original/1f8358323546858bab015835b5377cea/SMW_75_volume.mp3?1623319442",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "from a number of angles",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "with a specific goal in mind",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "in a less emotional manner",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "in a way that enriches society",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 2
+  },
+  {
+    "id": 53,
+    "num": 13,
+    "name": "#13 Surfing",
+    "name_without_num": "Surfing",
+    "labels": [
+      {
+        "label": "#13",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "Surfing has been a central part of Hawaiian culture for hundreds of years. But surfing wasn't just a pastime for the Hawaiians in ancient times. It served as a kind of training exercise meant to keep chiefs in top physical condition. Chiefs demonstrated their mastery by their skill in the surf, and commoners gained popularity by the way they handled themselves in the ocean. As well as this, surfing served as a system for conflict resolution. Young males would test their surfing skills in fierce competitions, during which wealth, pride, and even romance ...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nwere at stake",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/SMW_76_volume/original/845ca941b450db9a842f9676079aecd3/SMW_76_volume.mp3?1623319445",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "could fail",
+        "correct": false
+      },
+      {
+        "label": "B",
+        "choice": "took place",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "were at stake",
+        "correct": true
+      },
+      {
+        "label": "D",
+        "choice": "were discovered",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 1
+  },
+  {
+    "id": 51,
+    "num": 11,
+    "name": "#11 Presentation",
+    "name_without_num": "Presentation",
+    "labels": [
+      {
+        "label": "#11",
+        "id": "num",
+        "color": "CCCCCC"
+      },
+      {
+        "label": "Medium",
+        "color": "FF9900",
+        "id": "difficulty"
+      }
+    ],
+    "prediction_text": "This year we're planning to use a different type of assessment on this module. In the past students were required to complete two long written assignments and also to do a presentation on a subject of their own choice. We have decided to ask you to write four shorter pieces of written coursework this year. We are also going to be more prescriptive about what you focus on in your presentation. This is because previously many students lost marks unnecessarily simply because ...\n\n--------\nQuestion:\nAt the end of the recording the lost word or group of words has been replaced by a beep. Select the correct option to complete the recording.\n--------\nCorrect Answer:\nthey made an inappropriate choice of topic",
+    "audio_url": "https://dl26yht2ovo33.cloudfront.net/public/system/lmcqs/smw/audios/SMW_155/original/34731f14d83f3c17e48b1546ccfaefc3/SMW_155.mp3",
+    "transcript": null,
+    "choices": [
+      {
+        "label": "A",
+        "choice": "they made an inappropriate choice of topic",
+        "correct": true
+      },
+      {
+        "label": "B",
+        "choice": "they used illustrations and evidence well",
+        "correct": false
+      },
+      {
+        "label": "C",
+        "choice": "they showed they had grasped the content of the course",
+        "correct": false
+      },
+      {
+        "label": "D",
+        "choice": "they did not speak as clearly as they should have done",
+        "correct": false
+      }
+    ],
+    "answer_in_text": null,
+    "explanation": null,
+    "exam_note": null,
+    "kind": "practice",
+    "exam_count": 0
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "target": "phase-04-detail-endpoint",
+  "mode": "gate",
+  "verdict": "APPROVED",
+  "reviewed_files": [
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/dto/response/DecodedAnswerPayload.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/service/AnswerPayloadDecoder.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/dto/response/AnswerReviewDetailResponse.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/service/ScoringReviewService.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/controller/ScoringReviewController.java"
+  ],
+  "conventions_checked_against": [
+    "pte-api/services/reporting/src/main/java/com/pte/reporting/service/ReportService.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/service/SnapshotPinService.java"
+  ],
+  "design_note": "getAnswerForReview reuses the existing findOwned helper (already tenant-scoped, already 404-not-403) rather than a new method, avoiding duplicated denial logic between approve() and the new detail read. Media presign failure is caught at two layers (MediaClient's own resilience4j fallback returns null; withPresignedUrl also try/catches around the call) — intentional belt-and-suspenders per the phase's explicit 'never fail the whole endpoint on presign failure' constraint, not redundant dead code.",
+  "findings": [],
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "noted_count": 0,
+  "receipt_status": "skipped_cross_repo_boundary",
+  "receipt_note": "Same limitation as prior phases — result recorded directly in the phase file's Quality and Testing State."
+}

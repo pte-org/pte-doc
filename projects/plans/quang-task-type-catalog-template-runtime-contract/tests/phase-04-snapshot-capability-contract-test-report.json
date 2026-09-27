@@ -1,0 +1,20 @@
+{
+  "phase": "phase-04-snapshot-capability-contract",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-22T18:22:34+07:00",
+  "source_commit": "working-tree",
+  "commands": [
+    ".\\mvnw.cmd -pl app clean test '-Dtest=SnapshotPublishServiceTest,SnapshotPinServiceTest,CapabilityNegotiationServiceTest,AttemptLifecycleCapabilityTest,AttemptMapperTest'",
+    ".\\mvnw.cmd -pl app test"
+  ],
+  "summary": {
+    "focused_passed": 52,
+    "full_suite_passed": 774,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "report_path": "pte-doc/projects/plans/quang-task-type-catalog-template-runtime-contract/tests/phase-04-snapshot-capability-contract-test-report.json"
+}

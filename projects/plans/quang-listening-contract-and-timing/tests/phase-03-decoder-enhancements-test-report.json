@@ -1,0 +1,22 @@
+{
+  "phase": "phase-03-decoder-enhancements",
+  "mode": "all",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-12T14:35:40Z",
+  "summary": {
+    "passed": 57,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "test_commands": [
+    "mvn -pl services/scoring -am '-Dtest=AnswerPayloadDecoderFixtureTest,ListeningPayloadFixtureSchemaTest' '-Dsurefire.failIfNoSpecifiedTests=false' test",
+    "mvn -pl services/scoring -am test"
+  ],
+  "validation_notes": [
+    "Decoder fixture/regression tests passed 5/5.",
+    "Full scoring reactor passed 57/57: 24 pte-common and 33 scoring tests.",
+    "All DecodedAnswerPayload construction sites, including ScoringReviewService's URL-preserving reconstruction, compile with the new nullable fields."
+  ],
+  "report_path": "projects/plans/quang-listening-contract-and-timing/tests/phase-03-decoder-enhancements-test-report.json"
+}

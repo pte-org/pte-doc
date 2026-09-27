@@ -1,0 +1,79 @@
+{
+  "phase": "phase-08-rollout-verification-and-adr",
+  "mode": "cross-repo-rollout-verification",
+  "verdict": "PASSED_WITH_DEFERRED_AUTHENTICATED_WALKTHROUGH",
+  "reviewed_at": "2026-09-22T18:28:45+07:00",
+  "source_commit": "working-tree",
+  "commands": [
+    ".\\mvnw.cmd -pl app -DskipTests compile",
+    ".\\mvnw.cmd -pl app test",
+    "docker compose --env-file .env.local -f docker-compose.yml -f docker-compose.services.yml config --quiet",
+    "docker compose --env-file .env.local -f docker-compose.yml -f docker-compose.services.yml up --build -d app",
+    "docker compose --env-file .env.local -f docker-compose.yml -f docker-compose.services.yml run --rm --no-deps -e APP_DB_URL=jdbc:postgresql://postgres:5432/pte_phase8_fresh app",
+    "pnpm --filter @pte/api-client typecheck",
+    "pnpm --filter @pte/api-client test",
+    "pnpm --filter vendor-web lint",
+    "pnpm --filter vendor-web build",
+    "flutter analyze",
+    "flutter test",
+    "git diff --check in pte-api, pte-web, pte-app and pte-doc",
+    "Playwright public login smoke at http://localhost:3301/login"
+  ],
+  "summary": {
+    "backend_focused_tests_passed": 52,
+    "backend_full_tests_passed": 774,
+    "backend_compile": "passed",
+    "fresh_database_migrations": "passed: empty schema to V48",
+    "upgrade_database_migrations": "passed: existing V38 to V48",
+    "migration_rerun": "passed: V48 already up to date",
+    "catalog_active_rows": 23,
+    "catalog_scored_rows": 22,
+    "runtime_profiles": 23,
+    "duplicate_active_catalog_codes": 0,
+    "api_client_tests_passed": 269,
+    "api_client_typecheck": "passed",
+    "vendor_web_lint": "passed",
+    "vendor_web_build": "passed",
+    "vendor_web_unrelated_warnings": 1,
+    "flutter_analyze": "passed: no issues found",
+    "flutter_tests_passed": 553,
+    "docker_app_health": "passed: running/healthy",
+    "actuator_health": "passed: HTTP 200",
+    "public_browser_login_smoke": "passed: login form rendered and no raw machine error code visible",
+    "authenticated_browser_walkthrough": "deferred: no approved local credential available"
+  },
+  "migration_evidence": {
+    "fresh_database": {
+      "database": "pte_phase8_fresh",
+      "result": "V1-V48 applied; V44 inserted 23 standard catalog rows; app started",
+      "cleanup": "disposable database dropped; persistent pte volume untouched"
+    },
+    "upgrade_database": {
+      "starting_version": "V38",
+      "ending_version": "V48",
+      "result": "V44 inserted 22 and preserved 1 existing catalog row; V45-V48 applied"
+    },
+    "schema_checks": {
+      "score_template_runtime_columns": 9,
+      "snapshot_item_runtime_columns": 11,
+      "pinned_item_runtime_columns": 11,
+      "pinned_snapshot_template_version_columns": 1,
+      "audit_rows_in_greenfield_local_db": 0
+    }
+  },
+  "negative_matrix": {
+    "platform_catalog_authorization": "covered by existing backend role/security tests and source review; browser proof deferred",
+    "author_cannot_activate": "covered by existing lifecycle tests and source review; browser proof deferred",
+    "inactive_or_retired_task_new_template": "covered by template readiness tests and vendor UX checks",
+    "missing_capability_before_start": "covered by focused backend capability tests and pte-app manifest tests",
+    "unknown_renderer_no_silent_next": "covered by backend fail-closed tests and pte-app registry tests",
+    "raw_machine_code_suppression": "covered by vendor error helpers/static review and public login smoke"
+  },
+  "deferred": [
+    "Authenticated catalog-to-template-to-activation-to-snapshot browser walkthrough requires an approved local account and realistic fixture data.",
+    "The local actuator exposes health/info only; metrics/Prometheus verification requires the deployment observability profile and authenticated operator access.",
+    "Vendor-web has no dedicated component-test runner; Next TypeScript compilation, lint, build and API-client tests remain the available automated checks."
+  ],
+  "failures": [],
+  "report_path": "pte-doc/projects/plans/quang-task-type-catalog-template-runtime-contract/tests/phase-08-rollout-verification-test-report.json"
+}

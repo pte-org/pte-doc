@@ -1,0 +1,35 @@
+{
+  "phase": "phase-06-session",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-15T17:13:01+07:00",
+  "summary": {
+    "passed": 209,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "commands": [
+    {
+      "command": "mvn -pl app -am -DskipTests compile",
+      "result": "PASSED"
+    },
+    {
+      "command": "mvn -pl app test",
+      "result": "PASSED",
+      "tests": 209
+    }
+  ],
+  "coverage": [
+    "SessionLifecycleServiceTest: ported from services/scheduling's SessionServiceLockdownTest — LockdownMode derivation/override per ExamMode, patchPolicy partial update, incomplete-policy fail-fast; SnapshotRefService replaced with a mocked AssessmentService, plus a new test asserting the session stores the snapshot publicId AssessmentService.getSummary returns (not the raw request value).",
+    "EnrollmentServiceTest: ported from services/scheduling's own EnrollmentServiceTest, minus outbox verification (no OutboxWriter in the monolith) — bulk-enroll capacity check-then-insert, concurrent-race AlreadyEnrolledException, cross-session enrollment/proctor-assignment 404s.",
+    "EntitlementServiceTest (new): checkEntitlement/checkProctorAssignment trusted-caller paths — session not OPEN, student not enrolled, proctor not assigned, unknown session.",
+    "CompositionServiceTest (new): setComposition validates against AssessmentService.getSummary's live snapshot items each call — no local SnapshotRef cache; rejects a task type absent from the snapshot."
+  ],
+  "deviations": [
+    "SnapshotFetchFailedException and EmptyCompositionException (dead code in source — the latter was never thrown anywhere in services/scheduling) were not ported; SnapshotRef/SnapshotRefItem caching and SnapshotEventConsumer were eliminated entirely per Design Constraints (session reads assessment's summary in-process, no cache table needed).",
+    "HostCommandService (requestScoring/requestPublish) and the SessionController /score and /publish endpoints were deferred to Phase 08 (scoring) and Phase 10 (reporting) — in source they only ever published an outbox event for a downstream service that doesn't exist yet in this monolith.",
+    "com.pte.session.dto.response required a @NamedInterface package-info.java (same pattern as itembank/assessment in the prior phase) — added proactively after the quality gate flagged it as a HIGH finding, even though no current caller triggers a Modulith verify() failure yet (attempt/proctoring don't exist until Phase 07/09)."
+  ],
+  "report_path": "projects/plans/quang-modular-monolith/tests/phase-06-session-test-report.json"
+}

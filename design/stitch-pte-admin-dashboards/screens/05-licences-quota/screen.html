@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "error": "#ba1a1a",
+          "on-surface-variant": "#434654",
+          "on-primary": "#ffffff",
+          "surface-container": "#e7eeff",
+          "tertiary-container": "#0e826a",
+          "surface-tint": "#2653d2",
+          "primary-fixed": "#dce1ff",
+          "surface-variant": "#d8e3fa",
+          "outline-variant": "#c4c5d6",
+          "on-tertiary-container": "#e9fff5",
+          "tertiary-fixed-dim": "#77d8bc",
+          "on-tertiary-fixed-variant": "#005141",
+          "on-primary-container": "#fbf9ff",
+          "on-secondary-fixed-variant": "#004c6c",
+          "surface": "#f9f9ff",
+          "tertiary-fixed": "#94f5d7",
+          "on-primary-fixed-variant": "#003ab2",
+          "on-secondary-fixed": "#001e2e",
+          "on-tertiary-fixed": "#002019",
+          "on-secondary-container": "#00567b",
+          "inverse-on-surface": "#ebf1ff",
+          "on-error": "#ffffff",
+          "on-error-container": "#93000a",
+          "secondary-fixed-dim": "#85cfff",
+          "on-primary-fixed": "#001550",
+          "on-secondary": "#ffffff",
+          "inverse-surface": "#263143",
+          "secondary": "#00658e",
+          "on-surface": "#111c2d",
+          "surface-bright": "#f9f9ff",
+          "error-container": "#ffdad6",
+          "surface-container-high": "#dee8ff",
+          "secondary-container": "#7fccfe",
+          "primary": "#204ece",
+          "surface-container-highest": "#d8e3fa",
+          "background": "#f9f9ff",
+          "secondary-fixed": "#c7e7ff",
+          "surface-container-lowest": "#ffffff",
+          "inverse-primary": "#b6c4ff",
+          "surface-container-low": "#f0f3ff",
+          "tertiary": "#006753",
+          "primary-fixed-dim": "#b6c4ff",
+          "primary-container": "#4169e8",
+          "outline": "#747686",
+          "on-tertiary": "#ffffff",
+          "on-background": "#111c2d",
+          "surface-dim": "#cfdaf2"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "space-xl": "2rem",
+          "margin-sm": "1rem",
+          "margin": "2rem",
+          "space-sm": "0.5rem",
+          "space-md": "1rem",
+          "gutter": "1.5rem",
+          "space-lg": "1.5rem",
+          "gutter-sm": "1rem",
+          "space-xs": "0.25rem"
+        },
+        "fontFamily": {
+          "body-lg": ["Plus Jakarta Sans"],
+          "headline-xl-mobile": ["Plus Jakarta Sans"],
+          "button-text": ["Plus Jakarta Sans"],
+          "data-metric": ["Plus Jakarta Sans"],
+          "label-sm": ["Plus Jakarta Sans"],
+          "label-md": ["Plus Jakarta Sans"],
+          "body-md": ["Plus Jakarta Sans"],
+          "headline-lg": ["Plus Jakarta Sans"],
+          "headline-md": ["Plus Jakarta Sans"],
+          "headline-xl": ["Plus Jakarta Sans"],
+          "headline-sm": ["Plus Jakarta Sans"],
+          "body-sm": ["Plus Jakarta Sans"]
+        },
+        "fontSize": {
+          "body-lg": ["1rem", {"lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400"}],
+          "headline-xl-mobile": ["1.625rem", {"lineHeight": "2.125rem", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+          "button-text": ["0.875rem", {"lineHeight": "1.25rem", "letterSpacing": "0.005em", "fontWeight": "400"}],
+          "data-metric": ["1.75rem", {"lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+          "label-sm": ["0.75rem", {"lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600"}],
+          "label-md": ["0.875rem", {"lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "500"}],
+          "body-md": ["0.875rem", {"lineHeight": "1.375rem", "letterSpacing": "0em", "fontWeight": "400"}],
+          "headline-lg": ["1.5rem", {"lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+          "headline-md": ["1.25rem", {"lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+          "headline-xl": ["2rem", {"lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+          "headline-sm": ["1.125rem", {"lineHeight": "1.5rem", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+          "body-sm": ["0.75rem", {"lineHeight": "1.125rem", "letterSpacing": "0em", "fontWeight": "400"}]
+        }
+      }
+    }
+  }</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-screen w-64 bg-surface-container-lowest z-50 flex flex-col justify-between overflow-y-auto shadow-[rgba(145,158,171,0.3)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_12px_24px_-4px]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-sm"><div class="w-9 h-9 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-headline-sm font-bold shadow-[0_2px_8px_rgba(65,105,232,0.3)]">VP</div><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm font-bold text-on-surface tracking-tight leading-tight">Vendor Portal</span><span class="font-label-sm text-label-sm text-on-surface-variant">Institutional Admin</span></div></div><nav class="flex flex-col px-space-md py-space-sm space-y-1" data-active-classes="bg-surface-container-high text-primary font-semibold"><div class="px-space-sm pt-space-sm pb-1"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">HOME</span></div><a class="flex items-center h-10 px-space-md rounded-[7px] text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="dashboard" href="#">Dashboard</a><div class="px-space-sm pt-space-md pb-1"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">TENANTS</span></div><a class="flex items-center h-10 px-space-md rounded-[7px] text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="tenants" href="#">Tenants</a><a class="flex items-center h-10 px-space-md rounded-[7px] text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="licences-and-quota" href="#">Licences &amp; Quota</a><div class="px-space-sm pt-space-md pb-1"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">CONTENT</span></div><a class="flex items-center h-10 px-space-md rounded-[7px] text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="question-bank" href="#">Question Bank</a><a class="flex items-center h-10 px-space-md rounded-[7px] text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="exam-blueprints" href="#">Exam Blueprints</a><div class="px-space-sm pt-space-md pb-1"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">SETTINGS</span></div><a class="flex items-center h-10 px-space-md rounded-[7px] text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="platform-users" href="#">Platform Users</a><a class="flex items-center h-10 px-space-md rounded-[7px] text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="settings" href="#">Settings</a></nav></div><div class="p-space-md"><div class="p-space-md rounded-[7px] bg-surface-container-low shadow-[rgba(145,158,171,0.2)_0px_0px_2px_0px]"><div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-tertiary shrink-0 animate-pulse"></span><span class="font-label-sm text-label-sm font-semibold text-tertiary">All systems operational</span></div><p class="mt-1 text-[11px] leading-4 text-on-surface-variant font-body-sm">Updated 2 min ago</p></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest z-40 flex items-center justify-between px-space-lg shadow-[rgba(145,158,171,0.3)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_4px_12px_-4px]"><div class="flex items-center text-body-sm font-body-sm text-on-surface-variant"><a class="hover:text-primary transition-colors" href="#">Platform</a><span class="mx-2 text-outline-variant">/</span><span class="font-semibold text-on-surface">Overview</span></div><div class="flex items-center gap-space-md"><div class="relative w-72"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full h-10 pl-9 pr-3 text-body-sm font-body-sm bg-surface-container-low rounded-[7px] border border-outline focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all text-on-surface placeholder:text-outline" placeholder="Search tenants, exams, users..." type="text"/></div><button aria-label="Notifications" class="relative w-10 h-10 rounded-[7px] flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full ring-2 ring-surface-container-lowest"></span></button><div class="h-6 w-px bg-outline-variant"></div><div class="flex items-center gap-space-sm pl-1"><div class="w-9 h-9 rounded-full bg-surface-container-high text-primary font-headline-sm font-bold flex items-center justify-center">AD</div><div class="text-left hidden sm:block"><div class="font-label-md text-label-md font-semibold text-on-surface leading-tight">Admin User</div><div class="font-body-sm text-body-sm text-on-surface-variant leading-none">Super Administrator</div></div></div></div></header><main class="relative pt-16 bg-background min-h-screen"><div class="max-w-[1440px] mx-auto p-space-xl"><div class="flex flex-col w-full space-y-space-lg">
+<!-- Top Header & Actions Section -->
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-space-md">
+<div class="flex flex-col space-y-1">
+<div class="flex items-center text-body-sm font-body-sm text-on-surface-variant">
+<span class="hover:text-primary transition-colors cursor-pointer">Tenants</span>
+<span class="mx-2 text-outline-variant">/</span>
+<span class="font-semibold text-on-surface">Licences</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Licences &amp; Quota</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+        Quản lý hạn mức phân bổ và dung lượng sử dụng của các tổ chức giáo dục
+      </p>
+</div>
+<div class="flex items-center gap-space-sm self-start md:self-auto">
+<button class="h-10 px-space-md rounded-[7px] bg-surface-container text-primary font-button-text text-button-text flex items-center gap-2 hover:bg-surface-variant transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">history_edu</span>
+<span>Lịch sử cấp phát</span>
+</button>
+<button class="h-10 px-space-md rounded-[7px] bg-primary-container text-on-primary font-button-text text-button-text flex items-center gap-2 hover:bg-primary transition-all shadow-[0_2px_8px_rgba(65,105,232,0.35)]" id="openGrantModalBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>+ Grant quota</span>
+</button>
+</div>
+</div>
+<!-- Row 1: 4 Stat Metrics Tiles -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Stat 1: Total Allocated -->
+<div class="bg-surface-container-lowest rounded-[7px] p-space-lg shadow-[rgba(145,158,171,0.3)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_12px_24px_-4px] flex flex-col justify-between hover:shadow-[rgba(145,158,171,0.3)_0px_0px_3px_0px,rgba(145,158,171,0.18)_0px_16px_32px_-4px] transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">Tổng ghế đã cấp</span>
+<div class="w-10 h-10 rounded-[7px] bg-surface-container flex items-center justify-center text-primary-container shrink-0">
+<span class="material-symbols-outlined text-[22px]">badge</span>
+</div>
+</div>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="font-data-metric text-data-metric text-on-surface">15,000</span>
+<span class="font-body-sm text-body-sm text-outline">chỗ</span>
+</div>
+<div class="mt-3 flex items-center gap-1.5 text-body-sm font-body-sm text-tertiary">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+<span class="font-medium">+1,200</span>
+<span class="text-on-surface-variant">so với quý trước</span>
+</div>
+</div>
+<!-- Stat 2: Currently Used -->
+<div class="bg-surface-container-lowest rounded-[7px] p-space-lg shadow-[rgba(145,158,171,0.3)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_12px_24px_-4px] flex flex-col justify-between hover:shadow-[rgba(145,158,171,0.3)_0px_0px_3px_0px,rgba(145,158,171,0.18)_0px_16px_32px_-4px] transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">Đang dùng</span>
+<div class="w-10 h-10 rounded-[7px] bg-[#E6FFFA] flex items-center justify-center text-[#088068] shrink-0">
+<span class="material-symbols-outlined text-[22px]">how_to_reg</span>
+</div>
+</div>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="font-data-metric text-data-metric text-on-surface">12,480</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">ghế</span>
+</div>
+<div class="mt-3 flex items-center gap-2">
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-[#088068] h-1.5 rounded-full" style="width: 83.2%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-[#088068] font-semibold whitespace-nowrap">83.2%</span>
+</div>
+</div>
+<!-- Stat 3: Reserved / In Queue -->
+<div class="bg-surface-container-lowest rounded-[7px] p-space-lg shadow-[rgba(145,158,171,0.3)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_12px_24px_-4px] flex flex-col justify-between hover:shadow-[rgba(145,158,171,0.3)_0px_0px_3px_0px,rgba(145,158,171,0.18)_0px_16px_32px_-4px] transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">Đang giữ chỗ</span>
+<div class="w-10 h-10 rounded-[7px] bg-[#E8F7FF] flex items-center justify-center text-[#0E729F] shrink-0">
+<span class="material-symbols-outlined text-[22px]">pending_actions</span>
+</div>
+</div>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="font-data-metric text-data-metric text-on-surface">620</span>
+<span class="font-body-sm text-body-sm text-outline">kỳ thi sắp tới</span>
+</div>
+<div class="mt-3 flex items-center gap-1.5 text-body-sm font-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-secondary">event_seat</span>
+<span>4 cơ sở đang khoá thi</span>
+</div>
+</div>
+<!-- Stat 4: Remaining Available -->
+<div class="bg-surface-container-lowest rounded-[7px] p-space-lg shadow-[rgba(145,158,171,0.3)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_12px_24px_-4px] flex flex-col justify-between hover:shadow-[rgba(145,158,171,0.3)_0px_0px_3px_0px,rgba(145,158,171,0.18)_0px_16px_32px_-4px] transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">Còn lại khả dụng</span>
+<div class="w-10 h-10 rounded-[7px] bg-[#FEF5E5] flex items-center justify-center text-[#9C6400] shrink-0">
+<span class="material-symbols-outlined text-[22px]">pie_chart</span>
+</div>
+</div>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="font-data-metric text-data-metric text-on-surface">1,900</span>
+<span class="font-body-sm text-body-sm text-outline">chưa gán</span>
+</div>
+<div class="mt-3 flex items-center gap-1.5 text-body-sm font-body-sm text-[#9C6400]">
+<span class="material-symbols-outlined text-[16px]">info</span>
+<span class="font-medium">12.7% pool dự phòng</span>
+</div>
+</div>
+</div>
+<!-- Row 2: Full-Width Card "Licence theo tenant" -->
+<div class="bg-surface-container-lowest rounded-[7px] shadow-[rgba(145,158,171,0.3)_0px_0px_2px_0px,rgba(145,158,171,0.12)_0px_12px_24px_-4px] overflow-hidden flex flex-col">
+<!-- Card Header with Filters Toolbar -->
+<div class="p-space-lg flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md">
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-primary-container"></div>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Licence theo tenant</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Phân bổ chi tiết số lượng vị trí thí sinh, mức tiêu thụ và thời hạn dịch vụ</p>
+</div>
+</div>
+<!-- Controls Toolbar -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<!-- Search -->
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full h-10 pl-9 pr-3 text-body-sm font-body-sm bg-surface-container-lowest rounded-[7px] text-on-surface placeholder:text-outline outline-none focus:ring-2 focus:ring-primary-container/20 transition-all shadow-[rgba(145,158,171,0.15)_0px_0px_2px_0px]" id="searchInput" placeholder="Tìm tên tenant hoặc ID..." style="border: 1px solid #7C8FAC;" type="text"/>
+</div>
+<!-- Package Filter Combobox -->
+<div class="relative">
+<select class="h-10 pl-3 pr-8 text-body-sm font-body-sm bg-surface-container-lowest rounded-[7px] text-on-surface cursor-pointer appearance-none outline-none shadow-[rgba(145,158,171,0.15)_0px_0px_2px_0px]" id="packageFilter" style="border: 1px solid #7C8FAC;">
+<option value="ALL">Gói dịch vụ: Tất cả</option>
+<option value="Institution">Institution</option>
+<option value="Enterprise">Enterprise</option>
+<option value="Growth">Growth</option>
+<option value="Standard">Standard</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[18px]">expand_more</span>
+</div>
+<!-- Usage Status Filter -->
+<div class="relative">
+<select class="h-10 pl-3 pr-8 text-body-sm font-body-sm bg-surface-container-lowest rounded-[7px] text-on-surface cursor-pointer appearance-none outline-none shadow-[rgba(145,158,171,0.15)_0px_0px_2px_0px]" id="statusFilter" style="border: 1px solid #7C8FAC;">
+<option value="ALL">Trạng thái dùng: Tất cả</option>
+<option value="NORMAL">Bình thường (&lt;85%)</option>
+<option value="WARNING">Sắp hết quota (&gt;85%)</option>
+<option value="FULL">Hết quota (100%)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[18px]">tune</span>
+</div>
+<!-- Export CSV Button -->
+<button class="h-10 px-space-md rounded-[7px] bg-surface-container text-primary-container font-button-text text-button-text flex items-center gap-2 hover:bg-surface-variant transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">ios_share</span>
+<span>Xuất CSV</span>
+</button>
+</div>
+</div>
+<!-- Data Table Container -->
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#F2F6FA]">
+<th class="py-3 px-space-lg font-label-sm text-label-sm text-[#2A3547] uppercase tracking-wider" scope="col">Tenant</th>
+<th class="py-3 px-space-md font-label-sm text-label-sm text-[#2A3547] uppercase tracking-wider" scope="col">Gói dịch vụ</th>
+<th class="py-3 px-space-md font-label-sm text-label-sm text-[#2A3547] uppercase tracking-wider text-right" scope="col">Đã cấp</th>
+<th class="py-3 px-space-md font-label-sm text-label-sm text-[#2A3547] uppercase tracking-wider text-right" scope="col">Đã dùng</th>
+<th class="py-3 px-space-md font-label-sm text-label-sm text-[#2A3547] uppercase tracking-wider text-right" scope="col">Còn lại</th>
+<th class="py-3 px-space-md font-label-sm text-label-sm text-[#2A3547] uppercase tracking-wider min-w-[200px]" scope="col">Tỉ lệ dùng</th>
+<th class="py-3 px-space-md font-label-sm text-label-sm text-[#2A3547] uppercase tracking-wider" scope="col">Hạn licence</th>
+<th class="py-3 px-space-md font-label-sm text-label-sm text-[#2A3547] uppercase tracking-wider" scope="col">Trạng thái</th>
+<th class="py-3 px-space-lg font-label-sm text-label-sm text-[#2A3547] uppercase tracking-wider text-right" scope="col">Thao tác</th>
+</tr>
+</thead>
+<tbody id="tenantTableBody">
+<!-- Row 1: VNU HCM (Warning >85%) -->
+<tr class="hover:bg-[#F8FAFC] transition-colors" data-package="Institution" data-status="WARNING" style="border-bottom: 1px solid #F2F6FA;">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-[10px] shrink-0">
+                  VN
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Đại học Quốc gia TP.HCM</span>
+<span class="text-[12px] leading-tight text-[#7C8FAC] font-body-sm">Đại học Quốc lập trọng điểm • VN-HCM-01</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center h-6 px-2.5 rounded-full text-label-sm font-label-sm bg-surface-container text-primary font-semibold">
+                Institution
+              </span>
+</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-on-surface tabular-nums">500</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-on-surface font-semibold tabular-nums">486</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-[#9C6400] font-semibold tabular-nums">14</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col space-y-1">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<div class="flex items-center gap-1 text-[#9C6400] font-semibold">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span>97.2%</span>
+</div>
+<span class="text-[11px] text-[#9C6400] font-medium">Sắp hết</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1">
+<div class="bg-[#9C6400] h-1 rounded-full" style="width: 97.2%"></div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-on-surface-variant tabular-nums">31/12/2026</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full text-label-sm font-label-sm bg-[#E6FFFA] text-[#088068] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span>
+                Active
+              </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="kebab-btn w-8 h-8 rounded-[7px] text-outline hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors ml-auto" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Bach Khoa Ha Noi (Normal) -->
+<tr class="hover:bg-[#F8FAFC] transition-colors" data-package="Enterprise" data-status="NORMAL" style="border-bottom: 1px solid #F2F6FA;">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-full bg-secondary/15 text-secondary flex items-center justify-center font-bold text-[10px] shrink-0">
+                  BK
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Đại học Bách Khoa Hà Nội</span>
+<span class="text-[12px] leading-tight text-[#7C8FAC] font-body-sm">Đại học Kỹ thuật • HUST-VN-02</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center h-6 px-2.5 rounded-full text-label-sm font-label-sm bg-[#E8F7FF] text-[#0E729F] font-semibold">
+                Enterprise
+              </span>
+</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-on-surface tabular-nums">2,000</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-on-surface font-semibold tabular-nums">1,240</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-on-surface font-semibold tabular-nums">760</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col space-y-1">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-primary-container font-semibold">62.0%</span>
+<span class="text-[11px] text-on-surface-variant">Ổn định</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1">
+<div class="bg-primary-container h-1 rounded-full" style="width: 62.0%"></div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-on-surface-variant tabular-nums">15/08/2027</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full text-label-sm font-label-sm bg-[#E6FFFA] text-[#088068] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span>
+                Active
+              </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="kebab-btn w-8 h-8 rounded-[7px] text-outline hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors ml-auto" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Dai hoc Kinh te Quoc dan (Warning >85%) -->
+<tr class="hover:bg-[#F8FAFC] transition-colors" data-package="Institution" data-status="WARNING" style="border-bottom: 1px solid #F2F6FA;">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-full bg-[#FEF5E5] text-[#9C6400] flex items-center justify-center font-bold text-[10px] shrink-0">
+                  NE
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Đại học Kinh tế Quốc dân (NEU)</span>
+<span class="text-[12px] leading-tight text-[#7C8FAC] font-body-sm">Khối ngành Kinh tế • NEU-EDU-09</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center h-6 px-2.5 rounded-full text-label-sm font-label-sm bg-surface-container text-primary font-semibold">
+                Institution
+              </span>
+</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-on-surface tabular-nums">400</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-on-surface font-semibold tabular-nums">380</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-[#9C6400] font-semibold tabular-nums">20</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col space-y-1">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<div class="flex items-center gap-1 text-[#9C6400] font-semibold">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span>95.0%</span>
+</div>
+<span class="text-[11px] text-[#9C6400] font-medium">Sắp hết</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1">
+<div class="bg-[#9C6400] h-1 rounded-full" style="width: 95%"></div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-on-surface-variant tabular-nums">20/11/2026</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full text-label-sm font-label-sm bg-[#E6FFFA] text-[#088068] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span>
+                Active
+              </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="kebab-btn w-8 h-8 rounded-[7px] text-outline hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors ml-auto" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Y Duoc TP.HCM (Exhausted 100%) -->
+<tr class="hover:bg-[#F8FAFC] transition-colors" data-package="Standard" data-status="FULL" style="border-bottom: 1px solid #F2F6FA;">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-full bg-[#FDEDE8] text-[#BE452B] flex items-center justify-center font-bold text-[10px] shrink-0">
+                  YD
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Đại học Y Dược TP.HCM</span>
+<span class="text-[12px] leading-tight text-[#7C8FAC] font-body-sm">Đào tạo Y khoa • UMP-MED-04</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center h-6 px-2.5 rounded-full text-label-sm font-label-sm bg-surface-container-high text-on-surface font-semibold">
+                Standard
+              </span>
+</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-on-surface tabular-nums">300</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-[#BE452B] font-semibold tabular-nums">300</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-[#BE452B] font-semibold tabular-nums">0</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col space-y-1">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-[#BE452B] font-semibold">100.0%</span>
+<span class="text-[11px] font-semibold text-[#BE452B] bg-[#FDEDE8] px-1.5 py-0.5 rounded">Hết quota</span>
+</div>
+<div class="w-full bg-[#FDEDE8] rounded-full h-1">
+<div class="bg-[#BE452B] h-1 rounded-full" style="width: 100%"></div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-on-surface-variant tabular-nums">30/09/2026</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full text-label-sm font-label-sm bg-[#FDEDE8] text-[#BE452B] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#BE452B]"></span>
+                Suspended
+              </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="kebab-btn w-8 h-8 rounded-[7px] text-outline hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors ml-auto" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5: Su Pham Ha Noi (Normal) -->
+<tr class="hover:bg-[#F8FAFC] transition-colors" data-package="Growth" data-status="NORMAL" style="border-bottom: 1px solid #F2F6FA;">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-full bg-tertiary-fixed text-[#005141] flex items-center justify-center font-bold text-[10px] shrink-0">
+                  SP
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Đại học Sư phạm Hà Nội</span>
+<span class="text-[12px] leading-tight text-[#7C8FAC] font-body-sm">Đại học Sư phạm trọng điểm • HNUE-VN-05</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center h-6 px-2.5 rounded-full text-label-sm font-label-sm bg-surface-container-high text-primary-container font-semibold">
+                Growth
+              </span>
+</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-on-surface tabular-nums">750</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-on-surface font-semibold tabular-nums">520</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-on-surface font-semibold tabular-nums">230</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col space-y-1">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-primary-container font-semibold">69.3%</span>
+<span class="text-[11px] text-on-surface-variant">Bình thường</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1">
+<div class="bg-primary-container h-1 rounded-full" style="width: 69.3%"></div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-on-surface-variant tabular-nums">18/03/2027</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full text-label-sm font-label-sm bg-[#E6FFFA] text-[#088068] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span>
+                Active
+              </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="kebab-btn w-8 h-8 rounded-[7px] text-outline hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors ml-auto" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 6: FPT University (Normal) -->
+<tr class="hover:bg-[#F8FAFC] transition-colors" data-package="Enterprise" data-status="NORMAL" style="border-bottom: 1px solid #F2F6FA;">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-full bg-[#FEF5E5] text-[#9C6400] flex items-center justify-center font-bold text-[10px] shrink-0">
+                  FP
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Tổ chức Giáo dục FPT</span>
+<span class="text-[12px] leading-tight text-[#7C8FAC] font-body-sm">Đại học Tư thục đa cơ sở • FPTU-GLOBAL</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center h-6 px-2.5 rounded-full text-label-sm font-label-sm bg-[#E8F7FF] text-[#0E729F] font-semibold">
+                Enterprise
+              </span>
+</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-on-surface tabular-nums">1,800</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-on-surface font-semibold tabular-nums">1,150</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-on-surface font-semibold tabular-nums">650</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col space-y-1">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-primary-container font-semibold">63.8%</span>
+<span class="text-[11px] text-on-surface-variant">Bình thường</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1">
+<div class="bg-primary-container h-1 rounded-full" style="width: 63.8%"></div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-on-surface-variant tabular-nums">28/02/2028</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full text-label-sm font-label-sm bg-[#E6FFFA] text-[#088068] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span>
+                Active
+              </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="kebab-btn w-8 h-8 rounded-[7px] text-outline hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors ml-auto" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 7: Ngoai thuong FTU (Warning >85%) -->
+<tr class="hover:bg-[#F8FAFC] transition-colors" data-package="Institution" data-status="WARNING" style="border-bottom: 1px solid #F2F6FA;">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-full bg-[#FDEDE8] text-[#BE452B] flex items-center justify-center font-bold text-[10px] shrink-0">
+                  FT
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Trường Đại học Ngoại Thương</span>
+<span class="text-[12px] leading-tight text-[#7C8FAC] font-body-sm">Đại học Công lập tự chủ • FTU-HN-07</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center h-6 px-2.5 rounded-full text-label-sm font-label-sm bg-surface-container text-primary font-semibold">
+                Institution
+              </span>
+</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-on-surface tabular-nums">600</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-on-surface font-semibold tabular-nums">542</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-[#9C6400] font-semibold tabular-nums">58</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col space-y-1">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<div class="flex items-center gap-1 text-[#9C6400] font-semibold">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span>90.3%</span>
+</div>
+<span class="text-[11px] text-[#9C6400] font-medium">Sắp hết</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1">
+<div class="bg-[#9C6400] h-1 rounded-full" style="width: 90.3%"></div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-on-surface-variant tabular-nums">10/11/2026</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full text-label-sm font-label-sm bg-[#E6FFFA] text-[#088068] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span>
+                Active
+              </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="kebab-btn w-8 h-8 rounded-[7px] text-outline hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors ml-auto" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 8: Ton Duc Thang (Normal) -->
+<tr class="hover:bg-[#F8FAFC] transition-colors" data-package="Standard" data-status="NORMAL">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-full bg-secondary-fixed text-on-secondary-container flex items-center justify-center font-bold text-[10px] shrink-0">
+                  TD
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Đại học Tôn Đức Thắng</span>
+<span class="text-[12px] leading-tight text-[#7C8FAC] font-body-sm">Đại học Công lập tự chủ • TDTU-SG-08</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center h-6 px-2.5 rounded-full text-label-sm font-label-sm bg-surface-container-high text-on-surface font-semibold">
+                Standard
+              </span>
+</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-on-surface tabular-nums">450</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-on-surface font-semibold tabular-nums">210</td>
+<td class="py-3.5 px-space-md text-right font-body-md text-body-md text-on-surface font-semibold tabular-nums">240</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col space-y-1">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-primary-container font-semibold">46.6%</span>
+<span class="text-[11px] text-on-surface-variant">Bình thường</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1">
+<div class="bg-primary-container h-1 rounded-full" style="width: 46.6%"></div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-on-surface-variant tabular-nums">14/05/2027</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full text-label-sm font-label-sm bg-[#E6FFFA] text-[#088068] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span>
+                Active
+              </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="kebab-btn w-8 h-8 rounded-[7px] text-outline hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors ml-auto" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-space-lg py-3.5 bg-surface-container-lowest flex flex-col sm:flex-row items-center justify-between gap-space-sm border-t border-[#F2F6FA]">
+<div class="font-body-sm text-body-sm text-on-surface-variant">
+        Hiển thị <span class="font-semibold text-on-surface tabular-nums">1–8</span> trên tổng số <span class="font-semibold text-on-surface tabular-nums">37</span> tenants
+      </div>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center text-outline disabled:opacity-40 disabled:hover:bg-transparent hover:bg-surface-container transition-colors" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-[7px] bg-primary-container text-on-primary font-label-sm text-label-sm flex items-center justify-center" type="button">1</button>
+<button class="w-8 h-8 rounded-[7px] text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container flex items-center justify-center transition-colors" type="button">2</button>
+<button class="w-8 h-8 rounded-[7px] text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container flex items-center justify-center transition-colors" type="button">3</button>
+<span class="w-8 h-8 flex items-center justify-center text-outline text-body-sm">...</span>
+<button class="w-8 h-8 rounded-[7px] text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container flex items-center justify-center transition-colors" type="button">5</button>
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Action Floating Menu (Shared Kebab Popup) -->
+<div class="fixed hidden bg-surface-container-lowest rounded-[7px] py-1.5 z-50 min-w-[160px] shadow-[rgba(145,158,171,0.24)_0px_0px_2px_0px,rgba(145,158,171,0.24)_0px_20px_40px_-4px]" id="sharedActionMenu">
+<button class="w-full px-space-md py-2 text-left font-body-sm text-body-sm text-on-surface hover:bg-surface-container flex items-center gap-2 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary-container">add_circle_outline</span>
+<span>Grant quota</span>
+</button>
+<button class="w-full px-space-md py-2 text-left font-body-sm text-body-sm text-on-surface hover:bg-surface-container flex items-center gap-2 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-outline">history</span>
+<span>Xem lịch sử</span>
+</button>
+<div class="h-px bg-surface-container my-1"></div>
+<button class="w-full px-space-md py-2 text-left font-body-sm text-body-sm text-error hover:bg-[#FDEDE8] flex items-center gap-2 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">block</span>
+<span>Thu hồi</span>
+</button>
+</div>
+<!-- Grant Quota Modal Dialog -->
+<div class="fixed inset-0 z-50 hidden flex items-center justify-center bg-on-surface/40 backdrop-blur-sm p-4" id="grantQuotaModal">
+<div class="bg-surface-container-lowest w-full max-w-lg rounded-[7px] p-space-lg shadow-[rgba(145,158,171,0.3)_0px_0px_4px_0px,rgba(145,158,171,0.25)_0px_24px_48px_-4px] flex flex-col space-y-space-md animate-in fade-in zoom-in-95 duration-150">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-[7px] bg-surface-container text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">add_moderator</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Cấp thêm Quota khảo thí</h3>
+</div>
+<button class="w-8 h-8 rounded-[7px] text-outline hover:text-on-surface hover:bg-surface-container flex items-center justify-center" id="closeModalBtn" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="space-y-space-sm pt-2">
+<div class="flex flex-col space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Chọn tổ chức (Tenant)</label>
+<div class="relative">
+<select class="w-full h-10 px-3 pr-8 text-body-sm font-body-sm bg-surface-container-lowest rounded-[7px] text-on-surface outline-none shadow-sm" style="border: 1px solid #7C8FAC;">
+<option>Đại học Quốc gia TP.HCM (VN-HCM-01)</option>
+<option>Đại học Y Dược TP.HCM (UMP-MED-04)</option>
+<option>Trường Đại học Ngoại Thương (FTU-HN-07)</option>
+<option>Đại học Bách Khoa Hà Nội (HUST-VN-02)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="flex flex-col space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Số lượng chỗ cấp thêm</label>
+<input class="h-10 px-3 text-body-sm font-body-sm bg-surface-container-lowest rounded-[7px] text-on-surface outline-none shadow-sm" placeholder="e.g. 500" style="border: 1px solid #7C8FAC;" type="number" value="250"/>
+</div>
+<div class="flex flex-col space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Gói bổ sung</label>
+<select class="h-10 px-3 text-body-sm font-body-sm bg-surface-container-lowest rounded-[7px] text-on-surface outline-none shadow-sm" style="border: 1px solid #7C8FAC;">
+<option>Theo gói hiện hành</option>
+<option>Thêm theo đợt thi ngắn hạn</option>
+</select>
+</div>
+</div>
+<div class="flex flex-col space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Gia hạn ngày hiệu lực</label>
+<input class="h-10 px-3 text-body-sm font-body-sm bg-surface-container-lowest rounded-[7px] text-on-surface outline-none shadow-sm" style="border: 1px solid #7C8FAC;" type="date" value="2027-12-31"/>
+</div>
+<div class="p-3 bg-surface-container rounded-[7px] flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[20px] text-primary-container shrink-0 mt-0.5">info</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Hạn ngạch sẽ được cộng tức thì vào License Pool của trường. Nhật ký cấp phát được lưu trữ và thông báo tự động tới Quản trị viên Tenant.
+          </p>
+</div>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-2">
+<button class="h-10 px-space-md rounded-[7px] bg-surface-container text-on-surface-variant font-button-text text-button-text hover:bg-surface-variant transition-colors" id="cancelModalBtn" type="button">
+          Hủy bỏ
+        </button>
+<button class="h-10 px-space-md rounded-[7px] bg-primary-container text-on-primary font-button-text text-button-text hover:bg-primary transition-colors shadow-sm" id="confirmGrantBtn" type="button">
+          Xác nhận phân bổ
+        </button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    // Kebab Menu positioning & toggle
+    const kebabButtons = document.querySelectorAll('.kebab-btn');
+    const sharedMenu = document.getElementById('sharedActionMenu');
+    let currentOpenBtn = null;
+
+    kebabButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (currentOpenBtn === btn && !sharedMenu.classList.contains('hidden')) {
+          sharedMenu.classList.add('hidden');
+          currentOpenBtn = null;
+          return;
+        }
+
+        const rect = btn.getBoundingClientRect();
+        sharedMenu.style.top = `${rect.bottom + 4}px`;
+        sharedMenu.style.left = `${rect.right - 160}px`;
+        sharedMenu.classList.remove('hidden');
+        currentOpenBtn = btn;
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!sharedMenu.contains(e.target)) {
+        sharedMenu.classList.add('hidden');
+        currentOpenBtn = null;
+      }
+    });
+
+    // Filtering logic
+    const searchInput = document.getElementById('searchInput');
+    const packageFilter = document.getElementById('packageFilter');
+    const statusFilter = document.getElementById('statusFilter');
+    const tableRows = document.querySelectorAll('#tenantTableBody tr');
+
+    function applyFilters() {
+      const query = searchInput.value.toLowerCase().trim();
+      const pkg = packageFilter.value;
+      const st = statusFilter.value;
+
+      tableRows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        const rowPkg = row.getAttribute('data-package');
+        const rowStatus = row.getAttribute('data-status');
+
+        const matchesSearch = !query || text.includes(query);
+        const matchesPkg = (pkg === 'ALL') || (rowPkg === pkg);
+        const matchesStatus = (st === 'ALL') || (rowStatus === st);
+
+        if (matchesSearch && matchesPkg && matchesStatus) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+    packageFilter.addEventListener('change', applyFilters);
+    statusFilter.addEventListener('change', applyFilters);
+
+    // Modal behavior
+    const modal = document.getElementById('grantQuotaModal');
+    const openBtn = document.getElementById('openGrantModalBtn');
+    const closeBtn = document.getElementById('closeModalBtn');
+    const cancelBtn = document.getElementById('cancelModalBtn');
+    const confirmBtn = document.getElementById('confirmGrantBtn');
+
+    function openModal() {
+      modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      modal.classList.add('hidden');
+    }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    cancelBtn.addEventListener('click', closeModal);
+    confirmBtn.addEventListener('click', () => {
+      closeModal();
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+  })();
+</script></div></main></div></body></html>

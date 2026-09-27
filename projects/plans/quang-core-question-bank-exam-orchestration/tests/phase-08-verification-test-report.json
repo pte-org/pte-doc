@@ -1,0 +1,49 @@
+{
+  "phase": "phase-08-verification-and-release",
+  "mode": "all-phases",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-21T16:12:31+07:00",
+  "summary": {
+    "passed": 995,
+    "failed": 0,
+    "skipped": 0
+  },
+  "evidence": [
+    {
+      "scope": "pte-api",
+      "command": ".\\mvnw.cmd -pl app test",
+      "result": "BUILD SUCCESS; Tests run: 733, Failures: 0, Errors: 0, Skipped: 0"
+    },
+    {
+      "scope": "pte-api",
+      "command": ".\\mvnw.cmd -pl app '-Dtest=com.pte.session.internal.service.SessionLifecycleServiceTest,com.pte.enrollment.internal.service.ProgramServiceTest,com.pte.session.internal.service.ExamOrchestrationServiceTest' test",
+      "result": "BUILD SUCCESS; Tests run: 43, Failures: 0, Errors: 0, Skipped: 0 (focused subset of the full suite)"
+    },
+    {
+      "scope": "pte-web/packages/api-client",
+      "command": "corepack pnpm --filter @pte/api-client test -- --run",
+      "result": "4 test files passed; 262 tests passed"
+    },
+    {
+      "scope": "pte-web",
+      "command": "corepack pnpm --filter @pte/api-client typecheck; tenant/vendor tsc --noEmit; tenant/vendor lint; targeted prettier --check",
+      "result": "All commands passed; vendor lint retains one pre-existing no-img warning in QuestionEditorForm.tsx"
+    },
+    {
+      "scope": "pte-web/tenant-web",
+      "command": "corepack pnpm --filter tenant-web build",
+      "result": "Next production build passed; 20 static pages generated"
+    },
+    {
+      "scope": "pte-web/vendor-web",
+      "command": "corepack pnpm --filter vendor-web build",
+      "result": "Next production build passed; 18 static pages generated"
+    }
+  ],
+  "environment_checks": {
+    "local_browser_positive_path": "not run; approved local credentials/data were not supplied",
+    "docker_flyway_upgrade": "not run in this verification pass; source migrations V41-V43 and H2/JPA regression were inspected",
+    "production": "not touched"
+  },
+  "failures": []
+}

@@ -1,0 +1,23 @@
+{
+  "target": "phase-08-generation-snapshot-scoring-and-history",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-dynamic-task-type-screen-contract/quality/phase-08-generation-snapshot-scoring-and-history-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/assessment/domain/SnapshotItem.java",
+    "pte-api/app/src/main/java/com/pte/assessment/internal/service/SnapshotPublishService.java",
+    "pte-api/app/src/main/java/com/pte/attempt/domain/PinnedItem.java",
+    "pte-api/app/src/main/java/com/pte/attempt/internal/service/SnapshotPinService.java",
+    "pte-api/app/src/main/java/com/pte/scoring/internal/service/AnswerPayloadDecoder.java",
+    "pte-api/app/src/main/java/com/pte/scoring/internal/service/ObjectiveScoringService.java",
+    "pte-api/app/src/main/java/com/pte/scoring/internal/service/ScoringMethodResolver.java",
+    "pte-api/app/src/test/java/com/pte/assessment/internal/service/SnapshotPublishServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/attempt/internal/service/SnapshotPinServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/scoring/internal/service/ObjectiveScoringServiceTest.java",
+    "pte-doc/projects/plans/quang-dynamic-task-type-screen-contract/phase-08-generation-snapshot-scoring-and-history.md"
+  ],
+  "source_fingerprint": "sha256:f152bf8e9d5cf40fea5da12230b6a8ee8f7c44ede77b529195a3cfdb491fc34b",
+  "reviewed_at": "2026-09-22T16:35:00Z",
+  "open_blocking_findings": 0
+}

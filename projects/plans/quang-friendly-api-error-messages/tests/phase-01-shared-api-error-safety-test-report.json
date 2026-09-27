@@ -1,0 +1,21 @@
+{
+  "phase": "phase-01-shared-api-error-safety",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-20T15:03:00+07:00",
+  "summary": {
+    "passed": 232,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "commands": [
+    {
+      "command": "corepack pnpm --filter @pte/api-client test",
+      "working_directory": "pte-web",
+      "exit_code": 0,
+      "result": "4 test files passed; 232 tests passed"
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/quang-friendly-api-error-messages/tests/phase-01-shared-api-error-safety-test-report.json"
+}

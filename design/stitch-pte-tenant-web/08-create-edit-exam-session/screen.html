@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>PTE Assessment Platform</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-surface-variant":"#434654","surface-variant":"#d8e3fa","tertiary-container":"#466ae3","secondary":"#4f5f7a","on-primary":"#ffffff","tertiary":"#2850c9","on-error-container":"#93000a","surface-container-lowest":"#ffffff","on-tertiary":"#ffffff","surface-bright":"#f9f9ff","on-secondary":"#ffffff","secondary-fixed":"#d5e3ff","on-primary-fixed-variant":"#003ab2","on-secondary-fixed":"#0a1c33","on-tertiary-fixed":"#001551","surface-container-highest":"#d8e3fa","primary-fixed-dim":"#b6c4ff","on-primary-container":"#fbf9ff","on-tertiary-fixed-variant":"#0039b4","outline":"#747686","surface-dim":"#cfdaf2","error-container":"#ffdad6","on-primary-fixed":"#001550","primary-container":"#4169e8","surface-container":"#e7eeff","surface-container-low":"#f0f3ff","primary":"#204ece","surface":"#f9f9ff","secondary-fixed-dim":"#b7c7e6","inverse-surface":"#263143","error":"#ba1a1a","tertiary-fixed-dim":"#b7c4ff","tertiary-fixed":"#dce1ff","on-secondary-container":"#53637e","inverse-on-surface":"#ebf1ff","surface-tint":"#2653d2","on-secondary-fixed-variant":"#374761","surface-container-high":"#dee8ff","background":"#f9f9ff","inverse-primary":"#b6c4ff","on-background":"#111c2d","on-error":"#ffffff","primary-fixed":"#dce1ff","on-tertiary-container":"#fcf9ff","on-surface":"#111c2d","outline-variant":"#c4c5d6","secondary-container":"#d0e0ff"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{"space-lg":"1.5rem","space-xl":"1.875rem","gutter-mobile":"1rem","space-xs":"0.25rem",gutter:"1.5rem","margin-mobile":"1rem","space-sm":"0.5rem","space-md":"1rem","space-xxl":"3rem",margin:"1.875rem"},fontFamily:{"body-secondary":["Plus Jakarta Sans"],"button-label":["Plus Jakarta Sans"],"page-title-h4":["Plus Jakarta Sans"],"tabular-data":["Plus Jakarta Sans"],"display-h3":["Plus Jakarta Sans"],"display-h2":["Plus Jakarta Sans"],"caption-small":["Plus Jakarta Sans"],"subtitle-h6":["Plus Jakarta Sans"],"card-title-h5":["Plus Jakarta Sans"],"body-base":["Plus Jakarta Sans"],"display-h1":["Plus Jakarta Sans"],"display-h1-mobile":["Plus Jakarta Sans"]},fontSize:{"body-secondary":["14px",{lineHeight:"21px",letterSpacing:"0",fontWeight:"400"}],"button-label":["14px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"400"}],"page-title-h4":["21px",{lineHeight:"26px",letterSpacing:"-0.005em",fontWeight:"600"}],"tabular-data":["14px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"500"}],"display-h3":["24px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"display-h2":["30px",{lineHeight:"36px",letterSpacing:"-0.015em",fontWeight:"600"}],"caption-small":["12px",{lineHeight:"16px",letterSpacing:"0",fontWeight:"400"}],"subtitle-h6":["16px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"600"}],"card-title-h5":["18px",{lineHeight:"26px",letterSpacing:"0",fontWeight:"600"}],"body-base":["14px",{lineHeight:"21px",letterSpacing:"0",fontWeight:"400"}],"display-h1":["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"600"}],"display-h1-mobile":["28px",{lineHeight:"34px",letterSpacing:"-0.015em",fontWeight:"600"}]}}}};</script></head><body class="bg-[#F2F6FA] font-body-base text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-[270px] bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20)]"><div class="flex flex-col flex-1 overflow-y-auto px-4"><div class="h-[60px] flex items-center gap-3 px-2 mt-2"><div class="w-9 h-9 rounded-xl bg-primary-container flex items-center justify-center text-on-primary font-subtitle-h6 text-subtitle-h6 shadow-sm">P</div><div class="flex flex-col"><span class="font-subtitle-h6 text-subtitle-h6 text-on-surface leading-tight tracking-tight">PTE Institute</span><span class="font-caption-small text-caption-small text-secondary">Assessment Tenant</span></div></div><nav class="flex flex-col mt-2" data-active-classes="bg-primary-container text-on-primary font-medium rounded-xl shadow-[0px_4px_10px_rgba(65,105,232,0.25)]"><div class="mt-3 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Home</div><a aria-current="page" class="h-[45px] px-3 flex items-center gap-3 transition-all duration-150 bg-primary-container text-on-primary font-medium rounded-xl shadow-[0px_4px_10px_rgba(65,105,232,0.25)]" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Dashboard</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Learners</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="learners" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Learners</span></a><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="programmes" href="#"><span class="material-symbols-outlined text-[20px]">school</span><span>Programmes</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Delivery</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="exam-sessions" href="#"><span class="material-symbols-outlined text-[20px]">event_available</span><span>Exam sessions</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Assessment</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="scoring-review" href="#"><span class="material-symbols-outlined text-[20px]">fact_check</span><span>Scoring review</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Data</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="audit-log" href="#"><span class="material-symbols-outlined text-[20px]">history_edu</span><span>Audit log</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Settings</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="staff-and-roles" href="#"><span class="material-symbols-outlined text-[20px]">badge</span><span>Staff &amp; roles</span></a><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="platform-settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Settings</span></a></nav></div><div class="p-4 flex flex-col gap-3"><div class="bg-surface-container-low p-3.5 rounded-xl shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20)]"><div class="flex items-center justify-between mb-1.5"><span class="font-caption-small text-caption-small font-semibold text-on-surface">Licence Usage</span><span class="font-tabular-data text-tabular-data text-secondary">97%</span></div><div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden mb-2"><div class="bg-primary-container h-full rounded-full" style="width: 97.2%"></div></div><div class="flex items-center justify-between"><span class="font-caption-small text-caption-small text-secondary">486 / 500 learner seats</span><a class="font-caption-small text-caption-small text-primary font-semibold hover:underline" href="#">Request more seats</a></div></div><div class="flex items-center gap-3 px-2 py-2 rounded-xl bg-surface-container-lowest"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col min-w-0 flex-1"><span class="font-body-base text-body-base font-semibold text-on-surface truncate">Nguyễn Quản Trị</span><span class="font-caption-small text-caption-small text-secondary truncate">Host Admin</span></div><button class="text-secondary hover:text-on-surface"><span class="material-symbols-outlined text-[18px]">logout</span></button></div></div></aside><div class="pl-[270px]"><header class="fixed top-0 left-[270px] right-0 h-[70px] bg-surface-container-lowest shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-4"><button class="w-9 h-9 flex items-center justify-center rounded-xl text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">menu</span></button><div class="flex items-center gap-2 text-secondary font-body-base text-body-base"><span class="hover:text-on-surface cursor-pointer">Host</span><span>/</span><span class="text-on-surface font-medium">Assessment Ops</span></div></div><div class="flex items-center gap-3"><button class="w-10 h-10 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">search</span></button><button class="relative w-10 h-10 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span></button><div class="h-6 w-px bg-surface-variant mx-1"></div><div class="flex items-center gap-3 pl-1"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-body-base text-body-base font-semibold text-on-surface leading-snug">Nguyễn Quản Trị</span><span class="font-caption-small text-caption-small text-secondary">Host Admin</span></div></div></div></header><main class="relative pt-[70px] min-h-screen bg-[#F2F6FA]"><div class="max-w-[1200px] mx-auto p-space-lg"><div class="flex flex-col w-full">
+<!-- Script for active sidebar synchronization -->
+<script>
+    (function () {
+      const targetNav = document.querySelector('a[data-path="exam-sessions"]');
+      if (targetNav) {
+        const activeClasses = 'bg-primary-container text-on-primary font-medium rounded-xl shadow-[0px_4px_10px_rgba(65,105,232,0.25)]';
+        targetNav.className = 'h-[45px] px-3 flex items-center gap-3 ' + activeClasses;
+      }
+    })();
+  </script>
+<!-- Breadcrumbs & Page Action Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+<div class="flex flex-col">
+<nav class="flex items-center gap-2 font-caption-small text-caption-small text-secondary mb-1">
+<a class="hover:text-primary transition-colors" href="#">Host</a>
+<span>/</span>
+<a class="hover:text-primary transition-colors" href="#">Exam sessions</a>
+<span>/</span>
+<span class="text-on-surface font-semibold">Tạo ca thi mới</span>
+</nav>
+<div class="flex items-center gap-2.5">
+<h1 class="font-page-title-h4 text-page-title-h4 text-on-surface tracking-tight">Tạo ca thi mới</h1>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-caption-small text-caption-small font-semibold bg-[#E8F7FF] text-[#0E729F]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#0E729F]"></span>
+          Bản nháp cấu hình
+        </span>
+</div>
+<p class="font-body-secondary text-body-secondary text-secondary mt-0.5">
+        Thiết lập cấu hình bài thi, cơ sở vật chất phòng lab, lịch trình và phân bổ thí sinh theo chuẩn Pearson.
+      </p>
+</div>
+<!-- Top Action Buttons -->
+<div class="flex items-center gap-3 shrink-0">
+<button class="h-[38px] px-4 rounded-[7px] font-button-label text-button-label text-[#2A3547] bg-surface-container-lowest shadow-[0px_0px_2px_rgba(145,158,171,0.30),0px_4px_8px_-2px_rgba(145,158,171,0.12)] hover:bg-[#F2F6FA] transition-all flex items-center gap-2 cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[18px]">bookmark_border</span>
+<span>Lưu nháp</span>
+</button>
+<button class="h-[38px] px-5 rounded-[7px] font-button-label text-button-label text-on-primary bg-primary-container shadow-[0px_4px_10px_rgba(65,105,232,0.25)] hover:bg-[#3359D2] transition-all flex items-center gap-2 cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[18px]">event_available</span>
+<span>Tạo ca thi &amp; Phát hành</span>
+</button>
+</div>
+</div>
+<!-- Main 12-Column Responsive Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- LEFT COLUMN: Main Form Configuration (8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- THẺ 1: Thông tin cơ bản & Blueprint -->
+<section class="bg-surface-container-lowest rounded-[7px] p-6 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)]">
+<div class="flex items-center justify-between pb-4 mb-5 border-b border-[#F2F6FA]">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
+</div>
+<div>
+<h2 class="font-card-title-h5 text-card-title-h5 text-[#2A3547]">Thông tin cơ bản &amp; Blueprint</h2>
+<p class="font-caption-small text-caption-small text-secondary">Định danh ca thi, cấu trúc đề và mục tiêu đánh giá</p>
+</div>
+</div>
+<span class="font-caption-small text-caption-small text-secondary font-medium uppercase tracking-wider bg-surface-container-low px-2 py-1 rounded-[4px]">Bước 1/4</span>
+</div>
+<div class="flex flex-col gap-5">
+<!-- Tên & Mã ca thi -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+<div class="md:col-span-8 flex flex-col">
+<label class="font-subtitle-h6 text-[13px] text-[#2A3547] font-semibold mb-1.5 flex items-center justify-between">
+<span>Tên ca thi khảo thí <span class="text-error">*</span></span>
+<span class="font-caption-small text-caption-small text-secondary font-normal">Tối đa 120 ký tự</span>
+</label>
+<input class="h-[42px] px-3.5 rounded-[7px] text-[#2A3547] font-body-base text-body-base border border-[#7C8FAC] focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all bg-surface-container-lowest" type="text" value="Thi thử định kỳ PTE Academic Đợt 3 - Khối Intensive"/>
+</div>
+<div class="md:col-span-4 flex flex-col">
+<label class="font-subtitle-h6 text-[13px] text-[#2A3547] font-semibold mb-1.5 flex items-center justify-between">
+<span>Mã phiên thi (Code)</span>
+<span class="font-caption-small text-caption-small text-[#088068] font-semibold">Tự động sinh</span>
+</label>
+<div class="relative">
+<input class="h-[42px] w-full px-3.5 pl-9 rounded-[7px] font-tabular-data text-tabular-data font-semibold text-secondary bg-[#F2F6FA] border border-[#7C8FAC] cursor-not-allowed select-all" readonly="" type="text" value="PTE-A-115"/>
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-secondary text-[18px]">fingerprint</span>
+</div>
+</div>
+</div>
+<!-- Loại kỳ thi (Radio tiles) -->
+<div class="flex flex-col">
+<label class="font-subtitle-h6 text-[13px] text-[#2A3547] font-semibold mb-2">
+              Phân loại bài thi (Exam Type) <span class="text-error">*</span>
+</label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<!-- Tile 1: Selected -->
+<label class="relative flex flex-col p-3.5 rounded-[7px] border-2 border-primary-container bg-surface-container-low cursor-pointer transition-all">
+<input checked="" class="sr-only" name="exam_type" type="radio" value="mock"/>
+<div class="flex items-center justify-between mb-1.5">
+<span class="material-symbols-outlined text-primary text-[20px]">fact_check</span>
+<span class="w-4 h-4 rounded-full border-2 border-primary-container flex items-center justify-center">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+</span>
+</div>
+<span class="font-subtitle-h6 text-[14px] text-on-surface font-semibold">Thi thử định kỳ</span>
+<span class="font-caption-small text-caption-small text-secondary mt-0.5">Mock Test tiêu chuẩn 4 kỹ năng</span>
+</label>
+<!-- Tile 2 -->
+<label class="relative flex flex-col p-3.5 rounded-[7px] border border-[#7C8FAC]/60 bg-surface-container-lowest hover:bg-[#F9F9FF] cursor-pointer transition-all">
+<input class="sr-only" name="exam_type" type="radio" value="placement"/>
+<div class="flex items-center justify-between mb-1.5">
+<span class="material-symbols-outlined text-secondary text-[20px]">grading</span>
+<span class="w-4 h-4 rounded-full border border-[#7C8FAC]"></span>
+</div>
+<span class="font-subtitle-h6 text-[14px] text-on-surface font-semibold">Đánh giá đầu vào</span>
+<span class="font-caption-small text-caption-small text-secondary mt-0.5">Placement Test phân lớp xếp cấp</span>
+</label>
+<!-- Tile 3 -->
+<label class="relative flex flex-col p-3.5 rounded-[7px] border border-[#7C8FAC]/60 bg-surface-container-lowest hover:bg-[#F9F9FF] cursor-pointer transition-all">
+<input class="sr-only" name="exam_type" type="radio" value="progress"/>
+<div class="flex items-center justify-between mb-1.5">
+<span class="material-symbols-outlined text-secondary text-[20px]">trending_up</span>
+<span class="w-4 h-4 rounded-full border border-[#7C8FAC]"></span>
+</div>
+<span class="font-subtitle-h6 text-[14px] text-on-surface font-semibold">Kiểm tra tiến độ</span>
+<span class="font-caption-small text-caption-small text-secondary mt-0.5">Progress Check giữa khoá</span>
+</label>
+</div>
+</div>
+<!-- Chọn Exam Blueprint Dropdown -->
+<div class="flex flex-col">
+<label class="font-subtitle-h6 text-[13px] text-[#2A3547] font-semibold mb-1.5 flex items-center justify-between">
+<span>Đặc tả cấu trúc đề thi (Exam Blueprint) <span class="text-error">*</span></span>
+<a class="font-caption-small text-caption-small text-primary hover:underline flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[14px]">visibility</span>Xem chi tiết blueprint
+              </a>
+</label>
+<div class="relative">
+<select class="w-full h-[42px] px-3.5 pr-10 rounded-[7px] text-[#2A3547] font-body-base text-body-base border border-[#7C8FAC] focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all bg-surface-container-lowest appearance-none cursor-pointer">
+<option selected="">PTE Academic Standard (2h 15m - 4 kỹ năng Speaking, Writing, Reading, Listening)</option>
+<option>PTE Core FastTrack (2h 00m - Vocational and Migration focus)</option>
+<option>PTE Mock Express (1h 30m - Tinh gọn đánh giá nhanh)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-[20px]">expand_more</span>
+</div>
+<!-- Blueprint Summary Visual Card -->
+<div class="mt-3 p-4 rounded-[7px] bg-[#F0F3FF] border border-[#d0e0ff] flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 flex-1">
+<div class="flex flex-col">
+<span class="font-caption-small text-caption-small text-secondary">Số lượng câu hỏi</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-primary">format_list_numbered</span>
+<span class="font-tabular-data text-tabular-data font-bold text-on-surface">73 câu hỏi</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-caption-small text-caption-small text-secondary">Thời lượng thi</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-primary">schedule</span>
+<span class="font-tabular-data text-tabular-data font-bold text-on-surface">135 phút</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-caption-small text-caption-small text-secondary">Thang điểm chuẩn</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-primary">military_tech</span>
+<span class="font-tabular-data text-tabular-data font-bold text-on-surface">10 - 90 Điểm</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-caption-small text-caption-small text-secondary">Giọng nói AI</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-[#088068]">record_voice_over</span>
+<span class="font-caption-small text-caption-small font-semibold text-[#088068]">Kích hoạt Pearson AI</span>
+</div>
+</div>
+</div>
+<div class="shrink-0 flex items-center justify-end">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-[4px] bg-white font-caption-small text-caption-small text-primary font-semibold shadow-xs">
+<span class="material-symbols-outlined text-[14px]">verified</span> v2026.3 Validated
+                </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- THẺ 2: Thời gian & Địa điểm khảo thí -->
+<section class="bg-surface-container-lowest rounded-[7px] p-6 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)]">
+<div class="flex items-center justify-between pb-4 mb-5 border-b border-[#F2F6FA]">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+</div>
+<div>
+<h2 class="font-card-title-h5 text-card-title-h5 text-[#2A3547]">Thời gian &amp; Địa điểm khảo thí</h2>
+<p class="font-caption-small text-caption-small text-secondary">Lịch biểu tổ chức, chỉ định phòng máy và kiểm định kết nối LACS</p>
+</div>
+</div>
+<span class="font-caption-small text-caption-small text-secondary font-medium uppercase tracking-wider bg-surface-container-low px-2 py-1 rounded-[4px]">Bước 2/4</span>
+</div>
+<div class="flex flex-col gap-5">
+<!-- Hàng 1: Ngày thi & Khung giờ thi -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+<div class="md:col-span-5 flex flex-col">
+<label class="font-subtitle-h6 text-[13px] text-[#2A3547] font-semibold mb-1.5 flex items-center justify-between">
+<span>Ngày tổ chức thi <span class="text-error">*</span></span>
+</label>
+<div class="relative">
+<input class="h-[42px] w-full px-3.5 pl-10 rounded-[7px] text-[#2A3547] font-tabular-data text-tabular-data border border-[#7C8FAC] focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all bg-surface-container-lowest cursor-pointer" type="text" value="24/09/2026"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-[20px]">event</span>
+</div>
+</div>
+<div class="md:col-span-7 flex flex-col">
+<div class="flex items-center justify-between mb-1.5">
+<label class="font-subtitle-h6 text-[13px] text-[#2A3547] font-semibold">
+                  Khung giờ thi &amp; Check-in <span class="text-error">*</span>
+</label>
+<span class="font-caption-small text-caption-small text-primary font-medium">3 giờ 00 phút (bao gồm 30p check-in)</span>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="relative">
+<input class="h-[42px] w-full px-3.5 pl-9 rounded-[7px] text-[#2A3547] font-tabular-data text-tabular-data border border-[#7C8FAC] focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all bg-surface-container-lowest" type="text" value="08:30"/>
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-secondary text-[18px]">alarm</span>
+</div>
+<div class="relative">
+<input class="h-[42px] w-full px-3.5 pl-9 rounded-[7px] text-[#2A3547] font-tabular-data text-tabular-data border border-[#7C8FAC] focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all bg-surface-container-lowest" type="text" value="11:30"/>
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-secondary text-[18px]">schedule</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Hàng 2: Cơ sở khảo thí & Phòng lab -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+<div class="md:col-span-5 flex flex-col">
+<label class="font-subtitle-h6 text-[13px] text-[#2A3547] font-semibold mb-1.5">
+                Cơ sở khảo thí (Branch/Campus) <span class="text-error">*</span>
+</label>
+<div class="relative">
+<select class="w-full h-[42px] px-3.5 pr-10 rounded-[7px] text-[#2A3547] font-body-base text-body-base border border-[#7C8FAC] focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all bg-surface-container-lowest appearance-none cursor-pointer">
+<option selected="">Cơ sở Cầu Giấy (Hà Nội)</option>
+<option>Cơ sở Đống Đa (Hà Nội)</option>
+<option>Cơ sở Quận 1 (TP. Hồ Chí Minh)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-[20px]">apartment</span>
+</div>
+</div>
+<div class="md:col-span-7 flex flex-col">
+<label class="font-subtitle-h6 text-[13px] text-[#2A3547] font-semibold mb-1.5 flex items-center justify-between">
+<span>Phòng máy thi chỉ định <span class="text-error">*</span></span>
+<span class="font-caption-small text-caption-small text-secondary">Tối đa 48 máy trạm</span>
+</label>
+<div class="relative">
+<select class="w-full h-[42px] px-3.5 pr-10 rounded-[7px] text-[#2A3547] font-body-base text-body-base border border-[#7C8FAC] focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all bg-surface-container-lowest appearance-none cursor-pointer">
+<option selected="">Lab 1 - Tầng 3 (48 máy trạm khả dụng)</option>
+<option>Lab 2 - Tầng 4 (32 máy trạm khả dụng)</option>
+<option>Lab 3 - Tầng 2 (24 máy trạm khả dụng - Đang bảo trì)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-[20px]">desktop_windows</span>
+</div>
+</div>
+</div>
+<!-- Mini Badges & LACS Live Status Bar -->
+<div class="p-3.5 rounded-[7px] bg-[#F2F6FA] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[7px] font-caption-small text-caption-small font-semibold bg-[#E6FFFA] text-[#088068]">
+<span class="material-symbols-outlined text-[15px]">hearing</span>
+                Đạt chuẩn Pearson VUE Room Acoustics
+              </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-[7px] font-caption-small text-caption-small font-semibold bg-white text-secondary">
+<span class="material-symbols-outlined text-[15px]">videocam</span>
+                CCTV 360° Sẵn sàng
+              </span>
+</div>
+<div class="flex items-center gap-2 text-right">
+<span class="w-2 h-2 rounded-full bg-[#088068] animate-pulse"></span>
+<span class="font-caption-small text-caption-small font-semibold text-on-surface">LACS-01 Trực tuyến</span>
+<span class="font-tabular-data text-caption-small text-secondary">(Ping: 1ms · Cache OK)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- THẺ 3: Phân bổ thí sinh & Nguồn ghi danh -->
+<section class="bg-surface-container-lowest rounded-[7px] p-6 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)]">
+<div class="flex items-center justify-between pb-4 mb-5 border-b border-[#F2F6FA]">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">groups</span>
+</div>
+<div>
+<h2 class="font-card-title-h5 text-card-title-h5 text-[#2A3547]">Phân bổ thí sinh &amp; Nguồn ghi danh</h2>
+<p class="font-caption-small text-caption-small text-secondary">Chọn danh sách học viên theo khoá học hoặc nhập thủ công</p>
+</div>
+</div>
+<span class="font-caption-small text-caption-small text-secondary font-medium uppercase tracking-wider bg-surface-container-low px-2 py-1 rounded-[4px]">Bước 3/4</span>
+</div>
+<div class="flex flex-col gap-5">
+<!-- Radio Cards for Allocation Method -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<!-- Option A (Selected) -->
+<label class="p-4 rounded-[7px] border-2 border-primary-container bg-surface-container-low cursor-pointer flex items-start gap-3 transition-all">
+<input checked="" class="mt-1" name="enrollment_source" type="radio" value="cohort"/>
+<div class="flex flex-col">
+<span class="font-subtitle-h6 text-[14px] text-on-surface font-semibold">Theo Chương trình / Lớp học (Cohort)</span>
+<span class="font-caption-small text-caption-small text-secondary mt-1">Đồng bộ tự động từ dữ liệu quản lý lớp và danh sách điểm danh.</span>
+</div>
+</label>
+<!-- Option B -->
+<label class="p-4 rounded-[7px] border border-[#7C8FAC]/60 bg-surface-container-lowest hover:bg-[#F9F9FF] cursor-pointer flex items-start gap-3 transition-all">
+<input class="mt-1" name="enrollment_source" type="radio" value="custom"/>
+<div class="flex flex-col">
+<span class="font-subtitle-h6 text-[14px] text-on-surface font-semibold">Ghi danh tự do / Nhập file Excel</span>
+<span class="font-caption-small text-caption-small text-secondary mt-1">Tải lên danh sách thí sinh tự do vãng lai qua mẫu .xlsx chuẩn hoá.</span>
+</div>
+</label>
+</div>
+<!-- Dropdowns for Cohort selection -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+<div class="flex flex-col">
+<label class="font-subtitle-h6 text-[13px] text-[#2A3547] font-semibold mb-1.5">
+                Chương trình đào tạo (Programme) <span class="text-error">*</span>
+</label>
+<div class="relative">
+<select class="w-full h-[42px] px-3.5 pr-10 rounded-[7px] text-[#2A3547] font-body-base text-body-base border border-[#7C8FAC] focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all bg-surface-container-lowest appearance-none cursor-pointer">
+<option selected="">PTE Intensive Autumn 2026</option>
+<option>PTE Foundation Superpack</option>
+<option>PTE Core Express Evening</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-[20px]">school</span>
+</div>
+</div>
+<div class="flex flex-col">
+<label class="font-subtitle-h6 text-[13px] text-[#2A3547] font-semibold mb-1.5">
+                Lớp học chỉ định (Classes) <span class="text-error">*</span>
+</label>
+<div class="relative">
+<select class="w-full h-[42px] px-3.5 pr-10 rounded-[7px] text-[#2A3547] font-body-base text-body-base border border-[#7C8FAC] focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all bg-surface-container-lowest appearance-none cursor-pointer">
+<option selected="">PTE-79-A &amp; PTE-79-B (38 học viên)</option>
+<option>PTE-65-C (22 học viên)</option>
+<option>Tất cả các lớp thuộc khoá (54 học viên - Vượt quá 48 máy)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-[20px]">view_list</span>
+</div>
+</div>
+</div>
+<!-- Roster Preview Table -->
+<div class="flex flex-col mt-2">
+<div class="flex items-center justify-between mb-2.5">
+<div class="flex items-center gap-2">
+<span class="font-subtitle-h6 text-[13px] text-[#2A3547] font-semibold">Xem trước danh sách ghi danh</span>
+<span class="px-2 py-0.5 rounded-full font-caption-small text-caption-small font-semibold bg-[#E6FFFA] text-[#088068]">
+                  38 Thí sinh hợp lệ
+                </span>
+</div>
+<button class="font-caption-small text-caption-small text-primary hover:underline flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[15px]">refresh</span>Tải lại dữ liệu
+              </button>
+</div>
+<div class="overflow-x-auto rounded-[7px] border border-[#F2F6FA]">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="h-[44px] bg-[#F2F6FA] text-secondary font-caption-small text-caption-small uppercase font-semibold tracking-wider">
+<th class="px-4 py-2">SBD Dự kiến</th>
+<th class="px-4 py-2">Họ &amp; Tên thí sinh</th>
+<th class="px-4 py-2">Mã học viên</th>
+<th class="px-4 py-2">Lớp gốc</th>
+<th class="px-4 py-2 text-right">Máy trạm gán tự động</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#F2F6FA] font-body-base text-body-base text-on-surface">
+<tr class="h-[52px] hover:bg-[#F6F9FC] transition-colors">
+<td class="px-4 py-3 font-tabular-data text-tabular-data font-bold text-primary">SBD-001</td>
+<td class="px-4 py-3 font-medium flex items-center gap-2">
+<span class="w-7 h-7 rounded-full bg-primary-container/10 text-primary font-caption-small text-caption-small font-bold flex items-center justify-center">TL</span>
+<span>Trần Hoàng Linh</span>
+</td>
+<td class="px-4 py-3 font-tabular-data text-caption-small text-secondary">PTE-2026-081</td>
+<td class="px-4 py-3 font-caption-small text-caption-small">PTE-79-A</td>
+<td class="px-4 py-3 text-right">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] bg-surface-container font-tabular-data text-caption-small font-semibold text-primary">
+<span class="material-symbols-outlined text-[13px]">computer</span> LAB1-PC-01
+                      </span>
+</td>
+</tr>
+<tr class="h-[52px] hover:bg-[#F6F9FC] transition-colors">
+<td class="px-4 py-3 font-tabular-data text-tabular-data font-bold text-primary">SBD-002</td>
+<td class="px-4 py-3 font-medium flex items-center gap-2">
+<span class="w-7 h-7 rounded-full bg-primary-container/10 text-primary font-caption-small text-caption-small font-bold flex items-center justify-center">NM</span>
+<span>Nguyễn Văn Minh Quân</span>
+</td>
+<td class="px-4 py-3 font-tabular-data text-caption-small text-secondary">PTE-2026-094</td>
+<td class="px-4 py-3 font-caption-small text-caption-small">PTE-79-A</td>
+<td class="px-4 py-3 text-right">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] bg-surface-container font-tabular-data text-caption-small font-semibold text-primary">
+<span class="material-symbols-outlined text-[13px]">computer</span> LAB1-PC-02
+                      </span>
+</td>
+</tr>
+<tr class="h-[52px] hover:bg-[#F6F9FC] transition-colors">
+<td class="px-4 py-3 font-tabular-data text-tabular-data font-bold text-primary">SBD-003</td>
+<td class="px-4 py-3 font-medium flex items-center gap-2">
+<span class="w-7 h-7 rounded-full bg-primary-container/10 text-primary font-caption-small text-caption-small font-bold flex items-center justify-center">PA</span>
+<span>Phạm Quỳnh Anh</span>
+</td>
+<td class="px-4 py-3 font-tabular-data text-caption-small text-secondary">PTE-2026-112</td>
+<td class="px-4 py-3 font-caption-small text-caption-small">PTE-79-B</td>
+<td class="px-4 py-3 text-right">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] bg-surface-container font-tabular-data text-caption-small font-semibold text-primary">
+<span class="material-symbols-outlined text-[13px]">computer</span> LAB1-PC-03
+                      </span>
+</td>
+</tr>
+<tr class="h-[52px] hover:bg-[#F6F9FC] transition-colors">
+<td class="px-4 py-3 font-tabular-data text-tabular-data font-bold text-primary">SBD-004</td>
+<td class="px-4 py-3 font-medium flex items-center gap-2">
+<span class="w-7 h-7 rounded-full bg-primary-container/10 text-primary font-caption-small text-caption-small font-bold flex items-center justify-center">LD</span>
+<span>Lê Đức Duy</span>
+</td>
+<td class="px-4 py-3 font-tabular-data text-caption-small text-secondary">PTE-2026-119</td>
+<td class="px-4 py-3 font-caption-small text-caption-small">PTE-79-B</td>
+<td class="px-4 py-3 text-right">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] bg-surface-container font-tabular-data text-caption-small font-semibold text-primary">
+<span class="material-symbols-outlined text-[13px]">computer</span> LAB1-PC-04
+                      </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="flex items-center justify-between pt-2 px-1">
+<span class="font-caption-small text-caption-small text-secondary">Đang hiển thị 4 trên tổng số 38 thí sinh phân bổ tự động</span>
+<a class="font-caption-small text-caption-small text-primary font-semibold hover:underline" href="#">Xem toàn bộ 38 thí sinh →</a>
+</div>
+</div>
+</div>
+</section>
+<!-- THẺ 4: Phân công giám thị & Ban coi thi -->
+<section class="bg-surface-container-lowest rounded-[7px] p-6 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)]">
+<div class="flex items-center justify-between pb-4 mb-5 border-b border-[#F2F6FA]">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">badge</span>
+</div>
+<div>
+<h2 class="font-card-title-h5 text-card-title-h5 text-[#2A3547]">Phân công giám thị &amp; Ban coi thi</h2>
+<p class="font-caption-small text-caption-small text-secondary">Yêu cầu ít nhất 01 Giám thị đạt chứng chỉ Pearson Certified Test Administrator</p>
+</div>
+</div>
+<span class="font-caption-small text-caption-small text-secondary font-medium uppercase tracking-wider bg-surface-container-low px-2 py-1 rounded-[4px]">Bước 4/4</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Giám thị chính -->
+<div class="flex flex-col">
+<label class="font-subtitle-h6 text-[13px] text-[#2A3547] font-semibold mb-1.5 flex items-center justify-between">
+<span>Giám thị chính (Lead) <span class="text-error">*</span></span>
+</label>
+<div class="relative">
+<select class="w-full h-[42px] px-3.5 pr-10 rounded-[7px] text-[#2A3547] font-body-base text-body-base border border-[#7C8FAC] focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all bg-surface-container-lowest appearance-none cursor-pointer">
+<option selected="">TS. Nguyễn Hải Nam</option>
+<option>ThS. Trần Thị Mai Loan</option>
+<option>Vũ Đức Thành</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-[20px]">person_check</span>
+</div>
+<div class="mt-2 flex items-center gap-1.5 text-[#088068] font-caption-small text-caption-small font-semibold">
+<span class="material-symbols-outlined text-[15px]">verified</span>
+<span>Pearson Certified Lead Proctor</span>
+</div>
+</div>
+<!-- Giám thị hỗ trợ -->
+<div class="flex flex-col">
+<label class="font-subtitle-h6 text-[13px] text-[#2A3547] font-semibold mb-1.5">
+              Giám thị hỗ trợ (Co-proctor)
+            </label>
+<div class="relative">
+<select class="w-full h-[42px] px-3.5 pr-10 rounded-[7px] text-[#2A3547] font-body-base text-body-base border border-[#7C8FAC] focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all bg-surface-container-lowest appearance-none cursor-pointer">
+<option selected="">ThS. Đặng Tuấn Anh</option>
+<option>Hoàng Thu Hương</option>
+<option>Không chỉ định thêm</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-[20px]">support_agent</span>
+</div>
+<div class="mt-2 flex items-center gap-1.5 text-secondary font-caption-small text-caption-small">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+<span>Kiểm định ID &amp; Soát an ninh</span>
+</div>
+</div>
+<!-- Kỹ thuật viên phòng lab -->
+<div class="flex flex-col">
+<label class="font-subtitle-h6 text-[13px] text-[#2A3547] font-semibold mb-1.5">
+              Kỹ thuật viên phòng máy (IT) <span class="text-error">*</span>
+</label>
+<div class="relative">
+<select class="w-full h-[42px] px-3.5 pr-10 rounded-[7px] text-[#2A3547] font-body-base text-body-base border border-[#7C8FAC] focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all bg-surface-container-lowest appearance-none cursor-pointer">
+<option selected="">Lê Quốc Trung (IT Systems)</option>
+<option>Ngô Kiến Huy (Network Admin)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-[20px]">settings_ethernet</span>
+</div>
+<div class="mt-2 flex items-center gap-1.5 text-secondary font-caption-small text-caption-small">
+<span class="material-symbols-outlined text-[15px]">lan</span>
+<span>Trực hạ tầng mạng &amp; LACS</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- RIGHT COLUMN: Sticky Summary & Quick Checks (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-5 lg:sticky lg:top-[90px]">
+<!-- CARD 1: Session Summary -->
+<div class="bg-surface-container-lowest rounded-[7px] p-6 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)]">
+<div class="flex items-center justify-between pb-3.5 mb-4 border-b border-[#F2F6FA]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">summarize</span>
+<h3 class="font-card-title-h5 text-[16px] text-[#2A3547] font-semibold">Tóm tắt cấu hình ca thi</h3>
+</div>
+<span class="font-tabular-data text-caption-small font-bold text-primary bg-surface-container px-2 py-0.5 rounded-[4px]">
+            PTE-A-115
+          </span>
+</div>
+<div class="flex flex-col gap-3.5">
+<!-- Meta item -->
+<div class="flex items-start justify-between text-caption-small">
+<span class="text-secondary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">menu_book</span>
+              Đặc tả:
+            </span>
+<span class="font-semibold text-on-surface text-right">PTE Academic (4 kỹ năng)</span>
+</div>
+<div class="flex items-start justify-between text-caption-small">
+<span class="text-secondary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+              Thời gian:
+            </span>
+<span class="font-semibold text-on-surface text-right">T5, 24/09/2026 · 08:30 - 11:30</span>
+</div>
+<div class="flex items-start justify-between text-caption-small">
+<span class="text-secondary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">pin_drop</span>
+              Địa điểm:
+            </span>
+<span class="font-semibold text-on-surface text-right">Cầu Giấy · Lab 1 (Tầng 3)</span>
+</div>
+<div class="flex items-start justify-between text-caption-small">
+<span class="text-secondary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">badge</span>
+              Giám thị Lead:
+            </span>
+<span class="font-semibold text-on-surface text-right">TS. Nguyễn Hải Nam</span>
+</div>
+<div class="pt-3 border-t border-[#F2F6FA] flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-caption-small text-caption-small text-secondary">Tỷ lệ sử dụng máy thi</span>
+<span class="font-tabular-data text-caption-small font-bold text-on-surface">38 / 48 máy (79.2%)</span>
+</div>
+<!-- Progress bar -->
+<div class="w-full bg-[#E7EEFF] h-2 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full transition-all duration-300" style="width: 79.2%"></div>
+</div>
+<div class="flex items-center justify-between font-caption-small text-[11px] text-secondary mt-0.5">
+<span class="text-[#088068] font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span> 10 máy dự phòng sẵn sàng
+              </span>
+<span>Sức chứa: 48</span>
+</div>
+</div>
+<!-- Licence consumption preview banner -->
+<div class="p-3 rounded-[7px] bg-[#FEF5E5] text-[#9C6400] flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] shrink-0 mt-0.5">info</span>
+<div class="flex flex-col text-[12px] leading-relaxed">
+<span class="font-semibold">Mức tiêu thụ bản quyền:</span>
+<span><strong>38 seats</strong> sẽ được khoá tạm thời khi kích hoạt ca thi (Còn lại: <strong>14 seats</strong> khả dụng).</span>
+</div>
+</div>
+</div>
+</div>
+<!-- CARD 2: Pre-flight Safety Inspection -->
+<div class="bg-surface-container-lowest rounded-[7px] p-6 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)]">
+<div class="flex items-center justify-between pb-3 mb-3.5 border-b border-[#F2F6FA]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#088068] text-[20px]">checklist</span>
+<h3 class="font-card-title-h5 text-[16px] text-[#2A3547] font-semibold">Checklist an toàn phòng thi</h3>
+</div>
+<span class="w-2 h-2 rounded-full bg-[#088068]"></span>
+</div>
+<ul class="flex flex-col gap-2.5">
+<li class="flex items-start gap-2.5 text-caption-small">
+<span class="material-symbols-outlined text-[#088068] text-[18px] shrink-0">check_circle</span>
+<div class="flex flex-col">
+<span class="text-on-surface font-semibold">Audio Calibration</span>
+<span class="text-secondary text-[11px]">Đạt chuẩn 16-bit 44.1kHz không tạp âm</span>
+</div>
+</li>
+<li class="flex items-start gap-2.5 text-caption-small">
+<span class="material-symbols-outlined text-[#088068] text-[18px] shrink-0">check_circle</span>
+<div class="flex flex-col">
+<span class="text-on-surface font-semibold">Headset Mic Diagnostic</span>
+<span class="text-secondary text-[11px]">Đã kiểm định 48/48 tai nghe cách âm</span>
+</div>
+</li>
+<li class="flex items-start gap-2.5 text-caption-small">
+<span class="material-symbols-outlined text-[#088068] text-[18px] shrink-0">check_circle</span>
+<div class="flex flex-col">
+<span class="text-on-surface font-semibold">Local Caching Server (LACS)</span>
+<span class="text-secondary text-[11px]">Sẵn sàng đồng bộ offline phòng mất mạng</span>
+</div>
+</li>
+<li class="flex items-start gap-2.5 text-caption-small">
+<span class="material-symbols-outlined text-[#088068] text-[18px] shrink-0">check_circle</span>
+<div class="flex flex-col">
+<span class="text-on-surface font-semibold">Giám thị chứng chỉ Pearson</span>
+<span class="text-secondary text-[11px]">1 Lead Proctor hợp lệ theo chuẩn VUE</span>
+</div>
+</li>
+</ul>
+</div>
+<!-- CARD 3: Sticky Bottom Actions -->
+<div class="bg-surface-container-lowest rounded-[7px] p-5 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col gap-2.5">
+<button class="w-full h-[42px] px-5 rounded-[7px] font-button-label text-button-label font-medium text-on-primary bg-primary-container shadow-[0px_4px_10px_rgba(65,105,232,0.25)] hover:bg-[#3359D2] transition-all flex items-center justify-center gap-2 cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Tạo ca thi &amp; Phát hành</span>
+</button>
+<button class="w-full h-[38px] px-4 rounded-[7px] font-button-label text-button-label text-[#2A3547] bg-[#ECF2FF] hover:bg-[#DCE8FF] transition-all flex items-center justify-center gap-2 cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Lưu bản nháp ca thi</span>
+</button>
+<p class="text-center font-caption-small text-[11px] text-secondary mt-1">
+          Hệ thống sẽ gửi email thông báo kèm số báo danh tự động đến 38 thí sinh.
+        </p>
+</div>
+</div>
+</div>
+</div></div></main></div></body></html>

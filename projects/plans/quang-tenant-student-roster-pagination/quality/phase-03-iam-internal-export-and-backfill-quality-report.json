@@ -1,0 +1,49 @@
+{
+  "mode": "gate",
+  "target": "phase-03-iam-internal-export-and-backfill",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-15T02:27:00+07:00",
+  "reviewed_files": [
+    "pte-api/services/iam/src/main/java/com/pte/iam/controller/InternalExportController.java",
+    "pte-api/services/iam/src/main/java/com/pte/iam/controller/dto/StudentExportItem.java",
+    "pte-api/services/iam/src/main/java/com/pte/iam/repository/UserRepository.java",
+    "pte-api/services/iam/src/main/java/com/pte/iam/config/SecurityConfig.java",
+    "pte-api/services/iam/src/main/resources/application.yml",
+    "pte-api/services/admin/src/main/java/com/pte/admin/client/StudentExportClient.java",
+    "pte-api/services/admin/src/main/java/com/pte/admin/client/dto/StudentExportItem.java",
+    "pte-api/services/admin/src/main/java/com/pte/admin/service/StudentRosterRebuildService.java",
+    "pte-api/services/admin/src/main/java/com/pte/admin/controller/InternalRebuildController.java",
+    "pte-api/services/admin/src/main/java/com/pte/admin/repository/StudentRosterEntryRepository.java",
+    "pte-api/services/admin/src/main/java/com/pte/admin/config/SecurityConfig.java",
+    "pte-api/services/admin/src/main/resources/application.yml",
+    "pte-api/gateway/src/main/java/com/pte/gateway/config/SecurityConfig.java",
+    "pte-api/docker-compose.services.yml",
+    "pte-api/services/admin/README.md"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "verification": [
+    "mvn -pl services/iam,services/admin,gateway -am -DskipTests clean package: passed",
+    "Docker iam, admin, and gateway smoke boot: all healthy",
+    "IAM export with service key and tenant scope: HTTP success with safe-field payload",
+    "IAM all-tenant export with service key plus bootstrap key: HTTP success",
+    "IAM internal export without service key: HTTP 401",
+    "Admin rebuild endpoint with both internal keys: HTTP success and duration summary",
+    "Gateway request to IAM internal path: rejected at the public edge",
+    "Synthetic IAM student exported, backfilled, rebuilt a second time, and verified as exactly one Admin row",
+    "Projection row contained email, fullName, studentCode, phone, status, tenant, and immutable createdAt",
+    "Synthetic IAM and Admin rows removed after verification; no residual smoke data"
+  ],
+  "notes": [
+    "Unit tests were skipped by explicit user preference.",
+    "The local IAM database had no pre-existing student after the service restart, so the VPS backfill itself was not run from this workstation; the same endpoint and rebuild path were verified end-to-end with an isolated synthetic IAM student.",
+    "The concurrent write guarantee is implemented with PostgreSQL ON CONFLICT upsert on (tenant_id, student_public_id); a concurrent production load test remains a deployment validation activity."
+  ],
+  "report_path": "plans/quang-tenant-student-roster-pagination/quality/phase-03-iam-internal-export-and-backfill-quality-report.json"
+}

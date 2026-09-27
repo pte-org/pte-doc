@@ -1,0 +1,35 @@
+{
+  "target": "phase-03-decoder-enhancements",
+  "mode": "gate",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-12T14:35:40Z",
+  "reviewed_files": [
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/constant/ScoringConstants.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/dto/response/AnswerPayloadKind.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/dto/response/DecodedAnswerPayload.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/service/AnswerPayloadDecoder.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/service/ScoringReviewService.java",
+    "pte-api/services/scoring/src/test/java/com/pte/scoring/service/AnswerPayloadDecoderFixtureTest.java",
+    "pte-api/services/scoring/src/test/java/com/pte/scoring/service/ListeningPayloadFixtureSchemaTest.java",
+    "pte-api/services/scoring/src/test/resources/fixtures/listening-payload-contract.json"
+  ],
+  "conventions_checked_against": [
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/service/ObjectiveScoringService.java",
+    "pte-api/services/scoring/src/test/java/com/pte/scoring/service/ObjectiveScoringServiceTest.java",
+    "pte-api/services/scoring/src/main/java/com/pte/scoring/service/ScoringReviewService.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/dto/request/SubmitAnswerRequest.java"
+  ],
+  "findings": [],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "noted_count": 0,
+  "receipt_status": "skipped_cross_repo_boundary",
+  "receipt_note": "The plan/report lives in pte-doc while reviewed source and test files live in pte-api, a separate git repository under the pte-org parent. receipt.py requires one repository containing the report and every reviewed file, so no cryptographic receipt is issued."
+}

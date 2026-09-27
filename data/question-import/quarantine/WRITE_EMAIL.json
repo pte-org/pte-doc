@@ -1,0 +1,2842 @@
+[
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Healthier Lifestyles",
+    "promptText": "The local community center is looking to promote healthier lifestyles among residents of all ages. You are an active member of the local fitness club and have some innovative ideas on how to engage more people in regular physical activities. Write a proposal to Mrs. Thompson, the director of the community center, offering three suggestions for initiatives that could increase participation in physical activities. You should write between 80 and 120 words.\nYour suggestions should focus on the following themes:\n- A community fitness challenge;\n- Collaboration with local sports personalities;\n- Flexible fitness classes for different age groups.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mrs. Thompson,\nI hope this email finds you well. I am reaching out to propose a few initiatives that could significantly increase participation in physical activities within our community.\nFirstly, organizing a community-wide fitness challenge could serve as an excellent incentive. This event could include a variety of activities to cater to different interests.\nSecondly, leveraging the influence of local sports personalities could greatly inspire our community. Hosting sessions could spark interest and enthusiasm for maintaining an active lifestyle.\nLastly, recognizing the busy schedules of most residents, offering flexible fitness classes during evenings or weekends could accommodate more people.\nI look forward to your thoughts on these suggestions.\nBest wishes,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 2,
+      "num": 1,
+      "name": "#1 Healthier Lifestyles",
+      "nameWithoutNum": "Healthier Lifestyles",
+      "kind": "practice",
+      "examCount": 57,
+      "labels": [
+        {
+          "label": "#1",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Gardening and Environmental Conservation",
+    "promptText": "You are part of a local community garden group looking to engage more families and young people in gardening and environmental conservation. Write an email to Mr. Green, the coordinator of the community garden, offering three suggestions on how the garden can become a more inviting and educational space for younger community members. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Educational workshops;\n- Family-friendly gardening events;\n- Interactive environmental conservation projects.\nYou should elaborate on these themes with supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Green,\nI hope this email finds you well. I'm writing with ideas to make our community garden more appealing and educational for families and young people.\nFirst, offering workshops on topics like plant life cycles and sustainable gardening could spark interest and provide valuable knowledge.\nSecond, organizing family-friendly events, such as \"Plant Your Veggie Day,\" could encourage participation and teach kids about where their food comes from.\nLastly, starting interactive projects, like a butterfly garden or composting station, would engage young minds and promote environmental conservation.\nI believe these initiatives could transform our garden into a vibrant learning hub.\nLooking forward to your thoughts.\nBest,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 3,
+      "num": 2,
+      "name": "#2 Gardening and Environmental Conservation",
+      "nameWithoutNum": "Gardening and Environmental Conservation",
+      "kind": "practice",
+      "examCount": 52,
+      "labels": [
+        {
+          "label": "#2",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Weekend Plans",
+    "promptText": "Your colleague has invited you to join a weekend hiking trip, but you have already committed to a family event that weekend. Write an email to your colleague explaining why you can't join the hiking trip and suggesting another activity you both could do together the following weekend. You should write between 80 and 120 words.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Amy,\nI hope this message finds you well. I really appreciate the invitation to the hiking trip this weekend. Unfortunately, I have a family event that I've committed to and won't be able to make it.\nI'm really keen on spending some time outdoors, though. How about we plan a different activity for next weekend? Maybe a day hike or a visit to a local nature reserve? Let me know your thoughts, and we can pencil something in.\nThanks again for the invite, and I'm looking forward to catching up soon.\nBest,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 4,
+      "num": 3,
+      "name": "#3 Weekend Plans",
+      "nameWithoutNum": "Weekend Plans",
+      "kind": "practice",
+      "examCount": 62,
+      "labels": [
+        {
+          "label": "#3",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Strategies to Stand Out in a Crowded Market",
+    "promptText": "Your company is planning to enter a new market that is currently dominated by a few key players. Write an email to your business development manager suggesting three strategies to stand out in the crowded market and win over customers. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- A unique value proposition;\n- Targeted marketing campaigns;\n- Strong customer service and support.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mrs. Thompson,\nI hope you’re well. As we prepare to enter the new market, I've thought of strategies to help us stand out.\nFirstly, we should focus on creating a unique value proposition that addresses a gap not currently met by competitors.\nSecondly, investing in targeted marketing campaigns could raise awareness and interest in our offerings, specifically among under-served segments.\nFinally, building strong customer service and support could establish our reputation as a reliable and customer-focused company, differentiating us further.\nI believe these steps could position us strongly in the market.\nBest,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 5,
+      "num": 4,
+      "name": "#4 Strategies to Stand Out in a Crowded Market",
+      "nameWithoutNum": "Strategies to Stand Out in a Crowded Market",
+      "kind": "practice",
+      "examCount": 68,
+      "labels": [
+        {
+          "label": "#4",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Local Library",
+    "promptText": "Your local library is looking to increase its relevance and attract more visitors, especially from the younger generation. Write an email to Ms. Johnson, the head librarian, offering three suggestions on how the library can appeal more to young people and become a hub for community learning and engagement. You should write between 80 and 120 words. Your suggestions should focus on the following three themes:\n- Tech-oriented learning spaces;\n- Interactive and engaging workshops;\n- Collaborations with local schools and youth groups.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Ms. Johnson,\nI hope this message finds you well. I have a few ideas to help make our library more appealing to the younger crowd.\nFirstly, creating tech-oriented learning spaces with access to digital tools and resources can attract youth.\nSecondly, hosting interactive workshops on topics like coding, digital arts, and science experiments could spark interest and encourage frequent visits.\nFinally, collaborating with local schools and youth groups to organize events and projects could strengthen community ties and draw in a diverse group of young visitors.\nI believe these strategies could transform our library into a vibrant hub for learning and engagement.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 6,
+      "num": 5,
+      "name": "#5 Local Library",
+      "nameWithoutNum": "Local Library",
+      "kind": "practice",
+      "examCount": 50,
+      "labels": [
+        {
+          "label": "#5",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Promoting Environmental Awareness",
+    "promptText": "The local community center is looking to promote environmental awareness and sustainable living practices among residents. You are an active volunteer in the community's environmental club and have some innovative ideas on how to engage more people in sustainability efforts. Write an email to Ms. Lopez, the director of the community center, offering three suggestions for initiatives that could increase awareness and participation in environmental sustainability. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- A sustainability fair;\n- Partnerships with eco-friendly local businesses;\n- Educational workshops on reducing waste and energy consumption.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Ms. Lopez,\nI hope this email finds you well. I'm excited to share some ideas to boost environmental awareness in our community.\nFirstly, hosting a sustainability fair could showcase eco-friendly practices and products, engaging residents in fun and educational activities.\nSecondly, partnering with local eco-friendly businesses for workshops or discounts on sustainable products could encourage greener choices among our community members.\nLastly, offering educational workshops on topics like waste reduction and energy saving could empower residents with the knowledge to make more environmentally conscious decisions.\nI believe these initiatives could significantly enhance our community's commitment to sustainability.\nLooking forward to your thoughts.\nBest,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 7,
+      "num": 6,
+      "name": "#6 Promoting Environmental Awareness",
+      "nameWithoutNum": "Promoting Environmental Awareness",
+      "kind": "practice",
+      "examCount": 57,
+      "labels": [
+        {
+          "label": "#6",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Unable to Attend the Concert",
+    "promptText": "Your favorite band is coming to town, and your friend has gotten tickets for the concert next weekend. However, you have already committed to volunteering at a local charity event on the same day. Write an email to your friend explaining why you can't attend the concert and suggesting a different activity you both could do together to make up for it. You should write between 80 and 120 words.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Larry,\nI hope you're doing well! I heard about the concert next weekend – it sounds amazing, and I can't thank you enough for thinking of me. Unfortunately, I've already committed to volunteering at a local charity event that day, and I really can't back out.\nI'm really bummed about missing out, especially since it's our favorite band. How about we plan a night out the following weekend to make up for it? Maybe dinner and a movie or something else you'd like to do.\nThanks for understanding, and I'm looking forward to hanging out soon!\nBest,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 8,
+      "num": 7,
+      "name": "#7 Unable to Attend the Concert",
+      "nameWithoutNum": "Unable to Attend the Concert",
+      "kind": "practice",
+      "examCount": 46,
+      "labels": [
+        {
+          "label": "#7",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Enhancing the Café's Appeal",
+    "promptText": "Your neighborhood café is considering updating its menu and atmosphere to attract more customers. Write an email to the café owner, Mrs. Rivera, suggesting three changes that could help enhance the café's appeal and increase its patronage. You should write between 80 and 120 words.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mrs. Rivera,\nI hope this message finds you well. I've been a loyal customer at your café and have some ideas that might help attract more visitors.\nFirstly, introducing a range of healthy options could appeal to health-conscious customers. Secondly, a monthly theme, such as \"International Cuisine,\" could keep the menu exciting and draw in curious foodies. Lastly, creating a cozy corner with books and board games could enhance the café's atmosphere, making it a perfect spot for relaxation and social gatherings.\nI believe these changes could significantly boost the café's popularity. Looking forward to seeing your café thrive even more!\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 9,
+      "num": 8,
+      "name": "#8 Enhancing the Café's Appeal",
+      "nameWithoutNum": "Enhancing the Café's Appeal",
+      "kind": "practice",
+      "examCount": 52,
+      "labels": [
+        {
+          "label": "#8",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Animal Shelter",
+    "promptText": "The local animal shelter is seeking ways to increase adoptions and community involvement. You are a volunteer passionate about animal welfare and have thought of several initiatives that could help the shelter reach its goals. Write an email to Ms. Clark, the manager of the animal shelter, offering three suggestions for programs and events that could boost adoptions and engage the community. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Adoption events hosted in popular community locations;\n- Volunteer-led pet care and training workshops;\n- Social media campaigns featuring stories of pets up for adoption.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Ms. Clark,\nI hope you're doing well. I've been thinking about how we can increase adoptions and community involvement at our shelter.\nFirst, hosting adoption events in popular community spots could attract more visitors and potential adopters.\nSecond, offering pet care and training workshops led by our volunteers can educate people on responsible pet ownership and possibly encourage more adoptions.\nLastly, a social media campaign sharing stories and photos of our pets looking for homes could tug at heartstrings and spread the word further.\nI believe these initiatives could really make a difference.\nLooking forward to your thoughts.\nBest,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 10,
+      "num": 9,
+      "name": "#9 Animal Shelter",
+      "nameWithoutNum": "Animal Shelter",
+      "kind": "practice",
+      "examCount": 96,
+      "labels": [
+        {
+          "label": "#9",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Healthier Work Environment",
+    "promptText": "Your company has recently announced a new initiative to improve employee well-being. Write an email to your supervisor suggesting three ways to promote a healthier and more balanced work environment. You should write between 80 and 120 words.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mrs. Rivera,\nI hope this email finds you well. With the recent announcement of the new initiative to improve employee well-being, I would like to suggest the following ways to promote a healthier and more balanced work environment:\nFirstly, I recommend implementing flexible work hours to allow employees to better manage their work-life balance and reduce stress.\nSecondly, wellness programs such as yoga classes, meditation sessions, or health workshops can be introduced to support employees' physical and mental well-being.\nFinally, providing healthy snack options in the office can encourage better eating habits and contribute to overall employee wellness.\nThank you for considering these suggestions.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 11,
+      "num": 10,
+      "name": "#10 Healthier Work Environment",
+      "nameWithoutNum": "Healthier Work Environment",
+      "kind": "practice",
+      "examCount": 50,
+      "labels": [
+        {
+          "label": "#10",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Remote Team Collaboration and Communication",
+    "promptText": "Your company is looking to improve team collaboration and communication in remote work settings. Write an email to your team leader, suggesting three strategies to foster better teamwork and enhance communication among remote team members. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Implementing a weekly virtual team meeting;\n- Adopting a collaborative online platform;\n- Scheduling regular one-on-one check-ins.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr Harrison,\nI hope this email finds you well. As we navigate the challenges of remote work, I believe we can enhance our team's collaboration and communication with a few strategic initiatives.\nFirstly, implementing a weekly virtual team meeting could help us stay connected and align on projects. Secondly, adopting a collaborative online platform would streamline our workflow and ensure transparency. Lastly, scheduling regular one-on-one check-ins could support individual team members' needs and foster a stronger team bond.\nI'm confident these strategies will significantly improve our remote work dynamic.\nLooking forward to your feedback.\nBest,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 12,
+      "num": 11,
+      "name": "#11 Remote Team Collaboration and Communication",
+      "nameWithoutNum": "Remote Team Collaboration and Communication",
+      "kind": "practice",
+      "examCount": 68,
+      "labels": [
+        {
+          "label": "#11",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Not to Miss This Year's Local Food Festival",
+    "promptText": "You are the organizer of a local food festival and want to attract more attendees this year. Write an email to your subscriber list, explaining three reasons why they should not miss this year's event. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Variety of Food;\n- Interactive Cooking Demonstrations;\n- Exclusive Discounts.\nYou should include all three themes. Provide supporting examples for your reasons.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Food Enthusiasts,\nExciting flavors await at this year's local food festival! Here’s why you should join us:\nFirstly, the festival will showcase a variety of food, offering dishes from around the globe to delight every palate.\nSecondly, our interactive cooking demonstrations will not only entertain but also educate, as renowned chefs demonstrate their culinary skills and share kitchen secrets.\nFinally, enjoy exclusive discounts on meals and products, making this gourmet experience both memorable and affordable.\nMark your calendars for a day of delicious discovery!\nWarmest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 13,
+      "num": 12,
+      "name": "#12 Not to Miss This Year's Local Food Festival",
+      "nameWithoutNum": "Not to Miss This Year's Local Food Festival",
+      "kind": "practice",
+      "examCount": 67,
+      "labels": [
+        {
+          "label": "#12",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Engaging Children in Reading",
+    "promptText": "The local community library is looking to promote literacy and a love of reading among the youth in your area. You are a volunteer at the library and have some ideas on how to engage the children more effectively. Write an email to Ms. Reed, the librarian in charge, offering three suggestions for initiatives that could make reading more exciting and accessible for the children in your area. You should write between 80 and 120 words.\nYour ideas must come from the following three themes:\n- A reading marathon event;\n- Collaborations with local authors;\n- Weekend reading clubs.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Ms. Reed,\nI hope you're well. I'd like to suggest a few initiatives to foster a love of reading among our local youth.\nFirstly, hosting a reading marathon event could excite children about reading, with challenges and rewards for milestones reached.\nSecondly, collaborating with local authors for readings and Q&A sessions can inspire children by connecting them with the creators of their favorite stories.\nLastly, establishing weekend reading clubs would offer a regular, fun way for kids to explore new books and share their thoughts in a group setting.\nThese initiatives could significantly enhance our library's engagement with young readers.\nBest,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 14,
+      "num": 13,
+      "name": "#13 Engaging Children in Reading",
+      "nameWithoutNum": "Engaging Children in Reading",
+      "kind": "practice",
+      "examCount": 47,
+      "labels": [
+        {
+          "label": "#13",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Fostering a Vibrant Arts Scene",
+    "promptText": "The local arts council is looking to enhance cultural engagement and support local artists in your area. You are an artist and active member of the local arts community, and you have ideas on how to foster a vibrant arts scene. Write an email to Mr. Thompson, the chairperson of the local arts council, offering three suggestions for initiatives that could boost local arts and culture. You should write between 80 and 120 words.\nYour ideas must come from the following three themes:\n- Art exhibitions featuring local talent;\n- Workshops and classes for aspiring artists;\n- Grants and financial support for art projects.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Thompson,\nI hope this message finds you well. As an enthusiastic participant in our local arts scene, I'd like to propose a few initiatives to bolster cultural engagement and support for artists:\nFirstly, we could host art exhibitions specifically for showcasing local talent. This would not only provide artists with a platform to display their work but also enhance community engagement with the arts.\nSecondly, implementing workshops and classes for both new and established artists could foster a vibrant learning environment.\nFinally, offering grants and financial support for art projects would empower artists to undertake more ambitious works.\nThese steps could significantly elevate the arts within our community.\nWarm regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 15,
+      "num": 14,
+      "name": "#14 Fostering a Vibrant Arts Scene",
+      "nameWithoutNum": "Fostering a Vibrant Arts Scene",
+      "kind": "practice",
+      "examCount": 35,
+      "labels": [
+        {
+          "label": "#14",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Promoting Healthy Eating",
+    "promptText": "The local health department is seeking ways to promote healthy eating habits among the residents of your town. You are a nutritionist working at a local clinic and have several ideas on how to encourage healthier food choices. Write an email to Dr. Smith, a representative of the local health department, offering three suggestions for initiatives that could make healthy eating more appealing to the community. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- A community health fair;\n- Partnerships with local restaurants;\n- Cooking classes and workshops.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Dr. Smith,\nI hope this message finds you well. I am writing to propose three initiatives to promote healthy eating in our community.\nFirstly, organizing a community health fair would provide an excellent platform to educate residents about nutrition, featuring booths, free health screenings, and healthy cooking demonstrations.\nSecondly, forging partnerships with local restaurants to offer special healthy menus can make nutritious choices more accessible and appealing.\nFinally, introducing cooking classes and workshops focused on preparing healthy meals could empower individuals with the skills and knowledge to make better food choices. Together, these initiatives could significantly impact our community's health and well-being.\nWarm regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 16,
+      "num": 15,
+      "name": "#15 Promoting Healthy Eating",
+      "nameWithoutNum": "Promoting Healthy Eating",
+      "kind": "practice",
+      "examCount": 58,
+      "labels": [
+        {
+          "label": "#15",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Boosting Community Fitness Engagement",
+    "promptText": "The community sports center is interested in promoting physical fitness and a healthier lifestyle among the residents of your neighborhood. As a regular participant in the center's activities, you would like to offer suggestions to the community center's management. Write an email to Ms. Thompson, a coordinator at the community sports center, providing three suggestions for ways to increase participation in physical fitness programs among residents. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- A neighborhood fitness challenge;\n- Partnerships with local businesses;\n- Flexible scheduling for programs.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Ms. Thompson,\nI hope this message finds you well. As an avid participant at our community sports center, I'd like to propose a few ideas to boost participation in our fitness programs.\nFirstly, initiating a neighborhood fitness challenge could foster a sense of community and friendly competition.\nAdditionally, creating partnerships with local businesses could offer participants discounts or rewards, incentivizing more residents to join.\nLastly, implementing flexible scheduling for programs would accommodate diverse schedules, making fitness more accessible for everyone.\nI believe these strategies could significantly enhance engagement and promote a healthier lifestyle among our residents.\nWarm regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 17,
+      "num": 16,
+      "name": "#16 Boosting Community Fitness Engagement",
+      "nameWithoutNum": "Boosting Community Fitness Engagement",
+      "kind": "practice",
+      "examCount": 33,
+      "labels": [
+        {
+          "label": "#16",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Enhancing Inclusivity for Newcomers",
+    "promptText": "You are part of the local community center's team, keen on fostering a more inclusive environment for newcomers to the area. Write an email to Mr. Brooks, the director of community services, offering three suggestions on how the community center can assist newcomers in feeling more at home and engaged with the local community. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Cultural exchange events;\n- Guidance on local services;\n- Community mentorship programs.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Brooks,\nI hope this email finds you well. In our mission to make the community center a welcoming space for all, I propose three initiatives to better support newcomers in integrating into our community.\nFirstly, hosting cultural exchange events could celebrate our diversity and allow newcomers to share their heritage.\nSecondly, providing a guide to local services, such as healthcare, education, and transportation—would help them navigate their new environment with ease.\nLastly, establishing a community mentorship program could pair newcomers with local residents, offering them personal insights and fostering friendships within the community.\nThese efforts could significantly enrich our community's inclusivity and engagement.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 18,
+      "num": 17,
+      "name": "#17 Enhancing Inclusivity for Newcomers",
+      "nameWithoutNum": "Enhancing Inclusivity for Newcomers",
+      "kind": "complete",
+      "examCount": 40,
+      "labels": [
+        {
+          "label": "#17",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Improving Employee Satisfaction and Engagement",
+    "promptText": "You work in the human resources department of a multinational corporation, and you're tasked with improving employee satisfaction and engagement across your company's global offices. Write an email to Ms. Carter, the Chief Human Resources Officer, proposing three initiatives aimed at achieving these goals. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Remote working options;\n- Cross-cultural training programs;\n- Health and wellness initiatives.\nYou should thoroughly incorporate all three themes into your suggestions, providing actionable ideas for each.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Ms. Carter,\nI hope this message finds you well. Recognizing the importance of employee satisfaction and engagement, I propose three strategic initiatives to address these areas across our global offices.\nFirstly, expanding remote working options could offer employees flexibility, improving work-life balance and job satisfaction.\nSecondly, implementing cross-cultural training programs would foster inclusiveness and understanding among our diverse workforce, enhancing team collaboration.\nLastly, introducing health and wellness initiatives, such as fitness memberships and mental health support, would contribute to the overall well-being of our employees, positively impacting their productivity and engagement.\nImplementing these initiatives could significantly boost morale and commitment across the company.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 19,
+      "num": 18,
+      "name": "#18 Improving Employee Satisfaction and Engagement",
+      "nameWithoutNum": "Improving Employee Satisfaction and Engagement",
+      "kind": "practice",
+      "examCount": 49,
+      "labels": [
+        {
+          "label": "#18",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Boosting Community Engagement through Reading",
+    "promptText": "Your local library has launched a campaign to increase readership and community engagement. Write an email to the head librarian suggesting three strategies to attract more visitors and encourage reading within the community. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Monthly themed book clubs;\n- Literacy workshops;\n- \"Read and Share\" programs.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Head Librarian,\nI hope this message finds you well. With the library's recent initiative to enhance readership and community involvement, I'd like to propose three strategies that could significantly contribute to our goals.\nFirstly, hosting monthly themed book clubs can attract diverse groups and spark engaging discussions.\nSecondly, organizing literacy workshops for various age groups can provide valuable learning opportunities and foster a love for reading.\nLastly, implementing a \"Read and Share\" program could encourage readers to donate books they've enjoyed, creating a community-driven exchange system.\nThese initiatives could not only increase foot traffic but also strengthen the community's connection to reading and lifelong learning.\nWarm regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 20,
+      "num": 19,
+      "name": "#19 Boosting Community Engagement through Reading",
+      "nameWithoutNum": "Boosting Community Engagement through Reading",
+      "kind": "practice",
+      "examCount": 54,
+      "labels": [
+        {
+          "label": "#19",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Cultivating Community Spirit through Engagement",
+    "promptText": "Your neighborhood association is looking to enhance local engagement and foster a sense of community among residents. Write an email to the association president suggesting three activities that could bring neighbors together and strengthen community bonds. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- A neighborhood clean-up day;\n- A community potluck or food fair;\n- Regular sports or game nights.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Association President,\nI hope this message finds you well. In light of our shared goal to foster a stronger sense of community within our neighborhood, I propose three activities aimed at bringing residents closer together.\nFirst, organizing a neighborhood clean-up day could not only beautify our area but also instill a collective sense of pride and accomplishment.\nSecond, hosting a community potluck or food fair would provide a wonderful opportunity for neighbors to share meals and stories, promoting cultural exchange and understanding.\nLastly, setting up regular sports or game nights can offer a fun and relaxed setting for people of all ages to interact and build friendships.\nWarm regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 21,
+      "num": 20,
+      "name": "#20 Cultivating Community Spirit through Engagement",
+      "nameWithoutNum": "Cultivating Community Spirit through Engagement",
+      "kind": "practice",
+      "examCount": 61,
+      "labels": [
+        {
+          "label": "#20",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Revitalizing Library Engagement",
+    "promptText": "Your city's public library system is seeking ways to boost library membership and encourage more residents to take advantage of its resources. As a frequent visitor and library enthusiast, you want to offer suggestions to the library's management. Write an email to Ms. Bell, the director of library services, proposing three ideas to increase library engagement among city residents. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- An annual book festival;\n- Collaborations with local authors;\n- Innovative membership benefits.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Ms. Bell,\nI'm excited to share ideas to enhance library engagement across our community.\nFirstly, hosting an annual book festival could spotlight our rich collection and attract book lovers of all ages.\nSecondly, collaborations with local authors for workshops or storytelling sessions could offer unique insights into the writing process, encouraging budding writers and readers alike.\nLastly, introducing innovative membership benefits, such as exclusive online resources or early access to new arrivals, might incentivize more residents to join and actively use the library.\nI believe these initiatives could significantly boost library membership and community involvement.\nWarm regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 22,
+      "num": 21,
+      "name": "#21 Revitalizing Library Engagement",
+      "nameWithoutNum": "Revitalizing Library Engagement",
+      "kind": "practice",
+      "examCount": 80,
+      "labels": [
+        {
+          "label": "#21",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Advancing Corporate Sustainability Efforts",
+    "promptText": "Your company is exploring new strategies to enhance its sustainability efforts and reduce its environmental footprint. As an employee passionate about environmental conservation, you decide to contribute ideas to this initiative. Write an email to Mrs. Johnson, the head of the Sustainability Committee, suggesting three methods by which the company can further its sustainability goals. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Green energy solutions;\n- Waste reduction programs;\n- Employee sustainability education.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mrs. Johnson,\nI hope this message finds you well. In light of our company's commitment to enhancing its sustainability practices, I would like to propose three strategic approaches to further our environmental stewardship.\nFirstly, integrating green energy solutions can significantly reduce our carbon footprint and operational costs.\nSecondly, implementing comprehensive waste reduction programs, including recycling initiatives and minimizing single-use plastics, would visibly lower our waste output.\nLastly, developing an employee sustainability education program can foster a culture of environmental responsibility, encouraging innovative ideas and practices within our workforce.\nI believe these measures will not only advance our sustainability goals but also strengthen our company's reputation and efficiency.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 23,
+      "num": 22,
+      "name": "#22 Advancing Corporate Sustainability Efforts",
+      "nameWithoutNum": "Advancing Corporate Sustainability Efforts",
+      "kind": "practice",
+      "examCount": 45,
+      "labels": [
+        {
+          "label": "#22",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Innovating Education",
+    "promptText": "Your school district is looking to improve student engagement and academic achievement through innovative educational methods. As a concerned parent and member of the Parent-Teacher Association, you decide to offer suggestions to enhance the learning environment for students. Write an email to Dr. Lewis, the Superintendent of Schools, proposing three ideas to support this mission. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Interactive technology in the classroom;\n- Project-based learning;\n- Parental involvement in education.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Dr. Lewis,\nI hope this finds you well. As a dedicated parent and PTA member, I'm eager to share ideas that could significantly improve student engagement and achievement in our school district.\nFirstly, incorporating interactive technology in classrooms can offer dynamic and personalized learning experiences, making education more engaging for students.\nAdditionally, integrating project-based learning not only enriches understanding but also fosters critical thinking and collaboration among students.\nLastly, enhancing parental involvement through workshops and interactive platforms can bridge home and school environments, promoting continuous learning and support.\nImplementing these strategies could transform our students' educational journey, making learning more effective and enjoyable.\nWarm regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 24,
+      "num": 23,
+      "name": "#23 Innovating Education",
+      "nameWithoutNum": "Innovating Education",
+      "kind": "practice",
+      "examCount": 40,
+      "labels": [
+        {
+          "label": "#23",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Boosting Community Health",
+    "promptText": "Your local health department is launching a campaign to promote healthier lifestyles among the community members. As a health enthusiast and volunteer, you decide to contribute ideas to this initiative. Write an email to Ms. Anderson, the director of the Health Promotion Division, suggesting three strategies to enhance the effectiveness of the health campaign. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Community fitness events;\n- Nutrition education workshops;\n- Digital health tracking tools.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Ms. Anderson,\nI hope this message finds you well. As a volunteer and advocate for health within our community, I'm excited to propose strategies that could amplify the impact of our upcoming health promotion campaign.\nFirstly, hosting community fitness events, such as fun runs or yoga in the park, can inspire physical activity across diverse age groups.\nSecondly, offering nutrition education workshops can empower individuals with the knowledge to make healthier food choices.\nLastly, integrating digital health tracking tools into our campaign can encourage self-monitoring and accountability, making health goals more tangible and achievable for participants.\nWarm regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 25,
+      "num": 24,
+      "name": "#24 Boosting Community Health",
+      "nameWithoutNum": "Boosting Community Health",
+      "kind": "practice",
+      "examCount": 77,
+      "labels": [
+        {
+          "label": "#24",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Green Thumbs, Community Bonds",
+    "promptText": "Your neighborhood is planning to create a community garden to encourage local engagement and provide a space for residents to grow their own produce. As an avid gardener and community member, you decide to offer suggestions to enhance the garden's success and inclusivity. Write an email to Mr. Jenkins, the chair of the neighborhood association, proposing three ideas to ensure the community garden thrives and serves as a valuable resource for all residents. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Educational gardening workshops;\n- Inclusive design for accessibility;\n- Community events and volunteer opportunities.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Jenkins,\nI'm excited about our community garden initiative and would like to suggest ways to enrich this green space.\nFirstly, hosting educational workshops can empower residents with gardening skills, fostering a deeper connection with nature.\nSecondly, ensuring the garden's design is accessible to everyone, including those with mobility challenges, will make it a truly inclusive community asset.\nLastly, organizing regular community events and volunteer days in the garden will not only maintain it but also strengthen our neighborhood bonds through shared responsibilities and achievements.\nThese efforts will help our garden flourish as a hub of learning, inclusivity, and cooperation.\nWarmly,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 26,
+      "num": 25,
+      "name": "#25 Green Thumbs, Community Bonds",
+      "nameWithoutNum": "Green Thumbs, Community Bonds",
+      "kind": "practice",
+      "examCount": 57,
+      "labels": [
+        {
+          "label": "#25",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Promoting Holistic Wellness in the Workplace",
+    "promptText": "Your workplace is initiating a wellness program aimed at improving employee health and reducing stress. As an enthusiastic supporter of workplace wellness, you decide to contribute ideas to this initiative. Write an email to Mr. Daniels, the head of the Employee Wellness Committee, suggesting three strategies to promote wellness and well-being among employees. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Onsite fitness classes;\n- Mental health workshops;\n- Healthy eating options in the cafeteria.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Daniels,\nI am writing with great enthusiasm for our new wellness program and wish to contribute ideas that could further enhance our employees' health and well-being.\nFirstly, offering onsite fitness classes during lunch breaks or after hours can provide convenient access to physical activity, boosting overall health and energy levels.\nAdditionally, organizing mental health workshops can equip our team with strategies to manage stress and build resilience, fostering a supportive work environment.\nLastly, incorporating healthy eating options in the cafeteria can encourage better nutrition habits, positively impacting both physical and mental health.\nThese integrated strategies promise a more vibrant, health-conscious workplace culture.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 27,
+      "num": 26,
+      "name": "#26 Promoting Holistic Wellness in the Workplace",
+      "nameWithoutNum": "Promoting Holistic Wellness in the Workplace",
+      "kind": "practice",
+      "examCount": 43,
+      "labels": [
+        {
+          "label": "#26",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Igniting a Passion for Reading",
+    "promptText": "The local library is looking to foster a culture of reading and literature appreciation among residents of all ages. As an enthusiastic member of the local book club, you have some creative ideas on how to encourage more people to immerse themselves in the world of books. Write a proposal to Mr. Green, the librarian, offering three suggestions for initiatives that could boost engagement with reading and literature. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- A community-wide reading challenge;\n- Partnerships with local authors for workshops and readings;\n- Diverse book clubs catering to different interests and age groups;\nYou should include all three themes, providing supporting ideas for each.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Green,\nI'm excited to suggest three initiatives aimed at fostering a deeper connection with literature within our community.\nFirst, I propose launching a community-wide reading challenge, such as \"Read Around the World,\" motivating participants with reading goals and rewards.\nSecond, partnering with local authors for interactive workshops and readings, enriching our literary landscape.\nLastly, diverse book clubs tailored to various interests and ages, from youth sci-fi enthusiasts to adult history buffs, fostering a shared love for reading across generations.\nThese initiatives, designed to appeal to a wide audience, aim to create a dynamic, inclusive\nliterary culture that celebrates discovery, learning, and the joy of reading.\nWarm regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 28,
+      "num": 27,
+      "name": "#27 Igniting a Passion for Reading",
+      "nameWithoutNum": "Igniting a Passion for Reading",
+      "kind": "practice",
+      "examCount": 69,
+      "labels": [
+        {
+          "label": "#27",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Community Reading",
+    "promptText": "The local library is looking to foster a love of reading and literature among community members of all ages. As an enthusiastic volunteer and avid reader, you have some creative ideas on how to encourage more people to discover the joy of reading. Write a letter to Mr. Green, the librarian, offering three suggestions for initiatives that could increase interest in reading. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- A community-wide reading challenge;\n- Partnerships with local authors;\n- Reading groups for different interests and age groups.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Green,\nAs an enthusiastic volunteer and a book lover, I am thrilled to propose three innovative initiatives aimed at enhancing the reading interest among our community members.\nFirstly, I suggest launching a community-wide reading challenge, encouraging participation through set reading goals and rewards.\nSecondly, partnerships with local authors for book signings and discussion sessions could significantly increase interest in local literature.\nLastly, establishing reading groups tailored to different interests and age groups would provide a platform for community members to share and discuss their favorite reads.\nI believe these initiatives will ignite a passion for reading and cultivate a more culturally rich community environment.\nSincerely,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 29,
+      "num": 28,
+      "name": "#28 Community Reading",
+      "nameWithoutNum": "Community Reading",
+      "kind": "practice",
+      "examCount": 62,
+      "labels": [
+        {
+          "label": "#28",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Enhancing Educational Outcomes",
+    "promptText": "The local school district is seeking innovative ways to integrate technology into the classroom to enhance learning for students of all ages. You are a member of the Parent-Teacher Association (PTA) and have some forward-thinking ideas on how to make technology a more effective tool for education. Write a proposal to Mr. Davidson, the superintendent of the school district, offering three suggestions for initiatives that could improve technology use in education. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- A district-wide digital literacy campaign;\n- Partnerships with tech companies for hands-on learning experiences;\n- Customizable tech-based learning modules for different learning styles and subjects.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Davidson,\nAs an active member of the Parent-Teacher Association, I am eager to propose three initiatives to leverage technology for enriching our students' learning experiences.\nFirstly, launching a district-wide digital literacy campaign will ensure that all students possess the foundational skills necessary to navigate and utilize technology effectively.\nSecondly, forming partnerships with tech companies can provide hands-on learning experiences, exposing students to real-world applications of technology and potential career paths.\nLastly, developing customizable tech-based learning modules will cater to various learning styles and subjects, offering a more personalized education.\nSincerely,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 30,
+      "num": 29,
+      "name": "#29 Enhancing Educational Outcomes",
+      "nameWithoutNum": "Enhancing Educational Outcomes",
+      "kind": "practice",
+      "examCount": 51,
+      "labels": [
+        {
+          "label": "#29",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Building a Safer and More Connected Neighborhood",
+    "promptText": "Your neighborhood is interested in enhancing safety and fostering a sense of community among its residents. Write a letter to Mr. Thompson, the president of the neighborhood association, proposing three suggestions for initiatives that could improve neighborhood safety and community spirit. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Community watch programs;\n- Neighborhood social events;\n- Safety awareness workshops.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Thompson,\nAs a concerned resident and an advocate for our community's well-being, I propose three initiatives to enhance safety and foster a stronger sense of community among us.\nFirstly, establishing a community watch program would not only improve security but also encourage collaboration and vigilance among neighbors.\nSecondly, organizing neighborhood social events, such as block parties or picnics, can provide opportunities for residents to connect and strengthen community bonds.\nLastly, offering safety awareness workshops can educate our community on preventive measures and emergency response, empowering us all to contribute to a safer neighborhood.\nImplementing these initiatives could significantly improve our collective sense of security and community spirit.\nWarm regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 31,
+      "num": 30,
+      "name": "#30 Building a Safer and More Connected Neighborhood",
+      "nameWithoutNum": "Building a Safer and More Connected Neighborhood",
+      "kind": "practice",
+      "examCount": 50,
+      "labels": [
+        {
+          "label": "#30",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Proposal for Enhancing Our Sustainability Drive",
+    "promptText": "Your company has recently launched a sustainability drive aimed at reducing its environmental impact. Write an email to your supervisor suggesting three ways the company can integrate more eco-friendly practices into its daily operations. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- A digital-first approach;\n- A green procurement policy;\n- The use of public transportation and carpooling.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Green,\nI'm inspired by our company's dedication to sustainability and would like to suggest three ways we can further integrate eco-friendly practices into our operations.\nFirstly, we could significantly reduce our paper use by transitioning to a digital-first approach for all our documentation and communications.\nSecondly, implementing a green procurement policy would ensure that all the products and services we use are environmentally friendly, supporting sustainable business practices across the board.\nLastly, encouraging the use of public transportation and carpooling among employees can dramatically decrease our collective carbon emissions, promoting a healthier environment.\nThese initiatives could greatly contribute to our sustainability goals and corporate social responsibility efforts.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 32,
+      "num": 31,
+      "name": "#31 Proposal for Enhancing Our Sustainability Drive",
+      "nameWithoutNum": "Proposal for Enhancing Our Sustainability Drive",
+      "kind": "practice",
+      "examCount": 56,
+      "labels": [
+        {
+          "label": "#31",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Healthier Work Environment",
+    "promptText": "Your company has initiated a wellness program to enhance the overall health and productivity of its workforce. Write an email to your supervisor suggesting three strategies the company can adopt to promote a healthier work environment. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Flexible Work Schedules;\n- Health and Fitness Programs;\n- Healthy Eating Options.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Green,\nI hope this message finds you well. With the launch of our wellness program, I suggest three\nstrategic initiatives to foster a healthier workplace:\nFirstly, adopting Flexible Work Schedules would greatly benefit employees, allowing them to manage personal responsibilities alongside work.\nSecondly, implement Health and Fitness Programs, such as fitness classes and wellness workshops, to encourage physical activity and educate on health topics.\nLastly, offering Healthy Eating Options in the workplace, such as access to nutritious meals and snacks, can significantly impact overall health and energy levels.\nThese strategies aim to improve work-life balance and increase employee satisfaction and efficiency.\nWarm regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 33,
+      "num": 32,
+      "name": "#32 Healthier Work Environment",
+      "nameWithoutNum": "Healthier Work Environment",
+      "kind": "practice",
+      "examCount": 54,
+      "labels": [
+        {
+          "label": "#32",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Global Audiences",
+    "promptText": "Your company is planning to expand its market presence internationally. Write an email to your supervisor suggesting three approaches the company could take to adapt its marketing strategies to appeal to global audiences effectively. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- In-depth Market Research;\n- Localized Content Creation;\n- Local Partnerships.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Green,\nAs we aim to expand our international presence, adapting our marketing strategies for global audiences is crucial.\nFirstly, conducting In-depth Market Research is essential to understand the unique cultural, economic, and consumer behavior in each target market.\nSecondly, Localized Content Creation is critical. Tailoring our marketing materials, from language to visuals, ensures that our message is relevant and engaging across different cultures.\nLastly, Building Local Partnerships can significantly leverage our brand. Collaborating with regional businesses and influencers not only enhances our visibility but also builds trust within local communities.\nAdopting these strategies will position us strongly in the global market.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 34,
+      "num": 33,
+      "name": "#33 Global Audiences",
+      "nameWithoutNum": "Global Audiences",
+      "kind": "practice",
+      "examCount": 50,
+      "labels": [
+        {
+          "label": "#33",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Creativity and Innovation Culture",
+    "promptText": "Your organization is aiming to enhance its innovation capabilities to stay ahead of industry trends. Write an email to your supervisor suggesting three initiatives the company could undertake to foster a culture of creativity and innovation among its employees. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Establishing Innovation Labs;\n- Launching Idea Challenges across the company;\n- Offering Continuous Learning Programs.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Green,\nTo elevate our innovation capabilities and stay ahead of industry trends, I recommend the following strategic initiatives:\nFirstly, establishing Innovation Labs would provide a dedicated space for employees to explore and experiment with new ideas, fostering a tangible culture of innovation.\nSecondly, launching Idea Challenges across the company can encourage creative thinking, with incentives for actionable ideas that align with our strategic goals.\nLastly, offering Continuous Learning Programs tailored to emerging technologies and innovation methodologies.\nImplementing these initiatives will significantly boost our culture of creativity and innovation.\nBest,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 35,
+      "num": 34,
+      "name": "#34 Creativity and Innovation Culture",
+      "nameWithoutNum": "Creativity and Innovation Culture",
+      "kind": "practice",
+      "examCount": 39,
+      "labels": [
+        {
+          "label": "#34",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Enhancing Our Cybersecurity Measures",
+    "promptText": "Your company has recognized the need to upgrade its cybersecurity measures in light of recent industry-wide data breaches. Write an email to your supervisor suggesting three key actions the company could take to strengthen its digital security posture and protect sensitive information. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Multi-factor authentication;\n- Regular cybersecurity training;\n- Advanced threat detection software.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Green,\nIn response to recent industry-wide data breaches, it's imperative we upgrade our cybersecurity measures to safeguard our sensitive information.\nFirstly, implementing multi-factor authentication (MFA) across all our digital platforms can significantly increase our security by adding an extra layer of protection beyond just passwords.\nSecondly, conducting regular cybersecurity training for all employees will raise awareness of potential threats and phishing scams.\nLastly, investing in advanced threat detection software will enable us to monitor our systems in real time for any unusual activity.\nThese actions will greatly strengthen our digital security posture.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 36,
+      "num": 35,
+      "name": "#35 Enhancing Our Cybersecurity Measures",
+      "nameWithoutNum": "Enhancing Our Cybersecurity Measures",
+      "kind": "practice",
+      "examCount": 55,
+      "labels": [
+        {
+          "label": "#35",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Customer Satisfaction and Experience",
+    "promptText": "Your organization is focusing on improving customer satisfaction to boost loyalty and referrals. Write an email to your supervisor suggesting three specific strategies the company could implement to enhance the customer experience across all touchpoints. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Personalized Customer Service;\n- Feedback Loops;\n- Online User Experience.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Green,\nTo improve customer satisfaction and foster loyalty, I recommend the following strategies:\nFirstly, Personalized Customer Service can make a significant difference. Tailoring our approach based on customer history and preferences ensures a more meaningful and positive experience.\nSecondly, implementing Feedback Loops at every touchpoint allows us to gather insights directly from customers.\nLastly, enhancing our Online User Experience through a streamlined, intuitive website and mobile app design can greatly improve customer satisfaction.\nThese initiatives can drive higher satisfaction, loyalty, and referrals.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 37,
+      "num": 36,
+      "name": "#36 Customer Satisfaction and Experience",
+      "nameWithoutNum": "Customer Satisfaction and Experience",
+      "kind": "practice",
+      "examCount": 40,
+      "labels": [
+        {
+          "label": "#36",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Remote Work Environment",
+    "promptText": "Your company is considering implementing remote work options to offer greater flexibility to its employees. Write an email to your supervisor suggesting three policies or practices the company could adopt to ensure productivity and work-life balance in a remote work environment. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Clear Communication Guidelines;\n- Flexible Work Hours;\n- Remote Work Training and Resources.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Green,\nConsidering our move towards remote work, I suggest three key policies:\nFirstly, setting Clear Communication Guidelines is crucial. Regular check-ins and updates via video calls or messaging platforms can keep teams aligned and foster a sense of community.\nSecondly, introducing Flexible Work Hours allows employees to work during their most productive times while managing personal responsibilities.\nLastly, providing Remote Work Training and Resources equips our team with the tools and knowledge to work efficiently from home, addressing challenges related to time management and remote collaboration.\nAdopting these policies will support our transition to a productive and balanced remote work environment.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 38,
+      "num": 37,
+      "name": "#37 Remote Work Environment",
+      "nameWithoutNum": "Remote Work Environment",
+      "kind": "practice",
+      "examCount": 69,
+      "labels": [
+        {
+          "label": "#37",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Cost-Saving Measures for Efficient Operations",
+    "promptText": "Your organization is looking to reduce operational costs without sacrificing quality or employee satisfaction. Write an email to your supervisor suggesting three cost-saving measures the company could explore to achieve more efficient and economical operations. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Cloud Computing;\n- Telecommuting Options;\n- Energy-Efficient Practices.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Green,\nTo enhance operational efficiency without impacting quality or morale, I propose:\nFirstly, transitioning to Cloud Computing can significantly reduce IT infrastructure costs. By leveraging cloud services, we can scale resources according to demand.\nSecondly, implementing Telecommuting Options for employees can decrease office space and utility costs.\nLastly, adopting Energy-Efficient Practices across our operations, such as using LED lighting and encouraging digital documentation, can substantially lower our energy bills and reduce our environmental footprint.\nThese strategies can help us cut costs effectively while maintaining our commitment to quality and employee well-being.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 39,
+      "num": 38,
+      "name": "#38 Cost-Saving Measures for Efficient Operations",
+      "nameWithoutNum": "Cost-Saving Measures for Efficient Operations",
+      "kind": "practice",
+      "examCount": 44,
+      "labels": [
+        {
+          "label": "#38",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "CSR Strategies for Enhanced Brand Image",
+    "promptText": "Your company aims to enhance its brand image and reputation through corporate social responsibility (CSR) initiatives. Write an email to your supervisor suggesting three CSR projects or strategies the company could undertake to positively impact the community and environment while aligning with its business goals. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Adopting sustainable practices;\n- Engaging in community initiatives;\n- Ensuring our supply chain practices.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Green,\nI hope you're well. To enhance our brand image and contribute positively to our community and environment, I suggest we consider the following CSR initiatives:\nFirstly, adopting sustainable practices such as waste reduction and renewable energy use can not only decrease our carbon footprint but also strengthen our market position as an environmentally responsible brand.\nSecondly, engaging in community initiatives that support local education and health demonstrates our commitment to societal well-being, fostering a positive public perception.\nLastly, ensuring our supply chain practices are ethical and transparent can enhance our reputation and encourage brand loyalty.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 40,
+      "num": 39,
+      "name": "#39 CSR Strategies for Enhanced Brand Image",
+      "nameWithoutNum": "CSR Strategies for Enhanced Brand Image",
+      "kind": "practice",
+      "examCount": 42,
+      "labels": [
+        {
+          "label": "#39",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Expanding Our Product Portfolio",
+    "promptText": "Your organization is exploring opportunities to diversify its product portfolio to meet changing market demands and drive growth. Write an email to your supervisor suggesting three innovative product ideas or categories the company could consider developing to expand its offerings and reach new customers. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- A line of eco-friendly products;\n- Smart technology into our offerings;\n- Venturing into the health and wellness sector.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Green,\nI hope this message finds you well. To adapt to changing market demands and fuel growth, I propose we consider the following product innovations:\nFirstly, developing a line of eco-friendly products can appeal to environmentally conscious consumers and meet the rising demand for sustainable options.\nSecondly, integrating smart technology into our offerings would attract tech-savvy customers and enhance the functionality of our products.\nLastly, venturing into the health and wellness sector could capitalize on the growing consumer emphasis on personal well-being and preventive care.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 41,
+      "num": 40,
+      "name": "#40 Expanding Our Product Portfolio",
+      "nameWithoutNum": "Expanding Our Product Portfolio",
+      "kind": "practice",
+      "examCount": 53,
+      "labels": [
+        {
+          "label": "#40",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Enhancing Employee Engagement and Morale",
+    "promptText": "Your company is looking to improve employee engagement and morale during a period of organizational change. Write an email to your supervisor suggesting three initiatives or activities the company could implement to keep employees motivated and committed to the company’s vision and goals. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Transparent communication;\n- Professional development opportunities;\n- A recognition program.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Green,\nI hope this message finds you well. To boost employee engagement and morale during organizational change, I suggest the following initiatives:\nFirstly, we can enhance transparent communication by providing regular updates and feedback opportunities to ensure all team members feel informed and valued.\nSecondly, we can offer professional development opportunities such as workshops or online courses to foster personal growth and reinforce the company's investment in its employees.\nLastly, we can create a recognition program to celebrate individual and team achievements, boosting morale and aligning employees with the company’s vision and goals.\nThese strategies aim to cultivate a more engaged and committed workforce.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 42,
+      "num": 41,
+      "name": "#41 Enhancing Employee Engagement and Morale",
+      "nameWithoutNum": "Enhancing Employee Engagement and Morale",
+      "kind": "practice",
+      "examCount": 27,
+      "labels": [
+        {
+          "label": "#41",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Healthy Eating",
+    "promptText": "The local health department is looking to promote healthier eating habits among the residents of your city. You are a nutritionist working with a local community health center and you would like to make suggestions to the health department. Write an email to Dr. Smith, a representative of the local health department, giving three suggestions for ways to encourage healthier eating habits among city residents. You should write between 80 and 120 words. Your suggestions should cover the following three themes:\n- A city-wide healthy eating campaign;\n- Partnerships with local restaurants;\n- Educational workshops and seminars.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Dr. Smith,\nI'm reaching out to suggest effective methods for promoting healthier eating habits within our community:\nFirstly, initiating a city-wide campaign can significantly increase awareness about the benefits of healthy eating through diverse media platforms.\nSecondly, establishing partnerships with local restaurants to introduce and highlight healthier menu options can encourage residents to make better food choices.\nLastly, we should organize educational workshops and seminars. These events can equip our citizens with knowledge and tools for healthier living.\nI am eager to discuss these ideas further and contribute to our city's health improvement.\nWarm regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 43,
+      "num": 42,
+      "name": "#42 Healthy Eating",
+      "nameWithoutNum": "Healthy Eating",
+      "kind": "practice",
+      "examCount": 59,
+      "labels": [
+        {
+          "label": "#42",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Physical Fitness",
+    "promptText": "The local community center is looking to increase engagement in physical fitness activities among the residents of your town. You are a personal trainer at the local gym and you would like to make suggestions to the community center. Write an email to Ms. Taylor, a coordinator at the community center, giving three suggestions for ways to encourage more residents to participate in physical fitness activities. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- A community fitness challenge;\n- Partnerships with local businesses;\n- Flexible scheduling for fitness classes.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Ms. Taylor,\nI hope this message finds you well. As a personal trainer, I'm excited to suggest a few ideas to boost physical fitness participation among our town's residents.\nFirstly, organizing a community fitness challenge could spark interest and motivation through friendly competition and achievable goals.\nSecondly, forming partnerships with local businesses to offer discounts or rewards for participants can provide additional incentives for residents to join the fitness programs.\nLastly, offering fitness classes with flexible scheduling would accommodate the busy lives of our residents, making it easier for them to commit to staying active.\nI believe these strategies will greatly increase engagement in physical activities within our community.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 44,
+      "num": 43,
+      "name": "#43 Physical Fitness",
+      "nameWithoutNum": "Physical Fitness",
+      "kind": "practice",
+      "examCount": 62,
+      "labels": [
+        {
+          "label": "#43",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Library Reading Programs",
+    "promptText": "The local library is seeking to increase interest and participation in its reading programs among the youth of your town. You are a volunteer at the library and would like to make suggestions to the library management. Write an email to Mr. Bennett, the head librarian, proposing three suggestions for ways to encourage more young people to engage in reading activities. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- A town-wide reading competition;\n- Collaborations with local schools;\n- Interactive and themed reading sessions.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Bennett,\nI hope this email finds you well. I am writing to share ideas for boosting youth participation in our library's reading programs.\nFirstly, organizing a town-wide reading competition could spark enthusiasm among young readers, with incentives for milestones achieved.\nSecondly, collaborating with local schools to integrate reading programs with school curriculum could encourage students to participate more actively and consistently.\nLastly, hosting interactive and themed reading sessions would make reading a fun and engaging activity, catering to diverse interests and age groups.\nImplementing these strategies could significantly increase young people's interest in reading and library activities.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 45,
+      "num": 44,
+      "name": "#44 Library Reading Programs",
+      "nameWithoutNum": "Library Reading Programs",
+      "kind": "practice",
+      "examCount": 67,
+      "labels": [
+        {
+          "label": "#44",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Environmental Conservation",
+    "promptText": "The local park is looking to enhance its environmental conservation efforts and encourage community participation. You are an active member of the local environmental club and would like to make suggestions to the park's management. Write an email to Ms. Green, the park manager, proposing three suggestions for ways to involve the community in the park's conservation activities. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- A community clean-up day;\n- Educational workshops on local flora and fauna;\n- A \"sponsor a tree\" program.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Ms. Green,\nI hope this finds you well. I'd like to propose a few strategies to bolster community involvement in our park's conservation efforts.\nFirstly, organizing a community clean-up day could foster a sense of responsibility and pride among residents towards maintaining the park's beauty.\nSecondly, offering educational workshops on local flora and fauna would increase awareness and appreciation for our natural surroundings.\nLastly, launching a \"sponsor a tree\" program could provide a personal investment opportunity for community members.\nThese initiatives could greatly enhance our collective conservation efforts.\nWarm regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 46,
+      "num": 45,
+      "name": "#45 Environmental Conservation",
+      "nameWithoutNum": "Environmental Conservation",
+      "kind": "practice",
+      "examCount": 54,
+      "labels": [
+        {
+          "label": "#45",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Visitor Engagement",
+    "promptText": "The local art museum is looking to increase visitor engagement and foster a deeper appreciation for art within the community. You are an art enthusiast and a frequent visitor of the museum, and you would like to make suggestions to the museum's management. Write an email to Mr. Lopez, the museum director, proposing three suggestions for ways to attract more visitors and enhance their experience. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Interactive art installations;\n- Collaboration with local artists for live demonstrations;\n- Art classes for various age groups.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Lopez,\nI hope this message finds you well. I am writing with a few suggestions that could elevate the visitor experience and engagement at our local art museum.\nFirstly, incorporating interactive art installations would offer visitors a hands-on experience, making art more accessible and memorable.\nSecondly, partnering with local artists to conduct live demonstrations could attract a broader audience.\nLastly, offering art classes for various age groups would not only educate but also inspire participants.\nImplementing these ideas could significantly enhance the museum's appeal and visitor engagement.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 47,
+      "num": 46,
+      "name": "#46 Visitor Engagement",
+      "nameWithoutNum": "Visitor Engagement",
+      "kind": "practice",
+      "examCount": 53,
+      "labels": [
+        {
+          "label": "#46",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Increase Adoptions and Community Engagement",
+    "promptText": "The local animal shelter is looking to increase adoptions and community involvement. You are an animal lover and a volunteer at the shelter, and you would like to make suggestions to the shelter's management. Write an email to Ms. Anderson, the shelter director, proposing three suggestions for ways to boost adoptions and engage the community. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- An adoption event weekend;\n- Partnerships with local businesses for sponsorship and promotions;\n- Volunteer-led social media campaigns to showcase adoptable pets.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Ms. Anderson,\nI hope you're well. I'd like to share a few ideas to enhance adoptions and community involvement with our shelter.\nFirstly, hosting an adoption event weekend could significantly raise awareness and create a buzz, encouraging more people to consider adoption.\nSecondly, establishing partnerships with local businesses for sponsorship and promotions could broaden our reach and provide mutual benefits, drawing more visitors to our events.\nLastly, initiating volunteer-led social media campaigns to showcase our adoptable pets could captivate a wider audience, highlighting the personalities and stories of our animals, making it easier for them to find homes.\nThank you for considering these suggestions.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 48,
+      "num": 47,
+      "name": "#47 Increase Adoptions and Community Engagement",
+      "nameWithoutNum": "Increase Adoptions and Community Engagement",
+      "kind": "practice",
+      "examCount": 50,
+      "labels": [
+        {
+          "label": "#47",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Modernizing the Museum Experience",
+    "promptText": "The local history museum is planning to revitalize its exhibits and attract more visitors, especially younger audiences. You are a history buff and a member of the museum's volunteer advisory board, and you would like to make suggestions to the museum's management. Write an email to Dr. Wilson, the museum curator, proposing three suggestions for ways to modernize the museum experience and engage a broader audience. You should write between 80 and 120 words.\nYour suggestions should focus on the following three themes:\n- Integrating technology with exhibits, such as augmented reality (AR) tours;\n- Collaborating with local schools to develop history projects and field trips;\n- Organizing interactive history workshops or lectures that feature dynamic storytelling.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Dr. Wilson,\nI hope this email finds you well. I'm excited to share some ideas that could help modernize our museum and attract a wider audience, especially among younger visitors.\nFirstly, integrating technology, like augmented reality (AR) tours, could offer a more immersive and interactive experience.\nSecondly, collaborating with local schools to develop tailored history projects and field trips could foster a deeper connection with the community and inspire a love of history in students.\nLastly, organizing interactive workshops or lectures featuring dynamic storytelling could captivate visitors, making historical events and figures more relatable and fascinating.\nThank you for considering these suggestions.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 49,
+      "num": 48,
+      "name": "#48 Modernizing the Museum Experience",
+      "nameWithoutNum": "Modernizing the Museum Experience",
+      "kind": "practice",
+      "examCount": 64,
+      "labels": [
+        {
+          "label": "#48",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Community Health Education",
+    "promptText": "The local health clinic is looking to improve health outcomes and wellness in the community. You are a healthcare professional working at the clinic and would like to make suggestions to the clinic's management. Write an email to Dr. Martinez, the clinic director, proposing three suggestions for ways to enhance health education and preventative care among the community members. You should write between 80 and 120 words. Your suggestions must focus on the following three themes:\n- Hosting regular health education workshops on various topics;\n- Launching a community health ambassador program;\n- Implementing a mobile clinic to reach underserved areas.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Dr. Martinez,\nI hope this message finds you well. I'd like to propose three initiatives to improve health education and preventive care in our community.\nFirstly, hosting regular health education workshops can address diverse topics, empowering our community with knowledge about their health and well-being.\nSecondly, launching a community health ambassador program could leverage passionate individuals to spread health awareness and support within their networks, enhancing our outreach.\nLastly, implementing a mobile clinic would significantly extend our services to underserved areas, ensuring that preventive care and health education are accessible to all community members.\nThank you for considering these suggestions.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 50,
+      "num": 49,
+      "name": "#49 Community Health Education",
+      "nameWithoutNum": "Community Health Education",
+      "kind": "practice",
+      "examCount": 53,
+      "labels": [
+        {
+          "label": "#49",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Sports Activities",
+    "promptText": "The local sports center is looking to increase participation in sports activities among teenagers in the community. You are a coach at the center and would like to make suggestions to the center's management. Write an email to Ms. Carter, the director of the sports center, proposing three suggestions for ways to boost teenager participation in sports activities. You should write between 80 and 120 words.\nYour suggestions must focus on the following three themes:\n- Organizing sports clinics and workshops for skill development;\n- Creating a mentorship program with local athletes;\n- Offering discounted membership rates for teenagers.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Ms. Carter,\nI hope this email finds you well. I have some suggestions that could help increase teenager engagement in our sports programs.\nFirstly, organizing sports clinics and workshops can provide valuable skill development and foster a deeper interest in sports among teenagers.\nSecondly, creating a mentorship program with local athletes would inspire teenagers by giving them role models to look up to and learn from.\nLastly, offering discounted membership rates for teenagers could make joining the sports center more accessible, encouraging regular participation.\nI believe these initiatives could significantly boost teenager involvement in our sports activities.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 51,
+      "num": 50,
+      "name": "#50 Sports Activities",
+      "nameWithoutNum": "Sports Activities",
+      "kind": "practice",
+      "examCount": 60,
+      "labels": [
+        {
+          "label": "#50",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Fire Safety Awareness",
+    "promptText": "The local fire department is seeking to enhance its community outreach and education efforts to promote fire safety awareness. You are a firefighter and part of the community outreach team, and you would like to make suggestions to the department's leadership. Write an email to Chief Roberts, the head of the fire department, proposing three suggestions for ways to increase fire safety awareness among the community members. You should write between 80 and 120 words.\nYour suggestions must focus on the following three themes:\n- Hosting community fire safety workshops;\n- Implementing a school visit program to educate children on fire safety;\n- Launching a social media campaign to share fire safety tips and information.\nYou should include all three themes. Provide supporting ideas for your suggestions.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Chief Roberts,\nI hope this message finds you well. I'd like to propose a few strategies to bolster our fire safety outreach efforts.\nFirstly, hosting community fire safety workshops could engage residents directly, providing them with valuable knowledge and skills to prevent fire incidents.\nSecondly, implementing a school visit program would allow us to educate children on fire safety from an early age, fostering a culture of awareness and prevention.\nLastly, launching a social media campaign could extend our reach, sharing important fire safety tips and information with a wider audience efficiently.\nI believe these initiatives could significantly improve fire safety awareness in our community.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 52,
+      "num": 51,
+      "name": "#51 Fire Safety Awareness",
+      "nameWithoutNum": "Fire Safety Awareness",
+      "kind": "practice",
+      "examCount": 54,
+      "labels": [
+        {
+          "label": "#51",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Environmental Efforts",
+    "promptText": "The local environmental group is looking to increase community engagement in sustainability practices and environmental conservation. You are an environmental activist and member of the group, and you would like to make suggestions to the group's leadership. Write an email to Ms. Patel, the head of the environmental group, proposing three suggestions for ways to foster greater community involvement in environmental efforts. You should write between 80 and 120 words. Your suggestions must focus on the following three themes:\n- Initiating a community-wide clean-up and recycling drive;\n- Offering workshops on sustainable living and conservation practices;\n- Partnering with local schools to integrate environmental education into their curriculum.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Ms. Patel,\nI hope this email finds you well. I'm writing to propose several initiatives aimed at boosting community engagement in our environmental conservation efforts.\nFirstly, initiating a community-wide clean-up and recycling drive could greatly enhance our local environment and encourage collective responsibility among residents.\nSecondly, offering workshops on sustainable living and conservation practices would equip our community with the knowledge and skills to lead more eco-friendly lifestyles.\nLastly, partnering with local schools to integrate environmental education into their curriculum could instill a deep-rooted appreciation for environmental conservation in younger generations, fostering long-term sustainability.\nI believe these strategies could significantly impact our community's involvement in environmental efforts.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 53,
+      "num": 52,
+      "name": "#52 Environmental Efforts",
+      "nameWithoutNum": "Environmental Efforts",
+      "kind": "practice",
+      "examCount": 49,
+      "labels": [
+        {
+          "label": "#52",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Animal Welfare",
+    "promptText": "The local animal shelter is aiming to increase awareness and support for animal welfare within the community. You are an animal welfare advocate and volunteer at the shelter, and you would like to make suggestions to the shelter's management. Write an email to Mr. Johnson, the shelter director, proposing three suggestions for ways to raise awareness and support for animal welfare. You should write between 80 and 120 words. Your suggestions must focus on the following three themes:\n- Organizing community pet adoption fairs;\n- Creating educational programs on responsible pet ownership;\n- Developing partnerships with local businesses for fundraising events.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Johnson,\nI hope this finds you well. I'd like to propose a few strategies to elevate awareness and support for animal welfare in our community.\nFirstly, organizing community pet adoption fairs could significantly increase visibility for the animals in need and encourage adoptions.\nSecondly, creating educational programs on responsible pet ownership would help ensure that community members are well-informed about the needs and proper care of pets.\nLastly, developing partnerships with local businesses for fundraising events could provide essential funds for our shelter while also engaging the broader community in our cause.\nI believe these initiatives could greatly benefit our animal welfare efforts.\nBest regards,\nPeter Pan",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 54,
+      "num": 53,
+      "name": "#53 Animal Welfare",
+      "nameWithoutNum": "Animal Welfare",
+      "kind": "practice",
+      "examCount": 44,
+      "labels": [
+        {
+          "label": "#53",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Seeing a Movie",
+    "promptText": "Your friend invites you to see a movie, but you cannot go. Write an email to your friend. You should write between 80 and 120 words.\nYour email must focus on the following three themes:\n- Thanking him/her for inviting you;\n- Explain why you cannot go with him/her;\n- Proposing to see a movie some other day.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Lily,\nI hope this email finds you well. As your close friend, I would like to mention three points about missing the movie with you.\nFirstly, receiving your movie invitation would be beneficial because I really appreciate you thinking of me and I love watching films together.\nSecondly, attending an important evening class this Tuesday can stop me from going to the cinema with you. Lastly, arranging to watch the same movie this weekend could significantly work for me.\nThank you for considering my plan. I look forward to your response.\nBest regards,\nJennifer",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 55,
+      "num": 54,
+      "name": "#54 Seeing a Movie",
+      "nameWithoutNum": "Seeing a Movie",
+      "kind": "complete",
+      "examCount": 53,
+      "labels": [
+        {
+          "label": "#54",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Birthday Party",
+    "promptText": "As a parent, you write an email to other parents and invite their children to take part in your son Alex's birthday party. You should write between 80 and 120 words. Your email should include the following three themes:\n- When and where the party will be held;\n- What food will be served;\n- What activities will be arranged.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear fellow parents,\nI hope this email finds you well. As Alex’s parent, I’d like to share three key details about my son’s birthday party invitation:\nFirstly, holding the party at my home this Saturday afternoon would be beneficial because we have enough space for all kids to play safely.\nSecondly, serving snacks, fruit juice and small cakes can satisfy children’s tastes during the whole party. Lastly, preparing simple games could significantly bring fun to all the attending children.\nThank you for considering this invitation. I look forward to your response.\nBest regards,\nAmy",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 56,
+      "num": 55,
+      "name": "#55 Birthday Party",
+      "nameWithoutNum": "Birthday Party",
+      "kind": "complete",
+      "examCount": 285,
+      "labels": [
+        {
+          "label": "#55",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "New Neighbor",
+    "promptText": "Write an email to your neighbor who has just moved in and ask him/her to address some issues. You should write between 80 and 120 words.\nThe issues mentioned in the email should include the following three words:\n- Noise;\n- Parking;\n- Garbage.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear New Neighbor,\nI hope this email finds you well. As your neighbour living next door, I’d like to state three matters I hope we can sort out together:\nFirstly, keeping noise low after 10 p.m. would be beneficial because loud noises at night disturb everyone’s sleep.\nSecondly, parking your car in your own space can avoid blocking the shared walkway of our building.\nLastly, putting all rubbish in the public bin area could significantly keep our shared hallway clean.\nThank you for considering these suggestions. I look forward to your response.\nBest regards,\nAmy",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 57,
+      "num": 56,
+      "name": "#56 New Neighbor",
+      "nameWithoutNum": "New Neighbor",
+      "kind": "complete",
+      "examCount": 413,
+      "labels": [
+        {
+          "label": "#56",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Birthday Reservation",
+    "promptText": "You are writing to ask the restaurant manager if you can reserve a table in Oscar's kitchen for a friend to hold a birthday party for twenty people next Friday, because you can only book a table for six people online. You should write between 80 and 120 words. Your ideas must come from the following three themes:\n- You will tell the manager the situation and the exact time;\n- Birthday details and what you will do in the party;\n- Ask if there is a parking space in the building.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Restaurant Manager,\nI hope this email finds you well. As a customer hoping to hold a birthday party, I'd like to suggest three points for my booking request:\nFirstly, booking a table for twenty guests next Friday evening would be beneficial because the online system only allows reservations for up to six people.\nSecondly, preparing birthday desserts and small games can create a warm atmosphere to celebrate my friend’s birthday.\nLastly, offering available parking spaces in your building could significantly bring convenience to all our party guests.\nThank you for considering these suggestions. I look forward to your response.\nBest regards,\nAmy",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 58,
+      "num": 57,
+      "name": "#57 Birthday Reservation",
+      "nameWithoutNum": "Birthday Reservation",
+      "kind": "complete",
+      "examCount": 448,
+      "labels": [
+        {
+          "label": "#57",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Invitation for Movie",
+    "promptText": "Susan has invited you to watch a movie with her on Tuesday evening, but you can't go that time. Write a letter to explain why you can't go. You should write between 80 and 120 words. You should include:\n- Thank for her invitation;\n- Apologize for it;\n- Suggest another time to go.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Susan,\nI hope this email finds you well. As your good friend, I’d like to state three points about missing the movie on Tuesday evening:\nFirstly, receiving your movie invitation would be beneficial because I really appreciate you thinking of me.\nSecondly, missing the movie on Tuesday can make me feel sorry, since I have an important evening class that I cannot skip.\nLastly, arranging to watch the film this coming Sunday could significantly work for me as I will be fully free all day.\nThank you for considering my situation. I look forward to your response.\nBest regards,\nAmy",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 59,
+      "num": 58,
+      "name": "#58 Invitation for Movie",
+      "nameWithoutNum": "Invitation for Movie",
+      "kind": "complete",
+      "examCount": 389,
+      "labels": [
+        {
+          "label": "#58",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Company Energy",
+    "promptText": "Your company is trying to save energy, and you want to write an email to make some suggestions to the manager Mrs Smith about energy reduction. You should write between 80 and 120 words. Your ideas must come from the following three themes:\n- Turning off the lights;\n- Shutting down computers;\n- Heating and air-conditioning.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mrs Smith,\nI hope this email finds you well. As an employee of this company, I'd like to suggest three ways to cut down office energy consumption:\nFirstly, turning off unused lights would be beneficial because it can avoid unnecessary power waste during breaks and after work.\nSecondly, shutting down all office computers after work can reduce daily energy usage effectively.\nLastly, adjusting the settings of heating and air-conditioning could significantly lower the firm’s monthly electricity bills.\nThank you for considering these suggestions. I look forward to your response.\nBest regards,\nAmy",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 60,
+      "num": 59,
+      "name": "#59 Company Energy",
+      "nameWithoutNum": "Company Energy",
+      "kind": "complete",
+      "examCount": 327,
+      "labels": [
+        {
+          "label": "#59",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Two-week Leave",
+    "promptText": "You need to take a vacation for 2 weeks. Your manager Dani wants you to send her an email with all the details. You should write between 80 and 120 words. You should include:\n- Exact dates of the vacation;\n- Reasons for the leave;\n- Who will cover for you during that time and how can they reach you, if they have to.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Dani,\nI hope this email finds you well. As your staff, I would like to state three key details about my two-week vacation request.\nFirstly, taking leave from July 6th to July 19th would be beneficial because I need to travel to visit my family living in another city.\nSecondly, arranging Lisa to cover my daily work can keep all ongoing tasks running normally while I am away.\nLastly, leaving my mobile number for urgent matters could significantly help the team contact me when necessary.\nI look forward to your response.\nBest regards,\nJennifer",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 61,
+      "num": 60,
+      "name": "#60 Two-week Leave",
+      "nameWithoutNum": "Two-week Leave",
+      "kind": "complete",
+      "examCount": 25,
+      "labels": [
+        {
+          "label": "#60",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Company of Friend",
+    "promptText": "You are going to give a presentation at your friend Jim's company, but you are not familiar with the venue, so you are writing to ask about some basic information. You should write between 80 and 120 words. Your ideas must come from the following three themes:\n- Describe your situation, including the exact time;\n- Ask about the availability of technology equipment, such as computers and projectors;\n- Ask about the number of participants.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Jim,\nI hope this email finds you well. As a speaker giving a presentation in your company, I'd like to suggest three things I need to know for my speech: Firstly, holding my presentation at your office at 10a.m. next Wednesday would be beneficial because I am unfamiliar with your venue.\nSecondly, checking technical equipment like computers and projectors can help me prepare my presentation slides in advance.\nLastly, learning the total number of participants could significantly help me prepare enough printed materials for everyone.\nThank you for considering these suggestions. I look forward to your response.\nBest regards,\nAmy",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 62,
+      "num": 61,
+      "name": "#61 Company of Friend",
+      "nameWithoutNum": "Company of Friend",
+      "kind": "complete",
+      "examCount": 195,
+      "labels": [
+        {
+          "label": "#61",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Noise and Hot Water",
+    "promptText": "You are renting an apartment, but there are some problems with it. Your neighbors are noisy, and the hot water system hasn't been working properly. This isn't the first time you've had problems with the hot water system. Write an email to Marvin, the owner of the building, explaining the situation and asking him to resolve these issues. You should write between 80 and 120 words. You should include:\n- What problems you have encountered;\n- How you are affected;\n- How to fix the problems.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Marvin,\nI hope this email finds you well. As a renter of your apartment, I’d like to state three key points about the ongoing housing issues:\nFirstly, having noisy neighbours and a faulty hot water system explains my current trouble.\nSecondly, living with these issues can greatly disturb my daily life, as I cannot rest at night and have no warm water for washing every day.\nLastly, arranging staff to talk with noisy neighbours and fully repair the water heater could significantly resolve all my troubles.\nThank you for considering these suggestions. I look forward to your response.\nBest regards,\nAmy",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 63,
+      "num": 62,
+      "name": "#62 Noise and Hot Water",
+      "nameWithoutNum": "Noise and Hot Water",
+      "kind": "complete",
+      "examCount": 232,
+      "labels": [
+        {
+          "label": "#62",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Themes of Party",
+    "promptText": "You are a member of a sports club and you are writing to the club manager Mrs. Singh to make some suggestions on how to hold a party. You should write between 80 and 120 words. Your ideas must come from the following three themes:\n- Music;\n- Food;\n- Games.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mrs. Singh,\nI hope this email finds you well. As a member of this sports club, I’d like to suggest three ways to make our club party more enjoyable:\nFirstly, preparing sports-themed music would be beneficial because lively tunes can lift everyone’s mood and create a relaxed party atmosphere.\nSecondly, providing simple healthy snacks and soft drinks can satisfy all members after regular sports training. Lastly, organizing easy team sports games could significantly strengthen the bond between club members.\nThank you for considering these suggestions. I look forward to your response.\nBest regards,\nAmy",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 64,
+      "num": 63,
+      "name": "#63 Themes of Party",
+      "nameWithoutNum": "Themes of Party",
+      "kind": "complete",
+      "examCount": 323,
+      "labels": [
+        {
+          "label": "#63",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Moving Furniture",
+    "promptText": "Your friend Jim is moving furniture this weekend. He originally asked you to help and you're writing an email to explain why you can’t help. You should write between 80 and 120 words. You should include the following reasons:\n- work;\n- transportation;\n- family.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Jim,\nI hope this email finds you well. As your close friend, I’d like to explain three reasons why I cannot help you move furniture this weekend:\nFirstly, finishing urgent office work would take up my whole weekend because my boss assigned a big project.\nSecondly, using public transport can not support me to reach your place, as there are no direct buses to your new flat.\nLastly, taking care of my grandparents could significantly occupy my spare time.\nThank you for considering my situation. I look forward to your response.\nBest regards,\nAmy",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 65,
+      "num": 64,
+      "name": "#64 Moving Furniture",
+      "nameWithoutNum": "Moving Furniture",
+      "kind": "complete",
+      "examCount": 425,
+      "labels": [
+        {
+          "label": "#64",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Carpool",
+    "promptText": "You have noticed that one of your colleagues lives in the same building as you and you are planning to approach them to travel together to work to avoid parking fees. Try to cover the following details:\n- Welcoming the idea of carpooling;\n- Benefits of traveling together;\n- Logistics such as meeting time and location;\n- Any other relevant information to coordinate the carpool.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Jack,\nI hope this email finds you well. As your colleague in our company, I would like to suggest three ways to start daily carpool for our work commute.\nFirstly, carpooling together would be beneficial because we can completely avoid expensive daily parking fees in our company.\nSecondly, travelling to work together can save fuel costs and shorten our morning commute time.\nLastly, setting a regular meeting time and location could significantly make our daily trip more orderly and convenient.\nThank you for considering these suggestions. I look forward to your response.\nBest regards,\nAmy",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 73,
+      "num": 65,
+      "name": "#65 Carpool",
+      "nameWithoutNum": "Carpool",
+      "kind": "complete",
+      "examCount": 18,
+      "labels": [
+        {
+          "label": "#65",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Stairs Light",
+    "promptText": "You live on the second floor of an apartment building with no elevator. There is only one dim light at the entrance of the building, and there is no light by the stairs. Please write an email to Mr. Jackson describing the difficulties mentioned above. You should write between 80 and 120 words. Your email should cover the following three points:\n-Install more lights;\n-Install brighter lights;\n-Install motion-sensing lights.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. Jackson,\nI hope this email finds you well. As a resident living on the second floor without an elevator, I'd like to state three requests to improve the lighting condition of our building:\nFirstly, installing extra lights along the staircases would be beneficial because the stairs are completely dark and dangerous every night.\nSecondly, using brighter light bulbs can greatly improve visibility at the building's only entrance.\nLastly, setting up motion sensing lighting could significantly save electricity while offering instant light when residents walk by.\nThank you for considering these suggestions. I look forward to your response.\nBest regards,\nAmy",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 67,
+      "num": 66,
+      "name": "#66 Stairs Light",
+      "nameWithoutNum": "Stairs Light",
+      "kind": "complete",
+      "examCount": 326,
+      "labels": [
+        {
+          "label": "#66",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Lost Bag",
+    "promptText": "You and your friends went shopping and then had dinner at a restaurant yesterday. You think you left a bag at the restaurant. You tried to call them, but they did not answer your phone. Write an email to the restaurant manager. You should write between 80 and 120 words. Your ideas must come from the following three themes:\n- Describe your situation: who you were with, where you sat, etc.;\n- What the bag looks like and what was in the bag;\n- Ask them to contact you.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Manager,\nI hope this email finds you well. As a recent diner in your restaurant, I’d like to state three key points about my lost bag:\nFirstly, having dinner with three friends at your restaurant yesterday would be beneficial for you to locate my seat, because we sat by the window on the left side.\nSecondly, identifying my black canvas bag can help your staff check lost items quickly. It contains my student ID and a set of house keys.\nLastly, replying to my phone call could significantly speed up the whole process.\nThank you for considering these suggestions. I look forward to your response.\nBest regards,\nAmy",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 68,
+      "num": 67,
+      "name": "#67 Lost Bag",
+      "nameWithoutNum": "Lost Bag",
+      "kind": "complete",
+      "examCount": 307,
+      "labels": [
+        {
+          "label": "#67",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Recommendation Letter",
+    "promptText": "You need to write an email to your formal managers to request a recommendation letter for you. You should write between 80 and 120 words. In this letter, you would like your managers to include:\n● During your previous work, what roles you have taken and what contributions you have made;\n● What benefits of your previous roles have ben brought to the company.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Manager,\nI hope this email finds you well. As your former employee, I would like to ask for a reference letter to support my new job application.\nFirstly, listing my job roles and personal work contributions would be beneficial because hiring managers need to know my daily responsibilities and achievements clearly.\nSecondly, explaining the advantages my work brought to our company can show my practical value to potential employers.\nLastly, finishing this brief reference could significantly increase my chances of getting the new position.\nI look forward to your response.\nBest regards,\nJennifer",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 69,
+      "num": 68,
+      "name": "#68 Recommendation Letter",
+      "nameWithoutNum": "Recommendation Letter",
+      "kind": "complete",
+      "examCount": 0,
+      "labels": [
+        {
+          "label": "#68",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Letter of Recommendation",
+    "promptText": "Your name is Jennifer, and you were asked by your director to write a recommendation letter to your formal colleague who will be employed by another company. In your letter, please include the following details for your formal colleague:\n● Personality;\n● Abilities;\n● Contributions made.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Hiring Manager,\nI hope this email finds you well. As a team member working with this former colleague, I would like to suggest three aspects to recommend him for your company.\nFirstly, his friendly and patient personality would be beneficial because he gets along well with all teammates.\nSecondly, his strong professional and teamwork abilities can help him finish all working tasks efficiently.\nLastly, his great work contributions could significantly boost team work efficiency.\nThank you for considering my recommendation. I look forward to your response.\nBest regards,\nJennifer",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 70,
+      "num": 69,
+      "name": "#69 Letter of Recommendation",
+      "nameWithoutNum": "Letter of Recommendation",
+      "kind": "complete",
+      "examCount": 5,
+      "labels": [
+        {
+          "label": "#69",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Easter Event",
+    "promptText": "You are part of a community outreach team planning to promote an Easter event in your local area. Write an email to the head of your team, Alex, proposing ideas for the event. You should write between 80 and 120 words. Your reasons for your proposals must come from the following three themes:\n● Activities;\n● Social media;\n● local businesses.\nInclude all three themes and provide supporting ideas.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Alex,\nI hope this email finds you well. As a member of the community outreach team, I would like to suggest three ways to promote our local Easter event successfully.\nFirstly, preparing fun family-themed activities would be beneficial because egg hunts can attract more children and residents to join.\nSecondly, sharing event photos and short videos on social media can spread event information quickly to people living nearby. Lastly, cooperating with local businesses could significantly offer free small gifts and attract more visitors with joint promotions.\nThank you for considering these suggestions. I look forward to your response.\nBest regards,\nAmy",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 71,
+      "num": 70,
+      "name": "#70 Easter Event",
+      "nameWithoutNum": "Easter Event",
+      "kind": "complete",
+      "examCount": 11,
+      "labels": [
+        {
+          "label": "#70",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Air Conditioner",
+    "promptText": "Write an email to the building manager requesting the installation of an air conditioner in your apartment. In your email, you should:\n- Explain why you need the air conditioner;\n- Describe any issues you are currently facing;\n- Request the next steps for installation.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Building Manager,\nI hope this email finds you well. As a tenant living in this apartment building, I would like to suggest three ways to solve my living troubles by installing an air conditioner.\nFirstly, installing an air conditioner would be beneficial because the summer weather is extremely hot recently.\nSecondly, living without cooling equipment can affect my daily rest and make it hard for me to sleep well at night.\nLastly, telling me the clear next steps for installation could significantly help me make early preparations in advance.\nThank you for considering these suggestions. I look forward to your response.\nBest regards,\nAmy",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 72,
+      "num": 71,
+      "name": "#71 Air Conditioner",
+      "nameWithoutNum": "Air Conditioner",
+      "kind": "complete",
+      "examCount": 23,
+      "labels": [
+        {
+          "label": "#71",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Apartment Painting",
+    "promptText": "Write an email to your landlord requesting permission to paint your apartment, highlighting the benefits such as cost savings and improved appearance. How should you assure them of using high-quality materials and offer to restore the apartment to its original condition if needed?",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Landlord,\nI hope this email finds you well. As a renter of your apartment, I’d like to present three points about my request to repaint the flat.\nFirstly, repainting the walls myself would be beneficial because it can refresh the whole room’s look and save you future decoration costs.\nSecondly, using premium paint materials can guarantee a smooth and long-lasting finish without damaging the original wall surface.\nLastly, promising to restore all walls back to their original colour could significantly ease your worries about property changes.\nThank you for considering my request. I look forward to your response.\nBest regards,\nAmy",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 74,
+      "num": 72,
+      "name": "#72 Apartment Painting",
+      "nameWithoutNum": "Apartment Painting",
+      "kind": "complete",
+      "examCount": 8,
+      "labels": [
+        {
+          "label": "#72",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Online Reservation",
+    "promptText": "Write an email to the manager of a restaurant inquiring about the process for making online reservations. In your email, include:\n- Ask for information on how the online reservation system works;\n- Clarify if special requests (e.g., dietary preferences or seating arrangements) can be made online;\n- Inquire about confirmation details and how far reservations should be made in advance.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Restaurant Manager,\nI hope this email finds you well. As a potential customer, I’d like to ask three questions about your online reservation process.\nFirstly, explaining how your online booking system operates would be beneficial, as I am unfamiliar with the steps to reserve a table through your website.\nSecondly, allowing customers to submit special requests like dietary needs online can save extra phone calls after booking.\nLastly, telling me booking confirmation rules and the earliest advance time to reserve tables could significantly help me plan my meal properly.\nThank you for considering my inquiries. I look forward to your response.\nBest regards,\nAmy",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 75,
+      "num": 73,
+      "name": "#73 Online Reservation",
+      "nameWithoutNum": "Online Reservation",
+      "kind": "complete",
+      "examCount": 11,
+      "labels": [
+        {
+          "label": "#73",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Homeless Shelter",
+    "promptText": "You wish to enhance the resources available to the needy in your community and volunteer at a homeless shelter. Send an email with three recommendations for improving the community's support for the homeless to Mr. James, the director of the shelter. In your email, include:\n- Programs for job training and employment support;\n- Services for mental health counseling;\n- Programs for transitional housing with assistance from case managers.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Mr. James,\nI hope this email finds you well. As a volunteer hoping to help homeless people, I’d like to suggest three ways to improve support at your shelter:\nFirstly, launching job training and employment support programs would be beneficial because they help homeless people find stable work.\nSecondly, providing regular mental health counseling services can ease stress and fix emotional troubles.\nLastly, setting up transitional housing programs could significantly offer people a safe place to live.\nThank you for considering these suggestions. I look forward to your response.\nBest regards,\nAmy",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 76,
+      "num": 74,
+      "name": "#74 Homeless Shelter",
+      "nameWithoutNum": "Homeless Shelter",
+      "kind": "complete",
+      "examCount": 0,
+      "labels": [
+        {
+          "label": "#74",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Complaint",
+    "promptText": "Write an email to the restaurant manager complaining about the food and service you experienced during your recent visit. In your email, you should:\n- Explain what happened during your visit;\n- Describe the issues with the food and service;\n- Request appropriate action or compensation.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Restaurant Manager,\nI hope this email finds you well. As a recent customer of your restaurant, I’d like to state three points about my unpleasant dining experience:\nFirstly, having a terrible meal last Friday evening would be beneficial for you to know the whole process, as my friend and I waited over forty minutes for our dishes. Secondly, the cold tasteless food and rude service can ruin customers’ dining mood completely.\nLastly, offering proper compensation such as a discount voucher could significantly make up for this bad experience.\nThank you for considering these suggestions. I look forward to your response.\nBest regards,\nAmy",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 77,
+      "num": 75,
+      "name": "#75 Complaint",
+      "nameWithoutNum": "Complaint",
+      "kind": "complete",
+      "examCount": 19,
+      "labels": [
+        {
+          "label": "#75",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Urgent Repairs",
+    "promptText": "Write an email to your building landlord requesting urgent repairs in your apartment. In your email, you should:\n- Describe the issues that need to be repaired;\n- Explain the impact these issues are having on your living conditions;\n- Request a timeline for the repairs to be completed.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Landlord,\nI hope this email finds you well. As a renter in your apartment, I’d like to state three points about urgent repair requests:\nFirstly, fixing the broken window and leaking bathroom pipe would be beneficial because these two problems have existed for several days and cannot wait.\nSecondly, these damaged facilities can greatly affect my daily life, as wind blows inside easily and the floor always stays wet. Lastly, telling me a clear timeline to finish all repairs could significantly help me arrange my daily schedule in advance. Thank you for considering these suggestions. I look forward to your response.\nBest regards,\nAmy",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 78,
+      "num": 76,
+      "name": "#76 Urgent Repairs",
+      "nameWithoutNum": "Urgent Repairs",
+      "kind": "complete",
+      "examCount": 23,
+      "labels": [
+        {
+          "label": "#76",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Volunteer Project",
+    "promptText": "Write an email to your friend inviting them to participate in a volunteer project. In your email, you should:\n- Describe the volunteer project and its purpose;\n- Explain why you think they would be a great fit for the project;\n- Provide details on how they can get involved.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Dear Tom,\nI hope this email finds you well. As a volunteer coordinator at city charity centre, I'd like to suggest three reasons to invite you to join our animal shelter volunteer project:\nFirstly, taking part in the animal shelter volunteer project would be beneficial because it aims to look after stray cats and dogs, provide daily feeding and medical care.\nSecondly, joining this volunteer activity can make you an ideal candidate for the project, as you love small animals deeply.\nLastly, filling out the online volunteer form could significantly simplify your sign-up process.\nThank you for considering these suggestions. I look forward to your response.\nBest regards,\nLucas",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 79,
+      "num": 77,
+      "name": "#77 Volunteer Project",
+      "nameWithoutNum": "Volunteer Project",
+      "kind": "complete",
+      "examCount": 65,
+      "labels": [
+        {
+          "label": "#77",
+          "id": "num",
+          "color": "CCCCCC"
+        },
+        {
+          "label": "Explain",
+          "id": "explanation",
+          "color": "B261BE"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Recycling Bin",
+    "promptText": "Residents in the community often dispose of non-recyclable waste in the recycling bins, which causes the bins to become full and prevents them from being emptied regularly. Write a letter to the property manager explaining the situation and suggesting measures to solve the problem.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": null,
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 81,
+      "num": 79,
+      "name": "#79 Recycling Bin",
+      "nameWithoutNum": "Recycling Bin",
+      "kind": "complete",
+      "examCount": 4,
+      "labels": [
+        {
+          "label": "#79",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Wrong Package",
+    "promptText": "A package has already been shipped and is on its way, but it contains items that you did not order. You need to write a letter to negotiate the return or exchange of the items and discuss the issue of the costs involved.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": null,
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 82,
+      "num": 80,
+      "name": "#80 Wrong Package",
+      "nameWithoutNum": "Wrong Package",
+      "kind": "complete",
+      "examCount": 2,
+      "labels": [
+        {
+          "label": "#80",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  },
+  {
+    "pteTaskType": null,
+    "taskTypeKey": null,
+    "taskTypeSection": "WRITING",
+    "title": "Online Course",
+    "promptText": "Your company will reimburse employees for the cost of one online course. Write an email to your manager explaining which course you would like to take, why you are interested in it, and how it would benefit your work.",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": null,
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/writing/write_emails.json",
+      "cleanFile": "writing/write_emails.json",
+      "id": 83,
+      "num": 81,
+      "name": "#81 Online Course",
+      "nameWithoutNum": "Online Course",
+      "kind": "complete",
+      "examCount": 3,
+      "labels": [
+        {
+          "label": "#81",
+          "id": "num",
+          "color": "CCCCCC"
+        }
+      ]
+    },
+    "importWarnings": [
+      "UNSUPPORTED_TASK_TYPE"
+    ]
+  }
+]

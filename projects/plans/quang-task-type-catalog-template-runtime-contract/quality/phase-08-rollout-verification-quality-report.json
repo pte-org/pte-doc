@@ -1,0 +1,69 @@
+{
+  "mode": "gate",
+  "target": "phase-08-rollout-verification-and-adr",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-22T18:28:45+07:00",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/attempt/internal/service/CapabilityNegotiationService.java",
+    "pte-api/app/src/main/java/com/pte/attempt/internal/config/CapabilityProperties.java",
+    "pte-api/app/src/main/java/com/pte/assessment/internal/service/SnapshotPublishService.java",
+    "pte-api/app/src/main/java/com/pte/attempt/internal/service/SnapshotPinService.java",
+    "pte-api/app/src/main/java/com/pte/itembank/TaskRuntimeProfileRegistry.java",
+    "pte-api/app/src/main/resources/db/migration/V44__seed_standard_task_type_catalog.sql",
+    "pte-api/app/src/main/resources/db/migration/V45__task_runtime_profiles_and_template_pins.sql",
+    "pte-api/app/src/main/resources/db/migration/V46__allow_platform_audit_events.sql",
+    "pte-api/app/src/main/resources/db/migration/V47__snapshot_runtime_capability_contract.sql",
+    "pte-api/app/src/main/resources/db/migration/V48__attempt_score_template_version.sql",
+    "pte-web/packages/api-client/src/requests/questiontype/index.ts",
+    "pte-web/packages/api-client/src/types/questiontype/index.ts",
+    "pte-web/apps/vendor-web/features/questiontemplate/api.ts",
+    "pte-web/apps/vendor-web/features/scoretemplate/components/ScoreTemplateEditorView.tsx",
+    "pte-app/lib/core/constants/task_type_meta.dart",
+    "pte-app/lib/features/exam_attempt/domain/task_view.dart",
+    "pte-app/lib/features/exam_attempt/presentation/widgets/task_type_dispatcher.dart",
+    "pte-app/lib/features/exam_attempt/domain/client_capability_manifest.dart",
+    "pte-doc/projects/architecture/ADR-009-task-type-runtime-contract.md",
+    "pte-doc/projects/plans/quang-task-type-catalog-template-runtime-contract/fixtures/phase-08-runtime-contract-fixtures.json",
+    "pte-doc/projects/plans/quang-task-type-catalog-template-runtime-contract/compatibility-matrix.md",
+    "pte-doc/projects/plans/quang-task-type-catalog-template-runtime-contract/operator-runbook.md",
+    "pte-doc/projects/plans/quang-task-type-catalog-template-runtime-contract/phase-08-rollout-verification-and-adr.md"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 2
+  },
+  "findings": [
+    {
+      "id": "QUAL-009",
+      "severity": "NOTED",
+      "rule": "AUTHENTICATED_BROWSER_WALKTHROUGH",
+      "status": "OPEN",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/projects/plans/quang-task-type-catalog-template-runtime-contract/operator-runbook.md:Manual release walkthrough",
+      "evidence": "Public vendor login smoke passed, but no approved local credential was available for the positive catalog-to-activation-to-snapshot flow.",
+      "why_it_matters": "Role affordances and the end-to-end API/browser wiring still need one operator-run positive-path check.",
+      "required_action": "Run the documented authenticated walkthrough with approved local accounts before enabling strict enforcement or calling the release production-ready.",
+      "owner": "release operator"
+    },
+    {
+      "id": "QUAL-010",
+      "severity": "NOTED",
+      "rule": "ROLLOUT_METRICS_PROFILE",
+      "status": "OPEN",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-api/app/src/main/resources/application.yml:84",
+      "evidence": "The local profile exposes actuator health/info only; runtime audit paths are present, while metrics/Prometheus are not exposed in this profile.",
+      "why_it_matters": "Strict capability enforcement should be enabled only after deployment telemetry can show legacy-adapter use and unsupported-preflight failures.",
+      "required_action": "Verify the production observability profile and authenticated metrics/audit queries before flipping ATTEMPT_ALLOW_LEGACY_MISSING_MANIFEST=false.",
+      "owner": "release operator"
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/quang-task-type-catalog-template-runtime-contract/quality/phase-08-rollout-verification-quality-report.json"
+}

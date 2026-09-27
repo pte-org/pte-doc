@@ -1,0 +1,8 @@
+{
+  "name": "projects/2518511518052928179/screens/8dcee8fb4c6243e4b291296b43d25ba0",
+  "title": "T8 - Create / Edit Exam Session",
+  "deviceType": "DESKTOP",
+  "width": 2560,
+  "height": 4482,
+  "route": "tenant-web session create/edit flow"
+}

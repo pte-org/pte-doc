@@ -1,0 +1,92 @@
+{
+  "mode": "gate",
+  "target": "phase-01-core-networking-auth",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-07-27T00:00:00Z",
+  "reviewed_files": [
+    "lib/core/config/app_config.dart",
+    "lib/core/network/api_exceptions.dart",
+    "lib/core/network/api_client.dart",
+    "lib/core/network/token_refresher.dart",
+    "lib/core/network/interceptors/auth_header_interceptor.dart",
+    "lib/core/network/interceptors/token_refresh_interceptor.dart",
+    "lib/core/network/proactive_refresh_scheduler.dart",
+    "lib/core/storage/token_store.dart",
+    "lib/features/auth/domain/jwt_claims.dart",
+    "lib/features/auth/domain/repositories/auth_repository.dart",
+    "lib/features/auth/data/repositories/auth_repository_impl.dart",
+    "lib/features/auth/presentation/bloc/auth_event.dart",
+    "lib/features/auth/presentation/bloc/auth_state.dart",
+    "lib/features/auth/presentation/bloc/auth_bloc.dart",
+    "lib/features/auth/auth_module.dart"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 1,
+    "noted": 0
+  },
+  "findings": [
+    {
+      "id": "QUAL-101",
+      "severity": "HIGH",
+      "rule": "CORR_DEFINED_BRANCH_BEHAVIOR",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "lib/core/network/proactive_refresh_scheduler.dart:55-62",
+      "evidence": "ProactiveRefreshScheduler._fireRefresh() never rescheduled after a successful refresh, so proactive refresh fired exactly once per login.",
+      "why_it_matters": "Every subsequent refresh cycle silently fell back to the reactive 401 path, violating the phase's Design Constraint that proactive refresh be demonstrably time-triggered, not only 401-triggered.",
+      "required_action": "After a successful onRefreshDue(), call scheduleFromTokenStore() again to re-arm the next proactive cycle.",
+      "owner": "cook",
+      "resolution": "_fireRefresh() now calls scheduleFromTokenStore() again immediately after a successful onRefreshDue(); verified by a new two-consecutive-cycle test in proactive_refresh_scheduler_test.dart."
+    },
+    {
+      "id": "QUAL-102",
+      "severity": "HIGH",
+      "rule": "ERR_TIMEOUT_ON_EXTERNAL_CALL",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "lib/features/auth/auth_module.dart:19-24",
+      "evidence": "_newGatewayDio() built BaseOptions with only baseUrl — no connectTimeout/receiveTimeout/sendTimeout anywhere in lib/.",
+      "why_it_matters": "Every external call (login, logout, refresh, and future call sites through the same Dio instance) could hang indefinitely, stranding AuthBloc in AuthAuthenticating.",
+      "required_action": "Set connectTimeout/receiveTimeout/sendTimeout on the shared BaseOptions used by _newGatewayDio().",
+      "owner": "cook",
+      "resolution": "AppConfig now defines connectTimeout/receiveTimeout/sendTimeout (10s each); _newGatewayDio() wires them into BaseOptions, applied to both ApiClient's and TokenRefresher's Dio instances."
+    },
+    {
+      "id": "QUAL-103",
+      "severity": "HIGH",
+      "rule": "CORR_BOUNDARY_VALIDATION",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "lib/features/auth/presentation/bloc/auth_bloc.dart:28-39",
+      "evidence": "Login response body fields were force-cast (as String/as int) with no validation, and AuthBloc caught only `on ApiException`.",
+      "why_it_matters": "A malformed 2xx response threw a raw TypeError that the bloc's catch did not handle, permanently stranding it in AuthAuthenticating with no route to AuthError.",
+      "required_action": "Validate the response shape at the boundary, or broaden AuthBloc's catch to convert unexpected exceptions into AuthError.",
+      "owner": "cook",
+      "resolution": "AuthBloc._onLoginRequested now uses a broad catch (e) and emits AuthError(e is ApiException ? e : UnknownApiException(e.toString())), so any failure reaches a reachable AuthError state."
+    },
+    {
+      "id": "NOTED-1",
+      "severity": "LOW",
+      "rule": "CONST_CENTRALIZE_WHEN_MEANINGFUL",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "medium",
+      "location": "lib/features/auth/auth_module.dart, lib/features/auth/data/repositories/auth_repository_impl.dart",
+      "evidence": "Gateway route strings ('/api/iam/auth/login', '/logout', '/refresh') are hardcoded literals split across two files.",
+      "why_it_matters": "Later phases (2, 6, 7) add more call sites against this same gateway; route strings without a single source will drift as the surface grows.",
+      "required_action": "Consider a small route-constants holder before more features add their own scattered literals. Not blocking at this phase's size (3 single-use literals).",
+      "owner": "none"
+    }
+  ],
+  "report_path": "plans/ninh-student-exam-flow/quality/phase-01-core-networking-auth-quality-report.json"
+}

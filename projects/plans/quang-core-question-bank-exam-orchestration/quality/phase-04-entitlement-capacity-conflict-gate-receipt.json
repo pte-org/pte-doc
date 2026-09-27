@@ -1,0 +1,20 @@
+{
+  "target": "phase-04-entitlement-capacity-conflict-gate",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-core-question-bank-exam-orchestration/quality/phase-04-entitlement-capacity-conflict-gate-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/enrollment/EnrollmentModuleService.java",
+    "pte-api/app/src/main/java/com/pte/enrollment/internal/repository/ClassMembershipRepository.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/repository/EnrollmentRepository.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/repository/ExamSessionRepository.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/EnrollmentService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/ExamOrchestrationService.java",
+    "pte-api/app/src/test/java/com/pte/enrollment/EnrollmentModuleServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java"
+  ],
+  "source_fingerprint": "sha256:0bcceaa1e134ea042b2ea0412a2db60ba25927e7f26cc0a2c693568f7599f26e",
+  "reviewed_at": "2026-09-21T16:17:07+07:00",
+  "open_blocking_findings": 0
+}

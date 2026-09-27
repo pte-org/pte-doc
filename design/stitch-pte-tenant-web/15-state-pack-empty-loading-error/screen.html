@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>PTE Assessment Platform</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"tertiary-container":"#466ae3","on-primary-container":"#fbf9ff","on-primary":"#ffffff","surface-container-low":"#f0f3ff","inverse-primary":"#b6c4ff","on-background":"#111c2d","secondary-fixed-dim":"#b7c7e6","surface-dim":"#cfdaf2","surface-bright":"#f9f9ff","surface-variant":"#d8e3fa","tertiary-fixed-dim":"#b7c4ff","outline-variant":"#c4c5d6","on-tertiary":"#ffffff","outline":"#747686","tertiary-fixed":"#dce1ff","secondary":"#4f5f7a","surface-container-high":"#dee8ff","on-secondary-container":"#53637e","on-tertiary-fixed-variant":"#0039b4","primary":"#204ece","inverse-surface":"#263143","primary-fixed-dim":"#b6c4ff","surface-tint":"#2653d2","on-secondary-fixed-variant":"#374761","on-secondary-fixed":"#0a1c33","error":"#ba1a1a","on-tertiary-fixed":"#001551","primary-container":"#4169e8","secondary-container":"#d0e0ff","background":"#f9f9ff","tertiary":"#2850c9","on-primary-fixed-variant":"#003ab2","on-error-container":"#93000a","on-surface":"#111c2d","error-container":"#ffdad6","on-primary-fixed":"#001550","surface-container-highest":"#d8e3fa","surface":"#f9f9ff","inverse-on-surface":"#ebf1ff","on-surface-variant":"#434654","primary-fixed":"#dce1ff","on-error":"#ffffff","surface-container":"#e7eeff","secondary-fixed":"#d5e3ff","on-secondary":"#ffffff","surface-container-lowest":"#ffffff","on-tertiary-container":"#fcf9ff"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{"space-xs":"0.25rem","margin":"1.875rem","space-xl":"1.875rem","margin-mobile":"1rem","gutter-mobile":"1rem","space-md":"1rem","space-xxl":"3rem","space-sm":"0.5rem","space-lg":"1.5rem","gutter":"1.5rem"},fontFamily:{"display-h2":["Plus Jakarta Sans"],"body-base":["Plus Jakarta Sans"],"tabular-data":["Plus Jakarta Sans"],"body-secondary":["Plus Jakarta Sans"],"card-title-h5":["Plus Jakarta Sans"],"display-h1":["Plus Jakarta Sans"],"subtitle-h6":["Plus Jakarta Sans"],"button-label":["Plus Jakarta Sans"],"caption-small":["Plus Jakarta Sans"],"page-title-h4":["Plus Jakarta Sans"],"display-h3":["Plus Jakarta Sans"],"display-h1-mobile":["Plus Jakarta Sans"]},fontSize:{"display-h2":["30px",{lineHeight:"36px",letterSpacing:"-0.015em",fontWeight:"600"}],"body-base":["14px",{lineHeight:"21px",letterSpacing:"0",fontWeight:"400"}],"tabular-data":["14px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"500"}],"body-secondary":["14px",{lineHeight:"21px",letterSpacing:"0",fontWeight:"400"}],"card-title-h5":["18px",{lineHeight:"26px",letterSpacing:"0",fontWeight:"600"}],"display-h1":["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"600"}],"subtitle-h6":["16px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"600"}],"button-label":["14px",{lineHeight:"20px",letterSpacing:"0",fontWeight:"400"}],"caption-small":["12px",{lineHeight:"16px",letterSpacing:"0",fontWeight:"400"}],"page-title-h4":["21px",{lineHeight:"26px",letterSpacing:"-0.005em",fontWeight:"600"}],"display-h3":["24px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"display-h1-mobile":["28px",{lineHeight:"34px",letterSpacing:"-0.015em",fontWeight:"600"}]}}}};</script></head><body class="bg-[#F2F6FA] font-body-base text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-[270px] bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20)]"><div class="flex flex-col flex-1 overflow-y-auto px-4"><div class="h-[60px] flex items-center gap-3 px-2 mt-2"><div class="w-9 h-9 rounded-xl bg-primary-container flex items-center justify-center text-on-primary font-subtitle-h6 text-subtitle-h6 shadow-sm">P</div><div class="flex flex-col"><span class="font-subtitle-h6 text-subtitle-h6 text-on-surface leading-tight tracking-tight">PTE Institute</span><span class="font-caption-small text-caption-small text-secondary">Assessment Tenant</span></div></div><nav class="flex flex-col mt-2" data-active-classes="bg-primary-container text-on-primary font-medium rounded-xl shadow-[0px_4px_10px_rgba(65,105,232,0.25)]"><div class="mt-3 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Home</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Dashboard</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Learners</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="learners" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Learners</span></a><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="programmes" href="#"><span class="material-symbols-outlined text-[20px]">school</span><span>Programmes</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Delivery</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="exam-sessions" href="#"><span class="material-symbols-outlined text-[20px]">event_available</span><span>Exam sessions</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Assessment</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="scoring-review" href="#"><span class="material-symbols-outlined text-[20px]">fact_check</span><span>Scoring review</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Data</div><a aria-current="page" class="h-[45px] px-3 flex items-center gap-3 bg-primary-container text-on-primary font-medium rounded-xl shadow-[0px_4px_10px_rgba(65,105,232,0.25)]" data-path="audit-log" href="#"><span class="material-symbols-outlined text-[20px] text-on-primary">history_edu</span><span>Audit log</span></a><div class="mt-6 mb-1 px-3 font-caption-small text-caption-small font-semibold tracking-wider text-outline uppercase">Settings</div><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="staff-and-roles" href="#"><span class="material-symbols-outlined text-[20px]">badge</span><span>Staff &amp; roles</span></a><a class="h-[45px] px-3 flex items-center gap-3 rounded-xl font-body-base text-body-base text-secondary hover:bg-secondary-container hover:text-primary transition-all duration-150" data-path="platform-settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Settings</span></a></nav></div><div class="p-4 flex flex-col gap-3"><div class="bg-surface-container-low p-3.5 rounded-xl shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20)]"><div class="flex items-center justify-between mb-1.5"><span class="font-caption-small text-caption-small font-semibold text-on-surface">Licence Usage</span><span class="font-tabular-data text-tabular-data text-secondary">97%</span></div><div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden mb-2"><div class="bg-primary-container h-full rounded-full" style="width: 97.2%"></div></div><div class="flex items-center justify-between"><span class="font-caption-small text-caption-small text-secondary">486 / 500 learner seats</span><a class="font-caption-small text-caption-small text-primary font-semibold hover:underline" href="#">Request more seats</a></div></div><div class="flex items-center gap-3 px-2 py-2 rounded-xl bg-surface-container-lowest"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col min-w-0 flex-1"><span class="font-body-base text-body-base font-semibold text-on-surface truncate">Nguyễn Quản Trị</span><span class="font-caption-small text-caption-small text-secondary truncate">Host Admin</span></div><button class="text-secondary hover:text-on-surface"><span class="material-symbols-outlined text-[18px]">logout</span></button></div></div></aside><div class="pl-[270px]"><header class="fixed top-0 left-[270px] right-0 h-[70px] bg-surface-container-lowest shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-4"><button class="w-9 h-9 flex items-center justify-center rounded-xl text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">menu</span></button><div class="flex items-center gap-2 text-secondary font-body-base text-body-base"><span class="hover:text-on-surface cursor-pointer">Host</span><span>/</span><span class="text-on-surface font-medium">Assessment Ops</span></div></div><div class="flex items-center gap-3"><button class="w-10 h-10 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">search</span></button><button class="relative w-10 h-10 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span></button><div class="h-6 w-px bg-surface-variant mx-1"></div><div class="flex items-center gap-3 pl-1"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-body-base text-body-base font-semibold text-on-surface leading-snug">Nguyễn Quản Trị</span><span class="font-caption-small text-caption-small text-secondary">Host Admin</span></div></div></div></header><main class="relative pt-[70px] min-h-screen bg-[#F2F6FA]"><div class="max-w-[1200px] mx-auto p-space-lg"><div class="flex flex-col w-full space-y-8">
+<!-- Page Header & Metadata -->
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+<div class="flex flex-col space-y-1.5">
+<div class="flex items-center gap-2 text-secondary font-body-base text-body-base">
+<span>Host</span>
+<span>/</span>
+<span>System &amp; UI</span>
+<span>/</span>
+<span class="text-on-surface font-medium">Trạng thái hệ thống (State Pack)</span>
+</div>
+<div class="flex flex-wrap items-center gap-3 pt-1">
+<h1 class="font-display-h1 text-display-h1 text-on-surface tracking-tight">
+          State pack — Giao diện trạng thái
+        </h1>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-[7px] bg-secondary-container text-primary font-caption-small text-caption-small font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+          Design System Spec · Modernize v4.2
+        </span>
+</div>
+<p class="font-body-base text-body-base text-secondary max-w-3xl">
+        Bộ quy chuẩn giao diện và phản hồi hệ thống khi không có dữ liệu (Empty state), trong lúc tải dữ liệu (Skeleton loading), phát sinh lỗi phân quyền/mạng (Error state) và cảnh báo quota.
+      </p>
+</div>
+<!-- Action Toolbar -->
+<div class="flex items-center gap-3 shrink-0">
+<button class="h-[38px] px-[18px] rounded-[7px] bg-[#ECF2FF] text-[#3359D2] hover:bg-[#DCE8FF] font-button-label text-button-label transition-all duration-150 flex items-center gap-2" onclick="downloadAssetsToast()">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Tải gói assets minh họa</span>
+</button>
+<button class="h-[38px] px-[18px] rounded-[7px] bg-primary-container text-on-primary hover:bg-[#3359D2] font-button-label text-button-label shadow-[0px_4px_10px_rgba(65,105,232,0.25)] transition-all duration-150 flex items-center gap-2" onclick="applyAllStatesToast()">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Áp dụng toàn hệ thống</span>
+</button>
+</div>
+</div>
+<!-- Interactive State Pack Navigation Tabs -->
+<div class="flex items-center gap-2 overflow-x-auto pb-1 border-none scrollbar-none">
+<button class="tab-btn active-tab h-[38px] px-4 rounded-[7px] bg-primary-container text-on-primary font-body-base text-body-base font-medium shadow-[0px_2px_6px_rgba(65,105,232,0.2)] transition-all shrink-0 flex items-center gap-2" onclick="filterState('all', this)">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+<span>Tất cả trạng thái (Overview Matrix)</span>
+</button>
+<button class="tab-btn h-[38px] px-4 rounded-[7px] bg-surface-container-lowest text-secondary hover:text-on-surface hover:bg-[#F6F9FC] font-body-base text-body-base transition-all shrink-0 flex items-center gap-2" onclick="filterState('empty', this)">
+<span class="material-symbols-outlined text-[18px]">folder_off</span>
+<span>Empty States (0 dữ liệu)</span>
+</button>
+<button class="tab-btn h-[38px] px-4 rounded-[7px] bg-surface-container-lowest text-secondary hover:text-on-surface hover:bg-[#F6F9FC] font-body-base text-body-base transition-all shrink-0 flex items-center gap-2" onclick="filterState('loading', this)">
+<span class="material-symbols-outlined text-[18px]">hourglass_top</span>
+<span>Loading &amp; Skeleton</span>
+</button>
+<button class="tab-btn h-[38px] px-4 rounded-[7px] bg-surface-container-lowest text-secondary hover:text-on-surface hover:bg-[#F6F9FC] font-body-base text-body-base transition-all shrink-0 flex items-center gap-2" onclick="filterState('error', this)">
+<span class="material-symbols-outlined text-[18px]">gpp_maybe</span>
+<span>Error, 403 &amp; Offline</span>
+</button>
+<button class="tab-btn h-[38px] px-4 rounded-[7px] bg-surface-container-lowest text-secondary hover:text-on-surface hover:bg-[#F6F9FC] font-body-base text-body-base transition-all shrink-0 flex items-center gap-2" onclick="filterState('quota', this)">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+<span>Seat Quota &amp; Warnings</span>
+</button>
+</div>
+<!-- Notification Banner Toast Hook -->
+<div class="hidden fixed bottom-6 right-6 z-50 px-4 py-3 rounded-[7px] bg-inverse-surface text-inverse-on-surface shadow-[0px_16px_32px_-4px_rgba(145,158,171,0.25)] flex items-center gap-3" id="statusToast">
+<span class="material-symbols-outlined text-[20px] text-[#4169E8]">check_circle</span>
+<span class="font-body-base text-body-base" id="toastMessage">Hệ thống đã lưu trạng thái thiết lập</span>
+</div>
+<!-- SECTION 1: EMPTY STATES -->
+<section class="state-group flex flex-col space-y-4" id="section-empty">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-[7px] bg-[#ECF2FF] flex items-center justify-center text-[#3359D2]">
+<span class="material-symbols-outlined text-[19px]">inbox</span>
+</div>
+<div>
+<h2 class="font-card-title-h5 text-card-title-h5 text-on-surface">Khu vực 1: Empty States (Trạng thái rỗng không có dữ liệu)</h2>
+<p class="font-caption-small text-caption-small text-secondary">Thiết kế điểm chạm khi phòng thi, ca thi hoặc kết quả truy vấn chưa phát sinh dữ liệu trong cơ sở dữ liệu tenant.</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-[7px] bg-[#E8F7FF] text-[#0E729F] font-caption-small text-caption-small font-semibold">2 Biến thể</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Card A: No Exam Sessions -->
+<div class="bg-surface-container-lowest p-6 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col items-center text-center relative overflow-hidden group">
+<div class="w-full flex items-center justify-between mb-4">
+<span class="font-caption-small text-caption-small font-semibold uppercase tracking-wider text-outline">Preset ES-01</span>
+<span class="px-2 py-0.5 rounded-[7px] bg-[#E6FFFA] text-[#088068] font-caption-small text-caption-small font-semibold">Ready to Use</span>
+</div>
+<!-- Custom SVG Vector Illustration -->
+<div class="relative w-40 h-40 my-2 flex items-center justify-center">
+<div class="absolute inset-0 bg-[#ECF2FF] rounded-full opacity-60 transform group-hover:scale-105 transition-transform duration-300"></div>
+<svg class="w-28 h-28 relative z-10 text-[#4169E8]" fill="none" viewbox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#FFFFFF" height="68" rx="8" stroke="currentColor" stroke-dasharray="0 0" stroke-width="2.5" width="72" x="24" y="28"></rect>
+<rect fill="#D0E0FF" height="20" rx="8" width="72" x="24" y="28"></rect>
+<circle cx="42" cy="20" fill="currentColor" r="3"></circle>
+<circle cx="78" cy="20" fill="currentColor" r="3"></circle>
+<path d="M42" stroke="currentColor" stroke-linecap="round" stroke-width="3" y="16"></path>
+<circle cx="60" cy="62" fill="#F0F3FF" r="18" stroke="currentColor" stroke-width="2"></circle>
+<path d="M60 52V62L66 66" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<circle cx="82" cy="84" fill="#ECF2FF" r="12" stroke="#4169E8" stroke-width="2"></circle>
+<path d="M82 79V89M77 84H87" stroke="#4169E8" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="font-subtitle-h6 text-subtitle-h6 text-on-surface mt-2 mb-1.5">Chưa có ca thi nào được tạo</h3>
+<p class="font-body-base text-body-base text-secondary max-w-sm mb-6">
+          Tổ chức thi chưa lên lịch ca thi nào cho đợt tuyển sinh này. Hãy thiết lập ca thi mới để phân bổ máy trạm và gán thí sinh.
+        </p>
+<div class="flex flex-col sm:flex-row items-center gap-3 w-full justify-center mt-auto">
+<button class="w-full sm:w-auto h-[38px] px-[18px] rounded-[7px] bg-primary-container text-on-primary hover:bg-[#3359D2] font-button-label text-button-label shadow-[0px_4px_10px_rgba(65,105,232,0.25)] transition-all flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>+ Tạo ca thi đầu tiên</span>
+</button>
+<a class="font-button-label text-button-label text-primary hover:underline flex items-center gap-1 py-2" href="#">
+<span>Xem hướng dẫn cấu hình phòng lab</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card B: No Search/Filter Results -->
+<div class="bg-surface-container-lowest p-6 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col items-center text-center relative overflow-hidden group">
+<div class="w-full flex items-center justify-between mb-4">
+<span class="font-caption-small text-caption-small font-semibold uppercase tracking-wider text-outline">Preset ES-02</span>
+<span class="px-2 py-0.5 rounded-[7px] bg-[#FEF5E5] text-[#9C6400] font-caption-small text-caption-small font-semibold">Query State</span>
+</div>
+<!-- Custom SVG Search Illustration -->
+<div class="relative w-40 h-40 my-2 flex items-center justify-center">
+<div class="absolute inset-0 bg-[#F0F3FF] rounded-full opacity-80 transform group-hover:scale-105 transition-transform duration-300"></div>
+<svg class="w-28 h-28 relative z-10 text-secondary" fill="none" viewbox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+<circle cx="54" cy="54" fill="#FFFFFF" r="28" stroke="#7C8FAC" stroke-dasharray="4 4" stroke-width="2.5"></circle>
+<path d="M74 74L94 94" stroke="#4169E8" stroke-linecap="round" stroke-width="3.5"></path>
+<line stroke="#7C8FAC" stroke-linecap="round" stroke-width="2" x1="42" x2="66" y1="50" y2="50"></line>
+<line stroke="#7C8FAC" stroke-linecap="round" stroke-width="2" x1="46" x2="62" y1="58" y2="58"></line>
+<circle cx="82" cy="40" fill="#D0E0FF" r="4"></circle>
+<circle cx="30" cy="76" fill="#D0E0FF" r="3"></circle>
+</svg>
+</div>
+<h3 class="font-subtitle-h6 text-subtitle-h6 text-on-surface mt-2 mb-1.5">Không tìm thấy dữ liệu phù hợp</h3>
+<p class="font-body-base text-body-base text-secondary max-w-sm mb-6">
+          Không có thí sinh hoặc cán bộ nào khớp với từ khóa <span class="text-on-surface font-semibold">“Nguyễn Văn Z”</span> và bộ lọc đã chọn trong đợt thi hiện tại.
+        </p>
+<div class="flex flex-col sm:flex-row items-center gap-3 w-full justify-center mt-auto">
+<button class="w-full sm:w-auto h-[38px] px-[18px] rounded-[7px] bg-[#ECF2FF] text-[#3359D2] hover:bg-[#DCE8FF] font-button-label text-button-label transition-all flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">filter_alt_off</span>
+<span>Đặt lại bộ lọc (Clear filters)</span>
+</button>
+<button class="w-full sm:w-auto h-[38px] px-[18px] rounded-[7px] bg-transparent text-secondary hover:bg-[#F2F6FA] font-button-label text-button-label transition-all">
+            Xem tất cả danh sách
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: LOADING & SKELETON STATES -->
+<section class="state-group flex flex-col space-y-4" id="section-loading">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-[7px] bg-[#ECF2FF] flex items-center justify-center text-[#3359D2]">
+<span class="material-symbols-outlined text-[19px]">hourglass_empty</span>
+</div>
+<div>
+<h2 class="font-card-title-h5 text-card-title-h5 text-on-surface">Khu vực 2: Loading &amp; Skeleton States (Trạng thái nạp dữ liệu mượt mà)</h2>
+<p class="font-caption-small text-caption-small text-secondary">Tối ưu Cumulative Layout Shift (CLS &lt; 0.05) với cấu trúc Shimmer Pulse mô phỏng trực tiếp DOM chuẩn.</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-caption-small font-caption-small text-secondary hidden sm:inline">Animation Speed: 1.5s Shimmer</span>
+<span class="px-2.5 py-1 rounded-[7px] bg-[#E8F7FF] text-[#0E729F] font-caption-small text-caption-small font-semibold">CLS Safeguarded</span>
+</div>
+</div>
+<!-- Khối B: Metric Stat Cards Skeleton -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Stat Skeleton 1 -->
+<div class="bg-surface-container-lowest p-5 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col justify-between">
+<div class="flex items-center justify-between mb-4">
+<div class="h-4 w-32 bg-[#EEF2F6] rounded-[7px] animate-pulse"></div>
+<div class="w-9 h-9 rounded-[7px] bg-[#EEF2F6] animate-pulse"></div>
+</div>
+<div class="flex items-baseline gap-3 mb-2">
+<div class="h-8 w-24 bg-[#EEF2F6] rounded-[7px] animate-pulse"></div>
+<div class="h-4 w-12 bg-[#EEF2F6] rounded-[7px] animate-pulse"></div>
+</div>
+<div class="h-3 w-48 bg-[#F8FAFC] rounded-[7px] animate-pulse"></div>
+</div>
+<!-- Stat Skeleton 2 -->
+<div class="bg-surface-container-lowest p-5 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col justify-between">
+<div class="flex items-center justify-between mb-4">
+<div class="h-4 w-28 bg-[#EEF2F6] rounded-[7px] animate-pulse"></div>
+<div class="w-9 h-9 rounded-[7px] bg-[#EEF2F6] animate-pulse"></div>
+</div>
+<div class="flex items-baseline gap-3 mb-2">
+<div class="h-8 w-20 bg-[#EEF2F6] rounded-[7px] animate-pulse"></div>
+<div class="h-4 w-14 bg-[#EEF2F6] rounded-[7px] animate-pulse"></div>
+</div>
+<div class="h-3 w-40 bg-[#F8FAFC] rounded-[7px] animate-pulse"></div>
+</div>
+<!-- Stat Skeleton 3 -->
+<div class="bg-surface-container-lowest p-5 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col justify-between">
+<div class="flex items-center justify-between mb-4">
+<div class="h-4 w-36 bg-[#EEF2F6] rounded-[7px] animate-pulse"></div>
+<div class="w-9 h-9 rounded-[7px] bg-[#EEF2F6] animate-pulse"></div>
+</div>
+<div class="flex items-baseline gap-3 mb-2">
+<div class="h-8 w-28 bg-[#EEF2F6] rounded-[7px] animate-pulse"></div>
+<div class="h-4 w-10 bg-[#EEF2F6] rounded-[7px] animate-pulse"></div>
+</div>
+<div class="h-3 w-44 bg-[#F8FAFC] rounded-[7px] animate-pulse"></div>
+</div>
+</div>
+<!-- Khối A: Table Skeleton Loading -->
+<div class="bg-surface-container-lowest p-6 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col">
+<!-- Mock Filter Toolbar -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-[#DFE5EF]">
+<div class="flex items-center gap-3">
+<div class="h-[38px] w-64 bg-[#EEF2F6] rounded-[7px] animate-pulse flex items-center px-3">
+<span class="material-symbols-outlined text-[18px] text-outline-variant">search</span>
+</div>
+<div class="h-[38px] w-28 bg-[#F8FAFC] rounded-[7px] animate-pulse hidden md:block"></div>
+<div class="h-[38px] w-24 bg-[#F8FAFC] rounded-[7px] animate-pulse hidden md:block"></div>
+</div>
+<div class="flex items-center gap-2">
+<div class="h-[38px] w-32 bg-[#EEF2F6] rounded-[7px] animate-pulse"></div>
+<div class="h-[38px] w-10 bg-[#EEF2F6] rounded-[7px] animate-pulse"></div>
+</div>
+</div>
+<!-- Table Rows (4 Shimmer Rows) -->
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="h-10 text-caption-small font-caption-small text-secondary border-b border-[#DFE5EF]">
+<th class="py-2 px-3">THÍ SINH &amp; MÃ ĐỊNH DANH</th>
+<th class="py-2 px-3">PHÒNG THI / LAB</th>
+<th class="py-2 px-3">VAI TRÒ / TƯ CÁCH</th>
+<th class="py-2 px-3">TRẠNG THÁI</th>
+<th class="py-2 px-3 text-right">ĐIỂM TỔNG HỢP</th>
+<th class="py-2 px-3 text-right">THAO TÁC</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#F2F6FA]">
+<!-- Row 1 -->
+<tr class="h-16">
+<td class="py-3 px-3">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-[#EEF2F6] animate-pulse shrink-0"></div>
+<div class="space-y-1.5">
+<div class="h-4 w-32 bg-[#EEF2F6] rounded-[7px] animate-pulse"></div>
+<div class="h-3 w-20 bg-[#F8FAFC] rounded-[7px] animate-pulse"></div>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<div class="h-4 w-24 bg-[#EEF2F6] rounded-[7px] animate-pulse"></div>
+</td>
+<td class="py-3 px-3">
+<div class="h-6 w-20 bg-[#EEF2F6] rounded-full animate-pulse"></div>
+</td>
+<td class="py-3 px-3">
+<div class="h-6 w-24 bg-[#EEF2F6] rounded-full animate-pulse"></div>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="h-4 w-12 bg-[#EEF2F6] rounded-[7px] animate-pulse ml-auto"></div>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="h-7 w-16 bg-[#EEF2F6] rounded-[7px] animate-pulse ml-auto"></div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="h-16">
+<td class="py-3 px-3">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-[#EEF2F6] animate-pulse shrink-0"></div>
+<div class="space-y-1.5">
+<div class="h-4 w-40 bg-[#EEF2F6] rounded-[7px] animate-pulse"></div>
+<div class="h-3 w-24 bg-[#F8FAFC] rounded-[7px] animate-pulse"></div>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<div class="h-4 w-20 bg-[#EEF2F6] rounded-[7px] animate-pulse"></div>
+</td>
+<td class="py-3 px-3">
+<div class="h-6 w-20 bg-[#EEF2F6] rounded-full animate-pulse"></div>
+</td>
+<td class="py-3 px-3">
+<div class="h-6 w-28 bg-[#EEF2F6] rounded-full animate-pulse"></div>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="h-4 w-12 bg-[#EEF2F6] rounded-[7px] animate-pulse ml-auto"></div>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="h-7 w-16 bg-[#EEF2F6] rounded-[7px] animate-pulse ml-auto"></div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="h-16">
+<td class="py-3 px-3">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-[#EEF2F6] animate-pulse shrink-0"></div>
+<div class="space-y-1.5">
+<div class="h-4 w-28 bg-[#EEF2F6] rounded-[7px] animate-pulse"></div>
+<div class="h-3 w-16 bg-[#F8FAFC] rounded-[7px] animate-pulse"></div>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<div class="h-4 w-28 bg-[#EEF2F6] rounded-[7px] animate-pulse"></div>
+</td>
+<td class="py-3 px-3">
+<div class="h-6 w-20 bg-[#EEF2F6] rounded-full animate-pulse"></div>
+</td>
+<td class="py-3 px-3">
+<div class="h-6 w-20 bg-[#EEF2F6] rounded-full animate-pulse"></div>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="h-4 w-12 bg-[#EEF2F6] rounded-[7px] animate-pulse ml-auto"></div>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="h-7 w-16 bg-[#EEF2F6] rounded-[7px] animate-pulse ml-auto"></div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="h-16">
+<td class="py-3 px-3">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-[#EEF2F6] animate-pulse shrink-0"></div>
+<div class="space-y-1.5">
+<div class="h-4 w-36 bg-[#EEF2F6] rounded-[7px] animate-pulse"></div>
+<div class="h-3 w-20 bg-[#F8FAFC] rounded-[7px] animate-pulse"></div>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<div class="h-4 w-24 bg-[#EEF2F6] rounded-[7px] animate-pulse"></div>
+</td>
+<td class="py-3 px-3">
+<div class="h-6 w-20 bg-[#EEF2F6] rounded-full animate-pulse"></div>
+</td>
+<td class="py-3 px-3">
+<div class="h-6 w-24 bg-[#EEF2F6] rounded-full animate-pulse"></div>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="h-4 w-12 bg-[#EEF2F6] rounded-[7px] animate-pulse ml-auto"></div>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="h-7 w-16 bg-[#EEF2F6] rounded-[7px] animate-pulse ml-auto"></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Shimmer Note Footer -->
+<div class="mt-4 pt-4 border-t border-[#F2F6FA] flex items-center justify-between text-caption-small font-caption-small text-secondary">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>Sử dụng CSS skeleton pulse với màu nền #EEF2F6 và #F8FAFC thay vì spinner quay tròn toàn trang để tránh layout shift (CLS &lt; 0.05).</span>
+</div>
+<span class="font-mono text-outline">HTTP/2 Chunked Stream</span>
+</div>
+</div>
+</section>
+<!-- SECTION 3: ERROR & EXCEPTION STATES -->
+<section class="state-group flex flex-col space-y-4" id="section-error">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-[7px] bg-[#FDEDE8] flex items-center justify-center text-[#BE452B]">
+<span class="material-symbols-outlined text-[19px]">report</span>
+</div>
+<div>
+<h2 class="font-card-title-h5 text-card-title-h5 text-on-surface">Khu vực 3: Error &amp; Exception States (Trạng thái lỗi &amp; ngoại lệ)</h2>
+<p class="font-caption-small text-caption-small text-secondary">Xử lý phân quyền RBAC hạn chế, gián đoạn Gateway Pearson VUE API và mạng máy trạm phòng lab offline.</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-[7px] bg-[#FDEDE8] text-[#BE452B] font-caption-small text-caption-small font-semibold">3 Nguy cơ trọng yếu</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card A: 403 Forbidden -->
+<div class="bg-surface-container-lowest p-6 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 rounded-[7px] bg-[#FDEDE8] flex items-center justify-center text-[#BE452B]">
+<span class="material-symbols-outlined text-[26px]">gpp_bad</span>
+</div>
+<span class="px-2.5 py-1 rounded-[7px] bg-[#FDEDE8] text-[#BE452B] font-caption-small text-caption-small font-semibold">HTTP 403</span>
+</div>
+<h3 class="font-subtitle-h6 text-subtitle-h6 text-on-surface mb-2">Quyền truy cập bị từ chối (403 Forbidden)</h3>
+<p class="font-body-base text-body-base text-secondary mb-4">
+            Tài khoản của bạn (Vai trò: <span class="font-semibold text-on-surface">LECTURER</span>) không có thẩm quyền truy cập phân hệ Cài đặt hệ thống &amp; Cấu hình Pearson VUE Engine.
+          </p>
+<div class="bg-[#F9F9FF] p-3.5 rounded-[7px] mb-5 border-none">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">contact_support</span>
+<p class="font-caption-small text-caption-small text-secondary">
+                Nếu bạn cần cấp quyền, hãy liên hệ Host Super Admin:<br/>
+<a class="text-primary font-semibold hover:underline" href="mailto:admin@pteinstitute.edu.vn">admin@pteinstitute.edu.vn</a>
+</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2 pt-2">
+<button class="h-[38px] w-full rounded-[7px] bg-primary-container text-on-primary hover:bg-[#3359D2] font-button-label text-button-label transition-all">
+            Quay về Tổng quan (Dashboard)
+          </button>
+<button class="h-[38px] w-full rounded-[7px] bg-[#ECF2FF] text-[#3359D2] hover:bg-[#DCE8FF] font-button-label text-button-label transition-all">
+            Yêu cầu nâng quyền
+          </button>
+</div>
+</div>
+<!-- Card B: 500 Server / API Pearson Disconnected -->
+<div class="bg-surface-container-lowest p-6 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 rounded-[7px] bg-[#FEF5E5] flex items-center justify-center text-[#FA896B]">
+<span class="material-symbols-outlined text-[26px]">cloud_off</span>
+</div>
+<span class="px-2.5 py-1 rounded-[7px] bg-[#FEF5E5] text-[#FA896B] font-caption-small text-caption-small font-semibold">Gateway 504</span>
+</div>
+<h3 class="font-subtitle-h6 text-subtitle-h6 text-on-surface mb-2">Không thể đồng bộ với Pearson VUE Engine</h3>
+<p class="font-body-base text-body-base text-secondary mb-4">
+            Hệ thống AI Scoring Engine phản hồi quá thời gian (Timeout 504 Gateway). Dữ liệu chấm điểm tạm thời được lưu cục bộ trên máy chủ LACS an toàn.
+          </p>
+<div class="bg-[#FEF5E5]/40 p-3.5 rounded-[7px] mb-5">
+<div class="flex items-center gap-2 text-caption-small font-caption-small text-[#9C6400]">
+<span class="material-symbols-outlined text-[16px]">sync_problem</span>
+<span>12 bài thi nói (Speaking) đang xếp hàng chờ retry tự động.</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2 pt-2">
+<button class="h-[38px] w-full rounded-[7px] bg-primary-container text-on-primary hover:bg-[#3359D2] font-button-label text-button-label shadow-[0px_4px_10px_rgba(65,105,232,0.25)] transition-all flex items-center justify-center gap-2" onclick="retrySyncToast()">
+<span class="material-symbols-outlined text-[18px]">cached</span>
+<span>Thử kết nối lại (Retry)</span>
+</button>
+<button class="h-[38px] w-full rounded-[7px] bg-transparent text-secondary hover:bg-[#F2F6FA] font-button-label text-button-label transition-all">
+            Xem trạng thái hệ thống
+          </button>
+</div>
+</div>
+<!-- Card C: Network Offline / Exam Room Edge -->
+<div class="bg-surface-container-lowest p-6 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 rounded-[7px] bg-[#E8F7FF] flex items-center justify-center text-[#0E729F]">
+<span class="material-symbols-outlined text-[26px]">wifi_off</span>
+</div>
+<span class="px-2.5 py-1 rounded-[7px] bg-[#FDEDE8] text-[#BE452B] font-caption-small text-caption-small font-semibold">Chế độ ngoại tuyến</span>
+</div>
+<h3 class="font-subtitle-h6 text-subtitle-h6 text-on-surface mb-2">Mất kết nối Internet phòng thi</h3>
+<p class="font-body-base text-body-base text-secondary mb-4">
+            Máy trạm mất mạng. Ca thi đang được chuyển sang chế độ <span class="text-on-surface font-semibold">Hybrid Caching</span> an toàn trên máy chủ phòng lab cục bộ (Edge Node).
+          </p>
+<div class="bg-[#F2F6FA] p-3.5 rounded-[7px] mb-5 space-y-1.5">
+<div class="flex items-center justify-between text-caption-small font-caption-small">
+<span class="text-secondary">Trạng thái Edge Node:</span>
+<span class="font-semibold text-[#088068] flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span> Sẵn sàng lưu trữ
+              </span>
+</div>
+<div class="flex items-center justify-between text-caption-small font-caption-small">
+<span class="text-secondary">Bộ đệm bài làm:</span>
+<span class="font-tabular-data text-tabular-data text-on-surface">32/32 Thí sinh đã mã hóa</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2 pt-2">
+<button class="h-[38px] w-full rounded-[7px] bg-primary-container text-on-primary hover:bg-[#3359D2] font-button-label text-button-label transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">dns</span>
+<span>Mở bảng điều khiển Edge Lab</span>
+</button>
+<button class="h-[38px] w-full rounded-[7px] bg-[#ECF2FF] text-[#3359D2] hover:bg-[#DCE8FF] font-button-label text-button-label transition-all">
+            Kiểm tra đường truyền WAN
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: QUOTA & SYSTEM WARNINGS -->
+<section class="state-group flex flex-col space-y-4" id="section-quota">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-[7px] bg-[#FEF5E5] flex items-center justify-center text-[#FA896B]">
+<span class="material-symbols-outlined text-[19px]">pie_chart</span>
+</div>
+<div>
+<h2 class="font-card-title-h5 text-card-title-h5 text-on-surface">Khu vực 4: Quota &amp; System Warnings (Cảnh báo vượt hạn mức tài nguyên)</h2>
+<p class="font-caption-small text-caption-small text-secondary">Giám sát năng lực phân bổ gói thi cấp tenant, tránh đình chỉ ca thi đột ngột do hết hạn mức bản quyền.</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-[7px] bg-[#FEF5E5] text-[#FA896B] font-caption-small text-caption-small font-semibold">Tài nguyên 97.2%</span>
+</div>
+<!-- Alert Banner Card -->
+<div class="bg-surface-container-lowest p-6 rounded-[7px] shadow-[0px_0px_2px_0px_rgba(145,158,171,0.30),0px_12px_24px_-4px_rgba(145,158,171,0.12)]">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<div class="flex items-start gap-4 flex-1">
+<div class="w-12 h-12 rounded-full bg-[#FEF5E5] flex items-center justify-center text-[#FA896B] shrink-0">
+<span class="material-symbols-outlined text-[28px]">speed</span>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<h3 class="font-subtitle-h6 text-subtitle-h6 text-on-surface">Gần chạm trần bản quyền (Seat Quota Alert 97.2%)</h3>
+<span class="px-2 py-0.5 rounded-[7px] bg-[#FDEDE8] text-[#BE452B] font-caption-small text-caption-small font-semibold">Ngưỡng khẩn cấp</span>
+</div>
+<p class="font-body-base text-body-base text-secondary max-w-2xl">
+              Chỉ còn 14 chỗ ngồi cho thí sinh mới trong tổng số hạn mức đăng ký tenant. Các ca thi tiếp theo có thể bị từ chối phát đề thi nếu không bổ sung license kịp thời trước đợt sát hạch kế tiếp.
+            </p>
+</div>
+</div>
+<!-- Progress Gauge Box -->
+<div class="w-full lg:w-80 bg-[#F2F6FA] p-4 rounded-[7px] flex flex-col justify-center space-y-2">
+<div class="flex items-center justify-between text-body-base font-body-base">
+<span class="font-semibold text-on-surface">Sức chứa bản quyền:</span>
+<span class="font-tabular-data text-tabular-data font-bold text-[#FA896B]">486 / 500 Seats</span>
+</div>
+<div class="w-full bg-[#DFE5EF] h-2.5 rounded-full overflow-hidden">
+<div class="bg-[#FA896B] h-full rounded-full transition-all duration-500" style="width: 97.2%"></div>
+</div>
+<div class="flex items-center justify-between text-caption-small font-caption-small text-secondary">
+<span>Đã gán 97.2%</span>
+<span>Còn trống: 14 seats</span>
+</div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="mt-6 pt-4 border-t border-[#F2F6FA] flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-2 text-caption-small font-caption-small text-secondary">
+<span class="material-symbols-outlined text-[16px] text-primary">info</span>
+<span>Chu kỳ thanh toán kế tiếp: Ngày 01 tháng sau. Phí phát sinh vượt quota áp dụng giá On-Demand: $3.20/seat.</span>
+</div>
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<button class="w-full sm:w-auto h-[38px] px-[18px] rounded-[7px] bg-transparent text-secondary hover:bg-[#F2F6FA] font-button-label text-button-label transition-all">
+            Liên hệ đại diện Pearson
+          </button>
+<button class="w-full sm:w-auto h-[38px] px-[18px] rounded-[7px] bg-primary-container text-on-primary hover:bg-[#3359D2] font-button-label text-button-label shadow-[0px_4px_10px_rgba(65,105,232,0.25)] transition-all flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+<span>Nâng cấp bản quyền ngay</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Demo Tooling -->
+<script>
+    function filterState(target, element) {
+      // Update Tab button visuals
+      const tabs = document.querySelectorAll('.tab-btn');
+      tabs.forEach(tab => {
+        tab.className = 'tab-btn h-[38px] px-4 rounded-[7px] bg-surface-container-lowest text-secondary hover:text-on-surface hover:bg-[#F6F9FC] font-body-base text-body-base transition-all shrink-0 flex items-center gap-2';
+      });
+      element.className = 'tab-btn active-tab h-[38px] px-4 rounded-[7px] bg-primary-container text-on-primary font-body-base text-body-base font-medium shadow-[0px_2px_6px_rgba(65,105,232,0.2)] transition-all shrink-0 flex items-center gap-2';
+
+      // Hide or show sections
+      const sections = {
+        empty: document.getElementById('section-empty'),
+        loading: document.getElementById('section-loading'),
+        error: document.getElementById('section-error'),
+        quota: document.getElementById('section-quota')
+      };
+
+      if (target === 'all') {
+        Object.values(sections).forEach(sec => sec.classList.remove('hidden'));
+      } else {
+        Object.keys(sections).forEach(key => {
+          if (key === target) {
+            sections[key].classList.remove('hidden');
+          } else {
+            sections[key].classList.add('hidden');
+          }
+        });
+      }
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('statusToast');
+      const text = document.getElementById('toastMessage');
+      text.innerText = message;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3000);
+    }
+
+    function downloadAssetsToast() {
+      showToast('Đang đóng gói file Figma tokens & SVG illustrations (PTE_State_Pack_v4.2.zip)...');
+    }
+
+    function applyAllStatesToast() {
+      showToast('Đã đồng bộ quy chuẩn State Pack vào router & tenant-web client components!');
+    }
+
+    function retrySyncToast() {
+      showToast('Đang tái lập cổng kết nối TLS với Pearson AI Scoring Engine...');
+    }
+  </script>
+</div></div></main></div></body></html>

@@ -1,0 +1,19 @@
+{
+  "target": "phase-07-errors-security-audit-and-migration",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-core-question-bank-exam-orchestration/quality/phase-07-errors-security-audit-and-migration-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/scoretemplate/internal/controller/ScoreTemplateController.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/constant/SessionConstants.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/exception/LegacySessionCreateRequiresNewWorkflowException.java",
+    "pte-api/app/src/main/java/com/pte/shared/exception/DomainException.java",
+    "pte-api/app/src/main/resources/db/migration/V42__exam_orchestration_core.sql",
+    "pte-api/app/src/test/java/com/pte/scoretemplate/internal/controller/ScoreTemplateControllerSecurityTest.java",
+    "pte-web/packages/api-client/src/client/errorMessage.ts"
+  ],
+  "source_fingerprint": "sha256:1c2386312d9d23d17f1d8e7ab85646099273f8aa262d9b65b8866de580fd500d",
+  "reviewed_at": "2026-09-21T16:17:07+07:00",
+  "open_blocking_findings": 0
+}

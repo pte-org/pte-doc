@@ -1,0 +1,168 @@
+{
+  "sourceUrl": "https://stitch.withgoogle.com/projects/2518511518052928179",
+  "projectId": "2518511518052928179",
+  "title": "PTE Tenant Dashboard",
+  "capturedAt": "2026-09-14",
+  "screens": [
+    {
+      "id": "c8e54c3a038d495baa636ec01c39dfd1",
+      "title": "T1 - Dashboard (Overview)",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 3262,
+      "screenshot": "screens/01-dashboard-overview/screen.png",
+      "html": "screens/01-dashboard-overview/screen.html",
+      "route": "tenant-web /host/dashboard"
+    },
+    {
+      "id": "a43ec1f237234bbeae54f193e7e93ff7",
+      "title": "T2 - Learners",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 2090,
+      "screenshot": "screens/02-learners/screen.png",
+      "html": "screens/02-learners/screen.html",
+      "route": "tenant-web /host/students"
+    },
+    {
+      "id": "b89132a6a24d4b2abec5579623636e15",
+      "title": "T3 - Programmes",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 2698,
+      "screenshot": "screens/03-programmes/screen.png",
+      "html": "screens/03-programmes/screen.html",
+      "route": "tenant-web /host/programs"
+    },
+    {
+      "id": "bf30cf6b16de464ca8a6e8cd846c6535",
+      "title": "T4 - Programme Detail",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 4372,
+      "screenshot": "screens/04-programme-detail/screen.png",
+      "html": "screens/04-programme-detail/screen.html",
+      "route": "tenant-web /host/programs/[publicId]"
+    },
+    {
+      "id": "5b11e3b6086540879334b8d5e7974381",
+      "title": "T5 - Class Detail",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 2200,
+      "screenshot": "screens/05-class-detail/screen.png",
+      "html": "screens/05-class-detail/screen.html",
+      "route": "tenant-web /host/programs/[publicId]/classes/[classPublicId]"
+    },
+    {
+      "id": "a0993ec178cf475da4506baa3c71e686",
+      "title": "T6 - Exam Sessions",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 2902,
+      "screenshot": "screens/06-exam-sessions/screen.png",
+      "html": "screens/06-exam-sessions/screen.html",
+      "route": "tenant-web /host/exams"
+    },
+    {
+      "id": "e03bf8a7e30941b7b079c1a93f59794e",
+      "title": "T7 - Session Detail",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 2440,
+      "screenshot": "screens/07-session-detail/screen.png",
+      "html": "screens/07-session-detail/screen.html",
+      "route": "tenant-web /host/exams/[publicId]"
+    },
+    {
+      "id": "8dcee8fb4c6243e4b291296b43d25ba0",
+      "title": "T8 - Create / Edit Exam Session",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 4482,
+      "screenshot": "screens/08-create-edit-exam-session/screen.png",
+      "html": "screens/08-create-edit-exam-session/screen.html",
+      "route": "tenant-web session create/edit flow"
+    },
+    {
+      "id": "305a3cf703bf4bcb8de6169a5014ad13",
+      "title": "T9 - Scoring Review",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 3366,
+      "screenshot": "screens/09-scoring-review/screen.png",
+      "html": "screens/09-scoring-review/screen.html",
+      "route": "tenant-web session scoring review flow"
+    },
+    {
+      "id": "eacec569ff7942a08e74cd8126d40d64",
+      "title": "T10 - Audit Log",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 3262,
+      "screenshot": "screens/10-audit-log/screen.png",
+      "html": "screens/10-audit-log/screen.html",
+      "route": "tenant-web /host/audit-log"
+    },
+    {
+      "id": "c719079a5c1d4f7eb83a4fce0037bd9b",
+      "title": "T11 - Staff & Roles",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 3490,
+      "screenshot": "screens/11-staff-roles/screen.png",
+      "html": "screens/11-staff-roles/screen.html",
+      "route": "tenant-web staff and roles reference"
+    },
+    {
+      "id": "0934f099873f4834add013f32135ad53",
+      "title": "T12 - Settings / System Config",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 4562,
+      "screenshot": "screens/12-settings-system-config/screen.png",
+      "html": "screens/12-settings-system-config/screen.html",
+      "route": "tenant-web settings reference"
+    },
+    {
+      "id": "fe37c17af7ad4a109ef4b92d68c33b85",
+      "title": "T13 - Staff & Roles (Assign Roles Drawer)",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 2366,
+      "screenshot": "screens/13-staff-roles-assign-roles-drawer/screen.png",
+      "html": "screens/13-staff-roles-assign-roles-drawer/screen.html",
+      "route": "tenant-web staff role assignment reference"
+    },
+    {
+      "id": "15eea66ef4b54eba9cc5ab9e65279bd5",
+      "title": "T14 - Settings & Branding",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 3544,
+      "screenshot": "screens/14-settings-branding/screen.png",
+      "html": "screens/14-settings-branding/screen.html",
+      "route": "tenant-web settings and branding reference"
+    },
+    {
+      "id": "840b1aba94274783ab134963d5f0f1ef",
+      "title": "T15 - State Pack (Empty, Loading, Error)",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 5012,
+      "screenshot": "screens/15-state-pack-empty-loading-error/screen.png",
+      "html": "screens/15-state-pack-empty-loading-error/screen.html",
+      "route": "tenant-web cross-route state reference"
+    },
+    {
+      "id": "d25cdad518b74ec994df8530fb74f615",
+      "title": "T16 - Responsive Views (Tablet & Mobile)",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 4710,
+      "screenshot": "screens/16-responsive-views-tablet-mobile/screen.png",
+      "html": "screens/16-responsive-views-tablet-mobile/screen.html",
+      "route": "tenant-web responsive reference"
+    }
+  ]
+}

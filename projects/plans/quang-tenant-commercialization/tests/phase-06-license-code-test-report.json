@@ -1,0 +1,19 @@
+{
+  "phase": "phase-06-license-code",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-16T15:35:27Z",
+  "summary": {
+    "passed": 530,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "command": ".\\mvnw.cmd -pl app test",
+  "scope": "Phase 6 license-code tests plus full app regression suite",
+  "phase_tests": {
+    "LicenseCodeServiceTest": 9,
+    "LicenseCodeGeneratorTest": 1,
+    "LicenseCodeExpirationServiceTest": 1
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "projects/2518511518052928179/screens/5b11e3b6086540879334b8d5e7974381",
+  "title": "T5 - Class Detail",
+  "deviceType": "DESKTOP",
+  "width": 2560,
+  "height": 2200,
+  "route": "tenant-web /host/programs/[publicId]/classes/[classPublicId]"
+}

@@ -1,0 +1,38 @@
+{
+  "mode": "gate",
+  "target": "phase-05-iam-user-reactivate",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-15T08:01:02+07:00",
+  "reviewed_files": [
+    "pte-api/services/iam/src/main/java/com/pte/iam/domain/User.java",
+    "pte-api/services/iam/src/main/java/com/pte/iam/domain/event/UserReactivatedEvent.java",
+    "pte-api/services/iam/src/main/java/com/pte/iam/constant/IamConstants.java",
+    "pte-api/services/iam/src/main/java/com/pte/iam/service/UserService.java",
+    "pte-api/services/iam/src/main/java/com/pte/iam/controller/UserController.java",
+    "pte-api/services/admin/src/main/java/com/pte/admin/constant/AdminConstants.java",
+    "pte-api/services/admin/src/main/java/com/pte/admin/messaging/consumer/dto/UserReactivatedEvent.java",
+    "pte-api/services/admin/src/main/java/com/pte/admin/messaging/consumer/StudentRosterConsumer.java",
+    "pte-api/services/iam/README.md"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "verification": [
+    "mvn -q -pl services/iam,services/admin -am -DskipTests package: passed",
+    "Reviewed tenant scoping through the existing findScoped path",
+    "Reviewed idempotent no-op behavior for an already ACTIVE user",
+    "Reviewed outbox event emission only on SUSPENDED -> ACTIVE transition",
+    "Reviewed Admin projection status branch and existing idempotency ledger path"
+  ],
+  "notes": [
+    "Unit tests were skipped by explicit user preference.",
+    "Live suspend/login rejection/reactivate/login success and RabbitMQ projection checks are pending Docker availability.",
+    "Reactivation does not modify password, roles, or LoginHash."
+  ],
+  "report_path": "plans/quang-tenant-student-roster-pagination/quality/phase-05-iam-user-reactivate-quality-report.json"
+}

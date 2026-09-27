@@ -1,0 +1,58 @@
+{
+  "mode": "gate",
+  "target": "phase-02-mock-delivery-api",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-13T09:19:55Z",
+  "reviewed_files": [
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/controller/MockExamController.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/config/SecurityConfig.java",
+    "pte-api/services/exam-delivery/src/main/resources/application.yml",
+    "pte-api/services/exam-delivery/src/test/java/com/pte/examdelivery/controller/MockExamControllerTest.java",
+    "pte-app/lib/core/config/app_config.dart",
+    "pte-app/lib/core/network/api_client.dart",
+    "pte-app/lib/features/exam_attempt/data/repositories/exam_attempt_repository_impl.dart",
+    "pte-app/lib/features/exam_attempt/dev/api_mock_exam_preview_screen.dart",
+    "pte-app/lib/features/exam_attempt/dev/exam_ui_preview_task_body.dart",
+    "pte-app/lib/features/exam_attempt/dev/exam_ui_preview_stimulus.dart",
+    "pte-app/lib/app.dart"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 3
+  },
+  "findings": [
+    {
+      "id": "QUAL-MOCK-001",
+      "severity": "NOTED",
+      "status": "ACCEPTED_DEBT",
+      "location": "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/controller/MockExamController.java:35",
+      "evidence": "The mock keeps attempt state in memory and is profile-gated.",
+      "required_action": "Use the real persisted attempt flow for staging/production.",
+      "owner": "none"
+    },
+    {
+      "id": "QUAL-MOCK-002",
+      "severity": "NOTED",
+      "status": "ACCEPTED_DEBT",
+      "location": "pte-api/services/exam-delivery/src/main/resources/mock-audio/",
+      "evidence": "WAV files are generated test speech, not official content.",
+      "required_action": "Replace with approved media fixtures in the live media workflow.",
+      "owner": "none"
+    },
+    {
+      "id": "QUAL-MOCK-003",
+      "severity": "NOTED",
+      "status": "ACCEPTED_DEBT",
+      "location": "pte-doc/projects/plans/quang-full-exam-seed-content/phase-02-mock-delivery-api.md",
+      "evidence": "No live Spring stack was started because the local database/message dependencies are not running.",
+      "required_action": "Run the profile against the local stack before manual integration sign-off.",
+      "owner": "none"
+    }
+  ],
+  "receipt_status": "skipped_cross_repo_boundary",
+  "receipt_note": "The plan/report lives in pte-doc while reviewed source and tests live in pte-api and pte-app repositories.",
+  "report_path": "projects/plans/quang-full-exam-seed-content/quality/phase-02-mock-delivery-api-quality-report.json"
+}

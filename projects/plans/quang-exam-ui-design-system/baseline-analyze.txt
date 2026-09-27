@@ -1,0 +1,20 @@
+Baseline captured 2026-09-12 before ck:cook implementation.
+Command: flutter analyze
+Repository: D:\GitHub\pte-org\pte-app
+Exit code: 1
+Result: 15 issues (10 errors, 5 warnings/info).
+
+Warnings/info:
+- lib/core/storage/dao/local_violation_dao.dart:134 unused _unusedModeSeam
+- lib/features/exam_attempt/presentation/widgets/violation_warning_banner.dart:43 unused _current
+- test/unit/core/security/lockdown_service_test.dart:32 unused _MockLogger
+- test/unit/storage/local_violation_dao_test.dart:187 unused _unusedSeam
+- test/unit/storage/local_violation_dao_test.dart:187 no_leading_underscores_for_local_identifiers
+
+Errors:
+- test/unit/core/security/lockdown_service_test.dart:37,39,41,43 logger override signatures incompatible with logger 2.7.0
+- test/unit/storage/local_violation_dao_test.dart:26,46,145,168 invalid constant values
+- test/unit/storage/local_violation_dao_test.dart:187 LockdownMode undefined
+
+Disposition: pre-existing baseline. Phase 0 owns classification and repair of
+compile blockers; no UI migration regression is attributed to these findings.

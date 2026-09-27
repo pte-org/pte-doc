@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}.sidebar-shadow{box-shadow:rgba(145,158,171,0.20) 0px 0px 2px 0px,rgba(145,158,171,0.08) 0px 12px 24px -4px;}.card-elevation{box-shadow:rgba(145,158,171,0.30) 0px 0px 2px 0px,rgba(145,158,171,0.12) 0px 12px 24px -4px;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "inverse-primary": "#b6c4ff", "on-tertiary-container": "#e9fff5", "on-secondary-fixed": "#001e2e", "surface-tint": "#2653d2", "tertiary-fixed": "#94f5d7", "surface-variant": "#d8e3fa", "surface-container-lowest": "#ffffff", "inverse-surface": "#263143", "on-primary-fixed-variant": "#003ab2", "surface-container-low": "#f0f3ff", "surface": "#f9f9ff", "on-secondary": "#ffffff", "surface-container-high": "#dee8ff", "surface-container-highest": "#d8e3fa", "error-container": "#ffdad6", "on-primary-fixed": "#001550", "inverse-on-surface": "#ebf1ff", "tertiary-container": "#0e826a", "outline": "#747686", "on-error-container": "#93000a", "secondary-container": "#7fccfe", "surface-bright": "#f9f9ff", "on-primary-container": "#fbf9ff", "on-secondary-fixed-variant": "#004c6c", "on-primary": "#ffffff", "outline-variant": "#c4c5d6", "secondary-fixed": "#c7e7ff", "primary-fixed-dim": "#b6c4ff", "on-tertiary-fixed-variant": "#005141", "error": "#ba1a1a", "on-surface-variant": "#434654", "on-surface": "#111c2d", "primary-fixed": "#dce1ff", "surface-dim": "#cfdaf2", "primary": "#204ece", "background": "#f9f9ff", "tertiary": "#006753", "tertiary-fixed-dim": "#77d8bc", "on-background": "#111c2d", "on-secondary-container": "#00567b", "on-tertiary-fixed": "#002019", "on-error": "#ffffff", "primary-container": "#4169e8", "surface-container": "#e7eeff", "secondary": "#00658e", "secondary-fixed-dim": "#85cfff", "on-tertiary": "#ffffff" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "space-xs": "0.25rem", "margin": "2rem", "space-sm": "0.5rem", "gutter-sm": "1rem", "space-lg": "1.5rem", "space-md": "1rem", "margin-sm": "1rem", "gutter": "1.5rem", "space-xl": "2rem" }, fontFamily: { "label-md": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "headline-xl-mobile": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "button-text": ["Plus Jakarta Sans"], "data-metric": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"] }, fontSize: { "label-md": ["0.875rem", { lineHeight: "1.25rem", letterSpacing: "0.01em", fontWeight: "500" }], "headline-md": ["1.25rem", { lineHeight: "1.75rem", letterSpacing: "-0.01em", fontWeight: "600" }], "headline-xl-mobile": ["1.625rem", { lineHeight: "2.125rem", letterSpacing: "-0.015em", fontWeight: "700" }], "headline-sm": ["1.125rem", { lineHeight: "1.5rem", letterSpacing: "-0.005em", fontWeight: "600" }], "body-md": ["0.875rem", { lineHeight: "1.375rem", letterSpacing: "0em", fontWeight: "400" }], "label-sm": ["0.75rem", { lineHeight: "1rem", letterSpacing: "0.02em", fontWeight: "600" }], "body-lg": ["1rem", { lineHeight: "1.5rem", letterSpacing: "0em", fontWeight: "400" }], "button-text": ["0.875rem", { lineHeight: "1.25rem", letterSpacing: "0.005em", fontWeight: "400" }], "data-metric": ["1.75rem", { lineHeight: "2.25rem", letterSpacing: "-0.02em", fontWeight: "700" }], "headline-xl": ["2rem", { lineHeight: "2.5rem", letterSpacing: "-0.02em", fontWeight: "700" }], "body-sm": ["0.75rem", { lineHeight: "1.125rem", letterSpacing: "0em", fontWeight: "400" }], "headline-lg": ["1.5rem", { lineHeight: "2rem", letterSpacing: "-0.015em", fontWeight: "600" }] } } } };</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-[270px] bg-surface-container-lowest z-50 flex flex-col justify-between sidebar-shadow"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-[70px] px-space-lg flex items-center gap-space-sm"><div class="w-10 h-10 rounded-[7px] bg-primary-container flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[22px]">shield_with_heart</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface leading-tight">PTE Admin</span><span class="font-label-sm text-label-sm text-on-surface-variant">Platform Console</span></div></div><div class="px-space-md py-space-sm"><nav class="flex flex-col gap-space-xs" data-active-classes="bg-surface-container text-primary font-label-md"><div class="px-space-sm pt-space-sm pb-space-xs font-label-sm text-label-sm text-outline uppercase tracking-wider">Home</div><a class="flex items-center gap-space-sm px-space-md py-2 rounded-[7px] text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-label-md text-label-md">Dashboard</span></a><div class="px-space-sm pt-space-md pb-space-xs font-label-sm text-label-sm text-outline uppercase tracking-wider">Tenants</div><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-2 rounded-[7px] transition-colors bg-surface-container text-primary font-label-md" data-path="tenants" href="#"><span class="material-symbols-outlined text-[20px]">apartment</span><span class="font-label-md text-label-md">Tenants</span></a><a class="flex items-center gap-space-sm px-space-md py-2 rounded-[7px] text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="licences" href="#"><span class="material-symbols-outlined text-[20px]">verified_user</span><span class="font-label-md text-label-md">Licences</span></a><div class="px-space-sm pt-space-md pb-space-xs font-label-sm text-label-sm text-outline uppercase tracking-wider">Content</div><a class="flex items-center gap-space-sm px-space-md py-2 rounded-[7px] text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="question-bank" href="#"><span class="material-symbols-outlined text-[20px]">quiz</span><span class="font-label-md text-label-md">Question Bank</span></a><a class="flex items-center gap-space-sm px-space-md py-2 rounded-[7px] text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="exam-blueprints" href="#"><span class="material-symbols-outlined text-[20px]">architecture</span><span class="font-label-md text-label-md">Exam Blueprints</span></a><div class="px-space-sm pt-space-md pb-space-xs font-label-sm text-label-sm text-outline uppercase tracking-wider">Settings</div><a class="flex items-center gap-space-sm px-space-md py-2 rounded-[7px] text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="platform-users" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span class="font-label-md text-label-md">Platform Users</span></a><a class="flex items-center gap-space-sm px-space-md py-2 rounded-[7px] text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-label-md text-label-md">Settings</span></a></nav></div></div><div class="p-space-md flex flex-col gap-space-sm bg-surface-container-lowest"><div class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-full bg-surface-container-low"><div class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></div><span class="font-label-sm text-label-sm text-on-surface-variant truncate">All systems operational · Updated 2 min ago</span></div><div class="flex items-center gap-space-sm p-space-sm rounded-[7px] hover:bg-surface-container transition-colors cursor-pointer"><div class="w-9 h-9 rounded-full bg-primary-container flex items-center justify-center font-headline-sm text-headline-sm text-on-primary">TM</div><div class="flex flex-col min-w-0 flex-1"><span class="font-label-md text-label-md text-on-surface truncate">Trần Thị Mai</span><span class="font-label-sm text-label-sm text-on-surface-variant truncate">Platform admin</span></div><span class="material-symbols-outlined text-outline text-[18px]">expand_more</span></div></div></aside><div class="pl-[270px]"><header class="fixed top-0 left-[270px] right-0 h-[70px] bg-surface-container-lowest/90 backdrop-blur-xl z-40 flex items-center justify-between px-space-xl shadow-[0_1px_8px_rgba(145,158,171,0.12)]"><div class="flex items-center gap-space-md"><button aria-label="Collapse sidebar" class="w-9 h-9 rounded-[7px] flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">menu_open</span></button><div class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface-variant"><span class="hover:text-primary transition-colors cursor-pointer">Dashboard</span><span class="text-outline-variant font-normal">/</span><span class="text-on-surface font-semibold">Tenants</span></div></div><div class="flex items-center gap-space-sm"><button aria-label="Search console" class="w-10 h-10 rounded-[7px] flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">search</span></button><button aria-label="Notifications" class="relative w-10 h-10 rounded-[7px] flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span></button><div class="h-5 w-px bg-outline-variant mx-space-xs"></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm cursor-pointer"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-[70px] w-full px-space-xl min-h-screen bg-background"><div class="flex flex-col w-full pb-space-xl">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md mb-space-lg">
+<div class="flex flex-col">
+<h1 class="font-headline-md text-[21px] text-on-surface font-semibold leading-tight">Tenants</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">
+        Quản lý cơ sở giáo dục đối tác, hạn mức học viên và trạng thái kích hoạt hệ thống
+      </p>
+</div>
+<div class="flex items-center gap-space-sm self-start md:self-auto">
+<button class="h-10 px-4 rounded-[7px] bg-primary text-on-primary font-button-text text-button-text flex items-center gap-1.5 shadow-[0_2px_8px_rgba(32,78,206,0.25)] hover:bg-[#183fa8] active:scale-[0.98] transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>+ Add tenant</span>
+</button>
+</div>
+</div>
+<!-- Filter Row Card -->
+<div class="bg-surface-container-lowest rounded-[7px] p-space-md card-elevation mb-space-lg flex flex-col xl:flex-row xl:items-center justify-between gap-space-md">
+<div class="flex flex-wrap items-center gap-space-sm flex-1">
+<!-- Search Input -->
+<div class="relative w-full sm:w-[260px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-[#7C8FAC] pointer-events-none">search</span>
+<input class="w-full h-10 pl-9 pr-3 rounded-[7px] bg-surface-container-lowest text-on-surface placeholder-[#7C8FAC] font-body-md text-body-md border border-[#7C8FAC] focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Tìm theo tên tenant, mã ID..." type="text"/>
+</div>
+<!-- Select Trạng thái -->
+<div class="relative min-w-[150px]">
+<select class="w-full h-10 pl-3 pr-8 rounded-[7px] bg-surface-container-lowest text-on-surface font-body-md text-body-md border border-[#7C8FAC] appearance-none focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer">
+<option value="">Tất cả trạng thái</option>
+<option value="active">Active</option>
+<option value="suspended">Suspended</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-[18px] text-[#7C8FAC] pointer-events-none">expand_more</span>
+</div>
+<!-- Select Gói dịch vụ -->
+<div class="relative min-w-[150px]">
+<select class="w-full h-10 pl-3 pr-8 rounded-[7px] bg-surface-container-lowest text-on-surface font-body-md text-body-md border border-[#7C8FAC] appearance-none focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer">
+<option value="">Tất cả các gói</option>
+<option value="institution">Institution</option>
+<option value="enterprise">Enterprise</option>
+<option value="standard">Standard</option>
+<option value="growth">Growth</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-[18px] text-[#7C8FAC] pointer-events-none">expand_more</span>
+</div>
+<!-- Select Loại hình tổ chức -->
+<div class="relative min-w-[170px]">
+<select class="w-full h-10 pl-3 pr-8 rounded-[7px] bg-surface-container-lowest text-on-surface font-body-md text-body-md border border-[#7C8FAC] appearance-none focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer">
+<option value="">Tất cả loại hình</option>
+<option value="uni">Trường Đại học</option>
+<option value="lang">Học viện Ngôn ngữ</option>
+<option value="test">Trung tâm Khảo thí</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-[18px] text-[#7C8FAC] pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Right-aligned Meta & Reset -->
+<div class="flex items-center gap-space-md justify-between xl:justify-end shrink-0">
+<span class="font-body-sm text-body-sm text-on-surface-variant">12 trên tổng số 37 tenants</span>
+<button class="font-label-sm text-label-sm text-primary hover:text-primary-container font-semibold transition-colors" type="button">
+        Xoá bộ lọc
+      </button>
+</div>
+</div>
+<!-- Main Tenants Table Card -->
+<div class="bg-surface-container-lowest rounded-[7px] p-space-lg card-elevation flex flex-col">
+<!-- Responsive Table Scroll Container -->
+<div class="overflow-x-auto min-h-[580px]">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#F2F6FA] text-[#2A3547] uppercase font-semibold text-[0.75rem] tracking-[0.05em] select-none">
+<th class="w-10 px-3 py-3 rounded-l-[4px]">
+<input aria-label="Select all tenants" class="w-4 h-4 rounded text-primary focus:ring-primary/30 accent-primary cursor-pointer align-middle" type="checkbox"/>
+</th>
+<th class="px-3 py-3">
+<div class="inline-flex items-center gap-1 cursor-pointer hover:text-primary transition-colors">
+<span>Tenant</span>
+<span class="material-symbols-outlined text-[14px]">unfold_more</span>
+</div>
+</th>
+<th class="px-3 py-3">
+<div class="inline-flex items-center gap-1 cursor-pointer hover:text-primary transition-colors">
+<span>Gói dịch vụ</span>
+<span class="material-symbols-outlined text-[14px]">unfold_more</span>
+</div>
+</th>
+<th class="px-3 py-3 min-w-[210px]">
+<div class="inline-flex items-center gap-1 cursor-pointer hover:text-primary transition-colors">
+<span>Học viên (Sử dụng / Giới hạn)</span>
+<span class="material-symbols-outlined text-[14px]">unfold_more</span>
+</div>
+</th>
+<th class="px-3 py-3">
+<div class="inline-flex items-center gap-1 cursor-pointer hover:text-primary transition-colors">
+<span>Số chi nhánh</span>
+<span class="material-symbols-outlined text-[14px]">unfold_more</span>
+</div>
+</th>
+<th class="px-3 py-3">
+<div class="inline-flex items-center gap-1 cursor-pointer hover:text-primary transition-colors">
+<span>Trạng thái</span>
+<span class="material-symbols-outlined text-[14px]">unfold_more</span>
+</div>
+</th>
+<th class="px-3 py-3">
+<div class="inline-flex items-center gap-1 cursor-pointer hover:text-primary transition-colors">
+<span>Ngày tạo</span>
+<span class="material-symbols-outlined text-[14px]">unfold_more</span>
+</div>
+</th>
+<th class="px-3 py-3 text-right rounded-r-[4px]">Thao tác</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface divide-y-0">
+<!-- Row 1 (With Active Kebab Action Menu) -->
+<tr class="hover:bg-[#F8FAFC] transition-colors border-b border-[#F2F6FA] relative">
+<td class="w-10 px-3 py-3.5 align-middle">
+<input aria-label="Select row" class="w-4 h-4 rounded text-primary focus:ring-primary/30 accent-primary cursor-pointer align-middle" type="checkbox"/>
+</td>
+<td class="px-3 py-3.5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-[7px] bg-[#ECF2FF] flex items-center justify-center text-primary font-semibold text-[13px] shrink-0">
+                  HLI
+                </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate hover:text-primary cursor-pointer">Hanoi Language Institute (HLI)</span>
+<span class="text-xs text-outline font-mono bg-surface-container px-1.5 py-0.5 rounded-[4px]">TNT-HN-0018</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Viện Ngôn ngữ</span>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5">
+<span class="inline-flex items-center px-2.5 py-1 rounded-[6px] bg-[#F0F3FF] text-[#204ECE] font-label-sm text-label-sm font-semibold">
+                Institution
+              </span>
+</td>
+<td class="px-3 py-3.5 font-[tnum]">
+<div class="flex flex-col gap-1 w-full max-w-[190px]">
+<div class="flex justify-between items-center text-xs">
+<span class="font-semibold text-on-surface">486 <span class="font-normal text-on-surface-variant">/ 500</span></span>
+<span class="font-semibold text-[#9C6400]">97.2%</span>
+</div>
+<div class="h-1.5 w-full bg-[#EAEFF5] rounded-full overflow-hidden">
+<div class="h-full bg-[#9C6400] rounded-full" style="width: 97.2%;"></div>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface">3 cơ sở</td>
+<td class="px-3 py-3.5">
+<span class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full bg-[#E6FFFA] text-[#088068] font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span>
+                Active
+              </span>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface-variant">12/08/2026</td>
+<td class="px-3 py-3.5 text-right relative">
+<div class="relative inline-block text-left">
+<button aria-label="Row actions" class="w-8 h-8 rounded-[7px] flex items-center justify-center text-on-surface-variant bg-surface-container hover:bg-surface-variant transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+<!-- Open Popover / Dropdown Menu -->
+<div class="absolute right-0 top-9 w-56 bg-surface-container-lowest rounded-[7px] shadow-[0_12px_32px_rgba(145,158,171,0.28)] z-30 py-1.5 flex flex-col text-left">
+<button class="flex items-center gap-2.5 px-3 py-2 text-on-surface hover:bg-[#F2F6FA] font-label-md text-label-md transition-colors w-full text-left" type="button">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">data_usage</span>
+<span>Quản lý quota</span>
+</button>
+<button class="flex items-center gap-2.5 px-3 py-2 text-on-surface hover:bg-[#F2F6FA] font-label-md text-label-md transition-colors w-full text-left" type="button">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">switch_account</span>
+<span>Đăng nhập với vai trò</span>
+</button>
+<div class="h-px bg-surface-container my-1"></div>
+<button class="flex items-center gap-2.5 px-3 py-2 text-[#BE452B] hover:bg-[#FDEDE8] font-label-md text-label-md transition-colors w-full text-left" type="button">
+<span class="material-symbols-outlined text-[18px] text-[#BE452B]">block</span>
+<span>Tạm ngưng tenant</span>
+</button>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-[#F8FAFC] transition-colors border-b border-[#F2F6FA]">
+<td class="w-10 px-3 py-3.5 align-middle">
+<input aria-label="Select row" class="w-4 h-4 rounded text-primary focus:ring-primary/30 accent-primary cursor-pointer align-middle" type="checkbox"/>
+</td>
+<td class="px-3 py-3.5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-[7px] bg-[#E8F7FF] flex items-center justify-center text-[#0E729F] font-semibold text-[13px] shrink-0">
+                  SM
+                </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate hover:text-primary cursor-pointer">Trung tâm Anh ngữ Sao Mai</span>
+<span class="text-xs text-outline font-mono bg-surface-container px-1.5 py-0.5 rounded-[4px]">TNT-HCM-0022</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Trung tâm Đào tạo</span>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5">
+<span class="inline-flex items-center px-2.5 py-1 rounded-[6px] bg-[#F2F6FA] text-on-surface-variant font-label-sm text-label-sm font-semibold">
+                Standard
+              </span>
+</td>
+<td class="px-3 py-3.5 font-[tnum]">
+<div class="flex flex-col gap-1 w-full max-w-[190px]">
+<div class="flex justify-between items-center text-xs">
+<span class="font-semibold text-on-surface">210 <span class="font-normal text-on-surface-variant">/ 300</span></span>
+<span class="font-semibold text-[#00658E]">70.0%</span>
+</div>
+<div class="h-1.5 w-full bg-[#EAEFF5] rounded-full overflow-hidden">
+<div class="h-full bg-[#00658E] rounded-full" style="width: 70.0%;"></div>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface">2 cơ sở</td>
+<td class="px-3 py-3.5">
+<span class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full bg-[#E6FFFA] text-[#088068] font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span>
+                Active
+              </span>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface-variant">24/08/2026</td>
+<td class="px-3 py-3.5 text-right">
+<button aria-label="Row actions" class="w-8 h-8 rounded-[7px] inline-flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-[#F8FAFC] transition-colors border-b border-[#F2F6FA]">
+<td class="w-10 px-3 py-3.5 align-middle">
+<input aria-label="Select row" class="w-4 h-4 rounded text-primary focus:ring-primary/30 accent-primary cursor-pointer align-middle" type="checkbox"/>
+</td>
+<td class="px-3 py-3.5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-[7px] bg-[#E9FFF5] flex items-center justify-center text-[#0E826A] font-semibold text-[13px] shrink-0">
+                  DN
+                </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate hover:text-primary cursor-pointer">IELTS/PTE Academy Đà Nẵng</span>
+<span class="text-xs text-outline font-mono bg-surface-container px-1.5 py-0.5 rounded-[4px]">TNT-DN-0009</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Học viện Khảo thí</span>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5">
+<span class="inline-flex items-center px-2.5 py-1 rounded-[6px] bg-[#EAF7EE] text-[#006753] font-label-sm text-label-sm font-semibold">
+                Growth
+              </span>
+</td>
+<td class="px-3 py-3.5 font-[tnum]">
+<div class="flex flex-col gap-1 w-full max-w-[190px]">
+<div class="flex justify-between items-center text-xs">
+<span class="font-semibold text-on-surface">380 <span class="font-normal text-on-surface-variant">/ 400</span></span>
+<span class="font-semibold text-[#9C6400]">95.0%</span>
+</div>
+<div class="h-1.5 w-full bg-[#EAEFF5] rounded-full overflow-hidden">
+<div class="h-full bg-[#9C6400] rounded-full" style="width: 95.0%;"></div>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface">1 cơ sở</td>
+<td class="px-3 py-3.5">
+<span class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full bg-[#E6FFFA] text-[#088068] font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span>
+                Active
+              </span>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface-variant">01/09/2026</td>
+<td class="px-3 py-3.5 text-right">
+<button aria-label="Row actions" class="w-8 h-8 rounded-[7px] inline-flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-[#F8FAFC] transition-colors border-b border-[#F2F6FA]">
+<td class="w-10 px-3 py-3.5 align-middle">
+<input aria-label="Select row" class="w-4 h-4 rounded text-primary focus:ring-primary/30 accent-primary cursor-pointer align-middle" type="checkbox"/>
+</td>
+<td class="px-3 py-3.5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-[7px] bg-[#EDE9FE] flex items-center justify-center text-[#6D28D9] font-semibold text-[13px] shrink-0">
+                  SIU
+                </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate hover:text-primary cursor-pointer">ĐH Quốc tế Sài Gòn (SIU)</span>
+<span class="text-xs text-outline font-mono bg-surface-container px-1.5 py-0.5 rounded-[4px]">TNT-HCM-0011</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Trường Đại học</span>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5">
+<span class="inline-flex items-center px-2.5 py-1 rounded-[6px] bg-[#EEF2FF] text-[#4338CA] font-label-sm text-label-sm font-semibold">
+                Enterprise
+              </span>
+</td>
+<td class="px-3 py-3.5 font-[tnum]">
+<div class="flex flex-col gap-1 w-full max-w-[190px]">
+<div class="flex justify-between items-center text-xs">
+<span class="font-semibold text-on-surface">1,240 <span class="font-normal text-on-surface-variant">/ 2,000</span></span>
+<span class="font-semibold text-[#00658E]">62.0%</span>
+</div>
+<div class="h-1.5 w-full bg-[#EAEFF5] rounded-full overflow-hidden">
+<div class="h-full bg-[#00658E] rounded-full" style="width: 62.0%;"></div>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface">4 cơ sở</td>
+<td class="px-3 py-3.5">
+<span class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full bg-[#E6FFFA] text-[#088068] font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span>
+                Active
+              </span>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface-variant">05/09/2026</td>
+<td class="px-3 py-3.5 text-right">
+<button aria-label="Row actions" class="w-8 h-8 rounded-[7px] inline-flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 (Critical 100%) -->
+<tr class="hover:bg-[#F8FAFC] transition-colors border-b border-[#F2F6FA]">
+<td class="w-10 px-3 py-3.5 align-middle">
+<input aria-label="Select row" class="w-4 h-4 rounded text-primary focus:ring-primary/30 accent-primary cursor-pointer align-middle" type="checkbox"/>
+</td>
+<td class="px-3 py-3.5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-[7px] bg-[#FEF2F2] flex items-center justify-center text-[#BE452B] font-semibold text-[13px] shrink-0">
+                  ACT
+                </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate hover:text-primary cursor-pointer">Anh ngữ Á Châu Cần Thơ</span>
+<span class="text-xs text-outline font-mono bg-surface-container px-1.5 py-0.5 rounded-[4px]">TNT-CT-0004</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Trung tâm Đào tạo</span>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5">
+<span class="inline-flex items-center px-2.5 py-1 rounded-[6px] bg-[#F2F6FA] text-on-surface-variant font-label-sm text-label-sm font-semibold">
+                Standard
+              </span>
+</td>
+<td class="px-3 py-3.5 font-[tnum]">
+<div class="flex flex-col gap-1 w-full max-w-[190px]">
+<div class="flex justify-between items-center text-xs">
+<span class="font-semibold text-[#BE452B]">150 <span class="font-normal text-on-surface-variant">/ 150</span></span>
+<span class="font-semibold text-[#BE452B]">100%</span>
+</div>
+<div class="h-1.5 w-full bg-[#EAEFF5] rounded-full overflow-hidden">
+<div class="h-full bg-[#BE452B] rounded-full" style="width: 100%;"></div>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface">1 cơ sở</td>
+<td class="px-3 py-3.5">
+<span class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full bg-[#E6FFFA] text-[#088068] font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span>
+                Active
+              </span>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface-variant">10/09/2026</td>
+<td class="px-3 py-3.5 text-right">
+<button aria-label="Row actions" class="w-8 h-8 rounded-[7px] inline-flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-[#F8FAFC] transition-colors border-b border-[#F2F6FA]">
+<td class="w-10 px-3 py-3.5 align-middle">
+<input aria-label="Select row" class="w-4 h-4 rounded text-primary focus:ring-primary/30 accent-primary cursor-pointer align-middle" type="checkbox"/>
+</td>
+<td class="px-3 py-3.5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-[7px] bg-[#EEF2FF] flex items-center justify-center text-[#3730A3] font-semibold text-[13px] shrink-0">
+                  VUS
+                </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate hover:text-primary cursor-pointer">VUS Miền Bắc</span>
+<span class="text-xs text-outline font-mono bg-surface-container px-1.5 py-0.5 rounded-[4px]">TNT-HN-0041</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Hệ thống Anh ngữ</span>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5">
+<span class="inline-flex items-center px-2.5 py-1 rounded-[6px] bg-[#EEF2FF] text-[#4338CA] font-label-sm text-label-sm font-semibold">
+                Enterprise
+              </span>
+</td>
+<td class="px-3 py-3.5 font-[tnum]">
+<div class="flex flex-col gap-1 w-full max-w-[190px]">
+<div class="flex justify-between items-center text-xs">
+<span class="font-semibold text-on-surface">1,820 <span class="font-normal text-on-surface-variant">/ 2,500</span></span>
+<span class="font-semibold text-[#00658E]">72.8%</span>
+</div>
+<div class="h-1.5 w-full bg-[#EAEFF5] rounded-full overflow-hidden">
+<div class="h-full bg-[#00658E] rounded-full" style="width: 72.8%;"></div>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface">6 cơ sở</td>
+<td class="px-3 py-3.5">
+<span class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full bg-[#E6FFFA] text-[#088068] font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span>
+                Active
+              </span>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface-variant">15/07/2026</td>
+<td class="px-3 py-3.5 text-right">
+<button aria-label="Row actions" class="w-8 h-8 rounded-[7px] inline-flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 7 -->
+<tr class="hover:bg-[#F8FAFC] transition-colors border-b border-[#F2F6FA]">
+<td class="w-10 px-3 py-3.5 align-middle">
+<input aria-label="Select row" class="w-4 h-4 rounded text-primary focus:ring-primary/30 accent-primary cursor-pointer align-middle" type="checkbox"/>
+</td>
+<td class="px-3 py-3.5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-[7px] bg-[#ECFDF5] flex items-center justify-center text-[#065F46] font-semibold text-[13px] shrink-0">
+                  OXF
+                </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate hover:text-primary cursor-pointer">Học viện Ngôn ngữ Oxford Hải Phòng</span>
+<span class="text-xs text-outline font-mono bg-surface-container px-1.5 py-0.5 rounded-[4px]">TNT-HP-0007</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Trung tâm Khảo thí</span>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5">
+<span class="inline-flex items-center px-2.5 py-1 rounded-[6px] bg-[#EAF7EE] text-[#006753] font-label-sm text-label-sm font-semibold">
+                Growth
+              </span>
+</td>
+<td class="px-3 py-3.5 font-[tnum]">
+<div class="flex flex-col gap-1 w-full max-w-[190px]">
+<div class="flex justify-between items-center text-xs">
+<span class="font-semibold text-on-surface">290 <span class="font-normal text-on-surface-variant">/ 350</span></span>
+<span class="font-semibold text-[#00658E]">82.9%</span>
+</div>
+<div class="h-1.5 w-full bg-[#EAEFF5] rounded-full overflow-hidden">
+<div class="h-full bg-[#00658E] rounded-full" style="width: 82.9%;"></div>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface">2 cơ sở</td>
+<td class="px-3 py-3.5">
+<span class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full bg-[#E6FFFA] text-[#088068] font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span>
+                Active
+              </span>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface-variant">18/07/2026</td>
+<td class="px-3 py-3.5 text-right">
+<button aria-label="Row actions" class="w-8 h-8 rounded-[7px] inline-flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 8 -->
+<tr class="hover:bg-[#F8FAFC] transition-colors border-b border-[#F2F6FA]">
+<td class="w-10 px-3 py-3.5 align-middle">
+<input aria-label="Select row" class="w-4 h-4 rounded text-primary focus:ring-primary/30 accent-primary cursor-pointer align-middle" type="checkbox"/>
+</td>
+<td class="px-3 py-3.5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-[7px] bg-[#F0F3FF] flex items-center justify-center text-primary font-semibold text-[13px] shrink-0">
+                  BK
+                </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate hover:text-primary cursor-pointer">ĐH Bách Khoa Hà Nội (FLC)</span>
+<span class="text-xs text-outline font-mono bg-surface-container px-1.5 py-0.5 rounded-[4px]">TNT-HN-0033</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Trung tâm Ngoại ngữ ĐH</span>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5">
+<span class="inline-flex items-center px-2.5 py-1 rounded-[6px] bg-[#F0F3FF] text-[#204ECE] font-label-sm text-label-sm font-semibold">
+                Institution
+              </span>
+</td>
+<td class="px-3 py-3.5 font-[tnum]">
+<div class="flex flex-col gap-1 w-full max-w-[190px]">
+<div class="flex justify-between items-center text-xs">
+<span class="font-semibold text-on-surface">410 <span class="font-normal text-on-surface-variant">/ 600</span></span>
+<span class="font-semibold text-[#00658E]">68.3%</span>
+</div>
+<div class="h-1.5 w-full bg-[#EAEFF5] rounded-full overflow-hidden">
+<div class="h-full bg-[#00658E] rounded-full" style="width: 68.3%;"></div>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface">2 cơ sở</td>
+<td class="px-3 py-3.5">
+<span class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full bg-[#E6FFFA] text-[#088068] font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span>
+                Active
+              </span>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface-variant">02/06/2026</td>
+<td class="px-3 py-3.5 text-right">
+<button aria-label="Row actions" class="w-8 h-8 rounded-[7px] inline-flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 9 (Suspended) -->
+<tr class="hover:bg-[#F8FAFC] transition-colors border-b border-[#F2F6FA]">
+<td class="w-10 px-3 py-3.5 align-middle">
+<input aria-label="Select row" class="w-4 h-4 rounded text-primary focus:ring-primary/30 accent-primary cursor-pointer align-middle" type="checkbox"/>
+</td>
+<td class="px-3 py-3.5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-[7px] bg-[#FDEDE8] flex items-center justify-center text-[#BE452B] font-semibold text-[13px] shrink-0">
+                  BA
+                </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate hover:text-primary cursor-pointer">British Academy Nha Trang</span>
+<span class="text-xs text-outline font-mono bg-surface-container px-1.5 py-0.5 rounded-[4px]">TNT-KH-0012</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Học viện Quốc tế</span>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5">
+<span class="inline-flex items-center px-2.5 py-1 rounded-[6px] bg-[#EAF7EE] text-[#006753] font-label-sm text-label-sm font-semibold">
+                Growth
+              </span>
+</td>
+<td class="px-3 py-3.5 font-[tnum]">
+<div class="flex flex-col gap-1 w-full max-w-[190px]">
+<div class="flex justify-between items-center text-xs">
+<span class="font-semibold text-on-surface">195 <span class="font-normal text-on-surface-variant">/ 200</span></span>
+<span class="font-semibold text-[#9C6400]">97.5%</span>
+</div>
+<div class="h-1.5 w-full bg-[#EAEFF5] rounded-full overflow-hidden">
+<div class="h-full bg-[#9C6400] rounded-full" style="width: 97.5%;"></div>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface">1 cơ sở</td>
+<td class="px-3 py-3.5">
+<div class="flex flex-col items-start gap-0.5">
+<span class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full bg-[#FDEDE8] text-[#BE452B] font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#BE452B]"></span>
+                  Suspended
+                </span>
+<span class="font-body-sm text-[11px] text-[#BE452B]/80 pl-1 font-medium">vi phạm thanh toán</span>
+</div>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface-variant">14/05/2026</td>
+<td class="px-3 py-3.5 text-right">
+<button aria-label="Row actions" class="w-8 h-8 rounded-[7px] inline-flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 10 -->
+<tr class="hover:bg-[#F8FAFC] transition-colors">
+<td class="w-10 px-3 py-3.5 align-middle">
+<input aria-label="Select row" class="w-4 h-4 rounded text-primary focus:ring-primary/30 accent-primary cursor-pointer align-middle" type="checkbox"/>
+</td>
+<td class="px-3 py-3.5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-[7px] bg-[#FEF5E5] flex items-center justify-center text-[#9C6400] font-semibold text-[13px] shrink-0">
+                  SG
+                </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate hover:text-primary cursor-pointer">Trung tâm Khảo thí PTE Sài Gòn TestCenter</span>
+<span class="text-xs text-outline font-mono bg-surface-container px-1.5 py-0.5 rounded-[4px]">TNT-HCM-0089</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Test Center</span>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5">
+<span class="inline-flex items-center px-2.5 py-1 rounded-[6px] bg-[#F2F6FA] text-on-surface-variant font-label-sm text-label-sm font-semibold">
+                Standard
+              </span>
+</td>
+<td class="px-3 py-3.5 font-[tnum]">
+<div class="flex flex-col gap-1 w-full max-w-[190px]">
+<div class="flex justify-between items-center text-xs">
+<span class="font-semibold text-on-surface">85 <span class="font-normal text-on-surface-variant">/ 100</span></span>
+<span class="font-semibold text-[#9C6400]">85.0%</span>
+</div>
+<div class="h-1.5 w-full bg-[#EAEFF5] rounded-full overflow-hidden">
+<div class="h-full bg-[#9C6400] rounded-full" style="width: 85.0%;"></div>
+</div>
+</div>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface">1 cơ sở</td>
+<td class="px-3 py-3.5">
+<span class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full bg-[#E6FFFA] text-[#088068] font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#088068]"></span>
+                Active
+              </span>
+</td>
+<td class="px-3 py-3.5 font-[tnum] text-on-surface-variant">20/09/2026</td>
+<td class="px-3 py-3.5 text-right">
+<button aria-label="Row actions" class="w-8 h-8 rounded-[7px] inline-flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="pt-space-md mt-space-md border-t border-[#F2F6FA] flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="font-body-sm text-body-sm text-on-surface-variant">
+        Hiển thị <span class="font-semibold text-on-surface">1–10</span> trên <span class="font-semibold text-on-surface">37</span> tenants
+      </div>
+<div class="flex items-center gap-space-lg">
+<!-- Page size selector -->
+<div class="flex items-center gap-2">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Dòng / trang:</span>
+<div class="relative">
+<select aria-label="Page size" class="h-8 pl-2 pr-6 rounded-[7px] bg-surface-container-lowest text-on-surface font-body-sm text-body-sm border border-[#7C8FAC] appearance-none focus:outline-none focus:border-primary cursor-pointer">
+<option value="10">10</option>
+<option value="20">20</option>
+<option value="50">50</option>
+</select>
+<span class="material-symbols-outlined absolute right-1.5 top-1/2 -translate-y-1/2 text-[16px] text-[#7C8FAC] pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Pagination buttons -->
+<div class="flex items-center gap-1">
+<button aria-label="Previous page" class="w-8 h-8 rounded-[7px] flex items-center justify-center text-on-surface-variant hover:bg-surface-container disabled:opacity-40 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm" type="button">
+            1
+          </button>
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center text-on-surface hover:bg-surface-container font-label-sm text-label-sm font-medium transition-colors" type="button">
+            2
+          </button>
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center text-on-surface hover:bg-surface-container font-label-sm text-label-sm font-medium transition-colors" type="button">
+            3
+          </button>
+<button class="w-8 h-8 rounded-[7px] flex items-center justify-center text-on-surface hover:bg-surface-container font-label-sm text-label-sm font-medium transition-colors" type="button">
+            4
+          </button>
+<button aria-label="Next page" class="w-8 h-8 rounded-[7px] flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

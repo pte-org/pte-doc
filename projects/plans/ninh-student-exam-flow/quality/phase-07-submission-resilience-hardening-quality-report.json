@@ -1,0 +1,59 @@
+{
+  "mode": "gate",
+  "target": "phase-07-submission-resilience-hardening",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-07-27T00:00:00Z",
+  "reviewed_files": [
+    "lib/core/network/api_exceptions.dart",
+    "lib/core/network/api_client.dart",
+    "lib/core/sync/rate_limit_backoff.dart",
+    "lib/core/sync/sync_engine.dart",
+    "lib/core/sync/media_upload_coordinator.dart",
+    "lib/features/exam_attempt/presentation/bloc/exam_attempt_event.dart",
+    "lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart",
+    "lib/features/exam_attempt/presentation/widgets/exam_app_bar.dart",
+    "lib/core/constants/app_strings.dart",
+    "lib/features/exam_attempt/domain/timer_service.dart",
+    "test/integration/kill_cold_restart_recovery_test.dart",
+    "test/unit/sync/sync_engine_test.dart",
+    "test/unit/sync/media_upload_coordinator_test.dart"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [
+    {
+      "id": "QUAL-701",
+      "severity": "HIGH",
+      "rule": "PHASE07_BACKOFF_SUPPRESSES_ENTIRE_PASS",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "lib/core/sync/sync_engine.dart:140-151 (`_flush`'s `for (final answer in pending)` loop); lib/core/sync/media_upload_coordinator.dart:112-119 (`scanAll`'s `for (final row in rows)` loop)",
+      "evidence": "Both loops now re-check `_backoff.isActive` immediately after each row/answer and `break` as soon as it becomes true: `sync_engine.dart` lines 150-151 (`if (_backoff.isActive) break;` right after `flushedAny = true;`) and `media_upload_coordinator.dart` lines 115-118 (`if (_backoff.isActive) break;` right after `await _advance(row);`). A 429 hit on any row now stops the rest of that same pass rather than letting every remaining row also fire and re-register/compound the backoff.",
+      "why_it_matters": "Confirmed fixed — a 429 partway through a pass now stops all remaining rows in that pass, matching phase-07's Design Constraint (b) that the backoff must suppress the entire flush/scan pass, not just the offending row.",
+      "required_action": "None — resolved.",
+      "owner": "cook"
+    },
+    {
+      "id": "QUAL-702",
+      "severity": "MEDIUM",
+      "rule": "DRY_DUPLICATED_TEARDOWN",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart:161-168 (`_completeAttempt`), called from :151 (`_onForceSubmitRequested`) and :172 (`_emitFromResponse`)",
+      "evidence": "The shared teardown is now extracted into a single private method `_completeAttempt(String attemptPublicId, Emitter<ExamAttemptState> emit)` (lines 161-168) containing `_attemptPublicId = null`, `_syncEngine.setActiveTask(null)`, `_syncEngine.stopSync()`, `_timerService.stop()`, `_mediaUploadCoordinator.stop()`, and `emit(AttemptCompleted(attemptPublicId))`. Both `_onForceSubmitRequested` (line 151, after a successful `forceSubmit`) and `_emitFromResponse` (line 172, when `response.completed`) call this one method — no duplication remains.",
+      "why_it_matters": "Confirmed fixed — the two 'same outcome' paths this phase's contract requires to stay identical now share one implementation, eliminating the drift risk.",
+      "required_action": "None — resolved.",
+      "owner": "cook"
+    }
+  ],
+  "report_path": "plans/ninh-student-exam-flow/quality/phase-07-submission-resilience-hardening-quality-report.json"
+}

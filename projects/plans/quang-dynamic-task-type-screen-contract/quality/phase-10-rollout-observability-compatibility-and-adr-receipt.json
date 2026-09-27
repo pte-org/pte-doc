@@ -1,0 +1,20 @@
+{
+  "target": "phase-10-rollout-observability-compatibility-and-adr",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-dynamic-task-type-screen-contract/quality/phase-10-rollout-observability-compatibility-and-adr-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/attempt/internal/service/CapabilityNegotiationService.java",
+    "pte-api/app/src/main/java/com/pte/itembank/TaskTypeObservability.java",
+    "pte-api/app/src/main/java/com/pte/itembank/TaskTypeRolloutProperties.java",
+    "pte-api/app/src/main/java/com/pte/scoretemplate/internal/service/ScoreTemplateAdminService.java",
+    "pte-api/app/src/main/resources/application.yml",
+    "pte-doc/projects/architecture/ADR-010-dynamic-task-type-screen-contract.md",
+    "pte-doc/projects/plans/quang-dynamic-task-type-screen-contract/phase-10-rollout-observability-compatibility-and-adr.md",
+    "pte-doc/projects/runbooks/dynamic-task-type-rollout.md"
+  ],
+  "source_fingerprint": "sha256:4a8f90fe86c99de8be82f155f53886a4ad79da600f2d15d0895514c56cf21dd6",
+  "reviewed_at": "2026-09-22T16:35:00Z",
+  "open_blocking_findings": 0
+}

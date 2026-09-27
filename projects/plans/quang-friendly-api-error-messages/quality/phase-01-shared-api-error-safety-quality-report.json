@@ -1,0 +1,22 @@
+{
+  "mode": "gate",
+  "target": "phase-01-shared-api-error-safety",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-20T15:04:00+07:00",
+  "reviewed_files": [
+    "pte-web/packages/api-client/src/client/apiError.ts",
+    "pte-web/packages/api-client/src/client/client.ts",
+    "pte-web/packages/api-client/src/client/client.test.ts",
+    "pte-web/packages/api-client/src/client/errorMessage.ts",
+    "pte-web/packages/api-client/src/client/index.ts"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "report_path": "pte-doc/projects/plans/quang-friendly-api-error-messages/quality/phase-01-shared-api-error-safety-quality-report.json"
+}

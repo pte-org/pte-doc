@@ -1,0 +1,17 @@
+{
+  "target": "phase-01-rsa-keypair-startattempt",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\DOCUMENTFPT\\Github\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-answer-submission-encryption/quality/phase-01-rsa-keypair-startattempt-quality-report.json",
+  "reviewed_files": [
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/config/EncryptionKeyProvider.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/dto/response/AttemptTaskResponse.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/mapper/AttemptMapper.java",
+    "pte-api/services/exam-delivery/src/main/java/com/pte/examdelivery/service/AttemptService.java",
+    "pte-api/services/exam-delivery/src/main/resources/application.yml"
+  ],
+  "source_fingerprint": "sha256:e76755bbac82fa7ad62554b745ee3395e38d64ab439dbdf93cc10e97c15941e8",
+  "reviewed_at": "2026-08-28T00:00:00Z",
+  "open_blocking_findings": 0
+}
