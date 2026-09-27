@@ -132,6 +132,33 @@ for sprint 1. The N+1 of joining tenant-wide class list with
 memberships per class is not worth the latency at MVP scale. Add a
 follow-up backlog item if needed.
 
+### 2.6 Empty-state CTA "Create Class" must link to a real program
+
+Resolved UX gap (raised in plan review 2026-09-27): the empty state
+"Create Class" button cannot live inside `/host/classes` because
+classes are scoped to programs. The CTA must navigate to the first
+program's class management page, where the existing
+`ClassesSection` already owns the create-class UI.
+
+Implementation:
+
+```tsx
+const firstProgram = (programs ?? [])[0];
+
+// In EmptyStateNoClasses render:
+<Link
+  href={`/host/programs/${firstProgram.publicId}/classes?organizationPublicId=${firstProgram.organizationPublicId}`}
+  className="rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700"
+>
+  + {labels.class} in {firstProgram.name}
+</Link>
+```
+
+Edge case: if multiple programs exist with no classes, show a
+`Select` to pick which program to create the class under, instead of
+arbitrarily jumping to the first. Both programs and the empty-state
+data are already loaded by `usePrograms()`, so this is cheap.
+
 ---
 
 ## Design Constraints
@@ -158,6 +185,9 @@ follow-up backlog item if needed.
   perceived).
 - [ ] Empty state when tenant has 0 programs: shows "No programs yet"
   + CTA → `/host/programs`.
-- [ ] Empty state when tenant has programs but no classes: shows
-  "No classes yet" + CTA → first program's class creation flow.
+- [ ] Empty state when tenant has 1 program but 0 classes: shows
+  "No classes yet" + CTA → `/host/programs/{firstProgramId}/classes`.
+- [ ] Empty state when tenant has 2+ programs but 0 classes: shows
+  `Select` to pick which program to create the class under, then
+  routes to that program's class management page.
 - [ ] `pnpm build`, `pnpm lint`, `pnpm typecheck` all pass.
