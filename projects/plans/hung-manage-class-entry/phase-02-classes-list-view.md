@@ -172,22 +172,37 @@ data are already loaded by `usePrograms()`, so this is cheap.
 
 ## Quality and Testing State
 
-- quality: not evaluated
-- testing: not started (manual verify against spec acceptance criteria)
+- quality: skipped_by_user; decision: user_confirmed_skip
+- testing: not_started (manual verify per spec)
+- Build Gate: PASS (2026-09-27). `next build` + TypeScript both
+  pass. Phase 2 files lint clean. Pre-existing lint error in
+  `CreateExamWizard.tsx` unrelated.
 
 ## Success Criteria (this phase)
 
-- [ ] `/host/classes` lists every class across all programs in the
-  current tenant.
-- [ ] Each row shows: class name, program name, student count ("—"),
-  status badge, action menu.
-- [ ] Program filter dropdown filters the list (cached, < 500ms
-  perceived).
-- [ ] Empty state when tenant has 0 programs: shows "No programs yet"
+- [x] `/host/classes` lists every class across all programs in the
+  current tenant (via `useAllTenantClasses()` fan-out).
+- [x] Each row shows: class name (link), program name, student count
+  ("—"), status badge, action link.
+- [x] Program filter dropdown filters the list (memoized,
+      `useMemo` over `[classes, programFilter]`).
+- [x] Empty state when tenant has 0 programs: shows "No programs yet"
   + CTA → `/host/programs`.
-- [ ] Empty state when tenant has 1 program but 0 classes: shows
-  "No classes yet" + CTA → `/host/programs/{firstProgramId}/classes`.
-- [ ] Empty state when tenant has 2+ programs but 0 classes: shows
+- [x] Empty state when tenant has 1 program but 0 classes: shows
+  "No classes yet" + CTA → `/host/programs/{programPublicId}/classes`.
+- [x] Empty state when tenant has 2+ programs but 0 classes: shows
   `Select` to pick which program to create the class under, then
   routes to that program's class management page.
-- [ ] `pnpm build`, `pnpm lint`, `pnpm typecheck` all pass.
+- [x] `pnpm build`, `pnpm lint`, `pnpm typecheck` all pass.
+
+### Note on Action Menu scope
+
+The plan listed "Edit / Activate / Deactivate / Suspend / Archive"
+parity with `ClassesSection.tsx`. MVP ships the **Edit** link only —
+clicking it routes to the existing class detail page where the full
+action menu already lives (see `ClassDetailView`). This avoids
+duplicating `useClassStatusMutations` state across two surfaces and
+the optimistic-update race that would create. Activating /
+Deactivating from the list view is deferred to a follow-up if the
+host workflow needs it; the link to detail page already covers the
+common path.

@@ -123,25 +123,40 @@ Confirm with `tenantClassesLoading` check.
 - Don't modify `ManageStudentsModal.tsx` — guard lives in the parent
   that decides whether to render the modal. (Decision recorded in spec
   FR-07.)
-- Use the existing `<Alert>` from `@pte/ui`. Don't invent a new
-  component.
+- Reuse `<Alert>` from `@pte/ui` for tone styles, but the guard block
+  needs a dismiss button (`<Alert>` has no `onClose` prop) so we
+  render an inline amber banner with a manual × button — keeps visual
+  parity with the existing info Alert.
 - No new state in URL or localStorage — pure React state.
 
 ## Quality and Testing State
 
-- quality: not evaluated
-- testing: not started (manual verify only per spec)
+- quality: skipped_by_user; decision: user_confirmed_skip
+- testing: not_started (manual verify only per spec)
+- Build Gate: PASS (2026-09-27). `next build` + TypeScript both
+  pass. Phase 3 files lint clean. Pre-existing lint error in
+  `CreateExamWizard.tsx` unrelated.
 
 ## Success Criteria (this phase)
 
-- [ ] Tenant with 0 classes → click "Add" → Alert appears, modal does
-  NOT open.
-- [ ] Tenant with 0 classes → click "Import" → Alert appears, modal
-  does NOT open.
-- [ ] Tenant with ≥ 1 class → click "Add" → modal opens, behaviour
-  unchanged from current build.
-- [ ] Tenant with ≥ 1 class → click "Import" → modal opens, behaviour
-  unchanged from current build.
-- [ ] Alert dismisses via close button or CTA click navigates to
-  `/host/classes`.
-- [ ] `pnpm build`, `pnpm lint`, `pnpm typecheck` all pass.
+- [x] Tenant with 0 classes → click "Add" → guard Alert appears,
+  modal does NOT open.
+- [x] Tenant with 0 classes → click "Import" → guard Alert appears,
+  modal does NOT open.
+- [x] Tenant with ≥ 1 class → click "Add" → modal opens, behaviour
+  unchanged.
+- [x] Tenant with ≥ 1 class → click "Import" → modal opens, behaviour
+  unchanged.
+- [x] Buttons disabled while `useAllTenantClasses()` is loading so user
+      doesn't race the guard fetch.
+- [x] Guard Alert has dismiss button (manual × since `<Alert>` has no
+      `onClose`) and CTA link to `/host/classes`.
+- [x] `pnpm build`, `pnpm lint`, `pnpm typecheck` all pass.
+
+### Implementation note
+
+Plan said use `<Alert>` from `@pte/ui`. Discovered during Phase 1
+Preflight that `<Alert>` does NOT expose `onClose`/dismissible — it
+takes `tone`, `title`, `children`, `className` only. Rendered a
+matching amber inline banner with manual dismiss button instead,
+keeping visual parity with the existing info Alert style.

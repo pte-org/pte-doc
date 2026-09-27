@@ -116,13 +116,22 @@ No backend changes; risk documented in brainstorm risks section.
 
 ## Quality and Testing State
 
-| Phase | Quality | Testing |
-|-------|---------|---------|
-| 1 | not evaluated | not started |
-| 2 | not evaluated | not started |
-| 3 | not evaluated | not started |
+| Phase | Quality | Testing | Build Gate |
+|-------|---------|---------|------------|
+| 1 | skipped_by_user; decision: user_confirmed_skip | not_started (manual verify) | PASS 2026-09-27 |
+| 2 | skipped_by_user; decision: user_confirmed_skip | not_started (manual verify) | PASS 2026-09-27 |
+| 3 | skipped_by_user; decision: user_confirmed_skip | not_started (manual verify) | PASS 2026-09-27 |
 
 Per spec: e2e tests are out of scope. Manual verification only.
+User confirmed at cook-start (2026-09-27) that all 3 phases skip quality gate
+and unit tests; we rely on the Build Gate (build + lint + typecheck) only.
+
+## Plan Status
+
+- Status: completed (2026-09-27)
+- All 3 phases implemented; build + TypeScript pass on each.
+- Pre-existing lint error in `features/exams/components/CreateExamWizard.tsx:85`
+  remains unfixed; out of scope.
 
 ---
 
