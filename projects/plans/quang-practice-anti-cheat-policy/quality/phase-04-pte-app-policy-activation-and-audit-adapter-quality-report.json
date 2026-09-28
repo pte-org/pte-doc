@@ -1,0 +1,66 @@
+{
+  "mode": "gate",
+  "target": "phase-04-pte-app-policy-activation-and-audit-adapter",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-28T11:25:43+07:00",
+  "reviewed_files": [
+    "pte-doc/projects/plans/quang-practice-anti-cheat-policy/phase-04-pte-app-policy-activation-and-audit-adapter.md",
+    "pte-app/lib/core/network/api_client.dart",
+    "pte-app/lib/core/network/api_exceptions.dart",
+    "pte-app/lib/core/security/lockdown_mode.dart",
+    "pte-app/lib/core/security/lockdown_service.dart",
+    "pte-app/lib/core/security/models/violation_event.dart",
+    "pte-app/lib/core/security/violation_reporter.dart",
+    "pte-app/lib/core/security/violation_retry_coordinator.dart",
+    "pte-app/lib/core/di/security_module.dart",
+    "pte-app/lib/core/storage/app_database.dart",
+    "pte-app/lib/core/storage/app_database.g.dart",
+    "pte-app/lib/core/storage/tables/local_violations_table.dart",
+    "pte-app/lib/core/storage/dao/local_violation_dao.dart",
+    "pte-app/lib/features/exam_attempt/constants/exam_attempt_error_message.dart",
+    "pte-app/lib/features/exam_attempt/domain/task_view.dart",
+    "pte-app/lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart",
+    "pte-app/test/unit/core/security/lockdown_service_test.dart",
+    "pte-app/test/unit/core/security/violation_reporter_test.dart",
+    "pte-app/test/unit/storage/app_database_test.dart",
+    "pte-app/test/unit/storage/local_violation_dao_test.dart",
+    "pte-app/test/unit/features/exam_attempt/exam_attempt_bloc_lockdown_test.dart",
+    "pte-app/test/unit/features/exam_attempt/exam_attempt_bloc_test.dart",
+    "pte-api/app/src/main/java/com/pte/attempt/internal/controller/AttemptController.java",
+    "pte-api/app/src/main/java/com/pte/attempt/internal/dto/request/RecordSecurityViolationRequest.java",
+    "pte-api/app/src/main/java/com/pte/attempt/internal/service/AttemptSecurityAuditService.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 1
+  },
+  "findings": [
+    {
+      "id": "QUAL-P4-001",
+      "severity": "NOTED",
+      "rule": "BUILD_CHECKS_SCOPE",
+      "status": "ACCEPTED_DEBT",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-app/test/unit/features/exam_attempt/audio_recorder_service_impl_test.dart:59; pte-app/test/unit/features/exam_attempt/auto_record_cubit_test.dart: timer snapshot tests",
+      "evidence": "The full pte-app unit suite completed with 384 passed and 3 failed. The three failures reproduce in the two audio/auto-record test files and do not touch Phase 4 production code; the Phase 4 focused suite passed 34/34 and the exam-attempt regression file passed 29/29.",
+      "why_it_matters": "The repository-wide unit suite is not green, so a global release claim must continue to track the existing native-audio/auto-record baseline separately.",
+      "required_action": "Investigate the pre-existing audio recorder and auto-record fixture mismatch in a separate change; do not weaken fail-closed policy or expand Phase 4 into unrelated recording behavior.",
+      "owner": "none"
+    }
+  ],
+  "verification": {
+    "phase_focused_tests": "PASSED: 34/34",
+    "exam_attempt_regression": "PASSED: 29/29",
+    "scoped_analyze": "PASSED",
+    "dart_format": "PASSED",
+    "diff_check": "PASSED",
+    "full_unit_suite": "BASELINE_FAILURE_NOT_INTRODUCED: 384 passed, 3 failed, 0 skipped; failures outside Phase 4",
+    "contract_review": "PASSED: strict policy, activation ordering, authenticated attempt route, exact payload allowlist, local-first idempotent retry, terminal rejection, schema v5 backfill/index, and app-scoped single-flight coordinator"
+  },
+  "report_path": "pte-doc/projects/plans/quang-practice-anti-cheat-policy/quality/phase-04-pte-app-policy-activation-and-audit-adapter-quality-report.json"
+}

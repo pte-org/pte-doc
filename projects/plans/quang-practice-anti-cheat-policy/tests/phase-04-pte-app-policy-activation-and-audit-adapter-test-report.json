@@ -1,0 +1,21 @@
+{
+  "phase": "phase-04-pte-app-policy-activation-and-audit-adapter",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-28T11:25:43+07:00",
+  "summary": {
+    "passed": 63,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "scope": {
+    "phase_focused_suite": "34 passed: local violation DAO, Drift migration/backfill, strict activation, lockdown semantics, reporter transport/terminal handling, and retry coordinator",
+    "exam_attempt_regression": "29 passed: test/unit/features/exam_attempt/exam_attempt_bloc_test.dart",
+    "analyzer": "PASSED: scoped flutter analyze reported no issues",
+    "format": "PASSED: dart format --set-exit-if-changed reported 0 changed files",
+    "diff_check": "PASSED: git diff --check",
+    "full_unit_suite": "BASELINE_FAILURE_NOT_INTRODUCED: 384 passed and 3 failed out of 387; failures are outside Phase 4 in audio_recorder_service_impl_test.dart and auto_record_cubit_test.dart"
+  },
+  "report_path": "pte-doc/projects/plans/quang-practice-anti-cheat-policy/tests/phase-04-pte-app-policy-activation-and-audit-adapter-test-report.json"
+}
