@@ -1,0 +1,116 @@
+{
+  "mode": "verify",
+  "target": "phase-01-backend-policy-contract-and-invariants",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-28T09:31:01+07:00",
+  "reviewed_files": [
+    "pte-doc/projects/plans/quang-practice-anti-cheat-policy/phase-01-backend-policy-contract-and-invariants.md",
+    "pte-api/app/src/main/java/com/pte/session/domain/ExamPolicy.java",
+    "pte-api/app/src/main/java/com/pte/session/domain/ExamSession.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/constant/SessionConstants.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/dto/request/CreateExamDraftRequest.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/dto/request/PatchExamDraftRequest.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/exception/InvalidLockdownModeException.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/mapper/SessionMapper.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/policy/SessionPolicyResolver.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/EntitlementService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/ExamOrchestrationService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/SessionLifecycleService.java",
+    "pte-api/app/src/test/java/com/pte/attempt/internal/service/SnapshotPinServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/policy/SessionPolicyResolverTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/EntitlementServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/ExamOrchestrationServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 1
+  },
+  "findings": [
+    {
+      "id": "QUAL-P1-001",
+      "severity": "HIGH",
+      "rule": "API_BREAKING_CHANGE_DECLARED",
+      "status": "FIXED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-api/app/src/main/java/com/pte/session/internal/dto/request/CreateExamDraftRequest.java:20-41; pte-api/app/src/main/java/com/pte/session/internal/dto/request/PatchExamDraftRequest.java:16-38",
+      "evidence": "Adding the lockdownMode record component changes the public canonical constructor from the previous 12-argument CreateExamDraftRequest and 13-argument PatchExamDraftRequest signatures. The only overloads added accept the older reduced forms that predate selectedSkills/maxRetriesPerStudent; no overload preserves the immediately previous full constructor signatures.",
+      "why_it_matters": "Existing Java callers compiled against the canonical draft DTO constructors will fail to compile even though the phase explicitly requires source-compatible DTO constructors and optional JSON compatibility.",
+      "required_action": "Add public overloads matching the pre-change full CreateExamDraftRequest and PatchExamDraftRequest constructor signatures, delegating to the new canonical constructor with lockdownMode=null. Keep the reduced legacy overloads as well.",
+      "owner": "cook"
+    },
+    {
+      "id": "QUAL-P1-002",
+      "severity": "MEDIUM",
+      "rule": "CORR_DEFINED_BRANCH_BEHAVIOR",
+      "status": "FIXED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-api/app/src/main/java/com/pte/session/internal/mapper/SessionMapper.java:64-75",
+      "evidence": "toPolicy(policy, examMode) always calls resolveEffectiveLockdownMode(..., true), so every null lockdown value is treated as legacy. The phase resolver explicitly supports legacyState=false to fail closed for non-legacy null state, but the response and entitlement paths never select that branch.",
+      "why_it_matters": "A newly created or corrupted canonical session with a missing lockdown value can be returned as if it had a valid mode-derived policy, bypassing the phase requirement that non-legacy null state fail closed before response mapping and snapshot pinning.",
+      "required_action": "Carry an explicit legacy/non-legacy state decision into the session boundary and pass it to the resolver. Canonical drafts and persisted sessions known to be canonical must use legacyState=false; only identified legacy rows may receive the mode-aware compatibility default. Ensure the same resolved value is used before entitlement and snapshot pinning.",
+      "owner": "cook"
+    },
+    {
+      "id": "QUAL-P1-003",
+      "severity": "MEDIUM",
+      "rule": "CHG_ROLLOUT_BACKWARD_COMPATIBLE",
+      "status": "FIXED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-api/app/src/main/java/com/pte/session/domain/ExamSession.java:118-119",
+      "evidence": "The default embedded policy changed from ExamPolicy.mockTestDefault() to ExamPolicy.realExamDefault(). Canonical create and update flows already assign an explicit policy, so this domain-default change is not required to implement lockdownMode and affects any other construction path that does not immediately overwrite policy.",
+      "why_it_matters": "It silently changes the behavior of legacy or alternate session construction paths during rollout, conflicting with the phase constraint to leave the legacy route behavior unchanged and creating a stricter policy without an explicit exam-mode resolution.",
+      "required_action": "Restore the pre-change mockTestDefault() field default, or replace it with an explicitly documented compatibility strategy that proves every construction path sets policy before use. Do not use a global real-exam default as a substitute for mode-aware resolution.",
+      "owner": "cook"
+    },
+    {
+      "id": "QUAL-P1-004",
+      "severity": "LOW",
+      "rule": "RDB_COMMENT_EXPLAINS_WHY",
+      "status": "FIXED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-api/app/src/main/java/com/pte/session/internal/mapper/SessionMapper.java:42-49",
+      "evidence": "The comment says ExamPolicy.forMode()/backfillLegacyDefaults() always set all 5 policy fields together, but the current backfillLegacyDefaults implementation intentionally leaves lockdownMode null for mode-aware resolution.",
+      "why_it_matters": "The stale statement makes the null-lockdown compatibility design harder to reason about and contradicts the implementation immediately being reviewed.",
+      "required_action": "Update the comment to distinguish the four legacy backfilled fields from the intentionally mode-resolved lockdown field.",
+      "owner": "cook"
+    },
+    {
+      "id": "QUAL-P1-005",
+      "severity": "NOTED",
+      "rule": "CORR_DEFINED_BRANCH_BEHAVIOR",
+      "status": "ACCEPTED_OUT_OF_SCOPE",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "medium",
+      "location": "pte-api/app/src/main/java/com/pte/session/internal/service/SessionLifecycleService.java:203-221",
+      "evidence": "patchPolicy dereferences session.getPolicy() before checking for an incomplete/null embedded policy. A malformed legacy row can therefore produce a NullPointerException rather than the stable fail-closed policy error. This dereference predates the Phase 1 diff.",
+      "why_it_matters": "The phase defines explicit null and fail-closed policy behavior, but this existing policy-patch boundary still has an uncontrolled failure path for malformed persisted state.",
+      "required_action": "Track for the policy-boundary hardening follow-up; if Phase 1 remediation touches this path, convert the null/incomplete state to the owning stable DomainException without changing partial-update semantics.",
+      "owner": "none"
+    }
+  ],
+  "verification": {
+    "compile": "PASSED",
+    "focused_tests": {
+      "total": 81,
+      "passed": 81,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "diff_check": "PASSED"
+  },
+  "report_path": "pte-doc/projects/plans/quang-practice-anti-cheat-policy/quality/phase-01-backend-policy-contract-and-invariants-quality-report.json"
+}

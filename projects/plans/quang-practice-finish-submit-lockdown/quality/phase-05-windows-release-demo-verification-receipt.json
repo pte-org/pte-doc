@@ -1,0 +1,14 @@
+{
+  "target": "phase-05-windows-release-demo-verification",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org\\pte-doc\\projects\\plans\\quang-practice-finish-submit-lockdown",
+  "report_path": "quality/phase-05-windows-release-demo-verification-quality-report.json",
+  "reviewed_files": [
+    "phase-05-windows-release-demo-verification.md",
+    "tests/phase-05-windows-release-demo-verification-test-report.json"
+  ],
+  "source_fingerprint": "sha256:5e40c79c47e9f0639c02ec7c039c4fd34bc0a8138fa83d2a8dd205fa332e8f44",
+  "reviewed_at": "2026-09-29T00:00:00Z",
+  "open_blocking_findings": 0
+}

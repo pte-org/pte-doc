@@ -1,0 +1,29 @@
+{
+  "mode": "focused",
+  "target": "phase-02-finish-exam-ui-and-confirmation",
+  "verdict": "PASSED",
+  "tested_at": "2026-09-29T00:01:00Z",
+  "tested_files": [
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/widgets/exam_app_bar.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/widgets/exam_scaffold.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/widgets/task_advance_button.dart",
+    "D:/GitHub/pte-org/pte-app/test/widget/features/exam_attempt/exam_app_bar_test.dart",
+    "D:/GitHub/pte-org/pte-app/test/widget/features/exam_attempt/exam_scaffold_test.dart",
+    "D:/GitHub/pte-org/pte-app/test/widget/features/exam_attempt/task_advance_button_test.dart"
+  ],
+  "results": {
+    "flutter_widget_suite": {
+      "command": "flutter test test/widget/features/exam_attempt/exam_app_bar_test.dart test/widget/features/exam_attempt/exam_scaffold_test.dart test/widget/features/exam_attempt/task_advance_button_test.dart --reporter expanded",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    "flutter_analyze": {
+      "command": "flutter analyze lib/core/constants/exam_chrome_config.dart lib/core/storage/dao/answer_outbox_dao.dart lib/core/widgets/exam/exam_header_bar.dart lib/features/exam_attempt/constants/exam_attempt_strings.dart lib/features/exam_attempt/presentation/widgets/exam_app_bar.dart lib/features/exam_attempt/presentation/widgets/exam_scaffold.dart lib/features/exam_attempt/presentation/widgets/task_advance_button.dart test/widget/features/exam_attempt/exam_app_bar_test.dart",
+      "exit_code": 0
+    }
+  },
+  "summary": "Shared Finish exam confirmation shows answered/unanswered counts, permits incomplete submission, disables competing controls while awaiting acknowledgement, and exposes retry after a transport failure."
+}

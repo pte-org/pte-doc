@@ -1,0 +1,72 @@
+{
+  "mode": "gate",
+  "target": "phase-02-tenant-web-policy-setting-and-detail",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-28T09:42:28+07:00",
+  "reviewed_files": [
+    "pte-doc/projects/plans/quang-practice-anti-cheat-policy/phase-02-tenant-web-policy-setting-and-detail.md",
+    "pte-web/packages/api-client/src/client/errorMessage.ts",
+    "pte-web/packages/api-client/src/types/scheduling/index.ts",
+    "pte-web/packages/api-client/src/requests/scheduling/examOrchestration.ts",
+    "pte-web/packages/api-client/src/requests/scheduling/examOrchestration.test.ts",
+    "pte-web/apps/tenant-web/features/exams/types/index.ts",
+    "pte-web/apps/tenant-web/features/exams/api/index.ts",
+    "pte-web/apps/tenant-web/features/exams/constants/index.ts",
+    "pte-web/apps/tenant-web/features/exams/utils/examPolicy.ts",
+    "pte-web/apps/tenant-web/features/exams/utils/validateCreateExamWorkflow.ts",
+    "pte-web/apps/tenant-web/features/exams/components/CreateExamWizard.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/SessionDetailView.tsx"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 2
+  },
+  "findings": [
+    {
+      "id": "QUAL-P2-001",
+      "severity": "NOTED",
+      "rule": "BUILD_CHECKS_SCOPE",
+      "status": "ACCEPTED_OUT_OF_SCOPE",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-web/apps/tenant-web/features/exams/components/CreateExamWizard.tsx:22,69,91",
+      "evidence": "The repository lint command reports two existing unused-variable warnings and the existing react-hooks/set-state-in-effect error in the template synchronization effect. The new policy changes do not modify that effect or introduce the unused imports/prop.",
+      "why_it_matters": "The tenant lint command cannot be reported as green until the baseline wizard lint debt is addressed.",
+      "required_action": "Track as a separate tenant-web lint cleanup; Phase 2 typecheck, API tests, production build, and policy review are otherwise clean.",
+      "owner": "none"
+    },
+    {
+      "id": "QUAL-P2-002",
+      "severity": "NOTED",
+      "rule": "BUILD_CHECKS_SCOPE",
+      "status": "ACCEPTED_OUT_OF_SCOPE",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-web/packages/ui/src/components/Toast.tsx:87",
+      "evidence": "The authenticated browser attempt reported a ToastProvider hydration mismatch before the policy workflow could be exercised. The mismatch is outside the Phase 2 changed files and existed in the shared UI provider path.",
+      "why_it_matters": "Hydration errors can make browser walkthrough results unreliable and should be cleaned up before treating the tenant UI as release-clean.",
+      "required_action": "Track as a separate shared-ui hydration cleanup; do not expand Phase 2 into an unrelated foundation refactor.",
+      "owner": "none"
+    }
+  ],
+  "verification": {
+    "api_client_typecheck": "PASSED",
+    "api_client_tests": {
+      "total": 324,
+      "passed": 324,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "tenant_typecheck": "PASSED",
+    "tenant_build": "PASSED",
+    "tenant_lint": "BASELINE_FAILURE_NOT_INTRODUCED",
+    "diff_check": "PASSED"
+  },
+  "report_path": "pte-doc/projects/plans/quang-practice-anti-cheat-policy/quality/phase-02-tenant-web-policy-setting-and-detail-quality-report.json"
+}
