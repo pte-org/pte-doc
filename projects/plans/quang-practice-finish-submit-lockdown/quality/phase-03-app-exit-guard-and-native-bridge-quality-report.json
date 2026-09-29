@@ -1,0 +1,31 @@
+{
+  "mode": "gate",
+  "target": "phase-03-app-exit-guard-and-native-bridge",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-29T01:00:00Z",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-app/lib/core/platform/lockdown_exception.dart",
+    "D:/GitHub/pte-org/pte-app/lib/core/platform/window_manager_channel.dart",
+    "D:/GitHub/pte-org/pte-app/lib/core/security/lockdown_service.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart",
+    "D:/GitHub/pte-org/pte-app/windows/runner/flutter_window.cpp",
+    "D:/GitHub/pte-org/pte-app/windows/runner/lockdown_plugin.cpp",
+    "D:/GitHub/pte-org/pte-app/windows/runner/lockdown_plugin.h",
+    "D:/GitHub/pte-org/pte-app/test/unit/core/security/lockdown_service_test.dart",
+    "D:/GitHub/pte-org/pte-app/test/unit/features/exam_attempt/exam_attempt_bloc_lockdown_test.dart"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "notes": [
+    "The native runner makes only synchronous close, minimize, focus, and system-command decisions; warning/audit reporting is emitted as a lightweight event for Dart.",
+    "The app-level guard is independent from anti-cheat fullscreen, so Practice/NONE attempts remain guarded without changing the centered bounded login window.",
+    "Alt+Tab and focus restoration remain best-effort app-level behavior; Windows Assigned Access/Shell Launcher is intentionally out of scope."
+  ],
+  "report_path": "pte-doc/projects/plans/quang-practice-finish-submit-lockdown/quality/phase-03-app-exit-guard-and-native-bridge-quality-report.json"
+}

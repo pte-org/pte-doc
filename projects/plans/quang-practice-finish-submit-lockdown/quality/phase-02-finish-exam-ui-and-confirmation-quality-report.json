@@ -1,0 +1,31 @@
+{
+  "mode": "gate",
+  "target": "phase-02-finish-exam-ui-and-confirmation",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-29T00:00:00Z",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-app/lib/core/constants/exam_chrome_config.dart",
+    "D:/GitHub/pte-org/pte-app/lib/core/storage/dao/answer_outbox_dao.dart",
+    "D:/GitHub/pte-org/pte-app/lib/core/widgets/exam/exam_header_bar.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/constants/exam_attempt_strings.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/widgets/exam_app_bar.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/widgets/exam_scaffold.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/widgets/task_advance_button.dart",
+    "D:/GitHub/pte-org/pte-app/test/widget/features/exam_attempt/exam_app_bar_test.dart",
+    "D:/GitHub/pte-org/pte-app/test/widget/features/exam_attempt/exam_scaffold_test.dart"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "notes": [
+    "Finish exam is rendered by the shared exam header, including compact accessibility semantics and a visible text label at the normal wide exam layout.",
+    "The confirmation count is derived from local answer outbox rows and does not block zero-answer submission.",
+    "Submitting disables shared task interaction and retryable failure keeps the attempt active with a visible retry action."
+  ],
+  "report_path": "pte-doc/projects/plans/quang-practice-finish-submit-lockdown/quality/phase-02-finish-exam-ui-and-confirmation-quality-report.json"
+}

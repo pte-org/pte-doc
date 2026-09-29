@@ -1,0 +1,28 @@
+{
+  "target": "phase-04-submit-lock-lifecycle-and-recovery",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-practice-finish-submit-lockdown/quality/phase-04-submit-lock-lifecycle-and-recovery-quality-report.json",
+  "reviewed_files": [
+    "pte-app/lib/core/security/lockdown_service.dart",
+    "pte-app/lib/core/storage/dao/pending_media_upload_dao.dart",
+    "pte-app/lib/core/sync/media_upload_coordinator.dart",
+    "pte-app/lib/core/sync/submission_preparation_exception.dart",
+    "pte-app/lib/core/sync/sync_engine.dart",
+    "pte-app/lib/features/exam_attempt/constants/exam_attempt_error_message.dart",
+    "pte-app/lib/features/exam_attempt/constants/exam_attempt_strings.dart",
+    "pte-app/lib/features/exam_attempt/domain/repositories/exam_attempt_repository.dart",
+    "pte-app/lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart",
+    "pte-app/lib/features/exam_attempt/presentation/widgets/exam_scaffold.dart",
+    "pte-app/test/unit/core/security/lockdown_service_test.dart",
+    "pte-app/test/unit/features/exam_attempt/exam_attempt_bloc_lockdown_test.dart",
+    "pte-app/test/unit/features/exam_attempt/exam_attempt_bloc_test.dart",
+    "pte-app/test/unit/sync/media_upload_coordinator_test.dart",
+    "pte-app/test/unit/sync/sync_engine_test.dart",
+    "pte-app/test/widget/features/exam_attempt/exam_scaffold_test.dart"
+  ],
+  "source_fingerprint": "sha256:7f1020bcbaee0ad6b20c5b6c59e730b44630a06af23b4a1f8d2c645e5dd1b8d9",
+  "reviewed_at": "2026-09-29T01:00:00Z",
+  "open_blocking_findings": 0
+}

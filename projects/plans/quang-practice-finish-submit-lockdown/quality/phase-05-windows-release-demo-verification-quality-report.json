@@ -1,0 +1,24 @@
+{
+  "mode": "gate",
+  "target": "phase-05-windows-release-demo-verification",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-29T00:00:00Z",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-doc/projects/plans/quang-practice-finish-submit-lockdown/phase-05-windows-release-demo-verification.md",
+    "D:/GitHub/pte-org/pte-doc/projects/plans/quang-practice-finish-submit-lockdown/tests/phase-05-windows-release-demo-verification-test-report.json"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "notes": [
+    "The release evidence distinguishes the centered bounded login window from the guarded exam/device-check window.",
+    "The local stack was started without deleting volumes; the remaining release acceptance is intentionally manual because desktop focus/close behavior cannot be established by Dart tests alone.",
+    "The documentation keeps the app-level limitation explicit and does not claim Assigned Access/Shell Launcher kiosk security."
+  ],
+  "report_path": "pte-doc/projects/plans/quang-practice-finish-submit-lockdown/quality/phase-05-windows-release-demo-verification-quality-report.json"
+}

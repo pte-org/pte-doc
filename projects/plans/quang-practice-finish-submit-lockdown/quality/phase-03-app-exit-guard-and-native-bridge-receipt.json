@@ -1,0 +1,21 @@
+{
+  "target": "phase-03-app-exit-guard-and-native-bridge",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-practice-finish-submit-lockdown/quality/phase-03-app-exit-guard-and-native-bridge-quality-report.json",
+  "reviewed_files": [
+    "pte-app/lib/core/platform/lockdown_exception.dart",
+    "pte-app/lib/core/platform/window_manager_channel.dart",
+    "pte-app/lib/core/security/lockdown_service.dart",
+    "pte-app/lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart",
+    "pte-app/test/unit/core/security/lockdown_service_test.dart",
+    "pte-app/test/unit/features/exam_attempt/exam_attempt_bloc_lockdown_test.dart",
+    "pte-app/windows/runner/flutter_window.cpp",
+    "pte-app/windows/runner/lockdown_plugin.cpp",
+    "pte-app/windows/runner/lockdown_plugin.h"
+  ],
+  "source_fingerprint": "sha256:0a3a2ff5f25461ef0a3348c5ab491fdce7815591b8d83287558cf67d973bc30b",
+  "reviewed_at": "2026-09-29T01:00:00Z",
+  "open_blocking_findings": 0
+}

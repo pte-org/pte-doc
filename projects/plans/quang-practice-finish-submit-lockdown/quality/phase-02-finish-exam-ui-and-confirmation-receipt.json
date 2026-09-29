@@ -1,0 +1,21 @@
+{
+  "target": "phase-02-finish-exam-ui-and-confirmation",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-practice-finish-submit-lockdown/quality/phase-02-finish-exam-ui-and-confirmation-quality-report.json",
+  "reviewed_files": [
+    "pte-app/lib/core/constants/exam_chrome_config.dart",
+    "pte-app/lib/core/storage/dao/answer_outbox_dao.dart",
+    "pte-app/lib/core/widgets/exam/exam_header_bar.dart",
+    "pte-app/lib/features/exam_attempt/constants/exam_attempt_strings.dart",
+    "pte-app/lib/features/exam_attempt/presentation/widgets/exam_app_bar.dart",
+    "pte-app/lib/features/exam_attempt/presentation/widgets/exam_scaffold.dart",
+    "pte-app/lib/features/exam_attempt/presentation/widgets/task_advance_button.dart",
+    "pte-app/test/widget/features/exam_attempt/exam_app_bar_test.dart",
+    "pte-app/test/widget/features/exam_attempt/exam_scaffold_test.dart"
+  ],
+  "source_fingerprint": "sha256:6e432458e19b501fd37d1c9e54580a34c9039ea7a6d092d5ce3ddd1ef596f359",
+  "reviewed_at": "2026-09-29T00:00:00Z",
+  "open_blocking_findings": 0
+}

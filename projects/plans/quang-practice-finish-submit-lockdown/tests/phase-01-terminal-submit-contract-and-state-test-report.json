@@ -1,0 +1,40 @@
+{
+  "mode": "focused",
+  "target": "phase-01-terminal-submit-contract-and-state",
+  "verdict": "PASSED",
+  "tested_at": "2026-09-28T16:53:00Z",
+  "tested_files": [
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/service/AttemptLifecycleService.java",
+    "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServiceSubmitAttemptTest.java",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/bloc/exam_attempt_state.dart",
+    "D:/GitHub/pte-org/pte-app/test/unit/features/exam_attempt/exam_attempt_bloc_test.dart"
+  ],
+  "results": {
+    "backend_submit_lifecycle": {
+      "command": ".\\mvnw.cmd -pl app -Dtest=AttemptLifecycleServiceSubmitAttemptTest -DfailIfNoTests=true test",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    "flutter_exam_attempt_bloc": {
+      "command": "flutter test test/unit/features/exam_attempt/exam_attempt_bloc_test.dart --reporter expanded",
+      "tests": 29,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    "backend_compile": {
+      "command": ".\\mvnw.cmd -pl app -DskipTests compile",
+      "exit_code": 0
+    },
+    "flutter_analyze": {
+      "command": "flutter analyze lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart lib/features/exam_attempt/presentation/bloc/exam_attempt_state.dart",
+      "exit_code": 0
+    }
+  },
+  "summary": "Terminal submission is acknowledged by the server before completion is emitted; submitted replay is idempotent; concurrent force-submit is guarded; retryable failure remains in the active attempt state."
+}
