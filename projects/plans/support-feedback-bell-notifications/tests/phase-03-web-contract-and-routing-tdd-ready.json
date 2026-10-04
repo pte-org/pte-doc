@@ -1,0 +1,12 @@
+{
+  "phase": "phase-03-web-contract-and-routing",
+  "status": "RED_READY",
+  "prepared_at": "2026-10-04T13:47:03Z",
+  "test_files": [
+    "pte-web/packages/api-client/src/requests/notification/inbox.test.ts"
+  ],
+  "expected_red_reason": "The new support notification type, category, target, and SUPPORT list-filter literal are not accepted by the current api-client unions; typecheck fails on the contract assertions before the implementation change.",
+  "red_command": "corepack pnpm --filter @pte/api-client typecheck",
+  "red_observed": "TypeScript reported four TS2322 errors for SUPPORT_TICKET_NOTE_ADDED, SUPPORT, SUPPORT_TICKET, and the SUPPORT category filter.",
+  "artifact_path": "pte-doc/projects/plans/support-feedback-bell-notifications/tests/phase-03-web-contract-and-routing-tdd-ready.json"
+}

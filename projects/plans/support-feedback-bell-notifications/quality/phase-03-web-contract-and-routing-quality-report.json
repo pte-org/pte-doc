@@ -1,0 +1,40 @@
+{
+  "mode": "gate",
+  "target": "phase-03-web-contract-and-routing",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-04T13:51:00Z",
+  "reviewed_files": [
+    "pte-doc/projects/plans/support-feedback-bell-notifications/phase-03-web-contract-and-routing.md",
+    "pte-web/packages/api-client/src/types/notification/index.ts",
+    "pte-web/packages/api-client/src/requests/notification/inbox.test.ts",
+    "pte-web/apps/tenant-web/features/notifications/components/NotificationBellContainer.tsx",
+    "pte-web/apps/tenant-web/features/notifications/components/NotificationHistoryView.tsx",
+    "pte-web/apps/vendor-web/features/notifications/components/NotificationBellContainer.tsx",
+    "pte-web/apps/vendor-web/features/notifications/components/NotificationHistoryView.tsx",
+    "pte-web/apps/vendor-web/features/supportTickets/constants/index.ts"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 1
+  },
+  "findings": [
+    {
+      "id": "QUAL-004",
+      "severity": "NOTED",
+      "rule": "DOC_INTENTIONAL_LIMIT_IS_A_NON_GOAL",
+      "status": "OPEN",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/projects/plans/support-feedback-bell-notifications/phase-03-web-contract-and-routing.md:Acceptance and tests",
+      "evidence": "The existing tenant and vendor notification components keep targetHref private and the repository has no app-level notification component test harness. Typechecks and production builds verify compilation and route generation, but not an authenticated click that marks one item read before navigation.",
+      "why_it_matters": "A build cannot prove the complete browser interaction, identity scoping, or read-state invalidation path for a support item.",
+      "required_action": "Run the Phase 04 browser acceptance flow with tenant and platform-admin accounts, including unread support selection, SUPPORT filtering, mark-all, polling/focus refresh, and unauthorized-ticket handling.",
+      "owner": "release-operator"
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/support-feedback-bell-notifications/quality/phase-03-web-contract-and-routing-quality-report.json"
+}
