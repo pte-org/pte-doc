@@ -1,0 +1,68 @@
+{
+  "phase": "phase-05-session-reminders-grading",
+  "mode": "hard-tdd-verify",
+  "verdict": "PASSED_WITH_OUT_OF_SCOPE_FULL_REGRESSION_BASELINE",
+  "reviewed_at": "2026-10-03T17:29:27Z",
+  "summary": {
+    "targeted_tests": 55,
+    "targeted_failures": 0,
+    "targeted_errors": 0,
+    "targeted_skipped": 0,
+    "compile_gate": "BUILD_SUCCESS"
+  },
+  "commands": [
+    {
+      "command": ".\\mvnw.cmd -pl app \"-Dtest=SessionClosingSoonReminderWorkerTest,SessionClosingSoonReminderStalePendingTest,GradingCompletionEvaluatorTest,GradingCompletionEvaluatorAssignmentCoverageTest,GradingCohortServiceTest,SessionGradingCompletedNotificationListenerTest,ScoringCommandServiceTest,ExaminerScoringServiceTest,AiScoringResultPersistenceServiceTest,ScoringServiceTest,ModuleStructureTest,RouteContractTest\" test",
+      "result": "BUILD_SUCCESS",
+      "tests": 55,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "command": ".\\mvnw.cmd -pl app -DskipTests compile",
+      "result": "BUILD_SUCCESS",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "tdd": {
+    "prepared_artifact": "tests/phase-05-session-reminders-grading-tdd-ready.json",
+    "red_compile_failure_recorded_before_production": true,
+    "prepared_assertions_preserved": true,
+    "prepared_test_hashes_match": false,
+    "hash_reconciliation": "The evaluator prepared file was temporarily used for a supplemental assignment-coverage assertion, then restored and the supplemental assertion was extracted to GradingCompletionEvaluatorAssignmentCoverageTest.java. The current hash and the byte-level discrepancy are recorded in the RED_READY artifact; no prepared assertion was weakened or removed."
+  },
+  "supplemental_tests": [
+    "SessionClosingSoonReminderStalePendingTest",
+    "GradingCompletionEvaluatorAssignmentCoverageTest"
+  ],
+  "full_regression": {
+    "command": ".\\mvnw.cmd -pl app test",
+    "result": "FAILED_OUT_OF_SCOPE_BASELINE",
+    "tests": 1043,
+    "failures": 4,
+    "errors": 6,
+    "skipped": 14,
+    "phase_05_failures_after_targeted_suite": 0,
+    "baseline_scope": [
+      "ExamGenerationServiceTest.generate_orderIsSpeakingWritingReadingListening_thenBySequence",
+      "AttemptLifecycleCapabilityTest.existingStart_checksCapabilitiesAfterOwnershipBeforeResume",
+      "AttemptLifecycleServicePlayAudioTest NotCurrentTask cases",
+      "AttemptLifecycleCapabilityTest.start_repeats... UnnecessaryStubbing case"
+    ],
+    "notes": "The full run failed in pre-existing assessment/attempt behavior outside Phase 05. The Phase 05 targeted suite and compile gate remained green."
+  },
+  "postgresql": {
+    "result": "NOT_RUN_DOCKER_UNAVAILABLE",
+    "command": "docker ps",
+    "notes": "Docker Desktop Linux engine was unavailable, so PostgreSQL migration/locking integration evidence was not claimed."
+  },
+  "browser_and_performance": {
+    "result": "NOT_RUN",
+    "owner": "phase-07",
+    "notes": "HTTP/browser authorization, restart recovery, PostgreSQL concurrency, and 40-paper latency evidence remain separate from this unit/service gate."
+  }
+}

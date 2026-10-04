@@ -1,0 +1,39 @@
+{
+  "phase": "phase-04-commercial-hooks-exact-targets",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-03T15:27:27Z",
+  "summary": {
+    "passed": 32,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "commands": [
+    {
+      "command": ".\\mvnw.cmd -pl app \"-Dtest=CommercialNotificationListenerTest,SubscriptionActivationServiceTest,SubscriptionPersistenceServiceTest,OrderServiceTest,BillingServiceTest,PayOsWebhookServiceTest,OrderExpirationServiceTest,LicenseCodeServiceTest\" test",
+      "result": "BUILD_SUCCESS",
+      "tests": 32
+    },
+    {
+      "command": ".\\mvnw.cmd -pl app \"-Dtest=CommercialNotificationListenerTest,SubscriptionActivationServiceTest,SubscriptionPersistenceServiceTest,OrderPersistenceServiceTest,OrderServiceTest,BillingServiceTest,PayOsWebhookServiceTest,OrderExpirationServiceTest,LicenseCodeServiceTest,RouteContractTest,ModuleStructureTest\" test",
+      "result": "BUILD_SUCCESS",
+      "tests": 42
+    }
+  ],
+  "tdd": {
+    "prepared_artifact": "pte-doc/projects/plans/quang-tenant-admin-notifications/tests/phase-04-commercial-hooks-exact-targets-tdd-ready.json",
+    "prepared_test_hashes_match": true,
+    "supplemental_test": "pte-api/app/src/test/java/com/pte/billing/internal/service/OrderPersistenceServiceTest.java"
+  },
+  "full_regression": {
+    "command": ".\\mvnw.cmd -pl app test",
+    "result": "FAILED_OUT_OF_SCOPE_BASELINE",
+    "tests": 1034,
+    "failures": 4,
+    "errors": 7,
+    "phase04_failures_after_latest_fix": 0,
+    "notes": "The full run included pre-existing assessment/attempt failures and started before the final malformed-event test stub cleanup; the current Phase 04 targeted suite passes after that cleanup."
+  },
+  "report_path": "pte-doc/projects/plans/quang-tenant-admin-notifications/tests/phase-04-commercial-hooks-exact-targets-test-report.json"
+}

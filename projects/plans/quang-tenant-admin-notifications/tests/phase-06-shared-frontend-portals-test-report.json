@@ -1,0 +1,107 @@
+{
+  "phase": "phase-06-shared-frontend-portals",
+  "mode": "hard-tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-04T04:19:14Z",
+  "summary": {
+    "api_client_test_files": 14,
+    "api_client_tests": 357,
+    "api_client_passed": 357,
+    "api_client_failed": 0,
+    "compile_gates": "PASSED",
+    "portal_builds": "PASSED",
+    "portal_lint_errors": 0
+  },
+  "tdd": {
+    "prepared_artifact": "tests/phase-06-shared-frontend-portals-tdd-ready.json",
+    "red_compile_failure_recorded_before_production": true,
+    "red_command": "corepack pnpm --filter @pte/api-client exec vitest run src/requests/notification/inbox.test.ts src/requests/notification/announcements.test.ts src/requests/scoring/gradingCohort.test.ts",
+    "red_exit_code": 1,
+    "red_failed_suites": 3,
+    "green_command": "corepack pnpm --filter @pte/api-client test",
+    "green_test_files": 14,
+    "green_tests": 357,
+    "green_passed": 357,
+    "green_failed": 0
+  },
+  "commands": [
+    {
+      "command": "corepack pnpm --filter @pte/api-client test",
+      "result": "PASSED",
+      "tests": 357,
+      "failures": 0
+    },
+    {
+      "command": "corepack pnpm --filter @pte/api-client exec tsc --noEmit",
+      "result": "PASSED"
+    },
+    {
+      "command": "corepack pnpm --filter @pte/ui typecheck",
+      "result": "PASSED"
+    },
+    {
+      "command": "corepack pnpm --filter vendor-web exec tsc --noEmit",
+      "result": "PASSED"
+    },
+    {
+      "command": "corepack pnpm --filter tenant-web exec tsc --noEmit",
+      "result": "PASSED"
+    },
+    {
+      "command": "corepack pnpm --filter vendor-web lint",
+      "result": "PASSED",
+      "errors": 0,
+      "warnings": 2,
+      "warning_scope": "Pre-existing QuestionBank <img> warnings"
+    },
+    {
+      "command": "corepack pnpm --filter tenant-web lint",
+      "result": "PASSED",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "command": "corepack pnpm --filter vendor-web build",
+      "result": "PASSED",
+      "routes_verified": [
+        "/admin/announcements",
+        "/admin/announcements/[publicId]",
+        "/admin/notifications",
+        "/admin/notifications/[publicId]"
+      ]
+    },
+    {
+      "command": "corepack pnpm --filter tenant-web build",
+      "result": "PASSED",
+      "routes_verified": [
+        "/host/notifications",
+        "/host/notifications/[publicId]",
+        "/host/exams/[publicId]"
+      ]
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASSED",
+      "notes": "Only normal LF-to-CRLF conversion warnings for existing tracked files."
+    }
+  ],
+  "not_run": [
+    {
+      "scope": "browser/Playwright",
+      "reason": "Phase 07 owns live navigation, role denial, focus/Escape, polling visibility and deep-link evidence."
+    },
+    {
+      "scope": "PostgreSQL/HTTP authorization",
+      "reason": "Phase 06 changes are frontend/client-only; live deployment/filter-chain evidence remains in Phase 07."
+    },
+    {
+      "scope": "performance",
+      "reason": "No measured polling, inbox, publication or host-scale latency evidence was claimed."
+    }
+  ],
+  "scope_notes": [
+    "The shared NotificationCenter owns presentation and accessibility behavior only; portal adapters own auth, routes and cache policy.",
+    "The host grading cohort control is rendered after CLOSED and does not force-submit or exclude submitted attempts.",
+    "The two existing vendor QuestionBank img warnings are outside this phase and did not block lint."
+  ]
+}
