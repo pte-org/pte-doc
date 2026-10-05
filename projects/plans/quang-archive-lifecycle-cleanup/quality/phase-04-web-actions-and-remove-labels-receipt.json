@@ -1,0 +1,28 @@
+{
+  "target": "phase-04-web-actions-and-remove-labels",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-archive-lifecycle-cleanup/quality/phase-04-web-actions-and-remove-labels-quality-report.json",
+  "reviewed_files": [
+    "pte-web/apps/tenant-web/features/classes/constants/index.ts",
+    "pte-web/apps/tenant-web/features/programs/components/ProgramDetailView.tsx",
+    "pte-web/apps/tenant-web/features/programs/constants/index.ts",
+    "pte-web/apps/vendor-web/features/commercialization/api.ts",
+    "pte-web/apps/vendor-web/features/commercialization/components/PlanCatalogView.tsx",
+    "pte-web/apps/vendor-web/features/commercialization/constants.ts",
+    "pte-web/apps/vendor-web/features/questionbank/api.ts",
+    "pte-web/apps/vendor-web/features/questionbank/components/_QuestionTable.tsx",
+    "pte-web/apps/vendor-web/features/questionbank/constants.ts",
+    "pte-web/apps/vendor-web/features/questionbank/types.ts",
+    "pte-web/packages/api-client/src/requests/billing/plans.test.ts",
+    "pte-web/packages/api-client/src/requests/billing/plans.ts",
+    "pte-web/packages/api-client/src/types/billing/index.ts",
+    "pte-web/packages/api-client/src/types/question/index.ts",
+    "pte-web/packages/ui/src/components/ConfirmDialog.tsx",
+    "pte-web/packages/ui/src/components/Modal.tsx"
+  ],
+  "source_fingerprint": "sha256:6b469a16cf6472a5f9b4ad976c385de2530807c76627233fa9deb78c1a2e956e",
+  "reviewed_at": "2026-10-05T10:23:39.211Z",
+  "open_blocking_findings": 0
+}

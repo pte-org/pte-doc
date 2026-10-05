@@ -1,0 +1,15 @@
+{
+  "target": "phase-01-contract-and-provenance",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-archive-lifecycle-cleanup/quality/phase-01-contract-and-provenance-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/itembank/domain/Question.java",
+    "pte-api/app/src/main/java/com/pte/itembank/internal/service/QuestionLifecyclePolicy.java",
+    "pte-api/app/src/main/resources/db/migration/V77__question_publication_provenance.sql"
+  ],
+  "source_fingerprint": "sha256:0d1f3ff0f65306a873625b708c1a490e55c2768cea0129a4383fb12637dd1061",
+  "reviewed_at": "2026-10-05T09:36:27Z",
+  "open_blocking_findings": 0
+}

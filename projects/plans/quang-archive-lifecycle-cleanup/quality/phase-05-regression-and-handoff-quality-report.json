@@ -1,0 +1,27 @@
+{
+  "mode": "gate",
+  "target": "phase-05-regression-and-handoff",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-05T10:23:40.418Z",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/billing/internal/service/ArchiveLifecyclePostgresIntegrationTest.java",
+    "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/itembank/internal/service/QuestionPublicationMigrationPostgresTest.java",
+    "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/shared/web/DraftDeletionHttpContractTest.java",
+    "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/itembank/internal/service/QuestionDeletionServiceTest.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "report_path": "D:/GitHub/pte-org/pte-doc/projects/plans/quang-archive-lifecycle-cleanup/quality/phase-05-regression-and-handoff-quality-report.json",
+  "review_notes": [
+    "Inline ck:quality review, not a separate agent. Reviewed isolated-database URL restriction, committed readback, audit rollback, repeated two-transaction races, monotonic migration trigger assertions and HTTP contract tests.",
+    "Race invariant explicitly allows edit-before-issue success while blocking further entitlement edits after issuance. No mocks substitute for PostgreSQL locking. HTTP standalone MVC does not exercise JWT filters/method security.",
+    "Additional review: persisted pinned snapshot keeps prompt, options, source ID and score-template pin after source archive; draft deletion of that archived source is rejected. Scalar template/blueprint fixture IDs are synthetic; this is retention evidence, not end-to-end publishing/scoring.",
+    "APPROVED applies to the reviewed changes only. Full regression gate is FAILED: identical 11 failures reproduce on clean HEAD 906345c09d13092d4ae310b5f6dfaf15b1b631b8; this phase is not complete or release-ready. Live authenticated E2E remains unverified."
+  ]
+}

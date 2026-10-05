@@ -1,0 +1,20 @@
+{
+  "phase": "phase-01-contract-and-provenance",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-05T09:36:27Z",
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "report_path": "D:/GitHub/pte-org/pte-doc/projects/plans/quang-archive-lifecycle-cleanup/tests/phase-01-contract-and-provenance-test-report.json",
+  "commands": [
+    "./mvnw.cmd -pl app -DskipTests compile",
+    "./mvnw.cmd -pl app -Dtest=QuestionLifecyclePolicyTest test"
+  ],
+  "limitations": [
+    "Migration not yet executed on PostgreSQL; scheduled for phase05."
+  ]
+}
