@@ -2,6 +2,8 @@
 
 Ngày khảo sát: 2026-10-05. 45 case đề xuất: 12 Applications, 12 Plan catalog, 15 License codes, 6 dùng chung.
 
+Snapshot khảo sát ban đầu, giữ45 ID ổn định. Code lifecycle đã thay đổi một phần các nhánh PLN/LIC sau khảo sát; dùng [implementation-spec.md](implementation-spec.md) và coverage của plan mới để xác định residual scope. Không tự đánh dấu các case này Passed từ khảo sát/lifecycle receipts.
+
 ## Cách đọc và giới hạn bằng chứng
 
 - **C**: thấy trực tiếp nhánh xử lý hoặc khoảng trống trong code; không có nghĩa đã tái hiện lỗi runtime.

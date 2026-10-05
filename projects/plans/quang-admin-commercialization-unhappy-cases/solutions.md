@@ -1,6 +1,6 @@
 # Giải pháp đề xuất cho 45 unhappy cases của Admin
 
-Ngày: 2026-10-05. Trạng thái: đề xuất, chưa phê duyệt hoặc triển khai. Đối chiếu với [ma trận case](unhappy-cases.md) và [spec kiểm thử](spec.md).
+Ngày: 2026-10-05. Đây là các phương án khảo sát ban đầu. Quyết định đã chốt và phạm vi hiện tại nằm ở [implementation-spec.md](implementation-spec.md), được ưu tiên khi khác bảng dưới đây: giữ guard mã lưu hành, không license snapshots; issue mới EXAM-only, capacity legacy riêng; email minimal/reset existing, durable recovery hoãn; Plan VND/1–3650; revoke redeemed EXAM với explicit impact. Không hiểu các dòng snapshot/durable-email bên dưới là scope đã được user duyệt. Plan mới chưa code.
 
 ## 1. Hướng giải quyết
 

@@ -1,0 +1,16 @@
+{
+  "target": "phase-01-baseline-contract-coverage",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org\\pte-doc\\projects\\plans\\quang-admin-commercialization-unhappy-cases",
+  "report_path": "quality/phase-01-baseline-contract-coverage-quality-report.json",
+  "reviewed_files": [
+    "phase-01-baseline-contract-coverage.md",
+    "phase-01-baseline-receipt.md",
+    "plan.md",
+    "tests/phase-01-baseline-contract-coverage-test-report.json"
+  ],
+  "source_fingerprint": "sha256:bce57a09f2b2e88e6b423cb77ab6a1423521b69808e60639ace663630b66c659",
+  "reviewed_at": "2026-10-05T13:29:00Z",
+  "open_blocking_findings": 0
+}

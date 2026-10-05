@@ -1,6 +1,6 @@
 # Spec: Task phân tích và kiểm thử unhappy cases của Admin
 
-Ngày: 2026-10-05. Trạng thái: Draft — ma trận phân tích đã lập; chưa triển khai test mới hoặc sửa chức năng.
+Ngày: 2026-10-05. Trạng thái: tài liệu khảo sát ban đầu, không phải spec triển khai hiện tại. Spec đã chốt policy cho plan mới: [implementation-spec.md](implementation-spec.md). Code lifecycle đã được làm ở plan riêng; không đánh đồng với triển khai toàn45 case.
 
 Giải pháp thiết kế cho từng case được bổ sung tại [solutions.md](solutions.md). Đây là đề xuất để lựa chọn, chưa thay đổi policy hoặc phê duyệt triển khai.
 
@@ -61,8 +61,10 @@ Admin đang vận hành xét duyệt tổ chức, catalog và cấp/thu hồi li
 - Ưu tiên P1/P2/P3 trong ma trận là đề xuất kiểm thử, không phải mức độ bug đã được xác nhận.
 - API/code hiện tại là căn cứ hành vi; tài liệu phase cũ là ý định nghiệp vụ, không phải chứng minh implementation.
 
-## [NEEDS CLARIFICATION]
+## Policy questions — resolved for current implementation planning
 
-- [ ] Policy quyền lợi mã lúc phát/lúc redeem và archive/đổi family plan có mã đang lưu hành.
-- [ ] Capacity license có thuộc phạm vi sản phẩm không, và revoke quota đã cấp xử lý thế nào.
-- [ ] Cơ chế admin phục hồi khi onboarding credentials email lỗi sau approval commit.
+- [x] Giữ outstanding-code guard và ACTIVE family immutable; không license snapshots trong đợt này.
+- [x] Issue mới EXAM_PACKAGE only; capacity legacy inventory/xử lý riêng, không quota reversal.
+- [x] Email truthful wording + existing authorized reset; durable recovery/invitation deferred, APP-07 partial.
+- [x] VND + duration1..3650 cho Plan mới/chỉnh sửa, không tự rewrite legacy.
+- [x] Redeemed EXAM revoke UI reason + explicit subscription/SCHEDULED impact; preserve OPEN/CLOSED.
