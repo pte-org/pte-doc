@@ -2,7 +2,7 @@
 
 **Date:** 2026-10-06
 **Task:** #58 — Seed data demo 2 luồng thi PRACTICE và OFFICIAL dành cho 22 dạng đề
-**Status:** Validated and ready to cook — no input needed from the user (media from existing data + `pte.netlify.app`)
+**Status:** Implemented (all 5 phases); see "Implementation outcome and corrections". Not committed.
 **Mode:** Hard (multi-file, 5 phases, security-adjacent: proctor/STRICT policy)
 **Scope:** `pte-api/scripts` (new seed script) + data under `pte-doc/data/question-import`; no Java/API change planned.
 
@@ -52,18 +52,37 @@ No brainstorm report exists; the request is concrete enough (22 types x 2 flows)
 
 ## Phases
 
-- [ ] [Phase 1: Content audit and gap fill](phase-01-content-audit-and-gap-fill.md) [quality: not evaluated; testing: not started]
-- [ ] [Phase 2: Media and question bank load](phase-02-media-and-question-bank.md) [quality: not evaluated; testing: not started]
-- [ ] [Phase 3: Standard V5 template activation](phase-03-standard-v5-template.md) [quality: not evaluated; testing: not started]
-- [ ] [Phase 4: PRACTICE and OFFICIAL sessions](phase-04-practice-and-official-sessions.md) [quality: not evaluated; testing: not started]
-- [ ] [Phase 5: End-to-end verification and docs](phase-05-verification-and-docs.md) [quality: not evaluated; testing: not started]
+- [x] [Phase 1: Content audit and gap fill](phase-01-content-audit-and-gap-fill.md) [quality: audited inline (ck:quality --audit), findings fixed; testing: passed (node --test, 10/10)]
+- [x] [Phase 2: Media and question bank load](phase-02-media-and-question-bank.md) [quality: audited inline, findings fixed; testing: passed (seed run twice, row counts stable)]
+- [x] [Phase 3: Standard V5 template activation](phase-03-standard-v5-template.md) [quality: audited inline; testing: passed (activate, rerun no-op, weight sums 100)]
+- [x] [Phase 4: PRACTICE and OFFICIAL sessions](phase-04-practice-and-official-sessions.md) [quality: audited inline, findings fixed; testing: passed (6 exams OPEN, rerun idempotent)]
+- [x] [Phase 5: End-to-end verification and docs](phase-05-verification-and-docs.md) [quality: audited inline; testing: passed, including a run on an empty database]
 
 Dependencies: 1 → 2 → 3 → 4 → 5 (3 only needs 2 for the "enough questions" preflight, not for cloning).
+
+## Implementation outcome and corrections (2026-10-06)
+
+Delivered in `pte-api/scripts` (not committed by the assistant): `seed-demo22.ps1` (one command), `seed-demo22-questions.ps1`, `seed-demo22-template.ps1`, `seed-demo22-sessions.ps1`, `verify-demo22.ps1`, `bootstrap-local-admin.ps1`, `lib/`, `tools/` and `seed-data/demo22/`; README section "Demo data: 22 task types".
+
+Corrections to the findings above, discovered while building:
+
+- **F2/F3 were wrong:** the local `PTE_Score_Table`/V5 template is an older table (Speaking weights sum to 101, different Overall). The pasted Official Release table is new, so Phase 3 creates `DEMO22_V5` from `score-table-v5.json` (STANDARD_PTE) instead of reusing the old one. Overall is computed by the API as the average of the 4 skills and matches the pasted column.
+- **Personal Introduction:** STANDARD_PTE generation adds an implicit Personal Introduction (unscored) at the start of Speaking, so the bank has 1 extra question (67 total, 23 types).
+- **Media:** nothing was taken from `pte.netlify.app`. The repo fixtures are 80 KB / 602 byte placeholders, so Fill in the Blanks (Type In), Highlight Incorrect Words, Summarize Group Discussion audio and the Describe Image charts are self-generated (Windows TTS + Pillow) and uploaded to the user's Cloudinary (`pte/demo22`, public): 9 audio + 3 images. Summarize Spoken Text uses the existing CloudFront audio with word bounds 50-70.
+- **SQL instead of API for questions:** the question API only accepts `audio/wav` media, the bank's audio is mp3, so the seed is idempotent SQL (same approach as `local-question-seed.sql`), executed through the Postgres container. Speaking prep timing needs `media_objects.duration_seconds`; external mp3 durations are per-type approximations.
+- **R1 resolved:** for public (`UPLOAD`) media the backend returns `secure_url` unchanged, so external links and the user's Cloudinary links play regardless of the local Cloudinary credentials; verified through attempt tasks (audio/image urls present for every audio/image type).
+- **Re-order Paragraphs:** the question bank's `orderIndex` is the display order; the API needs it to be the correct position, so the builder recomputes it from `correctAnswerText`. (`local-question-seed*.sql` appears to carry display order; not changed here.)
+- **One subscription per exam:** exams sharing a subscription cannot overlap in time, so each of the 6 exams has its own exam package.
+- **F8 confirmed:** `POST /attempts` returns 409 with `deviceCheckConfirmed=false` on these exams (they require the device check); with `true` it succeeds.
+- **Windows PowerShell 5.1 encoding bug** found by the quality audit: typographic quotes were turned into `?` when piping SQL to `docker exec`; fixed by explicit UTF-8.
+- **Clean-database run done (2026-10-06):** after `docker compose down -v` and `up -d`, a single `seed-demo22.ps1` created the admin, 67 questions, the template and 6 OPEN exams, and verification passed. A run on a different physical machine was not done.
+- **Not done:** the app's real renderers for all 22 types were not exercised (preflight used a full manifest).
 
 ## Decisions from validation (2026-10-06)
 
 - **Bank:** 3 questions per task type = 66 questions.
-- **Media (revised 2026-10-06):** no user-uploaded Cloudinary files. Internal class demo only, so existing third-party content is acceptable: the seed registers `media_objects` rows from external URLs (same policy as `local-question-seed.sql`). Sources are listed in "Media sources" below. Phase 2 spike must confirm the backend serves an external `secure_url` correctly (R1); if not, fall back to self-hosting (download with the user's explicit approval and upload to Cloudinary).
+- **Media (revised again 2026-10-06, user-approved):** self-host. The files selected from `pte.netlify.app` (and the local SGD fixtures) are **downloaded and uploaded to the user's own free Cloudinary account** (credentials already in `.env.local`), folder `pte/demo22`. The user explicitly approved the download and upload. Internal class demo only. Sources are listed in "Media sources" below.
+- **Portable seed file:** all 66 questions plus their media URLs are committed as one data file (`pte-api/scripts/seed-data/demo22-questions.json`) so a teammate on another machine runs one script with no Cloudinary credentials: the script registers `media_objects` rows from the file's public `secure_url`s (no upload needed on their side). Hence uploads must use **public delivery** (not `authenticated`), otherwise other machines cannot play the audio. Phase 2 spike must still confirm the backend serves an externally registered `secure_url` (R1).
 - **PRACTICE:** both shapes — one full 22-type session **and** four skill-scoped sessions (Speaking, Writing, Reading, Listening) = 5 PRACTICE sessions.
 - **OFFICIAL:** real proctor — create a `PROCTOR` account and a proctor assignment on the OFFICIAL session; keep `proctorRequired=true`, lockdown `STRICT`. Phase 4 must first find the valid role/endpoint (R5).
 
@@ -79,7 +98,7 @@ Audio is required by 13 task types (39 audio) and an image by 1 (`DESCRIBE_IMAGE
 | Highlight Incorrect Words | Derived: a site audio that has a transcript (e.g. Repeat Sentence); `promptText` = transcript with 3-5 words altered, correct answer = the altered words | Authored in Phase 1 |
 | Summarize Group Discussion | The 2 local fixtures in `pte-doc/projects/fixtures/question-media` + 1 CloudFront/other URL | Site has no group-discussion audio |
 
-Extraction is read-only (page DOM / network inspection); no file is downloaded by the plan. The site credits PTE Helper as the original source and is a personal study site, so it is acceptable only for this internal class demo and must not be redistributed (R8).
+URLs are read from the page DOM; the selected files (about 12 audio + 3 images + the SGD fixtures) are then downloaded to a scratch folder, uploaded to `pte/demo22`, and the resulting Cloudinary `secure_url`/`public_id`/duration are written into the seed file. The 12 CloudFront-backed types keep their existing external URLs (not site-owned). The site credits PTE Helper as the original source and is a personal study site, so the files are acceptable only for this internal class demo and the Cloudinary links must not be shared publicly (R8).
 
 ## Open Questions (answers change Phase 2 and 4)
 
@@ -98,7 +117,8 @@ No open questions remain; Phase 4 still has the research item "find the valid pr
 - **R4 (medium)** `pte-app` may not implement renderers for all 22 screens; capability preflight would then mark tasks unsupported. Phase 5 records which types the app can actually start (informational, not a seed failure).
 - **R5 (medium)** No `PROCTOR` role appears in local data; the role/endpoint for proctor accounts is unverified (Open Q4).
 - **R6 (low)** Secrets: the script reads `PTE_*` env vars (already in `.env.local`) and must never write passwords/tokens/license codes to disk.
-- **R8 (medium)** Third-party hosting: audio/images on `pte.netlify.app` live in the site owner's Firebase bucket; removal or a bucket change breaks the demo, and the content is copied from PTE Helper (not licensed). Mitigation: scope limited to the internal class demo; keep the extracted URL list in the selection file so it can be swapped; fallback = self-host on Cloudinary with the user's approval.
+- **R8 (medium)** Copied third-party content: the files come from `pte.netlify.app` (copied from PTE Helper, not licensed) and will be hosted publicly on the user's personal free Cloudinary account (confirmed 2026-10-06), so the risks are ToS takedown/suspension of that account and anyone with the link being able to play the files. Mitigation: dedicated folder `pte/demo22` (not `pte/authoring`), upload only files in the selection, public delivery is required for the portable seed (so no `authenticated`), do not publish the seed file or links outside the class, delete the folder after the demo. The seed file keeps the source URL beside each Cloudinary URL for traceability.
+- **R9 (low)** Teammate's machine: media registration needs only the seed file and a running stack; if the Cloudinary links are removed, the seed must fail with a clear message listing the broken URLs (HEAD check before insert).
 - **R7 (low)** Existing `quang-full-exam-seed-content` plan targets the retired microservice layout (`services/authoring`); do not reuse its Java runner.
 
 ## Success Criteria
@@ -108,6 +128,7 @@ No open questions remain; Phase 4 still has the research item "find the valid pr
 - Demo template ACTIVE with 22 items, `maxCount <= 3`; skill weight sums = 100/100/100/100.
 - Two sessions `OPEN`: one `PRACTICE` (lockdown NONE), one `OFFICIAL_EXAM` (lockdown STRICT); each generated form contains all 22 task types.
 - Student `POST /attempts/preflight` returns `canStart=true` for both sessions; `POST /attempts` succeeds for both (with `deviceCheckConfirmed=true`).
+- On a clean machine with only the repo, `.env.local` and the running stack (no Cloudinary credentials needed), the same script seeds the full demo from `scripts/seed-data/demo22-questions.json`.
 - README section documents the one-command flow, accounts (names only), and reset steps.
 
 ## Quality and Testing State

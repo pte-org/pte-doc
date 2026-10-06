@@ -11,7 +11,7 @@
    - SGD: 2 local fixtures from `pte-doc/projects/fixtures/question-media/question-media-map.md` + 1 more audio; write the 3 scenario titles.
    - Record each URL's `Content-Type`/duration from the HTTP HEAD response only if needed by the `media_objects` columns.
 3. Target count is fixed at **3 questions per type** (user decision), 66 total, including types whose table count is lower (WE 1, SST 1, SWT 2, SMW 2): the bank has 3 and the template count picks from them.
-4. Write the curated selection as one deterministic file (`pte-doc/data/question-import/demo-22-selection.json`): stable title per question (`DEMO22 - <TASK_KEY> - <n>`) so reruns can find existing rows.
+4. Write the curated selection as the portable seed file `pte-api/scripts/seed-data/demo22-questions.json` (66 entries, deterministic order): stable title per question (`DEMO22 - <TASK_KEY> - <n>`) so reruns can find existing rows; each entry carries `sourceUrl` (site/fixture/CloudFront) now and `mediaUrl`/`publicId`/`durationSeconds` filled in by Phase 2.
 
 ## Design Constraints
 

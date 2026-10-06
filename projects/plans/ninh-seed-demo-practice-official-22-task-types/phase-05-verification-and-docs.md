@@ -8,6 +8,7 @@
 2. Confirm F8: call `POST /api/v1/attempts` with `deviceCheckConfirmed=false` then `true` on the PRACTICE session to establish the cause of the earlier 409; fix `seed-local-exam-ready.ps1` if it is the same cause (it currently passes `false`).
 3. For each session, as the student: `POST /attempts/preflight` with the capability manifest taken from `pte-app` (not the 2-contract manifest in the old script) → record `canStart`, `missingCapabilities`, `unsupportedTasks` per task type (R4).
 4. Start an attempt in each flow; fetch tasks; spot-check one audio, one image and one option-based task payload; for OFFICIAL confirm STRICT policy fields are pinned (`proctorRequired`, lockdown, replay limit 1).
+5a. Portability check: on a fresh clone/DB (no Cloudinary variables set) the wrapper must still seed all 66 questions from `demo22-questions.json`; document the "run on another machine" steps (clone, `.env.local` from `.env.example`, `docker compose up`, bootstrap admin, run wrapper).
 5. Idempotency: run the wrapper twice; compare row counts (questions by title, sessions by name, accounts, media) before/after.
 6. Docs: add a "Demo data (22 task types, PRACTICE + OFFICIAL)" section to `pte-api/README.md` (the README still points to the non-existent `seed-e2e.ps1`); update the `pte-doc` question-import README if the selection file is added.
 
