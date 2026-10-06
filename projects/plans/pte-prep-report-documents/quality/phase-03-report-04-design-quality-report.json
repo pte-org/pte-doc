@@ -1,0 +1,59 @@
+{
+  "mode": "gate",
+  "target": "phase-03-report-04-design",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-06T00:00:00+07:00",
+  "reviewed_files": [
+    "pte-doc/report/report04/00-project-report.md",
+    "pte-doc/report/report04/00-record-of-changes.md",
+    "pte-doc/report/report04/01-system-design.md",
+    "pte-doc/report/report04/02-database-design.md",
+    "pte-doc/report/report04/03-detailed-design.md"
+  ],
+  "summary": {"blocker": 0, "high": 0, "medium": 0, "low": 0, "noted": 3},
+  "findings": [
+    {
+      "id": "QUAL-DESIGN-001",
+      "severity": "NOTED",
+      "rule": "DOC_ARCHITECTURE_DECISION_RECORDED",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/report/report04/01-system-design.md:1.8",
+      "evidence": "Architecture, integration, exam, answer, Proctor, scoring, and data decisions have IDs, status, consequence, and evidence references.",
+      "why_it_matters": "Downstream reports can distinguish a current topology from a future design decision.",
+      "required_action": "No blocking action; preserve the decision IDs when Reports 5–6 are written.",
+      "owner": "Documentation work package"
+    },
+    {
+      "id": "QUAL-DESIGN-002",
+      "severity": "NOTED",
+      "rule": "CORR_DEFINED_BRANCH_BEHAVIOR",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/report/report04/03-detailed-design.md:3.8",
+      "evidence": "Generation, answer, Proctor, provider, scoring, and notification failure branches each state ownership, retryability, visible state, and invariant.",
+      "why_it_matters": "Failure behavior is part of the design contract for the core flows.",
+      "required_action": "No blocking action; test cases must cover the listed branches.",
+      "owner": "Report 5 owner"
+    },
+    {
+      "id": "QUAL-DESIGN-003",
+      "severity": "NOTED",
+      "rule": "DOC_INTENTIONAL_LIMIT_IS_A_NON_GOAL",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/report/report04/02-database-design.md:2.6",
+      "evidence": "Retention, exact columns, provider thresholds, violation delivery, and client matrix are explicitly left contract/evidence dependent.",
+      "why_it_matters": "The design does not invent a schema or policy that the SRS has not approved.",
+      "required_action": "No blocking action; keep TBD references visible in user guides and tests.",
+      "owner": "Documentation work package"
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/pte-prep-report-documents/quality/phase-03-report-04-design-quality-report.json"
+}

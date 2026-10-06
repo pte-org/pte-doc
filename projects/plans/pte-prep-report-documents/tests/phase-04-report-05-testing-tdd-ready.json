@@ -1,0 +1,9 @@
+{
+  "phase": "phase-04-report-05-testing",
+  "status": "RED_READY",
+  "test_files": [
+    "pte-doc/projects/plans/pte-prep-report-documents/tests/test_phase04_report05.py"
+  ],
+  "expected_red_reason": "Report 5 test scope, strategy, plan, cases, and result-record files are not implemented yet.",
+  "prepared_at": "2026-10-06"
+}

@@ -1,0 +1,9 @@
+{
+  "phase": "phase-03-report-04-design",
+  "status": "RED_READY",
+  "test_files": [
+    "pte-doc/projects/plans/pte-prep-report-documents/tests/test_phase03_report04.py"
+  ],
+  "expected_red_reason": "Report 4 design section files and architecture/data/sequence content are not implemented yet.",
+  "prepared_at": "2026-10-06"
+}

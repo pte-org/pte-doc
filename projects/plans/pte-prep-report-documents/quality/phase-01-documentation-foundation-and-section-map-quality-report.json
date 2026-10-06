@@ -1,0 +1,41 @@
+{
+  "mode": "gate",
+  "target": "phase-01-documentation-foundation-and-section-map",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-06T00:00:00+07:00",
+  "reviewed_files": [
+    "pte-doc/report/_foundation/section-map.md",
+    "pte-doc/report/_foundation/actor-feature-catalog.md",
+    "pte-doc/report/_foundation/status-evidence-matrix.md",
+    "pte-doc/report/_foundation/id-ledger.md",
+    "pte-doc/report/_foundation/tbd-register.md",
+    "pte-doc/report/_foundation/evidence-catalog.md",
+    "pte-doc/report/_foundation/pte-task-catalog.md",
+    "pte-doc/report/report03/00-project-report.md",
+    "pte-doc/report/report03/00-record-of-changes.md",
+    "pte-doc/report/report04/00-project-report.md",
+    "pte-doc/report/report04/00-record-of-changes.md",
+    "pte-doc/report/report05/00-project-report.md",
+    "pte-doc/report/report05/00-record-of-changes.md",
+    "pte-doc/report/report06/00-project-report.md",
+    "pte-doc/report/report06/00-record-of-changes.md"
+  ],
+  "summary": {"blocker": 0, "high": 0, "medium": 0, "low": 0, "noted": 1},
+  "findings": [
+    {
+      "id": "QUAL-DOC-001",
+      "severity": "NOTED",
+      "rule": "DOC_INTENTIONAL_LIMIT_IS_A_NON_GOAL",
+      "status": "OPEN",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/report/_foundation/section-map.md:normalization record",
+      "evidence": "The existing Report 4 template path is documented as a misleading legacy path.",
+      "why_it_matters": "The note helps prevent future output from inheriting the wrong directory.",
+      "required_action": "No action for this phase; preserve the canonical pte-doc/report/report04 path.",
+      "owner": "none"
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/pte-prep-report-documents/quality/phase-01-documentation-foundation-and-section-map-quality-report.json"
+}
