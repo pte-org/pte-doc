@@ -1,0 +1,21 @@
+{
+  "mode": "gate",
+  "target": "phase-01-contract-and-provenance",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-05T09:36:27Z",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/migration/V77__question_publication_provenance.sql",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/domain/Question.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/internal/service/QuestionLifecyclePolicy.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "report_path": "D:/GitHub/pte-org/pte-doc/projects/plans/quang-archive-lifecycle-cleanup/quality/phase-01-contract-and-provenance-quality-report.json",
+  "review_method": "inline ck:quality; reviewed provenance monotonic trigger, fail-closed policy, additive migration and module ownership. PostgreSQL execution scheduled for phase05; this receipt is semantic review, not database test evidence."
+}

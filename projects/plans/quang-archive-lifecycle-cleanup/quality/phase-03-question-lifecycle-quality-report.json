@@ -1,0 +1,32 @@
+{
+  "mode": "gate",
+  "target": "phase-03-question-lifecycle",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-05T09:59:07.249Z",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/ItembankService.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/dto/response/QuestionResponse.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/internal/constant/ItembankConstants.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/internal/controller/QuestionController.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/internal/mapper/QuestionMapper.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/internal/repository/QuestionRepository.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/internal/service/QuestionDeletionService.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/internal/exception/QuestionDeletionException.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/shared/constant/SharedConstants.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/shared/exception/GlobalExceptionHandler.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "report_path": "D:/GitHub/pte-org/pte-doc/projects/plans/quang-archive-lifecycle-cleanup/quality/phase-03-question-lifecycle-quality-report.json",
+  "review_notes": [
+    "Reviewed platform-only deletion, unknown/restored/revision protection, audit transaction, deleted filters including all native generation queries, existing optimistic version and conflict mapping.",
+    "Review remediation: added explicit shared visibility/null tenant scoping before tombstone handling. No assessment reverse dependency: freeze only accepts APPROVED current shared rows; never-published draft cannot gain pinned references through supported writers.",
+    "PostgreSQL persistence/concurrency evidence scheduled for phase05. Inline review, not separate agent."
+  ]
+}

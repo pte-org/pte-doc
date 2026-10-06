@@ -1,0 +1,80 @@
+# PTE Prep Cross-Report Identifier Ledger
+
+**Owner:** Documentation work package  
+**Rule:** an identifier is allocated once in this ledger and is never reused for a different meaning.
+
+## Namespaces
+
+| Prefix | Meaning | Example | Allocated by |
+|---|---|---|---|
+| `FR-` | Functional requirement | `FR-EXAM-001` | Report 3 |
+| `NFR-` | Non-functional requirement or target | `NFR-PERF-001` | Report 3 |
+| `UC-` | Use case | `UC-HOST-CREATE-EXAM` | Report 3 |
+| `BR-` | Business rule | `BR-EXAM-023` | Report 3 |
+| `CR-` | Cross-cutting requirement | `CR-AUDIT-001` | Report 3 |
+| `MSG-` | User-facing or integration message | `MSG-EXAM-004` | Report 3 |
+| `SD-` | System or detailed design element | `SD-ARCH-001` | Report 4 |
+| `ADR-` | Architecture decision record | `ADR-EXAM-001` | Report 4 |
+| `PKG-` | Owned application package/module | `PKG-EXAM` | Report 4 |
+| `DB-` | Database entity or invariant | `DB-ATTEMPT` | Report 4 |
+| `SEQ-` | Sequence or interaction | `SEQ-ANSWER-SYNC` | Report 4 |
+| `OBJ-` | Test objective | `OBJ-DELIVERY-001` | Report 5 |
+| `TC-` | Test case | `TC-DELIVERY-014` | Report 5 |
+| `BUG-` | Defect record | `BUG-DELIVERY-001` | Report 5 |
+| `WF-` | User workflow | `WF-HOST-PUBLISH-EXAM` | Report 6 |
+| `STEP-` | User or installation step | `STEP-INSTALL-001` | Report 6 |
+| `IMG-` | Screenshot/diagram asset | `IMG-ARCH-001` | Report 4 or 6 |
+| `EVD-` | Evidence record | `EVD-EXAM-GENERATION-001` | Any report, catalogued here |
+| `PT-` | PTE task catalog row | `PT-01` | Foundation catalog |
+| `TBD-` | Open decision/evidence item | `TBD-RETENTION-001` | Foundation register |
+
+## Allocation rules
+
+1. Use descriptive names where the name is stable; do not encode a temporary database table name into a business requirement ID.
+2. A report may reference an ID owned by an earlier report but may not silently redefine it.
+3. If a requirement changes meaning, allocate a new ID and mark the old ID superseded in the ledger.
+4. A diagram, test, or workflow must link to at least one requirement or explicitly state why it is a foundation/support artifact.
+5. `EVD-*` records are evidence pointers, not claims of product completeness.
+6. `PT-*` rows are the fixed task catalog identifiers and must remain one-to-one with the 23 catalog rows.
+
+## Initial allocations
+
+| ID or range | Meaning | Owner/report | Status |
+|---|---|---|---|
+| `FEAT-01`–`FEAT-12` | PTE Prep feature groups | Foundation / Report 3 | Allocated |
+| `PT-01`–`PT-23` | Complete task catalog | Foundation / Report 3 | Allocated |
+| `EVD-FOUNDATION-001`–`EVD-FOUNDATION-009` | Source, scope, architecture, and task evidence | Foundation | Allocated |
+| `TBD-RETENTION-001`–`TBD-DATA-001` | Open policy and evidence decisions | Foundation | Allocated |
+
+## Collision check
+
+The validation test collects all IDs from the report bundle. Duplicate IDs are a blocking documentation error because downstream reports use these values as stable links.
+
+## Bundle allocations (2026-10-06)
+
+The following IDs are allocated in the current English Report 3?6 bundle. Repeated uses in downstream text are references to the same ledger entry, not new meanings.
+
+| Prefix | Allocated IDs |
+|---|---|
+| `ADR-` | `ADR-ANSWER-001`, `ADR-ARCH-001`, `ADR-ARCH-002`, `ADR-DATA-001`, `ADR-EXAM-001`, `ADR-INTEGRATION-001`, `ADR-PROCTOR-001`, `ADR-SCORE-001` |
+| `ASM-` | `ASM-001`, `ASM-002`, `ASM-003`, `ASM-004`, `ASM-005`, `ASM-006` |
+| `BR-` | `BR-ACCESS-001`, `BR-ACCESS-002`, `BR-ACCESS-003`, `BR-ACCESS-004`, `BR-ACCESS-005`, `BR-ACCESS-006`, `BR-ACCESS-007`, `BR-ACCESS-008`, `BR-ACCESS-009`, `BR-ACCESS-010`, `BR-ACCESS-011`, `BR-CONTENT-012`, `BR-CONTENT-013`, `BR-CONTENT-014`, `BR-CONTENT-015`, `BR-CONTENT-016`, `BR-DELIVERY-030`, `BR-DELIVERY-031`, `BR-DELIVERY-032`, `BR-DELIVERY-033`, `BR-DELIVERY-034`, `BR-EXAM-012`, `BR-EXAM-023`, `BR-EXAM-024`, `BR-EXAM-025`, `BR-EXAM-026`, `BR-EXAM-027`, `BR-EXAM-028`, `BR-EXAM-029`, `BR-INTEGRATION-044`, `BR-INTEGRATION-045`, `BR-INTEGRATION-046`, `BR-INTEGRATION-047`, `BR-INTEGRATION-048`, `BR-INTEGRITY-035`, `BR-INTEGRITY-039`, `BR-PACKAGE-017`, `BR-PACKAGE-018`, `BR-PACKAGE-019`, `BR-PACKAGE-020`, `BR-PACKAGE-021`, `BR-PACKAGE-022`, `BR-REPORT-006`, `BR-REPORT-040`, `BR-REPORT-041`, `BR-REPORT-042`, `BR-REPORT-043`, `BR-SCORE-004`, `BR-SCORE-036`, `BR-SCORE-037`, `BR-SCORE-038` |
+| `BUG-` | `BUG-DELIVERY-001` |
+| `CR-` | `CR-AUTH-001`, `CR-AUTH-002`, `CR-IDEMPOTENCY-001`, `CR-MESSAGE-001`, `CR-PROVENANCE-001`, `CR-STATUS-001`, `CR-TENANT-001` |
+| `DB-` | `DB-ATTEMPT-ANSWER`, `DB-ATTEMPT-HEARTBEAT`, `DB-AUDIT-EVENT`, `DB-CLASS`, `DB-ERD-001`, `DB-EXAM`, `DB-EXAM-ATTEMPT`, `DB-EXAM-CANDIDATE-SNAPSHOT`, `DB-EXAM-FORM`, `DB-EXAM-STAFF-ASSIGNMENT`, `DB-EXAM-VERSION`, `DB-INV-001`, `DB-INV-002`, `DB-INV-003`, `DB-INV-004`, `DB-INV-005`, `DB-INV-006`, `DB-INV-007`, `DB-INV-008`, `DB-MEDIA-REFERENCE`, `DB-NOTIFICATION`, `DB-ORDER`, `DB-ORGANIZATION`, `DB-PACKAGE`, `DB-PROCTOR-SESSION`, `DB-PROGRAM`, `DB-PUBLICATION`, `DB-QUESTION`, `DB-QUESTION-REVISION`, `DB-REGISTRATION`, `DB-REGISTRATION-MEMBERSHIP`, `DB-REPORT`, `DB-REQ-RELATION-001`, `DB-SCORE-SELECTION`, `DB-SCORE-SOURCE`, `DB-SCORE-TEMPLATE`, `DB-SCORE-TEMPLATE-REVISION`, `DB-SCORING-ASSIGNMENT`, `DB-SECURITY-EVENT`, `DB-STUDENT`, `DB-SUBSCRIPTION`, `DB-USER`, `DB-USER-MEMBERSHIP`, `DB-VIOLATION-EVENT` |
+| `EVD-` | `EVD-CLIENT`, `EVD-FOUNDATION-001`, `EVD-FOUNDATION-002`, `EVD-FOUNDATION-003`, `EVD-FOUNDATION-004`, `EVD-FOUNDATION-005`, `EVD-FOUNDATION-006`, `EVD-FOUNDATION-007`, `EVD-FOUNDATION-008`, `EVD-FOUNDATION-009`, `EVD-INTEGRATION`, `EVD-OPS`, `EVD-OPS-APP`, `EVD-OPS-DB`, `EVD-OPS-EDGE`, `EVD-OPS-INFRA`, `EVD-OPS-WEB`, `EVD-TEST`, `EVD-TEST-DOC-001`, `EVD-TEST-DOC-002`, `EVD-TEST-DOC-003`, `EVD-TEST-DOC-004` |
+| `FR-` | `FR-ACCESS`, `FR-ACCESS-001`, `FR-ACCESS-004`, `FR-CONTENT`, `FR-CONTENT-001`, `FR-CONTENT-002`, `FR-CONTENT-003`, `FR-CONTENT-004`, `FR-CONTENT-005`, `FR-DELIVERY`, `FR-DELIVERY-001`, `FR-DELIVERY-002`, `FR-DELIVERY-003`, `FR-DELIVERY-004`, `FR-DELIVERY-005`, `FR-DELIVERY-006`, `FR-DELIVERY-007`, `FR-DELIVERY-008`, `FR-DELIVERY-009`, `FR-ENROLL`, `FR-ENROLL-001`, `FR-ENROLL-002`, `FR-ENROLL-004`, `FR-EXAM`, `FR-EXAM-001`, `FR-EXAM-002`, `FR-EXAM-003`, `FR-EXAM-004`, `FR-EXAM-005`, `FR-EXAM-006`, `FR-EXAM-007`, `FR-EXAM-008`, `FR-EXAM-009`, `FR-HARDENING-001`, `FR-HARDENING-002`, `FR-HARDENING-003`, `FR-HARDENING-004`, `FR-INTEGRATION`, `FR-INTEGRATION-001`, `FR-INTEGRATION-002`, `FR-INTEGRATION-003`, `FR-INTEGRATION-004`, `FR-INTEGRATION-005`, `FR-INTEGRATION-006`, `FR-INTEGRITY`, `FR-INTEGRITY-001`, `FR-INTEGRITY-002`, `FR-INTEGRITY-003`, `FR-INTEGRITY-004`, `FR-INTEGRITY-005`, `FR-ONBOARD`, `FR-ONBOARD-001`, `FR-ONBOARD-002`, `FR-ONBOARD-003`, `FR-ONBOARD-004`, `FR-ORG`, `FR-ORG-001`, `FR-ORG-002`, `FR-ORG-003`, `FR-ORG-004`, `FR-ORG-006`, `FR-PACKAGE`, `FR-PACKAGE-001`, `FR-PACKAGE-002`, `FR-PACKAGE-003`, `FR-PACKAGE-004`, `FR-PACKAGE-005`, `FR-PACKAGE-006`, `FR-REPORT`, `FR-REPORT-001`, `FR-REPORT-002`, `FR-REPORT-003`, `FR-REPORT-004`, `FR-REPORT-005`, `FR-SCORE`, `FR-SCORE-001`, `FR-SCORE-002`, `FR-SCORE-003`, `FR-SCORE-004`, `FR-SCORE-005`, `FR-SCORE-006`, `FR-SCORE-007`, `FR-TEMPLATE`, `FR-TEMPLATE-001`, `FR-TEMPLATE-002`, `FR-TEMPLATE-003`, `FR-TEMPLATE-004` |
+| `IMG-` | `IMG-ADMIN-ONBOARD-001`, `IMG-HOST-EXAM-001`, `IMG-PROCTOR-EVENT-001`, `IMG-REPORT-PUBLISH-001`, `IMG-STUDENT-CHECK-001` |
+| `MSG-` | `MSG-ACCESS-001`, `MSG-ACCESS-002`, `MSG-CONTENT-001`, `MSG-CONTENT-002`, `MSG-DELIVERY-001`, `MSG-DELIVERY-002`, `MSG-EXAM-001`, `MSG-EXAM-002`, `MSG-INTEGRATION-001`, `MSG-INTEGRITY-001`, `MSG-PACKAGE-001`, `MSG-REPORT-001`, `MSG-SCORE-001` |
+| `NFR-` | `NFR-01`, `NFR-02`, `NFR-03`, `NFR-04`, `NFR-05`, `NFR-06`, `NFR-07`, `NFR-08`, `NFR-09`, `NFR-10`, `NFR-11`, `NFR-12`, `NFR-13`, `NFR-14`, `NFR-15`, `NFR-16`, `NFR-17`, `NFR-18`, `NFR-19`, `NFR-AUDIT-001`, `NFR-COMPAT-001`, `NFR-DATA-001`, `NFR-DATA-002`, `NFR-DATA-003`, `NFR-DATA-004`, `NFR-INT-001`, `NFR-INT-002`, `NFR-INT-004`, `NFR-PERF-001`, `NFR-PERF-003`, `NFR-PERF-004`, `NFR-REQ-002`, `NFR-SEC-001`, `NFR-SEC-003`, `NFR-SEC-004`, `NFR-SEC-005` |
+| `OBJ-` | `OBJ-ACCESS-001`, `OBJ-ACCESS-002`, `OBJ-COMPAT-001`, `OBJ-CONTENT-001`, `OBJ-DATA-001`, `OBJ-DATA-002`, `OBJ-DELIVERY-001`, `OBJ-DELIVERY-002`, `OBJ-DELIVERY-003`, `OBJ-DELIVERY-004`, `OBJ-DELIVERY-005`, `OBJ-EXAM-001`, `OBJ-EXAM-002`, `OBJ-EXAM-003`, `OBJ-EXAM-004`, `OBJ-INTEGRATION-001`, `OBJ-INTEGRITY-001`, `OBJ-OPS-001`, `OBJ-OPS-002`, `OBJ-PACKAGE-001`, `OBJ-PACKAGE-002`, `OBJ-PERF-001`, `OBJ-PERF-002`, `OBJ-PERF-003`, `OBJ-PERF-004`, `OBJ-PERF-005`, `OBJ-RECOVERY-001`, `OBJ-RECOVERY-002`, `OBJ-REPORT-001`, `OBJ-ROSTER-001`, `OBJ-SCORE-001`, `OBJ-SCORE-002`, `OBJ-SCORE-003`, `OBJ-SEC-001`, `OBJ-SEC-002`, `OBJ-SEC-003`, `OBJ-SEC-004`, `OBJ-UX-001`, `OBJ-UX-002`, `OBJ-UX-003` |
+| `OOS-` | `OOS-001`, `OOS-002`, `OOS-003`, `OOS-004`, `OOS-005`, `OOS-006`, `OOS-007`, `OOS-008`, `OOS-009` |
+| `PKG-` | `PKG-ASSESSMENT`, `PKG-ATTEMPT`, `PKG-BILLING`, `PKG-DIAGRAM-001`, `PKG-IDENTITY`, `PKG-ITEMBANK`, `PKG-NOTIFICATION`, `PKG-PROCTORING`, `PKG-REPORTING`, `PKG-SCORETEMPLATE`, `PKG-SCORING`, `PKG-SESSION`, `PKG-SHARED`, `PKG-SUPPORT`, `PKG-TENANCY` |
+| `PT-` | `PT-01`, `PT-02`, `PT-03`, `PT-04`, `PT-05`, `PT-06`, `PT-07`, `PT-08`, `PT-09`, `PT-10`, `PT-11`, `PT-12`, `PT-13`, `PT-14`, `PT-15`, `PT-16`, `PT-17`, `PT-18`, `PT-19`, `PT-20`, `PT-21`, `PT-22`, `PT-23` |
+| `SD-` | `SD-ARCH-CONTEXT-001`, `SD-ARCH-DEPLOY-001`, `SD-EXAM-STATE-001`, `SD-REQ-CONTEXT-001`, `SD-REQ-SCREEN-001` |
+| `SEQ-` | `SEQ-ANSWER-SYNC`, `SEQ-CONTENT-001`, `SEQ-DELIVERY-001`, `SEQ-EXAM-001`, `SEQ-ONBOARD-001`, `SEQ-PROCTOR-AUDIT`, `SEQ-SCORE-PUBLISH-001` |
+| `STEP-` | `STEP-INSTALL-001`, `STEP-INSTALL-002`, `STEP-INSTALL-003` |
+| `TBD-` | `TBD-AI-001`, `TBD-AI-002`, `TBD-CLIENT-001`, `TBD-DATA-001`, `TBD-GENERATION-001`, `TBD-PROCTOR-001`, `TBD-RETENTION-001`, `TBD-VERSION-001` |
+| `TC-` | `TC-ACCESS-001`, `TC-ACCESS-002`, `TC-ACCESS-003`, `TC-ACCESS-004`, `TC-ACCESS-005`, `TC-CONTENT-001`, `TC-CONTENT-002`, `TC-DELIVERY-001`, `TC-DELIVERY-002`, `TC-DELIVERY-003`, `TC-DELIVERY-004`, `TC-DELIVERY-005`, `TC-EXAM-001`, `TC-EXAM-002`, `TC-EXAM-003`, `TC-INTEGRATION-001`, `TC-OPS-001`, `TC-PACKAGE-001`, `TC-PACKAGE-002`, `TC-PROCTOR-001`, `TC-REPORT-001`, `TC-ROSTER-001`, `TC-SCORE-001`, `TC-SCORE-002`, `TC-SCORE-003` |
+| `UC-` | `UC-ACCESS-001`, `UC-CONTENT-001`, `UC-DELIVERY-001`, `UC-EXAM-001`, `UC-INTEGRATION-001`, `UC-ONBOARD-001`, `UC-PACKAGE-001`, `UC-PROCTOR-001`, `UC-ROSTER-001`, `UC-SCORING-001`, `UC-TEMPLATE-001` |
+| `WF-` | `WF-ADMIN-CONTENT-001`, `WF-ADMIN-ONBOARD-001`, `WF-ADMIN-PACKAGE-001`, `WF-AUTHOR-DRAFT-001`, `WF-AUTHOR-TEMPLATE-001`, `WF-EXAMINER-SCORE-001`, `WF-HOST-CREATE-EXAM`, `WF-HOST-PACKAGE-001`, `WF-HOST-PUBLISH-REPORT`, `WF-HOST-ROSTER-001`, `WF-PROCTOR-MONITOR-001`, `WF-STUDENT-DEVICE-CHECK`, `WF-STUDENT-TAKE-001`, `WF-STUDENT-VIEW-001` |

@@ -1,0 +1,138 @@
+{
+  "phase": "phase-05-regression-and-handoff",
+  "mode": "all",
+  "verdict": "FAILED",
+  "summary": {
+    "passed": 1099,
+    "failed": 11,
+    "skipped": 14
+  },
+  "failures": [
+    {
+      "id": "TEST-BASELINE-01",
+      "severity": "HIGH",
+      "type": "REGRESSION",
+      "expected": "Full regression passes",
+      "actual": "ExamGenerationServiceTest.generate_orderIsSpeakingWritingReadingListening_thenBySequence fails both current tree and clean HEAD",
+      "likely_owner": "production_code",
+      "related_files": [],
+      "introduced_by_current_change": false
+    },
+    {
+      "id": "TEST-BASELINE-02",
+      "severity": "HIGH",
+      "type": "REGRESSION",
+      "expected": "Full regression passes",
+      "actual": "AttemptLifecycleCapabilityTest.existingStart_checksCapabilitiesAfterOwnershipBeforeResume fails both current tree and clean HEAD",
+      "likely_owner": "production_code",
+      "related_files": [],
+      "introduced_by_current_change": false
+    },
+    {
+      "id": "TEST-BASELINE-03",
+      "severity": "HIGH",
+      "type": "REGRESSION",
+      "expected": "Full regression passes",
+      "actual": "AttemptLifecycleCapabilityTest.start_repeatsAuthoritativeCheckAndStoresNormalizedFingerprint fails both current tree and clean HEAD",
+      "likely_owner": "production_code",
+      "related_files": [],
+      "introduced_by_current_change": false
+    },
+    {
+      "id": "TEST-BASELINE-04",
+      "severity": "HIGH",
+      "type": "REGRESSION",
+      "expected": "Full regression passes",
+      "actual": "AttemptLifecycleServicePlayAudioTest.playAudio_replayLimitExceeded_throws fails both current tree and clean HEAD",
+      "likely_owner": "production_code",
+      "related_files": [],
+      "introduced_by_current_change": false
+    },
+    {
+      "id": "TEST-BASELINE-05",
+      "severity": "HIGH",
+      "type": "REGRESSION",
+      "expected": "Full regression passes",
+      "actual": "AttemptLifecycleServicePlayAudioTest.playAudio_audioUrlExpired_throws fails both current tree and clean HEAD",
+      "likely_owner": "production_code",
+      "related_files": [],
+      "introduced_by_current_change": false
+    },
+    {
+      "id": "TEST-BASELINE-06",
+      "severity": "HIGH",
+      "type": "REGRESSION",
+      "expected": "Full regression passes",
+      "actual": "AttemptLifecycleServicePlayAudioTest.playAudio_unlimitedPolicy_neverRejects fails both current tree and clean HEAD",
+      "likely_owner": "production_code",
+      "related_files": [],
+      "introduced_by_current_change": false
+    },
+    {
+      "id": "TEST-BASELINE-07",
+      "severity": "HIGH",
+      "type": "REGRESSION",
+      "expected": "Full regression passes",
+      "actual": "AttemptLifecycleServicePlayAudioTest.playAudio_sameRequestIdReplayed_doesNotIncrementAgain fails both current tree and clean HEAD",
+      "likely_owner": "production_code",
+      "related_files": [],
+      "introduced_by_current_change": false
+    },
+    {
+      "id": "TEST-BASELINE-08",
+      "severity": "HIGH",
+      "type": "REGRESSION",
+      "expected": "Full regression passes",
+      "actual": "AttemptLifecycleServicePlayAudioTest.playAudio_firstPlay_incrementsPlayCount fails both current tree and clean HEAD",
+      "likely_owner": "production_code",
+      "related_files": [],
+      "introduced_by_current_change": false
+    },
+    {
+      "id": "TEST-BASELINE-09",
+      "severity": "HIGH",
+      "type": "REGRESSION",
+      "expected": "Full regression passes",
+      "actual": "AttemptLifecycleServicePlayAudioTest.playAudio_locksExamAttemptRow_neverTouchesTimerService fails both current tree and clean HEAD",
+      "likely_owner": "production_code",
+      "related_files": [],
+      "introduced_by_current_change": false
+    },
+    {
+      "id": "TEST-BASELINE-10",
+      "severity": "HIGH",
+      "type": "REGRESSION",
+      "expected": "Full regression passes",
+      "actual": "AttemptLifecycleServicePlayAudioTest.playAudio_publicLegacyAudio_ignoresStaleExpiryTimestamp fails both current tree and clean HEAD",
+      "likely_owner": "production_code",
+      "related_files": [],
+      "introduced_by_current_change": false
+    },
+    {
+      "id": "TEST-BASELINE-11",
+      "severity": "HIGH",
+      "type": "REGRESSION",
+      "expected": "Full regression passes",
+      "actual": "ModuleStructureTest.modules_have_no_boundary_violations fails both current tree and clean HEAD",
+      "likely_owner": "production_code",
+      "related_files": [],
+      "introduced_by_current_change": false
+    }
+  ],
+  "evidence": {
+    "full_suite_tests": 1124,
+    "assertion_failures": 4,
+    "errors": 7,
+    "clean_head": "906345c09d13092d4ae310b5f6dfaf15b1b631b8",
+    "clean_head_command": ".\\mvnw.cmd -pl app -Dtest=ExamGenerationServiceTest,AttemptLifecycleCapabilityTest,AttemptLifecycleServicePlayAudioTest,ModuleStructureTest test",
+    "clean_head_tests": 25,
+    "scoped_backend_tests": 165,
+    "postgres_tests": 12,
+    "postgres_race_interleavings": 40,
+    "client_tests": 381,
+    "mocked_browser_checks": 21,
+    "release_ready": false
+  },
+  "reviewed_at": "2026-10-05T10:31:25.800Z",
+  "report_path": "D:/GitHub/pte-org/pte-doc/projects/plans/quang-archive-lifecycle-cleanup/tests/phase-05-regression-and-handoff-test-report.json"
+}

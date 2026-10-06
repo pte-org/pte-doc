@@ -1,0 +1,55 @@
+{
+  "phase": "phase-03-web-contract-and-routing",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-04T13:51:00Z",
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "checks": {
+    "api_client_typecheck": {
+      "command": "corepack pnpm --filter @pte/api-client typecheck",
+      "verdict": "PASSED"
+    },
+    "tenant_typecheck": {
+      "command": "corepack pnpm --filter tenant-web exec tsc --noEmit",
+      "verdict": "PASSED"
+    },
+    "vendor_typecheck": {
+      "command": "corepack pnpm --filter vendor-web exec tsc --noEmit",
+      "verdict": "PASSED"
+    },
+    "tenant_build": {
+      "command": "corepack pnpm --filter tenant-web build",
+      "verdict": "PASSED"
+    },
+    "vendor_build": {
+      "command": "corepack pnpm --filter vendor-web build",
+      "verdict": "PASSED"
+    },
+    "format_check": {
+      "command": "corepack pnpm exec prettier --check <phase-03 changed web files>",
+      "verdict": "PASSED"
+    },
+    "out_of_scope_full_package_suite": {
+      "command": "corepack pnpm --filter @pte/api-client test",
+      "verdict": "FAILED_OUT_OF_SCOPE",
+      "summary": {
+        "passed": 373,
+        "failed": 4,
+        "skipped": 0
+      },
+      "failures": [
+        "src/requests/endpoints.test.ts: SUPPORT_TICKET_ENDPOINTS.adminTickets",
+        "src/requests/endpoints.test.ts: SUPPORT_TICKET_ENDPOINTS.adminTicket",
+        "src/requests/endpoints.test.ts: SUPPORT_TICKET_ENDPOINTS.adminUpdateStatus",
+        "src/requests/endpoints.test.ts: SUPPORT_TICKET_ENDPOINTS.adminAddNote"
+      ],
+      "note": "The Phase 03 diff does not touch the endpoint constants or endpoint regression test. The phase-scoped inbox test passed 3/3; this existing package-suite mismatch remains for separate follow-up."
+    }
+  },
+  "report_path": "pte-doc/projects/plans/support-feedback-bell-notifications/tests/phase-03-web-contract-and-routing-test-report.json"
+}

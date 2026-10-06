@@ -1,0 +1,62 @@
+{
+  "mode": "gate",
+  "target": "phase-04-report-05-testing",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-06T00:00:00+07:00",
+  "reviewed_files": [
+    "pte-doc/report/report05/00-project-report.md",
+    "pte-doc/report/report05/00-record-of-changes.md",
+    "pte-doc/report/report05/01-scope-of-testing.md",
+    "pte-doc/report/report05/02-test-strategy.md",
+    "pte-doc/report/report05/03-test-plan.md",
+    "pte-doc/report/report05/04-test-cases.md",
+    "pte-doc/report/report05/05-test-reports.md",
+    "pte-doc/report/report05/assets/README.md"
+  ],
+  "summary": {"blocker": 0, "high": 0, "medium": 0, "low": 0, "noted": 3},
+  "findings": [
+    {
+      "id": "QUAL-TEST-001",
+      "severity": "NOTED",
+      "rule": "DOC_PUBLIC_CONTRACT_DOCUMENTED",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/report/report05/05-test-reports.md:5.1",
+      "evidence": "The execution summary explicitly separates planned cases from actual results and requires environment/build/evidence before a Pass or Fail status.",
+      "why_it_matters": "A test plan must not be mistaken for runtime sign-off.",
+      "required_action": "No blocking action; fill the template only when a real run supplies evidence.",
+      "owner": "Test Lead"
+    },
+    {
+      "id": "QUAL-TEST-002",
+      "severity": "NOTED",
+      "rule": "CORR_DEFINED_BRANCH_BEHAVIOR",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/report/report05/04-test-cases.md:4.4",
+      "evidence": "Cases cover negative, authorization, duplicate/conflict, offline/retry, provider failure, Proctor audit, score readiness, and publication visibility paths.",
+      "why_it_matters": "The highest-risk business invariants need explicit failure-path evidence.",
+      "required_action": "No blocking action; execute or mark blocked with a dependency in later test runs.",
+      "owner": "QA Analyst"
+    },
+    {
+      "id": "QUAL-TEST-003",
+      "severity": "NOTED",
+      "rule": "DOC_INTENTIONAL_LIMIT_IS_A_NON_GOAL",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/report/report05/01-scope-of-testing.md:1.5",
+      "evidence": "PTE Academic certification, Student self-payment, mobile delivery, advanced anti-cheat, and provider quality guarantees are explicitly excluded.",
+      "why_it_matters": "Test scope cannot be inflated by treating excluded product behavior as a missing test.",
+      "required_action": "No blocking action; retain the boundary in later reports.",
+      "owner": "Documentation work package"
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/pte-prep-report-documents/quality/phase-04-report-05-testing-quality-report.json"
+}

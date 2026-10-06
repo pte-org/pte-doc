@@ -1,0 +1,81 @@
+{
+  "phase": "baseline-repair",
+  "mode": "verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-05T13:40:43Z",
+  "summary": {
+    "passed": 1101,
+    "failed": 0,
+    "skipped": 26
+  },
+  "failures": [],
+  "report_path": "pte-doc/projects/plans/quang-admin-baseline-repair/tests/baseline-repair-test-report.json",
+  "source_report": "pte-doc/projects/plans/quang-admin-commercialization-unhappy-cases/tests/phase-01-baseline-contract-coverage-test-report.json",
+  "backend": {
+    "head": "f070e38",
+    "worktree": "uncommitted repair changes",
+    "java": "21.0.5",
+    "command": ".\\mvnw.cmd -pl app test",
+    "exit_code": 0,
+    "tests": 1127,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 26,
+    "duration_seconds": 56.919
+  },
+  "targeted": {
+    "suites": [
+      "ExamGenerationServiceTest",
+      "AttemptLifecycleCapabilityTest",
+      "AttemptLifecycleServicePlayAudioTest",
+      "ModuleStructureTest",
+      "SupportTicketInboxNotificationListenerTest"
+    ],
+    "passed": 31,
+    "failed": 0,
+    "skipped": 0,
+    "exit_code": 0,
+    "duration_seconds": 25.715
+  },
+  "compile": {
+    "command": ".\\mvnw.cmd -pl app -DskipTests compile",
+    "exit_code": 0,
+    "javac_release": 21,
+    "production_sources": 961,
+    "duration_seconds": 15.984
+  },
+  "resolved_baseline_cases": 11,
+  "added_tests": 3,
+  "renamed_test": {
+    "from": "generate_orderIsSpeakingWritingReadingListening_thenBySequence",
+    "to": "generate_orderIsSpeakingListeningReadingWriting_thenBySequence",
+    "reason": "Current section order deliberately changed in commits1e8fe99/3f5329a; preserved and strengthened ordering assertions."
+  },
+  "skipped_suites": [
+    {
+      "suite": "ArchiveLifecyclePostgresIntegrationTest",
+      "count": 11
+    },
+    {
+      "suite": "QuestionPublicationMigrationPostgresTest",
+      "count": 1
+    },
+    {
+      "suite": "InboxAnnouncementStorePostgresIntegrationTest",
+      "count": 1
+    },
+    {
+      "suite": "InboxDeliveryStorePostgresIntegrationTest",
+      "count": 11
+    },
+    {
+      "suite": "InboxReadStorePostgresIntegrationTest",
+      "count": 2
+    }
+  ],
+  "limitations": [
+    "Opt-in PostgreSQL integration not enabled; no committed race or migration proof.",
+    "No browser/production verification.",
+    "Original failed baseline report remains historical and unchanged."
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "phase": "phase-01-inbox-foundation",
+  "status": "RED_READY",
+  "prepared_at": "2026-10-04T10:07:55Z",
+  "test_files": [
+    "pte-api/app/src/test/java/com/pte/notification/NotificationMigrationVersionTest.java"
+  ],
+  "expected_red_reason": "V71 is duplicated by V71__notification_inbox_foundation.sql and V71__support_ticket.sql; the target branch migration order has not been reconciled yet.",
+  "artifact_path": "pte-doc/projects/plans/support-feedback-bell-notifications/tests/phase-01-inbox-foundation-tdd-ready.json"
+}

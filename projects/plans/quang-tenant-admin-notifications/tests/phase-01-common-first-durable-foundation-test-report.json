@@ -1,0 +1,88 @@
+{
+  "phase": "phase-01-common-first-durable-foundation",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-03T12:06:42Z",
+  "summary": {
+    "passed": 96,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "report_path": "pte-doc/projects/plans/quang-tenant-admin-notifications/tests/phase-01-common-first-durable-foundation-test-report.json",
+  "orchestration": "ck:cook Phase 01 --hard --tdd verification; fresh rerun after restarting the isolated PostgreSQL instance. Scoped ck:test quality exception, not quality approval.",
+  "command": ".\\mvnw.cmd -pl app \"-Dtest=InboxNotificationRequestedTest,InboxDeliveryServiceTest,InboxRecipientEligibilityTest,InboxDeliveryJitterTest,InboxDeliveryStorePostgresIntegrationTest,NotificationLogServiceTest,NotificationDispatchServiceTest,EmailWorkerTest,ViolationNotificationListenerTest,UserCredentialsNotificationListenerTest,TenantApplicationNotificationListenerTest,SessionCancelledNotificationListenerTest,EnrollmentNotificationListenerTest,AttemptPublishedNotificationListenerTest,ModuleStructureTest\" test",
+  "working_directory": "pte-api",
+  "exit_code": 0,
+  "maven_duration_seconds": 46.449,
+  "suites": [
+    {
+      "name": "InboxNotificationRequestedTest",
+      "passed": 30
+    },
+    {
+      "name": "InboxDeliveryServiceTest",
+      "passed": 15
+    },
+    {
+      "name": "InboxDeliveryJitterTest",
+      "passed": 2
+    },
+    {
+      "name": "InboxDeliveryStorePostgresIntegrationTest",
+      "passed": 11
+    },
+    {
+      "name": "InboxRecipientEligibilityTest",
+      "passed": 7
+    },
+    {
+      "name": "ModuleStructureTest",
+      "passed": 3
+    },
+    {
+      "name": "Existing notification regressions (9 classes)",
+      "passed": 28
+    }
+  ],
+  "prepared_test_integrity": {
+    "status": "unchanged",
+    "algorithm": "SHA256",
+    "files": {
+      "pte-api/app/src/test/java/com/pte/notification/InboxNotificationRequestedTest.java": "B10E38459AE6F56818D719BE83DD75F77E0827FAF5BA5F0EFDE0BAAAA2E42015",
+      "pte-api/app/src/test/java/com/pte/notification/internal/service/InboxDeliveryServiceTest.java": "8B1622D2998546F440DFA83530AD2388FDF678E78518B77F80760CD7A996A19B"
+    }
+  },
+  "postgres_evidence": {
+    "url": "jdbc:postgresql://127.0.0.1:55439/postgres",
+    "user": "codex_inbox_test",
+    "migration": "db/migration/V71__notification_inbox_foundation.sql",
+    "isolated_random_schema_per_test": true,
+    "public_schema_untouched": true,
+    "skipped": 0,
+    "verified": [
+      "V71 migration applies with minimal FK fixture identities",
+      "Transaction rollback leaves no content/delivery",
+      "Proxied MANDATORY appender rejects nontransactional invocation; BEFORE_COMMIT listener ignores no-transaction event and rolls back origin work",
+      "Ten concurrent duplicate appends create one content and two distinct NULL-tenant admin intents",
+      "Changed immutable payload is rejected without rewriting history",
+      "Concurrent claims skip locked rows without duplicate ownership",
+      "Expired lease recovery replaces token and rejects stale token",
+      "Delivery insert/state/sequence changes roll back atomically",
+      "Read-all watermark shares stream lock and later arrival stays unread",
+      "Exhausted crash lease becomes FAILED; manual retry preserves original identity"
+    ]
+  },
+  "limitations": [
+    "No HTTP authorization/controller or browser validation in Phase 01.",
+    "Eligibility tests mock IdentityService/TenancyService; actual role lock persistence not integrated here.",
+    "Read-all test mirrors planned SQL locking, not the Phase 02 inbox API.",
+    "No JPA schema validation against V71 performed; this verifies native store and migration only.",
+    "No full historical migration-chain application, benchmark, RabbitMQ process restart or live scheduler evidence.",
+    "No quality verdict or phase completion implied."
+  ],
+  "warnings": [
+    "Existing Mockito dynamic-agent and deprecated/unchecked compiler warnings; no test failures."
+  ],
+  "test_code_fixes": []
+}

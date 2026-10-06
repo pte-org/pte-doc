@@ -1,0 +1,129 @@
+{
+  "mode": "verify",
+  "target": "phase-04-validation-and-handoff",
+  "verdict": "APPROVED",
+  "release_ready": false,
+  "reviewed_at": "2026-10-05T13:46:23.779Z",
+  "reviewed_files": [
+    "pte-doc/projects/plans/support-feedback-bell-notifications/phase-04-validation-and-handoff.md",
+    "pte-api/app/src/main/java/com/pte/support/dto/event/package-info.java",
+    "pte-api/app/src/main/java/com/pte/support/domain/enums/package-info.java",
+    "pte-api/app/src/test/java/com/pte/ModuleStructureTest.java",
+    "pte-web/packages/api-client/src/requests/endpoints.test.ts",
+    "pte-api/app/src/test/java/com/pte/assessment/internal/service/ExamGenerationServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleCapabilityTest.java",
+    "pte-api/app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServicePlayAudioTest.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 2
+  },
+  "findings": [
+    {
+      "id": "QUAL-P4-001",
+      "severity": "NOTED",
+      "rule": "FULL_REGRESSION_BASELINE",
+      "status": "RESOLVED",
+      "introduced_by_current_change": false,
+      "location": "pte-api/app/src/test/java/com/pte/attempt and com/pte/assessment",
+      "evidence": "Fresh XML totals: 1127 tests, 1101 passed, 0 failures, 0 errors, 26 skipped. Main Java 21 full run exited 0 in 56.919s; targeted 31 passed. Strict fixture updates, three added cases and narrow support NamedInterfaces resolve the failed baseline. Only FULL_REGRESSION_BASELINE is closed.",
+      "why_it_matters": "A non-green full suite prevents an unconditional release claim even though the current feature scope is green.",
+      "required_action": "Resolved for the failed baseline only. Preserve 26 skipped PostgreSQL cases and open worker/browser limits as separate verification boundaries.",
+      "owner": "backend-maintainer",
+      "applicable": true,
+      "confidence": "high",
+      "historical_evidence": "The full app suite reports four failures, six errors, and fourteen skipped tests; the support boundary test and all targeted support/inbox tests pass."
+    },
+    {
+      "id": "QUAL-P4-002",
+      "severity": "NOTED",
+      "rule": "WORKER_RUNTIME_ENABLEMENT",
+      "status": "OPEN",
+      "introduced_by_current_change": false,
+      "location": "pte-api/app/src/main/resources/application.yml:85",
+      "evidence": "Historical source report: NOTIFICATION_INBOX_ENABLED defaults to false; the healthy local app container is still at Flyway V70 and was not used as current-feature runtime evidence. Current worker performed no runtime/browser verification; remains NOT_VERIFIED. Historical container/migration state is not asserted as current.",
+      "why_it_matters": "Intent tests alone cannot prove that a bell item is materialized by the worker.",
+      "required_action": "Run the current V71-V76 application with NOTIFICATION_INBOX_ENABLED=true and verify a pending support intent reaches the inbox.",
+      "owner": "release-operator",
+      "applicable": true,
+      "confidence": "high",
+      "historical_evidence": "NOTIFICATION_INBOX_ENABLED defaults to false; the healthy local app container is still at Flyway V70 and was not used as current-feature runtime evidence."
+    },
+    {
+      "id": "QUAL-P4-003",
+      "severity": "NOTED",
+      "rule": "AUTHENTICATED_BROWSER_ACCEPTANCE",
+      "status": "OPEN",
+      "introduced_by_current_change": false,
+      "location": "Phase 04 browser acceptance flow",
+      "evidence": "Historical source report: Visible Playwright smoke covered login and unauthenticated protected-route redirects only; no valid tenant/platform-admin test accounts were available for the CRUD and isolation flow. Current worker performed no runtime/browser verification; remains NOT_VERIFIED. Historical container/migration state is not asserted as current.",
+      "why_it_matters": "Builds and 401 probes cannot prove fan-out, read-state, exact target navigation, or cross-account isolation.",
+      "required_action": "Repeat the browser flow with authorized local test accounts after the current runtime is deployed to the controlled environment.",
+      "owner": "release-operator",
+      "applicable": true,
+      "confidence": "high",
+      "historical_evidence": "Visible Playwright smoke covered login and unauthenticated protected-route redirects only; no valid tenant/platform-admin test accounts were available for the CRUD and isolation flow."
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/quang-admin-baseline-repair/quality/phase-04-validation-and-handoff-quality-report.json",
+  "source_report": "pte-doc/projects/plans/support-feedback-bell-notifications/quality/phase-04-validation-and-handoff-quality-report.json",
+  "source_report_sha256": "edd01af44acb338b91607253bae9302a697e717f8d23b3d29320f40f5c54d2b0",
+  "source_receipt": "pte-doc/projects/plans/support-feedback-bell-notifications/quality/phase-04-validation-and-handoff-receipt.json",
+  "verification_scope": {
+    "description": "Bounded re-evaluation of original findings and reviewed files, refreshed with relevant current repairs. No feature, deployment or production release approval.",
+    "original_reviewed_file_count": 5,
+    "current_reviewed_file_count": 8,
+    "changed_files_evaluated": [
+      "pte-api/app/src/test/java/com/pte/assessment/internal/service/ExamGenerationServiceTest.java",
+      "pte-api/app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleCapabilityTest.java",
+      "pte-api/app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServicePlayAudioTest.java",
+      "pte-api/app/src/main/java/com/pte/support/domain/enums/package-info.java",
+      "pte-api/app/src/main/java/com/pte/support/dto/event/package-info.java"
+    ],
+    "production_service_changes": false,
+    "source_artifacts_preserved": true,
+    "contract": "ck-quality Core plus relevant OWN, SEC, CHG, DOC, API, TXN and DB context; TypeScript adapter for existing endpoint test. No Java-specific adapter is defined.",
+    "review_notes": [
+      "Support exposes only DTO event and authoritative enum packages via NamedInterface, following existing session event/itembank enum conventions. Module remains closed; ModuleStructureTest and MODULES.verify are unchanged.",
+      "Three test repairs align fixtures with current production contracts and strengthen assertions. Three additional negative/navigation cases remain active.",
+      "Original phase document is historical; main owns checkpoint documentation and final code-review."
+    ]
+  },
+  "verification_evidence": {
+    "source_test_report": "pte-doc/projects/plans/quang-admin-baseline-repair/tests/baseline-repair-test-report.json",
+    "full_suite": {
+      "tests": 1127,
+      "passed": 1101,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 26,
+      "duration_seconds": 56.919,
+      "execution": "Main executed Java 21 Maven suite with exit 0; worker independently read fresh Surefire XML totals from 186 suite files."
+    },
+    "targeted": {
+      "tests": 31,
+      "passed": 31,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suites": {
+        "ExamGenerationServiceTest": 10,
+        "AttemptLifecycleCapabilityTest": 4,
+        "AttemptLifecycleServicePlayAudioTest": 11,
+        "ModuleStructureTest": 3,
+        "SupportTicketInboxNotificationListenerTest": 3
+      },
+      "execution": "Main targeted run reported 31 passed; current full-run XML independently confirms the same five suite counts."
+    },
+    "worker_test_execution": false,
+    "diff_check": "git -C pte-api diff --check exited 0; LF/CRLF warnings only.",
+    "limitations": [
+      "26 opt-in PostgreSQL integration tests skipped; no fresh migration, committed transaction or race evidence.",
+      "Current notification worker runtime and authenticated browser acceptance remain NOT_VERIFIED.",
+      "No deployment, production, feature completion or unconditional release claim."
+    ]
+  }
+}

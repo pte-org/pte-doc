@@ -1,0 +1,22 @@
+{
+  "target": "phase-03-question-lifecycle",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-archive-lifecycle-cleanup/quality/phase-03-question-lifecycle-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/itembank/ItembankService.java",
+    "pte-api/app/src/main/java/com/pte/itembank/dto/response/QuestionResponse.java",
+    "pte-api/app/src/main/java/com/pte/itembank/internal/constant/ItembankConstants.java",
+    "pte-api/app/src/main/java/com/pte/itembank/internal/controller/QuestionController.java",
+    "pte-api/app/src/main/java/com/pte/itembank/internal/exception/QuestionDeletionException.java",
+    "pte-api/app/src/main/java/com/pte/itembank/internal/mapper/QuestionMapper.java",
+    "pte-api/app/src/main/java/com/pte/itembank/internal/repository/QuestionRepository.java",
+    "pte-api/app/src/main/java/com/pte/itembank/internal/service/QuestionDeletionService.java",
+    "pte-api/app/src/main/java/com/pte/shared/constant/SharedConstants.java",
+    "pte-api/app/src/main/java/com/pte/shared/exception/GlobalExceptionHandler.java"
+  ],
+  "source_fingerprint": "sha256:0647a08907cd7bb01821329c6eb90f501e24f9055a1ba4679665612461760cc7",
+  "reviewed_at": "2026-10-05T09:59:07.249Z",
+  "open_blocking_findings": 0
+}

@@ -1,0 +1,47 @@
+{
+  "mode": "gate",
+  "target": "phase-02-report-03-srs",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-06T00:00:00+07:00",
+  "reviewed_files": [
+    "pte-doc/report/report03/00-project-report.md",
+    "pte-doc/report/report03/00-record-of-changes.md",
+    "pte-doc/report/report03/01-overall-description.md",
+    "pte-doc/report/report03/02-user-requirements.md",
+    "pte-doc/report/report03/03-functional-requirements.md",
+    "pte-doc/report/report03/04-non-functional-requirements.md",
+    "pte-doc/report/report03/05-requirement-appendix.md"
+  ],
+  "summary": {"blocker": 0, "high": 0, "medium": 0, "low": 0, "noted": 2},
+  "findings": [
+    {
+      "id": "QUAL-DOC-002",
+      "severity": "NOTED",
+      "rule": "DOC_PUBLIC_CONTRACT_DOCUMENTED",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/report/report03/04-non-functional-requirements.md:4.4",
+      "evidence": "Numeric targets are explicitly labelled as targets and point to future Report 5 evidence.",
+      "why_it_matters": "Reviewers need to distinguish requirement baselines from achieved measurements.",
+      "required_action": "No blocking action; Report 5 must preserve the same evidence rule.",
+      "owner": "Report 5 owner"
+    },
+    {
+      "id": "QUAL-DOC-003",
+      "severity": "NOTED",
+      "rule": "DOC_INTENTIONAL_LIMIT_IS_A_NON_GOAL",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/report/report03/05-requirement-appendix.md:5.7",
+      "evidence": "PTE Academic independence, Student self-payment, mobile delivery, advanced anti-cheat, and deferred reports are explicit out-of-scope rows.",
+      "why_it_matters": "Review scope cannot mistake deferred or excluded items for missing requirements.",
+      "required_action": "No blocking action; downstream reports must retain these boundaries.",
+      "owner": "Documentation work package"
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/pte-prep-report-documents/quality/phase-02-report-03-srs-quality-report.json"
+}

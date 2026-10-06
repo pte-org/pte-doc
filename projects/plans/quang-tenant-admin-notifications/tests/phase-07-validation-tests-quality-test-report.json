@@ -1,0 +1,104 @@
+{
+  "phase": "phase-07-validation-tests-quality",
+  "mode": "hard-tdd-verify",
+  "verdict": "PARTIAL_NOT_VERIFIED",
+  "reviewed_at": "2026-10-04T04:51:51Z",
+  "release_ready": false,
+  "summary": {
+    "targeted_backend_tests": 201,
+    "targeted_backend_failures": 0,
+    "targeted_backend_errors": 0,
+    "targeted_backend_skipped": 14,
+    "full_backend_tests": 1044,
+    "full_backend_failures": 4,
+    "full_backend_errors": 6,
+    "full_backend_skipped": 14,
+    "web_api_client_tests": 357,
+    "web_api_client_failures": 0,
+    "browser_smoke": "PASSED_UNAUTHENTICATED_ONLY",
+    "postgresql_runtime": "NOT_VERIFIED",
+    "performance": "NOT_VERIFIED"
+  },
+  "commands": [
+    {
+      "command": ".\\mvnw.cmd -pl app -am test",
+      "result": "FAILED_OUT_OF_SCOPE_BASELINE",
+      "tests": 1044,
+      "failures": 4,
+      "errors": 6,
+      "skipped": 14,
+      "failures_or_errors": [
+        "ExamGenerationServiceTest.generate_orderIsSpeakingWritingReadingListening_thenBySequence",
+        "AttemptLifecycleCapabilityTest.existingStart_checksCapabilitiesAfterOwnershipBeforeResume",
+        "AttemptLifecycleServicePlayAudioTest.playAudio_audioUrlExpired_throws",
+        "AttemptLifecycleServicePlayAudioTest.playAudio_replayLimitExceeded_throws",
+        "AttemptLifecycleCapabilityTest.start_repeatsAuthoritativeCheckAndStoresNormalizedFingerprint",
+        "AttemptLifecycleServicePlayAudioTest.playAudio_firstPlay_incrementsPlayCount",
+        "AttemptLifecycleServicePlayAudioTest.playAudio_locksExamAttemptRow_neverTouchesTimerService",
+        "AttemptLifecycleServicePlayAudioTest.playAudio_publicLegacyAudio_ignoresStaleExpiryTimestamp",
+        "AttemptLifecycleServicePlayAudioTest.playAudio_sameRequestIdReplayed_doesNotIncrementAgain",
+        "AttemptLifecycleServicePlayAudioTest.playAudio_unlimitedPolicy_neverRejects"
+      ],
+      "scope_note": "Matches the known assessment/attempt baseline recorded before Phase 07; no Phase 07 production code was changed to mask these failures."
+    },
+    {
+      "command": ".\\mvnw.cmd -pl app \"-Dtest=InboxNotificationRequestedTest,InboxDeliveryServiceTest,InboxRecipientEligibilityTest,InboxDeliveryJitterTest,InboxDeliveryStorePostgresIntegrationTest,InboxReadServiceTest,InboxReadStorePostgresIntegrationTest,InboxAnnouncementStorePostgresIntegrationTest,AnnouncementServiceTest,NotificationLogServiceTest,NotificationDispatchServiceTest,EmailWorkerTest,ViolationNotificationListenerTest,UserCredentialsNotificationListenerTest,TenantApplicationNotificationListenerTest,TenantApplicationInboxNotificationListenerTest,SessionCancelledNotificationListenerTest,EnrollmentNotificationListenerTest,AttemptPublishedNotificationListenerTest,CommercialNotificationListenerTest,SubscriptionActivationServiceTest,SubscriptionPersistenceServiceTest,OrderPersistenceServiceTest,OrderServiceTest,BillingServiceTest,PayOsWebhookServiceTest,OrderExpirationServiceTest,LicenseCodeServiceTest,SessionClosingSoonReminderWorkerTest,SessionClosingSoonReminderStalePendingTest,GradingCompletionEvaluatorTest,GradingCompletionEvaluatorAssignmentCoverageTest,GradingCohortServiceTest,SessionGradingCompletedNotificationListenerTest,ScoringCommandServiceTest,ExaminerScoringServiceTest,AiScoringResultPersistenceServiceTest,ScoringServiceTest,ModuleStructureTest,RouteContractTest\" test",
+      "result": "PASSED_WITH_ENVIRONMENT_SKIPS",
+      "tests": 201,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 14,
+      "skipped_scope": "InboxAnnouncementStorePostgresIntegrationTest, InboxDeliveryStorePostgresIntegrationTest, InboxReadStorePostgresIntegrationTest because INBOX_TEST_DB_URL was absent."
+    },
+    {
+      "command": "corepack pnpm --filter @pte/api-client test",
+      "result": "PASSED",
+      "test_files": 14,
+      "tests": 357,
+      "failures": 0
+    },
+    {
+      "command": "corepack pnpm --filter @pte/api-client exec tsc --noEmit; corepack pnpm --filter @pte/ui typecheck; corepack pnpm --filter tenant-web exec tsc --noEmit; corepack pnpm --filter vendor-web exec tsc --noEmit",
+      "result": "PASSED"
+    },
+    {
+      "command": "corepack pnpm --filter tenant-web lint; corepack pnpm --filter vendor-web lint",
+      "result": "PASSED",
+      "errors": 0,
+      "warnings": 2,
+      "warning_scope": "Pre-existing vendor QuestionBank <img> warnings."
+    },
+    {
+      "command": "corepack pnpm --filter tenant-web build; corepack pnpm --filter vendor-web build",
+      "result": "PASSED_CARRIED_FROM_PHASE_06",
+      "notes": "No production source changed after the Phase 06 build gate; routes were generated successfully in that receipt."
+    },
+    {
+      "command": "Playwright Chrome smoke script against http://localhost:3001 and http://localhost:3000",
+      "result": "PASSED_UNAUTHENTICATED_ONLY",
+      "observed": [
+        "Tenant /login and /host/notifications returned 200 and rendered the login shell.",
+        "Vendor /login and /admin/notifications returned 200 and rendered the login shell.",
+        "No browser console errors or failed frontend requests were observed."
+      ],
+      "script": "C:/Users/DELL/AppData/Local/Temp/playwright-test-phase07.js"
+    },
+    {
+      "command": "docker ps; Test-NetConnection localhost:8091/6379/5672/1025",
+      "result": "BLOCKED_ENVIRONMENT",
+      "notes": "Docker Desktop Linux engine and local API/Redis/RabbitMQ/MailHog ports were unavailable; local port 5432 was open but no safe PostgreSQL test credentials/harness were configured."
+    }
+  ],
+  "traceability": {
+    "inbox_types": 7,
+    "backend_type_mapping_checked": true,
+    "excluded_violation_submission_answer_ai_examiner_completion_inbox_triggers": "STATIC_ONLY",
+    "all_p1_destinations": "STATIC_AND_TARGETED_TESTS_ONLY"
+  },
+  "not_verified": [
+    "Authenticated HTTP authorization for PLATFORM_ADMIN, PLATFORM_AUTHOR, HOST_ADMIN, foreign tenant and foreign admin.",
+    "PostgreSQL migrations, null-admin uniqueness, rollback, lease fencing, restart recovery and concurrent read-all/publication races.",
+    "Authenticated browser CRUD, delivery to two hosts, independent read state, exact deep links, 15-minute reminder, grading finalization and no automatic publication.",
+    "Performance targets for inbox/count, publication, fanout, scheduler and visible-tab polling."
+  ]
+}

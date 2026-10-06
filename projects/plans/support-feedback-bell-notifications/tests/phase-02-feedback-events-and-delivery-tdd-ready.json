@@ -1,0 +1,14 @@
+{
+  "phase": "phase-02-feedback-events-and-delivery",
+  "status": "RED_READY",
+  "prepared_at": "2026-10-04T10:32:03Z",
+  "test_files": [
+    "pte-api/app/src/test/java/com/pte/notification/SupportTicketNotificationContractTest.java",
+    "pte-api/app/src/test/java/com/pte/notification/internal/listener/SupportTicketInboxNotificationListenerTest.java",
+    "pte-api/app/src/test/java/com/pte/support/internal/service/SupportTicketEventPublicationTest.java",
+    "pte-api/app/src/test/java/com/pte/support/internal/service/SupportTicketServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/support/SupportFeedbackInboxMigrationTest.java"
+  ],
+  "expected_red_reason": "Support notification event records, listener, enum mappings, V76 migration, and the SupportTicketService event-publisher constructor do not exist yet; test compilation fails only on those missing implementation symbols.",
+  "artifact_path": "pte-doc/projects/plans/support-feedback-bell-notifications/tests/phase-02-feedback-events-and-delivery-tdd-ready.json"
+}

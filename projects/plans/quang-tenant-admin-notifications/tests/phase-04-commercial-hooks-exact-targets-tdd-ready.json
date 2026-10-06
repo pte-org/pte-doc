@@ -1,0 +1,51 @@
+{
+  "phase": "04",
+  "title": "Commercial hooks and exact targets",
+  "mode": "hard",
+  "tdd": {
+    "status": "RED_READY",
+    "tests_written_before_production": true,
+    "red_command": ".\\mvnw.cmd -pl app \"-Dtest=CommercialNotificationListenerTest,SubscriptionActivationServiceTest,SubscriptionPersistenceServiceTest,OrderServiceTest,BillingServiceTest,PayOsWebhookServiceTest,OrderExpirationServiceTest,LicenseCodeServiceTest\" test",
+    "red_result": "EXPECTED_COMPILE_FAILURE_MISSING_PHASE_04_PRODUCTION_TYPES",
+    "red_observed_at": "2026-10-03T14:47:47Z",
+    "prepared_tests": [
+      {
+        "path": "pte-api/app/src/test/java/com/pte/notification/internal/listener/CommercialNotificationListenerTest.java",
+        "sha256": "A728A3ADDD40D36B4D7275273A923B207BCB55FF76DC35D7771FEDB6DA7B9B3C"
+      },
+      {
+        "path": "pte-api/app/src/test/java/com/pte/billing/internal/service/SubscriptionActivationServiceTest.java",
+        "sha256": "F7ED4CE0A634CC6A8FAA4BB21F9F9DCA548043D049E8C23F8EE06DD4580BB35E"
+      },
+      {
+        "path": "pte-api/app/src/test/java/com/pte/billing/internal/service/SubscriptionPersistenceServiceTest.java",
+        "sha256": "765BD6D27FF166BB7C5A8A9B789BA29DAEE5A85CF48A886F3D636B0ACB1988A4"
+      },
+      {
+        "path": "pte-api/app/src/test/java/com/pte/billing/BillingServiceTest.java",
+        "sha256": "C617CEAD69A4AD2E2A568089EA0D20B63F04B5A4EC40C9C00644139EAFDAC03F"
+      },
+      {
+        "path": "pte-api/app/src/test/java/com/pte/billing/internal/service/OrderServiceTest.java",
+        "sha256": "D80A8382E61FD3077807F6C846E346B7AC151FDBAF5DC08914F4CC107C46D287"
+      },
+      {
+        "path": "pte-api/app/src/test/java/com/pte/billing/internal/service/PayOsWebhookServiceTest.java",
+        "sha256": "5365480AD60B5ADA43930866400B1F6FC18C7A0A118B091E7031C5BE56845EB7"
+      },
+      {
+        "path": "pte-api/app/src/test/java/com/pte/billing/internal/service/OrderExpirationServiceTest.java",
+        "sha256": "15BB149E5B981EE6EE4ABDC65FB1ACB35387F687D1042B1B1412C7208F76665B"
+      },
+      {
+        "path": "pte-api/app/src/test/java/com/pte/billing/internal/service/LicenseCodeServiceTest.java",
+        "sha256": "83D8811F260B6D49F7491E58C26BC6C5ED8608314066799A485E4B98621B15EF"
+      },
+      {
+        "path": "pte-api/app/src/test/java/com/pte/RouteContractTest.java",
+        "sha256": "880CAA747D7FE20E5209ED90C7817BECF602817B03F0928160B70D4BF0423262"
+      }
+    ],
+    "assertion_change_policy": "Do not weaken prepared assertions; exact target ownership, one-event semantics and rollback-safe transaction propagation must be preserved."
+  }
+}

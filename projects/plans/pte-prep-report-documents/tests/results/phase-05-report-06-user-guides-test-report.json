@@ -1,0 +1,9 @@
+{
+  "phase": "phase-05-report-06-user-guides",
+  "mode": "tdd-verify",
+  "status": "GREEN",
+  "command": "python pte-doc/projects/plans/pte-prep-report-documents/tests/test_phase05_report06.py",
+  "result": "GREEN/PASSED: Report 6 guides are structurally valid",
+  "verified_at": "2026-10-06",
+  "notes": "Report 6 covers release contents, prerequisites, safe installation/access/health/rollback, six role workflows, troubleshooting, support escalation, and masked/TBD asset inventory."
+}

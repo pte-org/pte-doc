@@ -1,0 +1,60 @@
+{
+  "mode": "gate",
+  "target": "phase-04-validation-and-handoff",
+  "verdict": "APPROVED",
+  "release_ready": false,
+  "reviewed_at": "2026-10-04T14:45:34Z",
+  "reviewed_files": [
+    "pte-doc/projects/plans/support-feedback-bell-notifications/phase-04-validation-and-handoff.md",
+    "pte-api/app/src/main/java/com/pte/support/dto/event/package-info.java",
+    "pte-api/app/src/main/java/com/pte/support/domain/enums/package-info.java",
+    "pte-api/app/src/test/java/com/pte/ModuleStructureTest.java",
+    "pte-web/packages/api-client/src/requests/endpoints.test.ts"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 3
+  },
+  "findings": [
+    {
+      "id": "QUAL-P4-001",
+      "severity": "NOTED",
+      "rule": "FULL_REGRESSION_BASELINE",
+      "status": "OPEN",
+      "introduced_by_current_change": false,
+      "location": "pte-api/app/src/test/java/com/pte/attempt and com/pte/assessment",
+      "evidence": "The full app suite reports four failures, six errors, and fourteen skipped tests; the support boundary test and all targeted support/inbox tests pass.",
+      "why_it_matters": "A non-green full suite prevents an unconditional release claim even though the current feature scope is green.",
+      "required_action": "Resolve or separately baseline the assessment/attempt failures before final release sign-off.",
+      "owner": "backend-maintainer"
+    },
+    {
+      "id": "QUAL-P4-002",
+      "severity": "NOTED",
+      "rule": "WORKER_RUNTIME_ENABLEMENT",
+      "status": "OPEN",
+      "introduced_by_current_change": false,
+      "location": "pte-api/app/src/main/resources/application.yml:85",
+      "evidence": "NOTIFICATION_INBOX_ENABLED defaults to false; the healthy local app container is still at Flyway V70 and was not used as current-feature runtime evidence.",
+      "why_it_matters": "Intent tests alone cannot prove that a bell item is materialized by the worker.",
+      "required_action": "Run the current V71-V76 application with NOTIFICATION_INBOX_ENABLED=true and verify a pending support intent reaches the inbox.",
+      "owner": "release-operator"
+    },
+    {
+      "id": "QUAL-P4-003",
+      "severity": "NOTED",
+      "rule": "AUTHENTICATED_BROWSER_ACCEPTANCE",
+      "status": "OPEN",
+      "introduced_by_current_change": false,
+      "location": "Phase 04 browser acceptance flow",
+      "evidence": "Visible Playwright smoke covered login and unauthenticated protected-route redirects only; no valid tenant/platform-admin test accounts were available for the CRUD and isolation flow.",
+      "why_it_matters": "Builds and 401 probes cannot prove fan-out, read-state, exact target navigation, or cross-account isolation.",
+      "required_action": "Repeat the browser flow with authorized local test accounts after the current runtime is deployed to the controlled environment.",
+      "owner": "release-operator"
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/support-feedback-bell-notifications/quality/phase-04-validation-and-handoff-quality-report.json"
+}

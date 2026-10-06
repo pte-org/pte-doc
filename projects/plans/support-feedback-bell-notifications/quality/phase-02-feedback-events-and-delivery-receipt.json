@@ -1,0 +1,30 @@
+{
+  "target": "phase-02-feedback-events-and-delivery",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/support-feedback-bell-notifications/quality/phase-02-feedback-events-and-delivery-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/notification/InboxNotificationRequested.java",
+    "pte-api/app/src/main/java/com/pte/notification/domain/enums/InboxCategory.java",
+    "pte-api/app/src/main/java/com/pte/notification/domain/enums/InboxNotificationType.java",
+    "pte-api/app/src/main/java/com/pte/notification/domain/enums/InboxTargetType.java",
+    "pte-api/app/src/main/java/com/pte/notification/internal/constant/InboxConstants.java",
+    "pte-api/app/src/main/java/com/pte/notification/internal/listener/SupportTicketInboxNotificationListener.java",
+    "pte-api/app/src/main/java/com/pte/notification/internal/service/InboxRecipientEligibility.java",
+    "pte-api/app/src/main/java/com/pte/support/dto/event/SupportTicketNoteAddedEvent.java",
+    "pte-api/app/src/main/java/com/pte/support/dto/event/SupportTicketStatusChangedEvent.java",
+    "pte-api/app/src/main/java/com/pte/support/dto/event/SupportTicketSubmittedEvent.java",
+    "pte-api/app/src/main/java/com/pte/support/internal/service/SupportTicketService.java",
+    "pte-api/app/src/main/resources/db/migration/V76__support_feedback_inbox.sql",
+    "pte-api/app/src/test/java/com/pte/notification/SupportTicketNotificationContractTest.java",
+    "pte-api/app/src/test/java/com/pte/notification/internal/listener/SupportTicketInboxNotificationListenerTest.java",
+    "pte-api/app/src/test/java/com/pte/support/SupportFeedbackInboxMigrationTest.java",
+    "pte-api/app/src/test/java/com/pte/support/internal/service/SupportTicketEventPublicationTest.java",
+    "pte-api/app/src/test/java/com/pte/support/internal/service/SupportTicketServiceTest.java",
+    "pte-doc/projects/plans/support-feedback-bell-notifications/phase-02-feedback-events-and-delivery.md"
+  ],
+  "source_fingerprint": "sha256:817de48b947e737e67ebbc79682fd7d9a0901e966aee4c2193d54e307c20dd59",
+  "reviewed_at": "2026-10-04T10:38:00Z",
+  "open_blocking_findings": 0
+}
