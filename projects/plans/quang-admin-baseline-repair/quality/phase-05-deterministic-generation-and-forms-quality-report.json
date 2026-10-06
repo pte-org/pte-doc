@@ -1,0 +1,97 @@
+{
+  "mode": "verify",
+  "target": "phase-05-deterministic-generation-and-forms",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-05T13:46:23.809Z",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/internal/service/ExamGenerationService.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/internal/service/SnapshotPublishService.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/domain/ExamSnapshot.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/domain/ExamForm.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/domain/FormAssignment.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/domain/ExamGenerationJob.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/ExamOrchestrationService.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/EntitlementService.java",
+    "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/migration/V43__snapshot_generation_provenance.sql",
+    "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/assessment/internal/service/ExamGenerationServiceTest.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 1
+  },
+  "findings": [
+    {
+      "id": "QUAL-001-P5",
+      "severity": "NOTED",
+      "rule": "DOC_INTENTIONAL_LIMIT_IS_A_NON_GOAL",
+      "status": "ACCEPTED_DEBT",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-api/app/src/main/java/com/pte/session/internal/service/ExamOrchestrationService.java:generate",
+      "evidence": "Persistent job, progress and idempotency fields exist, while the current implementation generates forms synchronously in the request transaction and does not persist a FAILED job after rollback.",
+      "why_it_matters": "Large unique-form audiences can hold a transaction for too long and do not yet have durable worker retry semantics.",
+      "required_action": "Before production scale rollout, move generation to a bounded worker with a separate failure transition/retry transaction and keep publish blocked until SUCCEEDED.",
+      "owner": "none",
+      "verification": "Accepted debt unchanged by this repair: generation remains synchronous in the request transaction; FAILED is not persisted after rollback."
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/quang-admin-baseline-repair/quality/phase-05-deterministic-generation-and-forms-quality-report.json",
+  "source_report": "pte-doc/projects/plans/quang-core-question-bank-exam-orchestration/quality/phase-05-deterministic-generation-and-forms-quality-report.json",
+  "source_report_sha256": "e2d6f28b55737222b6b2ed366f03fc087370c70ffedeeacb54134cd83094434b",
+  "source_receipt": "pte-doc/projects/plans/quang-core-question-bank-exam-orchestration/quality/phase-05-deterministic-generation-and-forms-receipt.json",
+  "release_ready": false,
+  "verification_scope": {
+    "description": "Bounded re-evaluation of original findings and reviewed files, refreshed with relevant current repairs. No feature, deployment or production release approval.",
+    "original_reviewed_file_count": 10,
+    "current_reviewed_file_count": 10,
+    "changed_files_evaluated": [
+      "pte-api/app/src/test/java/com/pte/assessment/internal/service/ExamGenerationServiceTest.java"
+    ],
+    "production_service_changes": false,
+    "source_artifacts_preserved": true,
+    "contract": "ck-quality Core plus relevant OWN, SEC, CHG, DOC, API, TXN and DB context; TypeScript adapter for existing endpoint test. No Java-specific adapter is defined.",
+    "review_notes": [
+      "Production SECTION_ORDER is SPEAKING, LISTENING, READING, WRITING; buildRequirements sorts by template sequence within sections.",
+      "Repaired test reverses input template and asserts exact sections, exact task draw sequence and sequential orderIndex. Deterministic seed/provenance test remains intact.",
+      "ExamOrchestrationService.generate remains synchronous under @Transactional; no bounded worker or durable FAILED transition introduced."
+    ]
+  },
+  "verification_evidence": {
+    "source_test_report": "pte-doc/projects/plans/quang-admin-baseline-repair/tests/baseline-repair-test-report.json",
+    "full_suite": {
+      "tests": 1127,
+      "passed": 1101,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 26,
+      "duration_seconds": 56.919,
+      "execution": "Main executed Java 21 Maven suite with exit 0; worker independently read fresh Surefire XML totals from 186 suite files."
+    },
+    "targeted": {
+      "tests": 31,
+      "passed": 31,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suites": {
+        "ExamGenerationServiceTest": 10,
+        "AttemptLifecycleCapabilityTest": 4,
+        "AttemptLifecycleServicePlayAudioTest": 11,
+        "ModuleStructureTest": 3,
+        "SupportTicketInboxNotificationListenerTest": 3
+      },
+      "execution": "Main targeted run reported 31 passed; current full-run XML independently confirms the same five suite counts."
+    },
+    "worker_test_execution": false,
+    "diff_check": "git -C pte-api diff --check exited 0; LF/CRLF warnings only.",
+    "limitations": [
+      "26 opt-in PostgreSQL integration tests skipped; no fresh migration, committed transaction or race evidence.",
+      "Current notification worker runtime and authenticated browser acceptance remain NOT_VERIFIED.",
+      "No deployment, production, feature completion or unconditional release claim."
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "mode": "focused",
+  "target": "phase-04-submit-lock-lifecycle-and-recovery",
+  "verdict": "PASSED",
+  "tested_at": "2026-09-29T00:00:00Z",
+  "tested_files": [
+    "D:/GitHub/pte-org/pte-app/lib/core/security/lockdown_service.dart",
+    "D:/GitHub/pte-org/pte-app/lib/core/storage/dao/pending_media_upload_dao.dart",
+    "D:/GitHub/pte-org/pte-app/lib/core/sync/submission_preparation_exception.dart",
+    "D:/GitHub/pte-org/pte-app/lib/core/sync/sync_engine.dart",
+    "D:/GitHub/pte-org/pte-app/lib/core/sync/media_upload_coordinator.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/widgets/exam_scaffold.dart",
+    "D:/GitHub/pte-org/pte-app/test/unit/sync/sync_engine_test.dart",
+    "D:/GitHub/pte-org/pte-app/test/unit/sync/media_upload_coordinator_test.dart",
+    "D:/GitHub/pte-org/pte-app/test/unit/features/exam_attempt/exam_attempt_bloc_test.dart",
+    "D:/GitHub/pte-org/pte-app/test/unit/features/exam_attempt/exam_attempt_bloc_lockdown_test.dart",
+    "D:/GitHub/pte-org/pte-app/test/unit/core/security/lockdown_service_test.dart",
+    "D:/GitHub/pte-org/pte-app/test/widget/features/exam_attempt/exam_scaffold_test.dart",
+    "D:/GitHub/pte-org/pte-app/test/widget/features/exam_attempt/exam_app_bar_test.dart",
+    "D:/GitHub/pte-org/pte-app/test/widget/features/exam_attempt/task_advance_button_test.dart"
+  ],
+  "results": {
+    "flutter_terminal_lifecycle_suite": {
+      "command": "flutter test test/unit/sync/sync_engine_test.dart test/unit/sync/media_upload_coordinator_test.dart test/unit/features/exam_attempt/exam_attempt_bloc_test.dart test/unit/features/exam_attempt/exam_attempt_bloc_lockdown_test.dart test/unit/core/security/lockdown_service_test.dart --reporter compact",
+      "tests": 94,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    "flutter_exam_widget_suite": {
+      "command": "flutter test test/widget/features/exam_attempt/exam_scaffold_test.dart test/widget/features/exam_attempt/exam_app_bar_test.dart test/widget/features/exam_attempt/task_advance_button_test.dart --reporter expanded",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    "flutter_analyze": {
+      "command": "flutter analyze lib/core/security/lockdown_service.dart lib/core/sync/sync_engine.dart lib/core/sync/media_upload_coordinator.dart lib/core/sync/submission_preparation_exception.dart lib/core/storage/dao/pending_media_upload_dao.dart lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart lib/features/exam_attempt/constants/exam_attempt_strings.dart lib/features/exam_attempt/constants/exam_attempt_error_message.dart lib/features/exam_attempt/presentation/widgets/exam_scaffold.dart test/unit/core/security/lockdown_service_test.dart test/unit/sync/sync_engine_test.dart test/unit/sync/media_upload_coordinator_test.dart test/unit/features/exam_attempt/exam_attempt_bloc_test.dart test/unit/features/exam_attempt/exam_attempt_bloc_lockdown_test.dart",
+      "exit_code": 0
+    }
+  },
+  "summary": "Terminal preparation is ordered and bounded; transport/media/native-unlock failures stay retryable and guarded; submitted server reconciliation unlocks only after the native permission boundary."
+}

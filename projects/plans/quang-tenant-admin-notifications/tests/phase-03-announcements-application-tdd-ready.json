@@ -1,0 +1,27 @@
+{
+  "phase": "03",
+  "title": "Announcements and application notices",
+  "mode": "hard",
+  "tdd": {
+    "status": "RED_READY",
+    "tests_written_before_production": true,
+    "red_command": ".\\mvnw.cmd -pl app \"-Dtest=AnnouncementServiceTest,TenantApplicationInboxNotificationListenerTest,InboxAnnouncementStorePostgresIntegrationTest\" test",
+    "red_result": "EXPECTED_COMPILE_FAILURE_MISSING_PHASE_03_PRODUCTION_TYPES",
+    "red_observed_at": "2026-10-03T13:12:57Z",
+    "prepared_tests": [
+      {
+        "path": "pte-api/app/src/test/java/com/pte/notification/internal/service/AnnouncementServiceTest.java",
+        "sha256": "CE3411C62852DE4816CEF26D2FCE128590E796472B9F89A0A5990012B4BAACC0"
+      },
+      {
+        "path": "pte-api/app/src/test/java/com/pte/notification/internal/listener/TenantApplicationInboxNotificationListenerTest.java",
+        "sha256": "2B31159A01CEC3AEBF1186468E075D389434B4BF378D260B60074B936345D8E2"
+      },
+      {
+        "path": "pte-api/app/src/test/java/com/pte/notification/internal/repository/InboxAnnouncementStorePostgresIntegrationTest.java",
+        "sha256": "601F373B90E99709988E3F9FBB959387259794629DB40C8E11520DB14547DDB2"
+      }
+    ],
+    "assertion_change_policy": "Do not weaken prepared assertions; fixture ordering and the additional retry assertion were corrected without weakening behavior, so the hashes were refreshed."
+  }
+}

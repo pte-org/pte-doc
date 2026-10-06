@@ -1,0 +1,33 @@
+{
+  "mode": "release-and-manual",
+  "target": "phase-05-windows-release-demo-verification",
+  "verdict": "PARTIAL",
+  "tested_at": "2026-09-29T00:00:00Z",
+  "tested_files": [
+    "D:/GitHub/pte-org/pte-app/build/windows/x64/runner/Release/pte_app.exe",
+    "D:/GitHub/pte-org/pte-doc/projects/plans/quang-practice-finish-submit-lockdown/phase-05-windows-release-demo-verification.md"
+  ],
+  "results": {
+    "windows_release_build": {
+      "command": "flutter build windows --release",
+      "exit_code": 0,
+      "artifact": "D:/GitHub/pte-org/pte-app/build/windows/x64/runner/Release/pte_app.exe"
+    },
+    "local_compose_stack": {
+      "command": "docker compose --env-file .env.local -f docker-compose.yml -f docker-compose.services.yml up -d",
+      "exit_code": 0,
+      "observed": "Application container healthy; /actuator/health returned HTTP 200."
+    },
+    "release_process_start": {
+      "observed": "pte_app release process launched and remained responsive."
+    },
+    "login_window_probe": {
+      "observed": "The release login window was bounded/windowed (1280x720 on a 1920x1080 display), retained caption/thick-frame styles, and was not a WS_POPUP fullscreen window."
+    },
+    "manual_exam_matrix": {
+      "status": "PENDING",
+      "reason": "Requires operator-visible login, device-check, task interaction, submit/retry, native close/focus probes, and host-side status verification with a valid local student session."
+    }
+  },
+  "summary": "The release artifact and local runtime are ready, and the login-window contract is verified. The final demo claim remains open until the interactive D-02 through D-14 matrix is executed."
+}

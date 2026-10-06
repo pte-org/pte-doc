@@ -1,0 +1,9 @@
+{
+  "phase": "phase-06-cross-report-traceability-and-validation",
+  "status": "RED_READY",
+  "test_files": [
+    "pte-doc/projects/plans/pte-prep-report-documents/tests/test_phase06_validation.py"
+  ],
+  "expected_red_reason": "The final cross-report validation report has not been written yet.",
+  "prepared_at": "2026-10-06"
+}

@@ -1,0 +1,21 @@
+{
+  "phase": "phase-04-web-actions-and-remove-labels",
+  "mode": "all",
+  "verdict": "PASSED",
+  "summary": {
+    "passed": 402,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "evidence": {
+    "unit_tests": 381,
+    "mocked_browser_checks": 21,
+    "typecheck": "api-client/vendor/tenant passed",
+    "lint": "both passed with existing warnings",
+    "build": "both passed",
+    "authorization_boundary": "mocked browser session, not live E2E"
+  },
+  "reviewed_at": "2026-10-05T10:31:23.954Z",
+  "report_path": "D:/GitHub/pte-org/pte-doc/projects/plans/quang-archive-lifecycle-cleanup/tests/phase-04-web-actions-and-remove-labels-test-report.json"
+}

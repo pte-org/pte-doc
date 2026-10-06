@@ -1,0 +1,18 @@
+{
+  "target": "phase-01-terminal-submit-contract-and-state",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-practice-finish-submit-lockdown/quality/phase-01-terminal-submit-contract-and-state-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/attempt/internal/dto/response/AttemptTaskResponse.java",
+    "pte-api/app/src/main/java/com/pte/attempt/internal/service/AttemptLifecycleService.java",
+    "pte-api/app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServiceSubmitAttemptTest.java",
+    "pte-app/lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart",
+    "pte-app/lib/features/exam_attempt/presentation/bloc/exam_attempt_state.dart",
+    "pte-app/test/unit/features/exam_attempt/exam_attempt_bloc_test.dart"
+  ],
+  "source_fingerprint": "sha256:46f31c1abfd70c160e9f78bcb17e39a293a1e85964706bac846d05f8772d43bd",
+  "reviewed_at": "2026-09-28T16:00:00Z",
+  "open_blocking_findings": 0
+}

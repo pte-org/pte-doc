@@ -1,0 +1,24 @@
+{
+  "phase": "06",
+  "slug": "shared-frontend-portals",
+  "status": "RED_READY",
+  "mode": "hard-tdd",
+  "preparedAt": "2026-10-04",
+  "testsWrittenBeforeProduction": true,
+  "testFiles": [
+    "pte-web/packages/api-client/src/requests/notification/inbox.test.ts",
+    "pte-web/packages/api-client/src/requests/notification/announcements.test.ts",
+    "pte-web/packages/api-client/src/requests/scoring/gradingCohort.test.ts"
+  ],
+  "redCommand": "corepack pnpm --filter @pte/api-client exec vitest run src/requests/notification/inbox.test.ts src/requests/notification/announcements.test.ts src/requests/scoring/gradingCohort.test.ts",
+  "redResult": {
+    "exitCode": 1,
+    "failedSuites": 3,
+    "reason": "The request modules are intentionally missing before the production implementation."
+  },
+  "coverageIntent": [
+    "inbox snapshot/filter query encoding and self-scoped read mutations",
+    "versioned announcement draft/publication operations",
+    "session-scoped grading cohort preview/finalize operations"
+  ]
+}

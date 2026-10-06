@@ -1,0 +1,16 @@
+{
+  "target": "phase-05-regression-and-handoff",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-archive-lifecycle-cleanup/quality/phase-05-regression-and-handoff-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/ArchiveLifecyclePostgresIntegrationTest.java",
+    "pte-api/app/src/test/java/com/pte/itembank/internal/service/QuestionDeletionServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/itembank/internal/service/QuestionPublicationMigrationPostgresTest.java",
+    "pte-api/app/src/test/java/com/pte/shared/web/DraftDeletionHttpContractTest.java"
+  ],
+  "source_fingerprint": "sha256:09ff169a972235cb68a4ce11ad23704148e18a01e2139842a44ca91f96da1ccf",
+  "reviewed_at": "2026-10-05T10:23:40.418Z",
+  "open_blocking_findings": 0
+}

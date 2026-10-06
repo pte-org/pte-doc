@@ -1,0 +1,18 @@
+{
+  "phase": "phase-03-question-lifecycle",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-05T09:59:07.249Z",
+  "summary": {
+    "passed": 37,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "report_path": "D:/GitHub/pte-org/pte-doc/projects/plans/quang-archive-lifecycle-cleanup/tests/phase-03-question-lifecycle-test-report.json",
+  "command": ".\\mvnw.cmd -pl app -Dtest=ItembankServiceTest,QuestionDeletionServiceTest,QuestionLifecyclePolicyTest,QuestionControllerSecurityTest test",
+  "remediation": [
+    "Corrected new test fixture to supply publicId/revisionGroup (normally assigned at persist), then reran successfully.",
+    "Existing archive DRAFT test now explicitly models restored published provenance; new/unknown drafts have rejection assertions."
+  ]
+}

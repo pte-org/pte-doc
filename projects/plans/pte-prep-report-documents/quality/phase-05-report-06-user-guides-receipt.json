@@ -1,0 +1,18 @@
+{
+  "target": "phase-05-report-06-user-guides",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org\\pte-doc",
+  "report_path": "projects/plans/pte-prep-report-documents/quality/phase-05-report-06-user-guides-quality-report.json",
+  "reviewed_files": [
+    "report/report06/00-project-report.md",
+    "report/report06/00-record-of-changes.md",
+    "report/report06/01-deliverable-package.md",
+    "report/report06/02-installation-guides.md",
+    "report/report06/03-user-manual.md",
+    "report/report06/assets/README.md"
+  ],
+  "source_fingerprint": "sha256:a27b7de99b63ab341ec29d83117cfdc34335ab4c870c886332fad8a20a780b46",
+  "reviewed_at": "2026-10-06T00:00:00+07:00",
+  "open_blocking_findings": 0
+}

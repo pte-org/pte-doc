@@ -1,0 +1,9 @@
+{
+  "phase": "phase-02-report-03-srs",
+  "status": "RED_READY",
+  "test_files": [
+    "pte-doc/projects/plans/pte-prep-report-documents/tests/test_phase02_report03.py"
+  ],
+  "expected_red_reason": "Report 3 numbered section files and project-specific requirements are not implemented yet.",
+  "prepared_at": "2026-10-06"
+}

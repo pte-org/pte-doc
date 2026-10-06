@@ -1,0 +1,42 @@
+{
+  "mode": "gate",
+  "target": "phase-01-inbox-foundation",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-04T10:14:10Z",
+  "reviewed_files": [
+    "pte-doc/projects/plans/support-feedback-bell-notifications/phase-01-inbox-foundation.md",
+    "pte-api/app/src/main/resources/db/migration/V71__support_ticket.sql",
+    "pte-api/app/src/main/resources/db/migration/V72__notification_inbox_foundation.sql",
+    "pte-api/app/src/main/resources/db/migration/V73__notification_inbox_snapshots.sql",
+    "pte-api/app/src/main/resources/db/migration/V74__notification_announcement_query_indexes.sql",
+    "pte-api/app/src/main/resources/db/migration/V75__session_grading_cohort.sql",
+    "pte-api/app/src/test/java/com/pte/notification/NotificationMigrationVersionTest.java",
+    "pte-api/app/src/test/java/com/pte/notification/internal/repository/InboxAnnouncementStorePostgresIntegrationTest.java",
+    "pte-api/app/src/test/java/com/pte/notification/internal/repository/InboxDeliveryStorePostgresIntegrationTest.java",
+    "pte-api/app/src/test/java/com/pte/notification/internal/repository/InboxReadStorePostgresIntegrationTest.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 1
+  },
+  "findings": [
+    {
+      "id": "QUAL-001",
+      "severity": "NOTED",
+      "rule": "CHG_MIGRATION_DEPLOY_ORDER_SAFE",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "app/src/main/resources/db/migration/V72__notification_inbox_foundation.sql",
+      "evidence": "The notification migration chain was shifted from V71-V74 to V72-V75 to preserve dev's V71 support migration; repository history shows origin/main currently ends at V70, but no target database schema history was available locally.",
+      "why_it_matters": "A database that already applied the notification chain under V71-V74 would require a release-specific migration strategy instead of this repository-only rename.",
+      "required_action": "Before release, inspect the target flyway_schema_history and confirm it matches the preserved V71 support plus V72-V75 notification chain; do not deploy this rename against a database with the old notification versions applied.",
+      "owner": "release-operator"
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/support-feedback-bell-notifications/quality/phase-01-inbox-foundation-quality-report.json"
+}

@@ -1,0 +1,22 @@
+{
+  "target": "phase-01-inbox-foundation",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/support-feedback-bell-notifications/quality/phase-01-inbox-foundation-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/resources/db/migration/V71__support_ticket.sql",
+    "pte-api/app/src/main/resources/db/migration/V72__notification_inbox_foundation.sql",
+    "pte-api/app/src/main/resources/db/migration/V73__notification_inbox_snapshots.sql",
+    "pte-api/app/src/main/resources/db/migration/V74__notification_announcement_query_indexes.sql",
+    "pte-api/app/src/main/resources/db/migration/V75__session_grading_cohort.sql",
+    "pte-api/app/src/test/java/com/pte/notification/NotificationMigrationVersionTest.java",
+    "pte-api/app/src/test/java/com/pte/notification/internal/repository/InboxAnnouncementStorePostgresIntegrationTest.java",
+    "pte-api/app/src/test/java/com/pte/notification/internal/repository/InboxDeliveryStorePostgresIntegrationTest.java",
+    "pte-api/app/src/test/java/com/pte/notification/internal/repository/InboxReadStorePostgresIntegrationTest.java",
+    "pte-doc/projects/plans/support-feedback-bell-notifications/phase-01-inbox-foundation.md"
+  ],
+  "source_fingerprint": "sha256:c5bb114689fd21ae239fd24ed900d2b75483f12f9e0d721207e9e2def649c8d7",
+  "reviewed_at": "2026-10-04T10:14:10Z",
+  "open_blocking_findings": 0
+}

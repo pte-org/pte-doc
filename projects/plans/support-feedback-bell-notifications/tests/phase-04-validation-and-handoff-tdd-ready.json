@@ -1,0 +1,18 @@
+{
+  "phase": "phase-04-validation-and-handoff",
+  "status": "VERIFY_ONLY",
+  "prepared_at": "2026-10-04T14:45:34Z",
+  "test_files": [
+    "pte-api/app/src/test/java/com/pte/ModuleStructureTest.java",
+    "pte-api/app/src/test/java/com/pte/notification/InboxNotificationRequestedTest.java",
+    "pte-api/app/src/test/java/com/pte/notification/internal/listener/SupportTicketInboxNotificationListenerTest.java",
+    "pte-api/app/src/test/java/com/pte/notification/internal/repository/InboxDeliveryStorePostgresIntegrationTest.java",
+    "pte-api/app/src/test/java/com/pte/notification/internal/repository/InboxReadStorePostgresIntegrationTest.java",
+    "pte-api/app/src/test/java/com/pte/notification/internal/repository/InboxAnnouncementStorePostgresIntegrationTest.java",
+    "pte-web/packages/api-client/src/requests/endpoints.test.ts",
+    "pte-web/packages/api-client/src/requests/notification/inbox.test.ts"
+  ],
+  "expected_red_reason": "This phase validates the already implemented feature and its release boundary; no new behavior is introduced that requires a new red test before verification.",
+  "verification_choice": "Run existing targeted tests, real PostgreSQL/Flyway checks, full regression gates, web gates, and browser smoke; record every unavailable authenticated/runtime check explicitly.",
+  "artifact_path": "pte-doc/projects/plans/support-feedback-bell-notifications/tests/phase-04-validation-and-handoff-tdd-ready.json"
+}

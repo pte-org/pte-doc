@@ -1,0 +1,38 @@
+{
+  "mode": "gate",
+  "target": "phase-04-submit-lock-lifecycle-and-recovery",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-09-29T01:00:00Z",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-app/lib/core/security/lockdown_service.dart",
+    "D:/GitHub/pte-org/pte-app/lib/core/storage/dao/pending_media_upload_dao.dart",
+    "D:/GitHub/pte-org/pte-app/lib/core/sync/submission_preparation_exception.dart",
+    "D:/GitHub/pte-org/pte-app/lib/core/sync/sync_engine.dart",
+    "D:/GitHub/pte-org/pte-app/lib/core/sync/media_upload_coordinator.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/constants/exam_attempt_error_message.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/constants/exam_attempt_strings.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/domain/repositories/exam_attempt_repository.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/widgets/exam_scaffold.dart",
+    "D:/GitHub/pte-org/pte-app/test/unit/core/security/lockdown_service_test.dart",
+    "D:/GitHub/pte-org/pte-app/test/unit/sync/sync_engine_test.dart",
+    "D:/GitHub/pte-org/pte-app/test/unit/sync/media_upload_coordinator_test.dart",
+    "D:/GitHub/pte-org/pte-app/test/unit/features/exam_attempt/exam_attempt_bloc_test.dart",
+    "D:/GitHub/pte-org/pte-app/test/unit/features/exam_attempt/exam_attempt_bloc_lockdown_test.dart",
+    "D:/GitHub/pte-org/pte-app/test/widget/features/exam_attempt/exam_scaffold_test.dart"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "notes": [
+    "Terminal preparation is bounded and ordered as media readiness, answer outbox flush, then one idempotent server force-submit.",
+    "Transport, pending-media, and native-unlock failures leave the attempt active and retryable; normal guard teardown refuses to unlock before acknowledgement.",
+    "Relaunch/resume reconciliation trusts a server SUBMITTED response and never a stale local completion marker."
+  ],
+  "report_path": "pte-doc/projects/plans/quang-practice-finish-submit-lockdown/quality/phase-04-submit-lock-lifecycle-and-recovery-quality-report.json"
+}

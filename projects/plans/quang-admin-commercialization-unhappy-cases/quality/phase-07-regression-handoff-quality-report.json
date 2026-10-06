@@ -1,0 +1,90 @@
+{
+  "mode": "gate",
+  "target": "phase-07-regression-handoff",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-06T07:58:46Z",
+  "reviewed_files": [
+    "pte-doc/projects/plans/quang-admin-commercialization-unhappy-cases/phase-07-regression-handoff.md",
+    "pte-doc/projects/plans/quang-admin-commercialization-unhappy-cases/coverage-ledger.md",
+    "pte-doc/projects/plans/quang-admin-commercialization-unhappy-cases/plan.md",
+    "pte-doc/projects/plans/quang-admin-commercialization-unhappy-cases/implementation-spec.md",
+    "pte-doc/projects/plans/quang-admin-commercialization-unhappy-cases/unhappy-cases.md",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/PlanServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/controller/PlanControllerTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/LicenseCodeServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/LicenseCodePersistenceServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/ArchiveLifecyclePostgresIntegrationTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/LicenseIssuePostgresIntegrationTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/TenantApplicationReviewPostgresIntegrationTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/controller/LicenseIssueHttpContractTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/LicenseCodeRevocationServiceTest.java",
+    "pte-web/packages/api-client/src/client/client.test.ts",
+    "pte-web/packages/api-client/src/requests/billing/applications.test.ts",
+    "pte-web/packages/api-client/src/requests/billing/licenseCodes.test.ts",
+    "pte-web/packages/api-client/src/requests/billing/plans.test.ts",
+    "pte-web/apps/vendor-web/app/providers.tsx",
+    "pte-web/apps/tenant-web/app/providers.tsx"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 3
+  },
+  "findings": [
+    {
+      "id": "QUAL-0701",
+      "severity": "NOTED",
+      "rule": "TEST_BROWSER_EVIDENCE_BOUNDARY",
+      "status": "OPEN",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/projects/plans/quang-admin-commercialization-unhappy-cases/phase-07-regression-handoff.md:Web evidence",
+      "evidence": "The workspace has package unit tests, typechecks and production builds but no project-owned Playwright/Cypress/browser acceptance script. No authenticated browser, cache/persistor, multi-tab, or production trace run was claimed.",
+      "why_it_matters": "Build and mocked/client evidence cannot prove visible recovery states, real authorization, account-switch isolation, or deployed request/log redaction.",
+      "required_action": "Run the scoped authenticated browser and trace checks when an approved existing harness and non-production fixtures are available; keep this handoff boundary until then.",
+      "owner": "release-validation"
+    },
+    {
+      "id": "QUAL-0702",
+      "severity": "NOTED",
+      "rule": "RDB_LEGACY_EDGE_EVIDENCE",
+      "status": "OPEN",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/projects/plans/quang-admin-commercialization-unhappy-cases/coverage-ledger.md:LIC-06 and LIC-07",
+      "evidence": "The fresh PostgreSQL checkpoint now executes the direct archived-Plan plus outstanding-ISSUED redemption fixture and proves fail-closed behavior with the code left ISSUED; post-issue family/capacity mutation redemption remains unexecuted.",
+      "why_it_matters": "Those legacy states are policy-sensitive and must not be inferred from the adjacent issue/archive or capacity tests.",
+      "required_action": "Add or run an explicitly approved isolated fixture for LIC-07, or record a product-policy disposition that intentionally blocks the operation; do not mark the remaining branch Passed by inference.",
+      "owner": "billing-policy-and-release-validation"
+    },
+    {
+      "id": "QUAL-0703",
+      "severity": "NOTED",
+      "rule": "TEST_SKIPS_AND_SCALE_ARE_EXPLICIT",
+      "status": "OPEN",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/projects/plans/quang-admin-commercialization-unhappy-cases/phase-07-regression-handoff.md:Handoff limitations",
+      "evidence": "The current full app suite is green at 1170 tests with 0 failures, 0 errors, and 0 skips after both lifecycle and notification opt-in PostgreSQL settings were enabled; the notification checkpoint passed 14/14 and the selected issue/archive/application-review checkpoint passed 80/80. A bounded isolated PostgreSQL scale/EXPLAIN sample measured 174 applications, 606 plans, and 613 license codes (479 current non-expired ISSUED) with exercised queries at 0.084-0.951 ms, while unbounded Applications/Plans lists used sequential scans plus sorts. Revoke/session multi-transaction suites, production-like load/query-budget thresholds, and global pagination decision evidence were not run.",
+      "why_it_matters": "A green scoped/full unit suite and bounded local query sample do not establish every planned transaction interleaving or production-like scale behavior deferred by COM-06.",
+      "required_action": "Schedule revoke/session concurrency and production-like scale/query-budget validation in an approved environment; retain the remaining Blocked/Deferred ledger labels and do not treat the bounded local sample as release evidence.",
+      "owner": "release-validation"
+    }
+  ],
+  "scope_limit": "Static senior review of Phase07 regression evidence, the 45-ID coverage reconciliation, inherited guard references, scope discipline, and handoff honesty. The approval confirms that residual and unavailable evidence is represented accurately; it does not convert blocked tests into passes or approve release/deployment.",
+  "applicable_rules": [
+    "CHG_SCOPE_DISCIPLINE",
+    "TEST_EVIDENCE_SEPARATE_FROM_DISPOSITION",
+    "RDB_TRANSACTION_EVIDENCE_BOUNDARY",
+    "TEST_BROWSER_EVIDENCE_BOUNDARY",
+    "SEC_NO_SENSITIVE_DATA_LOGGED",
+    "DOC_INTENTIONAL_LIMIT_IS_A_NON_GOAL",
+    "DOC_HANDOFF_LIMITS_ARE_EXPLICIT"
+  ],
+  "report_path": "pte-doc/projects/plans/quang-admin-commercialization-unhappy-cases/quality/phase-07-regression-handoff-quality-report.json"
+}

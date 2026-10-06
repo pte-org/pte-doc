@@ -1,0 +1,33 @@
+{
+  "phase": "phase-02-personal-inbox-security-api",
+  "status": "RED_READY",
+  "prepared_at": "2026-10-03T12:34:03Z",
+  "test_files": [
+    "pte-api/app/src/test/java/com/pte/notification/internal/service/InboxReadServiceTest.java"
+  ],
+  "test_hashes_sha256": {
+    "pte-api/app/src/test/java/com/pte/notification/internal/service/InboxReadServiceTest.java": "02EE4698D2DEC19F60F0BA8C24E96701F542E04B66827D95890BA5ACD6781255"
+  },
+  "expected_red_reason": "Maven testCompile failed because the Phase 02 InboxReadStore, InboxReadService and response contracts did not exist; test imports were corrected before implementation and no assertions were weakened.",
+  "artifact_path": "pte-doc/projects/plans/quang-tenant-admin-notifications/tests/phase-02-personal-inbox-security-api-tdd-ready.json",
+  "tests_choice": "yes",
+  "mode": "tdd-prepare",
+  "red_evidence": {
+    "command": ".\\mvnw.cmd -pl app \"-Dtest=InboxReadServiceTest\" test",
+    "cwd": "pte-api",
+    "exit_code": 1,
+    "failed_goal": "maven-compiler-plugin:3.14.1:testCompile",
+    "compiler_errors": 7,
+    "junit_executed": 0
+  },
+  "contract_choices": {
+    "snapshot": "Server-issued UUID persisted with recipient, null-safe tenant scope, upper sequence watermark and expiry.",
+    "paging": "Page is zero-based, default size 20, maximum size 100; invalid page/size/filter/category/snapshot returns centralized 400.",
+    "read_all": "Optional server-issued snapshot limits the mark-all watermark; stream lock prevents later committed deliveries from being marked read."
+  },
+  "scope_limitations": [
+    "RED is compilation-based; behavioral assertions require implementation.",
+    "PostgreSQL race/migration coverage will be added before GREEN verification.",
+    "No HTTP/browser validation is included in this preparation artifact."
+  ]
+}

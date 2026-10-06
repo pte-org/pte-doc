@@ -1,0 +1,23 @@
+{
+  "phase": "phase-01-backend-policy-contract-and-invariants",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-28T09:31:01+07:00",
+  "summary": {
+    "total": 81,
+    "passed": 81,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "test_command": ".\\mvnw.cmd -pl app \"-Dtest=SessionPolicyResolverTest,ExamOrchestrationServiceTest,SessionLifecycleServiceTest,EntitlementServiceTest,SnapshotPinServiceTest\" test",
+  "scope": [
+    "pte-api/app/src/test/java/com/pte/session/internal/policy/SessionPolicyResolverTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/ExamOrchestrationServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/EntitlementServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/attempt/internal/service/SnapshotPinServiceTest.java"
+  ],
+  "failures": [],
+  "notes": "Fresh rerun after quality remediation: 81 tests passed, 0 failures, 0 errors, 0 skipped."
+}

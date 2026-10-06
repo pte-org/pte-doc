@@ -1,0 +1,60 @@
+{
+  "mode": "gate",
+  "target": "phase-05-report-06-user-guides",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-06T00:00:00+07:00",
+  "reviewed_files": [
+    "pte-doc/report/report06/00-project-report.md",
+    "pte-doc/report/report06/00-record-of-changes.md",
+    "pte-doc/report/report06/01-deliverable-package.md",
+    "pte-doc/report/report06/02-installation-guides.md",
+    "pte-doc/report/report06/03-user-manual.md",
+    "pte-doc/report/report06/assets/README.md"
+  ],
+  "summary": {"blocker": 0, "high": 0, "medium": 0, "low": 0, "noted": 3},
+  "findings": [
+    {
+      "id": "QUAL-GUIDE-001",
+      "severity": "NOTED",
+      "rule": "DOC_PUBLIC_CONTRACT_DOCUMENTED",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/report/report06/03-user-manual.md:3.2-3.7",
+      "evidence": "All six approved product roles have workflows with prerequisites, steps, expected result, error/recovery, visibility, audit, and requirement/test links.",
+      "why_it_matters": "Guides must be usable by business users and remain tied to the approved scope.",
+      "required_action": "No blocking action; verify labels/routes before adding screenshots.",
+      "owner": "Documentation work package"
+    },
+    {
+      "id": "QUAL-GUIDE-002",
+      "severity": "NOTED",
+      "rule": "SEC_NO_SENSITIVE_DATA_LOGGED",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/report/report06/02-installation-guides.md:2.8",
+      "evidence": "Installation and support instructions prohibit credentials, tokens, private keys, environment values, and unmasked data; screenshots are marked masked/TBD.",
+      "why_it_matters": "Release guides are frequently copied into operational channels and must be safe by default.",
+      "required_action": "No blocking action; apply the same rule to future screenshots/manifests.",
+      "owner": "Operations documentation owner"
+    },
+    {
+      "id": "QUAL-GUIDE-003",
+      "severity": "NOTED",
+      "rule": "DOC_INTENTIONAL_LIMIT_IS_A_NON_GOAL",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/report/report06/03-user-manual.md:3.10",
+      "evidence": "Unavailable screenshots and unresolved client/provider policies are listed as TBD with intended evidence and owners rather than fabricated UI instructions.",
+      "why_it_matters": "A guide should not promise a screen or recovery action that has not been verified.",
+      "required_action": "No blocking action; replace TBD entries only after source/UI evidence exists.",
+      "owner": "Documentation work package"
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/pte-prep-report-documents/quality/phase-05-report-06-user-guides-quality-report.json"
+}

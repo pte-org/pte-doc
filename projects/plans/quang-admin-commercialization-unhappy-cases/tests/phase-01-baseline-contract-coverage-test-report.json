@@ -1,0 +1,171 @@
+{
+  "phase": "phase-01-baseline-contract-coverage",
+  "mode": "unit",
+  "verdict": "FAILED",
+  "reviewed_at": "2026-10-05T13:25:49Z",
+  "summary": {
+    "passed": 1087,
+    "failed": 11,
+    "skipped": 26
+  },
+  "failures": [
+    {
+      "id": "generate_orderIsSpeakingWritingReadingListening_thenBySequence",
+      "severity": "HIGH",
+      "type": "BEHAVIOR",
+      "expected": "Existing baseline assertion passes without changing or weakening it.",
+      "actual": "Failed in fresh full backend baseline before any production or test edits.",
+      "likely_owner": "production_code",
+      "related_files": [
+        "pte-api/app/src/test/java/com/pte/assessment/internal/service/ExamGenerationServiceTest.java"
+      ],
+      "baseline_owner_unconfirmed": true
+    },
+    {
+      "id": "existingStart_checksCapabilitiesAfterOwnershipBeforeResume",
+      "severity": "HIGH",
+      "type": "BEHAVIOR",
+      "expected": "Existing baseline assertion passes without changing or weakening it.",
+      "actual": "Failed in fresh full backend baseline before any production or test edits.",
+      "likely_owner": "production_code",
+      "related_files": [
+        "pte-api/app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleCapabilityTest.java"
+      ],
+      "baseline_owner_unconfirmed": true
+    },
+    {
+      "id": "start_repeatsAuthoritativeCheckAndStoresNormalizedFingerprint",
+      "severity": "HIGH",
+      "type": "BEHAVIOR",
+      "expected": "Existing baseline assertion passes without changing or weakening it.",
+      "actual": "Failed in fresh full backend baseline before any production or test edits.",
+      "likely_owner": "production_code",
+      "related_files": [
+        "pte-api/app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleCapabilityTest.java"
+      ],
+      "baseline_owner_unconfirmed": true
+    },
+    {
+      "id": "playAudio_replayLimitExceeded_throws",
+      "severity": "HIGH",
+      "type": "BEHAVIOR",
+      "expected": "Existing baseline assertion passes without changing or weakening it.",
+      "actual": "Failed in fresh full backend baseline before any production or test edits.",
+      "likely_owner": "production_code",
+      "related_files": [
+        "pte-api/app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServicePlayAudioTest.java"
+      ],
+      "baseline_owner_unconfirmed": true
+    },
+    {
+      "id": "playAudio_audioUrlExpired_throws",
+      "severity": "HIGH",
+      "type": "BEHAVIOR",
+      "expected": "Existing baseline assertion passes without changing or weakening it.",
+      "actual": "Failed in fresh full backend baseline before any production or test edits.",
+      "likely_owner": "production_code",
+      "related_files": [
+        "pte-api/app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServicePlayAudioTest.java"
+      ],
+      "baseline_owner_unconfirmed": true
+    },
+    {
+      "id": "playAudio_unlimitedPolicy_neverRejects",
+      "severity": "HIGH",
+      "type": "BEHAVIOR",
+      "expected": "Existing baseline assertion passes without changing or weakening it.",
+      "actual": "Failed in fresh full backend baseline before any production or test edits.",
+      "likely_owner": "production_code",
+      "related_files": [
+        "pte-api/app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServicePlayAudioTest.java"
+      ],
+      "baseline_owner_unconfirmed": true
+    },
+    {
+      "id": "playAudio_sameRequestIdReplayed_doesNotIncrementAgain",
+      "severity": "HIGH",
+      "type": "BEHAVIOR",
+      "expected": "Existing baseline assertion passes without changing or weakening it.",
+      "actual": "Failed in fresh full backend baseline before any production or test edits.",
+      "likely_owner": "production_code",
+      "related_files": [
+        "pte-api/app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServicePlayAudioTest.java"
+      ],
+      "baseline_owner_unconfirmed": true
+    },
+    {
+      "id": "playAudio_firstPlay_incrementsPlayCount",
+      "severity": "HIGH",
+      "type": "BEHAVIOR",
+      "expected": "Existing baseline assertion passes without changing or weakening it.",
+      "actual": "Failed in fresh full backend baseline before any production or test edits.",
+      "likely_owner": "production_code",
+      "related_files": [
+        "pte-api/app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServicePlayAudioTest.java"
+      ],
+      "baseline_owner_unconfirmed": true
+    },
+    {
+      "id": "playAudio_locksExamAttemptRow_neverTouchesTimerService",
+      "severity": "HIGH",
+      "type": "BEHAVIOR",
+      "expected": "Existing baseline assertion passes without changing or weakening it.",
+      "actual": "Failed in fresh full backend baseline before any production or test edits.",
+      "likely_owner": "production_code",
+      "related_files": [
+        "pte-api/app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServicePlayAudioTest.java"
+      ],
+      "baseline_owner_unconfirmed": true
+    },
+    {
+      "id": "playAudio_publicLegacyAudio_ignoresStaleExpiryTimestamp",
+      "severity": "HIGH",
+      "type": "BEHAVIOR",
+      "expected": "Existing baseline assertion passes without changing or weakening it.",
+      "actual": "Failed in fresh full backend baseline before any production or test edits.",
+      "likely_owner": "production_code",
+      "related_files": [
+        "pte-api/app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServicePlayAudioTest.java"
+      ],
+      "baseline_owner_unconfirmed": true
+    },
+    {
+      "id": "modules_have_no_boundary_violations",
+      "severity": "HIGH",
+      "type": "BEHAVIOR",
+      "expected": "Existing baseline assertion passes without changing or weakening it.",
+      "actual": "Failed in fresh full backend baseline before any production or test edits.",
+      "likely_owner": "production_code",
+      "related_files": [
+        "pte-api/app/src/test/java/com/pte/ModuleStructureTest.java"
+      ],
+      "baseline_owner_unconfirmed": true
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/quang-admin-commercialization-unhappy-cases/tests/phase-01-baseline-contract-coverage-test-report.json",
+  "execution_scope": "Full existing app suite required for phase01 baseline; includes unit/integration tests beyond unit-only selection; PostgreSQL opt-in tests skipped.",
+  "backend": {
+    "head": "f070e38",
+    "command": ".\\mvnw.cmd -pl app test",
+    "java": "21.0.5",
+    "exit_code": 1,
+    "tests": 1124,
+    "failures": 4,
+    "errors": 7,
+    "skipped": 26
+  },
+  "web": {
+    "head": "eafe3c8",
+    "api_client_tests": {
+      "passed": 381,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    "api_client_typecheck": {
+      "exit_code": 0
+    }
+  },
+  "new_tests_written": 0,
+  "production_files_changed": 0
+}

@@ -1,0 +1,57 @@
+{
+  "mode": "gate",
+  "target": "phase-06-cross-report-traceability-and-validation",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-06T00:00:00+07:00",
+  "reviewed_files": [
+    "pte-doc/report/_validation/report-03-06-validation.md",
+    "pte-doc/projects/plans/pte-prep-report-documents/tests/validate_report_bundle.py",
+    "pte-doc/projects/plans/pte-prep-report-documents/tests/test_phase06_validation.py"
+  ],
+  "summary": {"blocker": 0, "high": 0, "medium": 0, "low": 0, "noted": 3},
+  "findings": [
+    {
+      "id": "QUAL-VALID-001",
+      "severity": "NOTED",
+      "rule": "DOC_PUBLIC_CONTRACT_DOCUMENTED",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/report/_validation/report-03-06-validation.md:1",
+      "evidence": "The validation report records structure, scope, encoding, links, assets, status/evidence, vertical flows, safety, and handoff gates with PASS/WARN/BLOCK counts.",
+      "why_it_matters": "The final handoff needs a reproducible review boundary rather than a generic completion statement.",
+      "required_action": "No blocking action; rerun after any downstream requirement/ID change.",
+      "owner": "Documentation work package"
+    },
+    {
+      "id": "QUAL-VALID-002",
+      "severity": "NOTED",
+      "rule": "CHG_SCOPE_DISCIPLINE",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/projects/plans/pte-prep-report-documents/tests/validate_report_bundle.py:validation report inclusion",
+      "evidence": "The validator now includes the final validation report in UTF-8/placeholder/link scanning and permits explicitly documented prohibited-role names only as exclusions.",
+      "why_it_matters": "The structural gate must validate the handoff artifact itself without confusing scope exclusions with active actors.",
+      "required_action": "No blocking action; keep the exclusion-aware check narrow and review active role tables manually.",
+      "owner": "Documentation work package"
+    },
+    {
+      "id": "QUAL-VALID-003",
+      "severity": "NOTED",
+      "rule": "DOC_INTENTIONAL_LIMIT_IS_A_NON_GOAL",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-doc/report/_validation/report-03-06-validation.md:7",
+      "evidence": "The overall verdict is PASS for documentation readiness while client/provider/retention/generation decisions remain named TBD items.",
+      "why_it_matters": "A documentation gate should not be mistaken for product runtime acceptance.",
+      "required_action": "No blocking action; keep runtime execution and policy decisions as downstream gates.",
+      "owner": "Project Leader"
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/pte-prep-report-documents/quality/phase-06-cross-report-traceability-and-validation-quality-report.json"
+}

@@ -1,0 +1,64 @@
+{
+  "mode": "gate",
+  "target": "phase-02-feedback-events-and-delivery",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-04T10:38:00Z",
+  "reviewed_files": [
+    "pte-doc/projects/plans/support-feedback-bell-notifications/phase-02-feedback-events-and-delivery.md",
+    "pte-api/app/src/main/java/com/pte/notification/InboxNotificationRequested.java",
+    "pte-api/app/src/main/java/com/pte/notification/domain/enums/InboxCategory.java",
+    "pte-api/app/src/main/java/com/pte/notification/domain/enums/InboxNotificationType.java",
+    "pte-api/app/src/main/java/com/pte/notification/domain/enums/InboxTargetType.java",
+    "pte-api/app/src/main/java/com/pte/notification/internal/constant/InboxConstants.java",
+    "pte-api/app/src/main/java/com/pte/notification/internal/listener/SupportTicketInboxNotificationListener.java",
+    "pte-api/app/src/main/java/com/pte/notification/internal/service/InboxRecipientEligibility.java",
+    "pte-api/app/src/main/java/com/pte/support/dto/event/SupportTicketNoteAddedEvent.java",
+    "pte-api/app/src/main/java/com/pte/support/dto/event/SupportTicketStatusChangedEvent.java",
+    "pte-api/app/src/main/java/com/pte/support/dto/event/SupportTicketSubmittedEvent.java",
+    "pte-api/app/src/main/java/com/pte/support/internal/service/SupportTicketService.java",
+    "pte-api/app/src/main/resources/db/migration/V76__support_feedback_inbox.sql",
+    "pte-api/app/src/test/java/com/pte/notification/SupportTicketNotificationContractTest.java",
+    "pte-api/app/src/test/java/com/pte/notification/internal/listener/SupportTicketInboxNotificationListenerTest.java",
+    "pte-api/app/src/test/java/com/pte/support/SupportFeedbackInboxMigrationTest.java",
+    "pte-api/app/src/test/java/com/pte/support/internal/service/SupportTicketEventPublicationTest.java",
+    "pte-api/app/src/test/java/com/pte/support/internal/service/SupportTicketServiceTest.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 2
+  },
+  "findings": [
+    {
+      "id": "QUAL-002",
+      "severity": "NOTED",
+      "rule": "CHG_MIGRATION_DEPLOY_ORDER_SAFE",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "app/src/main/resources/db/migration/V76__support_feedback_inbox.sql",
+      "evidence": "V76 widens constraints created by the renamed V72 inbox foundation; the local targeted suite does not have INBOX_TEST_DB_URL and therefore cannot execute the full Flyway chain against PostgreSQL.",
+      "why_it_matters": "A static SQL assertion cannot prove the exact constraint names and migration order on a real target database.",
+      "required_action": "Run the Phase 04 isolated PostgreSQL/Flyway suite before release and confirm the target flyway_schema_history first.",
+      "owner": "release-operator"
+    },
+    {
+      "id": "QUAL-003",
+      "severity": "NOTED",
+      "rule": "DB_MIGRATION_HAS_ROLLBACK_PATH",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "app/src/main/resources/db/migration/V76__support_feedback_inbox.sql:1-2",
+      "evidence": "V76 is an additive constraint widening migration and documents rollback as disabling the inbox worker while retaining durable history; it has no destructive down migration.",
+      "why_it_matters": "Constraint rollback must not delete or rewrite immutable notification content and deliveries.",
+      "required_action": "Use the documented feature-flag rollback and retain the schema/history; do not attempt a destructive down migration.",
+      "owner": "release-operator"
+    }
+  ],
+  "report_path": "pte-doc/projects/plans/support-feedback-bell-notifications/quality/phase-02-feedback-events-and-delivery-quality-report.json"
+}

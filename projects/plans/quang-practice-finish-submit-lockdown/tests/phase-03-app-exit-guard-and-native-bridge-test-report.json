@@ -1,0 +1,37 @@
+{
+  "mode": "focused",
+  "target": "phase-03-app-exit-guard-and-native-bridge",
+  "verdict": "PASSED",
+  "tested_at": "2026-09-29T00:00:00Z",
+  "tested_files": [
+    "D:/GitHub/pte-org/pte-app/lib/core/platform/lockdown_exception.dart",
+    "D:/GitHub/pte-org/pte-app/lib/core/platform/window_manager_channel.dart",
+    "D:/GitHub/pte-org/pte-app/lib/core/security/lockdown_service.dart",
+    "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart",
+    "D:/GitHub/pte-org/pte-app/windows/runner/flutter_window.cpp",
+    "D:/GitHub/pte-org/pte-app/windows/runner/lockdown_plugin.cpp",
+    "D:/GitHub/pte-org/pte-app/windows/runner/lockdown_plugin.h",
+    "D:/GitHub/pte-org/pte-app/test/unit/core/security/lockdown_service_test.dart",
+    "D:/GitHub/pte-org/pte-app/test/unit/features/exam_attempt/exam_attempt_bloc_lockdown_test.dart",
+    "D:/GitHub/pte-org/pte-app/test/unit/features/exam_attempt/exam_attempt_bloc_test.dart"
+  ],
+  "results": {
+    "flutter_security_and_attempt_suite": {
+      "command": "flutter test test/unit/core/security/lockdown_service_test.dart test/unit/features/exam_attempt/exam_attempt_bloc_lockdown_test.dart test/unit/features/exam_attempt/exam_attempt_bloc_test.dart --reporter expanded",
+      "tests": 60,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    "flutter_analyze": {
+      "command": "flutter analyze lib/core/platform/lockdown_exception.dart lib/core/platform/window_manager_channel.dart lib/core/security/lockdown_service.dart lib/features/exam_attempt/presentation/bloc/exam_attempt_bloc.dart test/unit/core/security/lockdown_service_test.dart test/unit/features/exam_attempt/exam_attempt_bloc_lockdown_test.dart",
+      "exit_code": 0
+    },
+    "windows_debug_build": {
+      "command": "flutter build windows --debug",
+      "exit_code": 0
+    }
+  },
+  "summary": "The app-level guard blocks close/minimize/focus-loss paths while active, reports lightweight violations, remains independent of anti-cheat fullscreen, and preserves the normal bounded login window."
+}

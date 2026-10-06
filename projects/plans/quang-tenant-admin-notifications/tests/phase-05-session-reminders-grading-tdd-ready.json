@@ -1,0 +1,30 @@
+{
+  "phase": "05",
+  "title": "Session reminders and full grading completion",
+  "mode": "hard",
+  "tdd": {
+    "status": "RED_READY",
+    "tests_written_before_production": true,
+    "red_command": ".\\mvnw.cmd -pl app \"-Dtest=SessionClosingSoonReminderWorkerTest,GradingCompletionEvaluatorTest\" test",
+    "red_result": "EXPECTED_COMPILE_FAILURE_MISSING_PHASE_05_PRODUCTION_TYPES",
+    "red_observed_at": "2026-10-03T16:47:33Z",
+    "prepared_tests": [
+      {
+        "path": "pte-api/app/src/test/java/com/pte/notification/internal/service/SessionClosingSoonReminderWorkerTest.java",
+        "sha256": "18CB47A50B9AA771F1856E70FE94F3507C7A43CA7BC0424FC2B62E445A4A8AF6"
+      },
+      {
+        "path": "pte-api/app/src/test/java/com/pte/scoring/internal/service/GradingCompletionEvaluatorTest.java",
+        "sha256": "7815345C2BCC312D82ED96EEBA7095FDC4A93EAE4FACBF012A8B295C64D7F040"
+      }
+    ],
+    "prepared_test_hashes_match": false,
+    "hash_reconciliation": {
+      "status": "RECONCILED_ASSERTION_SET",
+      "changed_path": "pte-api/app/src/test/java/com/pte/scoring/internal/service/GradingCompletionEvaluatorTest.java",
+      "supplemental_path": "pte-api/app/src/test/java/com/pte/scoring/internal/service/GradingCompletionEvaluatorAssignmentCoverageTest.java",
+      "note": "A supplemental assignment-coverage assertion was temporarily added to the prepared evaluator test and then extracted into its own test class. The prepared assertions were restored unchanged; the current byte hash is recorded after that reconciliation. No prepared assertion was weakened or removed."
+    },
+    "assertion_change_policy": "Do not weaken prepared assertions; preserve locked session revalidation, stale reminder suppression, pinned-item coverage, explicit examiner assignment, and real AI score requirements."
+  }
+}

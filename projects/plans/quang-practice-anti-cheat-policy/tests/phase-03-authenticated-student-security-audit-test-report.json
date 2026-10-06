@@ -1,0 +1,59 @@
+{
+  "phase": "phase-03-authenticated-student-security-audit",
+  "reviewed_at": "2026-09-28T10:58:00+07:00",
+  "status": "PASS_WITH_BASELINE_FAILURES_OUTSIDE_SCOPE",
+  "backend": {
+    "focused_command": ".\\mvnw.cmd -pl app '-Dtest=AttemptSecurityAuditServiceTest,AttemptSecurityAuditRetentionServiceTest,SecurityAuditQueryServiceTest,AttemptControllerSecurityTest,AttemptSecurityEventRepositoryTest,ModuleStructureTest' test",
+    "focused_tests": {
+      "total": 17,
+      "passed": 17,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "production_compile": "PASSED",
+    "full_suite": {
+      "total": 930,
+      "passed": 921,
+      "failed": 3,
+      "errors": 6,
+      "skipped": 0,
+      "status": "BASELINE_FAILURE_NOT_INTRODUCED",
+      "scope": "AttemptLifecycleCapabilityTest and AttemptLifecycleServicePlayAudioTest; Phase 3 did not modify those production or test files"
+    },
+    "migration": {
+      "disposable_postgresql": "PASSED",
+      "disposable_flyway_version": "V70",
+      "main_local_database": "PASSED: validated 70 migrations and applied V67, V68, V69, V70",
+      "health": "PASSED: app healthy and /actuator/health returned status UP"
+    }
+  },
+  "pte_app": {
+    "focused_command": "flutter test test/unit/features/host_audit/data/host_audit_repository_test.dart test/unit/features/host_audit/presentation/host_audit_bloc_test.dart test/widget/features/host_audit/host_audit_pages_test.dart",
+    "focused_tests": {
+      "total": 8,
+      "passed": 8,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "analyze_command": "flutter analyze lib/features/host_audit lib/core/constants/app_strings.dart",
+    "analyze": "PASSED"
+  },
+  "migration_preflight": {
+    "duplicate_version": "The unapplied duplicate V68 chain was re-sequenced as V67 question revision constraint, V68 attempt task navigation, V69 coordinator cleanup.",
+    "selected_phase_migration": "V70__attempt_security_events.sql",
+    "applied_history_preserved": true,
+    "flyway_validate": "PASSED"
+  },
+  "quality": {
+    "verdict": "APPROVED",
+    "report": "pte-doc/projects/plans/quang-practice-anti-cheat-policy/quality/phase-03-authenticated-student-security-audit-quality-report.json",
+    "receipt": "pte-doc/projects/plans/quang-practice-anti-cheat-policy/quality/phase-03-authenticated-student-security-audit-receipt.json"
+  },
+  "notes": [
+    "Repository duplicate-key warning is emitted intentionally by the uniqueness test and the test passes.",
+    "Mockito dynamic-agent and existing Hibernate callback warnings are environment/baseline warnings, not Phase 3 failures.",
+    "No credentials, tokens, or environment values were recorded."
+  ]
+}

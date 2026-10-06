@@ -1,0 +1,62 @@
+{
+  "phase": "phase-02-personal-inbox-security-api",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-03T12:54:01Z",
+  "summary": {
+    "passed": 106,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "report_path": "pte-doc/projects/plans/quang-tenant-admin-notifications/tests/phase-02-personal-inbox-security-api-test-report.json",
+  "orchestration": "ck:cook Phase 02 --hard --tdd verification; fresh build gate followed by Phase 02 plus Phase 01 notification regression scope.",
+  "command": ".\\mvnw.cmd -pl app \"-Dtest=InboxReadServiceTest,InboxReadStorePostgresIntegrationTest,InboxNotificationRequestedTest,InboxDeliveryServiceTest,InboxRecipientEligibilityTest,InboxDeliveryJitterTest,InboxDeliveryStorePostgresIntegrationTest,NotificationLogServiceTest,NotificationDispatchServiceTest,EmailWorkerTest,ViolationNotificationListenerTest,UserCredentialsNotificationListenerTest,TenantApplicationNotificationListenerTest,SessionCancelledNotificationListenerTest,EnrollmentNotificationListenerTest,AttemptPublishedNotificationListenerTest,ModuleStructureTest\" test",
+  "working_directory": "pte-api",
+  "exit_code": 0,
+  "maven_duration_seconds": 58.517,
+  "suites": [
+    { "name": "InboxReadServiceTest", "passed": 8 },
+    { "name": "InboxReadStorePostgresIntegrationTest", "passed": 2 },
+    { "name": "InboxNotificationRequestedTest", "passed": 30 },
+    { "name": "InboxDeliveryServiceTest", "passed": 15 },
+    { "name": "InboxDeliveryJitterTest", "passed": 2 },
+    { "name": "InboxRecipientEligibilityTest", "passed": 7 },
+    { "name": "InboxDeliveryStorePostgresIntegrationTest", "passed": 11 },
+    { "name": "ModuleStructureTest", "passed": 3 },
+    { "name": "Existing notification regressions (9 classes)", "passed": 28 }
+  ],
+  "prepared_test_integrity": {
+    "status": "unchanged_assertions",
+    "algorithm": "SHA256",
+    "files": {
+      "pte-api/app/src/test/java/com/pte/notification/internal/service/InboxReadServiceTest.java": "02EE4698D2DEC19F60F0BA8C24E96701F542E04B66827D95890BA5ACD6781255"
+    }
+  },
+  "postgres_evidence": {
+    "url": "jdbc:postgresql://127.0.0.1:55439/postgres",
+    "user": "codex_inbox_test",
+    "migrations": ["db/migration/V71__notification_inbox_foundation.sql", "db/migration/V72__notification_inbox_snapshots.sql"],
+    "isolated_random_schema_per_test": true,
+    "public_schema_untouched": true,
+    "skipped": 0,
+    "verified": [
+      "V72 snapshot migration applies after V71 with minimal FK fixture identities",
+      "Snapshot token is recipient and null-safe tenant bound and page rows remain anchored at upper sequence",
+      "Read-all obtains the recipient stream lock and a delivery committed later remains unread",
+      "Phase 01 delivery migration, lease fencing, rollback and bounded recovery regressions remain green"
+    ]
+  },
+  "limitations": [
+    "No HTTP authorization/browser validation in this phase test run; controller annotation and service self-scope are statically/unit reviewed.",
+    "No full historical migration-chain application, benchmark, RabbitMQ process restart or live scheduler evidence.",
+    "No target-entity availability resolver is included; typed target references remain safe notification metadata for later owning-module contracts.",
+    "No quality verdict or phase completion implied."
+  ],
+  "warnings": [
+    "Existing Mockito dynamic-agent and deprecated/unchecked compiler warnings; no test failures."
+  ],
+  "test_code_fixes": [
+    "Corrected missing imports and ThrowingCallable type in the newly prepared test before implementation; assertions and scope were preserved."
+  ]
+}

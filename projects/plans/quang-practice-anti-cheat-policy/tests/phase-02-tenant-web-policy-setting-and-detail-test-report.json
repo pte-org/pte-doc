@@ -1,0 +1,31 @@
+{
+  "phase": "phase-02-tenant-web-policy-setting-and-detail",
+  "mode": "unit-and-build",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-09-28T10:13:29+07:00",
+  "summary": {
+    "api_client_tests": 324,
+    "api_client_failures": 0,
+    "api_client_errors": 0,
+    "api_client_skipped": 0,
+    "api_client_typecheck": "PASSED",
+    "tenant_typecheck": "PASSED",
+    "tenant_build": "PASSED",
+    "authenticated_browser_walkthrough": "PASSED"
+  },
+  "commands": [
+    "pnpm --filter @pte/api-client typecheck",
+    "pnpm --filter @pte/api-client test",
+    "pnpm exec tsc --noEmit -p apps/tenant-web/tsconfig.json",
+    "pnpm --filter tenant-web build"
+  ],
+  "scope": [
+    "packages/api-client/src/types/scheduling/index.ts",
+    "packages/api-client/src/requests/scheduling/examOrchestration.test.ts",
+    "apps/tenant-web/features/exams/utils/examPolicy.ts",
+    "apps/tenant-web/features/exams/components/CreateExamWizard.tsx",
+    "apps/tenant-web/features/exams/components/SessionDetailView.tsx"
+  ],
+  "failures": [],
+  "notes": "API-client suite passed 324 tests, including NONE/STANDARD/STRICT serialization and mode mapping. Tenant lint was executed but remains blocked by the pre-existing react-hooks/set-state-in-effect error at CreateExamWizard.tsx:91 plus two pre-existing unused-variable warnings; it is recorded separately and did not block typecheck or production build. Authenticated browser walkthrough passed against the Docker-backed local stack: Practice exposes the anti-cheat checkbox; switching to Official hides it; switching back to Practice resets it to the unchecked default; review displays Practice — unrestricted and Practice — controlled desktop; an existing exam detail page displays the server-provided Security policy value Practice — unrestricted. The browser also reported a pre-existing ToastProvider hydration mismatch. No tenant component-test harness exists in this repository."
+}

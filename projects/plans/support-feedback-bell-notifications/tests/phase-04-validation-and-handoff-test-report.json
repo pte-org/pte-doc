@@ -1,0 +1,134 @@
+{
+  "phase": "phase-04-validation-and-handoff",
+  "mode": "hard-tdd-verify",
+  "verdict": "PARTIAL_NOT_VERIFIED",
+  "reviewed_at": "2026-10-04T14:45:34Z",
+  "release_ready": false,
+  "summary": {
+    "targeted_backend_tests": 89,
+    "targeted_backend_failures": 0,
+    "targeted_backend_errors": 0,
+    "targeted_backend_skipped": 0,
+    "postgresql_integration_tests": 14,
+    "postgresql_integration_failures": 0,
+    "postgresql_integration_errors": 0,
+    "flyway_migrations_validated": 76,
+    "full_backend_tests": 1089,
+    "full_backend_failures": 4,
+    "full_backend_errors": 6,
+    "full_backend_skipped": 14,
+    "web_api_client_tests": 377,
+    "web_api_client_failures": 0,
+    "browser_smoke": "PASSED_UNAUTHENTICATED_ONLY",
+    "worker_controlled_runtime": "NOT_VERIFIED_DEFAULT_FALSE",
+    "running_app_migration_baseline": "V70"
+  },
+  "commands": [
+    {
+      "command": ".\\mvnw.cmd -pl app -DskipTests compile",
+      "result": "PASSED"
+    },
+    {
+      "command": ".\\mvnw.cmd -pl app \"-Dtest=SupportTicketNotificationContractTest,SupportTicketInboxNotificationListenerTest,SupportTicketEventPublicationTest,SupportFeedbackInboxMigrationTest,SupportTicketServiceTest,InboxNotificationRequestedTest,InboxRecipientEligibilityTest,InboxDeliveryServiceTest,InboxReadServiceTest,InboxDeliveryJitterTest,ModuleStructureTest\" test",
+      "result": "PASSED",
+      "tests": 89,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "command": "Maven 3.9 / Java 21 container on the Docker application network with InboxDeliveryStorePostgresIntegrationTest, InboxReadStorePostgresIntegrationTest, and InboxAnnouncementStorePostgresIntegrationTest",
+      "result": "PASSED",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "database": "PostgreSQL 17.11",
+      "scope": "Random isolated schemas; no public schema writes"
+    },
+    {
+      "command": "Flyway 11 validation and migrate against a temporary PostgreSQL 17 database using app/src/main/resources/db/migration",
+      "result": "PASSED",
+      "migrations_validated": 76,
+      "migrations_applied": 76,
+      "support_inbox_versions": ["71", "72", "73", "74", "75", "76"],
+      "temporary_resources": "Removed after validation"
+    },
+    {
+      "command": ".\\mvnw.cmd -pl app test",
+      "result": "FAILED_OUT_OF_SCOPE_BASELINE",
+      "tests": 1089,
+      "failures": 4,
+      "errors": 6,
+      "skipped": 14,
+      "failures_or_errors": [
+        "ExamGenerationServiceTest.generate_orderIsSpeakingWritingReadingListening_thenBySequence",
+        "AttemptLifecycleCapabilityTest.existingStart_checksCapabilitiesAfterOwnershipBeforeResume",
+        "AttemptLifecycleCapabilityTest.start_repeatsAuthoritativeCheckAndStoresNormalizedFingerprint",
+        "AttemptLifecycleServicePlayAudioTest.playAudio_audioUrlExpired_throws",
+        "AttemptLifecycleServicePlayAudioTest.playAudio_replayLimitExceeded_throws",
+        "AttemptLifecycleServicePlayAudioTest.playAudio_firstPlay_incrementsPlayCount",
+        "AttemptLifecycleServicePlayAudioTest.playAudio_locksExamAttemptRow_neverTouchesTimerService",
+        "AttemptLifecycleServicePlayAudioTest.playAudio_publicLegacyAudio_ignoresStaleExpiryTimestamp",
+        "AttemptLifecycleServicePlayAudioTest.playAudio_sameRequestIdReplayed_doesNotIncrementAgain",
+        "AttemptLifecycleServicePlayAudioTest.playAudio_unlimitedPolicy_neverRejects"
+      ],
+      "scope_note": "The support module boundary failure was fixed and ModuleStructureTest now passes; remaining failures/errors are outside this feature's files and match the known assessment/attempt baseline."
+    },
+    {
+      "command": "corepack pnpm --filter @pte/api-client test",
+      "result": "PASSED",
+      "test_files": 15,
+      "tests": 377,
+      "failures": 0
+    },
+    {
+      "command": "corepack pnpm --filter @pte/api-client typecheck; corepack pnpm --filter tenant-web exec tsc --noEmit; corepack pnpm --filter vendor-web exec tsc --noEmit",
+      "result": "PASSED"
+    },
+    {
+      "command": "corepack pnpm build",
+      "result": "PASSED",
+      "scope": "tenant-web and vendor-web production builds"
+    },
+    {
+      "command": "corepack pnpm lint",
+      "result": "PASSED",
+      "warnings": 3,
+      "warning_scope": "Existing vendor QuestionBank img warnings and an unchanged tenant support modal unused-variable warning"
+    },
+    {
+      "command": "corepack pnpm exec prettier --check packages/api-client/src/requests/endpoints.test.ts",
+      "result": "PASSED"
+    },
+    {
+      "command": "Playwright visible-browser smoke against tenant-web :3000 and vendor-web :3001 with local API :8080",
+      "result": "PASSED_UNAUTHENTICATED_ONLY",
+      "observed": [
+        "Tenant /login rendered HTTP 200.",
+        "Tenant /host/notifications redirected to /login after GET /api/v1/auth/me returned 401.",
+        "Vendor /login rendered HTTP 200.",
+        "Vendor /admin/notifications redirected to /login."
+      ],
+      "not_verified": "Authenticated ticket submission, admin fan-out, note/status reply, read state, and cross-account isolation"
+    },
+    {
+      "command": "Docker health, local actuator, and unauthenticated support/inbox route probes",
+      "result": "BASELINE_ONLY",
+      "observed": [
+        "PostgreSQL, RabbitMQ, Redis, and app containers healthy.",
+        "GET /actuator/health returned 200.",
+        "GET /api/v1/notification-inbox/unread-count returned 401.",
+        "GET /api/v1/support-tickets returned 401.",
+        "GET /api/v1/admin/support-tickets returned 401.",
+        "Running app flyway_schema_history ends at V70; it is not the current V71-V76 feature runtime."
+      ]
+    }
+  ],
+  "not_verified": [
+    "Controlled application runtime with NOTIFICATION_INBOX_ENABLED=true and a pending support intent materialized by the worker.",
+    "Authenticated tenant/platform-admin browser flow, including one notification per committed note/status action.",
+    "Cross-account authenticated read/mutate denial in the browser.",
+    "Production deployment and public-domain routing."
+  ],
+  "report_path": "pte-doc/projects/plans/support-feedback-bell-notifications/tests/phase-04-validation-and-handoff-test-report.json"
+}

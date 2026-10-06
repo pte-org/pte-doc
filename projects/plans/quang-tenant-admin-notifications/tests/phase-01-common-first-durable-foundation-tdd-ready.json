@@ -1,0 +1,46 @@
+{
+  "phase": "phase-01-common-first-durable-foundation",
+  "status": "RED_READY",
+  "prepared_at": "2026-10-03T04:26:38Z",
+  "test_files": [
+    "pte-api/app/src/test/java/com/pte/notification/InboxNotificationRequestedTest.java",
+    "pte-api/app/src/test/java/com/pte/notification/internal/service/InboxDeliveryServiceTest.java"
+  ],
+  "test_hashes_sha256": {
+    "pte-api/app/src/test/java/com/pte/notification/InboxNotificationRequestedTest.java": "B10E38459AE6F56818D719BE83DD75F77E0827FAF5BA5F0EFDE0BAAAA2E42015",
+    "pte-api/app/src/test/java/com/pte/notification/internal/service/InboxDeliveryServiceTest.java": "8B1622D2998546F440DFA83530AD2388FDF678E78518B77F80760CD7A996A19B"
+  },
+  "expected_red_reason": "Missing production InboxNotificationRequested/InboxRecipient, inbox enums, InboxNotificationException, InboxDeliveryProperties, InboxDeliveryClaim/Record/Store, InboxRecipientEligibility and InboxDeliveryService. Maven production compile succeeded; testCompile failed with 28 unresolved-symbol/package diagnostics and no syntax diagnostics. No JUnit tests executed.",
+  "artifact_path": "pte-doc/projects/plans/quang-tenant-admin-notifications/tests/phase-01-common-first-durable-foundation-tdd-ready.json",
+  "tests_choice": "yes",
+  "mode": "tdd-prepare",
+  "red_evidence": {
+    "command": ".\\mvnw.cmd -pl app \"-Dtest=InboxNotificationRequestedTest,InboxDeliveryServiceTest\" test",
+    "cwd": "pte-api",
+    "exit_code": 1,
+    "failed_goal": "maven-compiler-plugin:3.14.1:testCompile",
+    "compiler_errors": 28,
+    "production_sources_compiled": 847,
+    "test_sources_attempted": 151,
+    "junit_executed": 0
+  },
+  "contract_choices": {
+    "duplicates": "Exact recipient duplicates normalized; same user with different tenant rejected.",
+    "properties_package": "com.pte.notification.internal.config",
+    "failure_codes": [
+      "INBOX_DELIVERY_TRANSIENT_FAILURE",
+      "INBOX_DELIVERY_NON_RETRYABLE_FAILURE"
+    ],
+    "commercial_targets": [
+      "ORDER",
+      "SUBSCRIPTION",
+      "QUOTA"
+    ]
+  },
+  "scope_limitations": [
+    "Compilation RED, not assertion RED; full type checking and assertions require implementation.",
+    "Eligibility role/facade locking unit tests deferred until new public facade signatures exist; no production mocks/stubs added.",
+    "No PostgreSQL migration, transaction, SQL concurrency, restart or integration evidence yet.",
+    "No production code or phase state edited; phase owner should record TDD preparation as in_progress, not passed."
+  ]
+}

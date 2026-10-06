@@ -1,0 +1,22 @@
+{
+  "target": "phase-05-deterministic-generation-and-forms",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-admin-baseline-repair/quality/phase-05-deterministic-generation-and-forms-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/assessment/domain/ExamSnapshot.java",
+    "pte-api/app/src/main/java/com/pte/assessment/internal/service/ExamGenerationService.java",
+    "pte-api/app/src/main/java/com/pte/assessment/internal/service/SnapshotPublishService.java",
+    "pte-api/app/src/main/java/com/pte/session/domain/ExamForm.java",
+    "pte-api/app/src/main/java/com/pte/session/domain/ExamGenerationJob.java",
+    "pte-api/app/src/main/java/com/pte/session/domain/FormAssignment.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/EntitlementService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/ExamOrchestrationService.java",
+    "pte-api/app/src/main/resources/db/migration/V43__snapshot_generation_provenance.sql",
+    "pte-api/app/src/test/java/com/pte/assessment/internal/service/ExamGenerationServiceTest.java"
+  ],
+  "source_fingerprint": "sha256:6c655d012d966a6020ac38d34f0bbe7471d18a324e5bf399922cd0bd2ba650ca",
+  "reviewed_at": "2026-10-05T13:46:23.809Z",
+  "open_blocking_findings": 0
+}

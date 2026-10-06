@@ -1,0 +1,20 @@
+{
+  "target": "phase-03-web-contract-and-routing",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/support-feedback-bell-notifications/quality/phase-03-web-contract-and-routing-quality-report.json",
+  "reviewed_files": [
+    "pte-doc/projects/plans/support-feedback-bell-notifications/phase-03-web-contract-and-routing.md",
+    "pte-web/apps/tenant-web/features/notifications/components/NotificationBellContainer.tsx",
+    "pte-web/apps/tenant-web/features/notifications/components/NotificationHistoryView.tsx",
+    "pte-web/apps/vendor-web/features/notifications/components/NotificationBellContainer.tsx",
+    "pte-web/apps/vendor-web/features/notifications/components/NotificationHistoryView.tsx",
+    "pte-web/apps/vendor-web/features/supportTickets/constants/index.ts",
+    "pte-web/packages/api-client/src/requests/notification/inbox.test.ts",
+    "pte-web/packages/api-client/src/types/notification/index.ts"
+  ],
+  "source_fingerprint": "sha256:629ea0989980e55c15c4854e636b394e595f0e759058347633d0732a3a6258d7",
+  "reviewed_at": "2026-10-04T13:51:00Z",
+  "open_blocking_findings": 0
+}

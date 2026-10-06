@@ -1,0 +1,24 @@
+{
+  "target": "phase-02-tenant-web-policy-setting-and-detail",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-practice-anti-cheat-policy/quality/phase-02-tenant-web-policy-setting-and-detail-quality-report.json",
+  "reviewed_files": [
+    "pte-doc/projects/plans/quang-practice-anti-cheat-policy/phase-02-tenant-web-policy-setting-and-detail.md",
+    "pte-web/apps/tenant-web/features/exams/api/index.ts",
+    "pte-web/apps/tenant-web/features/exams/components/CreateExamWizard.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/SessionDetailView.tsx",
+    "pte-web/apps/tenant-web/features/exams/constants/index.ts",
+    "pte-web/apps/tenant-web/features/exams/types/index.ts",
+    "pte-web/apps/tenant-web/features/exams/utils/examPolicy.ts",
+    "pte-web/apps/tenant-web/features/exams/utils/validateCreateExamWorkflow.ts",
+    "pte-web/packages/api-client/src/client/errorMessage.ts",
+    "pte-web/packages/api-client/src/requests/scheduling/examOrchestration.test.ts",
+    "pte-web/packages/api-client/src/requests/scheduling/examOrchestration.ts",
+    "pte-web/packages/api-client/src/types/scheduling/index.ts"
+  ],
+  "source_fingerprint": "sha256:211fda4820c223a36760fb5373a0f36a5f2bf7f3059d450b460aa5e67a2852eb",
+  "reviewed_at": "2026-09-28T09:42:28+07:00",
+  "open_blocking_findings": 0
+}

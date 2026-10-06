@@ -1,0 +1,29 @@
+{
+  "target": "phase-01-backend-policy-contract-and-invariants",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-practice-anti-cheat-policy/quality/phase-01-backend-policy-contract-and-invariants-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/session/domain/ExamPolicy.java",
+    "pte-api/app/src/main/java/com/pte/session/domain/ExamSession.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/constant/SessionConstants.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/dto/request/CreateExamDraftRequest.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/dto/request/PatchExamDraftRequest.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/exception/InvalidLockdownModeException.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/mapper/SessionMapper.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/policy/SessionPolicyResolver.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/EntitlementService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/ExamOrchestrationService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/SessionLifecycleService.java",
+    "pte-api/app/src/test/java/com/pte/attempt/internal/service/SnapshotPinServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/policy/SessionPolicyResolverTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/EntitlementServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/ExamOrchestrationServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java",
+    "pte-doc/projects/plans/quang-practice-anti-cheat-policy/phase-01-backend-policy-contract-and-invariants.md"
+  ],
+  "source_fingerprint": "sha256:687d18827903a06c946000ed4436205a9d0229d0754aade8c8b4201b046318ad",
+  "reviewed_at": "2026-09-28T09:31:01+07:00",
+  "open_blocking_findings": 0
+}

@@ -1,0 +1,32 @@
+{
+  "target": "phase-07-regression-handoff",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-admin-commercialization-unhappy-cases/quality/phase-07-regression-handoff-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/test/java/com/pte/billing/internal/controller/LicenseIssueHttpContractTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/controller/PlanControllerTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/ArchiveLifecyclePostgresIntegrationTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/LicenseCodePersistenceServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/LicenseCodeRevocationServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/LicenseCodeServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/LicenseIssuePostgresIntegrationTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/PlanServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/TenantApplicationReviewPostgresIntegrationTest.java",
+    "pte-doc/projects/plans/quang-admin-commercialization-unhappy-cases/coverage-ledger.md",
+    "pte-doc/projects/plans/quang-admin-commercialization-unhappy-cases/implementation-spec.md",
+    "pte-doc/projects/plans/quang-admin-commercialization-unhappy-cases/phase-07-regression-handoff.md",
+    "pte-doc/projects/plans/quang-admin-commercialization-unhappy-cases/plan.md",
+    "pte-doc/projects/plans/quang-admin-commercialization-unhappy-cases/unhappy-cases.md",
+    "pte-web/apps/tenant-web/app/providers.tsx",
+    "pte-web/apps/vendor-web/app/providers.tsx",
+    "pte-web/packages/api-client/src/client/client.test.ts",
+    "pte-web/packages/api-client/src/requests/billing/applications.test.ts",
+    "pte-web/packages/api-client/src/requests/billing/licenseCodes.test.ts",
+    "pte-web/packages/api-client/src/requests/billing/plans.test.ts"
+  ],
+  "source_fingerprint": "sha256:7729356588106c437f038b637d5792f3d74df0baa7c26615604e50a1e9a82e90",
+  "reviewed_at": "2026-10-06T07:58:46Z",
+  "open_blocking_findings": 0
+}
