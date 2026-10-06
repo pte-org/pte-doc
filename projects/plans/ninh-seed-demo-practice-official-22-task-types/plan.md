@@ -62,7 +62,7 @@ Dependencies: 1 → 2 → 3 → 4 → 5 (3 only needs 2 for the "enough question
 
 ## Implementation outcome and corrections (2026-10-06)
 
-Delivered in `pte-api/scripts` (not committed by the assistant): `seed-demo22.ps1` (one command), `seed-demo22-questions.ps1`, `seed-demo22-template.ps1`, `seed-demo22-sessions.ps1`, `verify-demo22.ps1`, `bootstrap-local-admin.ps1`, `lib/`, `tools/` and `seed-data/demo22/`; README section "Demo data: 22 task types".
+Delivered in one folder, `pte-api/scripts/demo22/` (not committed by the assistant), so it can be deleted as a unit: `seed-demo22.ps1` (one command), `seed-demo22-questions.ps1`, `seed-demo22-template.ps1`, `seed-demo22-sessions.ps1`, `verify-demo22.ps1`, `bootstrap-local-admin.ps1`, `lib/`, `tools/` and `data/`; README section "Demo data: 22 task types". Paths mentioned elsewhere in this plan (`scripts/seed-data/...`, `scripts/tools/...`, `scripts/lib/...`) were written before the move and now live under `scripts/demo22/`.
 
 Corrections to the findings above, discovered while building:
 
