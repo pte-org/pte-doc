@@ -1,10 +1,12 @@
 # Phase 05 — Confirmed revoke scope and atomic session cancellation
 
-Status: unstarted. Story: US-03 [P1]. Primary IDs: LIC-05/08/09/13. Depends on01/04. Highest transaction/lock-order risk; independent review required by the main-agent pipeline before cook readiness.
+Status: completed after operator-confirmed HARD transition. Story: US-03 [P1]. Primary IDs: LIC-05/08/09/13. Depends on 01/04. Highest transaction/lock-order risk; independent review required by the main-agent pipeline before cook readiness. Source baseline: API 90b1234, web 6f3b46d; Phase05 changes remain uncommitted. Checks: tests=yes, quality=yes as previously authorized for all phases; TDD not enabled.
 
 ## Design Constraints
 
 Revoke code, linked EXAM subscription and SCHEDULED persistence together; preserve OPEN/CLOSED. Reason trimmed1..255. Preview consent must match effective state and entitlement identity/scope at locked execution. No quota compensation or unsupported capacity reversal. Session depends on billing public events/facade; billing never imports SessionService/session internals. AFTER_COMMIT + REQUIRES_NEW is not an atomic substitute.
+
+Preflight and implementation review: the existing billing public facade, synchronous event boundary, constructor injection, module-owned constants/exceptions, and PESSIMISTIC_WRITE repository style are preserved. The implementation uses the code -> sorted subscription -> sorted session lock order, removes the legacy String-token revoke mutation path, and keeps the old HTTP route fail-closed with no token echo.
 
 ## Detailed tasks and exact files
 
@@ -38,6 +40,16 @@ Browser: ISSUED preview becomes REDEEMED before confirm ->409/repreview and fres
 
 Exit requires committed readback and rollback proof, module dependency verification, all writer order inventory, locked scope comparison and no old-route bypass. If shared transaction or module direction fails, stop this phase and report evidence; do not silently substitute eventual completion or durable intent beyond scope. Safe rollback disables destructive revoke while keeping committed history; do not revert to AFTER_COMMIT behavior or reopen old revoke bypass.04 state resolver/identity required;06 completes safe admin access/cache isolation.
 
+## Execution update (2026-10-06)
+
+Phase05 implementation and selected checks are complete. Admin revoke now uses UUID publicId preview/confirm endpoints. The preview binds the authenticated actor, code identity/effective state, plan, linked EXAM subscription/tenant/status, and the exact sorted SCHEDULED session publicId set. Confirm recomputes that scope under the code -> subscription -> session locks, requires a trimmed 1..255 reason and explicit acknowledgements, cancels the code/subscription/SCHEDULED sessions in one REQUIRED transaction, and preserves OPEN/CLOSED. Missing/duplicate impact responses fail closed through the synchronous public billing event and session facade. The legacy raw-token revoke mutation was removed; its old route returns a sanitized 409.
+
+Session writers now obtain subscription locks before session locks for create, draft update, publish, open and subscription changes. The cancellation listener runs BEFORE_COMMIT and flushes session changes before commit completion. Capacity-code revoke remains controlled unsupported; no quota reversal is claimed.
+
+Backend verification: `clean compile` passed; targeted revoke/HTTP/session/orchestration/listener tests passed 61/61; full `-pl app test` passed 1161 tests with 0 failures/errors and 37 opt-in PostgreSQL skips. Web verification: API client passed 391/391 tests and typecheck; vendor typecheck and production build passed; tenant typecheck and production build passed; vendor lint passed with 0 errors and 2 pre-existing question-bank `<img>` warnings; `git diff --check` passed. Mocked Playwright acceptance passed preview loading, explicit unchecked acknowledgements, reason capture, safe confirm payload and success state. The browser check used mocked API responses and is not authenticated live-backend E2E.
+
+Evidence limits: no Phase05-specific multi-transaction PostgreSQL interleaving/fault-injection run was available in this pass; the 37 opt-in PostgreSQL tests remain skipped without the dedicated test configuration. Raw code exposure in the legacy list contract remains the explicit Phase06 privacy boundary. No production or live authenticated mutation was performed.
+
 ## Quality and Testing State
 
-Quality: not evaluated; pending consent. Unit/PostgreSQL/browser: not started; pending consent. TDD recommended for each race/fault scenario, not enabled. No new tests have run. Existing row-lock annotation is source evidence, not proof of end-to-end atomicity.
+Quality: APPROVED; report `quality/phase-05-revoke-preview-atomic-cancellation-quality-report.json`; receipt `quality/phase-05-revoke-preview-atomic-cancellation-receipt.json`. TDD was not enabled. The operator confirmed the Phase05 HARD transition on 2026-10-06. The independent review records the PostgreSQL/live-E2E boundaries above as noted evidence limits, not as proof of production behavior.

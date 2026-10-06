@@ -1,8 +1,10 @@
 # Phase 04 — Issue-intent idempotency, redeem proof and effective expiry
 
-Status: unstarted. Story: US-03 [P1]. Primary IDs: LIC-02/03/04/11/12/14. Secondary: LIC-06/07 (primary07), LIC-13 (primary05), LIC-15 (primary06). Depends on01/03;05 builds revoke on these identity/state contracts. Planning source HEADs: API f070e38, web eafe3c8; no new runtime verification.
+Status: completed after operator-confirmed HARD transition. Story: US-03 [P1]. Primary IDs: LIC-02/03/04/11/12/14. Secondary: LIC-06/07 (primary07), LIC-13 (primary05), LIC-15 (primary06). Depends on01/03;05 builds revoke on these identity/state contracts. Source baseline before implementation: API e75d85d, web f47ff23; resulting implementation is present at API 90b1234 and web 6f3b46d. Checks: tests=yes, quality=yes as previously authorized for all phases; TDD not enabled.
 
 ## Design Constraints
+
+Preflight: confirmed billing-owned constants, constructor DI, shared UTC Clock and BaseEntity conventions. Issuance orchestration stays outside REQUIRES_NEW; successful intent and code share its transaction. Existing legacy capacity redemption remains supported. Current source trees were clean before Phase04; existing documentation changes are preserved.
 
 Keep existing locked eligibility and insert in `LicenseCodePersistenceService` REQUIRES_NEW; no outer Plan lock that survives across the inner transaction. Add intent+code in that same transaction. Preserve existing conditional redeem claim and shared activation/linkage transaction. New issue EXAM-only; capacity Plans and previously issued capacity redemption behavior remain supported. No quota compensation, snapshot, secret in intent, or automatic retry with a new key after timeout.
 
@@ -37,6 +39,14 @@ Browser: plan stale selection gets actionable refresh; datetime-local zone chang
 
 Exit: committed idempotency/race proof, exact expiry boundary, retained capacity redemption, no secret intent/cache leakage. Inventory legacy capacity codes read-only; quota reversal Deferred and never claimed. Rollback disables new issuance if binary compatibility fails; keep intent rows/unique keys and never restore unkeyed issuance. Do not delete issued codes or revert successful redemptions to undo a UI release.05 depends on safe publicId/state resolver;06 supplies reveal/page and final UI privacy.
 
+## Execution update (2026-10-06)
+
+Implementation and selected checks completed. The backend full suite passed 1155 tests with 0 failures, 0 errors, and 37 opt-in PostgreSQL skips. The dedicated local PostgreSQL Phase04 suite passed 31/31: committed same-key races, payload mismatch, rollback after code/intent faults, code-collision retry, legacy capacity redemption, two-tenant redemption, exact microsecond expiry boundary, and V78-to-V79 rehearsal. HTTP contract tests passed 3/3.
+
+The API client passed 388/388 tests and typecheck; vendor and tenant typechecks passed; vendor lint passed with 0 errors and 2 pre-existing question-bank `<img>` warnings; vendor and tenant production builds passed. Mocked browser acceptance passed for local-to-UTC conversion, failed-response recovery with the same key/payload, replay metadata without a bearer code, and cleared recovery storage. This browser check used mocked API responses; it is not authenticated live-backend E2E.
+
+Quality review is inline because the `ck` executable is unavailable in this installation. It found no blocking finding; the report and receipt are recorded under `quality/`. The existing raw license-code list/revoke contract remains an explicit Phase06 privacy scope boundary, with list responses marked `no-store` in this phase. PostgreSQL evidence uses the dedicated local container only, not production.
+
 ## Quality and Testing State
 
-Quality: not evaluated; pending consent. Unit/PostgreSQL/browser: not started; pending consent. TDD recommended for intent races and rollback, not enabled. No new tests have run. PostgreSQL proof is mandatory before atomicity claims.
+Quality: APPROVED; report `quality/phase-04-license-issue-redeem-expiry-quality-report.json`; receipt `quality/phase-04-license-issue-redeem-expiry-receipt.json`. Unit/HTTP/PostgreSQL/browser checks passed as recorded above. TDD was not enabled. The operator confirmed the HARD transition on 2026-10-06; Phase05 is now active.

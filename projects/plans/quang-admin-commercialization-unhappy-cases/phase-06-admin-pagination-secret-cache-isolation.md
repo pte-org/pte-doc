@@ -1,6 +1,6 @@
 # Phase 06 — Bounded admin access, secrets, errors and session isolation
 
-Status: unstarted. Story: US-04 [P2], common security acceptance [P1]. Primary IDs: LIC-01/10/15, COM-01..06. Depends on02..05 for final contracts; read-only design can proceed earlier. Gate: exact masked cutover and both query/mutation cache fencing must be demonstrated; UI masking alone is insufficient.
+Status: ready for HARD confirmation. Story: US-04 [P2], common security acceptance [P1]. Primary IDs: LIC-01/10/15, COM-01..06. Depends on 02..05 for final contracts; read-only design can proceed earlier. Gate: exact masked cutover and both query/mutation cache fencing must be demonstrated; UI masking alone is insufficient. Checks: tests=yes, quality=yes as previously authorized for all phases; TDD not enabled.
 
 ## Design Constraints
 
@@ -24,7 +24,7 @@ GET `/api/v1/admin/license-codes?page=0&size=25&status=ISSUED&planId=<UUID>&tena
 
 Selected old GET deprecation response410 uses existing ApiResponse error code/message; valid old successful shape is never replaced with PagedResult. Legacy overlap means explicit Partial security disposition. Add safe headers to all secret-bearing error/success responses, not only200. Redeem still accepts code in POST body and traces must redact it.
 
-## Verification planned after consent
+## Verification evidence and remaining limits
 
 Unit/HTTP: page bounds/meta/sort/filter/effective expiry, DTO reflection/serialization excludes code, auth bypass denied, lookup body binding, no-store reveal success/error, exact batch-query budget and owning-facade access. Legacy GET array during overlap versus410 at cutover tested separately; old revoke cannot cancel redeemed entitlement, old issue cannot omit key. No raw payload in error fallback/audit.
 
@@ -38,4 +38,10 @@ Exit: bounded locate/access, explicit old-read retirement/security disposition, 
 
 ## Quality and Testing State
 
-Quality: not evaluated; pending consent. Unit/PostgreSQL/browser: not started; pending consent. TDD recommended for late-result fencing/privacy/compatibility, not enabled. No new tests have run. Browser mocks alone do not prove API role enforcement or persisted outcomes.
+Preflight resolved: the protected QueryClient remains process-local and is cleared on session lifecycle changes; the API client keeps one refresh/replay per session generation and rejects stale results; the legacy raw list is retired with an explicit 410 after the web cutover. Reveal success and error responses are non-cacheable, and the reveal DTO string representation is redacted.
+
+Implementation/evidence update (2026-10-06): the admin license namespace now returns safe bounded pages with deterministic ordering, effective-status filtering, exact public-id detail, POST-body lookup, explicit platform-admin reveal/audit, batched Plan/Tenant enrichment, and no raw bearer in page/detail DTOs. The old list returns 410; old issue and fail-closed revoke contracts remain. Vendor uses server paging/filtering, direct non-cache lookup/reveal, local reveal timeout/copy state, and account/session cache fencing shared by tenant and vendor providers.
+
+Testing: backend compile passed; targeted license HTTP/service/revocation checkpoint passed 30/30; full app suite passed 1167 tests with 0 failures/errors and 37 opt-in PostgreSQL skips. API client passed 402/402; API client, shared UI, vendor and tenant typechecks passed; vendor lint passed with 0 errors and 2 pre-existing question-bank `<img>` warnings; vendor and tenant production builds passed. `git diff --check` passed for both source repositories.
+
+Quality: APPROVED with zero blocking findings; report [phase-06-admin-pagination-secret-cache-isolation-quality-report.json](quality/phase-06-admin-pagination-secret-cache-isolation-quality-report.json) and receipt [phase-06-admin-pagination-secret-cache-isolation-receipt.json](quality/phase-06-admin-pagination-secret-cache-isolation-receipt.json). Remaining evidence limits are explicit: no dedicated PostgreSQL >=125-row EXPLAIN/query-budget or interleaving run, no authenticated live-backend browser E2E, and no production access-log/trace inspection. These remain Phase07/release evidence, not claims of failure. Operator HARD confirmation is still required before Phase07 activation.

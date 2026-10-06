@@ -61,6 +61,47 @@ Implementation disposition (Residual/Inherited/Partial/Deferred) khác execution
 - COM-06: pagination Applications/Plans chỉ quyết định sau fixtures/đo thực tế; boundedLicensepagination và independentapplicationdetail vẫn bắtbuộc.
 - Full-suite: 11 failures là evidence lịch sử trên HEAD906345c, chưa xác nhận lại ở HEAD hiện tại. Phase01 chạy baseline mới; nếu còn lỗi ngoài scope thì đề xuất task riêng, không waive gate hoặc tự mở rộng implementation.
 
+## Phase07 execution reconciliation
+
+This section is the authoritative current execution record for the 45 IDs. The original `New execution` column above remains the planning-time placeholder from 2026-10-05 so the ledger preserves its audit history. `Passed` is always qualified by the evidence type and does not imply browser, live-backend, scale, or production proof. `Blocked`/`Not run` are explicit evidence states, not implementation dispositions.
+
+Evidence anchors: the fresh Java21 and web command results, selected PostgreSQL run, source scan, and handoff limits are recorded in [phase-07-regression-handoff.md](phase-07-regression-handoff.md#execution-update-2026-10-06). Prior phase receipts remain historical supporting evidence and are not silently upgraded to current browser/production evidence.
+
+| IDs | Current execution | Evidence and residual boundary |
+|---|---|---|
+| APP-01, APP-02 | Passed (backend/client automated subset) | Tenant application service/client contracts and full suite pass; 503/404/retry and list-state browser acceptance not run. |
+| APP-03 | Passed (PostgreSQL decision-race subset) | Ten approval-vs-reject races commit exactly one terminal decision with committed readback; name/code collision races and browser acceptance remain unrun. |
+| APP-04 | Passed (service validation) | Trim/blank/reason boundary service checks pass; native UI Unicode/field-retention acceptance not run. |
+| APP-05 | Passed (unit/HTTP error subset) | Reviewed/not-found classifications pass; stale-detail refetch browser path not run. |
+| APP-06 | Passed (unit conflict subset) | Submit/approval conflict mapping passes; PostgreSQL name/code/tax collision race and rollback not run. |
+| APP-07 | Blocked (partial scope) | Truthful approval/reset subset is retained; durable SMTP/broker delivery/retry remains explicitly Deferred. |
+| APP-08 | Passed (service guard subset) | Pending/review guards pass; response-loss-after-commit and retry browser acceptance not run. |
+| APP-09 | Passed (schema/bound subset) | Current schema/bound checks pass; organization taxonomy/reserved-code policy remains Deferred. |
+| APP-10, APP-11 | Passed (service/full-suite subset) | Action error/decision metadata contracts pass; multi-record UI reset and authenticated display acceptance not run. |
+| APP-12 | Passed (PostgreSQL rollback subset) | Injected approval-side identity failure leaves the application PENDING; durable delivery and other external-side-effect failures remain outside this checkpoint. |
+| PLN-01..PLN-08 | Passed (Plan service/controller/client subset) | Java21 Plan/HTTP/API-client checks pass, including version/lifecycle guards; native form and PostgreSQL stale-write overlap acceptance not run. |
+| PLN-09, PLN-10 | Passed (fresh PostgreSQL inherited guards) | Archive lifecycle and issue/archive/entitlement-edit repetition plus outstanding-code and ACTIVE-family guards pass; no snapshot policy was introduced. |
+| PLN-11, PLN-12 | Blocked (browser residual) | Pending-modal/late-callback/error-reset/decimal-display browser scenarios were not runnable without an existing harness. |
+| LIC-01 | Passed (service/client subset) | Bounded admin/service contracts pass; plan loading/error/empty browser states not run. |
+| LIC-02 | Passed (issue/archive guard subset) | Active-plan and issue/archive protections pass; direct 404/legacy-edge UI acceptance not run. |
+| LIC-03 | Passed (HTTP/service expiry subset) | UTC/equivalent-offset and expiry contract checks pass; browser timezone/native input acceptance not run. |
+| LIC-04 | Passed (fresh PostgreSQL race/rollback) | Ten-repetition two-tenant redemption and linkage rollback pass; no production DB evidence. |
+| LIC-05 | Passed (service/HTTP subset) | Redeemed revoke behavior and contract checks pass; list UI action availability was not browser-tested. |
+| LIC-06 | Passed (legacy archived-plan subset) | Direct legacy ISSUED-code-on-ARCHIVED-plan fixture fails closed with the plan-inactive error and leaves the code ISSUED; broader legacy data repair policy is not claimed. |
+| LIC-07 | Blocked (legacy entitlement edge not executed) | Post-issue family/capacity mutation followed by redemption was not run; no snapshot bypass was claimed. |
+| LIC-08, LIC-09 | Passed (unit/HTTP subset) | Preview/revoke/listener contracts pass; PostgreSQL revoke/session interleaving and fault-after-listener commit are not run. |
+| LIC-10 | Passed (bounded page/client subset) | Server paging/filter/lookup contracts pass; the local scale sample measured the current ISSUED query at 0.324 ms, but production-like query budget/load evidence is not run. |
+| LIC-11 | Passed (approved partial scope) | Fresh PostgreSQL proves new capacity issue denial and valid legacy capacity redemption; quota reversal/compensation remains Deferred. |
+| LIC-12 | Passed (fresh PostgreSQL idempotency) | Same-key/different-payload races, rollback, collision retry and replay identity pass in the isolated container. |
+| LIC-13, LIC-14 | Passed (service/HTTP/expiry subset) | Error/status/reason and effective expiry contracts pass; complete stale UI and cron/revoke interleaving acceptance not run. |
+| LIC-15 | Passed (privacy contract subset) | Masked page, reveal/lookup no-store, redaction and client cache boundaries pass; authenticated browser trace/access-log inspection not run. |
+| COM-01 | Passed (backend/client security subset) | Backend role/error contracts and client checks pass; authenticated role switch/revocation browser acceptance not run. |
+| COM-02 | Passed (client session-generation subset) | Refresh/replay and stale-generation tests pass; real multi-tab/logout cache acceptance not run. |
+| COM-03 | Passed (error contract subset) | API error mapping and client fallbacks pass; browser console/unhandled-rejection inspection not run. |
+| COM-04 | Blocked (cache/refetch residual) | Commit-vs-refetch failure and stale-tab browser scenario were not directly executable. |
+| COM-05 | Passed (client/session guard subset) | Session-generation fencing and operation cleanup are typechecked/tested; navigation/tab acceptance not run. |
+| COM-06 | Passed (bounded local scale/EXPLAIN sample; pagination deferred) | Isolated PostgreSQL measured 174 applications, 606 plans, and 613 license codes (479 current ISSUED); tested list/page/enrichment queries ran in 0.084–0.951 ms in this fixture, with seq scans/sorts observed on unbounded lists. Production-like load/query-budget evidence and global Applications/Plans pagination remain Deferred. |
+
 ## Evidence khi cook
 
 Bổ sung từngcase: fixture/preconditions, observedHTTP+errorcode, DBaftercommit/actor/audit, raceinterleaving, browsernetwork/mockvsreal, testcommand+timestamp, defect/deferredowner. Mộtcasebao gồm nhiều nhánh phải đủ scopeđãchốt mới Passed; nhánhdeferred ghi Partial trongdisposition và Blocked/Notrun với reason ởexecution/subcase. Checklist scope không thay test receipt.

@@ -1,10 +1,12 @@
 # Phase 07 — Regression, inherited guards and honest handoff
 
-Status: unstarted. Story: US-06 [P1]; final acceptance for US-01..05. Primary IDs: PLN-09/10, LIC-06/07. Reconciles all45 IDs. Depends on01..06 and their required receipts.
+Status: evidence reconciled with explicit release blockers; not release-ready. Story: US-06 [P1]; final acceptance for US-01..05. Primary IDs: PLN-09/10, LIC-06/07. Reconciles all45 IDs. Depends on01..06 and their required receipts. Checks: tests=yes, quality=yes under HARD confirmation; TDD not enabled.
 
 ## Design Constraints
 
 No implementation expansion to fix unrelated failures. Retained guards are rerun, not rebuilt or replaced with snapshots. APP-07/09 and LIC-11 partial/deferred subcases remain visible. Historical evidence on906345c is not current HEAD evidence. No release-ready claim with fresh failed/skipped required gates; no production mutation, commit, push or deploy implied by this handoff.
+
+Preflight: Phase07 is a regression/reconciliation/handoff gate; it does not authorize unrelated production changes or new test infrastructure without evidence. Phase01-06 receipts and phase documents are the prior evidence sources. Coverage disposition (Inherited, Residual, Partial, Deferred) must remain distinct from execution status (Not run, Passed, Failed, Blocked). PostgreSQL-unavailable or skipped atomicity evidence is reported as Blocked/Not run, never as a pass.
 
 ## Detailed tasks and exact files
 
@@ -35,6 +37,33 @@ Exit only when approved implemented scope has fresh required gates, all45 dispos
 
 Rollback: preserve committed application/license/subscription/session history, version checks, issue mappings/tombstones, audit and V77. Disable affected mutations for incompatible client/binary rollback; never restore old unguarded paths, delete volumes, or perform compensating tenant/password/quota operations automatically. Actual deployment/production checks require separate user authorization.
 
+## Execution update (2026-10-06)
+
+Phase07 did not add production code or test infrastructure. It added focused PostgreSQL regression coverage in `LicenseIssuePostgresIntegrationTest` and `TenantApplicationReviewPostgresIntegrationTest`, reran the retained guards, reconciled current evidence, and performed a no-secret/source-scope review. The API working tree contains only those test additions; the web source remains clean. API HEAD is `cc3763ef49bc6f78cc103b00ce8ca39840377a99`; web HEAD is `0e04c9c5a49020d54560af7798ae3a577ba08c8`. No commit, push, deployment, production mutation, or volume deletion was performed.
+
+Backend evidence, all under Java `21.0.5`:
+
+- `./mvnw.cmd -pl app -DskipTests compile`: passed.
+- Retained/related checkpoint with `-Dlifecycle.test.db.url=jdbc:postgresql://127.0.0.1:55439/lifecycle_test?currentSchema=migration_clean`: 80/80 passed, 0 failures, 0 errors, 0 skips. It included `PlanServiceTest` (19), `PlanControllerTest` (4), `LicenseCodeServiceTest` (17), `LicenseCodePersistenceServiceTest` (1), `ArchiveLifecyclePostgresIntegrationTest` (11), `LicenseIssuePostgresIntegrationTest` (12), `LicenseCodeExpirationServiceTest` (1), `LicenseIssueHttpContractTest` (8), `LicenseCodeRevocationServiceTest` (5), and `TenantApplicationReviewPostgresIntegrationTest` (2). The PostgreSQL tests prove the existing ten-repetition issue/archive, idempotency, redemption/linkage rollback, capacity legacy redemption/new-issue denial, exact expiry predicate, migration fixture, draft/entitlement guards, direct archived-plan legacy redemption fail-closed behavior, and approval/rejection decision/rollback behavior. This is isolated Docker PostgreSQL evidence, not production evidence.
+- The notification opt-in PostgreSQL checkpoint passed 14/14 with 0 failures, 0 errors, and 0 skips.
+- `./mvnw.cmd -pl app test`, rerun with the approved isolated PostgreSQL settings for both lifecycle and notification opt-in suites: 1170 tests, 0 failures, 0 errors, 0 skips. No historical 906345c result was reused as a current result.
+- Bounded local PostgreSQL scale/EXPLAIN sample after `ANALYZE`: 174 applications, 606 plans, and 613 license codes (479 current non-expired `ISSUED`). The exercised list/page/enrichment queries completed in 0.084–0.951 ms with shared-buffer hits only; unbounded Applications/Plans lists used sequential scans plus sorts. This is a small isolated fixture, not production-like load, query-budget, or pagination proof.
+
+Web evidence:
+
+- `pnpm --filter @pte/api-client test`: 402/402 passed.
+- API client, shared UI, vendor and tenant typechecks passed; vendor lint had 0 errors and 2 pre-existing Question Bank `<img>` warnings; vendor and tenant production builds passed.
+- The repository has no project-owned Playwright/Cypress/browser E2E script or configured acceptance harness outside dependencies. No browser test was invented or installed. Authenticated live-backend E2E, multi-tab acceptance, cache inspection, and production trace/access-log inspection therefore remain Blocked/Not run.
+- A source scan of the changed commercialization/session paths found no console logging of bearer values; page/detail types remain masked and direct lookup/reveal calls are deliberately outside React Query cache. This is not a deployed trace proof.
+
+Coverage reconciliation is authoritative in [coverage-ledger.md](coverage-ledger.md), section “Phase07 execution reconciliation”. Leading execution labels are `Passed`, `Blocked`, or `Not run`; a `Passed` row with a qualifier means only the named automated subcase passed. APP-07 durable delivery, APP-09 taxonomy/reserved-code policy, and LIC-11 quota reversal remain Partial/Deferred by approved scope. LIC-07 post-issue family/entitlement mutation redemption, revoke/session multi-transaction behavior, browser lifecycle states, cache/refetch failure, and production-like Applications/Plans/License query-budget/load evidence were not executed and are not silently marked Passed.
+
+Handoff limitations:
+
+- The 80-test PostgreSQL checkpoint is real local isolation and now covers approval/rejection decision races plus an injected approval-side rollback; it still does not cover revoke/session multi-transaction suites, and the scale sample is not production-like.
+- The full automated suite is green, but the ledger’s Blocked/Not run residuals still prevent a release-ready claim. The implementation and automated regression gates are green within their stated scope; unresolved evidence is a handoff blocker, not an authorization to waive tests or expand implementation.
+- Rollback remains operational: keep committed version/intent/tombstone/audit/history and disable affected mutations for incompatible clients; never delete test volumes/data or restore unguarded routes. Production verification requires separate authorization.
+
 ## Quality and Testing State
 
-Quality: not evaluated; per-phase/final review pending consent and main-agent pipeline. Unit/PostgreSQL/browser: not started; pending consent. TDD recommended, not enabled. No new tests, compile, lint, typecheck or E2E run is claimed in this planning turn. Prior full-suite11 failures on906345c await fresh classification, not assumed current.
+Quality: APPROVED for the Phase07 reconciliation/handoff artifact and static scope review, with no blocking code-quality finding. Report and receipt are under `quality/phase-07-regression-handoff-quality-report.json` and `quality/phase-07-regression-handoff-receipt.json`. The report records the evidence blockers above; this approval is not release approval. Tests=yes and quality=yes were recorded before activation. TDD was not enabled.

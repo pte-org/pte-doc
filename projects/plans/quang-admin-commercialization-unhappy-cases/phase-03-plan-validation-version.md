@@ -1,10 +1,12 @@
 # Phase 03 — Plan validation and expectedVersion stale-form protection
 
-Status: unstarted. Story: US-02 [P1]. Primary IDs: PLN-01..08, PLN-11/12. Secondary preservation checks: PLN-09/10 (primary07). Depends on 01; precedes 04.
+Status: completed after operator-confirmed HARD transition. Story: US-02 [P1]. Primary IDs: PLN-01..08, PLN-11/12. Secondary preservation checks: PLN-09/10 (primary07). Depends on 01; precedes 04.
 
 ## Design Constraints
 
 Retain current Plan lock, outstanding unexpired ISSUED guards, ACTIVE family immutability, ACTIVE-only archive, referenced-draft soft Delete, pending-modal protection and activation subscription snapshots. Add version only to Plan. Capacity Plans remain valid. New/edited Plans use VND, EXAM duration1..3650, caps/slots1..2000, decimal total precision19/scale2 (maximum17 integer digits); no bulk legacy rewrite or license snapshots.
+
+Preflight: inspected the existing Plan pessimistic-write boundary, Plan DTO/controller/service validation, @Version entities and migration style, billing exception/HTTP mapping, API-client mutation contracts, and vendor PlanCatalog modal/query state. Phase03 will keep Plan-only versioning and existing draft Delete/guard semantics, add explicit expectedVersion to protected writes, and avoid automatic stale-form overwrite or legacy catalog rewrite.
 
 ## Detailed tasks and exact files
 
@@ -17,7 +19,7 @@ Retain current Plan lock, outstanding unexpired ISSUED guards, ACTIVE family imm
 
 ## Proposed HTTP contract
 
-POST `/api/v1/plans` uses create fields and existing success200. PUT `/api/v1/plans/{publicId}` uses same editable fields plus expectedVersion. POST activation/archive uses `{expectedVersion}`. GET/list adds `version` while retaining existing array shape. Missing/negative version400; stale409 `PLAN_VERSION_CONFLICT` (proposed owner constant); invalid DTO400, direct business422; lifecycle conflict409; deleted/missing404. Draft DELETE remains guarded/idempotent204 and cannot edit/reactivate/archive.
+POST `/api/v1/plans` uses create fields and existing success200. PUT `/api/v1/plans/{publicId}` uses same editable fields plus expectedVersion. POST activation/archive uses `{expectedVersion}`. GET/list adds `version` while retaining existing array shape. Missing/negative version400; stale409 `PLAN_VERSION_CONFLICT`; invalid DTO400, direct business422; lifecycle conflict409; deleted/missing404. Draft DELETE remains guarded/idempotent204 and cannot edit/reactivate/archive.
 
 Mixed clients must fail closed on protected writes; deploy coordinated client support and backend enforcement only after authorization. No compatibility writer auto-fills current version. Manual repair of legacy non-VND/out-of-range Plans uses guarded edit; if outstanding codes prohibit entitlement repair, surface an operator blocker instead of bypassing guards.
 
@@ -35,4 +37,8 @@ Exit: all write paths protected, exact returned version, boundary contracts, pre
 
 ## Quality and Testing State
 
-Quality: not evaluated; pending consent. Unit/PostgreSQL/browser: not started; pending consent. TDD recommended for stale form and race acceptance, not enabled. No new tests have run.
+Quality: APPROVED by the Phase03 static senior review; report and receipt are in [quality/phase-03-plan-validation-version-quality-report.json](quality/phase-03-plan-validation-version-quality-report.json) and [quality/phase-03-plan-validation-version-receipt.json](quality/phase-03-plan-validation-version-receipt.json). No blocking findings remain.
+
+Automated gates: Java21 targeted PlanController/PlanService tests 23/23; full `app` suite 1135 tests with 0 failures, 0 errors, and 26 existing skips; isolated PostgreSQL lifecycle/concurrency suite 11/11. API client 385/385 with typecheck; vendor and tenant typechecks passed; vendor lint passed with 0 errors and 2 pre-existing Question Bank `<img>` warnings; diff checks passed. The PostgreSQL run used the dedicated `codex-archive-lifecycle-pg` database with the V78 `plans.version` column applied additively to its legacy V77-shaped fixture; it did not mutate a production database.
+
+Evidence limits: authenticated browser acceptance and a clean Flyway apply rehearsal remain pending. TDD was not enabled. These limits prevent a release-ready claim but do not block the implementation HARD checkpoint.

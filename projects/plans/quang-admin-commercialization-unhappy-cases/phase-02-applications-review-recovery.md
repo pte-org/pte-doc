@@ -1,10 +1,12 @@
 # Phase 02 — Atomic application review and minimal credential recovery
 
-Status: unstarted. Stories: US-01 [P1], US-05 [P2]. Primary IDs: APP-01..12. Depends on 01; common session/error hardening joins in 06.
+Status: completed. Stories: US-01 [P1], US-05 [P2]. Primary IDs: APP-01..12. Depends on 01; common session/error hardening joins in 06. Completed after the operator confirmed the HARD gate.
 
 ## Design Constraints
 
 Application decision, tenant, host and login hash commit in one REQUIRED transaction. Lock the application before testing PENDING; no BaseEntity version or host-create REQUIRES_NEW. Keep existing uniqueness policy and tenant-scoped email identity. APP-07 is Partial: truthful status and authorized reset only; no durable email, invitations, resend-old-password or automatic rotation.
+
+Preflight: inspected the existing locked repository/service patterns in Plan and Session lifecycle code, billing-owned constants/domain exceptions, shared ApiResponse/GlobalExceptionHandler, tenancy's public `TenancyService` boundary, identity's `UserService`/`UserProvisioningHelper`, and vendor commercialization/tenancy query-mutation hooks. Follow constructor DI, public module APIs, `DataIntegrityViolationException` translation only after flush, existing `ApiError`/React Query state handling, and no new wrapper unless the transaction boundary cannot remain in `TenantApplicationService`. Keep generated credentials out of response/UI claims and audit summaries.
 
 ## Detailed tasks and exact files
 
@@ -36,4 +38,8 @@ Exit: one-decision invariant with committed DB evidence; error/metadata/recovery
 
 ## Quality and Testing State
 
-Quality: not evaluated; pending consent. Unit/PostgreSQL/browser: not started; pending consent. TDD recommended for review races/rollback, not enabled. No new tests have run; scoped green would not waive full regression.
+HARD checkpoint: unit tests=yes and quality gate=yes for Phase02; TDD is not enabled. Scoped unit tests, full backend regression, API-client tests, compile, typecheck, lint and diff checks passed. The isolated PostgreSQL lifecycle container remains running and Phase01's 12/12 migration/lifecycle checkpoint is green. Phase02-specific PostgreSQL application races and authenticated browser acceptance remain pending and are not release approval.
+
+Quality gate: APPROVED with zero blocking findings. Report: `quality/phase-02-applications-review-recovery-quality-report.json`. Receipt: `quality/phase-02-applications-review-recovery-receipt.json`.
+
+HARD transition: the operator confirmed the completion transition on 2026-10-05. Phase02 is complete for the selected implementation and automated gates; PostgreSQL application races and authenticated browser acceptance remain explicitly pending evidence.
