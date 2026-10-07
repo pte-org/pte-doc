@@ -1,0 +1,51 @@
+{
+  "phase": "phase-03-practice-catalog-and-session-api",
+  "mode": "unit-and-regression",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-07T19:25:00+07:00",
+  "summary": {
+    "passed": 1238,
+    "failed": 0,
+    "skipped": 40
+  },
+  "checks": [
+    {
+      "command": ".\\mvnw.cmd -pl app -DskipTests compile",
+      "result": "PASSED",
+      "evidence": "Maven BUILD SUCCESS at 2026-10-07T19:20:04+07:00 after the transaction-boundary and expiry-flush hardening"
+    },
+    {
+      "command": ".\\mvnw.cmd -pl app \"-Dtest=PracticeMigrationVersionTest,PracticeCatalogServiceTest,PracticeSessionServiceTest,PracticeAnswerValidationServiceTest,PracticeEntitlementServiceTest,ModuleStructureTest,AttemptLifecycleServiceSubmitAnswerTest,AttemptLifecycleServiceEncryptedSubmissionTest\" test",
+      "result": "PASSED",
+      "evidence": "36 tests run, 0 failures, 0 errors, 0 skipped; Maven BUILD SUCCESS at 2026-10-07T19:23:44+07:00"
+    },
+    {
+      "command": ".\\mvnw.cmd -pl app test",
+      "result": "PASSED",
+      "evidence": "1,238 tests run, 0 failures, 0 errors, 40 skipped; Maven BUILD SUCCESS at 2026-10-07T19:25:00+07:00"
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASSED",
+      "evidence": "No whitespace errors or conflict markers; Git emitted only LF/CRLF normalization warnings"
+    }
+  ],
+  "coverage": [
+    "Safe catalog projection excludes answer/reference data and distinguishes runnable, visible-only and unavailable task types",
+    "Canonical runtime profile allowlisting, server readiness and client capability preflight are covered",
+    "Locked students are rejected before session creation; entitled start creates an overview session and same-key retry replays it",
+    "Start-key and mutation-key request hashes reject conflicting reuse; durable operation records close the last-key-only gap",
+    "Student ownership, live entitlement re-check, optimistic version conflicts and server deadline expiry are covered",
+    "Practice source/session identity is additive and separated from official exam behavior",
+    "Optional confidence is persisted without breaking existing two-argument official answer-submit callers",
+    "Migration contract and module-boundary checks are covered"
+  ],
+  "notes": [
+    "40 skipped tests are existing PostgreSQL integration tests because the local run does not provide the required external database/container",
+    "The full suite logs existing H2 schema warnings and Mockito dynamic-agent warnings; neither caused a failure",
+    "Task delivery, media, answer mutation and Progress read-model behavior remain later-phase scope",
+    "No live email, RabbitMQ or production API smoke test was run in this phase"
+  ],
+  "failures": [],
+  "report_path": "projects/plans/quang-pte-practice-student-web/tests/phase-03-practice-catalog-and-session-api-test-report.json"
+}
