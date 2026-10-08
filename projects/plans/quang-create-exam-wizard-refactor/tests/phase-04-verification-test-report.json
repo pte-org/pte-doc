@@ -1,0 +1,102 @@
+{
+  "phase": "phase-04-verification-handoff",
+  "mode": "regression-plus-browser-smoke",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-08T15:18:13.4150360+07:00",
+  "summary": {
+    "passed": 10,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "reviewed_files": [
+    "../pte-web/apps/tenant-web/features/exams/components/CreateExamWizard.tsx",
+    "../pte-web/apps/tenant-web/features/exams/components/create-exam/ExamDetailsStep.tsx",
+    "../pte-web/apps/tenant-web/features/exams/components/create-exam/SchedulePolicyStep.tsx",
+    "../pte-web/apps/tenant-web/features/exams/components/create-exam/AudienceStep.tsx",
+    "../pte-web/apps/tenant-web/features/exams/components/create-exam/ReviewStep.tsx",
+    "../pte-web/apps/tenant-web/features/exams/hooks/useCreateExamWizardViewModel.ts",
+    "../pte-web/apps/tenant-web/features/exams/hooks/useCreateExamWizardForm.ts",
+    "../pte-web/apps/tenant-web/features/exams/hooks/useCreateExamAudience.ts",
+    "../pte-web/apps/tenant-web/features/exams/utils/createExamWizard.ts",
+    "../pte-web/apps/tenant-web/features/exams/utils/validateCreateExamWorkflow.ts",
+    "projects/plans/quang-create-exam-wizard-refactor/tests/phase-01-pre-refactor-baseline.json",
+    "projects/plans/quang-create-exam-wizard-refactor/phase-04-verification-handoff.md"
+  ],
+  "evidence": [
+    {
+      "kind": "ui-typecheck",
+      "command": "corepack pnpm --filter @pte/ui typecheck",
+      "result": "passed"
+    },
+    {
+      "kind": "typecheck",
+      "command": "corepack pnpm --filter tenant-web exec tsc --noEmit",
+      "result": "passed"
+    },
+    {
+      "kind": "lint",
+      "command": "corepack pnpm --filter tenant-web lint",
+      "result": "passed with one known pre-existing warning in CreateTicketModal.tsx: unused E"
+    },
+    {
+      "kind": "build",
+      "command": "corepack pnpm --filter tenant-web build",
+      "result": "passed when run sequentially"
+    },
+    {
+      "kind": "diff-check",
+      "command": "git diff --check",
+      "result": "passed; Git reported existing LF-to-CRLF normalization warnings only"
+    },
+    {
+      "kind": "baseline-audit",
+      "command": "PowerShell source-contract and protected-hash audit against phase-01-pre-refactor-baseline.json",
+      "result": "passed; 25/25 assertions; form ID, four step IDs, submit guard, payload boundary, mode transitions, query enablement/filtering, and protected hashes match"
+    },
+    {
+      "kind": "browser-smoke-full",
+      "command": "node D:\\tmp\\playwright-test-tenant-exam-phase04-full.js",
+      "result": "passed: six detail tabs, tab history/keyboard navigation, VI/EN labels, light/dark toggle, four wizard steps, back retention, close/reopen reset, 390px no-overflow, one navigation entry, and zero browser errors"
+    },
+    {
+      "kind": "browser-smoke-boundaries",
+      "command": "node D:\\tmp\\playwright-test-tenant-exam-phase04-boundaries.js",
+      "result": "passed: default VI, audience add/duplicate/remove, zero intermediate session mutations, one draft request on final submit, 13-key serialized draft payload contract, one audience-source payload, five mocked workflow mutations, and zero browser errors"
+    },
+    {
+      "kind": "changed-path-audit",
+      "result": "Phase 04 made no production-source changes. pte-web changes remain the approved tenant Create Exam refactor plus pre-existing protected concurrent-agent edits; pte-doc changes are confined to this plan directory and unrelated pre-existing untracked plan artifacts were preserved."
+    },
+    {
+      "kind": "concurrent-agent-hash-audit",
+      "result": "all five protected vendor-web/UI/LocaleProvider SHA-256 hashes match the phase-01 baseline"
+    }
+  ],
+  "changedPathAudit": {
+    "phase04ProductionChanges": [],
+    "approvedTenantRefactorPaths": [
+      "apps/tenant-web/features/exams/components/CreateExamWizard.tsx",
+      "apps/tenant-web/features/exams/components/create-exam/",
+      "apps/tenant-web/features/exams/hooks/",
+      "apps/tenant-web/features/exams/utils/createExamWizard.ts",
+      "apps/tenant-web/features/exams/constants/index.ts"
+    ],
+    "protectedConcurrentPaths": [
+      "apps/vendor-web/features/auth/components/LoginView.tsx",
+      "apps/vendor-web/features/auth/constants.ts",
+      "packages/ui/src/hooks/index.ts",
+      "packages/ui/src/hooks/sessionStorage.ts",
+      "packages/ui/src/i18n/LocaleProvider.tsx"
+    ],
+    "planArtifactRoot": "projects/plans/quang-create-exam-wizard-refactor/"
+  },
+  "notes": [
+    "tenant-web has no component or hook test runner; deterministic fallback assertions and authenticated browser smoke were used as required by the plan",
+    "An initial static regex missed a multiline usePrograms call and was corrected without changing production source; the final baseline audit passed 25/25",
+    "The boundary smoke uses Playwright route fixtures for the final orchestration responses, so it proves request sequencing and serialized payload shape without creating local exam data",
+    "Known lint warning is pre-existing and outside the refactor scope",
+    "This report does not claim production deployment, production PostgreSQL, or release approval"
+  ],
+  "report_path": "projects/plans/quang-create-exam-wizard-refactor/tests/phase-04-verification-test-report.json"
+}

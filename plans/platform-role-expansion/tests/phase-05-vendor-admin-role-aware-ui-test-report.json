@@ -1,0 +1,34 @@
+{
+  "phase": "phase-05-vendor-admin-role-aware-ui",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-08T10:00:31Z",
+  "summary": {
+    "focused_passed": 441,
+    "regression_passed": 0,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "commands": [
+    "corepack pnpm --filter @pte/api-client typecheck",
+    "corepack pnpm --filter @pte/ui typecheck",
+    "corepack pnpm --filter vendor-web exec tsc --noEmit",
+    "corepack pnpm --filter @pte/api-client test",
+    "corepack pnpm --filter vendor-web lint",
+    "corepack pnpm --filter vendor-web build",
+    ".\\mvnw.cmd -pl app -DskipTests compile",
+    ".\\mvnw.cmd -pl app \"-Dtest=QuestionTypeServiceTest,QuestionTypeCatalogMigrationTest,QuestionTypeControllerSecurityTest\" \"-DforkCount=0\" test",
+    "git diff --check (pte-web and pte-api)"
+  ],
+  "remediations": [
+    "The first backend focused test compile exposed callers using the pre-lifecycle QuestionTypeResponse constructor. An overload preserving that shape was added; the final focused run passed 19/19 tests."
+  ],
+  "notes": [
+    "API-client Vitest passed 20 test files and 422 tests, including the new platform-user role/status filter contract test.",
+    "Vendor-web TypeScript and production build passed; the build generated 22 routes including /admin/platform-users.",
+    "Vendor-web lint passed with 0 errors and 2 existing @next/next/no-img-element warnings in QuestionDetailView.tsx and QuestionEditorForm.tsx.",
+    "The checks do not prove browser navigation, live HTTP authorization, production PostgreSQL/Flyway behavior, Cloudinary/runtime integration, or the complete seeded role matrix."
+  ],
+  "report_path": "pte-doc/plans/platform-role-expansion/tests/phase-05-vendor-admin-role-aware-ui-test-report.json"
+}

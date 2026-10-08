@@ -1,0 +1,69 @@
+{
+  "mode": "verify",
+  "target": "phase-05-integration",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-08T22:53:19.0548061+07:00",
+  "reviewed_files": [
+    "pte-web/apps/tenant-web/features/exams/components/SessionDetailView.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/ExamDetailTabs.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/ExamOverviewTab.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/ExamQuestionsTab.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/ExamPreviewSurface.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/ExamPreviewContent.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/ExamPreviewModal.tsx",
+    "pte-web/apps/tenant-web/features/supportTickets/components/ReportQuestionModal.tsx"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 1,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [
+    {
+      "id": "QUAL-0501",
+      "severity": "MEDIUM",
+      "rule": "ERR_MAPPING_AT_BOUNDARY_ONLY",
+      "status": "OPEN",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-web/apps/tenant-web/features/supportTickets/components/ReportQuestionModal.tsx:73",
+      "evidence": "The mutation error is rendered as report.error.message directly. The shared API-client error contract documents that callers must use the user-facing formatter rather than rendering Error.message directly.",
+      "why_it_matters": "A raw API error message can expose machine/internal details and bypass the repository's consistent user-facing error taxonomy.",
+      "required_action": "Out of scope for this gate and not introduced by Phase 05: when this modal is next functionally changed, map the error through the existing shared errorMessage/getUserFacingApiErrorMessage boundary.",
+      "owner": "future tenant-web follow-up"
+    }
+  ],
+  "review_scope": [
+    "Verify semantics: re-evaluate the existing Phase 05 findings against the existing reviewed_files list",
+    "Phase 05 hard-mode constraints from phase-05-integration-and-verification.md",
+    "Final Phase 02-04 production scope only: the eight files listed in reviewed_files",
+    "Questions tab ownership, lazy query gating, loading/error/empty/content/no-snapshot branches, and answer-key boundary",
+    "Seven-tab order, URL/history synchronization, visited-panel retention, modal reachability, and dependency direction",
+    "Overview lifecycle ownership, exact status guards, pending/error propagation, and duplicate header/action removal",
+    "VI/EN consumption and semantic light/dark UI tokens without editing the protected locale provider",
+    "Current scoped delta: the intentional Vietnamese examiner label in ExamDetailTabs.tsx; tab IDs, order, and behavior remain unchanged",
+    "TypeScript/React ownership, promise handling, accessible interactive controls, and scope discipline",
+    "Concurrent vendor-web, api-client, protected locale, and unrelated tenant changes were excluded as user-owned"
+  ],
+  "phase_constraints": {
+    "production_modification": "The final scoped production delta is one intentional, presentation-only Vietnamese locale override in ExamDetailTabs.tsx; no other production delta was attributed to this verify.",
+    "scope_boundary": "Only the eight requested Phase 02-04 tenant-web/support-ticket files were evaluated; the current diff refresh found no new in-scope path requiring expansion of reviewed_files.",
+    "concurrent_boundary": "Vendor/locale/api-client and unrelated tenant files outside the requested list were observed but not reviewed as Phase 05-owned and not modified.",
+    "static_runtime_boundary": "Existing Phase 05 test evidence remains separate from this quality judgment; this gate independently evaluated ownership, contract, maintainability, security, and change-safety rules."
+  },
+  "evidence": {
+    "ownership": "SessionDetailView owns lifecycle mutation hooks and guards; ExamDetailTabs owns tab URL/history/retention; ExamPreviewSurface owns preview query/state/report orchestration; ExamPreviewContent is presentation-only.",
+    "lifecycle": "Open is guarded by SCHEDULED, Close by OPEN, and Cancel by DRAFT/PREPARING/READY/SCHEDULED; header duplicates are absent and Overview is the single lifecycle action/status surface.",
+    "preview_boundary": "Questions passes snapshot availability to the shared surface; disabled query state prevents preview calls without a snapshot; the renderer consumes answer-stripped preview fields and exposes no scoring/correctness/edit controls.",
+    "frontend_contract": "Interactive controls are native/shared keyboard-reachable controls with labels; local report state has a single owner; async callbacks are handled through React Query mutations and explicit void invalidations.",
+    "locale_label": "ExamDetailTabs.tsx:110-112 adds the requested locale === \"vi\" presentation override for the Vietnamese examiner label Ng??i ch?m thi; the English branch continues through useLocale().t. The change does not alter the examiner tab ID, approved seven-tab order, navigation state, or any domain rule.",
+    "existing_finding": "ReportQuestionModal.tsx:73 still renders report.error.message directly and matches the current HEAD line; the shared errorMessage/getUserFacingApiErrorMessage boundary remains the documented follow-up. This is unchanged pre-existing debt, not introduced by the ExamDetailTabs label change.",
+    "scope_audit": "The current pte-web status still includes concurrent vendor-web, api-client, protected locale, and unrelated tenant changes outside reviewed_files. The reviewed-file list was retained; no out-of-scope file was edited or attributed to this verify.",
+    "contract_review": "Core, TypeScript/Node, and Frontend contract rules were applied. The locale override is an explicit presentation correction required by the scoped VI acceptance behavior and the protected provider's current VI value; no new applicable blocking or advisory issue was found.",
+    "verdict_basis": "One open MEDIUM pre-existing advisory remains. It does not block a verify because introduced_by_current_change is false; there are zero open BLOCKER/HIGH findings and zero open current-change MEDIUM findings."
+  },
+  "report_path": "pte-doc/projects/plans/quang-tenant-exam-questions-tab/quality/phase-05-integration-quality-report.json"
+}

@@ -1,0 +1,54 @@
+{
+  "mode": "gate",
+  "target": "phase-06-seed-migration-regression-and-quality-gate",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-08T10:50:00Z",
+  "reviewed_files": [
+    "pte-api/app/src/main/resources/db/migration/V89__canonicalize_legacy_platform_author.sql",
+    "pte-api/app/src/main/resources/db/migration/V90__rebuild_platform_username_uniqueness.sql",
+    "pte-api/app/src/test/java/com/pte/identity/internal/migration/PlatformRoleMigrationContractTest.java",
+    "pte-api/app/src/test/java/com/pte/identity/internal/migration/PlatformRoleMigrationPostgresIntegrationTest.java",
+    "pte-api/app/src/main/java/com/pte/itembank/internal/service/QuestionDeletionService.java",
+    "pte-api/app/src/test/java/com/pte/itembank/internal/service/QuestionDeletionServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/support/internal/service/SupportTicketEventPublicationTest.java",
+    "pte-api/scripts/seed-local-platform-roles.ps1",
+    "pte-doc/data/platform-role-seed-manifest.json",
+    "pte-doc/plans/platform-role-expansion/phase-06-seed-migration-regression-and-quality-gate.md",
+    "pte-doc/plans/platform-role-expansion/plan.md",
+    "pte-doc/plans/platform-role-expansion/tests/phase-06-seed-migration-regression-and-quality-gate-tdd-ready.json",
+    "pte-doc/plans/platform-role-expansion/tests/phase-06-seed-migration-regression-and-quality-gate-test-report.json"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 1
+  },
+  "findings": [
+    {
+      "id": "QUAL-ROLE-006-001",
+      "severity": "NOTED",
+      "rule": "UI_PERFORMANCE_IMAGE_COMPONENT",
+      "status": "OPEN",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-web/apps/vendor-web/features/questionbank/components/QuestionDetailView.tsx:68; pte-web/apps/vendor-web/features/questionbank/components/QuestionEditorForm.tsx:279",
+      "evidence": "vendor-web lint completed with 0 errors and the same two @next/next/no-img-element warnings recorded in the Phase 5 quality report.",
+      "why_it_matters": "Unoptimized media previews can increase bandwidth and affect image loading performance.",
+      "required_action": "Migrate the existing previews to the approved remote-image strategy in a dedicated UI performance change.",
+      "owner": "none"
+    }
+  ],
+  "review_notes": [
+    "V89 is additive and narrow: it removes only duplicate legacy role rows where the canonical row already exists, then canonicalizes remaining PLATFORM_AUTHOR rows; it does not delete audit history or resource data.",
+    "V90 intentionally replaces the previously created platform username index so the active tenantless predicate is actually enforced; it does not delete users or rewrite an applied migration.",
+    "The PostgreSQL rehearsal uses an exact dedicated database URL, a unique schema, and schema-scoped cleanup; it refuses arbitrary databases and does not persist credentials.",
+    "The local seed is loopback-only, requires a PLATFORM_ADMIN, uses the platform-user API, reconciles only three named fixtures, validates the API password minimum, and keeps passwords out of source and manifest artifacts.",
+    "Question deletion now rejects callers without any possible academic-draft mutation capability before resource lookup; Support ticket event fixtures use the canonical platform-manager contract.",
+    "Backend, API-client, frontend, Docker migration, live HTTP, and visible-browser evidence are recorded in the Phase 6 test report. Production and non-local release proof remain explicitly out of scope."
+  ],
+  "open_blocking_findings": 0,
+  "report_path": "pte-doc/plans/platform-role-expansion/quality/phase-06-seed-migration-regression-and-quality-gate-quality-report.json"
+}

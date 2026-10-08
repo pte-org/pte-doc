@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "environment": "local-only",
+  "seedScript": "pte-api/scripts/seed-local-platform-roles.ps1",
+  "authentication": {
+    "adminRole": "PLATFORM_ADMIN",
+    "passwordSource": "PTE_ADMIN_PASSWORD and PTE_SEED_PASSWORD environment variables or interactive prompt",
+    "credentialsPersisted": false
+  },
+  "accounts": [
+    {
+      "username": "platform.manager@test",
+      "role": "PLATFORM_MANAGER",
+      "status": "ACTIVE"
+    },
+    {
+      "username": "academic.manager@test",
+      "role": "ACADEMIC_MANAGER",
+      "status": "ACTIVE"
+    },
+    {
+      "username": "academic.staff@test",
+      "role": "ACADEMIC_STAFF",
+      "status": "ACTIVE"
+    }
+  ],
+  "rerunPolicy": "Reconcile only these accounts through /api/v1/platform-users; never reset the database or delete unrelated data."
+}

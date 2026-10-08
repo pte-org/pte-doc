@@ -1,0 +1,37 @@
+{
+  "mode": "gate",
+  "target": "phase-02-preview-surface-extraction",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-08T20:45:33.2839173+07:00",
+  "reviewed_files": [
+    "pte-web/apps/tenant-web/features/exams/components/ExamPreviewContent.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/ExamPreviewSurface.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/ExamPreviewModal.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/SessionDetailView.tsx",
+    "pte-web/apps/tenant-web/features/supportTickets/components/ReportQuestionModal.tsx"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "review_scope": [
+    "Shared preview ownership: query gating, loading/error/unavailable/empty/content branches, and local report state",
+    "Answer-key safety: renderer consumes only ExamPreviewResponse fields and does not reference scoring or correctness metadata",
+    "Deterministic section/task/order grouping and preservation of the existing session preview query contract",
+    "Modal compatibility and caller-side snapshot handoff",
+    "VI/EN locale consumption, semantic light/dark theme tokens, and accessible media/report controls",
+    "Phase scope and concurrent-agent boundary"
+  ],
+  "evidence": {
+    "build_gate": "tenant-web tsc --noEmit, scoped ESLint, and next build passed",
+    "focused_contract": "tests/phase-02-preview-surface-contract.ps1 passed",
+    "ownership": "ExamPreviewModal delegates to ExamPreviewSurface; ExamPreviewSurface owns preview/report state; ExamPreviewContent remains presentation-only",
+    "security_boundary": "No answer-key, correctness, teacher-score, edit, reorder, delete, or import field/control is read or rendered",
+    "review_follow_up": "The independent code review found one medium dark-mode contrast issue on the report submit action; it was corrected to use var(--action-foreground), then typecheck, lint, contract test, and production build were rerun successfully."
+  },
+  "report_path": "pte-doc/projects/plans/quang-tenant-exam-questions-tab/quality/phase-02-preview-surface-extraction-quality-report.json"
+}

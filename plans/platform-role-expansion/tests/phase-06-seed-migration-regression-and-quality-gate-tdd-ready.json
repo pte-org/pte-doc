@@ -1,0 +1,49 @@
+{
+  "phase": "06",
+  "name": "seed-migration-regression-and-quality-gate",
+  "mode": "tdd",
+  "status": "RED_READY",
+  "scope": "Flyway role compatibility, local platform-role seed, PostgreSQL rehearsal, and final regression",
+  "tests": [
+    {
+      "class": "pte-api/app/src/test/java/com/pte/identity/internal/migration/PlatformRoleMigrationContractTest.java",
+      "cases": [
+        "V86 keeps PLATFORM_AUTHOR as a compatibility alias while admitting canonical platform roles",
+        "the canonical backfill changes only PLATFORM_AUTHOR rows and does not delete audit history"
+      ]
+    },
+    {
+      "class": "pte-api/app/src/test/java/com/pte/identity/internal/migration/PlatformRoleMigrationPostgresIntegrationTest.java",
+      "cases": [
+        "fresh migration through V88 creates the role-compatible schema",
+        "a legacy PLATFORM_AUTHOR row is canonicalized to ACADEMIC_STAFF after V89",
+        "the integration test is opt-in and refuses a non-dedicated local database"
+      ]
+    },
+    {
+      "area": "local seed safety",
+      "cases": [
+        "platform-role seed uses only the PLATFORM_ADMIN API contract",
+        "rerunning the seed reconciles users without resetting unrelated data",
+        "manifest contains usernames, roles, and status only; no password, token, hash, or secret"
+      ]
+    },
+    {
+      "area": "release regression",
+      "cases": [
+        "backend compile and focused security/migration tests pass",
+        "API-client suite and vendor-web typecheck/lint/build pass",
+        "role-aware browser smoke and live HTTP authorization are recorded with explicit limitations"
+      ]
+    }
+  ],
+  "quality": {
+    "required": true,
+    "gate": "ck-quality",
+    "deferred": [
+      "full Playwright execution if the vendor dev server or browser auth fixture is unavailable",
+      "production deployment validation and non-local database migration",
+      "destructive reset or volume replacement"
+    ]
+  }
+}
