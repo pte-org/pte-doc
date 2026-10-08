@@ -1,0 +1,210 @@
+[
+  {
+    "pteTaskType": "HIGHLIGHT_INCORRECT_WORDS",
+    "taskTypeKey": "HIGHLIGHT_INCORRECT_WORDS",
+    "taskTypeSection": "LISTENING",
+    "title": "Happy New Year",
+    "promptText": "For many people, the start of a new year is a time to look forward on the past twelve months and make plans for the future. Some people celebrate with fireworks and large parties, while others prefer a noisy evening at home with family. A popular tradition is to make a resolution, such as exercising more or saving money. Unfortunately, studies show that most resolutions are remembered within a few weeks, often because the goals are too modest or too vague.",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/hiws/audios/You_Traveled_Far_Last_Year_volume/original/a45728bb0980d52c2c53ff43a144c4bd/You_Traveled_Far_Last_Year_volume.mp3?1623309551",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "For many people, the start of a new year is a time to look back on the past twelve months and make plans for the future. Some people celebrate with fireworks and large parties, while others prefer a quiet evening at home with family. A popular tradition is to make a resolution, such as exercising more or saving money. Unfortunately, studies show that most resolutions are abandoned within a few weeks, often because the goals are too ambitious or too vague.",
+    "correctAnswerText": "[14,38,66,77]",
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/HIGHLIGHT_INCORRECT_WORDS.json",
+      "kind": "mock",
+      "num": 1,
+      "name": "#1 Happy New Year",
+      "basedOn": {
+        "file": "data/listening/hiws.json",
+        "num": 1,
+        "name": "#1 Happy New Year"
+      },
+      "answerKey": [
+        {
+          "index": 14,
+          "shown": "forward",
+          "correct": "back"
+        },
+        {
+          "index": 38,
+          "shown": "noisy",
+          "correct": "quiet"
+        },
+        {
+          "index": 66,
+          "shown": "remembered",
+          "correct": "abandoned"
+        },
+        {
+          "index": 77,
+          "shown": "modest",
+          "correct": "ambitious"
+        }
+      ],
+      "note": "Transcript is self-written on the same topic and does NOT match the audio; for UI/flow testing only. answerKey lists the zero-based whitespace-token index of each incorrect word."
+    },
+    "importWarnings": [
+      "MOCK_TRANSCRIPT_NOT_MATCHING_AUDIO",
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "HIGHLIGHT_INCORRECT_WORDS",
+    "taskTypeKey": "HIGHLIGHT_INCORRECT_WORDS",
+    "taskTypeSection": "LISTENING",
+    "title": "Woodpecker",
+    "promptText": "Woodpeckers are well known for the loud drumming sound they make by striking their beaks against tree trunks. Scientists once believed that this behaviour was used only to find water, but we now know that drumming is also a form of silence. Each species has its own rhythm, which allows birds to ignore members of their own kind. Remarkably, the woodpecker's skull contains special bones and muscles that act like a hammer, protecting its brain from injury.",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/hiws/audios/Woodpeckers_Drum_to_Their_Own_Tunes_volume/original/7d84370a5124cdc000cb4b99be514ca1/Woodpeckers_Drum_to_Their_Own_Tunes_volume.mp3?1623309555",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Woodpeckers are well known for the loud drumming sound they make by striking their beaks against tree trunks. Scientists once believed that this behaviour was used only to find food, but we now know that drumming is also a form of communication. Each species has its own rhythm, which allows birds to recognise members of their own kind. Remarkably, the woodpecker's skull contains special bones and muscles that act like a cushion, protecting its brain from injury.",
+    "correctAnswerText": "[29,41,52,71]",
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/HIGHLIGHT_INCORRECT_WORDS.json",
+      "kind": "mock",
+      "num": 2,
+      "name": "#2 Woodpecker",
+      "basedOn": {
+        "file": "data/listening/hiws.json",
+        "num": 2,
+        "name": "#2 Woodpecker"
+      },
+      "answerKey": [
+        {
+          "index": 29,
+          "shown": "water",
+          "correct": "food"
+        },
+        {
+          "index": 41,
+          "shown": "silence",
+          "correct": "communication"
+        },
+        {
+          "index": 52,
+          "shown": "ignore",
+          "correct": "recognise"
+        },
+        {
+          "index": 71,
+          "shown": "hammer",
+          "correct": "cushion"
+        }
+      ],
+      "note": "Transcript is self-written on the same topic and does NOT match the audio; for UI/flow testing only. answerKey lists the zero-based whitespace-token index of each incorrect word."
+    },
+    "importWarnings": [
+      "MOCK_TRANSCRIPT_NOT_MATCHING_AUDIO",
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "HIGHLIGHT_INCORRECT_WORDS",
+    "taskTypeKey": "HIGHLIGHT_INCORRECT_WORDS",
+    "taskTypeSection": "LISTENING",
+    "title": "El Niño",
+    "promptText": "El Niño is a climate pattern that occurs when surface waters in the central Pacific Ocean become unusually cold. The event happens every two to seven years and can last for several days. Its effects are felt around the world: some regions experience heavy rain and flooding, while others suffer from severe floods. Because El Niño has such a strong influence on fashion, governments now use computer models to predict when the next event is likely to arrive.",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/hiws/audios/viper_poinous_bites_volume/original/4dbe7d25ed77d6602628d20e64ff4869/viper_poinous_bites_volume.mp3?1623309560",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "El Niño is a climate pattern that occurs when surface waters in the central Pacific Ocean become unusually warm. The event happens every two to seven years and can last for several months. Its effects are felt around the world: some regions experience heavy rain and flooding, while others suffer from severe drought. Because El Niño has such a strong influence on agriculture, governments now use computer models to predict when the next event is likely to arrive.",
+    "correctAnswerText": "[18,32,52,62]",
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/HIGHLIGHT_INCORRECT_WORDS.json",
+      "kind": "mock",
+      "num": 3,
+      "name": "#3 El Niño",
+      "basedOn": {
+        "file": "data/listening/hiws.json",
+        "num": 3,
+        "name": "#3 El Niño"
+      },
+      "answerKey": [
+        {
+          "index": 18,
+          "shown": "cold",
+          "correct": "warm"
+        },
+        {
+          "index": 32,
+          "shown": "days",
+          "correct": "months"
+        },
+        {
+          "index": 52,
+          "shown": "floods",
+          "correct": "drought"
+        },
+        {
+          "index": 62,
+          "shown": "fashion",
+          "correct": "agriculture"
+        }
+      ],
+      "note": "Transcript is self-written on the same topic and does NOT match the audio; for UI/flow testing only. answerKey lists the zero-based whitespace-token index of each incorrect word."
+    },
+    "importWarnings": [
+      "MOCK_TRANSCRIPT_NOT_MATCHING_AUDIO",
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "HIGHLIGHT_INCORRECT_WORDS",
+    "taskTypeKey": "HIGHLIGHT_INCORRECT_WORDS",
+    "taskTypeSection": "LISTENING",
+    "title": "Vaccine",
+    "promptText": "A vaccine works by training the body's immune system to recognise a harmful organism without causing the disease itself. Most vaccines contain a strengthened or inactive form of the virus, or just a small part of it. After the vaccine is given, the body produces sugars, which remain in the blood and can fight the real infection if it appears earlier. Thanks to large vaccination programmes, diseases such as smallpox have been completely introduced.",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/hiws/audios/vaccine/original/2b5f4a86bc1cb218ea3ad2766018eabd/vaccine.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "A vaccine works by training the body's immune system to recognise a harmful organism without causing the disease itself. Most vaccines contain a weakened or inactive form of the virus, or just a small part of it. After the vaccine is given, the body produces antibodies, which remain in the blood and can fight the real infection if it appears later. Thanks to large vaccination programmes, diseases such as smallpox have been completely eliminated.",
+    "correctAnswerText": "[23,45,60,73]",
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/HIGHLIGHT_INCORRECT_WORDS.json",
+      "kind": "mock",
+      "num": 4,
+      "name": "#4 Vaccine",
+      "basedOn": {
+        "file": "data/listening/hiws.json",
+        "num": 4,
+        "name": "#4 Vaccine"
+      },
+      "answerKey": [
+        {
+          "index": 23,
+          "shown": "strengthened",
+          "correct": "weakened"
+        },
+        {
+          "index": 45,
+          "shown": "sugars",
+          "correct": "antibodies"
+        },
+        {
+          "index": 60,
+          "shown": "earlier",
+          "correct": "later"
+        },
+        {
+          "index": 73,
+          "shown": "introduced",
+          "correct": "eliminated"
+        }
+      ],
+      "note": "Transcript is self-written on the same topic and does NOT match the audio; for UI/flow testing only. answerKey lists the zero-based whitespace-token index of each incorrect word."
+    },
+    "importWarnings": [
+      "MOCK_TRANSCRIPT_NOT_MATCHING_AUDIO",
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  }
+]
