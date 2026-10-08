@@ -1,0 +1,24 @@
+{
+  "target": "phase-03-phase-components",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\DOCUMENTFPT\\Github\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-create-exam-wizard-refactor/quality/phase-03-phase-components-quality-report.json",
+  "reviewed_files": [
+    "pte-doc/projects/plans/quang-create-exam-wizard-refactor/phase-03-phase-components.md",
+    "pte-web/apps/tenant-web/features/exams/components/CreateExamWizard.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/create-exam/AudienceStep.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/create-exam/ExamDetailsStep.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/create-exam/ReviewStep.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/create-exam/SchedulePolicyStep.tsx",
+    "pte-web/apps/tenant-web/features/exams/constants/index.ts",
+    "pte-web/apps/tenant-web/features/exams/hooks/useCreateExamAudience.ts",
+    "pte-web/apps/tenant-web/features/exams/hooks/useCreateExamWizardForm.ts",
+    "pte-web/apps/tenant-web/features/exams/hooks/useCreateExamWizardViewModel.ts",
+    "pte-web/apps/tenant-web/features/exams/utils/createExamWizard.ts",
+    "pte-web/apps/tenant-web/features/exams/utils/validateCreateExamWorkflow.ts"
+  ],
+  "source_fingerprint": "sha256:40c7e60674ec1068dee58750ca2c7e33347a00618c3f283975cb08c6b994930d",
+  "reviewed_at": "2026-10-08T15:02:21.0292725+07:00",
+  "open_blocking_findings": 0
+}

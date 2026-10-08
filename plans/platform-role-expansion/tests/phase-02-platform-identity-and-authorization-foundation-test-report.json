@@ -1,0 +1,22 @@
+{
+  "phase": "phase-02-platform-identity-and-authorization-foundation",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-08T07:20:11Z",
+  "summary": {
+    "focused_passed": 34,
+    "regression_passed": 61,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "commands": [
+    ".\\mvnw.cmd -pl app '-Dtest=SecurityPolicyTest,PlatformUserServiceTest,PlatformUserControllerSecurityTest,UserProvisioningHelperTest,SecurityRolesTest' '-DargLine=-Xmx256m -XX:MaxMetaspaceSize=128m' test",
+    ".\\mvnw.cmd -pl app '-Dtest=UserProvisioningHelperTest,SecurityRolesTest,AuthServiceTest,UserServiceTest,PlatformUserControllerSecurityTest' '-DforkCount=0' '-DargLine=-Xmx512m -XX:MaxMetaspaceSize=256m' test"
+  ],
+  "notes": [
+    "The first regression attempt was not counted because the forked JVM terminated before executing tests when the local paging file was exhausted; the same regression set then passed in a non-forked Maven run.",
+    "Focused coverage includes capability bundles, valid/mixed scope, platform-user lifecycle, forbidden role elevation, self-target rejection, denial audit, legacy role normalization, and controller authorization annotation."
+  ],
+  "report_path": "pte-doc/plans/platform-role-expansion/tests/phase-02-platform-identity-and-authorization-foundation-test-report.json"
+}

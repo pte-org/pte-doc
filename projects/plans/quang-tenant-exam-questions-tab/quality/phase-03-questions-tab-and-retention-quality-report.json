@@ -1,0 +1,34 @@
+{
+  "mode": "gate",
+  "target": "phase-03-questions-tab-and-retention",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-08T21:10:53.6449164+07:00",
+  "reviewed_files": [
+    "pte-web/apps/tenant-web/features/exams/components/ExamQuestionsTab.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/ExamDetailTabs.tsx"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "review_scope": [
+    "Questions tab composition delegates preview query, state, report mutation, toast, and modal ownership to ExamPreviewSurface",
+    "Exact seven-tab order with Questions second and invalid-tab fallback preserved",
+    "Lazy first mount and visited-tab retention without global loading or route navigation",
+    "Snapshot availability gate and min-width/overflow composition",
+    "Existing participant modal close-on-tab-change and six pre-existing panel reachability",
+    "Locale-key consumption through the handed-off provider and protected-file boundary"
+  ],
+  "evidence": {
+    "build_gate": "tenant-web tsc --noEmit, scoped ESLint, and next build passed",
+    "focused_contract": "tests/phase-01-contract-check.ps1 -Stage questions passed",
+    "ownership": "ExamDetailTabs owns navigation/retention; ExamQuestionsTab only wires session data to ExamPreviewSurface",
+    "query_boundary": "Questions passes Boolean(session.snapshotPublicId); ExamPreviewSurface remains the single query gate",
+    "review_follow_up": "The independent code review found an invalid-tab popstate history loop; ExamDetailTabs now activates location state without pushing a new history entry, and the history contract, typecheck, lint, and production build were rerun successfully."
+  },
+  "report_path": "pte-doc/projects/plans/quang-tenant-exam-questions-tab/quality/phase-03-questions-tab-and-retention-quality-report.json"
+}

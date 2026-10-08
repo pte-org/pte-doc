@@ -1,0 +1,59 @@
+{
+  "phase": "phase-04-verification-and-handoff",
+  "status": "passed_with_limitations",
+  "executedAt": "2026-10-08",
+  "workspace": "D:/DOCUMENTFPT/Github/pte-org/pte-web",
+  "commands": [
+    {
+      "command": "corepack.cmd pnpm --filter tenant-web lint",
+      "status": "passed",
+      "notes": "0 errors; one pre-existing warning in apps/tenant-web/features/supportTickets/components/CreateTicketModal.tsx (unused E import)."
+    },
+    {
+      "command": "corepack.cmd pnpm --filter tenant-web exec tsc --noEmit",
+      "status": "passed"
+    },
+    {
+      "command": "corepack.cmd pnpm --filter @pte/ui typecheck",
+      "status": "passed"
+    },
+    {
+      "command": "corepack.cmd pnpm --filter tenant-web build",
+      "status": "passed",
+      "notes": "Non-blocking existing turbopack.root absolute-path warning."
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "notes": "Git emitted existing LF/CRLF normalization warnings only."
+    }
+  ],
+  "browserSmoke": {
+    "status": "passed",
+    "baseUrl": "http://localhost:3000",
+    "route": "/host/exams/38cac09e-f4eb-48b1-beb2-528aa4ad8961",
+    "account": "host@test",
+    "checks": [
+      "Vietnamese default labels: Overview, Questions, Exam settings, Participants & proctors, Submissions, Phan cong cham diem, Results & publication",
+      "Seven-tab URL state and overview query reset",
+      "Visited Questions panel remains mounted after switching tabs",
+      "ArrowRight keyboard navigation moves from Overview to Questions",
+      "English Examiner label after locale switch",
+      "Dark-to-light theme toggle",
+      "Create Exam wizard open and close",
+      "390px viewport has no horizontal page overflow",
+      "No console errors or page errors"
+    ]
+  },
+  "protectedBoundary": {
+    "localeProviderSha256": "F86B7028E1138328FBF5A88D759FBC24498A480FD526ABDED6F11CE849CD7BA7",
+    "concurrentVendorAndApiChangesExcluded": true,
+    "backendChangedByThisPhase": false
+  },
+  "limitations": [
+    "The original decomposition plan describes six tabs; the current seven-tab state includes Questions from the follow-up quang-tenant-exam-questions-tab plan.",
+    "This local authenticated browser smoke does not prove production deployment, production database state, or authorization behavior outside the tested Host account.",
+    "The current worktree contains unrelated vendor-web, api-client, and protected LocaleProvider changes owned by concurrent work; they were not modified or attributed to this phase.",
+    "Visual inspection covered the shell and tested interactions; it does not replace a complete visual audit of every legacy sub-panel content state."
+  ]
+}
