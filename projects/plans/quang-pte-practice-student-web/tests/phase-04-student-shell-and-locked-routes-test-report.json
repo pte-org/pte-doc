@@ -1,0 +1,47 @@
+{
+  "phase": "phase-04-student-shell-and-locked-routes",
+  "mode": "unit-and-browser-regression",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-07T20:58:00+07:00",
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0
+  },
+  "checks": [
+    {
+      "command": "npm run lint",
+      "result": "PASSED",
+      "evidence": "ESLint completed with exit code 0 after the reference-faithful shell/icon refactor."
+    },
+    {
+      "command": "npm run test:unit",
+      "result": "PASSED",
+      "evidence": "Vitest: 1 test file, 4 tests passed, 0 failed."
+    },
+    {
+      "command": "npm run build",
+      "result": "PASSED",
+      "evidence": "Next.js 16.4.0 production build compiled TypeScript and generated /, /practice-tests, /progress, /sign-in and /study-pack successfully."
+    },
+    {
+      "command": "node run.js D:/tmp/playwright-test-pte-practice.js",
+      "result": "PASSED",
+      "evidence": "Visible Chromium mock-API flow verified unauthenticated redirect, four protected routes, locked non-navigation/no-session-request behavior, unlocked runnable control and screenshots at 390x844, 1024x768 and 1440x900."
+    }
+  ],
+  "coverage": [
+    "Reference-shaped desktop rail/header/search/context shell and mobile four-item bottom navigation",
+    "Shared project-owned SVG icon set replaces Unicode glyph icons across shell, catalog, Home, Study-Pack, Progress, auth and error states",
+    "Locked catalog/recommendation/skill controls remain disabled until entitlement is exactly UNLOCKED and the task is RUNNABLE",
+    "Entitlement and catalog errors fail closed; Progress keeps empty metrics as dashes rather than inventing results",
+    "Home and Progress visual review captured at desktop size using mocked typed API responses"
+  ],
+  "notes": [
+    "Playwright uses local API mocks for deterministic UI behavior; it is not production API or live Pearson-site evidence.",
+    "Screenshot files are local review evidence under D:/tmp and are not product assets.",
+    "Session runtime and task-type execution are deferred to Phase 05."
+  ],
+  "failures": [],
+  "report_path": "projects/plans/quang-pte-practice-student-web/tests/phase-04-student-shell-and-locked-routes-test-report.json"
+}
