@@ -1,0 +1,72 @@
+{
+  "plan_id": "hung-pte-practice-theme-i18n-rebrand",
+  "goal": "Add dark/light mode toggle, bilingual (Vietnamese/English) i18n support, and migrate the accent palette from lavender to pte-web blue brand colors",
+  "status": "completed",
+  "current_phase": 5,
+  "global_context": {
+    "framework": "Next.js 16.4 with Tailwind CSS v4 (used only for turbopack loader — all styling is vanilla CSS custom properties)",
+    "architecture": "Feature-sliced: app/ routes, features/ modules, common/ shared utilities",
+    "target_folder": "D:/GitHub/PTE-org/pte-practice",
+    "constraints": [
+      "No external i18n or theming library — lightweight custom React context implementations",
+      "All styling via CSS custom properties in globals.css — no Tailwind utility classes in components",
+      "Must not break existing API contracts, session storage, or test suite",
+      "Blue brand palette sourced from pte-web packages/ui/src/styles/design-tokens.css"
+    ]
+  },
+  "phases": [
+    {
+      "phase_id": 1,
+      "name": "design-tokens",
+      "description": "Refactor globals.css into dual-theme CSS custom properties (dark + light) and migrate lavender accent to pte-web blue palette",
+      "file": "phase-01-design-tokens.json",
+      "status": "completed",
+      "depends_on": [],
+      "quality_status": "skipped_by_user",
+      "testing_status": "not_started"
+    },
+    {
+      "phase_id": 2,
+      "name": "theme-provider",
+      "description": "Create ThemeProvider React context, blocking init script, update root layout, and add theme toggle to shell",
+      "file": "phase-02-theme-provider.json",
+      "status": "completed",
+      "depends_on": [1],
+      "quality_status": "skipped_by_user",
+      "testing_status": "not_started"
+    },
+    {
+      "phase_id": 3,
+      "name": "i18n-infrastructure",
+      "description": "Create bilingual i18n system with locale types, en/vi dictionaries, LocaleProvider, and integrate into root layout",
+      "file": "phase-03-i18n-infrastructure.json",
+      "status": "completed",
+      "depends_on": [2],
+      "quality_status": "skipped_by_user",
+      "testing_status": "not_started"
+    },
+    {
+      "phase_id": 4,
+      "name": "migrate-components",
+      "description": "Replace all hardcoded English strings in view components with t() translation calls and add locale toggle to shell",
+      "file": "phase-04-migrate-components.json",
+      "status": "completed",
+      "depends_on": [3],
+      "quality_status": "skipped_by_user",
+      "testing_status": "skipped_by_user"
+    },
+    {
+      "phase_id": 5,
+      "name": "polish-verify",
+      "description": "Final polish — smooth theme transitions, metadata, NAV_ITEMS i18n, build and test verification",
+      "file": "phase-05-polish-verify.json",
+      "status": "completed",
+      "depends_on": [4],
+      "quality_status": "skipped_by_user",
+      "testing_status": "skipped_by_user"
+    }
+  ]
+}
+
+
+
