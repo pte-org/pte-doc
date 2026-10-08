@@ -1,0 +1,61 @@
+{
+  "mode": "gate",
+  "target": "phase-04-student-shell-and-locked-routes",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-07T20:58:00+07:00",
+  "reviewed_files": [
+    "D:/GitHub/pte-org/pte-doc/projects/plans/quang-pte-practice-student-web/phase-04-student-shell-and-locked-routes.md",
+    "D:/GitHub/pte-org/pte-practice/app/globals.css",
+    "D:/GitHub/pte-org/pte-practice/app/layout.tsx",
+    "D:/GitHub/pte-org/pte-practice/app/(auth)/sign-in/page.tsx",
+    "D:/GitHub/pte-org/pte-practice/app/(student)/error.tsx",
+    "D:/GitHub/pte-org/pte-practice/app/(student)/layout.tsx",
+    "D:/GitHub/pte-org/pte-practice/app/(student)/loading.tsx",
+    "D:/GitHub/pte-org/pte-practice/app/(student)/page.tsx",
+    "D:/GitHub/pte-org/pte-practice/app/(student)/practice-tests/page.tsx",
+    "D:/GitHub/pte-org/pte-practice/app/(student)/progress/page.tsx",
+    "D:/GitHub/pte-org/pte-practice/app/(student)/study-pack/page.tsx",
+    "D:/GitHub/pte-org/pte-practice/features/catalog/CatalogCard.tsx",
+    "D:/GitHub/pte-org/pte-practice/features/catalog/CatalogGrid.tsx",
+    "D:/GitHub/pte-org/pte-practice/features/catalog/PracticeTestsView.tsx",
+    "D:/GitHub/pte-org/pte-practice/features/common/AccessStatusBanner.tsx",
+    "D:/GitHub/pte-org/pte-practice/features/common/LockBadge.tsx",
+    "D:/GitHub/pte-org/pte-practice/features/home/HomeView.tsx",
+    "D:/GitHub/pte-org/pte-practice/features/icons/AppIcon.tsx",
+    "D:/GitHub/pte-org/pte-practice/features/practice/api.ts",
+    "D:/GitHub/pte-org/pte-practice/features/practice/constants.ts",
+    "D:/GitHub/pte-org/pte-practice/features/practice/contracts.test.ts",
+    "D:/GitHub/pte-org/pte-practice/features/practice/contracts.ts",
+    "D:/GitHub/pte-org/pte-practice/features/practice/PracticeProvider.tsx",
+    "D:/GitHub/pte-org/pte-practice/features/practice/preview-catalog.ts",
+    "D:/GitHub/pte-org/pte-practice/features/practice/renderer-allowlist.ts",
+    "D:/GitHub/pte-org/pte-practice/features/practice/session-storage.ts",
+    "D:/GitHub/pte-org/pte-practice/features/progress/ProgressView.tsx",
+    "D:/GitHub/pte-org/pte-practice/features/shell/StudentShell.tsx",
+    "D:/GitHub/pte-org/pte-practice/features/studyPack/StudyPackView.tsx",
+    "D:/GitHub/pte-org/pte-practice/package.json",
+    "D:/GitHub/pte-org/pte-practice/package-lock.json"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "review_boundary": [
+    "The review covered the isolated Next.js 16.4 route/layout boundary, typed API adapter, browser session handling, entitlement fail-closed behavior, lock controls, allowlisted renderer metadata, shared SVG icon ownership and responsive shell CSS.",
+    "The supplied Pearson PTE Practice screenshots were used as the visual reference; no third-party source code or private website assets were copied.",
+    "Phase 05 session runtime, media capture, real progress results and live authenticated API smoke testing remain intentionally deferred and are not claimed by this gate.",
+    "No production deployment, external email delivery or persistent browser session was used as evidence."
+  ],
+  "review_basis": [
+    "Student pages are grouped behind PracticeProvider and StudentShell; unauthenticated sessions redirect to sign-in and server data is never rendered as unlocked by default.",
+    "Catalog and entitlement responses are normalized through typed contracts; unknown renderer keys are reduced through the client allowlist and unavailable catalog data falls back to locked preview cards.",
+    "Locked buttons use native disabled semantics and do not navigate or issue session-start requests; exact UNLOCKED entitlement plus RUNNABLE catalog availability is required for an enabled action.",
+    "Inline SVG icons are owned by one AppIcon module and section icon selection is shared rather than repeated across route components.",
+    "Progress uses explicit empty markers instead of fabricated scores or response counts, while Home and Progress preserve the reference-shaped shell and skill surfaces."
+  ],
+  "report_path": "projects/plans/quang-pte-practice-student-web/quality/phase-04-student-shell-and-locked-routes-quality-report.json"
+}
