@@ -1,0 +1,75 @@
+{
+  "phase": "03",
+  "name": "academic-authoring-approval-and-publish",
+  "mode": "tdd",
+  "status": "RED_TESTS_TO_ADD",
+  "scope": "backend",
+  "tests": [
+    {
+      "class": "com.pte.shared.security.SecurityPolicyAcademicWorkflowTest",
+      "cases": [
+        "academicStaffCanWriteDraftButCannotReviewOrPublish",
+        "academicManagerCanReviewAndPublish",
+        "academicManagerCannotApproveOwnAggregate",
+        "platformAdminCanOverrideAnyAcademicAggregate",
+        "legacyPlatformAuthorCanonicalizesToAcademicStaff"
+      ]
+    },
+    {
+      "class": "com.pte.itembank.ItembankAcademicWorkflowTest",
+      "cases": [
+        "staffCreatedQuestionStoresAuthorAndCanSubmit",
+        "staffCannotApproveOrPublish",
+        "managerCanApproveAnotherAuthorsQuestion",
+        "managerCannotApproveOwnQuestion",
+        "publishedQuestionRevisionKeepsRuntimeRevisionInvariant"
+      ]
+    },
+    {
+      "class": "com.pte.itembank.QuestionTypeAcademicWorkflowTest",
+      "cases": [
+        "staffCreatedTaskTypeStartsAsDraft",
+        "managerApprovalTransitionsTaskTypeWithoutChangingRuntimeLock",
+        "standardActiveTaskTypeCannotBeMutatedByStaff"
+      ]
+    },
+    {
+      "class": "com.pte.scoretemplate.internal.service.ScoreTemplateAcademicWorkflowTest",
+      "cases": [
+        "staffDraftStoresAuthor",
+        "staffCannotActivate",
+        "managerCannotApproveOwnTemplate",
+        "managerCanApproveAndActivateAnotherAuthorsVersion",
+        "activeVersionRemainsImmutable"
+      ]
+    },
+    {
+      "class": "com.pte.assessment.internal.service.BlueprintAcademicWorkflowTest",
+      "cases": [
+        "staffDraftStoresAuthor",
+        "staffCannotPublishSnapshot",
+        "managerCannotPublishOwnBlueprint",
+        "managerCanPublishAnotherAuthorsSnapshot",
+        "publishedSnapshotRemainsWriteOnce"
+      ]
+    },
+    {
+      "class": "com.pte.media.internal.service.CloudinaryMediaServiceAcademicPolicyTest",
+      "cases": [
+        "academicStaffCanRequestAuthoringUpload",
+        "academicManagerCanRequestAuthoringUpload",
+        "tenantAndPlatformManagerCannotRequestAuthoringUpload",
+        "authoringAssetCannotBeCompletedByAnotherAuthor"
+      ]
+    }
+  ],
+  "quality": {
+    "required": true,
+    "gate": "ck-quality",
+    "deferred": [
+      "live PostgreSQL migration execution",
+      "HTTP authorization through a running deployment",
+      "browser navigation and host runtime smoke test"
+    ]
+  }
+}
