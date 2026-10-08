@@ -1,0 +1,20 @@
+{
+  "target": "phase-05-integration",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\DOCUMENTFPT\\Github\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-tenant-exam-questions-tab/quality/phase-05-integration-quality-report.json",
+  "reviewed_files": [
+    "pte-web/apps/tenant-web/features/exams/components/ExamDetailTabs.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/ExamOverviewTab.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/ExamPreviewContent.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/ExamPreviewModal.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/ExamPreviewSurface.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/ExamQuestionsTab.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/SessionDetailView.tsx",
+    "pte-web/apps/tenant-web/features/supportTickets/components/ReportQuestionModal.tsx"
+  ],
+  "source_fingerprint": "sha256:1a20f62b61431c4e735fe4fc460692b9b7531ade1dc548b7796f5e27f6e1a14b",
+  "reviewed_at": "2026-10-08T22:53:19.0548061+07:00",
+  "open_blocking_findings": 0
+}

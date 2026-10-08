@@ -1,0 +1,16 @@
+{
+  "target": "phase-01-baseline-ownership-and-contract",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\DOCUMENTFPT\\Github\\pte-org\\pte-doc\\projects\\plans\\quang-tenant-exam-questions-tab",
+  "report_path": "quality/phase-01-baseline-ownership-and-contract-quality-report.json",
+  "reviewed_files": [
+    "tests/phase-01-baseline.json",
+    "tests/phase-01-contract-check.json",
+    "tests/phase-01-contract-check.ps1",
+    "tests/phase-01-locale-handoff.json"
+  ],
+  "source_fingerprint": "sha256:e9973404850e4a1651657913a0b27ef4f81d3ce2aea32d08fa5517960b31f24f",
+  "reviewed_at": "2026-10-08T18:03:21.1779112+07:00",
+  "open_blocking_findings": 0
+}

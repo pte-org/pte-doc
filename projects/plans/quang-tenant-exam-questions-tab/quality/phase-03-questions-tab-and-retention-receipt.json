@@ -1,0 +1,14 @@
+{
+  "target": "phase-03-questions-tab-and-retention",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\DOCUMENTFPT\\Github\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-tenant-exam-questions-tab/quality/phase-03-questions-tab-and-retention-quality-report.json",
+  "reviewed_files": [
+    "pte-web/apps/tenant-web/features/exams/components/ExamDetailTabs.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/ExamQuestionsTab.tsx"
+  ],
+  "source_fingerprint": "sha256:a87eb0d24c648a26c77be62d0c27fba89779c502795316524ed8697ad2f7a81f",
+  "reviewed_at": "2026-10-08T21:10:53.6449164+07:00",
+  "open_blocking_findings": 0
+}
