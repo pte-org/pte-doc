@@ -62,7 +62,10 @@ Prove the complete locked/unlocked practice journey across `pte-api` and `pte-pr
 
 ## Quality and Testing State
 
-- Quality: **Not evaluated**.
-- Testing: **Not started**.
-- Planned evidence: backend and frontend test reports, Playwright report/screenshots, `ck:quality` receipt, migration receipt, coverage matrix and rollback/runbook review.
-
+- Quality: **APPROVED for the local change set after inline final review**;
+  no blocking/high finding remains. This is not a production sign-off.
+- Testing: **PASSED for local automated gates**. The final record separates
+  authenticated browser, media, migration and deployment checks that remain
+  pending.
+- Evidence: `phase-08-coverage-matrix.md`,
+  `phase-08-final-verification.md` and `phase-08-rollout-runbook.md`.

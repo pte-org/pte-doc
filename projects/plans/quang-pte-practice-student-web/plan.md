@@ -1,10 +1,10 @@
 # Plan: PTE Practice Student Web
 
-**Status:** Draft for user review
+**Status:** In-scope implementation complete; external/reference evidence pending
 **Date:** 2026-10-07
 **Mode:** `ck:plan --hard`
 **Scope:** `pte-api` + isolated `pte-practice` + `pte-doc`
-**Implementation rule:** planning only; no production code, migration, commit, push or deployment is included in this plan.
+**Implementation rule:** phase implementation is complete for the approved in-scope contracts. No commit, push or deployment is included in this plan.
 
 ## Scope challenge
 
@@ -338,14 +338,14 @@ No finding was rejected as irrelevant to the security or runtime boundary. The u
 - [x] 2. Student identity, membership and server-authoritative entitlement (`phase-02-identity-membership-and-entitlement.md`) — quality: APPROVED; testing: PASSED
 - [x] 3. Practice catalog and standalone session facade (`phase-03-practice-catalog-and-session-api.md`) — quality: APPROVED; testing: PASSED
 - [x] 4. `pte-practice` shell, four routes and locked state (`phase-04-student-shell-and-locked-routes.md`) — quality: APPROVED; testing: PASSED
-- [ ] 5. Session lifecycle and objective interaction families (`phase-05-session-lifecycle-and-objective-runtime.md`)
-- [ ] 6. Text, playback and speaking media runtime (`phase-06-text-playback-and-speaking-media.md`)
-- [ ] 7. Confidence persistence and Progress read model (`phase-07-confidence-and-progress.md`)
-- [ ] 8. Cross-repo hardening, accessibility and rollout evidence (`phase-08-hardening-and-rollout.md`)
+- [x] 5. Session lifecycle and objective interaction families (`phase-05-session-lifecycle-and-objective-runtime.md`) — quality: APPROVED; testing: PASSED; browser/authenticated evidence pending
+- [x] 6. Text, playback and speaking media runtime (`phase-06-text-playback-and-speaking-media.md`) — quality: APPROVED for implemented media/text scope; testing: PASSED; prompt-media contract deferred
+- [x] 7. Confidence persistence and Progress read model (`phase-07-confidence-and-progress.md`) — quality: APPROVED; testing: PASSED; authenticated revoke-history evidence pending
+- [x] 8. Cross-repo hardening, accessibility and rollout evidence (`phase-08-hardening-and-rollout.md`) — local quality/testing complete; external browser, Cloudinary and deployment evidence pending
 
 ## Completion gate
 
-The plan is ready to cook when the user confirms the five decisions above or explicitly accepts the recommendations. During cooking, each phase must separately run the chosen unit/integration/E2E checks and `ck:quality` gate; this plan records both as `Not started` and `Not evaluated`.
+The implementation gate is complete for the approved decisions. The remaining release gate is environment evidence: authenticated Playwright journeys, microphone/Cloudinary behavior, fresh/upgrade migration verification and deployment checks. These are not replaced by local compilation or mocked routes.
 
 Completion must report separately: passed local checks, blocked external/reference checks, deferred task-contract gaps, unrelated dirty-worktree failures, and deployment status. No compile, mocked route or unauthenticated request is evidence of production readiness.
 
@@ -359,8 +359,7 @@ Completion must report separately: passed local checks, blocked external/referen
 
 ## Handoff
 
-No production source, database or deployment has been changed by this plan. After user review, the intended implementation command is:
-
-```text
-/ck:cook --hard --tests --quality D:\GitHub\pte-org\pte-doc\projects\plans\quang-pte-practice-student-web\plan.md
-```
+The remaining work is release validation, not another implementation phase. Use
+`phase-08-final-verification.md` and `phase-08-rollout-runbook.md` to run the
+authenticated browser, media, migration and deployment checks in an environment
+with the required student account and Cloudinary configuration.

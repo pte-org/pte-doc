@@ -63,6 +63,10 @@ Persist confidence with each answered item and expose honest, student-scoped pra
 
 ## Quality and Testing State
 
-- Quality: **Not evaluated**.
-- Testing: **Not started**.
-- Planned evidence: migration/entity tests, confidence contract tests, progress aggregation/ownership tests, revoke-history tests and Playwright confidence/resume/Progress flows.
+- Quality: **APPROVED for the implemented local change set** after inline senior
+  review. Progress is student-scoped, read-only, batched and bounded; scores
+  remain nullable until an authoritative scorer exists.
+- Testing: **PASSED**. Confidence/session tests, Progress projection tests,
+  migration assertions, frontend contract tests and full regression gates pass.
+- Evidence boundary: authenticated confidence/resume and post-revoke browser
+  evidence still requires a running environment with a real student account.

@@ -63,6 +63,11 @@ Add text-entry and media-backed practice behavior with explicit readiness, permi
 
 ## Quality and Testing State
 
-- Quality: **Not evaluated**.
-- Testing: **Not started**.
-- Planned evidence: media adapter unit tests, API binding/security tests, browser permission/device matrix, upload retry tests and Playwright audio/text/recording smoke flows.
+- Quality: **APPROVED for implemented text, WAV recording and media-binding
+  scope** after inline senior review; unsupported prompt-media behavior is
+  fail-closed and documented rather than approximated.
+- Testing: **PASSED**. Cloudinary binding/recording tests, migration checks,
+  backend regression, frontend lint/typecheck/unit/build all pass.
+- Evidence boundary: live Cloudinary upload, microphone permission/device
+  matrix and prompt audio playback remain pending because the current task
+  response does not expose protected prompt-media readiness metadata.
