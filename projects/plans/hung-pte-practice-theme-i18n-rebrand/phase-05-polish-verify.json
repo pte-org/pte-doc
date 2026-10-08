@@ -1,0 +1,87 @@
+{
+  "plan_id": "hung-pte-practice-theme-i18n-rebrand",
+  "phase_id": 5,
+  "name": "polish-verify",
+  "goal": "Final polish — ensure theme and locale switches are seamless, update metadata, and verify build passes",
+  "status": "pending",
+  "current_step": 1,
+  "design_constraints": [
+    "Cook confirms unit-test and quality-gate choices before each phase",
+    "No breaking changes to existing API contracts or session storage",
+    "Build must pass cleanly with npm run build"
+  ],
+  "quality_profile": {
+    "repository_conventions": {},
+    "boundaries": {},
+    "applicable_rules": [],
+    "allowed_exceptions": []
+  },
+  "quality": { "status": "not_evaluated", "report": "", "receipt": "", "remediation_cycles": 0 },
+  "testing": { "status": "not_started", "report": "" },
+  "steps": [
+    {
+      "step_id": 1,
+      "description": "Update app/layout.tsx metadata: set title template to support Vietnamese (e.g. 'PTE Luyện tập' when locale is vi). Ensure description metadata is locale-neutral or defaults to English (server component cannot read client locale).",
+      "status": "pending",
+      "input_files": ["app/layout.tsx"],
+      "output_files": ["app/layout.tsx"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Metadata title and description are appropriate for the app"
+      ]
+    },
+    {
+      "step_id": 2,
+      "description": "Add CSS transition to theme switch: add a global transition rule on background-color and color properties (e.g. 150ms ease) on body, .student-shell, .side-rail, .workspace, .top-bar, .session-task-card, .reference-card, etc. so theme switching feels smooth rather than jarring.",
+      "status": "pending",
+      "input_files": ["app/globals.css"],
+      "output_files": ["app/globals.css"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Toggling theme produces a smooth color transition on all major surfaces",
+        "Transition does not cause layout shift or flicker"
+      ]
+    },
+    {
+      "step_id": 3,
+      "description": "Update the NAV_ITEMS constant in features/practice/constants.ts to use translation keys instead of hardcoded labels (or document that labels are now looked up by key in the shell).",
+      "status": "pending",
+      "input_files": ["features/practice/constants.ts"],
+      "output_files": ["features/practice/constants.ts"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "NAV_ITEMS labels are compatible with the i18n system"
+      ]
+    },
+    {
+      "step_id": 4,
+      "description": "Run npm run build to verify no TypeScript errors, no CSS compilation errors, and the app builds successfully.",
+      "status": "pending",
+      "input_files": [],
+      "output_files": [],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "npm run build exits with code 0",
+        "No TypeScript type errors",
+        "No CSS compilation errors"
+      ]
+    },
+    {
+      "step_id": 5,
+      "description": "Run npm run test:unit to ensure existing tests still pass after all changes.",
+      "status": "pending",
+      "input_files": [],
+      "output_files": [],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "All existing unit tests pass",
+        "No regressions in catalog-order, contracts, session-state, or icon-mapping tests"
+      ]
+    }
+  ]
+}

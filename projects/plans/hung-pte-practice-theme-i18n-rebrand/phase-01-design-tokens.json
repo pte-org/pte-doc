@@ -1,0 +1,87 @@
+{
+  "plan_id": "hung-pte-practice-theme-i18n-rebrand",
+  "phase_id": 1,
+  "name": "design-tokens",
+  "goal": "Refactor globals.css into dual-theme CSS custom properties (dark + light) and migrate lavender accent palette to pte-web blue brand palette",
+  "status": "completed",
+  "current_step": 5,
+  "design_constraints": [
+    "Cook confirms unit-test and quality-gate choices before each phase",
+    "All existing dark-mode visuals must remain pixel-identical after token migration — only the accent hue changes (lavender → blue)",
+    "Light theme tokens must map semantically to pte-web design-tokens.css values where applicable",
+    "Theme switching via html[data-theme='dark'] / html[data-theme='light'] attribute; default is dark",
+    "No Tailwind utilities — pte-practice uses vanilla CSS only"
+  ],
+  "quality_profile": {
+    "repository_conventions": {},
+    "boundaries": {},
+    "applicable_rules": [],
+    "allowed_exceptions": []
+  },
+  "quality": { "status": "skipped_by_user", "decision": "user_confirmed_skip", "report": "", "receipt": "", "remediation_cycles": 0 },
+  "testing": { "status": "not_started", "report": "" },
+  "steps": [
+    {
+      "step_id": 1,
+      "description": "Refactor :root in globals.css: rename existing dark palette vars under html[data-theme='dark'] (or :root default) and replace every lavender/purple reference with a blue palette derived from pte-web's brand tokens (--brand: #4169e8, --brand-soft: #5d87ff, etc.). Create matching --accent, --accent-strong, --accent-soft tokens replacing --lavender, --lavender-strong, --lavender-soft.",
+      "status": "completed",
+      "input_files": [
+        "app/globals.css",
+        "D:/GitHub/PTE-org/pte-web/packages/ui/src/styles/design-tokens.css"
+      ],
+      "output_files": ["app/globals.css"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "globals.css contains html[data-theme='dark'] block with all dark palette tokens",
+        "All --lavender* variables are replaced by --accent* variables using blue hues from pte-web",
+        "Existing color-scheme: dark is preserved for default"
+      ]
+    },
+    {
+      "step_id": 2,
+      "description": "Add html[data-theme='light'] block to globals.css with a complete light-mode palette: --page maps to pte-web --surface-page (#f2f6fa), --surface to white, --text to --ink-primary (#2a3547), --muted to --ink-secondary (#5a6a85), --accent to --brand (#4169e8), --line to --divider (#e5eaef), etc. Add color-scheme: light.",
+      "status": "completed",
+      "input_files": [
+        "app/globals.css",
+        "D:/GitHub/PTE-org/pte-web/packages/ui/src/styles/design-tokens.css"
+      ],
+      "output_files": ["app/globals.css"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "html[data-theme='light'] block exists with semantically mapped light palette tokens",
+        "color-scheme: light is set inside the light block",
+        "Every CSS variable used in component classes has a light-mode counterpart"
+      ]
+    },
+    {
+      "step_id": 3,
+      "description": "Search-and-replace all hardcoded lavender/purple color literals in globals.css component classes (e.g. rgb(184 174 255 / ...), #c6beff, #29213b, #171126, #201c28) with the corresponding --accent-based variable or updated blue-tinted equivalents. Ensure every class rule references only CSS variables, never raw hex/rgb that would break theme switching.",
+      "status": "completed",
+      "input_files": ["app/globals.css"],
+      "output_files": ["app/globals.css"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "No hardcoded lavender/purple hex or rgb values remain in component class rules",
+        "All accent-colored borders, backgrounds, and box-shadows use var(--accent*) or theme-aware equivalents",
+        "Visual output in dark mode is the same as before but with blue accent instead of lavender"
+      ]
+    },
+    {
+      "step_id": 4,
+      "description": "Update body, .student-shell, .side-rail, .top-bar, .search-pill, and other layout classes to use only CSS variables for background and backdrop colors (replace any remaining hardcoded dark-mode rgb like rgb(9 8 13 / 92%), #07060a, #0e0c12, etc. with var-based expressions that respond to theme switching).",
+      "status": "completed",
+      "input_files": ["app/globals.css"],
+      "output_files": ["app/globals.css"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "All layout container backgrounds reference CSS variables",
+        "Both dark and light themes render correct backgrounds for shell, rail, top-bar, search-pill, and auth form inputs"
+      ]
+    }
+  ]
+}
+
