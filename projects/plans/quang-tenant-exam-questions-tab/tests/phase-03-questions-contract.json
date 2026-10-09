@@ -1,0 +1,16 @@
+{
+  "phase": "03",
+  "status": "passed",
+  "command": "powershell -NoProfile -ExecutionPolicy Bypass -File tests/phase-01-contract-check.ps1 -Stage questions",
+  "stage": "questions",
+  "result": "PASS: Questions-stage contract",
+  "checks": [
+    "Questions is the second tab in the seven-tab order",
+    "ExamQuestionsTab is rendered by ExamDetailTabs",
+    "snapshotPublicId is passed to the shared preview surface",
+    "popstate activates the parsed tab without pushing a new history entry",
+    "successful empty response branch remains explicit",
+    "Questions content delegates report support and contains no answer-key/scoring modal"
+  ],
+  "notes": "The reusable Phase 01 contract also revalidated the locale handoff, preview API/query boundary, tenant-scoped lifecycle contracts, and answer-key-free DTO documentation."
+}

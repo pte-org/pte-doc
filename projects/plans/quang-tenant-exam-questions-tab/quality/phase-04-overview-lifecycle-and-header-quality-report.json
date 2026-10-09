@@ -1,0 +1,48 @@
+{
+  "mode": "gate",
+  "target": "phase-04-overview-lifecycle-and-header",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-08T21:26:43.8863716+07:00",
+  "reviewed_files": [
+    "pte-web/apps/tenant-web/features/exams/components/SessionDetailView.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/ExamDetailTabs.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/ExamOverviewTab.tsx"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "review_scope": [
+    "Mutation hook ownership and lifecycle callback composition",
+    "Exact SCHEDULED/Open, OPEN/Close, and DRAFT/PREPARING/READY/SCHEDULED Cancel guards",
+    "Confirmation text, pending disabled behavior, error propagation, and cache update ownership",
+    "Header removal of preview, status, and lifecycle action duplicates",
+    "Single Overview status badge and adjacent lifecycle action/error area",
+    "Phase 01 VI/EN locale handoff consumption and semantic light/dark tokens",
+    "Accessible lifecycle error semantics",
+    "Questions tab, participant modal wiring, retention, and concurrent-agent boundaries"
+  ],
+  "evidence": {
+    "phase_file": "Phase 04 constraints and acceptance criteria reviewed",
+    "locale_handoff": "tests/phase-01-locale-handoff.json is owner-handoff-confirmed; required=35, available=35, missing=0, permissionToConsumeKeys=true; current protected LocaleProvider hash matches observedAfterSha256",
+    "focused_contract": "tests/phase-01-contract-check.ps1 -Stage final passed; tests/phase-04-lifecycle-contract.json records the focused Phase 04 contract as passed",
+    "ownership": "SessionDetailView remains the only owner of useOpenSession/useCloseSession/useCancelSession; ExamDetailTabs forwards the lifecycle view-model; ExamOverviewTab renders callbacks and does not import mutation hooks",
+    "guards": "SessionDetailView preserves Open=SCHEDULED, Close=OPEN, Cancel=DRAFT/PREPARING/READY/SCHEDULED",
+    "behavior": "SessionDetailView preserves window.confirm messages through handed-off locale keys, passes each mutation isPending flag, and the unchanged API hooks retain replaceSessionInCache onSuccess behavior",
+    "header_and_overview": "PageHeader contains title only; no ExamPreviewModal, previewOpen, View Exam, status Badge, lifecycle buttons, or global lifecycle Alert remain in SessionDetailView. ExamOverviewTab contains one status Badge and one lifecycle Alert surface adjacent to the action buttons",
+    "status_label_contract": "ExamOverviewTab no longer imports SESSION_STATUS_LABELS; it consumes the handed-off tenant.examStatus.* key using the session status code as the fallback",
+    "composition": "ExamDetailTabs still renders Questions second, preserves visited-tab retention, and passes both participant modal callbacks to ExamParticipantsTab",
+    "theme_and_accessibility": "Reviewed controls use shared semantic Button variants and CSS variables; lifecycle error is wrapped in role=alert and buttons remain keyboard-reachable through the shared Button primitive",
+    "static_assertions": "Custom read-only assertions passed for hooks, guards, header removals, single Alert/Badge counts, Questions wiring, participant wiring, and retention",
+    "typecheck": "Tenant TypeScript --noEmit passed using the repository-local tsc binary",
+    "lint": "Scoped ESLint passed for all three reviewed files using the repository-local eslint binary",
+    "diff_check": "git diff --check passed for all three reviewed files",
+    "runtime_boundary": "No authenticated browser smoke was available in this audit; live click/confirmation/cache behavior remains a Phase 05 testing responsibility",
+    "rerun": "Current-tree gate rerun after the status-label review finding fix; all focused assertions and repository-local typecheck/lint checks passed"
+  },
+  "report_path": "pte-doc/projects/plans/quang-tenant-exam-questions-tab/quality/phase-04-overview-lifecycle-and-header-quality-report.json"
+}

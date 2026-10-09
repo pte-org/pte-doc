@@ -1,0 +1,25 @@
+{
+  "target": "phase-06-seed-migration-regression-and-quality-gate",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\DOCUMENTFPT\\Github\\pte-org",
+  "report_path": "pte-doc/plans/platform-role-expansion/quality/phase-06-seed-migration-regression-and-quality-gate-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/itembank/internal/service/QuestionDeletionService.java",
+    "pte-api/app/src/main/resources/db/migration/V89__canonicalize_legacy_platform_author.sql",
+    "pte-api/app/src/main/resources/db/migration/V90__rebuild_platform_username_uniqueness.sql",
+    "pte-api/app/src/test/java/com/pte/identity/internal/migration/PlatformRoleMigrationContractTest.java",
+    "pte-api/app/src/test/java/com/pte/identity/internal/migration/PlatformRoleMigrationPostgresIntegrationTest.java",
+    "pte-api/app/src/test/java/com/pte/itembank/internal/service/QuestionDeletionServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/support/internal/service/SupportTicketEventPublicationTest.java",
+    "pte-api/scripts/seed-local-platform-roles.ps1",
+    "pte-doc/data/platform-role-seed-manifest.json",
+    "pte-doc/plans/platform-role-expansion/phase-06-seed-migration-regression-and-quality-gate.md",
+    "pte-doc/plans/platform-role-expansion/plan.md",
+    "pte-doc/plans/platform-role-expansion/tests/phase-06-seed-migration-regression-and-quality-gate-tdd-ready.json",
+    "pte-doc/plans/platform-role-expansion/tests/phase-06-seed-migration-regression-and-quality-gate-test-report.json"
+  ],
+  "source_fingerprint": "sha256:2d3024302f77e0f62eed692ee7c2171f3140c7dd8e93170d86b0efa5b7726156",
+  "reviewed_at": "2026-10-08T10:50:00Z",
+  "open_blocking_findings": 0
+}

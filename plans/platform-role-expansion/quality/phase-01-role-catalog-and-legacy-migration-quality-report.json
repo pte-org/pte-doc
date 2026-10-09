@@ -1,0 +1,39 @@
+{
+  "mode": "gate",
+  "target": "phase-01-role-catalog-and-legacy-migration",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-08T06:49:37Z",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/identity/domain/Role.java",
+    "pte-api/app/src/main/java/com/pte/identity/domain/User.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/security/AccessTokenIssuer.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/service/UserProvisioningHelper.java",
+    "pte-api/app/src/main/java/com/pte/shared/security/SecurityRoles.java",
+    "pte-api/app/src/main/java/com/pte/shared/security/CurrentUser.java",
+    "pte-api/app/src/main/java/com/pte/shared/security/ResourceServerJwt.java",
+    "pte-api/app/src/main/resources/db/migration/V86__platform_role_catalog.sql",
+    "pte-api/app/src/test/java/com/pte/identity/internal/service/UserProvisioningHelperTest.java",
+    "pte-api/app/src/test/java/com/pte/shared/security/SecurityRolesTest.java",
+    "pte-web/packages/ui/src/hooks/sessionStorage.ts",
+    "pte-web/packages/ui/src/hooks/index.ts",
+    "pte-web/apps/vendor-web/features/auth/constants.ts",
+    "pte-web/apps/vendor-web/features/auth/components/LoginView.tsx",
+    "pte-doc/plans/platform-role-expansion/phase-01-compatibility-runbook.md",
+    "pte-doc/plans/platform-role-expansion/phase-01-role-catalog-and-legacy-migration.md"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "review_notes": [
+    "Role expansion remains fixed and enum-backed; no dynamic permission table was introduced.",
+    "Legacy PLATFORM_AUTHOR has one canonical mapping to ACADEMIC_STAFF at token, resource-server, current-user and web-session boundaries.",
+    "Platform/tenant scope checks remain server-side and the migration preserves the legacy value during the compatibility window.",
+    "Focused backend tests and TypeScript typechecks were run separately; live PostgreSQL migration execution and browser E2E remain Phase 6 scope."
+  ],
+  "report_path": "plans/platform-role-expansion/quality/phase-01-role-catalog-and-legacy-migration-quality-report.json"
+}

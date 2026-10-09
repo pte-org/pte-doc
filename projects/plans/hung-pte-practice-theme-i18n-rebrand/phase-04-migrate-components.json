@@ -1,0 +1,143 @@
+{
+  "plan_id": "hung-pte-practice-theme-i18n-rebrand",
+  "phase_id": 4,
+  "name": "migrate-components",
+  "goal": "Migrate all view components and feature modules to use useTranslation(t) for all user-visible strings and add a locale toggle to the shell",
+  "status": "pending",
+  "current_step": 1,
+  "design_constraints": [
+    "Cook confirms unit-test and quality-gate choices before each phase",
+    "Each component's hardcoded English strings are replaced with t('key') calls",
+    "COMMON_TEXT, UI_TEXT, AUTH_TEXT constants remain as type-only references or are removed if no longer needed for non-UI logic",
+    "Do not change component structure or behavior — only swap static strings for t() calls",
+    "Locale toggle renders as a button near the theme toggle in the shell sidebar"
+  ],
+  "quality_profile": {
+    "repository_conventions": {},
+    "boundaries": {},
+    "applicable_rules": [],
+    "allowed_exceptions": []
+  },
+  "quality": { "status": "not_evaluated", "report": "", "receipt": "", "remediation_cycles": 0 },
+  "testing": { "status": "not_started", "report": "" },
+  "steps": [
+    {
+      "step_id": 1,
+      "description": "Update features/shell/StudentShell.tsx: replace all hardcoded strings ('Pearson', 'PTE Official AI Practice', 'Quick study', 'Search', 'Pearson PTE Core', 'Practice workspace', 'Student', 'Account') with t() calls. Add locale toggle button alongside the theme toggle. Wire it to useLocale().setLocale.",
+      "status": "pending",
+      "input_files": ["features/shell/StudentShell.tsx"],
+      "output_files": ["features/shell/StudentShell.tsx"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "No hardcoded English strings remain in StudentShell.tsx",
+        "Locale toggle button is visible in the sidebar",
+        "Switching locale updates all shell labels"
+      ]
+    },
+    {
+      "step_id": 2,
+      "description": "Update features/home/HomeView.tsx: replace hardcoded strings ('Exam date:', 'Not scheduled', 'Recommended for you', 'Skills', 'View all', 'Workspace:') with t() calls. Strings from UI_TEXT that are already used should be replaced with t() equivalents.",
+      "status": "pending",
+      "input_files": ["features/home/HomeView.tsx"],
+      "output_files": ["features/home/HomeView.tsx"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "All user-visible strings in HomeView use t() calls",
+        "Component renders correctly in both en and vi"
+      ]
+    },
+    {
+      "step_id": 3,
+      "description": "Update features/catalog/PracticeTestsView.tsx, CatalogGrid.tsx, CatalogCard.tsx, and SkillTaskList.tsx: replace hardcoded strings ('Practice library', 'Practice tests', 'Choose a skill...') and UI_TEXT references with t() calls.",
+      "status": "pending",
+      "input_files": [
+        "features/catalog/PracticeTestsView.tsx",
+        "features/catalog/CatalogGrid.tsx",
+        "features/catalog/CatalogCard.tsx",
+        "features/catalog/SkillTaskList.tsx"
+      ],
+      "output_files": [
+        "features/catalog/PracticeTestsView.tsx",
+        "features/catalog/CatalogGrid.tsx",
+        "features/catalog/CatalogCard.tsx",
+        "features/catalog/SkillTaskList.tsx"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "All catalog feature components use t() for user-visible strings"
+      ]
+    },
+    {
+      "step_id": 4,
+      "description": "Update features/studyPack/StudyPackView.tsx: replace hardcoded strings ('Guided learning', 'Study-Pack', 'Keep related practice activities...', 'Open pack') and STUDY_PACKS text with t() calls. Move study pack titles/descriptions into locale dictionaries.",
+      "status": "pending",
+      "input_files": ["features/studyPack/StudyPackView.tsx"],
+      "output_files": ["features/studyPack/StudyPackView.tsx"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "StudyPackView uses t() for all user-visible strings",
+        "Study pack titles and descriptions are translatable"
+      ]
+    },
+    {
+      "step_id": 5,
+      "description": "Update features/progress/ProgressView.tsx: replace all UI_TEXT.progress* references with t() calls.",
+      "status": "pending",
+      "input_files": ["features/progress/ProgressView.tsx"],
+      "output_files": ["features/progress/ProgressView.tsx"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "All progress page strings use t() calls",
+        "Component renders correctly in both locales"
+      ]
+    },
+    {
+      "step_id": 6,
+      "description": "Update features/practice/PracticeSessionView.tsx: replace all UI_TEXT.session* and hardcoded strings with t() calls. This includes session overview, progress bar labels, confidence panel, footer actions, error states, and completion states.",
+      "status": "pending",
+      "input_files": ["features/practice/PracticeSessionView.tsx"],
+      "output_files": ["features/practice/PracticeSessionView.tsx"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "All practice session strings use t() calls",
+        "Session overview, error, exited, and completed states are fully translated"
+      ]
+    },
+    {
+      "step_id": 7,
+      "description": "Update features/practice/AccessStatusBanner.tsx and ConfidenceHint.tsx: replace UI_TEXT references with t() calls.",
+      "status": "pending",
+      "input_files": [
+        "features/practice/AccessStatusBanner.tsx",
+        "features/practice/ConfidenceHint.tsx"
+      ],
+      "output_files": [
+        "features/practice/AccessStatusBanner.tsx",
+        "features/practice/ConfidenceHint.tsx"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "AccessStatusBanner and ConfidenceHint use t() for all user-visible strings"
+      ]
+    },
+    {
+      "step_id": 8,
+      "description": "Update the auth sign-in page component (app/(auth)/sign-in/page.tsx or its feature component) to use t() for AUTH_TEXT strings (title, description, labels, buttons, error messages).",
+      "status": "pending",
+      "input_files": ["app/(auth)/sign-in"],
+      "output_files": ["app/(auth)/sign-in"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Auth page strings are translatable via t()"
+      ]
+    }
+  ]
+}

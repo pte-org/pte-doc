@@ -1,0 +1,55 @@
+{
+  "baselineVersion": 1,
+  "capturedAt": "2026-10-08",
+  "phase": "phase-03-phase-components",
+  "repository": {
+    "root": "D:/DOCUMENTFPT/Github/pte-org/pte-web",
+    "branch": "quang/feat/ui-refactor",
+    "scope": "Phase component extraction before CreateExamWizard wiring"
+  },
+  "ownershipCheckpoint": {
+    "createExamWizardStatus": "modified by this task only; hash matches Phase 01 pre-refactor baseline",
+    "constantsStatus": "modified by earlier UI/localization work; hash matches Phase 01 pre-refactor baseline",
+    "parallelAgentFiles": "observed and protected by SHA-256; not edited"
+  },
+  "scopeSha256BeforePhase": {
+    "apps/tenant-web/features/exams/components/CreateExamWizard.tsx": "7F479FE641750678CC1904F593A0D74DDEAB7904B0F606A710230711C9929E71",
+    "apps/tenant-web/features/exams/constants/index.ts": "E2047FB944808BD9B23F904CD81A168A7B99DF43CCEB3B63A05D5301DE1DAC7E"
+  },
+  "protectedSha256": {
+    "apps/vendor-web/features/auth/components/LoginView.tsx": "DBE11AF3700FD847EE360F39D6F834EA999999DB182AB17437FD583497339A76",
+    "apps/vendor-web/features/auth/constants.ts": "DD4C00E8977036BB08A79A88B826AD950F4AC83AD9E527B2111F3F01D38F9BF9",
+    "packages/ui/src/hooks/index.ts": "40043F8B3A2D81AF4DBF3B7B6AF10994BA2BB610256F287E1F5A05AD5E706527",
+    "packages/ui/src/hooks/sessionStorage.ts": "966AC8E2C774696C9FA3E447E82046E5E6C99294462F2FE4F994DE73C85ADD78",
+    "packages/ui/src/i18n/LocaleProvider.tsx": "7AE6A91C37C633C345EB46A6877FEBFDF32CD95C5FE1CF141D94D0FBEE08C8BE"
+  },
+  "componentContract": {
+    "components": [
+      "ExamDetailsStep",
+      "SchedulePolicyStep",
+      "AudienceStep",
+      "ReviewStep"
+    ],
+    "shellResponsibilities": [
+      "modal lifecycle",
+      "form/audience hook composition",
+      "step map",
+      "stepper",
+      "sticky footer",
+      "final submit guard"
+    ],
+    "submitRule": "Only step 4 native submit calls onSubmit(effectiveForm); navigation remains type=button.",
+    "preserve": [
+      "public CreateExamWizard props",
+      "CreateExamWorkflowInput payload",
+      "semantic theme tokens",
+      "useLocale fallback behavior",
+      "field names, IDs, classes, and accessibility relationships"
+    ]
+  },
+  "phaseReceipts": [
+    "quality/phase-01-form-boundaries-receipt.json",
+    "quality/phase-02-audience-boundary-receipt.json"
+  ],
+  "evidenceBoundary": "Static ownership/hash baseline only; Phase 03 requires fresh browser smoke and build evidence before completion."
+}

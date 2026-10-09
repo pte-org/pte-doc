@@ -1,0 +1,14 @@
+{
+  "target": "phase-03-create-exam-wizard-layout",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\DOCUMENTFPT\\Github\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-tenant-exam-ui-decomposition/quality/phase-03-create-exam-wizard-layout-quality-report.json",
+  "reviewed_files": [
+    "pte-web/apps/tenant-web/features/exams/components/CreateExamWizard.tsx",
+    "pte-web/apps/tenant-web/features/exams/constants/index.ts"
+  ],
+  "source_fingerprint": "sha256:4c26ede843127bc37c33cfb0157b7849d218b46f07e34f679adb0b01846dfc30",
+  "reviewed_at": "2026-10-08T12:16:51+07:00",
+  "open_blocking_findings": 0
+}

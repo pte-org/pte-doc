@@ -1,0 +1,64 @@
+{
+  "phase": "phase-06-seed-migration-regression-and-quality-gate",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-08T10:45:00Z",
+  "summary": {
+    "backend_tests": 1312,
+    "backend_failures": 0,
+    "backend_errors": 0,
+    "backend_skipped": 41,
+    "migration_contract_tests": 3,
+    "migration_contract_failures": 0,
+    "postgres_migration_rehearsal": 1,
+    "postgres_migration_rehearsal_failures": 0,
+    "api_client_files": 20,
+    "api_client_tests": 422,
+    "api_client_failures": 0,
+    "browser_smoke": 1,
+    "browser_smoke_failures": 0
+  },
+  "commands": [
+    ".\\mvnw.cmd -pl app \"-DforkCount=0\" test -q",
+    ".\\mvnw.cmd -pl app \"-Dtest=QuestionDeletionServiceTest,SupportTicketEventPublicationTest\" \"-DforkCount=0\" test",
+    "Docker-network Maven run with -Dplatform.role.migration.db.url=jdbc:postgresql://pte-postgres:5432/pte_role_migration_test and PlatformRoleMigrationPostgresIntegrationTest",
+    "corepack pnpm --filter @pte/api-client typecheck",
+    "corepack pnpm --filter @pte/ui typecheck",
+    "corepack pnpm --filter vendor-web exec tsc --noEmit",
+    "corepack pnpm --filter @pte/api-client test",
+    "corepack pnpm --filter vendor-web lint",
+    "corepack pnpm --filter vendor-web build",
+    "PowerShell parser check for pte-api/scripts/seed-local-platform-roles.ps1",
+    "ConvertFrom-Json checks for the local seed manifest and Phase 6 TDD artifact",
+    "Playwright visible-browser smoke against http://localhost:3001"
+  ],
+  "live_verification": {
+    "docker_compose": "healthy; Flyway schema version 90",
+    "migration_integrity": [
+      "V89 canonicalizes persisted PLATFORM_AUTHOR rows to ACADEMIC_STAFF without deleting audit history",
+      "V90 rebuilds platform username uniqueness for active tenantless rows only",
+      "dedicated PostgreSQL schema cleanup was limited to the unique rehearsal schema"
+    ],
+    "role_seed": "three local platform fixtures reconciled through the PLATFORM_ADMIN API; passwords were supplied out of band and are not persisted in repository artifacts",
+    "authorization_matrix": "login/refresh for all eight role categories plus live HTTP allow/deny samples for platform, academic, tenant, and student boundaries",
+    "browser_checks": [
+      "PLATFORM_ADMIN login",
+      "platform navigation renders Platform users and question-type routes",
+      "platform-user management surface renders role controls",
+      "question-type route renders"
+    ]
+  },
+  "remediations": [
+    "Restored pre-lookup deny-by-default in QuestionDeletionService for callers that cannot modify academic drafts, preventing unauthorized resource-existence probing.",
+    "Updated SupportTicketEventPublicationTest fixtures from the removed SYSTEM_ADMIN role to the tenantless PLATFORM_MANAGER contract.",
+    "Added V90 because the existing V87 IF NOT EXISTS statement could not replace the already-created platform username index predicate."
+  ],
+  "limitations": [
+    "The 41 skipped backend tests are opt-in PostgreSQL suites whose dedicated DB properties were not supplied to the host Maven process; the new role migration rehearsal passed separately inside the Docker network.",
+    "Browser smoke covered the PLATFORM_ADMIN role; the remaining role boundaries were verified through live HTTP login/refresh and allow/deny checks rather than separate browser sessions.",
+    "Vendor-web lint still reports two pre-existing @next/next/no-img-element warnings.",
+    "No production deployment, non-local database migration, or Cloudinary/runtime integration was validated."
+  ],
+  "failures": [],
+  "report_path": "pte-doc/plans/platform-role-expansion/tests/phase-06-seed-migration-regression-and-quality-gate-test-report.json"
+}

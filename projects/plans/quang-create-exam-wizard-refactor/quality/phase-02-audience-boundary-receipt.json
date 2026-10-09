@@ -1,0 +1,22 @@
+{
+  "target": "phase-02-audience-boundary",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\DOCUMENTFPT\\Github\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-create-exam-wizard-refactor/quality/phase-02-audience-boundary-quality-report.json",
+  "reviewed_files": [
+    "pte-doc/projects/plans/quang-create-exam-wizard-refactor/phase-02-audience-boundary.md",
+    "pte-web/apps/tenant-web/features/classes/api/index.ts",
+    "pte-web/apps/tenant-web/features/commercialization/api.ts",
+    "pte-web/apps/tenant-web/features/examoperations/api.ts",
+    "pte-web/apps/tenant-web/features/exams/components/CreateExamWizard.tsx",
+    "pte-web/apps/tenant-web/features/exams/constants/index.ts",
+    "pte-web/apps/tenant-web/features/exams/hooks/useCreateExamAudience.ts",
+    "pte-web/apps/tenant-web/features/exams/hooks/useCreateExamWizardForm.ts",
+    "pte-web/apps/tenant-web/features/exams/types/index.ts",
+    "pte-web/apps/tenant-web/features/programs/api/index.ts"
+  ],
+  "source_fingerprint": "sha256:12b508145fd7cd90b52e20e3ee6dfb0d07ff558b8c09d5c9022d4e7c0d9002fa",
+  "reviewed_at": "2026-10-08T14:32:23.5972704+07:00",
+  "open_blocking_findings": 0
+}

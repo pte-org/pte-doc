@@ -1,0 +1,125 @@
+{
+  "plan_id": "hung-pte-practice-theme-i18n-rebrand",
+  "phase_id": 3,
+  "name": "i18n-infrastructure",
+  "goal": "Create a bilingual (Vietnamese/English) i18n system with locale context provider, locale dictionaries, and a useTranslation hook",
+  "status": "completed",
+  "current_step": 7,
+  "design_constraints": [
+    "Cook confirms unit-test and quality-gate choices before each phase",
+    "No external i18n library — lightweight custom implementation using React context",
+    "Locale persisted to localStorage key 'pte-practice-locale'",
+    "Default locale is 'en'; supported locales: 'en', 'vi'",
+    "Translation keys follow a flat dot-delimited convention (e.g. 'nav.home', 'auth.title')",
+    "All existing hardcoded English strings in COMMON_TEXT, UI_TEXT, AUTH_TEXT, STUDY_PACKS must be moved to locale files",
+    "Type-safe: locale dictionaries must satisfy a shared interface so missing keys cause TypeScript errors"
+  ],
+  "quality_profile": {
+    "repository_conventions": {},
+    "boundaries": {},
+    "applicable_rules": [],
+    "allowed_exceptions": []
+  },
+  "quality": { "status": "skipped_by_user", "decision": "user_confirmed_skip", "report": "", "receipt": "", "remediation_cycles": 0 },
+  "testing": { "status": "not_started", "report": "" },
+  "steps": [
+    {
+      "step_id": 1,
+      "description": "Create common/i18n/types.ts: export a Locale type ('en' | 'vi') and a LocaleDict interface containing every translation key used across the app. Keys should be organized by feature namespace: common.*, auth.*, nav.*, practice.*, progress.*, studyPack.*. All values are string.",
+      "status": "completed",
+      "input_files": [
+        "common/constants.ts",
+        "features/practice/constants.ts"
+      ],
+      "output_files": ["common/i18n/types.ts"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "LocaleDict interface covers every key from COMMON_TEXT, UI_TEXT, AUTH_TEXT, and STUDY_PACKS",
+        "Locale type is a union of 'en' | 'vi'"
+      ]
+    },
+    {
+      "step_id": 2,
+      "description": "Create common/i18n/en.ts: export a default English locale dictionary (satisfies LocaleDict) containing all current English strings migrated from constants.ts files. Values must exactly match the existing hardcoded strings.",
+      "status": "completed",
+      "input_files": [
+        "common/constants.ts",
+        "features/practice/constants.ts",
+        "common/i18n/types.ts"
+      ],
+      "output_files": ["common/i18n/en.ts"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "en.ts satisfies LocaleDict",
+        "All English strings match current hardcoded values exactly"
+      ]
+    },
+    {
+      "step_id": 3,
+      "description": "Create common/i18n/vi.ts: export a Vietnamese locale dictionary (satisfies LocaleDict). Translate all English strings to natural Vietnamese. Navigation labels, auth copy, practice UI text, progress labels, study pack descriptions — all translated.",
+      "status": "completed",
+      "input_files": [
+        "common/i18n/types.ts",
+        "common/i18n/en.ts"
+      ],
+      "output_files": ["common/i18n/vi.ts"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "vi.ts satisfies LocaleDict",
+        "All keys from en.ts are present in vi.ts with Vietnamese translations"
+      ]
+    },
+    {
+      "step_id": 4,
+      "description": "Create common/i18n/LocaleProvider.tsx: a 'use client' React context that manages current locale, reads from localStorage ('pte-practice-locale'), sets html lang attribute. Exports LocaleProvider and useLocale() hook returning { locale, setLocale, t } where t(key) returns the translated string. Also export useTranslation as alias.",
+      "status": "completed",
+      "input_files": [
+        "common/i18n/types.ts",
+        "common/i18n/en.ts",
+        "common/i18n/vi.ts"
+      ],
+      "output_files": ["common/i18n/LocaleProvider.tsx"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "LocaleProvider reads locale from localStorage with 'en' default",
+        "useLocale returns locale, setLocale, and t function",
+        "t function looks up key in current locale dictionary, falls back to English"
+      ]
+    },
+    {
+      "step_id": 5,
+      "description": "Create common/i18n/index.ts: barrel export for all i18n modules (types, LocaleProvider, useLocale, useTranslation, en, vi).",
+      "status": "completed",
+      "input_files": [
+        "common/i18n/types.ts",
+        "common/i18n/LocaleProvider.tsx",
+        "common/i18n/en.ts",
+        "common/i18n/vi.ts"
+      ],
+      "output_files": ["common/i18n/index.ts"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "index.ts re-exports LocaleProvider, useLocale, useTranslation, Locale, LocaleDict"
+      ]
+    },
+    {
+      "step_id": 6,
+      "description": "Update app/layout.tsx to wrap children with LocaleProvider (inside ThemeProvider). Set html lang attribute dynamically or keep as 'en' default (LocaleProvider will update it client-side).",
+      "status": "completed",
+      "input_files": ["app/layout.tsx"],
+      "output_files": ["app/layout.tsx"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "LocaleProvider wraps children in root layout",
+        "App renders without errors"
+      ]
+    }
+  ]
+}
+
