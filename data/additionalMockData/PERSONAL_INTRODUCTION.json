@@ -1,0 +1,90 @@
+[
+  {
+    "pteTaskType": "PERSONAL_INTRODUCTION",
+    "taskTypeKey": "PERSONAL_INTRODUCTION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Study Abroad Plans",
+    "promptText": "Please introduce yourself. For example, you could talk about one or more of the following:\n\n• Your interests\n• Your plans for future study\n• Why you want to study abroad\n• Why you need to learn English\n• Why you chose this test",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hello, my name is Minh and I am twenty-two years old. I have just finished my bachelor's degree in computer science in Ho Chi Minh City. I am very interested in artificial intelligence, so I plan to do a master's degree in Australia next year. I need a good English score because all of the courses are taught in English. I chose this test because it is fast, fair and accepted by my university.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/PERSONAL_INTRODUCTION.json",
+      "kind": "mock",
+      "num": 1,
+      "name": "#1 Study Abroad Plans",
+      "note": "Self-written prompt; referenceAnswerText is a sample answer (task is unscored)."
+    },
+    "importWarnings": []
+  },
+  {
+    "pteTaskType": "PERSONAL_INTRODUCTION",
+    "taskTypeKey": "PERSONAL_INTRODUCTION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Hometown and Background",
+    "promptText": "Please introduce yourself. For example, you could talk about one or more of the following:\n\n• Where you grew up\n• Your education background\n• What you are doing now\n• Your goals for the next five years",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hi, my name is Lan. I grew up in Da Nang, a coastal city in central Vietnam that is famous for its beaches. I studied business administration at a local university and now I work as a marketing assistant for a tourism company. In the next five years, I hope to become a marketing manager and to work with international clients, which is why improving my English is so important to me.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/PERSONAL_INTRODUCTION.json",
+      "kind": "mock",
+      "num": 2,
+      "name": "#2 Hometown and Background",
+      "note": "Self-written prompt; referenceAnswerText is a sample answer (task is unscored)."
+    },
+    "importWarnings": []
+  },
+  {
+    "pteTaskType": "PERSONAL_INTRODUCTION",
+    "taskTypeKey": "PERSONAL_INTRODUCTION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Hobbies and Free Time",
+    "promptText": "Please introduce yourself. For example, you could talk about one or more of the following:\n\n• Your hobbies\n• How you spend your weekends\n• A skill you would like to learn\n• A place you would like to visit",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Hello, I am Huy. In my free time, I love playing football and taking photos of street life. At the weekend, I usually go to the countryside with my friends or visit a coffee shop to read. One skill I would really like to learn is cooking, because I want to live independently when I study overseas. Someday, I would love to visit New Zealand to see its mountains and lakes.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/PERSONAL_INTRODUCTION.json",
+      "kind": "mock",
+      "num": 3,
+      "name": "#3 Hobbies and Free Time",
+      "note": "Self-written prompt; referenceAnswerText is a sample answer (task is unscored)."
+    },
+    "importWarnings": []
+  },
+  {
+    "pteTaskType": "PERSONAL_INTRODUCTION",
+    "taskTypeKey": "PERSONAL_INTRODUCTION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Career and English",
+    "promptText": "Please introduce yourself. For example, you could talk about one or more of the following:\n\n• Your current or desired job\n• Your work experience\n• Why you need a PTE score\n• How you will use English at work",
+    "audioPromptUrl": null,
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Good morning, my name is Thao and I am a registered nurse. I have worked at a hospital in Hanoi for three years, mainly in the emergency department. I need a PTE score to apply for nursing registration in Australia, where I hope to continue my career. At work, I will use English every day to talk with patients, explain treatments clearly and communicate with doctors and other nurses.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/PERSONAL_INTRODUCTION.json",
+      "kind": "mock",
+      "num": 4,
+      "name": "#4 Career and English",
+      "note": "Self-written prompt; referenceAnswerText is a sample answer (task is unscored)."
+    },
+    "importWarnings": []
+  }
+]

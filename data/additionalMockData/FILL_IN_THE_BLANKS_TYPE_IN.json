@@ -1,0 +1,122 @@
+[
+  {
+    "pteTaskType": "FILL_IN_THE_BLANKS_TYPE_IN",
+    "taskTypeKey": "FILL_IN_THE_BLANKS_TYPE_IN",
+    "taskTypeSection": "LISTENING",
+    "title": "Barred Owls",
+    "promptText": "Barred owls are large, round-headed birds that were once found mainly in the {{0}} forests of North America. Over the last century, however, they have spread {{1}} and now compete with the smaller spotted owl for food and nesting sites. Researchers believe that changes in {{2}}, such as new trees growing on the open plains, allowed the birds to cross areas that had previously been a natural {{3}}. Wildlife managers are still debating how to {{4}} the native species without harming the newcomers.",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/l_fibs/audios/FIB_69/original/8f54b52457ddf4a719de4fe4d67be35a/FIB_69.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Barred owls are large, round-headed birds that were once found mainly in the eastern forests of North America. Over the last century, however, they have spread westward and now compete with the smaller spotted owl for food and nesting sites. Researchers believe that changes in habitat, such as new trees growing on the open plains, allowed the birds to cross areas that had previously been a natural barrier. Wildlife managers are still debating how to protect the native species without harming the newcomers.",
+    "correctAnswerText": "[\"eastern\",\"westward\",\"habitat\",\"barrier\",\"protect\"]",
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/FILL_IN_THE_BLANKS_TYPE_IN.json",
+      "kind": "mock",
+      "num": 1,
+      "name": "#1 Barred Owls",
+      "basedOn": {
+        "file": "data/listening/l_fib.json",
+        "num": 1,
+        "name": "#1 Barred Owls"
+      },
+      "note": "Transcript is self-written on the same topic and does NOT match the audio; for UI/flow testing only."
+    },
+    "importWarnings": [
+      "MOCK_TRANSCRIPT_NOT_MATCHING_AUDIO",
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "FILL_IN_THE_BLANKS_TYPE_IN",
+    "taskTypeKey": "FILL_IN_THE_BLANKS_TYPE_IN",
+    "taskTypeSection": "LISTENING",
+    "title": "Pearl Oysters",
+    "promptText": "Natural pearls form when a tiny {{0}}, such as a grain of sand or a parasite, becomes trapped inside an oyster's shell. To protect itself, the oyster covers the object with layer after layer of a smooth substance called {{1}}. Because this process can take several {{2}}, natural pearls have always been rare and extremely valuable. Today, most pearls on the market are {{3}}, which means that farmers insert a small bead into the oyster by hand and then return it to the water to {{4}}.",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/l_fibs/audios/FIB_70/original/a381edaf1ecf8454829082503df902ac/FIB_70.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Natural pearls form when a tiny irritant, such as a grain of sand or a parasite, becomes trapped inside an oyster's shell. To protect itself, the oyster covers the object with layer after layer of a smooth substance called nacre. Because this process can take several years, natural pearls have always been rare and extremely valuable. Today, most pearls on the market are cultured, which means that farmers insert a small bead into the oyster by hand and then return it to the water to grow.",
+    "correctAnswerText": "[\"irritant\",\"nacre\",\"years\",\"cultured\",\"grow\"]",
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/FILL_IN_THE_BLANKS_TYPE_IN.json",
+      "kind": "mock",
+      "num": 2,
+      "name": "#2 Pearl Oysters",
+      "basedOn": {
+        "file": "data/listening/l_fib.json",
+        "num": 2,
+        "name": "#2 Pearl Oysters"
+      },
+      "note": "Transcript is self-written on the same topic and does NOT match the audio; for UI/flow testing only."
+    },
+    "importWarnings": [
+      "MOCK_TRANSCRIPT_NOT_MATCHING_AUDIO",
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "FILL_IN_THE_BLANKS_TYPE_IN",
+    "taskTypeKey": "FILL_IN_THE_BLANKS_TYPE_IN",
+    "taskTypeSection": "LISTENING",
+    "title": "Primary Text",
+    "promptText": "When students begin a research project, they are often told to rely on primary texts rather than secondary {{0}}. A primary text is an original document, such as a letter, a diary or a scientific report, written at the time of the events it {{1}}. Secondary texts, by contrast, {{2}} or comment on those original materials. Both types are useful, but reading the primary material first allows students to form their own {{3}} before they are influenced by the views of other {{4}}.",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/l_fibs/audios/FIB_149_volume/original/a7e88147f6f1b2437776baac1508effc/FIB_149_volume.mp3?1623318213",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "When students begin a research project, they are often told to rely on primary texts rather than secondary sources. A primary text is an original document, such as a letter, a diary or a scientific report, written at the time of the events it describes. Secondary texts, by contrast, interpret or comment on those original materials. Both types are useful, but reading the primary material first allows students to form their own opinions before they are influenced by the views of other scholars.",
+    "correctAnswerText": "[\"sources\",\"describes\",\"interpret\",\"opinions\",\"scholars\"]",
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/FILL_IN_THE_BLANKS_TYPE_IN.json",
+      "kind": "mock",
+      "num": 3,
+      "name": "#3 Primary Text",
+      "basedOn": {
+        "file": "data/listening/l_fib.json",
+        "num": 5,
+        "name": "#5 Primary Text"
+      },
+      "note": "Transcript is self-written on the same topic and does NOT match the audio; for UI/flow testing only."
+    },
+    "importWarnings": [
+      "MOCK_TRANSCRIPT_NOT_MATCHING_AUDIO",
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "FILL_IN_THE_BLANKS_TYPE_IN",
+    "taskTypeKey": "FILL_IN_THE_BLANKS_TYPE_IN",
+    "taskTypeSection": "LISTENING",
+    "title": "Language Learning",
+    "promptText": "Many adults believe that it is too late to learn a new language once they have left school. Recent studies, however, suggest that older learners have some important {{0}}. They usually have a larger vocabulary in their first language, better {{1}} strategies and a clearer idea of why they are studying. What adults often lack is not ability but {{2}}. Short, regular practice sessions, ideally every {{3}}, appear to be far more {{4}} than occasional long ones.",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/l_fibs/audios/FIB_29_volume/original/ac798e528ac105017bf4a5c2972baccf/FIB_29_volume.mp3?1623318215",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Many adults believe that it is too late to learn a new language once they have left school. Recent studies, however, suggest that older learners have some important advantages. They usually have a larger vocabulary in their first language, better memory strategies and a clearer idea of why they are studying. What adults often lack is not ability but time. Short, regular practice sessions, ideally every day, appear to be far more effective than occasional long ones.",
+    "correctAnswerText": "[\"advantages\",\"memory\",\"time\",\"day\",\"effective\"]",
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/FILL_IN_THE_BLANKS_TYPE_IN.json",
+      "kind": "mock",
+      "num": 4,
+      "name": "#4 Language Learning",
+      "basedOn": {
+        "file": "data/listening/l_fib.json",
+        "num": 7,
+        "name": "#7 Language Learning"
+      },
+      "note": "Transcript is self-written on the same topic and does NOT match the audio; for UI/flow testing only."
+    },
+    "importWarnings": [
+      "MOCK_TRANSCRIPT_NOT_MATCHING_AUDIO",
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  }
+]
