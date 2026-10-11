@@ -1,0 +1,446 @@
+{
+  "mode": "verify",
+  "target": "phase-07-verification-and-handoff",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-11T04:42:51Z",
+  "reviewer": {
+    "independent": true,
+    "method": "Inline independent source review using ck:quality Core/TypeScript/Frontend/Database adapters and code-review verification discipline; no separate reviewer agent tool available."
+  },
+  "reviewed_files": [
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/attempt/AttemptStaffContextService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/attempt/dto/response/AttemptStaffContextView.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/repository/ExamAttemptRepository.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/service/AttemptStaffContextQueryService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/ExaminerOverviewAccumulator.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/ExaminerOverviewView.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/ExaminerSessionPage.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/ExaminerSessionView.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffOverviewView.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffWorkspaceConstants.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffWorkspaceController.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffWorkspaceException.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffWorkspaceQuery.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffWorkspaceService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/package-info.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/dto/response/ExamStaffAccountView.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/ExamStaffIdentityService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/controller/ExamStaffProfileController.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/dto/request/UpdateExamStaffProfileRequest.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/repository/UserRepository.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/service/ExamStaffAccountService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/dto/response/ExaminerProgressView.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/repository/ExaminerAnswerScoreRepository.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/repository/ExaminerAttemptAssignmentRepository.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/repository/ScoringAnswerRepository.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/repository/ScoringSessionStateRepository.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/repository/StaffAnswerRow.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/repository/StaffAssignmentRow.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/repository/StaffPublicationRow.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/repository/StaffScoreRow.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/ScoringEligibilityQueryService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/StaffAttemptProgress.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/StaffScoringQueryService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/StaffSessionProgress.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/StaffScoringService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/dto/response/StaffSessionView.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/internal/repository/ExamSessionRepository.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/StaffScheduleQueryService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/StaffScheduleService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/StaffSessionFilter.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/resources/db/migration/V92__tenant_canonical_email_uniqueness.sql",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/resources/db/migration/V93__staff_schedule_lookup_indexes.sql",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/app/(dashboard)/host/exam-staff/[staffPublicId]/error.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/app/(dashboard)/host/exam-staff/[staffPublicId]/loading.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/app/(dashboard)/host/exam-staff/[staffPublicId]/page.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/components/ExamStaffRowActions.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/components/ExamStaffView.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/constants.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/api.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffAccountDescription.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffAccountTab.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffActionDialogs.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffDetailView.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffProfileHeader.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffProfileSnapshot.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffWorkspaceError.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/constants.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerBoard.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerOverview.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerProgress.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerSessionCard.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerSessionTable.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerTable.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerTrackingTab.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerWorkColumn.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/filters/api.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/filters/StaffFilterToolbar.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffAccountActions.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffAccountForm.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffDetailText.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffEditGuard.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffWorkspaceFilters.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/index.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/messages/en.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/messages/vi.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/proctor/NextProctorSessions.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/proctor/ProctorOverview.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/proctor/ProctorScheduleTab.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/proctor/ProctorSessionList.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/types.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/utils.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/hooks/useExamStaffListColumns.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/hooks/useExamStaffListText.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/studentDetail/components/StudentAccountTab.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/studentDetail/components/StudentActionDialogs.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/studentDetail/components/StudentDetailHeader.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/studentDetail/components/StudentDetailView.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/studentDetail/hooks/useStudentDetailActions.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/api-client/src/requests/admin/examStaffWorkspace.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/api-client/src/requests/index.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/api-client/src/requests/scheduling/sessions.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/api-client/src/types/admin/examStaffWorkspace.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/api-client/src/types/admin/index.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/Board.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/CollapsibleSection.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/DashboardCard.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/index.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/PaginationControls.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/ProfileAccountPanel.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/ProfileHeader.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/ProfileLayout.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/Tabs.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/handoff.md"
+  ],
+  "constraints_source_paths": [
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/contract.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/plan.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/phase-02-backend-projections-and-profile.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/phase-03-api-client-and-state.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/phase-04-common-profile-and-account.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/phase-05-proctor-overview-and-schedule.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/phase-06-examiner-overview-and-board.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/phase-07-verification-and-handoff.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/docs/CODING_STANDARDS_WEB.md"
+  ],
+  "scope": {
+    "production_files": 102,
+    "documentation_outputs": 1,
+    "policy": "Deduplicated live reviewed_files union of Phase02-06 canonical reports, cross-checked against all17 Phase06 declared outputs. All102 source files and handoff.md read/evaluated in this review. No historical content substituted for current source. Pipeline criteria/state and prior reports are constraints, not output hash inputs.",
+    "excludes": [
+      "pte-web/apps/tenant-web/features/exams/components/ExamOverviewTab.tsx",
+      "pte-web/apps/tenant-web/features/exams/components/ExamSettingsTab.tsx",
+      "pte-web/apps/tenant-web/features/exams/components/SessionTable.tsx",
+      "Separately reviewed SessionLifecycleService refactor and its test files.",
+      "Pre-existing Student reporting/date aggregation and assignProctor command gaps; no broader remediation authorized."
+    ],
+    "prior_receipts": "Earlier receipts represent completion-time snapshots. Later-phase shared-output changes are covered by this current union receipt; no assertion that every earlier receipt remains fresh. Phase06 receipt independently verified VALID before this gate. Comment remediation also changes an earlier reviewed output; this verify refreshes the integration fingerprint without rewriting earlier phase receipts."
+  },
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [
+    {
+      "id": "QUAL-P03-001",
+      "severity": "LOW",
+      "rule": "RDB_COMMENT_EXPLAINS_WHY",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffDetailText.ts:19",
+      "evidence": "Object.fromEntries(Object.entries(catalog).map(...)) as StaffDetailMessages remains without an explanatory comment. Both catalogs cover the message keys, but Object.fromEntries itself does not preserve that complete key-set type.",
+      "why_it_matters": "The invariant supporting the assertion is implicit; the web standard requires assertion rationale. No runtime defect or unsafe-any bypass established.",
+      "required_action": "Add a short comment explaining the complete-catalog key invariant, or replace the assertion with typed construction. Non-blocking advisory; reviewer does not edit production.",
+      "owner": "cook",
+      "change_evidence": "Same advisory recorded by Phase03; this feature-owned hook is still an untracked output in the current implementation union.",
+      "origin": "Carried forward, not a new Phase07 root cause.",
+      "resolution": {
+        "verified_at": "2026-10-11T04:42:17Z",
+        "location": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffDetailText.ts:17",
+        "evidence": "Immediately before the assertion, the new comment states both catalogs cover every StaffDetailMessageKey and translation preserves that complete key set. STAFF_DETAIL_EN defines the keyof catalog and STAFF_DETAIL_VI is typed StaffDetailMessages. Full current hook and both catalogs independently read. Removing exactly this added comment line reproduces the prior hook SHA256, establishing a comment-only change.",
+        "conclusion": "Required rationale present and accurate. QUAL-P03-001 resolved; no behavior modification."
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "area": "Host/tenant/target authorization and public ownership",
+      "evidence": [
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/service/ExamStaffAccountService.java:63",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffWorkspaceController.java:15",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffWorkspaceService.java:16",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/StaffScheduleQueryService.java:62",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/service/AttemptStaffContextQueryService.java:25"
+      ],
+      "assessment": "Host role and valid tenant security scope checked before scoped target resolution; deleted/nonstaff/cross-tenant targets do not produce metadata. Existing policy evaluates the complete role set, not just one staff role. Suspended reads remain allowed; requested work role is enforced separately. Composition uses Identity/Session/Scoring public facades and scalar DTOs, not cross-module repositories. Canonical Attempt context excludes unresolved/deleted/cross-session references before progress."
+    },
+    {
+      "area": "Cache generation, target remount and canonical mutation response",
+      "evidence": [
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/api.ts:19",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/api.ts:82",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/app/(dashboard)/host/exam-staff/[staffPublicId]/page.tsx:8",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/app/providers.tsx:15",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/api-client/src/client/client.ts:284"
+      ],
+      "assessment": "Workspace keys contain authenticated tenant, selected staff and request predicates/status/page. Route keys target view; inactive role tabs disable workload queries and AbortSignal reaches transport. Existing provider cancels/clears queries on actor/tenant session changes and client rejects stale-generation responses. Profile PATCH captures exact tenant/target key and generation, cancels prior/inflight detail reads, checks generation again after await, and installs canonical response before invalidating staff prefix. No temporary credential response is installed as query data."
+    },
+    {
+      "area": "Whitelist and credential-role integrity",
+      "evidence": [
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/dto/request/UpdateExamStaffProfileRequest.java:10",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/service/ExamStaffAccountService.java:33",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffAccountForm.ts:35",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffAccountActions.ts:29"
+      ],
+      "assessment": "New staff PATCH permits only fullName/email/phone/dateOfBirth; preserves username/roles/status/student fields. Server validates required staff name/email, mapped lengths and DOB, trims nullable phone, canonicalizes email. Existing send-email workflow remains authoritative and rejects any STUDENT role; staff capability disables unsupported mixed-role credential email. Learner retains its separate generateStudentCredentials flow. Lifecycle actions remain existing identity commands, not workload writes."
+    },
+    {
+      "area": "Database email integrity and additive migrations",
+      "evidence": [
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/repository/UserRepository.java:24",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/resources/db/migration/V92__tenant_canonical_email_uniqueness.sql",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/resources/db/migration/V93__staff_schedule_lookup_indexes.sql",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/service/ExamStaffAccountService.java:43"
+      ],
+      "assessment": "App canonical-email precheck is backed by a tenant/nondeleted/nonblank lower(trim(email)) unique index, including concurrent conflicts. V92 explicitly fails on existing collisions without exposing values or deleting/merging users. Expected unique-index violation maps to friendly conflict; other integrity failures are not swallowed. V93 supports schedule and inverse Proctor predicates. No database/migration execution or index/query-plan performance proof is inferred."
+    },
+    {
+      "area": "Canonical eligibility, submitted-answer integrity and bounded scans",
+      "evidence": [
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/StaffScoringQueryService.java:38",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/StaffAttemptProgress.java:36",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/StaffSessionProgress.java:29",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/repository/ExamAttemptRepository.java:22",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/StaffScheduleQueryService.java:30"
+      ],
+      "assessment": "Assignment and answer scans use bounded size100 closed scalar slices; Session uses scalar Criteria tuple/count reads, not managed history retention. Canonical pinned task counts use the existing scoring resolver and compare against actual eligible answer count and frozen denominator, including zero. Submitted score requires valid owner/scope/eligible membership/SUBMITTED/time/range; unmatched or inconsistent rows become UNAVAILABLE. Unique immutable assignment/answer-score identities support distinctness. Batch-id ordered scan counts supplemental batches with one session accumulator, not one card per batch. Only requested page records and bounded batch accumulators are retained; full-filter scans still have dataset-proportional cost and are not benchmarked."
+    },
+    {
+      "area": "Nullability, units, totals and exception reconciliation",
+      "evidence": [
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/ExaminerOverviewAccumulator.java:29",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffWorkspaceService.java:36",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/StaffSessionProgress.java:49",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/api-client/src/types/admin/examStaffWorkspace.ts",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerOverview.tsx",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerProgress.tsx"
+      ],
+      "assessment": "Backend/client distinguish session/attempt/batch/eligible/submitted units. Unavailable session whole eligible/submitted/percent are explicit null; assignment/frozen metadata and verified attempt subtotals remain independent. Overview coverage flag and separately named partial verified counts prevent partial totals masquerading as whole-workload progress. Zero-work displays no eligible answers, empty overview no assignments; no out-of-range progress bar. Status totals accumulate after shared base filters before workStatus/page selection, including UNAVAILABLE, and reconcile totalSessions."
+    },
+    {
+      "area": "Board/table/status/publication and no grading writes",
+      "evidence": [
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerWorkColumn.tsx",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerTrackingTab.tsx",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerBoard.tsx",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerTable.tsx",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffWorkspaceFilters.ts"
+      ],
+      "assessment": "Each visible normal status and technical UNAVAILABLE bucket has independent bounded server page5/count/error branch; table page20 ALL includes exceptions. Apply/Clear revision resets pages even for identical predicates. Visible work selector changes request-backed columns/table predicates, never client official totals. Publication independent of completion and published history retained. Staff workload UI only navigates to Host session details; no personal examiner route, score editing, grading/batch/assignment command, DnD or impersonation. New GET call graph contains only reads/cache resolution, no preview expiry/report creation/status advancement."
+    },
+    {
+      "area": "Timezone/filter identity and honest Proctor preview",
+      "evidence": [
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/utils.ts",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/filters/StaffFilterToolbar.tsx",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/api.ts:68",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/StaffScheduleQueryService.java:71",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffWorkspaceService.java:109"
+      ],
+      "assessment": "Session selector uses actual sessionPublicId, no invented exam/template identity. Same scoped date/status base predicates drive overview/list/count; UI converts calendar bounds in explicit UTC+7 with next calendar day exclusive end. Missing/invalid schedule is excluded with date bounds; displayed times share Asia/Ho_Chi_Minh. Preview recomputes current Instant each query execution, bounded3 stable key, includes overdue openings only while not ended. Remaining-assignment lifecycle buckets reconcile without attendance claims. Tenant session catalog is existing option-only source, not workload count/all-pages filtering."
+    },
+    {
+      "area": "Common presentation, Learner migration and current shared consumers",
+      "evidence": [
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/ProfileHeader.tsx",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/ProfileLayout.tsx",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/ProfileAccountPanel.tsx",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/Board.tsx",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/studentDetail/hooks/useStudentDetailActions.ts",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/studentDetail/components/StudentAccountTab.tsx"
+      ],
+      "assessment": "Common Profile/Board primitives own presentation slots only; no feature DTO/query/mutation imports. Learner diff preserves original account editor/data flow, student-code copy, overview default, history active gating and existing credential/lifecycle commands; actions/dialog extraction is feature-local. Staff uses stock common controls, role badges from full array, thin awaited-param route and installed Next error retry API. No global visual default override or broader Student reporting/assignProctor change. Rendered mobile/keyboard/theme behavior remains manual, not proven by source."
+    },
+    {
+      "area": "Handoff and acceptance evidence boundaries",
+      "evidence": [
+        "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/handoff.md"
+      ],
+      "assessment": "US01-09 manual checklist and runtime security/database follow-up owners are explicit. Fresh user-supplied static checks recorded separately from independent review. Backend latest compile is classes-up-to-date BUILD SUCCESS, not a new full-source/runtime execution claim. Login HTTP200 is listener/login availability only. Previous phase receipts are correctly described as historical snapshots; this current union supersedes their source fingerprints for integration coverage. No unrun tests, migration, PostgreSQL or authenticated-browser success is claimed."
+    }
+  ],
+  "validation": {
+    "reviewer_performed": [
+      {
+        "check": "Fresh scoped git diff --check in pte-api and pte-web; pte-doc diff --check",
+        "exit_code": 0,
+        "note": "Git checks tracked differences; all scoped untracked outputs were separately read. CRLF informational warnings only; unrelated exam files excluded from source inspection."
+      },
+      {
+        "check": "Conflict-marker scan over exact103 reviewed inputs",
+        "exit_code": 1,
+        "result": "No conflict-marker matches (rg exit1 means no match)."
+      },
+      {
+        "check": "Phase06 receipt verification using actual skill receipt.py",
+        "exit_code": 0,
+        "result": "VALID"
+      },
+      {
+        "check": "Live source/contract/diff integration traces",
+        "result": "No blocking finding; one unchanged LOW assertion-rationale advisory."
+      },
+      {
+        "check": "Verify103 live input SHA256 against previous post-gate snapshot",
+        "result": "Only useStaffDetailText.ts changed; removing the one invariant comment reproduces prior hash 57256E649980BF3DD6315A293A349F5715A48EABDE5F7CF80D8426F06D09B0FF. Other102 inputs unchanged."
+      },
+      {
+        "check": "Fresh hook/catalog source evaluation and scoped git diff --check",
+        "exit_code": 0,
+        "note": "Hook is untracked, so direct byte comparison establishes exact change; git check does not claim untracked lint coverage."
+      }
+    ],
+    "user_supplied": [
+      {
+        "check": "API-client/UI/tenant/vendor typechecks",
+        "exit_code": 0
+      },
+      {
+        "check": "Scoped tenant features/student/dynamic-route ESLint",
+        "exit_code": 0
+      },
+      {
+        "check": "Shared UI/API root-config ESLint",
+        "exit_code": 0,
+        "note": "Existing Next no-pages warning only; corrected rerun, ignored prior attempts not counted."
+      },
+      {
+        "check": "Tenant production build",
+        "exit_code": 0,
+        "note": "Same current production source, dynamic staff route registered."
+      },
+      {
+        "check": "Backend mvnw -pl app -am -Dmaven.test.skip=true compile",
+        "exit_code": 0,
+        "session": "76461",
+        "note": "Fresh BUILD SUCCESS, classes up to date; earlier Phase02 source compile not represented as fresh full-source recompile."
+      },
+      {
+        "check": "Three-repo git diff --check",
+        "exit_code": 0
+      },
+      {
+        "check": "FE3000/3001 /login",
+        "result": "HTTP200 only; no authenticated browser/API proof."
+      },
+      {
+        "check": "Post-comment tenant tsc, hook ESLint and final tenant production build",
+        "exit_code": 0,
+        "note": "Latest remediation checks completed per user, route present; not independently rerun by reviewer."
+      }
+    ],
+    "tests": {
+      "written": false,
+      "executed": false,
+      "reason": "User --no-tests all phases; no ck:test report produced or inferred."
+    },
+    "limitations": [
+      "Compile/typecheck/lint/build results above supplied by user and live handoff, not rerun by reviewer.",
+      "No live PostgreSQL, migration execution, HTTP auth negatives, authenticated browser/manual rendering or module-architecture test run.",
+      "Full workload scans are bounded in retained memory but not benchmarked; no SQL EXPLAIN/representative-load proof.",
+      "Dirty guard covers explicit tab/internal-link and beforeunload; no claim of browser-back trapping with unsupported Next APIs.",
+      "APPROVED is scoped source-level integration quality only; not release/deploy/human acceptance or automatic plan completion."
+    ],
+    "latest_remediation_checks": {
+      "tenant_tsc_and_hook_eslint": "SUCCESS_REPORTED_BY_USER_EXIT_0, not independently rerun.",
+      "tenant_production_build": "SUCCESS_REPORTED_BY_USER_EXIT_0 after comment fix, staff route present; not independently rerun."
+    }
+  },
+  "evidence_sources": [
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/app/providers.tsx",
+      "usage": "Live unchanged supporting boundary/convention inspected, not new production output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/auth/api.ts",
+      "usage": "Live unchanged supporting boundary/convention inspected, not new production output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/auth/components/DashboardChrome.tsx",
+      "usage": "Live unchanged supporting boundary/convention inspected, not new production output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/api.ts",
+      "usage": "Live unchanged supporting boundary/convention inspected, not new production output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/userManagement/api.ts",
+      "usage": "Live unchanged supporting boundary/convention inspected, not new production output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/api-client/src/client/client.ts",
+      "usage": "Live unchanged supporting boundary/convention inspected, not new production output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/hooks/sessionLifecycle.ts",
+      "usage": "Live unchanged supporting boundary/convention inspected, not new production output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/hooks/createSessionApiClient.ts",
+      "usage": "Live unchanged supporting boundary/convention inspected, not new production output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/shared/security/SecurityPolicy.java",
+      "usage": "Live unchanged supporting boundary/convention inspected, not new production output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/domain/User.java",
+      "usage": "Live unchanged supporting boundary/convention inspected, not new production output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/service/UserProvisioningHelper.java",
+      "usage": "Relevant role/credential policy methods read; unchanged supporting dependency, not production output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/service/UserService.java",
+      "usage": "Relevant role/credential policy methods read; unchanged supporting dependency, not production output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/domain/ExaminerAttemptAssignment.java",
+      "usage": "Live unchanged supporting boundary/convention inspected, not new production output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/domain/ExaminerAnswerScore.java",
+      "usage": "Live unchanged supporting boundary/convention inspected, not new production output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/ScoringMethodResolver.java",
+      "usage": "Live unchanged supporting boundary/convention inspected, not new production output."
+    }
+  ],
+  "receipt": {
+    "path": "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/quality/phase-07-verification-and-handoff-receipt.json",
+    "issued_by": "C:/Users/DELL/.codex/skills/ck-quality/scripts/receipt.py",
+    "policy": "Immediately issue after this APPROVED report and verify exact live report+103 inputs; excludes state files, previous reports/receipts and subsequent final-code-review note."
+  },
+  "report_path": "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/quality/phase-07-verification-and-handoff-quality-report.json",
+  "reviewer_changes": "This canonical report and mechanical receipt only; separate user-authorized post-gate final-code-review note follows. No production/tests/state transitions, commit/push/deploy or backend/DB restart.",
+  "summary_basis": "Open findings only; the historical LOW evidence is retained and its status is now RESOLVED.",
+  "verification_scope": {
+    "finding_ids": [
+      "QUAL-P03-001"
+    ],
+    "unchanged_scope": true,
+    "inputs_checked": 103,
+    "changed_inputs": [
+      "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffDetailText.ts"
+    ],
+    "retained_integration_coverage": "102 other inputs exactly match the preceding independent integration/post-gate review snapshot. This verify re-evaluates only the carried advisory, not unrelated code."
+  }
+}

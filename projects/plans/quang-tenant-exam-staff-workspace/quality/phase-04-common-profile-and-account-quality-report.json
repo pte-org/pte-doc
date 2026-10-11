@@ -1,0 +1,366 @@
+{
+  "mode": "verify",
+  "target": "phase-04-common-profile-and-account",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-11T04:15:35Z",
+  "reviewed_files": [
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/ProfileHeader.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/ProfileLayout.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/ProfileAccountPanel.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/index.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/studentDetail/components/StudentDetailHeader.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/studentDetail/components/StudentDetailView.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/studentDetail/components/StudentAccountTab.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/studentDetail/components/StudentActionDialogs.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/studentDetail/hooks/useStudentDetailActions.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffDetailView.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffProfileHeader.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffAccountTab.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffAccountDescription.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffActionDialogs.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffWorkspaceError.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffProfileSnapshot.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffAccountForm.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffAccountActions.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffEditGuard.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/index.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/app/(dashboard)/host/exam-staff/[staffPublicId]/page.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/app/(dashboard)/host/exam-staff/[staffPublicId]/loading.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/app/(dashboard)/host/exam-staff/[staffPublicId]/error.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/components/ExamStaffView.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/components/ExamStaffRowActions.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/constants.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/hooks/useExamStaffListText.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/hooks/useExamStaffListColumns.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/api.ts"
+  ],
+  "constraints_source_paths": [
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/phase-04-common-profile-and-account.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/phase-03-api-client-and-state.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/contract.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/docs/CODING_STANDARDS_WEB.md"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [
+    {
+      "id": "QUAL-P04-001",
+      "severity": "MEDIUM",
+      "rule": "CORR_DEFINED_BRANCH_BEHAVIOR",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffDetailView.tsx:35",
+      "related_locations": [
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffDetailView.tsx:70",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffAccountForm.ts:17",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/api.ts:26"
+      ],
+      "evidence": "StaffDetailView returns StaffWorkspaceError for query.isError || !account, including errors with cached account data. StaffAccountTab and its local useStaffAccountForm state are therefore unmounted on a failed background refetch. Retry remounts the editor with staffProfileForm(account), not the unsaved draft. The installed query-core 5.101.2 explicitly exposes isRefetchError = isError && hasData; query error state retains previous data. Providers constructs a default QueryClient, and useStaffDetail does not disable background refetch. The guard only gates explicit navigation/actions and cannot intercept this render branch.",
+      "why_it_matters": "A Host editing account contact information can lose the draft after a transient network/server error without choosing Save, Cancel, or Discard. Parent editState can additionally remain dirty while the editor/dialog tree is absent. This violates Phase04 dirty-state/discard behavior.",
+      "required_action": "Distinguish initial/no-data failures from retryable background failures. Preserve the mounted Staff account editor and its draft for retryable refetch errors, expose a safe non-destructive retry notice, and keep guard state accurate. Preserve fail-closed behavior for revoked authorization/not-found rather than continuing to expose an actionable cached profile after 403/404. Do not broaden this fix into the unrelated Student implementation.",
+      "owner": "cook",
+      "change_evidence": "StaffDetailView and useStaffAccountForm are new untracked Phase04 output files; the destructive rendering/draft-owner integration is new in this phase.",
+      "source_trace": "Load account -> open Account/Edit -> modify field -> background detail refetch exhausts retries with transient failure -> query.isError becomes true with prior data -> full-page error replaces/unmounts editor -> successful retry remounts original account draft. Source trace only; no browser execution.",
+      "resolution": {
+        "verified_at": "2026-10-11T04:15:35Z",
+        "confidence": "high",
+        "locations": [
+          "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffDetailView.tsx:36",
+          "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffDetailView.tsx:46"
+        ],
+        "evidence": "Full-page error now applies only to absent data or ApiError status 401/403/404. Other cached-data errors add an inline retry sibling and retain ProfileLayout and the same StaffAccountTab key. Retry does not change editVersion; local draft/guard state remains mounted. No fail-open cached editor after authorization/not-found errors. Re-read during remediation cycle 2; retained fail-closed and stable-editor branches are unchanged.",
+        "conclusion": "Original destructive background-error branch is resolved by source inspection. No browser/test proof claimed."
+      }
+    },
+    {
+      "id": "QUAL-P04-002",
+      "severity": "MEDIUM",
+      "rule": "FE_STATE_OWNERSHIP_CLEAR",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffAccountForm.ts:23",
+      "related_locations": [
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffAccountForm.ts:26",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffAccountForm.ts:47",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffDetailView.tsx:58",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffDetailView.tsx:74",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffAccountDescription.tsx:24",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/api.ts:70"
+      ],
+      "evidence": "The form now captures PATCH result in hook-local lastSave and seeds form/baseline from it. However authoritative is local only and not returned to StaffAccountTab/Description; read-only fields still use account[key] from old query data. StaffDetailView increments editVersion on any accepted tab/action and keys StaffAccountTab by publicId-editVersion, resetting lastSave to null on remount. The unchanged API helper still only starts void invalidation; selected query data is not reconciled with the PATCH response. Thus tab navigation loses the bridge while delayed or failed refetch leaves stale account. Object-reference inequality alone also does not establish that a refetch snapshot is newer than the successful PATCH.",
+      "why_it_matters": "Immediate re-edit within the same hook instance is improved, but successful canonical account data is not owned by a durable selected-account source. Read-only UI can show old saved values, and navigating to another tab and back before refetch completes can seed the next edit with old fields, allowing a full-field PATCH to overwrite the successful change. A transient refetch failure now preserves the mounted profile but still leaves its read-only and remounted editor sources stale.",
+      "required_action": "Make the successful canonical account the shared, tenant/target-scoped source used by read-only rendering and subsequent edit initialization, surviving editVersion remounts. Reconcile the selected-detail query cache with the PATCH result and protect against older in-flight reads, or retain an ordered authoritative account at a stable feature owner above editor remounts and pass it to both render and form consumers. If relying on refetch instead, keep another edit blocked until an authoritative account is available and explicitly handle refresh failure. Preserve existing invalidation/authorization behavior; do not treat any new object reference as proof of a newer server snapshot.",
+      "owner": "cook",
+      "change_evidence": "The Phase03 API helper is unchanged and is supporting evidence, not a reclassified standalone Phase03 finding. The new Phase04 form/read-only consumer and reset/re-edit flow introduce this integration failure.",
+      "source_trace": "Query account E0 -> PATCH email E1 succeeds -> hook stores result E1 but description still renders E0 -> detail refetch is delayed or fails -> select Overview (no dirty/pending guard now), editVersion increments and editor remounts with lastSave=null -> return Account/Edit before authoritative refetch -> reset uses query E0 -> change phone only -> full-field PATCH sends E0 email, reverting E1. Independent static trace; no test/API/browser execution.",
+      "original_gate_evidence": "useStaffAccountForm's mutation onSuccess discards ExamStaffAccountResponse and only sets saved=true/editing=false. The existing useUpdateStaffProfile onSuccess fires void invalidateQueries without updating the selected-detail cache or returning the refetch promise. Installed query-core awaits only the hook callback's returned promise before success dispatch. The next Edit calls reset(), which reads staffProfileForm(account) from the still-old detail query. Save always sends all four editable fields, not only the changed field.",
+      "original_source_trace": "Save email E1 -> PATCH returns canonical E1 -> onSuccess ignores response and starts unawaited detail refetch -> pending ends/Edit appears while account still E0 -> immediately start Edit, change phone only -> reset seeded E0 -> full-field PATCH resubmits E0. A later E1 query update does not resynchronize the already-open draft. Source trace only; no API/browser mutation.",
+      "verification": {
+        "verified_at": "2026-10-11T04:15:35Z",
+        "result": "RESOLVED",
+        "evidence": "Canonical account ownership moved to exact tenant/target detail cache; editor-local bridge removed."
+      },
+      "verification_history": [
+        {
+          "verified_at": "2026-10-11T04:12:33Z",
+          "result": "PARTIALLY_REMEDIATED_STILL_BLOCKING",
+          "evidence": "Returned canonical result is captured and same-instance reset uses the bridge, but bridge lifetime is shorter than account-view lifetime and read-only fields do not use it."
+        }
+      ],
+      "resolution": {
+        "verified_at": "2026-10-11T04:15:35Z",
+        "confidence": "high",
+        "locations": [
+          "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/api.ts:72",
+          "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/api.ts:79",
+          "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/api.ts:84",
+          "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffAccountForm.ts:42",
+          "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffDetailView.tsx:74",
+          "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffAccountDescription.tsx:24"
+        ],
+        "evidence": "onMutate captures the same tenant/target detail key as useStaffDetail plus current auth generation and awaits exact-key query cancellation. Async onSuccess rejects obsolete auth generations before and after a second cancellation of in-flight detail reads, then setQueryData(context.key, canonical account) precedes existing list/detail/overview/work and tenantUsers invalidation. The installed mutation implementation awaits this hook-level onSuccess before success dispatch and per-call form callbacks. The form now seeds returned canonical fields into form/baseline without an independent account bridge; read-only fields and keyed remounts continue to use the selected detail cache. Existing session generation advances on actor/tenant/role/logout change and provider clears caches. Detail reads pass AbortSignal; exact cancellation prevents older in-flight detail completion from overwriting the result.",
+        "conclusion": "The original immediate re-edit and first-cycle tab/remount stale-source paths are resolved by durable query ownership and ordering. Auth-generation protection prevents an old mutation response from repopulating a new protected session's cache. Static source verification only, no API/browser/test execution."
+      }
+    }
+  ],
+  "scope": {
+    "declared_output_files": 29,
+    "reviewed_output_files": 29,
+    "mode": "Independent inline reviewer; TypeScript/Node and Frontend adapters.",
+    "refinements": [
+      "ExamStaffRowActions replaces planned ExamStaffListDialogs by reusing StaffAccountActions and StaffActionDialogs.",
+      "ExamStaff constants and API-connected StaffProfileSnapshot are explicitly declared additional Phase04 outputs.",
+      "Cycle 2 explicitly adds detail/api.ts to Phase04 outputs for canonical-save cache reconciliation; overlapping Phase03 receipt refresh is handled separately."
+    ],
+    "output_fingerprint_policy": "reviewed_files contains the 28 Phase04 outputs actually read during the independent gate plus the live detail/api.ts output explicitly added and evaluated in verify. Phase/contract/standards remain constraints, not fingerprints. Evidence-only dependencies are not additional reviewed outputs.",
+    "excluded": [
+      "Three unrelated dirty exam component files were not opened, evaluated, or modified.",
+      "Other Phase03 API/client/filter/message outputs remain evidence-only; detail/api.ts is explicitly added to Phase04 reviewed output scope. No unrelated re-audit.",
+      "Broad Student text-hook rewrite, other exam scope, lifecycle refactor, backend implementation, and Phase05/06 role workload implementation are out of scope."
+    ],
+    "verification_scope": "Re-evaluated exactly QUAL-P04-001 and QUAL-P04-002 against live view/form/render/mutation paths, with existing session/cancellation implementations as evidence; no unrelated rescan. Scope expanded to 29 declared outputs by detail/api.ts."
+  },
+  "evaluation": {
+    "shared_profile": "ProfileHeader/Layout/AccountPanel expose presentation slots only, import no feature DTOs/hooks, and are consumed by Learner and Staff. Existing PageHeader/Avatar/ActionMenu/Inputs/Tabs/DescriptionList/dialog defaults are not overridden by Staff adapters; account section markup is extracted from existing Learner composition.",
+    "learner_preservation": "Live diff preserves default Overview, Student code copy, existing Student inline profile payload/actions/credential generation, Account/History/Overview panel composition. Action state/dialogs are feature-owned extractions. No broad Student text-hook edits.",
+    "staff_roles_and_actions": "Staff header includes full role set, email and account status; work tabs derive from all roles, Overview first/Account last. No Student code/copy or Student credential route in Staff. Credential availability honors server capability in detail and disables mixed STUDENT list targets. Lifecycle confirmation is account-wide. Public backend profile service retains Host/tenant/all-role manageability and whitelisted fields.",
+    "account": "Editable whitelist/trim/null/validation preserved. Retryable detail refetch failures retain the mounted draft; absent account or 401/403/404 fails closed. Successful canonical PATCH response is installed in exact tenant/target cache before mutation completion, with cancellation and auth-generation guards, and returned fields update form/baseline. Read-only fields and subsequent editor remounts use that same canonical source. Both findings resolved.",
+    "navigation": "Thin route awaits Promise params, public-ID keyed view resets target-local state, safe encoded same-tab router.push, loading common reuse, unstable_retry matches installed Next docs, scoped breadcrumb registration. Guard covers explicit tab/action/same-origin different-path anchor navigation and beforeunload only; unsupported browser-history interception is not claimed or required by the latest user clarification.",
+    "list": "Existing useExamStaff server paging/search/role/status is used, common DataTable local filter/sort/paging are disabled, page resets on filter change. Row actions reuse feature-owned detail dialogs/actions and perform no per-row detail request fan-out.",
+    "phase_boundary": "StaffProfileSnapshot reads actual overview and renders role session counts only. Proctor/Examiner work-tab descriptive placeholders intentionally await Phase05/06; workload screens are not claimed implemented."
+  },
+  "validation": {
+    "reviewer_performed": [
+      "Live git status, git diff/numstat, scoped source reads and supporting implementation/library inspection.",
+      "git diff --check exited 0; CRLF conversion warnings are not semantic validation.",
+      "Verify: fresh canonical report, current StaffDetailView/useStaffAccountForm/StaffAccountTab/StaffAccountDescription/api source and git status read; scoped git diff --check exited 0.",
+      "Cycle 2: freshly read current API/form/view/description/account-tab source, declared phase refinement, session-generation/cache-clear/client-staleness source and installed cancellation/mutation ordering. Scoped git diff --check exited 0.",
+      "Final freshness check: existing Phase04 and refreshed Phase03 receipts both independently verified VALID before validation-metadata update; no production differences since approval fingerprint."
+    ],
+    "user_supplied": [
+      {
+        "check": "Scoped direct-node ESLint: examStaff, studentDetail and dynamic route",
+        "result": "SUCCESS_REPORTED_BY_USER_EXIT_0",
+        "note": "Prior pnpm/cmd parentheses quoting failure was rerun successfully; not a product lint error.",
+        "freshness": "Supplied before current remediation; not proof of the latest edits."
+      },
+      {
+        "check": "UI, tenant and vendor TypeScript checks",
+        "result": "SUCCESS_REPORTED_BY_USER_EXIT_0",
+        "freshness": "Supplied before current remediation; not proof of the latest edits."
+      },
+      {
+        "check": "corepack pnpm --filter tenant-web build",
+        "result": "SUCCESS_REPORTED_BY_USER",
+        "details": "Next16 compilation 16.5s, TypeScript 21.5s, 28 static routes; new /host/exam-staff/[staffPublicId] registered.",
+        "freshness": "Supplied before current remediation; not proof of the latest edits."
+      }
+    ],
+    "tests": "Not written or run, explicitly declined.",
+    "limitations": [
+      "No browser/manual interaction, HTTP mutation, live database, or release proof.",
+      "Findings are independently checked source-level state traces, not executed tests.",
+      "Build/lint/typecheck results are supplied by user, not rerun by this reviewer.",
+      "APPROVED is independent source-level quality approval. Cycle-2 lint/typecheck success is user-supplied; prior production build predates latest remediation."
+    ],
+    "latest_remediation_checks": {
+      "status": "SUCCESS_REPORTED_BY_USER_EXIT_0_CYCLE_2",
+      "checks": "Direct-node scoped ESLint for features/examStaff/detail and tenant tsc --noEmit both exited 0 after canonical-cache remediation. Supplied by user, not independently rerun."
+    },
+    "phase03_overlap": "Refreshed Phase03 receipt independently verified VALID; separate Phase03 semantic verify APPROVED reported by user."
+  },
+  "evidence_sources": [
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/api.ts",
+      "usage": "Read fully and evaluated as an explicitly added Phase04 output in cycle-2 verification; canonical-cache ordering and target/auth guards."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/api.ts",
+      "usage": "Read fully: existing server-paged list and lifecycle invalidation."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/types.ts",
+      "usage": "Read fully: existing list/create domain types."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/studentDetail/api.ts",
+      "usage": "Read fully: existing Learner query/mutation boundary, not remediation scope."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/userManagement/api.ts",
+      "usage": "Read fully: existing shared credential workflow/invalidation."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/PageHeader.tsx",
+      "usage": "Existing common component behavior read for reuse and integration."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/ActionMenu.tsx",
+      "usage": "Existing common component behavior read for reuse and integration."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/DescriptionList.tsx",
+      "usage": "Existing common component behavior read for reuse and integration."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/Tabs.tsx",
+      "usage": "Existing common component behavior read for reuse and integration."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/ConfirmDialog.tsx",
+      "usage": "Existing common component behavior read for reuse and integration."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/DataTable.tsx",
+      "usage": "Existing common component behavior read for reuse and integration."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/app/providers.tsx",
+      "usage": "Read fully: default QueryClient and auth-cache clearing."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/auth/components/RequireAuth.tsx",
+      "usage": "Read fully: authenticated role guard."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/app/(dashboard)/host/layout.tsx",
+      "usage": "Read fully: Host dashboard wrapper."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/layouts/DashboardBreadcrumbContext.tsx",
+      "usage": "Read fully: scoped label cleanup and no Home trail."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/auth/components/DashboardChrome.tsx",
+      "usage": "Relevant breadcrumb/navigation and RequireAuth excerpts only."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/service/ExamStaffAccountService.java",
+      "usage": "Read fully: authorization, profile canonicalization and safe account response."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/dto/request/UpdateExamStaffProfileRequest.java",
+      "usage": "Validation annotation excerpts: 255-character mapped request limits."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/constants.ts",
+      "usage": "Read fully as unchanged Phase03 integration dependency, not Phase04 output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/types.ts",
+      "usage": "Read fully as unchanged Phase03 integration dependency, not Phase04 output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/utils.ts",
+      "usage": "Read fully as unchanged Phase03 integration dependency, not Phase04 output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffDetailText.ts",
+      "usage": "Read fully as unchanged Phase03 integration dependency, not Phase04 output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffWorkspaceFilters.ts",
+      "usage": "Read fully as unchanged Phase03 integration dependency, not Phase04 output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/messages/en.ts",
+      "usage": "Read fully as unchanged Phase03 integration dependency, not Phase04 output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/messages/vi.ts",
+      "usage": "Read fully as unchanged Phase03 integration dependency, not Phase04 output."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/node_modules/.pnpm/@tanstack+query-core@5.101.2/node_modules/@tanstack/query-core/src/query.ts",
+      "usage": "Relevant error-state/result and success-callback ordering excerpts only."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/node_modules/.pnpm/@tanstack+query-core@5.101.2/node_modules/@tanstack/query-core/src/queryObserver.ts",
+      "usage": "Relevant error-state/result and success-callback ordering excerpts only."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/node_modules/.pnpm/@tanstack+query-core@5.101.2/node_modules/@tanstack/query-core/src/mutation.ts",
+      "usage": "Relevant error-state/result and success-callback ordering excerpts only."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/node_modules/.pnpm/@tanstack+query-core@5.101.2/node_modules/@tanstack/query-core/src/mutationObserver.ts",
+      "usage": "Relevant error-state/result and success-callback ordering excerpts only."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/node_modules/next/dist/docs/01-app/03-api-reference/03-file-conventions/error.md",
+      "usage": "Installed Next reference read fully."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/node_modules/next/dist/docs/01-app/03-api-reference/03-file-conventions/page.md",
+      "usage": "Installed Next reference read fully."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/node_modules/next/dist/docs/01-app/03-api-reference/04-functions/use-router.md",
+      "usage": "Installed Next reference read fully."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/hooks/sessionLifecycle.ts",
+      "usage": "Read fully: auth generation lifecycle."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/hooks/createSessionApiClient.ts",
+      "usage": "Read fully: session-generation API client wiring."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/lib/apiClient.ts",
+      "usage": "Read fully: tenant client wiring."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/api-client/src/client/client.ts",
+      "usage": "Request-generation stale-session response guard excerpts."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/node_modules/.pnpm/@tanstack+query-core@5.101.2/node_modules/@tanstack/query-core/src/queryClient.ts",
+      "usage": "Exact-key cancelQueries cancellation/await excerpts."
+    }
+  ],
+  "report_path": "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/quality/phase-04-common-profile-and-account-quality-report.json",
+  "receipt": {
+    "issued_by": "C:/Users/DELL/.codex/skills/ck-quality/scripts/receipt.py",
+    "path": "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/quality/phase-04-common-profile-and-account-receipt.json",
+    "policy": "Issue immediately after this APPROVED verify report; receipt fingerprints current report and 29 outputs, not tests/runtime/release correctness."
+  },
+  "reviewer_changes": "Canonical quality report and mechanically issued Phase04 receipt only. No production/test edits, test execution, phase/master state transitions, Phase05 activation, or Phase03 receipt refresh.",
+  "summary_basis": "Open findings only; both original MEDIUM findings RESOLVED. Historical gate and first-cycle verification evidence is retained, not current unresolved evidence.",
+  "verification_files": [
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffDetailView.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffAccountForm.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffAccountTab.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffAccountDescription.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/api.ts"
+  ]
+}

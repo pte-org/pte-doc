@@ -1,0 +1,25 @@
+{
+  "target": "phase-05-proctor-overview-and-schedule",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\DOCUMENTFPT\\Github\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-tenant-exam-staff-workspace/quality/phase-05-proctor-overview-and-schedule-quality-report.json",
+  "reviewed_files": [
+    "pte-web/apps/tenant-web/features/examStaff/detail/api.ts",
+    "pte-web/apps/tenant-web/features/examStaff/detail/components/StaffDetailView.tsx",
+    "pte-web/apps/tenant-web/features/examStaff/detail/components/StaffProfileSnapshot.tsx",
+    "pte-web/apps/tenant-web/features/examStaff/detail/constants.ts",
+    "pte-web/apps/tenant-web/features/examStaff/detail/filters/StaffFilterToolbar.tsx",
+    "pte-web/apps/tenant-web/features/examStaff/detail/filters/api.ts",
+    "pte-web/apps/tenant-web/features/examStaff/detail/messages/en.ts",
+    "pte-web/apps/tenant-web/features/examStaff/detail/messages/vi.ts",
+    "pte-web/apps/tenant-web/features/examStaff/detail/proctor/NextProctorSessions.tsx",
+    "pte-web/apps/tenant-web/features/examStaff/detail/proctor/ProctorOverview.tsx",
+    "pte-web/apps/tenant-web/features/examStaff/detail/proctor/ProctorScheduleTab.tsx",
+    "pte-web/apps/tenant-web/features/examStaff/detail/proctor/ProctorSessionList.tsx",
+    "pte-web/packages/api-client/src/requests/scheduling/sessions.ts"
+  ],
+  "source_fingerprint": "sha256:f6eae46f0136ef3b3c3571c6c78363fa301408e573d66e7f3342c3ed6baca924",
+  "reviewed_at": "2026-10-11T04:23:33Z",
+  "open_blocking_findings": 0
+}
