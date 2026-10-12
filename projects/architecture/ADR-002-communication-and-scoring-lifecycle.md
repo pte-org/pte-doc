@@ -98,7 +98,7 @@ AttemptAnswer / Attempt:
 
 - **Idempotency ở worker.** RabbitMQ là at-least-once → `AiScoringWorker` phải dedup theo `answerId`. Đây là nơi **duy nhất** còn cần idempotency; các lời gọi khác nằm trong transaction nên không có vấn đề giao lại.
 - **Tracing.** OpenTelemetry (`micrometer-tracing-bridge-otel` + OTLP exporter → Jaeger). Vẫn cần dù là monolith: đường đi từ lệnh chấm tới AI vendor tới DB vẫn cắt qua một queue.
-- **Retry.** `spring-retry` cho lời gọi vendor. Không có Resilience4j, không có circuit breaker — không còn lời gọi mạng nội bộ nào để mà cắt.
+- **Retry.** `spring-retry` cho lời gọi vendor. Không có Resilience4j; không còn lời gọi mạng nội bộ nào để mà cắt. (Lời gọi tới vendor AI thì có retry và circuit breaker tự viết — xem Amendment 2026-10-12.)
 - **Payload queue là JSON** (Jackson). Thêm field mới phải nullable — message đang nằm trong queue lúc deploy sẽ được consumer phiên bản mới đọc.
 
 ---
@@ -112,3 +112,17 @@ AttemptAnswer / Attempt:
 - **Mất load-leveling cho write spike.** 500 sinh viên nộp cùng lúc đập thẳng vào DB, không có queue đứng giữa điều tiết.
 - **RabbitMQ sập** → không chấm được, không gửi email được. Bài thi và việc nộp bài không ảnh hưởng.
 - **Không còn ranh giới nào ép việc "không ghi ngược vào attempt".** Trước đây là ranh giới service; nay chỉ là quy ước.
+
+---
+
+## Amendment 2026-10-12 — chấm AI bằng Azure + Gemini (plan `phat-ai-scoring`)
+
+Phần nghiệp vụ trung tâm **không đổi**: scoring vẫn do host kích hoạt, vẫn có cổng publish. **Thời điểm chấm không đổi** — nộp bài không kéo theo chấm, chỉ lệnh của host mới đẩy job. Những điểm sau được bổ sung:
+
+1. **Chi tiết AI lưu trong bảng riêng** `scoring_answer_ai_details` (một dòng cho mỗi câu, unique theo `answer_public_id`), không nhét vào `ScoringAnswer`. Dòng chấm giữ điểm và trạng thái; bảng chi tiết giữ tiêu chí, transcript, nhận xét, model, cờ fallback. Chi tiết này chỉ trả ra qua API của host và examiner, không có trong response của sinh viên.
+2. **Message chỉ gửi sau khi transaction commit, và mang dispatch token.** `AiScoringDispatcher` đặt dòng sang `AI_SCORING` kèm token trong transaction, commit xong mới đẩy job (chỉ chứa id + token, không chứa audio hay bài viết). `AiScoringWorker` đọc nội dung từ dòng và chỉ chạy khi dòng còn chờ đúng token đó; redelivery hoặc job cũ gặp dòng đã kết thúc/đã gửi lại token mới thì bị bỏ qua và không gọi vendor lần nữa. Message vào DLQ chỉ đánh dấu `SCORING_FAILED` (`INTERNAL_ERROR`) khi token còn khớp.
+3. **Chấm lại.** Host bấm chấm lại sẽ gửi lại các câu `SCORING_FAILED` và các câu `AI_SCORING` quá hạn (`staleDispatchMinutes`, tức job coi như mất). Mỗi lần gửi lại cấp token mới nên kết quả muộn của lần gửi trước không ghi đè.
+4. **Gọi vendor.** Retry và circuit breaker nằm trong `ProviderGuard` quanh từng vendor; mọi câu lỗi kết thúc ở `SCORING_FAILED` với một `AiFailureReason` (chỉ là mã phân loại, không chứa nội dung). Không log audio, transcript, bài viết hay body trả về của vendor; key chỉ đọc từ biến môi trường; URL presigned của audio có TTL ngắn (mặc định 120 giây, tối đa 900 giây).
+5. **Examiner luôn thấy điểm AI.** Trước đây examiner chấm mù. Nay màn hình examiner luôn hiển thị điểm AI và chi tiết đi kèm.
+   - **Hạn chế đã biết:** examiner có thể bị điểm AI kéo theo (anchoring). Tín hiệu "lệch ≥ 20 điểm giữa AI và examiner" vì thế yếu đi: hai điểm không còn độc lập, nên độ lệch nhỏ không còn chứng minh hai bên cùng đánh giá đúng.
+   - Giảm nhẹ: điểm AI chỉ là gợi ý, điểm cuối vẫn là điểm của examiner/host; host vẫn publish thủ công.
