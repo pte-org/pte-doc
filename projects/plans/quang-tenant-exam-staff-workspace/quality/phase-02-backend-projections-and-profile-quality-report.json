@@ -1,0 +1,165 @@
+{
+  "mode": "verify",
+  "target": "phase-02-backend-projections-and-profile",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-10T12:09:35Z",
+  "reviewed_files": [
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/ExaminerOverviewAccumulator.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/ExaminerOverviewView.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/ExaminerSessionPage.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/ExaminerSessionView.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffOverviewView.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffWorkspaceConstants.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffWorkspaceController.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffWorkspaceException.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffWorkspaceQuery.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffWorkspaceService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/package-info.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/ExamStaffIdentityService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/dto/response/ExamStaffAccountView.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/controller/ExamStaffProfileController.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/dto/request/UpdateExamStaffProfileRequest.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/service/ExamStaffAccountService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/repository/UserRepository.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/StaffScoringService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/dto/response/ExaminerProgressView.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/StaffAttemptProgress.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/StaffSessionProgress.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/StaffScoringQueryService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/ScoringEligibilityQueryService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/repository/ExaminerAttemptAssignmentRepository.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/repository/ExaminerAnswerScoreRepository.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/repository/ScoringAnswerRepository.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/repository/ScoringSessionStateRepository.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/StaffScheduleService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/StaffSessionFilter.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/dto/response/StaffSessionView.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/StaffScheduleQueryService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/internal/repository/ExamSessionRepository.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/resources/db/migration/V92__tenant_canonical_email_uniqueness.sql",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/resources/db/migration/V93__staff_schedule_lookup_indexes.sql",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/attempt/AttemptStaffContextService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/attempt/dto/response/AttemptStaffContextView.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/service/AttemptStaffContextQueryService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/repository/ExamAttemptRepository.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/repository/StaffAssignmentRow.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/repository/StaffAnswerRow.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/repository/StaffScoreRow.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/repository/StaffPublicationRow.java"
+  ],
+  "constraints_source_paths": [
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/phase-02-backend-projections-and-profile.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/contract.md"
+  ],
+  "evidence_source_paths": [
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/service/UserProvisioningHelper.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/dto/response/package-info.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/package-info.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/dto/response/package-info.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/dto/response/package-info.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/domain/ScoringAnswer.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/domain/ExaminerAttemptAssignment.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/ScoringMethodResolver.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/attempt/AttemptService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/shared/web/ApiResponse.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoretemplate/ScoreTemplateService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/resources/db/migration/V10__scoring.sql",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/resources/db/migration/V58__examiner_scoring_foundation.sql",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/resources/db/migration/V59__enforce_examiner_scoring_references.sql",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/resources/db/migration/V60__bound_examiner_assignment_history.sql",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/attempt/dto/response/package-info.java"
+  ],
+  "scope": {
+    "output_files": 42,
+    "modified_tracked_files": 8,
+    "new_files": 34,
+    "stack": "Java/Spring Data JPA/Hibernate/PostgreSQL/Flyway",
+    "adapter": "Database; no Java adapter is supplied by the skill",
+    "method": "Re-evaluated exactly QUAL-P02-001 and QUAL-P02-002, read all 42 current Phase02 outputs, and cross-checked expanded phase Files against live Git modified/untracked enumeration. Refreshed canonical attempt facade/DTO/scalar queries, four scoring closed projections, query return types, accumulators, Session scalar criteria/count paths and their callers. Lifecycle refactor files, guard service and lifecycle test changes are explicitly excluded from this report/receipt and not evaluated here.",
+    "authorization": "User authorized automatic Standard continuation, no tests, quality/checks in all phases. Reviewer makes no production edits or pipeline transitions; no human checkpoint is requested.",
+    "receipt_scope": "Only Phase02 production outputs are in reviewed_files; phase/contract constraints and unchanged source evidence are recorded separately."
+  },
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [
+    {
+      "id": "QUAL-P02-001",
+      "severity": "HIGH",
+      "rule": "CORR_BOUNDARY_VALIDATION",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/StaffScoringQueryService.java:46",
+      "related_locations": [
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/StaffAttemptProgress.java:55",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/resources/db/migration/V59__enforce_examiner_scoring_references.sql:15",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/contract.md:104"
+      ],
+      "evidence": "The new assignment batch is converted directly to StaffAttemptProgress using assignment.attemptPublicId; no canonical Attempt read validates tenant/session/nondeleted membership. readAnswers only scopes scoring copies by tenant and those IDs. StaffAttemptProgress.finish compares derived eligible to the frozen count and returns COMPLETED when eligible == submitted. An assignment with a missing/deleted/cross-scope canonical attempt and frozen count 0 can have no matching scoring answers or scores, so both counts are 0 and it is reported as verified completion. Existing V59 constrains the assignment to its batch and score references to scoring-owned rows, but does not add a foreign key to the canonical attempt. V60 permits zero frozen counts. Thus existing DB constraints do not establish the missing canonical scope check. The contract explicitly excludes unresolved/cross-tenant/deleted references and permits zero-work completion only with consistent pinned eligibility.",
+      "why_it_matters": "Malformed or stale assignment references contribute visible assignment/card totals, can produce false completed workload, and can retain scoring-copy progress after the canonical attempt has been deleted. Matching a frozen number to the number of available scoring copies does not prove the canonical attempt or its zero-work eligibility is valid.",
+      "required_action": "Validate assigned attempt identities in bounded batches through an Attempt-owned public read contract, checking tenant, session and deleted state before aggregating visible assignments. Exclude unresolved/cross-tenant/deleted references as the contract specifies. Establish a valid pinned context for zero-work completion; use UNAVAILABLE for resolvable but unverifiable progress rather than inferring validity from absent answer rows. Keep this validation batched and preserve page/status/attempt/batch total reconciliation.",
+      "owner": "cook",
+      "change_evidence": "StaffScoringQueryService.java and StaffAttemptProgress.java are untracked Phase02 output files listed by git ls-files --others --exclude-standard.",
+      "resolution": {
+        "verified_at": "2026-10-10T12:09:35Z",
+        "location": "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/StaffScoringQueryService.java:50",
+        "evidence": "AttemptStaffContextService exposes an Attempt-owned safe batch DTO through the existing named response interface. ExamAttemptRepository.findStaffContexts scopes canonical attempts by tenant and deleted=false; its scalar pinned-context join and countStaffPinnedTasks validate pinned tenant/session/deleted state. AttemptStaffContextQueryService bounds the selected set to 100 and flags invalid pinned contexts. StaffScoringQueryService excludes missing contexts and session mismatches before creating progress or visible assignment totals. It derives expected eligibility from canonical pinned task counts through the existing scoring resolver; StaffAttemptProgress.finish now compares actual eligible count against both frozen and canonical expected counts, and accept requires the canonical pinned template. Invalid pinned context adds the safe unavailable diagnostic, preventing missing context from becoming verified zero-work completion. StaffSessionProgress counts batches from validated assignments only, in deterministic batchPublicId/id scan order, retaining one last batch key per session across slices.",
+        "conclusion": "Resolved with high confidence from current source inspection. Missing/deleted/cross-session canonical references are omitted; resolvable unverifiable contexts remain unavailable, with preserved count reconciliation."
+      }
+    },
+    {
+      "id": "QUAL-P02-002",
+      "severity": "MEDIUM",
+      "rule": "PERF_STREAM_OR_PAGINATE_LARGE_DATA",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffWorkspaceService.java:22",
+      "related_locations": [
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/StaffScheduleQueryService.java:27",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/StaffScoringQueryService.java:42",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/StaffScoringQueryService.java:73"
+      ],
+      "evidence": "StaffWorkspaceService wraps the complete session/assignment/answer scan in one REPEATABLE_READ transaction. StaffScheduleQueryService.findAll materializes ExamSession entities before mapping them; StaffScoringQueryService loads Slice<ExaminerAttemptAssignment>, Slice<ScoringAnswer>, List<ExaminerAnswerScore> and ScoringSessionState entities under that same persistence context. Local collections are limited to 100 rows but none of the scanner paths detaches/clears loaded entities or uses scalar/DTO repository projections. The JPA persistence context retains managed instances across batches until the transaction ends, including ScoringAnswer payload/correctAnswerText/optionsJson. The returned page is bounded, while managed request memory scales with the scanned dataset.",
+      "why_it_matters": "The implementation does not meet the contract's bounded-memory composition rule despite bounded query pages. Large staff histories can retain every scanned answer/entity, increasing heap usage and threatening the service before the requested page is returned. A read-only transaction and a 30-second timeout do not evict managed entities.",
+      "required_action": "Use owner-module scalar/DTO queries that avoid loading managed answer payloads and session/assignment entities for the scan, or implement safe owner-controlled eviction between bounded batches. Retain only counters, the requested page and bounded working data while preserving the single consistent read snapshot. Review the related full-tenant/offset scan cost; do not claim representative PostgreSQL query-cost or heap proof without actual evidence.",
+      "owner": "cook",
+      "change_evidence": "The transaction and scanner classes are new untracked Phase02 outputs; the entity-returning derived queries are added in the current repository diffs.",
+      "resolution": {
+        "verified_at": "2026-10-10T12:09:35Z",
+        "location": "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/StaffScheduleQueryService.java:33",
+        "evidence": "Session now selects six scalar columns through a Criteria Tuple query and shares scoped predicates with a separate scalar count query; it no longer materializes managed ExamSession rows for scans. Assignment and answer slices, score lookups and publication lookups now return StaffAssignmentRow, StaffAnswerRow, StaffScoreRow and StaffPublicationRow closed scalar interfaces with no entities, nested relations, SpEL or answer payload fields. Attempt context and pinned task-count JPQL queries explicitly select scalar aliases. Working sets remain 100-row batches plus aggregate counters and the requested result page. StaffSessionProgress retains one batch key per session instead of an unbounded batch identity set. The single read-only REPEATABLE_READ transaction remains in the composition service.",
+        "conclusion": "Resolved with high confidence: the managed history/payload retention described by QUAL-P02-002 is removed from these scan paths. This is not measured heap/latency/PostgreSQL query-plan proof; existing pinned-template resolver/cache behavior and full-tenant offset scan cost remain practical validation limitations."
+      }
+    }
+  ],
+  "evaluation": {
+    "tenant_roles": "New controllers require HOST_ADMIN and identity's service checks valid security scope/non-null tenant; target read is scoped, nondeleted staff, suspended allowed, and all target roles pass UserProvisioningHelper.authorizeTarget. Mixed STUDENT disables credential capability. Work-specific role checks exist. Session metadata is scoped/nondeleted; canonical attempt scope now comes from a tenant/nondeleted Attempt-owned scalar read and is rechecked against each assignment session; QUAL-P02-001 is resolved.",
+    "module_boundaries": "Composition imports public Identity/Session/Scoring facades and named response interfaces, not foreign internal repositories/entities. New module metadata is present. Identity does not depend on scoring. Owner facades delegate to internal query services. No module verification was executed. Remediation adds Scoring -> Attempt's public context facade and named DTO only, without importing the Attempt internal repository/service into Scoring.",
+    "dates_status": "Dynamic predicates omit absent bounds; schedule overlap and valid opensAt<closesAt apply with date filters. Query validates interval/status/page/size/direction. Proctor lifecycle buckets preserve CLOSED/CANCELLED truth and distinguish unscheduled/preparing/stale from attendance. Work and publication statuses remain separate; published sessions are retained.",
+    "eligibility": "Scoring-owned eligibility delegates to the existing pinned ScoringMethodResolver. Missing task rows on valid templates retain established unscored semantics. Frozen-count mismatch and invalid score rows become unavailable. Score checks cover matching examiner/attempt/session, score range, SUBMITTED/non-null timestamp and unique answer identity. Existing V10/V58/V59 unique and FK constraints support distinct answer/score ownership; duplicate rows were not speculatively alleged to bypass actual DB uniqueness. Canonical pinned task counts now establish expected eligibility, which must agree with actual scoring and frozen counts. Canonical pinned template identity is checked on each scoring row. Zero-work completion requires a valid canonical context.",
+    "unavailable_payload": "Nullable Long/Integer fields preserve unverifiable whole-session progress; frozen metadata is separate, unavailableAttemptCount reconciles attempt subtotals and diagnosticCodes uses the contract allowlist. Overview whole totals become null for unavailable coverage, separately named verified totals only sum fully verified sessions, and empty workload percent is null. This is source inspection, not HTTP serialization proof.",
+    "paging_memory_cost": "Public size 1..100, whole-filter status totals and bounded requested result page are preserved. Session Criteria scalar tuples and closed Scoring/Attempt scalar projections avoid managed history/payload retention; QUAL-P02-002 is resolved. Validated assignment batches are counted with bounded per-session last-key state under deterministic batch/id ordering. Full filtered tenant sessions are still traversed with offset paging before scoring filtering; no representative PostgreSQL query-plan, heap or latency measurement is claimed.",
+    "email_integrity": "New update DTO has required fullName/email, size 255, nullable optional fields and PastOrPresent DOB; mutation whitelists fields, preserves username and checks authority under row lock. Canonical tenant/nondeleted uniqueness has application precheck plus V92 partial expression unique index and index-specific conflict mapping. Migration detects legacy collisions and fails with a safe code, without data cleanup. V93 adds indexes without data changes. No migration or concurrency behavior was executed against a live DB."
+  },
+  "verification": {
+    "compile": {
+      "status": "SUCCESS_REPORTED_BY_USER_AFTER_REMEDIATION",
+      "command": "mvnw -pl app -am '-Dmaven.test.skip=true' compile",
+      "source": "User reported fresh BUILD SUCCESS: 1136 Java sources, 24 seconds. Reviewer did not run the compile or inspect its log; this is supplied compile evidence, not tests/API/database/browser proof."
+    },
+    "tests": "Not written or run; explicitly declined by user.",
+    "performed": "Independent live remediation source/contract inspection; expanded Git scope comparison; current reads of all 42 output files; canonical report JSON/open finding counts/path validation; receipt issuance and subsequent fingerprint verification.",
+    "not_performed": "HTTP/API authorization or serialization checks, browser checks, production PostgreSQL migration execution, query-plan/latency/heap measurement, tests, deployment or release validation.",
+    "receipt": "Approved verification qualifies for immediate receipt issuance with the actual ck-quality scripts/receipt.py. Receipt fingerprints only the 42 reviewed Phase02 outputs and this report; lifecycle and mutable pipeline state are excluded."
+  },
+  "report_path": "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/quality/phase-02-backend-projections-and-profile-quality-report.json",
+  "summary_basis": "Open findings only; two resolved findings are preserved for traceability. Original finding evidence describes the initial gate snapshot, not the current implementation."
+}

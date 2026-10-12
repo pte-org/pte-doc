@@ -1,0 +1,24 @@
+{
+  "target": "phase-03-api-client-and-state",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\DOCUMENTFPT\\Github\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-tenant-exam-staff-workspace/quality/phase-03-api-client-and-state-quality-report.json",
+  "reviewed_files": [
+    "pte-web/apps/tenant-web/features/examStaff/detail/api.ts",
+    "pte-web/apps/tenant-web/features/examStaff/detail/constants.ts",
+    "pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffDetailText.ts",
+    "pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffWorkspaceFilters.ts",
+    "pte-web/apps/tenant-web/features/examStaff/detail/messages/en.ts",
+    "pte-web/apps/tenant-web/features/examStaff/detail/messages/vi.ts",
+    "pte-web/apps/tenant-web/features/examStaff/detail/types.ts",
+    "pte-web/apps/tenant-web/features/examStaff/detail/utils.ts",
+    "pte-web/packages/api-client/src/requests/admin/examStaffWorkspace.ts",
+    "pte-web/packages/api-client/src/requests/index.ts",
+    "pte-web/packages/api-client/src/types/admin/examStaffWorkspace.ts",
+    "pte-web/packages/api-client/src/types/admin/index.ts"
+  ],
+  "source_fingerprint": "sha256:3ad12937cb0357aec6d1f8a345a3951f373d6eb953e1234dcc88233676c95b88",
+  "reviewed_at": "2026-10-11T04:16:01.631Z",
+  "open_blocking_findings": 0
+}
