@@ -1,0 +1,28 @@
+{
+  "target": "phase-04-admin-server-search",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:/GitHub/PTE-org",
+  "report_path": "pte-doc/projects/plans/quang-web-search-placeholder-rollout/quality/phase-04-admin-server-search-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/billing/internal/controller/AdminLicenseCodeController.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/repository/LicenseCodeRepository.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/service/LicenseCodeService.java",
+    "pte-api/app/src/main/java/com/pte/notification/internal/service/AnnouncementService.java",
+    "pte-api/app/src/main/java/com/pte/support/internal/service/SupportTicketService.java",
+    "pte-web/apps/vendor-web/features/commercialization/api.ts",
+    "pte-web/apps/vendor-web/features/commercialization/components/LicenseCodesView.tsx",
+    "pte-web/apps/vendor-web/features/i18n/adminCopy.ts",
+    "pte-web/apps/vendor-web/features/notifications/announcementsApi.ts",
+    "pte-web/apps/vendor-web/features/notifications/components/AnnouncementsView.tsx",
+    "pte-web/apps/vendor-web/features/supportTickets/api/index.ts",
+    "pte-web/apps/vendor-web/features/supportTickets/components/AdminSupportTicketsView.tsx",
+    "pte-web/packages/api-client/src/requests/billing/licenseCodes.ts",
+    "pte-web/packages/api-client/src/requests/notification/announcements.ts",
+    "pte-web/packages/api-client/src/requests/support/tickets.ts",
+    "pte-doc/projects/plans/quang-web-search-placeholder-rollout/phase-04-admin-server-search.md"
+  ],
+  "source_fingerprint": "sha256:0eaf9b50298550e9aae36f6c9eaefe9baa09dd65b0b8d0339f085a66d35ef78a",
+  "reviewed_at": "2026-10-12T14:15:00Z",
+  "open_blocking_findings": 0
+}

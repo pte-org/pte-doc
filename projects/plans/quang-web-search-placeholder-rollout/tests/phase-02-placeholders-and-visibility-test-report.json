@@ -1,0 +1,23 @@
+{
+  "phase": "phase-02-placeholders-and-visibility",
+  "mode": "unit-and-static",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-12T14:15:00Z",
+  "summary": {
+    "passed": 479,
+    "failed": 0,
+    "skipped": 0
+  },
+  "checks": [
+    { "name": "tenant-web typecheck", "status": "passed" },
+    { "name": "vendor-web typecheck", "status": "passed" },
+    { "name": "@pte/ui typecheck", "status": "passed" },
+    { "name": "tenant-web lint", "status": "passed" },
+    { "name": "vendor-web lint", "status": "passed", "warnings": 2 },
+    { "name": "tenant-web tests", "status": "passed", "tests": 37 },
+    { "name": "@pte/api-client tests", "status": "passed", "tests": 442 },
+    { "name": "visible DataTable placeholder inventory", "status": "passed" }
+  ],
+  "failures": [],
+  "report_path": "pte-doc/projects/plans/quang-web-search-placeholder-rollout/tests/phase-02-placeholders-and-visibility-test-report.json"
+}
