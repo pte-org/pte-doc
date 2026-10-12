@@ -1,6 +1,16 @@
 # Phase 2 — Monitoring
 
-Status: planned, chờ phê duyệt. Chỉ tài liệu; không triển khai.
+Status: completed.
+
+## Tasks hoàn thành
+
+- [x] Nối server roster/query filters với common DataTable, giữ whole-session summary.
+- [x] Dùng realtime/REST authority hiện có, không replay commands.
+- [x] Hoàn thiện connection/status/active student và paginated attempt detail.
+- [x] Giữ force-submit/flag permissions, explicit target và confirmed outcomes.
+- [x] Dùng common states/actions và giữ dữ liệu/input khi refresh lỗi.
+
+Execution constraints: no tests/lint/typecheck/build/quality; no rollout. Reuse nền tảng kỹ thuật hiện hữu, không chạy lại phase files trong archive/.
 
 ## 1. Mục tiêu
 

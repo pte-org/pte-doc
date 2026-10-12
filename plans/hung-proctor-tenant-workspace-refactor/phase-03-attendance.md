@@ -1,6 +1,16 @@
 # Phase 3 — Attendance
 
-Status: planned, chờ phê duyệt. Chỉ tài liệu; không triển khai.
+Status: completed.
+
+## Tasks hoàn thành
+
+- [x] Chốt shared verification-event→incident reference contract trước implementation, không tạo prerequisite vòng.
+- [x] Mở rộng LATE thủ công, summary/filter/receipt và giữ policy hiện hữu.
+- [x] Bổ sung identity current/command/history độc lập attendance, version/generation/authority riêng.
+- [x] Dùng DataTable roster/history và form/actions theo capability, Host reuse presentation.
+- [x] Giữ confirmed intent/reconciliation và FAILED handoff chưa ACK ở trạng thái chưa bàn giao.
+
+Execution constraints: no tests/lint/typecheck/build/quality; migration chỉ tạo khi implementation được duyệt, không chạy trên môi trường ngoài scope.
 
 ## 1. Mục tiêu
 

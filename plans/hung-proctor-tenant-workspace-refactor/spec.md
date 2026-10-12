@@ -1,136 +1,67 @@
-# Spec: Proctor workspace trong tenant web
+# Proctor Workspace — specification hiện hành
 
-**Date:** 2026-10-11
-**Status:** Approved — người dùng duyệt thiết kế và cho phép lập plan rồi triển khai ngày 2026-10-11
-**Repositories:** `pte-api`, `pte-web`; tài liệu tập trung ở `pte-doc`.
+Ngày: 2026-10-12. Status: planning complete, awaiting approval. Đây là spec cho đúng năm phase chức năng trong plan.md. Không triển khai source hoặc migration; không thực hiện Testing & Quality. Spec/phase kỹ thuật cũ nằm trong archive/ và không phải đầu vào thực thi hiện hành.
 
-## Problem Statement
+## Phạm vi và nguồn đã có
 
-Giám thị cần truy cập đúng buổi thi được phân công, theo dõi thí sinh và xử lý vi phạm trong tenant web. Scaffold hiện thiếu dữ liệu và thao tác thực; backend thiếu projection dành cho Proctor và một số kiểm tra quyền cho kênh giám sát.
+Tenant web, role PROCTOR; session assignments, roster monitoring, latest attempt/history, REST snapshot và STOMP transport đã có. Attendance current/command/receipt/history và Host correction hiện hữu được giữ lại. Common UI là @pte/ui/DataTable; các thay đổi còn lại là đề xuất, không coi đã được triển khai.
 
-## User Stories
+Sidebar: Overview, Monitoring, Attendance, Incidents, Audit Log, Profile. Overview chỉ summary/priority/quick links; các danh sách có trách nhiệm riêng. Feature flag giữ nguyên trạng thái off, không deploy hoặc tự bật môi trường.
 
-- **[P1]** Là Proctor, tôi đăng nhập vào workspace phù hợp và thấy các buổi thi được phân công.
-  Accepted when: tài khoản chỉ có PROCTOR vào `/proctor/sessions`; không thấy buổi thi ngoài tenant hoặc ngoài phân công; tài khoản nhiều role chuyển được giữa các workspace được phép.
-- **[P1]** Là Proctor, tôi xem trạng thái thực của thí sinh và lần hoạt động gần nhất.
-  Accepted when: thấy cả người chưa tạo attempt; trạng thái khớp CREATED / IN_PROGRESS / SUBMITTED; heartbeat được ghi là “Lần hoạt động gần nhất”, không cam kết online/offline.
-- **[P1]** Là Proctor được phân công, tôi ghi nhận vi phạm và yêu cầu nộp bài của attempt đang làm.
-  Accepted when: chỉ thao tác trong phiên giám sát của mình và đúng buổi thi; phải xác nhận trước FORCE_SUBMIT; chỉ báo đã nộp khi snapshot backend xác nhận SUBMITTED.
-- **[P1]** Là Proctor, tôi xem sự kiện bảo mật của buổi thi và kết thúc phiên giám sát của mình.
-  Accepted when: audit có nguồn, loại, thời gian, mức độ và mục tiêu; đóng giám sát không đóng buổi thi hoặc nộp bài hàng loạt.
-- **[P2]** Là Proctor, tôi có lịch sử thao tác vận hành có actor và kết quả command để truy vết.
-  Accepted when: có contract và storage riêng được phê duyệt; không giả định security audit hiện tại đã hỗ trợ. Chưa thuộc MVP.
-- **[P3]** Camera/screen streaming, phát hiện tự động, chat, gia hạn giờ hoặc tạm dừng bài thi: ghi nhận cho tương lai, ngoài phạm vi.
+## Stories và acceptance chức năng
 
-## Screen Design
+| ID | Priority | Story | Điều kiện đáp ứng |
+|---|---|---|---|
+| P01 | P1 | Overview và sidebar rõ trách nhiệm | Overview không có full queue; sidebar/card mở đúng route/scope, một item active |
+| P02 | P1 | Bảng thống nhất design system | Queue, picker, roster, history và incidents dùng Common DataTable; giữ tokens light/dark/default controls |
+| P03 | P1 | Giám sát đúng phân công | Tenant/actor/assignment được xác minh backend; roster có cả sinh viên chưa có attempt; summary toàn ca |
+| P04 | P1 | Realtime và detail đáng tin cậy | Reuse STOMP/polling; detail theo target hiện tại, không replay mutations hoặc báo thành công chỉ từ optimistic state |
+| P05 | P1 | Điểm danh thủ công | UNMARKED/PRESENT/ABSENT/LATE; LATE không suy từ login/heartbeat; trạng thái không đổi quyền bắt đầu thi |
+| P06 | P1 | Xác minh danh tính độc lập | UNVERIFIED/VERIFIED/FAILED, version/actor/time/note/history riêng; không ID photos hoặc biometrics |
+| P07 | P1 | FAILED được bàn giao | Tạo/liên kết incident trước khi có attempt; Proctor→Host→Admin khi cần, không tự kết luận gian lận |
+| P08 | P1 | Incident có vòng đời rõ | NEW/IN_PROGRESS/ESCALATED/RESOLVED/CLOSED, owner/recipient/reason/correlation và append-only history |
+| P09 | P1 | Host/Admin xử lý đúng quyền | Host tiếp nhận/xử lý/escalate; Admin chỉ case được giao, reuse Support inbox; Proctor không có generic Support/Admin quyền |
+| P10 | P1 | Audit chỉ đọc, đúng dữ liệu | Source/severity/subject/actor/time từ backend; không bịa hash position, actor hoặc timestamp |
+| P11 | P1 | Server queries không sai phạm vi | Search/filter/sort trước pagination; không client transform một server page; cursor không có totals giả |
+| P12 | P1 | Loading/error/refresh trung thực | Loading không giả0; empty chỉ từ successful response; stale refresh giữ rows và warning; retry không mất input |
+| P13 | P2 | Profile và responsive đồng nhất | Profile read-only, links reuse assignments; mobile/desktop cùng thông tin/actions, common dialogs/badges/toasts |
 
-### Buổi thi được phân công — `/proctor/sessions`
+## Quyết định người dùng đã xác nhận
 
-- Giữ DashboardChrome, branding tenant, locale và UI kit hiện có. Navigation Proctor gồm Buổi thi và Hồ sơ.
-- Mỗi hàng có tên buổi thi, sessionCode, lịch, trạng thái kỳ thi, vai trò phân công và hành động mở.
-- Bộ lọc trạng thái/lịch và tìm kiếm chỉ dùng khi backend hỗ trợ đúng contract; phải lọc phía server trước phân trang, không trình bày lọc một trang như kết quả toàn bộ.
-- Buổi thi chưa OPEN: xem thông tin; không mở phiên điều khiển. Buổi đã CLOSED: xem lịch sử/roster; không mở phiên điều khiển mới.
-- Có loading ban đầu, lỗi có retry, empty “Chưa có buổi thi được phân công”, phân trang. Không thay bảng bằng skeleton mỗi lần refresh nền.
+1. LATE do Proctor đánh dấu thủ công. Không tự suy attendance hoặc identity từ login, heartbeat hay attempt creation.
+2. Attendance informational. Assigned Proctor ghi SCHEDULED/OPEN từ opensAt−30 phút inclusive đến closesAt exclusive; CLOSED Proctor read-only, Host correction cần reason/audit; CANCELLED read-only. Initial absence note optional; correction/reset cần reason.
+3. Identity Verification độc lập Attendance: UNVERIFIED/VERIFIED/FAILED, actor/time/note, chỉ assigned Proctor hoặc người có thẩm quyền cập nhật. Không lưu ảnh giấy tờ/biometric; không automatic admission block.
+4. FAILED có report/handoff Host; Host escalate Admin nếu vượt thẩm quyền. Incident có severity/description/result, mỗi handoff có actor/receiver/time/reason.
+5. Không sửa/xóa history trực tiếp. Incident/identity không tự pause, force-submit, cancel hoặc kết luận gian lận. FORCE_SUBMIT hiện hữu giữ authorization/confirmation riêng.
 
-### Phòng giám sát — `/proctor/sessions/[publicId]`
+## Thiết kế đề xuất để phê duyệt cùng plan
 
-- Header: tên/code, trạng thái buổi thi, vai trò LEAD/ASSISTANT, tình trạng kết nối và thời điểm snapshot mới nhất.
-- Tổng hợp số thí sinh đăng ký, đang làm, đã nộp; tổng hợp từ toàn bộ roster, độc lập trang hiện tại.
-- Bảng: thí sinh, attempt đang hiển thị, trạng thái, lần hoạt động gần nhất, số ghi nhận thủ công của giám thị cho attempt (`manualViolationCount`). Không gộp mọi sự kiện lockdown thành vi phạm đã xác nhận. Không hiển thị phần trăm hoàn thành khi chưa có dữ liệu thực.
-- Một hàng cho mỗi enrollment; backend trả latest attempt và số thứ tự/lịch sử attempt khi có nhiều lần thi. Panel chi tiết cho phép chọn attempt cụ thể; mọi lệnh sử dụng UUID của attempt đã chọn, không tự suy diễn từ student UUID.
-- Không có attempt: hiển thị “Chưa bắt đầu” từ trạng thái nullable, không tạo enum persist NO_ATTEMPT. CREATED hiển thị “Đã tạo bài”, IN_PROGRESS “Đang làm”, SUBMITTED “Đã nộp”.
-- Panel chi tiết: tên, attempt, trạng thái, thời gian hoạt động và sự kiện liên quan. Ghi nhận vi phạm và Yêu cầu nộp bài; thao tác target explicit.
-- Drawer/modal ghi vi phạm có enum backend và detail tùy chọn. Các loại MULTIPLE_FACES, FACE_NOT_VISIBLE, SUSPICIOUS_AUDIO là nhãn ghi nhận thủ công, không ngụ ý có camera/audio feed.
-- FORCE_SUBMIT chỉ cho attempt IN_PROGRESS, kỳ thi OPEN và phiên giám sát ACTIVE. ConfirmDialog có tên thí sinh/attempt và tác động nộp bài.
-- Nút “Kết thúc giám sát” đóng phiên của giám thị, sau xác nhận; không gắn nhãn “Đóng kỳ thi”. Chuyển về danh sách sau thành công.
-- Mất kết nối/assignment/quyền: banner rõ, khóa thao tác ngay khi biết; trạng thái stale có timestamp. Điều hướng khỏi phòng không tự đóng monitoring session; có thể resume nếu vẫn đủ điều kiện. Logout/workspace switch dispose connection, không tự kết thúc giám sát.
+- Verification edit window dự kiến như attendance, nhưng version/command/state độc lập. CLOSED chỉ Host correction với reason; Admin case handling không tự cấp identity-edit. CANCELLED chỉ đọc.
+- Incident severity dự kiến LOW/MEDIUM/HIGH, biểu thị mức cần xử lý, không phải kết luận vi phạm. Không thay enum severity của security evidence hiện hữu.
+- Proctor report/clarify/follow outcome trong assignment; Host nhận/xử lý/chuyển cấp, Admin receiver phải eligible và được lưu bằng actual user ID. Không mở directory toàn platform cho Host/Proctor.
+- Host đóng incident sau RESOLVED với reason; không có reopen trong scope này. State IN_PROGRESS có thể thuộc Host hoặc Admin, ownership/handoff history phân biệt hai giai đoạn.
+- Shared extensions opt-in: controlled server sort, active row và cursor pagination nếu cần; filters slot/ErrorState hiện có được ưu tiên. Giữ defaults cho consumer khác.
 
-### Nhật ký sự kiện — `/proctor/audit-log/[publicId]`
+Các đề xuất này chưa phải quyền đã được triển khai hoặc sự phê duyệt chạy cook. Không tự quyết định mở rộng quyền khi thiếu capability cụ thể; giữ mutation disabled cho đường chưa có authority.
 
-- Link theo ngữ cảnh từ buổi thi/phòng giám sát; dùng audit thống nhất, không tạo tab nhật ký actor/action không có contract.
-- Hiển thị nguồn STUDENT_LOCKDOWN / PROCTOR, violationType, severity, detectedAt, attemptPublicId, studentPublicId khi có và detail.
-- Entry PROCTOR có thể thiếu studentPublicId: đối chiếu bằng projection roster trong đúng buổi thi, không tự đi gọi directory HOST.
-- Giữ thứ tự cursor backend (tăng dần thời gian/publicId); “Tải thêm” không lặp hoặc làm mất entry. Không đảo sang newest-first nếu chưa thay query/cursor nhất quán.
-- Chưa hỗ trợ server filter: không thêm bộ lọc toàn bộ audit. Bản minh họa không đại diện cho lượng dữ liệu thật.
+## Kiến trúc và contracts
 
-### Hồ sơ — `/proctor/profile`
+Session sở hữu enrollment/attendance/identity verification; Attempt sở hữu attempt/status/history; Identity cung cấp active staff/recipient projection tối thiểu; Proctoring compose public facades và sở hữu incident/handoff; Support cung cấp public escalation bridge. Không import repository/service internal của module khác hoặc tạo dependency cycle.
 
-Tái sử dụng ProctorProfileView/useCurrentUser, giữ loading/error/retry. Không mở thêm trang quản trị phân công cho Proctor.
+Identity dùng enrollment generation và revision riêng; giữ history khi membership đổi. Attendance/verification commands có request UUID và expected version, receipt outcome bất biến tách current snapshot. Authorization đọc hiện tại trước receipt disclosure; exact retry không là mutation mới. Actor/time/tenant luôn từ backend.
 
-## Functional Requirements
+Incident có session/student/enrollment refs, optional attempt/violation/verification refs; FAILED có thể trước attempt. Support ticket là kênh Admin xử lý liên kết case, không phải aggregate incident thứ hai. Existing support roles HOST_ADMIN và PLATFORM_ADMIN/PLATFORM_MANAGER không bị mở rộng blanket. Không map Ticket.close (OPEN withdrawal) thành case CLOSED sau RESOLVED.
 
-1. **FR-01 — Role routing:** bổ sung AUTH_ROUTES và resolver đích đăng nhập tập trung. PROCTOR-only → danh sách; tổ hợp không có PROCTOR giữ hành vi hiện tại. Với nhiều role có PROCTOR, giữ đích mặc định đang hợp lệ nếu có và bổ sung chuyển workspace được phép. Guard bảo vệ toàn bộ route; wrong-role không tạo vòng redirect giữa login và workspace.
-2. **FR-02 — Assigned list:** actor lấy từ JWT; chỉ trả assignment của actor trong tenant hiện tại. HOST_ADMIN vẫn quản lý phân công bằng endpoint hiện có; không mở quyền HOST_ADMIN cho Proctor.
-3. **FR-03 — Monitoring snapshot:** chỉ PROCTOR đang được phân công, trong đúng tenant; chứa session metadata, assignment role, aggregate counts, enrollment + latest attempt, heartbeat, số vi phạm và dữ liệu lịch sử attempt khi mở chi tiết. Không trả đáp án, điểm chi tiết hay dữ liệu hồ sơ không cần thiết.
-4. **FR-04 — Identifiers:** route/topic dùng examSessionPublicId; open response `publicId` là proctorSessionPublicId dùng khi SEND command/violation và REST close. Phải khai báo type/adapter rõ để không trộn hai ID.
-5. **FR-05 — Open/resume:** PROCTOR, tenant, assignment còn hiệu lực và kỳ thi OPEN trong thời gian entry gate cho phép; resume cũng recheck. Mỗi actor chỉ resume phiên ACTIVE của mình cho cùng buổi thi. LEAD/ASSISTANT có cùng quyền theo backend hiện tại.
-6. **FR-06 — Commands:** xác thực ownership/ACTIVE, tenant, assignment và target attempt thuộc đúng exam session; kiểm tra kỳ thi còn OPEN bằng gate hiện có. Attempt không tồn tại hoặc sai phạm vi bị từ chối; SUBMITTED không bị submit lại. Không replay command sau reconnect/refresh token.
-7. **FR-07 — Confirmation:** broadcast command không được coi là success. UI chuyển “Đang xác nhận”, refresh snapshot ngay và theo chu kỳ; trong 10 giây chưa xác nhận thì hiển thị “Chưa xác nhận kết quả”, cho làm mới, không đổi attempt status giả. Khi mất kết nối có thể dùng REST snapshot để xác nhận trạng thái; không gửi lại tự động.
-8. **FR-08 — Violation:** validate enum, target tồn tại/thuộc session, actor/tenant/assignment/ownership/ACTIVE; dedupe hiển thị bằng event publicId. Ghi vi phạm chỉ trong khi giám sát kỳ thi OPEN; xem lịch sử sau CLOSED vẫn được phép nếu còn phân công.
-9. **FR-09 — Close:** REST close phiên của mình, idempotent. Cho phép dọn phiên của mình sau kỳ thi đóng hoặc assignment bị thu hồi; không cấp quyền đọc roster/gửi lệnh vì quyền close này. Không gọi API đóng exam session.
-10. **FR-10 — Read access:** monitoring/audit chỉ theo tenant + assignment; không chỉ dựa vào role hoặc ẩn nút. Legacy violations endpoint phải áp cùng assignment check, hoặc UI chỉ dùng security-audit và route legacy được sửa để không vượt phạm vi.
-11. **FR-11 — STOMP:** dùng `/ws`, CONNECT Authorization Bearer như backend; bảo vệ SEND lẫn SUBSCRIBE. Chỉ subscribe topic buổi thi được phân công và user queue của bản thân. Thu hồi assignment chặn mọi thao tác và lượt cấp quyền gửi mới sau commit, kể cả subscription cũ; không chờ reconnect. Ranh giới gửi là snapshot của truy vấn quyền recipient ngay trước handler: message đã được cấp quyền trước commit có thể hoàn tất sau commit. Không cam kết thu hồi bytes/message đang gửi; plan phải kiểm thử cả message chờ trước kiểm tra và message đã vượt kiểm tra quyền.
-12. **FR-12 — Lifecycle:** token refresh/reconnect có backoff hữu hạn; dispose socket/subscriptions/query cache theo lifecycle auth. JWT không nằm URL/log. Rời phòng unsubscribe; trở lại chỉ resume sau auth check. Mất quyền chuyển sang trạng thái bị từ chối, không tiếp tục polling không giới hạn.
-13. **FR-13 — Polling:** mặc định monitoring snapshot 5 giây, tạm dừng khi tab ẩn; refetch khi tab hiện lại/reconnect hoặc nhận sự kiện liên quan. Tránh duplicate timer và burst request. Audit dùng “Tải thêm” và “Làm mới”: làm mới lấy lại trang đầu, chỉ thay danh sách sau thành công, reset cursor và ghi timestamp; lỗi giữ dữ liệu cũ. Không polling tail hoặc cam kết audit realtime vì endpoint hiện trả nextCursor=null tại cuối và không có feed lockdown. Dedupe publicId giữa các trang; ghi rõ dữ liệu tại lần tải mới nhất.
-14. **FR-14 — Feature rollout:** giữ `NEXT_PUBLIC_PROCTOR_UI_ENABLED` mặc định tắt cho đến khi API/authorization/integration checks đạt yêu cầu. Login resolver và workspace switcher phải cùng đọc khả năng rollout; khi tắt không điều hướng đến route 404, hiển thị thông báo workspace chưa khả dụng cho PROCTOR-only.
-15. **FR-15 — States/localization:** loading/error/empty/access denied/stale/closed đều có giao diện, actions pending chống double-click. Toàn bộ product text qua locale hiện có; demo dùng tiếng Việt và dữ liệu minh họa.
+## DataTable contract bắt buộc
 
-## API Contracts: Existing versus Proposed
+Component chính packages/ui/src/components/DataTable.tsx. Server-paged tables tắt cả client filtering/sorting/pagination, dùng server meta trong pagination slot. Header chưa nối server sort đặt sortable=false; built-in filters không được giả điều khiển server. Reuse Select/TableSearchControl/TableFilterInput/DateRangePicker/StatusBadge/ActionMenu/ErrorState/LoadingState/EmptyState/PaginationControls. No feature-local table shell/style hoặc hardcoded palette.
 
-| Contract | Trạng thái | Phạm vi/hành vi |
-| --- | --- | --- |
-| `GET /api/v1/proctor-assignments/mine` | **MỚI** | Session module; actor JWT, tenant + assignment. Page mặc định 25, cap 100. Filter/search server-side nếu đưa vào UI. DTO: assignmentPublicId, assignmentRole, examSessionPublicId, name/code, state, schedule. |
-| `GET /api/v1/exam-sessions/{id}/monitoring` | **MỚI** | Proctoring orchestration qua facade công khai. Metadata/summary + paginated roster (25, cap 100), latest attempt/lastSeenAt/manualViolationCount. Search/status filter server-side trước pagination. |
-| `GET /api/v1/exam-sessions/{id}/monitoring/students/{studentId}/attempts` | **MỚI** | Chi tiết lịch sử attempt cho enrollment trong chính buổi thi, có phân trang cap 100; same tenant/assignment check. Giúp giữ snapshot nhỏ, không kéo toàn bộ lịch sử mỗi 5 giây. |
-| SEND `/app/sessions/{examSessionId}/open` → `/user/queue/proctor-session` | Có sẵn; cần harden | Response `{publicId,sessionPublicId,proctorPublicId,status,openedAt}`; `publicId` là monitoring ID. Xác thực điều kiện khi open/resume. |
-| SEND `/app/proctor-sessions/{monitoringId}/commands` | Có sẵn; cần harden | `{attemptPublicId,commandType:"FORCE_SUBMIT"}`; không suy diễn success từ topic broadcast. |
-| SEND `/app/proctor-sessions/{monitoringId}/violations` | Có sẵn; cần harden | `{attemptPublicId,violationType,detail?}`; chặn target ngoài session. |
-| SUBSCRIBE `/topic/proctor-sessions/{examSessionId}` | Có sẵn; cần harden | Hiện có payload command/violation khác nhau, không envelope; adapter runtime phân biệt đúng schema, bỏ payload không hợp lệ. Không phá tương thích client bằng đổi envelope ngầm. |
-| `POST /api/v1/proctor-sessions/{monitoringId}/close` | Có sẵn | Close monitoring của mình; không đóng kỳ thi. |
-| `GET /api/v1/exam-sessions/{id}/security-audit?limit=50&cursor=...` | Có sẵn | Limit 1–100; `{entries,nextCursor}`. Cursor server-issued, giữ tenant/session scope, entries tăng dần. |
+## Navigation đề xuất
 
-**Errors:** dùng ApiResponse/domain exceptions hiện tại; giữ semantics 401/403 và tài nguyên không tồn tại theo convention. Backend đã có `/user/queue/errors` với `{status,code}`; phải giữ tương thích. Plan bổ sung response/error riêng có correlation ID cho client mới, không đổi topic payload ngầm; command/violation UI nhận denial/validation và kết thúc pending. Chi tiết envelope do plan chốt, không expose stacktrace. Opening có timeout 10 giây/retry thủ công; không tự tạo nhiều open concurrent. Violation phải được xác nhận đã lưu từ private response, không phụ thuộc topic broadcast tới nhiều giám thị.
+Overview /proctor/sessions; monitoring list ?scope=ACCESSIBLE và detail /proctor/sessions/{session}; attendance picker/detail /proctor/attendance[/{session}]; incident picker /proctor/incidents, list /proctor/incidents/{session}, detail /proctor/incidents/{session}/{incident}; audit picker/detail /proctor/audit-log[/{session}]; profile /proctor/profile.
 
-## Codebase Placement
+## Trình tự và điều kiện dừng
 
-- Backend list assignment đặt ở session module; monitoring orchestration đặt ở proctoring. Queries theo tenant/assignment và facade batch giữa session/attempt/identity; không import repository/internal DTO của module khác. Số truy vấn bounded theo trang, không truy vấn một lần cho mỗi thí sinh.
-- Controllers/services/repositories/mappers/records theo cấu trúc `app/src/main/java/com/pte/{module}/internal/...`; exports bằng public facade/NamedInterface đúng convention. SQL/schema thay đổi nếu thực sự cần: migration Flyway mới, không sửa migration đã phát hành.
-- Frontend routes giữ `apps/tenant-web/app/(dashboard)/proctor/...`; views/hooks/query keys ở `apps/tenant-web/features/proctor`, constants navigation tại lib hiện có. Không tạo `apps/tenant-web/src`.
-- DTO và raw request mới ở `packages/api-client/src/types` và `requests` theo resource, hooks TanStack tại feature; local types chỉ cho presentation. Không dùng segment retired `/api/v1/proctor/...`.
-- Reuse DataTable, PageHeader, Badge, Drawer/Modal, ConfirmDialog, ErrorState, EmptyState, Toast và DashboardChrome từ `@pte/ui`. Respect kích thước file/component và Tailwind/locale convention trong CODING_STANDARDS_WEB.
-- Trước khi viết Next product code đọc `pte-web/AGENTS.md` và guide Next tại `node_modules/next/dist/docs` như repo yêu cầu.
+Thực thi sau phê duyệt: phase01 sidebar/overview → phase02 monitoring → phase03 attendance/verification → phase04 incidents/audit → phase05 UI/UX. Thống nhất verification→incident reference contract ở đầu phase03; case/report UI chỉ công bố khi phase04 backend sẵn sàng, tránh prerequisite vòng. Verification FAILED giữ state thật, không báo đã bàn giao khi chưa có ACK.
 
-## Non-Functional Requirements
-
-- **Freshness:** khi tab active, snapshot poll 5 giây; bản ghi heartbeat hiển thị timestamp thực, stale badge khi snapshot không thành công sau 2 chu kỳ. Không claim online/offline từ threshold này.
-- **Data bounds:** page mặc định 25, cap 100 cho roster/list/history, audit cap 100; không có API trả toàn bộ roster không giới hạn cho mỗi refresh. Search/filter cả dataset phía server, counts độc lập filter/page và nhãn ghi rõ tổng toàn buổi thi.
-- **Security:** 100% read/write/subscription deny cases ngoài tenant/phân công/ownership có test; zero cross-session attempt mutations và zero lượt cấp quyền topic delivery mới sau commit thu hồi, theo ranh giới FR-11, được xác nhận trong integration test.
-- **Reliability:** timeout pending open/command 10 giây; command không retry tự động. Reconnect backoff 1/2/4/8/16/30 giây, cap 30 giây; dừng khi logout, denied hoặc unmount.
-- **Accessibility:** thao tác bằng keyboard, labels cho form, focus management dialog/drawer và focus restore; trạng thái ngoài màu. Kiểm tra widths 320, 768, 1024; phần chi tiết xuống dưới trên màn hẹp, bảng có overflow riêng khi cần.
-- **Performance verification:** chứng minh không có N+1 bằng test/query inspection trên fixture 100 enrollment; đo API latency/payload trong plan trên hạ tầng thực trước khi đặt SLA. Không cam kết SLA chưa có baseline.
-
-## Success Criteria
-
-- [ ] PROCTOR-only đăng nhập vào đúng workspace khi flag bật; khi tắt thấy trạng thái khả dụng, không vòng redirect/404. Role matrix gồm HOST_ADMIN, STUDENT, EXAMINER và PROCTOR cùng các tổ hợp liên quan giữ quyền đúng.
-- [ ] Assigned list và monitoring dùng API thật; zero query stub trả `[]`; enrollment chưa attempt và cả 3 AttemptStatus hiển thị đúng.
-- [ ] Unauthorized tenant/assignment/topic/target attempt bị backend từ chối; resume và subscription cũ sau thu hồi không vượt quyền.
-- [ ] FORCE_SUBMIT happy path xác nhận bằng SUBMITTED thực; no-op/denied/disconnect/timeout không báo thành công giả, không duplicate automatic command.
-- [ ] Ghi vi phạm xuất hiện đúng một lần trong audit sau làm mới; pagination không mất/lặp entry trên dataset ổn định; sources đúng contract. Refresh bắt được sự kiện mới cả khi trang cũ đã tới cuối.
-- [ ] Close monitoring không thay đổi exam session state; CLOSED/pre-OPEN chặn thao tác theo spec.
-- [ ] Vitest request/role contract checks, backend service/security/Modulith checks và smoke trình duyệt cho các luồng P1 pass trước bật flag.
-- [ ] Không có dữ liệu/role quản trị HOST bị đưa vào Proctor projection; không tạo thư mục/file trái convention.
-
-## Out of Scope
-
-- Video, camera, microphone, screen streaming; AI phát hiện gian lận tự động.
-- Tạo/sửa/đóng kỳ thi, phân công giám thị, quản trị user/tenant, chấm điểm hoặc xem đáp án.
-- Thay đổi quyền giữa LEAD và ASSISTANT; lệnh pause/resume/extend-time không có contract.
-- Nhật ký command có actor bền vững (P2), bulk FORCE_SUBMIT, quản trị toàn bộ tenant.
-
-## Assumptions
-
-- Người dùng đã chọn giao diện hoàn chỉnh, cho phép API bổ sung và duyệt thiết kế bảng + panel qua câu trả lời “Duyệt thiết kế → $ck:plan rồi triển khai (Đề xuất)” ngày 2026-10-11.
-- Quyền Proctor đến từ JWT và phân công trong session, không từ selector frontend. Assignment role là metadata, chưa là permission tier.
-- Snapshot là nguồn sự thật; websocket hỗ trợ thao tác/cập nhật nhanh, chưa có feed progress/presence đầy đủ.
-- Khi có nhiều attempt, latest là attempt có `attemptNumber` lớn nhất theo sequence bất biến hiện có của domain; query tenant/session/student và deleted=false. Lệnh luôn nhắm attempt explicit, lịch sử không bị gộp mất.
-- Prototype chỉ dùng dữ liệu minh họa cục bộ. Đây là design artifact, không phải trang đã tích hợp API.
+Cook chỉ đọc năm sibling phase files được liệt kê trong master, không recursive scan archive/. Không có Testing/Quality phase; no tests, lint, typecheck, build hoặc quality gate theo lựa chọn người dùng. Đây là chính sách cho bước thực thi tương lai, không phải lệnh kích hoạt. Dừng và chờ phê duyệt kế hoạch.

@@ -1,8 +1,21 @@
-﻿# PTE Prep — Proctor: Implementation Plan
+# PTE Prep — Proctor: Implementation Plan
 
 Ngày: 2026-10-12. **Chỉ lập kế hoạch; chờ phê duyệt.** Không chỉnh sửa source, tạo component/migration hoặc triển khai phase. Không có công việc Testing & Quality, test/lint/typecheck/build hoặc lệnh thực thi trong kế hoạch này.
 
 Phạm vi: hoàn thiện chức năng Proctor và thống nhất UI với Common DataTable hiện tại. Các lựa chọn nghiệp vụ mới bên dưới đã được người dùng trả lời; phê duyệt toàn bộ kế hoạch triển khai vẫn đang chờ. Code và dữ liệu có sẵn không bị thay đổi trong bước lập kế hoạch.
+
+## Đầu vào thực thi duy nhất
+
+Master: chính file plan.md này. Spec hiện hành: [spec.md](spec.md). Chỉ dùng năm phase ở mục7 theo thứ tự; tất cả trạng thái planned, chưa triển khai. Không recursive scan archive/, không dùng checkbox completed của bộ cũ để resume bộ mới. Archive giữ nguyên nội dung lịch sử và không phải nhiệm vụ còn phải code.
+
+Đã đủ tài liệu cho cả năm phase; readiness về tài liệu không phải phê duyệt triển khai. Chỉ chạy cook sau khi người dùng duyệt scope/spec/thiết kế đề xuất.
+
+### Chính sách cho bước cook sau khi được duyệt
+
+- Standard execution, đi liên tục qua các phase, không hỏi lại choices đã có; không tự deploy/push/bật feature flag.
+- Không viết/chạy tests, không test files, lint, typecheck, build hoặc quality audit ở bất kỳ phase nào. Skip Build Gate của skill theo chỉ thị người dùng, không coi skipped là passed/approved. Business validation/authorization/error handling vẫn phải implement.
+- Các flags --no-tests --no-quality --checks-all-phases chỉ chọn test/quality; chúng không tự tắt build/lint. Do đó câu chỉ thị bỏ các lệnh đó phải đi cùng lệnh cook.
+- Có thể dùng sau phê duyệt: `$ck-cook --plan D:/GitHub/PTE-org/pte-doc/plans/hung-proctor-tenant-workspace-refactor/plan.md --no-tests --no-quality --checks-all-phases`, kèm “Chỉ code; không test/lint/typecheck/build/quality. Chỉ thực thi 5 phase hiện hành, bỏ archive.” Đây là tham chiếu, không phải yêu cầu chạy ngay.
 
 ## 1. Hiện trạng và phạm vi
 
@@ -144,15 +157,25 @@ Host/Admin views tương ứng là phần dependency có giới hạn của phas
 
 | Phase | File | Dependencies | Trạng thái |
 |---|---|---|---|
-| 1 — Sidebar & Overview | [phase-01-sidebar-overview.md](phase-01-sidebar-overview.md) | Common UI contract và existing routes/API | Planned |
-| 2 — Monitoring | [phase-02-monitoring.md](phase-02-monitoring.md) | Phase1, current projection/transport; server query extensions trước UI controls | Planned |
-| 3 — Attendance & Identity | [phase-03-attendance.md](phase-03-attendance.md) | Phase1; phase4 case contract cho FAILED handoff | Planned |
-| 4 — Incidents & Audit | [phase-04-incidents-audit.md](phase-04-incidents-audit.md) | Phase1/2; identity event contract phase3; Host/Support/Admin bridge | Planned |
-| 5 — UI/UX Completion | [phase-05-ui-ux-completion.md](phase-05-ui-ux-completion.md) | Functional contracts phases1–4; no Testing/Quality phase | Planned |
+| 1 — Sidebar & Overview | [phase-01-sidebar-overview.md](phase-01-sidebar-overview.md) | Common UI contract và existing routes/API | Completed |
+| 2 — Monitoring | [phase-02-monitoring.md](phase-02-monitoring.md) | Phase1, current projection/transport; server query extensions trước UI controls | Completed |
+| 3 — Attendance & Identity | [phase-03-attendance.md](phase-03-attendance.md) | Phase1; chốt shared case reference contract tại đầu phase03, không đợi phase04 thực thi | Completed |
+| 4 — Incidents & Audit | [phase-04-incidents-audit.md](phase-04-incidents-audit.md) | Phase1/2; identity event contract phase3; Host/Support/Admin bridge | Completed |
+| 5 — UI/UX Completion | [phase-05-ui-ux-completion.md](phase-05-ui-ux-completion.md) | Functional contracts phases1–4; no Testing/Quality phase | Completed |
 
 Tránh dependency vòng phase3/4: thống nhất verification→incident event/reference contract ở đầu thiết kế; current verification state không phụ thuộc ticket resolution. Không expose FAILED “đã chuyển” trước server acknowledgement; phase3 có thể giữ trạng thái FAILED và “chưa bàn giao” nếu case capability chưa sẵn sàng. Hoàn thiện bridge trước khi công bố workflow hoàn chỉnh.
 
-Các file technical phase cũ (`phase-01-public-projections.md`, `phase-02-scoped-api-and-security.md`, `phase-03-client-and-role-routing.md`, `phase-04-room-transport.md`, `phase-05-screens-and-rollout.md`) giữ nguyên làm nền tảng đã có. Checkbox completed trong chúng không đồng nghĩa các phase chức năng mới này đã triển khai.
+Các file technical phase cũ (`archive/phase-01-public-projections.md`, `archive/phase-02-scoped-api-and-security.md`, `archive/phase-03-client-and-role-routing.md`, `archive/phase-04-room-transport.md`, `archive/phase-05-screens-and-rollout.md`) giữ nguyên làm nền tảng đã có. Checkbox completed trong chúng không đồng nghĩa các phase chức năng mới này đã triển khai.
+
+Vị trí thực tế của bộ cũ là `archive/` (kèm spec/research/rollout/verification/review cũ). Không có file phase kỹ thuật cũ ở thư mục thực thi hiện hành.
+
+### Tiến độ bộ hiện hành
+
+- [x] Phase01 — Sidebar & Overview.
+- [x] Phase02 — Monitoring.
+- [x] Phase03 — Attendance & Identity Verification.
+- [x] Phase04 — Incidents & Audit.
+- [x] Phase05 — UI/UX Completion.
 
 ## 8. File dự kiến sửa/tạo khi triển khai được duyệt
 
@@ -166,7 +189,7 @@ Các file technical phase cũ (`phase-01-public-projections.md`, `phase-02-scope
 ## 9. Điểm còn cần phê duyệt trong thiết kế chi tiết
 
 1. Quyền sửa identity verification sau CLOSED: đề xuất Host với lý do/audit, Proctor read-only; Admin xử lý incident không mặc nhiên có quyền sửa identity. Cửa sổ verification đề xuất như staff attendance nhưng state/revision độc lập.
-2. Severity taxonomy và recipient allocation: reuse existing severity vocabulary khi tương thích; explicit Admin receiver/authorized pool cần narrow lookup, không mở directory toàn platform cho Proctor/Host.
+2. Severity taxonomy và recipient allocation: đề xuất incident LOW/MEDIUM/HIGH, không thay severity của security evidence; explicit Admin receiver/authorized pool cần narrow lookup, không mở directory toàn platform cho Proctor/Host. Chi tiết quyền/closure/window dự kiến ở spec hiện hành, chưa phải quyền đã được cấp.
 3. Incident close/re-open policy: đề xuất Host đóng sau RESOLVED với lý do, Proctor chỉ follow/clarify; không có reopen hoặc xoá lịch sử trong phạm vi này.
 4. Shared UI extensions: controlled server sorting, opt-in active row/cursor pagination/loading label; chỉ additive, giữ default consumer. Full-history filter chỉ expose khi backend có scope tương ứng.
 

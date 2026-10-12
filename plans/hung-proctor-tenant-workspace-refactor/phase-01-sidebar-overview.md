@@ -1,6 +1,16 @@
 # Phase 1 — Sidebar & Overview
 
-Status: planned, chờ phê duyệt. Chỉ tài liệu; không triển khai.
+Status: completed.
+
+## Tasks hoàn thành
+
+- [x] Tách Overview và assigned-session list theo routes/query hiện hữu.
+- [x] Dùng common DataTable cho queue/picker, server metadata và controlled query controls.
+- [x] Giữ sidebar/card parity, one active item và role/flag behavior.
+- [x] Nối overview/priority/timezone/day-boundary projections có sẵn.
+- [x] Phân biệt initial/empty/error/retry/refresh, không raw API errors hoặc count0 giả.
+
+Execution constraints: no tests/lint/typecheck/build/quality; no rollout. Bộ kỹ thuật cũ nằm archive/, không là phase prerequisite để code lại.
 
 ## 1. Mục tiêu
 
