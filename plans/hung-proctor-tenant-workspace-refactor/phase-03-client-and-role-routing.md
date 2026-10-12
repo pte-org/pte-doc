@@ -1,6 +1,6 @@
 # Phase 03 — Shared client and role routing
 
-Status: pending. Dependency: 02 completed. Coverage: P1 workspace entry/list contracts; FR-01/04/14/15.
+Status: completed. Dependency: 02 completed. Coverage: P1 workspace entry/list contracts; FR-01/04/14/15.
 
 ## Design Constraints
 
@@ -52,7 +52,6 @@ From pte-web using declared pnpm: `pnpm.cmd --filter @pte/api-client typecheck`;
 
 ## Quality and Testing State
 
-- Quality: not evaluated. Decision: pending flags. Profile: not recorded.
-- Testing: not started. Decision: pending; TDD not selected.
-- If TDD selected: RED_READY role matrix + forbidden/disabled destinations + real resource request URLs/page/cursor handling.
+- Quality: skipped_by_user. Decision: user_confirmed_skip. Profile: recorded in Preflight.
+- Testing: not_started (skipped by user via --no-tests).
 - Risks: shared locale/API export regressions, no-PROCTOR precedence drift, flag-off redirect loop.

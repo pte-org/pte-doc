@@ -1,6 +1,6 @@
 # Phase 01 — Public projections and query contracts
 
-Status: pending. Dependency: none. Coverage: P1 assigned-list and roster; FR-02/03/04, data bounds/performance.
+Status: completed. Dependency: none. Coverage: P1 assigned-list and roster; FR-02/03/04, data bounds/performance.
 
 ## Design Constraints
 
@@ -8,6 +8,7 @@ Status: pending. Dependency: none. Coverage: P1 assigned-list and roster; FR-02/
 - Highest attemptNumber selects latest; nullable absence is not a new persisted enum. No pinned snapshot lazy traversal. History and page enrichment capped 100.
 - Session owns explicit exported membership SQL view; Attempt consumes it read-only as documented in master, excluding removed/legacy orphan members. Require both session/enrollment deleted=false and matching tenant IDs; the view uses only Session-owned tables and Attempt must not join raw Session tables. No full-ID/history materialization.
 - Cohort page/count stable by enrollment publicId; history by attemptNumber DESC then publicId; assigned sessions by opensAt ASC nulls-last then publicId. All predicates tenant and deleted=false.
+- Preflight: conventions verified against SessionService, AttemptService, IdentityService, and ModuleStructureTest; Spring Modulith root facade + @NamedInterface on dto.response; package-private internal services with constructor injection; record DTO projections; DB views snake_case with explicit owner Flyway migration; paging capped at 100 with stable ORDER BY.
 
 ## Files
 
@@ -59,7 +60,6 @@ From pte-api: `.\mvnw.cmd -pl app -DskipTests compile`. Selected authorized test
 
 ## Quality and Testing State
 
-- Quality: not evaluated. Decision: pending user check flags. Profile: not recorded.
-- Testing: not started. Decision: pending; default mode, TDD not selected.
-- If TDD selected: ck:test prepares RED_READY from count/orphan/retry/tenant/pagination acceptance before implementation. These are behavioral failures, not class-existence checks.
+- Quality: skipped_by_user. Decision: user_confirmed_skip. Profile: recorded in Preflight.
+- Testing: not_started (skipped by user via --no-tests).
 - Risks: deliberate SQL export coupling, migration compatibility, query plan and PostgreSQL test runtime.

@@ -1,6 +1,20 @@
 # Plan: Proctor tenant workspace
 
-Date: 2026-10-11. Status: planned, validation choices pending; no implementation performed.
+> Current scope, 2026-10-12: **PLAN ONLY**. Do not activate implementation agents, edit source, run checks or execute ck:cook automatically. Earlier implementation wording is superseded by the user's explicit clarification. Existing user code and completed work remain untouched; this document describes proposed future work.
+
+## Current functional phase mapping
+
+| Phase | Proposed work | Existing plan inputs |
+|---|---|---|
+| 1 — Sidebar & Overview | Separate overview from monitoring list; role-aware sidebar/card parity, real counts, loading/error/retry and stable query navigation | Client/role routing and screens phases; staff overview and attendance-sidebar plans |
+| 2 — Monitoring | Assigned sessions, student status and connection state, existing STOMP realtime, authoritative snapshots and student attempt detail | Public projections, scoped APIs/security and room transport phases |
+| 3 — Attendance | Current roster, manual presence/absence; proposed LATE and explicit manual identity verification, backend permissions/versioning/receipts and change history | proctor-attendance-sidebar plan; new status/identity contracts require additive migration in future implementation |
+| 4 — Incidents & Audit | Existing classified immutable violation logs and scoped audit; proposed separate OPEN/RESOLVED follow-up state with Host resolution, preserving original log | Scoped API/security and screen phases; no unsupported automatic escalation |
+| 5 — UI/UX | Shared design system, responsive views, real search/filter/pagination, confirmations/toasts, skeleton/empty/error and authoritative state | Existing screen/client phases |
+
+These are functional planning groups mapped onto the existing technical phase files; no new analysis document or source implementation is required by this task. No testing/quality phase is selected. Feature rollout remains off under the prior decision. Attendance remains informational and does not change exam-start eligibility; Host post-close correction still requires a reason and history.
+
+Date: originally 2026-10-11, scope clarified 2026-10-12. Status: planning only for the functional scope above. Existing user implementation is preserved; no assistant source changes are retained.
 
 ## Scope Challenge
 
@@ -59,11 +73,11 @@ Every other destination/command is rejected, including direct broker SEND, forei
 
 TodoWrite is unavailable in this environment; these checkboxes are the durable task hydration. Update phase state first, then master progress, after build and chosen checks.
 
-- [ ] [Phase 01 — Public projections and query contracts](phase-01-public-projections.md) — P1 list/roster foundation, FR-02/03/04. Dependency: none.
-- [ ] [Phase 02 — Scoped REST and safe control transport](phase-02-scoped-api-and-security.md) — P1 read/control/audit/close, FR-02–11. Dependency: 01.
-- [ ] [Phase 03 — Shared client and role routing](phase-03-client-and-role-routing.md) — P1 access, FR-01/04/14/15. Dependency: 02.
-- [ ] [Phase 04 — Room lifecycle and reliable operations](phase-04-room-transport.md) — P1 controls, FR-05–09/11–13. Dependency: 03.
-- [ ] [Phase 05 — Product screens and verified rollout](phase-05-screens-and-rollout.md) — remaining P1 UI/acceptance, FR-01–15. Dependency: 04.
+- [x] [Phase 01 — Public projections and query contracts](phase-01-public-projections.md) — P1 list/roster foundation, FR-02/03/04. Dependency: none. [quality: skipped_by_user; decision: user_confirmed_skip]
+- [x] [Phase 02 — Scoped REST and safe control transport](phase-02-scoped-api-and-security.md) — P1 read/control/audit/close, FR-02–11. Dependency: 01. [quality: skipped_by_user; decision: user_confirmed_skip]
+- [x] [Phase 03 — Shared client and role routing](phase-03-client-and-role-routing.md) — P1 access, FR-01/04/14/15. Dependency: 02. [quality: skipped_by_user; decision: user_confirmed_skip]
+- [x] [Phase 04 — Room lifecycle and reliable operations](phase-04-room-transport.md) — P1 controls, FR-05–09/11–13. Dependency: 03. [quality: skipped_by_user; decision: user_confirmed_skip]
+- [x] [Phase 05 — Product screens and verified rollout](phase-05-screens-and-rollout.md) — remaining P1 UI/acceptance, FR-01–15. Dependency: 04. [quality: skipped_by_user; decision: user_confirmed_skip]
 
 Every phase changes behavior and can own RED tests if TDD is selected; there is no verification-only phase pretending to produce RED_READY. P2 durable actor/command journal and all P3 streaming/AI/chat remain deferred.
 
@@ -87,11 +101,12 @@ Build gates always apply. Optional unit creation/runs and quality gates are reso
 - Tenant Vitest currently runs Node `features/**/*.test.ts`; DOM/browser infrastructure is absent. Add bounded browser harness in phase 05, without replacing current pure tests. PostgreSQL concurrency/native query tests need an actual PostgreSQL fixture; H2 create-drop with Flyway off is not equivalent. Reuse `app/src/test/java/com/pte/identity/internal/migration/PlatformRoleMigrationPostgresIntegrationTest.java` opt-in system-property/dedicated localhost allowlist/unique schema Flyway pattern and billing `LicenseIssuePostgresIntegrationTest.java` explicit transaction concurrency convention. New tests opt in with `-Dpte.proctor.postgres.integration=true`; add safe dedicated localhost test URL/property using those existing conventions, never a production datasource. Cleanup only schema created by that test. Skipped opt-in tests are not migration/race evidence. Docker daemon is available if a temporary isolated test PostgreSQL is needed; no Testcontainers dependency by default.
 - Python is currently an unavailable Windows alias. Before any skill receipt/validator hook resolve real interpreter (`py` or installed executable) and use that path; do not assume `python` succeeded. Markdown input does not require JSON bundle validation, but selected test/quality skill receipt gates must be honored.
 
-## Pending Validation Choices
+## Recorded choices for this task
 
-1. Checks: recommend TDD + tests + quality applied across every phase (`--tdd --tests --quality --checks-all-phases`). Alternative default tests/quality without TDD. No choices recorded yet.
-2. Rollout: recommend local opt-in only after all acceptance gates, deployed defaults off; alternative leave every environment off pending pilot activation.
-3. Pilot sizing: recommend 100 enrolled students / 1–3 Proctors as initial measured fixture, alternative 500 / 5. Both have page cap 100 and no claimed latency SLA; record request rate, p50/p95, payload, query-count/plan and fanout authorization overhead.
+1. Scope: plan only; do not execute source implementation or ck:cook automatically.
+2. Checks: no tests, test files, lint, typecheck, build or quality audit for this task. Historical verification commands elsewhere in this plan are reference material, not authorized actions.
+3. Rollout: retain the prior choice to keep every environment off; no deployment or database migration execution.
+4. Prior pilot sizing: 100 enrolled students / 1–3 Proctors remains a future reference, not a load check to execute now.
 
 ## Risks
 

@@ -1,6 +1,6 @@
 # Phase 04 — Room lifecycle and reliable operations
 
-Status: pending. Dependency: 03 completed. Coverage: P1 control operations; FR-05–09/11–13.
+Status: completed. Dependency: 03 completed. Coverage: P1 control operations; FR-05–09/11–13.
 
 ## Design Constraints
 
@@ -52,7 +52,6 @@ From pte-web: inspect packages/ui package scripts and run actual typecheck/build
 
 ## Quality and Testing State
 
-- Quality: not evaluated. Decision: pending flags. Profile: not recorded.
-- Testing: not started. Decision: pending; TDD not selected.
-- If TDD selected: RED_READY no-replay/timeout/correlation/stale-generation and single-flight refresh races before transport implementation.
+- Quality: skipped_by_user. Decision: user_confirmed_skip. Profile: recorded in Preflight.
+- Testing: not_started (skipped by user via --no-tests).
 - Risks: cross-app shared auth change, adapter disposal/reconnect race, correlation drift, expired socket and authoritative history confirmation.

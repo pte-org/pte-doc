@@ -1,6 +1,6 @@
 # Phase 05 — Product screens and verified rollout
 
-Status: pending. Dependency: 04 completed. Coverage: remaining P1 list/room/audit/profile UX, integrated FR-01–15; P2/P3 deferred.
+Status: completed. Dependency: 04 completed. Coverage: remaining P1 list/room/audit/profile UX, integrated FR-01–15; P2/P3 deferred.
 
 ## Design Constraints
 
@@ -55,7 +55,6 @@ From pte-api: `.\mvnw.cmd -pl app test` (record integration profile and DB prere
 
 ## Quality and Testing State
 
-- Quality: not evaluated. Decision: pending flags. Profile: not recorded.
-- Testing: not started. Decision: pending; TDD not selected.
-- If TDD selected: phase owns new behavioral browser RED tests for actual screen interactions before implementation; integrated rechecks are additional rollout evidence, not fake RED_READY.
+- Quality: skipped_by_user. Decision: user_confirmed_skip. Profile: recorded in Preflight.
+- Testing: not_started (skipped by user via --no-tests).
 - Risks: external services/test identities/browser runtime, visual accessibility defects, demo versus live evidence confusion, pilot authorization fanout costs.

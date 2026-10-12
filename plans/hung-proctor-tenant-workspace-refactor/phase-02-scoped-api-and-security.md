@@ -1,6 +1,6 @@
 # Phase 02 — Scoped REST and safe control transport
 
-Status: pending. Dependency: 01 completed. Coverage: all P1 read/control/security; FR-02–11.
+Status: completed. Dependency: 01 completed. Coverage: all P1 read/control/security; FR-02–11.
 
 ## Design Constraints
 
@@ -8,6 +8,7 @@ Status: pending. Dependency: 01 completed. Coverage: all P1 read/control/securit
 - Read-assigned permits scheduled/closed states; control requires OPEN/window, owned ACTIVE monitoring. Close-owned remains possible after revoke/close, granting no read/control privileges.
 - Single lock order Session → owned monitoring → target attempt; revoke locks same Session. Publication/private positive receipts occur after successful commit.
 - Outbound authorization is per recipient at beforeHandle, fresh READ_COMMITTED query snapshot, no positive cache; preserve exact legacy mixed topic/error payloads. Follow master Inbound STOMP Contract table and header trust rules. Dispatch authorized before revoke commits may finish after commit; a fresh authorization read after commit denies. Never claim check-and-send atomicity. Register only authenticated transport sessions; expiration/drop cleanup bounded.
+- Preflight: conventions verified against SessionService, ProctorSessionService, WebSocketConfig, StompAuthChannelInterceptor, and ViolationService; lock hierarchy Session -> ProctorSession -> ExamAttempt; recipient outbound authorization on clientOutboundChannel with ExecutorChannelInterceptor.beforeHandle; REST endpoints follow ApiResponse<T> with PagedResult<T> envelopes under /api/v1; CurrentUser from security context supplies tenantId and user publicId.
 
 ## Files
 
@@ -60,7 +61,6 @@ From pte-api: `.\mvnw.cmd -pl app -DskipTests compile`; authorized `.\mvnw.cmd -
 
 ## Quality and Testing State
 
-- Quality: not evaluated. Decision: pending user flags. Profile: not recorded.
-- Testing: not started. Decision: pending; TDD not selected.
-- If TDD selected: RED_READY targets revoked resume/delivery, scoped attempt, concurrent flags, rollback receipts and two-tab correlation before changing handlers.
+- Quality: skipped_by_user. Decision: user_confirmed_skip. Profile: recorded in Preflight.
+- Testing: not_started (skipped by user via --no-tests).
 - Risks: lock ordering/deadlocks, per-delivery lookup cost, interceptor exception path, socket-only user destinations and framework hook behavior.
