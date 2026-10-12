@@ -1,0 +1,248 @@
+<div id="pte-proctor-preview">
+  <div class="p-shell">
+    <aside class="p-sidebar">
+      <div class="p-brand">PTE Prep <span>Tenant web</span></div>
+      <div class="p-role">Workspace Giám thị</div>
+      <nav aria-label="Điều hướng giám thị">
+        <button type="button" data-view="sessions" class="p-nav p-active cursor-interaction">Buổi thi</button>
+        <button type="button" data-view="profile" class="p-nav cursor-interaction">Hồ sơ</button>
+      </nav>
+      <div class="p-user">Hung Pham<span>PROCTOR</span></div>
+    </aside>
+    <main class="p-main">
+      <div class="p-preview-label">Bản thiết kế · Dữ liệu minh họa</div>
+      <section data-screen="sessions">
+        <header class="p-heading"><div><h1>Buổi thi được phân công</h1><p>Truy cập phòng thi và lịch sử giám sát của bạn.</p></div></header>
+        <div class="p-session-list">
+          <article class="p-session"><div><span class="p-badge p-success">Đang mở</span><h2>PTE Mock Test — Ca sáng</h2><p>MOCK-11A · 11/10/2026 · 09:00–12:00</p><span class="p-small">Giám thị chính</span></div><button type="button" data-open="room" class="p-primary cursor-interaction">Vào giám sát →</button></article>
+          <article class="p-session"><div><span class="p-badge">Chưa mở</span><h2>PTE Mock Test — Ca chiều</h2><p>MOCK-11B · 11/10/2026 · 14:00–17:00</p><span class="p-small">Giám thị hỗ trợ</span></div><button type="button" data-open="scheduled" class="cursor-interaction">Xem thông tin</button></article>
+          <article class="p-session"><div><span class="p-badge">Đã đóng</span><h2>PTE Mock Test — Ca trước</h2><p>MOCK-10A · 10/10/2026 · 09:00–12:00</p><span class="p-small">Giám thị hỗ trợ</span></div><button type="button" data-view="audit" class="cursor-interaction">Xem sự kiện</button></article>
+        </div>
+      </section>
+      <section data-screen="room" hidden>
+        <button type="button" data-view="sessions" class="p-back cursor-interaction">← Buổi thi được phân công</button>
+        <header class="p-heading"><div><h1>PTE Mock Test — Ca sáng</h1><p>MOCK-11A · Giám thị chính <span class="p-badge p-success">Đang mở</span></p></div><button type="button" data-action="close" class="cursor-interaction">Kết thúc giám sát</button></header>
+        <div class="p-connection"><span class="p-dot"></span>Đã kết nối <span class="p-small">Snapshot minh họa · 09:42:15</span><button type="button" data-view="audit" class="p-text-action cursor-interaction">Nhật ký sự kiện →</button></div>
+        <div class="p-summary" id="p-summary"></div>
+        <div class="p-workspace">
+          <div class="p-panel p-roster">
+            <div class="p-toolbar"><h2>Thí sinh</h2><label>Tìm trong mẫu<input id="p-search" type="search" placeholder="Tên thí sinh" autocomplete="off"></label></div>
+            <div class="p-table-wrap"><table><thead><tr><th>Thí sinh</th><th>Trạng thái</th><th>Hoạt động gần nhất</th><th>Vi phạm</th></tr></thead><tbody id="p-students"></tbody></table></div>
+            <div class="p-table-foot">4 thí sinh · Trang 1 / 1</div>
+          </div>
+          <aside class="p-panel p-detail" aria-label="Chi tiết thí sinh"><div id="p-detail"></div></aside>
+        </div>
+      </section>
+      <section data-screen="audit" hidden>
+        <button type="button" data-view="sessions" class="p-back cursor-interaction">← Buổi thi được phân công</button>
+        <header class="p-heading"><div><h1>Nhật ký sự kiện</h1><p>PTE Mock Test · Sự kiện bảo mật và ghi nhận giám thị</p></div><button type="button" data-action="refresh" class="cursor-interaction">Làm mới</button></header>
+        <div class="p-small p-audit-time" id="p-audit-time">Dữ liệu minh họa tại 09:42:15 · Thứ tự thời gian tăng dần</div>
+        <div class="p-panel" id="p-events"></div>
+      </section>
+      <section data-screen="scheduled" hidden>
+        <button type="button" data-view="sessions" class="p-back cursor-interaction">← Buổi thi được phân công</button>
+        <header class="p-heading"><div><h1>PTE Mock Test — Ca chiều</h1><p>MOCK-11B · Giám thị hỗ trợ</p></div><span class="p-badge">Chưa mở</span></header>
+        <div class="p-panel p-info"><h2>Lịch thi</h2><p>11/10/2026 · 14:00–17:00</p><p>Bạn có thể vào giám sát khi buổi thi được mở.</p></div>
+      </section>
+      <section data-screen="profile" hidden>
+        <header class="p-heading"><div><h1>Hồ sơ giám thị</h1><p>Thông tin tài khoản trong tenant hiện tại.</p></div></header>
+        <div class="p-panel p-info"><h2>Hung Pham</h2><p>hung.pham@example.com</p><p>Vai trò: PROCTOR</p><span class="p-badge p-success">Đang hoạt động</span></div>
+      </section>
+      <div id="p-notice" class="p-notice" role="status" aria-live="polite" hidden></div>
+    </main>
+  </div>
+  <dialog id="p-dialog" aria-labelledby="p-dialog-title">
+    <form method="dialog" id="p-dialog-form">
+      <h2 id="p-dialog-title"></h2><p id="p-dialog-description"></p>
+      <div id="p-violation-fields" hidden><label>Loại vi phạm<select id="p-violation-type"><option value="TAB_SWITCH">Chuyển tab</option><option value="MULTIPLE_FACES">Nhiều khuôn mặt</option><option value="FACE_NOT_VISIBLE">Không thấy khuôn mặt</option><option value="SUSPICIOUS_AUDIO">Âm thanh đáng ngờ</option><option value="TECHNICAL_ISSUE">Sự cố kỹ thuật</option><option value="OTHER">Khác</option></select></label><label>Ghi chú (tùy chọn)<textarea id="p-note" rows="3" maxlength="500" placeholder="Mô tả sự kiện quan sát được"></textarea></label></div>
+      <div class="p-dialog-actions"><button type="submit" value="cancel" class="cursor-interaction">Hủy</button><button type="submit" value="confirm" id="p-confirm" class="p-primary cursor-interaction">Xác nhận</button></div>
+    </form>
+  </dialog>
+</div>
+<style>
+#pte-proctor-preview{--p-page:light-dark(#f4f4f5,#09090b);--p-card:light-dark(#fff,#171718);--p-ink:light-dark(#18181b,#f4f4f5);--p-muted:light-dark(#52525b,#a1a1aa);--p-border:light-dark(#e8e8e8,#2b2c2e);--p-blue:light-dark(#0b5fae,#4e9be1);--p-blue-ink:light-dark(#fff,#07111d);--p-tint:light-dark(#e8f2f9,#163859);--p-green-bg:light-dark(#e6fffa,#113c34);--p-green:light-dark(#088068,#7de8c8);--p-warn-bg:light-dark(#fef5e5,#382713);--p-warn:light-dark(#9c6400,#f0c36c);color:var(--p-ink);font:14px/1.5 system-ui,sans-serif;background:transparent}
+#pte-proctor-preview *{box-sizing:border-box}
+#pte-proctor-preview [hidden]{display:none!important}
+#pte-proctor-preview .p-shell{display:grid;grid-template-columns:176px minmax(0,1fr);background:var(--p-page);min-height:620px;border:1px solid var(--p-border);border-radius:12px;overflow:clip}
+#pte-proctor-preview .p-sidebar{background:var(--p-card);border-right:1px solid var(--p-border);padding:24px 16px;display:flex;flex-direction:column;gap:24px}
+#pte-proctor-preview .p-brand{font-size:20px;font-weight:500;letter-spacing:-.4px}
+#pte-proctor-preview .p-brand span,#pte-proctor-preview .p-user span{display:block;font-size:12px;color:var(--p-muted);font-weight:400}
+#pte-proctor-preview .p-role{font-size:12px;color:var(--p-muted)}
+#pte-proctor-preview nav{display:grid;gap:6px}
+#pte-proctor-preview button{font:inherit;color:var(--p-ink);background:var(--p-card);border:1px solid var(--p-border);padding:9px 12px;border-radius:7px;white-space:normal}
+#pte-proctor-preview button:hover{background:var(--p-tint)}
+#pte-proctor-preview button:disabled{opacity:.5}
+#pte-proctor-preview .p-nav{text-align:left;border:0;background:transparent}
+#pte-proctor-preview .p-nav.p-active{color:var(--p-blue);background:var(--p-tint);font-weight:500}
+#pte-proctor-preview .p-primary{background:var(--p-blue);color:var(--p-blue-ink);border-color:var(--p-blue)}
+#pte-proctor-preview .p-primary:hover{filter:brightness(.95);background:var(--p-blue)}
+#pte-proctor-preview .p-user{margin-top:auto;padding-top:16px;border-top:1px solid var(--p-border)}
+#pte-proctor-preview .p-main{padding:24px;min-width:0}
+#pte-proctor-preview .p-preview-label{font-size:12px;color:var(--p-muted);padding-right:90px;margin-bottom:20px;min-height:26px}
+#pte-proctor-preview h1{font-size:23px;line-height:1.25;letter-spacing:-.4px;font-weight:500;margin:0}
+#pte-proctor-preview h2{font-size:15px;font-weight:500;margin:0}
+#pte-proctor-preview p{margin:6px 0;color:var(--p-muted)}
+#pte-proctor-preview .p-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+#pte-proctor-preview .p-session-list{display:grid;gap:12px}
+#pte-proctor-preview .p-session{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px;background:var(--p-card);border:1px solid var(--p-border);border-radius:10px}
+#pte-proctor-preview .p-session h2{font-size:17px;margin-top:10px}
+#pte-proctor-preview .p-badge{display:inline-block;padding:3px 8px;border-radius:5px;background:var(--p-page);color:var(--p-muted);font-size:12px}
+#pte-proctor-preview .p-success{background:var(--p-green-bg);color:var(--p-green)}
+#pte-proctor-preview .p-warning{background:var(--p-warn-bg);color:var(--p-warn)}
+#pte-proctor-preview .p-small{font-size:12px;color:var(--p-muted)}
+#pte-proctor-preview .p-back{padding:0;border:0;background:transparent;color:var(--p-blue);margin-bottom:16px}
+#pte-proctor-preview .p-connection{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 0;border-top:1px solid var(--p-border);border-bottom:1px solid var(--p-border);font-size:12px}
+#pte-proctor-preview .p-dot{width:7px;height:7px;background:var(--p-green);border-radius:50%}
+#pte-proctor-preview .p-text-action{margin-left:auto;border:0;padding:2px;background:transparent;color:var(--p-blue);font-size:12px}
+#pte-proctor-preview .p-summary{padding:16px 0;display:flex;gap:24px;flex-wrap:wrap;color:var(--p-muted)}
+#pte-proctor-preview .p-summary strong{font-weight:500;color:var(--p-ink)}
+#pte-proctor-preview .p-workspace{display:grid;grid-template-columns:minmax(0,1fr) 224px;gap:16px;align-items:start}
+#pte-proctor-preview .p-panel{background:var(--p-card);border:1px solid var(--p-border);border-radius:9px;min-width:0}
+#pte-proctor-preview .p-toolbar{padding:16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+#pte-proctor-preview label{display:grid;gap:5px;font-size:12px;color:var(--p-muted);min-width:0}
+#pte-proctor-preview input,#pte-proctor-preview select,#pte-proctor-preview textarea{font:inherit;font-size:14px;max-width:100%;width:100%;border:1px solid var(--p-border);padding:8px 10px;border-radius:6px;background:var(--p-card);color:var(--p-ink)}
+#pte-proctor-preview .p-toolbar input{max-width:170px}
+#pte-proctor-preview .p-table-wrap{overflow-x:auto}
+#pte-proctor-preview table{width:100%;border-collapse:collapse;font-size:12px}
+#pte-proctor-preview th{text-align:left;font-weight:400;color:var(--p-muted);background:var(--p-page);padding:10px 12px;white-space:nowrap}
+#pte-proctor-preview td{padding:14px 12px;border-top:1px solid var(--p-border)}
+#pte-proctor-preview td button{border:0;padding:0;background:transparent;color:var(--p-blue);text-align:left}
+#pte-proctor-preview td small{display:block;color:var(--p-muted);margin-top:3px;font-size:11px}
+#pte-proctor-preview tr.p-selected{background:var(--p-tint)}
+#pte-proctor-preview .p-table-foot{padding:12px 16px;color:var(--p-muted);font-size:12px;border-top:1px solid var(--p-border)}
+#pte-proctor-preview .p-detail{padding:16px}
+#pte-proctor-preview .p-detail h2{font-size:17px}
+#pte-proctor-preview .p-detail dl{margin:18px 0;display:grid;gap:4px}
+#pte-proctor-preview dt{color:var(--p-muted);font-size:12px;margin-top:8px}
+#pte-proctor-preview dd{margin:0;font-size:13px;overflow-wrap:anywhere}
+#pte-proctor-preview .p-detail-actions{display:grid;gap:8px;border-top:1px solid var(--p-border);padding-top:16px}
+#pte-proctor-preview .p-detail-actions button{font-size:12px}
+#pte-proctor-preview .p-info{padding:24px}
+#pte-proctor-preview .p-audit-time{margin-bottom:14px}
+#pte-proctor-preview .p-event{padding:18px;display:grid;grid-template-columns:65px minmax(0,1fr);gap:12px;border-bottom:1px solid var(--p-border)}
+#pte-proctor-preview .p-event:last-child{border-bottom:0}
+#pte-proctor-preview .p-event time{color:var(--p-muted);font-size:12px;font-variant-numeric:tabular-nums}
+#pte-proctor-preview .p-event h2{margin:7px 0}
+#pte-proctor-preview .p-notice{margin-top:20px;padding:12px 16px;background:var(--p-tint);border-radius:8px}
+#pte-proctor-preview dialog{color:var(--p-ink);background:var(--p-card);border:1px solid var(--p-border);border-radius:12px;padding:24px;width:min(440px,calc(100% - 32px));max-height:90%;overflow:auto}
+#pte-proctor-preview dialog::backdrop{background:light-dark(#18181b66,#0009)}
+#pte-proctor-preview dialog h2{font-size:19px}
+#pte-proctor-preview dialog p{margin:12px 0 20px}
+#pte-proctor-preview #p-violation-fields{display:grid;gap:14px}
+#pte-proctor-preview .p-dialog-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:24px}
+@media(max-width:850px){#pte-proctor-preview .p-workspace{grid-template-columns:1fr}#pte-proctor-preview .p-detail{display:block}#pte-proctor-preview .p-detail dl{grid-template-columns:1fr 1fr;gap:8px}#pte-proctor-preview .p-detail dt{margin:0}#pte-proctor-preview .p-detail-actions{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){#pte-proctor-preview .p-shell{grid-template-columns:1fr;min-height:0}#pte-proctor-preview .p-sidebar{padding:14px 16px;gap:12px;border-right:0;border-bottom:1px solid var(--p-border)}#pte-proctor-preview .p-brand{font-size:17px}#pte-proctor-preview .p-brand span,#pte-proctor-preview .p-user,#pte-proctor-preview .p-role{display:none}#pte-proctor-preview nav{display:flex;flex-wrap:wrap}#pte-proctor-preview .p-main{padding:16px}#pte-proctor-preview h1{font-size:21px}#pte-proctor-preview .p-session{align-items:flex-start;flex-direction:column;padding:16px}#pte-proctor-preview .p-session button{width:100%}#pte-proctor-preview .p-preview-label{padding-right:80px}#pte-proctor-preview .p-detail-actions{grid-template-columns:1fr}}
+@media(pointer:coarse){#pte-proctor-preview button{min-height:44px}#pte-proctor-preview input,#pte-proctor-preview select,#pte-proctor-preview textarea{font-size:16px}}
+</style>
+<script>
+(() => {
+  const root = document.getElementById('pte-proctor-preview');
+  const get = id => root.querySelector('#' + id);
+  const people = [
+    {id:'a1',name:'Nguyễn Minh Anh',attempt:'Lần thi 1 · …b712',status:'IN_PROGRESS',seen:'09:42:10',violations:1},
+    {id:'a2',name:'Trần Đức Huy',attempt:'Lần thi 1 · …c831',status:'IN_PROGRESS',seen:'09:41:55',violations:0},
+    {id:'a3',name:'Lê Thu Hà',attempt:'Lần thi 1 · …d402',status:'SUBMITTED',seen:'09:38:20',violations:0},
+    {id:'a4',name:'Phạm Quang Nam',attempt:'Chưa có attempt',status:null,seen:'—',violations:0}
+  ];
+  const events = [
+    {time:'09:36:04',source:'Ứng dụng thí sinh',severity:'Cảnh báo',name:'Nguyễn Minh Anh',type:'Chuyển tab',detail:'Ứng dụng ghi nhận thay đổi tab khi đang làm bài.'},
+    {time:'09:40:12',source:'Giám thị',severity:'Cảnh báo',name:'Nguyễn Minh Anh',type:'Sự cố kỹ thuật',detail:'Thí sinh báo tai nghe bị gián đoạn.'}
+  ];
+  const labels = {IN_PROGRESS:'Đang làm',SUBMITTED:'Đã nộp',CREATED:'Đã tạo bài'};
+  let selected = 'a1';
+  let operation = null;
+  let activeView = 'sessions';
+  const dialog = get('p-dialog');
+  function remember() {
+    if (window.openai?.setWidgetState) window.openai.setWidgetState({modelContent:{screen:activeView},privateContent:{selected}}).catch(() => {});
+  }
+  function notice(message) { get('p-notice').textContent = message; get('p-notice').hidden = false; }
+  function view(name,save=true) {
+    const valid = ['sessions','room','audit','scheduled','profile'];
+    if (!valid.includes(name)) return;
+    activeView = name;
+    root.querySelectorAll('[data-screen]').forEach(el => {el.hidden = el.dataset.screen !== name;});
+    root.querySelectorAll('[data-view].p-nav').forEach(el => el.classList.toggle('p-active',el.dataset.view === (name==='profile'?'profile':'sessions')));
+    get('p-notice').hidden = true;
+    if (save) remember();
+  }
+  function badge(status) {
+    const span = document.createElement('span');
+    span.className = 'p-badge ' + (status==='IN_PROGRESS'?'p-success':'');
+    span.textContent = labels[status] || 'Chưa bắt đầu';
+    return span;
+  }
+  function render() {
+    const tbody = get('p-students'); tbody.replaceChildren();
+    const query = get('p-search').value.toLocaleLowerCase('vi');
+    people.filter(p => p.name.toLocaleLowerCase('vi').includes(query)).forEach(p => {
+      const tr = document.createElement('tr'); tr.classList.toggle('p-selected',p.id===selected);
+      const nameCell = document.createElement('td');
+      const button = document.createElement('button'); button.type='button'; button.className='cursor-interaction'; button.textContent=p.name;
+      button.setAttribute('aria-pressed',String(p.id===selected));
+      button.addEventListener('click',() => {selected=p.id;render();remember();});
+      const small=document.createElement('small');small.textContent=p.attempt;nameCell.append(button,small);
+      const statusCell=document.createElement('td');statusCell.append(badge(p.status));
+      const seenCell=document.createElement('td');seenCell.textContent=p.seen;
+      const flagCell=document.createElement('td');flagCell.textContent=String(p.violations);
+      tr.append(nameCell,statusCell,seenCell,flagCell);tbody.append(tr);
+    });
+    const p=people.find(p=>p.id===selected) || people[0];
+    get('p-summary').textContent=`${people.length} đăng ký · ${people.filter(p=>p.status==='IN_PROGRESS').length} đang làm · ${people.filter(p=>p.status==='SUBMITTED').length} đã nộp`;
+    const detail=get('p-detail');detail.replaceChildren();
+    const title=document.createElement('h2');title.textContent=p.name;
+    const dl=document.createElement('dl');
+    [['Attempt',p.attempt],['Trạng thái',labels[p.status]||'Chưa bắt đầu'],['Hoạt động gần nhất',p.seen],['Vi phạm',String(p.violations)]].forEach(([key,value])=>{
+      const dt=document.createElement('dt');dt.textContent=key;const dd=document.createElement('dd');dd.textContent=value;dl.append(dt,dd);
+    });
+    const actions=document.createElement('div');actions.className='p-detail-actions';
+    [['flag','Ghi nhận vi phạm'],['submit','Yêu cầu nộp bài']].forEach(([action,label])=>{
+      const button=document.createElement('button');button.type='button';button.dataset.action=action;button.className='cursor-interaction '+(action==='submit'?'p-primary':'');button.textContent=label;button.disabled=p.status!=='IN_PROGRESS';actions.append(button);
+    });
+    detail.append(title,dl,actions);
+    const list=get('p-events');list.replaceChildren();
+    events.forEach(e=>{
+      const item=document.createElement('article');item.className='p-event';
+      const time=document.createElement('time');time.textContent=e.time;
+      const content=document.createElement('div');
+      const source=document.createElement('span');source.className='p-badge p-warning';source.textContent=e.source+' · '+e.severity;
+      const heading=document.createElement('h2');heading.textContent=e.type+' · '+e.name;
+      const description=document.createElement('p');description.textContent=e.detail;
+      content.append(source,heading,description);item.append(time,content);list.append(item);
+    });
+  }
+  root.addEventListener('click',event=>{
+    const button=event.target.closest('button');if(!button || !root.contains(button) || button.disabled)return;
+    if(button.dataset.view)view(button.dataset.view);
+    if(button.dataset.open)view(button.dataset.open);
+    if(!button.dataset.action)return;
+    operation=button.dataset.action;
+    if(operation==='refresh'){notice('Đã làm mới dữ liệu minh họa.');return;}
+    const p=people.find(p=>p.id===selected);
+    get('p-violation-fields').hidden=operation!=='flag';get('p-note').value='';
+    const descriptions={submit:['Yêu cầu nộp bài?',`${p.name} · ${p.attempt}. Thí sinh sẽ kết thúc bài làm.`, 'Xác nhận nộp bài'],flag:['Ghi nhận vi phạm',`${p.name} · ${p.attempt}`, 'Lưu ghi nhận'],close:['Kết thúc giám sát?', 'Kết thúc phiên giám sát của bạn. Buổi thi tiếp tục theo lịch của Host.', 'Kết thúc giám sát']};
+    const content=descriptions[operation];if(!content)return;
+    get('p-dialog-title').textContent=content[0];get('p-dialog-description').textContent=content[1];get('p-confirm').textContent=content[2];dialog.showModal();
+  });
+  dialog.addEventListener('close',()=>{
+    if(dialog.returnValue!=='confirm')return;
+    const p=people.find(p=>p.id===selected);
+    if(operation==='submit'){p.status='SUBMITTED';render();notice('Minh họa: trạng thái bài làm đã được xác nhận là Đã nộp.');}
+    if(operation==='flag'){
+      p.violations+=1;
+      const select=get('p-violation-type');
+      events.push({time:'09:42:30',source:'Giám thị',severity:'Cảnh báo',name:p.name,type:select.selectedOptions[0].textContent,detail:get('p-note').value.trim()||'Ghi nhận thủ công trong phiên giám sát.'});
+      render();notice('Đã lưu ghi nhận trong bản minh họa.');
+    }
+    if(operation==='close'){view('sessions');notice('Minh họa: đã kết thúc phiên giám sát. Buổi thi vẫn đang mở.');}
+    operation=null;
+  });
+  get('p-search').addEventListener('input',render);
+  function restore(state) {
+    if (people.some(p=>p.id===state?.privateContent?.selected))selected=state.privateContent.selected;
+    render();view(state?.modelContent?.screen || 'sessions',false);
+  }
+  restore(window.openai?.widgetState);
+  window.addEventListener('openai:set_globals',event=>{if(event.detail?.globals?.widgetState)restore(event.detail.globals.widgetState);});
+})();
+</script>
