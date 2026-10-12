@@ -1,0 +1,14 @@
+{
+  "target": "phase-01-contracts-and-security",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\DOCUMENTFPT\\Github\\pte-org\\pte-doc\\projects\\plans\\quang-tenant-exam-staff-workspace",
+  "report_path": "quality/phase-01-contracts-and-security-quality-report.json",
+  "reviewed_files": [
+    "contract.md",
+    "spec.md"
+  ],
+  "source_fingerprint": "sha256:cbce67734dd9936dad0d99d0165b782b6c374539fc3226aaf13ba02075d7426b",
+  "reviewed_at": "2026-10-10T11:36:35Z",
+  "open_blocking_findings": 0
+}
