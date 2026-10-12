@@ -47,11 +47,11 @@ Run in order. Phase output is reviewable source, not permission to deploy. Do no
 
 ## Implementation tasks
 
-- [ ] Phase01 — contracts/schema/reference.
-- [ ] Phase02 — atomic decisions and session coordination.
-- [ ] Phase03 — publication barrier and SQL legacy alignment.
-- [ ] Phase04 — Examiner routes/shared client/UI.
-- [ ] Phase05 — Host workflow and delivery verification.
+- [x] Phase01 — contracts/schema/reference. [quality: skipped_by_user; decision: user_confirmed_skip; testing: skipped_by_user]
+- [x] Phase02 — atomic decisions and session coordination. [quality: skipped_by_user; decision: user_confirmed_skip; testing: skipped_by_user]
+- [x] Phase03 — publication barrier and SQL legacy alignment. [quality: skipped_by_user; decision: user_confirmed_skip; testing: skipped_by_user]
+- [x] Phase04 — Examiner routes/shared client/UI. [quality: skipped_by_user; decision: user_confirmed_skip; testing: skipped_by_user]
+- [x] Phase05 — Host workflow and delivery verification. [quality: skipped_by_user; decision: user_confirmed_skip; testing: skipped_by_user]
 
 ## Red-team adjudication
 

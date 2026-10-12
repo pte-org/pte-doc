@@ -1,6 +1,6 @@
 # Phase 05 — Host workflow, coordinated delivery and integrated verification
 
-Status: not started. Dependencies: Phases01–04.
+Status: completed. Dependencies: Phases01–04.
 Stories: P1 Host publication and end-to-end AI-assisted Examiner authority.
 Requirements: FR08–10,14,16; final evidence against all P1 success criteria.
 

@@ -1,6 +1,6 @@
 # Phase 04 — Examiner queue, grading routes and exact-intent UI
 
-Status: not started. Dependencies: Phases01–03 authoritative API contracts.
+Status: completed. Dependencies: Phases01–03 authoritative API contracts.
 Stories: P1 assigned queue, AI-supported human decision and resilient media/network interactions.
 Requirements: FR01–04,06–07,11–16.
 

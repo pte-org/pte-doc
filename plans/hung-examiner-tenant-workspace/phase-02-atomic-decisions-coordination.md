@@ -1,6 +1,6 @@
 # Phase 02 — Atomic final decisions and session coordination
 
-Status: not started. Dependency: Phase01 contract/schema.
+Status: completed. Dependency: Phase01 contract/schema.
 Stories: P1 explicit AI confirm/manual finalization, timeout resilience and late-AI safety.
 Requirements: FR04–08,13–14.
 
@@ -21,6 +21,7 @@ Relative to `pte-api/app/src/main/java/com/pte/`:
 - New decisions require FROZEN or COMPLETED MANUAL cohort and nonexcluded exact member; COMPLETED is not a prerequisite for first score.
 - Existing immutable decision cannot be amended; same score with a different kind/viewed version is a different intent.
 - Current read authorization precedes receipt replay. Replay precedes optimistic checks, but never restores revoked/published access.
+- Preflight: conventions=pte-api sessionService.lockForScoreReviewMutation for mutex; boundaries=session-first locking across scoring/cohort/reporting, atomic finalize (immutable score + selectScoreSource(EXAMINER) atomically); applicable_rules=common session mutex before cohort/answer/state locks, validate FROZEN MANUAL_EXAMINER cohort and nonexcluded member, verify expectedReviewVersion and reviewedAiVersion, reject legacy score-only payload, prevent Host source selection / teacher score in MANUAL_EXAMINER; allowed_exceptions=AI_ONLY sessions retain existing source-selection behavior.
 
 ## Implementation steps
 

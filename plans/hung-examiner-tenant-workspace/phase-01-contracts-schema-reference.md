@@ -1,6 +1,6 @@
 # Phase 01 — Contracts, schema and AI reference
 
-Status: not started. Dependency: approved spec and validation answers.
+Status: completed (quality skipped by user; tests skipped by user). Dependency: approved spec and validation answers.
 Stories: P1 assigned AI reference and reliable decisions; P2 only actual available reference fields.
 Requirements: FR01–03,05–07,10. Output does not yet enable human finalization.
 
@@ -22,6 +22,7 @@ API root: `pte-api/app/src/main/java/com/pte/`.
 - Tenant/active role/owned assignment precedes AI projection and authorized media signing. Keep student identity, answer keys, Host scores, provider secrets and other examiners hidden.
 - LEGACY_IMPORTED is server/migration-only. Nullable old metadata is recognized as legacy, not accepted for new modern decisions.
 - No media/provider/network calls while holding mutation locks; hash excludes signed URLs.
+- Preflight: conventions=pte-api standard (BaseEntity, records for DTOs, domain exceptions, tenant_id isolation, Flyway V93); boundaries=scoring domain internal/public packages, no separate receipt table, immutable score embeds receipt and versions, no media presigned URLs in hashes; applicable_rules=extend ExaminerAnswerScore with immutable metadata, partial unique constraint on request_public_id, canonical SHA-256 for reviewVersion and aiVersion, backward-compatible aliases on DTOs; allowed_exceptions=legacy scores with null metadata accepted as LEGACY_IMPORTED.
 
 ## Implementation steps
 
@@ -53,6 +54,6 @@ Shared contract is fully defined and safe read projection compiles. Persisted de
 
 ## Quality and Testing State
 
-- Quality: not evaluated; user choice pending.
-- Testing: not started; user choice pending; no --tdd selected.
-- Commands above are proposed, not executed; record evidence and limitations after implementation.
+- Quality: skipped_by_user; decision: user_confirmed_skip.
+- Testing: skipped_by_user (user chose build/compile only).
+- Build Gate: verified cleanly with Maven `.\mvnw.cmd -pl app -am -DskipTests compile` (BUILD SUCCESS, 1112 source files compiled).

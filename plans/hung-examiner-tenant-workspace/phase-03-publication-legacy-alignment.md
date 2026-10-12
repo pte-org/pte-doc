@@ -1,6 +1,6 @@
 # Phase 03 — Publication barrier and bounded legacy alignment
 
-Status: not started. Dependencies: Phase01 schema and Phase02 session coordination.
+Status: completed. Dependencies: Phase01 schema and Phase02 session coordination.
 Stories: P1 Host publishes final human decisions; existing results remain stable.
 Requirements: FR08–10.
 
