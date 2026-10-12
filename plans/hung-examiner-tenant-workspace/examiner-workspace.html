@@ -1,0 +1,210 @@
+<div id="examiner-workspace-preview">
+  <style>
+    #examiner-workspace-preview{--ex-page:light-dark(#f4f4f5,#09090b);--ex-panel:light-dark(#fff,#171718);--ex-ink:light-dark(#18181b,#f4f4f5);--ex-muted:light-dark(#52525b,#a1a1aa);--ex-line:light-dark(#e8e8e8,#2b2c2e);--ex-blue:light-dark(#0b5fae,#4e9be1);--ex-on-blue:light-dark(#fff,#07111d);--ex-tint:light-dark(#e8f2f9,#163859);--ex-green:light-dark(#088068,#7de8c8);--ex-green-bg:light-dark(#e6fffa,#113c34);--ex-warning:light-dark(#9c6400,#f0c36c);--ex-warning-bg:light-dark(#fef5e5,#382713);font:14px/1.6 system-ui,sans-serif;color:var(--ex-ink);background:var(--ex-page);border-radius:12px;overflow-wrap:anywhere}
+    #examiner-workspace-preview *{box-sizing:border-box}
+    #examiner-workspace-preview [hidden]{display:none!important}
+    #examiner-workspace-preview .ex-top{display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:20px 110px 20px 24px;background:var(--ex-panel);border-bottom:1px solid var(--ex-line);border-radius:12px 12px 0 0}
+    #examiner-workspace-preview .ex-brand{font-size:19px;font-weight:650;letter-spacing:-.5px}
+    #examiner-workspace-preview .ex-muted{color:var(--ex-muted)}
+    #examiner-workspace-preview .ex-demo{font-size:12px;color:var(--ex-muted);margin-left:auto}
+    #examiner-workspace-preview .ex-shell{display:grid;grid-template-columns:165px minmax(0,1fr)}
+    #examiner-workspace-preview .ex-sidebar{background:var(--ex-panel);padding:22px 12px;border-right:1px solid var(--ex-line)}
+    #examiner-workspace-preview .ex-role{margin:0 10px 18px;font-size:12px;color:var(--ex-muted)}
+    #examiner-workspace-preview button{font:inherit;color:var(--ex-ink);background:var(--ex-panel);border:1px solid var(--ex-line);padding:9px 12px;border-radius:8px;min-height:40px}
+    #examiner-workspace-preview button:disabled{opacity:.55;cursor:not-allowed}
+    #examiner-workspace-preview .ex-primary{background:var(--ex-blue);color:var(--ex-on-blue);border-color:var(--ex-blue)}
+    #examiner-workspace-preview .ex-nav{width:100%;text-align:left;background:var(--ex-tint);color:var(--ex-blue);border-color:transparent}
+    #examiner-workspace-preview main{padding:24px;min-width:0}
+    #examiner-workspace-preview h1{font-size:22px;line-height:1.3;letter-spacing:-.5px;margin:10px 0 7px;font-weight:650}
+    #examiner-workspace-preview h2{font-size:15px;margin:0 0 12px;font-weight:650}
+    #examiner-workspace-preview p{margin:0 0 12px}
+    #examiner-workspace-preview .ex-toolbar{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin:20px 0}
+    #examiner-workspace-preview label{display:block;font-weight:500;margin-bottom:6px}
+    #examiner-workspace-preview select,#examiner-workspace-preview input{font:inherit;font-size:16px;color:var(--ex-ink);background:var(--ex-panel);border:1px solid var(--ex-line);border-radius:8px;padding:9px 12px;max-width:100%;min-height:42px}
+    #examiner-workspace-preview .ex-table-wrap{overflow-x:auto;background:var(--ex-panel);border:1px solid var(--ex-line);border-radius:10px}
+    #examiner-workspace-preview table{width:100%;border-collapse:collapse;text-align:left;min-width:590px}
+    #examiner-workspace-preview th{font-size:12px;font-weight:500;color:var(--ex-muted);background:var(--ex-page)}
+    #examiner-workspace-preview th,#examiner-workspace-preview td{padding:15px 12px;border-bottom:1px solid var(--ex-line)}
+    #examiner-workspace-preview tbody tr:last-child td{border-bottom:0}
+    #examiner-workspace-preview .ex-badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:12px;background:var(--ex-warning-bg);color:var(--ex-warning)}
+    #examiner-workspace-preview .ex-saved{background:var(--ex-green-bg);color:var(--ex-green)}
+    #examiner-workspace-preview .ex-grid{display:grid;grid-template-columns:145px minmax(0,1fr) 220px;gap:14px;margin-top:20px;align-items:start}
+    #examiner-workspace-preview .ex-panel{padding:18px;background:var(--ex-panel);border:1px solid var(--ex-line);border-radius:10px;min-width:0}
+    #examiner-workspace-preview .ex-answers{display:flex;flex-direction:column;gap:8px}
+    #examiner-workspace-preview .ex-answer{text-align:left;width:100%;padding:10px}
+    #examiner-workspace-preview .ex-answer[aria-pressed="true"]{background:var(--ex-tint);border-color:var(--ex-blue);color:var(--ex-blue)}
+    #examiner-workspace-preview .ex-answer small{display:block;font-size:12px;color:var(--ex-muted)}
+    #examiner-workspace-preview .ex-content-label{font-size:12px;text-transform:uppercase;letter-spacing:.7px;color:var(--ex-muted);margin-bottom:8px}
+    #examiner-workspace-preview .ex-response{margin-top:20px;padding-top:18px;border-top:1px solid var(--ex-line)}
+    #examiner-workspace-preview .ex-prose{white-space:pre-wrap;line-height:1.85}
+    #examiner-workspace-preview .ex-score-input{width:100%;font-size:26px;font-weight:600;font-variant-numeric:tabular-nums}
+    #examiner-workspace-preview .ex-hint{font-size:12px;margin-top:10px;color:var(--ex-muted)}
+    #examiner-workspace-preview .ex-ai{padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--ex-line)}
+    #examiner-workspace-preview .ex-ai-number{font-size:28px;font-weight:650;font-variant-numeric:tabular-nums;color:var(--ex-blue)}
+    #examiner-workspace-preview .ex-ai-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    #examiner-workspace-preview .ex-flow{padding:10px 14px;background:var(--ex-tint);color:var(--ex-blue);border-radius:8px;margin:16px 0;font-size:12px}
+    #examiner-workspace-preview .ex-full{width:100%;margin-top:14px}
+    #examiner-workspace-preview .ex-progress{appearance:none;width:100%;height:6px;border:0;background:var(--ex-line);border-radius:6px;overflow:hidden;margin:10px 0}
+    #examiner-workspace-preview .ex-progress::-webkit-progress-bar{background:var(--ex-line)}
+    #examiner-workspace-preview .ex-progress::-webkit-progress-value{background:var(--ex-blue)}
+    #examiner-workspace-preview .ex-progress::-moz-progress-bar{background:var(--ex-blue)}
+    #examiner-workspace-preview .ex-note{margin-top:16px;color:var(--ex-green);font-size:13px}
+    #examiner-workspace-preview dialog{max-width:min(430px,calc(100% - 32px));padding:24px;background:var(--ex-panel);color:var(--ex-ink);border:1px solid var(--ex-line);border-radius:12px}
+    #examiner-workspace-preview dialog::backdrop{background:light-dark(#18181b66,#00000099)}
+    #examiner-workspace-preview .ex-dialog-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:20px}
+    @media(max-width:950px){#examiner-workspace-preview .ex-shell{grid-template-columns:1fr}#examiner-workspace-preview .ex-sidebar{border-right:0;border-bottom:1px solid var(--ex-line);display:flex;align-items:center;gap:12px;padding:10px 24px}#examiner-workspace-preview .ex-role{margin:0}#examiner-workspace-preview .ex-nav{width:auto}#examiner-workspace-preview .ex-grid{grid-template-columns:140px minmax(0,1fr) 180px}}
+    @media(max-width:740px){#examiner-workspace-preview main{padding:18px}#examiner-workspace-preview .ex-grid{grid-template-columns:1fr}#examiner-workspace-preview .ex-answers{flex-direction:row;flex-wrap:wrap}#examiner-workspace-preview .ex-answer{width:auto;flex:1;min-width:100px}#examiner-workspace-preview .ex-sidebar{flex-wrap:wrap;padding:12px 18px}#examiner-workspace-preview .ex-top{padding-left:18px}#examiner-workspace-preview .ex-demo{margin-left:0}#examiner-workspace-preview .ex-score-input{width:150px}}
+    @media(pointer:coarse){#examiner-workspace-preview button{min-height:44px}}
+  </style>
+  <header class="ex-top"><span class="ex-brand">PTE Prep</span><span class="ex-muted">Tenant workspace</span><span class="ex-demo">Bản thiết kế · Dữ liệu minh họa</span></header>
+  <div class="ex-shell">
+    <aside class="ex-sidebar"><p class="ex-role">EXAMINER</p><button type="button" id="ex-nav-queue" class="ex-nav cursor-interaction">Bài được phân công</button></aside>
+    <main>
+      <section id="ex-queue" hidden aria-labelledby="ex-queue-title">
+        <h1 id="ex-queue-title">Bài được phân công</h1><p class="ex-muted">Duyệt điểm AI và chốt điểm cuối cùng cho các bài được phân công.</p>
+        <div class="ex-toolbar"><div><label for="ex-filter">Trạng thái</label><select id="ex-filter" class="cursor-interaction"><option value="ALL">Tất cả</option><option value="PENDING">Chưa duyệt</option><option value="IN_PROGRESS">Đang duyệt</option><option value="COMPLETED">Đã chốt</option></select></div><span id="ex-count" class="ex-muted"></span></div>
+        <div class="ex-table-wrap"><table><thead><tr><th scope="col">Mã bài</th><th scope="col">Mã kỳ thi</th><th scope="col">Phân công</th><th scope="col">Tiến độ</th><th scope="col">Trạng thái</th><th scope="col">Thao tác</th></tr></thead><tbody id="ex-rows"></tbody></table></div>
+        <p id="ex-empty" class="ex-muted" hidden>Chưa có bài phù hợp với bộ lọc.</p>
+        <p class="ex-hint">Đã chốt điểm khác với đã công bố kết quả. Host thực hiện công bố sau khi đủ điều kiện.</p>
+      </section>
+      <section id="ex-detail" aria-labelledby="ex-detail-title">
+        <button id="ex-back" type="button" class="cursor-interaction">← Bài được phân công</button>
+        <h1 id="ex-detail-title">Duyệt và chấm bài …a731</h1>
+        <p id="ex-metadata" class="ex-muted">Kỳ thi …9e42 · Phân công 11/10/2026, 09:00</p>
+        <div class="ex-flow">AI hỗ trợ → Examiner chốt điểm cuối cùng → Host công bố</div>
+        <span id="ex-progress-text"></span><progress id="ex-progress" class="ex-progress" max="3" value="1" aria-label="Tiến độ chấm bài"></progress>
+        <div class="ex-grid">
+          <nav class="ex-panel" aria-label="Danh sách câu"><h2>Câu trả lời</h2><div id="ex-answers" class="ex-answers"></div></nav>
+          <article class="ex-panel"><div class="ex-content-label">Nội dung đề</div><h2 id="ex-task"></h2><p id="ex-prompt" class="ex-prose"></p><section class="ex-response" aria-label="Câu trả lời thí sinh"><div class="ex-content-label">Câu trả lời thí sinh</div><p id="ex-response" class="ex-prose"></p></section></article>
+          <section class="ex-panel" aria-labelledby="ex-score-title">
+            <div class="ex-ai"><h2>Điểm AI tham khảo</h2><div id="ex-ai-score" class="ex-ai-number"></div><p id="ex-ai-state" class="ex-hint"></p><div class="ex-ai-actions"><button id="ex-use-ai" type="button" class="cursor-interaction">Dùng điểm AI</button><button id="ex-regrade" type="button" class="cursor-interaction">Chấm lại</button></div></div>
+            <h2 id="ex-score-title">Điểm cuối cùng</h2><span id="ex-score-status" class="ex-badge">Cần duyệt</span>
+            <div style="margin-top:16px"><label for="ex-score">Điểm Examiner (0–100)</label><input id="ex-score" class="ex-score-input" type="number" min="0" max="100" step="1" inputmode="numeric" autocomplete="off" aria-describedby="ex-score-hint"></div>
+            <p id="ex-difference" class="ex-hint" role="status" aria-live="polite"></p>
+            <p id="ex-score-hint" class="ex-hint">Bạn quyết định điểm cuối cùng. Sau khi chốt không thể sửa.</p><button id="ex-submit" type="button" class="ex-primary ex-full cursor-interaction" disabled>Chốt điểm</button><button id="ex-next" type="button" class="ex-full cursor-interaction">Câu cần duyệt tiếp theo</button><p id="ex-notice" class="ex-note" role="status" aria-live="polite"></p>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+  <dialog id="ex-dialog" aria-labelledby="ex-dialog-title" aria-describedby="ex-dialog-text"><h2 id="ex-dialog-title">Chốt điểm cuối cùng</h2><p id="ex-dialog-text"></p><div class="ex-dialog-actions"><button id="ex-cancel" type="button" class="cursor-interaction">Quay lại</button><button id="ex-confirm" type="button" class="ex-primary cursor-interaction">Xác nhận chốt</button></div></dialog>
+  <script>
+    (() => {
+      const root = document.getElementById('examiner-workspace-preview');
+      const get = id => root.querySelector('#' + id);
+      const labels = {PENDING:'Chưa duyệt',IN_PROGRESS:'Đang duyệt',COMPLETED:'Đã chốt'};
+      const makeAnswers = () => [
+        {task:'Write Essay',prompt:'Some people believe that working from home improves productivity. Discuss the advantages and disadvantages and give your opinion.',response:'Working from home has become a common arrangement in many organisations. It allows employees to avoid long journeys and organise their day around focused work. This flexibility can improve productivity, particularly when tasks require concentration.\n\nHowever, remote work can also make communication more difficult. Employees may receive less immediate feedback and find it harder to separate their job from their personal life. A suitable workspace and clear expectations are therefore important.\n\nIn my opinion, a flexible approach is the most practical solution. Teams should agree on when they need to collaborate in person and when individual work can be completed remotely.',score:null},
+        {task:'Summarize Written Text',prompt:'Urban green spaces support biodiversity, offer opportunities for exercise and help reduce heat. Maintaining these spaces requires long-term planning and cooperation between communities and local authorities. Summarize the passage in one sentence.',response:'Urban green spaces benefit biodiversity, public health and temperature regulation, but require sustained planning and cooperation between communities and authorities.',score:null},
+        {task:'Summarize Written Text',prompt:'Digital libraries make information accessible beyond physical buildings, although unequal internet access remains a challenge. Summarize the passage in one sentence.',response:'Digital libraries expand access to information, but their benefits are limited by unequal internet access.',score:78}
+      ];
+      const works = [
+        {id:'a731',session:'9e42',time:'11/10/2026, 09:00',answers:makeAnswers().map((a,i) => ({...a,ai:[82,null,75][i],kind:'MANUAL'}))},
+        {id:'c205',session:'9e42',time:'11/10/2026, 08:45',answers:makeAnswers().map((a,i) => ({...a,ai:[68,74,80][i],score:null,kind:'MANUAL'}))},
+        {id:'f918',session:'6b03',time:'10/10/2026, 15:20',answers:makeAnswers().map((a,i) => ({...a,ai:[71,76,79][i],score:72+i*4,kind:'MANUAL'}))}
+      ];
+      let view='detail', workIndex=0, answerIndex=0, filter='ALL', action=null;
+      const drafts = new Map();
+      const choices = new Map();
+      const current = () => works[workIndex].answers[answerIndex];
+      const draftKey = () => workIndex + ':' + answerIndex;
+      const submitted = work => work.answers.filter(a => a.score !== null).length;
+      const status = work => submitted(work)===work.answers.length?'COMPLETED':submitted(work)>0?'IN_PROGRESS':'PENDING';
+      const save = () => {
+        if(window.openai?.setWidgetState) window.openai.setWidgetState({modelContent:{screen:view},privateContent:{view,workIndex,answerIndex,filter}}).catch(() => {});
+      };
+      function restore(snapshot){
+        const s=snapshot?.privateContent;
+        if(!s)return;
+        view=s.view==='queue'?'queue':'detail';
+        workIndex=Number.isInteger(s.workIndex)&&works[s.workIndex]?s.workIndex:0;
+        answerIndex=Number.isInteger(s.answerIndex)&&works[workIndex].answers[s.answerIndex]?s.answerIndex:0;
+        filter=s.filter==='ALL'||labels[s.filter]?s.filter:'ALL';
+      }
+      function queue(){
+        const rows=get('ex-rows');rows.replaceChildren();
+        const visible=works.filter(w => filter==='ALL'||status(w)===filter);
+        get('ex-count').textContent=visible.length+' bài · Dữ liệu mẫu';
+        get('ex-empty').hidden=visible.length>0;
+        visible.forEach(w => {
+          const tr=document.createElement('tr');
+          ['…'+w.id,'…'+w.session,w.time,submitted(w)+'/'+w.answers.length,labels[status(w)]].forEach((value,i) => {
+            const td=document.createElement('td');
+            if(i===4){const badge=document.createElement('span');badge.className='ex-badge'+(status(w)==='COMPLETED'?' ex-saved':'');badge.textContent=value;td.append(badge);}else td.textContent=value;
+            tr.append(td);
+          });
+          const td=document.createElement('td'), button=document.createElement('button');
+          button.type='button';button.className='cursor-interaction';button.textContent=status(w)==='COMPLETED'?'Xem bài':'Mở duyệt';
+          button.addEventListener('click',() => {workIndex=works.indexOf(w);answerIndex=0;view='detail';render();save();get('ex-back').focus();});
+          td.append(button);tr.append(td);rows.append(tr);
+        });
+      }
+      function validScore(){const value=get('ex-score').value;return value.trim()!==''&&Number.isInteger(Number(value))&&Number(value)>=0&&Number(value)<=100;}
+      function difference(){
+        const a=current(), valid=validScore(), saved=a.score!==null;
+        if(a.ai===null||!valid){get('ex-difference').textContent=a.ai===null?'Chấm thủ công khi nội dung đã khả dụng.':'Chưa chọn điểm cuối cùng.';return;}
+        const delta=Number(get('ex-score').value)-a.ai;
+        const kind=saved?a.kind:(choices.get(draftKey())??'MANUAL');
+        get('ex-difference').textContent=(kind==='CONFIRM_AI'?'Dùng điểm AI':'Examiner chấm lại')+' · Chênh lệch '+(delta>0?'+':'')+delta+' điểm';
+      }
+      function detail(){
+        const work=works[workIndex], answer=current(), saved=answer.score!==null;
+        get('ex-detail-title').textContent='Duyệt và chấm bài …'+work.id;
+        get('ex-metadata').textContent='Kỳ thi …'+work.session+' · Phân công '+work.time;
+        get('ex-progress-text').textContent=submitted(work)+'/'+work.answers.length+' câu đã chốt điểm';
+        get('ex-progress').max=work.answers.length;get('ex-progress').value=submitted(work);
+        const nav=get('ex-answers');nav.replaceChildren();
+        work.answers.forEach((a,i) => {
+          const button=document.createElement('button');button.type='button';button.className='ex-answer cursor-interaction';button.setAttribute('aria-pressed',String(i===answerIndex));
+          const title=document.createElement('span'),subtitle=document.createElement('small');title.textContent='Câu '+(i+1);subtitle.textContent=a.score===null?'Cần duyệt':'Đã chốt · '+a.score;
+          button.append(title,subtitle);button.addEventListener('click',() => {answerIndex=i;render();save();});nav.append(button);
+        });
+        get('ex-task').textContent='Câu '+(answerIndex+1)+' · '+answer.task;
+        get('ex-prompt').textContent=answer.prompt;get('ex-response').textContent=answer.response;
+        get('ex-score').value=saved?String(answer.score):(drafts.get(draftKey())??'');get('ex-score').disabled=saved;
+        get('ex-ai-score').textContent=answer.ai===null?'Chưa có điểm':answer.ai+'/100';
+        get('ex-ai-state').textContent=answer.ai===null?'AI chưa có kết quả khả dụng. Bạn vẫn có thể chấm thủ công.':'AI đưa điểm tham khảo. Examiner quyết định điểm cuối cùng.';
+        get('ex-use-ai').disabled=saved||answer.ai===null;get('ex-regrade').disabled=saved;
+        get('ex-score-status').textContent=saved?'Đã chốt · Đã khóa':'Cần duyệt';get('ex-score-status').className='ex-badge'+(saved?' ex-saved':'');
+        get('ex-submit').disabled=saved||!validScore();get('ex-submit').textContent=saved?'Điểm đã được chốt':'Chốt điểm';
+        get('ex-next').disabled=submitted(work)===work.answers.length;
+        get('ex-notice').textContent=saved?'Điểm cuối cùng: '+answer.score+'/100. Chờ Host công bố.':'';
+        difference();
+      }
+      function render(){get('ex-queue').hidden=view!=='queue';get('ex-detail').hidden=view!=='detail';get('ex-filter').value=filter;queue();detail();}
+      function goQueue(){view='queue';render();save();get('ex-filter').focus();}
+      function askQueue(){
+        const dirty=[...drafts].some(([key,value]) => key.startsWith(workIndex+':')&&value.trim()!=='');
+        if(view==='detail'&&dirty){action={kind:'leave'};get('ex-dialog-title').textContent='Rời bài đang chấm?';get('ex-dialog-text').textContent='Điểm chưa gửi sẽ bị bỏ khi rời bài.';get('ex-confirm').textContent='Rời bài';get('ex-dialog').showModal();}else goQueue();
+      }
+      get('ex-filter').addEventListener('change',e => {filter=e.target.value;queue();save();});
+      get('ex-back').addEventListener('click',askQueue);get('ex-nav-queue').addEventListener('click',askQueue);
+      get('ex-score').addEventListener('input',() => {drafts.set(draftKey(),get('ex-score').value);choices.set(draftKey(),'MANUAL');get('ex-submit').disabled=current().score!==null||!validScore();difference();});
+      get('ex-use-ai').addEventListener('click',() => {if(current().score!==null||current().ai===null)return;drafts.set(draftKey(),String(current().ai));choices.set(draftKey(),'CONFIRM_AI');detail();get('ex-submit').focus();});
+      get('ex-regrade').addEventListener('click',() => {if(current().score!==null)return;choices.set(draftKey(),'MANUAL');difference();get('ex-score').focus();});
+      get('ex-submit').addEventListener('click',() => {
+        if(current().score!==null||!validScore())return;
+        action={kind:'score',workIndex,answerIndex,score:Number(get('ex-score').value),decisionKind:choices.get(draftKey())??'MANUAL'};
+        get('ex-dialog-title').textContent='Chốt điểm cuối cùng';get('ex-dialog-text').textContent='Câu '+(answerIndex+1)+' · AI: '+(current().ai===null?'chưa có điểm':current().ai+'/100')+' · Điểm cuối cùng: '+action.score+'/100. '+(action.decisionKind==='CONFIRM_AI'?'Bạn xác nhận dùng điểm AI.':'Bạn quyết định điểm sau khi chấm lại.')+' Sau khi chốt không thể sửa; Host sẽ công bố. Đây là thao tác minh họa.';
+        get('ex-confirm').textContent='Xác nhận chốt';get('ex-dialog').showModal();
+      });
+      get('ex-cancel').addEventListener('click',() => get('ex-dialog').close());
+      get('ex-dialog').addEventListener('close',() => {action=null;});
+      get('ex-confirm').addEventListener('click',() => {
+        if(action?.kind==='score'){
+          const a=works[action.workIndex].answers[action.answerIndex];
+          if(a.score===null){a.score=action.score;a.kind=action.decisionKind;}
+          drafts.delete(action.workIndex+':'+action.answerIndex);choices.delete(action.workIndex+':'+action.answerIndex);get('ex-dialog').close();render();save();get('ex-next').focus();get('ex-notice').textContent='Minh họa: đã chốt điểm cuối cùng '+a.score+'/100. Chờ Host công bố.';
+        }else if(action?.kind==='leave'){
+          [...drafts.keys()].filter(k => k.startsWith(workIndex+':')).forEach(k => drafts.delete(k));get('ex-dialog').close();goQueue();
+        }
+      });
+      get('ex-next').addEventListener('click',() => {
+        const answers=works[workIndex].answers;
+        for(let step=1;step<=answers.length;step++){const i=(answerIndex+step)%answers.length;if(answers[i].score===null){answerIndex=i;render();save();get('ex-score').focus();break;}}
+      });
+      restore(window.openai?.widgetState);render();
+      window.addEventListener('openai:set_globals',event => {if(event.detail?.globals?.widgetState){restore(event.detail.globals.widgetState);render();}});
+    })();
+  </script>
+</div>
