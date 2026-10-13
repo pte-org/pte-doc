@@ -4,8 +4,8 @@
   "verdict": "PASSED",
   "verdict_note": "97 existing hostDashboard tests were reviewed and kept untouched; 338 tests in 18 new files were added (tenant-web 134 -> 472 tests, 11 -> 29 files). All pass. No production code, vitest config or package.json was changed. No production bug was found; 8 LOW concerns are listed below (none is encoded as a failing test). Tests were proven non-vacuous with 24 mutants run against a scratchpad copy (all killed). No git command was run.",
   "reviewed_at": "2026-10-13T17:05:00Z",
-  "summary": { "passed": 1314, "failed": 0, "skipped": 0 },
-  "summary_scope": "passed = 472 (tenant-web, 29 files) + 271 (@pte/ui, 12 files, unchanged) + 571 (@pte/api-client, 28 files, unchanged). vendor-web has no vitest suite.",
+  "summary": { "passed": 1350, "failed": 0, "skipped": 0 },
+  "summary_scope": "passed = 508 (tenant-web, 31 files, after remediation cycle 1; 472 / 29 files before it) + 271 (@pte/ui, 12 files, unchanged) + 571 (@pte/api-client, 28 files, unchanged). vendor-web has no vitest suite.",
   "new_tests": {
     "tenant_web_before": { "files": 11, "tests": 134, "note": "37 tests in 2 pre-existing roster files + 97 hostDashboard tests in 9 files" },
     "tenant_web_after": { "files": 29, "tests": 472 },
@@ -46,7 +46,8 @@
     "alias_handling": "vitest has no '@/' alias, so each test that loads modules importing '@/...' maps those ids with vi.mock to the real relative file (or a stub for '@/lib/apiClient'). This is test-only plumbing; adding an alias to vitest.config.ts would remove it but was not done."
   },
   "commands": [
-    { "cmd": "pnpm --filter tenant-web test", "result": "PASSED", "files": 29, "tests": 472, "failures": 0, "baseline": "11 files / 134 tests" },
+    { "cmd": "pnpm --filter tenant-web test", "result": "PASSED", "files": 31, "tests": 508, "failures": 0, "baseline": "11 files / 134 tests", "before_remediation_cycle_1": "29 files / 472 tests" },
+    { "cmd": "pnpm --filter tenant-web build", "result": "PASSED", "exit": 0, "note": "run in remediation cycle 1" },
     { "cmd": "pnpm --filter tenant-web typecheck", "result": "PASSED", "exit": 0 },
     { "cmd": "pnpm --filter tenant-web lint", "result": "PASSED", "exit": 0, "note": "0 problems" },
     { "cmd": "pnpm --filter @pte/ui test", "result": "PASSED", "files": 12, "tests": 271, "failures": 0, "baseline": "12 files / 271 tests" },
@@ -91,6 +92,49 @@
     "same_as_baseline": ["@pte/ui test (271)", "@pte/api-client test (571)", "vendor-web lint (2 warnings)", "vendor-web typecheck", "@pte/ui typecheck"]
   },
   "failures": [],
+  "remediation_cycle_1": {
+    "trigger": "Phase 7 quality gate APPROVED with LOWs (QUAL-001..014); cycle 1 applies QUAL-001, 002, 003, 004, 006, 007 and the unambiguous part of 009.",
+    "tenant_web_before": { "files": 29, "tests": 472 },
+    "tenant_web_after": { "files": 31, "tests": 508 },
+    "net_new_tests": 36,
+    "new_files": [
+      "features/hostDashboard/utils/drift.test.ts (15: missing sections in sectionAvailability/sectionData, deriveAttention and buildKpis; singular/plural key choice)",
+      "features/hostDashboard/components/Drift.test.ts (13: CompactCards null when all four FORBIDDEN or absent, UsagePanel/KpiRow/UpcomingSessionsPanel/NeedsAttentionPanel with absent sections, subscription expiry 1/2/7 days in en and vi)"
+    ],
+    "extended_files": [
+      "components/NeedsAttentionPanel.test.ts (+5: 1 vs 2 days in en and vi, no all-clear sentence while a source failed, all-clear kept when a source is only forbidden, absent section treated as forbidden)",
+      "messages/messages.catalog.test.ts (+2: singular entries next to the day-count plurals, removed key and product spelling)",
+      "hygiene.test.ts (+1: no template literal in components joins values with a separator)"
+    ],
+    "contract_changes_in_existing_tests": [
+      "en copy 'finalisation' -> 'finalization' (ChartPanels, HostDashboardGrid.states, NeedsAttentionPanel expectations)",
+      "vi copy 'Ca thi' -> 'Ky thi' to mirror nav.exams (ChartPanels, HostDashboardGrid.states, UpcomingSessionsPanel, ActivityHeaderCompact expectations)",
+      "messages.test.ts and messages.catalog.test.ts 'translated' checks ignore {placeholder} names, so pure-symbol templates such as '{enrolled} / {capacity}' need no translation; no assertion was removed or loosened for real words"
+    ],
+    "commands": [
+      { "cmd": "pnpm --filter tenant-web test", "result": "PASSED", "files": 31, "tests": 508 },
+      { "cmd": "pnpm --filter tenant-web typecheck", "result": "PASSED", "exit": 0 },
+      { "cmd": "pnpm --filter tenant-web lint", "result": "PASSED", "exit": 0, "note": "0 problems" },
+      { "cmd": "pnpm --filter tenant-web build", "result": "PASSED", "exit": 0 },
+      { "cmd": "pnpm --filter @pte/ui test", "result": "PASSED", "files": 12, "tests": 271 },
+      { "cmd": "pnpm --filter @pte/api-client test", "result": "PASSED", "files": 28, "tests": 571 },
+      { "cmd": "pnpm --filter vendor-web lint", "result": "PASSED", "exit": 0, "note": "0 errors; the same 2 @next/next/no-img-element warnings" },
+      { "cmd": "pnpm --filter vendor-web typecheck", "result": "PASSED", "exit": 0 }
+    ],
+    "deferred": {
+      "QUAL-005": "other mutations do not invalidate the overview: accepted, 30 s staleTime bounds it",
+      "QUAL-008": "DOM order vs CSS order: Phase 9 keyboard pass",
+      "QUAL-010": "readability nits (SeatUsageBlock props interface, nested ternary): not applied",
+      "QUAL-011": "StatusDonutChart total without thousands separator: @pte/ui follow-up (valueFormatter)",
+      "QUAL-012": "invalidateHostDashboard helper: refactor when the next mutation is added",
+      "QUAL-013": "retry busy state and half-failure announcement: Phase 9 manual pass",
+      "QUAL-014": "residual risk list for Phase 9"
+    },
+    "notes": [
+      "Singular keys exist only for expiryDay and attentionUnitDay: the other 'N days' strings (kpiSubtitle, kpiTotalLearnersNote, changePeriod) take meta.windowDays, typed 7 | 30 | 90, so a singular is unreachable and was not added.",
+      "A missing meta is not handled (only sections), as meta is required for time zone and window."
+    ]
+  },
   "production_concerns": [
     {
       "id": "OBS-P7-001",
