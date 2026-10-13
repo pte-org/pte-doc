@@ -1,4 +1,4 @@
-# Phase 1: Backend Foundations + Host Core
+﻿# Phase 1: Backend Foundations + Host Core
 
 ## Requirements
 A new `overview` module in pte-api serves an authenticated HOST_ADMIN-only host dashboard endpoint with the shared sectioned envelope, real trends and core sections (learners, quota, academics, staff, exams, attempts incl. a 12-month series). Priority: P1 for learners, quota, exams and attempts; P3 for academics and staff (consumed by compact cards).
@@ -14,6 +14,7 @@ A new `overview` module in pte-api serves an authenticated HOST_ADMIN-only host 
 - Caching: host core counts are NOT cached (fresh after mutations); only the heavy series is cached, TTL 30s, key = tenant id + window + schema version; cache failure never fails the request.
 - Do not loosen the module-list assertion; the one-line addition of the missing exam-staff module is in scope, fixing pre-existing cycles is not.
 - Migration contains indexes only and is idempotent; no entity index annotations are required (schema validation does not check indexes).
+- Preflight: found module roots hold `@Service` facades with constructor DI, `@Transactional(readOnly = true)` reads, repos/entities in `internal`/`domain`, views as root records (TenancyService, StaffScheduleService, StudentQuota); `package-info` uses `@ApplicationModule(displayName, allowedDependencies)` (enrollment is restricted to shared/identity/tenancy/tenancy::domain, session/attempt/identity are open); controllers are `@RestController @RequestMapping("/api/v1...") @PreAuthorize` with a private `currentUser()` -> `CurrentUserContext.required()` and return `ApiResponse.success(..)`; 400s are `DomainException` subclasses with codes in per-module `internal/constant/<Module>Constants`; Redis is hand-rolled (`StringRedisTemplate` + Jackson-3 `tools.jackson.JsonMapper`, see PinnedSnapshotCacheService); `Clock` bean from `shared.config.ClockConfig`; tenant id in enrollment/session/attempt is the tenant public UUID from the token. Rules applied: new root facades `IdentityOverviewService`, `EnrollmentOverviewService`, `SessionOverviewService`, `AttemptOverviewService` (+ `TenancyService.countOrganizations`) returning primitives/root records/Strings only (no `identity::domain`/`session::domain` enum leakage, no new allowed dependency for enrollment); `overview` is a leaf with a unit-testable `DashboardWindow`, `TrendCalculator`, `MonthBuckets`, `DashboardSectionRunner`, `DashboardCacheKeys`, `DashboardCache`; the `windowDays` param is read as a String so a non-numeric value yields 400 (not the generic 500 handler).
 
 ## Steps
 1. Record the baselines on the untouched tree: run `./mvnw -pl app test -Dtest=ModuleStructureTest > baseline-arch.txt` (stored next to the plan); the "violation set" used by every later diff is the set of lines starting `- Module`, `- Cycle detected` or `Allowed targets`, with timestamps and line numbers stripped. Also run the full suite once (`./mvnw -pl app test`) and record its totals: 1356 tests with exactly 2 pre-existing failures, both in the module-structure test, so "all new tests green" is checkable later.
@@ -35,9 +36,10 @@ A new `overview` module in pte-api serves an authenticated HOST_ADMIN-only host 
 
 ## Quality and Testing State
 - Quality gate: not evaluated (Cook runs `/ck:quality --gate` after implementing this phase)
-- Testing: not started
+- Testing: passed (2026-10-13) - 170 new tests, all green (165 unit/H2 + 5 Postgres IT); full suite (without the Postgres property) 1526 tests, 0 failures, 1 pre-existing error (ModuleStructureTest.modules_have_no_boundary_violations), 46 skipped; arch violation set identical to baseline (18 lines, none mention overview). Postgres RUN against scratch PG17 (port 55439): OverviewMigrationPostgresIntegrationTest 5/5 pass (empty schema through V94, ddl-auto=validate, V94 idempotent); EXPLAIN on 7 heavy queries all use V94 indexes (Bitmap Index Scan), no seq scan - tests/phase-01-explain-plans.txt. Report: tests/phase-01-test-report.json
 
 ## Risks
 - Pre-existing red architecture test hides regressions: the baseline diff is the only gate; pre-existing violations stay and are reported.
 - H2/Postgres divergence in aggregate queries: keep queries to JPQL/derived forms and rely on the Postgres-gated test for migration only.
 - Rolling-window "previous" overlaps data deleted since: documented limitation (no deleted-at history).
+
