@@ -91,9 +91,9 @@
                      }
                  ],
     "architecture_diff":  {
-                              "baseline":  "baseline-arch-violations.txt (18 normalized lines)",
-                              "after":  "after-arch-p1-violations.txt (18 normalized lines)",
-                              "raw_output":  "after-arch-p1-tester.txt",
+                              "baseline":  "tests/arch/baseline-arch-violations.txt (18 normalized lines)",
+                              "after":  "tests/arch/after-arch-p1-violations.txt (18 normalized lines)",
+                              "raw_output":  "tests/arch/after-arch-p1-tester.txt",
                               "new_lines":  0,
                               "lines_mentioning_overview":  0,
                               "result":  "identical"
@@ -127,7 +127,7 @@
                          "severity":  "LOW",
                          "type":  "REGRESSION",
                          "expected":  "ModuleStructureTest.modules_have_no_boundary_violations passes",
-                         "actual":  "Fails with the same 18 pre-existing enrollment/attempt/session/reporting/scoring violations as baseline-arch-violations.txt; no new lines, none mention overview",
+                         "actual":  "Fails with the same 18 pre-existing enrollment/attempt/session/reporting/scoring violations as tests/arch/baseline-arch-violations.txt; no new lines, none mention overview",
                          "likely_owner":  "production_code",
                          "related_files":  [
                                                "pte-api/app/src/main/java/com/pte/enrollment/internal/service/StudentWorkspaceQueryService.java"

@@ -1,0 +1,320 @@
+﻿Phase 4 EXPLAIN summary (ninh-overview-dashboards) - online revenue (orders) and question bank queries, and the V97 index
+Environment: scratch PostgreSQL 17 (container pte-overview-scratch, postgres:17-alpine, port 55439, trust auth), scratch schema
+overview_mig_<random> migrated from EMPTY through V97 and dropped by the test; container removed afterwards. No pte-* / postgres
+container was touched.
+Seed (plain SQL, rows cloned from one template per table, VACUUM ANALYZE): 100001 orders over 730 days (50% VND, 25% USD, 12.5% EUR,
+12.5% JPY; 70% PAID / 15% CANCELLED / 10% EXPIRED / 5% PENDING; 1% soft-deleted; 69001 PAID and not deleted, 2831 of them paid in the
+last 30 days) and 40001 questions (4 sections, 2 pools, 4 statuses, 2% deleted).
+Each query was explained twice: planner default and enable_seqscan=off (shows whether an index CAN serve it).
+
+V97 migration: idx_orders_paid_at verified from an empty schema as a PARTIAL btree on (paid_at) WHERE status = 'PAID' AND deleted = false
+(no tenant prefix; no other orders index contains paid_at), idempotent replay leaves the definition unchanged, Hibernate
+ddl-auto=validate passes.
+
+VERDICT ON V97 - KEEP. It is used by the DEFAULT planner (not only when forced) for every revenue query shape:
+- current 30d window per currency:        Index Scan idx_orders_paid_at, 1.9 ms (0.9 ms warm), 2831 rows read
+- previous 30d window per currency:       Index Scan idx_orders_paid_at, 0.9 ms
+- monthly bucket (oldest of the 12):      Index Scan idx_orders_paid_at, 0.9 ms
+- monthly bucket (current partial month): Index Scan idx_orders_paid_at, 0.4 ms
+- production shape (status/paid_at bound as parameters, PREPARE + 6 executions, plan_cache_mode=auto): still Index Scan
+  idx_orders_paid_at (PostgreSQL keeps custom plans because the generic plan cannot use the partial index and costs more).
+- worst case, plan_cache_mode=force_generic_plan (NOT the default; shown for completeness): the partial index cannot be proven for a
+  parameter, so it degrades to Bitmap Heap Scan via idx_orders_status_created (status only), 11.3 ms. Acceptable, not a defect.
+Without V97 (index dropped in the scratch schema): Parallel Seq Scan on orders, 21.5 ms for the 30d window and 40.4 ms for the
+current-month bucket (each of the 14 queries scans all 100k rows).
+Whole revenue load of one cache miss (2 windows + 12 monthly buckets = 14 grouped statements, JDBC bound parameters, 100k orders):
+  27.3-27.7 ms WITH idx_orders_paid_at, 151.7-176.3 ms WITHOUT (about 6x faster). The section is cached for 60 s, so this is paid at most
+  once a minute per window/bucket. The gain grows linearly with the table (the seq scan reads all rows, the index only the range), so
+  V97 is justified by evidence, not only by judgment.
+  Cost side: one small partial index (69k of 100k rows here), maintained only on writes that touch PAID and not-deleted orders.
+
+Question bank (no new index needed or recommended):
+- counts by status/section/pool (new facade query): Seq Scan questions + HashAggregate, 14.3 ms for 40k rows (39201 rows read, 17 groups).
+  Inherent: every shared non-deleted question must be counted; an index cannot avoid reading them (forced idx_questions_visibility is
+  slower, 15.7 ms). It replaces the two legacy grouped queries (7.9 + 9.9 ms) with ONE pass for the dashboard, which is fine.
+- created-in-window count: Seq Scan 7.4 ms (no created_at index; forced visibility index not faster). Linear growth: the bank is
+  expected to stay in the tens of thousands of rows, so this stays in the low tens of ms. If it ever passes ~1M rows add
+  questions(created_at) WHERE deleted = false.
+
+Observation (not a defect): the revenue series uses one statement per month (12) plus two for the windows = 14 statements per cache miss
+(Hibernate statistics confirm 12 + 1 + 1 prepared statements, 0 entity loads). With V97 each takes about 1 ms; a single grouped query
+by month would need a database-specific date function (the phase requires portable JPQL).
+
+
+Raw EXPLAIN (ANALYZE) output follows (identical to app/target/overview-explain-plans-phase4.txt, final run).
+==========================================================================================================================
+EXPLAIN (ANALYZE) of Phase 4 queries: online revenue (orders) and question bank
+
+  orders: 100001 rows
+  questions: 40001 rows
+  PAID and not deleted orders: 69001
+  PAID orders paid in the last 30 days: 2831
+  orders per currency: [EUR=12500, JPY=12500, USD=25000, VND=50001]
+
+Indexes on orders / questions:
+  CREATE INDEX idx_orders_paid_at ON overview_mig_1a173b33668d42fa.orders USING btree (paid_at) WHERE (((status)::text = 'PAID'::text) AND (deleted = false))
+  CREATE INDEX idx_orders_status_created ON overview_mig_1a173b33668d42fa.orders USING btree (status, created_at)
+  CREATE INDEX idx_orders_tenant_created ON overview_mig_1a173b33668d42fa.orders USING btree (tenant_id, created_at)
+  CREATE UNIQUE INDEX orders_order_code_key ON overview_mig_1a173b33668d42fa.orders USING btree (order_code)
+  CREATE UNIQUE INDEX orders_pkey ON overview_mig_1a173b33668d42fa.orders USING btree (id)
+  CREATE UNIQUE INDEX orders_public_id_key ON overview_mig_1a173b33668d42fa.orders USING btree (public_id)
+  CREATE UNIQUE INDEX ux_orders_pending_tenant_plan ON overview_mig_1a173b33668d42fa.orders USING btree (tenant_id, plan_id) WHERE (((status)::text = 'PENDING'::text) AND (deleted = false))
+  CREATE INDEX idx_questions_academic_author ON overview_mig_1a173b33668d42fa.questions USING btree (author_user_public_id, status) WHERE (deleted = false)
+  CREATE INDEX idx_questions_generation_pool ON overview_mig_1a173b33668d42fa.questions USING btree (pte_task_type, status, visibility)
+  CREATE INDEX idx_questions_pool ON overview_mig_1a173b33668d42fa.questions USING btree (pool)
+  CREATE INDEX idx_questions_revision_group ON overview_mig_1a173b33668d42fa.questions USING btree (revision_group_public_id, revision_number)
+  CREATE INDEX idx_questions_task_type ON overview_mig_1a173b33668d42fa.questions USING btree (pte_task_type)
+  CREATE INDEX idx_questions_task_type_key ON overview_mig_1a173b33668d42fa.questions USING btree (task_type_key)
+  CREATE INDEX idx_questions_tenant ON overview_mig_1a173b33668d42fa.questions USING btree (tenant_id)
+  CREATE INDEX idx_questions_visibility ON overview_mig_1a173b33668d42fa.questions USING btree (visibility)
+  CREATE UNIQUE INDEX questions_pkey ON overview_mig_1a173b33668d42fa.questions USING btree (id)
+  CREATE UNIQUE INDEX questions_public_id_key ON overview_mig_1a173b33668d42fa.questions USING btree (public_id)
+  CREATE UNIQUE INDEX uq_questions_active_revision_per_source ON overview_mig_1a173b33668d42fa.questions USING btree (supersedes_public_id) WHERE (((status)::text = ANY ((ARRAY['DRAFT'::character varying, 'PENDING_APPROVAL'::character varying])::text[])) AND (deleted = false))
+  CREATE UNIQUE INDEX uq_questions_current_revision_group ON overview_mig_1a173b33668d42fa.questions USING btree (revision_group_public_id) WHERE ((is_current = true) AND (deleted = false))
+
+--- revenue: current 30d window per currency (literal PAID) [planner default]
+HashAggregate  (cost=122.85..122.90 rows=4 width=44) (actual rows=4 loops=1)
+  Group Key: currency
+  Batches: 1  Memory Usage: 24kB
+  ->  Index Scan using idx_orders_paid_at on orders o  (cost=0.30..107.68 rows=2022 width=18) (actual rows=2831 loops=1)
+        Index Cond: ((paid_at >= (now() - '30 days'::interval)) AND (paid_at < now()))
+Planning Time: 0.383 ms
+Execution Time: 0.951 ms
+
+--- revenue: current 30d window per currency (literal PAID) [enable_seqscan=off]
+HashAggregate  (cost=122.85..122.90 rows=4 width=44) (actual rows=4 loops=1)
+  Group Key: currency
+  Batches: 1  Memory Usage: 24kB
+  ->  Index Scan using idx_orders_paid_at on orders o  (cost=0.30..107.68 rows=2022 width=18) (actual rows=2831 loops=1)
+        Index Cond: ((paid_at >= (now() - '30 days'::interval)) AND (paid_at < now()))
+Planning Time: 0.131 ms
+Execution Time: 0.952 ms
+
+
+--- revenue: previous 30d window per currency (literal PAID) [planner default]
+HashAggregate  (cost=124.25..124.30 rows=4 width=44) (actual rows=4 loops=1)
+  Group Key: currency
+  Batches: 1  Memory Usage: 24kB
+  ->  Index Scan using idx_orders_paid_at on orders o  (cost=0.30..108.98 rows=2036 width=18) (actual rows=2829 loops=1)
+        Index Cond: ((paid_at >= (now() - '60 days'::interval)) AND (paid_at < (now() - '30 days'::interval)))
+Planning Time: 0.149 ms
+Execution Time: 0.897 ms
+
+--- revenue: previous 30d window per currency (literal PAID) [enable_seqscan=off]
+HashAggregate  (cost=124.25..124.30 rows=4 width=44) (actual rows=4 loops=1)
+  Group Key: currency
+  Batches: 1  Memory Usage: 24kB
+  ->  Index Scan using idx_orders_paid_at on orders o  (cost=0.30..108.98 rows=2036 width=18) (actual rows=2829 loops=1)
+        Index Cond: ((paid_at >= (now() - '60 days'::interval)) AND (paid_at < (now() - '30 days'::interval)))
+Planning Time: 0.116 ms
+Execution Time: 0.971 ms
+
+
+--- revenue: monthly bucket - oldest of the 12 (Asia/Ho_Chi_Minh month) [planner default]
+HashAggregate  (cost=121.78..121.83 rows=4 width=44) (actual rows=4 loops=1)
+  Group Key: currency
+  Batches: 1  Memory Usage: 24kB
+  ->  Index Scan using idx_orders_paid_at on orders o  (cost=0.32..106.90 rows=1984 width=18) (actual rows=2833 loops=1)
+        Index Cond: ((paid_at >= ((date_trunc('month'::text, timezone('Asia/Ho_Chi_Minh'::text, now())) - '11 mons'::interval) AT TIME ZONE 'Asia/Ho_Chi_Minh'::text)) AND (paid_at < ((date_trunc('month'::text, timezone('Asia/Ho_Chi_Minh'::text, now())) - '10 mons'::interval) AT TIME ZONE 'Asia/Ho_Chi_Minh'::text)))
+Planning Time: 0.432 ms
+Execution Time: 0.882 ms
+
+--- revenue: monthly bucket - oldest of the 12 (Asia/Ho_Chi_Minh month) [enable_seqscan=off]
+HashAggregate  (cost=121.78..121.83 rows=4 width=44) (actual rows=4 loops=1)
+  Group Key: currency
+  Batches: 1  Memory Usage: 24kB
+  ->  Index Scan using idx_orders_paid_at on orders o  (cost=0.32..106.90 rows=1984 width=18) (actual rows=2833 loops=1)
+        Index Cond: ((paid_at >= ((date_trunc('month'::text, timezone('Asia/Ho_Chi_Minh'::text, now())) - '11 mons'::interval) AT TIME ZONE 'Asia/Ho_Chi_Minh'::text)) AND (paid_at < ((date_trunc('month'::text, timezone('Asia/Ho_Chi_Minh'::text, now())) - '10 mons'::interval) AT TIME ZONE 'Asia/Ho_Chi_Minh'::text)))
+Planning Time: 0.104 ms
+Execution Time: 0.836 ms
+
+
+--- revenue: monthly bucket - current partial month [planner default]
+HashAggregate  (cost=56.75..56.80 rows=4 width=44) (actual rows=4 loops=1)
+  Group Key: currency
+  Batches: 1  Memory Usage: 24kB
+  ->  Index Scan using idx_orders_paid_at on orders o  (cost=0.32..50.24 rows=867 width=18) (actual rows=1198 loops=1)
+        Index Cond: ((paid_at >= (date_trunc('month'::text, timezone('Asia/Ho_Chi_Minh'::text, now())) AT TIME ZONE 'Asia/Ho_Chi_Minh'::text)) AND (paid_at < ((date_trunc('month'::text, timezone('Asia/Ho_Chi_Minh'::text, now())) + '1 mon'::interval) AT TIME ZONE 'Asia/Ho_Chi_Minh'::text)))
+Planning Time: 0.086 ms
+Execution Time: 0.399 ms
+
+--- revenue: monthly bucket - current partial month [enable_seqscan=off]
+HashAggregate  (cost=56.75..56.80 rows=4 width=44) (actual rows=4 loops=1)
+  Group Key: currency
+  Batches: 1  Memory Usage: 24kB
+  ->  Index Scan using idx_orders_paid_at on orders o  (cost=0.32..50.24 rows=867 width=18) (actual rows=1198 loops=1)
+        Index Cond: ((paid_at >= (date_trunc('month'::text, timezone('Asia/Ho_Chi_Minh'::text, now())) AT TIME ZONE 'Asia/Ho_Chi_Minh'::text)) AND (paid_at < ((date_trunc('month'::text, timezone('Asia/Ho_Chi_Minh'::text, now())) + '1 mon'::interval) AT TIME ZONE 'Asia/Ho_Chi_Minh'::text)))
+Planning Time: 0.108 ms
+Execution Time: 0.370 ms
+
+
+--- question bank: counts by status, section, pool (the new facade query) [planner default]
+HashAggregate  (cost=1718.42..1718.74 rows=32 width=30) (actual rows=17 loops=1)
+  Group Key: status, task_type_section, pool
+  Batches: 1  Memory Usage: 24kB
+  ->  Seq Scan on questions q  (cost=0.00..1326.01 rows=39241 width=30) (actual rows=39201 loops=1)
+        Filter: ((NOT deleted) AND ((visibility)::text = 'SHARED'::text))
+        Rows Removed by Filter: 800
+Planning Time: 0.270 ms
+Execution Time: 14.780 ms
+
+--- question bank: counts by status, section, pool (the new facade query) [enable_seqscan=off]
+HashAggregate  (cost=2057.72..2058.04 rows=32 width=30) (actual rows=17 loops=1)
+  Group Key: status, task_type_section, pool
+  Batches: 1  Memory Usage: 24kB
+  ->  Index Scan using idx_questions_visibility on questions q  (cost=0.29..1665.31 rows=39241 width=30) (actual rows=39201 loops=1)
+        Index Cond: ((visibility)::text = 'SHARED'::text)
+        Filter: (NOT deleted)
+        Rows Removed by Filter: 800
+Planning Time: 0.221 ms
+Execution Time: 19.212 ms
+
+
+--- question bank: legacy stats by section [planner default]
+HashAggregate  (cost=1522.22..1522.26 rows=4 width=16) (actual rows=4 loops=1)
+  Group Key: task_type_section
+  Batches: 1  Memory Usage: 24kB
+  ->  Seq Scan on questions q  (cost=0.00..1326.01 rows=39241 width=16) (actual rows=39201 loops=1)
+        Filter: ((NOT deleted) AND ((visibility)::text = 'SHARED'::text))
+        Rows Removed by Filter: 800
+Planning Time: 0.121 ms
+Execution Time: 10.103 ms
+
+--- question bank: legacy stats by section [enable_seqscan=off]
+HashAggregate  (cost=1861.51..1861.55 rows=4 width=16) (actual rows=4 loops=1)
+  Group Key: task_type_section
+  Batches: 1  Memory Usage: 24kB
+  ->  Index Scan using idx_questions_visibility on questions q  (cost=0.29..1665.31 rows=39241 width=16) (actual rows=39201 loops=1)
+        Index Cond: ((visibility)::text = 'SHARED'::text)
+        Filter: (NOT deleted)
+        Rows Removed by Filter: 800
+Planning Time: 0.128 ms
+Execution Time: 11.270 ms
+
+
+--- question bank: legacy stats by status [planner default]
+HashAggregate  (cost=1522.22..1522.26 rows=4 width=17) (actual rows=4 loops=1)
+  Group Key: status
+  Batches: 1  Memory Usage: 24kB
+  ->  Seq Scan on questions q  (cost=0.00..1326.01 rows=39241 width=17) (actual rows=39201 loops=1)
+        Filter: ((NOT deleted) AND ((visibility)::text = 'SHARED'::text))
+        Rows Removed by Filter: 800
+Planning Time: 0.107 ms
+Execution Time: 8.226 ms
+
+--- question bank: legacy stats by status [enable_seqscan=off]
+HashAggregate  (cost=1861.51..1861.55 rows=4 width=17) (actual rows=4 loops=1)
+  Group Key: status
+  Batches: 1  Memory Usage: 24kB
+  ->  Index Scan using idx_questions_visibility on questions q  (cost=0.29..1665.31 rows=39241 width=17) (actual rows=39201 loops=1)
+        Index Cond: ((visibility)::text = 'SHARED'::text)
+        Filter: (NOT deleted)
+        Rows Removed by Filter: 800
+Planning Time: 0.123 ms
+Execution Time: 11.490 ms
+
+
+--- question bank: created in 30d window [planner default]
+Aggregate  (cost=1829.99..1830.00 rows=1 width=8) (actual rows=1 loops=1)
+  ->  Seq Scan on questions q  (cost=0.00..1826.03 rows=1586 width=8) (actual rows=1612 loops=1)
+        Filter: ((NOT deleted) AND ((visibility)::text = 'SHARED'::text) AND (created_at < now()) AND (created_at >= (now() - '30 days'::interval)))
+        Rows Removed by Filter: 38389
+Planning Time: 0.177 ms
+Execution Time: 8.411 ms
+
+--- question bank: created in 30d window [enable_seqscan=off]
+Aggregate  (cost=2169.28..2169.30 rows=1 width=8) (actual rows=1 loops=1)
+  ->  Index Scan using idx_questions_visibility on questions q  (cost=0.29..2165.32 rows=1586 width=8) (actual rows=1612 loops=1)
+        Index Cond: ((visibility)::text = 'SHARED'::text)
+        Filter: ((NOT deleted) AND (created_at < now()) AND (created_at >= (now() - '30 days'::interval)))
+        Rows Removed by Filter: 38389
+Planning Time: 0.215 ms
+Execution Time: 12.858 ms
+
+
+--- revenue current window, PREPARED with bound parameters (6 executions, then explain) [plan_cache_mode=auto]
+HashAggregate  (cost=122.84..122.89 rows=4 width=44) (actual rows=4 loops=1)
+  Group Key: currency
+  Batches: 1  Memory Usage: 24kB
+  ->  Index Scan using idx_orders_paid_at on orders o  (cost=0.29..107.68 rows=2022 width=18) (actual rows=2831 loops=1)
+        Index Cond: ((paid_at >= '2026-09-13 19:08:33.311561+07'::timestamp with time zone) AND (paid_at < '2026-10-13 19:08:33.311561+07'::timestamp with time zone))
+Planning Time: 0.245 ms
+Execution Time: 1.569 ms
+
+--- revenue current window, PREPARED [plan_cache_mode=force_generic_plan] (worst case)
+GroupAggregate  (cost=2916.76..2918.05 rows=4 width=44) (actual rows=4 loops=1)
+  Group Key: currency
+  ->  Sort  (cost=2916.76..2917.07 rows=124 width=18) (actual rows=2831 loops=1)
+        Sort Key: currency
+        Sort Method: quicksort  Memory: 207kB
+        ->  Bitmap Heap Scan on orders o  (cost=655.95..2912.45 rows=124 width=18) (actual rows=2831 loops=1)
+              Recheck Cond: ((status)::text = ($1)::text)
+              Filter: ((NOT deleted) AND (paid_at >= $2) AND (paid_at < $3))
+              Rows Removed by Filter: 67170
+              Heap Blocks: exact=1819
+              ->  Bitmap Index Scan on idx_orders_status_created  (cost=0.00..655.92 rows=25000 width=0) (actual rows=70001 loops=1)
+                    Index Cond: ((status)::text = ($1)::text)
+Planning Time: 0.046 ms
+Execution Time: 15.570 ms
+
+--- revenue previous window, PREPARED [plan_cache_mode=auto]
+HashAggregate  (cost=124.24..124.29 rows=4 width=44) (actual rows=4 loops=1)
+  Group Key: currency
+  Batches: 1  Memory Usage: 24kB
+  ->  Index Scan using idx_orders_paid_at on orders o  (cost=0.29..108.97 rows=2036 width=18) (actual rows=2829 loops=1)
+        Index Cond: ((paid_at >= '2026-08-14 19:08:33.467665+07'::timestamp with time zone) AND (paid_at < '2026-09-13 19:08:33.467665+07'::timestamp with time zone))
+Planning Time: 0.167 ms
+Execution Time: 1.525 ms
+
+--- revenue current window WITHOUT idx_orders_paid_at [planner default]
+Finalize GroupAggregate  (cost=4298.62..4299.17 rows=4 width=44) (actual rows=4 loops=1)
+  Group Key: currency
+  ->  Gather Merge  (cost=4298.62..4299.08 rows=4 width=44) (actual rows=8 loops=1)
+        Workers Planned: 1
+        Workers Launched: 1
+        ->  Sort  (cost=3298.61..3298.62 rows=4 width=44) (actual rows=4 loops=2)
+              Sort Key: currency
+              Sort Method: quicksort  Memory: 25kB
+              Worker 0:  Sort Method: quicksort  Memory: 25kB
+              ->  Partial HashAggregate  (cost=3298.52..3298.57 rows=4 width=44) (actual rows=4 loops=2)
+                    Group Key: currency
+                    Batches: 1  Memory Usage: 24kB
+                    Worker 0:  Batches: 1  Memory Usage: 24kB
+                    ->  Parallel Seq Scan on orders o  (cost=0.00..3289.60 rows=1189 width=18) (actual rows=1416 loops=2)
+                          Filter: ((NOT deleted) AND ((status)::text = 'PAID'::text) AND (paid_at < now()) AND (paid_at >= (now() - '30 days'::interval)))
+                          Rows Removed by Filter: 48585
+Planning Time: 0.138 ms
+Execution Time: 18.866 ms
+
+--- revenue current partial month WITHOUT idx_orders_paid_at [planner default]
+Finalize GroupAggregate  (cost=5194.91..5200.60 rows=4 width=44) (actual rows=4 loops=1)
+  Group Key: currency
+  ->  Gather Merge  (cost=5194.91..5200.51 rows=4 width=44) (actual rows=8 loops=1)
+        Workers Planned: 1
+        Workers Launched: 1
+        ->  Partial GroupAggregate  (cost=4194.90..4200.05 rows=4 width=44) (actual rows=4 loops=2)
+              Group Key: currency
+              ->  Sort  (cost=4194.90..4196.18 rows=510 width=18) (actual rows=599 loops=2)
+                    Sort Key: currency
+                    Sort Method: quicksort  Memory: 49kB
+                    Worker 0:  Sort Method: quicksort  Memory: 47kB
+                    ->  Parallel Seq Scan on orders o  (cost=0.00..4171.96 rows=510 width=18) (actual rows=599 loops=2)
+                          Filter: ((NOT deleted) AND ((status)::text = 'PAID'::text) AND (paid_at >= (date_trunc('month'::text, timezone('Asia/Ho_Chi_Minh'::text, now())) AT TIME ZONE 'Asia/Ho_Chi_Minh'::text)) AND (paid_at < ((date_trunc('month'::text, timezone('Asia/Ho_Chi_Minh'::text, now())) + '1 mon'::interval) AT TIME ZONE 'Asia/Ho_Chi_Minh'::text)))
+                          Rows Removed by Filter: 49402
+Planning Time: 0.161 ms
+Execution Time: 28.856 ms
+
+=== VERDICTS (with V97 present) ===
+revenue: current 30d window per currency (literal PAID): default planner -> Index Scan using idx_orders_paid_at on orders o  | Index Cond: | forced -> Index Scan using idx_orders_paid_at on orders o  | Index Cond:
+revenue: previous 30d window per currency (literal PAID): default planner -> Index Scan using idx_orders_paid_at on orders o  | Index Cond: | forced -> Index Scan using idx_orders_paid_at on orders o  | Index Cond:
+revenue: monthly bucket - oldest of the 12 (Asia/Ho_Chi_Minh month): default planner -> Index Scan using idx_orders_paid_at on orders o  | Index Cond: | forced -> Index Scan using idx_orders_paid_at on orders o  | Index Cond:
+revenue: monthly bucket - current partial month: default planner -> Index Scan using idx_orders_paid_at on orders o  | Index Cond: | forced -> Index Scan using idx_orders_paid_at on orders o  | Index Cond:
+question bank: counts by status, section, pool (the new facade query): default planner -> Seq Scan on questions q  | forced -> Index Scan using idx_questions_visibility on questions q  | Index Cond:
+question bank: legacy stats by section: default planner -> Seq Scan on questions q  | forced -> Index Scan using idx_questions_visibility on questions q  | Index Cond:
+question bank: legacy stats by status: default planner -> Seq Scan on questions q  | forced -> Index Scan using idx_questions_visibility on questions q  | Index Cond:
+question bank: created in 30d window: default planner -> Seq Scan on questions q  | forced -> Index Scan using idx_questions_visibility on questions q  | Index Cond:
+revenue current window, prepared (auto, after 6 executions): Index Scan using idx_orders_paid_at on orders o  | Index Cond:
+revenue current window, prepared (force_generic_plan): Bitmap Heap Scan on orders o  | Bitmap Index Scan on idx_orders_status_created  | Index Cond:
+revenue load of one cache miss (2 windows + 12 months = 14 grouped queries, bound parameters, 100000 orders): 27.7 ms WITH idx_orders_paid_at, 151.7 ms WITHOUT
+without V97 the current window plan is: Parallel Seq Scan on orders o 
+
