@@ -29,24 +29,24 @@ Sequential scan by default (small tables, no status-less created_at index; all 1
   uses a bitmap scan over the whole index). If these tables grow past ~1M rows add created_at-only partial indexes
   (support_ticket, tenant_applications, subscriptions) and license_codes(redeemed_at); not needed at current volumes.
 
-PRODUCTION CONCERN - students per tenant (UserRepository.countByRoleGroupedByTenant, the heaviest query):
-- Default plan: Seq Scan on users (100k rows) + Seq Scan on user_roles (100k rows) -> Hash Join -> Sort (external merge, spills 3.2 MB to
-  disk) -> GroupAggregate, ~95 ms. Forcing indexes is no better (~100 ms: idx_user_roles_role + users_pkey). No index can avoid reading
-  every student row because the result IS "every student, per tenant". It is bounded by the 2s timeout hint and the 60s section cache,
-  but it grows linearly: ~1 s at ~1M students, i.e. approaching the 2 s hint.
-- Cheap fix (production code, not applied): count(distinct u.id) forces the Sort. user_roles is unique per (user_id, role), so
-  count(u.id) (or count(*)) is exact. Same data with count(*) runs ~45 ms (about half: plain HashAggregate, no sort, no disk spill): see the
-  "count(*) variant" section below.
-- Optional index when the table is large: user_roles(role, user_id) (index-only on the join side) and
-  users(tenant_id, id) WHERE deleted = false (index-only on the user side).
-
+PERF-001 RESOLVED - students per tenant (UserRepository.countByRoleGroupedByTenant, the heaviest query):
+- Before: count(distinct u.id) forced Seq Scan users + Seq Scan user_roles -> Hash Join -> Sort (external merge, 3.2 MB disk spill) ->
+  GroupAggregate: 95 ms in the first run, 108 ms in the final run (comparison section "PREVIOUS query" in the raw output below).
+- Now (production query uses count(u.id)): Seq Scan users + Seq Scan user_roles -> Hash Join -> HashAggregate (24 kB), NO sort, NO disk
+  spill, 56 ms at 100k students (about half). Both tables are still read in full because the answer is "every student, per tenant";
+  no index can avoid that, so growth stays linear (~0.6 s at ~1M students, under the 2 s timeout hint and behind the 60 s section cache).
+- Exactness caveat (stated in the repository Javadoc): count(u.id) equals the distinct count only while no duplicate (user_id, role) row
+  exists in user_roles (the schema has no unique constraint; the application inserts set elements only). The H2 test
+  IdentityPlatformOverviewQueriesTest covers multi-role users (counted once per tenant as STUDENT), deleted and tenant-less users.
+- Optional if the table grows: user_roles(role, user_id) and users(tenant_id, id) WHERE deleted = false for index-only scans.
 Interplay finding (fixed in test code only): with the original 2-tenant Phase 1 seed (tenant A = 50 percent of every table) the planner
 now prefers the new narrow time-only indexes (idx_attempts_started/submitted) over idx_attempts_tenant_started/submitted for the
 TENANT-scoped host queries, so the Phase 1 IT assertion "forced plan contains the tenant index" failed after V96. With a production-like
 20-tenant interleaved seed (tenant A = 5 percent, same row totals) the tenant-leading indexes win again; the Phase 1 seed was changed to
 20 tenants and its assertions are unchanged.
 
-Raw EXPLAIN (ANALYZE) output follows (identical to app/target/overview-explain-plans-phase3.txt).
+
+Raw EXPLAIN (ANALYZE) output follows (identical to app/target/overview-explain-plans-phase3.txt, final run after PERF-001).
 ==========================================================================================================================
 
 EXPLAIN (ANALYZE) of Phase 3 platform-wide admin dashboard queries
@@ -65,252 +65,252 @@ Seed (plus rows left by the other tests of this class in the same scratch schema
   distinct tenants with students: 50
 
 Indexes on the queried tables:
-  CREATE UNIQUE INDEX exam_attempts_pkey ON overview_mig_5cd22c6b26fb4f60.exam_attempts USING btree (id)
-  CREATE UNIQUE INDEX exam_attempts_public_id_key ON overview_mig_5cd22c6b26fb4f60.exam_attempts USING btree (public_id)
-  CREATE INDEX idx_attempts_started ON overview_mig_5cd22c6b26fb4f60.exam_attempts USING btree (started_at) WHERE (deleted = false)
-  CREATE INDEX idx_attempts_submitted ON overview_mig_5cd22c6b26fb4f60.exam_attempts USING btree (submitted_at) WHERE (deleted = false)
-  CREATE INDEX idx_attempts_tenant ON overview_mig_5cd22c6b26fb4f60.exam_attempts USING btree (tenant_id)
-  CREATE INDEX idx_attempts_tenant_started ON overview_mig_5cd22c6b26fb4f60.exam_attempts USING btree (tenant_id, started_at) WHERE (deleted = false)
-  CREATE INDEX idx_attempts_tenant_status ON overview_mig_5cd22c6b26fb4f60.exam_attempts USING btree (tenant_id, status) WHERE (deleted = false)
-  CREATE INDEX idx_attempts_tenant_submitted ON overview_mig_5cd22c6b26fb4f60.exam_attempts USING btree (tenant_id, submitted_at) WHERE (deleted = false)
-  CREATE UNIQUE INDEX uk_exam_attempt_session_student_number ON overview_mig_5cd22c6b26fb4f60.exam_attempts USING btree (session_public_id, student_public_id, attempt_number)
-  CREATE INDEX idx_license_codes_status_expiry ON overview_mig_5cd22c6b26fb4f60.license_codes USING btree (status, code_expires_at)
-  CREATE UNIQUE INDEX license_codes_code_key ON overview_mig_5cd22c6b26fb4f60.license_codes USING btree (code)
-  CREATE UNIQUE INDEX license_codes_pkey ON overview_mig_5cd22c6b26fb4f60.license_codes USING btree (id)
-  CREATE UNIQUE INDEX license_codes_public_id_key ON overview_mig_5cd22c6b26fb4f60.license_codes USING btree (public_id)
-  CREATE UNIQUE INDEX license_codes_subscription_id_key ON overview_mig_5cd22c6b26fb4f60.license_codes USING btree (subscription_id)
-  CREATE INDEX idx_plans_status ON overview_mig_5cd22c6b26fb4f60.plans USING btree (status)
-  CREATE UNIQUE INDEX plans_pkey ON overview_mig_5cd22c6b26fb4f60.plans USING btree (id)
-  CREATE UNIQUE INDEX plans_public_id_key ON overview_mig_5cd22c6b26fb4f60.plans USING btree (public_id)
-  CREATE INDEX idx_subscriptions_status_expires ON overview_mig_5cd22c6b26fb4f60.subscriptions USING btree (status, expires_at) WHERE (deleted = false)
-  CREATE INDEX idx_subscriptions_tenant_status ON overview_mig_5cd22c6b26fb4f60.subscriptions USING btree (tenant_id, status)
-  CREATE UNIQUE INDEX subscriptions_license_key_key ON overview_mig_5cd22c6b26fb4f60.subscriptions USING btree (license_key)
-  CREATE UNIQUE INDEX subscriptions_pkey ON overview_mig_5cd22c6b26fb4f60.subscriptions USING btree (id)
-  CREATE UNIQUE INDEX subscriptions_public_id_key ON overview_mig_5cd22c6b26fb4f60.subscriptions USING btree (public_id)
-  CREATE INDEX idx_support_ticket_status_created ON overview_mig_5cd22c6b26fb4f60.support_ticket USING btree (status, created_at) WHERE (deleted = false)
-  CREATE INDEX idx_support_ticket_tenant_status_created ON overview_mig_5cd22c6b26fb4f60.support_ticket USING btree (tenant_id, status, created_at)
-  CREATE UNIQUE INDEX support_ticket_pkey ON overview_mig_5cd22c6b26fb4f60.support_ticket USING btree (id)
-  CREATE UNIQUE INDEX support_ticket_public_id_key ON overview_mig_5cd22c6b26fb4f60.support_ticket USING btree (public_id)
-  CREATE INDEX idx_tenant_applications_status_created ON overview_mig_5cd22c6b26fb4f60.tenant_applications USING btree (status, created_at) WHERE (deleted = false)
-  CREATE UNIQUE INDEX tenant_applications_pkey ON overview_mig_5cd22c6b26fb4f60.tenant_applications USING btree (id)
-  CREATE UNIQUE INDEX tenant_applications_public_id_key ON overview_mig_5cd22c6b26fb4f60.tenant_applications USING btree (public_id)
-  CREATE UNIQUE INDEX uq_application_code_active ON overview_mig_5cd22c6b26fb4f60.tenant_applications USING btree (requested_code) WHERE ((status)::text = 'PENDING'::text)
-  CREATE INDEX idx_tenants_created ON overview_mig_5cd22c6b26fb4f60.tenants USING btree (created_at) WHERE (deleted = false)
-  CREATE UNIQUE INDEX tenants_code_key ON overview_mig_5cd22c6b26fb4f60.tenants USING btree (code)
-  CREATE UNIQUE INDEX tenants_name_key ON overview_mig_5cd22c6b26fb4f60.tenants USING btree (name)
-  CREATE UNIQUE INDEX tenants_pkey ON overview_mig_5cd22c6b26fb4f60.tenants USING btree (id)
-  CREATE UNIQUE INDEX tenants_public_id_key ON overview_mig_5cd22c6b26fb4f60.tenants USING btree (public_id)
-  CREATE UNIQUE INDEX uk_tenants_tax_code ON overview_mig_5cd22c6b26fb4f60.tenants USING btree (tax_code) WHERE (tax_code IS NOT NULL)
-  CREATE INDEX idx_user_roles_role ON overview_mig_5cd22c6b26fb4f60.user_roles USING btree (role)
-  CREATE INDEX idx_user_roles_user_role ON overview_mig_5cd22c6b26fb4f60.user_roles USING btree (user_id, role)
-  CREATE INDEX idx_users_tenant ON overview_mig_5cd22c6b26fb4f60.users USING btree (tenant_id)
-  CREATE INDEX idx_users_tenant_created ON overview_mig_5cd22c6b26fb4f60.users USING btree (tenant_id, created_at) WHERE (deleted = false)
-  CREATE UNIQUE INDEX uk_users_platform_username ON overview_mig_5cd22c6b26fb4f60.users USING btree (username) WHERE ((tenant_id IS NULL) AND (deleted = false))
-  CREATE UNIQUE INDEX uk_users_tenant_canonical_email ON overview_mig_5cd22c6b26fb4f60.users USING btree (tenant_id, lower(TRIM(BOTH FROM email))) WHERE ((tenant_id IS NOT NULL) AND (deleted = false) AND (NULLIF(TRIM(BOTH FROM email), ''::text) IS NOT NULL))
-  CREATE UNIQUE INDEX uk_users_tenant_username ON overview_mig_5cd22c6b26fb4f60.users USING btree (tenant_id, username) WHERE (tenant_id IS NOT NULL)
-  CREATE UNIQUE INDEX users_pkey ON overview_mig_5cd22c6b26fb4f60.users USING btree (id)
-  CREATE UNIQUE INDEX users_public_id_key ON overview_mig_5cd22c6b26fb4f60.users USING btree (public_id)
+  CREATE UNIQUE INDEX exam_attempts_pkey ON overview_mig_f8c909aa205a4ee0.exam_attempts USING btree (id)
+  CREATE UNIQUE INDEX exam_attempts_public_id_key ON overview_mig_f8c909aa205a4ee0.exam_attempts USING btree (public_id)
+  CREATE INDEX idx_attempts_started ON overview_mig_f8c909aa205a4ee0.exam_attempts USING btree (started_at) WHERE (deleted = false)
+  CREATE INDEX idx_attempts_submitted ON overview_mig_f8c909aa205a4ee0.exam_attempts USING btree (submitted_at) WHERE (deleted = false)
+  CREATE INDEX idx_attempts_tenant ON overview_mig_f8c909aa205a4ee0.exam_attempts USING btree (tenant_id)
+  CREATE INDEX idx_attempts_tenant_started ON overview_mig_f8c909aa205a4ee0.exam_attempts USING btree (tenant_id, started_at) WHERE (deleted = false)
+  CREATE INDEX idx_attempts_tenant_status ON overview_mig_f8c909aa205a4ee0.exam_attempts USING btree (tenant_id, status) WHERE (deleted = false)
+  CREATE INDEX idx_attempts_tenant_submitted ON overview_mig_f8c909aa205a4ee0.exam_attempts USING btree (tenant_id, submitted_at) WHERE (deleted = false)
+  CREATE UNIQUE INDEX uk_exam_attempt_session_student_number ON overview_mig_f8c909aa205a4ee0.exam_attempts USING btree (session_public_id, student_public_id, attempt_number)
+  CREATE INDEX idx_license_codes_status_expiry ON overview_mig_f8c909aa205a4ee0.license_codes USING btree (status, code_expires_at)
+  CREATE UNIQUE INDEX license_codes_code_key ON overview_mig_f8c909aa205a4ee0.license_codes USING btree (code)
+  CREATE UNIQUE INDEX license_codes_pkey ON overview_mig_f8c909aa205a4ee0.license_codes USING btree (id)
+  CREATE UNIQUE INDEX license_codes_public_id_key ON overview_mig_f8c909aa205a4ee0.license_codes USING btree (public_id)
+  CREATE UNIQUE INDEX license_codes_subscription_id_key ON overview_mig_f8c909aa205a4ee0.license_codes USING btree (subscription_id)
+  CREATE INDEX idx_plans_status ON overview_mig_f8c909aa205a4ee0.plans USING btree (status)
+  CREATE UNIQUE INDEX plans_pkey ON overview_mig_f8c909aa205a4ee0.plans USING btree (id)
+  CREATE UNIQUE INDEX plans_public_id_key ON overview_mig_f8c909aa205a4ee0.plans USING btree (public_id)
+  CREATE INDEX idx_subscriptions_status_expires ON overview_mig_f8c909aa205a4ee0.subscriptions USING btree (status, expires_at) WHERE (deleted = false)
+  CREATE INDEX idx_subscriptions_tenant_status ON overview_mig_f8c909aa205a4ee0.subscriptions USING btree (tenant_id, status)
+  CREATE UNIQUE INDEX subscriptions_license_key_key ON overview_mig_f8c909aa205a4ee0.subscriptions USING btree (license_key)
+  CREATE UNIQUE INDEX subscriptions_pkey ON overview_mig_f8c909aa205a4ee0.subscriptions USING btree (id)
+  CREATE UNIQUE INDEX subscriptions_public_id_key ON overview_mig_f8c909aa205a4ee0.subscriptions USING btree (public_id)
+  CREATE INDEX idx_support_ticket_status_created ON overview_mig_f8c909aa205a4ee0.support_ticket USING btree (status, created_at) WHERE (deleted = false)
+  CREATE INDEX idx_support_ticket_tenant_status_created ON overview_mig_f8c909aa205a4ee0.support_ticket USING btree (tenant_id, status, created_at)
+  CREATE UNIQUE INDEX support_ticket_pkey ON overview_mig_f8c909aa205a4ee0.support_ticket USING btree (id)
+  CREATE UNIQUE INDEX support_ticket_public_id_key ON overview_mig_f8c909aa205a4ee0.support_ticket USING btree (public_id)
+  CREATE INDEX idx_tenant_applications_status_created ON overview_mig_f8c909aa205a4ee0.tenant_applications USING btree (status, created_at) WHERE (deleted = false)
+  CREATE UNIQUE INDEX tenant_applications_pkey ON overview_mig_f8c909aa205a4ee0.tenant_applications USING btree (id)
+  CREATE UNIQUE INDEX tenant_applications_public_id_key ON overview_mig_f8c909aa205a4ee0.tenant_applications USING btree (public_id)
+  CREATE UNIQUE INDEX uq_application_code_active ON overview_mig_f8c909aa205a4ee0.tenant_applications USING btree (requested_code) WHERE ((status)::text = 'PENDING'::text)
+  CREATE INDEX idx_tenants_created ON overview_mig_f8c909aa205a4ee0.tenants USING btree (created_at) WHERE (deleted = false)
+  CREATE UNIQUE INDEX tenants_code_key ON overview_mig_f8c909aa205a4ee0.tenants USING btree (code)
+  CREATE UNIQUE INDEX tenants_name_key ON overview_mig_f8c909aa205a4ee0.tenants USING btree (name)
+  CREATE UNIQUE INDEX tenants_pkey ON overview_mig_f8c909aa205a4ee0.tenants USING btree (id)
+  CREATE UNIQUE INDEX tenants_public_id_key ON overview_mig_f8c909aa205a4ee0.tenants USING btree (public_id)
+  CREATE UNIQUE INDEX uk_tenants_tax_code ON overview_mig_f8c909aa205a4ee0.tenants USING btree (tax_code) WHERE (tax_code IS NOT NULL)
+  CREATE INDEX idx_user_roles_role ON overview_mig_f8c909aa205a4ee0.user_roles USING btree (role)
+  CREATE INDEX idx_user_roles_user_role ON overview_mig_f8c909aa205a4ee0.user_roles USING btree (user_id, role)
+  CREATE INDEX idx_users_tenant ON overview_mig_f8c909aa205a4ee0.users USING btree (tenant_id)
+  CREATE INDEX idx_users_tenant_created ON overview_mig_f8c909aa205a4ee0.users USING btree (tenant_id, created_at) WHERE (deleted = false)
+  CREATE UNIQUE INDEX uk_users_platform_username ON overview_mig_f8c909aa205a4ee0.users USING btree (username) WHERE ((tenant_id IS NULL) AND (deleted = false))
+  CREATE UNIQUE INDEX uk_users_tenant_canonical_email ON overview_mig_f8c909aa205a4ee0.users USING btree (tenant_id, lower(TRIM(BOTH FROM email))) WHERE ((tenant_id IS NOT NULL) AND (deleted = false) AND (NULLIF(TRIM(BOTH FROM email), ''::text) IS NOT NULL))
+  CREATE UNIQUE INDEX uk_users_tenant_username ON overview_mig_f8c909aa205a4ee0.users USING btree (tenant_id, username) WHERE (tenant_id IS NOT NULL)
+  CREATE UNIQUE INDEX users_pkey ON overview_mig_f8c909aa205a4ee0.users USING btree (id)
+  CREATE UNIQUE INDEX users_public_id_key ON overview_mig_f8c909aa205a4ee0.users USING btree (public_id)
 
 --- platform distinct active students (started_at, current 30d) [planner default]
-Aggregate  (cost=2965.09..2965.10 rows=1 width=8) (actual rows=1 loops=1)
-  ->  Sort  (cost=2929.15..2947.12 rows=7188 width=16) (actual rows=7220 loops=1)
+Aggregate  (cost=2973.59..2973.60 rows=1 width=8) (actual rows=1 loops=1)
+  ->  Sort  (cost=2937.26..2955.43 rows=7266 width=16) (actual rows=7220 loops=1)
         Sort Key: student_public_id
         Sort Method: quicksort  Memory: 193kB
-        ->  Bitmap Heap Scan on exam_attempts a  (cost=177.98..2468.71 rows=7188 width=16) (actual rows=7220 loops=1)
+        ->  Bitmap Heap Scan on exam_attempts a  (cost=178.78..2471.26 rows=7266 width=16) (actual rows=7220 loops=1)
               Recheck Cond: ((started_at >= (now() - '30 days'::interval)) AND (started_at < now()) AND (NOT deleted))
               Heap Blocks: exact=204
-              ->  Bitmap Index Scan on idx_attempts_started  (cost=0.00..176.18 rows=7188 width=0) (actual rows=7220 loops=1)
+              ->  Bitmap Index Scan on idx_attempts_started  (cost=0.00..176.96 rows=7266 width=0) (actual rows=7220 loops=1)
                     Index Cond: ((started_at >= (now() - '30 days'::interval)) AND (started_at < now()))
-Planning Time: 0.255 ms
-Execution Time: 2.285 ms
+Planning Time: 0.250 ms
+Execution Time: 2.395 ms
 
 --- platform distinct active students (started_at, current 30d) [enable_seqscan=off]
-Aggregate  (cost=2965.09..2965.10 rows=1 width=8) (actual rows=1 loops=1)
-  ->  Sort  (cost=2929.15..2947.12 rows=7188 width=16) (actual rows=7220 loops=1)
+Aggregate  (cost=2973.59..2973.60 rows=1 width=8) (actual rows=1 loops=1)
+  ->  Sort  (cost=2937.26..2955.43 rows=7266 width=16) (actual rows=7220 loops=1)
         Sort Key: student_public_id
         Sort Method: quicksort  Memory: 193kB
-        ->  Bitmap Heap Scan on exam_attempts a  (cost=177.98..2468.71 rows=7188 width=16) (actual rows=7220 loops=1)
+        ->  Bitmap Heap Scan on exam_attempts a  (cost=178.78..2471.26 rows=7266 width=16) (actual rows=7220 loops=1)
               Recheck Cond: ((started_at >= (now() - '30 days'::interval)) AND (started_at < now()) AND (NOT deleted))
               Heap Blocks: exact=204
-              ->  Bitmap Index Scan on idx_attempts_started  (cost=0.00..176.18 rows=7188 width=0) (actual rows=7220 loops=1)
+              ->  Bitmap Index Scan on idx_attempts_started  (cost=0.00..176.96 rows=7266 width=0) (actual rows=7220 loops=1)
                     Index Cond: ((started_at >= (now() - '30 days'::interval)) AND (started_at < now()))
-Planning Time: 0.101 ms
-Execution Time: 2.236 ms
+Planning Time: 0.089 ms
+Execution Time: 2.452 ms
 
 
 --- platform distinct active students (started_at, previous 30d) [planner default]
-Aggregate  (cost=2960.56..2960.57 rows=1 width=8) (actual rows=1 loops=1)
-  ->  Sort  (cost=2925.45..2943.01 rows=7022 width=16) (actual rows=7140 loops=1)
+Aggregate  (cost=2992.77..2992.78 rows=1 width=8) (actual rows=1 loops=1)
+  ->  Sort  (cost=2956.39..2974.58 rows=7275 width=16) (actual rows=7140 loops=1)
         Sort Key: student_public_id
         Sort Method: quicksort  Memory: 193kB
-        ->  Bitmap Heap Scan on exam_attempts a  (cost=172.28..2476.83 rows=7022 width=16) (actual rows=7140 loops=1)
+        ->  Bitmap Heap Scan on exam_attempts a  (cost=178.87..2489.75 rows=7275 width=16) (actual rows=7140 loops=1)
               Recheck Cond: ((started_at >= (now() - '60 days'::interval)) AND (started_at < (now() - '30 days'::interval)) AND (NOT deleted))
               Heap Blocks: exact=203
-              ->  Bitmap Index Scan on idx_attempts_started  (cost=0.00..170.52 rows=7022 width=0) (actual rows=7140 loops=1)
+              ->  Bitmap Index Scan on idx_attempts_started  (cost=0.00..177.05 rows=7275 width=0) (actual rows=7140 loops=1)
                     Index Cond: ((started_at >= (now() - '60 days'::interval)) AND (started_at < (now() - '30 days'::interval)))
-Planning Time: 0.106 ms
-Execution Time: 2.379 ms
+Planning Time: 0.126 ms
+Execution Time: 2.380 ms
 
 --- platform distinct active students (started_at, previous 30d) [enable_seqscan=off]
-Aggregate  (cost=2960.56..2960.57 rows=1 width=8) (actual rows=1 loops=1)
-  ->  Sort  (cost=2925.45..2943.01 rows=7022 width=16) (actual rows=7140 loops=1)
+Aggregate  (cost=2992.77..2992.78 rows=1 width=8) (actual rows=1 loops=1)
+  ->  Sort  (cost=2956.39..2974.58 rows=7275 width=16) (actual rows=7140 loops=1)
         Sort Key: student_public_id
         Sort Method: quicksort  Memory: 193kB
-        ->  Bitmap Heap Scan on exam_attempts a  (cost=172.28..2476.83 rows=7022 width=16) (actual rows=7140 loops=1)
+        ->  Bitmap Heap Scan on exam_attempts a  (cost=178.87..2489.75 rows=7275 width=16) (actual rows=7140 loops=1)
               Recheck Cond: ((started_at >= (now() - '60 days'::interval)) AND (started_at < (now() - '30 days'::interval)) AND (NOT deleted))
               Heap Blocks: exact=203
-              ->  Bitmap Index Scan on idx_attempts_started  (cost=0.00..170.52 rows=7022 width=0) (actual rows=7140 loops=1)
+              ->  Bitmap Index Scan on idx_attempts_started  (cost=0.00..177.05 rows=7275 width=0) (actual rows=7140 loops=1)
                     Index Cond: ((started_at >= (now() - '60 days'::interval)) AND (started_at < (now() - '30 days'::interval)))
-Planning Time: 0.080 ms
-Execution Time: 2.099 ms
+Planning Time: 0.100 ms
+Execution Time: 2.244 ms
 
 
 --- platform submitted in window [planner default]
-Aggregate  (cost=2486.65..2486.66 rows=1 width=8) (actual rows=1 loops=1)
-  ->  Bitmap Heap Scan on exam_attempts a  (cost=167.38..2469.91 rows=6698 width=8) (actual rows=6920 loops=1)
+Aggregate  (cost=2491.09..2491.10 rows=1 width=8) (actual rows=1 loops=1)
+  ->  Bitmap Heap Scan on exam_attempts a  (cost=168.59..2474.04 rows=6823 width=8) (actual rows=6920 loops=1)
         Recheck Cond: ((submitted_at >= (now() - '30 days'::interval)) AND (submitted_at < now()) AND (NOT deleted))
         Filter: ((status)::text = 'SUBMITTED'::text)
         Heap Blocks: exact=201
-        ->  Bitmap Index Scan on idx_attempts_submitted  (cost=0.00..165.71 rows=6941 width=0) (actual rows=6920 loops=1)
+        ->  Bitmap Index Scan on idx_attempts_submitted  (cost=0.00..166.88 rows=7058 width=0) (actual rows=6920 loops=1)
               Index Cond: ((submitted_at >= (now() - '30 days'::interval)) AND (submitted_at < now()))
-Planning Time: 0.133 ms
-Execution Time: 1.266 ms
+Planning Time: 0.130 ms
+Execution Time: 1.403 ms
 
 --- platform submitted in window [enable_seqscan=off]
-Aggregate  (cost=2486.65..2486.66 rows=1 width=8) (actual rows=1 loops=1)
-  ->  Bitmap Heap Scan on exam_attempts a  (cost=167.38..2469.91 rows=6698 width=8) (actual rows=6920 loops=1)
+Aggregate  (cost=2491.09..2491.10 rows=1 width=8) (actual rows=1 loops=1)
+  ->  Bitmap Heap Scan on exam_attempts a  (cost=168.59..2474.04 rows=6823 width=8) (actual rows=6920 loops=1)
         Recheck Cond: ((submitted_at >= (now() - '30 days'::interval)) AND (submitted_at < now()) AND (NOT deleted))
         Filter: ((status)::text = 'SUBMITTED'::text)
         Heap Blocks: exact=201
-        ->  Bitmap Index Scan on idx_attempts_submitted  (cost=0.00..165.71 rows=6941 width=0) (actual rows=6920 loops=1)
+        ->  Bitmap Index Scan on idx_attempts_submitted  (cost=0.00..166.88 rows=7058 width=0) (actual rows=6920 loops=1)
               Index Cond: ((submitted_at >= (now() - '30 days'::interval)) AND (submitted_at < now()))
-Planning Time: 0.112 ms
-Execution Time: 1.426 ms
+Planning Time: 0.079 ms
+Execution Time: 1.089 ms
 
 
---- students per tenant (users join user_roles, grouped by tenant) [planner default]
-GroupAggregate  (cost=17104.47..17842.25 rows=50 width=24) (actual rows=50 loops=1)
-  Group Key: u.tenant_id
-  ->  Sort  (cost=17104.47..17350.23 rows=98304 width=24) (actual rows=98200 loops=1)
-        Sort Key: u.tenant_id, u.id
-        Sort Method: external merge  Disk: 3272kB
-        ->  Hash Join  (cost=4859.90..6936.63 rows=98304 width=24) (actual rows=98200 loops=1)
-              Hash Cond: (r.user_id = u.id)
-              ->  Seq Scan on user_roles r  (cost=0.00..1814.00 rows=100083 width=8) (actual rows=100000 loops=1)
-                    Filter: ((role)::text = 'STUDENT'::text)
-                    Rows Removed by Filter: 1200
-              ->  Hash  (cost=3631.50..3631.50 rows=98272 width=24) (actual rows=98250 loops=1)
-                    Buckets: 131072  Batches: 1  Memory Usage: 6398kB
-                    ->  Seq Scan on users u  (cost=0.00..3631.50 rows=98272 width=24) (actual rows=98250 loops=1)
-                          Filter: ((NOT deleted) AND (tenant_id IS NOT NULL))
-                          Rows Removed by Filter: 1800
-Planning Time: 0.369 ms
-Execution Time: 95.230 ms
-
---- students per tenant (users join user_roles, grouped by tenant) [enable_seqscan=off]
-GroupAggregate  (cost=19732.73..20470.51 rows=50 width=24) (actual rows=50 loops=1)
-  Group Key: u.tenant_id
-  ->  Sort  (cost=19732.73..19978.49 rows=98304 width=24) (actual rows=98200 loops=1)
-        Sort Key: u.tenant_id, u.id
-        Sort Method: external merge  Disk: 3272kB
-        ->  Hash Join  (cost=6467.73..9564.89 rows=98304 width=24) (actual rows=98200 loops=1)
-              Hash Cond: (r.user_id = u.id)
-              ->  Index Scan using idx_user_roles_role on user_roles r  (cost=0.29..2834.72 rows=100083 width=8) (actual rows=100000 loops=1)
-                    Index Cond: ((role)::text = 'STUDENT'::text)
-              ->  Hash  (cost=5239.04..5239.04 rows=98272 width=24) (actual rows=98250 loops=1)
-                    Buckets: 131072  Batches: 1  Memory Usage: 6398kB
-                    ->  Index Scan using users_pkey on users u  (cost=0.29..5239.04 rows=98272 width=24) (actual rows=98250 loops=1)
-                          Filter: ((NOT deleted) AND (tenant_id IS NOT NULL))
-                          Rows Removed by Filter: 1800
-Planning Time: 0.288 ms
-Execution Time: 100.217 ms
-
-
---- students per tenant - count(*) variant (suggested rewrite, informational) [planner default]
-HashAggregate  (cost=7428.15..7428.65 rows=50 width=24) (actual rows=50 loops=1)
+--- students per tenant (users join user_roles, grouped by tenant, count(u.id) = production query) [planner default]
+HashAggregate  (cost=7426.45..7426.95 rows=50 width=24) (actual rows=50 loops=1)
   Group Key: u.tenant_id
   Batches: 1  Memory Usage: 24kB
-  ->  Hash Join  (cost=4859.90..6936.63 rows=98304 width=16) (actual rows=98200 loops=1)
+  ->  Hash Join  (cost=4859.57..6935.87 rows=98116 width=24) (actual rows=98200 loops=1)
         Hash Cond: (r.user_id = u.id)
-        ->  Seq Scan on user_roles r  (cost=0.00..1814.00 rows=100083 width=8) (actual rows=100000 loops=1)
+        ->  Seq Scan on user_roles r  (cost=0.00..1814.00 rows=99918 width=8) (actual rows=100000 loops=1)
               Filter: ((role)::text = 'STUDENT'::text)
               Rows Removed by Filter: 1200
-        ->  Hash  (cost=3631.50..3631.50 rows=98272 width=24) (actual rows=98250 loops=1)
+        ->  Hash  (cost=3631.50..3631.50 rows=98246 width=24) (actual rows=98250 loops=1)
               Buckets: 131072  Batches: 1  Memory Usage: 6398kB
-              ->  Seq Scan on users u  (cost=0.00..3631.50 rows=98272 width=24) (actual rows=98250 loops=1)
+              ->  Seq Scan on users u  (cost=0.00..3631.50 rows=98246 width=24) (actual rows=98250 loops=1)
                     Filter: ((NOT deleted) AND (tenant_id IS NOT NULL))
                     Rows Removed by Filter: 1800
-Planning Time: 0.305 ms
-Execution Time: 45.405 ms
+Planning Time: 0.413 ms
+Execution Time: 56.309 ms
 
---- students per tenant - count(*) variant (suggested rewrite, informational) [enable_seqscan=off]
-Finalize GroupAggregate  (cost=9586.16..9598.83 rows=50 width=24) (actual rows=50 loops=1)
+--- students per tenant (users join user_roles, grouped by tenant, count(u.id) = production query) [enable_seqscan=off]
+Finalize GroupAggregate  (cost=9584.72..9597.39 rows=50 width=24) (actual rows=50 loops=1)
   Group Key: u.tenant_id
-  ->  Gather Merge  (cost=9586.16..9597.83 rows=100 width=24) (actual rows=150 loops=1)
+  ->  Gather Merge  (cost=9584.72..9596.39 rows=100 width=24) (actual rows=150 loops=1)
         Workers Planned: 2
         Workers Launched: 2
-        ->  Sort  (cost=8586.14..8586.27 rows=50 width=24) (actual rows=50 loops=3)
+        ->  Sort  (cost=8584.69..8584.82 rows=50 width=24) (actual rows=50 loops=3)
               Sort Key: u.tenant_id
               Sort Method: quicksort  Memory: 26kB
               Worker 0:  Sort Method: quicksort  Memory: 26kB
               Worker 1:  Sort Method: quicksort  Memory: 26kB
-              ->  Partial HashAggregate  (cost=8584.23..8584.73 rows=50 width=24) (actual rows=50 loops=3)
+              ->  Partial HashAggregate  (cost=8582.78..8583.28 rows=50 width=24) (actual rows=50 loops=3)
                     Group Key: u.tenant_id
                     Batches: 1  Memory Usage: 24kB
                     Worker 0:  Batches: 1  Memory Usage: 24kB
                     Worker 1:  Batches: 1  Memory Usage: 24kB
-                    ->  Parallel Hash Join  (cost=5549.95..8379.43 rows=40960 width=16) (actual rows=32733 loops=3)
+                    ->  Parallel Hash Join  (cost=5549.76..8378.37 rows=40882 width=24) (actual rows=32733 loops=3)
                           Hash Cond: (r.user_id = u.id)
-                          ->  Parallel Index Only Scan using idx_user_roles_user_role on user_roles r  (cost=0.29..2720.30 rows=41701 width=8) (actual rows=33333 loops=3)
+                          ->  Parallel Index Only Scan using idx_user_roles_user_role on user_roles r  (cost=0.29..2719.62 rows=41632 width=8) (actual rows=33333 loops=3)
                                 Index Cond: (role = 'STUDENT'::text)
                                 Heap Fetches: 0
-                          ->  Parallel Hash  (cost=4827.07..4827.07 rows=57807 width=24) (actual rows=32750 loops=3)
-                                Buckets: 131072  Batches: 1  Memory Usage: 6432kB
-                                ->  Parallel Index Scan using users_pkey on users u  (cost=0.29..4827.07 rows=57807 width=24) (actual rows=32750 loops=3)
+                          ->  Parallel Hash  (cost=4827.07..4827.07 rows=57792 width=24) (actual rows=32750 loops=3)
+                                Buckets: 131072  Batches: 1  Memory Usage: 6464kB
+                                ->  Parallel Index Scan using users_pkey on users u  (cost=0.29..4827.07 rows=57792 width=24) (actual rows=32750 loops=3)
                                       Filter: ((NOT deleted) AND (tenant_id IS NOT NULL))
                                       Rows Removed by Filter: 600
-Planning Time: 0.279 ms
-Execution Time: 36.208 ms
+Planning Time: 0.296 ms
+Execution Time: 41.762 ms
+
+
+--- students per tenant - count(distinct u.id) (PREVIOUS query, comparison only) [planner default]
+GroupAggregate  (cost=17083.27..17819.64 rows=50 width=24) (actual rows=50 loops=1)
+  Group Key: u.tenant_id
+  ->  Sort  (cost=17083.27..17328.56 rows=98116 width=24) (actual rows=98200 loops=1)
+        Sort Key: u.tenant_id, u.id
+        Sort Method: external merge  Disk: 3272kB
+        ->  Hash Join  (cost=4859.57..6935.87 rows=98116 width=24) (actual rows=98200 loops=1)
+              Hash Cond: (r.user_id = u.id)
+              ->  Seq Scan on user_roles r  (cost=0.00..1814.00 rows=99918 width=8) (actual rows=100000 loops=1)
+                    Filter: ((role)::text = 'STUDENT'::text)
+                    Rows Removed by Filter: 1200
+              ->  Hash  (cost=3631.50..3631.50 rows=98246 width=24) (actual rows=98250 loops=1)
+                    Buckets: 131072  Batches: 1  Memory Usage: 6398kB
+                    ->  Seq Scan on users u  (cost=0.00..3631.50 rows=98246 width=24) (actual rows=98250 loops=1)
+                          Filter: ((NOT deleted) AND (tenant_id IS NOT NULL))
+                          Rows Removed by Filter: 1800
+Planning Time: 0.293 ms
+Execution Time: 107.939 ms
+
+--- students per tenant - count(distinct u.id) (PREVIOUS query, comparison only) [enable_seqscan=off]
+GroupAggregate  (cost=19734.00..20470.37 rows=50 width=24) (actual rows=50 loops=1)
+  Group Key: u.tenant_id
+  ->  Sort  (cost=19734.00..19979.29 rows=98116 width=24) (actual rows=98200 loops=1)
+        Sort Key: u.tenant_id, u.id
+        Sort Method: external merge  Disk: 3272kB
+        ->  Hash Join  (cost=6467.41..9586.60 rows=98116 width=24) (actual rows=98200 loops=1)
+              Hash Cond: (r.user_id = u.id)
+              ->  Index Scan using idx_user_roles_role on user_roles r  (cost=0.29..2857.19 rows=99918 width=8) (actual rows=100000 loops=1)
+                    Index Cond: ((role)::text = 'STUDENT'::text)
+              ->  Hash  (cost=5239.04..5239.04 rows=98246 width=24) (actual rows=98250 loops=1)
+                    Buckets: 131072  Batches: 1  Memory Usage: 6398kB
+                    ->  Index Scan using users_pkey on users u  (cost=0.29..5239.04 rows=98246 width=24) (actual rows=98250 loops=1)
+                          Filter: ((NOT deleted) AND (tenant_id IS NOT NULL))
+                          Rows Removed by Filter: 1800
+Planning Time: 0.301 ms
+Execution Time: 183.888 ms
 
 
 --- subscriptions usable now (count) [planner default]
-Aggregate  (cost=786.12..786.13 rows=1 width=8) (actual rows=1 loops=1)
-  ->  Bitmap Heap Scan on subscriptions s  (cost=55.72..781.38 rows=1896 width=8) (actual rows=2580 loops=1)
+Aggregate  (cost=786.16..786.17 rows=1 width=8) (actual rows=1 loops=1)
+  ->  Bitmap Heap Scan on subscriptions s  (cost=55.73..781.42 rows=1897 width=8) (actual rows=2580 loops=1)
         Recheck Cond: (((status)::text = 'ACTIVE'::text) AND (expires_at > now()) AND (NOT deleted))
         Filter: (starts_at <= now())
         Heap Blocks: exact=667
-        ->  Bitmap Index Scan on idx_subscriptions_status_expires  (cost=0.00..55.25 rows=1896 width=0) (actual rows=2580 loops=1)
+        ->  Bitmap Index Scan on idx_subscriptions_status_expires  (cost=0.00..55.26 rows=1897 width=0) (actual rows=2580 loops=1)
               Index Cond: (((status)::text = 'ACTIVE'::text) AND (expires_at > now()))
-Planning Time: 0.235 ms
-Execution Time: 1.354 ms
+Planning Time: 0.333 ms
+Execution Time: 1.499 ms
 
 --- subscriptions usable now (count) [enable_seqscan=off]
-Aggregate  (cost=786.12..786.13 rows=1 width=8) (actual rows=1 loops=1)
-  ->  Bitmap Heap Scan on subscriptions s  (cost=55.72..781.38 rows=1896 width=8) (actual rows=2580 loops=1)
+Aggregate  (cost=786.16..786.17 rows=1 width=8) (actual rows=1 loops=1)
+  ->  Bitmap Heap Scan on subscriptions s  (cost=55.73..781.42 rows=1897 width=8) (actual rows=2580 loops=1)
         Recheck Cond: (((status)::text = 'ACTIVE'::text) AND (expires_at > now()) AND (NOT deleted))
         Filter: (starts_at <= now())
         Heap Blocks: exact=667
-        ->  Bitmap Index Scan on idx_subscriptions_status_expires  (cost=0.00..55.25 rows=1896 width=0) (actual rows=2580 loops=1)
+        ->  Bitmap Index Scan on idx_subscriptions_status_expires  (cost=0.00..55.26 rows=1897 width=0) (actual rows=2580 loops=1)
               Index Cond: (((status)::text = 'ACTIVE'::text) AND (expires_at > now()))
-Planning Time: 0.059 ms
-Execution Time: 0.743 ms
+Planning Time: 0.104 ms
+Execution Time: 1.201 ms
 
 
 --- subscriptions usable and expiring within 30 days (count) [planner default]
-Aggregate  (cost=312.52..312.53 rows=1 width=8) (actual rows=1 loops=1)
-  ->  Index Scan using idx_subscriptions_status_expires on subscriptions s  (cost=0.29..312.22 rows=120 width=8) (actual rows=390 loops=1)
+Aggregate  (cost=312.58..312.59 rows=1 width=8) (actual rows=1 loops=1)
+  ->  Index Scan using idx_subscriptions_status_expires on subscriptions s  (cost=0.29..312.28 rows=120 width=8) (actual rows=390 loops=1)
         Index Cond: (((status)::text = 'ACTIVE'::text) AND (expires_at > now()) AND (expires_at <= (now() + '30 days'::interval)))
         Filter: (starts_at <= now())
-Planning Time: 0.062 ms
-Execution Time: 0.152 ms
+Planning Time: 0.122 ms
+Execution Time: 0.300 ms
 
 --- subscriptions usable and expiring within 30 days (count) [enable_seqscan=off]
-Aggregate  (cost=312.52..312.53 rows=1 width=8) (actual rows=1 loops=1)
-  ->  Index Scan using idx_subscriptions_status_expires on subscriptions s  (cost=0.29..312.22 rows=120 width=8) (actual rows=390 loops=1)
+Aggregate  (cost=312.58..312.59 rows=1 width=8) (actual rows=1 loops=1)
+  ->  Index Scan using idx_subscriptions_status_expires on subscriptions s  (cost=0.29..312.28 rows=120 width=8) (actual rows=390 loops=1)
         Index Cond: (((status)::text = 'ACTIVE'::text) AND (expires_at > now()) AND (expires_at <= (now() + '30 days'::interval)))
         Filter: (starts_at <= now())
-Planning Time: 0.063 ms
-Execution Time: 0.158 ms
+Planning Time: 0.114 ms
+Execution Time: 0.358 ms
 
 
 --- subscriptions activated in window by source (created_at range) [planner default]
@@ -320,8 +320,8 @@ HashAggregate  (cost=1369.62..1369.64 rows=2 width=18) (actual rows=2 loops=1)
   ->  Seq Scan on subscriptions s  (cost=0.00..1358.67 rows=2190 width=18) (actual rows=2190 loops=1)
         Filter: ((NOT deleted) AND (created_at < now()) AND (created_at >= (now() - '30 days'::interval)))
         Rows Removed by Filter: 27840
-Planning Time: 0.110 ms
-Execution Time: 4.471 ms
+Planning Time: 0.172 ms
+Execution Time: 5.036 ms
 
 --- subscriptions activated in window by source (created_at range) [enable_seqscan=off]
 HashAggregate  (cost=2088.61..2088.63 rows=2 width=18) (actual rows=2 loops=1)
@@ -333,8 +333,8 @@ HashAggregate  (cost=2088.61..2088.63 rows=2 width=18) (actual rows=2 loops=1)
         Rows Removed by Filter: 27840
         Heap Blocks: exact=683
         ->  Bitmap Index Scan on idx_subscriptions_status_expires  (cost=0.00..718.44 rows=30030 width=0) (actual rows=30030 loops=1)
-Planning Time: 0.066 ms
-Execution Time: 6.434 ms
+Planning Time: 0.112 ms
+Execution Time: 6.582 ms
 
 
 --- support tickets grouped by status (platform-wide) [planner default]
@@ -343,15 +343,15 @@ HashAggregate  (cost=977.45..977.49 rows=4 width=15) (actual rows=4 loops=1)
   Batches: 1  Memory Usage: 24kB
   ->  Seq Scan on support_ticket t  (cost=0.00..827.30 rows=30030 width=15) (actual rows=30030 loops=1)
         Filter: (NOT deleted)
-Planning Time: 0.122 ms
-Execution Time: 5.397 ms
+Planning Time: 0.158 ms
+Execution Time: 5.647 ms
 
 --- support tickets grouped by status (platform-wide) [enable_seqscan=off]
-GroupAggregate  (cost=0.29..2921.21 rows=4 width=15) (actual rows=4 loops=1)
+GroupAggregate  (cost=0.29..2920.96 rows=4 width=15) (actual rows=4 loops=1)
   Group Key: status
-  ->  Index Scan using idx_support_ticket_status_created on support_ticket t  (cost=0.29..2771.02 rows=30030 width=15) (actual rows=30030 loops=1)
-Planning Time: 0.046 ms
-Execution Time: 10.679 ms
+  ->  Index Scan using idx_support_ticket_status_created on support_ticket t  (cost=0.29..2770.77 rows=30030 width=15) (actual rows=30030 loops=1)
+Planning Time: 0.075 ms
+Execution Time: 11.108 ms
 
 
 --- support tickets opened in window (created_at range) [planner default]
@@ -359,8 +359,8 @@ Aggregate  (cost=1208.15..1208.16 rows=1 width=8) (actual rows=1 loops=1)
   ->  Seq Scan on support_ticket t  (cost=0.00..1202.67 rows=2190 width=8) (actual rows=2190 loops=1)
         Filter: ((NOT deleted) AND (created_at < now()) AND (created_at >= (now() - '30 days'::interval)))
         Rows Removed by Filter: 27840
-Planning Time: 0.107 ms
-Execution Time: 4.009 ms
+Planning Time: 0.156 ms
+Execution Time: 4.766 ms
 
 --- support tickets opened in window (created_at range) [enable_seqscan=off]
 Aggregate  (cost=1470.89..1470.90 rows=1 width=8) (actual rows=1 loops=1)
@@ -369,31 +369,31 @@ Aggregate  (cost=1470.89..1470.90 rows=1 width=8) (actual rows=1 loops=1)
         Heap Blocks: exact=69
         ->  Bitmap Index Scan on idx_support_ticket_status_created  (cost=0.00..888.60 rows=2190 width=0) (actual rows=2190 loops=1)
               Index Cond: ((created_at >= (now() - '30 days'::interval)) AND (created_at < now()))
-Planning Time: 0.061 ms
-Execution Time: 1.132 ms
+Planning Time: 0.088 ms
+Execution Time: 1.195 ms
 
 
 --- support oldest 5 OPEN tickets [planner default]
-Limit  (cost=1.39..7.08 rows=5 width=268) (actual rows=5 loops=1)
-  ->  Incremental Sort  (cost=1.39..1741.14 rows=1530 width=268) (actual rows=5 loops=1)
+Limit  (cost=1.39..7.07 rows=5 width=268) (actual rows=5 loops=1)
+  ->  Incremental Sort  (cost=1.39..1740.87 rows=1531 width=268) (actual rows=5 loops=1)
         Sort Key: created_at, id
         Presorted Key: created_at
         Full-sort Groups: 1  Sort Method: quicksort  Average Memory: 25kB  Peak Memory: 25kB
-        ->  Index Scan using idx_support_ticket_status_created on support_ticket t  (cost=0.29..1672.29 rows=1530 width=268) (actual rows=6 loops=1)
+        ->  Index Scan using idx_support_ticket_status_created on support_ticket t  (cost=0.29..1671.98 rows=1531 width=268) (actual rows=6 loops=1)
               Index Cond: ((status)::text = 'OPEN'::text)
-Planning Time: 0.202 ms
-Execution Time: 0.053 ms
+Planning Time: 0.192 ms
+Execution Time: 0.050 ms
 
 --- support oldest 5 OPEN tickets [enable_seqscan=off]
-Limit  (cost=1.39..7.08 rows=5 width=268) (actual rows=5 loops=1)
-  ->  Incremental Sort  (cost=1.39..1741.14 rows=1530 width=268) (actual rows=5 loops=1)
+Limit  (cost=1.39..7.07 rows=5 width=268) (actual rows=5 loops=1)
+  ->  Incremental Sort  (cost=1.39..1740.87 rows=1531 width=268) (actual rows=5 loops=1)
         Sort Key: created_at, id
         Presorted Key: created_at
         Full-sort Groups: 1  Sort Method: quicksort  Average Memory: 25kB  Peak Memory: 25kB
-        ->  Index Scan using idx_support_ticket_status_created on support_ticket t  (cost=0.29..1672.29 rows=1530 width=268) (actual rows=6 loops=1)
+        ->  Index Scan using idx_support_ticket_status_created on support_ticket t  (cost=0.29..1671.98 rows=1531 width=268) (actual rows=6 loops=1)
               Index Cond: ((status)::text = 'OPEN'::text)
-Planning Time: 0.057 ms
-Execution Time: 0.065 ms
+Planning Time: 0.055 ms
+Execution Time: 0.059 ms
 
 
 --- applications pending (count) [planner default]
@@ -403,8 +403,8 @@ Aggregate  (cost=215.74..215.75 rows=1 width=8) (actual rows=1 loops=1)
         Filter: (NOT deleted)
         Heap Blocks: exact=197
         ->  Bitmap Index Scan on uq_application_code_active  (cost=0.00..9.97 rows=364 width=0) (actual rows=364 loops=1)
-Planning Time: 0.174 ms
-Execution Time: 0.329 ms
+Planning Time: 0.166 ms
+Execution Time: 0.334 ms
 
 --- applications pending (count) [enable_seqscan=off]
 Aggregate  (cost=215.74..215.75 rows=1 width=8) (actual rows=1 loops=1)
@@ -413,8 +413,8 @@ Aggregate  (cost=215.74..215.75 rows=1 width=8) (actual rows=1 loops=1)
         Filter: (NOT deleted)
         Heap Blocks: exact=197
         ->  Bitmap Index Scan on uq_application_code_active  (cost=0.00..9.97 rows=364 width=0) (actual rows=364 loops=1)
-Planning Time: 0.042 ms
-Execution Time: 0.198 ms
+Planning Time: 0.051 ms
+Execution Time: 0.247 ms
 
 
 --- applications oldest 5 pending [planner default]
@@ -425,8 +425,8 @@ Limit  (cost=1.89..10.05 rows=5 width=1661) (actual rows=5 loops=1)
         Full-sort Groups: 1  Sort Method: quicksort  Average Memory: 25kB  Peak Memory: 25kB
         ->  Index Scan using idx_tenant_applications_status_created on tenant_applications a  (cost=0.29..579.67 rows=364 width=1661) (actual rows=6 loops=1)
               Index Cond: ((status)::text = 'PENDING'::text)
-Planning Time: 0.250 ms
-Execution Time: 0.133 ms
+Planning Time: 0.300 ms
+Execution Time: 0.062 ms
 
 --- applications oldest 5 pending [enable_seqscan=off]
 Limit  (cost=1.89..10.05 rows=5 width=1661) (actual rows=5 loops=1)
@@ -436,8 +436,8 @@ Limit  (cost=1.89..10.05 rows=5 width=1661) (actual rows=5 loops=1)
         Full-sort Groups: 1  Sort Method: quicksort  Average Memory: 25kB  Peak Memory: 25kB
         ->  Index Scan using idx_tenant_applications_status_created on tenant_applications a  (cost=0.29..579.67 rows=364 width=1661) (actual rows=6 loops=1)
               Index Cond: ((status)::text = 'PENDING'::text)
-Planning Time: 0.051 ms
-Execution Time: 0.054 ms
+Planning Time: 0.062 ms
+Execution Time: 0.060 ms
 
 
 --- applications received in window (created_at range) [planner default]
@@ -445,8 +445,8 @@ Aggregate  (cost=468.82..468.83 rows=1 width=8) (actual rows=1 loops=1)
   ->  Seq Scan on tenant_applications a  (cost=0.00..467.02 rows=721 width=8) (actual rows=721 loops=1)
         Filter: ((NOT deleted) AND (created_at < now()) AND (created_at >= (now() - '30 days'::interval)))
         Rows Removed by Filter: 11280
-Planning Time: 0.045 ms
-Execution Time: 1.672 ms
+Planning Time: 0.048 ms
+Execution Time: 1.689 ms
 
 --- applications received in window (created_at range) [enable_seqscan=off]
 Aggregate  (cost=731.51..731.52 rows=1 width=8) (actual rows=1 loops=1)
@@ -455,38 +455,38 @@ Aggregate  (cost=731.51..731.52 rows=1 width=8) (actual rows=1 loops=1)
         Heap Blocks: exact=14
         ->  Bitmap Index Scan on idx_tenant_applications_status_created  (cost=0.00..516.30 rows=721 width=0) (actual rows=721 loops=1)
               Index Cond: ((created_at >= (now() - '30 days'::interval)) AND (created_at < now()))
-Planning Time: 0.049 ms
-Execution Time: 0.464 ms
+Planning Time: 0.069 ms
+Execution Time: 0.439 ms
 
 
 --- tenants created in window (count) [planner default]
 Aggregate  (cost=14.27..14.28 rows=1 width=8) (actual rows=1 loops=1)
   ->  Index Scan using idx_tenants_created on tenants t  (cost=0.29..13.91 rows=143 width=8) (actual rows=142 loops=1)
         Index Cond: ((created_at >= (now() - '30 days'::interval)) AND (created_at < now()))
-Planning Time: 0.138 ms
-Execution Time: 0.064 ms
+Planning Time: 0.121 ms
+Execution Time: 0.058 ms
 
 --- tenants created in window (count) [enable_seqscan=off]
 Aggregate  (cost=14.27..14.28 rows=1 width=8) (actual rows=1 loops=1)
   ->  Index Scan using idx_tenants_created on tenants t  (cost=0.29..13.91 rows=143 width=8) (actual rows=142 loops=1)
         Index Cond: ((created_at >= (now() - '30 days'::interval)) AND (created_at < now()))
-Planning Time: 0.047 ms
-Execution Time: 0.053 ms
+Planning Time: 0.053 ms
+Execution Time: 0.059 ms
 
 
 --- tenants growth series (one month bucket) [planner default]
 Aggregate  (cost=14.34..14.35 rows=1 width=8) (actual rows=1 loops=1)
   ->  Index Scan using idx_tenants_created on tenants t  (cost=0.29..13.98 rows=146 width=8) (actual rows=145 loops=1)
         Index Cond: ((created_at >= date_trunc('month'::text, (now() - '3 mons'::interval))) AND (created_at < date_trunc('month'::text, (now() - '2 mons'::interval))))
-Planning Time: 0.053 ms
-Execution Time: 0.098 ms
+Planning Time: 0.055 ms
+Execution Time: 0.061 ms
 
 --- tenants growth series (one month bucket) [enable_seqscan=off]
 Aggregate  (cost=14.34..14.35 rows=1 width=8) (actual rows=1 loops=1)
   ->  Index Scan using idx_tenants_created on tenants t  (cost=0.29..13.98 rows=146 width=8) (actual rows=145 loops=1)
         Index Cond: ((created_at >= date_trunc('month'::text, (now() - '3 mons'::interval))) AND (created_at < date_trunc('month'::text, (now() - '2 mons'::interval))))
-Planning Time: 0.054 ms
-Execution Time: 0.061 ms
+Planning Time: 0.052 ms
+Execution Time: 0.057 ms
 
 
 --- recent tenants (newest 5) [planner default]
@@ -496,8 +496,8 @@ Limit  (cost=0.34..0.79 rows=5 width=1275) (actual rows=5 loops=1)
         Presorted Key: created_at
         Full-sort Groups: 1  Sort Method: quicksort  Average Memory: 25kB  Peak Memory: 25kB
         ->  Index Scan Backward using idx_tenants_created on tenants t  (cost=0.28..178.67 rows=3921 width=1275) (actual rows=6 loops=1)
-Planning Time: 0.356 ms
-Execution Time: 0.050 ms
+Planning Time: 0.344 ms
+Execution Time: 0.048 ms
 
 --- recent tenants (newest 5) [enable_seqscan=off]
 Limit  (cost=0.34..0.79 rows=5 width=1275) (actual rows=5 loops=1)
@@ -506,8 +506,8 @@ Limit  (cost=0.34..0.79 rows=5 width=1275) (actual rows=5 loops=1)
         Presorted Key: created_at
         Full-sort Groups: 1  Sort Method: quicksort  Average Memory: 25kB  Peak Memory: 25kB
         ->  Index Scan Backward using idx_tenants_created on tenants t  (cost=0.28..178.67 rows=3921 width=1275) (actual rows=6 loops=1)
-Planning Time: 0.050 ms
-Execution Time: 0.051 ms
+Planning Time: 0.048 ms
+Execution Time: 0.082 ms
 
 
 --- tenants grouped by status [planner default]
@@ -517,16 +517,16 @@ HashAggregate  (cost=124.61..124.63 rows=2 width=15) (actual rows=2 loops=1)
   ->  Seq Scan on tenants t  (cost=0.00..105.01 rows=3921 width=15) (actual rows=3921 loops=1)
         Filter: (NOT deleted)
         Rows Removed by Filter: 80
-Planning Time: 0.040 ms
-Execution Time: 0.719 ms
+Planning Time: 0.038 ms
+Execution Time: 0.716 ms
 
 --- tenants grouped by status [enable_seqscan=off]
 HashAggregate  (cost=198.28..198.30 rows=2 width=15) (actual rows=2 loops=1)
   Group Key: status
   Batches: 1  Memory Usage: 24kB
   ->  Index Scan using idx_tenants_created on tenants t  (cost=0.28..178.67 rows=3921 width=15) (actual rows=3921 loops=1)
-Planning Time: 0.039 ms
-Execution Time: 0.971 ms
+Planning Time: 0.044 ms
+Execution Time: 0.948 ms
 
 
 --- license codes grouped by stored status [planner default]
@@ -535,16 +535,16 @@ HashAggregate  (cost=1010.02..1010.06 rows=4 width=15) (actual rows=4 loops=1)
   Batches: 1  Memory Usage: 24kB
   ->  Seq Scan on license_codes c  (cost=0.00..860.01 rows=30001 width=15) (actual rows=30001 loops=1)
         Filter: (NOT deleted)
-Planning Time: 0.187 ms
-Execution Time: 5.474 ms
+Planning Time: 0.082 ms
+Execution Time: 5.846 ms
 
 --- license codes grouped by stored status [enable_seqscan=off]
-GroupAggregate  (cost=0.29..2877.01 rows=4 width=15) (actual rows=4 loops=1)
+GroupAggregate  (cost=0.29..2877.03 rows=4 width=15) (actual rows=4 loops=1)
   Group Key: status
-  ->  Index Scan using idx_license_codes_status_expiry on license_codes c  (cost=0.29..2726.97 rows=30001 width=15) (actual rows=30001 loops=1)
+  ->  Index Scan using idx_license_codes_status_expiry on license_codes c  (cost=0.29..2726.99 rows=30001 width=15) (actual rows=30001 loops=1)
         Filter: (NOT deleted)
-Planning Time: 0.051 ms
-Execution Time: 10.530 ms
+Planning Time: 0.078 ms
+Execution Time: 10.007 ms
 
 
 --- license codes ISSUED past expiry (derived expired) [planner default]
@@ -555,8 +555,8 @@ Aggregate  (cost=725.03..725.04 rows=1 width=8) (actual rows=1 loops=1)
         Heap Blocks: exact=560
         ->  Bitmap Index Scan on idx_license_codes_status_expiry  (cost=0.00..82.95 rows=4053 width=0) (actual rows=6000 loops=1)
               Index Cond: (((status)::text = 'ISSUED'::text) AND (code_expires_at IS NOT NULL) AND (code_expires_at <= now()))
-Planning Time: 0.134 ms
-Execution Time: 1.377 ms
+Planning Time: 0.150 ms
+Execution Time: 1.665 ms
 
 --- license codes ISSUED past expiry (derived expired) [enable_seqscan=off]
 Aggregate  (cost=725.03..725.04 rows=1 width=8) (actual rows=1 loops=1)
@@ -566,8 +566,8 @@ Aggregate  (cost=725.03..725.04 rows=1 width=8) (actual rows=1 loops=1)
         Heap Blocks: exact=560
         ->  Bitmap Index Scan on idx_license_codes_status_expiry  (cost=0.00..82.95 rows=4053 width=0) (actual rows=6000 loops=1)
               Index Cond: (((status)::text = 'ISSUED'::text) AND (code_expires_at IS NOT NULL) AND (code_expires_at <= now()))
-Planning Time: 0.058 ms
-Execution Time: 1.393 ms
+Planning Time: 0.077 ms
+Execution Time: 1.359 ms
 
 
 --- license codes ISSUED expiring within 7 days [planner default]
@@ -578,8 +578,8 @@ Aggregate  (cost=601.69..601.70 rows=1 width=8) (actual rows=1 loops=1)
         Heap Blocks: exact=356
         ->  Bitmap Index Scan on idx_license_codes_status_expiry  (cost=0.00..14.79 rows=520 width=0) (actual rows=668 loops=1)
               Index Cond: (((status)::text = 'ISSUED'::text) AND (code_expires_at > now()) AND (code_expires_at <= (now() + '7 days'::interval)))
-Planning Time: 0.061 ms
-Execution Time: 0.412 ms
+Planning Time: 0.068 ms
+Execution Time: 0.393 ms
 
 --- license codes ISSUED expiring within 7 days [enable_seqscan=off]
 Aggregate  (cost=601.69..601.70 rows=1 width=8) (actual rows=1 loops=1)
@@ -590,7 +590,7 @@ Aggregate  (cost=601.69..601.70 rows=1 width=8) (actual rows=1 loops=1)
         ->  Bitmap Index Scan on idx_license_codes_status_expiry  (cost=0.00..14.79 rows=520 width=0) (actual rows=668 loops=1)
               Index Cond: (((status)::text = 'ISSUED'::text) AND (code_expires_at > now()) AND (code_expires_at <= (now() + '7 days'::interval)))
 Planning Time: 0.052 ms
-Execution Time: 0.312 ms
+Execution Time: 0.346 ms
 
 
 --- license codes redeemed in window [planner default]
@@ -598,19 +598,19 @@ Aggregate  (cost=1236.62..1236.63 rows=1 width=8) (actual rows=1 loops=1)
   ->  Seq Scan on license_codes c  (cost=0.00..1235.02 rows=638 width=8) (actual rows=675 loops=1)
         Filter: ((NOT deleted) AND (redeemed_at < now()) AND (redeemed_at >= (now() - '30 days'::interval)))
         Rows Removed by Filter: 29326
-Planning Time: 0.084 ms
-Execution Time: 3.411 ms
+Planning Time: 0.085 ms
+Execution Time: 3.462 ms
 
 --- license codes redeemed in window [enable_seqscan=off]
 Aggregate  (cost=10000001236.62..10000001236.63 rows=1 width=8) (actual rows=1 loops=1)
   ->  Seq Scan on license_codes c  (cost=10000000000.00..10000001235.02 rows=638 width=8) (actual rows=675 loops=1)
         Filter: ((NOT deleted) AND (redeemed_at < now()) AND (redeemed_at >= (now() - '30 days'::interval)))
         Rows Removed by Filter: 29326
-Planning Time: 0.075 ms
+Planning Time: 0.063 ms
 JIT:
   Functions: 5
   Options: Inlining true, Optimization true, Expressions true, Deforming true
-Execution Time: 104.177 ms
+Execution Time: 835.900 ms
 
 
 --- plans grouped by status and by type [planner default]
@@ -619,8 +619,8 @@ HashAggregate  (cost=1.70..1.74 rows=4 width=29) (actual rows=6 loops=1)
   Batches: 1  Memory Usage: 24kB
   ->  Seq Scan on plans p  (cost=0.00..1.40 rows=40 width=29) (actual rows=40 loops=1)
         Filter: (NOT deleted)
-Planning Time: 0.229 ms
-Execution Time: 0.044 ms
+Planning Time: 0.200 ms
+Execution Time: 0.041 ms
 
 --- plans grouped by status and by type [enable_seqscan=off]
 HashAggregate  (cost=13.04..13.08 rows=4 width=29) (actual rows=6 loops=1)
@@ -628,17 +628,17 @@ HashAggregate  (cost=13.04..13.08 rows=4 width=29) (actual rows=6 loops=1)
   Batches: 1  Memory Usage: 24kB
   ->  Index Scan using idx_plans_status on plans p  (cost=0.14..12.74 rows=40 width=29) (actual rows=40 loops=1)
         Filter: (NOT deleted)
-Planning Time: 0.075 ms
-Execution Time: 0.063 ms
+Planning Time: 0.088 ms
+Execution Time: 0.099 ms
 
 
 === VERDICTS ===
 platform distinct active students (started_at, current 30d): default planner -> Bitmap Heap Scan on exam_attempts a  | Bitmap Index Scan on idx_attempts_started  | Index Cond:; forced -> Bitmap Heap Scan on exam_attempts a  | Bitmap Index Scan on idx_attempts_started  | Index Cond:
 platform distinct active students (started_at, previous 30d): default planner -> Bitmap Heap Scan on exam_attempts a  | Bitmap Index Scan on idx_attempts_started  | Index Cond:; forced -> Bitmap Heap Scan on exam_attempts a  | Bitmap Index Scan on idx_attempts_started  | Index Cond:
 platform submitted in window: default planner -> Bitmap Heap Scan on exam_attempts a  | Bitmap Index Scan on idx_attempts_submitted  | Index Cond:; forced -> Bitmap Heap Scan on exam_attempts a  | Bitmap Index Scan on idx_attempts_submitted  | Index Cond:
-students per tenant (users join user_roles, grouped by tenant): default planner -> Seq Scan on user_roles r  | Seq Scan on users u ; forced -> Index Scan using idx_user_roles_role on user_roles r  | Index Cond: | Index Scan using users_pkey on users u 
+students per tenant (users join user_roles, grouped by tenant, count(u.id) = production query): default planner -> Seq Scan on user_roles r  | Seq Scan on users u ; forced -> Index Cond:
   note: default planner sequentially scans a table for this query (no covering index by design)
-students per tenant - count(*) variant (suggested rewrite, informational): default planner -> Seq Scan on user_roles r  | Seq Scan on users u ; forced -> Index Cond:
+students per tenant - count(distinct u.id) (PREVIOUS query, comparison only): default planner -> Seq Scan on user_roles r  | Seq Scan on users u ; forced -> Index Scan using idx_user_roles_role on user_roles r  | Index Cond: | Index Scan using users_pkey on users u 
   note: default planner sequentially scans a table for this query (no covering index by design)
 subscriptions usable now (count): default planner -> Bitmap Heap Scan on subscriptions s  | Bitmap Index Scan on idx_subscriptions_status_expires  | Index Cond:; forced -> Bitmap Heap Scan on subscriptions s  | Bitmap Index Scan on idx_subscriptions_status_expires  | Index Cond:
 subscriptions usable and expiring within 30 days (count): default planner -> Index Scan using idx_subscriptions_status_expires on subscriptions s  | Index Cond:; forced -> Index Scan using idx_subscriptions_status_expires on subscriptions s  | Index Cond:
@@ -665,4 +665,3 @@ license codes redeemed in window: default planner -> Seq Scan on license_codes c
   note: default planner sequentially scans a table for this query (no covering index by design)
 plans grouped by status and by type: default planner -> Seq Scan on plans p ; forced -> Index Scan using idx_plans_status on plans p 
   note: default planner sequentially scans a table for this query (no covering index by design)
-

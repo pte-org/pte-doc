@@ -1,17 +1,17 @@
-﻿{
+{
   "phase": "phase-03-backend-admin-core-role-gating",
   "mode": "unit",
   "verdict": "PASSED",
-  "verdict_note": "All 308 new Phase 3 tests pass (305 H2/Mockito/MockMvc + 3 new Postgres-gated that were RUN and passed on a scratch PostgreSQL 17 that has been removed). The only red test in the full suite is the pre-existing ModuleStructureTest.modules_have_no_boundary_violations; its normalized violation set is identical to the Phase 1 baseline (18 lines, none involving overview/billing/support). No production bug was found in Phase 3 code; two performance observations (not failures) are listed under observations/production_concerns.",
+  "verdict_note": "All 309 new Phase 3 tests pass (306 H2/Mockito/MockMvc + 3 new Postgres-gated that were RUN and passed on a scratch PostgreSQL 17 that has been removed). The only red test in the full suite is the pre-existing ModuleStructureTest.modules_have_no_boundary_violations; its normalized violation set is identical to the Phase 1 baseline (18 lines, none involving overview/billing/support). No production bug was found in Phase 3 code; two performance observations (not failures) are listed under observations/production_concerns.",
   "reviewed_at": "2026-10-13T11:20:00Z",
   "summary": {
-    "passed": 1864,
+    "passed": 1865,
     "failed": 1,
     "skipped": 53
   },
-  "summary_scope": "Full suite `./mvnw -o -pl app test` after all Phase 3 tests were added: 1918 tests (Phase 2 total 1610 + 308 new). The 1 error is the pre-existing architecture test. Skipped = 50 pre-existing (46 + 4 Phase 2 Postgres-gated) + 3 new Postgres-gated tests (they run only with -Dlifecycle.test.db.url and were run and passed separately, see postgres). Passed = 1918 - 1 - 53.",
+  "summary_scope": "Full suite `./mvnw -o -pl app test` after all Phase 3 tests were added: 1919 tests (Phase 2 total 1610 + 309 new). The 1 error is the pre-existing architecture test. Skipped = 50 pre-existing (46 + 4 Phase 2 Postgres-gated) + 3 new Postgres-gated tests (they run only with -Dlifecycle.test.db.url and were run and passed separately, see postgres). Passed = 1919 - 1 - 53. Re-run after cook applied the quality-gate edits (AttemptOverviewService platform-wide method renamed to countDistinctActiveStudentsPlatformWide; UserRepository.countByRoleGroupedByTenant now count(u.id)): tests updated, same totals plus one new identity case.",
   "new_tests": {
-    "total_methods_executed_or_skipped": 308,
+    "total_methods_executed_or_skipped": 309,
     "by_class": {
       "com.pte.overview.internal.service.SeatUtilisationRankingTest": "13 (exact cross-multiplied ordering incl. ratios that round to the same percent and a 2e9-seat overflow guard, seat limit <= 0 skipped, absent student count = 0 students, ghost tenants ignored, ties: more students then name case-insensitive then stable input order, top-N cap incl. n <= 0, one-decimal HALF_UP percent, inputs not mutated)",
       "com.pte.overview.internal.service.AdminVisibilityTest": "23 (section -> operation table vs the REAL PlatformOperationPolicy for PLATFORM_ADMIN/PLATFORM_MANAGER/ACADEMIC_MANAGER/ACADEMIC_STAFF/legacy PLATFORM_AUTHOR; bucket = sorted allowed keys joined '+', deterministic, role-order independent, 'none' for academic/tenant roles/tenant-bound platform roles/no roles/null caller/mixed scopes, PLATFORM_AUTHOR == ACADEMIC_STAFF)",
@@ -23,7 +23,7 @@
       "com.pte.overview.internal.controller.AdminDashboardControllerTest": "38 (MockMvc + real method security + JwtAuthenticationToken: PLATFORM_ADMIN and PLATFORM_MANAGER 200 with all 8 sections OK and frozen field names; ACADEMIC_STAFF/ACADEMIC_MANAGER/PLATFORM_AUTHOR 200 with 8 FORBIDDEN null-data sections and no facade touched; admin-cached data never reaches an academic caller; HOST_ADMIN with tenant id 403; every platform role carrying a tenant id 403 from the controller itself; STUDENT/PROCTOR/EXAMINER/HOST_ADMIN with or without tenant 403; no roles 403; anonymous stopped by method security; 403 beats invalid window; invalid windows 400 INVALID_DASHBOARD_WINDOW with no facade touched; failing section -> ERROR without raw message; Redis down still 200; response key walk + record-component reflection show no license code/secret/contact/tax/description/token keys)",
       "com.pte.identity.internal.config.SecurityConfigDashboardPathTest": "2 (neither /api/v1/dashboard/admin nor /host is on the public path list, so the real filter chain's anyRequest().authenticated() answers 401 to anonymous callers; no broad wildcard is public)",
       "com.pte.tenancy.internal.repository.TenancyPlatformOverviewQueriesTest": "15 (status/type counts without deleted, empty platform, 2 statements and 0 entity loads; created-between half-open and partition; per-range counts with VN-vs-UTC month boundaries (20:00Z 30 Sep lands in October, 16:59:59Z in September, exact starts), sum equals whole range, deleted excluded, <2 boundaries empty; recent tenants newest first, bounded, deleted skipped, same-instant tie by id desc, fields, limit <= 0 without a query, one statement; seat limits one projection statement with 0 entity loads)",
-      "com.pte.identity.internal.repository.IdentityPlatformOverviewQueriesTest": "9 (students per tenant: tenant isolation, suspended counted, deleted and other roles excluded, multi-role counted once, tenants with none absent, tenant-less users excluded, empty -> empty map, read-only map, one grouped statement with 0 entity loads)",
+      "com.pte.identity.internal.repository.IdentityPlatformOverviewQueriesTest": "10 (incl. plainCountIsExactPerTenantForAMixedPopulation: per-tenant counts with a user holding STUDENT+PROCTOR+EXAMINER counted once, deleted and tenant-less users excluded, staff-only tenant absent; students per tenant: tenant isolation, suspended counted, deleted and other roles excluded, multi-role counted once, tenants with none absent, tenant-less users excluded, empty -> empty map, read-only map, one grouped statement with 0 entity loads)",
       "com.pte.attempt.internal.repository.AttemptPlatformOverviewQueriesTest": "9 (platform-wide distinct students: once per student across tenants, half-open started_at, adjacent windows partition, deleted/never-started ignored, status irrelevant, empty/inverted range zero, independent of the tenant-scoped overload)",
       "com.pte.billing.internal.repository.BillingPlatformOverviewQueriesTest": "28 (license counts: derived expired incl. exactly-now boundary, redeemed/revoked stay as stored, 7-day threshold inclusive, deleted excluded, numbers only, 3 statements 0 entity loads; redeemed-in-window half-open incl. later-revoked; subscription counts: usable rules, 30-day threshold inclusive, starts-exactly-now usable; activated-by-source half-open with every source present; plan counts by status/type; applications pending/received/oldest-first with limit, safe fields only, stable tie order, limit <= 0 without a query; currentPlanByTenant: soonest per tenant, absent when none, other tenants not leaked, null plan, empty/null input without query, exactly 2 statements for 6 tenants)",
       "com.pte.support.internal.repository.SupportPlatformOverviewQueriesTest": "11 (platform counts across tenants, deleted excluded, opened-in-window half-open, oldest OPEN only oldest-first with limit, brief has ids/category/age only and never the description, same-instant stable order, limit <= 0 without a query, one bounded statement)",
@@ -50,7 +50,7 @@
     {
       "cmd": "./mvnw -o -pl app test -Dtest='com/pte/overview/**/*Test,com/pte/tenancy/**/*Test,com/pte/billing/**/*Test,com/pte/support/**/*Test,com/pte/identity/**/*Test,com/pte/attempt/**/*Test' -Dsurefire.failIfNoSpecifiedTests=true",
       "result": "PASSED",
-      "tests": 1009,
+      "tests": 1010,
       "failures": 0,
       "errors": 0,
       "skipped": 38,
@@ -76,7 +76,7 @@
     {
       "cmd": "./mvnw -o -pl app test (full)",
       "result": "1 pre-existing error",
-      "tests": 1918,
+      "tests": 1919,
       "failures": 0,
       "errors": 1,
       "skipped": 53
@@ -101,13 +101,13 @@
     "result": "identical"
   },
   "postgres": {
-    "migration_it": "RUN - PASSED 12/12 through V96 on an EMPTY schema (Hibernate ddl-auto=validate against the Flyway-built schema; the six V96 indexes verified as partial (deleted = false) platform-wide definitions on the right tables with no tenant prefix; V96 replay idempotent with unchanged definitions)",
+    "migration_it": "RUN - PASSED 12/12 (re-run on a FRESH scratch container after the production edits) through V96 on an EMPTY schema (Hibernate ddl-auto=validate against the Flyway-built schema; the six V96 indexes verified as partial (deleted = false) platform-wide definitions on the right tables with no tenant prefix; V96 replay idempotent with unchanged definitions)",
     "environment": "scratch container pte-overview-scratch (postgres:17-alpine, port 55439, trust auth), removed at the end (docker rm -f). Host port 5432 is a native Windows postgres (not Docker) and was not used; no pte-* or postgres container was touched.",
     "explain_plans": "tests/phase-03-explain-plans.txt (raw: pte-api/app/target/overview-explain-plans-phase3.txt). 100k attempts, 100k users/user_roles over 50 tenants, 30k subscriptions/tickets/license codes, 12k applications, 4k tenants, interleaved, VACUUM ANALYZE, default planner and enable_seqscan=off.",
     "explain_verdicts": {
       "platform distinct active students (current and previous 30d)": "Bitmap Index Scan idx_attempts_started (V96), default planner, ~2.3 ms",
       "platform submitted in window": "Bitmap Index Scan idx_attempts_submitted (V96), default planner, ~1.3 ms (no production caller yet)",
-      "students per tenant (users join user_roles grouped by tenant)": "NO INDEX HELP: Seq Scan users + Seq Scan user_roles, Hash Join, Sort (external merge, 3.2 MB spill), ~95 ms at 100k students; forced index plan ~100 ms. Production concern (see production_concerns); count(*) rewrite ~45 ms",
+      "students per tenant (production query, count(u.id))": "PERF-001 RESOLVED: Seq Scan users + Seq Scan user_roles (inherent: every student is read), Hash Join, HashAggregate 24 kB, NO sort, NO disk spill, 56 ms at 100k students; previous count(distinct u.id) plan = Sort with 3.2 MB external-merge spill, 95-108 ms (kept as a labelled comparison query)",
       "subscriptions usable now": "Bitmap Index Scan idx_subscriptions_status_expires (V96), ~1.4 ms",
       "subscriptions usable and expiring within 30 days": "Index Scan idx_subscriptions_status_expires (V96), ~0.15 ms",
       "subscriptions activated by source (created_at range)": "Seq Scan (no created_at index), ~4.5 ms at 30k rows",
@@ -142,6 +142,7 @@
   "production_concerns": [
     {
       "id": "PERF-001",
+      "status": "RESOLVED by cook (count(u.id)); re-measured 56 ms vs 108 ms for count(distinct), no sort/spill. Residual: linear growth (about 0.6 s at 1M students, under the 2 s hint); exactness of count(u.id) relies on no duplicate (user_id, role) row (no unique constraint in the schema, documented in the Javadoc)",
       "severity": "MEDIUM",
       "where": "pte-api/app/src/main/java/com/pte/identity/internal/repository/UserRepository.java:139-142 (countByRoleGroupedByTenant), called by IdentityOverviewService.studentCountsByTenant (once per uncached dashboard build)",
       "finding": "Must read every student row; Seq Scan users + Seq Scan user_roles, Hash Join, Sort with external-merge spill (count(distinct u.id) forces the sort), ~95 ms at 100k students. Linear growth: ~1 s at ~1M students, near the 2 s timeout hint (the 60 s section cache and the hint bound the damage).",
@@ -161,6 +162,7 @@
     "Standalone MockMvc has no filter chain, so an anonymous request is stopped only by the method-security proxy (the handler maps it to a 5xx there); the real 401 is the chain's anyRequest().authenticated(), proven by SecurityConfigDashboardPathTest (neither dashboard path is public).",
     "learners.totalStudents counts students of non-deleted tenants only (joined with seat limits) while activeLearners counts distinct students platform-wide including those of deleted tenants; both are by design of the implemented query shape.",
     "idx_attempts_submitted (V96) has no production caller yet (kept for later admin sections); EXPLAIN shows it works for the platform-wide submitted count.",
+    "Quality-gate follow-up: the platform-wide attempt method is now countDistinctActiveStudentsPlatformWide(Instant, Instant); the tenant-scoped countDistinctActiveStudents(UUID, Instant, Instant) is unchanged. Tests and fixtures updated (AdminDashboardFixtures, AdminTenantSectionsTest, AdminDashboardServiceTest, AttemptPlatformOverviewQueriesTest); the Phase 1 host fixtures still use the tenant-scoped overload.",
     "Mockito prints the 'dynamic agent' warning in this JDK; Hibernate/H2 print DDL warnings for unrelated entities; both pre-existing and unrelated."
   ],
   "phase1_test_edits_review": {
