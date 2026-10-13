@@ -23,6 +23,7 @@ Deliver real, data-backed overview screens for tenant-web `/host/dashboard` (HOS
 1. Backend ownership: Claude implements BOTH backend (Phases 1-4) and frontend (Phases 5-9). Cook order 1 -> 9.
 2. Architecture test: only add `examstaff` to the asserted module list; pre-existing cycles are left untouched. Gate = no NEW violations vs the Phase 1 baseline.
 3. Phase 10 (province for the map) is DEFERRED. The map ships with an empty-state in Phase 8. Do not cook Phase 10.
+5. (2026-10-14) Unit tests: from Phase 8 onward `ck:test` is SKIPPED by the user for each remaining phase [tests: skipped_by_user]. Cook still runs the Build Gate (lint, typecheck, build) and `ck:quality --gate`. Final handoff must print: "Testing: skipped by user. Run /ck:test or your project's test suite before code review or release." (Phases 1-7 were tested.)
 4. P3 widgets (staff coverage, academic structure, tenant own support tickets / pending orders cards, admin plans card) ARE built as compact cards after P1/P2 ("as complete as possible").
 
 ## Phase Dependencies

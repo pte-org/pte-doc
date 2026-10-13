@@ -31,7 +31,7 @@
 
 ## Quality and Testing State
 - Quality gate: not evaluated (Cook runs `/ck:quality --gate` after implementing this phase)
-- Testing: not started
+- Testing: passed (`/ck:test --unit`, 2026-10-14): tenant-web 472 tests / 29 files (was 134 / 11; +338 tests, +18 files; utils edge cases, bilingual catalog checks, server-rendered component tests of every widget, the 7 invalidating mutation hooks executed through a real QueryClient, single-query options, source hygiene), @pte/ui 271 / 12, @pte/api-client 571 / 28, all green; tenant-web lint and typecheck, @pte/ui typecheck, vendor-web lint (same 2 pre-existing img warnings) and typecheck pass. 24 mutants applied to a scratchpad copy were all killed. Report: tests/phase-07-test-report.json. NOT run (Phase 9): real-browser single-request network-panel check, visual and responsive layout, dark mode, keyboard navigation and focus, real recharts paint, click interaction (retry and quick actions are verified by handler wiring only), `next build`.
 
 ## Risks
 - Query-key invalidation can be forgotten in other features: centralize the key and cover the three known mutations.
