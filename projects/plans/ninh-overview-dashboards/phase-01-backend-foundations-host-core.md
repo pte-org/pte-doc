@@ -1,4 +1,4 @@
-﻿# Phase 1: Backend Foundations + Host Core
+# Phase 1: Backend Foundations + Host Core
 
 ## Requirements
 A new `overview` module in pte-api serves an authenticated HOST_ADMIN-only host dashboard endpoint with the shared sectioned envelope, real trends and core sections (learners, quota, academics, staff, exams, attempts incl. a 12-month series). Priority: P1 for learners, quota, exams and attempts; P3 for academics and staff (consumed by compact cards).
@@ -36,7 +36,7 @@ A new `overview` module in pte-api serves an authenticated HOST_ADMIN-only host 
 
 ## Quality and Testing State
 - Quality gate: not evaluated (Cook runs `/ck:quality --gate` after implementing this phase)
-- Testing: passed (2026-10-13) - 170 new tests, all green (165 unit/H2 + 5 Postgres IT); full suite (without the Postgres property) 1526 tests, 0 failures, 1 pre-existing error (ModuleStructureTest.modules_have_no_boundary_violations), 46 skipped; arch violation set identical to baseline (18 lines, none mention overview). Postgres RUN against scratch PG17 (port 55439): OverviewMigrationPostgresIntegrationTest 5/5 pass (empty schema through V94, ddl-auto=validate, V94 idempotent); EXPLAIN on 7 heavy queries all use V94 indexes (Bitmap Index Scan), no seq scan - tests/phase-01-explain-plans.txt. Report: tests/phase-01-test-report.json
+- Testing: passed (2026-10-13) - 170 new tests, all green (165 unit/H2 + 5 Postgres IT). Modulith import fixes applied: tests under com.pte.overview import only root facades/shared (grep proof empty); MonthlySeriesBoundaryDataTest moved to attempt/internal/repository/AttemptSubmittedPerMonthBoundaryTest; Postgres IT seeds with plain SQL. Re-run: overview 132 tests (5 gated skipped) pass; facade+tenancy groups 563 pass (1 pre-existing skip); Postgres IT 5/5 pass on scratch PG17 (empty schema through V94, ddl-auto=validate, V94 idempotent, 7 heavy queries all use V94 indexes - tests/phase-01-explain-plans.txt); ModuleStructureTest+RouteContractTest: only the pre-existing boundary-violation error, violation set identical to baseline (18 lines, none mention overview). Last full-suite run (before the import-only moves): 1526 tests, 0 failures, 1 pre-existing error, 46 skipped. Report: tests/phase-01-test-report.json
 
 ## Risks
 - Pre-existing red architecture test hides regressions: the baseline diff is the only gate; pre-existing violations stay and are reported.

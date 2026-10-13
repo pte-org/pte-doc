@@ -8,7 +8,7 @@ Revision: 2 (red-team adjudication applied)
 Deliver real, data-backed overview screens for tenant-web `/host/dashboard` (HOST_ADMIN only, LearnersOverview kept as the last full-width section) and vendor-web `/admin` (role-aware for PLATFORM_ADMIN/PLATFORM_MANAGER vs ACADEMIC_MANAGER/ACADEMIC_STAFF). Each dashboard is served by ONE aggregate endpoint in pte-api with honest period-over-period trends, replacing the current client-side counting and fake trends in vendor-web. Repos: backend `D:\FPT-FALL2026\Capstore\pte-api`, frontend `D:\FPT-FALL2026\Capstore\pte-web`. The user commits by themselves; this plan contains no commit/PR steps.
 
 ## Phases
-- [ ] Phase 1: Backend foundations + host core - baseline recording, leaf `overview` module, section/trend envelope, cache, host index migration (V94), host core sections
+- [x] Phase 1: [quality: approved (no receipt: report outside pte-web repo); tests: passed incl. Postgres+EXPLAIN] Backend foundations + host core - baseline recording, leaf `overview` module, section/trend envelope, cache, host index migration (V94), host core sections
 - [ ] Phase 2: Backend host commercial and ops - grading backlog, subscription/expiry, pending order count, support facade, recent activity
 - [ ] Phase 3: Backend admin core + role gating - section-to-permission table, tenants + growth series, learners, recent tenants, applications, licenses, subscriptions, plans, support; platform-wide indexes (V96)
 - [ ] Phase 4: Backend admin revenue + question bank - per-currency revenue and extended question bank stats (V97 only if needed)

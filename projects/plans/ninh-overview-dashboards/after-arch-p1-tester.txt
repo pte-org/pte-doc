@@ -25,9 +25,9 @@
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.pte.ModuleStructureTest
-10:12:42.873 [main] INFO com.tngtech.archunit.core.PluginLoader -- Detected Java version 24.0.1
-[ERROR] Tests run: 3, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 5.982 s <<< FAILURE! -- in com.pte.ModuleStructureTest
-[ERROR] com.pte.ModuleStructureTest.modules_have_no_boundary_violations -- Time elapsed: 0.549 s <<< ERROR!
+10:42:59.914 [main] INFO com.tngtech.archunit.core.PluginLoader -- Detected Java version 24.0.1
+[ERROR] Tests run: 3, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 14.11 s <<< FAILURE! -- in com.pte.ModuleStructureTest
+[ERROR] com.pte.ModuleStructureTest.modules_have_no_boundary_violations -- Time elapsed: 1.052 s <<< ERROR!
 org.springframework.modulith.core.Violations: 
 - Cycle detected: Slice attempt -> 
                 Slice session -> 
@@ -499,7 +499,7 @@ org.springframework.modulith.core.Violations:
 	at com.pte.ModuleStructureTest.modules_have_no_boundary_violations(ModuleStructureTest.java:23)
 
 [INFO] Running com.pte.RouteContractTest
-[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.862 s -- in com.pte.RouteContractTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.703 s -- in com.pte.RouteContractTest
 [INFO] 
 [INFO] Results:
 [INFO] 
@@ -973,8 +973,8 @@ org.springframework.modulith.core.Violations:
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  14.150 s
-[INFO] Finished at: 2026-10-13T10:12:52+07:00
+[INFO] Total time:  32.916 s
+[INFO] Finished at: 2026-10-13T10:43:20+07:00
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.5:test (default-test) on project app: 
 [ERROR] 

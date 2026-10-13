@@ -1,8 +1,8 @@
-﻿{
+{
     "phase":  "phase-01-backend-foundations-host-core",
     "mode":  "unit",
     "verdict":  "PASSED",
-    "verdict_note":  "All new tests pass, including the Postgres migration IT (5/5) run against a scratch PostgreSQL 17. The only red test in the full suite (run without the Postgres property) is the pre-existing ModuleStructureTest.modules_have_no_boundary_violations (baseline exception, identical 18-line violation set, none mention overview).",
+    "verdict_note":  "All new tests pass, including the Postgres migration IT (5/5, SQL-only seeding) run against a scratch PostgreSQL 17 that has been removed. The only red test is the pre-existing ModuleStructureTest.modules_have_no_boundary_violations (identical 18-line violation set, none mention overview).",
     "reviewed_at":  "2026-10-13T04:00:00Z",
     "summary":  {
                     "passed":  1479,
@@ -20,17 +20,17 @@
                                        "com.pte.overview.internal.service.DashboardWindowTest":  33,
                                        "com.pte.overview.internal.service.DashboardSectionRunnerTest":  5,
                                        "com.pte.overview.internal.service.HostDashboardServiceTest":  23,
-                                       "com.pte.overview.internal.service.MonthlySeriesBoundaryDataTest":  3,
                                        "com.pte.overview.internal.cache.DashboardCacheKeysTest":  9,
                                        "com.pte.overview.internal.cache.DashboardCacheTest":  11,
                                        "com.pte.overview.internal.controller.HostDashboardControllerTest":  25,
-                                       "com.pte.overview.internal.migration.OverviewMigrationPostgresIntegrationTest":  "5 (gated; skipped without the property, 5/5 passed with it)",
+                                       "com.pte.overview.internal.migration.OverviewMigrationPostgresIntegrationTest":  "5 (gated; skipped without the property, 5/5 passed with it; seeds with plain SQL only)",
                                        "com.pte.identity.internal.repository.IdentityOverviewQueriesTest":  9,
                                        "com.pte.enrollment.internal.repository.EnrollmentOverviewQueriesTest":  5,
                                        "com.pte.session.internal.repository.SessionOverviewQueriesTest":  9,
                                        "com.pte.attempt.internal.repository.AttemptOverviewQueriesTest":  9,
                                        "com.pte.tenancy.internal.repository.OrganizationCountQueryTest":  1,
-                                       "com.pte.tenancy.internal.service.TenancyServiceCountOrganizationsTest":  2
+                                       "com.pte.tenancy.internal.service.TenancyServiceCountOrganizationsTest":  2,
+                                       "com.pte.attempt.internal.repository.AttemptSubmittedPerMonthBoundaryTest":  3
                                    },
                       "support_file":  "com.pte.overview.internal.HostDashboardFixtures (not a test class)"
                   },
@@ -38,19 +38,38 @@
                      {
                          "cmd":  "./mvnw -o -pl app test -Dtest=\u0027com/pte/overview/**/*Test\u0027 -Dsurefire.failIfNoSpecifiedTests=true",
                          "result":  "PASSED",
-                         "tests":  135,
+                         "tests":  132,
                          "failures":  0,
                          "errors":  0,
-                         "skipped":  5
+                         "skipped":  5,
+                         "note":  "skipped = 5 Postgres-gated tests"
                      },
                      {
-                         "cmd":  "./mvnw -o -pl app test -Dtest=\u0027com/pte/identity/**/*Test,com/pte/enrollment/**/*Test,com/pte/session/**/*Test,com/pte/attempt/**/*Test\u0027 -Dsurefire.failIfNoSpecifiedTests=true",
+                         "cmd":  "./mvnw -o -pl app test -Dtest=AttemptSubmittedPerMonthBoundaryTest -Dsurefire.failIfNoSpecifiedTests=true",
                          "result":  "PASSED",
-                         "tests":  521,
+                         "tests":  3,
+                         "failures":  0,
+                         "errors":  0,
+                         "skipped":  0,
+                         "note":  "moved from com.pte.overview to the attempt module"
+                     },
+                     {
+                         "cmd":  "./mvnw -o -pl app test -Dtest=\u0027com/pte/identity/**/*Test,com/pte/enrollment/**/*Test,com/pte/session/**/*Test,com/pte/attempt/**/*Test,com/pte/tenancy/**/*Test\u0027 -Dsurefire.failIfNoSpecifiedTests=true",
+                         "result":  "PASSED",
+                         "tests":  563,
                          "failures":  0,
                          "errors":  0,
                          "skipped":  1,
                          "note":  "skipped = pre-existing PlatformRoleMigrationPostgresIntegrationTest"
+                     },
+                     {
+                         "cmd":  "./mvnw -o -pl app test -Dtest=OverviewMigrationPostgresIntegrationTest -Dlifecycle.test.db.url=jdbc:postgresql://localhost:55439/lifecycle_test?user=postgres",
+                         "result":  "PASSED",
+                         "tests":  5,
+                         "failures":  0,
+                         "errors":  0,
+                         "skipped":  0,
+                         "note":  "scratch PG17 container, removed afterwards"
                      },
                      {
                          "cmd":  "./mvnw -o -pl app test -Dtest=ModuleStructureTest,RouteContractTest -Dsurefire.failIfNoSpecifiedTests=true",
@@ -59,15 +78,16 @@
                          "failures":  0,
                          "errors":  1,
                          "skipped":  0,
-                         "note":  "only modules_have_no_boundary_violations errors (pre-existing); module-list test and RouteContractTest (5) pass"
+                         "note":  "only modules_have_no_boundary_violations (pre-existing); violation set identical to baseline (18 lines, 0 mention overview)"
                      },
                      {
-                         "cmd":  "./mvnw -o -pl app test (full)",
+                         "cmd":  "./mvnw -o -pl app test (full, before the import fixes)",
                          "result":  "1 pre-existing error",
                          "tests":  1526,
                          "failures":  0,
                          "errors":  1,
-                         "skipped":  46
+                         "skipped":  46,
+                         "note":  "not re-run after the import-only test moves (same 170 new tests, same test count); the affected groups above were re-run"
                      }
                  ],
     "architecture_diff":  {
@@ -121,5 +141,15 @@
                          "@PreAuthorize/JWT are exercised by wrapping the real controller in the real method-security proxy with a real JwtAuthenticationToken; the 401 for a missing token belongs to the filter chain and is not covered at this layer.",
                          "The Postgres seed was first unrealistic (tenants physically contiguous, created_at scattered): the planner then preferred pre-existing idx_sessions_tenant for two session queries and the test failed. The seed was made realistic (interleaved tenants, time columns follow insertion order, VACUUM ANALYZE); the assertions were not changed."
                      ],
-    "report_path":  "plans/ninh-overview-dashboards/tests/phase-01-test-report.json"
+    "report_path":  "plans/ninh-overview-dashboards/tests/phase-01-test-report.json",
+    "modulith_import_fixes":  {
+                                  "reason":  "Tests under com.pte.overview.** are treated as part of module overview by the IDE/Modulith; they must import only root classes of other modules and com.pte.shared.**",
+                                  "moved":  "overview/internal/service/MonthlySeriesBoundaryDataTest -\u003e attempt/internal/repository/AttemptSubmittedPerMonthBoundaryTest (same 3 scenarios; uses literal Asia/Ho_Chi_Minh boundary instants equal to the values asserted in MonthBucketsTest instead of overview MonthBuckets)",
+                                  "rewritten":  "OverviewMigrationPostgresIntegrationTest now seeds with plain SQL (type-based filler for NOT NULL columns + generate_series cloning); no entity or repository imports",
+                                  "changed":  [
+                                                  "HostDashboardServiceTest: TenantNotFoundException -\u003e overview InvalidDashboardWindowException (still a domain exception isolated inside a section)",
+                                                  "EnrollmentOverviewQueriesTest: no tenancy repositories/enum imports; Tenant/Organization (tenancy::domain) persisted via EntityManager, facility type chosen reflectively"
+                                              ],
+                                  "grep_proof":  "grep -E import (static )?com.pte.(identity|tenancy|enrollment|session|attempt|billing|support).[a-z]+. over app/src/**/overview/** : no matches"
+                              }
 }
