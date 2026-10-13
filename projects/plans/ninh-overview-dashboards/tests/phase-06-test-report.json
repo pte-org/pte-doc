@@ -1,0 +1,176 @@
+{
+  "phase": "phase-06-ui-dashboard-primitives",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "verdict_note": "@pte/ui had no test infrastructure; vitest was added (node environment, react-dom/server renderToStaticMarkup, no DOM library) and 250 tests in 11 files were written for every Phase 6 primitive. All pass. No production bug found. Tests were proven non-vacuous by 6 mutants applied to a copy of the sources in the scratchpad (never the repo). The 6 StatCard consumer files and DataTable.tsx are byte-identical to the recorded hashes. No git command was run; the StatCard 'regression' is a characterisation of the post-change output for the legacy props (there is no pre-change copy to diff against; integrity of the consumers is covered by hash + app typechecks).",
+  "reviewed_at": "2026-10-13T23:05:00Z",
+  "summary": { "passed": 879, "failed": 0, "skipped": 0 },
+  "summary_scope": "passed = 271 (@pte/ui, 12 files, NEW; was 250 / 11 files before remediation cycle 1) + 571 (@pte/api-client, 28 files) + 37 (tenant-web, 2 files). vendor-web has no vitest suite.",
+  "new_tests": {
+    "ui_before": { "files": 0, "tests": 0, "note": "package had no test script" },
+    "ui_after": { "files": 12, "tests": 271, "note": "11 files / 250 tests at the original test pass; 12 / 271 after remediation_cycle_1 (see that block)" },
+    "net_new_tests": 271,
+    "net_new_files": 12,
+    "by_file": {
+      "src/components/StatCard.test.tsx": "31. Legacy props: exact legacy markup (golden string) for label+value; no delta p, no svg, no sr-only, no dash; trend/trendPositive true/false glyph+tone+text; default trendPositive; progress clamp 0..100 and aria-label; highlight precedence; compact/accent/footnote; the 6 real consumer prop combinations render with no delta. New props: arrow + signed text + sr-only direction label + period label; up/down/flat each draw only their own arrow; good/bad/neutral class mapping; up+bad and down+good; defaults flat+neutral; change=null renders aria-hidden en dash + sr-only empty label (no arrow, no direction label, no tone); no sr-only when no empty label; labels alone do not trigger a delta; direction/tone/periodLabel alone do (dash); delta coexists with trend; ordering value < delta < footnote; hasStatCardDelta truth table. HTML attribute escaping (&amp;) handled.",
+      "src/components/DashboardPanel.test.tsx": "17. region + h2 title linked by aria-labelledby (useId), distinct ids for two panels, no h1; subtitle/actions optional; className/contentClassName; default content; loading (aria-busy=true, polite status, sr-only loadingLabel, 3 skeletons, no children); aria-busy=false for content/error/empty; error (role=alert, title, description, retry button with label when onRetry; no button without onRetry; empty body when error object missing); empty (title, description, action; empty body when object missing); only the matching state object is read; no built-in copy.",
+      "src/components/ActivityList.test.tsx": "19. timeline: ol with aria-label, li per item, time/title/description/meta text, decorative marker per tone (neutral default), optional lines omitted, icon, href/onClick ignored, className. actions: ul with aria-label, native a (href) by default, button type=button for onClick only, static li otherwise, href beats onClick, count badge (including 0, string) with tone, no badge without count, chevron only on interactive rows, renderLink used with href/className/children and never called for non-href rows. empty: both variants show only emptyLabel and no ol/ul/li; className on placeholder.",
+      "src/components/TrendCharts.test.tsx": "48 (24 per chart via describe.each of TrendBarChart/TrendLineChart, server render). role=img + aria-label, h-64 default and chartClassName override, recharts responsive container present, legend entries/order/dots/tones, brand default tone, partial legend item only when a point is partial AND partialLabel given, sr-only table (caption, one th per series, one row per datum in order, valueFormatter on every cell, partial rows annotated with partialLabel only, missing/NaN -> formatted 0), empty state for no data / all zeros / empty series / non-finite (emptyLabel only, no plot/legend/table, className kept), no inline style except recharts' own sizing container, no animation classes, theme variables only.",
+      "src/components/TrendChartsRecharts.test.tsx": "20. recharts replaced by recording stubs (vi.mock) to assert what the components hand to recharts: nothing rendered in empty state; ResponsiveContainer 100%x100%; BarChart rows; one Bar per series with tone color; stacked flag -> one shared stackId and radius 0, grouped otherwise; Cell per datum per series with lighter fill + dashed outline for partial points; isAnimationActive=false on Bars, Lines and Tooltip; YAxis tickFormatter identity / String fallback; only var(--...) colors; tooltip content renderer. Line chart: buildRows semantics (solid run, dashed continuation joined at the last complete point, partial at index 0, several consecutive partials, no overlap except the join point, NaN/missing -> 0, input data not mutated), dashed lines only when a partial exists (legendType none, no dots, dasharray 4 3), monotone, theme strokes, tooltip uses the original data.",
+      "src/components/trendChartShared.test.tsx": "22. defaults and constants; toneColor; readSeriesValue normalisation (missing, undefined, NaN, Infinity, string, boolean -> 0; negatives kept); hasTrendData all-zero detection (negatives count, unknown keys ignored); createTooltipRenderer (label + formatted lines, partial caption rules, null when inactive/unknown label); TrendChartFrame (children only inside role=img plot, table is a sibling, height class default/override, className, formatter default/custom, empty state without child/table/legend).",
+      "src/components/chartTones.test.ts": "23. both maps cover exactly the six tones (satisfies + runtime keys), ChartTone type equality, var(--*) colors, full-class dot backgrounds, color/dot agree, palette identical to the pre-extraction donut palette, distinct colors, StatusDonutTone === ChartTone via expectTypeOf.",
+      "src/components/StatusDonutChart.test.tsx": "4. donut regression after the tone extraction: sort desc + percentages, dot classes from CHART_TONE_DOT_CLASSES (neutral default), total + label + aria-label usage, empty state for none/zero/negative/NaN.",
+      "src/components/dashboardIcons.test.tsx": "37. 7 icons x (single svg, aria-hidden=true by default, no aria-label/role, className applied, no class attribute without className, currentColor, no hex/rgb/inline style) + pairwise distinct markup + shared 24x24 stroke convention for the hand-drawn icons (CalendarIcon wraps NextAdminCalendarIcon, which also keeps aria-hidden).",
+      "src/components/DashboardLoadingState.test.tsx": "12. shared shell (polite status, label, sr-only, className) for all 4 variants; default markup === explicit 'page' markup; page shape pinned relationally (2 + 4x2 + table skeleton count, no overview-only classes); Vietnamese default label; table/detail variants structurally unchanged; overview distinct (22 skeletons: header 2, 4 KPI cards x3, 4 panels x2; two xl:grid-cols-3 rows; no table).",
+      "src/barrel.test.tsx": "17. every new component and icon is exported from the package entry (src/index.ts, what '@pte/ui' resolves to) as a function; neighbouring pre-existing exports intact; every new public type resolves with its documented shape (expectTypeOf, enforced by tsc) and out-of-contract values are rejected by @ts-expect-error."
+    },
+    "support_files_created": [
+      "packages/ui/src/testing/renderHtml.ts: renderHtml (renderToStaticMarkup), countMatches, textOf, findOpeningTag, innerOf, muteRechartsSizeWarning (mutes only recharts' server-side zero-size warning)",
+      "packages/ui/vitest.config.ts: node environment, include src/**/*.test.{ts,tsx}"
+    ],
+    "collection_verified": "vitest run reports 11 files / 250 tests (src/**/*.test.{ts,tsx}); tsconfig include is `src`, so tests and helper are type-checked by `pnpm --filter @pte/ui typecheck` (verified that expectTypeOf mismatches fail tsc with a throwaway probe file, since deleted)."
+  },
+  "infrastructure_changes": {
+    "packages/ui/package.json": "scripts.test = \"vitest run\"; devDependencies += \"@types/node\": \"^20\" and \"vitest\": \"^3.2.7\" (same ranges as @pte/api-client / tenant-web).",
+    "packages/ui/vitest.config.ts": "new file",
+    "pnpm-lock.yaml": "`pnpm install --offline` succeeded (no network needed). Only the packages/ui importer changed: +'@types/node' (specifier ^20, version 20.19.43) and +vitest (specifier ^3.2.7, version 3.2.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)), i.e. +6 lines, both resolving to snapshot keys already used by api-client and tenant-web. @types/node was added so vitest resolves to the SAME peer-variant snapshot key and the lockfile gains no new package entries. No other importer or package section changed (diff against a copy taken before the install).",
+    "no_new_runtime_dependency": "react-dom/server comes from the existing react-dom devDependency; no testing-library or jsdom was added."
+  },
+  "commands": [
+    { "cmd": "pnpm --filter @pte/ui test", "result": "PASSED", "files": 11, "tests": 250, "failures": 0, "skipped": 0, "baseline": "no test script before this pass" },
+    { "cmd": "pnpm --filter @pte/ui typecheck", "result": "PASSED", "exit": 0, "note": "includes all new test files; all @ts-expect-error lines consumed, expectTypeOf assertions enforced" },
+    { "cmd": "pnpm --filter tenant-web typecheck", "result": "PASSED", "exit": 0, "baseline": "0 errors" },
+    { "cmd": "pnpm --filter tenant-web test", "result": "PASSED", "files": 2, "tests": 37, "failures": 0, "baseline": "2 files / 37 tests" },
+    { "cmd": "pnpm --filter tenant-web lint", "result": "PASSED", "exit": 0, "baseline": "0 errors, 0 warnings" },
+    { "cmd": "pnpm --filter vendor-web lint", "result": "PASSED", "exit": 0, "note": "0 errors, the same 2 @next/next/no-img-element warnings (QuestionDetailView.tsx:63, QuestionEditorForm.tsx:304)", "baseline": "identical" },
+    { "cmd": "pnpm --filter @pte/api-client test", "result": "PASSED", "files": 28, "tests": 571, "failures": 0, "baseline": "28 files / 571 tests" },
+    { "cmd": "pnpm --filter vendor-web typecheck", "result": "PASSED", "exit": 0, "errors": 0, "note": "differs from the Phase 5 baseline (28 errors in .next/dev/types/routes.d.ts): the Phase 6 `next build` rewrote apps/vendor-web/next-env.d.ts to import ./.next/types/routes.d.ts and dropped .next/dev/types from tsconfig include, so the corrupted dev file (hash unchanged, mtime 2026-10-10) is no longer in the program. Environment effect, not a source change; the 28-error baseline is gone, not regressed." },
+    { "cmd": "pnpm --filter vendor-web exec tsc --noEmit -p <scratchpad>/tsconfig.vendor-nonext.json", "result": "PASSED", "exit": 0, "errors": 0, "note": "temp tsconfig outside the repo, excludes .next, node_modules and next-env.d.ts; --listFilesOnly shows 173 vendor-web source files and 0 under .next" }
+  ],
+  "integrity_checks": {
+    "statcard_consumers_and_datatable": "SHA256 of the 6 StatCard consumer files and packages/ui/src/components/DataTable.tsx recomputed after all test work: all 7 MATCH the values in tests/phase-06-statcard-consumers.md; DataTable still 711 lines.",
+    "consumers_typecheck": "tenant-web (ProctorOverview, ExaminerOverview, StudentOverviewTab) and vendor-web (_AdminStatGrid, _LicenseStatGrid, _QuestionStatGrid) still compile against the extended StatCard (tenant-web typecheck 0 errors; vendor-web typecheck and the no-.next tsconfig 0 errors)."
+  },
+  "mutation_sanity": {
+    "method": "scratchpad/mutate-ui.ps1 copies packages/ui/src into scratchpad/mutant-ui (node_modules junctioned, recharts/cmdk aliased to their pnpm store paths), applies ONE textual mutation to the copy, runs the whole suite (250 tests) there. The repo sources were never touched.",
+    "results": [
+      { "mutant": "M1 StatCard always renders the delta (guard hasStatCardDelta removed)", "killed_by": "11 StatCard tests (exact legacy markup, no delta/svg/sr-only, trend variants, all 6 consumer combinations, labels-only)" },
+      { "mutant": "M2 StatCardDelta good tone uses the bad class", "killed_by": "2 StatCard tests (tone mapping, up+bad/down+good)" },
+      { "mutant": "M3 sr-only table ignores valueFormatter", "killed_by": "3 tests (valueFormatter on both charts, TrendChartFrame formatter)" },
+      { "mutant": "M4 sr-only table drops the partial annotation", "killed_by": "2 tests (bar + line partial row annotation)" },
+      { "mutant": "M5 sr-only table drops the caption", "killed_by": "2 tests (bar + line caption/headers)" },
+      { "mutant": "M6 line chart no longer joins the dashed run to the last complete point", "killed_by": "4 TrendChartsRecharts tests (split, consecutive partials, overlap, NaN normalisation)" }
+    ],
+    "note": "A first attempt failed to load recharts through the junction (relative pnpm symlinks); results were discarded and the run repeated with explicit aliases so all 250 tests executed against every mutant (only the targeted tests failed)."
+  },
+  "baseline_comparison": {
+    "new_failures": 0,
+    "regressions": 0,
+    "same_as_baseline": ["tenant-web typecheck/test/lint", "vendor-web lint (2 warnings)", "@pte/api-client test (571)"],
+    "improved": ["vendor-web typecheck: 28 pre-existing generated-file errors no longer present (see commands)"]
+  },
+  "remediation_cycle_1": {
+    "applied_at": "2026-10-13T23:30:00Z",
+    "trigger": "quality gate CHANGES_REQUIRED (quality/phase-06-ui-dashboard-primitives-quality-report.json, QUAL-001..011)",
+    "result": "PASSED",
+    "tests": {
+      "ui_before": { "files": 11, "tests": 250 },
+      "ui_after": { "files": 12, "tests": 271 },
+      "delta": "+21 tests, +1 file (src/components/TrendLineChartRows.test.tsx, 8 tests). Per file: TrendChartsRecharts 20 -> 25 (+5), TrendLineChartRows 0 -> 8 (new), TrendCharts 48 -> 56 (+8: 4 empty cases x 2 charts), trendChartShared 22 -> 22 (empty-state assertions changed in place). Other files unchanged.",
+      "api_client": { "files": 28, "tests": 571, "unchanged": true },
+      "tenant_web": { "files": 2, "tests": 37, "unchanged": true }
+    },
+    "findings_addressed": {
+      "QUAL-001": {
+        "status": "FIXED",
+        "change": "TrendBarChart.tsx passes accessibilityLayer={false} to <BarChart>; TrendLineChart.tsx passes it to <LineChart>. Verified in recharts 3.8.1: CartesianChart.js defaults accessibilityLayer to true and es6/container/RootSurface.js sets tabIndex=0 and role='application' on the chart <svg> only when it is true (undefined when false, unless otherAttributes carries explicit tabIndex/role, which the components never pass); RechartsWrapper.js adds no tabIndex/role. JSDoc on both chart components explains why (tooltip is pointer-only; the sr-only table is the keyboard/AT path).",
+        "tests": "TrendChartsRecharts.test.tsx: one test per chart asserts the stub received accessibilityLayer === false and no tabIndex/role prop."
+      },
+      "QUAL-002": {
+        "status": "FIXED (trend charts only; StatusDonutChart intentionally untouched)",
+        "change": "trendChartShared.tsx empty branch is now <div role=\"status\"> with the visible emptyLabel text; role=\"img\" and aria-label were removed from that branch (the chart name is not repeated there). Non-empty branch unchanged (role=img wrapper, legend, sr-only table).",
+        "tests_changed": "trendChartShared.test.tsx 'uses the empty state ...' and TrendCharts.test.tsx 'shows emptyLabel for %s' previously asserted role=\"img\" + aria-label on the empty div; they now assert role=\"status\", no role=\"img\", no aria-label, text equals emptyLabel (no assertion weakened: emptyLabel text, no plot/legend/table and className assertions are all kept; a new it.each per chart pins the exposed-text contract)."
+      },
+      "QUAL-003": {
+        "status": "FIXED",
+        "change": "TrendLineChart.tsx: buildRows is now exported and the dashed key covers every partial point plus the complete point immediately before AND after it, so a middle partial point reconnects to the next complete point; the dashed Line uses createPartialDotRenderer (exported) instead of dot={false}, drawing the same hollow marker as the solid line (r 3, theme fill, tone stroke) on rows flagged partial only, so a lone/only partial point is visible and no partial point lacks a marker. JSDoc states partial is normally a trailing in-progress period and documents the middle/lone behaviour.",
+        "tests": "TrendLineChartRows.test.tsx (new, 8): single partial, partial in the middle, only-neighbours not dashed, partial last, no partial, partial:false; createPartialDotRenderer marker markup and null cases. TrendChartsRecharts.test.tsx: wiring test for a lone partial point; the old assertion dot:false on the dashed line was replaced by 'dot is a function' + solid line keeps its dot object (behaviour intentionally changed)."
+      },
+      "QUAL-004": {
+        "status": "DOCUMENTED",
+        "change": "JSDoc on TrendChartDatum / TrendChartBaseProps.data: label must be unique per datum (React key of table rows and bar cells, tooltip lookup, x text). Not changed to index keys (behaviour kept)."
+      },
+      "QUAL-005": {
+        "status": "DOCUMENTED + additive prop",
+        "change": "JSDoc on TrendChartSeries.tone: untoned series fall back to brand, pass distinct tones for several series. New optional prop allowDecimals?: boolean on TrendChartBaseProps (both charts), default false (DEFAULT_ALLOW_DECIMALS) = the previous hard-coded behaviour, so existing callers are unchanged.",
+        "tests": "TrendChartsRecharts.test.tsx: default false and allowDecimals=true reach YAxis, for both charts."
+      },
+      "QUAL-007": {
+        "status": "DOCUMENTED",
+        "change": "JSDoc on StatCardDelta tone, StatCard changeTone / changeDirectionLabel and ActivityListItem.tone: tone is colour only, put the evaluative meaning in text (directionLabel / title). No behaviour change; directionLabel not made required."
+      }
+    },
+    "deferred_to_user": {
+      "QUAL-006": "apps/vendor-web/tsconfig.json was rewritten by `next build` (dropped .next/dev/types include). Not reverted or edited, per instruction; decision is the user's before committing.",
+      "QUAL-008": "CircularProgressChart keeps its own tone map next to chartTones.ts (pre-existing, out of scope).",
+      "QUAL-009": "Residual test risk, tracked for Phase 9 (real browser: no tab stop inside role=img, tooltip, dashed paint, contrast).",
+      "QUAL-010": "Optional `@source not` for *.test.* in both globals.css (not applied).",
+      "QUAL-011": "Rule-of-three notes (loading skeleton / icon base), no action."
+    },
+    "commands": [
+      { "cmd": "pnpm --filter @pte/ui test", "result": "PASSED", "files": 12, "tests": 271, "failures": 0 },
+      { "cmd": "pnpm --filter @pte/ui typecheck", "result": "PASSED", "exit": 0, "note": "accessibilityLayer on BarChart/LineChart and the dot render function type-check against recharts 3.8.1" },
+      { "cmd": "pnpm --filter tenant-web typecheck", "result": "PASSED", "exit": 0 },
+      { "cmd": "pnpm --filter tenant-web test", "result": "PASSED", "files": 2, "tests": 37, "failures": 0 },
+      { "cmd": "pnpm --filter tenant-web lint", "result": "PASSED", "exit": 0 },
+      { "cmd": "pnpm --filter vendor-web lint", "result": "PASSED", "exit": 0, "note": "same 2 @next/next/no-img-element warnings" },
+      { "cmd": "pnpm --filter @pte/api-client test", "result": "PASSED", "files": 28, "tests": 571, "failures": 0 },
+      { "cmd": "pnpm --filter vendor-web typecheck", "result": "PASSED", "exit": 0, "errors": 0, "note": "same state as before the remediation (0 errors after the tsconfig rewrite, QUAL-006)" },
+      { "cmd": "pnpm --filter vendor-web exec tsc --noEmit -p <scratchpad>/tsconfig.vendor-nonext.json", "result": "PASSED", "exit": 0, "errors": 0 },
+      { "cmd": "eslint -c apps/tenant-web/eslint.config.mjs (run from packages/ui) on the 9 changed/new files", "result": "PASSED", "exit": 0, "errors": 0, "note": "1 pre-existing no-unused-vars warning at TrendCharts.test.tsx:92 ('_partial'), not touched by this cycle" }
+    ],
+    "integrity_checks": {
+      "statcard_consumers_and_datatable": "SHA256 of the 6 StatCard consumer files and DataTable.tsx recomputed after all edits: all 7 MATCH tests/phase-06-statcard-consumers.md (unchanged)."
+    },
+    "file_sizes_after": "trendChartShared.tsx 229, TrendLineChart.tsx 156, TrendBarChart.tsx 93, TrendChartsRecharts.test.tsx 284, TrendLineChartRows.test.tsx 77 (the buildRows tests were put in a new file to keep the recharts-stub test under 300 lines); all components well under 150 lines per function and 300 per file."
+  },
+  "failures": [],
+  "production_concerns": [
+    {
+      "id": "OBS-P6-001",
+      "severity": "LOW",
+      "where": "packages/ui/src/components/TrendLineChart.tsx buildRows (not exported)",
+      "finding": "The partial-segment splitting is the only non-trivial pure logic of the line chart but is module-private, so it can only be verified through a recharts stub (done) rather than directly.",
+      "suggested_fix": "Optionally export buildRows (or move it to trendChartShared.tsx) and unit-test it directly; not required."
+    },
+    {
+      "id": "OBS-P6-002",
+      "severity": "LOW",
+      "where": "packages/ui/src/components/index.ts lines 27, 127, 132",
+      "finding": "CHART_TONE_COLORS, CHART_TONE_DOT_CLASSES, the StatCardDelta component and TrendChartFrame/helpers are not exported from the barrel (only ChartTone, StatCardDeltaDirection/Tone and the trend chart types are). They are internal helpers, so this looks intentional; the barrel test pins the public surface (components, icons, types) only.",
+      "suggested_fix": "None unless consumers need the tone maps; then add `export { CHART_TONE_COLORS, CHART_TONE_DOT_CLASSES } from \"./chartTones\";`."
+    },
+    {
+      "id": "OBS-P6-003",
+      "severity": "LOW",
+      "where": "packages/ui/src/components/StatCard.tsx (cn(...) at the DashboardCard className)",
+      "finding": "Rendered root carries `p-5` twice (DashboardCard default + StatCard non-compact `p-5`) and, for compact, `p-5 ... p-4` (conflicting; cn() does not merge). Pre-existing behaviour (documented in the phase file: cn does not merge conflicting classes), pinned by the legacy golden markup, not caused by Phase 6.",
+      "suggested_fix": "None for this phase."
+    },
+    {
+      "id": "OBS-P6-004",
+      "severity": "LOW",
+      "where": "packages/ui/src/components/DashboardPanel.tsx PanelError",
+      "finding": "Error body with status 'error' but no `error` prop (or 'empty' without `empty`) renders an empty body; documented in the prop comments and pinned by tests. Callers must always pass the matching state object.",
+      "suggested_fix": "None."
+    }
+  ],
+  "not_run": [
+    "Real browser rendering of recharts: ResponsiveContainer sizing, hover tooltips, the dashed/lighter paint of partial points, theme variable resolution in dark mode (the server render and recharts stubs only prove structure, props and accessible fallbacks). Phase 9.",
+    "Visual regression of existing StatusDonutChart screens after the tone extraction (only markup/legend/palette assertions here). Phase 9.",
+    "Interaction tests (clicking retry or action rows, focus ring) - no DOM test library was added; handlers are verified by presence/props only.",
+    "`next build` was not re-run (already done in the cook Build Gate).",
+    "Delta/ActivityList/DashboardPanel inside the real Phase 7/8 screens (not built yet)."
+  ],
+  "report_path": "plans/ninh-overview-dashboards/tests/phase-06-test-report.json"
+}

@@ -10,6 +10,7 @@
 - Delta meaning is not conveyed by color alone (arrow, sign and screen-reader text); null change renders a dash.
 - No domain logic in the package; file <= 300 lines, component <= 150 lines.
 - Verification relies on the app typecheck scripts from Phase 5 step 1.
+- Preflight: read StatCard, StatusDonutChart, CircularProgressChart, DashboardCard, EmptyState, ErrorState, Skeleton, DashboardLoadingState, Button, Badge, BackButton/Breadcrumbs/SidebarNav and design-tokens.css first. @pte/ui does not import next/link (siblings take a `renderLink` adapter with a native `<a>` default), uses theme CSS variables only (`var(--action|sky-action|mint-action|cream-action|blush-action|ink-*|shell-border|surface-*)`), `cn()` does not merge conflicting Tailwind classes, `icons.tsx` is already 331 lines so new icons live in `dashboardIcons.tsx`, and lint does not cover packages/ui (it is only reachable through the app builds).
 
 ## Steps
 1. Grep all StatCard consumers and record their current usage as the regression reference.
@@ -30,7 +31,8 @@
 
 ## Quality and Testing State
 - Quality gate: not evaluated (Cook runs `/ck:quality --gate` after implementing this phase)
-- Testing: not started
+- Remediation cycle 1 (2026-10-13, after quality CHANGES_REQUIRED QUAL-001..011): QUAL-001 `accessibilityLayer={false}` on BarChart/LineChart (svg no longer a role=application tab stop inside role=img); QUAL-002 trend-chart empty state is now plain `role="status"` text (donut untouched); QUAL-003 `buildRows` exported, partial in the middle reconnects to the next complete point, lone/any partial point gets a hollow marker on the dashed line; QUAL-004/005 JSDoc (`label` unique per datum, untoned series = brand tone) + additive `allowDecimals?: boolean` (default false = unchanged); QUAL-007 JSDoc (tone is colour only, put evaluative text in `changeDirectionLabel`/`title`). Deferred to the user: QUAL-006 (vendor-web tsconfig rewritten by `next build`), QUAL-008..011. Re-test: @pte/ui 12 files / 271 tests passed; quality `--verify` pending. Details: tests/phase-06-test-report.json `remediation_cycle_1`.
+- Testing: passed (unit, 2026-10-13; counts below are the original 250 and were 271 after remediation cycle 1). @pte/ui gained its first test infrastructure (vitest ^3.2.7 + @types/node ^20 devDependencies, `test` script, node-environment `vitest.config.ts`; components rendered with `renderToStaticMarkup`, no DOM library): 0 -> 11 files / 250 tests, 0 failed, 0 skipped (StatCard regression + delta, DashboardPanel, ActivityList, TrendBarChart/TrendLineChart server render + recharts-stubbed prop/partial-segment checks, chartTones/StatusDonutChart alias, icons, DashboardLoadingState default-vs-overview, barrel). Mutation sanity: 6 deliberately broken copies (delta always shown, swapped tones, sr-only table formatter/partial/caption, line partial split) each failed the intended tests. @pte/ui typecheck (tests included), tenant-web typecheck/test (37)/lint, vendor-web lint (same 2 warnings), vendor-web typecheck (0 errors; `next build` regenerated the corrupted `.next/dev` reference, so the 28-error baseline no longer reproduces) and @pte/api-client test (571) pass; the 6 StatCard consumers and DataTable.tsx (711 lines) are SHA256-identical. Not run: real browser rendering of recharts (sizing, hover tooltip, dashed/lighter partial paint) and visual donut regression -> Phase 9. Report: tests/phase-06-test-report.json
 
 ## Risks
 - Chart renders zero-size on first paint: component contract requires an explicit height on the container.
