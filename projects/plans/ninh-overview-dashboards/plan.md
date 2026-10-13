@@ -11,7 +11,7 @@ Deliver real, data-backed overview screens for tenant-web `/host/dashboard` (HOS
 - [x] Phase 1: [quality: approved (no receipt: report outside pte-web repo); tests: passed incl. Postgres+EXPLAIN] Backend foundations + host core - baseline recording, leaf `overview` module, section/trend envelope, cache, host index migration (V94), host core sections
 - [x] Phase 2: [quality: approved after 1 fix cycle (no receipt: report outside pte-web repo); tests: passed, Postgres+EXPLAIN on scratch PG17] Backend host commercial and ops - grading backlog, subscription/expiry, pending order count, support facade, recent activity
 - [x] Phase 3: [quality: approved (no receipt: report outside pte-web repo); tests: passed incl. V96 Postgres+EXPLAIN on scratch PG17] Backend admin core + role gating - section-to-permission table, tenants + growth series, learners, recent tenants, applications, licenses, subscriptions, plans, support; platform-wide indexes (V96)
-- [ ] Phase 4: Backend admin revenue + question bank - per-currency revenue and extended question bank stats (V97 only if needed)
+- [x] Phase 4: [quality: approved (no receipt: report outside pte-web repo); tests: passed incl. V97 Postgres+EXPLAIN on scratch PG17; V97 kept] Backend admin revenue + question bank - per-currency revenue and extended question bank stats (V97 only if needed)
 - [ ] Phase 5: Frontend api-client contract + app `typecheck` scripts - dashboard types, endpoint constants, request functions, tests
 - [ ] Phase 6: @pte/ui dashboard primitives - StatCard delta (additive), DashboardPanel, trend charts, ActivityList, icons, overview skeleton
 - [ ] Phase 7: Tenant host dashboard UI - feature module, thin route, widgets, i18n messages, LearnersOverview retained last

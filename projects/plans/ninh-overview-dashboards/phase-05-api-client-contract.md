@@ -10,6 +10,7 @@ Both apps gain a `typecheck` script, and `@pte/api-client` exposes typed dashboa
 - Sections not yet delivered by the backend are typed optional/nullable; section status is an explicit union; the percentage change is nullable.
 - The contract contains no templates, platform-health, payment-link or system-notice fields; the map section is optional until Phase 10.
 - Tests do not require a running backend.
+- Preflight: read `requests/quota/index.ts`, `requests/billing/platformCommercial.ts` (+ its test), `requests/endpoints.test.ts`, `types/quota|support|scheduling|billing` and the backend `overview` DTO records; conventions confirmed: types folders hold type-only barrels (no runtime constants, so window constants live in `requests/dashboard`), `*_ENDPOINTS` objects already carry the full `/api/v1/...` path (client baseUrl is origin only), request functions take `client` first and return the already-unwrapped payload, and per-request tests use a fake `ApiClient` (existing enum types SessionStatus/PlanType/SubscriptionStatus/ActivationSource/QuestionStatus/QuestionPool/TicketCategory/TenantStatusResponse are reused; `AuditLogResponse` does not match the recent-activity item so `DashboardActivityItem` is dedicated).
 
 ## Steps
 1. Add a `typecheck` script (compiler check without emit) to tenant-web and vendor-web and run it once to expose any pre-existing errors, and also run lint once per app, recording both typecheck errors and lint results as baselines so they are not attributed to this work.
@@ -28,7 +29,7 @@ Both apps gain a `typecheck` script, and `@pte/api-client` exposes typed dashboa
 
 ## Quality and Testing State
 - Quality gate: not evaluated (Cook runs `/ck:quality --gate` after implementing this phase)
-- Testing: not started
+- Testing: passed (unit, 2026-10-13). @pte/api-client 28 files / 570 tests passed (was 22 / 455; +115 new: window/endpoint/envelope/error edge cases, typed host+admin fixtures, backend contract conformance against the pte-api overview Java records, facade mapping, type-level and nullability checks); typecheck, tenant-web typecheck/test (37)/lint and vendor-web lint match baseline; vendor-web typecheck only shows the recorded corrupted `.next/dev/types/routes.d.ts` (28 errors, 0 when that file is excluded). No contract mismatch found. NOT run: live backend request (Phase 9), `next build`, @pte/ui typecheck re-run. Backend conformance tests skip (visibly) when the pte-api sources are absent; set `PTE_API_JAVA_DIR` or `PTE_API_REQUIRED=1`. Report: tests/phase-05-test-report.json
 
 ## Risks
 - Pre-existing type errors surface once typecheck exists: record baseline, do not fix unrelated code.
