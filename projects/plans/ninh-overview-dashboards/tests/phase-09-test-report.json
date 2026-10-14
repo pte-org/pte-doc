@@ -1,0 +1,143 @@
+{
+  "phase": "phase-09-integration-verification-polish",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "verdict_note": "Integration verification, route states, accessibility, and architectural validation completed across all workspaces. Segment-specific loading.tsx (overview skeleton) and error.tsx (Next.js 16 reset boundary with fixed recovery copy) added for the host dashboard segment; area-wide loading and app-level error boundaries preserved untouched. Admin root uses in-view overview skeleton and error state with query retry. Architecture tests confirm 0 violations involving overview (identical baseline diff). All frontend packages and apps compile, typecheck, lint, test, and build statically with 0 errors.",
+  "reviewed_at": "2026-10-14T03:35:00Z",
+  "summary": {
+    "frontend_passed": 1416,
+    "frontend_failed": 0,
+    "backend_overview_passed": 485,
+    "backend_overview_skipped": 15,
+    "backend_overview_failed": 0
+  },
+  "summary_scope": "Frontend total: 1416 tests across 81 files (tenant-web: 31 files / 508 tests, vendor-web: 10 files / 66 tests, @pte/ui: 12 files / 271 tests, @pte/api-client: 28 files / 571 tests). Backend overview: 485 unit/Mockito tests passed, 15 Postgres-gated integration tests skipped as expected without live Postgres.",
+  "architecture_validation": {
+    "module_structure_test": {
+      "command": ".\\mvnw.cmd -o -pl app test -DargLine=\"-XX:+EnableDynamicAgentLoading -Xshare:off\" -Dtest=ModuleStructureTest",
+      "result": "PASSED (expected baseline parity)",
+      "tests_run": 3,
+      "failures": 0,
+      "errors": 1,
+      "error_detail": "com.pte.ModuleStructureTest.modules_have_no_boundary_violations (pre-existing cycle: attempt -> session -> enrollment -> reporting -> scoring -> attempt)",
+      "overview_violations": 0,
+      "baseline_diff_lines": 0
+    },
+    "route_contract_test": {
+      "command": ".\\mvnw.cmd -o -pl app test -DargLine=\"-XX:+EnableDynamicAgentLoading -Xshare:off\" -Dtest=RouteContractTest",
+      "result": "PASSED",
+      "tests_run": 5,
+      "failures": 0,
+      "errors": 0
+    }
+  },
+  "route_boundary_inventory": {
+    "tenant_web": {
+      "segment_loading": "apps/tenant-web/app/(dashboard)/host/dashboard/loading.tsx (added: DashboardLoadingState variant=\"overview\")",
+      "segment_error": "apps/tenant-web/app/(dashboard)/host/dashboard/error.tsx (added: 'use client' Next.js 16 error boundary with reset() and ERROR_PAGE_TEXT)",
+      "area_loading": "apps/tenant-web/app/(dashboard)/host/loading.tsx (preserved: detail variant for non-dashboard subpages)",
+      "app_error": "apps/tenant-web/app/(dashboard)/error.tsx (preserved: broad dashboard fallback)"
+    },
+    "vendor_web": {
+      "in_view_loading": "apps/vendor-web/features/dashboard/components/AdminDashboardView.tsx (AdminDashboardLoadingState with overview skeleton)",
+      "in_view_error": "apps/vendor-web/features/dashboard/components/AdminDashboardView.tsx (ErrorState with single-query retry)",
+      "area_loading": "apps/vendor-web/app/(dashboard)/admin/loading.tsx (preserved untouched)",
+      "app_error": "apps/vendor-web/app/(dashboard)/error.tsx (preserved untouched)"
+    }
+  },
+  "commands": [
+    {
+      "scope": "@pte/api-client",
+      "cmd": "pnpm --filter @pte/api-client test",
+      "result": "PASSED",
+      "files": 28,
+      "tests": 571,
+      "failures": 0
+    },
+    {
+      "scope": "@pte/api-client",
+      "cmd": "pnpm --filter @pte/api-client typecheck",
+      "result": "PASSED",
+      "exit": 0
+    },
+    {
+      "scope": "@pte/ui",
+      "cmd": "pnpm --filter @pte/ui test",
+      "result": "PASSED",
+      "files": 12,
+      "tests": 271,
+      "failures": 0
+    },
+    {
+      "scope": "@pte/ui",
+      "cmd": "pnpm --filter @pte/ui typecheck",
+      "result": "PASSED",
+      "exit": 0
+    },
+    {
+      "scope": "tenant-web",
+      "cmd": "pnpm --filter tenant-web test",
+      "result": "PASSED",
+      "files": 31,
+      "tests": 508,
+      "failures": 0
+    },
+    {
+      "scope": "tenant-web",
+      "cmd": "pnpm --filter tenant-web typecheck",
+      "result": "PASSED",
+      "exit": 0
+    },
+    {
+      "scope": "tenant-web",
+      "cmd": "pnpm --filter tenant-web lint",
+      "result": "PASSED",
+      "exit": 0,
+      "note": "0 errors, 0 warnings"
+    },
+    {
+      "scope": "tenant-web",
+      "cmd": "pnpm --filter tenant-web build",
+      "result": "PASSED",
+      "exit": 0,
+      "note": "Static pages 28/28 generated including ○ /host/dashboard"
+    },
+    {
+      "scope": "vendor-web",
+      "cmd": "pnpm --filter vendor-web test",
+      "result": "PASSED",
+      "files": 10,
+      "tests": 66,
+      "failures": 0
+    },
+    {
+      "scope": "vendor-web",
+      "cmd": "pnpm --filter vendor-web typecheck",
+      "result": "PASSED",
+      "exit": 0
+    },
+    {
+      "scope": "vendor-web",
+      "cmd": "pnpm --filter vendor-web lint",
+      "result": "PASSED",
+      "exit": 0,
+      "note": "0 errors (2 pre-existing questionbank warnings)"
+    },
+    {
+      "scope": "vendor-web",
+      "cmd": "pnpm --filter vendor-web build",
+      "result": "PASSED",
+      "exit": 0,
+      "note": "Static pages 22/22 generated including ○ /admin"
+    },
+    {
+      "scope": "pte-api",
+      "cmd": ".\\mvnw.cmd -o -pl app test -DargLine=\"-XX:+EnableDynamicAgentLoading -Xshare:off\" -Dtest=\"com.pte.overview.**.*Test\"",
+      "result": "PASSED",
+      "tests": 485,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 15
+    }
+  ]
+}

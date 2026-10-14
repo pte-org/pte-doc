@@ -9,6 +9,7 @@ Both dashboards are verified end to end against the real backend per role, with 
 - Route error boundaries use the retry mechanism documented for Next.js 16 and fixed recovery copy, no technical details.
 - Verification is lint, typecheck, unit tests, build and a documented browser pass; no new DOM test infrastructure.
 - Do not modify shared defaults other screens rely on.
+- Preflight: read AGENTS.md/CODING_STANDARDS_WEB.md and Next 16 docs in node_modules/next/dist/docs/01-app/03-api-reference/03-file-conventions/ (loading.md Suspense boundary, error.md Client Component error boundary with reset/retry); existing route file inventory: area-wide loading files (apps/tenant-web/app/(dashboard)/host/loading.tsx with detail variant, apps/vendor-web/app/(dashboard)/admin/loading.tsx) serve multiple subpages and remain untouched; app-level dashboard error files (apps/tenant-web/app/(dashboard)/error.tsx and apps/vendor-web/app/(dashboard)/error.tsx) serve broad dashboard routes and remain untouched; segment-specific loading.tsx and error.tsx added to dedicated host dashboard route segment app/(dashboard)/host/dashboard; admin root route app/(dashboard)/admin uses in-view overview skeleton and error state inside AdminDashboardView with query retry; verification across all workspaces via pte-web and pte-api suites.
 
 ## Steps
 1. Inventory the existing loading and error files (vendor app dashboard error, vendor admin loading, tenant host loading, both app-level dashboard errors) and decide per file: keep, or add a segment-specific file for the host dashboard route (loading with the overview skeleton, error with retry).
@@ -25,8 +26,8 @@ Both dashboards are verified end to end against the real backend per role, with 
 - Browser pass documented for the six role cases and three widths: no horizontal page scroll, no console errors, exactly one dashboard-endpoint request per load (LearnersOverview roster request excluded); forced failure shows the retry boundary and retry works.
 
 ## Quality and Testing State
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after implementing this phase)
-- Testing: not started
+- Quality gate: APPROVED (reviewed in quality/phase-09-integration-verification-polish-quality-report.json)
+- Testing: passed (unit; documented in tests/phase-09-test-report.json and tests/phase-09-integration-checklist.md)
 
 ## Risks
 - Seed data may not cover all states (expiring subscriptions, failed scoring): use local fixtures or temporary mocked responses for visual checks only, not committed.
