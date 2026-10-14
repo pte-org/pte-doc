@@ -70,7 +70,10 @@ AttemptAnswer / Attempt:
 ```
 1. Sinh viên nộp bài
    └─ attempt: 1 transaction → INSERT AttemptAnswer (status=SUBMITTED)
-      Không phát gì, không kích hoạt gì.
+      Khi attempt chuyển SUBMITTED, phát `AttemptSubmittedEvent` (không kèm dữ liệu bài làm);
+      scoring nghe sau commit và kéo bài vào bảng làm việc của nó (trạng thái PENDING) để host
+      xem được trước khi chấm. Không chấm, không đẩy queue. Lỗi ở bước này không ảnh hưởng bài nộp;
+      lệnh chấm của host vẫn kéo nốt phần còn thiếu.
 
 2. Host chủ động phát lệnh "chấm kỳ thi X"
    └─ scoring: kiểm quyền qua SessionService.verifyHostAccess
