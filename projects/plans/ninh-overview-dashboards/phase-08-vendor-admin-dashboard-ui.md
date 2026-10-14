@@ -11,6 +11,7 @@
 - Copy in a sibling messages file (vi/en) for the dashboard, not the 1005-line admin copy dictionary; every displayed enum has both keys.
 - Reuse @pte/ui as shipped; no inline styles or raw colors; component <= 150, file <= 300. vendor-web tests are `.test.ts` files.
 - Role visibility uses existing permission helpers on top of (never instead of) backend section status.
+- Preflight: read AGENTS.md/CODING_STANDARDS_WEB.md and Next 16 docs in node_modules/next/dist/docs/01-app/ (page.md, loading.md, error.md: page stays thin server component rendering client view, no 'use client' in page.tsx); siblings read: features/auth/permissions.ts (hasAnyRole, canManagePlatformOperations, canReviewAcademic, roleLabel), features/auth/api.ts (useCurrentUser query, CURRENT_USER_QUERY_KEY), features/tenancy/api (useTenants, getTenant), features/i18n/adminCopy.ts (63KB catalog bypassed in favour of sibling messages en.ts/vi.ts), tenant-web hostDashboard pattern (api.ts single query, typed en/vi messages, pure format/sections/trend mappers, SectionPanel error/hidden handling); vitest installed in vendor-web mirroring tenant-web node environment.
 
 ## Steps
 1. Read the Next.js 16 docs, then add the dashboard api hook (query key, stale time) and install vitest in vendor-web: dev dependency, minimal node-environment config mirroring tenant-web, a `test` script, lockfile update and the package-manager build-script allowance for esbuild.
@@ -28,8 +29,8 @@
 - Every admin section in the plan.md map has a rendered consumer (checklist in handoff).
 
 ## Quality and Testing State
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after implementing this phase)
-- Testing: not started
+- Quality gate: approved (quality/phase-08-vendor-admin-dashboard-ui-quality-report.json)
+- Testing: passed (tests/phase-08-test-report.json; 10 files / 66 passed in vendor-web)
 
 ## Risks
 - Province map empty until Phase 10: empty state, no fake locations.

@@ -14,8 +14,8 @@ Deliver real, data-backed overview screens for tenant-web `/host/dashboard` (HOS
 - [x] Phase 4: [quality: approved (no receipt: report outside pte-web repo); tests: passed incl. V97 Postgres+EXPLAIN on scratch PG17; V97 kept] Backend admin revenue + question bank - per-currency revenue and extended question bank stats (V97 only if needed)
 - [x] Phase 5: [quality: approved after 1 remediation cycle (no receipt: report outside pte-web repo); tests: passed (api-client 571, tenant-web 37); vendor-web typecheck red only from pre-existing corrupted .next routes.d.ts (baseline)] Frontend api-client contract + app `typecheck` scripts - dashboard types, endpoint constants, request functions, tests
 - [x] Phase 6: [quality: approved after 1 remediation cycle (no receipt: report outside pte-web repo); tests: passed (@pte/ui 271); QUAL-006 vendor-web tsconfig rewrite = user decision] @pte/ui dashboard primitives - StatCard delta (additive), DashboardPanel, trend charts, ActivityList, icons, overview skeleton
-- [ ] Phase 7: Tenant host dashboard UI - feature module, thin route, widgets, i18n messages, LearnersOverview retained last
-- [ ] Phase 8: Vendor admin dashboard UI - role-aware sections, remove fake data and full tenant-list dependency, vitest installed in vendor-web
+- [x] Phase 7: [quality: approved; tests: passed] Tenant host dashboard UI - feature module, thin route, widgets, i18n messages, LearnersOverview retained last
+- [x] Phase 8: [quality: approved; tests: passed] Vendor admin dashboard UI - role-aware sections, remove fake data and full tenant-list dependency, vitest installed in vendor-web
 - [ ] Phase 9: Integration verification, states and polish - route-specific loading/error, responsive + a11y pass, end-to-end check per role
 - [ ] Phase 10 (DEFERRED - not in this cook; see "Deferred / Follow-up" at the end): Tenant province for the map - province captured through application/approval/create flows, map aggregate, vendor form field
 
