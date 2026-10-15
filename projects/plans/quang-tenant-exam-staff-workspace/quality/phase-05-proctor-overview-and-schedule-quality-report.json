@@ -1,0 +1,177 @@
+{
+  "mode": "verify",
+  "target": "phase-05-proctor-overview-and-schedule",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-11T04:23:33Z",
+  "reviewed_files": [
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/api-client/src/requests/scheduling/sessions.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/filters/api.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/filters/StaffFilterToolbar.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/proctor/ProctorOverview.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/proctor/ProctorScheduleTab.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/proctor/ProctorSessionList.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/proctor/NextProctorSessions.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffProfileSnapshot.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffDetailView.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/messages/en.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/messages/vi.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/api.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/constants.ts"
+  ],
+  "constraints_source_paths": [
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/phase-05-proctor-overview-and-schedule.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/contract.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/docs/CODING_STANDARDS_WEB.md"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [
+    {
+      "id": "QUAL-P05-001",
+      "severity": "MEDIUM",
+      "rule": "PERF_CACHE_HAS_DEFINED_LIFECYCLE",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/proctor/NextProctorSessions.tsx:11",
+      "related_locations": [
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/proctor/NextProctorSessions.tsx:12",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/proctor/NextProctorSessions.tsx:14",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffDetailView.tsx:61",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/messages/en.ts:38",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/messages/vi.ts:38"
+      ],
+      "evidence": "NextProctorSessions captures from once with useState(() => new Date().toISOString()) and never advances it. The preview uses sessionStatus=SCHEDULED, direction=asc, page=0, size=3 and that same from on every query request/refetch/retry. StaffProfileSnapshot is kept mounted across tabs, so returning to Overview does not reconstruct this boundary. The server filters closesAt > filter.from, not closesAt > current request time. Both message catalogs promise up to three assigned scheduled sessions 'not yet ended'/ 'chưa hết giờ', including overdue openings.",
+      "why_it_matters": "A fresh preview request made later in the same mounted profile can still include a SCHEDULED session whose closing time has already passed, because it remains after the old mount-time lower bound. Older overdue sessions can occupy all three bounded slots and hide genuinely not-yet-ended assignments. This is a moving-time query freshness issue, not an objection to intentionally including overdue openings.",
+      "required_action": "Give the preview lower bound an explicit moving-time lifecycle: compute a fresh current Instant for each actual preview request or advance it at well-defined activation/refresh boundaries, keeping displayed 'not yet ended' semantics honest. Ensure retry and return-to-Overview cannot silently reuse the profile's original timestamp. Preserve bounded server filtering, include overdue-but-not-ended openings, retain tenant/target isolation and cancellation, and avoid per-render time keys that cause request/cache churn or client-filtering a bounded page as a substitute for server filtering.",
+      "owner": "cook",
+      "change_evidence": "NextProctorSessions is a new untracked Phase05 source output, declared in the current phase Files; its frozen timestamp and moving-time copy are newly introduced.",
+      "source_trace": "Mount preview at T0 -> assigned session has opensAt < T0 < closesAt T1 and remains SCHEDULED -> later T2 > T1 return Overview or retry/refetch -> request still sends from=T0 -> server accepts closesAt=T1 > T0 -> response can display this elapsed session as not yet ended. Independent source trace only; no clock simulation/test/HTTP/browser execution.",
+      "resolution": {
+        "verified_at": "2026-10-11T04:23:33Z",
+        "confidence": "high",
+        "locations": [
+          "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/api.ts:68",
+          "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/constants.ts:6",
+          "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/proctor/NextProctorSessions.tsx:11"
+        ],
+        "evidence": "New useNextStaffProctorSessions uses scope.key (staff detail prefix, authenticated tenant and target public ID) plus dedicated proctor-preview suffix. Its queryFn creates from=new Date().toISOString() at execution time and calls the existing abortable package request with SCHEDULED/asc/page0/STAFF_PREVIEW_PAGE_SIZE=3. No render-time timestamp in the key or mount-frozen from state remains. scope.ready && enabled gates inactive/unauthorized requests. NextProctorSessions consumes this hook; common Refresh and safe error Retry refetch the same hook and therefore recompute the time bound. Query invalidation/focus/activation fetch executions likewise use a current bound. The overlap predicate and overdue-but-not-ended interpretation remain unchanged.",
+        "conclusion": "Moving-time preview request freshness and bounded/cache lifecycle are explicit. Source trace confirms the earlier mount-time lower-bound failure no longer applies. Static review only; no tests/browser/HTTP execution."
+      }
+    }
+  ],
+  "scope": {
+    "declared_output_files": 13,
+    "reviewed_output_files": 13,
+    "adapter": "TypeScript/Node and Frontend; Core plus relevant ownership/API/constants/async/cache/performance/change-safety rules.",
+    "fingerprint_policy": "Exact 11 Phase05 outputs actually read during gate plus api.ts and constants.ts explicitly declared and freshly read/evaluated in verify; constraints remain outside reviewed-output fingerprints.",
+    "excluded": [
+      "Three unrelated dirty exam component files were not opened or reviewed.",
+      "Existing Phase02 backend and Phase03 helpers were read only to establish actual server/query/route semantics; not new production outputs.",
+      "Student broad refactoring, Phase06 workload board/scoring implementation and lifecycle mutation are outside scope."
+    ],
+    "verification_scope": "Re-evaluated the existing preview-lifecycle finding and new scoped preview-hook/constants integration against live source. Phase file explicitly expands Files before this verify. No unrelated rescan."
+  },
+  "evaluation": {
+    "server_filtering": "Apply separates draft from applied query; apply/clear reset page; session/status/date filters and page/size are passed to dedicated staff endpoints. Local DataTable filter/sort/pagination are disabled. Page-local date grouping does not invent full-dataset totals. Existing tenant session catalog is option-only as explicitly required by phase, never used to derive workload counts.",
+    "counts": "All eight Proctor metrics are direct server fields, including separate ended/cancelled/awaiting-open/preparing/unscheduled. No attendance/completed-duty claim and no fabricated distinct exam identity. Dual-role examiner session count is separately labeled; Phase06 detailed grading metrics are not claimed implemented.",
+    "preview": "Bounded dedicated preview request now recomputes current Instant inside each fetch execution, with a stable tenant/target proctor-preview key and size3 constant. Includes overdue openings only while closesAt exceeds that request bound; this is not a promise every opensAt is future. Common Refresh and Retry use the same fresh-bound request path. QUAL-P05-001 resolved.",
+    "timezone": "Date utilities use explicit Asia/Ho_Chi_Minh UTC+7 bounds and next calendar-day exclusive end, not host/browser local timezone. Group labels and time cells use same display zone; null timestamps render unscheduled. Common timezone subtitle is visible. Shared server predicate excludes missing/invalid schedules with date filters.",
+    "active_queries": "Overview and preview are enabled only when Overview active; schedule queries/options only when Proctor active, gated by selected publicId and authenticated Host tenant. Role set controls work sections; public-ID keyed route resets target state. Reused tenant option query key avoids per-session fan-out.",
+    "common_defaults": "Uses stock CollapsibleSection/StatCard/Input/Select/Button/LoadingState/DataTable/PaginationControls/StatusBadge/ActionMenu without typography/color/trigger/sizing overrides. Feature composition changes layout only; no new dependencies/calendar/drag-and-drop.",
+    "api_ownership": "Package request owns optional AbortSignal compatibility; option/source hooks own transport through api-client and TanStack. Backend identity validates selected staff and requested role; server provides totals and dedicated projection. No personal Proctor console endpoint or mutation.",
+    "navigation": "Live Host app route /host/exams/[publicId] renders SessionDetailView with sessionPublicId; same-tab encoded session publicId route is correct. Existing Staff account query-error preservation/fail-closed behavior retained.",
+    "error_loading": "Common pending/error/retry/empty states distinguish failed requests from empty result; no raw API/internal errors are rendered. Main schedule paging disabled while fetching; no stale previous-filter rows are deliberately presented as new-filter data."
+  },
+  "validation": {
+    "reviewer_performed": [
+      "Live phase Files cross-checked with git status/untracked source tree, listSessions diff and full reads of all 11 outputs.",
+      "Live backend schedule predicate and overview bucket implementations read; actual Host detail route and shared query/filter/date boundaries checked.",
+      "Scoped git diff --check exited 0; line-ending warnings only.",
+      "Verify: refreshed live API/constants/NextProctorSessions and phase Files, git status and scoped git diff --check (exit0). Exact preview enable/key/transport/cancellation and fresh request-time boundary reviewed."
+    ],
+    "user_supplied": [
+      {
+        "check": "Tenant tsc --noEmit and eslint features/examStaff",
+        "result": "SUCCESS_REPORTED_BY_USER_EXIT_0",
+        "session": "47138",
+        "note": "Not independently rerun by reviewer."
+      },
+      {
+        "check": "API-client TypeScript and git diff --check",
+        "result": "SUCCESS_REPORTED_BY_USER_EXIT_0_BEFORE_PREVIEW_REMEDIATION"
+      }
+    ],
+    "tests": "Not written or run, explicitly declined.",
+    "limitations": [
+      "Source-level semantic quality review only; no browser/UI manual proof, live HTTP/database checks or test execution.",
+      "Phase05 approval would not claim Phase06 implemented or release-ready.",
+      "APPROVED is semantic source-level quality approval; post-remediation tenant tsc and scoped ESLint exit0 are user-supplied, not independently rerun. No production build/browser/live database proof claimed."
+    ],
+    "latest_remediation_checks": {
+      "status": "SUCCESS_REPORTED_BY_USER_EXIT_0",
+      "checks": "Post-remediation tenant tsc and scoped ESLint both exited 0, supplied by user; not independently rerun by reviewer."
+    }
+  },
+  "evidence_sources": [
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/api.ts",
+      "usage": "Explicitly added Phase05 output; freshly read fully during verification for scoped preview-hook/constant lifecycle."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/constants.ts",
+      "usage": "Explicitly added Phase05 output; freshly read fully during verification for scoped preview-hook/constant lifecycle."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/utils.ts",
+      "usage": "Existing integration dependency read fully; query ownership, key/enabling/cancellation, routes and UTC bounds."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffWorkspaceFilters.ts",
+      "usage": "Existing integration dependency read fully; query ownership, key/enabling/cancellation, routes and UTC bounds."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/api-client/src/requests/admin/examStaffWorkspace.ts",
+      "usage": "Read fully: selected public-ID typed transport/serialization and AbortSignal."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/StatCard.tsx",
+      "usage": "Read fully: stock metric presentation."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/CollapsibleSection.tsx",
+      "usage": "Read fully: common collapsible presentation."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/app/(dashboard)/host/exams/[publicId]/page.tsx",
+      "usage": "Read fully: actual owned session detail route."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffWorkspaceService.java",
+      "usage": "Read fully: Proctor server totals/buckets and selected-staff role enforcement."
+    },
+    {
+      "path": "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/StaffScheduleQueryService.java",
+      "usage": "Read fully: scoped assignment EXISTS/count/paging and closesAt > from overlap predicate."
+    }
+  ],
+  "receipt": {
+    "issued_by": "C:/Users/DELL/.codex/skills/ck-quality/scripts/receipt.py",
+    "path": "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/quality/phase-05-proctor-overview-and-schedule-receipt.json",
+    "policy": "Issue immediately after APPROVED report; fingerprint live report and all13 reviewed outputs, not pipeline state or runtime correctness."
+  },
+  "report_path": "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/quality/phase-05-proctor-overview-and-schedule-quality-report.json",
+  "reviewer_changes": "Canonical report and mechanically issued Phase05 receipt only. No production/test edits, tests, phase/master transitions, other phase receipt refresh, or Phase06 activation.",
+  "summary_basis": "Open findings only; original gate evidence is retained historically and QUAL-P05-001 is RESOLVED.",
+  "verification_files": [
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/api.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/constants.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/proctor/NextProctorSessions.tsx"
+  ]
+}
