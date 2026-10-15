@@ -1,0 +1,64 @@
+{
+  "phase": "04",
+  "name": "platform-manager-operations",
+  "mode": "tdd",
+  "status": "RED_TESTS_TO_ADD",
+  "scope": "backend",
+  "tests": [
+    {
+      "class": "com.pte.shared.security.PlatformOperationPolicyTest",
+      "cases": [
+        "managerCanUseOnlyMatrixOperations",
+        "managerCannotUseAdminOnlyOperations",
+        "tenantScopedPrincipalCannotUsePlatformOperations",
+        "adminCanOverridePlatformOperations"
+      ]
+    },
+    {
+      "class": "com.pte.billing.internal.controller.PlatformManagerControllerSecurityTest",
+      "cases": [
+        "applicationsTenantsPlansLicensesUseManagerGuards",
+        "settingsUsersRevealRevokeRemainAdminOnly",
+        "tenantOrderAndSubscriptionEndpointsRemainHostOnly"
+      ]
+    },
+    {
+      "class": "com.pte.notification.internal.controller.PlatformManagerAnnouncementSecurityTest",
+      "cases": [
+        "managerCanManageAnnouncementDraftAndPublish",
+        "managerCannotDeletePublishedSensitiveAnnouncementWithoutAdminOverride"
+      ]
+    },
+    {
+      "class": "com.pte.support.internal.controller.PlatformManagerSupportSecurityTest",
+      "cases": [
+        "managerCanReadAndMutateSupportTickets",
+        "tenantSupportEndpointsRemainTenantScoped"
+      ]
+    },
+    {
+      "class": "com.pte.billing.internal.service.PlatformManagerMutationPolicyTest",
+      "cases": [
+        "managerTenantAndPlanMutationCarriesActorAndAudit",
+        "managerLicenseIssueAndMaskedReadNeverReturnsRawCode",
+        "managerCannotRevealOrRevokeLicense"
+      ]
+    },
+    {
+      "class": "com.pte.billing.internal.service.PlatformCommercialQueryServiceTest",
+      "cases": [
+        "managerReadsPlatformWideOrdersAndSubscriptions",
+        "tenantIdFilterIsAppliedServerSide"
+      ]
+    }
+  ],
+  "quality": {
+    "required": true,
+    "gate": "ck-quality",
+    "deferred": [
+      "live PostgreSQL query/migration execution",
+      "HTTP authorization through a running deployment",
+      "browser/vendor-admin role-aware UI"
+    ]
+  }
+}

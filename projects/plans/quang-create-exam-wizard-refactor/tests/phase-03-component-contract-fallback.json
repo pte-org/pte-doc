@@ -1,0 +1,65 @@
+{
+  "artifactVersion": 1,
+  "phase": "03-phase-components",
+  "capturedAt": "2026-10-08",
+  "runner": {
+    "status": "not-configured",
+    "reason": "tenant-web exposes dev/build/start/lint only and has no local component-test runner",
+    "fallback": "deterministic source-contract, line-count, baseline-hash, and protected-hash assertions plus browser smoke"
+  },
+  "ownedFiles": [
+    "../pte-web/apps/tenant-web/features/exams/components/CreateExamWizard.tsx",
+    "../pte-web/apps/tenant-web/features/exams/components/create-exam/ExamDetailsStep.tsx",
+    "../pte-web/apps/tenant-web/features/exams/components/create-exam/SchedulePolicyStep.tsx",
+    "../pte-web/apps/tenant-web/features/exams/components/create-exam/AudienceStep.tsx",
+    "../pte-web/apps/tenant-web/features/exams/components/create-exam/ReviewStep.tsx",
+    "../pte-web/apps/tenant-web/features/exams/hooks/useCreateExamWizardViewModel.ts"
+  ],
+  "contractCases": [
+    {
+      "id": "four-phase-files",
+      "expectedOutput": "all four focused presentation files exist"
+    },
+    {
+      "id": "shell-line-target",
+      "expectedOutput": "CreateExamWizard.tsx has no more than 180 physical lines"
+    },
+    {
+      "id": "explicit-step-map",
+      "expectedOutput": "shell maps steps 1 through 4 to the four phase components"
+    },
+    {
+      "id": "shell-form-contract",
+      "expectedOutput": "create-exam-workflow-form and final effectiveForm submit payload are preserved"
+    },
+    {
+      "id": "navigation-submit-guard",
+      "expectedOutput": "navigation buttons remain type=button and handleSubmit rejects non-step-4 events"
+    },
+    {
+      "id": "phase-presentation-boundary",
+      "expectedOutput": "phase components contain no nested native form, query hook, mutation hook, or mutate call"
+    },
+    {
+      "id": "view-model-boundary",
+      "expectedOutput": "view-model owns locale/options/policy mapping and composes the existing form and audience hooks"
+    },
+    {
+      "id": "scope-baseline",
+      "expectedOutput": "the pre-refactor shell hash remains recorded in the Phase 03 baseline and constants remain unchanged"
+    },
+    {
+      "id": "protected-agent-hashes",
+      "expectedOutput": "all five protected concurrent-agent files retain their recorded hashes"
+    }
+  ],
+  "boundaryAssertions": [
+    "The shell remains the modal, Stepper, sticky-footer, explicit step-map, and final-submit boundary.",
+    "The four phase files receive values/options/errors/loading state and callbacks only.",
+    "The view-model hook contains no JSX and does not introduce a second form or audience store.",
+    "useLocale remains the locale source; no LocaleProvider or common UI file is changed by this phase.",
+    "The existing public wizard props, field names, IDs, classes, semantic tokens, and payload shape remain intact.",
+    "The new hook is a composition helper, not a per-input micro-component."
+  ],
+  "evidenceBoundary": "This fallback artifact proves the recorded source contract and static checks only; it is not live browser, API, database, or production proof."
+}

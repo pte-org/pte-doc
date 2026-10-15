@@ -1,0 +1,206 @@
+{
+  "mode": "gate",
+  "target": "phase-06-examiner-overview-and-board",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-11T04:31:33Z",
+  "reviewer": {
+    "independent": true,
+    "method": "Inline independent source review using ck:quality and code-review; no implementation delegation."
+  },
+  "reviewed_files": [
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/Board.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/index.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerOverview.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerProgress.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerSessionCard.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerSessionTable.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerWorkColumn.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerBoard.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerTable.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerTrackingTab.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffProfileSnapshot.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffDetailView.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/messages/en.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/messages/vi.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/constants.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/types.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffWorkspaceFilters.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/api.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/utils.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/filters/StaffFilterToolbar.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffWorkspaceError.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffDetailText.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/proctor/ProctorScheduleTab.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/proctor/ProctorOverview.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/app/(dashboard)/host/exam-staff/[staffPublicId]/page.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/api-client/src/types/admin/examStaffWorkspace.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/api-client/src/requests/admin/examStaffWorkspace.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/Tabs.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/DashboardCard.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/CollapsibleSection.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/PaginationControls.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffWorkspaceService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffWorkspaceController.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/StaffWorkspaceQuery.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/ExaminerOverviewAccumulator.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/examstaff/internal/ExaminerOverviewView.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/dto/response/ExaminerProgressView.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/StaffScoringQueryService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/StaffSessionProgress.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/StaffAttemptProgress.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/StaffScheduleQueryService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/ExamStaffIdentityService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/service/ExamStaffAccountService.java"
+  ],
+  "declared_outputs": [
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/Board.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/ui/src/components/index.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerOverview.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerProgress.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerSessionCard.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerSessionTable.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerWorkColumn.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerBoard.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerTable.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/examiner/ExaminerTrackingTab.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffProfileSnapshot.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/components/StaffDetailView.tsx",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/messages/en.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/messages/vi.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/constants.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/types.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffWorkspaceFilters.ts"
+  ],
+  "scope": {
+    "phase_file": "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/phase-06-examiner-overview-and-board.md",
+    "contract": "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/contract.md",
+    "boundaries": "All 17 Phase06 declared outputs; supporting API/backend contracts and existing UI conventions read-only. Unrelated exam changes excluded. No production/test edits, no tests or browser execution."
+  },
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "evaluations": [
+    {
+      "area": "Independent bounded paging and full totals",
+      "evidence": [
+        "ExaminerWorkColumn.tsx:18-27",
+        "ExaminerBoard.tsx:13-26",
+        "ExaminerTable.tsx:15-26",
+        "StaffWorkspaceService.java:36-50"
+      ],
+      "assessment": "Each visible work bucket owns page state and sends its own bounded size=5 request; UNAVAILABLE has a separate request/page. Table size=20 uses the same server projection. Column summary uses totalByStatus rather than page length for official totals; page length is explicitly the number shown. Backend totals are accumulated before workStatus selection and pagination; no local grouping/aggregation substitutes for full totals."
+    },
+    {
+      "area": "Filter lifecycle and target/role boundaries",
+      "evidence": [
+        "useStaffWorkspaceFilters.ts:19-34",
+        "ExaminerTrackingTab.tsx:17-35",
+        "StaffDetailView.tsx:41-45",
+        "StaffDetailView.tsx:70-73",
+        "api.ts:19-24",
+        "api.ts:55-62",
+        "app/(dashboard)/host/exam-staff/[staffPublicId]/page.tsx:8"
+      ],
+      "assessment": "Applied date/session/publication filters are shared between board and table; immediate work-status selection changes visible request-backed columns/table server predicate. Successful Apply and Clear increment revision and remount the board/table, resetting all pages even for identical predicates. Clear also resets work status to ALL. The route keys the entire view by selected publicId; examiner components mount only for EXAMINER and requests are enabled only for an active tab and a valid Host tenant/target scope. Query keys include tenant, target and predicates; AbortSignal is forwarded."
+    },
+    {
+      "area": "Progress, units, zero-work and unavailable coverage",
+      "evidence": [
+        "ExaminerOverview.tsx:10-34",
+        "ExaminerProgress.tsx:12-24",
+        "ExaminerOverviewAccumulator.java:29-49",
+        "StaffSessionProgress.java:49-58",
+        "StaffAttemptProgress.java:64-73"
+      ],
+      "assessment": "Session counts, assignment/attempt counts and eligible/submitted answer counts remain separately labeled. Overview uses server totals and coverage flag; partial verified counts are explicitly separate, never presented as whole-workload completion. Null/invalid progress renders unavailable without a bar; consistent eligible=0 renders no-work copy instead of a fabricated graded percentage. An empty overview renders no assignments. Percentages outside 0..100 are not rendered. Session-level unavailable progress is not counted as completed."
+    },
+    {
+      "area": "Publication, read-only actions and privacy",
+      "evidence": [
+        "ExaminerSessionCard.tsx:12-28",
+        "ExaminerSessionTable.tsx:12-29",
+        "ExaminerTrackingTab.tsx:19",
+        "StaffWorkspaceService.java:66-85",
+        "StaffScoringQueryService.java:65-70"
+      ],
+      "assessment": "Publication uses the backend publication field independently of work completion; published history is not excluded by default. Cards and table expose only Host session-detail navigation, not scoring commands, allocation/confirmation or impersonation. UI renders metadata and aggregate counts only, not answer payloads, individual scores or raw diagnostic errors."
+    },
+    {
+      "area": "Common UI abstraction and locale",
+      "evidence": [
+        "Board.tsx:5-25",
+        "ExaminerSessionCard.tsx:14-28",
+        "ExaminerSessionTable.tsx:25-29",
+        "detail/messages/en.ts",
+        "detail/messages/vi.ts"
+      ],
+      "assessment": "Board/BoardColumn are small presentation-only slot compositions of stock DashboardCard/CollapsibleSection. Domain status, query, projection and paging stay in the feature. Layout classes do not override shipped typography, colors, sizing or action triggers. Existing common controls provide keyboard interactions; feature copy uses the shared locale catalog. Components are focused and below documented line limits."
+    },
+    {
+      "area": "Error isolation, refresh and schedule semantics",
+      "evidence": [
+        "ExaminerWorkColumn.tsx:25-32",
+        "ExaminerTable.tsx:20-26",
+        "StaffProfileSnapshot.tsx:17-26",
+        "utils.ts:8-38",
+        "StaffScheduleQueryService.java:25-73",
+        "StaffWorkspaceQuery.java:10-29"
+      ],
+      "assessment": "Each request has its own loading/error/retry branch and explicit manual refresh; a failed column does not zero other columns. No added polling. Both display modes use deterministic schedule sort descending plus server publicId tie-breaker and the same validated base filters. Date-only filters use approved Asia/Ho_Chi_Minh inclusive day boundaries converted to UTC; nullable schedules display unscheduled and backend date predicates exclude missing schedules."
+    }
+  ],
+  "verification": {
+    "performed_by_reviewer": [
+      {
+        "check": "Scoped git diff --check",
+        "exit_code": 0,
+        "note": "Tracked paths only; feature sources are currently untracked and were inspected directly. Git emitted only an LF/CRLF informational warning."
+      },
+      {
+        "check": "Independent static comparison of all declared outputs to live backend DTO/controller/service contracts",
+        "result": "No gate-blocking defect found."
+      }
+    ],
+    "supplied_by_user": [
+      {
+        "check": "Tenant TypeScript noEmit",
+        "exit_code": 0
+      },
+      {
+        "check": "Scoped feature/student ESLint",
+        "exit_code": 0
+      },
+      {
+        "check": "UI package typecheck and vendor TypeScript noEmit",
+        "exit_code": 0
+      },
+      {
+        "check": "Root-config UI Board/Profile lint",
+        "exit_code": 0,
+        "note": "Next no-pages directory warning reported."
+      },
+      {
+        "check": "Tenant production build including dynamic staff route",
+        "exit_code": 0
+      }
+    ],
+    "tests": {
+      "written": false,
+      "executed": false,
+      "reason": "User explicitly declined tests."
+    },
+    "limitations": [
+      "Reviewer did not rerun compilation, lint or build; supplied results are not independent execution evidence.",
+      "No rendered keyboard, 375px overflow, long-text, light/dark, API/database or behavioral verification was performed.",
+      "Existing Phase03 LOW assertion finding in useStaffDetailText.ts remains outside this phase's remediation scope and is not resolved by this gate.",
+      "Phase05 receipt validity was supplied by the user, not reverified here.",
+      "This approval is only Phase06 architecture/domain/source quality, not phase completion, human acceptance, release proof or the later all-phase integration gate."
+    ]
+  },
+  "report_path": "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/quality/phase-06-examiner-overview-and-board-quality-report.json"
+}

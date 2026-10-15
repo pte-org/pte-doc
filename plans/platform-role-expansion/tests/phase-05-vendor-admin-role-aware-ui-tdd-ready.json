@@ -1,0 +1,58 @@
+{
+  "phase": "05",
+  "name": "vendor-admin-role-aware-ui",
+  "mode": "tdd",
+  "status": "RED_READY",
+  "scope": "vendor-web, api-client, shared-ui, and response compatibility",
+  "tests": [
+    {
+      "area": "session and capability boundary",
+      "cases": [
+        "canonical platform roles and legacy PLATFORM_AUTHOR normalize to one capability vocabulary",
+        "unsupported vendor roles do not persist a vendor session or redirect into /admin",
+        "authenticated users without a required route role receive a forbidden state"
+      ]
+    },
+    {
+      "class": "packages/api-client/src/requests/user/platformUsers.test.ts",
+      "cases": [
+        "platform user list serializes page and size",
+        "platform user role and status filters serialize on the server-owned endpoint",
+        "platform user create, role update, suspend, and endpoint methods preserve HTTP contract"
+      ]
+    },
+    {
+      "class": "packages/api-client/src/requests/questiontype/index.test.ts",
+      "cases": [
+        "legacy and canonical task-type routes remain separate",
+        "task-type submit-approval and approve commands use the canonical route"
+      ]
+    },
+    {
+      "area": "role-aware page actions",
+      "cases": [
+        "platform admin sees all navigation and privileged actions",
+        "platform manager sees operational pages but not settings, platform users, raw license reveal, or revoke",
+        "academic manager sees academic review/activation actions",
+        "academic staff sees academic create/edit/submit actions but not approve/publish"
+      ]
+    },
+    {
+      "area": "contract compatibility",
+      "cases": [
+        "task-type lifecycleStatus is exposed to the API client",
+        "legacy QuestionTypeResponse constructor callers continue to compile",
+        "platform user filters are accepted without changing the existing unfiltered list overload"
+      ]
+    }
+  ],
+  "quality": {
+    "required": true,
+    "gate": "ck-quality",
+    "deferred": [
+      "browser role-by-role navigation and action automation",
+      "live HTTP 401/403 checks through a running deployment",
+      "production PostgreSQL/Flyway and full seeded regression"
+    ]
+  }
+}

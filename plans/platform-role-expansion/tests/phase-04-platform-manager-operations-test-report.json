@@ -1,0 +1,24 @@
+{
+  "phase": "phase-04-platform-manager-operations",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-08T08:31:14Z",
+  "summary": {
+    "focused_passed": 113,
+    "regression_passed": 0,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "commands": [
+    ".\\mvnw.cmd -pl app clean compile -DskipTests",
+    ".\\mvnw.cmd -pl app '-Dtest=PlatformManagerControllerSecurityTest,PlatformOperationPolicyTest,PlanControllerTest,PlanServiceTest,TenantApplicationServiceTest,TenantLifecycleServiceTest,LicenseCodeServiceTest,AnnouncementServiceTest,SupportTicketServiceTest,OrderServiceTest,BillingServiceTest' '-DforkCount=0' '-DargLine=-Xmx512m -XX:MaxMetaspaceSize=256m' test"
+  ],
+  "notes": [
+    "Clean compilation passed for 1074 backend source files.",
+    "Focused coverage includes the shared manager operation matrix, controller guards, manager application/tenant/plan/license/announcement/support actions, admin-only settings/user/reveal/revoke boundaries, academic approve/publish exclusion, host-only order/subscription routes, platform commercial tenant filtering, masked license/subscription projections, actor audit propagation, and payment-link-safe platform order output.",
+    "The TDD-ready cases are covered by PlatformOperationPolicyTest, PlatformManagerControllerSecurityTest, AnnouncementServiceTest, SupportTicketServiceTest, LicenseCodeServiceTest, PlanServiceTest, TenantApplicationServiceTest, TenantLifecycleServiceTest, OrderServiceTest, and BillingServiceTest.",
+    "Live PostgreSQL/Flyway execution, HTTP authorization through a running deployment, browser/vendor-admin UI, and full seed/regression sweep were not run in this phase."
+  ],
+  "report_path": "pte-doc/plans/platform-role-expansion/tests/phase-04-platform-manager-operations-test-report.json"
+}

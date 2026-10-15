@@ -1,0 +1,156 @@
+{
+  "artifactVersion": 1,
+  "phase": "01-form-boundaries",
+  "capturedAt": "2026-10-08",
+  "runner": {
+    "status": "not-configured",
+    "reason": "tenant-web exposes dev/build/start/lint only and has no local unit-test runner",
+    "fallback": "deterministic source-contract assertions plus TypeScript validation"
+  },
+  "contractCases": [
+    {
+      "id": "empty-form",
+      "input": {
+        "templatePublicId": "template-public-id-fixture",
+        "selectedSkills": ["SPEAKING", "READING"]
+      },
+      "expectedOutput": {
+        "name": "",
+        "templatePublicId": "template-public-id-fixture",
+        "subscriptionPublicId": "",
+        "opensAt": "",
+        "closesAt": "",
+        "examMode": "PRACTICE",
+        "practiceAntiCheatEnabled": false,
+        "selectedSkills": ["SPEAKING", "READING"],
+        "maxRetriesPerStudent": "0",
+        "formMode": "SHARED_FORM",
+        "reusePolicy": "ALLOW",
+        "seriesKey": "",
+        "capacity": "",
+        "sources": []
+      }
+    },
+    {
+      "id": "template-skill-derivation",
+      "input": {
+        "items": [
+          { "section": "READING" },
+          { "section": "UNKNOWN" },
+          { "section": "SPEAKING" },
+          { "section": "READING" }
+        ]
+      },
+      "expectedOutput": ["SPEAKING", "READING"]
+    },
+    {
+      "id": "practice-to-official-mode-transition",
+      "input": {
+        "examMode": "PRACTICE",
+        "practiceAntiCheatEnabled": true,
+        "selectedSkills": ["SPEAKING"],
+        "maxRetriesPerStudent": "3",
+        "formMode": "UNIQUE_FORM_PER_STUDENT",
+        "reusePolicy": "EXCLUDE_STARTED_IN_SERIES",
+        "seriesKey": "SERIES-01",
+        "templateSkills": ["SPEAKING", "WRITING", "READING"]
+      },
+      "expectedChangedFields": {
+        "examMode": "OFFICIAL_EXAM",
+        "practiceAntiCheatEnabled": false,
+        "selectedSkills": ["SPEAKING", "WRITING", "READING"],
+        "maxRetriesPerStudent": "0",
+        "formMode": "SHARED_FORM",
+        "reusePolicy": "ALLOW",
+        "seriesKey": ""
+      }
+    },
+    {
+      "id": "official-to-practice-mode-transition",
+      "input": {
+        "examMode": "OFFICIAL_EXAM",
+        "practiceAntiCheatEnabled": false,
+        "selectedSkills": ["SPEAKING", "READING"],
+        "maxRetriesPerStudent": "0",
+        "formMode": "SHARED_FORM",
+        "reusePolicy": "ALLOW",
+        "seriesKey": "",
+        "templateSkills": ["SPEAKING", "WRITING", "READING"]
+      },
+      "expectedChangedFields": {
+        "examMode": "PRACTICE",
+        "practiceAntiCheatEnabled": false,
+        "selectedSkills": ["SPEAKING", "READING"],
+        "maxRetriesPerStudent": "0",
+        "formMode": "SHARED_FORM",
+        "reusePolicy": "ALLOW",
+        "seriesKey": ""
+      }
+    },
+    {
+      "id": "step-error-filter",
+      "input": {
+        "errors": {
+          "name": "NAME_REQUIRED",
+          "opensAt": "OPENS_REQUIRED",
+          "sources": "AUDIENCE_REQUIRED"
+        },
+        "fields": [
+          "name",
+          "templatePublicId",
+          "subscriptionPublicId",
+          "capacity",
+          "selectedSkills"
+        ]
+      },
+      "expectedOutput": {
+        "name": "NAME_REQUIRED"
+      }
+    },
+    {
+      "id": "effective-template-fallback",
+      "input": {
+        "formTemplatePublicId": "",
+        "activeTemplatePublicId": "template-public-id-fixture"
+      },
+      "expectedOutput": {
+        "templatePublicId": "template-public-id-fixture"
+      }
+    }
+  ],
+  "boundaryAssertions": [
+    "createExamWizard.ts contains no @pte/api-client import",
+    "useCreateExamWizardForm imports validateCreateExamWorkflow as the authoritative validator",
+    "useCreateExamWizardForm exposes one sources value and typed onSourcesChange(nextSources)",
+    "useCreateExamWizardForm contains no query or mutation import",
+    "CreateExamWizard.tsx remains unchanged until Phase 03 wiring"
+  ],
+  "commands": [
+    {
+      "command": "corepack pnpm --filter tenant-web exec tsc --noEmit",
+      "result": "passed"
+    },
+    {
+      "command": "PowerShell deterministic hash and boundary assertions",
+      "result": "passed; 13 assertions"
+    },
+    {
+      "command": "git diff --check -- apps/tenant-web/features/exams/utils/createExamWizard.ts apps/tenant-web/features/exams/hooks/useCreateExamWizardForm.ts",
+      "result": "passed"
+    }
+  ],
+  "protectedFiles": {
+    "result": "all baseline hashes unchanged",
+    "scopeFiles": [
+      "apps/tenant-web/features/exams/components/CreateExamWizard.tsx",
+      "apps/tenant-web/features/exams/constants/index.ts"
+    ],
+    "concurrentAgentFiles": [
+      "apps/vendor-web/**",
+      "packages/ui/src/hooks/index.ts",
+      "packages/ui/src/hooks/sessionStorage.ts",
+      "packages/ui/src/i18n/LocaleProvider.tsx"
+    ]
+  },
+  "evidenceBoundary": "This fallback artifact proves the recorded source contract and static checks only; it is not live browser, API, database, or production proof."
+}

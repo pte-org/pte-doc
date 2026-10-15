@@ -1,0 +1,21 @@
+{
+  "phase": "phase-04-admin-server-search",
+  "mode": "unit-and-integration",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-12T14:15:00Z",
+  "summary": {
+    "passed": 524,
+    "failed": 0,
+    "skipped": 0
+  },
+  "checks": [
+    { "name": "@pte/api-client tests", "status": "passed", "tests": 442 },
+    { "name": "license HTTP contract", "status": "passed", "tests": 8 },
+    { "name": "admin search service tests", "status": "passed", "tests": 74 },
+    { "name": "vendor-web typecheck", "status": "passed" },
+    { "name": "vendor-web lint", "status": "passed", "warnings": 2 },
+    { "name": "vendor-web production build", "status": "passed" }
+  ],
+  "failures": [],
+  "report_path": "pte-doc/projects/plans/quang-web-search-placeholder-rollout/tests/phase-04-admin-server-search-test-report.json"
+}

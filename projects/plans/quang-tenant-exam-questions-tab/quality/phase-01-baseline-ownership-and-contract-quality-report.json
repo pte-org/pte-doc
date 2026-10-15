@@ -1,0 +1,21 @@
+{
+  "mode": "gate",
+  "target": "phase-01-baseline-ownership-and-contract",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-08T18:03:21.1779112+07:00",
+  "reviewed_files": [
+    "pte-doc/projects/plans/quang-tenant-exam-questions-tab/tests/phase-01-baseline.json",
+    "pte-doc/projects/plans/quang-tenant-exam-questions-tab/tests/phase-01-contract-check.json",
+    "pte-doc/projects/plans/quang-tenant-exam-questions-tab/tests/phase-01-contract-check.ps1",
+    "pte-doc/projects/plans/quang-tenant-exam-questions-tab/tests/phase-01-locale-handoff.json"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "report_path": "pte-doc/projects/plans/quang-tenant-exam-questions-tab/quality/phase-01-baseline-ownership-and-contract-quality-report.json"
+}

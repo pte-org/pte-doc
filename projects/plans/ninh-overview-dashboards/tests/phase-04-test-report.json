@@ -1,0 +1,193 @@
+{
+  "phase": "phase-04-backend-admin-revenue-question-bank",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "verdict_note": "All 130 net-new Phase 4 tests pass (127 H2/Mockito/MockMvc + 3 new Postgres-gated that were RUN and passed on a scratch PostgreSQL 17 that has been removed) and the 29 tests that were red because of the intentionally changed contract (8 -> 10 sections, academic bucket none -> questionBank) were updated to the new contract and pass. The only red test in the full suite is the pre-existing ModuleStructureTest.modules_have_no_boundary_violations; its normalized violation set is identical to the Phase 1 baseline (18 lines, none involving overview, billing, tenancy or itembank). No production bug was found in Phase 4 code. V97 (idx_orders_paid_at) was verified useful by EXPLAIN on 100k orders: KEEP.",
+  "reviewed_at": "2026-10-13T12:40:00Z",
+  "summary": {
+    "passed": 1992,
+    "failed": 1,
+    "skipped": 56
+  },
+  "summary_scope": "Full suite `./mvnw -o -pl app test` after all Phase 4 tests were added: 2049 tests (Phase 3 total 1919 + 130 net new). The 1 error is the pre-existing architecture test. Skipped = 53 (Phase 3) + 3 new Postgres-gated tests (they run only with -Dlifecycle.test.db.url and were RUN and PASSED separately, 15/15, see postgres). Passed = 2049 - 1 - 56.",
+  "new_tests": {
+    "total_net_new_methods_executed_or_skipped": 130,
+    "by_class": {
+      "com.pte.billing.internal.repository.BillingRevenueOverviewQueriesTest": "27 NEW (H2 @DataJpaTest over BillingRevenueOverviewService + OrderRepository.sumAmountAndCountByCurrencyPaidBetween: status enum guard (PENDING/PAID/CANCELLED/EXPIRED are the only statuses; no FAILED/refunded exists), per-currency grouping VND/USD/EUR never summed, ordered by currency code, absent currency not zero, empty DB -> empty, only PAID counts (PENDING/CANCELLED/EXPIRED excluded), soft-deleted excluded, PAID with null paid_at excluded, window decided by paid_at not created_at, half-open [from,to) incl. exact lower bound / excl. exact upper bound at microsecond precision, adjacent windows partition and previous+current = whole, empty/inverted range, exact decimals (0.1+0.2+0.01 = 0.31 scale 2, 16-digit amounts, scale 2 for whole numbers), series: one amount per range with zero fill, currency only in older months still listed, series sum = whole-span revenue per currency, orders outside first/last boundary in no range, <2 boundaries -> empty without a query, unmodifiable result, Asia/Ho_Chi_Minh boundary (17:30Z 31 Oct is November in VN and October in UTC; 16:59:59Z stays October; exact 17:00:00Z starts November; VN vs UTC buckets differ), current partial month range, license-code redemptions and subscriptions of every activation source never contribute, result rows are (String, BigDecimal, Long) only even with a payment link and tenant on the order, 1 statement / 0 entity loads per window and 12 statements for the 12-month series)",
+      "com.pte.itembank.internal.repository.ItembankOverviewQueriesTest": "19 NEW (H2 @DataJpaTest over ItembankOverviewService + the two new QuestionRepository queries: enum guard (4 statuses, 2 pools, single SHARED visibility), empty bank has every status/section/pool key at 0, unused keys stay 0, breakdown by status/section/pool adds up to total, approvedByPool counts APPROVED only (practice never mistaken for exam stock), soft-deleted excluded, every revision counted (superseded revision = ARCHIVED), tenant-stamped legacy row counted like the old stats, unknown section name kept, EQUALITY with ItembankService.stats on the same rows (total, 4 sections, draft), old stats contract regression (record components, GET /stats mapping and ApiResponse<QuestionStatsResponse> return type, service signature, 3 legacy repository queries still present), old stats values from the database, createdInWindow half-open + partition + status-at-creation irrelevant + deleted excluded + empty/inverted range, 1 statement / 0 entity loads, facade row is counts only with unmodifiable maps and no question text)",
+      "com.pte.overview.internal.service.AdminRevenueSectionsTest": "15 NEW (mapping over the mocked revenue facade: source ONLINE_ORDERS, currencies = union of series/current/previous ordered by code regardless of facade order, per-currency current/previous/changePct/paidOrders trend (EUR -100.0, USD null, VND 50.0), overall paidOrders trend counts orders but never adds amounts, 12 monthly points oldest first with only the last partial and exact amounts, currency without series gets 12 zero months, currency only in older months still listed with zero windows and null change, boundaries passed to the facade are the VN months and the last label follows the VN calendar at the month boundary (2026-11), empty -> empty currencies, exact BigDecimal scale kept (17-digit amount), HALF_UP one-decimal change on exact amounts (+0.1 / -0.1 ties), facade call set exactly 2 windows + 1 series and no other facade (billing license/subscription facade untouched), payload records have no customer/tenant/payment/license field)",
+      "com.pte.overview.internal.service.AdminQuestionBankSectionsTest": "7 NEW (one-to-one mapping of every enum key, createdInWindow trend current vs previous window, null change when previous is 0, negative change keeps its sign, empty bank all zeros with null change, only the item bank facade is read, payload has counts only and no approval trend)",
+      "com.pte.tenancy.TenancyOverviewServiceMoveTest": "3 NEW (prep refactor guard: the five moved methods exist only on TenancyOverviewService and not on TenancyService, same signatures/return types, @Service and every read @Transactional(readOnly = true))",
+      "com.pte.overview.internal.service.TrendCalculatorTest": "+17 (percentChange on exact BigDecimal amounts: 12 CSV cases incl. 16-digit amounts and 0.02 vs 0.01, zero previous in any scale -> null, HALF_UP ties +/-0.1 and agreement with the long variant for 9 pairs, fractional precision a long cannot represent (100.05 vs 100.00 = 0.1), negative change and drop to zero = -100.0, long variant unchanged)",
+      "com.pte.overview.internal.service.MonthBucketsTest": "+4 (toAmountPoints: 12 labelled months oldest first with only the current partial, exact scale kept, VN month at the 17:30Z month boundary and label list equal to the count variant, size follows input and empty input)",
+      "com.pte.overview.internal.service.AdminVisibilityTest": "+2 (23 -> 25) and 11 existing assertions updated, see updated_assertions",
+      "com.pte.overview.internal.service.AdminDashboardServiceTest": "+4 (53 -> 57) and 17 existing tests updated, see updated_assertions",
+      "com.pte.overview.internal.controller.AdminDashboardControllerTest": "+7 (38 -> 45) and 1 existing test updated, see updated_assertions",
+      "com.pte.overview.internal.cache.AdminSectionCacheRoundTripTest": "+22 (56 -> 78): Revenue (2 currencies exact amounts, beyond double precision / scale 0 and 4 / negative change, empty) and QuestionBank (full, zero filled) samples x production Spring Boot mapper and bare mapper x serialize/deserialize and a REAL DashboardCache over fake Redis; BigDecimal scale-exactness test over 8 amounts; cached revenue/questionBank JSON has no payment/link/url/provider/checkout/customer/tenant/orderCode/title/prompt/answer keys; the 'every type has a sample' guard now also requires Revenue and QuestionBank",
+      "com.pte.overview.internal.migration.OverviewMigrationPostgresIntegrationTest": "+3 gated (v97CreatedThePartialPaidAtIndexOnPaidAndNotDeletedOrdersOnly, v97IsIdempotentWhenReplayedAgainstTheMigratedSchema, phaseFourRevenueAndQuestionBankQueriesAndTheirPlans); the migrated-through check was renamed everyMigrationAppliedFromAnEmptySchemaThroughV97 and strengthened (>= 97 versions, contains 94/95/96/97); class total 15"
+    },
+    "support_files_changed": [
+      "com.pte.overview.internal.AdminDashboardFixtures: new stubRevenueAndQuestionBank() (deterministic revenue VND/USD current + VND/EUR previous with a 12-month series, question bank 120 questions with pools/statuses and created-in-window 12 vs 8) called from stubHappyPath; stubHappyPath previously stubbed itembank.counts() with zeros"
+    ],
+    "coverage": {
+      "role_matrix": "expectations derived from the REAL PlatformOperationPolicy at the AdminVisibility, service and HTTP layers: PLATFORM_ADMIN and PLATFORM_MANAGER see all 10 sections (revenue needs COMMERCIAL_READ, which the manager has); ACADEMIC_MANAGER, ACADEMIC_STAFF and legacy PLATFORM_AUTHOR see only questionBank, every operations section incl. revenue is FORBIDDEN with null data (HTTP 200); HOST_ADMIN and every tenant role / tenant-bound platform role get 403 from the controller",
+      "bucket_semantics": "operations bucket = the 10 section keys sorted joined '+' (applications+learners+licenses+plans+questionBank+recentTenants+revenue+subscriptions+support+tenants); academic bucket = 'questionBank' (was 'none'); 'none' still used by callers that see nothing (tenant-bound, tenant roles, no roles, null caller); deterministic and role-order independent; academic bucket is a different string from the operations bucket",
+      "gating_before_cache": "forbidden sections: no facade touched, no cache lookup (fake Redis reads empty except the single academic questionBank key, mock cache gets exactly one getOrCompute for the questionBank key and verifyNoMoreInteractions), callers who see nothing never touch the cache or any facade",
+      "cache_isolation": "real DashboardCache over fake Redis: academic caller after an admin populated all 10 operations entries never reads any admin key, gets its own questionBank entry (11 entries), payloads planted under the 'none' and 'questionBank' bucket keys for tenants/revenue/subscriptions are never served, academic-first then admin gets full data, store holds exactly the two expected buckets; controller level: admin cached 10, academic body contains no Alpha School / Pro Pack / Org One / ONLINE_ORDERS / VND",
+      "failure_isolation": "failing revenue or questionBank facade -> only that section ERROR (parameterized with the 8 existing sections, now 10), never cached, recovers on the next request; no raw message in the HTTP body",
+      "no_sensitive_data": "HTTP response walk: revenue keys are exactly {status,data,source,paidOrders,current,previous,changePct,currencies,currency,monthly,month,amount,partial} with no payment/link/url/provider/checkout/customer/tenant/buyer/orderCode/payos/license/plan; questionBank keys are counts only; facade rows CurrencyPaidTotal(currency, amount, paidOrders) and QuestionBankCounts(total, byStatus, bySection, byPool, approvedByPool)",
+      "old_stats_unchanged": "ItembankServiceTest.stats_returnsSectionAndDraftCounts (existing, passes) + new equality test against the same database rows + reflection regression for GET /stats, QuestionStatsResponse components, ItembankService.stats signature and the legacy repository queries. There was no existing QuestionController stats test, only the service test and a reflection security test; a regression assertion was added"
+    }
+  },
+  "updated_assertions": {
+    "reason": "Intentional Phase 4 contract change (documented in the phase file): the admin dashboard now has 10 sections instead of 8 (revenue, questionBank added), the operations visibility bucket is the 10 sorted keys, academic callers (ACADEMIC_MANAGER, ACADEMIC_STAFF, legacy PLATFORM_AUTHOR) now see the question bank (bucket 'questionBank' instead of 'none') while every operations section incl. revenue stays FORBIDDEN. These are not weakened tests: every previous protection was kept and extended to the new sections. The cook had already pointed the fixtures at TenancyOverviewService (mechanical).",
+    "categories": [
+      {
+        "category": "8 -> 10 sections (counts, key lists, section lists)",
+        "tests": "AdminDashboardServiceTest (sections(...) now returns 10, SECTION_KEYS/ADMIN_BUCKET constants, hasSize(8) -> hasSize(10), cache entry counts 8 -> 10, 24 -> 30 for three windows, failure case 7 -> 9 -> 10), AdminDashboardControllerTest (ALL_SECTIONS of 10 for the admin and manager OK test, redis.store hasSize 10), AdminVisibilityTest (REQUIRED table gains REVENUE; QUESTION_BANK gated by isPlatformCaller; section key list gains revenue and questionBank)",
+        "still_tests": "that every section a role may see is OK with data, every other is FORBIDDEN with null data, and that cache entries exist exactly for the OK sections"
+      },
+      {
+        "category": "operations bucket string",
+        "tests": "AdminVisibilityTest.ALL_SECTIONS_BUCKET, AdminDashboardServiceTest.ADMIN_BUCKET (now includes questionBank and revenue)",
+        "still_tests": "bucket = sorted allowed keys joined '+', deterministic, shared by admin and manager, the cache key embeds the bucket"
+      },
+      {
+        "category": "academic bucket none -> questionBank and academic callers now get the question bank",
+        "tests": "AdminVisibilityTest.academicRolesAndTheLegacyAuthorAliasSeeNoPhaseThreeSection -> ...SeeOnlyTheQuestionBankSection; AdminDashboardServiceTest.academicCallersGetEverySectionForbidden... -> ...GetEveryOperationsSectionForbiddenWithNullDataAndOnlyTheQuestionBankIsComputedAndCached; aForbiddenCallerNeverTouchesAMockedCacheEither -> aForbiddenSectionNeverTouchesAMockedCacheOnlyTheQuestionBankDoes (+ new aCallerWithNoVisibleSectionAtAllNeverTouchesAMockedCacheOrAnyFacade for the callers who see nothing, which keeps the original 'never touches cache or facade' guarantee); anAcademicCallerNeverReceivesAnOperationsPayload...; evenAPayloadPlantedUnderTheNoneBucketKeyIsNeverServed (now also plants under the academic bucket key and for revenue/subscriptions); anAcademicCallerFirstThenAnAdmin...; AdminDashboardControllerTest.academicRoles...Get200WithEverySectionForbiddenAndNullData -> ...WithQuestionBankOkAndEveryOperationsSectionForbidden and anAcademicCallerNeverSeesDataAnAdminJustCachedForTheSameWindow",
+        "still_tests": "gating before cache/query: the nine operations sections of an academic caller are FORBIDDEN with null data, no operations facade is ever invoked, the cache is only consulted for the question bank under the academic bucket, an admin-populated cache never leaks to an academic caller (asserted on keys read, on keys stored and on the response body)"
+      },
+      {
+        "category": "facade-touched helper widened",
+        "tests": "AdminDashboardControllerTest.assertNoFacadeWasTouched now also covers tenancyOverview, revenueFacade and itembank (it previously ignored the three facades added by Phases 3-4); assertNoOperationsFacadeWasTouched is used where the question bank legitimately reads the item bank",
+        "still_tests": "that rejected or invalid requests read nothing"
+      }
+    ]
+  },
+  "commands": [
+    {
+      "cmd": "./mvnw -o -pl app test -Dtest='com/pte/overview/**/*Test,com/pte/billing/**/*Test,com/pte/itembank/**/*Test,com/pte/tenancy/**/*Test' -Dsurefire.failIfNoSpecifiedTests=true",
+      "result": "PASSED",
+      "tests": 862,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 41,
+      "note": "skipped = Postgres-gated tests (they run in the dedicated Postgres command below). Before the contract assertions were updated: 114 tests of AdminDashboardServiceTest/AdminVisibilityTest/AdminDashboardControllerTest with 29 failures, all from the intentional contract change"
+    },
+    {
+      "cmd": "./mvnw -o -pl app test -Dtest='com/pte/identity/**/*Test,com/pte/support/**/*Test,com/pte/attempt/**/*Test,com/pte/shared/**/*Test,com/pte/scoring/**/*Test,com/pte/reporting/**/*Test,com/pte/enrollment/**/*Test,com/pte/session/**/*Test' -Dsurefire.failIfNoSpecifiedTests=true",
+      "result": "PASSED",
+      "tests": 858,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    {
+      "cmd": "./mvnw -o -pl app test -Dtest=ModuleStructureTest,RouteContractTest -Dsurefire.failIfNoSpecifiedTests=true",
+      "result": "EXPECTED_BASELINE_FAILURE",
+      "tests": 8,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "note": "only modules_have_no_boundary_violations (pre-existing); RouteContractTest 5/5 passes"
+    },
+    {
+      "cmd": "./mvnw -o -pl app test (full)",
+      "result": "1 pre-existing error",
+      "tests": 2049,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 56
+    },
+    {
+      "cmd": "./mvnw -o -pl app test -Dtest=OverviewMigrationPostgresIntegrationTest \"-Dlifecycle.test.db.url=jdbc:postgresql://localhost:55439/lifecycle_test?user=postgres\" -Dsurefire.failIfNoSpecifiedTests=true",
+      "result": "PASSED",
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "note": "scratch PG17 container pte-overview-scratch, removed afterwards; run twice (first run green; second run after a cosmetic change to the plan summariser in test code); the final code state is the one recorded"
+    }
+  ],
+  "architecture_diff": {
+    "baseline": "tests/arch/baseline-arch-violations.txt (18 normalized lines)",
+    "after": "tests/arch/after-arch-p4-violations.txt (18 normalized lines; multi-line cycle and module entries joined, sorted unique)",
+    "raw_output": "tests/arch/after-arch-p4-tester.txt",
+    "new_lines": 0,
+    "removed_lines": 0,
+    "lines_mentioning_overview_billing_tenancy_itembank": 0,
+    "result": "identical",
+    "note": "A naive grep for 'tenancy' matches the baseline text 'Allowed targets: shared, identity, tenancy' only; no violation has tenancy, billing, itembank or overview as the offending module or as a target"
+  },
+  "postgres": {
+    "migration_it": "RUN - PASSED 15/15 through V97 on an EMPTY schema (Hibernate ddl-auto=validate against the Flyway-built schema; V97 idx_orders_paid_at verified as a partial btree on (paid_at) WHERE status = 'PAID' AND deleted = false with no tenant prefix and no other orders index containing paid_at; V97 replay idempotent with unchanged definition; V94/V95/V96 checks still pass)",
+    "environment": "scratch container pte-overview-scratch (postgres:17-alpine, port 55439, trust auth), removed at the end (docker rm -f). No pte-* or postgres container was touched.",
+    "explain_plans": "tests/phase-04-explain-plans.txt (raw: pte-api/app/target/overview-explain-plans-phase4.txt). 100001 orders over 730 days (4 currencies, 70% PAID, 1% soft-deleted, 2831 PAID in the last 30 days) and 40001 questions, VACUUM ANALYZE, default planner and enable_seqscan=off, plus PREPARE with bound parameters (auto and force_generic_plan) and a drop-the-index comparison.",
+    "explain_verdicts": {
+      "V97 idx_orders_paid_at": "KEEP. Index Scan idx_orders_paid_at chosen by the DEFAULT planner for the current 30d window (1.9 ms), previous window (0.9 ms), oldest monthly bucket (0.9 ms) and current partial month (0.4 ms). With bound parameters (what Hibernate/pgjdbc send) after 6 executions plan_cache_mode=auto still uses it. Without the index: Parallel Seq Scan, 21.5 ms (window) and 40.4 ms (month). Whole 14-statement revenue load of one cache miss: 27.7 ms with, 151.7-176.3 ms without (about 6x) at 100k orders, growing linearly with the table.",
+      "V97 worst case": "plan_cache_mode=force_generic_plan (not the default) cannot prove the partial predicate for a parameter and falls back to Bitmap Heap Scan on idx_orders_status_created, 11.3 ms: acceptable, no action.",
+      "question bank counts by status/section/pool": "Seq Scan + HashAggregate, 14.3 ms for 40k rows (inherent: every shared non-deleted question is counted; the forced visibility index is slower at 15.7 ms). One pass replaces the two legacy grouped queries (7.9 + 9.9 ms).",
+      "question bank created in window": "Seq Scan 7.4 ms (no created_at index; forced index not faster). Fine at expected volumes."
+    }
+  },
+  "failures": [
+    {
+      "id": "TEST-PREEXISTING-001",
+      "severity": "LOW",
+      "type": "REGRESSION",
+      "expected": "ModuleStructureTest.modules_have_no_boundary_violations passes",
+      "actual": "Fails with the same 18 pre-existing enrollment/attempt/session/reporting/scoring violations as tests/arch/baseline-arch-violations.txt; no new lines, none mention overview, billing, tenancy or itembank",
+      "likely_owner": "production_code",
+      "related_files": [
+        "pte-api/app/src/main/java/com/pte/enrollment/internal/service/StudentWorkspaceQueryService.java"
+      ],
+      "pre_existing": true
+    }
+  ],
+  "production_concerns": [
+    {
+      "id": "OBS-P4-001",
+      "severity": "LOW",
+      "where": "pte-api/app/src/main/java/com/pte/billing/BillingRevenueOverviewService.java:52-67 (paidAmountsPerRange), called from AdminRevenueSections.revenue",
+      "finding": "The 12-month series issues one grouped statement per month (12) plus one per window (2) = 14 statements per uncached revenue build (Hibernate statistics: 12 statements for the series, 0 entity loads). With V97 each is about 1 ms (27.7 ms total at 100k orders); the section is cached 60 s.",
+      "suggested_fix": "None needed now. If the orders table grows by orders of magnitude, a single grouped statement by month would remove the 12 round trips but needs a database-specific date_trunc/zone function, which the portable-JPQL constraint of the phase rules out."
+    },
+    {
+      "id": "OBS-P4-002",
+      "severity": "LOW",
+      "where": "pte-api/app/src/main/java/com/pte/itembank/internal/repository/QuestionRepository.java:100-109 (countByStatusSectionAndPool, countCreatedBetween)",
+      "finding": "Both are sequential scans (14.3 ms and 7.4 ms at 40k questions); no index can avoid reading every shared question for the counts. Linear growth.",
+      "suggested_fix": "Nothing now. If the bank passes ~1M rows add questions(created_at) WHERE deleted = false for the created-in-window count."
+    },
+    {
+      "id": "OBS-P4-003",
+      "severity": "LOW",
+      "where": "Phase 5 API client contract (AdminSectionData.CurrencyRevenue.current/previous, MonthlyAmount.amount)",
+      "finding": "BigDecimal amounts are serialized as JSON numbers (verified: jsonPath numeric match 1500000.5), so a JavaScript client parses them as double. That is exact up to 2^53 (~9e15) and loses trailing-zero scale (1500000.50 arrives as 1500000.5); fine for VND/USD display, but the client must format with the currency's fraction digits and must never sum across currencies.",
+      "suggested_fix": "Phase 5: type the amount fields as number, format via Intl.NumberFormat with the row's currency, no cross-currency totals."
+    }
+  ],
+  "observations": [
+    "No production bug found in Phase 4 code; every success criterion in the phase file was met (overview/billing/itembank group, architecture diff, MockMvc/JWT ACADEMIC_MANAGER question bank OK + revenue FORBIDDEN, PLATFORM_ADMIN revenue OK, Postgres-gated migration test with the same command as Phase 3, EXPLAIN recorded).",
+    "V97 was added 'judgment-based' by the cook; the EXPLAIN evidence now supports it: default planner uses it for all four revenue query shapes and the load is about 6x faster at 100k orders. Keep it.",
+    "The question bank section for academic callers is computed and cached once per bucket: the admin bucket has its own questionBank entry, so the same payload is cached twice (one entry per bucket). That is by design of the visibility-bucket cache and costs one extra small query every 60 s.",
+    "Real policy outcome (derived, not assumed): PLATFORM_MANAGER sees all 10 sections exactly like PLATFORM_ADMIN and shares its cache bucket; ACADEMIC_MANAGER, ACADEMIC_STAFF and legacy PLATFORM_AUTHOR see only questionBank (bucket 'questionBank'); a platform role that also carries a tenant id, tenant roles, role-less and null callers see nothing (bucket 'none').",
+    "The status list guard in BillingRevenueOverviewQueriesTest documents that the order lifecycle has no FAILED or refunded status (PENDING, PAID, CANCELLED, EXPIRED only), so PAID-only is the complete revenue rule today; adding a refund status will fail that guard and force a decision.",
+    "The Visibility enum has a single value (SHARED); 'non-shared questions are excluded' is therefore vacuous today. A guard test fails if a second visibility is added.",
+    "AdminDashboardControllerTest.assertNoFacadeWasTouched previously ignored the tenancyOverview, revenue and itembank facades; it now includes them (stricter, not weaker).",
+    "Mockito prints the 'dynamic agent' warning in this JDK; Hibernate/H2 print DDL warnings for unrelated entities; both pre-existing and unrelated."
+  ],
+  "modulith_hygiene": {
+    "tests_created_by_package": "billing revenue test in com.pte.billing.internal.repository (owning module, imports only billing types + shared); itembank test in com.pte.itembank.internal.repository (owning module); tenancy move guard in com.pte.tenancy (owning module); overview tests in com.pte.overview.internal.service / .cache / .controller / .migration",
+    "overview_imports": "only root facades/records of other modules (BillingRevenueOverviewService + CurrencyPaidTotal, ItembankOverviewService + QuestionBankCounts, TenancyOverviewService, plus the Phase 3 ones) and shared and overview internals; no foreign domain/internal/repository/dto type",
+    "grep_proof": "grep -E com.pte.(identity|tenancy|enrollment|session|attempt|billing|support|scoring|reporting|itembank|assessment|media|audit).(domain|internal|dto|repository). over app/src/test/java/com/pte/overview/**: no matches (checked for imports and for fully qualified inline references). The Postgres IT seeds orders and questions with plain SQL only."
+  },
+  "not_run": [
+    "pte-postgres (user's compose Postgres) - not used; scratch container used instead",
+    "Frontend/Playwright tests and any non-app Maven module (out of scope for Phase 4 backend)",
+    "A live HTTP run against the real Spring Security filter chain: covered indirectly by SecurityConfigDashboardPathTest (Phase 3), not by a full-context request",
+    "Mutation testing of the new tests (no production change is allowed in this pass)",
+    "Revenue/question bank against H2 with a month-boundary Clock injected into the real AdminRevenueSections: the real billing facade lives in another module's test package, so the month-boundary behaviour is proven in two halves (billing: orders land in the VN-month range; overview: boundaries passed to the facade are the VN months and the last label is the VN month) rather than in one cross-module test"
+  ],
+  "report_path": "plans/ninh-overview-dashboards/tests/phase-04-test-report.json"
+}

@@ -1,0 +1,114 @@
+[
+  {
+    "pteTaskType": "DESCRIBE_IMAGE",
+    "taskTypeKey": "DESCRIBE_IMAGE",
+    "taskTypeSection": "SPEAKING",
+    "title": "Nuclear Power Plants",
+    "promptText": null,
+    "audioPromptUrl": null,
+    "imagePromptUrl": "https://res.cloudinary.com/dkkbfp6mg/image/upload/v1791256007/pte/local/question-media/64112a39-5583-4581-b8fa-2547fe713e0b.png",
+    "referenceAnswerText": "The following graph gives information about nuclear power plants in operation in Europe.\nAs we can see from the map, the largest nuclear electricity generation is in France, which is 59.\nFollowing that the second largest one is found in Russia, and it is 30.\nIn contrast, the Netherlands has the smallest number, just 1.\nApart from that, Spain has 7, Germany has 8 and the United Kingdom has 15.\nTo sum up, the graph tells about how nuclear electricity generation is distributed in Europe.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/DESCRIBE_IMAGE.json",
+      "kind": "mock",
+      "num": 1,
+      "name": "#1 Nuclear Power Plants",
+      "basedOn": {
+        "file": "data/speaking/describe_images.json",
+        "num": 10,
+        "name": "#10 Nuclear Power Plants"
+      },
+      "imageFile": "images/di-01-nuclear-power-plants.png",
+      "note": "Chart drawn from the figures in referenceAnswerText and uploaded to Cloudinary."
+    },
+    "importWarnings": []
+  },
+  {
+    "pteTaskType": "DESCRIBE_IMAGE",
+    "taskTypeKey": "DESCRIBE_IMAGE",
+    "taskTypeSection": "SPEAKING",
+    "title": "World Water",
+    "promptText": null,
+    "audioPromptUrl": null,
+    "imagePromptUrl": "https://res.cloudinary.com/dkkbfp6mg/image/upload/v1791256008/pte/local/question-media/bad965ae-4129-4bf6-b5f4-3115f8a7f1ef.png",
+    "referenceAnswerText": "The following graph gives information about the world's water distribution.\nIt can be seen that 97.5% of the world's water is salt water and only 2.5% is freshwater.\nIn the freshwater sector, glaciers and permanent snow occupy the largest proportion at 68.7%.\nAnd, groundwater occupies 30.06% of the fresh water.\nGround ice and permafrost takes up 0.86% of fresh water and other resources, 1.22%.\nIn the other sector, lakes occupy the majority of the percentage, about 0.26%.\nIn conclusion, this image gives information about the world's water distribution.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/DESCRIBE_IMAGE.json",
+      "kind": "mock",
+      "num": 2,
+      "name": "#2 World Water",
+      "basedOn": {
+        "file": "data/speaking/describe_images.json",
+        "num": 23,
+        "name": "#23 World Water"
+      },
+      "imageFile": "images/di-02-world-water.png",
+      "note": "Chart drawn from the figures in referenceAnswerText and uploaded to Cloudinary."
+    },
+    "importWarnings": []
+  },
+  {
+    "pteTaskType": "DESCRIBE_IMAGE",
+    "taskTypeKey": "DESCRIBE_IMAGE",
+    "taskTypeSection": "SPEAKING",
+    "title": "Adult Literacy",
+    "promptText": null,
+    "audioPromptUrl": null,
+    "imagePromptUrl": "https://res.cloudinary.com/dkkbfp6mg/image/upload/v1791256009/pte/local/question-media/74a8262f-aa47-4090-a50d-c60416918fd0.png",
+    "referenceAnswerText": "The following graph gives information about adult literacy by region from 2000-2004.\nAs we can see the largest amount is in Latin America and the Caribbean, 89% in females and 91% in males.\nAnd Asia has the second highest rate, 73% in females and 86% in males.\nHowever, we can see the smallest amounts in sub-Saharan Africa, which are 53% in females and 70% in males.\nIn conclusion, males have a larger adult literacy rate than females in all the regions.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/DESCRIBE_IMAGE.json",
+      "kind": "mock",
+      "num": 3,
+      "name": "#3 Adult Literacy",
+      "basedOn": {
+        "file": "data/speaking/describe_images.json",
+        "num": 25,
+        "name": "#25 Adult Literacy"
+      },
+      "imageFile": "images/di-03-adult-literacy.png",
+      "note": "Chart drawn from the figures in referenceAnswerText and uploaded to Cloudinary."
+    },
+    "importWarnings": []
+  },
+  {
+    "pteTaskType": "DESCRIBE_IMAGE",
+    "taskTypeKey": "DESCRIBE_IMAGE",
+    "taskTypeSection": "SPEAKING",
+    "title": "Sport Participants",
+    "promptText": null,
+    "audioPromptUrl": null,
+    "imagePromptUrl": "https://res.cloudinary.com/dkkbfp6mg/image/upload/v1791256010/pte/local/question-media/a01cd188-b35b-435d-a327-f1c0ecec7cbf.png",
+    "referenceAnswerText": "The bar chart shows the percentages of male and female participants in four sports.\nFootball has the highest percentage of male participants, at 70%, but only 30% for females.\nThe figures for cricket are 60% and 40%, while basketball records 55% and 45%.\nIn tennis, the female proportion was higher, about 60%, compared with 40% for males.\nOverall, football shows the largest gender difference.\nTo sum up, males participate more in football, cricket and basketball, while females participated more in tennis.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/DESCRIBE_IMAGE.json",
+      "kind": "mock",
+      "num": 4,
+      "name": "#4 Sport Participants",
+      "basedOn": {
+        "file": "data/speaking/describe_images.json",
+        "num": 1247,
+        "name": "#1247 Sport Participants"
+      },
+      "imageFile": "images/di-04-sport-participants.png",
+      "note": "Chart drawn from the figures in referenceAnswerText and uploaded to Cloudinary."
+    },
+    "importWarnings": []
+  }
+]

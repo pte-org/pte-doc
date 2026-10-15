@@ -1,0 +1,17 @@
+{
+  "phase": "phase-01-role-catalog-and-legacy-migration",
+  "status": "RED_READY",
+  "prepared_at": "2026-10-08T06:12:08.6306085Z",
+  "test_files": [
+    "pte-api/app/src/test/java/com/pte/identity/internal/service/UserProvisioningHelperTest.java"
+  ],
+  "expected_red_reason": "The current Role enum does not contain PLATFORM_MANAGER, ACADEMIC_MANAGER, or ACADEMIC_STAFF, and UserProvisioningHelper rejects ACADEMIC_STAFF assignment. The test source compiled and the targeted Maven test ran with 1 failure and 1 error caused by the missing implementation.",
+  "red_command": ".\\mvnw.cmd -pl app -Dtest=UserProvisioningHelperTest test",
+  "red_summary": {
+    "tests_run": 16,
+    "failures": 1,
+    "errors": 1,
+    "skipped": 0
+  },
+  "artifact_path": "pte-doc/plans/platform-role-expansion/tests/phase-01-tdd-ready.json"
+}

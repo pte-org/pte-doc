@@ -1,0 +1,78 @@
+{
+  "phase": "01",
+  "capturedAt": "2026-10-08T16:09:56.7301902+07:00",
+  "status": "blocked",
+  "blockedReason": "Locale handoff is unresolved: required Questions/lifecycle/support keys are absent and the protected provider is owned by a concurrent FE agent.",
+  "observedBaseline": {
+    "tabIds": ["overview", "settings", "participants", "submissions", "examiner", "results"],
+    "tabCount": 6,
+    "urlState": "tab query with client-side pushState and Overview fallback",
+    "retention": ["overview", "submissions", "examiner"],
+    "previewEntry": "SessionDetailView header View Exam action opens ExamPreviewModal",
+    "lifecycleOwner": "SessionDetailView",
+    "lifecycleGuards": {
+      "open": ["SCHEDULED"],
+      "close": ["OPEN"],
+      "cancel": ["DRAFT", "PREPARING", "READY", "SCHEDULED"]
+    },
+    "lifecycleErrorSurface": "SessionDetailView global Alert",
+    "localeKeysFoundForTarget": []
+  },
+  "targetContract": {
+    "tabIds": ["overview", "questions", "settings", "participants", "submissions", "examiner", "results"],
+    "tabCount": 7,
+    "questionsPosition": 1,
+    "questionsMode": "read-only immutable answer-key-free snapshot",
+    "lifecycleSurface": "Overview only",
+    "headerActions": [],
+    "requiredLocaleHandoffStatus": ["keys-already-available", "owner-handoff-confirmed"]
+  },
+  "laterOwnedSourceFiles": {
+    "pte-web/apps/tenant-web/features/exams/components/ExamPreviewContent.tsx": null,
+    "pte-web/apps/tenant-web/features/exams/components/ExamPreviewSurface.tsx": null,
+    "pte-web/apps/tenant-web/features/exams/components/ExamQuestionsTab.tsx": null,
+    "pte-web/apps/tenant-web/features/exams/components/ExamDetailTabs.tsx": "9E493751362366E4B30636FEC7654627383C8F8378E3C4E62E19AC7BD7563E83",
+    "pte-web/apps/tenant-web/features/exams/components/SessionDetailView.tsx": "FB294ACE080E6FFDB0C955D98BF5A4BE098E4C51A31E45DC0671EC7819D37581",
+    "pte-web/apps/tenant-web/features/exams/components/ExamOverviewTab.tsx": "88B36FAA072E02BCE85A5C8D5F6C968BDCE657A4552A8D7CB55A320467C93189",
+    "pte-web/apps/tenant-web/features/exams/components/ExamPreviewModal.tsx": "6D08D3DC1F045A32BCA9CF031F17854C9B5676631043D9986B76EFE574E3F14A",
+    "pte-web/apps/tenant-web/features/supportTickets/components/ReportQuestionModal.tsx": "24BE6FF5A46410E6205B80475E8506BF7C7013EADA4A563B865616F95D083DD3"
+  },
+  "protectedFiles": {
+    "pte-web/apps/vendor-web/features/auth/components/LoginView.tsx": "DBE11AF3700FD847EE360F39D6F834EA999999DB182AB17437FD583497339A76",
+    "pte-web/apps/vendor-web/features/auth/constants.ts": "DD4C00E8977036BB08A79A88B826AD950F4AC83AD9E527B2111F3F01D38F9BF9",
+    "pte-web/packages/ui/src/hooks/index.ts": "40043F8B3A2D81AF4DBF3B7B6AF10994BA2BB610256F287E1F5A05AD5E706527",
+    "pte-web/packages/ui/src/hooks/sessionStorage.ts": "966AC8E2C774696C9FA3E447E82046E5E6C99294462F2FE4F994DE73C85ADD78",
+    "pte-web/packages/ui/src/i18n/LocaleProvider.tsx": "7AE6A91C37C633C345EB46A6877FEBFDF32CD95C5FE1CF141D94D0FBEE08C8BE"
+  },
+  "concurrentProtectedDrift": {
+    "pte-web/apps/vendor-web/features/auth/components/LoginView.tsx": {
+      "currentSha256": "24D1045320243D79484E5BAA888EA6C847BD7A4A25952DBB603ED22EF83C74FB",
+      "classification": "pre-existing concurrent-agent change",
+      "planAction": "preserve; do not overwrite"
+    },
+    "pte-web/apps/vendor-web/features/auth/constants.ts": {
+      "currentSha256": "D1430FAFAEB077FC689659683F7AE7829860D3D8130AB8FAB04EF00A9011973D",
+      "classification": "pre-existing concurrent-agent change",
+      "planAction": "preserve; do not overwrite"
+    },
+    "pte-web/packages/ui/src/hooks/sessionStorage.ts": {
+      "currentSha256": "408C589CCE58A9280F76940DE1B1494B875134CCFC7588FFA02B73B967E535C6",
+      "classification": "pre-existing concurrent-agent change",
+      "planAction": "preserve; do not overwrite"
+    }
+  },
+  "protectedPathPatterns": [
+    "pte-web/apps/vendor-web/**",
+    "pte-web/packages/ui/src/hooks/**",
+    "pte-api/**",
+    "pte-web/packages/api-client/**",
+    "pte-doc/projects/plans/quang-tenant-exam-ui-decomposition/**"
+  ],
+  "backendEvidence": {
+    "controllerRole": "HOST_ADMIN",
+    "tenantScopedLookup": true,
+    "preview": "SessionExamPreviewService and ExamPreviewResponse exclude option correctness",
+    "statusGuards": "Open SCHEDULED; Close OPEN; Cancel DRAFT/PREPARING/READY/SCHEDULED"
+  },
+  "worktreeBoundary": "pte-web already contains unrelated concurrent/previous changes; this phase writes only under the new plan directory and does not normalize them."
+}

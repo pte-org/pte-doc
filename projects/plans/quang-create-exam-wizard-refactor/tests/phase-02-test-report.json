@@ -1,0 +1,58 @@
+{
+  "phase": "phase-02-audience-boundary",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-08T14:32:23.5972704+07:00",
+  "summary": {
+    "passed": 15,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "reviewed_files": [
+    "../pte-web/apps/tenant-web/features/exams/hooks/useCreateExamAudience.ts",
+    "../pte-web/apps/tenant-web/features/exams/hooks/useCreateExamWizardForm.ts",
+    "../pte-web/apps/tenant-web/features/exams/components/CreateExamWizard.tsx",
+    "../pte-web/apps/tenant-web/features/exams/constants/index.ts",
+    "projects/plans/quang-create-exam-wizard-refactor/tests/phase-02-pre-refactor-baseline.json",
+    "projects/plans/quang-create-exam-wizard-refactor/tests/phase-02-audience-contract-fallback.json"
+  ],
+  "evidence": [
+    {
+      "kind": "fallback-contract",
+      "artifact": "projects/plans/quang-create-exam-wizard-refactor/tests/phase-02-audience-contract-fallback.json",
+      "result": "15/15 deterministic JSON, baseline-hash, protected-hash, query-boundary, and source-selection assertions passed"
+    },
+    {
+      "kind": "ui-typecheck",
+      "command": "corepack pnpm --filter @pte/ui typecheck",
+      "result": "passed"
+    },
+    {
+      "kind": "typecheck",
+      "command": "corepack pnpm --filter tenant-web exec tsc --noEmit",
+      "result": "passed"
+    },
+    {
+      "kind": "lint",
+      "command": "corepack pnpm --filter tenant-web lint",
+      "result": "passed with one pre-existing warning in CreateTicketModal.tsx: unused E"
+    },
+    {
+      "kind": "build",
+      "command": "corepack pnpm --filter tenant-web build",
+      "result": "passed when run sequentially"
+    },
+    {
+      "kind": "diff-check",
+      "command": "git diff --check",
+      "result": "passed; Git reported existing LF-to-CRLF normalization warnings"
+    }
+  ],
+  "notes": [
+    "tenant-web has no unit or hook test runner, so the required deterministic fallback contract was executed",
+    "The first fallback harness attempt caught an incorrect case-count expectation and a regex false positive for a TypeScript generic; the harness was corrected and rerun 15/15",
+    "This report does not claim live browser, API, database, or production proof"
+  ],
+  "report_path": "projects/plans/quang-create-exam-wizard-refactor/tests/phase-02-test-report.json"
+}

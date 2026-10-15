@@ -1,0 +1,23 @@
+{
+  "phase": "phase-01-common-exam-shell-and-tab-state",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-08T00:00:00+07:00",
+  "summary": {
+    "passed": 0,
+    "failed": 0,
+    "skipped": 1
+  },
+  "failures": [],
+  "executed_checks": [
+    "corepack pnpm --filter @pte/ui typecheck",
+    "corepack pnpm --filter tenant-web exec tsc --noEmit",
+    "corepack pnpm --filter tenant-web lint",
+    "corepack pnpm --filter tenant-web build"
+  ],
+  "notes": [
+    "No unit-test runner or applicable test files exist for the @pte/ui Tabs scope; no test dependency or production test harness was added.",
+    "The static/type/build checks above passed. Browser interaction coverage is deferred to Phase 04."
+  ],
+  "report_path": "pte-doc/projects/plans/quang-tenant-exam-ui-decomposition/tests/phase-01-common-exam-shell-and-tab-state-test-report.json"
+}

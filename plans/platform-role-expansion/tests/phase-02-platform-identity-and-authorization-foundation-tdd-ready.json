@@ -1,0 +1,18 @@
+{
+  "phase": "phase-02-platform-identity-and-authorization-foundation",
+  "status": "RED_READY",
+  "prepared_at": "2026-10-08T06:58:50Z",
+  "test_files": [
+    "pte-api/app/src/test/java/com/pte/shared/security/SecurityPolicyTest.java",
+    "pte-api/app/src/test/java/com/pte/identity/internal/service/PlatformUserServiceTest.java"
+  ],
+  "expected_red_reason": "The shared SecurityPolicy/SecurityCapability contract and platform-user DTO/service do not exist yet. Maven test compilation failed only on those missing implementation symbols; no production behavior was executed.",
+  "red_command": ".\\mvnw.cmd -pl app '-Dtest=SecurityPolicyTest,PlatformUserServiceTest' test",
+  "red_summary": {
+    "tests_run": 0,
+    "failures": 0,
+    "errors": 1,
+    "skipped": 0
+  },
+  "artifact_path": "pte-doc/plans/platform-role-expansion/tests/phase-02-platform-identity-and-authorization-foundation-tdd-ready.json"
+}

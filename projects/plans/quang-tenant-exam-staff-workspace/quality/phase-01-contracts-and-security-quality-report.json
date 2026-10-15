@@ -1,0 +1,100 @@
+{
+  "mode": "verify",
+  "target": "phase-01-contracts-and-security",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-10T11:36:35Z",
+  "reviewed_files": [
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/contract.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/spec.md"
+  ],
+  "constraints_source_paths": [
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/plan.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/phase-01-contracts-and-security.md"
+  ],
+  "context_source_paths": [
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/phase-02-backend-projections-and-profile.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/plan-review.md"
+  ],
+  "evidence_source_paths": [
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/service/UserProvisioningHelper.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/service/UserService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/controller/UserController.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/domain/User.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/IdentityService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/dto/request/CreateUserRequest.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/dto/request/UpdateStudentProfileRequest.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/shared/security/SecurityPolicy.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/shared/domain/BaseEntity.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/shared/web/PagedResult.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/shared/exception/DomainException.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/SessionService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/package-info.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/dto/response/SessionSummaryView.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/domain/ExamSession.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/domain/ProctorAssignment.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/session/domain/enums/SessionStatus.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/ScoringService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/package-info.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/domain/ExaminerAttemptAssignment.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/domain/ExaminerAnswerScore.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/domain/ScoringSessionState.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/ScoringEligibilityQueryService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/ScoringMethodResolver.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/ExaminerAssignmentService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/service/ExaminerScoringService.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/java/com/pte/scoring/internal/repository/ExaminerWorkQueueRepository.java",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/resources/db/migration/V2__identity.sql",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/resources/db/migration/V36__tenant_scoped_user_login.sql",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/resources/db/migration/V38__student_roster_account_metadata.sql",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-api/app/src/main/resources/application.yml"
+  ],
+  "scope_notes": [
+    "Documentation/contracts gate only. reviewed_files contains the actual Phase01 output and the live spec scope refinement; pipeline state/criteria and existing API evidence are separate from receipt outputs, as explicitly instructed by the user.",
+    "Existing API evidence was read in full or in relevant method/query excerpts. Failed reads of nonexistent identity/package-info.java and incorrectly located request DTOs are excluded; the actual internal request DTOs were subsequently read.",
+    "Git status in pte-doc shows this plan directory is untracked; git ls-files returns no tracked phase outputs. The finding is introduced in the new Phase01 contract, not inferred from speculative production changes. pte-api git status was clean.",
+    "User selected no tests and quality for every phase. No tests, production edits, migrations, or phase/master completion transitions were performed. Hard checkpoint remains required before Phase02."
+  ],
+  "summary": { "blocker": 0, "high": 0, "medium": 0, "low": 0, "noted": 0 },
+  "summary_basis": "Open findings only; the resolved MEDIUM finding is retained below for traceability.",
+  "verification_scope": "Re-evaluated exactly QUAL-P01-001 against the live contract field-presence subsection and refreshed spec.md. Prior gate source evidence is retained; ExaminerAttemptAssignment and ScoringEligibilityQueryService were freshly read for the frozen-versus-verified distinction. No unrelated production audit or implementation approval is implied.",
+  "findings": [
+    {
+      "id": "QUAL-P01-001",
+      "severity": "MEDIUM",
+      "rule": "API_FIELD_PRESENCE_SEMANTICS_CLEAR",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/contract.md:84",
+      "related_locations": [
+        "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/contract.md:79",
+        "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/spec.md:64"
+      ],
+      "evidence": "contract.md:79 makes invalid pinned eligibility/assignment data UNAVAILABLE rather than inventing completion; :84 nevertheless lists eligibleAnswerCount, submittedAnswerCount and pending/inProgress/completedAttemptCount without defining nullable/omitted/known-value semantics for those unavailable records. spec.md likewise forbids unknown data becoming zero and requires ALL/table/exception pages to include the records. Live ExaminerAttemptAssignment stores only a frozen integer eligibleAnswerCount; ScoringEligibilityQueryService derives eligibility using ScoringMethodResolver. When a pinned template cannot be resolved, the frozen number can remain known while eligible identity membership and submitted progress cannot be verified. The document does not say which metrics remain trustworthy or how unknown metrics cross the typed response boundary.",
+      "why_it_matters": "Backend and API-client implementers must currently invent different field-presence/type decisions for the same exception bucket. Required numeric counts can turn unknown progress into zero or preserve misleading completion subtotals; optional omission and explicit null also require different client handling. This is a contract decision needed before the production phase, not a claim that nonexistent ORM/DTO code is faulty.",
+      "required_action": "Document the ExaminerSessionView and summary count presence rules for valid versus UNAVAILABLE records. Choose explicit null, omission, or a discriminated unavailable payload for unverifiable metrics; identify any frozen/verified counts retained and the safe diagnostic-code field. Specify how unavailable attempts affect per-session attempt subtotals and aggregate overview counters while preserving totalByStatus/totalSessions reconciliation. A Markdown field table or wire example is sufficient; do not implement production code or add tests to resolve this finding.",
+      "owner": "cook",
+      "resolution": {
+        "verified_at": "2026-10-10T11:36:35Z",
+        "location": "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/contract.md:88",
+        "evidence": "Lines 90-100 choose explicit JSON null for unverifiable eligible/submitted totals and progressPercent, required verified assignment/batch identities, separately named frozenEligibleAnswerCount with invalid-denominator null handling, verified attempt subtotals, unavailableAttemptCount and a nonempty diagnosticCodes array for unavailable sessions. Line 102 makes failed attempts exclusively unavailable and reconciles all attempt buckets. Line 104 fixes the safe diagnostic allowlist and excludes unresolved/cross-tenant/deleted references. Line 106 makes whole-workload progress null on any unavailable session, labels separate fully verified-session partial counters, defines progressCoverageComplete and the no-assignment empty state. These rules resolve all field-presence and aggregation decisions required by QUAL-P01-001 without changing production code.",
+        "conclusion": "Resolved with high confidence. The new contract distinguishes frozen allocation metadata, verified subsets and unverifiable whole-session/workload totals; no open blocking finding remains."
+      }
+    }
+  ],
+  "evaluation": {
+    "authorization": "Contract requires valid HOST_ADMIN scope before target resolution, same-tenant/nondeleted staff, all-role manageability, suspended reads, role-specific work authorization, and scoped nondeleted session metadata. UserProvisioningHelper.canManageTarget uses containsAll and valid security scope. Existing lifecycle rights and mixed-STUDENT credential rejection are preserved.",
+    "public_boundaries": "Public facade-only dependency direction is explicit; new staff projection excludes internal UserResponse/ORM User. Existing Identity facade entity returns are baseline evidence, not newly introduced leakage. SessionService.findSummaries demonstrates batch typed metadata; richer bounded projections are future Phase02 outputs, not asserted to exist already. The refreshed field-presence subsection now explicitly defines unavailable numeric nullability, verified subtotals, retained frozen allocation metadata, safe diagnostics and overview coverage; QUAL-P01-001 is resolved.",
+    "date_and_status": "UTC Instant overlap, half-open end conversion in display zone, absent-bound omission and missing-schedule exclusion are documented. Proctor lifecycle/stale/preparing/unscheduled buckets distinguish attendance from remaining assignments; Examiner work/publication states are separate. Live ExamSession has session identity/template/snapshot references and seven statuses, not an independent examPublicId. Refreshed spec explicitly defers to the sessionPublicId refinement.",
+    "eligibility_and_scoring": "Pinned-template eligibility agrees with the assignment and submission services. Frozen denominator comparison, eligible answer membership, examiner/tenant/session/attempt scope, soft deletion, distinct answer IDs, submittedAt and score-range validity are specified. Invalid data uses UNAVAILABLE; zero eligible completes only when pinned eligibility is consistent. Personal queue publication exclusion and raw-score-row counting are not reused.",
+    "bounded_paging": "Size 1..100, stable publicId tie-breaker, status totals before paging, ALL including unavailable, independent board pages, bounded owner-module scans and no per-answer/session query fan-out are documented. Read snapshot and no GET writes are explicit. Performance/query-plan/isolation implementation proof is intentionally deferred to the actual Phase02 gate; bounded scans alone are not a performance approval.",
+    "email_integrity": "Existing tenant username uniqueness is correctly distinguished from canonical email uniqueness. Required staff fields, trim normalization, nullable optional fields, future-DOB rejection, schema-aligned string bounds, lower(trim(email)) tenant/nondeleted uniqueness and DB enforcement/conflict mapping are required. Additive Flyway migration must detect existing collisions and fail safely without data cleanup. No current migration/index is claimed to implement this future requirement."
+  },
+  "verification": {
+    "performed": "Initial gate live documentation/source inspection and source method/query comparison; verification refreshed both reviewed outputs and the relevant assignment/eligibility source, checked Git scope and validates report JSON/open counts/paths plus receipt fingerprint mechanically.",
+    "not_performed": "Production compilation/lint/build, tests, HTTP authorization execution, live database/query-plan checks, browser checks and release verification.",
+    "receipt": "APPROVED verification qualifies for immediate issuance using C:/Users/DELL/.codex/skills/ck-quality/scripts/receipt.py; receipt freshness is verified separately after issuance."
+  },
+  "report_path": "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/quality/phase-01-contracts-and-security-quality-report.json"
+}

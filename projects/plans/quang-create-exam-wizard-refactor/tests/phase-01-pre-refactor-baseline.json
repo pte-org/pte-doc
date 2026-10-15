@@ -1,0 +1,112 @@
+{
+  "baselineVersion": 1,
+  "capturedAt": "2026-10-08",
+  "repository": {
+    "root": "D:/DOCUMENTFPT/Github/pte-org/pte-web",
+    "branch": "quang/feat/ui-refactor",
+    "scope": "Create Exam Wizard refactor before Phase 01 source writes"
+  },
+  "changedPathsBeforeRefactor": [
+    "apps/tenant-web/features/exams/components/CreateExamWizard.tsx",
+    "apps/tenant-web/features/exams/constants/index.ts",
+    "apps/vendor-web/features/auth/components/LoginView.tsx",
+    "apps/vendor-web/features/auth/constants.ts",
+    "packages/ui/src/hooks/index.ts",
+    "packages/ui/src/hooks/sessionStorage.ts",
+    "packages/ui/src/i18n/LocaleProvider.tsx"
+  ],
+  "protectedSha256": {
+    "apps/vendor-web/features/auth/components/LoginView.tsx": "DBE11AF3700FD847EE360F39D6F834EA999999DB182AB17437FD583497339A76",
+    "apps/vendor-web/features/auth/constants.ts": "DD4C00E8977036BB08A79A88B826AD950F4AC83AD9E527B2111F3F01D38F9BF9",
+    "packages/ui/src/hooks/index.ts": "40043F8B3A2D81AF4DBF3B7B6AF10994BA2BB610256F287E1F5A05AD5E706527",
+    "packages/ui/src/hooks/sessionStorage.ts": "966AC8E2C774696C9FA3E447E82046E5E6C99294462F2FE4F994DE73C85ADD78",
+    "packages/ui/src/i18n/LocaleProvider.tsx": "7AE6A91C37C633C345EB46A6877FEBFDF32CD95C5FE1CF141D94D0FBEE08C8BE"
+  },
+  "scopeSha256BeforeRefactor": {
+    "apps/tenant-web/features/exams/components/CreateExamWizard.tsx": "7F479FE641750678CC1904F593A0D74DDEAB7904B0F606A710230711C9929E71",
+    "apps/tenant-web/features/exams/constants/index.ts": "E2047FB944808BD9B23F904CD81A168A7B99DF43CCEB3B63A05D5301DE1DAC7E"
+  },
+  "sourceBaseline": {
+    "wizardLineCount": 726,
+    "formId": "create-exam-workflow-form",
+    "steps": ["details", "schedule", "audience", "review"],
+    "initialForm": {
+      "name": "",
+      "templatePublicId": "activeTemplate.publicId or empty",
+      "subscriptionPublicId": "",
+      "opensAt": "",
+      "closesAt": "",
+      "examMode": "PRACTICE",
+      "practiceAntiCheatEnabled": false,
+      "selectedSkills": "skills present in activeTemplate.items",
+      "maxRetriesPerStudent": "0",
+      "formMode": "SHARED_FORM",
+      "reusePolicy": "ALLOW",
+      "seriesKey": "",
+      "capacity": "",
+      "sources": []
+    },
+    "stepFieldGroups": {
+      "1": ["name", "templatePublicId", "subscriptionPublicId", "capacity", "selectedSkills"],
+      "2": ["opensAt", "closesAt", "maxRetriesPerStudent", "seriesKey"],
+      "3": ["sources"],
+      "4": "full form validation including audience"
+    },
+    "validPayloadShape": {
+      "name": "Baseline UI smoke exam",
+      "templatePublicId": "template-public-id-fixture",
+      "subscriptionPublicId": "subscription-public-id-fixture",
+      "opensAt": "2099-10-09T10:00",
+      "closesAt": "2099-10-09T12:00",
+      "examMode": "PRACTICE",
+      "practiceAntiCheatEnabled": false,
+      "selectedSkills": ["SPEAKING", "READING"],
+      "maxRetriesPerStudent": "0",
+      "formMode": "SHARED_FORM",
+      "reusePolicy": "ALLOW",
+      "seriesKey": "",
+      "capacity": "10",
+      "sources": [{ "sourceType": "STUDENT", "sourcePublicId": "student-public-id-fixture" }]
+    },
+    "modeTransitionRules": {
+      "practiceToOfficial": [
+        "practiceAntiCheatEnabled=false",
+        "selectedSkills=templateSkills",
+        "formMode=SHARED_FORM",
+        "reusePolicy=ALLOW",
+        "seriesKey=empty",
+        "maxRetriesPerStudent=0"
+      ],
+      "officialToPractice": [
+        "practiceAntiCheatEnabled=false",
+        "selectedSkills=previous practice selection",
+        "formMode=SHARED_FORM",
+        "reusePolicy=ALLOW",
+        "seriesKey=empty",
+        "maxRetriesPerStudent=previous practice retry value"
+      ]
+    },
+    "queryContracts": {
+      "subscriptions": "useSubscriptionsQuery() and filter status ACTIVE",
+      "plans": "useTenantPlansQuery() and map planPublicId to plan name",
+      "classes": "useAllTenantClasses(open), filter ACTIVE",
+      "students": "useTenantStudents(open), filter ACTIVE",
+      "organizations": "useMyOrganizations(open), first organization drives programs",
+      "programs": "usePrograms(organizationPublicId, open), filter ACTIVE"
+    },
+    "submitContract": {
+      "nativeForm": "single form with id create-exam-workflow-form",
+      "intermediateNavigation": "type=button and zero create-session requests",
+      "finalReview": "type=submit; validate full form then call onSubmit(effectiveForm) once",
+      "existingBrowserSmoke": "after submit guard fix, no POST /api/v1/sessions/drafts in final smoke"
+    },
+    "visibleLocaleTheme": {
+      "defaultLocale": "vi",
+      "viStepLabels": ["Thông tin kỳ thi", "Lịch thi & chính sách", "Đối tượng dự thi", "Kiểm tra & tạo"],
+      "enStepLabels": ["Exam details", "Schedule & policy", "Audience", "Review & create"],
+      "themeModes": ["light", "dark"],
+      "tokenRule": "semantic var tokens; no white-only text/background assumptions"
+    }
+  },
+  "evidenceBoundary": "Static source contract plus the existing local authenticated browser smoke; this artifact is not production or database proof."
+}

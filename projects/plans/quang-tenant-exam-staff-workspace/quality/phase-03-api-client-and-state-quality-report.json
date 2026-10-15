@@ -1,0 +1,86 @@
+{
+  "mode": "verify",
+  "target": "phase-03-api-client-and-state",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-11T04:16:01.631Z",
+  "reviewed_files": [
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/api-client/src/types/admin/examStaffWorkspace.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/api-client/src/types/admin/index.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/api-client/src/requests/admin/examStaffWorkspace.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/packages/api-client/src/requests/index.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/api.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/constants.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/types.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/utils.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffWorkspaceFilters.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffDetailText.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/messages/en.ts",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/messages/vi.ts"
+  ],
+  "constraints_source_paths": [
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/phase-03-api-client-and-state.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/contract.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/AGENTS.md",
+    "D:/DOCUMENTFPT/Github/pte-org/pte-web/docs/CODING_STANDARDS_WEB.md"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 1,
+    "noted": 0
+  },
+  "findings": [
+    {
+      "id": "QUAL-P03-001",
+      "severity": "LOW",
+      "rule": "RDB_COMMENT_EXPLAINS_WHY",
+      "status": "OPEN",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "D:/DOCUMENTFPT/Github/pte-org/pte-web/apps/tenant-web/features/examStaff/detail/hooks/useStaffDetailText.ts:19",
+      "evidence": "Object.fromEntries(...) as StaffDetailMessages has no explanatory comment. CODING_STANDARDS_WEB.md requires a comment explaining each type assertion.",
+      "why_it_matters": "The complete-catalog invariant supporting this assertion is implicit; the compiler cannot verify Object.fromEntries produces all message keys.",
+      "required_action": "Add a short comment explaining that both catalogs cover StaffDetailMessageKey and translating every entry preserves the complete key set, or remove the assertion through a typed construction.",
+      "owner": "cook"
+    }
+  ],
+  "scope": {
+    "declared_output_files": 12,
+    "modified_tracked_files": 2,
+    "new_files": 10,
+    "excluded": "Three unrelated dirty exam component files were not opened or reviewed. No production/test edits and no test execution.",
+    "adapter": "TypeScript/Node; core and relevant API, ownership, constants, concurrency, abstraction and change-safety rules."
+  },
+  "evaluation": {
+    "api_contracts": "Fresh backend reads confirm exact routes, query names, lowercase sort directions, work/publication/session enums, DTO fields, explicit nullable counts/progress, PageMeta/PagedResult envelope shape, capability boolean and profile whitelist. Serializer omits undefined, empty and ALL sentinel values; size/page are validated by backend. No separate examPublicId is present in the authoritative V1 contract.",
+    "query_scoping": "All reads obtain authenticated tenant/current user, require HOST_ADMIN and target publicId, and include tenant and target in cache keys. Work hooks additionally require consumer enabled. Query object keys isolate dates/status/publication/page/size and future board column requests. No cross-target placeholder reuse. GET query functions forward AbortSignal through existing ApiClient.",
+    "auth_boundaries": "Existing tenant Providers subscribes to protected-session lifecycle, cancels queries and clears the cache. Shared session identity covers actor, tenant and role set; shared client checks session generation before refresh/result acceptance. Workspace reuses this infrastructure. This is static evidence, not live auth-switch proof.",
+    "dates_state": "Approved fixed Asia/Ho_Chi_Minh UTC+7 zone has no DST. Calendar components are parsed and round-trip validated; exclusive to boundary uses next calendar day; invalid/reversed dates preserve previously applied filters and mark invalidDates. Draft changes do not alter applied query until Apply; Apply/Clear reset page. Mounting beneath selected publicId is documented integration responsibility.",
+    "invalidation": "Profile mutation now captures the exact [examStaff, detail, tenantId, publicId] detail key plus protected-session generation in onMutate and cancels only that exact detail query before sending the PATCH. On success it requires the original generation, cancels exact-key refetches, checks generation again after the await, writes the canonical backend account into the captured target key, then invalidates the existing examStaff and tenantUsers prefixes. The captured context prevents a response for target A from writing the currently displayed target B. Shared protected-session changes cancel queries/clear caches and advance generation on actor/tenant/role change. No optimistic profile payload, secret, unrelated phase04 file or new cache boundary is introduced.",
+    "locale_ownership": "English/Vietnamese catalogs share a typed key set, use useLocale translation/interpolation with fallback, and keep copy outside JSX. Presentation, field validation/error rendering and role/tab consumer enabling are deferred to Phases04-06 as explicitly instructed. One LOW missing assertion justification is recorded.",
+    "integration_boundary": "Independent board page states, active-tab/target-role enabled booleans, keyed target filter remount, dirty-edit navigation guard and rendered safe errors must be integrated in Phases04-06. These are explicit handoff obligations rather than missing Phase03 blockers. No claim that route/UI integration already exists."
+  },
+  "verification": {
+    "reported_by_user": [
+      "corepack pnpm --filter @pte/api-client typecheck: exit 0",
+      "corepack pnpm --filter tenant-web exec tsc --noEmit: exit 0",
+      "Scoped tenant ESLint features/examStaff/detail: exit 0",
+      "git diff --check: exit 0"
+    ],
+    "performed": "Independent source/DTO/controller/convention/authorization-cache inspection, declared-file inventory cross-check and scoped barrel diff --check.",
+    "not_performed": "No tests written or run; no reviewer typecheck/build execution, HTTP serialization/auth checks, browser interaction, database checks or deployment. Supplied checks are user-reported, not independently inspected logs.",
+    "build": "No completed build result supplied at report creation; this semantic gate is not build/runtime proof.",
+    "receipt": "Issue with actual ck-quality receipt.py after APPROVED report is saved; receipt fingerprints 12 declared Phase03 outputs only plus report. Backend/contracts/auth infrastructure are read-only supporting evidence, not phase outputs.",
+    "refresh": {
+      "scope": "Only new shared-output change in detail/api.ts profile mutation and existing QUAL-P03-001 were semantically re-evaluated. Original 12 reviewed_files retained for canonical Phase03 receipt. Other Phase04 files are separately reviewed and excluded.",
+      "performed": "Fresh read of canonical report, current detail/api.ts and useStaffDetailText.ts; supporting auth query/provider/session-generation and typed request source inspection. Static checks of exact key capture, cancellation, two generation guards, canonical write and existing-prefix invalidation.",
+      "findings": "APPROVED; no new BLOCKER/HIGH/current-change MEDIUM. QUAL-P03-001 remains OPEN LOW at useStaffDetailText.ts:19; assertion has no explanatory comment.",
+      "reported_checks": "Fresh lint/tsc are underway per user; no successful refreshed outcome is asserted. Prior supplied Phase03 checks remain historical evidence.",
+      "limitations": "No production/test edits, no tests or build run, no live auth-switch/race/browser proof. Git treats detail/api.ts as untracked, so normal git diff does not provide the original Phase03 body; prior canonical audit and current source provide the comparison.",
+      "receipt": "Canonical verify receipt to be reissued and fingerprint-verified against the retained Phase03 file set; this does not grant another phase's checkpoint."
+    }
+  },
+  "report_path": "D:/DOCUMENTFPT/Github/pte-org/pte-doc/projects/plans/quang-tenant-exam-staff-workspace/quality/phase-03-api-client-and-state-quality-report.json"
+}

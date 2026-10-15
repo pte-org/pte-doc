@@ -1,0 +1,90 @@
+{
+  "plan_id": "hung-pte-practice-theme-i18n-rebrand",
+  "phase_id": 2,
+  "name": "theme-provider",
+  "goal": "Create a ThemeProvider React context that manages dark/light mode, persists preference to localStorage, respects OS prefers-color-scheme, and sets data-theme on <html>",
+  "status": "completed",
+  "current_step": 5,
+  "design_constraints": [
+    "Cook confirms unit-test and quality-gate choices before each phase",
+    "Provider must be a client component wrapping the root layout",
+    "ThemeProvider writes data-theme='dark'|'light' to document.documentElement",
+    "Persist user preference to localStorage key 'pte-practice-theme'",
+    "Default to system preference via matchMedia('(prefers-color-scheme: dark)')",
+    "Expose useTheme() hook returning { theme, setTheme, toggleTheme }",
+    "No flash-of-wrong-theme: inject a blocking <script> in layout.tsx to set data-theme before React hydrates"
+  ],
+  "quality_profile": {
+    "repository_conventions": {},
+    "boundaries": {},
+    "applicable_rules": [],
+    "allowed_exceptions": []
+  },
+  "quality": { "status": "skipped_by_user", "decision": "user_confirmed_skip", "report": "", "receipt": "", "remediation_cycles": 0 },
+  "testing": { "status": "not_started", "report": "" },
+  "steps": [
+    {
+      "step_id": 1,
+      "description": "Create common/providers/ThemeProvider.tsx: a 'use client' React context that reads initial theme from localStorage (key 'pte-practice-theme') or falls back to matchMedia prefers-color-scheme. Sets data-theme attribute on document.documentElement. Exports ThemeProvider component and useTheme() hook with { theme: 'dark'|'light', setTheme, toggleTheme }.",
+      "status": "completed",
+      "input_files": [],
+      "output_files": ["common/providers/ThemeProvider.tsx"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "ThemeProvider.tsx exports ThemeProvider and useTheme",
+        "useTheme returns theme, setTheme, toggleTheme",
+        "Theme is persisted to localStorage on change",
+        "data-theme attribute is set on document.documentElement"
+      ]
+    },
+    {
+      "step_id": 2,
+      "description": "Create common/providers/theme-init.ts: export a THEME_INIT_SCRIPT constant (string of inline JS) that reads localStorage and matchMedia before React hydration and sets data-theme on <html>. This prevents flash-of-wrong-theme.",
+      "status": "completed",
+      "input_files": [],
+      "output_files": ["common/providers/theme-init.ts"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "theme-init.ts exports a self-executing JS string that can be injected via <script dangerouslySetInnerHTML>",
+        "Script reads 'pte-practice-theme' from localStorage, falls back to prefers-color-scheme, sets data-theme attribute"
+      ]
+    },
+    {
+      "step_id": 3,
+      "description": "Update app/layout.tsx: remove hardcoded className='dark' from <html>. Add the blocking <script dangerouslySetInnerHTML> with THEME_INIT_SCRIPT. Wrap {children} with ThemeProvider.",
+      "status": "completed",
+      "input_files": ["app/layout.tsx"],
+      "output_files": ["app/layout.tsx"],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "<html> element no longer has hardcoded className='dark'",
+        "Blocking script tag is present before <body>",
+        "ThemeProvider wraps children in the layout"
+      ]
+    },
+    {
+      "step_id": 4,
+      "description": "Add a theme toggle button to the StudentShell side-rail (near the account-card area). Use AppIcon with 'sun'/'moon' icon and wire it to useTheme().toggleTheme. Add sun/moon SVG icons to AppIcon.tsx if not already present.",
+      "status": "completed",
+      "input_files": [
+        "features/shell/StudentShell.tsx",
+        "common/components/AppIcon.tsx"
+      ],
+      "output_files": [
+        "features/shell/StudentShell.tsx",
+        "common/components/AppIcon.tsx"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Theme toggle button is rendered in the side-rail",
+        "Clicking the toggle switches data-theme between dark and light",
+        "AppIcon supports 'sun' and 'moon' icon names"
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,159 @@
+{
+  "artifactVersion": 1,
+  "phase": "02-audience-boundary",
+  "capturedAt": "2026-10-08",
+  "runner": {
+    "status": "not-configured",
+    "reason": "tenant-web exposes dev/build/start/lint only and has no local hook-test runner",
+    "fallback": "deterministic source-contract assertions plus TypeScript validation"
+  },
+  "hookBoundary": {
+    "signature": "useCreateExamAudience({ open, sources, onSourcesChange, onSourcesError })",
+    "sourcesOwnership": "read-only input; writes only through onSourcesChange(nextSources)",
+    "transientState": ["sourceType", "sourcePublicId", "sourceSearch"]
+  },
+  "contractCases": [
+    {
+      "id": "query-enablement-open-false",
+      "input": { "open": false, "firstOrganizationPublicId": "" },
+      "expectedQueryCalls": [
+        "useSubscriptionsQuery()",
+        "useTenantPlansQuery()",
+        "useAllTenantClasses(false)",
+        "useTenantStudents(false)",
+        "useMyOrganizations(false)",
+        "usePrograms('', false)"
+      ]
+    },
+    {
+      "id": "query-enablement-open-true-with-organization",
+      "input": { "open": true, "firstOrganizationPublicId": "org-public-id-fixture" },
+      "expectedQueryCalls": [
+        "useSubscriptionsQuery()",
+        "useTenantPlansQuery()",
+        "useAllTenantClasses(true)",
+        "useTenantStudents(true)",
+        "useMyOrganizations(true)",
+        "usePrograms('org-public-id-fixture', true)"
+      ]
+    },
+    {
+      "id": "active-filter-and-label-mapping",
+      "input": {
+        "subscriptions": [
+          { "publicId": "sub-active", "status": "ACTIVE", "planId": "plan-1" },
+          { "publicId": "sub-expired", "status": "EXPIRED", "planId": "plan-1" }
+        ],
+        "plans": [{ "publicId": "plan-1", "name": "Starter" }],
+        "students": [
+          {
+            "publicId": "student-active",
+            "status": "ACTIVE",
+            "fullName": "Active Student",
+            "email": "active@test",
+            "username": "active",
+            "studentCode": "S-01"
+          },
+          {
+            "publicId": "student-inactive",
+            "status": "SUSPENDED",
+            "fullName": "Inactive Student",
+            "email": "inactive@test",
+            "username": "inactive",
+            "studentCode": null
+          }
+        ]
+      },
+      "expectedOutput": {
+        "activeSubscriptionIds": ["sub-active"],
+        "planNameById": { "plan-1": "Starter" },
+        "studentOptions": [
+          {
+            "label": "Active Student (active@test) · S-01",
+            "value": "student-active"
+          }
+        ],
+        "selectedSourceLabel": "Active Student (active@test)"
+      }
+    },
+    {
+      "id": "source-type-change-resets-transient-state",
+      "input": {
+        "sourceType": "STUDENT",
+        "sourcePublicId": "student-1",
+        "sourceSearch": "alice",
+        "nextSourceType": "CLASS"
+      },
+      "expectedOutput": {
+        "sourceType": "CLASS",
+        "sourcePublicId": "",
+        "sourceSearch": ""
+      }
+    },
+    {
+      "id": "source-search-change-resets-selection",
+      "input": {
+        "sourceType": "STUDENT",
+        "sourcePublicId": "student-1",
+        "sourceSearch": "",
+        "nextSourceSearch": "alice"
+      },
+      "expectedOutput": {
+        "sourceType": "STUDENT",
+        "sourcePublicId": "",
+        "sourceSearch": "alice"
+      }
+    },
+    {
+      "id": "add-source-trims-and-clears-transient-state",
+      "input": {
+        "sources": [],
+        "sourceType": "STUDENT",
+        "sourcePublicId": "  student-1  ",
+        "sourceSearch": "student"
+      },
+      "expectedCallbacks": {
+        "onSourcesChange": [
+          [{ "sourceType": "STUDENT", "sourcePublicId": "student-1" }]
+        ],
+        "onSourcesError": [],
+        "afterState": { "sourcePublicId": "", "sourceSearch": "" }
+      }
+    },
+    {
+      "id": "duplicate-source-rejected",
+      "input": {
+        "sources": [{ "sourceType": "STUDENT", "sourcePublicId": "student-1" }],
+        "sourceType": "STUDENT",
+        "sourcePublicId": " student-1 "
+      },
+      "expectedCallbacks": {
+        "onSourcesChange": [],
+        "onSourcesError": ["This audience source has already been added."]
+      }
+    },
+    {
+      "id": "remove-source-delegates-single-source-update",
+      "input": {
+        "sources": [
+          { "sourceType": "STUDENT", "sourcePublicId": "student-1" },
+          { "sourceType": "CLASS", "sourcePublicId": "class-1" }
+        ],
+        "removeIndex": 0
+      },
+      "expectedCallbacks": {
+        "onSourcesChange": [
+          [{ "sourceType": "CLASS", "sourcePublicId": "class-1" }]
+        ]
+      }
+    }
+  ],
+  "boundaryAssertions": [
+    "The hook contains no JSX.",
+    "The hook has no mutation or API-client contract call.",
+    "The hook does not create a second sources store.",
+    "Organization-to-program dependency and ACTIVE filtering remain in the hook.",
+    "Locale-specific source type labels remain outside the hook."
+  ],
+  "evidenceBoundary": "This fallback artifact proves the recorded source contract and static checks only; it is not live browser, API, database, or production proof."
+}

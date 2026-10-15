@@ -1,0 +1,15 @@
+{
+  "target": "phase-04-overview-lifecycle-and-header",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\DOCUMENTFPT\\Github\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-tenant-exam-questions-tab/quality/phase-04-overview-lifecycle-and-header-quality-report.json",
+  "reviewed_files": [
+    "pte-web/apps/tenant-web/features/exams/components/ExamDetailTabs.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/ExamOverviewTab.tsx",
+    "pte-web/apps/tenant-web/features/exams/components/SessionDetailView.tsx"
+  ],
+  "source_fingerprint": "sha256:4c6af89ce14e2f067eabc148f615a97b0a42df7f23648bb83eeb054d2b05e78b",
+  "reviewed_at": "2026-10-08T21:26:43.8863716+07:00",
+  "open_blocking_findings": 0
+}

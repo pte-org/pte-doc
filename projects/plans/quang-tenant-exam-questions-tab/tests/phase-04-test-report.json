@@ -1,0 +1,55 @@
+{
+  "phase": "04",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "status": "passed",
+  "reviewed_at": "2026-10-08T21:28:09.2460840+07:00",
+  "summary": {
+    "passed": 8,
+    "failed": 0,
+    "skipped": 1
+  },
+  "commands": [
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File tests/phase-01-contract-check.ps1 -Stage final",
+      "result": "PASSED: Final lifecycle contract"
+    },
+    {
+      "command": "PowerShell static Phase 04 lifecycle contract",
+      "result": "PASSED: guard parity, header cleanup, lifecycle prop wiring, single error Alert, single status Badge"
+    },
+    {
+      "command": "apps/tenant-web/.bin/tsc --noEmit",
+      "result": "PASSED: tenant TypeScript project"
+    },
+    {
+      "command": "apps/tenant-web/.bin/eslint scoped lifecycle files",
+      "result": "PASSED: no ESLint findings in SessionDetailView.tsx, ExamDetailTabs.tsx, or ExamOverviewTab.tsx"
+    },
+    {
+      "command": "Prettier --check scoped lifecycle files",
+      "result": "PASSED: all modified Phase 04 files use repository formatting"
+    },
+    {
+      "command": "apps/tenant-web/.bin/next build",
+      "result": "PASSED: production build compiled, TypeScript completed, and 26 routes generated"
+    },
+    {
+      "command": "git diff --check scoped lifecycle files",
+      "result": "PASSED: no whitespace errors; Git reported only existing LF/CRLF normalization warnings"
+    },
+    {
+      "command": "Protected LocaleProvider SHA-256 verification",
+      "result": "PASSED: F86B7028E1138328FBF5A88D759FBC24498A480FD526ABDED6F11CE849CD7BA7"
+    }
+  ],
+  "skipped": [
+    {
+      "check": "authenticated browser smoke",
+      "reason": "No tenant dev server or authenticated browser session was available during this phase; status-specific click/confirm behavior, light/dark rendering, locale switching, keyboard navigation, and 390px overflow remain part of the Phase 05 integration gate."
+    }
+  ],
+  "failures": [],
+  "notes": "Final verification was rerun after removing the raw SESSION_STATUS_LABELS fallback from the moved Overview status path. Lifecycle mutation hooks, confirmations, pending flags, errors, invalidation ownership, and status guards remain in SessionDetailView. Overview is the only lifecycle presentation surface. No backend, API client, auth, vendor-web, or protected locale file was changed.",
+  "report_path": "pte-doc/projects/plans/quang-tenant-exam-questions-tab/tests/phase-04-test-report.json"
+}

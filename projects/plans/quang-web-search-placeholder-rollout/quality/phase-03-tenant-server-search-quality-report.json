@@ -1,0 +1,41 @@
+{
+  "mode": "gate",
+  "target": "phase-03-tenant-server-search",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-12T14:15:00Z",
+  "reviewed_files": [
+    "pte-doc/projects/plans/quang-web-search-placeholder-rollout/phase-03-tenant-server-search.md",
+    "apps/tenant-web/features/examoperations/components/LearnersOverview.tsx",
+    "apps/tenant-web/features/supportTickets/components/SupportTicketsView.tsx",
+    "apps/tenant-web/features/auditLog/components/AuditLogView.tsx",
+    "apps/tenant-web/features/commercialization/components/OrdersView.tsx",
+    "apps/tenant-web/features/exams/components/AnswersSection.tsx",
+    "apps/tenant-web/features/exams/components/ExaminerAssignmentSection.tsx",
+    "packages/api-client/src/requests/admin/auditLogs.ts",
+    "packages/api-client/src/requests/billing/orders.ts",
+    "packages/api-client/src/requests/scoring/answers.ts",
+    "packages/api-client/src/requests/scoring/assignments.ts",
+    "packages/api-client/src/requests/support/tickets.ts",
+    "../pte-api/app/src/main/java/com/pte/shared/audit/AuditLogService.java",
+    "../pte-api/app/src/main/java/com/pte/billing/internal/service/OrderService.java",
+    "../pte-api/app/src/main/java/com/pte/scoring/internal/service/ScoringReviewService.java",
+    "../pte-api/app/src/main/java/com/pte/scoring/internal/service/ExaminerAssignmentService.java",
+    "../pte-api/app/src/main/java/com/pte/support/internal/service/SupportTicketService.java"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "evidence": {
+    "tenant_server_search_surfaces": 6,
+    "tenant_scoping_preserved": true,
+    "trimmed_search_in_query_keys": true,
+    "page_reset_on_search_change": true,
+    "local_filtering_disabled_on_server_tables": true
+  },
+  "report_path": "pte-doc/projects/plans/quang-web-search-placeholder-rollout/quality/phase-03-tenant-server-search-quality-report.json"
+}

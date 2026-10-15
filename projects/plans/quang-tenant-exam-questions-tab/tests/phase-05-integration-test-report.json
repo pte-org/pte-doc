@@ -1,0 +1,83 @@
+{
+  "phase": "05",
+  "mode": "integration",
+  "verdict": "PASSED",
+  "status": "awaiting-final-checkpoint",
+  "reviewed_at": "2026-10-08T21:54:58.6896141+07:00",
+  "summary": {
+    "passed": 15,
+    "failed": 0,
+    "skipped": 0
+  },
+  "commands": [
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File tests/phase-02-preview-surface-contract.ps1",
+      "result": "PASSED: preview surface ownership, state branches, answer-key boundary, modal delegation, and locale/theme contract; stale snapshot-handoff assertion updated to current ExamQuestionsTab ownership"
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File tests/phase-01-contract-check.ps1 -Stage questions",
+      "result": "PASSED: seven-tab order, Questions second, locale handoff, query boundary, history contract, and answer-key boundary"
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File tests/phase-01-contract-check.ps1 -Stage final",
+      "result": "PASSED: lifecycle ownership/guards, clean detail header, seven-tab order, tenant-scoped API contracts, and locale handoff"
+    },
+    {
+      "command": "Temporary Phase 05 static integration contract",
+      "result": "PASSED: seven-tab sequence, retention/history wiring, preview state branches, lifecycle ownership, single Overview status/Alert surfaces, read-only question boundary"
+    },
+    {
+      "command": "packages/ui/node_modules/.bin/tsc.cmd --noEmit",
+      "result": "PASSED: @pte/ui TypeScript project"
+    },
+    {
+      "command": "apps/tenant-web/node_modules/.bin/tsc.cmd --noEmit",
+      "result": "PASSED: tenant-web TypeScript project"
+    },
+    {
+      "command": "apps/tenant-web/node_modules/.bin/eslint.cmd scoped Phase 02-04 files",
+      "result": "PASSED: no ESLint findings"
+    },
+    {
+      "command": "node_modules/.bin/prettier.cmd --check scoped Phase 02-04 files",
+      "result": "PASSED: all reviewed production files use repository formatting"
+    },
+    {
+      "command": "apps/tenant-web/node_modules/.bin/next.cmd build",
+      "result": "PASSED: production build compiled, TypeScript completed, and 26 routes generated"
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASSED: no whitespace errors; Git emitted only existing LF/CRLF normalization warnings"
+    },
+    {
+      "command": "Protected LocaleProvider SHA-256 verification",
+      "result": "PASSED: F86B7028E1138328FBF5A88D759FBC24498A480FD526ABDED6F11CE849CD7BA7"
+    },
+    {
+      "command": "Visible Chrome browser smoke: C:/tmp/playwright-test-phase-05-live.js",
+      "result": "PASSED: login, seven tabs, clean header, Questions no document navigation, retention, deep-link/reload/back, keyboard Home/End, VI default/EN switch, dark/light, lifecycle Scheduled/Open, and 390px no overflow"
+    },
+    {
+      "command": "Visible Chrome controlled Questions state smoke: C:/tmp/playwright-test-phase-05-states.js",
+      "result": "PASSED: loading skeleton, successful-empty, error, content, and no-snapshot; no-snapshot previewCalls=0; error retry settled after 4 intercepted attempts; answer-key text absent from content"
+    },
+    {
+      "command": "Visible Chrome workflow/browser health smoke: C:/tmp/playwright-test-phase-05-ux-paths.js",
+      "result": "PASSED: participant student-assignment modal opened/closed, Submissions/Examiner/Results panels reachable, no tab/modal document navigation, console errors=0, page errors=0, non-aborted request failures=0; 7 ERR_ABORTED cancellations were recorded as benign cancelled assets/prefetch/request cleanup"
+    },
+    {
+      "command": "Visible Chrome post-feedback locale regression smoke",
+      "result": "PASSED: Vietnamese Examiner tab is Giám khảo, English switch remains Examiner; tab order/history/retention unchanged"
+    }
+  ],
+  "failures": [],
+  "notes": [
+    "Frontend served at http://localhost:3000 with the existing local backend at http://localhost:8080.",
+    "The bundled Playwright Chromium runtime was unavailable; the same Playwright scripts ran against the installed Google Chrome executable at C:/Program Files/Google/Chrome/Application/chrome.exe.",
+    "Phase 05 made no planned production changes. The only repository test change reconciles a stale Phase 02 snapshot-handoff assertion with the Phase 04 ownership move to ExamQuestionsTab.",
+    "Post-checkpoint UI fix changed only ExamDetailTabs.tsx to provide the Vietnamese Giám khảo label without touching the protected LocaleProvider. ExamSettingsTab remains read-only because full configuration PATCH is supported only for DRAFT sessions; the screenshot's SCHEDULED session is locked for those fields.",
+    "Concurrent vendor-web, api-client, and protected locale changes were observed and left untouched."
+  ],
+  "report_path": "pte-doc/projects/plans/quang-tenant-exam-questions-tab/tests/phase-05-integration-test-report.json"
+}

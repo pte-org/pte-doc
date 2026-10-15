@@ -1,0 +1,44 @@
+{
+  "phase": "01",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "status": "passed",
+  "reviewed_at": "2026-10-08T18:05:20.5393912+07:00",
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0
+  },
+  "phase_gate": {
+    "verdict": "PASSED",
+    "reason": "Locale handoff confirmed and current provider hash matches the recorded handoff.",
+    "missing_keys": 0,
+    "permission_to_consume_keys": true,
+    "status": "owner-handoff-confirmed"
+  },
+  "commands": [
+    {
+      "command": "python .codex/skills/ck-quality/scripts/receipt.py verify pte-doc/projects/plans/quang-tenant-exam-questions-tab/quality/phase-01-baseline-ownership-and-contract-receipt.json",
+      "result": "VALID before the report-only write; receipt fingerprint covers this report and therefore becomes stale after the required report update"
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File tests/phase-01-contract-check.ps1 -Stage baseline",
+      "result": "PASS: Phase 01 baseline contract; exit 0"
+    },
+    {
+      "command": "PowerShell read-only audit of all Phase 01 JSON artifacts and baseline protected/later-owned hashes",
+      "result": "PASSED: 6 scoped JSON artifacts parsed"
+    },
+    {
+      "command": "PowerShell read-only protected/concurrent drift ledger and later-owned baseline hash audit",
+      "result": "PASSED: 5 protected/concurrent ledger hashes matched and 5 later-owned baseline hashes matched"
+    },
+    {
+      "command": "PowerShell read-only locale handoff assertion and current LocaleProvider hash check",
+      "result": "PASSED: status=owner-handoff-confirmed; required=35; available=35; missing=0; permissionToConsumeKeys=true; observedAfterSha256 matches current provider"
+    }
+  ],
+  "failures": [],
+  "notes": "AnswerDetailModal scoring metadata was detected and remains disallowed for Questions, as required. No production or protected files were modified; only this test report was updated.",
+  "report_path": "pte-doc/projects/plans/quang-tenant-exam-questions-tab/tests/phase-01-test-report.json"
+}

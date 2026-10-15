@@ -1,0 +1,47 @@
+{
+  "phase": "phase-02-identity-membership-and-entitlement",
+  "mode": "unit-and-regression",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-07T18:47:11+07:00",
+  "summary": {
+    "passed": 1224,
+    "failed": 0,
+    "skipped": 40
+  },
+  "checks": [
+    {
+      "command": ".\\mvnw.cmd -pl app -DskipTests compile",
+      "result": "PASSED",
+      "evidence": "Maven BUILD SUCCESS at 2026-10-07T18:47:11+07:00"
+    },
+    {
+      "command": ".\\mvnw.cmd -pl app \"-Dtest=PracticeMigrationVersionTest,PracticeEmailAuthServiceTest,PracticeEmailChallengeNotificationListenerTest,PracticeEntitlementServiceTest,BillingServiceTest,ModuleStructureTest\" test",
+      "result": "PASSED",
+      "evidence": "23 tests run, 0 failures, 0 errors, 0 skipped"
+    },
+    {
+      "command": ".\\mvnw.cmd -pl app test",
+      "result": "PASSED",
+      "evidence": "1,224 tests run, 0 failures, 0 errors, 40 skipped; Maven BUILD SUCCESS"
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASSED",
+      "evidence": "No whitespace errors or conflict markers; Git emitted only LF/CRLF normalization warnings"
+    }
+  ],
+  "coverage": [
+    "Verified email challenge is single-use, expiry-bound, attempt-limited and does not return the code in the response",
+    "Revoked identity, replayed challenge, wrong code and rate-limit paths are covered",
+    "Active imported student, capacity-only/missing exam package, capacity overrun, inactive/removed membership, unknown shell identity and ambiguous organization states are covered",
+    "Cross-organization authorization and disabled strict entitlement fail-closed behavior are covered",
+    "Migration contract, module structure and after-commit notification boundary are covered"
+  ],
+  "notes": [
+    "40 skipped tests are existing Postgres integration tests because the local run does not provide the required external database/container",
+    "The full suite logs existing H2 schema warnings for task_runtime_contracts and Mockito dynamic-agent warnings; neither caused a failure",
+    "No live email, RabbitMQ or production API smoke test was run in this phase"
+  ],
+  "failures": [],
+  "report_path": "projects/plans/quang-pte-practice-student-web/tests/phase-02-identity-membership-and-entitlement-test-report.json"
+}

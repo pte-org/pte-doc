@@ -1,0 +1,126 @@
+[
+  {
+    "pteTaskType": "SUMMARIZE_GROUP_DISCUSSION",
+    "taskTypeKey": "SUMMARIZE_GROUP_DISCUSSION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Eco-tourism",
+    "promptText": "The speakers discuss the growing trend towards eco-tourism holidays and whether they really protect the environment and local cultures.",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/ssts/audios/SST_105/original/ca176af33c7a50e501a1dcb07ce3bd38/SST_105.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "This lecture mainly talks about eco-tourism holidays. Firstly, the speaker emphasizes nowadays there is an increasing trend towards eco-tourism holidays. Also, he mentions the tourism should not only protect but also actively improve our environment and its cultures. Lastly, the speaker believes travelers can make the right choice when confronted with this type of marketing. In conclusion, this lecture is very informative.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/SUMMARIZE_GROUP_DISCUSSION.json",
+      "kind": "mock",
+      "num": 1,
+      "name": "#1 Eco-tourism",
+      "basedOn": {
+        "file": "data/listening/ssts.json",
+        "num": 5,
+        "name": "#5 Eco-tourism"
+      },
+      "note": "Audio and reference summary reused from Summarize Spoken Text; the audio is a single-speaker lecture."
+    },
+    "importWarnings": [
+      "AUDIO_REUSED_FROM_SUMMARIZE_SPOKEN_TEXT",
+      "AUDIO_IS_MONOLOGUE_NOT_GROUP_DISCUSSION",
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "SUMMARIZE_GROUP_DISCUSSION",
+    "taskTypeKey": "SUMMARIZE_GROUP_DISCUSSION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Climate Change",
+    "promptText": "The speakers discuss the evidence that climate change is the result of human activities since the industrial revolution.",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/ssts/audios/SST_106/original/bd5be3de824f590cb56255de8f08c12b/SST_106.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Climate change is a result of human activities, as our own actions are causing a genuine threat. To be more specific, land and sea temperatures started to increase around 200 years ago, when the industrial revolution began. This has resulted in the production of harmful gases, which is the proof of the damaging effect of our actions.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/SUMMARIZE_GROUP_DISCUSSION.json",
+      "kind": "mock",
+      "num": 2,
+      "name": "#2 Climate Change",
+      "basedOn": {
+        "file": "data/listening/ssts.json",
+        "num": 6,
+        "name": "#6 Climate Change"
+      },
+      "note": "Audio and reference summary reused from Summarize Spoken Text; the audio is a single-speaker lecture."
+    },
+    "importWarnings": [
+      "AUDIO_REUSED_FROM_SUMMARIZE_SPOKEN_TEXT",
+      "AUDIO_IS_MONOLOGUE_NOT_GROUP_DISCUSSION",
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "SUMMARIZE_GROUP_DISCUSSION",
+    "taskTypeKey": "SUMMARIZE_GROUP_DISCUSSION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Allergies",
+    "promptText": "The speakers discuss why allergies are becoming more common and how people who suffer from them can be treated.",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/ssts/audios/SST_145_volume/original/2724a0b298b7d42c0e39bb6ee8a3dceb/SST_145_volume.mp3?1623378567",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "Allergies seem to be increasing these days especially in more hygienic societies where children are less exposed to harmful situations at an early age. They are a result of the body's immune system reacting to something it believes is harmful and producing histamines to get rid the body of this. Sufferers are advised to avoid the trigger for their allergy. When this is impossible, they can be prescribed anti-histamines.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/SUMMARIZE_GROUP_DISCUSSION.json",
+      "kind": "mock",
+      "num": 3,
+      "name": "#3 Allergies",
+      "basedOn": {
+        "file": "data/listening/ssts.json",
+        "num": 7,
+        "name": "#7 Allergy"
+      },
+      "note": "Audio and reference summary reused from Summarize Spoken Text; the audio is a single-speaker lecture."
+    },
+    "importWarnings": [
+      "AUDIO_REUSED_FROM_SUMMARIZE_SPOKEN_TEXT",
+      "AUDIO_IS_MONOLOGUE_NOT_GROUP_DISCUSSION",
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  },
+  {
+    "pteTaskType": "SUMMARIZE_GROUP_DISCUSSION",
+    "taskTypeKey": "SUMMARIZE_GROUP_DISCUSSION",
+    "taskTypeSection": "SPEAKING",
+    "title": "Reading Habit",
+    "promptText": "The speakers discuss the long European habit of travelling in the mind through reading about faraway places such as America.",
+    "audioPromptUrl": "https://dl26yht2ovo33.cloudfront.net/public/system/ssts/audios/SST_146/original/ab88d0f5823e4ee77059a8cc27bc03dc/SST_146.mp3",
+    "imagePromptUrl": null,
+    "referenceAnswerText": "This lecture mainly talks about travelling through reading. Firstly, the speaker emphasises travelling through reading is a long-standing European habit. Also, he mentions the report about America from the person who has been there is a literary genre that Europeans have devoured. Lastly, the speaker believes no nation or people can be compared with the experience of Americans. In conclusion, this lecture is very informative.",
+    "correctAnswerText": null,
+    "minWordCount": null,
+    "maxWordCount": null,
+    "options": [],
+    "source": {
+      "file": "data/additionalMockData/SUMMARIZE_GROUP_DISCUSSION.json",
+      "kind": "mock",
+      "num": 4,
+      "name": "#4 Reading Habit",
+      "basedOn": {
+        "file": "data/listening/ssts.json",
+        "num": 8,
+        "name": "#8 Reading Habbit"
+      },
+      "note": "Audio and reference summary reused from Summarize Spoken Text; the audio is a single-speaker lecture."
+    },
+    "importWarnings": [
+      "AUDIO_REUSED_FROM_SUMMARIZE_SPOKEN_TEXT",
+      "AUDIO_IS_MONOLOGUE_NOT_GROUP_DISCUSSION",
+      "EXTERNAL_AUDIO_URL_REQUIRES_BACKEND_SUPPORT"
+    ]
+  }
+]

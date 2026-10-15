@@ -1,0 +1,8 @@
+{
+  "phase": "01",
+  "status": "passed",
+  "command": "powershell -NoProfile -ExecutionPolicy Bypass -File tests/phase-01-contract-check.ps1 -Stage baseline",
+  "stage": "baseline",
+  "result": "PASS: Phase 01 baseline contract",
+  "notes": "PowerShell 5.1 was used because pwsh is not installed in this environment. AnswerDetailModal was detected as disallowed scoring UI, as required."
+}

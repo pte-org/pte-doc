@@ -1,0 +1,21 @@
+{
+  "target": "phase-02-placeholders-and-visibility",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:/GitHub/PTE-org",
+  "report_path": "pte-doc/projects/plans/quang-web-search-placeholder-rollout/quality/phase-02-placeholders-and-visibility-quality-report.json",
+  "reviewed_files": [
+    "pte-web/apps/tenant-web/features/examStaff/components/ExamStaffTable.tsx",
+    "pte-web/apps/tenant-web/features/search/constants.ts",
+    "pte-web/apps/tenant-web/features/search/useTenantSearchText.ts",
+    "pte-web/apps/vendor-web/features/i18n/adminCopy.ts",
+    "pte-web/apps/vendor-web/features/i18n/adminSearchCopy.ts",
+    "pte-web/apps/vendor-web/features/questionbank/constants.ts",
+    "pte-web/packages/ui/src/i18n/LocaleProvider.tsx",
+    "pte-doc/projects/plans/quang-web-search-placeholder-rollout/phase-02-placeholders-and-visibility.md",
+    "pte-doc/projects/plans/quang-web-search-placeholder-rollout/search-surface-manifest.md"
+  ],
+  "source_fingerprint": "sha256:b22e09791bd50f3962dfe13c77a097be9b5e800daf5432d50743aa89015bf54e",
+  "reviewed_at": "2026-10-12T14:15:00Z",
+  "open_blocking_findings": 0
+}

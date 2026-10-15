@@ -1,0 +1,57 @@
+{
+  "baselineVersion": 1,
+  "capturedAt": "2026-10-08",
+  "phase": "phase-02-audience-boundary",
+  "repository": {
+    "root": "D:/DOCUMENTFPT/Github/pte-org/pte-web",
+    "branch": "quang/feat/ui-refactor",
+    "scope": "Audience hook before Phase 02 source writes"
+  },
+  "changedPathsBeforePhase": [
+    "apps/tenant-web/features/exams/components/CreateExamWizard.tsx",
+    "apps/tenant-web/features/exams/constants/index.ts",
+    "apps/tenant-web/features/exams/hooks/useCreateExamWizardForm.ts",
+    "apps/tenant-web/features/exams/utils/createExamWizard.ts",
+    "apps/vendor-web/features/auth/components/LoginView.tsx",
+    "apps/vendor-web/features/auth/constants.ts",
+    "packages/ui/src/hooks/index.ts",
+    "packages/ui/src/hooks/sessionStorage.ts",
+    "packages/ui/src/i18n/LocaleProvider.tsx"
+  ],
+  "protectedSha256": {
+    "apps/vendor-web/features/auth/components/LoginView.tsx": "DBE11AF3700FD847EE360F39D6F834EA999999DB182AB17437FD583497339A76",
+    "apps/vendor-web/features/auth/constants.ts": "DD4C00E8977036BB08A79A88B826AD950F4AC83AD9E527B2111F3F01D38F9BF9",
+    "packages/ui/src/hooks/index.ts": "40043F8B3A2D81AF4DBF3B7B6AF10994BA2BB610256F287E1F5A05AD5E706527",
+    "packages/ui/src/hooks/sessionStorage.ts": "966AC8E2C774696C9FA3E447E82046E5E6C99294462F2FE4F994DE73C85ADD78",
+    "packages/ui/src/i18n/LocaleProvider.tsx": "7AE6A91C37C633C345EB46A6877FEBFDF32CD95C5FE1CF141D94D0FBEE08C8BE"
+  },
+  "phaseScopeBeforeWrite": {
+    "newFiles": [
+      "apps/tenant-web/features/exams/hooks/useCreateExamAudience.ts"
+    ],
+    "existingPhaseFilesReadOnly": [
+      "apps/tenant-web/features/exams/hooks/useCreateExamWizardForm.ts",
+      "apps/tenant-web/features/exams/components/CreateExamWizard.tsx"
+    ]
+  },
+  "audienceContract": {
+    "hookApi": "useCreateExamAudience({ open, sources, onSourcesChange, onSourcesError })",
+    "queryEnablement": {
+      "subscriptions": "useSubscriptionsQuery()",
+      "plans": "useTenantPlansQuery()",
+      "classes": "useAllTenantClasses(open)",
+      "students": "useTenantStudents(open)",
+      "organizations": "useMyOrganizations(open)",
+      "programs": "usePrograms(firstOrganizationPublicId, open)"
+    },
+    "filtering": "ACTIVE subscriptions/classes/students/programs",
+    "sourceKey": "sourceType + ':' + sourcePublicId",
+    "transientReset": {
+      "sourceTypeChange": ["sourcePublicId", "sourceSearch"],
+      "sourceSearchChange": ["sourcePublicId"],
+      "successfulAdd": ["sourcePublicId", "sourceSearch"]
+    }
+  },
+  "phase01QualityReceipt": "quality/phase-01-form-boundaries-receipt.json",
+  "evidenceBoundary": "Static ownership/hash baseline only; this artifact is not live browser, API, database, or production proof."
+}

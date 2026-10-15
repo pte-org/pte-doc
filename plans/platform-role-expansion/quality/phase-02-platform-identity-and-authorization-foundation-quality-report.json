@@ -1,0 +1,51 @@
+{
+  "mode": "gate",
+  "target": "phase-02-platform-identity-and-authorization-foundation",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-08T07:20:30Z",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/identity/domain/Role.java",
+    "pte-api/app/src/main/java/com/pte/identity/domain/User.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/constant/IdentityConstants.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/controller/PlatformUserController.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/dto/request/PlatformUserCreateRequest.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/dto/request/PlatformUserRoleUpdateRequest.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/exception/ForbiddenRoleAssignmentException.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/exception/ForbiddenUserManagementException.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/repository/UserRepository.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/service/PlatformUserService.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/service/UserProvisioningHelper.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/mapper/UserMapper.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/security/AccessTokenIssuer.java",
+    "pte-api/app/src/main/java/com/pte/shared/security/CurrentUser.java",
+    "pte-api/app/src/main/java/com/pte/shared/security/ResourceServerJwt.java",
+    "pte-api/app/src/main/java/com/pte/shared/security/SecurityCapability.java",
+    "pte-api/app/src/main/java/com/pte/shared/security/SecurityPolicy.java",
+    "pte-api/app/src/main/java/com/pte/shared/security/SecurityRoles.java",
+    "pte-api/app/src/main/resources/db/migration/V86__platform_role_catalog.sql",
+    "pte-api/app/src/main/resources/db/migration/V87__platform_user_username_uniqueness.sql",
+    "pte-api/app/src/test/java/com/pte/identity/internal/controller/PlatformUserControllerSecurityTest.java",
+    "pte-api/app/src/test/java/com/pte/identity/internal/service/PlatformUserServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/identity/internal/service/UserProvisioningHelperTest.java",
+    "pte-api/app/src/test/java/com/pte/shared/security/SecurityPolicyTest.java",
+    "pte-api/app/src/test/java/com/pte/shared/security/SecurityRolesTest.java",
+    "pte-doc/plans/platform-role-expansion/phase-02-platform-identity-and-authorization-foundation.md",
+    "pte-doc/plans/platform-role-expansion/tests/phase-02-platform-identity-and-authorization-foundation-test-report.json"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "findings": [],
+  "review_notes": [
+    "Platform-user lifecycle is isolated behind /api/v1/platform-users and guarded both at the controller boundary and service capability boundary.",
+    "Legacy PLATFORM_AUTHOR remains an explicit compatibility alias while canonical role resolution emits ACADEMIC_STAFF; the legacy tenant-user endpoint no longer resolves academic platform roles.",
+    "Role scope is deny-by-default, mixed platform/tenant principals fail closed, platform-user username uniqueness is backed by a partial database index, and soft-deleted platform users are excluded from direct lookup/listing.",
+    "Denied capability, self-target, forbidden target, and forbidden role-assignment paths record failure audits without password, token, or credential material.",
+    "Live PostgreSQL migration execution, HTTP authorization integration, and browser E2E remain deferred validation boundaries for the later integration phase."
+  ],
+  "report_path": "pte-doc/plans/platform-role-expansion/quality/phase-02-platform-identity-and-authorization-foundation-quality-report.json"
+}

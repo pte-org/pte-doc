@@ -1,0 +1,14 @@
+{
+  "target": "phase-01-common-exam-shell-and-tab-state",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\DOCUMENTFPT\\Github\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-tenant-exam-ui-decomposition/quality/phase-01-common-exam-shell-and-tab-state-quality-report.json",
+  "reviewed_files": [
+    "pte-web/packages/ui/src/components/Tabs.tsx",
+    "pte-web/packages/ui/src/components/index.ts"
+  ],
+  "source_fingerprint": "sha256:4fc5c82a9e4f5afc3581d4c172050d0e340a3a92c46af2239f82e19cb7b2fe50",
+  "reviewed_at": "2026-10-08T00:00:00+07:00",
+  "open_blocking_findings": 0
+}

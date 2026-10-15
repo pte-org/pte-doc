@@ -1,0 +1,17 @@
+{
+  "phase": "phase-01-role-catalog-and-legacy-migration",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-08T06:30:42Z",
+  "summary": {
+    "passed": 56,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "commands": [
+    ".\\mvnw.cmd -pl app -Dtest=UserProvisioningHelperTest test",
+    ".\\mvnw.cmd -pl app '-Dtest=SecurityRolesTest,UserProvisioningHelperTest,AuthServiceTest,UserServiceTest' test"
+  ],
+  "report_path": "pte-doc/plans/platform-role-expansion/tests/phase-01-role-catalog-and-legacy-migration-test-report.json"
+}
