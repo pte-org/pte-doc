@@ -1,0 +1,18 @@
+﻿- Cycle detected: Slice attempt -> Slice session -> Slice enrollment -> Slice attempt
+- Cycle detected: Slice attempt -> Slice session -> Slice enrollment -> Slice reporting -> Slice attempt
+- Cycle detected: Slice attempt -> Slice session -> Slice enrollment -> Slice reporting -> Slice scoring -> Slice attempt
+- Cycle detected: Slice enrollment -> Slice reporting -> Slice scoring -> Slice enrollment
+- Cycle detected: Slice enrollment -> Slice reporting -> Slice scoring -> Slice session -> Slice enrollment
+- Cycle detected: Slice enrollment -> Slice reporting -> Slice session -> Slice enrollment
+- Cycle detected: Slice enrollment -> Slice session -> Slice enrollment
+- Module 'enrollment' depends on module 'attempt' via com.pte.enrollment.internal.service.StudentWorkspaceQueryService -> com.pte.attempt.AttemptService. Allowed targets: shared, identity, tenancy, tenancy :: domain.
+- Module 'enrollment' depends on module 'attempt' via com.pte.enrollment.internal.service.StudentWorkspaceQueryService -> com.pte.attempt.domain.enums.AttemptStatus. Allowed targets: shared, identity, tenancy, tenancy :: domain.
+- Module 'enrollment' depends on module 'reporting' via com.pte.enrollment.internal.service.StudentWorkspaceQueryService -> com.pte.reporting.dto.response.ReportSkillScoreView. Allowed targets: shared, identity, tenancy, tenancy :: domain.
+- Module 'enrollment' depends on module 'reporting' via com.pte.enrollment.internal.service.StudentWorkspaceQueryService -> com.pte.reporting.dto.response.StudentReportSummaryView. Allowed targets: shared, identity, tenancy, tenancy :: domain.
+- Module 'enrollment' depends on module 'reporting' via com.pte.enrollment.internal.service.StudentWorkspaceQueryService -> com.pte.reporting.ReportingService. Allowed targets: shared, identity, tenancy, tenancy :: domain.
+- Module 'enrollment' depends on module 'session' via com.pte.enrollment.internal.service.StudentWorkspaceQueryService -> com.pte.session.SessionService. Allowed targets: shared, identity, tenancy, tenancy :: domain.
+- Module 'enrollment' depends on named interface(s) 'attempt :: response' via com.pte.enrollment.internal.service.StudentWorkspaceQueryService -> com.pte.attempt.dto.response.StudentAttemptHistoryView. Allowed targets: shared, identity, tenancy, tenancy :: domain.
+- Module 'enrollment' depends on named interface(s) 'identity :: domain' via com.pte.enrollment.internal.service.StudentWorkspaceQueryService -> com.pte.identity.domain.Role. Allowed targets: shared, identity, tenancy, tenancy :: domain.
+- Module 'enrollment' depends on named interface(s) 'identity :: domain' via com.pte.enrollment.internal.service.StudentWorkspaceQueryService -> com.pte.identity.domain.User. Allowed targets: shared, identity, tenancy, tenancy :: domain.
+- Module 'enrollment' depends on named interface(s) 'identity :: domain' via com.pte.enrollment.internal.service.StudentWorkspaceQueryService -> com.pte.identity.domain.UserStatus. Allowed targets: shared, identity, tenancy, tenancy :: domain.
+- Module 'enrollment' depends on named interface(s) 'session :: response' via com.pte.enrollment.internal.service.StudentWorkspaceQueryService -> com.pte.session.dto.response.SessionSummaryView. Allowed targets: shared, identity, tenancy, tenancy :: domain.
