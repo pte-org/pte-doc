@@ -1,0 +1,207 @@
+{
+  "phase": "phase-07-tenant-host-dashboard-ui",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "verdict_note": "97 existing hostDashboard tests were reviewed and kept untouched; 338 tests in 18 new files were added (tenant-web 134 -> 472 tests, 11 -> 29 files). All pass. No production code, vitest config or package.json was changed. No production bug was found; 8 LOW concerns are listed below (none is encoded as a failing test). Tests were proven non-vacuous with 24 mutants run against a scratchpad copy (all killed). No git command was run.",
+  "reviewed_at": "2026-10-13T17:05:00Z",
+  "summary": { "passed": 1350, "failed": 0, "skipped": 0 },
+  "summary_scope": "passed = 508 (tenant-web, 31 files, after remediation cycle 1; 472 / 29 files before it) + 271 (@pte/ui, 12 files, unchanged) + 571 (@pte/api-client, 28 files, unchanged). vendor-web has no vitest suite.",
+  "new_tests": {
+    "tenant_web_before": { "files": 11, "tests": 134, "note": "37 tests in 2 pre-existing roster files + 97 hostDashboard tests in 9 files" },
+    "tenant_web_after": { "files": 29, "tests": 472 },
+    "net_new_tests": 338,
+    "net_new_files": 18,
+    "existing_tests_reviewed": "The 9 existing hostDashboard files cover the pure mappers well (single-case per source, threshold 89/90, null change, unknown action, key parity). Gaps found: no component rendering at all; no per-source ERROR/FORBIDDEN matrix for needs-attention; no rounding boundary cases (89.4/89.5); no limit 0/negative/over-capacity cases; no 12-bucket or vi month-label check; no timezone boundary cases (month/year end in Asia/Ho_Chi_Minh); no end-to-end proof of the 25 audit codes; no placeholder-name or whitespace checks on the catalogs; nothing on the invalidation hooks, the query options or the source hygiene rules.",
+    "by_file": {
+      "components/HostDashboardGrid.test.ts": "21. all sections loaded: 13 headings in the expected DOM order with needs-attention first, regions labelled by h2 and no h1, needs-attention slot has no unprefixed order class, every href is an allowed existing route and the session row links to /host/exams/{publicId}, no inline style except recharts' own two sizing wrappers, no hex/rgb/hsl, no machine strings (enum codes, audit codes, UUIDs, braces) in text or aria-label/title, actor only Staff member/System. ERROR for each of 9 sections: own error panel (role=alert, 'This section is unavailable', Try again button, no link) while the other panels keep content; retry of a failed panel refetches the single query (recorded onRetry); usage panel halves independent (quota ERROR keeps plans, subscription ERROR keeps seats, both ERROR = one error state); KPI cards of a failed section show Unavailable.",
+      "components/HostDashboardGrid.states.test.ts": "21. FORBIDDEN for each of 11 sections hides exactly its panels with no error text or alert; usage halves; both forbidden hides the usage panel; all 11 forbidden renders no widget. All-zero tenant: 0 in KPIs with a dash and the no-previous-period label, 0 of 100 seats with no warning, empty-state sentence for chart/table/timeline/donuts/attention, zero counts in grading and compact cards. Vietnamese render: all 13 titles, no English copy left, vi number grouping and day count. Tenant nouns (Course/Cohort) replace Program/Class and no {token} survives.",
+      "components/HostDashboardView.test.ts": "11. loading state (status, label, header kept, no grid, no alert); LearnersOverview is the last child of the view (html ends with it, after the last h2); header and quick actions precede the widgets; whole-query error with retry and LearnersOverview still mounted; retry refetches; error text comes from getUserFacingApiErrorMessage for machine-code, server+stack-trace, network and plain Error (raw message never in the HTML); a background-refetch error keeps the grid; Vietnamese loading/error.",
+      "components/UpcomingSessionsPanel.test.ts": "16. exactly 5 columns and no Branch/Chi nhanh column (en and vi); row link /host/exams/{publicId}; capacity null -> '12 / -' and capacity 0 -> '0 / 0'; invalid close time -> dash; enrolled/capacity grouped per locale; all 7 statuses labelled, no enum text; 8-row limit; instants in the dashboard zone (8:00 AM at UTC+7, 1:00 AM at UTC, Nov 1 12:30 AM and Jan 1 2027 across month/year ends); vi date format; empty state without a table; ERROR state; FORBIDDEN renders nothing.",
+      "components/UsagePanel.test.ts": "29. near-limit boundary at 88/89/90/91 and rounded 89.4/89.5 (warning text + billing link only from 90%); bar colour green/amber/red; over capacity 120% with full bar and 0 remaining; limit 0 -> explanation, no progress, no NaN; locale grouping; subscription block: empty, fields, expiry date in the dashboard zone (June 1 vs May 31), fallbacks for null plan name/type, both plan types and 3 statuses labelled, invalid expiry date, daysToExpiry 7/0/-3/null messages, expiringSoon alert with and without plans; links only /host/subscriptions and /host/billing; forbidden/failed halves.",
+      "components/NeedsAttentionPanel.test.ts": "27. busy payload lists 8 items in severity order with count/unit/href; each source alone raises exactly one item (failed, backlog from pending and from AI-scoring, finalisation, reports, expiring, open tickets, pending orders); zero hides items while in-progress/resolved tickets exist; unflagged expiry hidden; locale counts; vi titles and day unit; per-source ERROR (5) drops only its items, shows the partial note and a retry; per-source FORBIDDEN (5) drops quietly with no note and no button; header retry wiring; all five failed = own error state with retry; all forbidden = nothing rendered.",
+      "components/KpiRow.test.ts": "16. increase/decrease/no-change with sign and direction label; decrease class equals flat class and differs from a real bad-tone StatCard and from the increase class; previous = 0 -> dash with explanatory sr-only label and no direction or percent; -100% neutral decrease; one-decimal rounding; total-learners card has no comparison; zeros; comparison window 7 in subtitle/notes/period labels; locale grouping; vi direction and period copy; ERROR card Unavailable with one retry wired to the single refetch and no retry when all loaded; forbidden cards dropped; all forbidden renders nothing.",
+      "components/ChartPanels.test.ts": "22. attempts chart: 12 buckets oldest first across Dec/Jan, partial flag only on the month in progress with legend, formatted values en/vi, vi month labels, all-zero -> empty sentence and no table, partial-only month still draws, accessible name/caption, error/forbidden; session status donut: lifecycle statuses with sessions only, total, empty, vi; learner split: shares, clamped inconsistent counts, empty, tenant class noun, students link; grading pipeline: shares as progress aria-labels, red failed, no-backlog text with zero follow-up counts, follow-up counts alone, vi + locale grouping.",
+      "components/ActivityHeaderCompact.test.ts": "18. recent activity: all 26 known audit codes end to end (en title from the catalog, code never in HTML, 4 chunks of 8), unknown code -> 'Activity recorded', actor Staff member vs System for nil/empty/missing id and never the id, vi, tenant nouns in sentences, zone-correct time across month and year ends, invalid instant omitted, 8-entry limit, empty state, error/forbidden; header: single h1, 3 quick actions wired to router.push('/host/students' | '/host/exams' | '/host/billing'), vi; compact cards: counts and 4 links, pending orders = count + /host/orders link only (no button, form, input, http, checkout), locale numbers, failed card keeps others, forbidden cards disappear.",
+      "api.test.ts": "11. useHostDashboard options captured and fed to a real QueryObserver: key ['hostDashboard'] identical to the shared constant, staleTime 30_000, retry false, queryFn calls getHostDashboard exactly once with only the shared client (no windowDays); one request on mount; one shared request for two simultaneous observers; no refetch on remount at +29 s; refetch at +31 s; invalidating the shared key refetches; a failure surfaces after one attempt; previous data kept when a refetch fails.",
+      "invalidation.test.ts": "16. the 7 mutation hooks (useCreateRosterAccounts, useCreateStudent, useCreateTenantStudents, useCreateRosterAccountsForClass, useCreateClass, useCreateSession, useCreateExamWorkflow) are executed through a real QueryClient + MutationObserver (useMutation/useQueryClient mocked to capture options, network functions mocked): after success invalidateQueries is called with the identical HOST_DASHBOARD_QUERY_KEY and {queryKey: ['hostDashboard']} (7 tests); after a failed request it is not (7 tests); plus the key value and the hook count.",
+      "hygiene.test.ts": "15. host/dashboard/page.tsx: no 'use client', <= 6 lines, no logic, no JSX text/props, imports the view from the barrel; feature sources: no style=, hex/rgb/hsl, arbitrary colour or px spacing, any, ts-ignore, console, raw <a>/<img>/fetch, no literal JSX text in components; every source and test file <= 300 lines; every component function <= 150 lines; only api.ts and HostDashboardView call the dashboard endpoint hook; panels never call useQuery/useMutation; every HOST_DASHBOARD_ROUTES entry has a page.tsx under app/(dashboard)/host; every '/host/...' literal in the sources is in the route table.",
+      "utils/attention.sources.test.ts": "40. each of the 9 sources alone (kind, count, unit, tone, href); failed answers kept out of the backlog; expires-today count 0; seat boundary table (89/90/91, 179 of 200, 894/895 of 1000, 100, 130), no warning for limit 0 or negative, rounded percent reported, custom threshold; ERROR and FORBIDDEN for each of 5 sources (dropped kinds, failed/available counts); non-source sections never change the list; exact severity order with declaration order inside a severity; payload not mutated; fresh result per call.",
+      "utils/usage.edge.test.ts": "22. buildSeatUsage boundary table incl. rounding, limit 0/-1/-100, negative remainder, threshold pass-through; describeExpiry around 0 and negatives; relative day count rendered in en and vi; subscription rows: zone date (Jun 1 vs May 31), vi date, order, status passthrough.",
+      "utils/mapping.edge.test.ts": "18. delta: previous = 0 with and without current -> null change/flat/neutral in both locales, 0 -> '0%' flat, positive up/good, negative down/neutral (never bad), -100%, smallest backend step +-0.1%, vi decimal comma, NaN; KPI: window days in notes, locale in-progress note, per-source unavailable/forbidden; chart data: 12 buckets with partial only on the last, en/vi Dec/Jan labels, all-zero year kept, malformed month; activity: every known code -> its own key present non-empty in both catalogs, unknown -> generic and not in the row, nil/empty/missing/other actor, no actor id or target type in the row, time per locale and zone across day/month/year ends.",
+      "utils/format.edge.test.ts": "15. numbers per locale (grouping, decimals, zero, negative), percent and signed percent; dates in Asia/Ho_Chi_Minh across midnight, month end, New Year's Eve and a leap day, UTC contrast, vi formats; invalid/blank/garbage inputs -> empty; month labels at both ends of the year and malformed keys; relative-day, percent and used/limit templates in both catalogs; formatMessage does not interpret '$&' in values.",
+      "utils/sections.edge.test.ts": "6. type narrowing with expectTypeOf, stale data in ERROR/FORBIDDEN ignored, three distinct availabilities, an unknown future status is hidden (forbidden), mixed data types map together, falsy data of an OK section is data.",
+      "messages/messages.catalog.test.ts": "14. both catalogs: non-blank for every key, same key set both ways, no leading/trailing/doubled whitespace, balanced braces, only known placeholder names (typo guard), run-time placeholders identical per key in en and vi, org nouns only in English, no enum codes/technical words/urls in copy, every Vietnamese value actually translated."
+    },
+    "support_files_created": [
+      "features/hostDashboard/testing/environment.ts: vi.mock set for server-rendering in the node environment (no '@/' alias there): useOrgLabels, orgLabels/constants (mapped to the real file), next/navigation useRouter (records push), LearnersOverview (marker), and a partial @pte/ui mock that switches useLocale and records Button/DashboardPanel props so retry handlers can be invoked. Must be imported first in a test file.",
+      "features/hostDashboard/testing/render.ts: renderHtml (renderToStaticMarkup inside the real LocaleProvider), textOf/hrefsOf/regionOf/panelTitles/attributeText helpers, locale/org-label switches, recharts size-warning mute, allowed-route helpers, installRenderHooks.",
+      "features/hostDashboard/testing/scenarios.ts: richDashboard, zeroDashboard, allForbiddenDashboard, twelveMonths, activityItem and identifier constants."
+    ],
+    "collection_verified": "vitest run reports 29 files / 472 tests (features/**/*.test.ts only, the pre-existing include). tsc includes every new test and helper (tenant-web typecheck exit 0); eslint exit 0 with 0 problems (rules-of-hooks needed the hook-calling test helpers to be named use*)."
+  },
+  "infrastructure_changes": {
+    "vitest_config": "none (apps/tenant-web/vitest.config.ts untouched; all new tests are .ts files using React.createElement + renderToStaticMarkup)",
+    "package_json_and_lockfile": "none (react-dom/server, @tanstack/react-query and vitest were already dependencies)",
+    "production_code": "none",
+    "alias_handling": "vitest has no '@/' alias, so each test that loads modules importing '@/...' maps those ids with vi.mock to the real relative file (or a stub for '@/lib/apiClient'). This is test-only plumbing; adding an alias to vitest.config.ts would remove it but was not done."
+  },
+  "commands": [
+    { "cmd": "pnpm --filter tenant-web test", "result": "PASSED", "files": 31, "tests": 508, "failures": 0, "baseline": "11 files / 134 tests", "before_remediation_cycle_1": "29 files / 472 tests" },
+    { "cmd": "pnpm --filter tenant-web build", "result": "PASSED", "exit": 0, "note": "run in remediation cycle 1" },
+    { "cmd": "pnpm --filter tenant-web typecheck", "result": "PASSED", "exit": 0 },
+    { "cmd": "pnpm --filter tenant-web lint", "result": "PASSED", "exit": 0, "note": "0 problems" },
+    { "cmd": "pnpm --filter @pte/ui test", "result": "PASSED", "files": 12, "tests": 271, "failures": 0, "baseline": "12 files / 271 tests" },
+    { "cmd": "pnpm --filter @pte/ui typecheck", "result": "PASSED", "exit": 0 },
+    { "cmd": "pnpm --filter @pte/api-client test", "result": "PASSED", "files": 28, "tests": 571, "failures": 0, "baseline": "28 files / 571 tests" },
+    { "cmd": "pnpm --filter vendor-web lint", "result": "PASSED", "exit": 0, "note": "0 errors; the same 2 @next/next/no-img-element warnings (QuestionDetailView.tsx:63, QuestionEditorForm.tsx:304)" },
+    { "cmd": "pnpm --filter vendor-web typecheck", "result": "PASSED", "exit": 0 }
+  ],
+  "mutation_sanity": {
+    "method": "scratchpad/mutant/apps/tenant-web holds a copy of features/{hostDashboard,orgLabels,classes,exams,examoperations,studentSearch} with per-package junctions to the real node_modules and a minimal tsconfig; scratchpad/mutate.ps1 applies one textual mutation to the copy (reading the pristine text from the repo, never writing to it), runs the whole suite there (457 tests; hygiene.test.ts excluded because it reads the repo app dir), records the failures and restores the copy. The unmutated copy passes 457/457.",
+    "results": [
+      { "mutant": "M1 needs-attention lists a pending-orders item for an ERROR billing section (and ignores the zero rule)", "killed_by": 26 },
+      { "mutant": "M1b same but zero rule intact (isolates the ERROR rule)", "killed_by": "3 tests: NeedsAttentionPanel 'a failed billing source drops only its items', attention.sources 'an ERROR billing drops exactly its items', attention.test 'reports only failures when every source failed'" },
+      { "mutant": "M2 raw audit action code appended to the activity title (RecentActivityPanel)", "killed_by": "6 tests (known/unknown code, vi, tenant nouns, invalid instant, grid machine-string guard)" },
+      { "mutant": "M2b raw actor UUID shown instead of the generic actor label (RecentActivityPanel)", "killed_by": "5 tests" },
+      { "mutant": "M2c actor id carried in the activity row (activity.ts)", "killed_by": "2 tests (activity.test, mapping.edge)" },
+      { "mutant": "M3 seat threshold off by one (>= becomes >)", "killed_by": 17 },
+      { "mutant": "M3b rounding Math.round -> Math.floor (89.5% must warn)", "killed_by": 8 },
+      { "mutant": "M4 a decrease gets the bad tone", "killed_by": 6 },
+      { "mutant": "M5 stale time 30_000 -> 0", "killed_by": "2 tests (options check, remount inside the fresh window)" },
+      { "mutant": "M6 usage panel no longer hidden when quota and subscription are both forbidden", "killed_by": 3 },
+      { "mutant": "M7 a forbidden section renders an error panel instead of nothing", "killed_by": 17 },
+      { "mutant": "M8 dashboard time zone ignored when formatting instants", "killed_by": 6 },
+      { "mutant": "M9 needs-attention no longer first in the DOM", "killed_by": 2 },
+      { "mutant": "M10 LearnersOverview mounted first instead of last", "killed_by": 1 },
+      { "mutant": "M11 null capacity rendered as 0 instead of a dash", "killed_by": 1 },
+      { "mutant": "M12 useCreateClass no longer invalidates the dashboard key (real classes/api copy)", "killed_by": "1 test (invalidation.test useCreateClass success)" },
+      { "mutant": "M12b useCreateRosterAccounts invalidates a mistyped key (real examoperations/api copy)", "killed_by": "1 test" },
+      { "mutant": "M14 zero count rendered blank in the compact cards", "killed_by": 1 },
+      { "mutant": "M15 null changePct no longer maps to a dash", "killed_by": 7 },
+      { "mutant": "M16 raw Error.message shown for a whole-page failure", "killed_by": 5 },
+      { "mutant": "M17 tenant program noun ignored", "killed_by": 1 },
+      { "mutant": "M18 retry of a failed panel does nothing", "killed_by": 1 },
+      { "mutant": "M19 attempts chart keeps only 6 of 12 months", "killed_by": 7 },
+      { "mutant": "M20 unknown audit code falls back to a known code", "killed_by": 8 }
+    ],
+    "survivors": 0
+  },
+  "baseline_comparison": {
+    "new_failures": 0,
+    "regressions": 0,
+    "same_as_baseline": ["@pte/ui test (271)", "@pte/api-client test (571)", "vendor-web lint (2 warnings)", "vendor-web typecheck", "@pte/ui typecheck"]
+  },
+  "failures": [],
+  "remediation_cycle_1": {
+    "trigger": "Phase 7 quality gate APPROVED with LOWs (QUAL-001..014); cycle 1 applies QUAL-001, 002, 003, 004, 006, 007 and the unambiguous part of 009.",
+    "tenant_web_before": { "files": 29, "tests": 472 },
+    "tenant_web_after": { "files": 31, "tests": 508 },
+    "net_new_tests": 36,
+    "new_files": [
+      "features/hostDashboard/utils/drift.test.ts (15: missing sections in sectionAvailability/sectionData, deriveAttention and buildKpis; singular/plural key choice)",
+      "features/hostDashboard/components/Drift.test.ts (13: CompactCards null when all four FORBIDDEN or absent, UsagePanel/KpiRow/UpcomingSessionsPanel/NeedsAttentionPanel with absent sections, subscription expiry 1/2/7 days in en and vi)"
+    ],
+    "extended_files": [
+      "components/NeedsAttentionPanel.test.ts (+5: 1 vs 2 days in en and vi, no all-clear sentence while a source failed, all-clear kept when a source is only forbidden, absent section treated as forbidden)",
+      "messages/messages.catalog.test.ts (+2: singular entries next to the day-count plurals, removed key and product spelling)",
+      "hygiene.test.ts (+1: no template literal in components joins values with a separator)"
+    ],
+    "contract_changes_in_existing_tests": [
+      "en copy 'finalisation' -> 'finalization' (ChartPanels, HostDashboardGrid.states, NeedsAttentionPanel expectations)",
+      "vi copy 'Ca thi' -> 'Ky thi' to mirror nav.exams (ChartPanels, HostDashboardGrid.states, UpcomingSessionsPanel, ActivityHeaderCompact expectations)",
+      "messages.test.ts and messages.catalog.test.ts 'translated' checks ignore {placeholder} names, so pure-symbol templates such as '{enrolled} / {capacity}' need no translation; no assertion was removed or loosened for real words"
+    ],
+    "commands": [
+      { "cmd": "pnpm --filter tenant-web test", "result": "PASSED", "files": 31, "tests": 508 },
+      { "cmd": "pnpm --filter tenant-web typecheck", "result": "PASSED", "exit": 0 },
+      { "cmd": "pnpm --filter tenant-web lint", "result": "PASSED", "exit": 0, "note": "0 problems" },
+      { "cmd": "pnpm --filter tenant-web build", "result": "PASSED", "exit": 0 },
+      { "cmd": "pnpm --filter @pte/ui test", "result": "PASSED", "files": 12, "tests": 271 },
+      { "cmd": "pnpm --filter @pte/api-client test", "result": "PASSED", "files": 28, "tests": 571 },
+      { "cmd": "pnpm --filter vendor-web lint", "result": "PASSED", "exit": 0, "note": "0 errors; the same 2 @next/next/no-img-element warnings" },
+      { "cmd": "pnpm --filter vendor-web typecheck", "result": "PASSED", "exit": 0 }
+    ],
+    "deferred": {
+      "QUAL-005": "other mutations do not invalidate the overview: accepted, 30 s staleTime bounds it",
+      "QUAL-008": "DOM order vs CSS order: Phase 9 keyboard pass",
+      "QUAL-010": "readability nits (SeatUsageBlock props interface, nested ternary): not applied",
+      "QUAL-011": "StatusDonutChart total without thousands separator: @pte/ui follow-up (valueFormatter)",
+      "QUAL-012": "invalidateHostDashboard helper: refactor when the next mutation is added",
+      "QUAL-013": "retry busy state and half-failure announcement: Phase 9 manual pass",
+      "QUAL-014": "residual risk list for Phase 9"
+    },
+    "notes": [
+      "Singular keys exist only for expiryDay and attentionUnitDay: the other 'N days' strings (kpiSubtitle, kpiTotalLearnersNote, changePeriod) take meta.windowDays, typed 7 | 30 | 90, so a singular is unreachable and was not added.",
+      "A missing meta is not handled (only sections), as meta is required for time zone and window."
+    ]
+  },
+  "production_concerns": [
+    {
+      "id": "OBS-P7-001",
+      "severity": "LOW",
+      "where": "apps/tenant-web/features/hostDashboard/messages/en.ts:58 (expiryDays) and :107 (attentionUnitDays)",
+      "finding": "'Expires in {days} days' and '{count} days' are used for every count, so one day reads 'Expires in 1 days' / '1 days' in English (Vietnamese has no plural). Not encoded as a failing test.",
+      "suggested_fix": "Add singular keys (expiryDay, attentionUnitDay) chosen by describeExpiry/NeedsAttentionPanel when the count is 1, or word it neutrally ('Expires in: {days} day(s)')."
+    },
+    {
+      "id": "OBS-P7-002",
+      "severity": "LOW",
+      "where": "apps/tenant-web/features/hostDashboard/components/CompactCards.tsx:24-26",
+      "finding": "When all four compact sections (staff, academics, support, billing) are FORBIDDEN the component still returns the slot wrapper with an empty grid (verified: '<div class=\"slot\"><div class=\"grid ...\"></div></div>'), leaving an empty md:col-span-2 / xl:col-span-6 cell and an extra gap. Cosmetic; HOST_ADMIN sees all four.",
+      "suggested_fix": "Return null when all four sections are FORBIDDEN (use sectionAvailability)."
+    },
+    {
+      "id": "OBS-P7-003",
+      "severity": "LOW",
+      "where": "apps/tenant-web/features/hostDashboard/utils/attention.ts:25-28 (and kpis.ts:13, UsagePanel.tsx:25)",
+      "finding": "The mappers destructure required sections without optional chaining. A payload that omits a section (older backend) throws 'Cannot read properties of undefined (reading status)' and the route error boundary takes over instead of hiding that widget. The api-client type says every section is always present, so this is a contract-drift hazard only.",
+      "suggested_fix": "Optional: treat an undefined section as FORBIDDEN in sectionAvailability/sectionData and guard the destructured reads."
+    },
+    {
+      "id": "OBS-P7-004",
+      "severity": "LOW",
+      "where": "apps/tenant-web/features/classes/api/index.ts:84-97 (useClassStatusMutations), features/studentSearch/api/index.ts (suspend/reactivate/assign), features/exams/api/index.ts:258-280 (open/close/cancel session)",
+      "finding": "Only the 7 mutations named in the plan invalidate the overview. Other mutations change numbers on it (active classes, unassigned/active learners, session status counts and upcoming list, enrolled counts, open tickets). The overview can be up to 30 s stale after them (staleTime) when the user returns quickly.",
+      "suggested_fix": "Optional: add the same one-line invalidateQueries({ queryKey: HOST_DASHBOARD_QUERY_KEY }) to those hooks, or accept the 30 s staleness."
+    },
+    {
+      "id": "OBS-P7-005",
+      "severity": "LOW",
+      "where": "apps/tenant-web/features/hostDashboard/components/NeedsAttentionPanel.tsx:66-73",
+      "finding": "When some sources failed and nothing else is waiting, the panel shows 'Nothing needs your attention right now.' together with 'Some checks could not be loaded.' The first sentence is reassuring while checks are missing. No test pins the all-clear sentence in that state.",
+      "suggested_fix": "Hide the all-clear sentence while failed > 0 (or word it 'Nothing needs attention in the checks that loaded')."
+    },
+    {
+      "id": "OBS-P7-006",
+      "severity": "LOW",
+      "where": "apps/tenant-web/features/hostDashboard/messages/en.ts:18 and vi.ts:15 (quickActionsLabel); constants.ts:25 (HOST_DASHBOARD_ROUTES.classes); constants.ts:163 (DashboardSlot)",
+      "finding": "Dead code: quickActionsLabel is never read, HOST_DASHBOARD_ROUTES.classes is never used, and the DashboardSlot type is never imported. Local constants FULL_PERCENT (SeatUsageBlock.tsx:12) and PERCENT_MAX (GradingPipelinePanel.tsx:17) duplicate PERCENT_SCALE (constants.ts:18).",
+      "suggested_fix": "Remove the unused entries (or use quickActionsLabel as the aria-label of the quick-action group) and reuse PERCENT_SCALE."
+    },
+    {
+      "id": "OBS-P7-007",
+      "severity": "LOW",
+      "where": "packages/ui StatusDonutChart total (rendered by LearnerSplitPanel)",
+      "finding": "The donut total prints '1200 learners' without a thousands separator while every other number on the page is locale-grouped ('1,200' / '1.200'). The total text comes from the shared chart, not from the feature.",
+      "suggested_fix": "Let StatusDonutChart accept a valueFormatter (as the trend charts do) and pass formatNumber."
+    },
+    {
+      "id": "OBS-P7-008",
+      "severity": "LOW",
+      "where": "tests only (render environment)",
+      "finding": "Server rendering uses the default locale of the @pte/ui provider (Vietnamese) for the package's own chrome, so in English renders the collapse button ('Thu gon') and DataTable sort labels ('Sap xep theo ...') stay Vietnamese. Only the dashboard copy is switched. Not a product defect; it limits what the English render tests can say about library chrome.",
+      "suggested_fix": "None for production."
+    }
+  ],
+  "not_run": [
+    "Real browser: the network panel shows exactly one dashboard request per page load. The single-request guarantee is proven at the query level (one fetch per mount, shared by simultaneous observers, no refetch inside 30 s, invalidation refetch) and by a source scan (only api.ts and HostDashboardView use the hook), not in the running app. Phase 9.",
+    "Visual and responsive layout (mobile single column with needs-attention first, md two columns, xl twelve columns): only the DOM order and the slot class literals are asserted. Phase 9.",
+    "Dark mode, colour contrast, real recharts paint (ResponsiveContainer sizing, hover tooltips, dashed/lighter partial bar). Phase 9.",
+    "Keyboard navigation and focus order, screen-reader behaviour of the collapsible section and tables. Phase 9.",
+    "Click interaction: retry buttons and quick actions are verified by invoking the recorded onClick/onRetry handlers (refetch and router.push called with the right arguments), not by dispatching DOM events (no DOM library).",
+    "Hydration: LocaleProvider switches from the default locale on the client; static markup cannot show a hydration mismatch.",
+    "`next build` was not re-run (done in the cook Build Gate).",
+    "LearnersOverview (untouched, own roster request) is replaced by a marker in the view tests; its behaviour is not covered here."
+  ],
+  "report_path": "plans/ninh-overview-dashboards/tests/phase-07-test-report.json"
+}

@@ -1,0 +1,127 @@
+{
+  "phase": "phase-05-api-client-contract",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "verdict_note": "All Phase 5 checks pass. 115 net-new api-client tests were added (22 files / 455 tests -> 28 files / 570 tests, 0 failed, 0 skipped) on top of the 20 tests the cook wrote (16 dashboard request tests + 4 auto-discovered endpoint checks). The key addition is a backend-conformance suite that reads the real pte-api `overview` Java records and compares their component names, JSON kinds, enum values and nullability with typed TS fixtures in both directions: the TS contract matches the backend exactly, no mismatch found. The suite was proven non-vacuous by running it against a mutated copy of the Java sources (renamed component, dropped component, extra enum constant: 9 tests failed as expected). No new failure anywhere versus tests/phase-05-baselines.md; the vendor-web typecheck failure is the recorded pre-existing corrupted .next file and is 0 errors when that generated file is excluded.",
+  "reviewed_at": "2026-10-13T16:30:00Z",
+  "summary": {
+    "passed": 608,
+    "failed": 0,
+    "skipped": 0
+  },
+  "summary_scope": "passed = 571 (@pte/api-client, 28 files; was 570 before remediation cycle 1) + 37 (tenant-web, 2 files). vendor-web has no vitest suite. Typecheck and lint results are listed under commands.",
+  "new_tests": {
+    "api_client_before": { "files": 22, "tests": 455 },
+    "api_client_after": { "files": 28, "tests": 570 },
+    "api_client_after_remediation_cycle_1": { "files": 28, "tests": 571 },
+    "net_new_tests": 115,
+    "net_new_files": 6,
+    "by_file": {
+      "src/requests/dashboard/index.edgeCases.test.ts": "33 NEW. Endpoint constants obey the endpoints.test.ts rules (starts /api/v1/, no trailing slash/query, no retired service segment, host != admin, same identity through requests barrel and package root, default window is an offered window). windowDays 7/30/90 for BOTH functions through the real client: exact URL, plain GET, no body; undefined omits the whole query; one /api/v1 only (no double prefix); no leak of a previous call's window. Values the types forbid (14, 0, -7, NaN, null, \"30\") are forwarded verbatim, never coerced/defaulted/dropped (the backend answers 400). Compile-time: parameter(1) is DashboardWindowDays | undefined, return types, DASHBOARD_WINDOW_OPTIONS is readonly [7,30,90], and @ts-expect-error for getHostDashboard(client, 14) / 0 / \"30\" / null / { windowDays: 30 }. Envelope unwrap keeps section states exactly as sent for host OK/FORBIDDEN/ERROR/MIXED and admin OK/academic-FORBIDDEN/ERROR payloads, ignores extra envelope fields, tolerates an additive new section.",
+      "src/requests/dashboard/index.errors.test.ts": "9 NEW. 400 INVALID_DASHBOARD_WINDOW (code field and code-in-message variants) -> validation ApiError with code; 403 on both dashboards -> forbidden; 401 without refresh -> unauthorized, onUnauthorized exactly once, one fetch; 401 with refresh -> one refresh, same URL retried with the new Bearer token, onUnauthorized not called; failed refresh -> unauthorized; 500 and a non-JSON 502 -> server error with the default message; rejected fetch -> network error, status 0, cause kept; Bearer token sent on both dashboards.",
+      "src/types/dashboard/contract.test.ts": "29 NEW (skipped with a clear message when the backend sources are absent). Reads the Java records and walks every typed fixture along them: Host x6 fixtures, Admin x5 fixtures, each asserting exact key sets at every depth, JSON kind per Java type (long/int integer, BigDecimal/double number, Instant ISO-8601, UUID, boolean), enum values, enum-keyed maps (all keys of the Java enum), documented-nullable fields. Plus: both roots expose the expected section lists; every record of the DTO package (except the cache-only MonthlySeries) and the two serialised facade records are reached; every documented nullable field is null in at least one fixture; a mutated fixture is flagged in both directions (walker not vacuous); TS unions equal the Java enums for SessionStatus, PlanType, SubscriptionStatus, ActivationSource, QuestionStatus, QuestionPool, TicketCategory, TenantStatus(Response) and SectionStatus; OverviewConstants agree with api-client (API_BASE+HOST/ADMIN_PATH vs DASHBOARD_ENDPOINTS, ALLOWED_WINDOW_DAYS vs DASHBOARD_WINDOW_OPTIONS, DEFAULT_WINDOW_DAYS, PARAM_WINDOW_DAYS, BUCKET_ZONE, SERIES_MONTHS, REVENUE_SOURCE, INVALID_DASHBOARD_WINDOW => 400).",
+      "src/types/dashboard/contractFacade.test.ts": "20 NEW (skipped without the backend). For 19 facade records (RecentTenantView, TenantSeatLimit, PlatformTenantCounts, StudentQuota, LicenseCounts, SubscriptionCounts, PlanCounts, PendingApplicationView, TenantPlanBrief, SubscriptionSummary, CurrencyPaidTotal, TicketCounts x2, OpenTicketBrief, StudentStatusCounts, StaffCounts, QuestionBankCounts, ScoringBacklog, AcademicCounts) every component reaches the response record under its documented rename with a compatible JSON kind; plus a guard that every record of the mapped facade files has a mapping (a new facade record forces a decision).",
+      "src/types/dashboard/contractTypes.test.ts": "13 NEW (always runs, no backend). Type-level: no optional member in any of 34 contract types, window union 7|30|90, DashboardSection shape, the 10 nullable members are exactly `| null` and representative non-nullable members are not, enum-valued members use the shared unions (Record<SessionStatus, number> etc.), 6 @ts-expect-error cases for invalid shapes. Fixture sanity: OK/FORBIDDEN/ERROR/MIXED semantics, academic-role admin view, 12 monthly buckets oldest first with only the last partial, changePct null exactly when previous is 0, decimal revenue stays a JSON number, JSON round trip is lossless (nulls explicit).",
+      "src/types/dashboard/javaRecords.test.ts": "11 NEW. Unit tests of the Java reader itself (comments, strings, generics, nested/top-level records, annotations, type parameters, enums) so a broken parser cannot make the conformance suite pass vacuously."
+    },
+    "support_files_created": [
+      "src/types/dashboard/fixtures/{common,host,admin,index}.ts: typed HostDashboardResponse / AdminDashboardResponse fixtures (OK, NULLABLES, EMPTY, FORBIDDEN, ERROR, MIXED host; OK, NULLABLES, EMPTY, FORBIDDEN(academic), ERROR admin)",
+      "src/types/dashboard/javaRecords.ts: Java record/enum reader",
+      "src/types/dashboard/javaContract.ts: backend locator/loader, hand-maintained tables (nullable fields, enum fields, enum-keyed maps)",
+      "src/types/dashboard/javaWalker.ts: fixture-vs-Java walker",
+      "src/requests/dashboard/dashboardTestUtils.ts: real client over mocked fetch helpers"
+    ],
+    "collection_verified": "vitest include is src/**/*.test.ts (packages/api-client/vitest.config.ts); the count went from 22 files / 455 tests to 28 files / 570 tests, so every new test file is collected. tsconfig include is `src`, so test files and fixtures are also type-checked by `pnpm --filter @pte/api-client typecheck`; expectTypeOf and @ts-expect-error are enforced there (verified with a throwaway failing probe file that tsc rejects, since removed), not by `vitest run`."
+  },
+  "contract_conformance": {
+    "source_of_truth": "pte-api/app/src/main/java/com/pte/overview/internal/dto/response/*.java plus session/UpcomingSessionView, billing/CurrentSubscriptionView (serialised as is) and the facade records listed in contractFacade.test.ts",
+    "result": "NO MISMATCH. Every Java record component of the 12-section host and 11-component admin responses (including nested rows, monthly points/amounts, meta, section envelope, trend) has a TS counterpart with the same name and JSON kind, and vice versa. All 10 Java-nullable components are `| null` in TS, nothing else is nullable. All enum unions equal the Java enums.",
+    "nullable_fields_verified": [
+      "TrendValue.changePct", "UpcomingSessionView.capacity", "CurrentSubscriptionView.planName", "CurrentSubscriptionView.planType",
+      "HostSectionData.Subscription.nearestExpiryAt", "HostSectionData.Subscription.daysToExpiry",
+      "AdminSectionData.RecentTenant.planName", "AdminSectionData.RecentTenant.subscriptionExpiresAt",
+      "AdminSectionData.OldestTicket.tenantName", "AdminSectionData.CurrencyRevenue.changePct"
+    ],
+    "mutation_check": "The suite was run (env PTE_API_JAVA_DIR) against a scratch copy of the Java sources with SeatUtilisation.seatLimit renamed and an Integer component added, MonthlyPoint.partial removed and a SessionStatus constant added: 9 tests failed with messages naming the record and component in both directions (Java lacks / TS lacks), then the mutant copy stayed in the scratchpad and the real sources were untouched. Re-run after the file split: still 9 failures on the mutant, 0 on the real sources.",
+    "backend_not_found_behaviour": "With PTE_API_JAVA_DIR pointing at a missing directory the two backend suites are skipped with a visible `SKIPPED dashboard contract conformance: pte-api sources not found at ...` entry and exit 0; with PTE_API_REQUIRED=1 the same situation fails. Default location: ../../pte-api relative to pte-web (sibling checkout)."
+  },
+  "commands": [
+    { "cmd": "pnpm --filter @pte/api-client test", "result": "PASSED", "files": 28, "tests": 570, "failures": 0, "skipped": 0, "baseline": "22 files / 455 tests at the start of this pass (cook state); original before Phase 5: 21 files / 435 tests" },
+    { "cmd": "pnpm --filter @pte/api-client typecheck", "result": "PASSED", "exit": 0, "note": "includes src/**/*.test.ts and fixtures; type-level assertions enforced here" },
+    { "cmd": "pnpm --filter tenant-web typecheck", "result": "PASSED", "exit": 0, "baseline": "0 errors" },
+    { "cmd": "pnpm --filter tenant-web test", "result": "PASSED", "files": 2, "tests": 37, "failures": 0, "baseline": "2 files / 37 tests" },
+    { "cmd": "pnpm --filter tenant-web lint", "result": "PASSED", "exit": 0, "baseline": "0 errors, 0 warnings" },
+    { "cmd": "pnpm --filter vendor-web lint", "result": "PASSED", "exit": 0, "note": "0 errors, the same 2 recorded @next/next/no-img-element warnings (QuestionDetailView.tsx:63, QuestionEditorForm.tsx:304)", "baseline": "identical" },
+    { "cmd": "pnpm --filter vendor-web typecheck", "result": "EXPECTED_BASELINE_FAILURE", "exit": 1, "note": "28 errors, ALL in apps/vendor-web/.next/dev/types/routes.d.ts (grouped by file: 28 in that one file, 0 elsewhere): the recorded corrupted generated Next.js file, same as the baseline" },
+    { "cmd": "pnpm --filter vendor-web exec tsc --noEmit -p <scratchpad>/tsconfig.vendor-noNext.json", "result": "PASSED", "exit": 0, "errors": 0, "note": "throwaway tsconfig outside the repo, extends apps/vendor-web/tsconfig.json, absolute include of vendor-web ts/tsx/mts, excludes .next, node_modules and next-env.d.ts; --listFilesOnly shows 173 vendor-web source files and none under .next, so the check is not vacuous" }
+  ],
+  "baseline_comparison": {
+    "new_failures": 0,
+    "regressions": 0,
+    "same_as_baseline": ["tenant-web typecheck/test/lint", "vendor-web lint (2 warnings)", "vendor-web typecheck (28 errors, only the corrupted .next file)", "@pte/ui typecheck not re-run (untouched)"]
+  },
+  "failures": [],
+  "remediation_cycle_1": {
+    "reviewed_at": "2026-10-13T22:35:00Z",
+    "trigger": "Phase 5 quality gate APPROVED with LOW findings QUAL-001..006 (quality/phase-05-api-client-contract-quality-report.json)",
+    "verdict": "PASSED",
+    "applied": {
+      "QUAL-005": "DashboardSection<T> in types/dashboard/common.ts is now { status: 'OK'; data: T } | { status: 'ERROR' | 'FORBIDDEN'; data: null }; DashboardSectionStatus still exported (OK | ERROR | FORBIDDEN). Java checked: DashboardSection.ok(T) is only built by DashboardSectionRunner from a loaded value (every loader returns a record or list), error()/forbidden() carry null, so OK with null data is not modelled and no field was typed nullable for it. contractTypes.test.ts: pinned-shape test replaced by the union shape, new narrowing test (status === 'OK' gives data: HostQuotaData; else status ERROR|FORBIDDEN and data null), 3 new @ts-expect-error cases ({OK,null}, {ERROR,1}, {FORBIDDEN,1}); the compile-time case list went from 6 to 9. Fixtures/helpers (ok/forbidden/failed) and all request tests compiled unchanged.",
+      "QUAL-004": "Doc comments on MonthlyAmount (common.ts) and DashboardCurrencyRevenue (admin.ts): JSON number, exact only up to 2^53 and only for zero-decimal currencies (VND); format with Intl.NumberFormat per currency, never sum across currencies, backend must switch to string/minor units before a non-VND currency is enabled. Fractional fixtures replaced by whole amounts (VND 1500000.5 -> 1500000; USD 250.75/75.5 -> 250/75, changePct 150.8 -> 150) in fixtures/admin.ts and requests/dashboard/index.test.ts; contractTypes.test.ts now also asserts the amounts are integers. No assertion weakened.",
+      "QUAL-001": "Added \"@types/node\": \"^20\" to packages/api-client devDependencies. `pnpm install --offline` failed (ERR_PNPM_NO_OFFLINE_TARBALL: prettier 3.9.6 not in store, unrelated); plain `pnpm install` succeeded (network available) and updated pnpm-lock.yaml through pnpm: the api-client importer gained @types/node ^20 -> 20.19.43, the vitest key is unchanged. Lockfile not hand-edited, no other package.json touched.",
+      "QUAL-003_small_part": "javaContract.ts gains backendPresent() (cheap existsSync of the DTO dir). contract.test.ts and contractFacade.test.ts decide skip/run at collection time from backendPresent() and call loadBackend() (Java parsing) inside beforeAll, so a parser error fails the suites with a clear message instead of failing the file at import. Skip-when-absent (visible it.skip) and PTE_API_REQUIRED=1 (failing it) behaviour unchanged. Dropping/opting-in contractFacade.test.ts was NOT done."
+    },
+    "deferred": {
+      "QUAL-002": "moving fixtures/Java helpers out of types/dashboard into src/testing (not in scope)",
+      "QUAL-003_rest": "contractFacade.test.ts layout coupling (drop or make opt-in) left as is",
+      "QUAL-006": "typegen hardening of the apps' typecheck scripts (`next typegen && tsc --noEmit`) not in scope",
+      "NOTED": "QUAL-007..010 untouched"
+    },
+    "commands": [
+      { "cmd": "pnpm --filter @pte/api-client test", "result": "PASSED", "files": 28, "tests": 571, "failures": 0, "skipped": 0, "before": "28 files / 570 tests", "note": "+1 narrowing test; backend conformance suites ran (not skipped)" },
+      { "cmd": "pnpm --filter @pte/api-client typecheck", "result": "PASSED", "exit": 0, "note": "run after the type change and again after the @types/node install; all new @ts-expect-error lines are consumed" },
+      { "cmd": "pnpm --filter tenant-web typecheck", "result": "PASSED", "exit": 0, "baseline": "0 errors" },
+      { "cmd": "pnpm --filter tenant-web test", "result": "PASSED", "files": 2, "tests": 37, "failures": 0 },
+      { "cmd": "pnpm --filter tenant-web lint", "result": "PASSED", "exit": 0, "baseline": "0 errors, 0 warnings" },
+      { "cmd": "pnpm --filter vendor-web lint", "result": "PASSED", "exit": 0, "note": "0 errors, the same 2 @next/next/no-img-element warnings" },
+      { "cmd": "pnpm --filter vendor-web typecheck", "result": "EXPECTED_BASELINE_FAILURE", "exit": 2, "errors": 28, "note": "28 errors, all in apps/vendor-web/.next/dev/types/routes.d.ts; 0 elsewhere (unchanged vs baseline)" },
+      { "cmd": "pnpm --filter vendor-web exec tsc --noEmit -p <scratchpad>/tsconfig.vendor-noNext.json", "result": "PASSED", "exit": 0, "errors": 0, "note": "temp tsconfig outside the repo, .next and next-env.d.ts excluded" }
+    ],
+    "baseline_comparison": { "new_failures": 0, "regressions": 0 }
+  },
+  "production_concerns": [
+    {
+      "id": "OBS-P5-001",
+      "severity": "LOW",
+      "where": "packages/api-client/package.json (devDependencies) and the new test support files src/types/dashboard/javaContract.ts / javaWalker.ts",
+      "finding": "The conformance test imports node:fs, node:path, node:url and process. @pte/api-client does not declare @types/node; typecheck passes only because @types/node is currently resolved transitively through vitest/vite. If that transitive dependency changes, `pnpm --filter @pte/api-client typecheck` would fail on the test support files (the package source itself does not use node APIs and is unaffected).",
+      "suggested_fix": "Add \"@types/node\": \"^20\" to packages/api-client devDependencies (tenant-web already uses ^20). Not done here: package.json is outside the tester's write scope."
+    },
+    {
+      "id": "OBS-P5-002",
+      "severity": "LOW",
+      "where": "packages/api-client/src/types/dashboard/admin.ts AdminQuestionBankData.bySection (Record<string, number>)",
+      "finding": "Intentional and documented, not a mismatch: the Java map holds the four PteSection keys but also any non-standard section name found in data, so the string key is correct. The conformance test asserts the four standard keys are present.",
+      "suggested_fix": "None."
+    },
+    {
+      "id": "OBS-P5-003",
+      "severity": "LOW",
+      "where": "getHostDashboard / getAdminDashboard (requests/dashboard/index.ts)",
+      "finding": "windowDays is a compile-time union only. A value that reaches the function through a cast (0, 14, NaN, null) is forwarded as `?windowDays=<String(value)>` and is rejected by the backend with 400 INVALID_DASHBOARD_WINDOW; there is no runtime guard. The tests pin this as the intended behaviour (no silent coercion to 30, no dropping of falsy 0).",
+      "suggested_fix": "None needed; consumers use DASHBOARD_WINDOW_OPTIONS for selectors."
+    }
+  ],
+  "observations": [
+    "Contract text in the phase file says sections not yet delivered are typed optional; the final TS contract has no optional member (verified by a type-level test) because the backend always serialises every component (Jackson default inclusion; ApiResponse is @JsonInclude(ALWAYS)). The map section is correctly absent until Phase 10.",
+    "BigDecimal revenue amounts are typed number; the fixtures keep whole-VND amounts (1500000; originally fractional 1500000.5, changed in remediation cycle 1) as JSON numbers through a real-client round trip (OBS-P4-003 is therefore addressed on the TS side: format with Intl.NumberFormat per currency, never sum across currencies).",
+    "Test files stay under the 300-line limit (largest 274); fixtures were split into common/host/admin for the same reason."
+  ],
+  "not_run": [
+    "A live request against a running pte-api (no backend is started; the conformance test reads Java sources, it does not call the API). Phase 9 owns the live re-verification.",
+    "vitest `typecheck` mode: type-level assertions are enforced by tsc via the package typecheck script, not by `vitest run`.",
+    "@pte/ui typecheck and any app build (`next build`): untouched by this pass.",
+    "Browser/Playwright and UI tests (Phases 6-8)."
+  ],
+  "report_path": "plans/ninh-overview-dashboards/tests/phase-05-test-report.json"
+}

@@ -1,0 +1,168 @@
+{
+  "phase": "phase-02-backend-host-commercial-ops",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "verdict_note": "All 74 new Phase 2 tests pass (70 H2/Mockito/MockMvc + 4 new Postgres-gated, which were run and passed on a scratch PostgreSQL 17 that has been removed). The only red test in the full suite is the pre-existing ModuleStructureTest.modules_have_no_boundary_violations; its normalized violation set is identical to the Phase 1 baseline (18 lines, none involving overview/billing/support).",
+  "reviewed_at": "2026-10-13T10:40:00Z",
+  "summary": {
+    "passed": 1559,
+    "failed": 1,
+    "skipped": 50
+  },
+  "summary_scope": "LATEST full suite `./mvnw -o -pl app test` (after the QUAL-001 fix and the LOW cleanups): 1610 tests (Phase 1 baseline 1526 + 84 new; the per-class figures below were measured earlier, 74 + 3 audit-null + 5 Memo + 2 service). The 1 error is the pre-existing architecture test. Skipped = 46 pre-existing + 4 new Postgres-gated tests (they run only with -Dlifecycle.test.db.url; run and passed separately, see postgres).",
+  "new_tests": {
+    "total_methods_executed_or_skipped": 77,
+    "by_class": {
+      "com.pte.shared.audit.AuditLogServiceRecentNullTenantTest": "3 (added after quality gate QUAL-001: recent(null, 8) throws NullPointerException and the repository is never touched, for any size; a real tenant still reaches the repository with PageRequest.of(0, 8))",
+      "com.pte.scoring.internal.repository.ScoringOverviewQueriesTest": 7,
+      "com.pte.reporting.internal.repository.ReportingOverviewQueriesTest": 5,
+      "com.pte.support.internal.repository.SupportOverviewQueriesTest": 6,
+      "com.pte.billing.internal.repository.BillingOverviewQueriesTest": 17,
+      "com.pte.shared.audit.AuditLogServiceRecentTest": 8,
+      "com.pte.overview.internal.service.HostDashboardOperationsSectionsTest": 24,
+      "com.pte.overview.internal.controller.HostDashboardControllerTest": "+3 (hostAdminGetsAllElevenSectionsOkFromTheNamedTenantAFixture, tenantBDataNeverAppearsInTenantAsResponseEvenWhenTenantBIsFullyStubbed, aFailingScoringSectionStill200sWithGradingInErrorAndTheRestOk); class total 28",
+      "com.pte.overview.internal.migration.OverviewMigrationPostgresIntegrationTest": "+4 (gated): v95CreatedTheReportsAndAuditIndexesAsPartialTenantLeadingIndexes, v95IsIdempotentWhenReplayedAgainstTheMigratedSchema, theScratchSchemaIsTheOnlyPlaceTheTestWrites, phaseTwoHostQueriesUseIndexes; everyMigration... renamed/strengthened to ThroughV95 (asserts versions 94 and 95); class total 9"
+    },
+    "support_files_changed": [
+      "com.pte.overview.internal.HostDashboardFixtures (new mock fields scoring/reporting/billing/support/audit, stubOperations, stubOperationsOfTenantB, stubFullPath; service() now wires those mocks)"
+    ],
+    "coverage": {
+      "soft_delete_filtering": "scoring answers, grading cohorts, reports, support tickets, orders, subscriptions, audit logs",
+      "tenant_isolation": "every facade/query tested with a second tenant holding distinct counts",
+      "status_mapping": "PENDING/AI_SCORING/SCORING_FAILED -> backlog fields, SCORED excluded; FROZEN cohorts only; OPEN/IN_PROGRESS/RESOLVED -> support fields, CLOSED excluded; PENDING orders only",
+      "subscription_boundaries_fixed_clock": "exactly 30d (expiringSoon, 30 days), 29d, 31d, 30d+1s (not soon, 30 days), 23h (0 days, soon), expiring exactly now (excluded), already expired, not started, starts exactly now (usable), EXPIRED/CANCELLED/deleted excluded, no subscription -> null/null/false, cap 10 nearest, soonest-first ordering",
+      "plan_name_batching": "Hibernate statistics: 6 subscriptions over 3 plans -> exactly 2 prepared statements; pending-order count -> 1 statement and 0 entity loads",
+      "audit_recent": "newest-first, size cap 8, hard cap 100, size<=0 -> 1, soft-deleted and tenantless rows excluded, tenant isolation, full field mapping",
+      "overview": "all 11 sections OK; each of 6 ops failure modes isolated (scoring, reporting, subscription, billing, support, recentActivity); unstubbed facade -> ERROR section not failed request; JSON has no payment/link/url/provider/checkout/licence/amount keys in billing+subscription (real JsonMapper, key walk + reflective record-component check + no http(s):// anywhere); recentActivity exposes only id/action/actorUserId/targetType/occurredAt; only grading backlog (key dash:host:v1:<tenant>:<window>:grading, TTL 30s) and monthly series are cached (recorded cache calls); reports/subscription/billing/support/audit read on every request; real DashboardCache over fake Redis proves ScoringBacklog round-trips and the cached backlog is served while reports count stays live; cross-tenant cache isolation; broken Redis still OK"
+    }
+  },
+  "post_gate_rerun": {
+    "reason": "Quality gate QUAL-001 fix: AuditLogService.recent now does Objects.requireNonNull(tenantId); unused DashboardSection import removed from HostDashboardService. Test code only changed (one new test class).",
+    "no_existing_test_relied_on_null_tenant": "grep of recent( callers in app/src: only non-null tenants (the DataJpa test seeds a tenantless row but always queries with a tenant)",
+    "shared_and_overview": "-Dtest='com/pte/shared/**/*Test,com/pte/overview/**/*Test': 197 tests, 0 failures, 0 errors, 9 skipped (Postgres-gated) - PASSED",
+    "billing_support_scoring_reporting": "413 tests, 0 failures, 0 errors, 25 skipped (Postgres-gated) - PASSED",
+    "architecture": "ModuleStructureTest+RouteContractTest: only the pre-existing error; normalized violation set 18 lines, diff vs baseline 0, 0 mention overview/billing/support",
+    "test_compile": "./mvnw -o -q -pl app test-compile exit 0",
+    "full_suite": "superseded by low_cleanups_rerun.full_suite below",
+    "postgres": "not re-run (no migration or query change)"
+  },
+  "low_cleanups_rerun": {
+    "reason": "Cook LOW cleanups: Memo<T> shared by learners+academics (enrollment.academicCounts once per build), OVERVIEW_QUERY_TIMEOUT_MS constant, OverviewConstants.CACHE_SCOPE_HOST. Test code only changed.",
+    "new_tests": {
+      "com.pte.overview.internal.service.MemoTest": "5 (computed once; failure rethrown identically (same instance) on every get with the source called once; lazy until first get; null result memoised; value never replaced)",
+      "com.pte.overview.internal.service.HostDashboardServiceTest": "+2: enrollmentAcademicCountsIsReadExactlyOncePerBuildAndFeedsBothSections (1 call per build, 2 after two builds), whenAcademicCountsFailsItIsStillQueriedOnceAndBothDependentSectionsAreErrorWhileOthersStayOk (learners+academics ERROR, quota/staff/exams/attempts OK)"
+    },
+    "cache_key_pin": "already covered, unchanged: DashboardCacheKeysTest asserts dash:host:v1:<tenant>:30:attempts-monthly; HostDashboardServiceTest and HostDashboardOperationsSectionsTest assert the series and grading keys literally, so the CACHE_SCOPE_HOST extraction left the key string identical",
+    "overview_and_shared": "-Dtest='com/pte/overview/**/*Test,com/pte/shared/**/*Test': 204 tests, 0 failures, 0 errors, 9 skipped (Postgres-gated) - PASSED",
+    "architecture": "ModuleStructureTest+RouteContractTest: only the pre-existing error; normalized violation set 18 lines, diff vs baseline 0, 0 mention overview/billing/support",
+    "full_suite": "./mvnw -o -pl app test: 1610 tests, 1559 passed, 0 failures, 1 error (pre-existing ModuleStructureTest.modules_have_no_boundary_violations), 50 skipped. 1610 = 1526 Phase 1 + 84 Phase 2 new tests (74 + 3 audit-null + 5 Memo + 2 service)",
+    "postgres": "not re-run (no migration or query change)"
+  },
+  "commands": [
+    {
+      "cmd": "./mvnw -o -pl app test -Dtest='com/pte/overview/**/*Test,com/pte/billing/**/*Test,com/pte/support/**/*Test,com/pte/scoring/**/*Test,com/pte/reporting/**/*Test' -Dsurefire.failIfNoSpecifiedTests=true",
+      "result": "PASSED",
+      "tests": 576,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 34,
+      "note": "skipped = Postgres-gated tests (new 9-method migration IT counts 9 here, plus pre-existing gated billing/scoring/overview ITs)"
+    },
+    {
+      "cmd": "./mvnw -o -pl app test -Dtest='com/pte/identity/**/*Test,com/pte/enrollment/**/*Test,com/pte/session/**/*Test,com/pte/attempt/**/*Test,com/pte/tenancy/**/*Test' -Dsurefire.failIfNoSpecifiedTests=true",
+      "result": "PASSED",
+      "tests": 563,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "note": "identical to Phase 1 (skipped = pre-existing PlatformRoleMigrationPostgresIntegrationTest)"
+    },
+    {
+      "cmd": "./mvnw -o -pl app test -Dtest=ModuleStructureTest,RouteContractTest -Dsurefire.failIfNoSpecifiedTests=true",
+      "result": "EXPECTED_BASELINE_FAILURE",
+      "tests": 8,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "note": "only modules_have_no_boundary_violations (pre-existing)"
+    },
+    {
+      "cmd": "./mvnw -o -pl app test (full)",
+      "result": "1 pre-existing error",
+      "tests": 1600,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 50
+    },
+    {
+      "cmd": "./mvnw -o -pl app test -Dtest=OverviewMigrationPostgresIntegrationTest -Dlifecycle.test.db.url=jdbc:postgresql://localhost:55439/lifecycle_test?user=postgres -Dsurefire.failIfNoSpecifiedTests=true",
+      "result": "PASSED",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "note": "scratch PG17 container pte-overview-scratch, removed afterwards"
+    }
+  ],
+  "architecture_diff": {
+    "baseline": "tests/arch/baseline-arch-violations.txt (18 normalized lines)",
+    "after": "tests/arch/after-arch-p2-violations.txt (18 normalized lines; multi-line cycle entries joined)",
+    "raw_output": "tests/arch/after-arch-p2-tester.txt",
+    "new_lines": 0,
+    "removed_lines": 0,
+    "lines_mentioning_overview_billing_support": 0,
+    "result": "identical"
+  },
+  "postgres": {
+    "migration_it": "RUN - PASSED 9/9 through V95 on an empty schema (Hibernate ddl-auto=validate against the Flyway-built schema; V95 indexes verified as partial tenant-leading definitions; V95 replay idempotent)",
+    "environment": "scratch container pte-overview-scratch (postgres:17-alpine, port 55439, trust auth), removed at the end. The user's preferred pte-postgres container was NOT used: host port 5432 is owned by a native Windows postgres process (pid seen via Get-NetTCPConnection, not Docker), so any JDBC client on the host reaches that other server (password authentication fails) and never the pte-postgres container. That process and all pte-* containers were left untouched; no schema or data was created in any of them.",
+    "explain_plans": "all 8 Phase 2 queries use an index; V95 indexes used by the default planner (no forced settings) - see tests/phase-02-explain-plans.txt (raw: pte-api/app/target/overview-explain-plans-phase2.txt)",
+    "explain_verdicts": {
+      "reports awaiting publication": "Bitmap Index Scan idx_attempt_reports_tenant_unpublished (V95), default planner",
+      "recent activity (newest 8)": "Index Scan idx_audit_logs_tenant_created (V95), default planner, no Sort node",
+      "grading answers by status": "Bitmap Index Scan idx_scoring_answers_tenant_review (pre-existing)",
+      "grading frozen cohorts": "Bitmap Index Scans idx_grading_cohort_status + uq_grading_cohort_session (pre-existing)",
+      "pending orders": "Bitmap Index Scan ux_orders_pending_tenant_plan (pre-existing)",
+      "support tickets by status": "Bitmap Index Scan idx_support_ticket_tenant_status_created (pre-existing)",
+      "usable subscriptions": "Bitmap Index Scan idx_subscriptions_tenant_status (pre-existing); top-N sort over the tenant's usable rows (tens at most per tenant)",
+      "plan names batch": "Seq Scan by default on a 40-row table; index scan on unique public_id when forced"
+    }
+  },
+  "failures": [
+    {
+      "id": "TEST-PREEXISTING-001",
+      "severity": "LOW",
+      "type": "REGRESSION",
+      "expected": "ModuleStructureTest.modules_have_no_boundary_violations passes",
+      "actual": "Fails with the same 18 pre-existing enrollment/attempt/session/reporting/scoring violations as tests/arch/baseline-arch-violations.txt; no new lines, none mention overview, billing or support",
+      "likely_owner": "production_code",
+      "related_files": [
+        "pte-api/app/src/main/java/com/pte/enrollment/internal/service/StudentWorkspaceQueryService.java"
+      ],
+      "pre_existing": true
+    }
+  ],
+  "phase1_test_edits_review": {
+    "HostDashboardFixtures": "service() now wires fixture-owned mocks for the five new facades instead of anonymous mocks; stubHappyPath unchanged, so Phase 1 assertions are unchanged (new sections are ERROR there because mocks return null, and Phase 1 tests only assert the first six sections). Not weakened.",
+    "HostDashboardServiceTest.cacheKeyChangesWithTenantAndWindow": "now verifies getOrCompute(..., MonthlySeries.class, ...) 3 times instead of any class, because the grading backlog adds a second cache lookup per build. Same distinct-key assertion; the grading-key equivalent is covered by HostDashboardOperationsSectionsTest.gradingCacheKeysDifferPerTenantAndWindow. Not weakened. Note: the name of coreCountsAreNotCachedOnlyTheMonthlySeriesGoThroughTheCache is now slightly stale (the grading backlog is also cached) but its assertions still hold."
+  },
+  "observations": [
+    "No production bug found in Phase 2 code; every success criterion was met.",
+    "The grading cache key embeds windowDays although the backlog is point-in-time and window independent: three entries per tenant instead of one (harmless fragmentation, same as the monthly series).",
+    "The grading section mixes a up-to-30s cached backlog with a live reportsAwaitingPublication count (by design in the plan); a user can briefly see an updated report count next to a stale backlog.",
+    "reportsAwaitingPublication counts every unpublished attempt_reports row of the tenant, including reports created lazily when a host merely viewed an attempt before publish (see AttemptReport javadoc); it is not restricted to graded attempts.",
+    "The subscription lookup sorts the tenant's usable subscriptions (top-N heapsort, 111 rows in the seed); acceptable because a tenant holds few subscriptions, no extra index is warranted.",
+    "Fixture numbers for the cross-tenant assertions are deliberately 5-digit values (70707 ...) because repeated-digit values such as 7777 collide with the repeated-digit UUID fixtures in the JSON body.",
+    "Mockito prints the 'dynamic agent' warning in this JDK; unrelated to the tests."
+  ],
+  "modulith_hygiene": {
+    "tests_created_by_package": "billing tests in com.pte.billing.internal.repository, support in com.pte.support..., scoring in com.pte.scoring..., reporting in com.pte.reporting..., audit in com.pte.shared.audit, overview tests in com.pte.overview...",
+    "overview_imports": "only root facades/DTOs (BillingOverviewService, CurrentSubscriptionView, ScoringOverviewService, ReportingOverviewService, SupportOverviewService) plus shared; no foreign domain/internal/repository type",
+    "grep_proof": "grep -E com.pte.(identity|tenancy|enrollment|session|attempt|billing|support|scoring|reporting).[a-z]+. over app/src/test/**/overview/** and AuditLogServiceRecentTest: no matches; the Postgres IT seeds with plain SQL only"
+  },
+  "not_run": [
+    "pte-postgres (user's compose Postgres) - unreachable from the host (port 5432 shadowed by a native Windows postgres); scratch container used instead",
+    "Frontend/Playwright tests and any non-app Maven module (out of scope for Phase 2 backend)"
+  ],
+  "report_path": "plans/ninh-overview-dashboards/tests/phase-02-test-report.json"
+}

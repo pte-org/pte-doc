@@ -1,0 +1,30 @@
+{
+  "phase": "phase-08-vendor-admin-dashboard-ui",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "verdict_note": "Vitest installed cleanly in vendor-web with node environment mirroring tenant-web. 66 tests across 10 test files were created covering pure utilities (format, greeting, trend deltas, attention derivation, kpis, charts, sections), API hook query configuration, bilingual message catalog completeness/hygiene, and source-level coding standards hygiene. All 66 tests pass. Typecheck, lint and next build pass with 0 errors.",
+  "reviewed_at": "2026-10-14T02:50:00Z",
+  "summary": { "passed": 66, "failed": 0, "skipped": 0 },
+  "summary_scope": "vendor-web: 10 test files / 66 tests.",
+  "new_tests": {
+    "vendor_web": { "files": 10, "tests": 66 },
+    "by_file": {
+      "utils/format.test.ts": "14 tests: number formatting per locale, percentage formatting, currency formatting (VND without decimals, USD with decimals, graceful fallback), date formatting in timezone (valid ISO timestamp, empty/null/undefined -> dash, invalid date -> dash), month labels (YYYY-MM to short month and year, malformed handling), message interpolation (known/unknown/empty placeholders), keyForCount (singular/plural).",
+      "utils/greeting.test.ts": "4 tests: morning greeting (5-11), afternoon greeting (12-17), evening greeting (outside 5-17), fallback administrator name when user name is missing or blank.",
+      "utils/trend.test.ts": "4 tests: positive change -> up/good tone with plus sign, negative change -> down/neutral tone (never bad/danger), zero change -> flat/neutral tone, null change -> null delta.",
+      "utils/sections.test.ts": "4 tests: sectionAvailability mapping (OK -> ok, ERROR -> error, FORBIDDEN -> forbidden), null/undefined handling, sectionData extraction (data only on OK), zero or empty array treated as valid data.",
+      "utils/attention.test.ts": "3 tests: derivation of attention items sorted by severity (danger before warning), open support tickets as danger, pending applications/subscriptions/licenses as warning, zero waiting items handling, failed sources tracking.",
+      "utils/kpis.test.ts": "3 tests: 4 KPI cards generation when sections are OK, unavailable state when section has ERROR, card omission when section is FORBIDDEN.",
+      "utils/charts.test.ts": "6 tests: monthly tenant growth series with partial month flag, status donut slices (active, suspended, pending remainder), org-type donut slices with chart tones, monthly revenue series.",
+      "api.test.ts": "1 test: useAdminDashboard query options (ADMIN_DASHBOARD_QUERY_KEY, 60s stale time, retry false, getAdminDashboard call).",
+      "messages/messages.catalog.test.ts": "13 tests: non-blank values, bidirectional key parity between en and vi, whitespace hygiene, placeholder matching, known placeholder guard, balanced braces, translation coverage, copy hygiene.",
+      "hygiene.test.ts": "14 tests: thin server page.tsx (<= 6 lines, no use client, no logic, no JSX text), components <= 150 lines, files <= 300 lines, no inline styles or raw colors, no any/ts-ignore/console, single query architecture, route targets exist."
+    }
+  },
+  "commands": [
+    { "cmd": "pnpm --filter vendor-web test", "result": "PASSED", "files": 10, "tests": 66, "failures": 0 },
+    { "cmd": "pnpm --filter vendor-web typecheck", "result": "PASSED", "exit": 0 },
+    { "cmd": "pnpm --filter vendor-web lint", "result": "PASSED", "exit": 0, "note": "0 errors" },
+    { "cmd": "pnpm --filter vendor-web build", "result": "PASSED", "exit": 0, "note": "Next.js 16.2.9 compiled successfully, static routes generated including /admin" }
+  ]
+}
