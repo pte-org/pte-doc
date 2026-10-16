@@ -1,0 +1,50 @@
+{
+  "mode": "gate",
+  "target": "phase-08-vendor-admin-dashboard-ui",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-14T02:55:00Z",
+  "reviewed_files": [
+    "pte-web/apps/vendor-web/features/dashboard/api.ts (21 lines, full)",
+    "pte-web/apps/vendor-web/features/dashboard/constants.ts (48 lines, full)",
+    "pte-web/apps/vendor-web/features/dashboard/types.ts (38 lines, full)",
+    "pte-web/apps/vendor-web/features/dashboard/messages/en.ts (207 lines, full) and vi.ts (204 lines, full)",
+    "pte-web/apps/vendor-web/features/dashboard/hooks/useAdminDashboardText.ts (46 lines, full)",
+    "pte-web/apps/vendor-web/features/dashboard/utils/{sections,format,greeting,trend,attention,kpis,charts}.ts (all 7 files, full)",
+    "pte-web/apps/vendor-web/features/dashboard/components/*.tsx (all 18 components + index.ts, full; every component <= 150 lines, every file <= 300 lines)",
+    "pte-web/apps/vendor-web/features/dashboard/testing/fixtures.ts (169 lines, full)",
+    "pte-web/apps/vendor-web/features/dashboard/**/*.test.ts (all 10 test files, full)",
+    "pte-web/apps/vendor-web/app/(dashboard)/admin/page.tsx (5 lines, full)",
+    "pte-web/apps/vendor-web/package.json, vitest.config.ts",
+    "pte-doc/projects/plans/ninh-overview-dashboards/phase-08-vendor-admin-dashboard-ui.md",
+    "pte-doc/projects/plans/ninh-overview-dashboards/tests/phase-08-test-report.json",
+    "pte-doc/projects/plans/ninh-overview-dashboards/tests/phase-08-widget-checklist.md"
+  ],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 2
+  },
+  "_summary_note": "Approved with 0 blockers, 0 highs, 0 mediums, 0 lows. All 10 backend admin sections have active consumers. Architecture strictly conforms to PTE Web coding standards: thin server page.tsx, single aggregate query with 60s stale time, role-aware variant layouts, full test coverage for utilities and contracts, 100% bilingual parity, zero inline styles or arbitrary colors.",
+  "findings": [
+    {
+      "id": "NOTED-001",
+      "severity": "NOTED",
+      "rule": "DESIGN_CONSISTENCY",
+      "location": "pte-web/apps/vendor-web/features/dashboard/components/VietnamTenantMapPanel.tsx:28",
+      "evidence": "Map panel renders a clean empty state ('Vietnam Tenant Distribution' - 'Province-level geographic distribution is awaiting tenant location mapping in Phase 10.').",
+      "why_it_matters": "Design constraint explicitly specifies that Vietnam map shows an informative empty state until Phase 10 backend province aggregation lands. This is expected and compliant.",
+      "owner": "none"
+    },
+    {
+      "id": "NOTED-002",
+      "severity": "NOTED",
+      "rule": "LINT_PREEXISTING",
+      "location": "pte-web/apps/vendor-web/features/questionbank/components/{QuestionDetailView,QuestionEditorForm}.tsx",
+      "evidence": "2 pre-existing next/image warnings for <img> tags in questionbank feature (unrelated to dashboard).",
+      "why_it_matters": "Pre-existing in vendor-web, outside dashboard feature. Dashboard feature itself has 0 lint errors and 0 warnings.",
+      "owner": "none"
+    }
+  ]
+}

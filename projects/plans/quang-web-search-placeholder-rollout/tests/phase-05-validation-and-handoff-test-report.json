@@ -1,0 +1,27 @@
+{
+  "phase": "phase-05-validation-and-handoff",
+  "mode": "validation",
+  "verdict": "PASSED_WITH_LIMITATION",
+  "reviewed_at": "2026-10-12T14:15:00Z",
+  "summary": {
+    "passed": 10,
+    "failed": 1,
+    "skipped": 1
+  },
+  "checks": [
+    { "name": "tenant-web production build", "status": "passed" },
+    { "name": "vendor-web production build", "status": "passed" },
+    { "name": "tenant/admin representative route smoke", "status": "passed", "routes": 11 },
+    { "name": "static search-surface inventory", "status": "passed", "tables": 44 },
+    { "name": "git diff --check", "status": "passed" },
+    { "name": "tenant-web and vendor-web typecheck/lint", "status": "passed" },
+    { "name": "tenant-web tests", "status": "passed", "tests": 37 },
+    { "name": "@pte/api-client tests", "status": "passed", "tests": 442 },
+    { "name": "pte-api targeted search tests", "status": "passed", "tests": 74 },
+    { "name": "license HTTP contract", "status": "passed", "tests": 8 },
+    { "name": "pte-api full app suite", "status": "failed-unrelated", "tests": 1356, "failures": 1, "errors": 1, "suite": "ModuleStructureTest" },
+    { "name": "authenticated interactive browser/responsive smoke", "status": "skipped", "reason": "No repository browser probe or Playwright harness available" }
+  ],
+  "failures": [],
+  "report_path": "pte-doc/projects/plans/quang-web-search-placeholder-rollout/tests/phase-05-validation-and-handoff-test-report.json"
+}

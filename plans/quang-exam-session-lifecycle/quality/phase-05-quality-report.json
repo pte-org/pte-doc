@@ -1,0 +1,63 @@
+{
+  "phase": "05",
+  "title": "Regression and quality gate",
+  "generatedAt": "2026-10-13T20:03:00+07:00",
+  "status": "targeted_pass_full_suite_limited",
+  "scope": ["pte-api", "pte-web", "Docker Compose runtime"],
+  "checks": [
+    {
+      "name": "Backend compilation",
+      "command": ".\\mvnw.cmd -pl app -DskipTests compile",
+      "result": "passed"
+    },
+    {
+      "name": "Backend lifecycle focused tests",
+      "command": ".\\mvnw.cmd -pl app '-Dtest=ExamOrchestrationServiceTest,SessionLifecycleServiceTest,SessionCancelledNotificationListenerTest,SessionAutoCloseWorkerTest,ScoringServiceTest' test",
+      "result": "passed",
+      "details": "51 tests passed; 0 failures; 0 errors."
+    },
+    {
+      "name": "Backend full test suite",
+      "command": ".\\mvnw.cmd -pl app test",
+      "result": "limited",
+      "details": "1363 tests run; 1 failure, 1 error, 41 skipped. The failure is the repository's ModuleStructureTest expectation mismatch for detected module examstaff; the error reports repository-level dependency cycles involving attempt, session, enrollment and reporting. No lifecycle-focused test failure was reported."
+    },
+    {
+      "name": "Tenant frontend typecheck",
+      "command": "corepack pnpm exec tsc --noEmit -p apps/tenant-web/tsconfig.json",
+      "result": "passed"
+    },
+    {
+      "name": "Tenant frontend lint",
+      "command": "corepack pnpm --filter tenant-web lint",
+      "result": "passed"
+    },
+    {
+      "name": "Tenant frontend tests",
+      "command": "corepack pnpm --filter tenant-web test",
+      "result": "passed",
+      "details": "2 test files and 37 tests passed."
+    },
+    {
+      "name": "Tenant frontend production build",
+      "command": "corepack pnpm --filter tenant-web build",
+      "result": "passed"
+    },
+    {
+      "name": "Changed frontend file formatting",
+      "command": "corepack pnpm exec prettier --check apps/tenant-web/features/exams/api/index.ts apps/tenant-web/features/exams/components/SessionDetailView.tsx",
+      "result": "passed"
+    },
+    {
+      "name": "Docker Compose runtime",
+      "command": "docker compose --env-file .env.local -f docker-compose.yml -f docker-compose.services.yml up -d --build",
+      "result": "passed",
+      "details": "Application, PostgreSQL, Redis, RabbitMQ and Mailpit reported healthy/up; application logs reported successful startup without ERROR, Exception or Application Failed."
+    }
+  ],
+  "limitations": [
+    "The full-suite Modulith architecture gate remains unresolved and was not changed because it is outside the exam-session lifecycle scope.",
+    "No production deployment or authenticated end-to-end cancellation journey was performed in this local verification run.",
+    "No Playwright logs or screenshots were added to pte-web."
+  ]
+}

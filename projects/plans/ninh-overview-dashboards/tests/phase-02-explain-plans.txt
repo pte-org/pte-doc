@@ -1,0 +1,233 @@
+﻿Phase 2 EXPLAIN summary (ninh-overview-dashboards)
+Environment: scratch PostgreSQL 17 (container pte-overview-scratch, postgres:17-alpine, port 55439, trust auth), scratch schema
+overview_mig_<random> migrated from empty through V95 and dropped by the test. The preferred pte-postgres container could not be
+used: host port 5432 is held by a native Windows postgres process (not the Docker container), so a JDBC client on the host never
+reaches pte-postgres; that process was not touched.
+Seed: 20 tenants x 1500 rows per table (tenant A = 1 of 20), tenants interleaved, VACUUM ANALYZE; skewed like production
+(about 5 percent unpublished reports, 10 percent frozen cohorts, 2 percent pending orders, 10 percent active subscriptions).
+
+Verdicts (default planner / forced enable_seqscan=off):
+- reports awaiting publication: Bitmap Index Scan idx_attempt_reports_tenant_unpublished (V95) both ways.
+- recent activity newest 8:     Index Scan idx_audit_logs_tenant_created (V95) both ways, no sort node (index order + LIMIT).
+- grading answers by status:    Bitmap Index Scan idx_scoring_answers_tenant_review (pre-existing, tenant_id leading) both ways.
+- grading frozen cohorts:       BitmapAnd-style idx_grading_cohort_status + uq_grading_cohort_session (pre-existing) both ways.
+- pending orders count:         Bitmap Index Scan ux_orders_pending_tenant_plan (pre-existing partial unique, tenant_id leading) both ways.
+- support tickets by status:    Bitmap Index Scan idx_support_ticket_tenant_status_created (pre-existing) both ways.
+- usable subscriptions:         Bitmap Index Scan idx_subscriptions_tenant_status (pre-existing) both ways.
+- plan names batch:             Seq Scan by default (40-row table, cheaper than index); index scan on the unique public_id when forced.
+No Seq Scan on any large Phase 2 table. Raw EXPLAIN (ANALYZE) output follows.
+EXPLAIN (ANALYZE) of Phase 2 host dashboard queries
+
+Seed: 20 tenants x 1500 rows per table (tenant A is 1 of 20)
+  attempt_reports: 30020 rows
+  audit_logs: 30020 rows
+  scoring_answers: 30020 rows
+  session_grading_cohorts: 30020 rows
+  orders: 30020 rows
+  support_ticket: 30020 rows
+  subscriptions: 30020 rows
+  plans: 40 rows
+
+Indexes on the queried tables:
+  CREATE UNIQUE INDEX attempt_reports_attempt_public_id_key ON overview_mig_dfed64e0bef1413e.attempt_reports USING btree (attempt_public_id)
+  CREATE UNIQUE INDEX attempt_reports_pkey ON overview_mig_dfed64e0bef1413e.attempt_reports USING btree (id)
+  CREATE UNIQUE INDEX attempt_reports_public_id_key ON overview_mig_dfed64e0bef1413e.attempt_reports USING btree (public_id)
+  CREATE INDEX idx_attempt_reports_session ON overview_mig_dfed64e0bef1413e.attempt_reports USING btree (session_public_id)
+  CREATE INDEX idx_attempt_reports_student_tenant_published ON overview_mig_dfed64e0bef1413e.attempt_reports USING btree (student_public_id, tenant_id, published, published_at)
+  CREATE INDEX idx_attempt_reports_tenant_unpublished ON overview_mig_dfed64e0bef1413e.attempt_reports USING btree (tenant_id) WHERE ((published = false) AND (deleted = false))
+  CREATE UNIQUE INDEX audit_logs_pkey ON overview_mig_dfed64e0bef1413e.audit_logs USING btree (id)
+  CREATE UNIQUE INDEX audit_logs_public_id_key ON overview_mig_dfed64e0bef1413e.audit_logs USING btree (public_id)
+  CREATE INDEX idx_audit_logs_tenant ON overview_mig_dfed64e0bef1413e.audit_logs USING btree (tenant_id)
+  CREATE INDEX idx_audit_logs_tenant_aggregate_type ON overview_mig_dfed64e0bef1413e.audit_logs USING btree (tenant_id, aggregate_type)
+  CREATE INDEX idx_audit_logs_tenant_created ON overview_mig_dfed64e0bef1413e.audit_logs USING btree (tenant_id, created_at DESC) WHERE (deleted = false)
+  CREATE INDEX idx_orders_status_created ON overview_mig_dfed64e0bef1413e.orders USING btree (status, created_at)
+  CREATE INDEX idx_orders_tenant_created ON overview_mig_dfed64e0bef1413e.orders USING btree (tenant_id, created_at)
+  CREATE UNIQUE INDEX orders_order_code_key ON overview_mig_dfed64e0bef1413e.orders USING btree (order_code)
+  CREATE UNIQUE INDEX orders_pkey ON overview_mig_dfed64e0bef1413e.orders USING btree (id)
+  CREATE UNIQUE INDEX orders_public_id_key ON overview_mig_dfed64e0bef1413e.orders USING btree (public_id)
+  CREATE UNIQUE INDEX ux_orders_pending_tenant_plan ON overview_mig_dfed64e0bef1413e.orders USING btree (tenant_id, plan_id) WHERE (((status)::text = 'PENDING'::text) AND (deleted = false))
+  CREATE INDEX idx_plans_status ON overview_mig_dfed64e0bef1413e.plans USING btree (status)
+  CREATE UNIQUE INDEX plans_pkey ON overview_mig_dfed64e0bef1413e.plans USING btree (id)
+  CREATE UNIQUE INDEX plans_public_id_key ON overview_mig_dfed64e0bef1413e.plans USING btree (public_id)
+  CREATE INDEX idx_scoring_answers_attempt ON overview_mig_dfed64e0bef1413e.scoring_answers USING btree (attempt_public_id)
+  CREATE INDEX idx_scoring_answers_session ON overview_mig_dfed64e0bef1413e.scoring_answers USING btree (session_public_id)
+  CREATE INDEX idx_scoring_answers_status ON overview_mig_dfed64e0bef1413e.scoring_answers USING btree (status)
+  CREATE INDEX idx_scoring_answers_tenant_review ON overview_mig_dfed64e0bef1413e.scoring_answers USING btree (tenant_id, session_public_id, status, created_at)
+  CREATE UNIQUE INDEX scoring_answers_answer_public_id_key ON overview_mig_dfed64e0bef1413e.scoring_answers USING btree (answer_public_id)
+  CREATE UNIQUE INDEX scoring_answers_pkey ON overview_mig_dfed64e0bef1413e.scoring_answers USING btree (id)
+  CREATE UNIQUE INDEX scoring_answers_public_id_key ON overview_mig_dfed64e0bef1413e.scoring_answers USING btree (public_id)
+  CREATE UNIQUE INDEX uq_scoring_answer_owner_scope ON overview_mig_dfed64e0bef1413e.scoring_answers USING btree (answer_public_id, tenant_id, session_public_id, attempt_public_id)
+  CREATE INDEX idx_grading_cohort_status ON overview_mig_dfed64e0bef1413e.session_grading_cohorts USING btree (status) WHERE (deleted = false)
+  CREATE UNIQUE INDEX session_grading_cohorts_pkey ON overview_mig_dfed64e0bef1413e.session_grading_cohorts USING btree (id)
+  CREATE UNIQUE INDEX session_grading_cohorts_public_id_key ON overview_mig_dfed64e0bef1413e.session_grading_cohorts USING btree (public_id)
+  CREATE UNIQUE INDEX uq_grading_cohort_session ON overview_mig_dfed64e0bef1413e.session_grading_cohorts USING btree (tenant_id, session_public_id)
+  CREATE INDEX idx_subscriptions_tenant_status ON overview_mig_dfed64e0bef1413e.subscriptions USING btree (tenant_id, status)
+  CREATE UNIQUE INDEX subscriptions_license_key_key ON overview_mig_dfed64e0bef1413e.subscriptions USING btree (license_key)
+  CREATE UNIQUE INDEX subscriptions_pkey ON overview_mig_dfed64e0bef1413e.subscriptions USING btree (id)
+  CREATE UNIQUE INDEX subscriptions_public_id_key ON overview_mig_dfed64e0bef1413e.subscriptions USING btree (public_id)
+  CREATE INDEX idx_support_ticket_tenant_status_created ON overview_mig_dfed64e0bef1413e.support_ticket USING btree (tenant_id, status, created_at)
+  CREATE UNIQUE INDEX support_ticket_pkey ON overview_mig_dfed64e0bef1413e.support_ticket USING btree (id)
+  CREATE UNIQUE INDEX support_ticket_public_id_key ON overview_mig_dfed64e0bef1413e.support_ticket USING btree (public_id)
+
+--- reports awaiting publication (count) [planner default]
+Aggregate  (cost=215.57..215.58 rows=1 width=8) (actual rows=1 loops=1)
+  ->  Bitmap Heap Scan on attempt_reports r  (cost=4.87..215.38 rows=76 width=8) (actual rows=76 loops=1)
+        Recheck Cond: ((tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid) AND (NOT published) AND (NOT deleted))
+        Heap Blocks: exact=30
+        ->  Bitmap Index Scan on idx_attempt_reports_tenant_unpublished  (cost=0.00..4.85 rows=76 width=0) (actual rows=76 loops=1)
+              Index Cond: (tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid)
+
+--- reports awaiting publication (count) [enable_seqscan=off]
+Aggregate  (cost=215.57..215.58 rows=1 width=8) (actual rows=1 loops=1)
+  ->  Bitmap Heap Scan on attempt_reports r  (cost=4.87..215.38 rows=76 width=8) (actual rows=76 loops=1)
+        Recheck Cond: ((tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid) AND (NOT published) AND (NOT deleted))
+        Heap Blocks: exact=30
+        ->  Bitmap Index Scan on idx_attempt_reports_tenant_unpublished  (cost=0.00..4.85 rows=76 width=0) (actual rows=76 loops=1)
+              Index Cond: (tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid)
+
+
+--- recent activity (newest 8 audit rows) [planner default]
+Limit  (cost=0.41..10.67 rows=8 width=89) (actual rows=8 loops=1)
+  ->  Index Scan using idx_audit_logs_tenant_created on audit_logs a  (cost=0.41..1925.47 rows=1502 width=89) (actual rows=8 loops=1)
+        Index Cond: (tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid)
+
+--- recent activity (newest 8 audit rows) [enable_seqscan=off]
+Limit  (cost=0.41..10.67 rows=8 width=89) (actual rows=8 loops=1)
+  ->  Index Scan using idx_audit_logs_tenant_created on audit_logs a  (cost=0.41..1925.47 rows=1502 width=89) (actual rows=8 loops=1)
+        Index Cond: (tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid)
+
+
+--- grading: answers grouped by status [planner default]
+HashAggregate  (cost=783.21..783.24 rows=3 width=15) (actual rows=3 loops=1)
+  Group Key: status
+  Batches: 1  Memory Usage: 24kB
+  ->  Bitmap Heap Scan on scoring_answers s  (cost=23.93..775.70 rows=1502 width=15) (actual rows=1501 loops=1)
+        Recheck Cond: (tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid)
+        Filter: (NOT deleted)
+        Heap Blocks: exact=39
+        ->  Bitmap Index Scan on idx_scoring_answers_tenant_review  (cost=0.00..23.55 rows=1502 width=0) (actual rows=1501 loops=1)
+              Index Cond: (tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid)
+
+--- grading: answers grouped by status [enable_seqscan=off]
+HashAggregate  (cost=783.21..783.24 rows=3 width=15) (actual rows=3 loops=1)
+  Group Key: status
+  Batches: 1  Memory Usage: 24kB
+  ->  Bitmap Heap Scan on scoring_answers s  (cost=23.93..775.70 rows=1502 width=15) (actual rows=1501 loops=1)
+        Recheck Cond: (tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid)
+        Filter: (NOT deleted)
+        Heap Blocks: exact=39
+        ->  Bitmap Index Scan on idx_scoring_answers_tenant_review  (cost=0.00..23.55 rows=1502 width=0) (actual rows=1501 loops=1)
+              Index Cond: (tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid)
+
+
+--- grading: frozen cohorts (closed sessions awaiting finalisation) [planner default]
+Aggregate  (cost=457.47..457.48 rows=1 width=8) (actual rows=1 loops=1)
+  ->  Bitmap Heap Scan on session_grading_cohorts c  (cost=94.93..457.10 rows=151 width=8) (actual rows=151 loops=1)
+        Recheck Cond: (((status)::text = 'FROZEN'::text) AND (NOT deleted) AND (tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid))
+        Heap Blocks: exact=35
+        ->  BitmapAnd  (cost=94.93..94.93 rows=151 width=0) (actual rows=0 loops=1)
+              ->  Bitmap Index Scan on idx_grading_cohort_status  (cost=0.00..34.93 rows=3019 width=0) (actual rows=3020 loops=1)
+                    Index Cond: ((status)::text = 'FROZEN'::text)
+              ->  Bitmap Index Scan on uq_grading_cohort_session  (cost=0.00..59.67 rows=1501 width=0) (actual rows=1501 loops=1)
+                    Index Cond: (tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid)
+
+--- grading: frozen cohorts (closed sessions awaiting finalisation) [enable_seqscan=off]
+Aggregate  (cost=457.47..457.48 rows=1 width=8) (actual rows=1 loops=1)
+  ->  Bitmap Heap Scan on session_grading_cohorts c  (cost=94.93..457.10 rows=151 width=8) (actual rows=151 loops=1)
+        Recheck Cond: (((status)::text = 'FROZEN'::text) AND (NOT deleted) AND (tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid))
+        Heap Blocks: exact=35
+        ->  BitmapAnd  (cost=94.93..94.93 rows=151 width=0) (actual rows=0 loops=1)
+              ->  Bitmap Index Scan on idx_grading_cohort_status  (cost=0.00..34.93 rows=3019 width=0) (actual rows=3020 loops=1)
+                    Index Cond: ((status)::text = 'FROZEN'::text)
+              ->  Bitmap Index Scan on uq_grading_cohort_session  (cost=0.00..59.67 rows=1501 width=0) (actual rows=1501 loops=1)
+                    Index Cond: (tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid)
+
+
+--- pending orders (count) [planner default]
+Aggregate  (cost=106.90..106.91 rows=1 width=8) (actual rows=1 loops=1)
+  ->  Bitmap Heap Scan on orders o  (cost=4.52..106.82 rows=31 width=8) (actual rows=31 loops=1)
+        Recheck Cond: ((tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid) AND ((status)::text = 'PENDING'::text) AND (NOT deleted))
+        Heap Blocks: exact=29
+        ->  Bitmap Index Scan on ux_orders_pending_tenant_plan  (cost=0.00..4.51 rows=31 width=0) (actual rows=31 loops=1)
+              Index Cond: (tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid)
+
+--- pending orders (count) [enable_seqscan=off]
+Aggregate  (cost=106.90..106.91 rows=1 width=8) (actual rows=1 loops=1)
+  ->  Bitmap Heap Scan on orders o  (cost=4.52..106.82 rows=31 width=8) (actual rows=31 loops=1)
+        Recheck Cond: ((tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid) AND ((status)::text = 'PENDING'::text) AND (NOT deleted))
+        Heap Blocks: exact=29
+        ->  Bitmap Index Scan on ux_orders_pending_tenant_plan  (cost=0.00..4.51 rows=31 width=0) (actual rows=31 loops=1)
+              Index Cond: (tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid)
+
+
+--- support tickets grouped by status [planner default]
+HashAggregate  (cost=573.16..573.20 rows=4 width=15) (actual rows=4 loops=1)
+  Group Key: status
+  Batches: 1  Memory Usage: 24kB
+  ->  Bitmap Heap Scan on support_ticket t  (cost=19.91..565.66 rows=1500 width=15) (actual rows=1501 loops=1)
+        Recheck Cond: (tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid)
+        Filter: (NOT deleted)
+        Heap Blocks: exact=29
+        ->  Bitmap Index Scan on idx_support_ticket_tenant_status_created  (cost=0.00..19.54 rows=1500 width=0) (actual rows=1501 loops=1)
+              Index Cond: (tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid)
+
+--- support tickets grouped by status [enable_seqscan=off]
+HashAggregate  (cost=573.16..573.20 rows=4 width=15) (actual rows=4 loops=1)
+  Group Key: status
+  Batches: 1  Memory Usage: 24kB
+  ->  Bitmap Heap Scan on support_ticket t  (cost=19.91..565.66 rows=1500 width=15) (actual rows=1501 loops=1)
+        Recheck Cond: (tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid)
+        Filter: (NOT deleted)
+        Heap Blocks: exact=29
+        ->  Bitmap Index Scan on idx_support_ticket_tenant_status_created  (cost=0.00..19.54 rows=1500 width=0) (actual rows=1501 loops=1)
+              Index Cond: (tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid)
+
+
+--- usable subscriptions (soonest expiry, limit 10) [planner default]
+Limit  (cost=378.04..378.07 rows=10 width=146) (actual rows=10 loops=1)
+  ->  Sort  (cost=378.04..378.32 rows=111 width=146) (actual rows=10 loops=1)
+        Sort Key: expires_at, id
+        Sort Method: top-N heapsort  Memory: 27kB
+        ->  Bitmap Heap Scan on subscriptions s  (cost=5.83..375.65 rows=111 width=146) (actual rows=111 loops=1)
+              Recheck Cond: ((tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid) AND ((status)::text = 'ACTIVE'::text))
+              Filter: ((NOT deleted) AND (starts_at <= now()) AND (expires_at > now()))
+              Rows Removed by Filter: 40
+              Heap Blocks: exact=38
+              ->  Bitmap Index Scan on idx_subscriptions_tenant_status  (cost=0.00..5.80 rows=151 width=0) (actual rows=151 loops=1)
+                    Index Cond: ((tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid) AND ((status)::text = 'ACTIVE'::text))
+
+--- usable subscriptions (soonest expiry, limit 10) [enable_seqscan=off]
+Limit  (cost=378.04..378.07 rows=10 width=146) (actual rows=10 loops=1)
+  ->  Sort  (cost=378.04..378.32 rows=111 width=146) (actual rows=10 loops=1)
+        Sort Key: expires_at, id
+        Sort Method: top-N heapsort  Memory: 27kB
+        ->  Bitmap Heap Scan on subscriptions s  (cost=5.83..375.65 rows=111 width=146) (actual rows=111 loops=1)
+              Recheck Cond: ((tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid) AND ((status)::text = 'ACTIVE'::text))
+              Filter: ((NOT deleted) AND (starts_at <= now()) AND (expires_at > now()))
+              Rows Removed by Filter: 40
+              Heap Blocks: exact=38
+              ->  Bitmap Index Scan on idx_subscriptions_tenant_status  (cost=0.00..5.80 rows=151 width=0) (actual rows=151 loops=1)
+                    Index Cond: ((tenant_id = '8cdba2df-7d4e-4d3b-9140-7005b90e0b28'::uuid) AND ((status)::text = 'ACTIVE'::text))
+
+
+--- plan names batch (findByPublicIdIn) [planner default]
+Seq Scan on plans p  (cost=0.00..1.55 rows=3 width=613) (actual rows=3 loops=1)
+  Filter: (public_id = ANY ('{5b4ea8fb-4712-411a-ba54-7537d045d1ae,6d06145e-bd22-447e-9581-3fb5e81d4158,d721c33a-2d72-4bec-afba-e29c5c8230c1}'::uuid[]))
+  Rows Removed by Filter: 37
+
+--- plan names batch (findByPublicIdIn) [enable_seqscan=off]
+Index Scan using plans_public_id_key on plans p  (cost=0.14..8.19 rows=3 width=613) (actual rows=3 loops=1)
+  Index Cond: (public_id = ANY ('{5b4ea8fb-4712-411a-ba54-7537d045d1ae,6d06145e-bd22-447e-9581-3fb5e81d4158,d721c33a-2d72-4bec-afba-e29c5c8230c1}'::uuid[]))
+
+
+=== VERDICTS ===
+reports awaiting publication (count): default planner -> Bitmap Heap Scan on attempt_reports r  | Bitmap Index Scan on idx_attempt_reports_tenant_unpublished  | Index Cond:; forced -> Bitmap Heap Scan on attempt_reports r  | Bitmap Index Scan on idx_attempt_reports_tenant_unpublished  | Index Cond:
+recent activity (newest 8 audit rows): default planner -> Index Scan using idx_audit_logs_tenant_created on audit_logs a  | Index Cond:; forced -> Index Scan using idx_audit_logs_tenant_created on audit_logs a  | Index Cond:
+grading: answers grouped by status: default planner -> Bitmap Heap Scan on scoring_answers s  | Bitmap Index Scan on idx_scoring_answers_tenant_review  | Index Cond:; forced -> Bitmap Heap Scan on scoring_answers s  | Bitmap Index Scan on idx_scoring_answers_tenant_review  | Index Cond:
+grading: frozen cohorts (closed sessions awaiting finalisation): default planner -> Bitmap Heap Scan on session_grading_cohorts c  | Bitmap Index Scan on idx_grading_cohort_status  | Index Cond: | Bitmap Index Scan on uq_grading_cohort_session  | Index Cond:; forced -> Bitmap Heap Scan on session_grading_cohorts c  | Bitmap Index Scan on idx_grading_cohort_status  | Index Cond: | Bitmap Index Scan on uq_grading_cohort_session  | Index Cond:
+pending orders (count): default planner -> Bitmap Heap Scan on orders o  | Bitmap Index Scan on ux_orders_pending_tenant_plan  | Index Cond:; forced -> Bitmap Heap Scan on orders o  | Bitmap Index Scan on ux_orders_pending_tenant_plan  | Index Cond:
+support tickets grouped by status: default planner -> Bitmap Heap Scan on support_ticket t  | Bitmap Index Scan on idx_support_ticket_tenant_status_created  | Index Cond:; forced -> Bitmap Heap Scan on support_ticket t  | Bitmap Index Scan on idx_support_ticket_tenant_status_created  | Index Cond:
+usable subscriptions (soonest expiry, limit 10): default planner -> Bitmap Heap Scan on subscriptions s  | Bitmap Index Scan on idx_subscriptions_tenant_status  | Index Cond:; forced -> Bitmap Heap Scan on subscriptions s  | Bitmap Index Scan on idx_subscriptions_tenant_status  | Index Cond:
+plan names batch (findByPublicIdIn): default planner -> Seq Scan on plans p ; forced -> Index Scan using plans_public_id_key on plans p  | Index Cond:
+  note: default planner chose a sequential scan on the 20-tenant seed
+

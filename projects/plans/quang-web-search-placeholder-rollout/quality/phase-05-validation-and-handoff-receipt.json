@@ -1,0 +1,19 @@
+{
+  "target": "phase-05-validation-and-handoff",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:/GitHub/PTE-org",
+  "report_path": "pte-doc/projects/plans/quang-web-search-placeholder-rollout/quality/phase-05-validation-and-handoff-quality-report.json",
+  "reviewed_files": [
+    "pte-web/apps/tenant-web/features/examStaff/components/ExamStaffTable.tsx",
+    "pte-web/apps/vendor-web/features/commercialization/api.ts",
+    "pte-web/apps/vendor-web/features/questionbank/components/_QuestionTable.tsx",
+    "pte-web/packages/ui/src/components/DataTable.tsx",
+    "pte-doc/projects/plans/quang-web-search-placeholder-rollout/phase-05-validation-and-handoff.md",
+    "pte-doc/projects/plans/quang-web-search-placeholder-rollout/plan.md",
+    "pte-doc/projects/plans/quang-web-search-placeholder-rollout/search-surface-manifest.md"
+  ],
+  "source_fingerprint": "sha256:d044844789049fe35a313db002bbf942a5bfcc25a56448ceca8fa28e001c3ee3",
+  "reviewed_at": "2026-10-12T14:15:00Z",
+  "open_blocking_findings": 0
+}
