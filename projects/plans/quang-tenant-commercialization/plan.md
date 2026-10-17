@@ -1,11 +1,11 @@
 # Plan: Thương mại hoá tenant & định danh sinh viên
 
-Status: 🟡 In progress — Phases 12–14 implemented and focused-tested; Phase 15 implementation is in progress under the confirmed hard-gate workflow; Phases 16–17 remain planned follow-up business-rule hardening; Phase 1/2 checklist state remains pending its own recorded quality gates; full regression still reports the known ModuleStructureTest baseline violation
+Status: 🟡 In progress — Phases 12–15 implemented and focused-tested; Phases 16–17 remain planned follow-up business-rule hardening; Phase 1/2 checklist state remains pending its own recorded quality gates; full regression still reports the known ModuleStructureTest baseline violation
 Date: 2026-09-17
 Mode: Hard
 Test: default
 Created by: Quang
-Last reviewed: 2026-10-17 by Quang
+Last reviewed: 2026-10-18 by Quang
 Specs: [ADR-006](../../architecture/ADR-006-commercialization-and-exam-templates.md) · [ADR-007](../../architecture/ADR-007-student-identity-and-login.md)
 
 ## Overview
@@ -46,7 +46,7 @@ Các đường dẫn source làm căn cứ chính gồm `ExamOrchestrationServic
 - [x] Phase 12: Trùng slot sinh viên — phát hiện bằng một query, loại khỏi lô, thông báo tenant [quality: approved; testing: passed]
 - [x] Phase 13: Điểm có trọng số & đình chỉ tenant — `Σ(điểm phần × %)`, breakdown `appliedWeight` trong report snapshot, `suspendedUntil` mặc định 0 [quality: approved; testing: passed]
 - [x] Phase 14: Guardrail hoạt động tenant & eligibility identity — chặn đúng điểm bắt đầu, giữ nguyên attempt đang chạy, chuẩn hoá tenant/role/status/deleted checks [quality: approved; testing: passed]
-- [ ] Phase 15: Enrollment concurrency & publish reconciliation — serialize theo student, không ghi `ENROLLED` nếu không có enrollment thật [quality: approved; testing: passed; hard-checkpoint pending]
+- [x] Phase 15: Enrollment concurrency & publish reconciliation — serialize theo student, không ghi `ENROLLED` nếu không có enrollment thật [quality: approved; testing: passed]
 - [ ] Phase 16: Auth/report/suspension operator contract — first-login password, giải thích applied weight, preview đình chỉ đầy đủ và audit auto-reactivation
 - [ ] Phase 17: Đóng chính sách thương mại & release gate — chốt renewal, suspended auth, re-suspend, refund/revocation và bằng chứng rollout
 

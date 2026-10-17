@@ -1,7 +1,7 @@
 # Phase 15: Enrollment concurrency & publish reconciliation
 
 Owner: **Quang**
-Status: **In progress**
+Status: **Completed**
 Depends on: **Phase 14**
 
 Implementation preflight: Phase 14 completion was confirmed by Quang before this phase started. The default serialization decision is a pessimistic write lock on active student identity rows, acquired in ascending `publicId` order inside the enrollment transaction. Publish will reconcile the actual bulk response before changing audience/session state; all-conflict remains `READY` with `409`.
@@ -73,14 +73,14 @@ Phase 12 đã có conflict query tenant-wide và xử lý partial batch, nhưng 
 
 - Quality gate: **APPROVED** — report: `quality/phase-15-enrollment-concurrency-and-publish-reconciliation-quality-report.json`; receipt: `quality/phase-15-enrollment-concurrency-and-publish-reconciliation-receipt.json`.
 - Testing: **PASSED** — focused Phase 15 suite `51/51`, including dedicated PostgreSQL concurrency `4/4`; report: `tests/phase-15-enrollment-concurrency-and-publish-reconciliation-test-report.json`.
-- Decision checkpoint: implementation, quality gate, and required Postgres evidence are complete; completion confirmation after this hard checkpoint is still pending.
+- Decision checkpoint: implementation, quality gate, and required Postgres evidence are complete. Completion was confirmed by Quang on 2026-10-18.
 
 ## Session Notes
 
 - Added deterministic active-student identity row locking before conflict/capacity/insert for single, bulk, and publish enrollment paths; the repository lock query and service input both use ascending `publicId` order.
 - Publish now reconciles the actual bulk response, persists conflict metadata as `EXCLUDED/SCHEDULE_OVERLAP`, treats `alreadyEnrolled` as success, and keeps all-conflict sessions `READY` with `409`.
 - Unit, H2 repository, compile, and dedicated PostgreSQL concurrency checks passed. PostgreSQL ran in the isolated scratch container `codex-tenant-commercialization-pg` on loopback port `55439`; the application `pte-postgres` container was not used.
-- No push or deployment was performed. Phase completion remains held at the hard checkpoint until Quang confirms the evidence.
+- Phase completion was confirmed by Quang at the hard checkpoint on 2026-10-18; no push or deployment was performed.
 
 ## Decision Record
 
