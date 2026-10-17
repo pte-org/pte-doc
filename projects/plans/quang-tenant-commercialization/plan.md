@@ -1,6 +1,6 @@
 # Plan: Thương mại hoá tenant & định danh sinh viên
 
-Status: 🟡 In progress — Phase 11 implemented, tested, and quality-approved; Phase 1/2 checklist state remains pending its own recorded gates
+Status: 🟡 In progress — Phases 12–13 implemented and focused-tested; Phase 1/2 checklist state remains pending its own recorded quality gates; full regression still reports the known ModuleStructureTest baseline violation
 Date: 2026-09-17
 Mode: Hard
 Created by: Quang
@@ -27,8 +27,8 @@ Kèm theo: gỡ ràng buộc email-unique-toàn-cục đang chặn một ngườ
 - [x] Phase 9: Catalog template đề — `ExamTemplate` + `TemplateSection` (% điểm, Σ=100) + `TemplateSlot`, platform-owned [quality: approved; testing: passed]
 - [x] Phase 10: Sinh đề từ template — random có seed, kiểm đủ câu trước khi sinh, rút đường soạn đề thủ công, kho đề chỉ còn SHARED [quality: approved; testing: passed]
 - [x] Phase 11: Ràng buộc kỳ thi ↔ gói — C1–C4, exclusion constraint chống trùng khung giờ, đổi gói khi còn `SCHEDULED` [quality: approved; testing: passed]
-- [ ] Phase 12: Trùng slot sinh viên — phát hiện bằng một query, loại khỏi lô, thông báo tenant
-- [ ] Phase 13: Điểm có trọng số & đình chỉ tenant — `Σ(điểm phần × %)`, `suspendedUntil` mặc định 0
+- [x] Phase 12: Trùng slot sinh viên — phát hiện bằng một query, loại khỏi lô, thông báo tenant [quality: approved; testing: passed]
+- [x] Phase 13: Điểm có trọng số & đình chỉ tenant — `Σ(điểm phần × %)`, breakdown `appliedWeight` trong report snapshot, `suspendedUntil` mặc định 0 [quality: approved; testing: passed]
 
 ## Thứ tự và phụ thuộc
 

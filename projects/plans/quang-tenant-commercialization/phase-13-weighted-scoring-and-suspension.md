@@ -30,7 +30,7 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 3. `AttemptReport` thêm điểm từng phần + trọng số đã áp dụng, để phiếu điểm giải thích được con số tổng.
 
-4. Migration `V25__reporting_section_scores.sql`.
+4. Không tạo migration reporting mới: `appliedWeight` được lưu trong immutable `report_snapshot_json` hiện có, nên không tạo thêm bảng/cột trùng dữ liệu.
 
 5. Test: snapshot có trọng số 30/20/25/25, điểm phần 80/60/70/90 → tổng = 76.5.
 
@@ -40,7 +40,7 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 ### Phần B — đình chỉ tenant
 
-8. `Tenant` thêm `suspendedUntil` (Instant, nullable). Migration `V26__tenant_suspension.sql`.
+8. `Tenant` thêm `suspendedUntil` (Instant, nullable). Migration thực tế `V113__tenant_suspension.sql`.
 
 9. `TenantLifecycleService.suspend(publicId, days)`:
    - `days == 0` hoặc null → `suspendedUntil = null` (không tự hết hạn)
@@ -59,9 +59,9 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
     | Tạo Order / redeem mã | Đọc report đã publish |
     | Import roster | |
 
-12. Endpoint xem trước cho Admin: `GET /api/admin/tenants/{id}/suspension-impact` — trả số gói đang `ACTIVE`, tổng số ngày sẽ mất, và gói nào sẽ **hết hạn hẳn** trong thời gian đình chỉ. Màn hình đình chỉ phải hiện cái này trước khi bấm.
+12. Endpoint xem trước cho Admin: `GET /api/v1/tenants/{id}/suspension-impact` — trả số gói đang `ACTIVE`, tổng số ngày sẽ mất, và gói nào sẽ **hết hạn hẳn** trong thời gian đình chỉ. Màn hình đình chỉ phải hiện cái này trước khi bấm.
 
-13. Job quét `suspendedUntil < now` → `reactivate()`. Với mặc định 0 thì job không có việc gì làm — nó chỉ phục vụ các lần đình chỉ có đặt thời hạn.
+13. Job quét `suspendedUntil <= now` → `reactivate()`. Với mặc định 0 thì job không có việc gì làm — nó chỉ phục vụ các lần đình chỉ có đặt thời hạn.
 
 14. Test: đình chỉ mặc định → tenant giữ `SUSPENDED` sau khi job chạy, chỉ `reactivate()` thủ công mới gỡ.
 
@@ -83,9 +83,12 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 ## Quality and Testing State
 
-- Quality gate: chưa chạy
-- Testing: chưa bắt đầu
+- Quality gate: **approved**; [quality report](quality/phase-13-weighted-scoring-and-suspension-quality-report.json) đã ghi nhận review scope, findings và verification boundary.
+- Testing: **passed**, combined business-rule smoke suite `155/155` (0 failures, 0 errors), gồm weighted-report mapping, suspension HTTP contract, identity/application và release-gate coverage. Audit/data-policy suite thêm `50/50` tests passed. Identity/application verification chạy `36` tests với `0` failures và `2` Postgres integration tests skipped vì Docker không khả dụng; release-gate verification chạy `150` tests với `0` failures và `1` Postgres migration test skipped vì Docker không khả dụng. Pre-weighted-change full app regression chạy `2131` tests với `0` failures và `1` error tại `ModuleStructureTest` do boundary/cycle violations hiện hữu.
 
 ## Session Notes
 
-_(trống)_
+- Weighted scoring đọc template đã pin theo snapshot/template version, loại task type chưa có publishable score khỏi cả tử và mẫu, và trả thêm `appliedWeight` cho từng skill/Overall. Breakdown này được lưu cùng immutable `report_snapshot_json`; không tạo thêm bảng dữ liệu trùng lặp.
+- Suspension hỗ trợ mặc định vô hạn (`days = 0/null`), bounded suspension, validate ngày không âm, impact preview trước khi suspend, job tự reactivate bounded tenant, không gia hạn `Subscription.expiresAt`, và không chặn attempt đang chạy.
+- Enforcement đã đặt ở các điểm bắt đầu: tạo/mở kỳ thi, enroll/import, tạo order/redeem license; read report, submit/heartbeat/close attempt vẫn không bị chặn. Admin UI dùng common `@pte/ui` và fail-closed khi impact preview chưa sẵn sàng.
+- Không commit/push/deploy trong session này.
