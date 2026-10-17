@@ -1,9 +1,11 @@
 # Phase 14: Guardrail hoạt động tenant & eligibility identity
 
 Owner: **Quang**
-Status: **Planned**
+Status: **In progress**
 Depends on: **Phase 13**
 Maps to: [ADR-006](../../architecture/ADR-006-commercialization-and-exam-templates.md) §4, §9 · [ADR-007](../../architecture/ADR-007-student-identity-and-login.md)
+
+Preflight: Confirmed the existing tenant-active guard is already used by session creation/open and manual enrollment, while canonical orchestration, attempt-start, schedule/policy/subscription patch, explicit-student audience resolution, and proctor assignment still have bypasses. Existing constructor overloads and module facades remain compatibility boundaries; batch identity eligibility must be resolved without N+1 repository calls.
 
 ## Requirements
 
@@ -61,10 +63,48 @@ Read-only inspection và suspension-impact là control-plane read, không đư�
 - Mọi response bị chặn dùng một machine code ổn định và không làm lộ resource ngoài tenant.
 - Operation matrix được link từ phase master và có owner cho các dòng còn cần quyết định.
 
+## Files
+
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/tenancy/TenancyService.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/identity/IdentityService.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/constant/IdentityConstants.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/repository/UserRepository.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/enrollment/EnrollmentModuleService.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/enrollment/internal/service/ClassService.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/EnrollmentService.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/EntitlementService.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/SessionOperationGuardService.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/SessionLifecycleService.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/SessionService.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/ExamOrchestrationService.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/SessionClassAssignmentService.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/lifecycle/SessionScheduleService.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/lifecycle/SessionPolicyService.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/lifecycle/SessionSubscriptionService.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/service/AttemptLifecycleService.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/notification/internal/listener/StudentEnrollmentConflictNotificationListener.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/notification/internal/listener/ViolationNotificationListener.java`
+- `D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/identity/IdentityServiceTest.java`
+- `D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/enrollment/EnrollmentModuleServiceTest.java`
+- `D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/enrollment/internal/service/ClassServiceTest.java`
+- `D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/session/internal/service/EnrollmentServiceTest.java`
+- `D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/session/internal/service/ExamOrchestrationServiceTest.java`
+- `D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/session/internal/service/lifecycle/SessionScheduleServiceTest.java`
+- `D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java`
+- `D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServiceTest.java`
+
 ## Quality and Testing State
 
-- Quality gate: **not evaluated**.
-- Testing: **not started**. Planned evidence gồm API HTTP contract matrix, service tests cho new-vs-resume attempt, identity eligibility tests và regression cho các đường Phase 11–13.
+- Decision checkpoint: unit tests = yes; quality gate = yes (`ck:cook --hard`). Completion confirmation after these checks is still pending.
+- Quality gate: **APPROVED** — no blocking findings; report: `quality/phase-14-tenant-activity-and-identity-guardrails-quality-report.json`; receipt: `quality/phase-14-tenant-activity-and-identity-guardrails-receipt.json`.
+- Testing: **PASSED** — focused Phase 14 API suite `151/151` plus HTTP suspension and notification regression `16/16`; report: `tests/phase-14-tenant-activity-and-identity-guardrails-test-report.json`.
+
+## Session Notes
+
+- Added one forward-moving tenant activity guard path while keeping the attempt resume path tenant-activity-neutral for `IN_PROGRESS` attempts.
+- Applied active identity eligibility to enrollment, class/program audience expansion, explicit student sources, proctor assignment, and notification recipient fan-out; preview audience computation is now read-only.
+- Build gate `mvn -pl app -DskipTests compile`, focused tests, HTTP contract tests, notification regressions, and `git diff --check` passed.
+- Phase completion is intentionally held at the hard checkpoint until Quang confirms the evidence; no push/deploy was performed.
 
 ## Decision Record and Remaining Gate
 

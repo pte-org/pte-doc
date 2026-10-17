@@ -1,6 +1,6 @@
 # Plan: Thương mại hoá tenant & định danh sinh viên
 
-Status: 🟡 In progress — Phases 12–13 implemented and focused-tested; Phases 14–17 are planned follow-up business-rule hardening; Phase 1/2 checklist state remains pending its own recorded quality gates; full regression still reports the known ModuleStructureTest baseline violation
+Status: 🟡 In progress — Phases 12–13 implemented and focused-tested; Phase 14 implementation has passed its hard quality/testing checkpoint and awaits completion confirmation; Phases 15–17 remain planned follow-up business-rule hardening; Phase 1/2 checklist state remains pending its own recorded quality gates; full regression still reports the known ModuleStructureTest baseline violation
 Date: 2026-09-17
 Mode: Hard
 Test: default
@@ -45,7 +45,7 @@ Các đường dẫn source làm căn cứ chính gồm `ExamOrchestrationServic
 - [x] Phase 11: Ràng buộc kỳ thi ↔ gói — C1–C4, exclusion constraint chống trùng khung giờ, đổi gói khi còn `SCHEDULED` [quality: approved; testing: passed]
 - [x] Phase 12: Trùng slot sinh viên — phát hiện bằng một query, loại khỏi lô, thông báo tenant [quality: approved; testing: passed]
 - [x] Phase 13: Điểm có trọng số & đình chỉ tenant — `Σ(điểm phần × %)`, breakdown `appliedWeight` trong report snapshot, `suspendedUntil` mặc định 0 [quality: approved; testing: passed]
-- [ ] Phase 14: Guardrail hoạt động tenant & eligibility identity — chặn đúng điểm bắt đầu, giữ nguyên attempt đang chạy, chuẩn hoá tenant/role/status/deleted checks
+- [ ] Phase 14: Guardrail hoạt động tenant & eligibility identity — chặn đúng điểm bắt đầu, giữ nguyên attempt đang chạy, chuẩn hoá tenant/role/status/deleted checks [quality: approved; testing: passed; hard-checkpoint pending]
 - [ ] Phase 15: Enrollment concurrency & publish reconciliation — serialize theo student, không ghi `ENROLLED` nếu không có enrollment thật
 - [ ] Phase 16: Auth/report/suspension operator contract — first-login password, giải thích applied weight, preview đình chỉ đầy đủ và audit auto-reactivation
 - [ ] Phase 17: Đóng chính sách thương mại & release gate — chốt renewal, suspended auth, re-suspend, refund/revocation và bằng chứng rollout
