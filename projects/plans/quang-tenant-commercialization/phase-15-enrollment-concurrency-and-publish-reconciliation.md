@@ -1,8 +1,10 @@
 # Phase 15: Enrollment concurrency & publish reconciliation
 
 Owner: **Quang**
-Status: **Planned**
+Status: **In progress**
 Depends on: **Phase 14**
+
+Implementation preflight: Phase 14 completion was confirmed by Quang before this phase started. The default serialization decision is a pessimistic write lock on active student identity rows, acquired in ascending `publicId` order inside the enrollment transaction. Publish will reconcile the actual bulk response before changing audience/session state; all-conflict remains `READY` with `409`.
 Maps to: [ADR-006](../../architecture/ADR-006-commercialization-and-exam-templates.md) §4
 
 ## Requirements
@@ -53,10 +55,32 @@ Phase 12 đã có conflict query tenant-wide và xử lý partial batch, nhưng 
 - Conflict phát sinh sau preflight được lưu reason, session gây conflict và notification/audit tương ứng.
 - Retry/idempotency không tạo duplicate hoặc làm đổi status đã reconcile.
 
+## Files
+
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/identity/internal/repository/UserRepository.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/identity/IdentityService.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/EnrollmentService.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/ExamOrchestrationService.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/constant/SessionConstants.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/exception/ExamAudienceConflictException.java`
+- `D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/exception/ExamAudienceReconciliationException.java`
+- `D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/identity/IdentityServiceTest.java`
+- `D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/session/internal/service/EnrollmentServiceTest.java`
+- `D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/session/internal/service/ExamOrchestrationServiceTest.java`
+- `D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/session/internal/service/EnrollmentConcurrencyPostgresIntegrationTest.java`
+
 ## Quality and Testing State
 
-- Quality gate: **not evaluated**.
-- Testing: **not started**. Bằng chứng bắt buộc là Postgres integration/concurrency test; mock-only test không đủ để đóng phase này. Docker unavailable phải được report như một release blocker hoặc gap, không ghi `passed`.
+- Quality gate: **APPROVED** — report: `quality/phase-15-enrollment-concurrency-and-publish-reconciliation-quality-report.json`; receipt: `quality/phase-15-enrollment-concurrency-and-publish-reconciliation-receipt.json`.
+- Testing: **PASSED** — focused Phase 15 suite `51/51`, including dedicated PostgreSQL concurrency `4/4`; report: `tests/phase-15-enrollment-concurrency-and-publish-reconciliation-test-report.json`.
+- Decision checkpoint: implementation, quality gate, and required Postgres evidence are complete; completion confirmation after this hard checkpoint is still pending.
+
+## Session Notes
+
+- Added deterministic active-student identity row locking before conflict/capacity/insert for single, bulk, and publish enrollment paths; the repository lock query and service input both use ascending `publicId` order.
+- Publish now reconciles the actual bulk response, persists conflict metadata as `EXCLUDED/SCHEDULE_OVERLAP`, treats `alreadyEnrolled` as success, and keeps all-conflict sessions `READY` with `409`.
+- Unit, H2 repository, compile, and dedicated PostgreSQL concurrency checks passed. PostgreSQL ran in the isolated scratch container `codex-tenant-commercialization-pg` on loopback port `55439`; the application `pte-postgres` container was not used.
+- No push or deployment was performed. Phase completion remains held at the hard checkpoint until Quang confirms the evidence.
 
 ## Decision Record
 

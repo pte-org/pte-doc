@@ -1,0 +1,52 @@
+{
+  "phase": "phase-15-enrollment-concurrency-and-publish-reconciliation",
+  "mode": "unit-h2-and-postgres-concurrency",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-17T21:59:10+07:00",
+  "summary": {
+    "phase15_focused_suite": {
+      "tests": 51,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "postgres_concurrency": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "commands": [
+    {
+      "cmd": "mvn -pl app -DskipTests compile",
+      "result": "PASSED",
+      "note": "API production compile gate"
+    },
+    {
+      "cmd": "mvn -pl app \"-Dtest=IdentityServiceTest,EnrollmentServiceTest,ExamOrchestrationServiceTest,EnrollmentRepositorySlotConflictTest,EnrollmentConcurrencyPostgresIntegrationTest\" \"-Dlifecycle.test.db.url=jdbc:postgresql://127.0.0.1:55439/lifecycle_test?currentSchema=migration_clean\" test",
+      "result": "PASSED",
+      "tests": 51,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "note": "51 focused tests: identity lock contract, enrollment service, publish reconciliation, H2 slot query regression, and 4 real PostgreSQL concurrency tests"
+    },
+    {
+      "cmd": "git diff --check",
+      "result": "PASSED",
+      "scope": "pte-api and pte-doc"
+    }
+  ],
+  "coverage_evidence": [
+    "Single and bulk enrollment acquire active student identity row locks before conflict, capacity, and insert operations; batch input order is normalized by publicId.",
+    "Two overlapping PostgreSQL transactions for one student commit only one enrollment; opposite multi-student lock orders complete without deadlock.",
+    "Half-open boundary windows can both enroll the same student, and same-session retry preserves one enrollment.",
+    "Publish maps enrolled/alreadyEnrolled to ENROLLED, maps skippedByConflict to EXCLUDED with SCHEDULE_OVERLAP and conflicting session metadata, and keeps all-conflict sessions READY with 409.",
+    "Focused unit tests cover active identity lock validation and publish success, partial conflict, all-conflict, and already-enrolled branches."
+  ],
+  "limitations": [
+    "No live production, deployment, browser, or full-repository regression verification is claimed.",
+    "The PostgreSQL evidence uses an isolated scratch container at 127.0.0.1:55439 and does not touch the pte-postgres application container."
+  ]
+}

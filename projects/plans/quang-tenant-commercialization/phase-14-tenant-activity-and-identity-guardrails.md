@@ -1,7 +1,7 @@
 # Phase 14: Guardrail hoạt động tenant & eligibility identity
 
 Owner: **Quang**
-Status: **In progress**
+Status: **Completed**
 Depends on: **Phase 13**
 Maps to: [ADR-006](../../architecture/ADR-006-commercialization-and-exam-templates.md) §4, §9 · [ADR-007](../../architecture/ADR-007-student-identity-and-login.md)
 
@@ -95,7 +95,7 @@ Read-only inspection và suspension-impact là control-plane read, không đư�
 
 ## Quality and Testing State
 
-- Decision checkpoint: unit tests = yes; quality gate = yes (`ck:cook --hard`). Completion confirmation after these checks is still pending.
+- Decision checkpoint: unit tests = yes; quality gate = yes (`ck:cook --hard`). Completion confirmed by Quang on 2026-10-17.
 - Quality gate: **APPROVED** — no blocking findings; report: `quality/phase-14-tenant-activity-and-identity-guardrails-quality-report.json`; receipt: `quality/phase-14-tenant-activity-and-identity-guardrails-receipt.json`.
 - Testing: **PASSED** — focused Phase 14 API suite `151/151` plus HTTP suspension and notification regression `16/16`; report: `tests/phase-14-tenant-activity-and-identity-guardrails-test-report.json`.
 
@@ -104,7 +104,7 @@ Read-only inspection và suspension-impact là control-plane read, không đư�
 - Added one forward-moving tenant activity guard path while keeping the attempt resume path tenant-activity-neutral for `IN_PROGRESS` attempts.
 - Applied active identity eligibility to enrollment, class/program audience expansion, explicit student sources, proctor assignment, and notification recipient fan-out; preview audience computation is now read-only.
 - Build gate `mvn -pl app -DskipTests compile`, focused tests, HTTP contract tests, notification regressions, and `git diff --check` passed.
-- Phase completion is intentionally held at the hard checkpoint until Quang confirms the evidence; no push/deploy was performed.
+- Phase completion was confirmed at the hard checkpoint; no push/deploy was performed.
 
 ## Decision Record and Remaining Gate
 
