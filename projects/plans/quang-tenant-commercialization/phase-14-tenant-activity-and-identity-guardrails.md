@@ -66,8 +66,8 @@ Read-only inspection và suspension-impact là control-plane read, không đư�
 - Quality gate: **not evaluated**.
 - Testing: **not started**. Planned evidence gồm API HTTP contract matrix, service tests cho new-vs-resume attempt, identity eligibility tests và regression cho các đường Phase 11–13.
 
-## Decision Gates
+## Decision Record and Remaining Gate
 
-- Tenant bị đình chỉ có được cancel/archive/unassign resource đang tồn tại không?
-- Explicit tenant login/refresh trong trạng thái `SUSPENDED` có được phép để xem report hay chỉ token hiện hữu được tiếp tục?
-- Một user `SUSPENDED` sau khi đã enroll có được resume attempt đang chạy không, hay identity suspension là security revoke riêng với tenant suspension?
+- Tenant `SUSPENDED` vẫn được login/refresh để đọc report và tiếp tục attempt đang chạy; các command forward-moving vẫn bị block.
+- Cancel/archive/unassign resource đang tồn tại chỉ được mở nếu chứng minh là cleanup thuần tuý, không tạo quyền thi/enrollment/chi phí mới; nếu không, giữ block và xử lý qua support/admin path riêng.
+- User `SUSPENDED` sau khi đã enroll vẫn theo rule attempt đang chạy của Phase 13; identity suspension trở thành security revoke riêng chỉ khi có policy/command riêng được phê duyệt.

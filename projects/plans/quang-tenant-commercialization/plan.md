@@ -76,7 +76,7 @@ P13 ──> P14 ──> P15
   └───────────> P17 (chỉ chốt rollout sau P14–P16)
 ```
 
-P14 là dependency của P15 vì mọi enrollment phải đi qua identity eligibility và cùng tenant-activity policy. P16 có thể làm song song với P15 sau khi contract được chốt. P17 là cổng quyết định và bằng chứng phát hành, không được coi là hoàn tất chỉ vì test unit xanh.
+P14 là dependency của P15 vì mọi enrollment phải đi qua identity eligibility và cùng tenant-activity policy. P16 có thể làm song song với P15. P17 là cổng bằng chứng phát hành, không được coi là hoàn tất chỉ vì test unit xanh.
 
 ## Quyết định đã chốt (không mở lại trong lúc code)
 
@@ -142,17 +142,18 @@ P14 là dependency của P15 vì mọi enrollment phải đi qua identity eligib
 - **Bulk import chạy đồng bộ.** P8 giữ nguyên tính chất này. Một trung tâm import 5.000 dòng vẫn ăn vào connection pool dùng chung với bài thi
 - **`ApplicationModules.verify()` chưa có.** Plan này thêm module `billing` với phụ thuộc `billing → tenancy`, `session → billing`. Không có test nào chặn chiều ngược lại
 
-## Quyết định cần chốt trước rollout
+## Quyết định đã chốt cho follow-up
 
-- **Renewal expiry:** khuyến nghị mỗi lần mua tạo một lane độc lập với `expiresAt = activationTime + durationDays`, khớp quyết định multi-instance/ADR; code hiện tại đang nối sau `latestExpiry`. Nếu muốn contiguous renewal, phải sửa ADR và copy contract trước khi code.
-- **Suspended tenant activity matrix:** chốt có cho phép cancel/archive/unassign các resource đã tồn tại hay chỉ cho read report + tiếp tục attempt đang chạy. Không được suy ra từ một guard dùng chung.
-- **All-conflict publish:** khuyến nghị cho phép partial publish; nếu toàn bộ audience hợp lệ bị conflict thì giữ `READY` và yêu cầu admin xử lý. Phải chốt status/HTTP response trước P15.
-- **Suspended login/refresh:** quyết định tenant bị đình chỉ có được login để xem report hay chỉ cho token hiện hữu tiếp tục; rule phải nhất quán giữa organization list, explicit tenant login và refresh.
-- **Re-suspend:** request khi tenant đã `SUSPENDED` là idempotent no-op hay được phép đổi deadline; impact digest phải xử lý cả hai trường hợp.
-- **Capacity/refund/revocation:** student-capacity license có được giảm quota khi revoke không; refund/chargeback có làm trong release này không. Hiện plan gốc ghi không hoàn tiền và revoke capacity chưa hỗ trợ, cần xác nhận lại với business.
-- **First-login scope:** bắt buộc đổi mật khẩu cho student/host/proctor/examiner hay mọi account có `mustChangePassword`; route và quyền sau login phải ghi rõ.
+- **Renewal expiry:** mỗi lần mua là một lane độc lập với `expiresAt = activationTime + durationDays`; không tự nối sau `latestExpiry`.
+- **Suspended tenant:** vẫn cho login/refresh, đọc report và tiếp tục attempt đang chạy; chặn toàn bộ hoạt động mới và forward-moving activity.
+- **All-conflict publish:** nếu có ít nhất một enrollment thành công hoặc đã tồn tại thì cho partial publish; nếu toàn bộ audience conflict thì giữ `READY` và trả `409` để admin xử lý.
+- **Re-suspend:** request trên tenant đã `SUSPENDED` là idempotent no-op; đổi deadline cần command/policy riêng và impact preview mới.
+- **Stale impact preview:** suspend confirmation dùng digest/version; dữ liệu stale trả `409` và yêu cầu xác nhận lại.
+- **Impact duration:** hiển thị chính xác theo ngày + giờ, không làm tròn xuống làm thiếu thiệt hại.
+- **Capacity/refund/revocation:** không tự giảm quota student-capacity khi revoke; refund/chargeback ngoài release này và phải trả machine code `unsupported` rõ ràng.
+- **First-login scope:** mọi account có `mustChangePassword = true` đều bị chặn vào workspace cho tới khi đổi mật khẩu thành công; chỉ cho đổi mật khẩu hoặc logout.
 
-Các câu hỏi trên là decision gate, không được ẩn dưới implementation detail hoặc tự coi là “đã chốt” chỉ vì test hiện tại chưa bao phủ.
+Các quyết định trên là contract business; test hiện tại chưa được coi là bằng chứng hoàn tất cho tới khi P14–P17 đóng đủ quality/testing state.
 
 ## Test strategy
 
@@ -168,4 +169,4 @@ Các câu hỏi trên là decision gate, không được ẩn dưới implementa
 
 ## Release boundary
 
-Không tuyên bố commercialization rollout-ready khi P14 chưa chứng minh được “block new, allow in-progress”, P15 chưa có concurrency evidence trên Postgres, hoặc P17 còn decision gate chưa có owner/acceptance criteria. Full regression hiện vẫn có baseline `ModuleStructureTest` error; report rollout phải tách rõ lỗi baseline đó khỏi bằng chứng của các phase mới.
+Không tuyên bố commercialization rollout-ready khi P14 chưa chứng minh được “block new, allow in-progress”, P15 chưa có concurrency evidence trên Postgres, hoặc P17 còn release evidence chưa đạt/không có owner. Full regression hiện vẫn có baseline `ModuleStructureTest` error; report rollout phải tách rõ lỗi baseline đó khỏi bằng chứng của các phase mới.

@@ -54,8 +54,8 @@ Backend đã có `mustChangePassword`, endpoint `POST /api/v1/auth/change-passwo
 - Quality gate: **not evaluated**.
 - Testing: **not started**. Planned evidence gồm API-client typecheck, tenant-web/vendor-web typecheck, focused component/route tests, HTTP contract tests và audit persistence test.
 
-## Decision Gates
+## Decision Record
 
-- First-login gate áp dụng cho role nào; có cho phép xem một trang đổi mật khẩu duy nhất hay còn endpoint read-only nào được dùng trước đó?
-- Impact loss hiển thị theo ngày nguyên, ngày + giờ hay duration chuẩn hóa khác?
-- Preview digest stale trả `409` hay trả impact mới với trạng thái “cần xác nhận lại”?
+- First-login gate áp dụng cho mọi account có `mustChangePassword = true`; trước khi đổi chỉ được vào change-password flow hoặc logout.
+- Impact loss hiển thị chính xác theo ngày + giờ, không làm tròn xuống.
+- Preview digest stale trả `409` và yêu cầu xác nhận lại, không tự silently apply impact mới.

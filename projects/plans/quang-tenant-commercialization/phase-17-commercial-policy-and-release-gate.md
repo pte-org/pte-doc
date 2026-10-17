@@ -7,29 +7,29 @@ Maps to: [ADR-006](../../architecture/ADR-006-commercialization-and-exam-templat
 
 ## Requirements
 
-Một số behavior hiện đã có code/test nhưng chưa có quyết định business thống nhất: renewal có nối sau subscription đang active hay mỗi lần mua tính từ activation, tenant suspended có được login/refresh để xem report không, re-suspend có đổi deadline không, và license student-capacity/refund/chargeback xử lý thế nào. Không được đưa commercialization rollout vào production khi các behavior này chỉ tồn tại như assumption trong service hoặc test.
+Các behavior từng chưa có quyết định business thống nhất nay đã được owner Quang chốt trong master plan: renewal tính từ activation, suspended tenant được capability giới hạn, re-suspend là idempotent no-op, và student-capacity/refund/chargeback giữ ngoài release. Phase này biến các quyết định đó thành ADR/API/UI contract và release evidence; không để chúng chỉ tồn tại như assumption trong service hoặc test.
 
 ## Design Constraints
 
 - Mọi decision phải có một canonical source trong ADR/plan và có acceptance test; không để code hiện tại tự trở thành business policy.
-- Khuyến nghị giữ mô hình đã ghi trong master plan: mỗi purchase là một `Subscription` lane độc lập và `expiresAt = activationTime + durationDays`. Code hiện tại đang tìm `latestExpiry` cùng plan rồi nối duration; đó là discrepancy cần quyết định, không được âm thầm sửa.
+- Đã chốt giữ mô hình đã ghi trong master plan: mỗi purchase là một `Subscription` lane độc lập và `expiresAt = activationTime + durationDays`. Code hiện tại đang tìm `latestExpiry` cùng plan rồi nối duration; đây là discrepancy phải sửa theo contract, không được giữ ngầm.
 - Suspension không tự gia hạn subscription theo ADR. Nếu deadline/rule re-suspend thay đổi, phải giữ nguyên nguyên tắc không tạo “free time” ngoài policy.
 - Refund/chargeback, license revoke và capacity ledger phải có trạng thái/owner/audit rõ ràng. Nếu chưa làm trong release, phải ghi “unsupported” trong API/UI thay vì giả vờ đã xử lý.
 - Release evidence phải phân biệt focused test, local/mock test, Postgres integration và full regression. Một test bị skip vì Docker không có không được ghi là passed.
 
 ## Steps
 
-1. Lập decision table và chốt với owner Quang:
+1. Ghi decision table đã được owner Quang chốt:
 
-   | Policy | Khuyến nghị để review |
+   | Policy | Decision đã chốt |
    |---|---|
    | Renewal expiry | Mỗi activation tính từ `startsAt`, không nối sau lane cũ; khớp ADR/multi-instance |
-   | Suspended login/refresh | Cho phép đúng capability cần cho report/ongoing attempt, không mở lại command forward-moving |
-   | Re-suspend | Idempotent no-op nếu không có policy đổi deadline; nếu cho đổi phải có impact preview mới và audit |
+   | Suspended login/refresh | Cho phép report và ongoing attempt, không mở lại command forward-moving |
+   | Re-suspend | Idempotent no-op; đổi deadline cần command/policy riêng, impact preview mới và audit |
    | Student-capacity revoke | Không tự giảm quota trong release nếu ledger chưa có reversal invariant |
-   | Refund/chargeback | Không hỗ trợ trong release hiện tại nếu chưa có payment/refund contract; trả lỗi có machine code rõ ràng |
+   | Refund/chargeback | Không hỗ trợ trong release hiện tại; trả lỗi có machine code `unsupported` rõ ràng |
 
-2. Sau khi chốt, cập nhật ADR-006, master plan, phase 13 notes và API/UI copy để không còn câu mâu thuẫn. Mọi thay đổi expiry phải cập nhật test `SubscriptionActivationServiceTest` và contract của cả PayOS/license activation.
+2. Cập nhật ADR-006, master plan, phase 13 notes và API/UI copy theo các quyết định đã chốt. Mọi thay đổi expiry phải cập nhật test `SubscriptionActivationServiceTest` và contract của cả PayOS/license activation.
 
 3. Implement đúng policy đã ký: expiry calculation, suspended auth matrix, re-suspend behavior, unsupported refund/revoke behavior và audit. Không mở thêm scope billing khác trong phase này.
 
@@ -48,15 +48,15 @@ Một số behavior hiện đã có code/test nhưng chưa có quyết định b
 - Renewal behavior khớp một ADR duy nhất và có test cho activation mới, lane đang active, PayOS, license redeem và expiry.
 - Suspended auth, re-suspend, refund/revoke đều có response contract và UI copy không gây hiểu sai.
 - Mỗi skipped/failed release check có lý do, scope và người chịu trách nhiệm; không dùng focused pass để tuyên bố production-ready.
-- Master plan chỉ chuyển trạng thái hoàn tất sau khi các decision gate và evidence được ghi nhận.
+- Master plan chỉ chuyển trạng thái hoàn tất sau khi các release gate và evidence được ghi nhận.
 
 ## Quality and Testing State
 
 - Quality gate: **not evaluated**.
 - Testing: **not started**. Đây là phase gate; không tạo report “passed” trước khi policy decision và Postgres-dependent checks có bằng chứng thật.
 
-## Decision Gates
+## Remaining Release Gates
 
-- Chọn `activationTime + durationDays` hay contiguous renewal làm contract chính thức.
-- Chốt capability tối thiểu của suspended tenant khi login/refresh.
-- Chốt refund/chargeback và capacity license revoke có nằm trong release này không.
+- Cập nhật ADR/API/UI contract theo các quyết định đã chốt.
+- Chạy đủ Postgres-dependent tests và ghi rõ mọi skipped/blocked evidence.
+- Owner Quang xác nhận rollout chỉ sau khi P14–P16 có quality/testing state đạt yêu cầu.

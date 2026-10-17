@@ -33,7 +33,7 @@ Phase 12 đã có conflict query tenant-wide và xử lý partial batch, nhưng 
    - chỉ chuyển session sang `SCHEDULED` theo policy đã chốt, không dựa vào việc preflight trước đó đã xanh;
    - phát notification/audit sau khi status đã phản ánh đúng database.
 
-5. Chốt behavior all-conflict. Khuyến nghị: partial publish được phép; nếu không còn student nào có thể enroll thì giữ session `READY`, trả lỗi có thể xử lý và không tạo trạng thái `SCHEDULED` rỗng. Nếu business chọn publish rỗng, phải ghi rõ lý do và acceptance test thay thế.
+5. Áp dụng behavior đã chốt cho all-conflict: partial publish được phép khi có ít nhất một enrollment thành công hoặc đã tồn tại; nếu toàn bộ audience hợp lệ bị conflict thì giữ session `READY`, trả `409` có thể xử lý và không tạo trạng thái `SCHEDULED` rỗng.
 
 6. Viết Postgres integration/concurrency tests:
 
@@ -58,8 +58,8 @@ Phase 12 đã có conflict query tenant-wide và xử lý partial batch, nhưng 
 - Quality gate: **not evaluated**.
 - Testing: **not started**. Bằng chứng bắt buộc là Postgres integration/concurrency test; mock-only test không đủ để đóng phase này. Docker unavailable phải được report như một release blocker hoặc gap, không ghi `passed`.
 
-## Decision Gates
+## Decision Record
 
-- All-conflict publish giữ `READY` hay vẫn `SCHEDULED` với audience rỗng?
-- Có chấp nhận lock identity row làm serialization contract chính thức không, hay cần schema-level invariant mới?
-- Notification/audit conflict cần hiển thị student name tại thời điểm nào, và xử lý identity đã bị archive ra sao?
+- All-conflict publish giữ `READY` và trả `409`; `alreadyEnrolled` được tính là thành công cho retry/idempotency.
+- Lock identity row theo thứ tự ổn định là cơ chế mặc định; nếu implementation chọn schema-level invariant khác phải chứng minh tương đương trên Postgres.
+- Notification/audit không được làm lộ dữ liệu ngoài tenant; student display name phải lấy từ snapshot/event payload hợp lệ tại thời điểm conflict.
