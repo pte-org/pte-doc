@@ -1,9 +1,11 @@
 # Plan: Thương mại hoá tenant & định danh sinh viên
 
-Status: 🟡 In progress — Phases 12–13 implemented and focused-tested; Phase 1/2 checklist state remains pending its own recorded quality gates; full regression still reports the known ModuleStructureTest baseline violation
+Status: 🟡 In progress — Phases 12–13 implemented and focused-tested; Phases 14–17 are planned follow-up business-rule hardening; Phase 1/2 checklist state remains pending its own recorded quality gates; full regression still reports the known ModuleStructureTest baseline violation
 Date: 2026-09-17
 Mode: Hard
+Test: default
 Created by: Quang
+Last reviewed: 2026-10-17 by Quang
 Specs: [ADR-006](../../architecture/ADR-006-commercialization-and-exam-templates.md) · [ADR-007](../../architecture/ADR-007-student-identity-and-login.md)
 
 ## Overview
@@ -13,6 +15,20 @@ Chuyển nền tảng từ "admin onboard tenant thủ công, host tự soạn �
 Kèm theo: gỡ ràng buộc email-unique-toàn-cục đang chặn một người học ở hai trung tâm, và chuyển import roster sang mô hình passthrough.
 
 **Hai ADR phải làm cùng nhau, không nối tiếp** — `Tenant.code` của ADR-007 được đặt lúc duyệt đơn đăng ký của ADR-006.
+
+## Cơ sở của đợt rà soát business rule
+
+Đợt follow-up này dùng `ck-plan --hard` trên trạng thái source hiện tại, sau khi đối chiếu các report của Phase 12–13. Đây là kế hoạch đóng các khoảng trống còn lại, không phải xác nhận rằng các rule đã được enforce đầy đủ.
+
+| Khoảng trống đã xác minh | Rủi ro kinh doanh | Phase xử lý |
+|---|---|---|
+| Tenant bị đình chỉ vẫn có đường tạo attempt mới và thao tác qua canonical draft/orchestration flow | Tenant bị đình chỉ vẫn phát sinh hoạt động mới | P14 |
+| Enrollment/audience/proctor chưa dùng một hợp đồng identity active + đúng role + đúng tenant | Gán nhầm người, dữ liệu tenant sai, hoặc giao bài cho tài khoản không còn hợp lệ | P14 |
+| Kiểm tra slot hiện tại là read-then-write; publish bỏ qua `skippedByConflict` | Hai kỳ thi trùng slot cùng được nhận, audience hiển thị `ENROLLED` giả | P15 |
+| `mustChangePassword`, applied weight và suspension impact chưa đi hết tới trải nghiệm vận hành | Người dùng không bị buộc đổi mật khẩu; trung tâm/admin không giải thích được kết quả hoặc thiệt hại | P16 |
+| Renewal expiry, re-suspend, suspended login và refund/revocation chưa có một quyết định thương mại nhất quán | Bán sai thời hạn, sai kỳ vọng khi đình chỉ hoặc tranh chấp thương mại | P17 |
+
+Các đường dẫn source làm căn cứ chính gồm `ExamOrchestrationService`, `AttemptLifecycleService`, `EnrollmentService`, `IdentityService`, `SubscriptionActivationService`, auth contract của `pte-web` và `SuspendTenantModal`. Kế hoạch không thay đổi code trong lượt này.
 
 ## Phases
 
@@ -29,6 +45,10 @@ Kèm theo: gỡ ràng buộc email-unique-toàn-cục đang chặn một ngườ
 - [x] Phase 11: Ràng buộc kỳ thi ↔ gói — C1–C4, exclusion constraint chống trùng khung giờ, đổi gói khi còn `SCHEDULED` [quality: approved; testing: passed]
 - [x] Phase 12: Trùng slot sinh viên — phát hiện bằng một query, loại khỏi lô, thông báo tenant [quality: approved; testing: passed]
 - [x] Phase 13: Điểm có trọng số & đình chỉ tenant — `Σ(điểm phần × %)`, breakdown `appliedWeight` trong report snapshot, `suspendedUntil` mặc định 0 [quality: approved; testing: passed]
+- [ ] Phase 14: Guardrail hoạt động tenant & eligibility identity — chặn đúng điểm bắt đầu, giữ nguyên attempt đang chạy, chuẩn hoá tenant/role/status/deleted checks
+- [ ] Phase 15: Enrollment concurrency & publish reconciliation — serialize theo student, không ghi `ENROLLED` nếu không có enrollment thật
+- [ ] Phase 16: Auth/report/suspension operator contract — first-login password, giải thích applied weight, preview đình chỉ đầy đủ và audit auto-reactivation
+- [ ] Phase 17: Đóng chính sách thương mại & release gate — chốt renewal, suspended auth, re-suspend, refund/revocation và bằng chứng rollout
 
 ## Thứ tự và phụ thuộc
 
@@ -47,6 +67,16 @@ P4 + P10 ──> P11 ──> P12 ──> P13
 **P9/P10 độc lập với P2–P8** — nếu làm hai người thì đây là đường cắt.
 
 **P11 cần cả hai nhánh** — `ExamSession` phải có `subscriptionId` (từ P4) và snapshot sinh từ template (từ P10).
+
+Follow-up sau P13 được tách để tránh một transaction/rule thay đổi che khuất rule khác:
+
+```
+P13 ──> P14 ──> P15
+  ├───────────> P16
+  └───────────> P17 (chỉ chốt rollout sau P14–P16)
+```
+
+P14 là dependency của P15 vì mọi enrollment phải đi qua identity eligibility và cùng tenant-activity policy. P16 có thể làm song song với P15 sau khi contract được chốt. P17 là cổng quyết định và bằng chứng phát hành, không được coi là hoàn tất chỉ vì test unit xanh.
 
 ## Quyết định đã chốt (không mở lại trong lúc code)
 
@@ -98,6 +128,13 @@ P4 + P10 ──> P11 ──> P12 ──> P13
 | Deadlock khi hai request đổi gói chéo nhau (A→B, B→A) | 11 | Luôn khoá `Subscription` theo thứ tự `publicId` tăng dần, **không** theo thứ tự cũ-rồi-mới |
 | Enroll 500 sinh viên sinh 500 query kiểm trùng slot | 12 | Một query `IN (:ids)` + so khoảng thời gian, diff trong bộ nhớ |
 | Rút `Visibility.PRIVATE` làm Hibernate nổ lúc đọc | 10 | Đã kiểm: không có row `PRIVATE`. Vẫn rút theo thứ tự: bỏ đường ghi trước, rút enum sau |
+| Guard sai điểm làm hỏng resume/submit của attempt đang chạy | 14 | Tách `new attempt` khỏi `resume`; test ma trận 403/200 cho từng operation |
+| Một audience member không còn là student active vẫn được publish/enroll | 14 | Identity facade kiểm tenant + role + `deleted=false` + `status=ACTIVE` ở mọi command boundary |
+| Hai request enroll chéo session cùng nhận một student | 15 | Khoá row identity theo thứ tự `publicId` tăng dần trước conflict query và insert; bắt buộc Postgres concurrency test |
+| Publish đánh dấu `ENROLLED` dù bulk enroll trả conflict | 15 | Reconcile từ `BulkEnrollResponse`; chỉ `enrolled`/`alreadyEnrolled` mới được đánh dấu enrolled |
+| Preview đình chỉ bị stale hoặc chỉ hiển thị 5 gói | 16 | Digest/version confirmation, total count, plan label và hiển thị phần còn lại |
+| Scheduled auto-reactivation không có actor/audit | 16 | System audit event chứa tenant, thời điểm hết hạn, lý do và idempotency |
+| Thời hạn renewal khác ADR nhưng vẫn lọt qua test hiện tại | 17 | Chặn rollout ở decision gate; sửa ADR + acceptance test trước khi đổi code |
 
 ## Nợ kỹ thuật chạm phải (không giải trong plan này)
 
@@ -105,10 +142,17 @@ P4 + P10 ──> P11 ──> P12 ──> P13
 - **Bulk import chạy đồng bộ.** P8 giữ nguyên tính chất này. Một trung tâm import 5.000 dòng vẫn ăn vào connection pool dùng chung với bài thi
 - **`ApplicationModules.verify()` chưa có.** Plan này thêm module `billing` với phụ thuộc `billing → tenancy`, `session → billing`. Không có test nào chặn chiều ngược lại
 
-## Câu hỏi còn mở (tham số, không chặn code)
+## Quyết định cần chốt trước rollout
 
-- Tỷ lệ hoàn tiền khi gói đã dùng — chính sách kinh doanh, và hoàn tiền chưa làm ở plan này
-- Thời hạn đình chỉ mặc định trong `PlatformSetting` — mặc định 0 (gỡ thủ công), Admin đặt số khác được
+- **Renewal expiry:** khuyến nghị mỗi lần mua tạo một lane độc lập với `expiresAt = activationTime + durationDays`, khớp quyết định multi-instance/ADR; code hiện tại đang nối sau `latestExpiry`. Nếu muốn contiguous renewal, phải sửa ADR và copy contract trước khi code.
+- **Suspended tenant activity matrix:** chốt có cho phép cancel/archive/unassign các resource đã tồn tại hay chỉ cho read report + tiếp tục attempt đang chạy. Không được suy ra từ một guard dùng chung.
+- **All-conflict publish:** khuyến nghị cho phép partial publish; nếu toàn bộ audience hợp lệ bị conflict thì giữ `READY` và yêu cầu admin xử lý. Phải chốt status/HTTP response trước P15.
+- **Suspended login/refresh:** quyết định tenant bị đình chỉ có được login để xem report hay chỉ cho token hiện hữu tiếp tục; rule phải nhất quán giữa organization list, explicit tenant login và refresh.
+- **Re-suspend:** request khi tenant đã `SUSPENDED` là idempotent no-op hay được phép đổi deadline; impact digest phải xử lý cả hai trường hợp.
+- **Capacity/refund/revocation:** student-capacity license có được giảm quota khi revoke không; refund/chargeback có làm trong release này không. Hiện plan gốc ghi không hoàn tiền và revoke capacity chưa hỗ trợ, cần xác nhận lại với business.
+- **First-login scope:** bắt buộc đổi mật khẩu cho student/host/proctor/examiner hay mọi account có `mustChangePassword`; route và quyền sau login phải ghi rõ.
+
+Các câu hỏi trên là decision gate, không được ẩn dưới implementation detail hoặc tự coi là “đã chốt” chỉ vì test hiện tại chưa bao phủ.
 
 ## Test strategy
 
@@ -116,4 +160,12 @@ P4 + P10 ──> P11 ──> P12 ──> P13
 - **P5, P6** là hai đường vào cùng một `activate()` → test rằng cả hai sinh ra Subscription **giống hệt nhau** về `expiresAt`, `licenseKey` format, cap đã snapshot
 - **P11** ràng buộc C1–C4 → test từng điều kiện riêng, cộng một test đồng thời cho exclusion constraint
 - **P12** → test với lô 500 sinh viên, đếm số query thực tế
+- **P14** → HTTP contract matrix cho suspended/active tenant; resume attempt, submit, heartbeat, report read vẫn pass; cross-tenant/nonstudent/deleted/suspended identity đều bị từ chối ở đúng command boundary
+- **P15** → Postgres test thật cho hai session overlap cùng student, acquisition order không deadlock, publish không sinh false `ENROLLED`, retry/idempotency và query count batch
+- **P16** → typecheck/API contract cho tenant-web và vendor-web; first-login redirect/change-password; report applied weight; preview đầy đủ/stale digest; system audit auto-reactivation
+- **P17** → ADR/decision checklist, renewal expiry test theo policy đã chọn, suspended auth matrix, và release evidence cho các test bị skip hoặc baseline `ModuleStructureTest`
 - Coverage tối thiểu 80% theo chuẩn repo
+
+## Release boundary
+
+Không tuyên bố commercialization rollout-ready khi P14 chưa chứng minh được “block new, allow in-progress”, P15 chưa có concurrency evidence trên Postgres, hoặc P17 còn decision gate chưa có owner/acceptance criteria. Full regression hiện vẫn có baseline `ModuleStructureTest` error; report rollout phải tách rõ lỗi baseline đó khỏi bằng chứng của các phase mới.
