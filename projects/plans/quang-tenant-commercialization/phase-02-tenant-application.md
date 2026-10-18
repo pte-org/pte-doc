@@ -1,6 +1,6 @@
 # Phase 2: Đăng ký & thẩm định tổ chức
 
-Status: **Implemented — application contract focused-tested; PostgreSQL index verification remains open**
+Status: **Implemented — application contract and PostgreSQL index verification passed locally**
 
 ## Requirements
 
@@ -64,8 +64,8 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 ## Quality and Testing State
 
 - Quality gate: **approved** — report: `quality/phase-02-tenant-application-quality-report.json`.
-- Testing: **focused passed** — report: `tests/phase-02-tenant-application-test-report.json`.
-- PostgreSQL boundary: the unique partial index `uq_application_code_active` is not exercised by H2 `@DataJpaTest`; verify it against a real PostgreSQL migration before rollout.
+- Testing: **focused and PostgreSQL supplemental tests passed** — report: `tests/phase-02-tenant-application-test-report.json`.
+- PostgreSQL boundary: H2 `@DataJpaTest` does not exercise the unique partial index `uq_application_code_active`; Phase 17 records isolated PostgreSQL proof that pending codes are unique and become reusable after rejection. No production rollout verification is claimed.
 
 ## Session Notes
 

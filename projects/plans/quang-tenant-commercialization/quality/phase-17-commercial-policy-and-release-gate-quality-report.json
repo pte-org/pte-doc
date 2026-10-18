@@ -2,7 +2,7 @@
   "mode": "gate",
   "target": "phase-17-commercial-policy-and-release-gate",
   "verdict": "APPROVED",
-  "reviewed_at": "2026-10-18T11:57:45+07:00",
+  "reviewed_at": "2026-10-18T12:59:20+07:00",
   "reviewed_files": [
     "projects/architecture/ADR-006-commercialization-and-exam-templates.md",
     "projects/plans/quang-tenant-commercialization/plan.md",
@@ -30,6 +30,6 @@
   "blocking_count": 0,
   "advisory_count": 1,
   "noted_count": 1,
-  "notes": "Commercial decisions are now canonical in ADR-006 and the master plan: renewal starts from activation, suspended capabilities are explicit, re-suspend is idempotent, capacity revoke does not reduce quota, and refund/chargeback are unsupported. This is an implementation quality approval, not a rollout approval.",
-  "verification_boundary": "Policy/code review and focused tests only; full regression and PostgreSQL migration evidence remain release gates."
+  "notes": "Commercial decisions are canonical in ADR-006 and the master plan: renewal starts from activation, suspended capabilities are explicit, re-suspend is idempotent, capacity revoke does not reduce quota, and refund/chargeback are unsupported. Full regression and isolated PostgreSQL release evidence are now clean; this remains an implementation quality approval, not a production rollout approval.",
+  "verification_boundary": "Policy/code review, focused tests, full API regression (2,157 tests, 0 failures/errors, 61 default-profile opt-in skips), and 61 supplemental isolated PostgreSQL tests passed. No production, deployment, browser, or rollout verification is claimed."
 }

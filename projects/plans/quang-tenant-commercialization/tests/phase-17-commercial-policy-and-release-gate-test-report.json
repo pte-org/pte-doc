@@ -1,8 +1,8 @@
 {
   "phase": "phase-17-commercial-policy-and-release-gate",
-  "mode": "focused-policy-and-release-evidence",
+  "mode": "focused-policy-release-and-regression-evidence",
   "verdict": "PASSED_WITH_LIMITATIONS",
-  "reviewed_at": "2026-10-18T11:57:45+07:00",
+  "reviewed_at": "2026-10-18T12:59:20+07:00",
   "summary": {
     "focused_business_rules": {
       "tests": 70,
@@ -11,10 +11,22 @@
       "skipped": 0
     },
     "full_api_regression": {
-      "tests": 2156,
-      "failures": 5,
-      "errors": 2,
-      "skipped": 60
+      "tests": 2157,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 61
+    },
+    "postgresql_supplemental": {
+      "tests": 61,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "breakdown": {
+        "lifecycle_and_migration": 31,
+        "overview_migration_and_query_plans": 15,
+        "platform_role_migration": 1,
+        "notification_inbox": 14
+      }
     }
   },
   "commands": [
@@ -28,12 +40,48 @@
     },
     {
       "cmd": ".\\mvnw.cmd -pl app test",
-      "result": "FAILED_BASELINE",
-      "tests": 2156,
-      "failures": 5,
-      "errors": 2,
-      "skipped": 60,
-      "note": "ModuleStructureTest, notification listener regressions, and UserRepositoryTest UUID ordering prevent a clean rollout gate."
+      "result": "PASSED_WITH_OPT_IN_SKIPS",
+      "tests": 2157,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 61,
+      "note": "The default profile skips opt-in PostgreSQL tests when their dedicated DB properties/environment are absent; all 61 were run separately below."
+    },
+    {
+      "cmd": ".\\mvnw.cmd -pl app \"-Dtest=EnrollmentConcurrencyPostgresIntegrationTest,TenantApplicationReviewPostgresIntegrationTest,ArchiveLifecyclePostgresIntegrationTest,LicenseIssuePostgresIntegrationTest,QuestionPublicationMigrationPostgresTest\" \"-Dlifecycle.test.db.url=jdbc:postgresql://127.0.0.1:55439/lifecycle_test?currentSchema=migration_clean\" test",
+      "result": "PASSED",
+      "tests": 31,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "note": "Isolated scratch PostgreSQL: lifecycle concurrency, tenant-application partial index behavior, archive/license invariants, and question publication migration."
+    },
+    {
+      "cmd": ".\\mvnw.cmd -pl app \"-Dtest=OverviewMigrationPostgresIntegrationTest\" \"-Dlifecycle.test.db.url=jdbc:postgresql://127.0.0.1:55439/lifecycle_test?user=codex_lifecycle_test\" test",
+      "result": "PASSED",
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "note": "Empty-schema Flyway rehearsal through V97+ with Hibernate validation and heavy host/admin query-plan evidence."
+    },
+    {
+      "cmd": ".\\mvnw.cmd -pl app \"-Dtest=PlatformRoleMigrationPostgresIntegrationTest\" \"-Dplatform.role.migration.db.url=jdbc:postgresql://127.0.0.1:55440/pte_role_migration_test\" \"-Dplatform.role.migration.db.user=codex_role_migration_test\" \"-Dplatform.role.migration.db.password=\" test",
+      "result": "PASSED",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "note": "Dedicated scratch PostgreSQL role-migration rehearsal; the protected pte-postgres container was not used."
+    },
+    {
+      "cmd": "PowerShell task env INBOX_TEST_DB_URL/INBOX_TEST_DB_USER/INBOX_TEST_DB_PASSWORD; .\\mvnw.cmd -pl app \"-Dtest=InboxAnnouncementStorePostgresIntegrationTest,InboxDeliveryStorePostgresIntegrationTest,InboxReadStorePostgresIntegrationTest\" test",
+      "result": "PASSED",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "note": "Notification inbox repository/migration tests on the isolated lifecycle scratch PostgreSQL database."
     },
     {
       "cmd": ".\\mvnw.cmd -pl app -DskipTests compile",
@@ -45,11 +93,13 @@
     "Renewal expiry is independent per activation lane.",
     "Suspended authentication/read/ongoing-attempt behavior and forward-moving command blocks are explicit.",
     "Re-suspend is idempotent, capacity revoke does not reduce quota, and refund/chargeback remain unsupported.",
-    "ADR-006 and the master plan now carry the same canonical decision table."
+    "ADR-006 and the master plan now carry the same canonical decision table.",
+    "ModuleStructureTest, notification listener stubs, and UUID ordering are clean in the full regression.",
+    "The Phase 2 partial unique index rejects a second pending code and releases it after rejection."
   ],
   "limitations": [
-    "This is not a rollout approval: full regression has 5 failures, 2 errors, and 60 skipped tests.",
-    "The Phase 2 partial index and skipped PostgreSQL integration suites still require real PostgreSQL evidence.",
-    "No production, deployment, or browser verification is claimed."
+    "The default full-suite profile still reports 61 opt-in PostgreSQL tests as skipped unless their dedicated properties/environment are supplied; the supplemental run passed all 61.",
+    "All PostgreSQL evidence used isolated scratch containers and did not touch the protected pte-postgres application container.",
+    "No production, deployment, browser, or rollout approval is claimed."
   ]
 }

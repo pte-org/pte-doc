@@ -2,7 +2,7 @@
   "phase": "phase-16-auth-report-and-suspension-operator-contract",
   "mode": "focused-api-web-contract-and-test",
   "verdict": "PASSED_WITH_LIMITATIONS",
-  "reviewed_at": "2026-10-18T11:57:45+07:00",
+  "reviewed_at": "2026-10-18T12:59:20+07:00",
   "summary": {
     "api_phase16_selected": {
       "tests": 49,
@@ -51,6 +51,6 @@
   ],
   "limitations": [
     "No browser, production, deployment, or live PostgreSQL verification is claimed.",
-    "Full API regression remains baseline-blocked as recorded in the Phase 17 report."
+    "Full API regression is clean; the default profile leaves opt-in PostgreSQL tests skipped, and all 61 supplemental tests passed as recorded in Phase 17."
   ]
 }

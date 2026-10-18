@@ -2,10 +2,16 @@
   "phase": "phase-02-tenant-application",
   "mode": "focused-api-service-and-application-contract",
   "verdict": "PASSED_WITH_LIMITATIONS",
-  "reviewed_at": "2026-10-18T11:57:45+07:00",
+  "reviewed_at": "2026-10-18T12:59:20+07:00",
   "summary": {
     "tenant_application_service": {
       "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "postgresql_partial_index": {
+      "tests": 3,
       "failures": 0,
       "errors": 0,
       "skipped": 0
@@ -20,15 +26,25 @@
       "errors": 0,
       "skipped": 0,
       "note": "Submit, duplicate-code, approve, reject, and not-found branches."
+    },
+    {
+      "cmd": ".\\mvnw.cmd -pl app \"-Dtest=TenantApplicationReviewPostgresIntegrationTest\" \"-Dlifecycle.test.db.url=jdbc:postgresql://127.0.0.1:55439/lifecycle_test?currentSchema=migration_clean\" test",
+      "result": "PASSED",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "note": "Isolated PostgreSQL verifies uq_application_code_active rejects a second pending code and releases it after rejection."
     }
   ],
   "coverage_evidence": [
     "Application-level pending-code reservation rejects duplicates.",
     "Approval creates tenant and host admin through the module facades.",
-    "Rejection releases the application reservation at the application policy boundary."
+    "Rejection releases the application reservation at the application policy boundary.",
+    "The PostgreSQL partial unique index rejects a second pending code and allows reuse after a terminal rejection."
   ],
   "limitations": [
-    "V15 unique partial index uq_application_code_active was not exercised by H2 tests.",
-    "Real PostgreSQL migration verification is required before rollout."
+    "V15 unique partial index uq_application_code_active is not exercised by H2 tests; the supplemental PostgreSQL proof is isolated and does not claim production verification.",
+    "No production, deployment, browser, or rollout approval is claimed."
   ]
 }

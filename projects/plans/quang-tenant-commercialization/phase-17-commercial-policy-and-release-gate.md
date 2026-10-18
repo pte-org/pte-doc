@@ -1,7 +1,7 @@
 # Phase 17: Đóng chính sách thương mại & release gate
 
 Owner: **Quang**
-Status: **Implemented — release gate open pending baseline cleanup**
+Status: **Implemented — local release evidence passed; rollout/deploy not executed**
 Depends on: **Phases 14–16**
 Maps to: [ADR-006](../../architecture/ADR-006-commercialization-and-exam-templates.md) §3, §7, §9
 
@@ -37,7 +37,7 @@ Các behavior từng chưa có quyết định business thống nhất nay đã 
 
    - API focused business-rule suite và Postgres migration/concurrency suite;
    - tenant-web/vendor-web typecheck và route contract checks;
-   - full app regression, ghi riêng baseline `ModuleStructureTest` violation nếu vẫn còn;
+   - full app regression, ghi riêng các opt-in PostgreSQL suites bị skip trong profile mặc định;
    - kiểm tra report quality/test evidence của Phase 14–16;
    - xác nhận không có generated artifact, secret hoặc migration chưa review trong commit groups.
 
@@ -53,11 +53,11 @@ Các behavior từng chưa có quyết định business thống nhất nay đã 
 ## Quality and Testing State
 
 - Quality gate: **approved for policy implementation** — report: `quality/phase-17-commercial-policy-and-release-gate-quality-report.json`.
-- Testing: **focused passed; release gate not closed** — report: `tests/phase-17-commercial-policy-and-release-gate-test-report.json`.
-- The full API regression ran 2,156 tests with 5 failures, 2 errors, and 60 skipped. The failures are existing module-boundary/notification/test-order baselines outside this change set; therefore this phase must not be called rollout-ready.
+- Testing: **focused, full regression, and supplemental PostgreSQL evidence passed** — report: `tests/phase-17-commercial-policy-and-release-gate-test-report.json`.
+- The full API regression ran 2,157 tests with 0 failures, 0 errors, and 61 opt-in tests skipped by the default profile. The 61 skipped tests were then executed on isolated scratch PostgreSQL containers with 0 failures/errors/skips.
 
-## Remaining Release Gates
+## Release Boundary
 
-- Stabilize the full-suite baseline: `ModuleStructureTest`, notification listener regressions, and the UUID-order assertion in `UserRepositoryTest`.
-- Run PostgreSQL migration verification for the Phase 2 partial index and any remaining skipped integration suites.
-- Owner Quang confirms rollout only after P14–P16 and this release gate have clean evidence.
+- [x] Stabilize the full-suite baseline: `ModuleStructureTest`, notification listener regressions, and the UUID-order assertion in `UserRepositoryTest`.
+- [x] Run PostgreSQL migration verification for the Phase 2 partial index and all opt-in integration suites: 61/61 passed.
+- Production rollout, deployment, browser verification, and owner approval remain outside this local evidence record; Quang decides that next step.

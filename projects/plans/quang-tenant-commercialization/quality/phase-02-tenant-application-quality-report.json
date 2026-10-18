@@ -2,7 +2,7 @@
   "mode": "gate",
   "target": "phase-02-tenant-application",
   "verdict": "APPROVED",
-  "reviewed_at": "2026-10-18T11:57:45+07:00",
+  "reviewed_at": "2026-10-18T12:59:20+07:00",
   "reviewed_files": [
     "pte-api/app/src/main/java/com/pte/billing/internal/domain/TenantApplication.java",
     "pte-api/app/src/main/java/com/pte/billing/internal/service/TenantApplicationService.java",
@@ -29,6 +29,6 @@
   "blocking_count": 0,
   "advisory_count": 1,
   "noted_count": 1,
-  "notes": "Application-level code reservation, approval transaction, rejection release, and public-route rate-limit boundary are covered. The PostgreSQL partial unique index remains a migration verification boundary because the repository test profile uses H2 with Flyway disabled.",
-  "verification_boundary": "Focused source review and H2/application tests only; no real PostgreSQL migration or production verification is claimed."
+  "notes": "Application-level code reservation, approval transaction, rejection release, and public-route rate-limit boundary are covered. The H2 profile does not exercise the PostgreSQL partial unique index, so Phase 17 records the isolated migration and constraint proof separately.",
+  "verification_boundary": "Focused source review, H2/application tests, and the three-test isolated PostgreSQL review suite; no production, deployment, browser, or rollout verification is claimed."
 }

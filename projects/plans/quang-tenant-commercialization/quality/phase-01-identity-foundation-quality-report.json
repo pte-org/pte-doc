@@ -2,7 +2,7 @@
   "mode": "gate",
   "target": "phase-01-identity-foundation",
   "verdict": "APPROVED",
-  "reviewed_at": "2026-10-18T11:57:45+07:00",
+  "reviewed_at": "2026-10-18T12:59:20+07:00",
   "reviewed_files": [
     "pte-api/app/src/main/resources/db/migration/V2__identity.sql",
     "pte-api/app/src/main/resources/db/migration/V3__tenancy.sql",
@@ -31,6 +31,6 @@
   "blocking_count": 0,
   "advisory_count": 1,
   "noted_count": 1,
-  "notes": "Username is the login key and tenant-scoped duplicate email behavior is represented in the repository contract. The full-suite UUID ordering assertion is recorded as a release-boundary test stability issue, not as an identity contract finding.",
-  "verification_boundary": "Focused source review and selected tests only; no production, deployment, or live migration verification is claimed."
+  "notes": "Username is the login key and tenant-scoped duplicate email behavior is represented in the repository contract. UUID ordering is deterministic in the full regression; supplemental PostgreSQL migration evidence is recorded in Phase 17.",
+  "verification_boundary": "Focused source review, full API regression, and isolated supplemental PostgreSQL evidence; no production, deployment, browser, or rollout verification is claimed."
 }
