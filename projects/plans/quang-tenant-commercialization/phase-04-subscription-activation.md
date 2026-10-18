@@ -1,5 +1,7 @@
 # Phase 4: Lõi kích hoạt Subscription
 
+Status: **Completed — focused verification recorded**
+
 ## Requirements
 
 `Subscription` = một lần mua gói thi = một "làn" chạy độc lập, mang `licenseKey` riêng. Xây **một** thao tác kích hoạt duy nhất mà cả hai đường mua (Phase 5 PayOS, Phase 6 mã kích hoạt) đều gọi vào.
@@ -55,14 +57,9 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 ## Quality and Testing State
 
-- Decision checkpoint: unit tests = no (user confirmed skip); quality gate = yes (user confirmed).
-- Testing decision: skipped_by_user (not_started; user confirmed no).
-- Quality decision: user confirmed yes; gate pending.
-- Quality result: **APPROVED**, 0 blocking/advisory/noted findings. Report: `quality/phase-04-subscription-activation-quality-report.json`. Cryptographic receipt skipped because this report is in `pte-doc` while source files are in the separate `pte-api` repository.
-- Testing result: **skipped by user**, not started, per the Phase 4 checkpoint decision.
-
-- Quality gate: **approved**, report and user decision are recorded above.
-- Testing: **skipped_by_user**, not started, because the user selected no.
+- Quality gate: **approved**, 0 blocking/advisory/noted findings. Report: `quality/phase-04-subscription-activation-quality-report.json`.
+- Testing: **passed** — report: `tests/phase-04-subscription-activation-test-report.json`.
+- The earlier checkpoint recorded `skipped_by_user`; that state is superseded by the focused verification run on 2026-10-18.
 
 ## Session Notes
 
@@ -72,4 +69,4 @@ _(trống)_
 - `EXAM_PACKAGE` snapshots cap and expiry from activation time; `STUDENT_CAPACITY` writes through `TenancyService.grantQuota()` to the existing quota ledger and creates no Subscription.
 - `BillingService` exposes non-ORM active-subscription views for future session validation; `/subscriptions` returns only rows whose status and timestamps are both currently valid.
 - Expiry job runs every minute by default and updates ACTIVE rows with `expiresAt <= now`; app reads remain defensive if the scheduler has not run yet.
-- Build Gate passed with `.\mvnw.cmd -pl app -DskipTests compile` (`BUILD SUCCESS`). Tests were intentionally not run because the user selected no. Docker/PostgreSQL runtime migration validation remains unavailable while Docker Desktop is stopped.
+- Build Gate passed with `.\mvnw.cmd -pl app -DskipTests compile` (`BUILD SUCCESS`), and the focused activation suite is recorded in `tests/phase-04-subscription-activation-test-report.json`. Docker/PostgreSQL runtime migration validation remains outside this evidence.

@@ -1,0 +1,34 @@
+{
+  "mode": "gate",
+  "target": "phase-02-tenant-application",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-18T11:57:45+07:00",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/billing/internal/domain/TenantApplication.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/service/TenantApplicationService.java",
+    "pte-api/app/src/main/java/com/pte/billing/internal/controller/TenantApplicationController.java",
+    "pte-api/app/src/main/resources/db/migration/V15__billing_tenant_application.sql",
+    "pte-api/app/src/main/java/com/pte/tenancy/TenancyService.java",
+    "pte-api/app/src/main/java/com/pte/identity/IdentityService.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/TenantApplicationServiceTest.java"
+  ],
+  "conventions_checked_against": [
+    "docs/CODING_STANDARDS_API.md",
+    "pte-api/app/src/main/java/com/pte/shared/security/RateLimitFilter.java",
+    "pte-api/app/src/main/java/com/pte/shared/exception/GlobalExceptionHandler.java",
+    "projects/architecture/ADR-006-commercialization-and-exam-templates.md"
+  ],
+  "findings": [],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 1
+  },
+  "blocking_count": 0,
+  "advisory_count": 1,
+  "noted_count": 1,
+  "notes": "Application-level code reservation, approval transaction, rejection release, and public-route rate-limit boundary are covered. The PostgreSQL partial unique index remains a migration verification boundary because the repository test profile uses H2 with Flyway disabled.",
+  "verification_boundary": "Focused source review and H2/application tests only; no real PostgreSQL migration or production verification is claimed."
+}

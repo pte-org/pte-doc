@@ -1,6 +1,6 @@
 # Plan: Thương mại hoá tenant & định danh sinh viên
 
-Status: 🟡 In progress — Phases 12–15 implemented and focused-tested; Phases 16–17 remain planned follow-up business-rule hardening; Phase 1/2 checklist state remains pending its own recorded quality gates; full regression still reports the known ModuleStructureTest baseline violation
+Status: 🟡 In progress — implementation for Phases 1–17 is recorded; release gate remains open because full regression and PostgreSQL migration evidence are not clean
 Date: 2026-09-17
 Mode: Hard
 Test: default
@@ -25,17 +25,17 @@ Kèm theo: gỡ ràng buộc email-unique-toàn-cục đang chặn một ngườ
 | Tenant bị đình chỉ vẫn có đường tạo attempt mới và thao tác qua canonical draft/orchestration flow | Tenant bị đình chỉ vẫn phát sinh hoạt động mới | P14 |
 | Enrollment/audience/proctor chưa dùng một hợp đồng identity active + đúng role + đúng tenant | Gán nhầm người, dữ liệu tenant sai, hoặc giao bài cho tài khoản không còn hợp lệ | P14 |
 | Kiểm tra slot hiện tại là read-then-write; publish bỏ qua `skippedByConflict` | Hai kỳ thi trùng slot cùng được nhận, audience hiển thị `ENROLLED` giả | P15 |
-| `mustChangePassword`, applied weight và suspension impact chưa đi hết tới trải nghiệm vận hành | Người dùng không bị buộc đổi mật khẩu; trung tâm/admin không giải thích được kết quả hoặc thiệt hại | P16 |
-| Renewal expiry, re-suspend, suspended login và refund/revocation chưa có một quyết định thương mại nhất quán | Bán sai thời hạn, sai kỳ vọng khi đình chỉ hoặc tranh chấp thương mại | P17 |
+| `mustChangePassword`, applied weight và suspension impact chưa đi hết tới trải nghiệm vận hành | Người dùng không bị buộc đổi mật khẩu; trung tâm/admin không giải thích được kết quả hoặc thiệt hại | P16 — resolved |
+| Renewal expiry, re-suspend, suspended login và refund/revocation chưa có một quyết định thương mại nhất quán | Bán sai thời hạn, sai kỳ vọng khi đình chỉ hoặc tranh chấp thương mại | P17 — resolved |
 
-Các đường dẫn source làm căn cứ chính gồm `ExamOrchestrationService`, `AttemptLifecycleService`, `EnrollmentService`, `IdentityService`, `SubscriptionActivationService`, auth contract của `pte-web` và `SuspendTenantModal`. Kế hoạch không thay đổi code trong lượt này.
+Các đường dẫn source làm căn cứ chính gồm `ExamOrchestrationService`, `AttemptLifecycleService`, `EnrollmentService`, `IdentityService`, `SubscriptionActivationService`, auth contract của `pte-web` và `SuspendTenantModal`. Các implementation gap của P1/P2/P16/P17 đã được xử lý; phần còn mở là release evidence, không phải business decision.
 
 ## Phases
 
-- [ ] Phase 1: Nền tảng định danh — `Tenant.code`, `User.username`, chuyển login sang `findByUsername`, backfill toàn bộ user hiện có
-- [ ] Phase 2: Đăng ký & thẩm định tổ chức — `TenantApplication`, giữ chỗ mã từ lúc nộp đơn, duyệt → tạo Tenant + user OWNER
+- [x] Phase 1: Nền tảng định danh — `Tenant.code`, `User.username`, chuyển login sang `findByUsername`, backfill toàn bộ user hiện có [quality: approved; testing: focused passed]
+- [x] Phase 2: Đăng ký & thẩm định tổ chức — `TenantApplication`, giữ chỗ mã từ lúc nộp đơn, duyệt → tạo Tenant + user OWNER [quality: approved; testing: focused passed; PostgreSQL partial index pending]
 - [x] Phase 3: Catalog gói & tham số nền tảng — `Plan` (EXAM_PACKAGE / STUDENT_CAPACITY), `PlatformSetting.freeStudentLimit` [quality: approved; testing: passed]
-- [x] Phase 4: Lõi kích hoạt Subscription — `Subscription` + `licenseKey`, **một nơi duy nhất sinh Subscription**, snapshot cap từ Plan [quality: approved; testing: skipped_by_user]
+- [x] Phase 4: Lõi kích hoạt Subscription — `Subscription` + `licenseKey`, **một nơi duy nhất sinh Subscription**, snapshot cap từ Plan [quality: approved; testing: passed]
 - [x] Phase 5: Mua gói qua PayOS — `Order` + `orderCode` sequence, tạo payment link, webhook verify chữ ký + idempotent [quality: approved; testing: passed]
 - [x] Phase 6: Mã kích hoạt — `LicenseCode` phát lẻ, redeem atomic, `REVOKED` huỷ luôn Subscription [quality: approved; testing: passed]
 - [x] Phase 7: Enforce hạn mức sinh viên — `Tenant.studentLimit` từ cột trang trí thành ràng buộc thật, kiểm theo lô [quality: approved; testing: passed]
@@ -47,8 +47,8 @@ Các đường dẫn source làm căn cứ chính gồm `ExamOrchestrationServic
 - [x] Phase 13: Điểm có trọng số & đình chỉ tenant — `Σ(điểm phần × %)`, breakdown `appliedWeight` trong report snapshot, `suspendedUntil` mặc định 0 [quality: approved; testing: passed]
 - [x] Phase 14: Guardrail hoạt động tenant & eligibility identity — chặn đúng điểm bắt đầu, giữ nguyên attempt đang chạy, chuẩn hoá tenant/role/status/deleted checks [quality: approved; testing: passed]
 - [x] Phase 15: Enrollment concurrency & publish reconciliation — serialize theo student, không ghi `ENROLLED` nếu không có enrollment thật [quality: approved; testing: passed]
-- [ ] Phase 16: Auth/report/suspension operator contract — first-login password, giải thích applied weight, preview đình chỉ đầy đủ và audit auto-reactivation
-- [ ] Phase 17: Đóng chính sách thương mại & release gate — chốt renewal, suspended auth, re-suspend, refund/revocation và bằng chứng rollout
+- [x] Phase 16: Auth/report/suspension operator contract — first-login password, giải thích applied weight, preview đình chỉ đầy đủ và audit auto-reactivation [quality: approved; testing: focused passed]
+- [x] Phase 17: Đóng chính sách thương mại & release gate — chốt renewal, suspended auth, re-suspend, refund/revocation và bằng chứng rollout [implementation complete; release gate open]
 
 ## Thứ tự và phụ thuộc
 
@@ -153,7 +153,7 @@ P14 là dependency của P15 vì mọi enrollment phải đi qua identity eligib
 - **Capacity/refund/revocation:** không tự giảm quota student-capacity khi revoke; refund/chargeback ngoài release này và phải trả machine code `unsupported` rõ ràng.
 - **First-login scope:** mọi account có `mustChangePassword = true` đều bị chặn vào workspace cho tới khi đổi mật khẩu thành công; chỉ cho đổi mật khẩu hoặc logout.
 
-Các quyết định trên là contract business; test hiện tại chưa được coi là bằng chứng hoàn tất cho tới khi P14–P17 đóng đủ quality/testing state.
+Các quyết định trên là contract business; quality/testing state của P16–P17 đã được ghi nhận, nhưng release vẫn mở cho tới khi full regression và PostgreSQL evidence sạch.
 
 ## Test strategy
 
@@ -166,6 +166,16 @@ Các quyết định trên là contract business; test hiện tại chưa đư�
 - **P16** → typecheck/API contract cho tenant-web và vendor-web; first-login redirect/change-password; report applied weight; preview đầy đủ/stale digest; system audit auto-reactivation
 - **P17** → ADR/decision checklist, renewal expiry test theo policy đã chọn, suspended auth matrix, và release evidence cho các test bị skip hoặc baseline `ModuleStructureTest`
 - Coverage tối thiểu 80% theo chuẩn repo
+
+## Evidence recorded on 2026-10-18
+
+- P1/P2/P4/P16/P17 API focused suite: **70 tests passed**, 0 failures/errors/skips. The suite covers identity username lookup, application approval/rejection, renewal expiry, suspension impact confirmation, suspended login selection, HTTP request shape, stale digest rejection, and scheduled system audit.
+- Web typechecks: `@pte/api-client`, `@pte/ui`, `tenant-web`, and `vendor-web` all passed. Web tests recorded for this implementation remain green: 677 API-client, 536 tenant-web, and 68 vendor-web tests.
+- Web lint: tenant-web passed; vendor-web passed with two pre-existing `next/image` warnings in question-bank components. `@pte/api-client` and `@pte/ui` do not expose a lint script.
+- Full API regression: 2,156 tests, 5 failures, 2 errors, and 60 skipped. The blocking baseline includes `ModuleStructureTest`, notification listener regressions, and a UUID-order assertion in `UserRepositoryTest`; no production or deployment claim is made.
+- PostgreSQL boundary: the Phase 2 unique partial index and skipped integration suites still need a real PostgreSQL run. Phase 17 therefore remains an implementation-complete but rollout-blocked gate.
+
+Reports: [quality](quality/) · [tests](tests/)
 
 ## Release boundary
 

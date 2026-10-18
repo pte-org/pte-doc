@@ -1,0 +1,55 @@
+{
+  "phase": "phase-17-commercial-policy-and-release-gate",
+  "mode": "focused-policy-and-release-evidence",
+  "verdict": "PASSED_WITH_LIMITATIONS",
+  "reviewed_at": "2026-10-18T11:57:45+07:00",
+  "summary": {
+    "focused_business_rules": {
+      "tests": 70,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "full_api_regression": {
+      "tests": 2156,
+      "failures": 5,
+      "errors": 2,
+      "skipped": 60
+    }
+  },
+  "commands": [
+    {
+      "cmd": ".\\mvnw.cmd -pl app \"-Dtest=AuthServiceTest,UserRepositoryTest,TenantApplicationServiceTest,SubscriptionActivationServiceTest,TenantLifecycleServiceTest,TenantSuspensionExpirationServiceTest,BillingTenantSuspensionImpactProviderTest,TenantSuspensionHttpContractTest,TenancyServiceTest\" test",
+      "result": "PASSED",
+      "tests": 70,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "cmd": ".\\mvnw.cmd -pl app test",
+      "result": "FAILED_BASELINE",
+      "tests": 2156,
+      "failures": 5,
+      "errors": 2,
+      "skipped": 60,
+      "note": "ModuleStructureTest, notification listener regressions, and UserRepositoryTest UUID ordering prevent a clean rollout gate."
+    },
+    {
+      "cmd": ".\\mvnw.cmd -pl app -DskipTests compile",
+      "result": "PASSED",
+      "note": "Production compile is included in the focused run and full-suite lifecycle."
+    }
+  ],
+  "coverage_evidence": [
+    "Renewal expiry is independent per activation lane.",
+    "Suspended authentication/read/ongoing-attempt behavior and forward-moving command blocks are explicit.",
+    "Re-suspend is idempotent, capacity revoke does not reduce quota, and refund/chargeback remain unsupported.",
+    "ADR-006 and the master plan now carry the same canonical decision table."
+  ],
+  "limitations": [
+    "This is not a rollout approval: full regression has 5 failures, 2 errors, and 60 skipped tests.",
+    "The Phase 2 partial index and skipped PostgreSQL integration suites still require real PostgreSQL evidence.",
+    "No production, deployment, or browser verification is claimed."
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "phase": "phase-01-identity-foundation",
+  "mode": "focused-api-unit-and-repository",
+  "verdict": "PASSED_WITH_LIMITATIONS",
+  "reviewed_at": "2026-10-18T11:57:45+07:00",
+  "summary": {
+    "identity_focused": {
+      "tests": 20,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "full_api_regression": {
+      "tests": 2156,
+      "failures": 5,
+      "errors": 2,
+      "skipped": 60
+    }
+  },
+  "commands": [
+    {
+      "cmd": ".\\mvnw.cmd -pl app \"-Dtest=AuthServiceTest,UserRepositoryTest,TenantApplicationServiceTest,SubscriptionActivationServiceTest,TenantLifecycleServiceTest,TenantSuspensionExpirationServiceTest,BillingTenantSuspensionImpactProviderTest,TenantSuspensionHttpContractTest,TenancyServiceTest\" test",
+      "result": "PASSED",
+      "tests": 70,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "note": "Cross-phase focused suite; the identity subset is AuthServiceTest and UserRepositoryTest (20 tests)."
+    },
+    {
+      "cmd": ".\\mvnw.cmd -pl app test",
+      "result": "FAILED_BASELINE",
+      "tests": 2156,
+      "failures": 5,
+      "errors": 2,
+      "skipped": 60,
+      "note": "Full-suite failures include ModuleStructureTest, notification listener regressions, and a UUID-order assertion in UserRepositoryTest."
+    }
+  ],
+  "coverage_evidence": [
+    "AuthServiceTest covers username-based authentication and suspended-tenant login selection.",
+    "UserRepositoryTest covers duplicate email across tenants and username uniqueness boundaries."
+  ],
+  "limitations": [
+    "The full-suite UUID ordering assertion is not deterministic across the current H2/database ordering behavior.",
+    "No production, deployment, browser, or live migration verification is claimed."
+  ]
+}

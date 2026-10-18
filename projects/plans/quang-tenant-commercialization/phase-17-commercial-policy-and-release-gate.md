@@ -1,7 +1,7 @@
 # Phase 17: Đóng chính sách thương mại & release gate
 
 Owner: **Quang**
-Status: **Planned**
+Status: **Implemented — release gate open pending baseline cleanup**
 Depends on: **Phases 14–16**
 Maps to: [ADR-006](../../architecture/ADR-006-commercialization-and-exam-templates.md) §3, §7, §9
 
@@ -12,7 +12,7 @@ Các behavior từng chưa có quyết định business thống nhất nay đã 
 ## Design Constraints
 
 - Mọi decision phải có một canonical source trong ADR/plan và có acceptance test; không để code hiện tại tự trở thành business policy.
-- Đã chốt giữ mô hình đã ghi trong master plan: mỗi purchase là một `Subscription` lane độc lập và `expiresAt = activationTime + durationDays`. Code hiện tại đang tìm `latestExpiry` cùng plan rồi nối duration; đây là discrepancy phải sửa theo contract, không được giữ ngầm.
+- Đã chốt giữ mô hình đã ghi trong master plan: mỗi purchase là một `Subscription` lane độc lập và `expiresAt = activationTime + durationDays`. Implementation hiện tại đã tính hạn độc lập từ `startsAt`; acceptance test không còn phụ thuộc `latestExpiry`.
 - Suspension không tự gia hạn subscription theo ADR. Nếu deadline/rule re-suspend thay đổi, phải giữ nguyên nguyên tắc không tạo “free time” ngoài policy.
 - Refund/chargeback, license revoke và capacity ledger phải có trạng thái/owner/audit rõ ràng. Nếu chưa làm trong release, phải ghi “unsupported” trong API/UI thay vì giả vờ đã xử lý.
 - Release evidence phải phân biệt focused test, local/mock test, Postgres integration và full regression. Một test bị skip vì Docker không có không được ghi là passed.
@@ -52,11 +52,12 @@ Các behavior từng chưa có quyết định business thống nhất nay đã 
 
 ## Quality and Testing State
 
-- Quality gate: **not evaluated**.
-- Testing: **not started**. Đây là phase gate; không tạo report “passed” trước khi policy decision và Postgres-dependent checks có bằng chứng thật.
+- Quality gate: **approved for policy implementation** — report: `quality/phase-17-commercial-policy-and-release-gate-quality-report.json`.
+- Testing: **focused passed; release gate not closed** — report: `tests/phase-17-commercial-policy-and-release-gate-test-report.json`.
+- The full API regression ran 2,156 tests with 5 failures, 2 errors, and 60 skipped. The failures are existing module-boundary/notification/test-order baselines outside this change set; therefore this phase must not be called rollout-ready.
 
 ## Remaining Release Gates
 
-- Cập nhật ADR/API/UI contract theo các quyết định đã chốt.
-- Chạy đủ Postgres-dependent tests và ghi rõ mọi skipped/blocked evidence.
-- Owner Quang xác nhận rollout chỉ sau khi P14–P16 có quality/testing state đạt yêu cầu.
+- Stabilize the full-suite baseline: `ModuleStructureTest`, notification listener regressions, and the UUID-order assertion in `UserRepositoryTest`.
+- Run PostgreSQL migration verification for the Phase 2 partial index and any remaining skipped integration suites.
+- Owner Quang confirms rollout only after P14–P16 and this release gate have clean evidence.

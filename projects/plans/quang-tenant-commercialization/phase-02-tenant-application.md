@@ -1,5 +1,7 @@
 # Phase 2: Đăng ký & thẩm định tổ chức
 
+Status: **Implemented — application contract focused-tested; PostgreSQL index verification remains open**
+
 ## Requirements
 
 Tổ chức tự nộp đơn đăng ký (công khai, không cần đăng nhập), chọn `Tenant.code` của mình. Admin nền tảng thẩm định: duyệt hoặc từ chối. Duyệt → tạo `Tenant` + user `HOST_ADMIN` đầu tiên.
@@ -61,8 +63,9 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 ## Quality and Testing State
 
-- Quality gate: chưa chạy
-- Testing: `TenantApplicationServiceTest` viết xong (9 test: submit x3, approve x3, reject x2 + implicit not-found), **chưa chạy được** — sandbox không có Java/Maven.
+- Quality gate: **approved** — report: `quality/phase-02-tenant-application-quality-report.json`.
+- Testing: **focused passed** — report: `tests/phase-02-tenant-application-test-report.json`.
+- PostgreSQL boundary: the unique partial index `uq_application_code_active` is not exercised by H2 `@DataJpaTest`; verify it against a real PostgreSQL migration before rollout.
 
 ## Session Notes
 
@@ -78,4 +81,4 @@ Implement 2026-09-16. Module `com.pte.billing` mới, toàn bộ dưới `billin
 
 **Route thật khác với plan gốc:** repo này không dùng tiền tố `/api/` (xác nhận qua `TenantController`/`AuthController` hiện có) — dùng `/applications` (public) và `/admin/applications` (PLATFORM_ADMIN) thay vì `/api/applications`/`/api/admin/applications` như plan.md ghi. Thêm `/applications` vào `SecurityConfig.PUBLIC_PATHS` — path chính xác, không wildcard, vì controller không map method nào khác lên đúng path đó.
 
-**Chưa kiểm chứng được (như Phase 1):** `mvn test`, và riêng phase này còn một khoảng trống test đáng nói — **unique partial index `uq_application_code_active` không kiểm chứng được bằng `@DataJpaTest`** vì quy ước hiện tại của repo (H2 + Hibernate `create-drop`, Flyway tắt) không chạy migration SQL thật, nên index tay viết trong `V15` không tồn tại trong schema test. Chỉ có nhánh kiểm tra ở tầng application (`TenantApplicationService.submit()`) được test; DB-level index cần verify thủ công trên Postgres thật.
+Application-level tests are now recorded as focused-passed. The remaining gap is intentional: **unique partial index `uq_application_code_active` không kiểm chứng được bằng `@DataJpaTest`** vì quy ước hiện tại của repo (H2 + Hibernate `create-drop`, Flyway tắt) không chạy migration SQL thật, nên index tay viết trong `V15` không tồn tại trong schema test. Chỉ có nhánh kiểm tra ở tầng application (`TenantApplicationService.submit()`) được test; DB-level index cần verify thủ công trên Postgres thật.

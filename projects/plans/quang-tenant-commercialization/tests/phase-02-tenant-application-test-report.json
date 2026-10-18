@@ -1,0 +1,34 @@
+{
+  "phase": "phase-02-tenant-application",
+  "mode": "focused-api-service-and-application-contract",
+  "verdict": "PASSED_WITH_LIMITATIONS",
+  "reviewed_at": "2026-10-18T11:57:45+07:00",
+  "summary": {
+    "tenant_application_service": {
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "commands": [
+    {
+      "cmd": ".\\mvnw.cmd -pl app \"-Dtest=TenantApplicationServiceTest\" test",
+      "result": "PASSED",
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "note": "Submit, duplicate-code, approve, reject, and not-found branches."
+    }
+  ],
+  "coverage_evidence": [
+    "Application-level pending-code reservation rejects duplicates.",
+    "Approval creates tenant and host admin through the module facades.",
+    "Rejection releases the application reservation at the application policy boundary."
+  ],
+  "limitations": [
+    "V15 unique partial index uq_application_code_active was not exercised by H2 tests.",
+    "Real PostgreSQL migration verification is required before rollout."
+  ]
+}

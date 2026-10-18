@@ -1,7 +1,7 @@
 # Phase 16: Auth, report & suspension operator contract
 
 Owner: **Quang**
-Status: **Planned**
+Status: **Implemented — focused-tested; release boundary remains open**
 Depends on: **Phase 13**; can run in parallel with Phase 15 after contract review
 Maps to: [ADR-006](../../architecture/ADR-006-commercialization-and-exam-templates.md) §5, §9 · [ADR-007](../../architecture/ADR-007-student-identity-and-login.md)
 
@@ -51,8 +51,9 @@ Backend đã có `mustChangePassword`, endpoint `POST /api/v1/auth/change-passwo
 
 ## Quality and Testing State
 
-- Quality gate: **not evaluated**.
-- Testing: **not started**. Planned evidence gồm API-client typecheck, tenant-web/vendor-web typecheck, focused component/route tests, HTTP contract tests và audit persistence test.
+- Quality gate: **approved** — report: `quality/phase-16-auth-report-and-suspension-operator-contract-quality-report.json`.
+- Testing: **focused passed** — report: `tests/phase-16-auth-report-and-suspension-operator-contract-test-report.json`.
+- Evidence includes API auth/tenancy contracts, suspension stale-digest rejection, system audit on scheduled reactivation, API-client/UI typechecks, and tenant/vendor web test suites.
 
 ## Decision Record
 

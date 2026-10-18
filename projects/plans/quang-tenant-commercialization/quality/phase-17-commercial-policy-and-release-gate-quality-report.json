@@ -1,0 +1,35 @@
+{
+  "mode": "gate",
+  "target": "phase-17-commercial-policy-and-release-gate",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-18T11:57:45+07:00",
+  "reviewed_files": [
+    "projects/architecture/ADR-006-commercialization-and-exam-templates.md",
+    "projects/plans/quang-tenant-commercialization/plan.md",
+    "pte-api/app/src/main/java/com/pte/billing/internal/service/SubscriptionActivationService.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/TenancyService.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/service/AuthService.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/internal/service/TenantLifecycleService.java",
+    "pte-web/apps/vendor-web/features/tenancy/components/SuspendTenantModal.tsx",
+    "pte-web/packages/api-client/src/client/errorMessage.ts"
+  ],
+  "conventions_checked_against": [
+    "projects/architecture/ADR-006-commercialization-and-exam-templates.md",
+    "projects/architecture/ADR-007-student-identity-and-login.md",
+    "docs/CODING_STANDARDS_API.md",
+    "docs/CODING_STANDARDS_WEB.md"
+  ],
+  "findings": [],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 1
+  },
+  "blocking_count": 0,
+  "advisory_count": 1,
+  "noted_count": 1,
+  "notes": "Commercial decisions are now canonical in ADR-006 and the master plan: renewal starts from activation, suspended capabilities are explicit, re-suspend is idempotent, capacity revoke does not reduce quota, and refund/chargeback are unsupported. This is an implementation quality approval, not a rollout approval.",
+  "verification_boundary": "Policy/code review and focused tests only; full regression and PostgreSQL migration evidence remain release gates."
+}
