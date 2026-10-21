@@ -1,0 +1,143 @@
+{
+  "phase": "phase-13-weighted-scoring-and-suspension",
+  "mode": "unit-contract-and-static",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-17T18:18:16+07:00",
+  "summary": {
+    "suspension_focused": {
+      "tests": 28,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "weighted_reporting_focused": {
+      "tests": 42,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "suspension_http_contract": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "identity_application_verification": {
+      "tests": 36,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2,
+      "skip_reason": "Docker unavailable for Postgres integration tests"
+    },
+    "release_gate_verification": {
+      "tests": 150,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "skip_reason": "Docker unavailable for Postgres migration test"
+    },
+    "audit_data_policy": {
+      "tests": 50,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "combined_business_rule_smoke": {
+      "tests": 155,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "baseline_full_regression": {
+      "tests": 2131,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 56,
+      "error_scope": "pre-existing ModuleStructureTest boundary/cycle violations"
+    }
+  },
+  "commands": [
+    {
+      "cmd": ".\\mvnw.cmd -pl app \"-Dtest=TenantLifecycleServiceTest,TenancyServiceTest,TenantSuspensionExpirationServiceTest,BillingTenantSuspensionImpactProviderTest\" test",
+      "result": "PASSED",
+      "tests": 28,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "cmd": ".\\mvnw.cmd -pl app \"-Dtest=ScoreAggregationServiceTest,ReportMapperTest,ReportSnapshotCodecTest,ReportServiceTest,ReportPublishServiceTest\" test",
+      "result": "PASSED",
+      "tests": 42,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "cmd": ".\\mvnw.cmd -pl app \"-Dtest=TenantSuspensionHttpContractTest\" test",
+      "result": "PASSED",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "cmd": ".\\mvnw.cmd -pl app \"-Dtest=AuthServiceTest,UserRepositoryTest,TenantApplicationServiceTest,TenantMapperTest,TenantApplicationReviewPostgresIntegrationTest\" test",
+      "result": "PASSED_WITH_SKIPS",
+      "tests": 36,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2
+    },
+    {
+      "cmd": ".\\mvnw.cmd -pl app \"-Dtest=AssessmentServiceTest,BlueprintServiceTest,SnapshotPublishServiceTest,ExamGenerationServiceTest,QuestionTypeServiceTest,QuestionTypeCatalogMigrationTest,QuestionValidationHelperTest,QuestionValidationCatalogTest,QuestionLifecyclePolicyTest,QuestionDeletionServiceTest,QuestionPublicationMigrationPostgresTest,ScoreTemplateServiceTest,ScoreTemplateAdminServiceTest,ScoreTemplateActivationValidatorTest,TaskTypeScoringMethodsTest,TaskRuntimeContractServiceTest,TaskRuntimeProfileServiceTest,SnapshotPinServiceTest,ReportSnapshotCodecTest\" test",
+      "result": "PASSED_WITH_SKIPS",
+      "tests": 150,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    {
+      "cmd": ".\\mvnw.cmd -pl app \"-Dtest=AuditLogServiceTest,AuditLogServiceRecentTest,AuditLogServiceRecentNullTenantTest,StudentRosterImportServiceTest,RosterFileServiceTest,AttemptSecurityAuditServiceTest,AttemptSecurityAuditRetentionServiceTest,NotificationDispatchServiceTest,NotificationLogServiceTest,InboxRecipientEligibilityTest\" test",
+      "result": "PASSED",
+      "tests": 50,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "cmd": "pnpm --filter @pte/api-client typecheck",
+      "result": "PASSED",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter tenant-web typecheck",
+      "result": "PASSED",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter vendor-web typecheck",
+      "result": "PASSED",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter vendor-web exec eslint features/tenancy/api/index.ts features/tenancy/components/SuspendTenantModal.tsx features/tenancy/components/TenantManagementView.tsx features/tenancy/constants/index.ts features/tenancy/types/index.ts",
+      "result": "PASSED",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @pte/api-client exec eslint src/requests/tenant/index.ts src/types/tenant/index.ts src/types/scheduling/index.ts",
+      "result": "NOT_AVAILABLE",
+      "note": "The package has no eslint binary or eslint script; typecheck was used instead."
+    },
+    {
+      "cmd": "git diff --check",
+      "result": "PASSED",
+      "scope": "pte-api, pte-web, and pte-doc"
+    }
+  ],
+  "limitations": [
+    "The full regression result is a baseline record from before the final weighted-report follow-up; the post-follow-up combined smoke suite passed 155/155.",
+    "No production, deployment, or live-browser evidence is claimed."
+  ]
+}

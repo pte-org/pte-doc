@@ -1,0 +1,50 @@
+{
+  "mode": "gate",
+  "target": "phase-14-tenant-activity-and-identity-guardrails",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-17T20:47:49+07:00",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/attempt/internal/service/AttemptLifecycleService.java",
+    "pte-api/app/src/main/java/com/pte/enrollment/EnrollmentModuleService.java",
+    "pte-api/app/src/main/java/com/pte/enrollment/internal/service/ClassService.java",
+    "pte-api/app/src/main/java/com/pte/identity/IdentityService.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/constant/IdentityConstants.java",
+    "pte-api/app/src/main/java/com/pte/notification/internal/listener/StudentEnrollmentConflictNotificationListener.java",
+    "pte-api/app/src/main/java/com/pte/notification/internal/listener/ViolationNotificationListener.java",
+    "pte-api/app/src/main/java/com/pte/session/SessionService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/EnrollmentService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/EntitlementService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/ExamOrchestrationService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/SessionLifecycleService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/SessionOperationGuardService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/lifecycle/SessionPolicyService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/lifecycle/SessionScheduleService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/lifecycle/SessionSubscriptionService.java",
+    "pte-api/app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/enrollment/EnrollmentModuleServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/identity/IdentityServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/EnrollmentServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/ExamOrchestrationServiceTest.java"
+  ],
+  "conventions_checked_against": [
+    "pte-api/app/src/main/java/com/pte/tenancy/TenancyService.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/internal/exception/TenantSuspendedException.java",
+    "pte-api/app/src/main/java/com/pte/shared/exception/GlobalExceptionHandler.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/repository/UserRepository.java",
+    "pte-api/app/src/test/java/com/pte/tenancy/internal/controller/TenantSuspensionHttpContractTest.java",
+    "docs/CODING_STANDARDS_API.md"
+  ],
+  "findings": [],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "noted_count": 0,
+  "notes": "The gate confirms a single tenant-active policy path for forward-moving commands, a separate resume path for in-progress attempts, active identity eligibility at enrollment/audience/proctor boundaries, read-only audience preview, stable domain error mapping, and one Spring production constructor per changed service. Compatibility constructors remain only for focused tests/integrations and are not selected by Spring.",
+  "verification_boundary": "Focused API compile, service, HTTP contract, notification regression, and static quality evidence only; no production or deployment verification is claimed."
+}

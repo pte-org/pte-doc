@@ -18,7 +18,7 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 1. `EnrollmentRepository.findConflictingEnrollments(tenantId, studentPublicIds, opensAt, closesAt)` — một câu, join `enrollments` với `exam_sessions`, trả về `(studentPublicId, conflictingSessionPublicId, conflictingSessionName)`.
 
-2. Index hỗ trợ: `exam_sessions (tenant_id, opens_at, closes_at)`. Migration `V24__session_conflict_index.sql`. Đo `EXPLAIN` trên dữ liệu giả 10.000 enrollment trước khi chốt index.
+2. Index hỗ trợ: `exam_sessions (tenant_id, opens_at, closes_at)`. Migration thực tế `V112__enrollment_slot_conflict_lookup.sql`. Đo `EXPLAIN` trên dữ liệu giả 10.000 enrollment trước khi chốt index.
 
 3. `BulkEnrollResponse` thêm nhánh thứ ba:
    ```java
@@ -65,9 +65,11 @@ Maps to: **[ADR-006](../../architecture/ADR-006-commercialization-and-exam-templ
 
 ## Quality and Testing State
 
-- Quality gate: chưa chạy
-- Testing: chưa bắt đầu
+- Quality gate: **approved**; [quality report](quality/phase-12-student-slot-conflict-quality-report.json) đã ghi nhận review scope, findings và verification boundary.
+- Testing: **passed**, focused slot-conflict suite `20/20` (0 failures, 0 errors); combined business-rule smoke suite `155/155` cũng passed. Pre-weighted-change full app regression chạy `2131` tests với `0` failures và `1` error tại `ModuleStructureTest` do các boundary/cycle violations hiện hữu giữa `enrollment`, `session`, `attempt`, và `reporting`.
 
 ## Session Notes
 
-_(trống)_
+- Đã thêm một query tenant-wide với half-open interval (`opensAt < closesAt` và `closesAt > opensAt`), bỏ qua enrollment/session bị xoá và session `CANCELLED`, kèm index `(tenant_id, opens_at, closes_at)`.
+- Bulk enroll loại conflict trước khi tính capacity, trả `enrolled`/`alreadyEnrolled`/`skippedByConflict`; enroll lẻ ném conflict exception. Event sau đó được notification module chuyển thành thông báo cho `HOST_ADMIN`.
+- Contract web/API-client và UI import hiển thị conflict, giữ pending import khi batch còn conflict; không commit/push/deploy trong session này.

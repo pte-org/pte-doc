@@ -1,5 +1,7 @@
 # Phase 1: Nền tảng định danh — `Tenant.code` & `User.username`
 
+Status: **Implemented — focused and full regression evidence passed; local PostgreSQL release evidence recorded**
+
 ## Requirements
 
 Tách khoá đăng nhập ra khỏi email. Thêm `User.username` (unique toàn cục) làm khoá duy nhất `AuthService` tra cứu, thêm `Tenant.code` làm tiền tố cho username của sinh viên. Bỏ `email` khỏi vai trò định danh. Backfill toàn bộ user hiện có.
@@ -54,8 +56,9 @@ Maps to: **[ADR-007](../../architecture/ADR-007-student-identity-and-login.md) �
 
 ## Quality and Testing State
 
-- Quality gate: chưa chạy
-- Testing: code + test đã viết (`AuthServiceTest` 8 vai trò + 3 test lỗi, `UserRepositoryTest` 2 test), **chưa chạy được** — sandbox không có Java/Maven/Docker. Cần chạy `mvn test` thật trước khi merge.
+- Quality gate: **approved** — report: `quality/phase-01-identity-foundation-quality-report.json`.
+- Testing: **focused passed** — report: `tests/phase-01-identity-foundation-test-report.json`.
+- Release boundary: UUID ordering is deterministic in the full suite. Full API regression is clean; supplemental PostgreSQL migration evidence is recorded in Phase 17. No production/deployment verification is claimed.
 
 ## Session Notes
 
@@ -73,4 +76,4 @@ Implement 2026-09-16. File đã sửa/tạo:
 
 **Chưa làm trong phase này (đúng như thiết kế, Phase 8 lo):** roster import chưa gọi `UsernameGenerator`; `UserService.createBulk()` vẫn `username = email` cho STUDENT.
 
-**Việc còn nợ trước khi merge:** chạy `mvn clean test` thật (không chạy được trong sandbox này), xác nhận `AuthServiceTest`/`UserRepositoryTest` xanh, và soi lại `ddl-auto: validate` khởi động không lỗi.
+**Release evidence:** assertion thứ tự UUID đã ổn định và migration/`ddl-auto: validate` trên PostgreSQL scratch đã được ghi nhận ở Phase 17; không hàm ý production rollout.

@@ -1,0 +1,33 @@
+{
+  "phase": "phase-04-subscription-activation",
+  "mode": "focused-api-unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-18T11:57:45+07:00",
+  "summary": {
+    "subscription_activation": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "commands": [
+    {
+      "cmd": ".\\mvnw.cmd -pl app \"-Dtest=SubscriptionActivationServiceTest\" test",
+      "result": "PASSED",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "note": "Independent renewal expiry, snapshot capacity, and student-capacity activation behavior."
+    }
+  ],
+  "coverage_evidence": [
+    "A new activation expires from its own startsAt and does not query latestExpiry.",
+    "Plan capacity is snapshotted at activation.",
+    "Student-capacity activation keeps the non-Subscription branch."
+  ],
+  "limitations": [
+    "No production, deployment, browser, or live PostgreSQL verification is claimed."
+  ]
+}

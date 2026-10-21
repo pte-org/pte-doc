@@ -1,0 +1,56 @@
+{
+  "phase": "phase-16-auth-report-and-suspension-operator-contract",
+  "mode": "focused-api-web-contract-and-test",
+  "verdict": "PASSED_WITH_LIMITATIONS",
+  "reviewed_at": "2026-10-18T12:59:20+07:00",
+  "summary": {
+    "api_phase16_selected": {
+      "tests": 49,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web_tests": {
+      "api_client": 677,
+      "tenant_web": 536,
+      "vendor_web": 68,
+      "failures": 0
+    },
+    "web_typechecks": {
+      "packages_and_apps": 4,
+      "failures": 0
+    }
+  },
+  "commands": [
+    {
+      "cmd": ".\\mvnw.cmd -pl app \"-Dtest=AuthServiceTest,BillingTenantSuspensionImpactProviderTest,TenantSuspensionHttpContractTest,TenancyServiceTest,TenantLifecycleServiceTest,TenantSuspensionExpirationServiceTest\" test",
+      "result": "PASSED",
+      "tests": 49,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "cmd": "pnpm --filter @pte/api-client test -- --run; pnpm --filter tenant-web test -- --run; pnpm --filter vendor-web test -- --run",
+      "result": "PASSED",
+      "tests": 1281,
+      "failures": 0,
+      "note": "677 + 536 + 68 tests."
+    },
+    {
+      "cmd": "pnpm --filter @pte/api-client typecheck; pnpm --filter @pte/ui typecheck; pnpm --filter tenant-web typecheck; pnpm --filter vendor-web typecheck",
+      "result": "PASSED",
+      "failures": 0
+    }
+  ],
+  "coverage_evidence": [
+    "First-login sessions redirect to change-password and cannot enter protected workspace routes until success.",
+    "Reports render appliedWeight from the snapshot and label legacy non-immutable results.",
+    "Suspension confirmation sends a digest, exact loss duration, plan labels, and remaining-count affordance; stale digest is rejected.",
+    "Scheduled bounded reactivation writes a system audit and remains idempotent on retry."
+  ],
+  "limitations": [
+    "No browser, production, deployment, or live PostgreSQL verification is claimed.",
+    "Full API regression is clean; the default profile leaves opt-in PostgreSQL tests skipped, and all 61 supplemental tests passed as recorded in Phase 17."
+  ]
+}

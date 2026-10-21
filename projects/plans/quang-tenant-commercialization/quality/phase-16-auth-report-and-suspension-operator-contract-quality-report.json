@@ -1,0 +1,41 @@
+{
+  "mode": "gate",
+  "target": "phase-16-auth-report-and-suspension-operator-contract",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-18T11:57:45+07:00",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/tenancy/TenantSuspensionImpact.java",
+    "pte-api/app/src/main/java/com/pte/billing/BillingTenantSuspensionImpactProvider.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/internal/service/TenantLifecycleService.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/internal/service/TenantSuspensionExpirationService.java",
+    "pte-api/app/src/main/java/com/pte/tenancy/internal/controller/TenantController.java",
+    "pte-web/packages/api-client/src/types/auth/index.ts",
+    "pte-web/packages/api-client/src/types/tenant/index.ts",
+    "pte-web/packages/ui/src/hooks/sessionStorage.ts",
+    "pte-web/apps/vendor-web/features/auth/components/RequireAuth.tsx",
+    "pte-web/apps/vendor-web/features/auth/components/ChangePasswordView.tsx",
+    "pte-web/apps/tenant-web/features/auth/components/RequireAuth.tsx",
+    "pte-web/apps/tenant-web/features/reports/StudentReportsView.tsx",
+    "pte-web/apps/vendor-web/features/tenancy/components/SuspendTenantModal.tsx"
+  ],
+  "conventions_checked_against": [
+    "docs/CODING_STANDARDS_API.md",
+    "docs/CODING_STANDARDS_WEB.md",
+    "pte-web/AGENTS.md",
+    "pte-api/app/src/main/java/com/pte/shared/audit/AuditLogService.java",
+    "pte-web/packages/ui/src/hooks/createSessionApiClient.ts"
+  ],
+  "findings": [],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "noted_count": 0,
+  "notes": "First-login enforcement, immutable report weight explanation, exact suspension impact duration, plan labels, remaining counts, digest confirmation, stale rejection, and system reactivation audit are represented across API and web contracts.",
+  "verification_boundary": "Focused API/web verification only; no browser, production, or deployment verification is claimed."
+}

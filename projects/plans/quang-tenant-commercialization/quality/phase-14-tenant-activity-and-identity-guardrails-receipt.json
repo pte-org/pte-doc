@@ -1,0 +1,33 @@
+{
+  "target": "phase-14-tenant-activity-and-identity-guardrails",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-tenant-commercialization/quality/phase-14-tenant-activity-and-identity-guardrails-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/attempt/internal/service/AttemptLifecycleService.java",
+    "pte-api/app/src/main/java/com/pte/enrollment/EnrollmentModuleService.java",
+    "pte-api/app/src/main/java/com/pte/enrollment/internal/service/ClassService.java",
+    "pte-api/app/src/main/java/com/pte/identity/IdentityService.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/constant/IdentityConstants.java",
+    "pte-api/app/src/main/java/com/pte/notification/internal/listener/StudentEnrollmentConflictNotificationListener.java",
+    "pte-api/app/src/main/java/com/pte/notification/internal/listener/ViolationNotificationListener.java",
+    "pte-api/app/src/main/java/com/pte/session/SessionService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/EnrollmentService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/EntitlementService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/ExamOrchestrationService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/SessionLifecycleService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/SessionOperationGuardService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/lifecycle/SessionPolicyService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/lifecycle/SessionScheduleService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/lifecycle/SessionSubscriptionService.java",
+    "pte-api/app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/enrollment/EnrollmentModuleServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/identity/IdentityServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/EnrollmentServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/ExamOrchestrationServiceTest.java"
+  ],
+  "source_fingerprint": "sha256:84538a1f107491ce6c2a226dc19324274893a41a28df2ae9f67e836fb5a1c199",
+  "reviewed_at": "2026-10-17T20:47:49+07:00",
+  "open_blocking_findings": 0
+}

@@ -1,0 +1,40 @@
+{
+  "mode": "gate",
+  "target": "phase-15-enrollment-concurrency-and-publish-reconciliation",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-17T21:58:35+07:00",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/identity/internal/repository/UserRepository.java",
+    "pte-api/app/src/main/java/com/pte/identity/IdentityService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/EnrollmentService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/ExamOrchestrationService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/constant/SessionConstants.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/exception/ExamAudienceConflictException.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/exception/ExamAudienceReconciliationException.java",
+    "pte-api/app/src/test/java/com/pte/identity/IdentityServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/EnrollmentServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/ExamOrchestrationServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/EnrollmentConcurrencyPostgresIntegrationTest.java"
+  ],
+  "conventions_checked_against": [
+    "pte-api/app/src/main/java/com/pte/tenancy/TenancyService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/exception/SessionTimeConflictException.java",
+    "pte-api/app/src/main/java/com/pte/shared/exception/GlobalExceptionHandler.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/repository/UserRepository.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/repository/EnrollmentRepositorySlotConflictTest.java",
+    "docs/CODING_STANDARDS_API.md"
+  ],
+  "findings": [],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 0
+  },
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "noted_count": 0,
+  "notes": "The gate confirms one deterministic pessimistic-lock boundary for single, bulk, and publish enrollment; active student eligibility is revalidated under the lock; publish reconciles enrolled/alreadyEnrolled/skippedByConflict before session transition; all-conflict persists EXCLUDED audience state and returns 409 without scheduling; conflict response data remains tenant-scoped and uses the existing DomainException boundary.",
+  "verification_boundary": "Focused unit tests, H2 slot-query regression, dedicated PostgreSQL concurrency tests, compile, and diff checks only; no production or deployment verification is claimed."
+}
