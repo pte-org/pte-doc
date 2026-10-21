@@ -271,6 +271,15 @@ Dòng cuối là bắt buộc, không phải nhân nhượng: đình chỉ là t
 
 Hết hạn `suspendedUntil` → tenant tự động trở lại `ACTIVE`. Cần một job quét, vì không có gì khác kích hoạt chuyển trạng thái này. Với mặc định 0 thì job không có việc gì làm — nó chỉ phục vụ các lần đình chỉ có đặt thời hạn.
 
+### Contract vận hành đã chốt (2026-10-18)
+
+- **Renewal:** mỗi lần activation là một commercial lane độc lập; `expiresAt = startsAt + durationDays`. Không nối sau `latestExpiry` của lane cũ, không tạo free time ngầm.
+- **Suspended capability matrix:** tenant vẫn được login, refresh token, đọc report và hoàn tất attempt đang chạy; mọi thao tác tạo mới hoặc forward-moving như tạo kỳ thi, mở kỳ thi, enroll, mua gói và redeem mã đều bị chặn. Login organization lookup vẫn phải chọn được tenant đang `SUSPENDED` để auth contract không mâu thuẫn với capability guard.
+- **Re-suspend:** tenant đã `SUSPENDED` thì suspend lại là idempotent no-op. Đổi deadline là policy/command riêng, phải có impact preview và audit mới.
+- **Impact confirmation:** preview trả tổng subscription, tổng loss theo giây, plan label, số item còn lại và `impactDigest`. Confirmation gửi digest; digest stale trả `409` và không được apply.
+- **Scheduled reactivation:** system actor ghi audit với tenant, deadline cũ và kết quả; retry không được tạo thêm state transition.
+- **Capacity/revocation/refund:** revoke không tự giảm student-capacity quota nếu chưa có reversal invariant; refund/chargeback không thuộc release này và phải trả machine code `unsupported` rõ ràng.
+
 ---
 
 ## Consequences
@@ -288,7 +297,7 @@ Hết hạn `suspendedUntil` → tenant tự động trở lại `ACTIVE`. Cần
 
 ---
 
-## Cần chốt (chưa quyết)
+## Cần chốt (đã quyết)
 
 Không còn câu hỏi nào chặn việc triển khai. Các câu đã giải:
 
@@ -304,6 +313,17 @@ Không còn câu hỏi nào chặn việc triển khai. Các câu đã giải:
 | Còn row `Question` nào `PRIVATE` không | Không có → rút `Visibility.PRIVATE` an toàn, không cần migrate — §6 |
 | Phát hành `LicenseCode` theo lô | Chưa phát triển — ngoài phạm vi, thêm sau nếu cần (§7) |
 | Sinh viên có thuộc nhiều tenant được không | **Câu hỏi đặt sai.** `User.tenantId` là cột scalar, một user thuộc đúng một tenant; không có bảng membership nhiều-nhiều. Kiểm trùng slot là trong-tenant **theo cấu trúc**, không phải theo lựa chọn — không cần quyết gì |
+
+### Đã giải (2026-10-18)
+
+| Câu hỏi | Kết luận |
+|---|---|
+| Renewal có nối sau lane đang active không | **Không.** Mỗi activation tính hạn độc lập từ `startsAt`. |
+| Tenant `SUSPENDED` có được login/report/tiếp tục attempt không | **Có** cho login, refresh, report và attempt đang chạy; chặn command mới/forward-moving. |
+| Suspend lại tenant đã suspended xử lý thế nào | **Idempotent no-op**; đổi deadline cần policy riêng và impact confirmation mới. |
+| Preview đình chỉ có được dùng lại sau khi dữ liệu đổi không | **Không.** Digest stale trả `409`, phải preview/confirm lại. |
+| Scheduled reactivation có audit không | **Có.** System actor ghi audit một lần cho mỗi transition. |
+| Revoke capacity/refund/chargeback | Không tự giảm quota; refund/chargeback **unsupported** trong release này. |
 
 ---
 

@@ -1,0 +1,48 @@
+{
+  "phase": "phase-01-identity-foundation",
+  "mode": "focused-api-unit-and-repository",
+  "verdict": "PASSED_WITH_LIMITATIONS",
+  "reviewed_at": "2026-10-18T12:59:20+07:00",
+  "summary": {
+    "identity_focused": {
+      "tests": 20,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "full_api_regression": {
+      "tests": 2157,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 61
+    }
+  },
+  "commands": [
+    {
+      "cmd": ".\\mvnw.cmd -pl app \"-Dtest=AuthServiceTest,UserRepositoryTest,TenantApplicationServiceTest,SubscriptionActivationServiceTest,TenantLifecycleServiceTest,TenantSuspensionExpirationServiceTest,BillingTenantSuspensionImpactProviderTest,TenantSuspensionHttpContractTest,TenancyServiceTest\" test",
+      "result": "PASSED",
+      "tests": 70,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "note": "Cross-phase focused suite; the identity subset is AuthServiceTest and UserRepositoryTest (20 tests)."
+    },
+    {
+      "cmd": ".\\mvnw.cmd -pl app test",
+      "result": "PASSED_WITH_OPT_IN_SKIPS",
+      "tests": 2157,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 61,
+      "note": "The default profile skips opt-in PostgreSQL tests without dedicated properties/environment; all 61 were run separately and passed as recorded in Phase 17."
+    }
+  ],
+  "coverage_evidence": [
+    "AuthServiceTest covers username-based authentication and suspended-tenant login selection.",
+    "UserRepositoryTest covers duplicate email across tenants and username uniqueness boundaries."
+  ],
+  "limitations": [
+    "The default profile reports 61 opt-in PostgreSQL tests as skipped; supplemental isolated PostgreSQL evidence passed in Phase 17.",
+    "No production, deployment, browser, or live migration verification is claimed."
+  ]
+}

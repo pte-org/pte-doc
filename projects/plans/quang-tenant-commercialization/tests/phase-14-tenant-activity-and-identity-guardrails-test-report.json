@@ -1,0 +1,60 @@
+{
+  "phase": "phase-14-tenant-activity-and-identity-guardrails",
+  "mode": "unit-contract-and-static",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-17T20:47:49+07:00",
+  "summary": {
+    "api_phase14_selected": {
+      "tests": 151,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "http_suspension_and_notification_regression": {
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "commands": [
+    {
+      "cmd": ".\\mvnw.cmd -pl app -DskipTests compile",
+      "result": "PASSED",
+      "note": "API production compile gate"
+    },
+    {
+      "cmd": ".\\mvnw.cmd -pl app \"-Dtest=AttemptLifecycleServiceTest,ExamOrchestrationServiceTest,EnrollmentServiceTest,IdentityServiceTest,EnrollmentModuleServiceTest,ClassServiceTest,ClassServiceTenantIsolationTest,SessionScheduleServiceTest,SessionLifecycleServiceTest,EntitlementServiceTest\" test",
+      "result": "PASSED",
+      "tests": 151,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "cmd": ".\\mvnw.cmd -pl app \"-Dtest=TenantSuspensionHttpContractTest,NotificationDispatchServiceTest,NotificationLogServiceTest,InboxRecipientEligibilityTest\" test",
+      "result": "PASSED",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "cmd": "git diff --check",
+      "result": "PASSED",
+      "scope": "pte-api"
+    }
+  ],
+  "coverage_evidence": [
+    "Suspended tenants block new attempt creation before pinning while an existing IN_PROGRESS attempt resumes without the new-attempt guard.",
+    "Draft/orchestration suspension guard rejects createDraft before billing/template/session side effects.",
+    "Active identity facade rejects wrong tenant, wrong role, suspended, and deleted students/proctors; batch audience expansion filters inactive identities in one lookup.",
+    "Enrollment and proctor assignment reject ineligible identities before persistence; preview audience remains read-only.",
+    "Tenant suspension HTTP contract and active notification recipient regressions pass."
+  ],
+  "limitations": [
+    "No Postgres concurrency/integration test was added in this phase; enrollment serialization and publish reconciliation are Phase 15 scope.",
+    "No live production, deployment, or browser verification is claimed.",
+    "The full API regression suite was not used as the Phase 14 gate; evidence is limited to the listed focused suites and compile gate."
+  ]
+}

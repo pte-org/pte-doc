@@ -1,0 +1,53 @@
+{
+  "mode": "gate",
+  "target": "phase-12-student-slot-conflict",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-17T18:18:16+07:00",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/session/dto/event/StudentEnrollmentConflictEvent.java",
+    "pte-api/app/src/main/java/com/pte/session/dto/response/SlotConflict.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/dto/response/BulkEnrollResponse.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/repository/EnrollmentRepository.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/EnrollmentService.java",
+    "pte-api/app/src/main/java/com/pte/notification/domain/enums/NotificationType.java",
+    "pte-api/app/src/main/java/com/pte/notification/internal/constant/NotificationConstants.java",
+    "pte-api/app/src/main/java/com/pte/notification/internal/listener/StudentEnrollmentConflictNotificationListener.java",
+    "pte-api/app/src/main/resources/db/migration/V112__enrollment_slot_conflict_lookup.sql",
+    "pte-api/app/src/test/java/com/pte/session/internal/repository/EnrollmentRepositorySlotConflictTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/EnrollmentServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/notification/internal/listener/StudentEnrollmentConflictNotificationListenerTest.java",
+    "pte-web/apps/tenant-web/features/examoperations/api.ts",
+    "pte-web/apps/tenant-web/features/examoperations/components/AddStudentForm.tsx",
+    "pte-web/apps/tenant-web/features/examoperations/components/ExistingStudentAssignmentModal.tsx",
+    "pte-web/apps/tenant-web/features/examoperations/components/ExistingStudentImportModal.tsx",
+    "pte-web/apps/tenant-web/features/examoperations/components/EnrollmentConflictNotice.tsx",
+    "pte-web/apps/tenant-web/features/examoperations/components/PendingImportBanner.tsx",
+    "pte-web/apps/tenant-web/features/examoperations/components/RosterImport.tsx",
+    "pte-web/apps/tenant-web/features/examoperations/components/constants.ts",
+    "pte-web/packages/api-client/src/types/scheduling/index.ts"
+  ],
+  "conventions_checked_against": [
+    "pte-api/app/src/main/java/com/pte/session/internal/service/SessionLifecycleService.java",
+    "pte-api/app/src/main/java/com/pte/notification/internal/listener/EnrollmentNotificationListener.java",
+    "pte-api/app/src/main/java/com/pte/shared/exception/GlobalExceptionHandler.java",
+    "pte-api/app/src/main/resources/db/migration/V8__session.sql",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/EnrollmentServiceTest.java",
+    "pte-web/apps/tenant-web/features/examoperations/components/ExistingStudentImportModal.tsx",
+    "pte-web/packages/api-client/src/types/scheduling/index.ts"
+  ],
+  "findings": [],
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 1
+  },
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "noted_count": 1,
+  "receipt_status": "skipped_cross_repo_boundary",
+  "receipt_note": "The quality artifact lives in pte-doc while reviewed source and test files live in pte-api and pte-web; a same-root receipt cannot fingerprint all reviewed files.",
+  "notes": "The gate review confirmed tenant-scoped half-open overlap detection, one bulk lookup, cancelled-session exclusion, conflict filtering before capacity validation, explicit single-enroll failure, after-commit notification dispatch, and a web response contract that preserves a pending import when conflicts remain. The remaining note is that the full regression baseline still reports the pre-existing ModuleStructureTest boundary/cycle error.",
+  "verification_boundary": "Focused implementation and contract evidence is recorded in the paired test report; no production or deployment verification is claimed."
+}

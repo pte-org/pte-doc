@@ -1,0 +1,23 @@
+{
+  "target": "phase-15-enrollment-concurrency-and-publish-reconciliation",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-tenant-commercialization/quality/phase-15-enrollment-concurrency-and-publish-reconciliation-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/identity/IdentityService.java",
+    "pte-api/app/src/main/java/com/pte/identity/internal/repository/UserRepository.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/constant/SessionConstants.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/exception/ExamAudienceConflictException.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/exception/ExamAudienceReconciliationException.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/EnrollmentService.java",
+    "pte-api/app/src/main/java/com/pte/session/internal/service/ExamOrchestrationService.java",
+    "pte-api/app/src/test/java/com/pte/identity/IdentityServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/EnrollmentConcurrencyPostgresIntegrationTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/EnrollmentServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/session/internal/service/ExamOrchestrationServiceTest.java"
+  ],
+  "source_fingerprint": "sha256:a64f1b1c5ac062aa797210c304e8e97f82944e5aa2a9f03b7e7d191877b862a1",
+  "reviewed_at": "2026-10-17T21:58:35+07:00",
+  "open_blocking_findings": 0
+}
