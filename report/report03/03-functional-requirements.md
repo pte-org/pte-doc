@@ -4,7 +4,7 @@ This section maps the original DOCX heading **3. Functional Requirements**. It d
 
 ## 3.1 Functional overview
 
-PTE Prep coordinates five connected business stages:
+PTEPrep coordinates five connected business stages:
 
 1. establish an approved organization and safe access;
 2. prepare governed content, media, task behavior, and Score Templates;
@@ -22,9 +22,13 @@ The web portals are used for administration and operations. The Windows-first cl
 flowchart TB
     subgraph Platform[Platform administration portal]
       PA[Platform Admin workspace]
-      AU[Platform Author workspace]
+      PM[Platform Manager workspace]
+      AM[Academic Manager workspace]
+      AU[Academic Staff workspace]
       PA --> REG[Organization review]
-      PA --> PUB[Content and package approval]
+      PA --> PACKAGE[Platform and package governance]
+      PM --> OPS[Operational review and support]
+      AM --> PUB[Academic content approval and publication]
       AU --> DRAFT[Question/media/Score Template draft]
       DRAFT --> SUBMIT[Submit for approval]
       SUBMIT --> PUB
@@ -53,32 +57,34 @@ flowchart TB
     SUBMIT2 --> REPORT
 ```
 
-**Diagram ID:** `SD-REQ-SCREEN-001`  
-**Caption:** PTE Prep workspace and delivery screen flow  
-**Status:** Planned/Future summary of requirements; individual screens must be verified against the current route/client evidence before being labelled Current.  
-**Evidence/source:** `EVD-FOUNDATION-001`, `EVD-FOUNDATION-003`, `EVD-FOUNDATION-004`.  
+**Diagram ID:** `SD-REQ-SCREEN-001`
+**Caption:** PTEPrep workspace and delivery screen flow
+**Status:** Planned/Future summary of requirements; individual screens must be verified against the current route/client evidence before being labelled Current.
+**Evidence/source:** `EVD-FOUNDATION-001`, `EVD-FOUNDATION-003`, `EVD-FOUNDATION-004`.
 **Related requirements:** `FR-ONBOARD-001`, `FR-CONTENT-001`, `FR-EXAM-001`, `FR-DELIVERY-001`, `FR-REPORT-001`.
 
 ### 3.2.1 Authorization model
 
-| Operation | Platform Admin | Platform Author | Host | Proctor | Examiner | Student | External Integration Services |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| Review organization registration | Yes | No | No | No | No | No | No |
-| Draft shared content | Yes, support/override policy | Yes | No | No | No | No | Contract input only |
-| Approve/publish shared content | Yes | No | No | No | No | No | No |
-| Manage organization Students/classes | Platform support only | No | Own organization | No | No | No | No |
-| Activate organization package | Support/administration | No | Own organization | No | No | No | Payment/media contract only |
-| Create and publish an exam | Support/administration | No | Own organization | No | No | No | No |
-| Monitor an exam | Platform audit/support only | No | Policy/assignment management | Assigned exam | No | Own status visibility | No |
-| Score an answer | Review/support only | No | Review/final source | No | Assigned answer | No | Provider result where configured |
-| Publish a report | Platform audit/support only | No | Own organization | No | No | No | Notification only |
-| View own attempt/report | Authorized support | Draft scope only | Organization view | Assigned view | Assigned view | Own only | Contract-limited |
+| Operation | Platform Admin | Platform Manager | Academic Manager | Academic Staff | Host | Proctor | Examiner | Student | External Integration Services |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Review organization registration | Yes | Operational review | No | No | No | No | No | No | No |
+| Draft shared content | Support/override policy | No | Correction/review scope | Yes | No | No | No | No | Contract input only |
+| Approve/publish shared content | Platform governance | No | Yes | No | No | No | No | No | No |
+| Manage organization Students/classes | Support only | Operational support | No | No | Own organization | No | No | No | No |
+| Activate organization package | Administration | Operationally permitted | No | No | Own organization | No | No | No | Payment contract only |
+| Create and publish an exam | Support/audit | No | No | No | Own organization | No | No | No | No |
+| Monitor an exam | Audit/support | No | No | No | Assignment management | Assigned exam | No | Own status only | No |
+| Score an answer | Review/support | No | Policy review | No | Select final source | No | Assigned answer | No | Provider result where configured |
+| Publish a report | Audit/support | No | No | No | Own organization | No | No | No | Notification only |
+| View own attempt/report | Authorized support | Authorized operations | Academic review scope | Draft scope only | Organization view | Assigned view | Assigned view | Own only | Contract-limited |
 
 Authorization must be checked at both the workspace/route level and the business-record level. A valid sign-in does not permit cross-organization access or unassigned Proctor/Examiner work.
 
-**Requirement IDs:** `CR-AUTH-001`, `CR-AUTH-002`, `CR-TENANT-001`.  
-**Status/evidence:** Current boundary requirement; implementation slices must be verified using `EVD-FOUNDATION-003` and `EVD-FOUNDATION-004`.  
+**Requirement IDs:** `CR-AUTH-001`, `CR-AUTH-002`, `CR-TENANT-001`.
+**Status/evidence:** Current boundary requirement; implementation slices must be verified using `EVD-FOUNDATION-003` and `EVD-FOUNDATION-004`.
 **Acceptance:** a user attempting an operation outside the table receives a clear denial and no data mutation.
+
+**Scope revision precedence:** The matrix above is retained as the original baseline view. For the revised scope, Platform Admin governs platform-wide actions; Platform Manager handles permitted operational review/support; Academic Staff drafts and submits; Academic Manager reviews, publishes and activates academic content; Host owns organization operations; Proctor and Examiner are assignment-scoped; Student owns only the Student journey. The complete revised matrix is in Report 3 Section 5.9 and the foundation actor catalog.
 
 ## 3.3 FEAT-01 — Account and organization onboarding
 
@@ -137,14 +143,14 @@ Authorization must be checked at both the workspace/route level and the business
 
 Host can create, edit permitted profile fields, deactivate, search, filter, sort, and paginate Students belonging to the Host’s organization. The system validates required values, duplicate identity indicators, and organization capacity before committing a record.
 
-**Status:** Current/Partial only where the tenant roster UI/API is verified (`EVD-FOUNDATION-003`, `EVD-FOUNDATION-004`); the complete lifecycle is a requirement baseline.  
+**Status:** Current/Partial only where the tenant roster UI/API is verified (`EVD-FOUNDATION-003`, `EVD-FOUNDATION-004`); the complete lifecycle is a requirement baseline.
 **Acceptance:** A Host cannot read or mutate a Student outside the organization.
 
 #### FR-ORG-002 — Import a Student roster with row-level validation
 
 The Host may submit a supported bulk file or equivalent input. The system validates the whole input, reports missing/invalid/duplicate rows, and makes the commit outcome explicit. It must not silently create a partial roster while claiming success.
 
-**Related:** `NFR-PERF-004`, `BR-ACCESS-010`.  
+**Related:** `NFR-PERF-004`, `BR-ACCESS-010`.
 **Acceptance:** Every rejected row has a reason and every committed Student has an audit context.
 
 #### FR-ORG-003 — Manage programs and classes
@@ -175,15 +181,15 @@ The system removes repeated candidate references and identifies Students exclude
 
 #### FR-CONTENT-001 — Create and edit a task-specific question draft
 
-Platform Author creates a draft using one of the 23 task catalog rows. The draft includes prompt/content fields, expected response form, score behavior, and required media references. The task type is not free text when a catalog type exists.
+Academic Staff creates a draft using one of the 23 task catalog rows. The draft includes prompt/content fields, expected response form, score behavior, and required media references. The task type is not free text when a catalog type exists.
 
 **Acceptance:** An invalid task structure cannot be submitted for approval.
 
 #### FR-CONTENT-002 — Manage media through an approved signed boundary
 
-Platform Author uploads or selects image/audio through the approved media contract. The system stores the relationship and completion state without exposing provider credentials in the browser or Markdown documentation.
+Academic Staff uploads or selects image/audio through the approved media contract. The system stores the relationship and completion state without exposing provider credentials in the browser or Markdown documentation.
 
-**Status:** Partial/Planned/Future by integration evidence; `EVD-FOUNDATION-003`, `EVD-FOUNDATION-005`.  
+**Status:** Partial/Planned/Future by integration evidence; `EVD-FOUNDATION-003`, `EVD-FOUNDATION-005`.
 **Acceptance:** Expired or failed media access is shown as a recoverable content issue.
 
 #### FR-CONTENT-003 — Validate required content before approval/publication
@@ -200,7 +206,7 @@ Editing a published question creates a new revision. A revision referenced by a 
 
 #### FR-CONTENT-005 — Govern approval and publication
 
-Platform Author may submit; Platform Admin may approve, reject, publish, archive, or recover according to state. Host can select published content through a Score Template but cannot directly publish shared content.
+Academic Staff may submit; Academic Manager may approve, reject, publish, activate, archive, or request correction according to state. Platform Admin retains platform governance and exceptional support. Host can select published content through a Score Template but cannot directly publish shared content.
 
 **Acceptance:** The approval history shows actor, decision, time, reason, and revision.
 
@@ -208,11 +214,11 @@ Platform Author may submit; Platform Admin may approve, reject, publish, archive
 
 #### FR-TEMPLATE-001 — Create a Score Template draft
 
-Platform Author creates a template with sections, selected task catalog rows, task counts, timing rules, skill weights, score-source eligibility, and the treatment of unscored Personal Introduction. The template records a revision rather than overwriting an active version.
+Academic Staff creates a template with sections, selected task catalog rows, task counts, timing rules, skill weights, score-source eligibility, and the treatment of unscored Personal Introduction. The template records a revision rather than overwriting an active version.
 
 #### FR-TEMPLATE-002 — Validate, approve, activate, and retire a template
 
-Platform Admin validates and controls the lifecycle. An invalid or incomplete template remains non-active. A retired template cannot be selected for a new exam but remains available to historical snapshots.
+Academic Manager reviews and approves the template lifecycle under the academic-content policy. Platform Admin retains platform governance and exceptional support. An invalid or incomplete template remains non-active. A retired template cannot be selected for a new exam but remains available to historical snapshots.
 
 #### FR-TEMPLATE-003 — Select only active templates for an exam
 
@@ -479,10 +485,10 @@ erDiagram
     REPORT ||--o{ AUDIT_EVENT : references
 ```
 
-**Diagram ID:** `DB-REQ-RELATION-001`  
-**Caption:** Requirement-level ownership and scoring relationships  
-**Status:** Planned/Future design placeholder; exact table names/columns are defined in Report 4 only where evidence supports them.  
-**Evidence/source:** `EVD-FOUNDATION-003`, `EVD-FOUNDATION-005`;  
+**Diagram ID:** `DB-REQ-RELATION-001`
+**Caption:** Requirement-level ownership and scoring relationships
+**Status:** Planned/Future design placeholder; exact table names/columns are defined in Report 4 only where evidence supports them.
+**Evidence/source:** `EVD-FOUNDATION-003`, `EVD-FOUNDATION-005`;
 **Related requirements:** `FR-HARDENING-001`–`FR-HARDENING-003`, `FR-EXAM-009`, `FR-SCORE-007`, `FR-REPORT-005`.
 
 ## 3.17 Functional acceptance principles
@@ -494,3 +500,105 @@ erDiagram
 - Every role sees only the data necessary for its approved scope.
 - Every future, partial, or TBD integration is labelled honestly in the design, test, and guide reports.
 
+
+## 3.18 FEAT-13 - Academic role governance
+
+#### FR-PLATFORM-001 - Operate organization and package support
+
+Platform Manager can review the operational state of organization applications, package/license records, support cases and permitted account actions. The action is restricted to the assigned platform scope and is logged. It cannot approve academic content or bypass tenant permissions.
+
+**Acceptance:** an unauthorized academic or tenant action is rejected with a business-readable reason, while an allowed operational action records actor, scope, target, time and result.
+
+#### FR-ACADEMIC-001 - Draft and submit academic content
+
+Academic Staff can create and revise question, media, rubric and Score Template drafts. The system validates required fields, content/media readiness, task identity, channel flags and revision ownership before submission.
+
+**Acceptance:** a submitted draft has a stable revision, owner, status, selected channel flags, validation result and review target. Academic Staff cannot activate the revision alone.
+
+#### FR-ACADEMIC-002 - Review, publish and activate academic content
+
+Academic Manager reviews submitted revisions, records approval or rejection reasons, and controls publication/activation under the approved policy. A rejected revision returns to a revision state; an approved revision becomes eligible only after all required readiness checks pass.
+
+**Acceptance:** the history shows the reviewer, decision, reason, time, content revision and resulting status. A draft or rejected revision cannot enter a practice or exam pool.
+
+## 3.19 FEAT-14 - Student practice journey
+
+#### FR-PRACTICE-001 - Verify Student email sign-in
+
+The Student requests a one-time email code, submits it within its validity period, and receives a signed-in session only after the code is valid, unused and within the resend/throttling policy.
+
+**Acceptance:** invalid, expired, reused and throttled requests do not create an authenticated practice session; the response does not disclose whether another email belongs to an organization.
+
+#### FR-PRACTICE-002 - Resolve identity, organization context and entitlement
+
+After sign-in, the system resolves the Student identity, permitted membership context and practice entitlement. A membership is an explicit relationship; email verification alone is not membership. The Student may choose among authorized contexts when the policy requires it.
+
+**Acceptance:** no membership, inactive membership, ambiguous context, expired entitlement and unavailable entitlement service each produce a distinct safe state without cross-organization data leakage.
+
+#### FR-PRACTICE-003 - Show channel-aware task catalog
+
+The practice catalog shows task groups and questions that are visible and eligible for practice. Selection applies publication/review status, task support, media/rubric readiness, entitlement and `available_for_practice`. It never selects a question that is only enabled for organized exams.
+
+**Acceptance:** changing the exam flag alone cannot make an ineligible practice question runnable; an insufficient pool explains the missing readiness condition.
+
+#### FR-PRACTICE-004 - Create and begin a practice session
+
+The Student starts a session only after entitlement and content checks pass. The system stores the selected question/media revisions, task policy, session owner, start state and provenance before presenting the first answer.
+
+**Acceptance:** repeated start commands are idempotent or return the existing session; a session cannot be opened by another Student or context.
+
+#### FR-PRACTICE-005 - Save, resume and submit practice responses
+
+The Student can answer supported task types, record confidence where offered, save progress, leave and resume, submit, skip or discard according to policy. Text, selections and media responses are correlated to the same session item and preserve local pending state when the network is unavailable.
+
+**Acceptance:** repeated save/submit/retry commands do not duplicate responses; a resumed session retains its fixed content, previous answers and visible pending state.
+
+#### FR-PRACTICE-006 - Bind practice media safely
+
+Speaking or other media responses use a signed grant/upload/bind flow. The service checks Student, session and item ownership before accepting the media reference. Arbitrary URLs and media belonging to another session are rejected.
+
+**Acceptance:** failed or expired upload grants can be retried without changing the question identity or losing an already saved answer.
+
+#### FR-PRACTICE-007 - Produce objective feedback or an AI explanation
+
+After submission, objective feedback may be calculated immediately. When the task is eligible and the provider policy permits it, the system may request an AI explanation grounded in the question, rubric and Student answer. The result carries provider/model/prompt/rubric versions and a pending, available, failed, unavailable or retryable state.
+
+**Acceptance:** the answer remains available independently of the AI result; generated content is labelled; unauthorized Students cannot read another Student's explanation; no provider failure is represented as a score.
+
+#### FR-PRACTICE-008 - Show truthful progress and history
+
+The Student can view attempted, saved, submitted, feedback-pending, feedback-available and completed activity. Progress distinguishes activity and confidence from scored performance. Loss or pause of entitlement follows the approved policy and does not silently rewrite ownership or history.
+
+**Acceptance:** a pending explanation is not counted as a completed scored result; history entries point to the original session and content revision.
+
+#### FR-PRACTICE-009 - Handle content feedback as a bounded capability
+
+If content feedback is enabled, the system records the reporting Student, target question/lesson/session, category, description, status, handler and visibility according to an approved policy. Host support tickets are not assumed to be Student content feedback.
+
+**Acceptance:** until `TBD-FEEDBACK-001` is resolved, the UI may provide an escalation route but must not promise a response owner or closure time.
+
+## 3.20 FEAT-15 - Independent question usage flags
+
+#### FR-CONTENT-006 - Select questions by channel usage flag
+
+Each question revision stores `available_for_practice` and `available_for_exam` independently. Practice selection uses the first flag; organized exam generation uses the second. Both consumers additionally require approval/publication, readiness, task support, ownership and the selected catalog/composition rules.
+
+**Acceptance:** practice-only content is excluded from organized exam generation; exam-only content is excluded from practice; neither flag is treated as an entitlement; existing sessions/exams retain their selected content after a later flag change.
+
+## 3.21 Practice business rules
+
+- `BR-PRACTICE-001`: An authenticated Student must still have an authorized context and entitlement before creating a practice session.
+- `BR-PRACTICE-002`: A practice session is not an organization ExamSession and never creates a Host-published report by implication.
+- `BR-PRACTICE-003`: Selected question and media revisions are fixed for the life of the session item.
+- `BR-PRACTICE-004`: Local/pending answer state survives a transient network or provider failure.
+- `BR-PRACTICE-005`: AI explanation status is independent from answer ownership and activity history.
+- `BR-PRACTICE-006`: A generated explanation is labelled and traceable to question, rubric, answer, provider/model and prompt versions.
+- `BR-PRACTICE-007`: A Student cannot read another Student's practice session, answer, explanation or progress.
+- `BR-CONTENT-017`: Practice selection requires `available_for_practice`.
+- `BR-CONTENT-018`: Exam generation requires `available_for_exam`.
+- `BR-CONTENT-019`: No cross-channel fallback is allowed when the requested eligible pool is insufficient.
+- `BR-CONTENT-020`: Flag changes apply to future selection only; frozen existing content is not rewritten.
+
+## 3.22 Practice acceptance summary
+
+The practice implementation handoff must prove email verification, context/entitlement resolution, catalog filtering, session ownership, answer/media persistence, resume/submit idempotency, AI pending/failure/retry, explanation provenance, progress truthfulness and access isolation. The current report revision defines the requirement and acceptance boundary; it does not claim that the later implementation is complete.

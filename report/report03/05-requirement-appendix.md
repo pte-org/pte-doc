@@ -11,14 +11,14 @@ The rules below are the business interpretation of the functional requirements. 
 | ID | Rule | Related requirements |
 |---|---|---|
 | `BR-ACCESS-001` | A person may use only the approved human roles assigned to the account; External Integration Services is not a human login role. | `FR-ONBOARD-004`, `CR-AUTH-001` |
-| `BR-ACCESS-002` | Platform Admin controls platform-wide administrative data and approval actions. | `FR-ONBOARD-002`, `FR-CONTENT-005` |
-| `BR-ACCESS-003` | Platform Author may create/edit/submit drafts but cannot self-activate shared production content. | `FR-CONTENT-001`, `FR-CONTENT-005` |
+| `BR-ACCESS-002` | Platform Admin controls platform-wide administrative data; Academic Manager controls ordinary academic content approval and publication under policy. | `FR-ONBOARD-002`, `FR-CONTENT-005` |
+| `BR-ACCESS-003` | Academic Staff may create/edit/submit drafts but cannot self-activate shared production content. | `FR-CONTENT-001`, `FR-CONTENT-005` |
 | `BR-ACCESS-004` | Host may read and change only the organization’s permitted operational data. | `FR-HARDENING-002`, `NFR-09` |
 | `BR-ACCESS-005` | Proctor and Examiner may work only in their assigned exam/answer scope. | `FR-INTEGRITY-001`, `FR-SCORE-001` |
 | `BR-ACCESS-006` | Student may write own active attempt data and view own published report only. | `FR-DELIVERY-001`, `FR-REPORT-004` |
 | `BR-ACCESS-007` | An organization becomes active only after Platform Admin approval. | `FR-ONBOARD-002`, `FR-ONBOARD-003` |
 | `BR-ACCESS-008` | Pending or rejected registration cannot open an active organization workspace. | `FR-ONBOARD-001`, `FR-ONBOARD-002` |
-| `BR-ACCESS-009` | A Student belongs to one organization in this release. | `FR-ORG-001`, `FR-ENROLL-001` |
+| `BR-ACCESS-009` | Student practice access requires an explicit organization context and active membership; multiple-organization identity linking remains pending `TBD-D02-IDENTITY-CONTEXT`, and ambiguous context must be denied safely. | `FR-ORG-001`, `FR-ENROLL-001`, `FR-PRACTICE-002` |
 | `BR-ACCESS-010` | Student creation/import checks organization capacity, duplicates, and required data before commit. | `FR-ORG-001`, `FR-ORG-002` |
 | `BR-ACCESS-011` | Membership transfer/removal is explicit and auditable; it does not rewrite a published exam audience. | `FR-ORG-004`, `FR-ENROLL-002` |
 
@@ -114,7 +114,7 @@ Messages are examples of required business meaning. Exact localization and UI wo
 |---|---|---|---|---|---|
 | `MSG-ACCESS-001` | Registration pending/rejected | Registrant/Platform Admin | Information/Warning | Registration is not an active workspace; show status/reason. | Correct, wait for review, or contact authorized support. |
 | `MSG-ACCESS-002` | Account locked/suspended | Account holder | Warning | Sign-in/business action is temporarily unavailable. | Follow controlled recovery path. |
-| `MSG-CONTENT-001` | Required media missing | Platform Author/Admin/Host | Error | Content cannot be approved/published because named media is incomplete. | Attach/renew media and validate again. |
+| `MSG-CONTENT-001` | Required media missing | Academic Staff/Admin/Host | Error | Content cannot be approved/published because named media is incomplete. | Attach/renew media and validate again. |
 | `MSG-CONTENT-002` | Template inactive/retired | Host | Error | Selected Score Template cannot be used for a new exam. | Select an active version or ask Platform Admin. |
 | `MSG-PACKAGE-001` | Package inactive/expired/over limit | Host | Error | Package does not permit this exam/date/capacity. | Activate/choose an eligible package or adjust draft. |
 | `MSG-EXAM-001` | Candidate conflict/duplicate | Host | Warning/Error | Named Student is duplicated, conflicting, or blocked. | Review list and resolve before publication. |
@@ -128,7 +128,7 @@ Messages are examples of required business meaning. Exact localization and UI wo
 
 ## 5.4 Complete PTE task catalogue reference
 
-The canonical catalog contains exactly 23 rows at [`../_foundation/pte-task-catalog.md`](../_foundation/pte-task-catalog.md): 22 scored task types plus unscored Personal Introduction. Every row records response type, timing rule, default score source, Score Template relationship, and fixed-version relationship. Report 3 must not introduce an additional task name outside that catalog without updating the catalog and ledger.
+The current task vocabulary contains exactly 23 rows at [`../_foundation/pte-task-catalog.md`](../_foundation/pte-task-catalog.md): 22 scored task types plus unscored Personal Introduction. Every row records response type, timing rule, default score source, Score Template relationship, and fixed-version relationship. D01 still controls the final task-family scope; D04 independently controls whether an approved question revision is eligible for Practice Web or Windows Exam Client. Report 3 must not introduce an additional task name outside that catalog without updating the catalog and ledger.
 
 ## 5.5 Assumptions and constraints
 
@@ -170,13 +170,44 @@ The canonical catalog contains exactly 23 rows at [`../_foundation/pte-task-cata
 
 ## 5.8 Requirement acceptance checklist
 
-- Product name is **PTE Prep** and the PTE Academic independence boundary is present.
-- Only the six approved human roles and External Integration Services appear as actors.
+- Product name is **PTEPrep** and the PTE Academic independence boundary is present.
+- Only the eight approved human roles and External Integration Services appear as actors.
 - Registration is separate from package/payment activation.
-- The complete 23-task catalog is linked without adding a hidden task type.
+- The current 23-row task vocabulary is linked without adding a hidden task type; final channel applicability remains visible as a decision where unresolved.
 - Current/Partial/Planned/Future/Out of scope/TBD wording follows the evidence matrix.
 - NFR numbers are targets/baselines until Report 5 supplies measured evidence.
 - Retention is contract-based and remains linked to `TBD-RETENTION-001`.
 - Out-of-scope boundaries are explicit and do not appear as current features.
 - No credentials, private keys, environment values, or personal test data are included.
 
+
+## 5.9 Scope revision appendix
+
+### 5.9.1 Role-to-action matrix
+
+| Action | Platform Admin | Platform Manager | Academic Manager | Academic Staff | Host | Proctor | Examiner | Student |
+|---|---|---|---|---|---|---|---|---|
+| Review organization application | Allow | Allow operational review | View only when assigned | Deny | Submit/track own organization | Deny | Deny | Deny |
+| Draft shared question/media | Allow | Deny | Allow when preparing a correction | Allow | Deny | Deny | Deny | Deny |
+| Approve/publish academic content | Allow platform governance | Deny | Allow | Deny | Deny | Deny | Deny | Deny |
+| Activate package/license | Allow | Allow operationally | Deny | Deny | Allow own organization | Deny | Deny | Deny |
+| Create practice session | Support only | Support only | Deny | Deny | Deny for another Student | Deny | Deny | Allow own session |
+| Monitor an exam | View for audit if authorized | View for operations if authorized | Deny | Deny | Assign/view own organization | Allow assigned exam | Deny | Own status only |
+| Score assigned answer | Audit only | Deny | Review policy | Deny unless assigned by policy | Review/select source | Deny | Allow assigned answer | Deny |
+| Publish organization report | Audit only | Deny | Deny | Deny | Allow own organization | Deny | Deny | View own published report |
+
+### 5.9.2 Out-of-scope register for the revision
+
+| ID | Exclusion |
+|---|---|
+| OOS-010 | Official PTE Academic connection, certification, endorsement or result equivalence |
+| OOS-011 | Student personal payment or personal subscription outside organization entitlement |
+| OOS-012 | Research-based learning claims, model training, or a new scientific scoring model |
+| OOS-013 | Open chatbot, automatic personalized learning-plan generation, or LMS course management |
+| OOS-014 | Mobile organization exam client redesign |
+| OOS-015 | Advanced anti-cheat such as complete secondary-device blocking or virtual-machine detection |
+| OOS-016 | Silent cross-channel question fallback when the eligible pool is insufficient |
+
+### 5.9.3 Open-decision closure rule
+
+D01, D02, D03, feedback ownership, AI policy and retention remain visible until the named owner supplies a decision. A draft can describe both alternatives and safe behavior. Final design/test/guide statements depending on a decision remain provisional and cannot be labelled approved or runtime verified.

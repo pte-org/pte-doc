@@ -1,4 +1,4 @@
-# PTE Prep Open and TBD Register
+# PTEPrep Open and TBD Register
 
 These items are deliberately visible. They must not be hidden by writing a precise-looking value into a requirement, design, test result, or user instruction.
 
@@ -20,3 +20,15 @@ These items are deliberately visible. They must not be hidden by writing a preci
 - A test case may verify that a TBD-safe behavior is visible, but it must not invent the final policy.
 - User guides may give an escalation instruction for a TBD item; they must not present it as a guaranteed product behavior.
 
+
+
+## Scope revision decisions
+
+| ID | Decision | Safe interim statement | Affected artifacts |
+|---|---|---|---|
+| `TBD-D01-TASK-CATALOG` | Shared Academic-oriented task families or separate Core/Academic catalogs | Keep the catalog decision visibly open; do not claim every task is available in every channel | Reports 3-6, task catalog, `FR-PRACTICE-003` |
+| `TBD-D02-IDENTITY-CONTEXT` | One email identity with explicit organization context or no cross-organization linking | An email identity and an organization membership are different objects; never grant access from email alone | Reports 3-6, `FR-PRACTICE-002`, `DB-PRACTICE-SESSION` |
+| `TBD-D03-STUDY-PACK` | Quick grouped practice or persisted curated packs | Describe the current grouped navigation without promising LMS course completion | Reports 3-6, `FR-PRACTICE-003`, `FR-PRACTICE-008` |
+| `TBD-FEEDBACK-001` | Who may report a question/content/lesson issue, target object, handler and response visibility | Existing Host support tickets do not automatically cover Student content feedback | Reports 3-6, `FR-PRACTICE-009` |
+| `TBD-AI-POLICY-001` | AI provider, eligible tasks, rubric, explanation review, timeout and retry policy | Preserve answers independently of AI state and show pending/failed states; do not claim quality guarantees | Reports 3-6, `FR-PRACTICE-007`, `NFR-AI-001` |
+| `TBD-RETENTION-002` | Contract-specific retention, export, deletion and legal hold for attempts, scores, media and audit | Retention follows the organization contract until a detailed policy is approved | Reports 3-6, `NFR-DATA-001` |

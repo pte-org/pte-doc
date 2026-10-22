@@ -1,4 +1,4 @@
-# PTE Prep Complete Task Catalog
+# PTEPrep Complete Task Catalog
 
 This catalog is the stable vocabulary for an exam version and its Score Template. It contains exactly 23 rows: 22 scored task types and the unscored Personal Introduction. Timing is expressed as a business rule or source-configured value; the report set does not claim that every value has been verified in the client.
 
@@ -35,3 +35,19 @@ This catalog is the stable vocabulary for an exam version and its Score Template
 - The generated exam stores the task/prompt/media/rubric revision used by the attempt. Editing the shared bank later does not rewrite an in-progress or submitted attempt.
 - Exact per-task timing, response limits, and provider thresholds are configuration/evidence items and remain open where the source does not prove them.
 
+
+
+## Channel eligibility and D04
+
+The 23 task rows remain the stable task vocabulary, but each **question revision** must carry two independent usage flags:
+
+| Flag | Meaning | Consumer |
+|---|---|---|
+| `available_for_practice` | The approved question revision may be selected for a Student self-practice session | `pte-practice` |
+| `available_for_exam` | The approved question revision may be selected for an organized Windows exam | `pte-app` through the exam-generation flow |
+
+The system selects from the flag that belongs to the requested channel. Publication/approval, task support, media readiness, rubric readiness, ownership, entitlement, and the selected composition rules remain additional filters. A true flag does not bypass those checks. If the eligible pool is empty or too small, the action stops with a content-readiness result; it never borrows a question excluded from the requested channel.
+
+The flags are separate from the still-open D01 decision about the final Academic/Core task-family catalog. D01 controls which task families are permitted; D04 controls whether a particular approved question revision may be consumed by each channel. A question can be enabled for both channels only when the later reuse, provenance, and flag-change policy explicitly allows it.
+
+For an existing practice session or generated exam, selected question and media revisions are frozen. A later flag change affects future selection only and does not rewrite the existing session or exam.

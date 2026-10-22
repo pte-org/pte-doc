@@ -1,8 +1,8 @@
-# PTE Prep Reports 3–6 — DOCX to Markdown Section Map
+# PTEPrep Reports 3–6 — DOCX to Markdown Section Map
 
-**Status:** Current foundation artifact  
-**Owner:** Documentation work package  
-**Source authority:** Original Report 3–6 DOCX heading order; project meaning comes from the approved PTE Prep SRS.
+**Status:** Current foundation artifact
+**Owner:** Documentation work package
+**Source authority:** Original Report 3–6 DOCX heading order; project meaning comes from the approved PTEPrep SRS.
 
 ## Mapping rules
 
