@@ -176,9 +176,9 @@ Large roster, candidate, queue, report, and audit queries must be paginated or b
 
 
 
-## 2.7 Scope revision practice entities and channel flags
+## 2.8 Scope revision practice entities and channel flags
 
-### 2.7.1 Proposed practice entity catalogue
+### 2.8.1 Proposed practice entity catalogue
 
 | Entity | Ownership | Key information | State/constraint |
 |---|---|---|---|
@@ -190,7 +190,7 @@ Large roster, candidate, queue, report, and audit queries must be paginated or b
 | `AIFeedback` | PracticeResponse | status, explanation, provider/model/prompt/rubric versions, error/retry data | Generated content is labelled and preserves the answer on failure |
 | `QuestionUsagePolicy` or equivalent fields on a revision | Shared content | `available_for_practice`, `available_for_exam`, actor/time/history | Flags are independent and do not bypass approval/readiness |
 
-### 2.7.2 Practice versus exam ownership
+### 2.8.2 Practice versus exam ownership
 
 ```mermaid
 erDiagram
@@ -214,7 +214,7 @@ erDiagram
 
 The ERD deliberately keeps `PracticeResponse` separate from `AttemptAnswer`. A practice answer can produce educational feedback and progress; an exam answer enters the organization scoring/publication flow. The two flows may reuse a question revision, but they do not share a mutable response record.
 
-### 2.7.3 Channel flag invariants
+### 2.8.3 Channel flag invariants
 
 1. A question revision may be enabled for practice, exam, both, or neither.
 2. Approval/publication and readiness are required in addition to either flag.

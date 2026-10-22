@@ -372,9 +372,9 @@ Retries must exclude validation, authorization, and conflict failures. External 
 - Exact database columns/migrations and client device matrix require source or execution evidence before being labelled Current.
 
 
-## 3.9 Scope revision interaction designs
+## 3.10 Scope revision interaction designs
 
-### 3.9.1 Student email and context resolution
+### 3.10.1 Student email and context resolution
 
 ```mermaid
 sequenceDiagram
@@ -402,7 +402,7 @@ sequenceDiagram
 **Status:** Proposed; source contains identity/membership slices but the final practice context policy remains `TBD-D02-IDENTITY-CONTEXT`.
 **Related requirements:** `FR-PRACTICE-001`, `FR-PRACTICE-002`.
 
-### 3.9.2 Practice start, save and resume
+### 3.10.2 Practice start, save and resume
 
 ```mermaid
 sequenceDiagram
@@ -430,7 +430,7 @@ sequenceDiagram
 **Diagram ID:** `SEQ-PRACTICE-SESSION`
 **Status:** Proposed; it is the later implementation contract for `FR-PRACTICE-003` through `FR-PRACTICE-006`.
 
-### 3.9.3 AI explanation state
+### 3.10.3 AI explanation state
 
 ```mermaid
 stateDiagram-v2
@@ -448,7 +448,7 @@ stateDiagram-v2
 **Diagram ID:** `SEQ-AI-FEEDBACK`
 **Status:** Proposed/TBD for provider and rubric policy. The answer and activity event remain available in every terminal state.
 
-### 3.9.4 Design decisions
+### 3.10.4 Design decisions
 
 - `ADR-PRACTICE-001`: keep practice and exam response ownership separate.
 - `ADR-PRACTICE-002`: treat channel flags as eligibility filters, not entitlements.
@@ -456,7 +456,7 @@ stateDiagram-v2
 - `ADR-PRACTICE-004`: label all AI output as educational/generated content and retain provenance.
 - `ADR-PRACTICE-005`: keep unresolved D01-D03 decisions as design parameters rather than silently selecting a product policy.
 
-### 3.9.5 Scope revision traceability
+### 3.10.5 Scope revision traceability
 
 | Requirement | Design coverage |
 |---|---|

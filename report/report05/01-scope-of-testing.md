@@ -107,7 +107,7 @@ Each case/result records:
 The current Report 5 baseline contains planned cases and result-record templates only. It does not claim a product test run or execution evidence for the product.
 
 
-## 1.7 Scope revision coverage
+## 1.9 Scope revision coverage
 
 The revised test boundary includes:
 

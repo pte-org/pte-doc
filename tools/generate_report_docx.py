@@ -1,4 +1,4 @@
-"""Generate submission-ready DOCX files from the PTE Prep Markdown reports.
+"""Generate submission-ready DOCX files from the PTEPrep Markdown reports.
 
 The source DOCX files in template-doc are used as the document shell.  This
 keeps their page size, cover logo, theme, heading styles, table conventions,
@@ -13,6 +13,7 @@ import os
 import subprocess
 import tempfile
 from copy import deepcopy
+from datetime import datetime
 from pathlib import Path
 from typing import Iterable, Iterator, Sequence
 
@@ -29,9 +30,13 @@ TEMPLATE_DIR = ROOT / "template-doc"
 REPORT_DIR = ROOT / "pte-doc" / "report"
 OUTPUT_DIR = REPORT_DIR / "docx"
 
-DATE_LINE = "— Ho Chi Minh City, October 2026 —"
+DATE_LINE = "— Ho Chi Minh City, 22 October 2026 —"
 GROUP_CODE = "FA26SE182"
 OWNER = "Ngô Đăng Quang — Project Leader"
+DOCUMENT_VERSION = "Version 1.1 · 22 October 2026"
+PRODUCT_NAME = "PTEPrep"
+REGISTERED_TITLE = "PTEPrep: An AI-Powered PTE Practice Platform and Realistic Exam Simulator"
+DOCUMENT_DATE = datetime(2026, 10, 22)
 
 
 REPORTS = {
@@ -151,7 +156,7 @@ def replace_toc_content(document: Document, entries: Sequence[tuple[int, str]]) 
     Word's TOC content control in the supplied files contains cached entries
     from the original sample project.  Keeping those entries would show stale
     names until a manual refresh.  The control is retained for the template's
-    styling, while its cached outline is replaced with the PTE Prep headings.
+    styling, while its cached outline is replaced with the PTEPrep headings.
     The document settings still request a Word refresh when opened.
     """
 
@@ -505,7 +510,7 @@ def render_mermaid(code: str, temporary_dir: Path, name: str) -> Path | None:
 def add_code_block(document: Document, code: str, language: str | None = None,
                    *, diagram_path: Path | None = None) -> None:
     if language == "mermaid" and diagram_path is not None:
-        caption = add_body_paragraph(document, "Figure — PTE Prep process/design diagram", italic=True, small=True)
+        caption = add_body_paragraph(document, "Figure — PTEPrep process/design diagram", italic=True, small=True)
         caption.alignment = WD_ALIGN_PARAGRAPH.CENTER
         caption.paragraph_format.space_after = Pt(2)
         paragraph = document.add_paragraph()
@@ -693,9 +698,9 @@ def prepare_cover(document: Document, report_number: str, title: str) -> None:
         raise RuntimeError("The supplied DOCX template does not contain the expected cover layout")
     set_cover_paragraph(paragraphs[9], "Capstone Project Report", size=25.5, bold=True, color="C00000")
     set_cover_paragraph(paragraphs[10], f"Report {report_number} — {title}", size=20, bold=True, color="C00000")
-    set_cover_paragraph(paragraphs[11], "PTE Prep", size=15, bold=True, color="1F4D78")
+    set_cover_paragraph(paragraphs[11], PRODUCT_NAME, size=15, bold=True, color="1F4D78")
     set_cover_paragraph(paragraphs[12], GROUP_CODE, size=11, color="666666")
-    set_cover_paragraph(paragraphs[13], "Version 1.0 · 06 October 2026", size=10, color="666666")
+    set_cover_paragraph(paragraphs[13], DOCUMENT_VERSION, size=10, color="666666")
     date_paragraph = next((paragraph for paragraph in paragraphs if "Hanoi" in paragraph.text or "August 2019" in paragraph.text), None)
     if date_paragraph is None:
         date_paragraph = paragraphs[20]
@@ -712,10 +717,14 @@ def generate_one(report_number: str, config: dict) -> Path:
     prepare_cover(document, display_report_number, config["title"])
     replace_toc_content(document, collect_toc_entries(report_dir, config))
     remove_body_after_toc(document)
-    document.core_properties.title = f"PTE Prep — Report {display_report_number} — {config['title']}"
-    document.core_properties.subject = "FA26SE182 Capstone Project — PTE Prep"
+    document.core_properties.title = f"{PRODUCT_NAME} — Report {display_report_number} — {config['title']}"
+    document.core_properties.subject = f"FA26SE182 Capstone Project — {PRODUCT_NAME}"
     document.core_properties.author = OWNER
-    document.core_properties.comments = "Generated from the approved PTE Prep Markdown report bundle using the supplied DOCX template."
+    document.core_properties.last_modified_by = OWNER
+    document.core_properties.revision = 1
+    document.core_properties.created = DOCUMENT_DATE
+    document.core_properties.modified = DOCUMENT_DATE
+    document.core_properties.comments = "Generated from the current PTEPrep Markdown report bundle using the supplied DOCX template."
 
     # Leave the template's Table of Contents control in place; the document
     # setting above asks Word to refresh it when the file is opened.
@@ -724,13 +733,19 @@ def generate_one(report_number: str, config: dict) -> Path:
     set_heading(document, config["major_heading"], 1)
     add_body_paragraph(
         document,
-        "Product: PTE Prep · Independent organization-based PTE-style practice and mock-exam simulation platform.",
+        f"Product: {PRODUCT_NAME} · Independent organization-based PTE-style practice and mock-exam simulation platform.",
         italic=True,
         small=True,
     )
     add_body_paragraph(
         document,
-        "Document baseline: Version 1.0 · Owner: Ngô Đăng Quang — Project Leader · Group: FA26SE182.",
+        f"Registered title: {REGISTERED_TITLE}.",
+        italic=True,
+        small=True,
+    )
+    add_body_paragraph(
+        document,
+        f"Document baseline: {DOCUMENT_VERSION} · Owner: {OWNER} · Group: {GROUP_CODE}.",
         italic=True,
         small=True,
     )
