@@ -1,4 +1,6 @@
-# PTE Prep DOCX submission package
+# PTEPrep DOCX submission package
+
+> **Status:** The DOCX files in this folder were generated from the previous Markdown baseline and are **superseded** by the scope revision dated 22 October 2026. Treat them as historical reference files until the revised Markdown is approved, regenerated, and visually inspected. Do not submit these copies as the current revision.
 
 These DOCX files are generated from the supplied Report 3–6 Word templates. The generated documents preserve the template cover/logo, page settings, Word theme, heading hierarchy, table styling, and table-of-contents control while replacing the generic sample body with the approved PTE Prep report content.
 
