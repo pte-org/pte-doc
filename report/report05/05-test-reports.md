@@ -97,3 +97,10 @@ The Test Lead should conclude only after reviewing executed evidence:
 7. release recommendation and expiry of evidence.
 
 This Report 5 baseline is **not a runtime sign-off**. It is an executable test specification and an honest result-record format for later runs.
+
+
+## 5.8 Scope revision evidence state
+
+No new product execution was performed while revising the reports. The cases in Section 4.7 are therefore `Not executed` unless a later dated run supplies the build, environment, observation and evidence link. Source inspection can support a maturity label such as Partial or Planned/Future, but it cannot change a test case to Passed.
+
+The documentation validation run may report Markdown encoding, identifier, link, section and diagram-manifest checks separately from product behavior. A clean documentation check does not prove email delivery, entitlement enforcement, AI quality, exam generation, Windows audio, or production availability.
