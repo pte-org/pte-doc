@@ -1,6 +1,6 @@
 # 3. User Manual
 
-This section maps the original DOCX heading **3. User Manual**. It provides role-specific workflows for the six approved human roles. Every workflow records a stable ID, purpose, prerequisites, steps, expected result, error/recovery path, visibility/audit effect, and linked requirements/tests. External Integration Services is described as a service boundary rather than a human manual role.
+This section maps the original DOCX heading **3. User Manual**. It provides role-specific workflows for the eight approved human roles. Every workflow records a stable ID, purpose, prerequisites, steps, expected result, error/recovery path, visibility/audit effect, and linked requirements/tests. External Integration Services is described as a service boundary rather than a human manual role.
 
 ## 3.1 Common language and status
 
@@ -14,13 +14,13 @@ This section maps the original DOCX heading **3. User Manual**. It provides role
 | Locked | Content/policy/audience is fixed for the exam/attempt. |
 | TBD | The product policy or evidence is not fixed; contact the owner rather than guessing. |
 
-The product is independent from PTE Academic and is used for practice/mock-exam simulation. A PTE Prep report is not an official PTE Academic result.
+The product is independent from PTE Academic and is used for practice/mock-exam simulation. A PTEPrep report is not an official PTE Academic result.
 
 ## 3.2 Platform Admin workflows
 
 ### `WF-ADMIN-ONBOARD-001` — Review an organization registration
 
-**Purpose:** Decide whether a pending organization can receive an active workspace.  
+**Purpose:** Decide whether a pending organization can receive an active workspace.
 **Prerequisites:** Platform Admin account is active; registration is visible as `PENDING`.
 
 **Steps**
@@ -39,20 +39,6 @@ The product is independent from PTE Academic and is used for practice/mock-exam 
 
 **Traceability:** `WF-ADMIN-ONBOARD-001`, `FR-ONBOARD-001`–`FR-ONBOARD-003`, `BR-ACCESS-007`–`BR-ACCESS-008`, `TC-ACCESS-001`–`TC-ACCESS-002`.
 
-### `WF-ADMIN-CONTENT-001` — Approve shared question/media content
-
-**Prerequisites:** Platform Author submitted a draft; required media/status is visible.
-
-**Steps:** Open draft → inspect task type/content/media → validate required fields → approve/publish or reject with a reason → confirm revision status.
-
-**Expected result:** A complete revision becomes available to active templates; an incomplete/rejected revision remains unavailable with a correction reason. Published content is revised rather than overwritten.
-
-**Error/recovery:** Expired media or missing answer/rubric stays non-published. Ask Platform Author to correct and resubmit; do not mark incomplete content active.
-
-**Visibility/audit:** Platform Author sees draft/rejection; Host sees published selectable content only. Approval/publication/rejection is audited.
-
-**Traceability:** `WF-ADMIN-CONTENT-001`, `FR-CONTENT-003`–`FR-CONTENT-005`, `BR-CONTENT-012`–`BR-CONTENT-016`, `TC-CONTENT-001`–`TC-CONTENT-002`.
-
 ### `WF-ADMIN-PACKAGE-001` — Manage package/license state
 
 **Prerequisites:** Platform Admin has the approved package policy and provider status.
@@ -65,11 +51,11 @@ The product is independent from PTE Academic and is used for practice/mock-exam 
 
 **Traceability:** `WF-ADMIN-PACKAGE-001`, `FR-PACKAGE-001`–`FR-PACKAGE-004`, `BR-PACKAGE-018`–`BR-PACKAGE-022`, `TC-PACKAGE-002`.
 
-## 3.3 Platform Author workflows
+## 3.3 Academic Staff workflows
 
 ### `WF-AUTHOR-DRAFT-001` — Create a question/media draft
 
-**Prerequisites:** Platform Author has content scope; task catalog row and required media are known.
+**Prerequisites:** Academic Staff has content scope; task catalog row and required media are known.
 
 **Steps:** Open question authoring → choose the catalog task type → enter prompt/response/rubric fields → attach image/audio through the signed media flow → preview → validate → save draft.
 
@@ -77,7 +63,7 @@ The product is independent from PTE Academic and is used for practice/mock-exam 
 
 **Error/recovery:** Missing/expired media, invalid response field, or unsupported task combination appears beside the relevant item. Correct and validate again; do not bypass a required media check.
 
-**Visibility/audit:** Author sees assigned drafts/revisions; Platform Admin sees submitted drafts; Host sees only published content. Draft submission and revision actions are auditable.
+**Visibility/audit:** Academic Staff sees assigned drafts/revisions; Academic Manager sees submitted drafts for review; Platform Admin sees permitted governance/support data; Host sees only published content. Draft submission and revision actions are auditable.
 
 **Traceability:** `WF-AUTHOR-DRAFT-001`, `FR-CONTENT-001`–`FR-CONTENT-003`, `FR-INTEGRATION-002`, `TC-CONTENT-001`.
 
@@ -85,7 +71,7 @@ The product is independent from PTE Academic and is used for practice/mock-exam 
 
 **Prerequisites:** Task rows, section weights, timing, and score-source policy are available.
 
-**Steps:** Create template draft → select task rows from the 23-row catalog → specify task count/timing/weight/source eligibility → explicitly mark Personal Introduction unscored when included → validate → submit for Platform Admin approval.
+**Steps:** Create template draft → select task rows from the current 23-row vocabulary → specify task count/timing/weight/source eligibility and channel flags → explicitly mark Personal Introduction unscored when included → validate → submit for Academic Manager review.
 
 **Expected result:** Template status is submitted/pending approval; no new Host exam can select it until it is active.
 
@@ -226,7 +212,7 @@ The product is independent from PTE Academic and is used for practice/mock-exam 
 
 **Error/recovery:** If report is not visible, the message explains whether scoring is pending or Host publication is incomplete. Contact Host; do not attempt to access another Student’s report.
 
-**Visibility/audit:** Student view is own-scope; Host publication and Student access are traceable. 
+**Visibility/audit:** Student view is own-scope; Host publication and Student access are traceable.
 
 **Traceability:** `WF-STUDENT-VIEW-001`, `FR-REPORT-002`–`FR-REPORT-004`, `BR-REPORT-040`–`BR-REPORT-041`, `TC-REPORT-001`.
 
@@ -253,7 +239,7 @@ Check subscription/license status, effective dates, Student capacity, and exam o
 
 ### Missing question/media or template
 
-Check content revision status, required media completion, active Score Template, and approval state. Platform Author corrects the draft; Platform Admin approves/publishes. Host cannot bypass the shared content gate.
+Check content revision status, required media completion, active Score Template, and approval state. Academic Staff corrects the draft; Academic Manager reviews/activates under policy, while Platform Admin handles platform governance. Host cannot bypass the shared content gate.
 
 ### Exam conflict or generation error
 
@@ -299,8 +285,8 @@ Every image must use synthetic/masked data and include status, source/capture da
 
 ## 3.11 Guide review checklist
 
-- Product is named PTE Prep; PTE Academic independence boundary is visible.
-- Only Platform Admin, Platform Author, Host, Proctor, Examiner, Student, and External Integration Services appear as product actors.
+- Product is named PTEPrep; PTE Academic independence boundary is visible.
+- Only Platform Admin, Platform Manager, Academic Manager, Academic Staff, Host, Proctor, Examiner, Student, and External Integration Services appear as product actors.
 - Registration and package activation are separate instructions.
 - Windows-first client and device/offline limitations are explicit.
 - Every role workflow has prerequisites, steps, expected result, error/recovery, visibility, audit, and traceability.
@@ -309,3 +295,82 @@ Every image must use synthetic/masked data and include status, source/capture da
 - Retention remains contract-based/TBD.
 - Screenshots/assets are masked or explicitly TBD.
 
+
+## 3.12 Scope revision workflows
+
+### 3.12.1 Platform Manager - operational review
+
+**Workflow ID:** `WF-PLATFORM-MANAGER-001`
+**Status:** Current/Partial depending on the reviewed route.
+
+1. Sign in to the platform administration web.
+2. Open the organization or operational case assigned to the Platform Manager.
+3. Review status, package/support information and the allowed action.
+4. Apply the operational action or escalate it to Platform Admin.
+5. Confirm that the resulting status and audit reference are visible.
+
+The Platform Manager cannot approve academic content, publish a question revision, or read unrelated Student answers.
+
+### 3.12.2 Academic Staff - draft and submit
+
+**Workflow ID:** `WF-ACADEMIC-STAFF-001`
+**Status:** Partial/Planned until the complete authoring and review route is evidenced.
+
+1. Open the content authoring area.
+2. Create or revise the question, prompt/media, rubric and task metadata.
+3. Choose the intended `available_for_practice` and `available_for_exam` flags.
+4. Run the visible content/readiness checks.
+5. Submit the revision to Academic Manager with a version and review note.
+6. If rejected, address the recorded findings in a new revision; do not edit a locked exam or practice item.
+
+Academic Staff must not publish or activate its own submitted content.
+
+### 3.12.3 Academic Manager - review and activate
+
+**Workflow ID:** `WF-ACADEMIC-MANAGER-001`
+**Status:** Planned/Future where the reviewed source does not show the complete workflow.
+
+1. Open the submitted revision and inspect task structure, media, rubric, answer policy and channel flags.
+2. Approve or reject with a reason.
+3. Publish/activate only after all required content and policy checks pass.
+4. Confirm the revision status and audit record.
+5. Retire or suspend unsafe content without rewriting an existing frozen session or exam.
+
+### 3.12.4 Student - self-practice
+
+**Workflow ID:** `WF-STUDENT-PRACTICE-001`
+**Status:** Partial for current catalog/session/progress slices; AI explanation is Planned/Future.
+
+1. Open `pte-practice` and request the email sign-in code.
+2. Submit the valid code. If it is expired or reused, request a safe resend.
+3. Select an authorized organization/context when the product asks for one and confirm that practice entitlement is available.
+4. Browse a task group. A visible but unavailable group must explain the missing content, entitlement or readiness condition.
+5. Start or resume a practice session. Read the task, timing and save state before answering.
+6. Answer, optionally record confidence, and wait for the saved/pending indicator. For speaking/media work, complete the approved grant/upload flow.
+7. Use Save and Exit when permitted. Resume the same session rather than starting a duplicate.
+8. Submit, skip or discard according to the session policy. Repeated commands should return the existing state.
+9. Open Progress/History. Activity and pending feedback are not presented as a final score.
+
+### 3.12.5 Student - AI explanation
+
+**Workflow ID:** `WF-STUDENT-PRACTICE-002`
+**Status:** Planned/Future/TBD.
+
+After a submitted answer, the Student may see `Pending`, `Available`, `Unavailable`, or `Retry`. When available, the explanation is labelled as generated educational feedback and identifies the relevant question/rubric context. If it fails, the Student keeps the answer and can follow the retry or support instruction. The guide must not show an invented button or claim a successful AI result until a real UI and dated evidence exist.
+
+### 3.12.6 Student - organization exam reminder
+
+The self-practice workflow does not replace the Windows organization exam workflow. For an assigned exam, the Student uses the exam code/assignment, completes the device check, follows the fixed timer, saves locally, synchronizes, submits once and later views the Host-published report. Practice flags and exam flags are evaluated by their respective consumers.
+
+### 3.12.7 Scope revision traceability and unresolved feedback
+
+| Guide topic | Requirement/design/test link | User-facing status |
+|---|---|---|
+| Email sign-in and context | `FR-PRACTICE-001`, `FR-PRACTICE-002`, `SEQ-PRACTICE-LOGIN`, `TC-PRACTICE-001`, `TC-PRACTICE-002` | Current/Partial or Planned depending on the verified route |
+| Practice catalog and usage flags | `FR-PRACTICE-003`, `FR-CONTENT-006`, `TC-PRACTICE-004`, `TC-CONTENT-003`-`006` | Flag controls are Planned/Future until the UI is evidenced |
+| Session, answer and media recovery | `FR-PRACTICE-004`, `FR-PRACTICE-005`, `FR-PRACTICE-006`, `SEQ-PRACTICE-SESSION`, `TC-PRACTICE-005` through `TC-PRACTICE-009` | Current slices and later implementation steps are separated |
+| AI explanation | `FR-PRACTICE-007`, `NFR-AI-001`, `NFR-AI-002`, `SEQ-AI-FEEDBACK`, `TC-PRACTICE-010`, `TC-PRACTICE-011` | Planned/Future/TBD; no invented successful screen |
+| Progress and history | `FR-PRACTICE-008`, `TC-PRACTICE-008`/`012` | Activity/progress is distinct from a final score |
+| Content feedback | `FR-PRACTICE-009`, `TBD-FEEDBACK-001`, `TC-PRACTICE-013` | Escalation only until reporter, target, handler and visibility are approved |
+
+These references allow a reviewer to move from the user instruction to the requirement, design and planned test without treating a planned step as an available feature.
