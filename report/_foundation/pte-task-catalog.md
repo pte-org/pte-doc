@@ -48,6 +48,6 @@ The 23 task rows remain the stable task vocabulary, but each **question revision
 
 The system selects from the flag that belongs to the requested channel. Publication/approval, task support, media readiness, rubric readiness, ownership, entitlement, and the selected composition rules remain additional filters. A true flag does not bypass those checks. If the eligible pool is empty or too small, the action stops with a content-readiness result; it never borrows a question excluded from the requested channel.
 
-The flags are separate from the still-open D01 decision about the final Academic/Core task-family catalog. D01 controls which task families are permitted; D04 controls whether a particular approved question revision may be consumed by each channel. A question can be enabled for both channels only when the later reuse, provenance, and flag-change policy explicitly allows it.
+The flags are separate from D01, resolved by the user on 2026-10-22 in favor of the existing Academic task families without a separate Core expansion. D01 controls task-family scope; D04 controls whether an approved question revision may be consumed by each channel. Task/media/runtime readiness still requires verification. Both-channel reuse requires the approved provenance, disclosure and flag-change policy.
 
 For an existing practice session or generated exam, selected question and media revisions are frozen. A later flag change affects future selection only and does not rewrite the existing session or exam.

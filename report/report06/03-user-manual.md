@@ -358,6 +358,8 @@ Academic Staff must not publish or activate its own submitted content.
 
 After a submitted answer, the Student may see `Pending`, `Available`, `Unavailable`, or `Retry`. When available, the explanation is labelled as generated educational feedback and identifies the relevant question/rubric context. If it fails, the Student keeps the answer and can follow the retry or support instruction. The guide must not show an invented button or claim a successful AI result until a real UI and dated evidence exist.
 
+**Confirmed product policy, 2026-10-22; implementation remains Planned/Future:** explanations default to Vietnamese with an English option. Each language variant is stored separately; reopening a result returns the stored explanation and changing the interface language does not automatically request AI again. Objective tasks show system-calculated results. Writing/Speaking initially show rubric feedback and criterion levels; numeric AI scores require later calibration. The practice catalog uses existing Academic task families; Student organization selection is restricted to authorized memberships. Study-Pack provides quick filtered task groups, without a separate course or ordered-pack completion system.
+
 ### 3.12.6 Student - organization exam reminder
 
 The self-practice workflow does not replace the Windows organization exam workflow. For an assigned exam, the Student uses the exam code/assignment, completes the device check, follows the fixed timer, saves locally, synchronizes, submits once and later views the Host-published report. Practice flags and exam flags are evaluated by their respective consumers.

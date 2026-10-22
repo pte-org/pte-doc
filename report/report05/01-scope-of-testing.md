@@ -118,6 +118,6 @@ The revised test boundary includes:
 - Independent `available_for_practice` and `available_for_exam` question selection with no cross-channel fallback.
 - Existing organization exam generation, Windows delivery, Proctor monitoring, Examiner assignment, Host score selection and report publication regression paths.
 
-The following remain outside testing for this revision: official PTE Academic equivalence, a research contribution, Student personal payment, mobile organization exam delivery, open chatbot/personalized study plans, advanced anti-cheat and any unresolved D01-D03 policy that has no accepted expected result.
+The following remain outside testing for this revision: official PTE Academic equivalence, a research contribution, Student personal payment, mobile organization exam delivery, open chatbot/personalized study plans, advanced anti-cheat and ordered curated-pack completion. D01-D03 are confirmed requirements and belong in planned coverage; execution remains pending. Numeric Writing/Speaking AI scoring is a later capability after calibration, separate from the initial rubric-feedback release.
 
 Every case records requirement disposition, implementation maturity and execution status separately. A future AI case may be complete as a planned acceptance case while its execution status remains `Not executed`.

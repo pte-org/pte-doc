@@ -1,7 +1,7 @@
 # Specification: cập nhật phạm vi Report 3–6 của PTEPrep
 
 Date: 22 October 2026
-Status: Draft; D01–D03 awaiting user answers; registration v1.2 pending supervisor confirmation.
+Status: Draft; D01–D03 confirmed by user on 2026-10-22; registration v1.2 pending supervisor confirmation. Implementation maturity and academic/operational evidence remain separate.
 Execution boundary: Reports first; practice application implementation belongs to a later work package.
 Registered title: **PTEPrep: An AI-Powered PTE Practice Platform and Realistic Exam Simulator**.
 
@@ -32,12 +32,12 @@ P1 outputs are mandatory. P2 summary is useful but may remain concise; P3 conven
 
 | ID | Question and options | Recommendation only | Dependent finalization blocked |
 |---|---|---|---|
-| D01 | Shared Academic-oriented task families for web/Windows, or separately scoped Core and Academic catalogs? This concerns task families, not a specific question set. | Shared Academic-oriented scope; no separate Core expansion. Not accepted. | Catalog membership, per-channel task support, scoring/timing, task-specific tests and guide screenshots. |
-| D02 | One verified email linked to isolated organization memberships with explicit context, or no cross-organization identity linking? | Shared identity, explicit org context and per-org ownership. Not accepted. | Identity/membership wording, context-selection design, ownership tests, access guide. Alternative requires source-gap flag and supervisor clarification of v1.2 exclusion. |
-| D03 | Study-Pack quick grouped practice, or curated ordered packs with persisted pack completion? | Quick groups only; no LMS or per-pack progress. Not accepted. | Pack requirements, entities/progress model, pack test cases and operational guide. Expanded option requires extra catalog/admin and progress scope decisions. |
+| D01 | Task-family scope | User confirmed 2026-10-22: existing Academic task families, no separate Core expansion. | Verify catalog membership, per-channel readiness, timing and tests; confirmation is not runtime evidence. |
+| D02 | Email identity and organization membership | User confirmed 2026-10-22: verified email identity with explicit authorized context and per-organization ownership. | No automatic Student profile merging; verify membership/context isolation. |
+| D03 | Study-Pack scope | User confirmed 2026-10-22: quick filtered practice groups; no LMS or per-pack completion. | Implement real filtering/navigation and corresponding planned cases/guides. |
 | D04 | Question eligibility is controlled separately for Practice Web and Windows Exam Client; the system selects questions using the corresponding flag. | Confirmed by user on 22 October 2026. Proposed business labels: Available for practice / Available for exam simulation. Technical field names remain design choices. | Propagate channel eligibility through authoring/review, pool selection, generation, design, tests and guides. No application change in this package. |
 
-D01–D03 do not block independent role/channel, existing exam, general AI or structure drafting. Final affected claims and publication cannot be accepted until answered; recommendations must not silently become decisions.
+D01–D03 are resolved by direct user answers recorded in [Practice decisions](../quang-pte-practice-completion/decisions.md). Vietnamese-default/English-option explanations and rubric feedback before calibrated numeric AI scores were also confirmed. Remaining academic/operational policies and supervisor approval are independent gates; no implementation or publication verification is implied.
 
 Additional closure items go to the foundation TBD register: AI eligible tasks/output rubric/academic oversight, feedback reporting actors and targets, entitlement revocation/resume/history, and contractual retention/AI-provider data handling. Draft explicit bounded requirements; do not invent unresolved thresholds or permissions.
 

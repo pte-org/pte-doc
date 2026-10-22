@@ -80,7 +80,7 @@ External Integration Services represents controlled boundaries for payment, medi
 2. Platform Admin is platform-wide; Platform Manager is operationally scoped; Academic Manager is academic-review scoped; Academic Staff is content-authoring scoped; Host is organization-scoped; Proctor and Examiner are assignment-scoped; Student is own-practice/attempt/report scoped.
 3. External Integration Services has no interactive workspace and no permission to administer PTEPrep data.
 4. A registration in `PENDING` or `REJECTED` state cannot open an active organization workspace.
-5. Student practice access requires an explicit organization context and an active membership where the selected practice content is organization-scoped. Whether one verified identity may link to multiple organization memberships remains the open `TBD-D02-IDENTITY-CONTEXT` decision; until it is resolved, the system must deny ambiguous or cross-organization access rather than infer ownership from email alone.
+5. Student practice access requires an explicit organization context and an active membership where the selected practice content is organization-scoped. D02 was confirmed on 2026-10-22: one verified email identity may choose among authorized organization memberships. The selected context scopes each session and its data; email alone does not grant access or merge Student profiles. Missing, ambiguous or unauthorized context is denied safely.
 6. A published report contains only data that the viewer is allowed to see. Student report visibility starts only after Host publication.
 7. Important changes to permission, package, enrollment, exam policy, scoring approval, publication, and violation records must be traceable to actor, time, affected record, and outcome.
 
@@ -202,7 +202,7 @@ Each use case below has a stable ID, a primary actor, preconditions, main flow, 
 |---|---|
 | Primary actor | Academic Staff prepares; Academic Manager reviews/activates under policy. |
 | Preconditions | Task catalog, weights, timing, score sources, and required content rules are available. |
-| Main flow | Create draft → select task rows from the current 23-row task vocabulary → define sections/timing/weights/source eligibility and channel flags → validate → approve → activate. Final task-family applicability remains subject to D01. |
+| Main flow | Create draft → select existing Academic task rows from the canonical vocabulary under confirmed D01 → define sections/timing/weights/source eligibility and channel flags → validate content/runtime readiness → approve → activate. |
 | Alternate/error flow | Invalid weight/timing/task combination remains draft; retirement prevents new selection but does not rewrite locked exams. |
 | Result | Host can select the active version; a locked exam retains the selected version. |
 | Related IDs | `FR-TEMPLATE-001`–`FR-TEMPLATE-004`, `BR-CONTENT-014`–`BR-CONTENT-016`, `NFR-REQ-002`. |

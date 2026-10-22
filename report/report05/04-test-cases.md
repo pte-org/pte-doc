@@ -75,7 +75,7 @@ A test case becomes an execution result only when the tester fills actual result
 | `TC-ROLE-004` | `FR-ACADEMIC-002` | Academic Manager approves ready content; publication/activation history contains actor and time | Not executed |
 | `TC-PRACTICE-001` | `FR-PRACTICE-001` | Expired, reused and throttled email codes do not create a practice session and expose no membership data | Not executed |
 | `TC-PRACTICE-002` | `FR-PRACTICE-002` | A Student with no active membership or entitlement receives a safe locked state; another organization is not listed | Not executed |
-| `TC-PRACTICE-003` | `FR-PRACTICE-002` | Multiple authorized contexts require the approved choice/default policy; the session records the selected context | Blocked by `TBD-D02-IDENTITY-CONTEXT` |
+| `TC-PRACTICE-003` | `FR-PRACTICE-002` | One verified email identity selects an authorized organization context; the session records it and denies foreign/ambiguous context without profile merging | Not executed; D02 confirmed 2026-10-22 |
 | `TC-PRACTICE-004` | `FR-PRACTICE-003` | Practice catalog excludes unpublished, unready and exam-only questions; insufficient content is explained | Not executed |
 | `TC-PRACTICE-005` | `FR-PRACTICE-004` | Repeated begin commands return one owned session or one deterministic conflict, never two active sessions | Not executed |
 | `TC-PRACTICE-006` | `FR-PRACTICE-005` | Save, network interruption, retry, leave and resume preserve one response and its fixed content | Not executed |

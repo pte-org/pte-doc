@@ -399,7 +399,7 @@ sequenceDiagram
 ```
 
 **Diagram ID:** `SEQ-PRACTICE-LOGIN`
-**Status:** Proposed; source contains identity/membership slices but the final practice context policy remains `TBD-D02-IDENTITY-CONTEXT`.
+**Status:** Proposed implementation; D02 was confirmed on 2026-10-22: verified email with explicit authorized organization context. Source contains identity/membership slices; complete context switching and isolation still require implementation evidence.
 **Related requirements:** `FR-PRACTICE-001`, `FR-PRACTICE-002`.
 
 ### 3.10.2 Practice start, save and resume
@@ -454,7 +454,7 @@ stateDiagram-v2
 - `ADR-PRACTICE-002`: treat channel flags as eligibility filters, not entitlements.
 - `ADR-PRACTICE-003`: preserve answer data independently from AI feedback state.
 - `ADR-PRACTICE-004`: label all AI output as educational/generated content and retain provenance.
-- `ADR-PRACTICE-005`: keep unresolved D01-D03 decisions as design parameters rather than silently selecting a product policy.
+- `ADR-PRACTICE-005`: implement D01-D03 confirmed on 2026-10-22: existing Academic task families, explicit authorized organization context, and quick grouped Study-Pack practice. Preserve source maturity and academic/operational policy gates independently from these product decisions.
 
 ### 3.10.5 Scope revision traceability
 

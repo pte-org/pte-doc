@@ -3,13 +3,13 @@
 Date: 22 October 2026
 Mode: Hard
 Test mode: Default; no `--tdd` requested or inherited.
-Status: **In progress — Phases 01–06 drafted; DOCX publication remains pending. D01–D03 are still pending for dependent finalization.**
+Status: **In progress — Phases 01–06 drafted; D01–D03 confirmed by user on 2026-10-22. Updated DOCX publication/visual review remain pending.**
 Spec: [spec.md](spec.md)
 Canonical output: `pte-doc/report/`
 
 ## Immediate work package — sửa báo cáo trước
 
-**User direction confirmed on 22 October 2026:** prepare the documentation plan first and revise Reports 3–6 before revising practice application code. The plan was prepared first; Phases 01–06 have now drafted the foundation and Reports 3–6. Business recommendations D01–D03 remain pending and are not implicitly accepted by this sequencing instruction.
+**User direction confirmed on 22 October 2026:** prepare the documentation plan first and revise Reports 3–6 before revising practice application code. Phases 01–06 have drafted the foundation and Reports 3–6. D01–D03 were subsequently confirmed through direct Practice-planning answers; see `quang-pte-practice-completion/decisions.md`.
 
 The first reviewable output during execution is the revised English Report 3 and shared foundation. Continue with Reports 4–6 derived from that requirement baseline, then perform cross-report review. Word publication follows stable Markdown content. Application implementation begins in a separate later work package using the report requirements and gap handoff.
 
@@ -57,7 +57,7 @@ English report content; Vietnamese planning is permitted. No word limit; every m
 
 ### Confirmed clarification: question usage flags
 
-On 22 October 2026 the user confirmed separate question flags for Practice Web and Windows Exam Client, with automatic question selection by the appropriate flag (D04 in spec). This is a question-pool rule, independent of the pending D01 Academic/Core task-family choice. Academic authoring/review, selection filters, generation failures, frozen content, diagrams, tests and guides must all cover it. Flags supplement publication/content readiness and access checks; they never authorize cross-channel fallback. Default values, legacy data migration and both-enabled reuse policy are not silently decided by this clarification.
+On 22 October 2026 the user confirmed separate question flags for Practice Web and Windows Exam Client, with automatic question selection by the appropriate flag (D04 in spec). This is a question-pool rule, independent of the D01 existing Academic task-family scope confirmed in the subsequent user reply. Academic authoring/review, selection filters, generation failures, frozen content, diagrams, tests and guides must all cover it. Flags supplement publication/content readiness and access checks; they never authorize cross-channel fallback. Default values, legacy data migration and both-enabled reuse policy are not silently decided by this clarification.
 
 ## Inputs and research synthesis
 
@@ -83,7 +83,7 @@ Research recommends in-place revision, stable IDs, explicit source/proposal dist
 | 06 | [phase-06-validation-and-gap-handoff.md](phase-06-validation-and-gap-handoff.md) | Successor validation and later-practice gap handoff | US-04,06,07,08 |
 | 07 | [phase-07-docx-publication.md](phase-07-docx-publication.md) | Four visually inspected template-style DOCX | US-05,08 |
 
-Execute phases in order; draft independent sections while D01–D03 are open. No final baseline/export acceptance while dependent statements remain unresolved. Writing drafts does not require fabricated supervisor approval. Readiness for execution and supervisor approval of registration are different states.
+Execute phases in order using the confirmed D01–D03 decisions. Product confirmation does not replace academic policy closure or final export validation. Writing drafts does not require fabricated supervisor approval; registration approval remains separate.
 
 ## Acceptance gates
 
@@ -106,7 +106,7 @@ Do not write new verification reports into workstation Temp or historical `repor
 
 ## Risks and open decisions
 
-- D01–D03 recommendations in spec are unaccepted. Track both options and affected artifacts.
+- D01–D03 were confirmed on 2026-10-22; implement the selected policies and keep remaining academic/operational evidence gates separate.
 - D04 channel-specific question eligibility is confirmed; both-enabled reuse, flag-change approval and migration/default policies need explicit design treatment. The earlier plan review predates D04; its approval does not certify the added behavior.
 - v1.2 supervisor confirmation pending; no approval claim without receipt.
 - New role names are not a global replacement for Author; approval responsibilities require resource/action review.
@@ -118,7 +118,7 @@ Do not write new verification reports into workstation Temp or historical `repor
 
 ## Quality and Testing State
 
-Spec Quality Check: structural PASS — prioritized stories and measurable acceptance are present. Business validation D01–D03 remains pending user answers; this structural result does not approve execution or publication. No ambiguity is disguised as an accepted recommendation.
+Spec Quality Check: structural PASS — prioritized stories and measurable acceptance are present. D01–D03 were subsequently confirmed by direct user answers; that confirmation does not prove implementation or publication readiness.
 
 Plan review: APPROVED for independent drafting; no BLOCKER/HIGH findings. See [red-team review](../../../plans/reports/261022-pte-prep-report-scope-plan-review.md). Phase implementation quality remains not evaluated.
 Testing: no product tests started; documentation validation only. No application tests or new TDD commitment.
@@ -129,13 +129,13 @@ Execution: Phases 01–06 were drafted on 2026-10-22. No application source, dat
 
 The documentation work package drafted Phases 01–05 in place under `pte-doc/report/` while preserving the original Report 3–6 filenames and top-level section order. The revision adds the four application channels, eight canonical human roles, Student practice, AI explanation requirements, progress/history, and independent `available_for_practice` / `available_for_exam` selection rules. Source maturity remains separate from requirements.
 
-The Markdown checks found no replacement characters or broken local links in the foundation and Report 3–6 bundle. No application tests, runtime checks, production checks or DOCX visual inspection were performed in this drafting pass. Phase 06 records the successor validation and practice gap handoff; Phase 07 remains pending until the dependent scope decisions and Markdown baseline are accepted.
+The Markdown checks found no replacement characters or broken local links in the foundation and Report 3–6 bundle. No application tests, runtime checks, production checks or DOCX visual inspection were performed in this drafting pass. Phase 06 records the successor validation and practice gap handoff; Phase 07 final publication remains pending updated decision propagation and visual inspection; the product choices are confirmed.
 
-Review adjudication: LOW handoff ambiguity **ACCEPTED** and corrected below. D01–D03 gate dependent finalization and publication, rather than all independent drafting. No findings rejected or left unaddressed.
+Review adjudication: LOW handoff ambiguity **ACCEPTED**. D01–D03 were decision gates during initial drafting and are now resolved by direct user answers. No findings rejected or left unaddressed.
 
 ## Handoff command
 
-The reviewed plan supports independent documentation drafting with D01–D03 visibly pending. Record the user's answers before finalizing their dependent requirements, designs, cases, guides or submission exports. The handoff command is:
+D01–D03 answers are now recorded in the spec, shared TBD register and `quang-pte-practice-completion/decisions.md`. Finalize against those choices and preserve remaining academic/operational and visual-publication gates. The documentation handoff command is:
 
 ```text
 /ck:cook --hard pte-doc/projects/plans/quang-pte-prep-report-scope-update/plan.md

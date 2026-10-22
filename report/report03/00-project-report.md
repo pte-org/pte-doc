@@ -4,7 +4,7 @@
 **Registered title:** PTEPrep: An AI-Powered PTE Practice Platform and Realistic Exam Simulator
 **Document-level DOCX section:** II. Software Requirement Specification
 **Version:** 1.1 scope revision draft
-**Status:** Draft - English project-specific requirements, pending D01-D03 decisions and supervisor confirmation
+**Status:** Draft - D01-D03 and practice language/feedback policy confirmed by user; supervisor confirmation and remaining academic/operational policies pending
 **Owner:** Ngo Dang Quang - Project Leader
 **Revision date:** 2026-10-22
 **Source:** `template-doc/Report3_Software Requirement Specification.docx`, registration v1.2, reviewed source and the scope revision plan
@@ -40,4 +40,4 @@ The shared actor, feature, vocabulary, task, status, evidence and open-decision 
 - [Evidence catalog](../_foundation/evidence-catalog.md)
 - [Open/TBD register](../_foundation/tbd-register.md)
 
-Numeric performance and recovery values remain acceptance targets until a dated Report 5 result proves them. Retention remains contract-based. D01-D03 remain decision pending; D04 question flags are confirmed by the user and are included in all four reports.
+Numeric performance and recovery values remain acceptance targets until a dated Report 5 result proves them. Retention remains contract-based. D01-D03 and practice language/feedback policy were confirmed by the user on 2026-10-22; D04 independent question flags remain confirmed. See the shared TBD register and Practice decision record for the resolved policies; confirmation does not imply implementation or academic validation.

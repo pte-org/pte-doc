@@ -18,7 +18,7 @@ The rules below are the business interpretation of the functional requirements. 
 | `BR-ACCESS-006` | Student may write own active attempt data and view own published report only. | `FR-DELIVERY-001`, `FR-REPORT-004` |
 | `BR-ACCESS-007` | An organization becomes active only after Platform Admin approval. | `FR-ONBOARD-002`, `FR-ONBOARD-003` |
 | `BR-ACCESS-008` | Pending or rejected registration cannot open an active organization workspace. | `FR-ONBOARD-001`, `FR-ONBOARD-002` |
-| `BR-ACCESS-009` | Student practice access requires an explicit organization context and active membership; multiple-organization identity linking remains pending `TBD-D02-IDENTITY-CONTEXT`, and ambiguous context must be denied safely. | `FR-ORG-001`, `FR-ENROLL-001`, `FR-PRACTICE-002` |
+| `BR-ACCESS-009` | Confirmed D02: one verified email identity may select among authorized organization memberships. Practice sessions and Student data remain isolated by selected context; membership is never inferred from email alone and ambiguous/foreign context is denied. | `FR-ORG-001`, `FR-ENROLL-001`, `FR-PRACTICE-002` |
 | `BR-ACCESS-010` | Student creation/import checks organization capacity, duplicates, and required data before commit. | `FR-ORG-001`, `FR-ORG-002` |
 | `BR-ACCESS-011` | Membership transfer/removal is explicit and auditable; it does not rewrite a published exam audience. | `FR-ORG-004`, `FR-ENROLL-002` |
 
@@ -128,7 +128,7 @@ Messages are examples of required business meaning. Exact localization and UI wo
 
 ## 5.4 Complete PTE task catalogue reference
 
-The current task vocabulary contains exactly 23 rows at [`../_foundation/pte-task-catalog.md`](../_foundation/pte-task-catalog.md): 22 scored task types plus unscored Personal Introduction. Every row records response type, timing rule, default score source, Score Template relationship, and fixed-version relationship. D01 still controls the final task-family scope; D04 independently controls whether an approved question revision is eligible for Practice Web or Windows Exam Client. Report 3 must not introduce an additional task name outside that catalog without updating the catalog and ledger.
+The current task vocabulary contains exactly 23 rows at [`../_foundation/pte-task-catalog.md`](../_foundation/pte-task-catalog.md): 22 scored task types plus unscored Personal Introduction. Every row records response type, timing rule, default score source, Score Template relationship, and fixed-version relationship. Confirmed D01 selects the existing Academic task families without separate Core expansion; per-task readiness remains an implementation gate. D04 independently controls question eligibility for Practice Web or Windows Exam Client. Additional task names require updating the catalog and ledger.
 
 ## 5.5 Assumptions and constraints
 
@@ -210,4 +210,4 @@ The current task vocabulary contains exactly 23 rows at [`../_foundation/pte-tas
 
 ### 5.9.3 Open-decision closure rule
 
-D01, D02, D03, feedback ownership, AI policy and retention remain visible until the named owner supplies a decision. A draft can describe both alternatives and safe behavior. Final design/test/guide statements depending on a decision remain provisional and cannot be labelled approved or runtime verified.
+D01–D03 were resolved by the user on 2026-10-22: existing Academic task families, verified email with explicit authorized organization context, and quick grouped Study-Pack practice. The user also chose Vietnamese explanations by default with an English option, objective system scores and rubric feedback for Writing/Speaking before calibrated numeric AI scores. See the shared TBD register for the resolution record. Feedback ownership, academic rubric approval, remaining AI operational policy and contractual retention details remain open. Product confirmation does not prove runtime behavior, test execution or supervisor approval.

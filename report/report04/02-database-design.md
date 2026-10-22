@@ -22,7 +22,7 @@ This section maps the original DOCX heading **2. Database Design**. It describes
 | `DB-REGISTRATION` | Public organization registration | `PKG-TENANCY` | May materialize one organization and first Host | `PENDING`/approved/rejected state; approval is idempotent. |
 | `DB-USER` | Account/principal | `PKG-IDENTITY` | Role/membership links, assignments | Account status and role are separate from organization data. |
 | `DB-USER-MEMBERSHIP` | User-to-organization role/scope | `PKG-IDENTITY`/`PKG-TENANCY` | User, organization, role | Role must be one approved human role; scope is enforced. |
-| `DB-STUDENT` | Organization Student profile | `PKG-TENANCY` | Organization, classes, enrollments, attempts | The profile is read through an explicit organization membership/context. Whether one identity may link to multiple organization memberships remains `TBD-D02-IDENTITY-CONTEXT`; duplicates, capacity and ownership are checked before commit. |
+| `DB-STUDENT` | Organization Student profile | `PKG-TENANCY` | Organization, classes, enrollments, attempts | Confirmed D02 allows one verified email identity to select among authorized memberships. Profiles and practice ownership remain context-scoped; duplicates, capacity and ownership are checked before commit, without automatic profile merging. |
 | `DB-PROGRAM` | Organization program | `PKG-TENANCY` | Organization, classes/Students | Active state controls selection. |
 | `DB-CLASS` | Organization class | `PKG-TENANCY` | Program, Student membership | Membership changes are explicit/auditable. |
 | `DB-REGISTRATION-MEMBERSHIP` | Student/program/class membership | `PKG-TENANCY` | Student, class/program | No duplicate active membership; published audience is independent snapshot. |

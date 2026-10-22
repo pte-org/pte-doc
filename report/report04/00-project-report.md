@@ -4,7 +4,7 @@
 **Registered title:** PTEPrep: An AI-Powered PTE Practice Platform and Realistic Exam Simulator
 **Document-level DOCX section:** II. Software Design Document
 **Version:** 1.1 scope revision draft
-**Status:** Draft - source-backed and proposed design separated; D01-D03 and selected policy items remain open
+**Status:** Draft - source-backed and proposed design separated; D01-D03 confirmed, selected academic/operational policies remain open
 **Owner:** Ngo Dang Quang - Project Leader
 **Revision date:** 2026-10-22
 **Source:** Report 3 revision, registration v1.2, current Compose/source inventory and reviewed design plans

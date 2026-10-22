@@ -89,4 +89,4 @@ The person executing a case is responsible for actual evidence, but the Test Lea
 | WP-05 Channel flags | `TC-CONTENT-003` through `TC-CONTENT-006` | Academic content owner | No cross-channel selection or frozen-content rewrite |
 | WP-06 Exam regression | Existing delivery, Proctor, Examiner and publication cases | Exam workflow owner | New practice changes do not regress organization exam behavior |
 
-Dependent D01-D03 cases remain `Blocked by decision` until the corresponding expected result is accepted. This is different from `Out of scope` and must not be counted as a passed test.
+D01-D03 expected policies were accepted by the user on 2026-10-22: existing Academic task families, explicit authorized organization context and quick grouped Study-Pack practice. Their cases are `Not executed`, rather than `Blocked by decision` or `Passed`. Remaining AI academic/operational or feedback ownership decisions can still block their own dependent cases.
