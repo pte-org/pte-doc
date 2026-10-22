@@ -1,6 +1,6 @@
 # 2. Database Design
 
-This section maps the original DOCX heading **2. Database Design**. It describes the relational ownership and invariants needed for PTE Prep. It does not invent columns that were not supported by the reviewed source. Detailed table/column migrations remain implementation evidence or TBD items.
+This section maps the original DOCX heading **2. Database Design**. It describes the relational ownership and invariants needed for PTEPrep. It does not invent columns that were not supported by the reviewed source. Detailed table/column migrations remain implementation evidence or TBD items.
 
 ## 2.1 Data ownership principles
 
@@ -22,7 +22,7 @@ This section maps the original DOCX heading **2. Database Design**. It describes
 | `DB-REGISTRATION` | Public organization registration | `PKG-TENANCY` | May materialize one organization and first Host | `PENDING`/approved/rejected state; approval is idempotent. |
 | `DB-USER` | Account/principal | `PKG-IDENTITY` | Role/membership links, assignments | Account status and role are separate from organization data. |
 | `DB-USER-MEMBERSHIP` | User-to-organization role/scope | `PKG-IDENTITY`/`PKG-TENANCY` | User, organization, role | Role must be one approved human role; scope is enforced. |
-| `DB-STUDENT` | Organization Student profile | `PKG-TENANCY` | Organization, classes, enrollments, attempts | One organization in this release; duplicates/capacity checked before commit. |
+| `DB-STUDENT` | Organization Student profile | `PKG-TENANCY` | Organization, classes, enrollments, attempts | The profile is read through an explicit organization membership/context. Whether one identity may link to multiple organization memberships remains `TBD-D02-IDENTITY-CONTEXT`; duplicates, capacity and ownership are checked before commit. |
 | `DB-PROGRAM` | Organization program | `PKG-TENANCY` | Organization, classes/Students | Active state controls selection. |
 | `DB-CLASS` | Organization class | `PKG-TENANCY` | Program, Student membership | Membership changes are explicit/auditable. |
 | `DB-REGISTRATION-MEMBERSHIP` | Student/program/class membership | `PKG-TENANCY` | Student, class/program | No duplicate active membership; published audience is independent snapshot. |
@@ -90,10 +90,10 @@ erDiagram
     AUDIT_EVENT }o--|| ORGANIZATION : scoped_to
 ```
 
-**ERD ID:** `DB-ERD-001`  
-**Caption:** PTE Prep organization, fixed exam, attempt, scoring, and publication relationships  
-**Status:** Planned/Future conceptual design; exact columns and migrations require source/schema evidence.  
-**Evidence/source:** `EVD-FOUNDATION-003`, `EVD-FOUNDATION-005`.  
+**ERD ID:** `DB-ERD-001`
+**Caption:** PTEPrep organization, fixed exam, attempt, scoring, and publication relationships
+**Status:** Planned/Future conceptual design; exact columns and migrations require source/schema evidence.
+**Evidence/source:** `EVD-FOUNDATION-003`, `EVD-FOUNDATION-005`.
 **Related Report 3 IDs:** `FR-EXAM-004`, `FR-EXAM-009`, `FR-DELIVERY-005`–`FR-DELIVERY-008`, `FR-SCORE-007`, `FR-REPORT-003`–`FR-REPORT-005`, `NFR-09`, `NFR-13`.
 
 ## 2.4 Fixed-version and provenance invariants
@@ -174,3 +174,50 @@ Large roster, candidate, queue, report, and audit queries must be paginated or b
 - Include time zone/offset meaning for exam scheduling and audit timestamps.
 - Treat local client answer storage as sensitive and document device cleanup/recovery boundaries.
 
+
+
+## 2.7 Scope revision practice entities and channel flags
+
+### 2.7.1 Proposed practice entity catalogue
+
+| Entity | Ownership | Key information | State/constraint |
+|---|---|---|---|
+| `PracticeSession` | Student plus selected context | owner, context, entitlement reference, status, created/started/submitted times | A session cannot be opened by another Student; status transitions are idempotent |
+| `PracticeItem` | PracticeSession | question revision, media revision, position, timing policy, selected-at timestamp | Selected content is frozen for the item |
+| `PracticeResponse` | PracticeItem | response payload, confidence, local/sync status, submitted time | One logical response per item; retries use a correlation key |
+| `PracticeMediaBinding` | PracticeResponse | signed grant, provider asset reference, checksum/status, owner | The reference is accepted only for the same Student/session/item |
+| `PracticeProgressEvent` | Student/session | activity type, completion state, source item, timestamp | Activity and confidence are not a score |
+| `AIFeedback` | PracticeResponse | status, explanation, provider/model/prompt/rubric versions, error/retry data | Generated content is labelled and preserves the answer on failure |
+| `QuestionUsagePolicy` or equivalent fields on a revision | Shared content | `available_for_practice`, `available_for_exam`, actor/time/history | Flags are independent and do not bypass approval/readiness |
+
+### 2.7.2 Practice versus exam ownership
+
+```mermaid
+erDiagram
+    USER ||--o{ PRACTICE_SESSION : owns
+    ORGANIZATION ||--o{ MEMBERSHIP : grants
+    PRACTICE_SESSION ||--o{ PRACTICE_ITEM : contains
+    QUESTION_REVISION ||--o{ PRACTICE_ITEM : selected_for
+    PRACTICE_ITEM ||--o| PRACTICE_RESPONSE : receives
+    PRACTICE_RESPONSE ||--o{ PRACTICE_MEDIA_BINDING : binds
+    PRACTICE_RESPONSE ||--o{ AI_FEEDBACK : may_receive
+    PRACTICE_SESSION ||--o{ PRACTICE_PROGRESS_EVENT : records
+    QUESTION_REVISION ||--o{ QUESTION_USAGE_POLICY : classifies
+    EXAM ||--o{ EXAM_ATTEMPT : contains
+    EXAM_ATTEMPT ||--o{ ATTEMPT_ANSWER : receives
+    QUESTION_REVISION ||--o{ ATTEMPT_ANSWER : snapshotted_for
+```
+
+**Diagram ID:** `DB-PRACTICE-ERD-001`
+**Status:** Proposed for the later practice implementation. Existing exam entities are source-backed; practice entities are a design handoff.
+**Related requirements:** `FR-PRACTICE-004` through `FR-PRACTICE-008`, `FR-CONTENT-006`.
+
+The ERD deliberately keeps `PracticeResponse` separate from `AttemptAnswer`. A practice answer can produce educational feedback and progress; an exam answer enters the organization scoring/publication flow. The two flows may reuse a question revision, but they do not share a mutable response record.
+
+### 2.7.3 Channel flag invariants
+
+1. A question revision may be enabled for practice, exam, both, or neither.
+2. Approval/publication and readiness are required in addition to either flag.
+3. A flag edit is audited and applies only to future selection.
+4. A locked practice item or exam form retains its selected revision even if a flag later changes.
+5. An empty eligible pool is a content-readiness error, never a cross-channel fallback.
