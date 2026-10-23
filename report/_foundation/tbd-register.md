@@ -1,4 +1,4 @@
-# PTE Prep Open and TBD Register
+# PTEPrep Open and TBD Register
 
 These items are deliberately visible. They must not be hidden by writing a precise-looking value into a requirement, design, test result, or user instruction.
 
@@ -20,3 +20,17 @@ These items are deliberately visible. They must not be hidden by writing a preci
 - A test case may verify that a TBD-safe behavior is visible, but it must not invent the final policy.
 - User guides may give an escalation instruction for a TBD item; they must not present it as a guaranteed product behavior.
 
+
+
+## Scope revision decisions
+
+| ID | Decision | Safe interim statement | Affected artifacts |
+|---|---|---|---|
+| `TBD-D01-TASK-CATALOG` | RESOLVED by user, 2026-10-22: existing Academic task families; no separate Core expansion | Verify each task's actual content/media/runtime readiness; the scope decision does not prove availability | Reports 3-6, task catalog, `FR-PRACTICE-003` |
+| `TBD-D02-IDENTITY-CONTEXT` | RESOLVED by user, 2026-10-22: verified email identity with explicit choice among authorized organization memberships | Membership and Student data remain organization-scoped; verification alone does not grant membership or merge profiles | Reports 3-6, `FR-PRACTICE-002`, `DB-PRACTICE-SESSION` |
+| `TBD-D03-STUDY-PACK` | RESOLVED by user, 2026-10-22: quick grouped practice with real task filters | No ordered curated-pack domain, separate pack completion or LMS in this scope | Reports 3-6, `FR-PRACTICE-003`, `FR-PRACTICE-008` |
+| `TBD-FEEDBACK-001` | Who may report a question/content/lesson issue, target object, handler and response visibility | Existing Host support tickets do not automatically cover Student content feedback | Reports 3-6, `FR-PRACTICE-009` |
+| `TBD-AI-POLICY-001` | PARTIALLY RESOLVED: Gemini; Vietnamese default with English option; rubric feedback before calibrated AI numeric scores, confirmed 2026-10-22. Academic rubric approval, task evidence, quality thresholds, budget/timeouts/retry remain to close | Preserve answers independently of AI state; persist language variants; do not treat confirmation as quality/runtime evidence | Reports 3-6, `FR-PRACTICE-007`, `NFR-AI-001` |
+| `TBD-RETENTION-002` | Contract-specific retention, export, deletion and legal hold for attempts, scores, media and audit | Retention follows the organization contract until a detailed policy is approved | Reports 3-6, `NFR-DATA-001` |
+
+Resolution source: [user-confirmed Practice decisions](../../projects/plans/quang-pte-practice-completion/decisions.md). Keep resolved IDs for historical traceability; do not reopen D01–D03 or count them as outstanding decisions. Confirmation does not constitute supervisor approval or executed tests.

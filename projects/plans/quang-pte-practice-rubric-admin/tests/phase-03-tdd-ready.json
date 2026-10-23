@@ -1,0 +1,11 @@
+{
+  "phase": "phase-03-runtime-binding-and-gemini-integration",
+  "status": "GREEN_VERIFIED",
+  "prepared_at": "2026-10-23T00:00:00+07:00",
+  "test_files": [
+    "pte-api/app/src/test/java/com/pte/practice/internal/service/PracticeRubricBindingServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/scoring/PracticeExplanationGeneratorContractTest.java"
+  ],
+  "verified_command": ".\\mvnw.cmd -pl app '-Dtest=PracticeRubricBindingServiceTest,PracticeExplanationGeneratorContractTest' test",
+  "artifact_path": "pte-doc/projects/plans/quang-pte-practice-rubric-admin/tests/phase-03-tdd-ready.json"
+}

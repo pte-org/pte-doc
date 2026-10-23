@@ -1,0 +1,63 @@
+{
+  "manifest_version": "1.1",
+  "validated_on": "2026-10-22",
+  "product_title": "PTEPrep: An AI-Powered PTE Practice Platform and Realistic Exam Simulator",
+  "scope": "Report 3-6 Markdown scope revision",
+  "canonical_roles": [
+    "Platform Admin",
+    "Platform Manager",
+    "Academic Manager",
+    "Academic Staff",
+    "Host",
+    "Proctor",
+    "Examiner",
+    "Student"
+  ],
+  "integration_actor": "External Integration Services",
+  "channels": [
+    "vendor-web platform administration web",
+    "tenant-web organization web",
+    "pte-practice Student practice web",
+    "pte-app Windows exam client"
+  ],
+  "report_roots": [
+    "pte-doc/report/report03",
+    "pte-doc/report/report04",
+    "pte-doc/report/report05",
+    "pte-doc/report/report06"
+  ],
+  "required_scope_markers": [
+    "FR-PRACTICE-001",
+    "FR-PRACTICE-009",
+    "FR-CONTENT-006",
+    "FR-PLATFORM-001",
+    "FR-ACADEMIC-001",
+    "FR-ACADEMIC-002",
+    "available_for_practice",
+    "available_for_exam",
+    "NFR-AI-001",
+    "TBD-D01-TASK-CATALOG",
+    "TBD-D02-IDENTITY-CONTEXT",
+    "TBD-D03-STUDY-PACK"
+  ],
+  "required_diagram_ids": [
+    "SD-ARCH-CHANNEL-001",
+    "DB-PRACTICE-ERD-001",
+    "SEQ-PRACTICE-LOGIN",
+    "SEQ-PRACTICE-SESSION",
+    "SEQ-AI-FEEDBACK"
+  ],
+  "status": {
+    "markdown_encoding": "passed",
+    "local_links": "passed",
+    "product_tests": "not_run",
+    "docx_export": "not_run",
+    "supervisor_confirmation": "pending",
+    "d01_d03": "pending"
+  },
+  "limits": [
+    "Static Markdown validation is not a product runtime test.",
+    "Source and plan evidence do not prove complete AI explanation delivery.",
+    "The original DOCX templates have not been regenerated or visually inspected in this pass."
+  ]
+}

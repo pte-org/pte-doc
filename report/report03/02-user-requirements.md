@@ -6,24 +6,24 @@ This section maps the original DOCX heading **2. User Requirements**. It describ
 
 ### 2.1.1 Platform Admin
 
-The Platform Admin operates the platform as a whole. The role reviews organization registrations, approves or rejects onboarding, supports controlled account recovery, governs shared questions/media and Score Templates, manages package definitions, reviews platform audit information, and handles exceptional integration or publication states.
+The Platform Admin operates the platform as a whole. The role reviews organization registrations, approves or rejects onboarding, supports controlled account recovery, governs platform policy and package definitions, reviews platform audit information, and handles exceptional integration or publication states. Academic Manager owns the ordinary academic review/publication decision.
 
 - **Channel:** platform administration portal.
 - **Expected knowledge:** organization operations, content approval, package and audit policy; no programming knowledge is required.
 - **Data scope:** platform-wide administrative data, with sensitive Student answers and reports shown only when an authorized operational or audit purpose exists.
-- **Can change:** organization approval state, shared content approval/publication, package state, controlled account support actions, and platform configuration permitted by policy.
+- **Can change:** organization approval state, platform/package state, controlled account support actions, and platform configuration permitted by policy; academic content actions are limited to the approved governance/override policy.
 - **Cannot claim:** official PTE Academic authority, a Student’s personal identity, or a score that has not passed the scoring/publication rules.
 - **User need:** every consequential action should show the affected organization/content/package, the resulting status, and an audit reference.
 
-### 2.1.2 Platform Author
+### 2.1.2 Academic Staff
 
-The Platform Author prepares shared question, image/audio media, task-type, and Score Template drafts. The role needs preview and validation feedback, revision history, and a clear submission-to-approval status. The Platform Author cannot publish or activate shared content alone.
+The Academic Staff prepares shared question, image/audio media, task-type, and Score Template drafts. The role needs preview and validation feedback, revision history, and a clear submission-to-approval status. The Academic Staff cannot publish or activate shared content alone.
 
 - **Channel:** platform administration portal.
 - **Expected knowledge:** PTE-style task content and rubric preparation.
 - **Data scope:** shared drafts and revisions assigned to the author.
 - **Can change:** draft content, media references, task metadata, and draft scoring configuration.
-- **Cannot change:** a locked exam snapshot, another organization’s operational data, or the final publication state without Platform Admin approval.
+- **Cannot change:** a locked exam snapshot, another organization’s operational data, or the final publication state without the approved Academic Manager/platform governance decision.
 - **User need:** missing media, invalid task structure, and incomplete scoring information must be visible before submission.
 
 ### 2.1.3 Host
@@ -76,11 +76,11 @@ External Integration Services represents controlled boundaries for payment, medi
 
 ## 2.2 Access, ownership, and visibility requirements
 
-1. A person may hold one or more of the six approved human roles only when assigned by the platform’s authorization rules.
-2. Platform Admin is platform-wide; Platform Author is content-authoring scoped; Host is organization-scoped; Proctor and Examiner are assignment-scoped; Student is own-attempt/report scoped.
-3. External Integration Services has no interactive workspace and no permission to administer PTE Prep data.
+1. A person may hold one or more of the eight approved human roles only when assigned by the platform’s authorization rules.
+2. Platform Admin is platform-wide; Platform Manager is operationally scoped; Academic Manager is academic-review scoped; Academic Staff is content-authoring scoped; Host is organization-scoped; Proctor and Examiner are assignment-scoped; Student is own-practice/attempt/report scoped.
+3. External Integration Services has no interactive workspace and no permission to administer PTEPrep data.
 4. A registration in `PENDING` or `REJECTED` state cannot open an active organization workspace.
-5. A Student belongs to one organization in this release. Cross-organization Student identity is outside scope.
+5. Student practice access requires an explicit organization context and an active membership where the selected practice content is organization-scoped. D02 was confirmed on 2026-10-22: one verified email identity may choose among authorized organization memberships. The selected context scopes each session and its data; email alone does not grant access or merge Student profiles. Missing, ambiguous or unauthorized context is denied safely.
 6. A published report contains only data that the viewer is allowed to see. Student report visibility starts only after Host publication.
 7. Important changes to permission, package, enrollment, exam policy, scoring approval, publication, and violation records must be traceable to actor, time, affected record, and outcome.
 
@@ -101,7 +101,7 @@ Alternate paths:
 
 ### Main journey B — Content and Score Template preparation
 
-Platform Author creates a draft → attaches required image/audio media → validates task fields → submits for approval → Platform Admin reviews → approves and publishes or rejects with reason → active content/Score Template becomes selectable for an eligible exam.
+Academic Staff creates a draft → attaches required image/audio media → validates task fields and channel flags → submits for approval → Academic Manager reviews → approves/activates or rejects with reason → active content/Score Template becomes selectable for an eligible consumer.
 
 Alternate paths:
 
@@ -189,9 +189,9 @@ Each use case below has a stable ID, a primary actor, preconditions, main flow, 
 
 | Item | Requirement |
 |---|---|
-| Primary actor | Platform Author; Platform Admin approves. |
+| Primary actor | Academic Staff; Academic Manager reviews and approves. |
 | Preconditions | Author has content scope; task type and required media rules are known. |
-| Main flow | Create draft → enter prompt/task fields → attach media → validate → submit → Platform Admin reviews → approve/publish or reject with reason. |
+| Main flow | Create draft → enter prompt/task fields → attach media → set channel flags → validate → submit → Academic Manager reviews → approve/activate or reject with reason. |
 | Alternate/error flow | Invalid task fields or missing media block submission; media link expiration requests a new signed link; published content is revised rather than overwritten. |
 | Result | A published revision is available to an active Score Template, or a reasoned rejection remains visible. |
 | Related IDs | `FR-CONTENT-001`–`FR-CONTENT-005`, `BR-CONTENT-012`–`BR-CONTENT-016`, `NFR-DATA-003`. |
@@ -200,9 +200,9 @@ Each use case below has a stable ID, a primary actor, preconditions, main flow, 
 
 | Item | Requirement |
 |---|---|
-| Primary actor | Platform Author prepares; Platform Admin activates. |
+| Primary actor | Academic Staff prepares; Academic Manager reviews/activates under policy. |
 | Preconditions | Task catalog, weights, timing, score sources, and required content rules are available. |
-| Main flow | Create draft → select task rows from the 23-task catalog → define sections/timing/weights/source eligibility → validate → approve → activate. |
+| Main flow | Create draft → select existing Academic task rows from the canonical vocabulary under confirmed D01 → define sections/timing/weights/source eligibility and channel flags → validate content/runtime readiness → approve → activate. |
 | Alternate/error flow | Invalid weight/timing/task combination remains draft; retirement prevents new selection but does not rewrite locked exams. |
 | Result | Host can select the active version; a locked exam retains the selected version. |
 | Related IDs | `FR-TEMPLATE-001`–`FR-TEMPLATE-004`, `BR-CONTENT-014`–`BR-CONTENT-016`, `NFR-REQ-002`. |
@@ -293,7 +293,7 @@ The system should explain the problem in business language, identify the affecte
 | Registration incomplete | Show missing/invalid fields and keep the request non-active. | Registrant or Platform Admin |
 | Package not active/expired | Explain that registration and package activation are separate; do not create a new exam. | Host / Platform Admin |
 | Candidate duplicate/conflict | Identify the Student and conflict reason before enrollment. | Host |
-| Missing question/media | Identify the task/content item and keep exam/content unpublished. | Platform Author / Platform Admin / Host |
+| Missing question/media | Identify the task/content item and keep exam/content unpublished. | Academic Staff / Platform Admin / Host |
 | Generation interrupted | Show pending/error status and allow safe retry/cancel; never publish partial forms. | Host / Platform support |
 | Device/audio check failure | Show the device item and permitted correction before timed work. | Student / Proctor / Host |
 | Answer not synchronized | Show local save and retry state; do not say “submitted” until accepted. | Student / exam client / support |
@@ -314,3 +314,40 @@ The system should explain the problem in business language, identify the affecte
 | Correct score publication | `UC-SCORING-001` | `FR-SCORE-*`, `FR-REPORT-*` | Scoring/publication cases and Host/Student guide |
 | Resilient dependencies | `UC-INTEGRATION-001` | `FR-INTEGRATION-*` | Integration failure tests and troubleshooting |
 
+
+## 2.9 Revised role matrix and Student practice requirements
+
+### 2.9.1 Platform operational and academic roles
+
+| Role | Must be able to | Must not be able to | Acceptance condition |
+|---|---|---|---|
+| Platform Manager | Review organization applications, operate package/support actions, inspect operational status and escalate incidents | Approve academic content or read unrelated Student answers without an authorized purpose | The action is allowed only on the assigned platform scope and creates an audit record |
+| Academic Staff | Create question/media/rubric/Score Template drafts, validate required content, submit revisions and respond to review findings | Approve, publish, activate, or rewrite a locked exam revision | A submitted revision has an owner, version, status and review target |
+| Academic Manager | Review submitted content, record approval/rejection reasons, publish or activate approved revisions, and retire unsafe content | Change organization rosters, publish a Host report, or alter a Student response | The state transition records reviewer, time, reason and affected revision |
+
+The old Platform Author wording is a compatibility label for Academic Staff. It must not create a second permission set.
+
+### 2.9.2 Student practice user needs
+
+The Student needs a clear, recoverable practice journey:
+
+1. Sign in through a verified email challenge; an expired or reused code explains the problem and offers a safe resend path.
+2. Resolve the permitted organization or practice context. Email identity alone cannot grant access to an organization.
+3. See task groups that are visible, runnable, unavailable, or temporarily blocked. A visible task without eligible content is not presented as runnable.
+4. Start a practice session with a stable question/media revision and the timing rules shown before the first answer.
+5. Save text, selections, confidence and supported media locally/through the approved service boundary, with visible pending and retry states.
+6. Leave and resume when policy allows. A resumed session keeps its existing selected content and answer history.
+7. Submit or discard according to the session policy. Repeated commands are safe and do not create duplicate responses.
+8. View activity and progress separately from a score. Pending or failed AI feedback must not be shown as a completed score.
+9. View an AI explanation only when the question, rubric, answer and provider result are authorized and available. The explanation identifies that it is generated and keeps its provenance.
+
+### 2.9.3 Practice alternate paths
+
+| Situation | Required user-visible result |
+|---|---|
+| Invalid, expired or reused email code | No session is created; explain expiry/reuse and provide a bounded resend path |
+| No membership or entitlement | Show that practice is unavailable and the next permitted action; do not expose another organization |
+| Multiple contexts | Ask the Student to choose from authorized contexts or apply an explicitly approved default; do not guess silently |
+| Question pool too small | Keep the task group visible if product policy allows, but block start with a content-readiness message; never use the exam-only pool as fallback |
+| Answer save or media upload fails | Preserve the local answer, show pending/retry state, and keep ownership tied to the same Student/session/item |
+| AI explanation pending, unavailable or failed | Keep the answer and activity; show status and retry/escalation guidance without claiming a score |

@@ -63,3 +63,32 @@ Each case records:
 
 A test case becomes an execution result only when the tester fills actual result, status, environment/build, date, evidence, and defect/TBD link. A planned row is not a pass, and a structural documentation GREEN result is not product runtime evidence.
 
+
+
+## 4.7 Scope revision test cases
+
+| ID | Requirement | Scenario and expected result | Status |
+|---|---|---|---|
+| `TC-ROLE-001` | `FR-PLATFORM-001` | Platform Manager can review an operational organization case; academic approval action is denied and audited | Not executed |
+| `TC-ROLE-002` | `FR-ACADEMIC-001` | Academic Staff submits a complete draft; owner, revision, flags and review status are stored | Not executed |
+| `TC-ROLE-003` | `FR-ACADEMIC-002` | Academic Manager rejects an incomplete draft with a reason; the draft is not selectable by either channel | Not executed |
+| `TC-ROLE-004` | `FR-ACADEMIC-002` | Academic Manager approves ready content; publication/activation history contains actor and time | Not executed |
+| `TC-PRACTICE-001` | `FR-PRACTICE-001` | Expired, reused and throttled email codes do not create a practice session and expose no membership data | Not executed |
+| `TC-PRACTICE-002` | `FR-PRACTICE-002` | A Student with no active membership or entitlement receives a safe locked state; another organization is not listed | Not executed |
+| `TC-PRACTICE-003` | `FR-PRACTICE-002` | One verified email identity selects an authorized organization context; the session records it and denies foreign/ambiguous context without profile merging | Not executed; D02 confirmed 2026-10-22 |
+| `TC-PRACTICE-004` | `FR-PRACTICE-003` | Practice catalog excludes unpublished, unready and exam-only questions; insufficient content is explained | Not executed |
+| `TC-PRACTICE-005` | `FR-PRACTICE-004` | Repeated begin commands return one owned session or one deterministic conflict, never two active sessions | Not executed |
+| `TC-PRACTICE-006` | `FR-PRACTICE-005` | Save, network interruption, retry, leave and resume preserve one response and its fixed content | Not executed |
+| `TC-PRACTICE-007` | `FR-PRACTICE-005` | Repeated submit/discard commands are idempotent and cannot reopen a final session without policy | Not executed |
+| `TC-PRACTICE-008` | `FR-PRACTICE-008` | Pending feedback appears as activity/pending, not as a completed score; history points to the session item | Not executed |
+| `TC-PRACTICE-009` | `FR-PRACTICE-006` | Media upload for another Student/session/item is rejected; a retryable failed upload preserves the answer | Not executed |
+| `TC-PRACTICE-010` | `FR-PRACTICE-007` | AI provider pending/success/failure/unavailable states preserve the answer and expose the correct next action | Not executed |
+| `TC-PRACTICE-011` | `FR-PRACTICE-007` | AI result shows question/rubric/provider/model provenance and cannot be read by another Student | Not executed |
+| `TC-PRACTICE-012` | `FR-PRACTICE-008` | Confidence and activity history are not included as a score when scoring is pending | Not executed |
+| `TC-CONTENT-003` | `FR-CONTENT-006` | Practice-only question is excluded from exam generation even when other readiness checks pass | Not executed |
+| `TC-CONTENT-004` | `FR-CONTENT-006` | Exam-only question is excluded from practice catalog selection | Not executed |
+| `TC-CONTENT-005` | `FR-CONTENT-006` | Neither-enabled or unready question is excluded from both channels | Not executed |
+| `TC-CONTENT-006` | `FR-CONTENT-006` | Changing a flag after selection does not rewrite a frozen practice item or exam form | Not executed |
+| `TC-PRACTICE-013` | `FR-PRACTICE-009` / `TBD-FEEDBACK-001` | If content feedback is enabled, the report identifies the permitted reporter, target, handler and visibility; while unresolved, the UI provides only the approved escalation path | Blocked by decision |
+| `TC-ROLE-005` | `FR-PLATFORM-001` | Platform Manager operational support cannot approve academic content or bypass organization scope | Not executed |
+| `TC-ROLE-006` | `FR-ACADEMIC-001` / `FR-ACADEMIC-002` | Academic Staff cannot activate its own submission; Academic Manager approval records reason and revision | Not executed |

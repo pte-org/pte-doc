@@ -38,12 +38,12 @@ Each `II.` document-level heading is represented by a `00-project-report.md` fil
 
 ## 3. Structural and encoding evidence
 
-- Final bundle validator: `python pte-doc/projects/plans/pte-prep-report-documents/tests/validate_report_bundle.py` → `GREEN/PASSED`; 31 Markdown files validated.
-- Phase 01 TDD result: [`phase-01-documentation-foundation-and-section-map-test-report.json`](../../projects/plans/pte-prep-report-documents/tests/results/phase-01-documentation-foundation-and-section-map-test-report.json).
-- Phase 02 TDD result: [`phase-02-report-03-srs-test-report.json`](../../projects/plans/pte-prep-report-documents/tests/results/phase-02-report-03-srs-test-report.json).
-- Phase 03 TDD result: [`phase-03-report-04-design-test-report.json`](../../projects/plans/pte-prep-report-documents/tests/results/phase-03-report-04-design-test-report.json).
-- Phase 04 TDD result: [`phase-04-report-05-testing-test-report.json`](../../projects/plans/pte-prep-report-documents/tests/results/phase-04-report-05-testing-test-report.json).
-- Phase 05 TDD result: [`phase-05-report-06-user-guides-test-report.json`](../../projects/plans/pte-prep-report-documents/tests/results/phase-05-report-06-user-guides-test-report.json).
+- Final bundle validator: `python pte-doc/projects/plans/quang-pte-prep-report-documents/tests/validate_report_bundle.py` → `GREEN/PASSED`; 31 Markdown files validated.
+- Phase 01 TDD result: [`phase-01-documentation-foundation-and-section-map-test-report.json`](../../projects/plans/quang-pte-prep-report-documents/tests/results/phase-01-documentation-foundation-and-section-map-test-report.json).
+- Phase 02 TDD result: [`phase-02-report-03-srs-test-report.json`](../../projects/plans/quang-pte-prep-report-documents/tests/results/phase-02-report-03-srs-test-report.json).
+- Phase 03 TDD result: [`phase-03-report-04-design-test-report.json`](../../projects/plans/quang-pte-prep-report-documents/tests/results/phase-03-report-04-design-test-report.json).
+- Phase 04 TDD result: [`phase-04-report-05-testing-test-report.json`](../../projects/plans/quang-pte-prep-report-documents/tests/results/phase-04-report-05-testing-test-report.json).
+- Phase 05 TDD result: [`phase-05-report-06-user-guides-test-report.json`](../../projects/plans/quang-pte-prep-report-documents/tests/results/phase-05-report-06-user-guides-test-report.json).
 - Phase 06 TDD result is created after this report and confirms this file exists and all gates pass.
 - The only source-extraction normalization is documented in `_foundation/section-map.md`; no replacement character appears in final report prose.
 - The complete task catalog has exactly 23 rows: 22 scored task types plus unscored Personal Introduction.

@@ -1,14 +1,15 @@
-# Report 4 — Software Design Document
+# Report 4 - Software Design Document
 
-**Product:** PTE Prep  
-**Document-level DOCX section:** II. Software Design Document  
-**Version:** 1.0 documentation baseline  
-**Status:** Draft — project-specific English Markdown conversion  
-**Owner:** Ngô Đăng Quang — Project Leader  
-**Baseline date:** 2026-10-06  
-**Source:** `template-doc/Report4_Software Design Document.docx` and the approved PTE Prep architecture plans
+**Product:** PTEPrep
+**Registered title:** PTEPrep: An AI-Powered PTE Practice Platform and Realistic Exam Simulator
+**Document-level DOCX section:** II. Software Design Document
+**Version:** 1.1 scope revision draft
+**Status:** Draft - source-backed and proposed design separated; D01-D03 confirmed, selected academic/operational policies remain open
+**Owner:** Ngo Dang Quang - Project Leader
+**Revision date:** 2026-10-22
+**Source:** Report 3 revision, registration v1.2, current Compose/source inventory and reviewed design plans
 
-This report turns the Report 3 requirement baseline into a business-readable design. It describes the single deployed modular-monolith application, its web and Windows-first channels, data ownership, external boundaries, fixed exam snapshots, answer synchronization, proctoring, scoring, and report publication. A design marked Planned/Future or TBD is not an instruction that the capability is currently available.
+This report translates the revised requirements into a business-readable design. It keeps the deployed backend as a modular monolith, adds the Student practice web boundary, preserves the Windows exam client boundary, and distinguishes observed source contracts from proposed practice/AI components that still require implementation.
 
 ## Section navigation
 
@@ -16,10 +17,14 @@ This report turns the Report 3 requirement baseline into a business-readable des
 2. [Database Design](02-database-design.md)
 3. [Detailed Design](03-detailed-design.md)
 
+## Design status rule
+
+**Source observed** means a path, contract, configuration or class was found in the reviewed workspace. **Proposed** means the design is required by Report 3 but is not yet evidenced as complete. **TBD** means the design depends on an unresolved product or policy decision. These labels appear next to the design element; a diagram is not proof of implementation.
+
 ## Shared references
 
 - [Report 3 SRS](../report03/00-project-report.md)
 - [Actor and feature catalog](../_foundation/actor-feature-catalog.md)
+- [Identifier ledger](../_foundation/id-ledger.md)
 - [Status and evidence matrix](../_foundation/status-evidence-matrix.md)
 - [Evidence catalog](../_foundation/evidence-catalog.md)
-

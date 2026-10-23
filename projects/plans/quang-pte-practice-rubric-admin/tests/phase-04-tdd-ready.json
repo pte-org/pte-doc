@@ -1,0 +1,21 @@
+{
+  "phase": "04",
+  "status": "GREEN_VERIFIED",
+  "scope": "Shared API client and vendor-web rubric administration",
+  "test_files": [
+    "pte-web/packages/api-client/src/requests/practicerubric/index.test.ts"
+  ],
+  "cases": [
+    "list sends server-side pagination and status/task filters",
+    "publish sends mandatory reason and optimistic version",
+    "retire sends expected version for concurrency protection"
+  ],
+  "verified_commands": [
+    "pnpm --filter @pte/api-client typecheck",
+    "pnpm --filter @pte/api-client test -- src/requests/practicerubric/index.test.ts",
+    "pnpm --filter vendor-web typecheck",
+    "pnpm --filter vendor-web lint",
+    "pnpm --filter vendor-web build"
+  ],
+  "quality": "Use @pte/api-client and @pte/ui; no duplicate table/form primitives"
+}

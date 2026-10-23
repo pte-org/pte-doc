@@ -1,19 +1,19 @@
 # 1. Deliverable Package
 
-This section maps the original DOCX heading **1. Deliverable Package**. It defines what the PTE Prep release package contains, how each item is identified, what is supported, and what evidence is still required before a release handoff.
+This section maps the original DOCX heading **1. Deliverable Package**. It defines what the PTEPrep release package contains, how each item is identified, what is supported, and what evidence is still required before a release handoff.
 
 ## 1.1 Product boundary
 
-PTE Prep is an independent organization-based PTE-style practice and mock-exam simulation platform. It is not connected to, representative of, endorsed by, or a certification service for PTE Academic. A report produced by PTE Prep is an organization practice/mock result, not an official PTE Academic result.
+PTEPrep is an independent organization-based PTE-style practice and mock-exam simulation platform. It is not connected to, representative of, endorsed by, or a certification service for PTE Academic. A report produced by PTEPrep is an organization practice/mock result, not an official PTE Academic result.
 
 ## 1.2 Package contents
 
 | Package ID | Deliverable | Purpose | Status/evidence |
 |---|---|---|---|
 | `REL-WEB-TENANT` | Organization web portal | Host, Proctor, Examiner operations: roster, packages, exams, monitoring, scoring, reports, audit. | Current channel boundary; individual workflows are Current/Partial only when route/UI evidence is verified (`EVD-FOUNDATION-004`). |
-| `REL-WEB-PLATFORM` | Platform administration portal | Platform Admin and Platform Author onboarding/content/template/package governance. | Current channel boundary; end-to-end slices are evidence-dependent. |
+| `REL-WEB-PLATFORM` | Platform administration portal | Platform Admin, Platform Manager, Academic Manager and Academic Staff organization, operational, content, template and package governance. | Current channel boundary; end-to-end slices are evidence-dependent. |
 | `REL-CLIENT-WINDOWS` | Windows-first exam client | Student sign-in, device check, timed tasks, local answer save, synchronization, submission, result view. | Windows-first requirement; complete device/offline matrix is `TBD-CLIENT-001`. |
-| `REL-APP` | PTE Prep backend application | Identity, tenancy, content, template, billing, exam, attempt, proctoring, scoring, reporting, notification, support, and audit package boundaries. | Current modular-monolith topology (`EVD-FOUNDATION-003`). |
+| `REL-APP` | PTEPrep backend application | Identity, tenancy, content, template, billing, exam, attempt, proctoring, scoring, reporting, notification, support, and audit package boundaries. | Current modular-monolith topology (`EVD-FOUNDATION-003`). |
 | `REL-DATABASE` | PostgreSQL data store | Relational organization, exam, attempt, scoring, report, and audit data. | Current infrastructure boundary; retention is contract-based TBD. |
 | `REL-SUPPORT-INFRA` | Redis and RabbitMQ support services | Cache/rate-limit/coordination and asynchronous work where configured. | Current infrastructure boundary; feature use is evidence-dependent. |
 | `REL-EDGE` | Public edge/proxy and TLS boundary | Routes users to supported web/API entry points. | Current deployment topology (`EVD-FOUNDATION-006`). |
@@ -66,3 +66,15 @@ The release does not promise official certification, Student self-payment, mobil
 - AI provider, thresholds, and Examiner review policy: `TBD-AI-001`, `TBD-AI-002`.
 - Retention, export/delete/legal hold and jurisdiction: `TBD-RETENTION-001`, `TBD-DATA-001`.
 
+
+## 1.7 Scope revision package contents
+
+The revised submission package contains four user-facing channels and one shared business backend:
+
+1. Platform administration web for Platform Admin, Platform Manager, Academic Manager and Academic Staff.
+2. Organization web for Host, assigned Proctor and assigned Examiner.
+3. Student practice web for email sign-in, task catalog, practice sessions, progress and future AI explanations.
+4. Windows exam client for assigned organization exams, device checks, timed tasks, local saving, synchronization and submission.
+5. Shared reports, diagrams, test cases, evidence records and the later practice implementation gap handoff.
+
+The package does not include an official PTE Academic connection, Student personal payment, mobile exam delivery, a research-based learning product, or an open chatbot/personalized study-plan engine. AI explanation and channel-specific question flags are included as requirements and design/test handoff items; their current implementation state is labelled rather than implied.

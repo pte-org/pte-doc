@@ -4,9 +4,9 @@ This section maps the original DOCX heading **1. Product Overview**. It explains
 
 ## 1.1 Product perspective
 
-PTE Prep is an organization-based platform for practicing and simulating PTE-style examinations. An organization registers, is reviewed by the Platform Admin, receives a Host workspace after approval, prepares Students and staff, creates a fixed exam version, delivers the exam through a Windows-first client, coordinates supervision and scoring, and publishes reports to Students.
+PTEPrep is an organization-based platform for practicing and simulating PTE-style examinations. An organization registers, is reviewed by the Platform Admin, receives a Host workspace after approval, prepares Students and staff, creates a fixed exam version, delivers the exam through a Windows-first client, coordinates supervision and scoring, and publishes reports to Students.
 
-PTE Prep is an independent product. It does not connect to, represent, certify for, or claim endorsement by PTE Academic. Its task names and exam presentation are used to model a practice or mock-exam experience. No result from this product is an official PTE Academic result.
+PTEPrep is an independent product. It does not connect to, represent, certify for, or claim endorsement by PTE Academic. Its task names and exam presentation are used to model a practice or mock-exam experience. No result from this product is an official PTE Academic result.
 
 **Evidence and status:** The boundary is an approved requirement decision, `EVD-FOUNDATION-001` and `EVD-FOUNDATION-002` (verified 2026-10-06). The statement is a product scope rule, not a claim that every planned workflow is already implemented.
 
@@ -23,14 +23,14 @@ An organization needs one controlled place to prepare learning content, manage i
 - a Student may see another Student’s data or a report before publication;
 - payment, media, AI, email, or notification failures may be mistaken for a failure of the whole business operation.
 
-PTE Prep addresses these risks through tenant ownership, approval states, pre-exam validation, fixed exam snapshots, local-first answer persistence, retryable synchronization, assignment-scoped workspaces, score-source review, publication gates, and audit records.
+PTEPrep addresses these risks through tenant ownership, approval states, pre-exam validation, fixed exam snapshots, local-first answer persistence, retryable synchronization, assignment-scoped workspaces, score-source review, publication gates, and audit records.
 
 ## 1.3 Product channels and boundaries
 
 | Channel | Main users | Responsibilities | Boundary |
 |---|---|---|---|
 | Organization web portal | Host, assigned Proctor, assigned Examiner | Organization data, package use, Students/classes, exam preparation, monitoring, scoring, publication, audit views | Data is limited to the organization or assignment scope of the signed-in user. |
-| Platform administration portal | Platform Admin, Platform Author | Organization approval, shared question/media content, Score Templates, packages, platform audit, account support | Platform-wide actions require platform permissions; a content author cannot activate shared content alone. |
+| Platform administration portal | Platform Admin, Platform Manager, Academic Manager, Academic Staff | Organization approval, operational support, shared question/media content, Score Templates, packages, platform audit and account support | Platform-wide actions require platform permissions; Academic Staff cannot activate submitted content alone. |
 | Windows-first exam client | Student; exam-time policy may be monitored by Proctor | Device check, task display, timed responses, local answer saving, synchronization, submission | Windows is the first supported delivery platform. Mobile delivery is outside the current scope. |
 
 The backend application is the business boundary behind these channels. PostgreSQL stores the shared relational data; Redis and RabbitMQ support the configured application behavior; media upload uses a signed external media boundary; payment, AI scoring, email, and notifications use separately controlled integration contracts where enabled. The public edge is the supported entry point. Internal service ports are not end-user URLs.
@@ -39,12 +39,14 @@ The backend application is the business boundary behind these channels. PostgreS
 
 ## 1.4 Product users and external services
 
-PTE Prep uses exactly six human roles and one integration actor:
+PTEPrep uses exactly eight human roles and one integration actor:
 
 | Actor | Product responsibility | Typical success outcome |
 |---|---|---|
-| Platform Admin | Operates the platform, reviews organizations, controls shared content/package publication, and handles controlled account support | An approved organization, usable shared content, or a traceable platform decision exists. |
-| Platform Author | Creates and maintains question, media, task, and Score Template drafts | A complete draft is submitted for Platform Admin approval. |
+| Platform Admin | Operates the platform, reviews organizations, governs platform/package policy, and handles controlled account support | An approved organization, governed content policy, or a traceable platform decision exists. |
+| Platform Manager | Handles permitted operational organization review, package/support actions and escalation | An operational case is resolved or escalated with scope and audit evidence. |
+| Academic Manager | Reviews academic content and Score Templates, records decisions, and controls publication/activation under policy | A ready approved revision is available to the permitted channel. |
+| Academic Staff | Creates and maintains question, media, task, and Score Template drafts | A complete draft is submitted for Academic Manager review. |
 | Host | Operates one organization’s Students, classes, packages, exams, staff assignments, scores, reports, and audit review | An organization can run an exam and publish the correct report. |
 | Proctor | Monitors only assigned exams and records assistance or integrity events | Student status and relevant events are visible and auditable. |
 | Examiner | Scores only assigned answers using the available rubric and queue | A submitted score is available for Host review. |
@@ -61,7 +63,7 @@ An organization submits registration before it has an active workspace. The Plat
 
 ### 1.5.2 Shared content and controlled configuration
 
-Platform-owned questions, image/audio media, task types, and Score Templates are prepared centrally. Platform Author creates and submits drafts. Platform Admin approves, publishes, archives, or recovers shared content. A Host selects an active Score Template and published content but does not change the common scoring rules in an organization exam.
+Platform-owned questions, image/audio media, task types, and Score Templates are prepared centrally. Academic Staff creates and submits drafts. Academic Manager reviews, publishes, activates, archives, or requests correction of shared academic content; Platform Admin retains platform governance and exceptional support. A Host selects an active Score Template and published content but does not change the common scoring rules in an organization exam.
 
 ### 1.5.3 Exam lifecycle
 
@@ -82,10 +84,10 @@ flowchart LR
     O --> U[Student views own report]
 ```
 
-**Diagram ID:** `SD-REQ-CONTEXT-001`  
-**Caption:** PTE Prep organization-to-report lifecycle  
-**Status:** Planned/Future as a cross-report visualization; it summarizes approved requirements and is not a runtime trace.  
-**Evidence/source:** `EVD-FOUNDATION-001`, `EVD-FOUNDATION-002`;  
+**Diagram ID:** `SD-REQ-CONTEXT-001`
+**Caption:** PTEPrep organization-to-report lifecycle
+**Status:** Planned/Future as a cross-report visualization; it summarizes approved requirements and is not a runtime trace.
+**Evidence/source:** `EVD-FOUNDATION-001`, `EVD-FOUNDATION-002`;
 **Related requirements:** `FR-ONBOARD-001`, `FR-EXAM-001`, `FR-EXAM-006`, `FR-DELIVERY-001`, `FR-REPORT-001`.
 
 ### 1.5.4 Fixed version and answer safety
@@ -138,3 +140,30 @@ The requirement appendix repeats these decisions with traceability IDs so later 
 
 The product requirement baseline is considered useful when an approved organization can move through the core journey with one owned data set, a Student can complete a timed assigned attempt with recoverable answer synchronization, staff can trace supervision and scoring decisions, and a Host can publish a report that the correct Student can see. Performance and availability targets are recorded in Section 4 and must be validated separately.
 
+
+## 1.10 Scope revision - practice channel and current actor model
+
+The following channel view supersedes the six-role baseline wherever it differs:
+
+| Channel | Users | Main journey | Status boundary |
+|---|---|---|---|
+| Platform administration web | Platform Admin, Platform Manager, Academic Manager, Academic Staff | Review organizations, operate platform services, author/review/publish academic content | Role routes and source contracts are evidence; end-to-end approval is classified separately |
+| Organization web | Host, assigned Proctor, assigned Examiner | Prepare Students and exams, monitor attempts, score answers, publish reports | Organization exam slices are Partial/Current depending on the workflow |
+| Student practice web | Student | Verify email, resolve context/entitlement, browse available task groups, practice, save/resume, view progress and receive future explanations | Practice pages and progress slices are Partial; AI explanation is Planned/Future until the complete integration is evidenced |
+| Windows exam client | Student | Complete assigned organization exam with device check, timed tasks, local save, sync and submit | Windows-first delivery boundary; mobile exam delivery is out of scope |
+
+### 1.10.1 Student self-practice is not an organization exam
+
+The practice session is owned by the Student within the approved identity and entitlement context. It does not create a Host-published exam report, Proctor assignment or Examiner queue. A practice response can receive objective feedback or an AI explanation when the task and provider policy permit it; a pending or unavailable explanation does not delete the answer or turn activity into a final exam score.
+
+The organization exam remains Host-created. Its audience, question/media revisions, Score Template, timing, Proctoring policy and score-source rules are frozen before delivery. The same question bank may contain questions eligible for both channels, but the two usage flags are evaluated independently and the selected revision is preserved in each existing session or exam.
+
+### 1.10.2 Role transition
+
+Earlier report text may use **Academic Staff** where the old baseline said Platform Author. Academic Staff drafts and submits. Academic Manager reviews academic correctness, approves or rejects, and activates or requests publication according to the configured policy. Platform Admin retains platform-level governance. Platform Manager handles operational review and support; it does not replace academic approval.
+
+### 1.10.3 Revised main flows
+
+1. **Practice:** Student verifies email -> selects a permitted organization/context when required -> passes entitlement and catalog checks -> opens a task group -> starts a practice session -> answers and saves -> submits or exits -> sees activity/progress -> receives objective or AI explanation when available.
+2. **Organization exam:** Host prepares and validates an exam -> system selects only `available_for_exam` content that is approved and ready -> Host publishes a fixed version -> Student completes it in the Windows client -> Proctor monitors -> Examiner/automatic scoring produces sources -> Host selects and publishes the report.
+3. **Academic content:** Academic Staff drafts -> content checks run -> Academic Staff submits -> Academic Manager reviews -> reject/revise or approve -> activation/publication makes the revision eligible for later channel selection. The question flags do not replace approval or readiness checks.

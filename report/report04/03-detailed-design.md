@@ -1,6 +1,6 @@
 # 3. Detailed Design
 
-This section maps the original DOCX heading **3. Detailed Design**. It explains how the most important PTE Prep flows cooperate across owned packages. The descriptions are implementation-oriented but remain tied to the Report 3 business requirements. A future or TBD step is labelled rather than presented as a working product behavior.
+This section maps the original DOCX heading **3. Detailed Design**. It explains how the most important PTEPrep flows cooperate across owned packages. The descriptions are implementation-oriented but remain tied to the Report 3 business requirements. A future or TBD step is labelled rather than presented as a working product behavior.
 
 ## 3.1 Detailed design notation
 
@@ -55,10 +55,10 @@ sequenceDiagram
     end
 ```
 
-**Sequence ID:** `SEQ-ONBOARD-001`  
-**Caption:** Idempotent organization approval and first Host creation  
-**Status:** Partial/Planned/Future depending on the verified end-to-end route; the state rule is approved.  
-**Evidence/source:** `EVD-FOUNDATION-003`, `EVD-FOUNDATION-004`; incomplete recovery remains `TBD-GENERATION-001` only for later exam generation, not onboarding.  
+**Sequence ID:** `SEQ-ONBOARD-001`
+**Caption:** Idempotent organization approval and first Host creation
+**Status:** Partial/Planned/Future depending on the verified end-to-end route; the state rule is approved.
+**Evidence/source:** `EVD-FOUNDATION-003`, `EVD-FOUNDATION-004`; incomplete recovery remains `TBD-GENERATION-001` only for later exam generation, not onboarding.
 **Related Report 3 IDs:** `FR-ONBOARD-001`–`FR-ONBOARD-004`, `BR-ACCESS-007`–`BR-ACCESS-008`, `NFR-10`–`NFR-12`.
 
 ### Error and concurrency rules
@@ -75,17 +75,17 @@ sequenceDiagram
 - `PKG-ITEMBANK` owns logical questions, revisions, task catalog validation, and media requirement state.
 - Media adapter owns signed provider access and provider error translation.
 - `PKG-SCORETEMPLATE` owns task rows, timing, weights, score-source eligibility, and template lifecycle.
-- Platform Author can create/submit drafts; Platform Admin owns approval/publication.
+- Academic Staff can create/submit drafts; Academic Manager owns academic review/publication/activation, while Platform Admin retains platform governance.
 - A generated exam references immutable revisions; no later edit mutates the running exam.
 
 ### `SEQ-CONTENT-001` — Draft to published revision
 
 ```mermaid
 sequenceDiagram
-    actor Author as Platform Author
+    actor Author as Academic Staff
     participant Bank as PKG-ITEMBANK
     participant Media as Media adapter
-    actor Admin as Platform Admin
+    actor Manager as Academic Manager
     participant Audit as Audit
     Author->>Bank: Create draft task row
     Author->>Media: Request signed upload/access
@@ -93,26 +93,26 @@ sequenceDiagram
     Author->>Bank: Attach media reference and validate
     Bank-->>Author: Draft valid or blocking fields
     Author->>Bank: Submit for approval
-    Admin->>Bank: Review revision
+    Manager->>Bank: Review revision
     alt Incomplete/reject
         Bank->>Audit: Record rejection/missing media
-        Bank-->>Admin: REJECTED with reason
+        Bank-->>Manager: REJECTED with reason
     else Approve/publish
         Bank->>Bank: Lock revision identity
         Bank->>Audit: Record approval/publication
-        Bank-->>Admin: PUBLISHED revision
+        Bank-->>Manager: PUBLISHED revision
     end
 ```
 
-**Sequence ID:** `SEQ-CONTENT-001`  
-**Caption:** Shared question/media revision governance  
-**Status:** Partial/Planned/Future by source slice; media provider quality remains external.  
-**Evidence/source:** `EVD-FOUNDATION-003`, `EVD-FOUNDATION-005`.  
+**Sequence ID:** `SEQ-CONTENT-001`
+**Caption:** Shared question/media revision governance
+**Status:** Partial/Planned/Future by source slice; media provider quality remains external.
+**Evidence/source:** `EVD-FOUNDATION-003`, `EVD-FOUNDATION-005`.
 **Related IDs:** `FR-CONTENT-001`–`FR-CONTENT-005`, `BR-CONTENT-012`–`BR-CONTENT-016`, `NFR-12`, `NFR-19`.
 
 ### Template activation rules
 
-`PKG-SCORETEMPLATE` validates that each task row belongs to the canonical 23-row catalog, that required timing/response/source fields exist, and that the treatment of Personal Introduction is explicit. Platform Admin approval creates an active revision. Retirement prevents new exam selection but does not invalidate historical fixed versions.
+`PKG-SCORETEMPLATE` validates that each task row belongs to the current 23-row vocabulary, that required timing/response/source fields and channel flags exist, and that the treatment of Personal Introduction is explicit. Academic Manager approval creates an active revision under Platform Admin governance. Retirement prevents new selection but does not invalidate historical fixed versions.
 
 ## 3.4 Exam draft, validation, generation, and scheduling
 
@@ -157,10 +157,10 @@ sequenceDiagram
     end
 ```
 
-**Sequence ID:** `SEQ-EXAM-001`  
-**Caption:** Pre-exam validation, fixed snapshot generation, and publication  
-**Status:** Partial/Planned/Future; current source contains assessment/session slices, while end-to-end recovery is not assumed.  
-**Evidence/source:** `EVD-FOUNDATION-003`, `EVD-FOUNDATION-005`, `TBD-GENERATION-001`, `TBD-VERSION-001`.  
+**Sequence ID:** `SEQ-EXAM-001`
+**Caption:** Pre-exam validation, fixed snapshot generation, and publication
+**Status:** Partial/Planned/Future; current source contains assessment/session slices, while end-to-end recovery is not assumed.
+**Evidence/source:** `EVD-FOUNDATION-003`, `EVD-FOUNDATION-005`, `TBD-GENERATION-001`, `TBD-VERSION-001`.
 **Related IDs:** `FR-EXAM-001`–`FR-EXAM-009`, `FR-HARDENING-001`, `BR-EXAM-023`–`BR-EXAM-029`, `NFR-04`, `NFR-09`.
 
 ### Generation state model
@@ -181,10 +181,10 @@ stateDiagram-v2
     OPEN --> CANCELLED: Allowed cancellation
 ```
 
-**State ID:** `SD-EXAM-STATE-001`  
-**Caption:** Exam draft and generation lifecycle  
-**Status:** Planned/Future state contract; exact transitions need implementation/evidence review.  
-**Evidence/source:** Report 3 `FR-EXAM-006`–`FR-EXAM-007`, `TBD-GENERATION-001`.  
+**State ID:** `SD-EXAM-STATE-001`
+**Caption:** Exam draft and generation lifecycle
+**Status:** Planned/Future state contract; exact transitions need implementation/evidence review.
+**Evidence/source:** Report 3 `FR-EXAM-006`–`FR-EXAM-007`, `TBD-GENERATION-001`.
 **Related IDs:** `BR-EXAM-023`, `BR-EXAM-027`, `CR-IDEMPOTENCY-001`.
 
 ### Validation result contract
@@ -249,10 +249,10 @@ sequenceDiagram
     end
 ```
 
-**Sequence ID:** `SEQ-ANSWER-SYNC`  
-**Caption:** Local-first answer persistence and idempotent retry  
-**Status:** Partial/Planned/Future; exact Windows client offline evidence is `TBD-CLIENT-001`.  
-**Evidence/source:** `EVD-FOUNDATION-003`, approved Student delivery plan, `TBD-PROCTOR-001` for related violation sync.  
+**Sequence ID:** `SEQ-ANSWER-SYNC`
+**Caption:** Local-first answer persistence and idempotent retry
+**Status:** Partial/Planned/Future; exact Windows client offline evidence is `TBD-CLIENT-001`.
+**Evidence/source:** `EVD-FOUNDATION-003`, approved Student delivery plan, `TBD-PROCTOR-001` for related violation sync.
 **Related IDs:** `FR-DELIVERY-003`–`FR-DELIVERY-009`, `BR-DELIVERY-030`–`BR-DELIVERY-034`, `NFR-02`, `NFR-03`, `NFR-06`, `NFR-12`.
 
 ### Attempt state and timer invariant
@@ -284,10 +284,10 @@ sequenceDiagram
     end
 ```
 
-**Sequence ID:** `SEQ-PROCTOR-AUDIT`  
-**Caption:** Assignment-scoped Proctor monitoring and audit event  
-**Status:** Partial/Planned/Future; exact live synchronization remains `TBD-PROCTOR-001`.  
-**Evidence/source:** Proctor implementation/plan evidence under `EVD-FOUNDATION-003`, `EVD-FOUNDATION-005`.  
+**Sequence ID:** `SEQ-PROCTOR-AUDIT`
+**Caption:** Assignment-scoped Proctor monitoring and audit event
+**Status:** Partial/Planned/Future; exact live synchronization remains `TBD-PROCTOR-001`.
+**Evidence/source:** Proctor implementation/plan evidence under `EVD-FOUNDATION-003`, `EVD-FOUNDATION-005`.
 **Related IDs:** `FR-INTEGRITY-001`–`FR-INTEGRITY-005`, `BR-INTEGRITY-035`, `BR-INTEGRITY-039`, `NFR-09`, `NFR-10`.
 
 The first Practice policy records a violation and warning without automatic invalidation. A stricter policy may issue an allowed command such as extend time or force submit only when the fixed attempt policy contains that behavior. Any command must be idempotent and visible in audit.
@@ -333,10 +333,10 @@ sequenceDiagram
     end
 ```
 
-**Sequence ID:** `SEQ-SCORE-PUBLISH-001`  
-**Caption:** Examiner/automated scoring, Host source review, and report publication  
-**Status:** Partial/Planned/Future; source/provider policies include TBD items.  
-**Evidence/source:** `EVD-FOUNDATION-003`, `EVD-FOUNDATION-005`, `TBD-AI-001`, `TBD-AI-002`.  
+**Sequence ID:** `SEQ-SCORE-PUBLISH-001`
+**Caption:** Examiner/automated scoring, Host source review, and report publication
+**Status:** Partial/Planned/Future; source/provider policies include TBD items.
+**Evidence/source:** `EVD-FOUNDATION-003`, `EVD-FOUNDATION-005`, `TBD-AI-001`, `TBD-AI-002`.
 **Related IDs:** `FR-SCORE-001`–`FR-SCORE-007`, `FR-REPORT-001`–`FR-REPORT-005`, `BR-SCORE-036`–`BR-SCORE-038`, `BR-REPORT-040`–`BR-REPORT-043`, `NFR-10`.
 
 ### Publication gate
@@ -370,3 +370,103 @@ Retries must exclude validation, authorization, and conflict failures. External 
 - Exact violation delivery/recovery remains `TBD-PROCTOR-001`.
 - Exact generation recovery and form/audience policy remain `TBD-GENERATION-001`/`TBD-VERSION-001`.
 - Exact database columns/migrations and client device matrix require source or execution evidence before being labelled Current.
+
+
+## 3.10 Scope revision interaction designs
+
+### 3.10.1 Student email and context resolution
+
+```mermaid
+sequenceDiagram
+    actor S as Student
+    participant P as Practice Web
+    participant I as Identity
+    participant M as Membership/Entitlement
+    S->>P: Request email sign-in
+    P->>I: Create one-time challenge
+    I-->>S: Deliver code
+    S->>P: Submit code
+    P->>I: Verify unused, valid code
+    I-->>P: Authenticated identity
+    P->>M: Resolve permitted contexts and entitlement
+    alt no context or entitlement
+        M-->>P: Locked/unavailable state
+        P-->>S: Explain next permitted action
+    else one or more contexts
+        M-->>P: Authorized context list
+        P-->>S: Show permitted choice
+    end
+```
+
+**Diagram ID:** `SEQ-PRACTICE-LOGIN`
+**Status:** Proposed implementation; D02 was confirmed on 2026-10-22: verified email with explicit authorized organization context. Source contains identity/membership slices; complete context switching and isolation still require implementation evidence.
+**Related requirements:** `FR-PRACTICE-001`, `FR-PRACTICE-002`.
+
+### 3.10.2 Practice start, save and resume
+
+```mermaid
+sequenceDiagram
+    actor S as Student
+    participant P as Practice Web
+    participant C as Catalog
+    participant X as Practice Session
+    participant M as Media/Storage
+    S->>P: Open task group
+    P->>C: Filter published, ready, practice-flagged content
+    C-->>P: Eligible pool or insufficient-content result
+    S->>P: Begin or resume
+    P->>X: Create/resume owned session
+    X-->>P: Fixed item and policy snapshot
+    S->>P: Save answer/confidence
+    P->>X: Persist response with idempotency key
+    alt media response
+        P->>M: Request signed grant and bind upload
+        M-->>P: Accepted/pending/failed binding
+    end
+    X-->>P: Saved/pending state
+    P-->>S: Show state and next action
+```
+
+**Diagram ID:** `SEQ-PRACTICE-SESSION`
+**Status:** Proposed; it is the later implementation contract for `FR-PRACTICE-003` through `FR-PRACTICE-006`.
+
+### 3.10.3 AI explanation state
+
+```mermaid
+stateDiagram-v2
+    [*] --> NotRequested
+    NotRequested --> Queued: eligible response submitted
+    Queued --> Processing: provider request accepted
+    Processing --> Available: explanation returned and validated
+    Processing --> RetryableFailure: timeout or transient provider error
+    Processing --> Unavailable: unsupported task or policy block
+    RetryableFailure --> Queued: safe retry
+    Available --> [*]
+    Unavailable --> [*]
+```
+
+**Diagram ID:** `SEQ-AI-FEEDBACK`
+**Status:** Proposed/TBD for provider and rubric policy. The answer and activity event remain available in every terminal state.
+
+### 3.10.4 Design decisions
+
+- `ADR-PRACTICE-001`: keep practice and exam response ownership separate.
+- `ADR-PRACTICE-002`: treat channel flags as eligibility filters, not entitlements.
+- `ADR-PRACTICE-003`: preserve answer data independently from AI feedback state.
+- `ADR-PRACTICE-004`: label all AI output as educational/generated content and retain provenance.
+- `ADR-PRACTICE-005`: implement D01-D03 confirmed on 2026-10-22: existing Academic task families, explicit authorized organization context, and quick grouped Study-Pack practice. Preserve source maturity and academic/operational policy gates independently from these product decisions.
+
+### 3.10.5 Scope revision traceability
+
+| Requirement | Design coverage |
+|---|---|
+| `FR-PLATFORM-001` | Platform administration boundary and operational responsibility split in `SD-ARCH-CHANNEL-001` |
+| `FR-ACADEMIC-001` / `FR-ACADEMIC-002` | Academic draft/review/publication ownership in `SD-ARCH-CHANNEL-001` and the Report 3 role matrix |
+| `FR-CONTENT-006` | Channel flag invariants in Report 4 Database Design Section 2.7.3 |
+| `FR-PRACTICE-001` / `FR-PRACTICE-002` | `SEQ-PRACTICE-LOGIN` |
+| `FR-PRACTICE-003` / `FR-PRACTICE-004` | Catalog filtering and session creation in `SEQ-PRACTICE-SESSION` |
+| `FR-PRACTICE-005` / `FR-PRACTICE-006` | Response/media ownership in `DB-PRACTICE-ERD-001` and `SEQ-PRACTICE-SESSION` |
+| `FR-PRACTICE-007` | `SEQ-AI-FEEDBACK` and proposed `AIFeedback` provenance |
+| `FR-PRACTICE-008` | `PracticeProgressEvent` ownership and the separation from score/report entities |
+| `FR-PRACTICE-009` | Bounded feedback decision `TBD-FEEDBACK-001`; no unapproved handler is designed |
+| `NFR-AI-001` / `NFR-AI-002` | AI provider isolation, retry, provenance and learner-readable explanation boundary |

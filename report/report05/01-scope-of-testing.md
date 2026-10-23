@@ -1,10 +1,10 @@
 # 1. Scope of Testing
 
-This section maps the original DOCX heading **1. Scope of Testing**. It defines what the PTE Prep test documentation covers, what is excluded, the testable baseline, assumptions, and evidence boundaries.
+This section maps the original DOCX heading **1. Scope of Testing**. It defines what the PTEPrep test documentation covers, what is excluded, the testable baseline, assumptions, and evidence boundaries.
 
 ## 1.1 Test objective
 
-The test effort must show whether the approved PTE Prep requirements and design are internally consistent and whether the implemented product preserves the core business invariants. The focus is not only happy-path screen completion. It includes authorization, tenant ownership, fixed exam provenance, local-first answer recovery, Proctor/Examiner assignment, scoring-source review, publication blocking, and external-service failure behavior.
+The test effort must show whether the approved PTEPrep requirements and design are internally consistent and whether the implemented product preserves the core business invariants. The focus is not only happy-path screen completion. It includes authorization, tenant ownership, fixed exam provenance, local-first answer recovery, Proctor/Examiner assignment, scoring-source review, publication blocking, and external-service failure behavior.
 
 ## 1.2 In-scope product surfaces
 
@@ -19,7 +19,7 @@ The test effort must show whether the approved PTE Prep requirements and design 
 
 ## 1.3 Functional coverage
 
-The test scope covers all 12 PTE Prep feature groups:
+The test scope covers all 12 PTEPrep feature groups:
 
 1. account and organization onboarding;
 2. organization, Student, program, class, and enrollment management;
@@ -61,7 +61,7 @@ Numeric NFR values are targets. A test run must include environment, build, work
 
 ## 1.6 Test personnel and responsibilities
 
-The test team is a project activity, not an additional PTE Prep product role. The following test responsibilities are distinct from the product actors:
+The test team is a project activity, not an additional PTEPrep product role. The following test responsibilities are distinct from the product actors:
 
 | Test responsibility | Responsibility |
 |---|---|
@@ -105,3 +105,19 @@ Each case/result records:
 9. defect/TBD link where applicable.
 
 The current Report 5 baseline contains planned cases and result-record templates only. It does not claim a product test run or execution evidence for the product.
+
+
+## 1.9 Scope revision coverage
+
+The revised test boundary includes:
+
+- Platform Admin and Platform Manager operational permissions, including allow/deny separation.
+- Academic Staff draft/submit behavior and Academic Manager review, rejection, publication and activation.
+- Practice email challenge, context and entitlement resolution, catalog visibility, session ownership, save/resume/submit, media binding, progress and history.
+- Objective feedback and AI explanation pending, success, unavailable, failed and retryable states.
+- Independent `available_for_practice` and `available_for_exam` question selection with no cross-channel fallback.
+- Existing organization exam generation, Windows delivery, Proctor monitoring, Examiner assignment, Host score selection and report publication regression paths.
+
+The following remain outside testing for this revision: official PTE Academic equivalence, a research contribution, Student personal payment, mobile organization exam delivery, open chatbot/personalized study plans, advanced anti-cheat and ordered curated-pack completion. D01-D03 are confirmed requirements and belong in planned coverage; execution remains pending. Numeric Writing/Speaking AI scoring is a later capability after calibration, separate from the initial rubric-feedback release.
+
+Every case records requirement disposition, implementation maturity and execution status separately. A future AI case may be complete as a planned acceptance case while its execution status remains `Not executed`.

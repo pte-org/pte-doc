@@ -1,18 +1,19 @@
-# Report 3 — Software Requirement Specification
+# Report 3 - Software Requirement Specification
 
-**Product:** PTE Prep  
-**Document-level DOCX section:** II. Software Requirement Specification  
-**Version:** 1.0 documentation baseline  
-**Status:** Draft — project-specific English Markdown conversion  
-**Owner:** Ngô Đăng Quang — Project Leader  
-**Baseline date:** 2026-10-06  
-**Source:** `template-doc/Report3_Software Requirement Specification.docx` and the approved PTE Prep SRS
+**Product:** PTEPrep
+**Registered title:** PTEPrep: An AI-Powered PTE Practice Platform and Realistic Exam Simulator
+**Document-level DOCX section:** II. Software Requirement Specification
+**Version:** 1.1 scope revision draft
+**Status:** Draft - D01-D03 and practice language/feedback policy confirmed by user; supervisor confirmation and remaining academic/operational policies pending
+**Owner:** Ngo Dang Quang - Project Leader
+**Revision date:** 2026-10-22
+**Source:** `template-doc/Report3_Software Requirement Specification.docx`, registration v1.2, reviewed source and the scope revision plan
 
 ## Purpose
 
-This report defines the business requirements and quality expectations for PTE Prep. It replaces generic template prompts with the requirements of the project while preserving the original document section order. The report is written for project reviewers, business analysts, product owners, designers, developers, testers, and operators.
+This report defines the business requirements for PTEPrep before the later practice implementation work. It preserves the original DOCX section order and uses plain language so that a reviewer, business analyst, academic reviewer, developer, tester, or operator can follow the same rule. It separates required behavior from what the reviewed source currently proves.
 
-PTE Prep is an independent organization-based practice and mock-exam platform that simulates PTE-style content. It does not connect to, represent, certify for, or claim endorsement by PTE Academic.
+PTEPrep is an independent PTE-style practice and realistic exam simulation product. It does not connect to, represent, certify for, or claim endorsement by PTE Academic. Its results are not official PTE Academic results.
 
 ## Section navigation
 
@@ -22,17 +23,21 @@ PTE Prep is an independent organization-based practice and mock-exam platform th
 4. [Non-Functional Requirements](04-non-functional-requirements.md)
 5. [Requirement Appendix](05-requirement-appendix.md)
 
-## Scope status
+## Revision boundary
 
-The organization-first onboarding, shared content governance, exam preparation, Windows-first delivery, proctoring, scoring, reporting, and audit concepts are the approved requirement baseline. Current/Partial/Planned/Future/Out of scope/TBD labels are controlled by [`_foundation/status-evidence-matrix.md`](../_foundation/status-evidence-matrix.md). The complete 23-task catalog is maintained in [`_foundation/pte-task-catalog.md`](../_foundation/pte-task-catalog.md).
+This revision adds the `pte-practice` Student journey, four product channels, Platform Manager, Academic Manager and Academic Staff responsibilities, AI educational explanations, progress/history, and independent question usage flags for Practice Web and the Windows exam client. It keeps the existing organization exam lifecycle, Proctoring, Examiner scoring, Host report publication, external integrations and out-of-scope decisions.
 
-Numeric performance, availability, capacity, and recovery values are targets or baselines until Report 5 contains dated execution evidence. Contract-based retention, provider thresholds, and several recovery details remain TBD.
+The required product scope is not the same as implementation maturity. A capability can be in scope while the reviewed build is Partial or Planned/Future. No product code, database migration, deployment or production data is changed by this report revision.
 
-## Shared foundation
+## Scope status and shared foundation
+
+The shared actor, feature, vocabulary, task, status, evidence and open-decision rules are maintained in:
 
 - [Actor and feature catalog](../_foundation/actor-feature-catalog.md)
-- [DOCX-to-Markdown section map](../_foundation/section-map.md)
+- [Task catalog](../_foundation/pte-task-catalog.md)
+- [Identifier ledger](../_foundation/id-ledger.md)
 - [Status and evidence matrix](../_foundation/status-evidence-matrix.md)
-- [Open/TBD register](../_foundation/tbd-register.md)
 - [Evidence catalog](../_foundation/evidence-catalog.md)
+- [Open/TBD register](../_foundation/tbd-register.md)
 
+Numeric performance and recovery values remain acceptance targets until a dated Report 5 result proves them. Retention remains contract-based. D01-D03 and practice language/feedback policy were confirmed by the user on 2026-10-22; D04 independent question flags remain confirmed. See the shared TBD register and Practice decision record for the resolved policies; confirmation does not imply implementation or academic validation.

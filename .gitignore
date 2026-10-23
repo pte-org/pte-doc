@@ -1,3 +1,4 @@
 # Reporting scratchpads - local only, not source artifacts
 *.csv
 .claude/
+__pycache__/
