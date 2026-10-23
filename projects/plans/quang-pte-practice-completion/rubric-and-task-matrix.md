@@ -1,5 +1,9 @@
 # Rubric và ma trận task cho Practice
 
+> Bản rubric chi tiết, có thể review và pin theo version, nằm tại
+> [`practice-rubric-v1.md`](practice-rubric-v1.md). Tài liệu này giữ vai trò
+> ma trận task, nguồn tham chiếu và các ràng buộc thiết kế bổ sung.
+
 Date: 2026-10-22. Status: Proposed, cần Academic Manager duyệt nội dung/anchors.
 Đây là rubric giáo dục nội bộ PTEPrep, không phải công bố thang điểm chính thức Pearson.
 
