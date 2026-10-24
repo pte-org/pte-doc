@@ -1,0 +1,24 @@
+{
+  "phase": "phase-05-content-exam-definition-version",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-24T20:00:00Z",
+  "summary": {
+    "passed": 2730,
+    "failed": 0,
+    "skipped": 75
+  },
+  "failures": [],
+  "notes": [
+    "Full app suite (clean test): 2805+ tests, 0 failures, 75 skipped (Postgres-only integration tests). ExamVersionRepositoryTest adds 3 tests (item order and stable ids, tenant-scoped examiner prompt lookup, definition items in sequence order).",
+    "After quality-gate fixes: 2805 tests, 0 failures; ExamDefinition @Version lockVersion, item public id dropped, seed updated; Docker gate re-run healthy and clone of the active definition works.",
+    "Mechanical move and rename done by a token-aware codemod that leaves string literals (error codes, audit names, messages) untouched: module scoretemplate -> assessment, ScoreTemplate* -> ExamDefinition*, ExamSnapshot -> ExamVersion, SnapshotItem -> ExamVersionItem. ModuleStructureTest now expects 15 business modules.",
+    "Entities removed: ScoreTemplateItem, SnapshotItem and BlueprintItem became embeddables (child tables exam_definition_items, exam_version_items, blueprint_items). Aggregates: ScoreTemplate -> ExamDefinition, ExamSnapshot -> ExamVersion, ExamBlueprint kept (see the decision note in the phase file).",
+    "Process deviations: no failing-first artifact; the rename phase was verified by compile plus the full suite. Incremental maven compile hid errors twice; every check used clean builds.",
+    "Docker gate (manual): dev DB recreated, app rebuilt with profile local-schema, healthy with the embeddable mappings; seed rewritten for exam_definitions/exam_definition_items (22 items), sequences reset; GET /exam-definitions lists the ACTIVE definition with 22 items, GET /exam-definitions/active works for the host and is denied to platform admin as before; POST /sessions/drafts accepts examDefinitionPublicId (validation now reports the next business rule).",
+    "Not verified end to end: blueprint approval and publish into an ExamVersion, and exam generation, need a question bank with every task type (the active definition requires the full counts); covered by unit tests only.",
+    "Client (pte-web): api-client paths and JSON fields renamed (/api/v1/exam-definitions, examDefinitionPublicId, examDefinitionVersion, preflight.examDefinition); tenant-web maps the wire name to its internal form field; tsc clean for api-client, tenant-web, vendor-web (ignoring stale .next types); api-client vitest 678 passed with 1 failing test that existed before this work (dashboard contract, 4 unmapped student records); tenant-web exams and hostDashboard vitest 480 passed.",
+    "Scripts: seed-local-exam-ready.ps1 and seed-local-template-and-question-bank.ps1 point at /api/v1/exam-definitions and send examDefinitionPublicId."
+  ],
+  "report_path": "pte-doc/projects/plans/quang-entity-consolidation/tests/phase-05-content-exam-definition-version-test-report.json"
+}
