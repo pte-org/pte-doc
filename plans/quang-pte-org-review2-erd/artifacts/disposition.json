@@ -1,0 +1,1075 @@
+{
+  "items": [
+    {
+      "inventory_id": "ENT-User",
+      "table": "users",
+      "disposition": "core",
+      "pages": [
+        "01-identity-organization",
+        "06-exam-delivery",
+        "07-examiner-grading",
+        "09-proctoring",
+        "10-practice"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "User",
+      "reason": "Khái niệm cốt lõi có mapping riêng; chi tiết vật lý giữ ở domain."
+    },
+    {
+      "inventory_id": "TABLE-user_roles",
+      "table": "user_roles",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "11-authentication"
+      ],
+      "conceptual_mapping": null,
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-LoginHash",
+      "table": "login_hashes",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "11-authentication"
+      ],
+      "conceptual_mapping": "LoginHash",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-RefreshToken",
+      "table": "refresh_tokens",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "11-authentication"
+      ],
+      "conceptual_mapping": "RefreshToken",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-Tenant",
+      "table": "tenants",
+      "disposition": "core",
+      "pages": [
+        "01-identity-organization",
+        "04-billing"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "Organization",
+      "reason": "Khái niệm cốt lõi có mapping riêng; chi tiết vật lý giữ ở domain."
+    },
+    {
+      "inventory_id": "ENT-Organization",
+      "table": "organizations",
+      "disposition": "core",
+      "pages": [
+        "01-identity-organization"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "Organization",
+      "reason": "Khái niệm cốt lõi có mapping riêng; chi tiết vật lý giữ ở domain."
+    },
+    {
+      "inventory_id": "ENT-QuotaTransaction",
+      "table": "quota_transactions",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "12-tenancy-billing-audit"
+      ],
+      "conceptual_mapping": "QuotaTransaction",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-AuditLog",
+      "table": "audit_logs",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "12-tenancy-billing-audit"
+      ],
+      "conceptual_mapping": "AuditLog",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-Program",
+      "table": "programs",
+      "disposition": "detail",
+      "pages": [
+        "01-identity-organization"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "Program",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-StudentClass",
+      "table": "student_classes",
+      "disposition": "detail",
+      "pages": [
+        "01-identity-organization"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "StudentClass",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-ClassMembership",
+      "table": "class_memberships",
+      "disposition": "detail",
+      "pages": [
+        "01-identity-organization"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ClassMembership",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-LecturerAssignment",
+      "table": "lecturer_assignments",
+      "disposition": "detail",
+      "pages": [
+        "01-identity-organization"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "LecturerAssignment",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-MediaObject",
+      "table": "media_objects",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "13-media-runtime"
+      ],
+      "conceptual_mapping": "MediaObject",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-Question",
+      "table": "questions",
+      "disposition": "core",
+      "pages": [
+        "02-content-assessment"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "Question",
+      "reason": "Khái niệm cốt lõi có mapping riêng; chi tiết vật lý giữ ở domain."
+    },
+    {
+      "inventory_id": "ENT-QuestionOption",
+      "table": "question_options",
+      "disposition": "detail",
+      "pages": [
+        "02-content-assessment"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "QuestionOption",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-ExamBlueprint",
+      "table": "exam_blueprints",
+      "disposition": "detail",
+      "pages": [
+        "02-content-assessment"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ExamBlueprint",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-BlueprintItem",
+      "table": "blueprint_items",
+      "disposition": "detail",
+      "pages": [
+        "02-content-assessment"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "BlueprintItem",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-ExamSnapshot",
+      "table": "exam_snapshots",
+      "disposition": "core",
+      "pages": [
+        "02-content-assessment",
+        "05-exam-setup"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ExamSnapshot",
+      "reason": "Khái niệm cốt lõi có mapping riêng; chi tiết vật lý giữ ở domain."
+    },
+    {
+      "inventory_id": "ENT-SnapshotItem",
+      "table": "snapshot_items",
+      "disposition": "detail",
+      "pages": [
+        "02-content-assessment"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "SnapshotItem",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-ExamSession",
+      "table": "exam_sessions",
+      "disposition": "core",
+      "pages": [
+        "05-exam-setup",
+        "06-exam-delivery",
+        "08-scoring-reporting",
+        "09-proctoring"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ExamSession",
+      "reason": "Khái niệm cốt lõi có mapping riêng; chi tiết vật lý giữ ở domain."
+    },
+    {
+      "inventory_id": "ENT-Enrollment",
+      "table": "enrollments",
+      "disposition": "detail",
+      "pages": [
+        "05-exam-setup"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "Enrollment",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-ProctorAssignment",
+      "table": "proctor_assignments",
+      "disposition": "detail",
+      "pages": [
+        "05-exam-setup"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ProctorAssignment",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-ExamAttempt",
+      "table": "exam_attempts",
+      "disposition": "core",
+      "pages": [
+        "06-exam-delivery",
+        "07-examiner-grading",
+        "08-scoring-reporting",
+        "10-practice"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ExamAttempt",
+      "reason": "Khái niệm cốt lõi có mapping riêng; chi tiết vật lý giữ ở domain."
+    },
+    {
+      "inventory_id": "ENT-PinnedExamSnapshot",
+      "table": "pinned_exam_snapshots",
+      "disposition": "detail",
+      "pages": [
+        "06-exam-delivery"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "PinnedExamSnapshot",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-PinnedItem",
+      "table": "pinned_items",
+      "disposition": "detail",
+      "pages": [
+        "06-exam-delivery"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "PinnedItem",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-AttemptAnswer",
+      "table": "attempt_answers",
+      "disposition": "core",
+      "pages": [
+        "06-exam-delivery",
+        "08-scoring-reporting"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "AttemptAnswer",
+      "reason": "Khái niệm cốt lõi có mapping riêng; chi tiết vật lý giữ ở domain."
+    },
+    {
+      "inventory_id": "ENT-AttemptHeartbeat",
+      "table": "attempt_heartbeats",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "14-session-controls"
+      ],
+      "conceptual_mapping": "AttemptHeartbeat",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-ScoringAnswer",
+      "table": "scoring_answers",
+      "disposition": "core",
+      "pages": [
+        "08-scoring-reporting"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ScoringAnswer",
+      "reason": "Khái niệm cốt lõi có mapping riêng; chi tiết vật lý giữ ở domain."
+    },
+    {
+      "inventory_id": "ENT-ProctorSession",
+      "table": "proctor_sessions",
+      "disposition": "detail",
+      "pages": [
+        "09-proctoring"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ProctorSession",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-ViolationEvent",
+      "table": "violation_events",
+      "disposition": "detail",
+      "pages": [
+        "09-proctoring"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ViolationEvent",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-NotificationLog",
+      "table": "notification_logs",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "15-notification-inbox"
+      ],
+      "conceptual_mapping": "NotificationLog",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-AttemptReport",
+      "table": "attempt_reports",
+      "disposition": "core",
+      "pages": [
+        "08-scoring-reporting"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "AttemptReport",
+      "reason": "Khái niệm cốt lõi có mapping riêng; chi tiết vật lý giữ ở domain."
+    },
+    {
+      "inventory_id": "ENT-ScoreTemplate",
+      "table": "score_templates",
+      "disposition": "core",
+      "pages": [
+        "03-template-rubric",
+        "05-exam-setup"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ScoreTemplate",
+      "reason": "Khái niệm cốt lõi có mapping riêng; chi tiết vật lý giữ ở domain."
+    },
+    {
+      "inventory_id": "ENT-ScoreTemplateItem",
+      "table": "score_template_items",
+      "disposition": "detail",
+      "pages": [
+        "03-template-rubric"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ScoreTemplateItem",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-SessionClassAssignment",
+      "table": "session_class_assignments",
+      "disposition": "detail",
+      "pages": [
+        "05-exam-setup"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "SessionClassAssignment",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-TenantApplication",
+      "table": "tenant_applications",
+      "disposition": "detail",
+      "pages": [
+        "04-billing"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "TenantApplication",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-Plan",
+      "table": "plans",
+      "disposition": "detail",
+      "pages": [
+        "04-billing"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "Plan",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-PlatformSetting",
+      "table": "platform_settings",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "12-tenancy-billing-audit"
+      ],
+      "conceptual_mapping": "PlatformSetting",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-Subscription",
+      "table": "subscriptions",
+      "disposition": "core",
+      "pages": [
+        "04-billing"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "Subscription",
+      "reason": "Khái niệm cốt lõi có mapping riêng; chi tiết vật lý giữ ở domain."
+    },
+    {
+      "inventory_id": "ENT-Order",
+      "table": "orders",
+      "disposition": "detail",
+      "pages": [
+        "04-billing"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "Order",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-PaymentTransaction",
+      "table": "payment_transactions",
+      "disposition": "detail",
+      "pages": [
+        "04-billing"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "PaymentTransaction",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-LicenseCode",
+      "table": "license_codes",
+      "disposition": "detail",
+      "pages": [
+        "04-billing"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "LicenseCode",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-QuestionTypeDefinition",
+      "table": "question_types",
+      "disposition": "detail",
+      "pages": [
+        "02-content-assessment",
+        "03-template-rubric"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "QuestionTypeDefinition",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-ExamAudienceSource",
+      "table": "exam_audience_sources",
+      "disposition": "detail",
+      "pages": [
+        "05-exam-setup"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ExamAudienceSource",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-ExamAudienceMember",
+      "table": "exam_audience_members",
+      "disposition": "detail",
+      "pages": [
+        "05-exam-setup"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ExamAudienceMember",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-ExamGenerationJob",
+      "table": "exam_generation_jobs",
+      "disposition": "detail",
+      "pages": [
+        "05-exam-setup"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ExamGenerationJob",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-ExamForm",
+      "table": "exam_forms",
+      "disposition": "detail",
+      "pages": [
+        "05-exam-setup"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ExamForm",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-FormAssignment",
+      "table": "form_assignments",
+      "disposition": "detail",
+      "pages": [
+        "05-exam-setup"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "FormAssignment",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-TaskRuntimeProfile",
+      "table": "task_runtime_profiles",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "13-media-runtime"
+      ],
+      "conceptual_mapping": "TaskRuntimeProfile",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-TaskRuntimeContract",
+      "table": "task_runtime_contracts",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "13-media-runtime"
+      ],
+      "conceptual_mapping": "TaskRuntimeContract",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-TaskTypePublicationUsage",
+      "table": "task_type_publication_usage",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "13-media-runtime"
+      ],
+      "conceptual_mapping": "TaskTypePublicationUsage",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-ExaminerAssignmentBatch",
+      "table": "examiner_assignment_batches",
+      "disposition": "detail",
+      "pages": [
+        "07-examiner-grading"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ExaminerAssignmentBatch",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-ExaminerAttemptAssignment",
+      "table": "examiner_attempt_assignments",
+      "disposition": "detail",
+      "pages": [
+        "07-examiner-grading"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ExaminerAttemptAssignment",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-ExaminerAnswerScore",
+      "table": "examiner_answer_scores",
+      "disposition": "detail",
+      "pages": [
+        "08-scoring-reporting"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ExaminerAnswerScore",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-ScoreSourceAudit",
+      "table": "score_source_audits",
+      "disposition": "detail",
+      "pages": [
+        "08-scoring-reporting"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ScoreSourceAudit",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-ScoringSessionState",
+      "table": "scoring_session_states",
+      "disposition": "detail",
+      "pages": [
+        "08-scoring-reporting"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ScoringSessionState",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "TABLE-exam_session_selected_skills",
+      "table": "exam_session_selected_skills",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "14-session-controls"
+      ],
+      "conceptual_mapping": null,
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-AttemptSecurityEvent",
+      "table": "attempt_security_events",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "14-session-controls"
+      ],
+      "conceptual_mapping": "AttemptSecurityEvent",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-SupportTicket",
+      "table": "support_ticket",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "16-support-grading-receipts"
+      ],
+      "conceptual_mapping": "SupportTicket",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-SupportTicketNote",
+      "table": "support_ticket_note",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "16-support-grading-receipts"
+      ],
+      "conceptual_mapping": "SupportTicketNote",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-InboxContent",
+      "table": "notification_inbox_contents",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "15-notification-inbox"
+      ],
+      "conceptual_mapping": "InboxContent",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-InboxAnnouncement",
+      "table": "notification_inbox_announcements",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "15-notification-inbox"
+      ],
+      "conceptual_mapping": "InboxAnnouncement",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-InboxDeliveryIntent",
+      "table": "notification_inbox_deliveries",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "15-notification-inbox"
+      ],
+      "conceptual_mapping": "InboxDeliveryIntent",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-InboxRecipientStream",
+      "table": "notification_inbox_streams",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "15-notification-inbox"
+      ],
+      "conceptual_mapping": "InboxRecipientStream",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-InboxItem",
+      "table": "notification_inbox_items",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "15-notification-inbox"
+      ],
+      "conceptual_mapping": "InboxItem",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "TABLE-notification_inbox_snapshots",
+      "table": "notification_inbox_snapshots",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "15-notification-inbox"
+      ],
+      "conceptual_mapping": null,
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-GradingCohort",
+      "table": "session_grading_cohorts",
+      "disposition": "detail",
+      "pages": [
+        "07-examiner-grading"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "GradingCohort",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-GradingCohortMember",
+      "table": "session_grading_cohort_members",
+      "disposition": "detail",
+      "pages": [
+        "07-examiner-grading"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "GradingCohortMember",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-LicenseIssueIntent",
+      "table": "license_issue_intents",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "12-tenancy-billing-audit"
+      ],
+      "conceptual_mapping": "LicenseIssueIntent",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-PracticeIdentity",
+      "table": "practice_identities",
+      "disposition": "detail",
+      "pages": [
+        "10-practice"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "PracticeIdentity",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-PracticeIdentityMembership",
+      "table": "practice_identity_memberships",
+      "disposition": "detail",
+      "pages": [
+        "10-practice"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "PracticeIdentityMembership",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-PracticeEmailChallenge",
+      "table": "practice_email_challenges",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "11-authentication"
+      ],
+      "conceptual_mapping": "PracticeEmailChallenge",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-PracticeSession",
+      "table": "practice_sessions",
+      "disposition": "detail",
+      "pages": [
+        "10-practice"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "PracticeSession",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-PracticeSessionAttemptLink",
+      "table": "practice_session_attempts",
+      "disposition": "detail",
+      "pages": [
+        "10-practice"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "PracticeSessionAttemptLink",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-PracticeSessionOperation",
+      "table": "practice_session_operations",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "17-practice-jobs"
+      ],
+      "conceptual_mapping": "PracticeSessionOperation",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-PracticeSessionItem",
+      "table": "practice_session_items",
+      "disposition": "detail",
+      "pages": [
+        "10-practice"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "PracticeSessionItem",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-SessionAttendance",
+      "table": "session_attendances",
+      "disposition": "detail",
+      "pages": [
+        "09-proctoring"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "SessionAttendance",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-SessionAttendanceCommand",
+      "table": "session_attendance_commands",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "14-session-controls"
+      ],
+      "conceptual_mapping": "SessionAttendanceCommand",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-ExaminerGradingWork",
+      "table": "examiner_grading_work",
+      "disposition": "detail",
+      "pages": [
+        "07-examiner-grading"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ExaminerGradingWork",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-ExaminerAnswerDraft",
+      "table": "examiner_answer_drafts",
+      "disposition": "detail",
+      "pages": [
+        "07-examiner-grading"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ExaminerAnswerDraft",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-ExaminerGradingEvent",
+      "table": "examiner_grading_events",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "16-support-grading-receipts"
+      ],
+      "conceptual_mapping": "ExaminerGradingEvent",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-ExaminerGradingCommand",
+      "table": "examiner_grading_commands",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "16-support-grading-receipts"
+      ],
+      "conceptual_mapping": "ExaminerGradingCommand",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-ExaminerGradingIssue",
+      "table": "examiner_grading_issues",
+      "disposition": "detail",
+      "pages": [
+        "07-examiner-grading"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ExaminerGradingIssue",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-SessionIdentityVerificationCommand",
+      "table": "session_identity_verification_commands",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "14-session-controls"
+      ],
+      "conceptual_mapping": "SessionIdentityVerificationCommand",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-ExamSessionIncident",
+      "table": "exam_session_incidents",
+      "disposition": "detail",
+      "pages": [
+        "09-proctoring"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ExamSessionIncident",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-ExamSessionIncidentHistory",
+      "table": "exam_session_incident_history",
+      "disposition": "detail",
+      "pages": [
+        "09-proctoring"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ExamSessionIncidentHistory",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-ScoringAnswerAiDetail",
+      "table": "scoring_answer_ai_details",
+      "disposition": "detail",
+      "pages": [
+        "08-scoring-reporting"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "ScoringAnswerAiDetail",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-PracticeExplanation",
+      "table": "practice_explanations",
+      "disposition": "detail",
+      "pages": [
+        "10-practice"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "PracticeExplanation",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-PracticeExplanationJob",
+      "table": "practice_explanation_jobs",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "17-practice-jobs"
+      ],
+      "conceptual_mapping": "PracticeExplanationJob",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-PracticeExplanationOutbox",
+      "table": "practice_explanation_outbox",
+      "disposition": "technical",
+      "pages": [],
+      "technical_pages": [
+        "17-practice-jobs"
+      ],
+      "conceptual_mapping": "PracticeExplanationOutbox",
+      "reason": "Bảng kỹ thuật/phụ trợ đã được vẽ trong nhóm03."
+    },
+    {
+      "inventory_id": "ENT-RubricRevision",
+      "table": "rubric_revisions",
+      "disposition": "detail",
+      "pages": [
+        "03-template-rubric",
+        "10-practice"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "RubricRevision",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-RubricCriterion",
+      "table": "rubric_criteria",
+      "disposition": "detail",
+      "pages": [
+        "03-template-rubric"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "RubricCriterion",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    },
+    {
+      "inventory_id": "ENT-RubricCriterionLevel",
+      "table": "rubric_criterion_levels",
+      "disposition": "detail",
+      "pages": [
+        "03-template-rubric"
+      ],
+      "technical_pages": [],
+      "conceptual_mapping": "RubricCriterionLevel",
+      "reason": "Có dữ liệu hoặc quan hệ nghiệp vụ cần giải thích riêng."
+    }
+  ],
+  "historical_exclusions": [
+    {
+      "table": "session_compositions",
+      "disposition": "excluded",
+      "reason": {
+        "file": "../pte-api/app/src/main/resources/db/migration/V19__session_drop_composition.sql",
+        "line": 7,
+        "sql": "DROP TABLE IF EXISTS session_compositions",
+        "conditional_file": false
+      }
+    },
+    {
+      "table": "_pte_standard_task_type_catalog",
+      "disposition": "excluded",
+      "reason": "transaction-scoped temporary seed table"
+    },
+    {
+      "table": "_pte_standard_task_type_requirements",
+      "disposition": "excluded",
+      "reason": "transaction-scoped temporary seed table"
+    },
+    {
+      "table": "program_coordinator_assignments",
+      "disposition": "excluded",
+      "reason": {
+        "file": "../pte-api/app/src/main/resources/db/migration/V69__drop_program_coordinator_assignments.sql",
+        "line": 4,
+        "sql": "DROP TABLE IF EXISTS program_coordinator_assignments",
+        "conditional_file": false
+      }
+    }
+  ]
+}

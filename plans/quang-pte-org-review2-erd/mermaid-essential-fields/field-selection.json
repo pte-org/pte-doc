@@ -1,0 +1,3828 @@
+{
+  "status": "source-verified",
+  "inventory_tables": 93,
+  "selected_field_count": 772,
+  "source_field_count": 1443,
+  "pages": [
+    {
+      "id": "02-core-delivery-grading",
+      "source": "01-core-overview/quang-02-core-delivery-grading.mmd",
+      "tables": [
+        "users",
+        "exam_sessions",
+        "exam_snapshots",
+        "exam_attempts",
+        "pinned_exam_snapshots",
+        "pinned_items",
+        "attempt_answers",
+        "scoring_answers",
+        "examiner_attempt_assignments",
+        "examiner_grading_work",
+        "examiner_answer_scores",
+        "attempt_reports"
+      ],
+      "relationships": [
+        "REL-041A322D",
+        "REL-141873E0",
+        "REL-1AD2B578",
+        "REL-2449BEC9",
+        "REL-322A7BCD",
+        "REL-591E2A11",
+        "REL-5BF81437",
+        "REL-63506D22",
+        "REL-7290217F",
+        "REL-7371AB5B",
+        "REL-7A976F78",
+        "REL-8F347276",
+        "REL-C2AD5C63",
+        "REL-D02D4510",
+        "REL-F6B3D600",
+        "REL-F6C4AE37",
+        "REL-F97143D6"
+      ],
+      "sha256": "193354f10290dab58df24b494290867086d00903406d9bdedf634d9e53d1eec1"
+    },
+    {
+      "id": "01-core-exam-setup",
+      "source": "01-core-overview/quang-01-core-exam-setup.mmd",
+      "tables": [
+        "tenants",
+        "organizations",
+        "users",
+        "subscriptions",
+        "questions",
+        "exam_snapshots",
+        "snapshot_items",
+        "score_templates",
+        "exam_sessions",
+        "enrollments",
+        "exam_forms",
+        "form_assignments"
+      ],
+      "relationships": [
+        "REL-35BDE713",
+        "REL-433B42E8",
+        "REL-43657F1A",
+        "REL-5BF81437",
+        "REL-7DA4518E",
+        "REL-921E243A",
+        "REL-9A42D978",
+        "REL-A49D8D66",
+        "REL-B4832265",
+        "REL-BB8240A0",
+        "REL-CCDDE3B4",
+        "REL-D0DD9755",
+        "REL-DC6AD25C"
+      ],
+      "sha256": "5c9de112c11ff174c027332f776cc8478c5fd225bad385c5771d06f08b206f3e"
+    },
+    {
+      "id": "quang-00-core-erd",
+      "source": "01-core-overview/quang-00-core-erd.mmd",
+      "tables": [
+        "exam_sessions",
+        "exam_attempts",
+        "pinned_exam_snapshots",
+        "pinned_items",
+        "attempt_answers",
+        "scoring_answers",
+        "examiner_answer_scores",
+        "attempt_reports"
+      ],
+      "relationships": [
+        "REL-041A322D",
+        "REL-1AD2B578",
+        "REL-2449BEC9",
+        "REL-63506D22",
+        "REL-7371AB5B",
+        "REL-C2AD5C63",
+        "REL-D02D4510",
+        "REL-F6B3D600",
+        "REL-F6C4AE37",
+        "REL-F97143D6"
+      ],
+      "sha256": "eed3f7d50be22e0db36aa6bd487f30e9a2a87b9c91c2f40db30afeaa09ddbbe6"
+    },
+    {
+      "id": "01-identity-organization",
+      "source": "02-business-details/quang-01-identity-organization.mmd",
+      "tables": [
+        "tenants",
+        "organizations",
+        "users",
+        "programs",
+        "student_classes",
+        "class_memberships",
+        "lecturer_assignments"
+      ],
+      "relationships": [
+        "REL-24D1F3C2",
+        "REL-35BDE713",
+        "REL-4BFBB1F2",
+        "REL-5883EDB3",
+        "REL-5BDEF290",
+        "REL-A7E0D1C9",
+        "REL-D0DD9755",
+        "REL-F9125C3D"
+      ],
+      "sha256": "a6682ee196f4c3552fd27e4cf97003b6a9ba9a34d42b591de397fba234afcedc"
+    },
+    {
+      "id": "02-content-assessment",
+      "source": "02-business-details/quang-02-content-assessment.mmd",
+      "tables": [
+        "question_types",
+        "questions",
+        "question_options",
+        "exam_blueprints",
+        "blueprint_items",
+        "exam_snapshots",
+        "snapshot_items"
+      ],
+      "relationships": [
+        "REL-06306153",
+        "REL-0D9BCEAC",
+        "REL-5DFB9F9E",
+        "REL-7DA4518E",
+        "REL-9A42D978",
+        "REL-A8EDC357",
+        "REL-A8F585E3",
+        "REL-D2CC9017"
+      ],
+      "sha256": "86def46a3b9349114f4813333c8354bdf044b15f27265e08e9db8f21ae5ef3be"
+    },
+    {
+      "id": "03-template-rubric",
+      "source": "02-business-details/quang-03-template-rubric.mmd",
+      "tables": [
+        "question_types",
+        "score_templates",
+        "score_template_items",
+        "rubric_revisions",
+        "rubric_criteria",
+        "rubric_criterion_levels"
+      ],
+      "relationships": [
+        "REL-145F45C0",
+        "REL-4026290A",
+        "REL-89806D98",
+        "REL-8D0C4CE8",
+        "REL-D37F2680"
+      ],
+      "sha256": "194ed6828acf1681f3b6d3b4654ed3d0bd8c55b0cdd5545c97ea2a6226ed9665"
+    },
+    {
+      "id": "04-billing",
+      "source": "02-business-details/quang-04-billing.mmd",
+      "tables": [
+        "tenants",
+        "plans",
+        "subscriptions",
+        "orders",
+        "payment_transactions",
+        "license_codes",
+        "tenant_applications"
+      ],
+      "relationships": [
+        "REL-005E2CBE",
+        "REL-2286506A",
+        "REL-2D0D94DA",
+        "REL-58A32EC9",
+        "REL-A49D8D66",
+        "REL-BDE744B1",
+        "REL-D5F77C0F",
+        "REL-F7FADFC7"
+      ],
+      "sha256": "67be4afad686a7325f477f7272d1d2427ff46fe42281d40f32f7a812d6ff6554"
+    },
+    {
+      "id": "05-exam-setup",
+      "source": "02-business-details/quang-05-exam-setup.mmd",
+      "tables": [
+        "exam_sessions",
+        "exam_snapshots",
+        "score_templates",
+        "session_class_assignments",
+        "enrollments",
+        "proctor_assignments",
+        "exam_audience_sources",
+        "exam_audience_members",
+        "exam_generation_jobs",
+        "exam_forms",
+        "form_assignments"
+      ],
+      "relationships": [
+        "REL-1F6E5AB1",
+        "REL-36ACDDBE",
+        "REL-3D201D26",
+        "REL-433B42E8",
+        "REL-43657F1A",
+        "REL-5BF81437",
+        "REL-A4A2B326",
+        "REL-B4832265",
+        "REL-BB8240A0",
+        "REL-BCA8EB98",
+        "REL-CCDDE3B4",
+        "REL-DC6AD25C"
+      ],
+      "sha256": "884838575b9453aa246d2aef311b06aef6dbc9e8b6053eee5763c686947bb34e"
+    },
+    {
+      "id": "06-exam-delivery",
+      "source": "02-business-details/quang-06-exam-delivery.mmd",
+      "tables": [
+        "exam_sessions",
+        "users",
+        "exam_attempts",
+        "pinned_exam_snapshots",
+        "pinned_items",
+        "attempt_answers"
+      ],
+      "relationships": [
+        "REL-041A322D",
+        "REL-2449BEC9",
+        "REL-7A976F78",
+        "REL-D02D4510",
+        "REL-F6B3D600",
+        "REL-F97143D6"
+      ],
+      "sha256": "22e6e445f39c688672a49d71be979c422f8e38b0122595308e9b0c2875869a67"
+    },
+    {
+      "id": "07-examiner-grading",
+      "source": "02-business-details/quang-07-examiner-grading.mmd",
+      "tables": [
+        "exam_attempts",
+        "users",
+        "examiner_assignment_batches",
+        "examiner_attempt_assignments",
+        "examiner_grading_work",
+        "examiner_answer_drafts",
+        "examiner_grading_issues",
+        "session_grading_cohorts",
+        "session_grading_cohort_members"
+      ],
+      "relationships": [
+        "REL-0D1EC53E",
+        "REL-141873E0",
+        "REL-322A7BCD",
+        "REL-591E2A11",
+        "REL-702382C5",
+        "REL-7A976F78",
+        "REL-AF84AD68",
+        "REL-B6339EAC",
+        "REL-EBF8FB78"
+      ],
+      "sha256": "e3117130d151fddaaf44e5235f023245333e11740bf81df5e007cb6a26b494fc"
+    },
+    {
+      "id": "08-scoring-reporting",
+      "source": "02-business-details/quang-08-scoring-reporting.mmd",
+      "tables": [
+        "attempt_answers",
+        "scoring_answers",
+        "examiner_answer_scores",
+        "scoring_answer_ai_details",
+        "score_source_audits",
+        "scoring_session_states",
+        "attempt_reports",
+        "exam_attempts",
+        "exam_sessions"
+      ],
+      "relationships": [
+        "REL-1AD2B578",
+        "REL-41519569",
+        "REL-63506D22",
+        "REL-7371AB5B",
+        "REL-87B88168",
+        "REL-A70ABFC9",
+        "REL-C2AD5C63",
+        "REL-D02D4510",
+        "REL-F6B3D600",
+        "REL-F6C4AE37"
+      ],
+      "sha256": "53cc2489ba25926f49be24bc6c925c4169bc5dd58430f3f15016cd179b257410"
+    },
+    {
+      "id": "09-proctoring",
+      "source": "02-business-details/quang-09-proctoring.mmd",
+      "tables": [
+        "exam_sessions",
+        "proctor_sessions",
+        "violation_events",
+        "exam_session_incidents",
+        "exam_session_incident_history",
+        "session_attendances",
+        "users"
+      ],
+      "relationships": [
+        "REL-246ACE3E",
+        "REL-2DAF7144",
+        "REL-529E31C2",
+        "REL-99DBF3ED",
+        "REL-AB909372",
+        "REL-F3CA282B"
+      ],
+      "sha256": "ed0857f62ccc0c0b8736be64f5cbd42f1b12fb7e8d6df19f637543570c5f8095"
+    },
+    {
+      "id": "10-practice",
+      "source": "02-business-details/quang-10-practice.mmd",
+      "tables": [
+        "users",
+        "practice_identities",
+        "practice_identity_memberships",
+        "practice_sessions",
+        "practice_session_items",
+        "practice_session_attempts",
+        "practice_explanations",
+        "rubric_revisions",
+        "exam_attempts"
+      ],
+      "relationships": [
+        "REL-04B981C8",
+        "REL-36975512",
+        "REL-508BBBD6",
+        "REL-5672086F",
+        "REL-7405D308",
+        "REL-7A976F78",
+        "REL-7F85733B",
+        "REL-9E11DA14",
+        "REL-C06603BB",
+        "REL-D8C3DC44",
+        "REL-E375809C"
+      ],
+      "sha256": "9658d8ac456c0d742d959a64b014552aadc25d30d7ebc4101cfd315c68d40811"
+    },
+    {
+      "id": "11-authentication",
+      "source": "03-technical-mapping/quang-11-authentication.mmd",
+      "tables": [
+        "users",
+        "user_roles",
+        "login_hashes",
+        "refresh_tokens",
+        "practice_identities",
+        "practice_email_challenges"
+      ],
+      "relationships": [
+        "REL-239724C2",
+        "REL-69A08B63",
+        "REL-7405D308",
+        "REL-B6D15CD4",
+        "REL-E5865990"
+      ],
+      "sha256": "93cb66695b888a57b3bd96a83191de8cbb66b6457ee85ae0ae9e209f4f5dfc89"
+    },
+    {
+      "id": "12-tenancy-billing-audit",
+      "source": "03-technical-mapping/quang-12-tenancy-billing-audit.mmd",
+      "tables": [
+        "tenants",
+        "users",
+        "license_codes",
+        "quota_transactions",
+        "audit_logs",
+        "platform_settings",
+        "license_issue_intents"
+      ],
+      "relationships": [
+        "REL-28110202",
+        "REL-2DD7C946",
+        "REL-3E862CDD",
+        "REL-4806F219",
+        "REL-59EDFB5D",
+        "REL-99F7AA25",
+        "REL-D0DD9755",
+        "REL-D5F77C0F"
+      ],
+      "sha256": "33a185b361fbe2fa7af846015b22f6d682a1e320c833506d5aa74f3fca3324ed"
+    },
+    {
+      "id": "13-media-runtime",
+      "source": "03-technical-mapping/quang-13-media-runtime.mmd",
+      "tables": [
+        "media_objects",
+        "task_runtime_profiles",
+        "task_runtime_contracts",
+        "task_type_publication_usage",
+        "question_types",
+        "score_templates",
+        "questions",
+        "practice_sessions",
+        "practice_session_items"
+      ],
+      "relationships": [
+        "REL-015A4C3C",
+        "REL-262D62BC",
+        "REL-5672086F",
+        "REL-71585599",
+        "REL-737D6B76",
+        "REL-857FB932",
+        "REL-9D9038F6",
+        "REL-9F5244CC",
+        "REL-CB79216B",
+        "REL-D2CC9017",
+        "REL-F3D1CB59"
+      ],
+      "sha256": "732fcb047ea14746ab28e2264c7e7e6ad487ad7e56db99153bebf9e7f98f7609"
+    },
+    {
+      "id": "14-session-controls",
+      "source": "03-technical-mapping/quang-14-session-controls.mmd",
+      "tables": [
+        "exam_sessions",
+        "exam_attempts",
+        "users",
+        "enrollments",
+        "exam_session_selected_skills",
+        "attempt_heartbeats",
+        "attempt_security_events",
+        "session_attendance_commands",
+        "session_identity_verification_commands"
+      ],
+      "relationships": [
+        "REL-35E69F7B",
+        "REL-4E0812BE",
+        "REL-5247CBC6",
+        "REL-6446E600",
+        "REL-6593540B",
+        "REL-65C10DE0",
+        "REL-7A976F78",
+        "REL-9DFA695B",
+        "REL-C51F7ADA",
+        "REL-DC6AD25C",
+        "REL-E7E0682B",
+        "REL-F6B3D600"
+      ],
+      "sha256": "a612514fd3c71d69d6a576bf0ed66c56608e0148655436b4b55261b79bd31cf6"
+    },
+    {
+      "id": "15-notification-inbox",
+      "source": "03-technical-mapping/quang-15-notification-inbox.mmd",
+      "tables": [
+        "users",
+        "tenants",
+        "notification_logs",
+        "notification_inbox_contents",
+        "notification_inbox_announcements",
+        "notification_inbox_deliveries",
+        "notification_inbox_streams",
+        "notification_inbox_items",
+        "notification_inbox_snapshots"
+      ],
+      "relationships": [
+        "REL-24E4E1A2",
+        "REL-283AC7DD",
+        "REL-43D54A5F",
+        "REL-59A79E1F",
+        "REL-62BF684A",
+        "REL-64DC20FE",
+        "REL-7679F862",
+        "REL-7A0C7A32",
+        "REL-911B6A80",
+        "REL-91A023C5",
+        "REL-9A2DA89F",
+        "REL-CD96BEF6",
+        "REL-D0DD9755",
+        "REL-D895DD73",
+        "REL-E5413C5D",
+        "REL-F2C0C63D"
+      ],
+      "sha256": "4dbdcd823252f5158d077b5925f23cdecd381744c936b91377f982e0f5b3aeb3"
+    },
+    {
+      "id": "16-support-grading-receipts",
+      "source": "03-technical-mapping/quang-16-support-grading-receipts.mmd",
+      "tables": [
+        "users",
+        "examiner_grading_work",
+        "examiner_attempt_assignments",
+        "support_ticket",
+        "support_ticket_note",
+        "examiner_grading_events",
+        "examiner_grading_commands"
+      ],
+      "relationships": [
+        "REL-134974ED",
+        "REL-17B6A212",
+        "REL-2C55CBDE",
+        "REL-322A7BCD",
+        "REL-481F66AA",
+        "REL-591E2A11",
+        "REL-891C3716"
+      ],
+      "sha256": "afb442c7a01ba0a166daec4496e180ee4f3a2891d035d8586412856680b92be8"
+    },
+    {
+      "id": "17-practice-jobs",
+      "source": "03-technical-mapping/quang-17-practice-jobs.mmd",
+      "tables": [
+        "practice_sessions",
+        "practice_session_items",
+        "practice_explanations",
+        "users",
+        "practice_session_operations",
+        "practice_explanation_jobs",
+        "practice_explanation_outbox"
+      ],
+      "relationships": [
+        "REL-25294ADF",
+        "REL-5672086F",
+        "REL-6B252353",
+        "REL-7F85733B",
+        "REL-8AD38A15",
+        "REL-9E11DA14"
+      ],
+      "sha256": "11d025198f785c6197911ba314253fa210f0b5e1db7652d170a8c87f4c61cc86"
+    }
+  ],
+  "tables": [
+    {
+      "table": "users",
+      "fields": [
+        "id",
+        "public_id",
+        "tenant_id",
+        "username",
+        "email",
+        "full_name",
+        "student_code",
+        "status"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "username",
+        "email",
+        "full_name",
+        "student_code",
+        "status"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "class_name",
+        "phone",
+        "date_of_birth",
+        "must_change_password"
+      ]
+    },
+    {
+      "table": "user_roles",
+      "fields": [
+        "user_id",
+        "role"
+      ],
+      "relationship_fields": [
+        "user_id"
+      ],
+      "business_fields": [
+        "user_id",
+        "role"
+      ],
+      "omitted_fields": []
+    },
+    {
+      "table": "login_hashes",
+      "fields": [
+        "id",
+        "public_id",
+        "user_id",
+        "hash"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "user_id"
+      ],
+      "business_fields": [
+        "user_id",
+        "hash"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "refresh_tokens",
+      "fields": [
+        "id",
+        "public_id",
+        "user_id",
+        "token_hash",
+        "expires_at",
+        "revoked"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "user_id"
+      ],
+      "business_fields": [
+        "user_id",
+        "token_hash",
+        "expires_at",
+        "revoked"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "tenants",
+      "fields": [
+        "id",
+        "public_id",
+        "code",
+        "name",
+        "organization_type",
+        "status",
+        "student_limit",
+        "suspended_until"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id"
+      ],
+      "business_fields": [
+        "code",
+        "name",
+        "organization_type",
+        "status",
+        "student_limit",
+        "suspended_until"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "package_name",
+        "logo_url",
+        "primary_color",
+        "version",
+        "tax_code"
+      ]
+    },
+    {
+      "table": "organizations",
+      "fields": [
+        "id",
+        "public_id",
+        "tenant_id",
+        "name",
+        "address",
+        "facility_type",
+        "status"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "name",
+        "address",
+        "facility_type",
+        "status"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "province_code",
+        "province_name",
+        "ward_code",
+        "ward_name"
+      ]
+    },
+    {
+      "table": "quota_transactions",
+      "fields": [
+        "id",
+        "public_id",
+        "tenant_id",
+        "actor_user_id",
+        "package_name",
+        "amount",
+        "action_type",
+        "created_at"
+      ],
+      "relationship_fields": [
+        "actor_user_id",
+        "id",
+        "public_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "package_name",
+        "amount",
+        "action_type",
+        "created_at"
+      ],
+      "omitted_fields": [
+        "updated_at",
+        "deleted",
+        "note"
+      ]
+    },
+    {
+      "table": "audit_logs",
+      "fields": [
+        "id",
+        "public_id",
+        "tenant_id",
+        "actor_user_id",
+        "aggregate_type",
+        "aggregate_id",
+        "action",
+        "summary",
+        "created_at"
+      ],
+      "relationship_fields": [
+        "actor_user_id",
+        "id",
+        "public_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "aggregate_type",
+        "aggregate_id",
+        "action",
+        "summary",
+        "created_at"
+      ],
+      "omitted_fields": [
+        "updated_at",
+        "deleted",
+        "resource_name",
+        "resource_code"
+      ]
+    },
+    {
+      "table": "programs",
+      "fields": [
+        "id",
+        "public_id",
+        "organization_id",
+        "name",
+        "start_date",
+        "end_date",
+        "status"
+      ],
+      "relationship_fields": [
+        "id",
+        "organization_id",
+        "public_id"
+      ],
+      "business_fields": [
+        "name",
+        "start_date",
+        "end_date",
+        "status"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "description"
+      ]
+    },
+    {
+      "table": "student_classes",
+      "fields": [
+        "id",
+        "public_id",
+        "program_id",
+        "name",
+        "status"
+      ],
+      "relationship_fields": [
+        "id",
+        "program_id",
+        "public_id"
+      ],
+      "business_fields": [
+        "name",
+        "status"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "class_memberships",
+      "fields": [
+        "id",
+        "public_id",
+        "student_class_id",
+        "student_public_id",
+        "tenant_id"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "student_class_id",
+        "student_public_id"
+      ],
+      "business_fields": [
+        "student_public_id",
+        "tenant_id"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "lecturer_assignments",
+      "fields": [
+        "id",
+        "public_id",
+        "student_class_id",
+        "assignee_public_id",
+        "tenant_id"
+      ],
+      "relationship_fields": [
+        "assignee_public_id",
+        "id",
+        "public_id",
+        "student_class_id"
+      ],
+      "business_fields": [
+        "assignee_public_id",
+        "tenant_id"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "media_objects",
+      "fields": [
+        "id",
+        "public_id",
+        "practice_session_public_id",
+        "practice_item_public_id",
+        "owner_public_id",
+        "content_type",
+        "storage_key",
+        "status",
+        "size_bytes",
+        "duration_seconds",
+        "purpose"
+      ],
+      "relationship_fields": [
+        "id",
+        "practice_item_public_id",
+        "practice_session_public_id",
+        "public_id"
+      ],
+      "business_fields": [
+        "owner_public_id",
+        "content_type",
+        "storage_key",
+        "status",
+        "size_bytes",
+        "duration_seconds",
+        "purpose"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "tenant_id",
+        "audio_prompt",
+        "cloudinary_public_id",
+        "cloudinary_resource_type",
+        "secure_url",
+        "asset_id",
+        "cloudinary_delivery_type"
+      ]
+    },
+    {
+      "table": "questions",
+      "fields": [
+        "id",
+        "public_id",
+        "pte_task_type",
+        "audio_prompt_ref",
+        "image_prompt_ref",
+        "task_type_key",
+        "title",
+        "prompt_text",
+        "reference_answer_text",
+        "correct_answer_text",
+        "task_type_section",
+        "tenant_id",
+        "author_user_public_id",
+        "visibility",
+        "status",
+        "revision_number",
+        "is_current",
+        "available_for_practice",
+        "available_for_exam"
+      ],
+      "relationship_fields": [
+        "audio_prompt_ref",
+        "id",
+        "image_prompt_ref",
+        "pte_task_type",
+        "public_id",
+        "task_type_key"
+      ],
+      "business_fields": [
+        "title",
+        "prompt_text",
+        "reference_answer_text",
+        "correct_answer_text",
+        "task_type_key",
+        "task_type_section",
+        "tenant_id",
+        "author_user_public_id",
+        "visibility",
+        "status",
+        "revision_number",
+        "is_current",
+        "available_for_practice",
+        "available_for_exam"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "min_word_count",
+        "max_word_count",
+        "revision_group_public_id",
+        "supersedes_public_id",
+        "version",
+        "rejection_reason",
+        "ever_published",
+        "pool",
+        "availability_flags_explicit"
+      ]
+    },
+    {
+      "table": "question_options",
+      "fields": [
+        "id",
+        "public_id",
+        "question_id",
+        "text",
+        "correct",
+        "order_index",
+        "blank_index",
+        "correct_gap_index"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "question_id"
+      ],
+      "business_fields": [
+        "text",
+        "correct",
+        "order_index",
+        "blank_index",
+        "correct_gap_index"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "exam_blueprints",
+      "fields": [
+        "id",
+        "public_id",
+        "name",
+        "tenant_id",
+        "status",
+        "version"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id"
+      ],
+      "business_fields": [
+        "name",
+        "tenant_id",
+        "status",
+        "version"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "rejection_reason",
+        "author_user_public_id"
+      ]
+    },
+    {
+      "table": "blueprint_items",
+      "fields": [
+        "id",
+        "public_id",
+        "blueprint_id",
+        "question_public_id",
+        "section",
+        "order_index"
+      ],
+      "relationship_fields": [
+        "blueprint_id",
+        "id",
+        "public_id",
+        "question_public_id"
+      ],
+      "business_fields": [
+        "question_public_id",
+        "section",
+        "order_index"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "exam_snapshots",
+      "fields": [
+        "id",
+        "public_id",
+        "source_blueprint_public_id",
+        "name",
+        "version",
+        "tenant_id",
+        "score_template_public_id",
+        "score_template_version"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "source_blueprint_public_id"
+      ],
+      "business_fields": [
+        "name",
+        "version",
+        "source_blueprint_public_id",
+        "tenant_id",
+        "score_template_public_id",
+        "score_template_version"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "generation_algorithm_version",
+        "generation_seed",
+        "pool_policy_fingerprint"
+      ]
+    },
+    {
+      "table": "snapshot_items",
+      "fields": [
+        "id",
+        "public_id",
+        "snapshot_id",
+        "source_question_public_id",
+        "task_type_key",
+        "section",
+        "order_index",
+        "title",
+        "prompt_text",
+        "correct_answer_text",
+        "options_json"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "snapshot_id",
+        "source_question_public_id",
+        "task_type_key"
+      ],
+      "business_fields": [
+        "task_type_key",
+        "section",
+        "order_index",
+        "title",
+        "prompt_text",
+        "correct_answer_text",
+        "options_json"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "pte_task_type",
+        "audio_prompt_ref",
+        "image_prompt_ref",
+        "reference_answer_text",
+        "min_word_count",
+        "max_word_count",
+        "task_type_code",
+        "runtime_profile_key",
+        "runtime_profile_version",
+        "runtime_behavior_key",
+        "runtime_renderer_key",
+        "runtime_answer_schema_version",
+        "runtime_scoring_profile_key",
+        "runtime_scoring_profile_version",
+        "runtime_required_client_capabilities",
+        "runtime_profile_status",
+        "runtime_mapping_version",
+        "runtime_mapping_status",
+        "task_type_display_name",
+        "runtime_screen_key",
+        "runtime_contract_version",
+        "runtime_scoring_mode",
+        "runtime_min_supported_app_version",
+        "runtime_authoring_contract_key",
+        "runtime_authoring_contract_version",
+        "runtime_scoring_implementation_version",
+        "runtime_scoring_configuration_digest"
+      ]
+    },
+    {
+      "table": "exam_sessions",
+      "fields": [
+        "id",
+        "public_id",
+        "snapshot_public_id",
+        "subscription_id",
+        "template_public_id",
+        "session_code",
+        "name",
+        "tenant_id",
+        "status",
+        "opens_at",
+        "closes_at",
+        "capacity",
+        "exam_mode",
+        "form_mode",
+        "max_retries_per_student"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "session_code",
+        "snapshot_public_id",
+        "subscription_id",
+        "template_public_id"
+      ],
+      "business_fields": [
+        "session_code",
+        "name",
+        "tenant_id",
+        "subscription_id",
+        "status",
+        "opens_at",
+        "closes_at",
+        "capacity",
+        "exam_mode",
+        "form_mode",
+        "max_retries_per_student"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "replay_policy_type",
+        "replay_policy_limit",
+        "device_check_required",
+        "proctor_required",
+        "answer_integrity_level",
+        "lockdown_mode",
+        "license_key",
+        "template_version",
+        "reuse_policy",
+        "series_key",
+        "generation_job_public_id",
+        "draft_version"
+      ]
+    },
+    {
+      "table": "enrollments",
+      "fields": [
+        "id",
+        "public_id",
+        "session_id",
+        "student_public_id",
+        "tenant_id",
+        "license_key"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "session_id",
+        "student_public_id"
+      ],
+      "business_fields": [
+        "student_public_id",
+        "tenant_id",
+        "license_key"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "proctor_assignments",
+      "fields": [
+        "id",
+        "public_id",
+        "session_id",
+        "proctor_public_id",
+        "tenant_id",
+        "role"
+      ],
+      "relationship_fields": [
+        "id",
+        "proctor_public_id",
+        "public_id",
+        "session_id"
+      ],
+      "business_fields": [
+        "proctor_public_id",
+        "tenant_id",
+        "role"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "exam_attempts",
+      "fields": [
+        "id",
+        "public_id",
+        "session_public_id",
+        "student_public_id",
+        "attempt_number",
+        "tenant_id",
+        "status",
+        "started_at",
+        "submitted_at",
+        "exam_end_time"
+      ],
+      "relationship_fields": [
+        "attempt_number",
+        "id",
+        "public_id",
+        "session_public_id",
+        "student_public_id"
+      ],
+      "business_fields": [
+        "tenant_id",
+        "status",
+        "attempt_number",
+        "started_at",
+        "submitted_at",
+        "exam_end_time"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "device_check_passed_at",
+        "current_order_index",
+        "play_count",
+        "last_play_request_id",
+        "last_play_allowed",
+        "active_section",
+        "section_started_at",
+        "version",
+        "capability_fingerprint",
+        "max_retries_per_student"
+      ]
+    },
+    {
+      "table": "pinned_exam_snapshots",
+      "fields": [
+        "id",
+        "public_id",
+        "attempt_id",
+        "source_snapshot_public_id",
+        "source_session_public_id",
+        "tenant_id",
+        "score_template_public_id",
+        "score_template_version",
+        "exam_mode"
+      ],
+      "relationship_fields": [
+        "attempt_id",
+        "id",
+        "public_id",
+        "source_snapshot_public_id"
+      ],
+      "business_fields": [
+        "source_snapshot_public_id",
+        "source_session_public_id",
+        "tenant_id",
+        "score_template_public_id",
+        "score_template_version",
+        "exam_mode"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "replay_policy_type",
+        "replay_policy_limit",
+        "device_check_required",
+        "proctor_required",
+        "answer_integrity_level",
+        "lockdown_mode"
+      ]
+    },
+    {
+      "table": "pinned_items",
+      "fields": [
+        "id",
+        "public_id",
+        "pinned_snapshot_id",
+        "task_type_key",
+        "section",
+        "order_index",
+        "title",
+        "prompt_text",
+        "correct_answer_text",
+        "options_json",
+        "prep_seconds",
+        "response_seconds"
+      ],
+      "relationship_fields": [
+        "id",
+        "pinned_snapshot_id",
+        "public_id",
+        "task_type_key"
+      ],
+      "business_fields": [
+        "task_type_key",
+        "section",
+        "order_index",
+        "title",
+        "prompt_text",
+        "correct_answer_text",
+        "options_json",
+        "prep_seconds",
+        "response_seconds"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "task_type",
+        "audio_prompt_ref",
+        "image_prompt_ref",
+        "reference_answer_text",
+        "min_word_count",
+        "max_word_count",
+        "max_play_count_override",
+        "audio_url",
+        "audio_url_expires_at",
+        "pre_listen_seconds",
+        "pre_record_seconds",
+        "image_url",
+        "image_url_expires_at",
+        "task_type_code",
+        "runtime_profile_key",
+        "runtime_profile_version",
+        "runtime_behavior_key",
+        "runtime_renderer_key",
+        "runtime_answer_schema_version",
+        "runtime_scoring_profile_key",
+        "runtime_scoring_profile_version",
+        "runtime_required_client_capabilities",
+        "runtime_profile_status",
+        "runtime_mapping_version",
+        "runtime_mapping_status",
+        "task_type_display_name",
+        "runtime_screen_key",
+        "runtime_contract_version",
+        "runtime_scoring_mode",
+        "runtime_min_supported_app_version",
+        "runtime_authoring_contract_key",
+        "runtime_authoring_contract_version",
+        "runtime_scoring_implementation_version",
+        "runtime_scoring_configuration_digest"
+      ]
+    },
+    {
+      "table": "attempt_answers",
+      "fields": [
+        "id",
+        "public_id",
+        "attempt_id",
+        "pinned_item_id",
+        "payload",
+        "status",
+        "expired"
+      ],
+      "relationship_fields": [
+        "attempt_id",
+        "id",
+        "pinned_item_id",
+        "public_id"
+      ],
+      "business_fields": [
+        "payload",
+        "status",
+        "expired"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "confidence"
+      ]
+    },
+    {
+      "table": "attempt_heartbeats",
+      "fields": [
+        "id",
+        "public_id",
+        "attempt_id",
+        "last_seen_at"
+      ],
+      "relationship_fields": [
+        "attempt_id",
+        "id",
+        "public_id"
+      ],
+      "business_fields": [
+        "last_seen_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "scoring_answers",
+      "fields": [
+        "id",
+        "public_id",
+        "answer_public_id",
+        "attempt_public_id",
+        "session_public_id",
+        "tenant_id",
+        "selected_examiner_score_public_id",
+        "pinned_item_public_id",
+        "score_template_public_id",
+        "task_type",
+        "status",
+        "raw_score",
+        "scored_at",
+        "teacher_score",
+        "selected_score_source",
+        "selected_score_source_at"
+      ],
+      "relationship_fields": [
+        "answer_public_id",
+        "attempt_public_id",
+        "id",
+        "public_id",
+        "selected_examiner_score_public_id",
+        "session_public_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "pinned_item_public_id",
+        "score_template_public_id",
+        "task_type",
+        "status",
+        "raw_score",
+        "scored_at",
+        "teacher_score",
+        "selected_score_source",
+        "selected_score_source_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "payload",
+        "correct_answer_text",
+        "options_json",
+        "expired",
+        "teacher_scored_at",
+        "ai_provider_category",
+        "ai_provider",
+        "ai_model",
+        "ai_provider_version",
+        "selected_score_source_by_public_id",
+        "lock_version",
+        "prompt_text",
+        "reference_answer_text",
+        "image_prompt_ref",
+        "min_word_count",
+        "max_word_count",
+        "dispatch_token",
+        "ai_dispatched_at"
+      ]
+    },
+    {
+      "table": "proctor_sessions",
+      "fields": [
+        "id",
+        "public_id",
+        "session_public_id",
+        "status",
+        "opened_at",
+        "closed_at"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "session_public_id"
+      ],
+      "business_fields": [
+        "status",
+        "opened_at",
+        "closed_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "proctor_public_id",
+        "tenant_id",
+        "last_sequence_no",
+        "last_hash"
+      ]
+    },
+    {
+      "table": "violation_events",
+      "fields": [
+        "id",
+        "public_id",
+        "proctor_session_id",
+        "violation_type",
+        "detail",
+        "detected_at"
+      ],
+      "relationship_fields": [
+        "id",
+        "proctor_session_id",
+        "public_id"
+      ],
+      "business_fields": [
+        "violation_type",
+        "detail",
+        "detected_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "session_public_id",
+        "attempt_public_id",
+        "tenant_id",
+        "sequence_no",
+        "prev_hash",
+        "hash"
+      ]
+    },
+    {
+      "table": "notification_logs",
+      "fields": [
+        "id",
+        "public_id",
+        "recipient_user_public_id",
+        "recipient_email",
+        "notification_type",
+        "subject",
+        "status",
+        "sent_at"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "recipient_user_public_id"
+      ],
+      "business_fields": [
+        "recipient_email",
+        "notification_type",
+        "subject",
+        "status",
+        "sent_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "tenant_id",
+        "body",
+        "dedupe_key"
+      ]
+    },
+    {
+      "table": "attempt_reports",
+      "fields": [
+        "id",
+        "public_id",
+        "attempt_public_id",
+        "session_public_id",
+        "student_public_id",
+        "tenant_id",
+        "published",
+        "published_at",
+        "snapshot_public_id",
+        "report_snapshot_json",
+        "publication_public_id",
+        "published_by_public_id"
+      ],
+      "relationship_fields": [
+        "attempt_public_id",
+        "id",
+        "public_id"
+      ],
+      "business_fields": [
+        "session_public_id",
+        "student_public_id",
+        "tenant_id",
+        "published",
+        "published_at",
+        "snapshot_public_id",
+        "report_snapshot_json",
+        "publication_public_id",
+        "published_by_public_id"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "publication_cohort_size"
+      ]
+    },
+    {
+      "table": "score_templates",
+      "fields": [
+        "id",
+        "public_id",
+        "code",
+        "version",
+        "name",
+        "status",
+        "template_policy",
+        "author_user_public_id"
+      ],
+      "relationship_fields": [
+        "code",
+        "id",
+        "public_id",
+        "version"
+      ],
+      "business_fields": [
+        "code",
+        "name",
+        "version",
+        "status",
+        "template_policy",
+        "author_user_public_id"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "rejection_reason"
+      ]
+    },
+    {
+      "table": "score_template_items",
+      "fields": [
+        "id",
+        "public_id",
+        "template_id",
+        "task_type_key",
+        "section",
+        "sequence",
+        "min_count",
+        "max_count",
+        "prep_seconds",
+        "response_seconds",
+        "scoring_method",
+        "overall_weight",
+        "speaking_weight",
+        "writing_weight",
+        "reading_weight",
+        "listening_weight"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "task_type_key",
+        "template_id"
+      ],
+      "business_fields": [
+        "task_type_key",
+        "section",
+        "sequence",
+        "min_count",
+        "max_count",
+        "prep_seconds",
+        "response_seconds",
+        "scoring_method",
+        "overall_weight",
+        "speaking_weight",
+        "writing_weight",
+        "reading_weight",
+        "listening_weight"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "task_type",
+        "runtime_profile_key",
+        "runtime_profile_version",
+        "runtime_behavior_key",
+        "runtime_renderer_key",
+        "runtime_answer_schema_version",
+        "runtime_scoring_profile_key",
+        "runtime_scoring_profile_version",
+        "runtime_required_client_capabilities",
+        "runtime_profile_status",
+        "runtime_screen_key",
+        "runtime_contract_version",
+        "runtime_scoring_mode",
+        "runtime_authoring_contract_key",
+        "runtime_authoring_contract_version",
+        "runtime_min_app_version"
+      ]
+    },
+    {
+      "table": "session_class_assignments",
+      "fields": [
+        "id",
+        "public_id",
+        "session_id",
+        "class_public_id",
+        "tenant_id"
+      ],
+      "relationship_fields": [
+        "class_public_id",
+        "id",
+        "public_id",
+        "session_id"
+      ],
+      "business_fields": [
+        "tenant_id",
+        "class_public_id"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "tenant_applications",
+      "fields": [
+        "id",
+        "public_id",
+        "org_name",
+        "org_type",
+        "contact_email",
+        "contact_phone",
+        "status",
+        "reviewed_by",
+        "reviewed_at",
+        "reject_reason"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id"
+      ],
+      "business_fields": [
+        "org_name",
+        "org_type",
+        "contact_email",
+        "contact_phone",
+        "status",
+        "reviewed_by",
+        "reviewed_at",
+        "reject_reason"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "requested_code",
+        "tax_code"
+      ]
+    },
+    {
+      "table": "plans",
+      "fields": [
+        "id",
+        "public_id",
+        "name",
+        "type",
+        "price",
+        "currency",
+        "duration_days",
+        "max_students_per_session",
+        "status"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id"
+      ],
+      "business_fields": [
+        "name",
+        "type",
+        "price",
+        "currency",
+        "duration_days",
+        "max_students_per_session",
+        "status"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "description",
+        "extra_student_slots",
+        "version"
+      ]
+    },
+    {
+      "table": "platform_settings",
+      "fields": [
+        "id",
+        "public_id",
+        "setting_key",
+        "value",
+        "description"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id"
+      ],
+      "business_fields": [
+        "setting_key",
+        "value",
+        "description"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "subscriptions",
+      "fields": [
+        "id",
+        "public_id",
+        "tenant_id",
+        "plan_id",
+        "license_key",
+        "starts_at",
+        "expires_at",
+        "max_students_per_session",
+        "status",
+        "activation_source"
+      ],
+      "relationship_fields": [
+        "id",
+        "plan_id",
+        "public_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "license_key",
+        "starts_at",
+        "expires_at",
+        "max_students_per_session",
+        "status",
+        "activation_source"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "orders",
+      "fields": [
+        "id",
+        "public_id",
+        "tenant_id",
+        "plan_id",
+        "order_code",
+        "amount",
+        "currency",
+        "status",
+        "paid_at"
+      ],
+      "relationship_fields": [
+        "id",
+        "order_code",
+        "plan_id",
+        "public_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "order_code",
+        "amount",
+        "currency",
+        "status",
+        "paid_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "payment_link_url"
+      ]
+    },
+    {
+      "table": "payment_transactions",
+      "fields": [
+        "id",
+        "public_id",
+        "order_code",
+        "signature_valid",
+        "received_at",
+        "processed"
+      ],
+      "relationship_fields": [
+        "id",
+        "order_code",
+        "public_id"
+      ],
+      "business_fields": [
+        "signature_valid",
+        "received_at",
+        "processed"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "raw_payload"
+      ]
+    },
+    {
+      "table": "license_codes",
+      "fields": [
+        "id",
+        "public_id",
+        "plan_id",
+        "redeemed_by_tenant_id",
+        "subscription_id",
+        "code",
+        "status",
+        "issued_at",
+        "code_expires_at",
+        "redeemed_at",
+        "revoke_reason"
+      ],
+      "relationship_fields": [
+        "id",
+        "plan_id",
+        "public_id",
+        "redeemed_by_tenant_id",
+        "subscription_id"
+      ],
+      "business_fields": [
+        "code",
+        "status",
+        "issued_at",
+        "code_expires_at",
+        "redeemed_at",
+        "revoke_reason"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "issued_by"
+      ]
+    },
+    {
+      "table": "question_types",
+      "fields": [
+        "id",
+        "public_id",
+        "code",
+        "task_type_key",
+        "normalized_display_name",
+        "screen_key",
+        "runtime_profile_version",
+        "display_name",
+        "section",
+        "scored",
+        "active",
+        "lifecycle_status"
+      ],
+      "relationship_fields": [
+        "code",
+        "id",
+        "normalized_display_name",
+        "public_id",
+        "runtime_profile_version",
+        "screen_key",
+        "task_type_key"
+      ],
+      "business_fields": [
+        "code",
+        "display_name",
+        "section",
+        "task_type_key",
+        "scored",
+        "active",
+        "lifecycle_status"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "short_name",
+        "display_order",
+        "requires_audio_prompt",
+        "requires_image_prompt",
+        "requires_prompt_text",
+        "requires_options",
+        "requires_correct_answer",
+        "requires_word_count",
+        "requires_single_correct_option",
+        "uses_option_order_as_correct_position",
+        "runtime_profile_key",
+        "runtime_behavior_key",
+        "runtime_renderer_key",
+        "runtime_answer_schema_version",
+        "runtime_scoring_profile_key",
+        "runtime_scoring_profile_version",
+        "runtime_scoring_mode",
+        "runtime_required_capabilities",
+        "runtime_min_app_version",
+        "authoring_contract_key",
+        "authoring_contract_version",
+        "first_published_at",
+        "runtime_locked_at",
+        "author_user_public_id",
+        "requires_reference_answer"
+      ]
+    },
+    {
+      "table": "exam_audience_sources",
+      "fields": [
+        "id",
+        "public_id",
+        "session_id",
+        "source_type",
+        "source_public_id",
+        "tenant_id"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "session_id",
+        "source_public_id",
+        "source_type"
+      ],
+      "business_fields": [
+        "tenant_id",
+        "source_type",
+        "source_public_id"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "created_by"
+      ]
+    },
+    {
+      "table": "exam_audience_members",
+      "fields": [
+        "id",
+        "public_id",
+        "session_id",
+        "student_public_id",
+        "tenant_id",
+        "status",
+        "reason",
+        "prior_session_public_id"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "session_id",
+        "student_public_id"
+      ],
+      "business_fields": [
+        "tenant_id",
+        "student_public_id",
+        "status",
+        "reason",
+        "prior_session_public_id"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "source_summary",
+        "prior_session_name",
+        "prior_status",
+        "published_at"
+      ]
+    },
+    {
+      "table": "exam_generation_jobs",
+      "fields": [
+        "id",
+        "public_id",
+        "session_id",
+        "idempotency_key",
+        "tenant_id",
+        "status",
+        "forms_total",
+        "forms_completed",
+        "last_error"
+      ],
+      "relationship_fields": [
+        "id",
+        "idempotency_key",
+        "public_id",
+        "session_id"
+      ],
+      "business_fields": [
+        "tenant_id",
+        "status",
+        "forms_total",
+        "forms_completed",
+        "last_error"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "algorithm_version",
+        "base_seed"
+      ]
+    },
+    {
+      "table": "exam_forms",
+      "fields": [
+        "id",
+        "public_id",
+        "session_id",
+        "snapshot_public_id",
+        "form_index",
+        "form_seed",
+        "algorithm_version"
+      ],
+      "relationship_fields": [
+        "form_index",
+        "id",
+        "public_id",
+        "session_id",
+        "snapshot_public_id"
+      ],
+      "business_fields": [
+        "form_index",
+        "form_seed",
+        "algorithm_version"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "pool_policy_fingerprint"
+      ]
+    },
+    {
+      "table": "form_assignments",
+      "fields": [
+        "id",
+        "public_id",
+        "session_id",
+        "form_id",
+        "student_public_id"
+      ],
+      "relationship_fields": [
+        "form_id",
+        "id",
+        "public_id",
+        "session_id",
+        "student_public_id"
+      ],
+      "business_fields": [
+        "student_public_id"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "task_runtime_profiles",
+      "fields": [
+        "id",
+        "public_id",
+        "task_type_code",
+        "profile_version",
+        "profile_key",
+        "behavior_key",
+        "renderer_key",
+        "answer_schema_version",
+        "scoring_profile_key",
+        "scoring_profile_version",
+        "status"
+      ],
+      "relationship_fields": [
+        "id",
+        "profile_version",
+        "public_id",
+        "task_type_code"
+      ],
+      "business_fields": [
+        "profile_key",
+        "profile_version",
+        "behavior_key",
+        "renderer_key",
+        "answer_schema_version",
+        "scoring_profile_key",
+        "scoring_profile_version",
+        "status"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "required_client_capabilities"
+      ]
+    },
+    {
+      "table": "task_runtime_contracts",
+      "fields": [
+        "id",
+        "public_id",
+        "screen_key",
+        "contract_version",
+        "profile_key",
+        "profile_version",
+        "answer_schema_version",
+        "scoring_mode",
+        "min_supported_app_version",
+        "status"
+      ],
+      "relationship_fields": [
+        "contract_version",
+        "id",
+        "public_id",
+        "screen_key"
+      ],
+      "business_fields": [
+        "screen_key",
+        "contract_version",
+        "profile_key",
+        "profile_version",
+        "answer_schema_version",
+        "scoring_mode",
+        "min_supported_app_version",
+        "status"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "behavior_key",
+        "renderer_key",
+        "scoring_profile_key",
+        "scoring_profile_version",
+        "required_client_capabilities",
+        "authoring_contract_key",
+        "authoring_contract_version",
+        "requires_audio_prompt",
+        "requires_image_prompt",
+        "requires_prompt_text",
+        "requires_options",
+        "requires_correct_answer",
+        "requires_word_count",
+        "requires_single_correct_option",
+        "uses_option_order_as_correct_position",
+        "requires_reference_answer"
+      ]
+    },
+    {
+      "table": "task_type_publication_usage",
+      "fields": [
+        "id",
+        "public_id",
+        "task_type_key",
+        "template_version_public_id",
+        "template_public_id",
+        "published_at",
+        "actor_public_id"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "task_type_key",
+        "template_version_public_id"
+      ],
+      "business_fields": [
+        "template_public_id",
+        "published_at",
+        "actor_public_id"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "audit_reference"
+      ]
+    },
+    {
+      "table": "examiner_assignment_batches",
+      "fields": [
+        "id",
+        "public_id",
+        "tenant_id",
+        "session_public_id",
+        "mode",
+        "status",
+        "created_by_public_id",
+        "committed_at"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "session_public_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "mode",
+        "status",
+        "created_by_public_id",
+        "committed_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "scope_snapshot_json",
+        "assignment_snapshot_json",
+        "random_seed",
+        "preview_expires_at",
+        "lock_version"
+      ]
+    },
+    {
+      "table": "examiner_attempt_assignments",
+      "fields": [
+        "id",
+        "public_id",
+        "batch_public_id",
+        "tenant_id",
+        "session_public_id",
+        "attempt_public_id",
+        "examiner_public_id",
+        "assigned_by_public_id",
+        "assigned_at",
+        "eligible_answer_count"
+      ],
+      "relationship_fields": [
+        "attempt_public_id",
+        "batch_public_id",
+        "examiner_public_id",
+        "id",
+        "public_id",
+        "session_public_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "assigned_by_public_id",
+        "assigned_at",
+        "eligible_answer_count"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "examiner_answer_scores",
+      "fields": [
+        "id",
+        "public_id",
+        "answer_public_id",
+        "attempt_public_id",
+        "session_public_id",
+        "tenant_id",
+        "examiner_public_id",
+        "score",
+        "status",
+        "decision_kind",
+        "submitted_at"
+      ],
+      "relationship_fields": [
+        "answer_public_id",
+        "attempt_public_id",
+        "examiner_public_id",
+        "id",
+        "public_id",
+        "session_public_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "score",
+        "status",
+        "decision_kind",
+        "submitted_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "lock_version",
+        "reviewed_ai_score",
+        "reviewed_ai_version",
+        "expected_review_version",
+        "request_public_id",
+        "request_fingerprint"
+      ]
+    },
+    {
+      "table": "score_source_audits",
+      "fields": [
+        "id",
+        "public_id",
+        "tenant_id",
+        "session_public_id",
+        "request_public_id",
+        "scope",
+        "scope_value",
+        "selected_source",
+        "affected_answer_count",
+        "occurred_at"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "request_public_id",
+        "session_public_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "scope",
+        "scope_value",
+        "selected_source",
+        "affected_answer_count",
+        "occurred_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "actor_public_id",
+        "previous_ai_count",
+        "previous_examiner_count",
+        "previous_unselected_count"
+      ]
+    },
+    {
+      "table": "scoring_session_states",
+      "fields": [
+        "id",
+        "public_id",
+        "tenant_id",
+        "session_public_id",
+        "publication_public_id",
+        "publication_locked_at"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "session_public_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "publication_public_id",
+        "publication_locked_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "lock_version"
+      ]
+    },
+    {
+      "table": "exam_session_selected_skills",
+      "fields": [
+        "session_id",
+        "skill"
+      ],
+      "relationship_fields": [
+        "session_id",
+        "skill"
+      ],
+      "business_fields": [
+        "session_id",
+        "skill"
+      ],
+      "omitted_fields": []
+    },
+    {
+      "table": "attempt_security_events",
+      "fields": [
+        "id",
+        "public_id",
+        "attempt_id",
+        "client_event_id",
+        "violation_type",
+        "severity",
+        "detail",
+        "detected_at"
+      ],
+      "relationship_fields": [
+        "attempt_id",
+        "client_event_id",
+        "id",
+        "public_id"
+      ],
+      "business_fields": [
+        "violation_type",
+        "severity",
+        "detail",
+        "detected_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "attempt_public_id",
+        "session_public_id",
+        "student_public_id",
+        "tenant_id",
+        "client_occurred_at"
+      ]
+    },
+    {
+      "table": "support_ticket",
+      "fields": [
+        "id",
+        "public_id",
+        "submitter_user_public_id",
+        "category",
+        "description",
+        "status",
+        "entity_type",
+        "entity_id"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "submitter_user_public_id"
+      ],
+      "business_fields": [
+        "category",
+        "description",
+        "status",
+        "entity_type",
+        "entity_id"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "version",
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "support_ticket_note",
+      "fields": [
+        "id",
+        "public_id",
+        "ticket_id",
+        "content",
+        "created_at"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "ticket_id"
+      ],
+      "business_fields": [
+        "content",
+        "created_at"
+      ],
+      "omitted_fields": [
+        "updated_at",
+        "deleted",
+        "ticket_public_id",
+        "admin_public_id"
+      ]
+    },
+    {
+      "table": "notification_inbox_contents",
+      "fields": [
+        "id",
+        "public_id",
+        "notification_type",
+        "category",
+        "importance",
+        "title",
+        "body",
+        "target_type",
+        "target_public_id"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id"
+      ],
+      "business_fields": [
+        "notification_type",
+        "category",
+        "importance",
+        "title",
+        "body",
+        "target_type",
+        "target_public_id"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "event_key",
+        "schema_version",
+        "payload_hash"
+      ]
+    },
+    {
+      "table": "notification_inbox_announcements",
+      "fields": [
+        "id",
+        "public_id",
+        "author_user_public_id",
+        "published_content_public_id",
+        "correction_of_public_id",
+        "title",
+        "body",
+        "category",
+        "importance",
+        "affected_from",
+        "affected_until",
+        "published_at"
+      ],
+      "relationship_fields": [
+        "author_user_public_id",
+        "correction_of_public_id",
+        "id",
+        "public_id",
+        "published_content_public_id"
+      ],
+      "business_fields": [
+        "title",
+        "body",
+        "category",
+        "importance",
+        "affected_from",
+        "affected_until",
+        "published_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "version"
+      ]
+    },
+    {
+      "table": "notification_inbox_deliveries",
+      "fields": [
+        "id",
+        "public_id",
+        "content_public_id",
+        "recipient_user_public_id",
+        "tenant_id",
+        "status",
+        "attempts",
+        "next_attempt_at",
+        "completed_at",
+        "last_failure_code"
+      ],
+      "relationship_fields": [
+        "content_public_id",
+        "id",
+        "public_id",
+        "recipient_user_public_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "status",
+        "attempts",
+        "next_attempt_at",
+        "completed_at",
+        "last_failure_code"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "claim_token",
+        "lease_until"
+      ]
+    },
+    {
+      "table": "notification_inbox_streams",
+      "fields": [
+        "id",
+        "public_id",
+        "recipient_user_public_id",
+        "tenant_id",
+        "last_sequence",
+        "read_revision"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "recipient_user_public_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "last_sequence",
+        "read_revision"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "notification_inbox_items",
+      "fields": [
+        "id",
+        "public_id",
+        "delivery_public_id",
+        "content_public_id",
+        "recipient_user_public_id",
+        "tenant_id",
+        "sequence_no",
+        "delivered_at",
+        "read_at"
+      ],
+      "relationship_fields": [
+        "content_public_id",
+        "delivery_public_id",
+        "id",
+        "public_id",
+        "recipient_user_public_id",
+        "sequence_no",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "sequence_no",
+        "delivered_at",
+        "read_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "notification_inbox_snapshots",
+      "fields": [
+        "id",
+        "public_id",
+        "recipient_user_public_id",
+        "tenant_id",
+        "upper_sequence",
+        "read_revision",
+        "expires_at"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "recipient_user_public_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "upper_sequence",
+        "read_revision",
+        "expires_at"
+      ],
+      "omitted_fields": [
+        "created_at"
+      ]
+    },
+    {
+      "table": "session_grading_cohorts",
+      "fields": [
+        "id",
+        "public_id",
+        "tenant_id",
+        "session_public_id",
+        "marking_mode",
+        "status",
+        "cohort_version",
+        "frozen_at",
+        "completed_at"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "session_public_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "marking_mode",
+        "status",
+        "cohort_version",
+        "frozen_at",
+        "completed_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "created_by_public_id",
+        "preview_version",
+        "lock_version"
+      ]
+    },
+    {
+      "table": "session_grading_cohort_members",
+      "fields": [
+        "id",
+        "public_id",
+        "cohort_public_id",
+        "attempt_public_id",
+        "attempt_status_snapshot",
+        "excluded",
+        "disposition_reason"
+      ],
+      "relationship_fields": [
+        "attempt_public_id",
+        "cohort_public_id",
+        "id",
+        "public_id"
+      ],
+      "business_fields": [
+        "attempt_status_snapshot",
+        "excluded",
+        "disposition_reason"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "tenant_id",
+        "session_public_id",
+        "student_public_id"
+      ]
+    },
+    {
+      "table": "license_issue_intents",
+      "fields": [
+        "id",
+        "public_id",
+        "actor_public_id",
+        "operation",
+        "idempotency_key",
+        "license_code_public_id"
+      ],
+      "relationship_fields": [
+        "actor_public_id",
+        "id",
+        "idempotency_key",
+        "license_code_public_id",
+        "operation",
+        "public_id"
+      ],
+      "business_fields": [
+        "operation",
+        "idempotency_key",
+        "license_code_public_id"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "payload_fingerprint"
+      ]
+    },
+    {
+      "table": "practice_identities",
+      "fields": [
+        "id",
+        "public_id",
+        "shell_user_id",
+        "normalized_email_hash",
+        "status",
+        "verified_at"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "shell_user_id"
+      ],
+      "business_fields": [
+        "normalized_email_hash",
+        "status",
+        "verified_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "practice_identity_memberships",
+      "fields": [
+        "id",
+        "public_id",
+        "identity_id",
+        "user_public_id",
+        "status",
+        "linked_at"
+      ],
+      "relationship_fields": [
+        "id",
+        "identity_id",
+        "public_id",
+        "user_public_id"
+      ],
+      "business_fields": [
+        "status",
+        "linked_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "practice_email_challenges",
+      "fields": [
+        "id",
+        "public_id",
+        "identity_id",
+        "code_hash",
+        "expires_at",
+        "consumed_at",
+        "failed_attempts"
+      ],
+      "relationship_fields": [
+        "id",
+        "identity_id",
+        "public_id"
+      ],
+      "business_fields": [
+        "code_hash",
+        "expires_at",
+        "consumed_at",
+        "failed_attempts"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "practice_sessions",
+      "fields": [
+        "id",
+        "public_id",
+        "student_public_id",
+        "identity_public_id",
+        "start_idempotency_key",
+        "product_code",
+        "title",
+        "time_limit_seconds",
+        "selected_task_types",
+        "source_type",
+        "status",
+        "started_at",
+        "deadline_at",
+        "completed_at"
+      ],
+      "relationship_fields": [
+        "id",
+        "identity_public_id",
+        "public_id",
+        "start_idempotency_key",
+        "student_public_id"
+      ],
+      "business_fields": [
+        "product_code",
+        "title",
+        "time_limit_seconds",
+        "selected_task_types",
+        "source_type",
+        "status",
+        "started_at",
+        "deadline_at",
+        "completed_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "tenant_id",
+        "catalog_version",
+        "client_capabilities",
+        "start_request_hash",
+        "discarded_at",
+        "version",
+        "last_activity_at"
+      ]
+    },
+    {
+      "table": "practice_session_attempts",
+      "fields": [
+        "id",
+        "public_id",
+        "practice_session_id",
+        "exam_attempt_public_id",
+        "source_type"
+      ],
+      "relationship_fields": [
+        "exam_attempt_public_id",
+        "id",
+        "practice_session_id",
+        "public_id"
+      ],
+      "business_fields": [
+        "source_type"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "practice_session_operations",
+      "fields": [
+        "id",
+        "public_id",
+        "practice_session_id",
+        "operation_type",
+        "idempotency_key"
+      ],
+      "relationship_fields": [
+        "id",
+        "idempotency_key",
+        "operation_type",
+        "practice_session_id",
+        "public_id"
+      ],
+      "business_fields": [
+        "operation_type",
+        "idempotency_key"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "request_hash"
+      ]
+    },
+    {
+      "table": "practice_session_items",
+      "fields": [
+        "id",
+        "public_id",
+        "practice_session_id",
+        "order_index",
+        "source_question_public_id",
+        "rubric_revision_public_id",
+        "task_code",
+        "section",
+        "status",
+        "saved_payload",
+        "answered_at",
+        "skipped_at",
+        "objective_score",
+        "ai_score",
+        "ai_score_status"
+      ],
+      "relationship_fields": [
+        "id",
+        "order_index",
+        "practice_session_id",
+        "public_id",
+        "rubric_revision_public_id",
+        "source_question_public_id"
+      ],
+      "business_fields": [
+        "task_code",
+        "section",
+        "order_index",
+        "status",
+        "saved_payload",
+        "answered_at",
+        "skipped_at",
+        "objective_score",
+        "ai_score",
+        "ai_score_status"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "display_name",
+        "renderer_key",
+        "contract_version",
+        "answer_schema_version",
+        "confidence",
+        "version",
+        "prompt_text",
+        "options_json",
+        "min_word_count",
+        "max_word_count",
+        "audio_prompt_ref",
+        "image_prompt_ref",
+        "reference_answer_text",
+        "correct_answer_text",
+        "rubric_revision_number",
+        "rubric_canonical_hash",
+        "rubric_snapshot_json",
+        "runtime_compatibility_hash",
+        "objective_evaluated_at",
+        "objective_evaluator_version",
+        "objective_result_hash",
+        "objective_evidence_identity_hash",
+        "form_word_count",
+        "form_status",
+        "form_evaluator_version",
+        "form_result_hash",
+        "form_evidence_identity_hash",
+        "ai_sub_scores_json",
+        "ai_provider",
+        "ai_model",
+        "ai_provider_version",
+        "ai_transcript",
+        "ai_detail_json",
+        "ai_scored_at",
+        "ai_result_hash",
+        "objective_options_json"
+      ]
+    },
+    {
+      "table": "session_attendances",
+      "fields": [
+        "id",
+        "public_id",
+        "session_id",
+        "student_public_id",
+        "status",
+        "identity_status",
+        "last_action_at",
+        "identity_note"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "session_id",
+        "student_public_id"
+      ],
+      "business_fields": [
+        "status",
+        "identity_status",
+        "last_action_at",
+        "identity_note"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "tenant_id",
+        "enrollment_public_id",
+        "version",
+        "last_actor_public_id",
+        "last_actor_role",
+        "last_reason_or_note"
+      ]
+    },
+    {
+      "table": "session_attendance_commands",
+      "fields": [
+        "id",
+        "public_id",
+        "tenant_id",
+        "session_id",
+        "actor_public_id",
+        "request_public_id",
+        "enrollment_public_id",
+        "previous_status",
+        "new_status",
+        "server_action_at",
+        "changed"
+      ],
+      "relationship_fields": [
+        "actor_public_id",
+        "enrollment_public_id",
+        "id",
+        "public_id",
+        "request_public_id",
+        "session_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "request_public_id",
+        "previous_status",
+        "new_status",
+        "server_action_at",
+        "changed"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "actor_role",
+        "intent_fingerprint",
+        "student_public_id",
+        "expected_version",
+        "applied_version",
+        "reason_or_note",
+        "committed_result"
+      ]
+    },
+    {
+      "table": "examiner_grading_work",
+      "fields": [
+        "id",
+        "public_id",
+        "tenant_id",
+        "assignment_public_id",
+        "status",
+        "started_at",
+        "finalized_at"
+      ],
+      "relationship_fields": [
+        "assignment_public_id",
+        "id",
+        "public_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "status",
+        "started_at",
+        "finalized_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "session_public_id",
+        "attempt_public_id",
+        "examiner_public_id",
+        "version"
+      ]
+    },
+    {
+      "table": "examiner_answer_drafts",
+      "fields": [
+        "id",
+        "public_id",
+        "work_id",
+        "answer_public_id",
+        "score",
+        "comment",
+        "decision_kind",
+        "saved_at"
+      ],
+      "relationship_fields": [
+        "answer_public_id",
+        "id",
+        "public_id",
+        "work_id"
+      ],
+      "business_fields": [
+        "score",
+        "comment",
+        "decision_kind",
+        "saved_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "tenant_id",
+        "expected_review_version",
+        "reviewed_ai_version",
+        "version"
+      ]
+    },
+    {
+      "table": "examiner_grading_events",
+      "fields": [
+        "id",
+        "public_id",
+        "work_id",
+        "operation",
+        "work_version",
+        "occurred_at"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "work_id"
+      ],
+      "business_fields": [
+        "operation",
+        "work_version",
+        "occurred_at"
+      ],
+      "omitted_fields": [
+        "tenant_id",
+        "answer_public_id",
+        "draft_version",
+        "metadata"
+      ]
+    },
+    {
+      "table": "examiner_grading_commands",
+      "fields": [
+        "id",
+        "public_id",
+        "tenant_id",
+        "examiner_public_id",
+        "assignment_public_id",
+        "request_public_id",
+        "operation",
+        "created_at"
+      ],
+      "relationship_fields": [
+        "assignment_public_id",
+        "examiner_public_id",
+        "id",
+        "public_id",
+        "request_public_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "request_public_id",
+        "operation",
+        "created_at"
+      ],
+      "omitted_fields": [
+        "fingerprint",
+        "receipt_json"
+      ]
+    },
+    {
+      "table": "examiner_grading_issues",
+      "fields": [
+        "id",
+        "public_id",
+        "work_id",
+        "type",
+        "description",
+        "status",
+        "reported_at",
+        "resolved_at",
+        "resolution"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "work_id"
+      ],
+      "business_fields": [
+        "type",
+        "description",
+        "status",
+        "reported_at",
+        "resolved_at",
+        "resolution"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "tenant_id",
+        "answer_public_id",
+        "reported_by",
+        "resolved_by"
+      ]
+    },
+    {
+      "table": "session_identity_verification_commands",
+      "fields": [
+        "id",
+        "public_id",
+        "tenant_id",
+        "session_id",
+        "actor_public_id",
+        "request_public_id",
+        "enrollment_public_id",
+        "previous_status",
+        "new_status",
+        "note",
+        "server_action_at",
+        "changed"
+      ],
+      "relationship_fields": [
+        "actor_public_id",
+        "enrollment_public_id",
+        "id",
+        "public_id",
+        "request_public_id",
+        "session_id",
+        "tenant_id"
+      ],
+      "business_fields": [
+        "request_public_id",
+        "previous_status",
+        "new_status",
+        "note",
+        "server_action_at",
+        "changed"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "actor_role",
+        "intent_fingerprint",
+        "student_public_id",
+        "expected_version",
+        "applied_version",
+        "committed_result"
+      ]
+    },
+    {
+      "table": "exam_session_incidents",
+      "fields": [
+        "id",
+        "public_id",
+        "session_public_id",
+        "title",
+        "category",
+        "severity",
+        "status",
+        "reporter_role",
+        "current_owner_role",
+        "resolution_summary"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "session_public_id"
+      ],
+      "business_fields": [
+        "title",
+        "category",
+        "severity",
+        "status",
+        "reporter_role",
+        "current_owner_role",
+        "resolution_summary"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "tenant_id",
+        "student_public_id",
+        "attempt_public_id",
+        "description",
+        "reporter_name",
+        "reporter_public_id",
+        "current_owner_name"
+      ]
+    },
+    {
+      "table": "exam_session_incident_history",
+      "fields": [
+        "id",
+        "public_id",
+        "incident_id",
+        "action",
+        "from_status",
+        "to_status",
+        "notes",
+        "created_at"
+      ],
+      "relationship_fields": [
+        "id",
+        "incident_id",
+        "public_id"
+      ],
+      "business_fields": [
+        "action",
+        "from_status",
+        "to_status",
+        "notes",
+        "created_at"
+      ],
+      "omitted_fields": [
+        "updated_at",
+        "deleted",
+        "incident_public_id",
+        "actor_public_id",
+        "actor_name",
+        "actor_role"
+      ]
+    },
+    {
+      "table": "scoring_answer_ai_details",
+      "fields": [
+        "id",
+        "public_id",
+        "answer_public_id",
+        "criteria_scores_json",
+        "feedback",
+        "transcript",
+        "fallback",
+        "failure_reason"
+      ],
+      "relationship_fields": [
+        "answer_public_id",
+        "id",
+        "public_id"
+      ],
+      "business_fields": [
+        "criteria_scores_json",
+        "feedback",
+        "transcript",
+        "fallback",
+        "failure_reason"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "tenant_id",
+        "detail_json"
+      ]
+    },
+    {
+      "table": "practice_explanations",
+      "fields": [
+        "id",
+        "public_id",
+        "practice_session_item_id",
+        "language",
+        "generation_sequence",
+        "status",
+        "summary",
+        "strengths_json",
+        "improvements_json",
+        "rubric_feedback_json",
+        "generated_at",
+        "failure_code"
+      ],
+      "relationship_fields": [
+        "generation_sequence",
+        "id",
+        "language",
+        "practice_session_item_id",
+        "public_id"
+      ],
+      "business_fields": [
+        "language",
+        "status",
+        "summary",
+        "strengths_json",
+        "improvements_json",
+        "rubric_feedback_json",
+        "generated_at",
+        "failure_code"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "student_public_id",
+        "submission_hash",
+        "rubric_version",
+        "requested_model",
+        "actual_model_version",
+        "provider_version",
+        "can_retry",
+        "attempt_count",
+        "next_attempt_at",
+        "rubric_revision_public_id",
+        "rubric_canonical_hash",
+        "rubric_provenance_status",
+        "limitations_json",
+        "objective_score",
+        "objective_evaluator_version",
+        "objective_result_hash",
+        "objective_evidence_identity_hash",
+        "form_word_count",
+        "form_status",
+        "form_evaluator_version",
+        "form_result_hash",
+        "form_evidence_identity_hash"
+      ]
+    },
+    {
+      "table": "practice_explanation_jobs",
+      "fields": [
+        "id",
+        "public_id",
+        "explanation_id",
+        "status",
+        "attempt_count",
+        "next_attempt_at",
+        "last_failure_code",
+        "idempotency_key"
+      ],
+      "relationship_fields": [
+        "explanation_id",
+        "id",
+        "public_id"
+      ],
+      "business_fields": [
+        "status",
+        "attempt_count",
+        "next_attempt_at",
+        "last_failure_code",
+        "idempotency_key"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "student_public_id",
+        "language",
+        "generation_sequence",
+        "lease_token",
+        "lease_until",
+        "run_token"
+      ]
+    },
+    {
+      "table": "practice_explanation_outbox",
+      "fields": [
+        "id",
+        "public_id",
+        "job_id",
+        "attempts",
+        "next_attempt_at",
+        "published_at",
+        "last_failure_code"
+      ],
+      "relationship_fields": [
+        "id",
+        "job_id",
+        "public_id"
+      ],
+      "business_fields": [
+        "attempts",
+        "next_attempt_at",
+        "published_at",
+        "last_failure_code"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted"
+      ]
+    },
+    {
+      "table": "rubric_revisions",
+      "fields": [
+        "id",
+        "public_id",
+        "rubric_key",
+        "task_type_key",
+        "version",
+        "name",
+        "channel",
+        "status",
+        "submitted_at",
+        "published_at",
+        "retired_at"
+      ],
+      "relationship_fields": [
+        "id",
+        "public_id",
+        "rubric_key",
+        "task_type_key",
+        "version"
+      ],
+      "business_fields": [
+        "rubric_key",
+        "name",
+        "task_type_key",
+        "channel",
+        "version",
+        "status",
+        "submitted_at",
+        "published_at",
+        "retired_at"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "author_user_public_id",
+        "reviewer_user_public_id",
+        "publisher_user_public_id",
+        "change_reason",
+        "rejection_reason",
+        "document_json",
+        "references_json",
+        "anchors_json",
+        "canonical_hash",
+        "runtime_compatibility_hash",
+        "entity_version"
+      ]
+    },
+    {
+      "table": "rubric_criteria",
+      "fields": [
+        "id",
+        "public_id",
+        "revision_id",
+        "criterion_id",
+        "sequence",
+        "required",
+        "applicability"
+      ],
+      "relationship_fields": [
+        "criterion_id",
+        "id",
+        "public_id",
+        "revision_id"
+      ],
+      "business_fields": [
+        "criterion_id",
+        "sequence",
+        "required",
+        "applicability"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "evidence_policy_json"
+      ]
+    },
+    {
+      "table": "rubric_criterion_levels",
+      "fields": [
+        "id",
+        "public_id",
+        "criterion_id",
+        "level_key",
+        "level_order",
+        "label_en",
+        "descriptor"
+      ],
+      "relationship_fields": [
+        "criterion_id",
+        "id",
+        "level_key",
+        "public_id"
+      ],
+      "business_fields": [
+        "level_key",
+        "level_order",
+        "label_en",
+        "descriptor"
+      ],
+      "omitted_fields": [
+        "created_at",
+        "updated_at",
+        "deleted",
+        "label_vi"
+      ]
+    }
+  ],
+  "conceptual_source": "01-core-overview/quang-00-conceptual-overview.mmd"
+}
