@@ -2,7 +2,7 @@
 
 **Date:** 2026-10-24
 **Spec:** [../261024-hung-practice-timed-modes/spec.md](../261024-hung-practice-timed-modes/spec.md)
-**Inputs:** builder check, Primary researcher, Alternative researcher (read-only code review of `pte-api` and `pte-practice` on `hung/feat/practice-password-login`).
+**Inputs:** builder check, Primary researcher, Alternative researcher (read-only code review of `pte-api` and `pte-practice` on `hung/feat/practice-revamp`).
 
 ## Verdicts
 

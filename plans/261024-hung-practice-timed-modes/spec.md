@@ -3,7 +3,7 @@
 **Ngày:** 2026-10-24
 **Owner:** Hung
 **Repo bị ảnh hưởng:** `pte-practice` (chính), `pte-api` (module `practice`)
-**Phụ thuộc:** làm tiếp trên nhánh `hung/feat/practice-password-login` (đăng nhập bằng tài khoản trung tâm cấp, V132). Migration mới của spec này bắt đầu từ **V133**.
+**Phụ thuộc:** làm tiếp trên nhánh `hung/feat/practice-revamp` (đăng nhập bằng tài khoản trung tâm cấp, V132). Migration mới của spec này bắt đầu từ **V133**.
 **Trạng thái:** Chờ duyệt
 
 Quy ước trong tài liệu: **[Đã chốt]** là điều Hung đã quyết trong buổi brainstorm; **[Quyết định của Claude]** là lựa chọn mặc định mình đưa ra, Hung có thể đổi khi đọc.
@@ -42,11 +42,12 @@ Mục tiêu: học viên chọn được cách luyện phù hợp — **thi th�
 | US-5 | **P2** | Là học viên, tôi thấy sóng âm khi đang ghi và sóng âm của bản ghi để tua khi nghe lại. | 6 |
 | US-6 | **P2** | Là học viên Writing/Reading/Listening, chế độ tính giờ cho tôi đồng hồ theo từng câu; hết giờ thì khoá ô trả lời. | 3, 4 (phần không ghi âm) |
 | US-7 | **P3** | Là học viên quay lại, hộp chọn nhớ chế độ và số câu tôi chọn lần trước cho từng dạng bài. | — (kiểm bằng tay) |
+| US-9 | **P2** | Là học viên, tôi thấy vòng tiến độ thật (thay vòng giả) ở trang Progress theo từng kỹ năng, ở 4 ô kỹ năng trên Home, và trong phiên luyện (vòng đếm ngược của giai đoạn tính giờ, vòng câu x/y). | §5.4 ProgressRing |
 | US-8 | **P1** (kỹ thuật) | Là người phát triển, phiên cũ trước V133 vẫn mở được; UI dùng component chung theo §5.4. | 8, 9 |
 
 ### Không làm trong spec này
 - Study-Pack (phiên trộn nhiều dạng bài) — để spec riêng; thiết kế ở đây không được chặn việc đó (request vẫn nhận nhiều `taskTypeCodes`).
-- Thay đổi cách chấm điểm, AI scoring, trang Review, trang Progress.
+- Thay đổi cách chấm điểm, AI scoring, trang Review; số liệu/logic của trang Progress (chỉ thay phần **hiển thị vòng tiến độ** — xem US-9).
 - Bỏ hay đổi bước chọn mức tự tin (confidence) — giữ nguyên như hiện tại.
 - Exam client `pte-app` và luồng thi của tổ chức: không đụng.
 - Ép thời gian ở server (practice là luyện tập, đồng hồ do client giữ — xem §5.5).
@@ -175,9 +176,33 @@ Chuyển sang câu sau thì nhịp bắt đầu lại từ đầu cho câu đó.
 | `Modal` | `Modal` (`open`, `onClose`, `title`, `children`, `footer`, `size`) | hộp chọn chế độ |
 | `Stepper` | `Stepper` (`steps: {id,label}[]`, `currentStep`) | thanh giai đoạn Nghe đề → Chuẩn bị → Ghi âm → Xong |
 | `AudioWaveform` | — (chưa có ở đâu) | sóng sống + sóng tĩnh có tua; dùng chung cho Speaking và sau này trang Review |
-| `CountdownTimer` | — | đồng hồ đếm ngược của giai đoạn |
+| `CountdownTimer` | — | đồng hồ đếm ngược của giai đoạn; hiển thị bằng `ProgressRing` + số giây |
+| `ProgressRing` | — **[Đã chốt, theo `pearson-inline-icons.json` Hung cung cấp]** | SVG vòng tiến độ, 3 biến thể dựng lại từ hình học trong file mẫu: (1) **progress** — vòng nền + cung theo `value/max` (mẫu: vòng 90/56/48/40px, độ dày ~10/6/5/5px); (2) **segmented** — vòng 4 đoạn bo tròn cho trạng thái đang tải / chưa có dữ liệu; (3) **empty** — chỉ vòng nền. Props: `value`, `max`, `size`, `thickness`, `variant`, `tone`, `label` (aria). Màu lấy từ token theme (`--accent`, `--line`…), **không** dùng tím Pearson `rgb(81,46,171)` và không chép nguyên markup (file mẫu chứa `<div>` lồng trong `<svg>`, style inline, class React Native Web). Dùng ở: trang Progress (thay `progress-empty-ring`), 4 ô kỹ năng trên Home, trong phiên (đếm ngược giai đoạn tính giờ, tiến độ câu x/y). |
 
-3. **Không** chép mã từ `pte-web` sang theo kiểu sửa riêng; **không** thêm thư viện UI/waveform mới.
+3. **Không** chép mã từ `pte-web` sang theo kiểu sửa riêng; **không** thêm thư viện UI/waveform mới. Ngoại lệ duy nhất là `@mdi/js` (mục 4) — chỉ là chuỗi path SVG, không phải thư viện UI.
+
+4. **Icon: chuyển `AppIcon` sang Material Design Icons qua `@mdi/js`** **[Đã chốt]**
+   - Lý do: app PTE AI Practice tham chiếu dùng phần lớn icon MDI (mã nguồn mở, Apache 2.0, cộng đồng Pictogrammers); dùng chung bộ giúp giao diện đồng nhất và dễ bảo trì.
+   - Cách làm: thêm dependency `@mdi/js` (bản cố định), giữ **nguyên API** `AppIcon name="…" size={…}` và kiểu `IconName`, chỉ thay phần vẽ bên trong bằng path MDI (`viewBox 0 0 24 24`, `fill="currentColor"`). Không màn nào phải đổi lời gọi; icon mới cần cho tính năng này (ghi âm, nghe lại, ghi lại, đồng hồ…) thêm vào cùng bảng.
+   - **Không** dùng `pearsonicons` / `memorangicons` (tài sản riêng của Pearson/Memorang; trái ranh giới sản phẩm). `ProductMark` (logo) giữ nguyên.
+   - Bảng ánh xạ khởi đầu (builder có thể chỉnh nếu glyph nhìn không hợp):
+
+| `IconName` | MDI | `IconName` | MDI |
+|---|---|---|---|
+| home | `mdiHomeOutline` | practice | `mdiClipboardTextOutline` |
+| studyPack | `mdiPackageVariantClosed` | progress | `mdiChartLine` |
+| mic | `mdiMicrophoneOutline` | writing | `mdiFileDocumentEditOutline` |
+| reading | `mdiBookOpenPageVariantOutline` | listening | `mdiEarHearing` |
+| readAloud | `mdiAccountVoice` | repeatSentence | `mdiWaveform` |
+| describeImage | `mdiImageOutline` | reTellLecture | `mdiPresentation` |
+| play | `mdiPlay` | lock | `mdiLockOutline` |
+| check | `mdiCheckCircleOutline` | info | `mdiInformationOutline` |
+| calendar | `mdiCalendarMonthOutline` | search | `mdiMagnify` |
+| signOut | `mdiLogout` | sun / moon | `mdiWeatherSunny` / `mdiWeatherNight` |
+| chevronRight / chevronDown | `mdiChevronRight` / `mdiChevronDown` | sparkle | `mdiStarFourPointsOutline` |
+| *(mới)* record / stop / pause / retake / timer | `mdiRecordCircleOutline` / `mdiStop` / `mdiPause` / `mdiRestore` / `mdiTimerOutline` | | |
+
+   Các `IconName` còn lại (dạng bài Reading/Listening, `bookOpen`, `responses`, `arrowRight`…) builder chọn glyph MDI gần nghĩa nhất.
 
 Việc đưa `@pte/ui` thành dependency thật của `pte-practice` (git/published package) là thay đổi hạ tầng, **không** nằm trong spec này.
 
