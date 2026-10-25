@@ -47,7 +47,7 @@ Tham chiếu giao diện: ảnh app PTE Official AI Practice (danh sách "PTE Ac
 | D2 | Kết quả: điểm từng câu + ước lượng 4 kỹ năng/tổng theo trọng số template, nhãn "tham khảo" | Đã chốt |
 | D3 | Giờ: TIMED từng câu, thứ tự Speaking → Writing → Reading → Listening, lưu/tiếp tục được; 2h15m chỉ là ước tính hiển thị (tổng prep+response của template, làm tròn 5 phút) | Đã chốt / Claude (cách tính) |
 | D4 | Số đề = số đề đã tạo và PUBLISHED | Đã chốt |
-| D5 | Ai tạo đề: endpoint admin `POST /api/v1/admin/practice/mock-tests:generate {count}` (`hasAnyRole('PLATFORM_ADMIN','ACADEMIC_MANAGER')`, như các endpoint quản lý câu hỏi) + script seed local gọi endpoint này. Đề mới đánh số tiếp theo (Mock Test N+1…). Không đủ câu PRACTICE cho một dạng bài → 422, không tạo đề nào | Quyết định của Claude |
+| D5 | Ai tạo đề: **hệ thống tự tạo** khi học viên mở danh sách đề, số đề = sức chứa ngân hàng Practice không lặp câu (trần 20); endpoint admin chỉ để thao tác tay | Đã chốt (cách B) |
 | D6 | Ghép nhiều đề: trong một lần generate, ưu tiên câu chưa dùng ở đề khác (dùng lại `PracticeQuestionPicker` với "seen" = câu đã ghim ở các đề trước); nếu ngân hàng không đủ thì được lặp câu giữa các đề | Quyết định của Claude |
 | D7 | Làm lại đề: được, mỗi lần là một lượt (session) mới; danh sách đề hiển thị lượt gần nhất (Tiếp tục nếu đang làm dở, "Làm lại" + điểm nếu đã xong) | Quyết định của Claude |
 | D8 | Phiên kỹ năng (Study-Pack): dùng lại start API với `taskTypeCodes` = mọi dạng bài RUNNABLE của kỹ năng; `questionCount` là **tổng số câu của phiên**, chia đều cho các dạng bài (dư chia cho các dạng đầu); URL `?skill=READING&mode=…&count=…` | Quyết định của Claude |

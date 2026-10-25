@@ -95,3 +95,10 @@ Nguồn: agent `plan-reviewer` đối chiếu plan với code. Verdict ban đầ
 | M8 | Đường dẫn FE: parser section ở `catalog-contracts.ts`, review ở `api.ts`; `api.ts` đã 300 dòng | Phase 3/4: `features/mockTests/api.ts` riêng, sửa `catalog-contracts.ts` |
 | M9 | `useSessionLifecycle` thoát sớm khi `!taskCode` và chặn bằng `canStartPractice(task)` | Phase 3/4: viết lại request-key + guard cho skill/mockTest |
 | L1–L5 | Kiểu cột/tên cột, `sourceQuestionPublicId`, lượt DISCARDED che điểm cũ, `@ConditionalOnProperty` cho admin controller, link "Xem tất cả" ở Home | Áp khi làm; lượt gần nhất = lượt **không bị DISCARDED**; admin controller dùng cùng property; chỉ PLATFORM_ADMIN cho generate (mock là dữ liệu toàn cục) |
+
+## Thay đổi sau review của Hung (2026-10-25): đề tự tạo từ ngân hàng (cách B)
+
+- Bỏ việc tạo đề thủ công (seed `-MockTests`). Khi học viên mở danh sách đề, `PracticeMockTestService.ensureCapacity()` tính **sức chứa** = min theo dạng bài của ⌊số câu Practice / minCount⌋ (trần 20) và tự tạo các đề còn thiếu; không bao giờ xoá đề.
+- Ngân hàng nhỏ (chưa đủ 1 đề) hoặc không có Mẫu bài thi active → không tạo đề, danh sách trống.
+- Endpoint admin `GET/POST /api/v1/admin/practice/mock-tests(:generate)` giữ lại để thao tác tay khi cần, không có UI.
+- Không làm (theo lựa chọn): trang admin, đề ngẫu nhiên mỗi lượt.
