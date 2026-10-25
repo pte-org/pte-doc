@@ -1,12 +1,12 @@
 # Plan: Trả nợ bảo trì pte-api — `Clock` thống nhất, tách file > 300 dòng, gom thư mục
 
-Status: 📝 Draft — chờ duyệt
+Status: 🟡 In Progress
 Date: 2026-10-25
 Mode: Hard
 Test: mỗi phase chạy `./mvnw.cmd -pl app clean test` (kèm DB test Postgres theo `quang-entity-consolidation/local-dev-runbook.md`) + quality gate `ck:quality --gate`
 Created by: quang
-Bắt đầu sau khi: nhánh gộp entity (`quang/feat/maintain-v2`) đã review và merge, để diff không trộn.
-Branch đề xuất: `quang/refactor/api-maintainability` (tách từ nhánh đã merge). Agent KHÔNG commit/push.
+Bắt đầu: 2026-10-25, sau khi người dùng commit nhánh gộp entity (chưa merge).
+Branch: `quang/refactor/api-maintainability` (pte-api, tách từ `quang/feat/maintain-v2`). Agent KHÔNG commit/push.
 
 ## Overview
 
@@ -32,14 +32,14 @@ Plan **không đổi hành vi, API, schema hay mã lỗi**. Chỉ dời code, t�
 
 ## Phases
 
-- [ ] Phase 1: Hàng rào kiểm tra — [phase-01-guardrails.md](phase-01-guardrails.md) — test kiến trúc chặn `now()` và file > 300 dòng (allowlist chỉ được co lại), quy tắc gom thư mục
-- [ ] Phase 2: `Clock` toàn bộ — [phase-02-clock.md](phase-02-clock.md) — thay 69 lời gọi `now()`, entity nhận `Instant`
-- [ ] Phase 3: Gom exception và DTO nội bộ — [phase-03-group-internal-packages.md](phase-03-group-internal-packages.md) — `session/internal/exception` (55), `billing/internal/exception` (20), các `internal/dto/*` > 15 file
-- [ ] Phase 4: itembank + assessment — [phase-04-itembank-assessment.md](phase-04-itembank-assessment.md) — `ItembankService` 828, `QuestionTypeService` 689, `ExamDefinitionAdminService` 735, `ExamGenerationService` 340, `SnapshotPublishService` 311
-- [ ] Phase 5: scoring — [phase-05-scoring.md](phase-05-scoring.md) — 6 file lớn + gom `scoring/internal/service` (38 file) theo nhóm examiner / ai / objective / review / grading
-- [ ] Phase 6: attempt + session — [phase-06-attempt-session.md](phase-06-attempt-session.md) — `AttemptLifecycleService` 597, `CapabilityNegotiationService` 520, `ProctorMonitoringQueryService` 344, `SessionService` 319 + gom `session/internal/service` (30)
-- [ ] Phase 7: billing, identity, tenancy, media, practice — [phase-07-remaining-modules.md](phase-07-remaining-modules.md) — 8 file lớn còn lại
-- [ ] Phase 8: Chốt — [phase-08-finalize.md](phase-08-finalize.md) — allowlist rỗng, cập nhật tài liệu, báo cáo
+- [x] Phase 1: Hàng rào kiểm tra — [phase-01-guardrails.md](phase-01-guardrails.md) — test kiến trúc chặn `now()` và file > 300 dòng (allowlist chỉ được co lại), quy tắc gom thư mục [quality: approved; tests: passed 2856; completed 2026-10-25; bước 5 chờ quyết định]
+- [x] Phase 2: `Clock` toàn bộ — [phase-02-clock.md](phase-02-clock.md) — thay 69 lời gọi `now()`, entity nhận `Instant` [quality: approved; tests: passed 2856; completed 2026-10-25]
+- [x] Phase 3: Gom exception và DTO nội bộ — [phase-03-group-internal-packages.md](phase-03-group-internal-packages.md) — `session/internal/exception` (55), `billing/internal/exception` (20), các `internal/dto/*` > 15 file [quality: approved; tests: passed 2856; completed 2026-10-25]
+- [x] Phase 4: itembank + assessment — [phase-04-itembank-assessment.md](phase-04-itembank-assessment.md) — `ItembankService` 828, `QuestionTypeService` 689, `ExamDefinitionAdminService` 735, `ExamGenerationService` 340, `SnapshotPublishService` 311 [quality: approved; tests: passed 2861; completed 2026-10-25]
+- [x] Phase 5: scoring — [phase-05-scoring.md](phase-05-scoring.md) — 6 file lớn + gom `scoring/internal/service` (38 file) theo nhóm examiner / ai / objective / review / grading [quality: approved; tests: passed 2861; completed 2026-10-25]
+- [x] Phase 6: attempt + session — [phase-06-attempt-session.md](phase-06-attempt-session.md) — `AttemptLifecycleService` 597, `CapabilityNegotiationService` 520, `ProctorMonitoringQueryService` 344, `SessionService` 319 + gom `session/internal/service` (30) [quality: approved; tests: passed 2861; completed 2026-10-25]
+- [x] Phase 7: billing, identity, tenancy, media, practice — [phase-07-remaining-modules.md](phase-07-remaining-modules.md) — 8 file lớn còn lại [code + unit tests done 2026-10-25; quality gate and full test run delegated to another agent]
+- [x] Phase 8: Chốt — [phase-08-finalize.md](phase-08-finalize.md) — allowlist rỗng, cập nhật tài liệu, báo cáo [docs done: docs/CODING_STANDARDS_API.md, AGENTS.md; allowlists empty]
 
 ## Dependencies
 
@@ -56,3 +56,10 @@ Plan **không đổi hành vi, API, schema hay mã lỗi**. Chỉ dời code, t�
 | Tách service làm đổi ranh giới `@Transactional` / proxy (gọi nội bộ `this.x()` thành gọi bean khác) | Ghi rõ trong phase: method nào đang dựa vào self-invocation; giữ ranh giới giao dịch cũ; test Postgres race/rollback phải xanh |
 | Diff lớn khó review (chuẩn giới hạn PR 400 dòng logic) | Dời file thuần (`git mv` + sửa import) để riêng một commit với tách logic; người dùng tự commit theo từng phase |
 | `@MockitoBean` trong test trỏ lớp cũ | Sửa test cùng phase; không xoá test để cho qua |
+
+
+## Bàn giao cho agent kiểm thử / quality gate (2026-10-25)
+
+Phase 1-6 đã có quality report + receipt (`quality/`, `tests/`). **Chưa chạy gate:** phase 7 (billing, identity, media, tenancy, practice), phase 8 (tài liệu, allowlist rỗng) và test bổ sung (`DynamicTaskTypeServiceTest`, `ExamDefinitionValidatorTest`, `QuestionMediaReferenceValidatorTest`, `RuntimeContractResolverTest`, `ExamGenerationServiceTest` feasibility).
+Lệnh kiểm: dựng Postgres test theo `quang-entity-consolidation/local-dev-runbook.md`, `rm -rf app/target/classes app/target/test-classes` (build tăng dần che lỗi), rồi `./mvnw.cmd -pl app test` với `INBOX_TEST_DB_URL` và `-Dlifecycle.test.db.url` (kỳ vọng 0 lỗi, 16 skip). Docker gate: dựng lại app, healthy, chạy luồng seed -> làm bài -> chấm tay -> công bố -> học viên xem báo cáo.
+Rủi ro cần soi kỹ khi review: các agent yếu từng làm rơi logic (đã phát hiện ở phase 4), nên so sánh từng method với HEAD; bean có 2 constructor không có `@Autowired` chỉ lộ khi khởi động app; test chưa chuyển sang `Clock.fixed`.

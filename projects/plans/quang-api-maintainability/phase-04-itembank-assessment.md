@@ -2,6 +2,8 @@
 
 ## Requirements
 
+> **Quyết định khi cook phase-04-itembank-assessment (2026-10-25):** ItembankService 828->183, QuestionTypeService 689->220, ExamDefinitionAdminService 739->233 (definition/ sub-package), ExamGenerationService 340->79, SnapshotPublishService 311->215; collaborators named by responsibility, all <= 300 lines. Facades keep signatures and delegate to injected beans. Review bắt được 4 BLOCKER do agent làm rơi logic (feasibility, media validation, custom-template profile, @Autowired) — đã khôi phục và so sánh từng method với HEAD; thêm test cho feasibility, media validator, contract resolver.
+
 Đưa các file sau về ≤ 300 dòng, không đổi hành vi:
 
 | File | Dòng |
@@ -33,8 +35,8 @@ Kèm: gốc module `itembank/` có 18 file phẳng → rà lại, lớp nào kh�
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated
-- Testing: not started
+- Quality gate: approved (xem quality/phase-04-itembank-assessment-quality-report.json)
+- Testing: passed (xem tests/phase-04-itembank-assessment-test-report.json)
 
 ## Risks
 

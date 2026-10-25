@@ -2,6 +2,8 @@
 
 ## Requirements
 
+> **Quyết định khi cook phase 1 (2026-10-25):** (1) Ba test trong `app/src/test/java/com/pte/architecture/` dùng chung `SourceDebtAllowlist.ratchet(...)`; giá trị trong allowlist là số đo **chính xác** hiện tại, nên file nhỏ lại cũng phải hạ con số (không thể phình lại tới mức cũ). (2) `NoDirectClockAccessTest` bỏ qua comment/chuỗi, bắt `now()`, `now(zone)`, `::now` của các kiểu java.time, `System.currentTimeMillis()`, `new Date()`, `Calendar.getInstance()`; `now(clock)` hợp lệ; `Clock.systemUTC()` (bean và fallback trong constructor) nằm ngoài phạm vi. (3) Chênh lệch có chủ đích: `PackageDensityTest` miễn **mọi** package không thuộc `internal/**` (không chỉ package có `@NamedInterface`), vì package công khai nào cũng là ứng viên ranh giới module. (4) Allowlist ban đầu: 49 file / 69 lần đọc giờ, 23 file > 300 dòng, 14 package đông (thêm `overview/internal/service`, `scoring/internal/vendor/gemini`, `billing/internal/service` so với plan, đã bổ sung vào phase 3 và 7). (5) Bước 5 (ghi quy tắc gom thư mục vào `docs/CODING_STANDARDS_API.md` hay chỉ trong plan) **chờ người dùng quyết**; quy tắc hiện nằm ở plan.md "Quy tắc chung" 4–5.
+
 Trước khi sửa, dựng test kiến trúc để nợ không quay lại. Test đếm vi phạm hiện có vào allowlist; mỗi phase sau chỉ được xoá mục khỏi allowlist, không được thêm.
 
 ## Design Constraints
@@ -25,8 +27,8 @@ Trước khi sửa, dựng test kiến trúc để nợ không quay lại. Test 
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated
-- Testing: not started
+- Quality gate: approved (xem quality/phase-01-guardrails-quality-report.json)
+- Testing: passed (xem tests/phase-01-guardrails-test-report.json); bước 5 chờ người dùng quyết
 
 ## Risks
 

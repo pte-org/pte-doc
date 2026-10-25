@@ -2,6 +2,8 @@
 
 ## Requirements
 
+> **Quyết định khi cook phase-06-attempt-session (2026-10-25):** session/internal/service gom attendance/audience/draft/enrollment/staff (+lifecycle) và attempt/internal/service/query; AttemptLifecycleService 600->243 (AttemptAccess, AttemptTaskProgression, AttemptStartFlow, AttemptAnswerRecorder, AttemptAudioPlayback, tạo bằng new trong bean), CapabilityNegotiationService 520->168 chuyển sang capability/ (+Evaluator, Normalizer, 2 record), ProctorMonitoringQueryService 344->280 (+ProctorSessionViews), SessionService 319->300 (SessionAttendanceOperations gom 4 service attendance; constructor 9->6 phụ thuộc, chữ ký public giữ nguyên). Mở public tối thiểu cho các lớp dùng chéo package.
+
 | File | Dòng |
 |---|---|
 | `attempt/internal/service/AttemptLifecycleService.java` | 597 |
@@ -46,8 +48,8 @@ Kèm gom `session/internal/service` (30 file) và `attempt/internal/service` (17
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated
-- Testing: not started
+- Quality gate: approved (xem quality/phase-06-attempt-session-quality-report.json)
+- Testing: passed (xem tests/phase-06-attempt-session-test-report.json)
 
 ## Risks
 

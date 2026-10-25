@@ -2,6 +2,8 @@
 
 ## Requirements
 
+> **Quyết định khi cook phase-05-scoring (2026-10-25):** scoring/internal/service gom thành examiner/ai/objective/selection/grading/review/staff (còn ScoringCommandService, ScoringIngestService ở gốc); exception gom ở phase 3. 6 file lớn tách bằng collaborator package-private tạo bằng new trong bean sở hữu (không thêm bean): ExaminerScoringService 623->201, ObjectiveScoringService 419->72, GradingCohortService 347->296, ExaminerDraftCommandService 325->254, ScoringReviewReadQueryService 306->269, ExaminerWorkspaceReadRepository 469->215 (+repository/workspace). Một số lớp được mở public tối thiểu để dùng chéo package; test chuyển cạnh lớp được test.
+
 Tách file lớn và gom `scoring/internal/service` (38 file phẳng):
 
 | File | Dòng |
@@ -46,8 +48,8 @@ Tách file lớn và gom `scoring/internal/service` (38 file phẳng):
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated
-- Testing: not started
+- Quality gate: approved (xem quality/phase-05-scoring-quality-report.json)
+- Testing: passed (xem tests/phase-05-scoring-test-report.json)
 
 ## Risks
 

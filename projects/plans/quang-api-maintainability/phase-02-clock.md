@@ -2,6 +2,8 @@
 
 ## Requirements
 
+> **Quyết định khi cook phase-02-clock (2026-10-25):** 69 lời gọi thời gian thay bằng Clock inject (Clock là tham số constructor cuối); entity không đọc giờ (ExamAttempt.begin/submit, NotificationLog.markSent, AiEvaluation.markScored/markAiScored, Organization.grantQuota nhận Instant; ExamIncident.detectedAt do nơi tạo gán). createdAt/updatedAt vẫn dùng @CreationTimestamp/@UpdateTimestamp có sẵn của BaseEntity. Constructor tương thích cho test nay truyền Clock.systemUTC(). Test chưa chuyển sang Clock.fixed (nợ theo dõi). Size allowlist hạ theo số dòng mới.
+
 Thay toàn bộ 69 lời gọi lấy giờ trực tiếp bằng `Clock` inject. Theo module (đo 2026-10-25): billing 13, proctoring 11, attempt 9, session 8, scoring 8, tenancy 4, practice 3, identity 3, notification 2, media 2, enrollment 2, shared 1, reporting 1, examstaff 1, assessment 1.
 
 ## Design Constraints
@@ -25,8 +27,8 @@ Thay toàn bộ 69 lời gọi lấy giờ trực tiếp bằng `Clock` inject. 
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated
-- Testing: not started
+- Quality gate: approved (xem quality/phase-02-clock-quality-report.json)
+- Testing: passed (xem tests/phase-02-clock-test-report.json)
 
 ## Risks
 

@@ -22,7 +22,7 @@
 ## Steps
 
 1. Tách từng lớp, chạy test module sau mỗi lớp.
-2. Gom thư mục nếu sau khi tách vượt 15 file.
+2. Gom `billing/internal/service` (16 file trước khi tách, ví dụ `license/`, `plan/`, `order/`), và các thư mục khác vượt 15 file sau khi tách.
 3. Cập nhật allowlist.
 
 ## Success Criteria
