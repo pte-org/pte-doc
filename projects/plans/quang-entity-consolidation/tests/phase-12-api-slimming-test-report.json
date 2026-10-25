@@ -1,0 +1,22 @@
+{
+  "phase": "phase-12-api-slimming",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-25T12:00:00Z",
+  "summary": {
+    "passed": 2795,
+    "failed": 0,
+    "skipped": 58
+  },
+  "failures": [],
+  "notes": [
+    "Backend (clean test): 2853 tests, 0 failures, 0 errors, 58 skipped (env-gated Postgres); ModuleStructureTest green. ApiInventoryExportTest: 260 endpoints (phase 1 baseline 328, target <= 260), 3 STOMP.",
+    "New backend tests: TrainingStatusEndpointTest, ApprovalStatusEndpointTest (role matrix, reason required, custom-template guard), QuestionStatusEndpointTest, UserStatusEndpointTest, BillingStatusEndpointTest, SessionStatusEndpointTest, AnnouncementStatusEndpointTest, OrganizationStatusEndpointTest, TaskTypeRetireStatusTest, AttendanceControllerTest, StaffWorkspaceControllerTest, GlobalExceptionHandler additions (404/405/415/400); StatusEndpointHarness test support.",
+    "pte-web: api-client 623 tests + tsc clean; tenant-web 540 tests + tsc clean; vendor-web 68 tests (tsc only reports stale .next types); eslint clean on changed vendor-web file. Dashboard contract test now excludes the student workspace records that share the overview DTO package.",
+    "Docker (Postgres 17, empty DB, default profile, Flyway V1): healthy, login 200 for admin@test.local and host.e2e@test.local; seed scripts (new routes) + attempt -> manual grading -> publish -> student report flow works; status routes for program/class/announcement/organization/session answer as designed, removed routes return 404.",
+    "Found by the gate: unknown routes, wrong verbs, missing query parameters and non-JSON bodies returned 500 (global catch-all); now 404/405/400/415. seed-local-exam-ready.ps1 plan activation and seed-local-template-and-question-bank.ps1 unarchive still used removed routes.",
+    "Not verified: pte-app (Flutter) tests/analysis; pte-app scoring_review repository still targets a legacy /api/scheduling/sessions path that does not exist in the monolith (pre-existing); env-gated Postgres tests.",
+    "Process deviation: tests written with the implementation (no RED_READY artifact)."
+  ],
+  "report_path": "pte-doc/projects/plans/quang-entity-consolidation/tests/phase-12-api-slimming-test-report.json"
+}

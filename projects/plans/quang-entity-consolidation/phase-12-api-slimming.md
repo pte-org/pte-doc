@@ -2,6 +2,8 @@
 
 ## Requirements
 
+> **Quyết định khi cook phase 12 (2026-10-25):** (1) 328 → **260** endpoint (exporter; phase 1 export không có controller practice nên số so sánh là 260 so với 328). (2) Quy ước `PATCH .../{id}/status {action, reason?}` cho Program/Class, Blueprint, ExamDefinition, Question, TaskType (thêm RETIRE thay `DELETE`), User/PlatformUser (PlatformUser thêm ARCHIVE/RESTORE; User chỉ SUSPEND/REACTIVATE), Application, Plan (mang `expectedVersion`), Session, Organization (SUSPEND vẫn bắt buộc `impactDigest`), Announcement; quyền theo action kiểm bằng `CurrentUser.requireAnyRole` trong handler, bằng hoặc chặt hơn endpoint cũ, có test theo action. (3) Hợp nhất attendance host/proctor thành `/exam-sessions/{id}/attendance/**` (cờ host suy ra từ role; tài khoản vừa HOST_ADMIN vừa PROCTOR nay luôn xem như host). (4) Gỡ không consumer: `/internal/**` (3 controller), stub `POST /license-codes/{ignored}/revoke`, `GET/PUT /settings/{key}`; gộp `GET /exam-staff/{id}/{proctor,examiner}-sessions` thành `/sessions?role=`. (5) Không gộp: `ClassController` merge/split/transfer, `SessionController` generate/preflight/audience, publish báo cáo, các cặp single/bulk (đổi hình dạng request). (6) Sửa kèm: route không tồn tại, sai verb, thiếu tham số query, sai content-type trước đây trả 500, nay 404/405/400/415. (7) Client `pte-web` và script seed sửa cùng phase; bảng chi tiết cũ → mới ở cuối `spec.md`. Nợ: `pte-app` vẫn có repository scoring_review trỏ `/api/scheduling/sessions` (đường cũ không tồn tại, có từ trước).
+
 Giảm số endpoint (328 trước plan; còn khoảng 290 sau phase 4–11 nhờ gỡ `score-templates`, `tenants`, `proctor-sessions/close`, assignment preview/confirm) xuống khoảng 250 mà không mất chức năng. Chỉ đổi bề mặt API, không đổi entity hay schema (V1 đã sinh ở phase 11). Phục vụ tiêu chí function parity và yêu cầu người dùng 2026-10-24 ("API slimming").
 
 ## Design Constraints
@@ -34,8 +36,8 @@ Giảm số endpoint (328 trước plan; còn khoảng 290 sau phase 4–11 nh�
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after implementing this phase)
-- Testing: not started
+- Quality gate: approved (xem quality/phase-12-api-slimming-quality-report.json)
+- Testing: passed (xem tests/phase-12-api-slimming-test-report.json)
 
 ## Risks
 

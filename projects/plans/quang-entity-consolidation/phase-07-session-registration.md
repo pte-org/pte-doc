@@ -2,6 +2,8 @@
 
 ## Requirements
 
+> **Quyết định khi cook phase 7 (2026-10-25):** (1) Còn 4 entity trong module `session`: `ExamSession`, `ExamSessionProctor` (đổi tên `ProctorAssignment`), `ExamSessionAudienceSource` (đổi tên `ExamAudienceSource`; `SessionClassAssignment` được hấp thụ thành nguồn loại `CLASS`) và `ExamRegistration` (gộp `Enrollment` + `ExamAudienceMember` + `SessionAttendance`, unique `(session, student)`, `status` ELIGIBLE/EXCLUDED/ENROLLED; "đã ghi danh" = `ENROLLED`, mọi truy vấn roster/sức chứa/xung đột lọc theo đó). Policy nhúng và `selectedSkills` đã sẵn dạng embedded/`@ElementCollection`. (2) Gỡ `ExamForm`, `FormAssignment`, `ExamGenerationJob`, `ExamFormProvisioningService`, `FormMode`, `SessionStatus.PREPARING`: mỗi ca thi một `examVersionPublicId`; `POST /sessions/{id}/generate` dựng đề đồng bộ qua `AssessmentService.generateDeterministic` và giữ path + shape (`GenerationJobResponse`: `publicId` = id ExamVersion, `status` luôn `SUCCEEDED`, `formsTotal=formsCompleted=1`); `GET .../generation` suy ra từ ca thi. (3) Receipt điểm danh/xác minh lưu ở `IdempotencyKey` scope `ATTENDANCE` (khoá `kind:session:actor:request`, giữ đến `closesAt` + 90 ngày); lịch sử đọc từ `AuditLog` (`SESSION_ATTENDANCE`, id `session:student`, before/after JSON, chỉ lệnh có thay đổi) qua `AuditHistoryReader` mới ở `shared`. `unenroll` xoá hẳn registration nên version điểm danh của lần ghi danh sau bắt đầu lại từ 0 (lịch sử vẫn nằm ở audit); khái niệm "enrollment generation" bỏ, so khớp `enrollmentPublicId` với id registration. (4) `/sessions/{id}/classes` được giữ (client Flutter còn gọi): DRAFT thêm/xoá nguồn CLASS qua `ExamAudienceService`; SCHEDULED ghi danh ngay học viên của lớp rồi lưu nguồn CLASS để gỡ được. (5) View `session_monitoring_enrollment_membership` (attempt dùng) được định nghĩa lại trên `exam_registrations` thay vì thay bằng truy vấn trong attempt; gỡ ở phase 8. (6) Đổi tên JSON `SessionResponse`: `snapshotPublicId`→`examVersionPublicId`, `templateVersion`→`examDefinitionVersion`; bỏ `formMode`, `generationJobPublicId` và `formMode` ở request tạo/sửa nháp; client web (api-client, tenant-web) và Flutter (`session_model.dart`) đã sửa; `PREPARING` bị bỏ khỏi `SessionStatus` ở TS vì `contract.test.ts` so sánh với enum Java. (7) Tách `ExamOrchestrationService` (1047 dòng) thành `ExamDraftService`, `ExamAudienceService`, `ExamPublishService`, `AudienceResolver`, `ExamSessionAccess`, `ExamSkillSelection`; `EnrollmentService` tách `ProctorAssignmentService`; `AttendanceCommandService` (694 dòng) tách `AttendanceCommandService`, `IdentityVerificationService`, `AttendanceReceiptService` + `AttendanceReceiptStore`/`AttendanceWindowPolicy`/`AttendanceAccess`/`AttendanceSnapshotFactory`. (8) Cột trạng thái chấm/công bố trên `ExamSession`: `publicationPublicId`, `publicationLockedAt` (nullable, phase 10 điền hành vi). (9) Nợ: `ProctorMonitoringQueryService` 336 dòng và `SessionService` facade 270 dòng chưa tách; test không còn cho `ExamFormProvisioningService` và `SessionClassAssignmentService` cũ vì chức năng đã gỡ/đổi mô hình (có test thay thế cho phần class: `SessionClassSourceServiceTest`).
+
 Gộp `ExamSession` + `ExamPolicy` + `ProctorAssignment` + `SessionClassAssignment` + `ExamAudienceSource` thành `ExamSession`; `ExamAudienceMember` + `Enrollment` + `SessionAttendance` thành `ExamRegistration`; xoá cơ chế form (`ExamForm`, `FormAssignment`, `ExamGenerationJob`). Đáp ứng FR-03, FR-04 và cột trạng thái chấm/công bố cho phase 10.
 
 ## Design Constraints
@@ -33,8 +35,8 @@ Gộp `ExamSession` + `ExamPolicy` + `ProctorAssignment` + `SessionClassAssignme
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after implementing this phase)
-- Testing: not started
+- Quality gate: approved (xem quality/phase-07-session-registration-quality-report.json)
+- Testing: passed (xem tests/phase-07-session-registration-test-report.json)
 
 ## Risks
 

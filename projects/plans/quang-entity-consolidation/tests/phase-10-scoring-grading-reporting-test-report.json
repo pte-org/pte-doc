@@ -1,0 +1,22 @@
+{
+  "phase": "phase-10-scoring-grading-reporting",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-25T07:00:00Z",
+  "summary": {
+    "passed": 2777,
+    "failed": 0,
+    "skipped": 75
+  },
+  "failures": [],
+  "notes": [
+    "Full app suite (clean test): 2852 tests, 0 failures, 0 errors, 75 skipped (Postgres-only); ModuleStructureTest green. 48 @Entity files; 56 tables built by Hibernate on the fresh dev DB.",
+    "New: SessionGradingServiceTest (freeze once, complete once, publication lock idempotent, tenant isolation), ExamAttemptGradingExclusionTest (exclusion keeps version/updatedAt), ScorePublicationLockServiceTest (lock order, reuse of publication id), GradingCohortServiceTest (rewritten: preview/finalize, idempotent re-finalize, stale version, mode conflict, AI_ONLY with assignments, reconcile once), ExaminerAssignmentServiceTest/RepositoryTest/DatabaseIntegrationTest (commit, roster, overview, concurrent commit stores once, 40-attempt budget), GlobalExceptionHandlerResponseStatusTest, ReportPublishServiceTest additions (score columns, session-level blocker count).",
+    "Ported to GradingAssignment/SessionGradingGateway/AttemptGradingCandidateView: examiner draft/workflow/scoring/ai-detail, score-source selection, review read, AI persistence/pipeline, completion evaluator, overview queries, work queue.",
+    "Docker gate (Postgres 17, local-schema, fresh DB): manual flow = roster -> commit -> cohort frozen MANUAL_EXAMINER -> examiner start (replay, other body 409) -> issue -> finalize blocked 409 until host resolves -> draft -> finalize (replay; again 409) -> grading COMPLETED in the same commit, EXAMINER source selected -> preflight ready -> publish (idempotent) -> student list and report 200; score write after publish 409. AI_ONLY: preview, stale 409, finalize, idempotent finalize, MANUAL after AI_ONLY 409, examiner commit rejected.",
+    "Found by the flow: ResponseStatusException surfaced as 500 (handler now keeps 4xx); finalize never selected the EXAMINER source so manual sessions could not be published; preflight readyAttemptCount went negative with a session-level blocker. All fixed with tests.",
+    "Not verified: AI_ONLY publication (local AI scores are STUB, not selectable); excluded-attempt path on Docker (seed has one student; covered by unit/repository tests); Docker flow not re-run after the last ExaminerFinalizeSubmitter extraction (unit tests cover it).",
+    "Process deviation: no failing-first (RED_READY) artifact."
+  ],
+  "report_path": "pte-doc/projects/plans/quang-entity-consolidation/tests/phase-10-scoring-grading-reporting-test-report.json"
+}

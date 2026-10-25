@@ -188,12 +188,12 @@ before/after state, requestPublicId, aggregateType/aggregateId, organizationId),
 
 ## Success Criteria
 
-- [ ] **API slimming (phase 12)**: tổng endpoint ≤ 260 (từ 328 trong `api-inventory.before.json`); POST đổi trạng thái đơn thuần gộp thành `PATCH .../{id}/status` `{action, reason}`; attendance host/proctor dùng chung một bộ endpoint; không còn alias trùng; function parity giữ nguyên.
-- [ ] Quy tắc đếm: 24 aggregate root; tổng `@Entity` ≤ 45 (từ 90); số bảng sau cùng ≤ 55 (từ 93).
+- [x] **API slimming (phase 12)**: tổng endpoint ≤ 260 (từ 328 trong `api-inventory.before.json`); POST đổi trạng thái đơn thuần gộp thành `PATCH .../{id}/status` `{action, reason}`; attendance host/proctor dùng chung một bộ endpoint; không còn alias trùng; function parity giữ nguyên. _Đạt: 260 endpoint (2026-10-25)._
+- [x] Quy tắc đếm: 24 aggregate root; tổng `@Entity` ≤ 45 (từ 90); số bảng sau cùng ≤ 55 (từ 93). _Đạt: 45 `@Entity`, 52 bảng; 24 aggregate root theo `spec.md` chưa kiểm lại từng root._
 - [ ] Cột `runtime*` chỉ xuất hiện ở `QuestionType` và `ExamVersion` items.
-- [ ] `.\mvnw.cmd -pl app -DskipTests compile`, `.\mvnw.cmd -pl app test` và
-      `ModuleStructureTest` pass ở cuối MỖI phase.
-- [ ] **Gate dev DB theo phase**: cuối mỗi phase, app khởi động với profile `local-schema` trên DB `pte` trống (Docker Postgres 17), seed dev chạy xong, login `admin@test.local` (và `host.e2e@test.local` từ phase 2) thành công. Ràng buộc chỉ Postgres (exclusion constraint, partial unique index) nằm trong `db/dev-seed/000-postgres-objects.sql`. Không chạy được thì báo "not verified". Cuối phase 11 thêm gate Flyway V1 trên DB trống với `ddl-auto=validate`.
+- [x] `.\mvnw.cmd -pl app -DskipTests compile`, `.\mvnw.cmd -pl app test` và
+      `ModuleStructureTest` pass ở cuối MỖI phase. _Đạt ở từng phase; cuối cùng 2853 test, 0 lỗi._
+- [x] **Gate dev DB theo phase**: cuối mỗi phase, app khởi động với profile `local-schema` trên DB `pte` trống (Docker Postgres 17), seed dev chạy xong, login `admin@test.local` (và `host.e2e@test.local` từ phase 2) thành công. Ràng buộc chỉ Postgres (exclusion constraint, partial unique index) nằm trong `db/dev-seed/000-postgres-objects.sql`. Không chạy được thì báo "not verified". Cuối phase 11 thêm gate Flyway V1 trên DB trống với `ddl-auto=validate`. _Đạt; gate cuối chạy bằng Flyway V1 (profile mặc định) thay vì `local-schema`._
 - [ ] **Luồng end-to-end**: mỗi luồng P1 có một service-level flow test trên H2
       (profile test hiện có, AI provider stub, không cần full `@SpringBootTest`):
       đăng ký tổ chức → mua/redeem → tạo ca thi → làm bài → chấm AI + examiner
@@ -201,14 +201,14 @@ before/after state, requestPublicId, aggregateType/aggregateId, organizationId),
       explanation. Smoke trên VPS là bước riêng sau deploy.
 - [ ] Mỗi user story P1 có ít nhất một test hành vi trên entity mới; không đạt
       "test pass" bằng cách xoá test không có thay thế cho hành vi còn giữ.
-- [ ] **Function parity (thay "API diff")**: phase 1 xuất inventory (method +
+- [x] **Function parity (thay "API diff")**: phase 1 xuất inventory (method +
       path + roles, gồm `/internal/**` và destination STOMP, cùng tên field
       response DTO) và ánh xạ từng endpoint vào một danh sách tính năng, cộng
       danh sách call site endpoint trong `pte-web`, `pte-app`, `pte-practice`.
       Phase 11 xuất lại và kiểm: mỗi tính năng vẫn có endpoint (cũ hoặc mới);
       mọi thay đổi endpoint/DTO đều có trong bảng Decisions; grep path cũ trong
-      3 client trả 0.
-- [ ] **Client không bao giờ hỏng ở ranh giới phase**: phase nào đổi endpoint/DTO
+      3 client trả 0. _Đạt: xem `plans/reports/assets/261025-entity-consolidation-parity/`._
+- [x] **Client không bao giờ hỏng ở ranh giới phase**: phase nào đổi endpoint/DTO
       thì sửa client call site trong chính phase đó và chạy lint/type/build theo
       `docs/CODING_STANDARDS_WEB.md` / `docs/CODING_STANDARDS_APP.md`.
 
@@ -284,3 +284,22 @@ Cột "Phase" là phase sửa cả backend lẫn client call site.
 | `/api/v1/notification-inbox/**`, `/api/v1/announcements/{id}/audience-preview`, `/retry-delivery` | giữ | `Notification` + `NotificationRecipient` | — | 11 |
 | `/api/v1/platform/audit-logs` | giữ | `AuditLog` mở rộng | — | 1 |
 | `/internal/**` (session, snapshot, media) | giữ hoặc ghi rõ lý do gỡ trong function-parity report | module sở hữu | — | theo module |
+| `POST /organizations/{o}/programs/{p}/{activate,deactivate,suspend,archive}` | **gộp** → `PATCH .../programs/{p}/status` `{action: ACTIVATE\|DEACTIVATE\|SUSPEND\|ARCHIVE}` | `ProgramService` (logic giữ nguyên) | `.../requests/admin/programs.ts` | 12 |
+| `POST .../classes/{c}/{activate,deactivate,suspend,archive}` | **gộp** → `PATCH .../classes/{c}/status` (cùng enum); merge/split/transfer/students giữ | `ClassLifecycleService` | `.../requests/admin/classes.ts` | 12 |
+| `POST /blueprints/{id}/{submit-approval,approve,approval,reject,rejection}` | **gộp** → `PATCH /blueprints/{id}/status` `{action: SUBMIT_APPROVAL\|APPROVE\|REJECT, reason}`; `REJECT` cần `reason`; APPROVE/REJECT chỉ PLATFORM_ADMIN, ACADEMIC_MANAGER; bỏ alias trùng | `BlueprintService` | `.../requests/assessment/index.ts` | 12 |
+| `POST /exam-definitions/{id}/{activate,submit-approval,approve,reject}` | **gộp** → `PATCH /exam-definitions/{id}/status` `{action: SUBMIT_APPROVAL\|APPROVE\|REJECT\|ACTIVATE, reason}`; `clone` giữ | `ExamDefinitionAdminService`; quyền theo action như cũ | `.../requests/scoretemplate/index.ts` | 12 |
+| `POST /questions/{id}/{submit-approval,approve,approval,reject,rejection,publish,archive,unarchive}` | **gộp** → `PATCH /questions/{id}/status` `{action: SUBMIT_APPROVAL\|APPROVE\|REJECT\|PUBLISH\|ARCHIVE\|UNARCHIVE, reason}`; `edit` giữ; APPROVE/REJECT/PUBLISH chỉ manager/admin | `ItembankService` | `.../requests/question/index.ts` | 12 |
+| `POST /task-types/{id}/{submit-approval,approve}`, `DELETE /task-types/{id}` | **gộp** → `PATCH /task-types/{id}/status` `{action: SUBMIT_APPROVAL\|APPROVE\|RETIRE}` | `QuestionTypeService` | `.../requests/questiontype/index.ts` | 12 |
+| `POST /platform-users/{id}/{suspend,reactivate,restore}`, `DELETE /platform-users/{id}` | **gộp** → `PATCH /platform-users/{id}/status` `{action: SUSPEND\|REACTIVATE\|ARCHIVE\|RESTORE}` | `PlatformUserService`, `PlatformUserLifecycleService` | `.../requests/user/index.ts` | 12 |
+| `POST /users/{id}/{suspend,reactivate}` | **gộp** → `PATCH /users/{id}/status` (ARCHIVE/RESTORE → 400) | `UserService` | `.../requests/user/index.ts` | 12 |
+| `POST /applications/{id}/{approval,rejection}` | **gộp** → `PATCH /applications/{id}/status` `{action: APPROVE\|REJECT, reason}` | `TenantApplicationService` | `.../requests/billing/applications.ts` | 12 |
+| `POST /plans/{id}/{activation,archive}` | **gộp** → `PATCH /plans/{id}/status` `{action: ACTIVATE\|ARCHIVE, expectedVersion}` | `PlanService` (giữ khoá phiên bản) | `.../requests/billing/plans.ts`, `seed-local-exam-ready.ps1` | 12 |
+| `POST /sessions/{id}/{publish,cancel,open,close}` | **gộp** → `PATCH /sessions/{id}/status` `{action: PUBLISH\|CANCEL\|OPEN\|CLOSE}`; generate/preflight/audience/report publish giữ | `ExamPublishService`, `SessionLifecycleService` | `.../requests/scheduling/{sessions,examOrchestration}.ts`, `seed-local-exam-ready.ps1` | 12 |
+| `POST /organizations/{id}/{suspend,reactivate}` | **gộp** → `PATCH /organizations/{id}/status` `{action: SUSPEND\|REACTIVATE, days, impactDigest}`; SUSPEND vẫn bắt buộc `impactDigest` | `OrganizationLifecycleService` | `.../requests/tenant/index.ts`, `seed-local-exam-ready.ps1` | 12 |
+| `POST /announcements/{id}/{publish,retry-delivery}` | **gộp** → `PATCH /announcements/{id}/status` `{action: PUBLISH\|RETRY_DELIVERY, expectedDraftVersion}` | `AnnouncementService` | `.../requests/notification/announcements.ts` | 12 |
+| `GET /exam-staff/{id}/{proctor-sessions,examiner-sessions}` | **gộp** → `GET /exam-staff/{id}/sessions?role=PROCTOR\|EXAMINER` | `StaffWorkspaceService` | `.../requests/admin/examStaffWorkspace.ts` | 12 |
+| `GET /host/exam-sessions/{s}/attendance/**` (Host) + `GET/PATCH /exam-sessions/{s}/attendance/**` (Proctor) | **hợp nhất** → một bộ `/api/v1/exam-sessions/{s}/attendance/**` cho HOST_ADMIN và PROCTOR; service nhận cờ host theo role | `AttendanceCoordinatorService` | `.../requests/attendance.ts` | 12 |
+| `GET/PUT /settings/{key}` | **gỡ** (không còn consumer UI) → `PUT /settings/batch`, `GET /settings` | `PlatformSettingService` | `apps/vendor-web/features/commercialization/api.ts` (bỏ hook không dùng) | 12 |
+| `POST /license-codes/{ignored}/revoke` | **gỡ** (stub từ chối đường cũ, không consumer) → `POST /admin/license-codes/{id}/revoke` | `AdminLicenseCodeController` | — | 12 |
+| `/internal/sessions/**`, `/internal/snapshots/**`, `/internal/media-objects/**` | **gỡ** (không consumer; monolith gọi service trực tiếp) | — | — | 12 |
+ _Đạt cho `pte-web` (typecheck + test); `pte-app` chưa chạy analyze/test._

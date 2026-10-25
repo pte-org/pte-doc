@@ -2,6 +2,8 @@
 
 ## Requirements
 
+> **Quyết định khi cook phase 6 (2026-10-25):** (1) Spec đếm `ClassStudent`/`ClassLecturer` là child `@Entity` nên giữ chúng là entity (membership có `publicId` dùng trong path unassign/transfer); phase này đổi tên và tên bảng chứ không giảm số entity: `StudentClass`→`TrainingClass` (bảng `classes`; không đặt `Class` vì trùng `java.lang.Class` và là từ khoá HQL), `ClassMembership`→`ClassStudent` (`class_students`), `LecturerAssignment`→`ClassLecturer` (`class_lecturers`); `Program` giữ. (2) `tenantId`→`organizationId` (cột `organization_id`) trên hai bảng con; `TrainingClass` thêm `organizationId` (suy ra từ program trong `setProgram`) để kiểm tra sở hữu không cần join. (3) `ClassService` (468 dòng, 14 public) tách thành `ClassService` (create/list/get/update + `findOwned`), `ClassLifecycleService`, `ClassStudentService`, `ClassReorganizationService` (merge/split). (4) Endpoint, DTO, mã lỗi, tên exception và tên controller KHÔNG đổi → client pte-web không phải sửa. (5) Seed dev `040-training.sql` (1 program, 2 lớp, 4 học viên); `scripts/seed-local-sample-class-students.ps1` được retire. (6) Không đổi: unique tên lớp trong program vẫn kiểm tra ở tầng service (không có ràng buộc DB vì có `deleted`); adapter tạm của session vẫn gọi `EnrollmentModuleService`, xoá ở phase 7.
+
 Chuyển `Program`, `StudentClass` (+ `ClassMembership`, `LecturerAssignment`) trong module `enrollment` thành `Program` và `Class` (students, lecturers là bảng con). Phase này tách khỏi ExamSession để giảm quy mô; chức năng merge/split/bulk assign, roster, dashboard giữ nguyên.
 
 ## Design Constraints
@@ -31,8 +33,8 @@ Chuyển `Program`, `StudentClass` (+ `ClassMembership`, `LecturerAssignment`) t
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after implementing this phase)
-- Testing: not started
+- Quality gate: approved (xem quality/phase-06-training-program-class-quality-report.json)
+- Testing: passed (xem tests/phase-06-training-program-class-test-report.json)
 
 ## Risks
 

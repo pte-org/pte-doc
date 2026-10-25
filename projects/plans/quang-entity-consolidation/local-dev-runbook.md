@@ -1,6 +1,6 @@
 # Local dev runbook — profile `local-schema`
 
-Giai đoạn consolidation: Hibernate dựng schema, Flyway tắt. Flyway V1 chỉ sinh một lần ở phase 11.
+Profile `local-schema`: Hibernate dựng schema, Flyway tắt (dùng khi thử nghiệm schema). Từ phase 11 mặc định (không profile) dùng Flyway với `db/migration/V1__baseline.sql` duy nhất; thay đổi schema sau đó thêm `V2+`.
 Mọi lệnh chạy từ `D:\GitHub\pte-org\pte-api`. Không dùng cho môi trường đã deploy.
 
 ## Bật profile
@@ -34,9 +34,30 @@ constraint, partial unique index) → `010-reference-data.sql` (task type, runti
 - `POST http://localhost:8091/api/v1/auth/login` với `admin@test.local` thành công; từ phase 2 thêm `host.e2e@test.local`.
 - Mật khẩu local dùng chung do người dùng cung cấp (xem memory `local-test-accounts`); seed chỉ lưu BCrypt hash.
 
+## Chạy nhóm test Postgres (bị skip trong `mvnw test` thường)
+
+42 test (`*PostgresIntegrationTest`: license, archive, enrollment, tenant application, inbox) chạy trên một
+container Postgres tạm riêng, không đụng `pte-postgres`:
+
+```bash
+docker run -d --name pte-test-pg -p 127.0.0.1:55439:5432 -e POSTGRES_HOST_AUTH_METHOD=trust \
+  -e POSTGRES_USER=codex_lifecycle_test -e POSTGRES_DB=lifecycle_test postgres:17
+docker exec pte-test-pg psql -U codex_lifecycle_test -d lifecycle_test \
+  -c "CREATE SCHEMA migration_clean; CREATE ROLE codex_inbox_test LOGIN; GRANT ALL ON DATABASE lifecycle_test TO codex_inbox_test;"
+
+cd pte-api
+INBOX_TEST_DB_URL="jdbc:postgresql://127.0.0.1:55439/lifecycle_test" ./mvnw.cmd -pl app test \
+  "-Dlifecycle.test.db.url=jdbc:postgresql://127.0.0.1:55439/lifecycle_test?currentSchema=migration_clean"
+
+docker rm -f pte-test-pg   # xoá khi xong
+```
+
+Khi đó chỉ còn 16 test spike AI (`SCORING_AI_SPIKE=true`, cần key Azure/Gemini thật) bị skip.
+
 ## Lưu ý
 
 - `db/dev-seed/*.sql` đi kèm jar nhưng chỉ chạy khi profile `local-schema` bật; hosted compose không đặt profile này.
 - Seed dùng `ON CONFLICT DO NOTHING` / `WHERE NOT EXISTS`; mỗi phase cập nhật phần của mình khi bảng đổi.
-- Flyway V1 (phase 11): dựng DB trống bằng profile này, `pg_dump --schema-only --no-owner --no-privileges`, ghép đối tượng Postgres
-  và seed, đặt vào `db/migration/V1__baseline.sql`, chuyển 126 migration cũ sang `db/legacy-migration/`.
+- Flyway V1 (đã sinh ở phase 11): `pg_dump --schema-only --no-owner --no-privileges` của DB trống do profile này dựng, bỏ tiền tố `public.`,
+  ghép dữ liệu tham chiếu/seed `db/dev-seed/010..050`, đặt vào `db/migration/V1__baseline.sql`; 128 migration cũ đã bị xoá.
+  Gate: DB trống + profile mặc định → Flyway áp dụng V1, `ddl-auto: validate` qua, đăng nhập `admin@test.local` và `host.e2e@test.local`.

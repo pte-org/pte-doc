@@ -2,6 +2,8 @@
 
 ## Requirements
 
+> **Quyết định khi cook phase 10 (2026-10-25):** (1) `GradingAssignment` gộp assignment + work (`workVersion == 0` = chưa bắt đầu; owner `updatable=false`) cùng bảng con `GradingIssue`; bỏ `ExaminerAssignmentBatch`, `GradingCohort/Member`, `ScoringSessionState`. (2) Trạng thái chấm/công bố là field của `ExamSession` (`freezeGrading/completeGrading/lockPublication`), đọc qua `SessionService` và `SessionGradingGateway` của scoring; id cohort = id ca thi. (3) **Lệch spec:** loại trừ nằm trên `ExamAttempt` (`gradingExcluded`, bulk UPDATE giữ version/updatedAt nên preview version ổn định), không phải `ExamResult.excluded`, vì `ExamResult` chỉ tạo khi công bố. Trọng số QuestionType vẫn ở `ExamDefinitionItem` (quyết định phase 5). (4) `AttemptReport` đổi tên `ExamResult`, thêm cột thật overall/listening/reading/speaking/writing ghi lúc công bố (snapshot vẫn là bản bất biến). (5) Gỡ `previews`/`confirm`; `commit` nhận bảng phân công đầy đủ, tự đóng băng cohort MANUAL_EXAMINER. Khoá: ca thi → câu trả lời → công bố. (6) Sửa theo luồng thực tế: finalize của examiner chọn nguồn EXAMINER và phát `ScoringProgressChangedEvent` nên chấm xong ngay trong commit (trước đó ca MANUAL không công bố được); `GlobalExceptionHandler` giữ status 4xx của `ResponseStatusException` (trước là 500; code chỉ là tên status, nợ chuyển sang `DomainException`); `readyAttemptCount` không còn âm khi có blocker cấp ca thi. (7) Nợ: `ExaminerDraftCommandService` 328 dòng, `ExaminerScoringService` ~617 dòng, `Instant.now()` ở 3 service, `@Setter` cấp lớp trên `ExamResult`. Gate Postgres: luồng MANUAL và AI_ONLY chạy được; công bố AI_ONLY chưa kiểm vì điểm AI local là STUB.
+
 Gộp `ExaminerAttemptAssignment`, `ExaminerGradingWork`, `ExaminerGradingIssue` thành `GradingAssignment`; bỏ `ExaminerAssignmentBatch`, `GradingCohort/Member`, `ScoringSessionState`; `AttemptReport` thành `ExamResult` (10–90 theo trọng số QuestionType); xoá `ScoreConfigFacade`. Đáp ứng FR-06 và luồng chấm → công bố → student xem kết quả.
 
 ## Design Constraints
@@ -34,8 +36,8 @@ Gộp `ExaminerAttemptAssignment`, `ExaminerGradingWork`, `ExaminerGradingIssue`
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after implementing this phase)
-- Testing: not started
+- Quality gate: approved (xem quality/phase-10-scoring-grading-reporting-quality-report.json)
+- Testing: passed (xem tests/phase-10-scoring-grading-reporting-test-report.json)
 
 ## Risks
 

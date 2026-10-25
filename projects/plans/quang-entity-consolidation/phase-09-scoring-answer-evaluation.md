@@ -2,6 +2,8 @@
 
 ## Requirements
 
+> **Quyết định khi cook phase 9 (2026-10-25):** (1) Một bảng `answer_evaluations` (SINGLE_TABLE, cột `source` là discriminator qua `@DiscriminatorFormula` trên cột map thường — check IN do Hibernate sinh làm H2 từ chối mọi insert trong ngữ cảnh Spring) với `AiEvaluation` (trạng thái dispatch AI: token, stale-retry, provider, chi tiết criteria/feedback/transcript, teacherScore, `scoringMethod` đọc từ runtime của item lúc mở bản ghi) và `ExaminerEvaluation` (draft và điểm nộp cùng một hàng: DRAFT → SUBMITTED tại chỗ, bất biến sau khi nộp). Unique (answer, source) thay cho partial unique ≤ 1 SUBMITTED; index `uq_examiner_score_receipt` trong `000-postgres-objects.sql` chuyển sang bảng mới. (2) Scoring không giữ bản sao nội dung bài làm: đọc từ attempt qua `AnswerContentReader`/`SubmittedAnswerView` (thêm section, runtime, trường chọn nguồn); `ScoringMethodResolver` bỏ, `ScoringMethods` suy ra từ runtime. (3) Nguồn điểm được chọn nằm trên `AttemptAnswer` (`selectedScoreSource*`, `selectedEvaluationPublicId`), ghi qua `AttemptService.selectScoreSource`, đọc lại qua `ScoreSelectionReader`; **không** thêm `finalScore` (không ai đọc/ghi). (4) Receipt lệnh examiner → `IdempotencyKey` scope `EXAMINER_COMMAND`, lịch sử → `AuditLog` (`EXAMINER_WORK`) qua `ExaminerWorkRecorder`; chọn nguồn → scope `SCORE_SELECTION` + `AuditLog` (`SCORE_SOURCE_SELECTION`); `AuditHistoryReader` có thêm truy vấn toàn bộ trail của aggregate. Trùng request id khác nội dung ném `ExaminerReceiptConflictException` (409) thay vì `ResponseStatusException` (đang bị map 500). (5) Hành vi đổi: lưu draft cho câu đã có điểm nộp trả 409 (trước đây nhận draft rồi finalize bỏ qua). (6) `scoreTemplatePublicId` → `examDefinitionPublicId` trong `ReportScoringAnswerView`, `ExaminerGuidelinesResponse` và client examiner; field snapshot của reporting để phase 10. (7) Nợ: `ExaminerScoringService` ~640 dòng (`submitScore` ~200) để phase 10; `ResponseStatusException` trong các service examiner vẫn map 500 ở `GlobalExceptionHandler` (có sẵn từ trước). Gate Postgres lần đầu bắt được lỗi index trỏ bảng cũ trong dev-seed; `seed-local-exam-ready.ps1` vẫn 403 ở bước preflight lần chạy đầu (token học viên cũ), đăng nhập lại thì qua.
+
 Gộp `ScoringAnswer`, `ScoringAnswerAiDetail`, `ExaminerAnswerDraft`, `ExaminerAnswerScore` thành `AnswerEvaluation`; điểm nguồn được chọn nằm trên `AttemptAnswer`; thay `ExaminerGradingCommand`/`Event`/`ScoreSourceAudit` bằng `IdempotencyKey` + `AuditLog`. Đáp ứng story P1 "≤ 1 AI và ≤ 1 EXAMINER SUBMITTED; chọn nguồn chỉ cập nhật AttemptAnswer" và FR-08.
 
 ## Design Constraints
@@ -33,8 +35,8 @@ Gộp `ScoringAnswer`, `ScoringAnswerAiDetail`, `ExaminerAnswerDraft`, `Examiner
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after implementing this phase)
-- Testing: not started
+- Quality gate: approved (xem quality/phase-09-scoring-answer-evaluation-quality-report.json)
+- Testing: passed (xem tests/phase-09-scoring-answer-evaluation-test-report.json)
 
 ## Risks
 

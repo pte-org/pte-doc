@@ -23,13 +23,13 @@ Branch: `quang/feat/maintain-v2` (pte-api; client sửa trên nhánh hiện tạ
 - [x] Phase 3: Thương mại — [phase-03-commerce.md](phase-03-commerce.md) — ServicePlan, Subscription, LicenseCode, Order.payments, `Organization.quotaGrants`, seed subscription ACTIVE [quality: approved; tests: passed 2798; completed 2026-10-24]
 - [x] Phase 4: Nội dung A — [phase-04-content-question-type-question-rubric.md](phase-04-content-question-type-question-rubric.md) — QuestionType (+runtime từ registry), Question (+options embeddable) (Rubric đã bị gỡ ở dev; `ScoreConfigFacade` dời sang phase 5) [quality: approved; tests: passed 2802; completed 2026-10-24]
 - [x] Phase 5: Nội dung B — [phase-05-content-exam-definition-version.md](phase-05-content-exam-definition-version.md) — ExamDefinition (=ScoreTemplate), ExamVersion (=ExamSnapshot), items embeddable, gỡ module scoretemplate (ExamBlueprint giữ; builder đồng bộ dời phase 7–8)s
-- [ ] Phase 6: Đào tạo (6a) — [phase-06-training-program-class.md](phase-06-training-program-class.md) — Program, Class (enrollment module)
-- [ ] Phase 7: Ca thi & ghi danh (6b) — [phase-07-session-registration.md](phase-07-session-registration.md) — ExamSession, ExamRegistration, điểm danh, xoá cơ chế form
-- [ ] Phase 8: Làm bài & sự cố — [phase-08-attempt-incident.md](phase-08-attempt-incident.md) — ExamAttempt trỏ ExamVersion, ExamIncident
-- [ ] Phase 9: Chấm điểm A — [phase-09-scoring-answer-evaluation.md](phase-09-scoring-answer-evaluation.md) — AnswerEvaluation, chọn nguồn điểm, AI dispatch, receipt/audit
-- [ ] Phase 10: Chấm điểm B & báo cáo — [phase-10-scoring-grading-reporting.md](phase-10-scoring-grading-reporting.md) — GradingAssignment, ExamResult, xoá facade/cohort
-- [ ] Phase 11: Practice, Notification, Support, hoàn tất — [phase-11-practice-notification-support-finalize.md](phase-11-practice-notification-support-finalize.md) — PracticeSession/Response, Notification, SupportTicket, xoá legacy, function parity
-- [ ] Phase 12: API slimming — [phase-12-api-slimming.md](phase-12-api-slimming.md) — gộp POST đổi trạng thái thành `PATCH .../status`, hợp nhất attendance host/proctor, gỡ `/internal` và alias; 328 → ≤ 260 endpoint
+- [x] Phase 6: Đào tạo (6a) — [phase-06-training-program-class.md](phase-06-training-program-class.md) — Program, TrainingClass, ClassStudent, ClassLecturer (đổi tên + tách ClassService; API không đổi) [quality: approved; tests: passed 2807; completed 2026-10-25]
+- [x] Phase 7: Ca thi & ghi danh (6b) — [phase-07-session-registration.md](phase-07-session-registration.md) — ExamSession, ExamSessionProctor, ExamSessionAudienceSource, ExamRegistration; xoá cơ chế form; receipt qua IdempotencyKey, lịch sử qua AuditLog [quality: approved; tests: passed 2814; completed 2026-10-25]
+- [x] Phase 8: Làm bài & sự cố — [phase-08-attempt-incident.md](phase-08-attempt-incident.md) — ExamAttempt trỏ ExamVersion, ExamIncident
+- [x] Phase 9: Chấm điểm A — [phase-09-scoring-answer-evaluation.md](phase-09-scoring-answer-evaluation.md) — AnswerEvaluation, chọn nguồn điểm, AI dispatch, receipt/audit
+- [x] Phase 10: Chấm điểm B & báo cáo — [phase-10-scoring-grading-reporting.md](phase-10-scoring-grading-reporting.md) — GradingAssignment, ExamResult, xoá facade/cohort [quality: approved; tests: passed 2852; completed 2026-10-25]
+- [x] Phase 11: Practice, Notification, Support, hoàn tất — [phase-11-practice-notification-support-finalize.md](phase-11-practice-notification-support-finalize.md) — PracticeSession/Response, Notification, SupportTicket, xoá legacy, function parity [quality: approved; tests: passed 2820; completed 2026-10-25]
+- [x] Phase 12: API slimming — [phase-12-api-slimming.md](phase-12-api-slimming.md) — gộp POST đổi trạng thái thành `PATCH .../status`, hợp nhất attendance host/proctor, gỡ `/internal` và alias; 328 → 260 endpoint [quality: approved; tests: passed 2853; completed 2026-10-25]
 
 
 ## Research Summary

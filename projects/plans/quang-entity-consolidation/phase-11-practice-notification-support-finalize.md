@@ -2,6 +2,8 @@
 
 ## Requirements
 
+> **Quyết định khi cook phase 11 (2026-10-25):** (1) Practice: `PracticeSessionItem` đổi tên `PracticeResponse` (bảng `practice_responses`); bỏ `PracticeSessionOperation` và `PracticeSessionAttemptLink` (link không có consumer); idempotency đi qua `IdempotencyKeyService` scope `PRACTICE_SESSION_OP`, key = `sessionId:OP:sha256(clientKey)` (hash để không vượt cột 128). Hạn lưu key 7 ngày kể từ lúc gọi thay vì sống cùng session. (2) Notification: gộp delivery và inbox item thành `NotificationRecipient` (trạng thái giao + `sequence_no/delivered_at/read_at`, null đến khi giao xong), `InboxContent` đổi `Notification`, `InboxRecipientStream` đổi `NotificationRecipientStream` (giữ counter theo người nhận, khoá `FOR UPDATE`); SQL của 3 store viết lại; thêm 3 index cho hàng đợi giao. **Lệch spec:** `Announcement` (bản nháp có version) và `NotificationLog` (email) giữ thành entity riêng vì vòng đời khác; vẫn đạt ngưỡng. (3) Bảng `notification_inbox_snapshots` không có entity nên Hibernate không dựng; tạo trong `000-postgres-objects.sql` và có trong V1. (4) Flyway: `V1__baseline.sql` = `pg_dump --schema-only` của DB mới do Hibernate dựng (bỏ `public.`) + dữ liệu tham chiếu/seed demo (010–050, chỉ hash mật khẩu); 128 migration cũ bị xoá; 9 test đọc nội dung migration cũ bị xoá, `ExamDefinitionSeedMigrationTest` đọc V1, 3 test Postgres của inbox nạp V1 (chưa chạy được: máy chủ không đăng nhập được Postgres Docker). **DB đã migrate bằng lịch sử cũ không nhận V1: phải drop/recreate trước lần deploy đầu.** (5) Kết quả: 45 `@Entity`, 52 bảng; xoá `seed-plan-b.sh` (lỗi thời), README và AGENTS.md cập nhật.
+
 Chuyển `PracticeSession`/`PracticeResponse`, `Notification` (+`NotificationRecipient`, gộp `NotificationLog` + 5 entity Inbox), `SupportTicket` (+notes); rồi hoàn tất: xoá `db/legacy-migration`, chốt `V1` + seed demo, function parity, client grep 0. Đáp ứng story P1 practice và FR-08.
 
 ## Design Constraints
@@ -33,8 +35,8 @@ Chuyển `PracticeSession`/`PracticeResponse`, `Notification` (+`NotificationRec
 
 ## Quality and Testing State
 
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after implementing this phase)
-- Testing: not started
+- Quality gate: approved (xem quality/phase-11-practice-notification-support-finalize-quality-report.json)
+- Testing: passed (xem tests/phase-11-practice-notification-support-finalize-test-report.json)
 
 ## Risks
 
