@@ -1,6 +1,6 @@
 # Phase 5: Frontend — hộp chọn chế độ, luồng không tính giờ, trình ghi âm + sóng âm, ProgressRing
 
-Status: Not started
+Status: Completed (fast mode, uncommitted)
 User stories: US-1, US-2, US-5, US-7, US-9 (vòng ở Home, Progress, vòng câu x/y)
 Tiêu chí §7: 1, 3, 5, 6, 7
 

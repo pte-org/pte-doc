@@ -1,6 +1,6 @@
 # Phase 6: Frontend — bộ điều phối nhịp tính giờ
 
-Status: Not started
+Status: Completed (fast mode, uncommitted)
 User stories: US-3 (Speaking đúng nhịp thi), US-6 (đồng hồ theo câu cho Writing/Reading/Listening),
 US-9 (vòng đếm ngược giai đoạn)
 Tiêu chí §7: 4, 3 (UNTIMED không bị ảnh hưởng)

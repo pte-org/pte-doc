@@ -58,13 +58,13 @@ và một state machine thời gian thực phía client.
 
 ## Phases
 
-- [ ] Phase 1: Backend — V133, chế độ phiên, bỏ deadline chung — [phase-01-backend-session-mode-and-migration.md](./phase-01-backend-session-mode-and-migration.md) [quality: not evaluated; testing: not started]
-- [ ] Phase 2: Backend — chọn câu, đóng băng theo lô, ghim timing — [phase-02-backend-question-selection-and-timing.md](./phase-02-backend-question-selection-and-timing.md) [quality: not evaluated; testing: not started]
-- [ ] Phase 3: Backend — link phát bản ghi của chính mình và lưu draft — [phase-03-backend-recording-playback-and-draft.md](./phase-03-backend-recording-playback-and-draft.md) [quality: not evaluated; testing: not started]
-- [ ] Phase 4: Frontend — tách `PracticeSessionView`, common components (Modal, Stepper, ProgressRing, CountdownTimer), `AppIcon` → MDI (`@mdi/js`), contract — [phase-04-frontend-foundation.md](./phase-04-frontend-foundation.md) [quality: not evaluated; testing: not started]
-- [ ] Phase 5: Frontend — hộp chọn chế độ, luồng không tính giờ, trình ghi âm + sóng âm, ProgressRing ở Home/Progress/phiên — [phase-05-frontend-mode-chooser-and-recorder.md](./phase-05-frontend-mode-chooser-and-recorder.md) [quality: not evaluated; testing: not started]
-- [ ] Phase 6: Frontend — bộ điều phối nhịp tính giờ — [phase-06-frontend-timed-phase-engine.md](./phase-06-frontend-timed-phase-engine.md) [quality: not evaluated; testing: not started]
-- [ ] Phase 7: Kiểm chứng và handoff — [phase-07-verification-and-handoff.md](./phase-07-verification-and-handoff.md) [quality: not evaluated; testing: not started]
+- [x] Phase 1: Backend — V133, chế độ phiên, bỏ deadline chung — [phase-01-backend-session-mode-and-migration.md](./phase-01-backend-session-mode-and-migration.md) [quality: skipped_by_user; decision: user_confirmed_skip] [testing: not_started — unit tests declined (--fast)]
+- [x] Phase 2: Backend — chọn câu, đóng băng theo lô, ghim timing — [phase-02-backend-question-selection-and-timing.md](./phase-02-backend-question-selection-and-timing.md) [quality: skipped_by_user; decision: user_confirmed_skip] [testing: not_started — unit tests declined (--fast)]
+- [x] Phase 3: Backend — link phát bản ghi của chính mình và lưu draft — [phase-03-backend-recording-playback-and-draft.md](./phase-03-backend-recording-playback-and-draft.md) [quality: skipped_by_user; decision: user_confirmed_skip] [testing: not_started — unit tests declined (--fast)]
+- [x] Phase 4: Frontend — tách `PracticeSessionView`, common components (Modal, Stepper, ProgressRing, CountdownTimer), `AppIcon` → MDI (`@mdi/js`), contract — [phase-04-frontend-foundation.md](./phase-04-frontend-foundation.md) [quality: skipped_by_user; decision: user_confirmed_skip] [testing: not_started — unit tests declined (--fast)]
+- [x] Phase 5: Frontend — hộp chọn chế độ, luồng không tính giờ, trình ghi âm + sóng âm, ProgressRing ở Home/Progress/phiên — [phase-05-frontend-mode-chooser-and-recorder.md](./phase-05-frontend-mode-chooser-and-recorder.md) [quality: skipped_by_user; decision: user_confirmed_skip] [testing: not_started — unit tests declined (--fast)]
+- [x] Phase 6: Frontend — bộ điều phối nhịp tính giờ — [phase-06-frontend-timed-phase-engine.md](./phase-06-frontend-timed-phase-engine.md) [quality: skipped_by_user; decision: user_confirmed_skip] [testing: not_started — unit tests declined (--fast)]
+- [x] Phase 7: Kiểm chứng và handoff — [phase-07-verification-and-handoff.md](./phase-07-verification-and-handoff.md) [quality: skipped_by_user; decision: user_confirmed_skip] — báo cáo: ../reports/261024-hung-practice-timed-modes-report.md (một số TC thủ công chưa chạy, xem §3)
 
 ## Phase → user story → tiêu chí nghiệm thu (spec §7)
 
