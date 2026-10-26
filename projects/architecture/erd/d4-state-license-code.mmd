@@ -1,0 +1,12 @@
+---
+title: D4 LicenseCode
+---
+%% Nguồn: billing/domain/LicenseCode.java, LicenseCodeExpirationService
+stateDiagram-v2
+  [*] --> ISSUED : admin phát hành
+  ISSUED --> REDEEMED : tổ chức đổi mã, tạo Subscription (linkSubscription)
+  ISSUED --> EXPIRED : quá code_expires_at
+  ISSUED --> REVOKED : thu hồi (revoke_reason)
+  REDEEMED --> REVOKED : thu hồi (revoke_reason)
+  EXPIRED --> [*]
+  REVOKED --> [*]

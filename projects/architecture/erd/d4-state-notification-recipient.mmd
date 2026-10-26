@@ -1,0 +1,16 @@
+---
+title: D4 NotificationRecipient (hàng đợi giao inbox)
+---
+%% Nguồn: notification/internal/repository/InboxDeliveryStore.java, InboxDeliveryService, InboxDeliveryWorker
+stateDiagram-v2
+  [*] --> PENDING : fan-out nội dung tới người nhận
+  PENDING --> PROCESSING : worker claim (attempts + 1, lease_until)
+  PROCESSING --> PROCESSING : lease hết hạn, worker khác claim lại
+  PROCESSING --> DELIVERED : giao thành công
+  PROCESSING --> SUPPRESSED : không cần giao nữa
+  PROCESSING --> PENDING : lỗi tạm thời, hẹn next_attempt_at
+  PROCESSING --> FAILED : lỗi vĩnh viễn / hết lượt thử
+  PENDING --> SUPPRESSED : nhắc SESSION_CLOSING_SOON không còn hợp lệ
+  FAILED --> PENDING : admin gửi lại (attempts = 0)
+  DELIVERED --> [*]
+  SUPPRESSED --> [*]

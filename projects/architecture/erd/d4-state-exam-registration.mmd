@@ -1,0 +1,34 @@
+---
+title: D4 ExamRegistration (ba trục trạng thái)
+---
+%% Nguồn: AudienceResolver, ExamPublishService, EnrollmentService,
+%% AttendanceCommandService, IdentityVerificationService
+%% Enum còn giá trị CANDIDATE nhưng không đoạn code nào gán, nên không vẽ.
+stateDiagram-v2
+  state Registration {
+    state "Ghi danh (status)" as enroll {
+      [*] --> ELIGIBLE : resolve audience (mặc định)
+      ELIGIBLE --> EXCLUDED : reuse policy / trùng lịch / vượt capacity
+      EXCLUDED --> ELIGIBLE : resolve lại
+      ELIGIBLE --> ENROLLED : publish, ghi danh thành công
+      ELIGIBLE --> EXCLUDED : publish, ghi danh thất bại
+      [*] --> ENROLLED : host ghi danh trực tiếp
+    }
+    --
+    state "Điểm danh (attendance_status)" as attend {
+      [*] --> UNMARKED
+      UNMARKED --> PRESENT : giám thị
+      UNMARKED --> ABSENT : giám thị
+      UNMARKED --> LATE : giám thị
+      PRESENT --> LATE : sửa
+      LATE --> PRESENT : sửa
+      PRESENT --> ABSENT : sửa
+      ABSENT --> PRESENT : sửa
+    }
+    --
+    state "Danh tính (identity_status)" as ident {
+      [*] --> UNVERIFIED
+      UNVERIFIED --> VERIFIED : giám thị xác minh
+      UNVERIFIED --> FAILED : không khớp
+    }
+  }

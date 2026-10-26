@@ -1,0 +1,18 @@
+---
+title: D4 ExamIncident (status kiểu chuỗi, không có enum hay CHECK)
+---
+%% Nguồn: proctoring/internal/service/ExamIncidentCommandService.java
+%% Host và platform admin có thể đặt mọi giá trị hợp lệ khi chưa CLOSED. Chỉ vẽ cạnh có nghĩa nghiệp vụ.
+%% Giám thị chỉ đặt NEW hoặc IN_PROGRESS, không đưa IN_PROGRESS về NEW.
+stateDiagram-v2
+  [*] --> NEW : báo cáo sự cố (origin REPORTED)
+  NEW --> IN_PROGRESS : giám thị / host nhận xử lý
+  NEW --> ESCALATED : host chuyển lên platform admin
+  IN_PROGRESS --> ESCALATED : host chuyển lên platform admin
+  NEW --> RESOLVED : host / admin
+  IN_PROGRESS --> RESOLVED : host / admin
+  ESCALATED --> RESOLVED : host / admin
+  RESOLVED --> IN_PROGRESS : host / admin mở lại
+  RESOLVED --> CLOSED : host / admin
+  ESCALATED --> CLOSED : host / admin
+  CLOSED --> [*]

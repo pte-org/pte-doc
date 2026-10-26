@@ -1,0 +1,11 @@
+---
+title: D4 SupportTicket
+---
+%% Nguồn: support/domain/SupportTicket.java
+stateDiagram-v2
+  [*] --> OPEN : host gửi phiếu
+  OPEN --> IN_PROGRESS : admin nhận xử lý
+  IN_PROGRESS --> RESOLVED : admin giải quyết
+  OPEN --> CLOSED : host rút phiếu
+  RESOLVED --> [*]
+  CLOSED --> [*]

@@ -1,0 +1,15 @@
+---
+title: D4 ExamAttempt
+---
+%% Nguồn: attempt/domain/ExamAttempt.java, AttemptStartFlow, AttemptLifecycleService
+%% grading_excluded là cờ, không phải trạng thái.
+stateDiagram-v2
+  [*] --> CREATED : học viên vào ca (preflight)
+  CREATED --> IN_PROGRESS : bắt đầu làm bài (begin)
+  IN_PROGRESS --> IN_PROGRESS : trả lời / chuyển section / resume
+  IN_PROGRESS --> SUBMITTED : học viên nộp
+  IN_PROGRESS --> SUBMITTED : hết giờ / giám thị buộc nộp
+  SUBMITTED --> [*]
+  note right of SUBMITTED
+    AttemptAnswer.status: SUBMITTED → SCORED
+  end note

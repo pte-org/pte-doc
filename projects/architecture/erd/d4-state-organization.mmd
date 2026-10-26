@@ -1,0 +1,12 @@
+---
+title: D4 Organization
+---
+%% Nguồn: tenancy/domain/Organization.java, TenantSuspensionExpirationService
+stateDiagram-v2
+  [*] --> PENDING : nộp đơn đăng ký tổ chức
+  PENDING --> ACTIVE : admin duyệt
+  PENDING --> REJECTED : admin từ chối (reject_reason)
+  ACTIVE --> SUSPENDED : đình chỉ tới suspended_until
+  SUSPENDED --> SUSPENDED : gia hạn đình chỉ
+  SUSPENDED --> ACTIVE : kích hoạt lại / hết hạn đình chỉ
+  REJECTED --> [*]

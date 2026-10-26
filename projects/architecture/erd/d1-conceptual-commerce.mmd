@@ -1,0 +1,28 @@
+---
+title: D1 Conceptual ERD - Thương mại, luyện tập, thông báo, hỗ trợ
+---
+erDiagram
+  SERVICE_PLAN ||--o{ ORDER : "được đặt mua"
+  ORGANIZATION ||--o{ ORDER : "đặt"
+  ORDER ||--o{ ORDER_PAYMENT : "nhận webhook"
+  SERVICE_PLAN ||--o{ SUBSCRIPTION : "cấp"
+  ORGANIZATION ||--o{ SUBSCRIPTION : "sở hữu"
+  ORDER |o--o| SUBSCRIPTION : "kích hoạt (PAYMENT)"
+  SERVICE_PLAN ||--o{ LICENSE_CODE : "phát hành"
+  LICENSE_CODE |o--o| SUBSCRIPTION : "kích hoạt (LICENSE_CODE)"
+  SUBSCRIPTION ||--o{ EXAM_SESSION : "cấp quyền mở ca"
+
+  USER ||--o{ PRACTICE_SESSION : "luyện tập"
+  PRACTICE_SESSION ||--o{ PRACTICE_RESPONSE : "gồm"
+  QUESTION ||--o{ PRACTICE_RESPONSE : "chụp lại (snapshot)"
+
+  NOTIFICATION ||--o{ NOTIFICATION_RECIPIENT : "giao tới"
+  USER ||--o{ NOTIFICATION_RECIPIENT : "nhận"
+  ANNOUNCEMENT |o--o| NOTIFICATION : "phát hành thành"
+
+  ORGANIZATION ||--o{ SUPPORT_TICKET : "gửi"
+  USER ||--o{ SUPPORT_TICKET : "người gửi"
+  SUPPORT_TICKET ||--o{ SUPPORT_TICKET_NOTE : "có ghi chú"
+  SUPPORT_TICKET }o--o| EXAM_SESSION : "về ca thi"
+  SUPPORT_TICKET }o--o| EXAM_ATTEMPT : "về lượt làm bài"
+  SUPPORT_TICKET }o--o| QUESTION : "về câu hỏi"

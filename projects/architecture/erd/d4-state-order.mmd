@@ -1,0 +1,13 @@
+---
+title: D4 Order
+---
+%% Nguồn: billing/domain/Order.java, OrderExpirationService
+%% Mọi cạnh chỉ đi ra từ PENDING. Gọi lại ở trạng thái cuối không có tác dụng (idempotent).
+stateDiagram-v2
+  [*] --> PENDING : tạo link PayOS
+  PENDING --> PAID : webhook thanh toán (OrderPayment)
+  PENDING --> CANCELLED : hủy
+  PENDING --> EXPIRED : quá hạn (OrderExpirationService)
+  PAID --> [*]
+  CANCELLED --> [*]
+  EXPIRED --> [*]

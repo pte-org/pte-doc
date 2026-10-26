@@ -1,0 +1,10 @@
+---
+title: D4 Subscription
+---
+%% Nguồn: billing/domain/Subscription.java, SubscriptionExpirationService, SessionRevocationService
+stateDiagram-v2
+  [*] --> ACTIVE : kích hoạt bằng PAYMENT hoặc LICENSE_CODE
+  ACTIVE --> EXPIRED : quá expires_at (SubscriptionExpirationService)
+  ACTIVE --> CANCELLED : thu hồi, hủy các ca SCHEDULED liên quan
+  EXPIRED --> [*]
+  CANCELLED --> [*]

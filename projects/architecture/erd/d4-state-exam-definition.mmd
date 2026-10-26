@@ -1,0 +1,16 @@
+---
+title: D4 ExamDefinition
+---
+%% Nguồn: assessment/internal/service/definition/ExamDefinitionApprovalWorkflow.java
+stateDiagram-v2
+  [*] --> DRAFT : tạo / sao chép phiên bản mới
+  DRAFT --> PENDING_APPROVAL : gửi duyệt
+  PENDING_APPROVAL --> DRAFT : admin duyệt (đã kiểm hợp lệ, chờ kích hoạt)
+  PENDING_APPROVAL --> DRAFT : admin từ chối (rejection_reason)
+  DRAFT --> ACTIVE : publish / kích hoạt
+  ACTIVE --> RETIRED : phiên bản khác cùng code được kích hoạt
+  RETIRED --> [*]
+  note left of DRAFT
+    Duyệt và từ chối cùng về DRAFT.
+    Chỉ phân biệt bằng rejection_reason và audit log.
+  end note

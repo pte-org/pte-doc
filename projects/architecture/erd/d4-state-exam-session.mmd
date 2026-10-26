@@ -1,0 +1,26 @@
+---
+title: D4 ExamSession (status + grading_status)
+---
+%% Nguồn: session/domain/ExamSession.java, ExamPublishService, SessionStateService,
+%% SessionAutoOpenWorker, SessionAutoCloseWorker, SessionRevocationService
+stateDiagram-v2
+  [*] --> DRAFT : host tạo nháp (ExamDraftService)
+  DRAFT --> READY : prepare đề + đối tượng
+  READY --> READY : prepare lại
+  READY --> SCHEDULED : publish, ghi danh audience
+  SCHEDULED --> OPEN : tới opens_at (SessionAutoOpenWorker) / host mở
+  OPEN --> CLOSED : tới closes_at (SessionAutoCloseWorker) / host đóng
+  READY --> CANCELLED : host hủy
+  SCHEDULED --> CANCELLED : host hủy / thuê bao bị thu hồi
+  CANCELLED --> [*]
+
+  state CLOSED {
+    [*] --> UNFROZEN
+    UNFROZEN --> FROZEN : host chốt cách chấm (freezeGrading, một lần)
+    FROZEN --> COMPLETED : mọi bài đã chấm (completeGrading, báo một lần)
+    COMPLETED --> [*]
+  }
+  note right of CLOSED
+    Trục phụ grading_status.
+    UNFROZEN = cột null, không phải giá trị enum.
+  end note

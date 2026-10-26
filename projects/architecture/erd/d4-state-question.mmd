@@ -1,0 +1,16 @@
+---
+title: D4 Question
+---
+%% Nguồn: QuestionApprovalService, QuestionLifecycleService, QuestionLifecyclePolicy
+stateDiagram-v2
+  [*] --> DRAFT : tạo câu / tạo bản sửa đổi
+  DRAFT --> PENDING_APPROVAL : tác giả gửi duyệt
+  PENDING_APPROVAL --> APPROVED : academic duyệt
+  PENDING_APPROVAL --> DRAFT : từ chối (rejection_reason)
+  DRAFT --> APPROVED : academic publish trực tiếp
+  APPROVED --> ARCHIVED : lưu trữ / bị bản sửa đổi mới thay thế
+  DRAFT --> ARCHIVED : lưu trữ (chỉ khi ever_published)
+  ARCHIVED --> DRAFT : unarchive (trừ bản đã bị thay thế)
+  note right of APPROVED
+    is_current đánh dấu bản hiện hành trong revision_group_public_id
+  end note
