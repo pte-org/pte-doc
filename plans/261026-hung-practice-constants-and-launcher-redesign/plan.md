@@ -32,9 +32,16 @@
   - Chuẩn hóa chuỗi hướng dẫn cấp quyền Micro Chrome vào từ điển i18n (`deviceCheck.micStep1`, `deviceCheck.micStep2`).
   - Commit: `42eca04`.
 
-- [x] **Phase 4: Kiểm chứng & Đẩy nhánh (Verification & Delivery)**
+- [x] **Phase 4: Sửa lỗi hiển thị trạng thái khi kiểm tra Micro thất bại (Device Check Red X)**
+  - Thêm trạng thái `failed` vào `DeviceCheckStatus` ("passed" | "failed" | "not-checked").
+  - Khi micro bị chặn quyền (permission denied), ghi âm lỗi hoặc im lặng (silent): lập tức gọi `markFailed("mic")`.
+  - Proactive sync: Tự động lắng nghe `navigator.permissions.query({ name: "microphone" })` để đánh dấu `failed` ngay khi mở trang nếu Chrome đang chặn micro.
+  - Hiển thị trên thẻ kỹ năng (Speaking tile): `✗ Failed` (en) / `✗ Không đạt` (vi) với màu đỏ `color: var(--red)` và class `.device-status-failed`, loại bỏ hoàn toàn việc hiển thị nhầm tích xanh `✓ Checked`.
+  - Commit: `b443955`.
+
+- [x] **Phase 5: Kiểm chứng & Đẩy nhánh (Verification & Delivery)**
   - Chạy `pnpm typecheck` kiểm tra TypeScript (`0 errors`).
-  - Chạy `pnpm test:unit` chạy toàn bộ test suite (`49/49 test files passed`, `240/240 tests passed`).
+  - Chạy `pnpm test:unit` chạy toàn bộ test suite (`49/49 test files passed`, `241/241 tests passed`).
   - Push toàn bộ commit lên remote branch `hung/feat/practice-revamp`.
 
 ---
