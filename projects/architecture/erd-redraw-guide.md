@@ -4,6 +4,9 @@
 - Nguồn sự thật: `pte-api/app/src/main/resources/db/migration/V1__baseline.sql` và các lớp `@Entity` trong `pte-api/app/src/main/java/com/pte/**/domain/`
 - Phạm vi: modular monolith `pte-api/app`, sau khi gộp entity (45 entity, 52 bảng)
 
+
+> **Phạm vi sau V6:** đã bỏ phân công lecturer cho lớp; role `EXAMINER` và phân công chấm qua `GradingAssignment` vẫn giữ nguyên. Migration `V6__drop_class_lecturer_assignments.sql` chỉ xóa bảng `class_lecturers`, không xóa tài khoản. Các số đếm, FK và file D2/D3 sinh từ V1 bên dưới vẫn là snapshot baseline, có chứa bảng cũ. Để xuất physical ERD hiện hành, áp dụng toàn bộ migration V1–V6 trên database kiểm tra rồi xuất schema.
+
 ## 1. Vì sao phải vẽ lại
 
 Các ERD hiện có đều vẽ trước đợt gộp entity, khi hệ thống còn khoảng 90 entity:
@@ -149,7 +152,7 @@ Gộp entity kỹ thuật lại thành khái niệm nghiệp vụ. Không đưa 
 | Thành viên tổ chức (có vai trò) | `OrganizationMember` + `organization_member_roles` |
 | Chương trình đào tạo | `Program` |
 | Lớp học | `TrainingClass` (`classes`) |
-| Học viên trong lớp / Giảng viên lớp | `ClassStudent`, `ClassLecturer` |
+| Học viên trong lớp | `ClassStudent` |
 | Dạng câu hỏi | `QuestionType` |
 | Câu hỏi (có lựa chọn) | `Question` + `question_options` |
 | Khung đề (blueprint) | `ExamBlueprint` + `blueprint_items` |
@@ -181,7 +184,7 @@ Gộp entity kỹ thuật lại thành khái niệm nghiệp vụ. Không đưa 
 | Tổ chức có Thành viên | 1 – N | Một User có thể thuộc nhiều tổ chức qua `OrganizationMember` (N – N) |
 | Tổ chức mở Chương trình | 1 – N | |
 | Chương trình gồm Lớp | 1 – N | |
-| Lớp có Học viên / Giảng viên | N – N | qua `ClassStudent` / `ClassLecturer` |
+| Lớp có Học viên | N – N | qua `ClassStudent` |
 | Dạng câu hỏi phân loại Câu hỏi | 1 – N | qua `task_type_key` |
 | Câu hỏi có bản sửa đổi | 1 – N (tự tham chiếu) | `revision_group_public_id`, `supersedes_public_id` |
 | Khung đề chọn Câu hỏi | N – N | qua `blueprint_items` |
@@ -214,7 +217,7 @@ erDiagram
   USER ||--o{ ORGANIZATION_MEMBER : joins
   ORGANIZATION ||--o{ PROGRAM : runs
   PROGRAM ||--o{ TRAINING_CLASS : contains
-  TRAINING_CLASS }o--o{ USER : "students / lecturers"
+  TRAINING_CLASS }o--o{ USER : "students"
   QUESTION_TYPE ||--o{ QUESTION : classifies
   EXAM_DEFINITION ||--o{ EXAM_VERSION : generates
   EXAM_VERSION }o--o{ QUESTION : snapshots
