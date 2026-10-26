@@ -1,0 +1,669 @@
+[
+  {
+    "id": "TEST-001",
+    "test": "com.pte.attempt.internal.service.AttemptLifecycleServicePlayAudioTest.playAudio_audioUrlExpired_throws",
+    "kind": "failure",
+    "runs": {
+      "unit": {
+        "message": "\nExpecting code to raise a throwable.",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting code to raise a throwable.\n\tat com.pte.attempt.internal.service.AttemptLifecycleServicePlayAudioTest.playAudio_audioUrlExpired_throws(AttemptLifecycleServicePlayAudioTest.java:185)\n"
+      },
+      "postgres": {
+        "message": "\nExpecting code to raise a throwable.",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting code to raise a throwable.\n\tat com.pte.attempt.internal.service.AttemptLifecycleServicePlayAudioTest.playAudio_audioUrlExpired_throws(AttemptLifecycleServicePlayAudioTest.java:185)\n"
+      }
+    },
+    "risk": "R3",
+    "test_file": "app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServicePlayAudioTest.java",
+    "test_line": 180,
+    "production_file": "app/src/main/java/com/pte/attempt/internal/service/AttemptAudioPlayback.java",
+    "production_line": 78,
+    "suggestion": "Tạo expiresAt từ clock.instant().minusSeconds(1) để URL thực sự hết hạn theo service."
+  },
+  {
+    "id": "TEST-002",
+    "test": "com.pte.attempt.internal.service.HeartbeatServiceTest.recordHeartbeat_stampsLastSeenAt",
+    "kind": "failure",
+    "runs": {
+      "unit": {
+        "message": "\nExpecting actual:\n  2026-10-25T17:43:02.989328200Z\nto be between:\n  [2026-10-25T17:43:08.007040800Z, 2026-10-25T17:43:08.007040800Z]\n",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual:\n  2026-10-25T17:43:02.989328200Z\nto be between:\n  [2026-10-25T17:43:08.007040800Z, 2026-10-25T17:43:08.007040800Z]\n\n\tat com.pte.attempt.internal.service.HeartbeatServiceTest.recordHeartbeat_stampsLastSeenAt(HeartbeatServiceTest.java:46)\n"
+      },
+      "postgres": {
+        "message": "\nExpecting actual:\n  2026-10-25T17:46:08.199761300Z\nto be between:\n  [2026-10-25T17:46:18.376087300Z, 2026-10-25T17:46:18.377859700Z]\n",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual:\n  2026-10-25T17:46:08.199761300Z\nto be between:\n  [2026-10-25T17:46:18.376087300Z, 2026-10-25T17:46:18.377859700Z]\n\n\tat com.pte.attempt.internal.service.HeartbeatServiceTest.recordHeartbeat_stampsLastSeenAt(HeartbeatServiceTest.java:46)\n"
+      }
+    },
+    "risk": "R3",
+    "test_file": "app/src/test/java/com/pte/attempt/internal/service/HeartbeatServiceTest.java",
+    "test_line": 39,
+    "production_file": "app/src/main/java/com/pte/attempt/internal/service/HeartbeatService.java",
+    "production_line": 29,
+    "suggestion": "Dùng cùng Clock cố định cho service và expected timestamp."
+  },
+  {
+    "id": "TEST-003",
+    "test": "com.pte.attempt.internal.service.TimerServiceTest.startTask_enteringReadingAfterAnotherSection_startsFreshSectionClock",
+    "kind": "failure",
+    "runs": {
+      "unit": {
+        "message": "\nExpecting actual:\n  2026-10-25T17:43:02.989328200Z\nto be between:\n  [2026-10-25T17:43:08.082106600Z, 2026-10-25T17:43:08.082106600Z]\n",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual:\n  2026-10-25T17:43:02.989328200Z\nto be between:\n  [2026-10-25T17:43:08.082106600Z, 2026-10-25T17:43:08.082106600Z]\n\n\tat com.pte.attempt.internal.service.TimerServiceTest.startTask_enteringReadingAfterAnotherSection_startsFreshSectionClock(TimerServiceTest.java:102)\n"
+      },
+      "postgres": {
+        "message": "\nExpecting actual:\n  2026-10-25T17:46:08.199761300Z\nto be between:\n  [2026-10-25T17:46:18.632187200Z, 2026-10-25T17:46:18.632187200Z]\n",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual:\n  2026-10-25T17:46:08.199761300Z\nto be between:\n  [2026-10-25T17:46:18.632187200Z, 2026-10-25T17:46:18.632187200Z]\n\n\tat com.pte.attempt.internal.service.TimerServiceTest.startTask_enteringReadingAfterAnotherSection_startsFreshSectionClock(TimerServiceTest.java:102)\n"
+      }
+    },
+    "risk": "R3",
+    "test_file": "app/src/test/java/com/pte/attempt/internal/service/TimerServiceTest.java",
+    "test_line": 91,
+    "production_file": "app/src/main/java/com/pte/attempt/internal/service/TimerService.java",
+    "production_line": 62,
+    "suggestion": "So sectionStartedAt với clock.instant() thay cho khoảng Instant.now() thực."
+  },
+  {
+    "id": "TEST-004",
+    "test": "com.pte.attempt.internal.service.TimerServiceTest.startTask_firstReadingItem_setsActiveSectionAndStartsSectionClock",
+    "kind": "failure",
+    "runs": {
+      "unit": {
+        "message": "\nExpecting actual:\n  2026-10-25T17:43:02.989328200Z\nto be between:\n  [2026-10-25T17:43:08.085626400Z, 2026-10-25T17:43:08.085626400Z]\n",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual:\n  2026-10-25T17:43:02.989328200Z\nto be between:\n  [2026-10-25T17:43:08.085626400Z, 2026-10-25T17:43:08.085626400Z]\n\n\tat com.pte.attempt.internal.service.TimerServiceTest.startTask_firstReadingItem_setsActiveSectionAndStartsSectionClock(TimerServiceTest.java:74)\n"
+      },
+      "postgres": {
+        "message": "\nExpecting actual:\n  2026-10-25T17:46:08.199761300Z\nto be between:\n  [2026-10-25T17:46:18.656925Z, 2026-10-25T17:46:18.656925Z]\n",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual:\n  2026-10-25T17:46:08.199761300Z\nto be between:\n  [2026-10-25T17:46:18.656925Z, 2026-10-25T17:46:18.656925Z]\n\n\tat com.pte.attempt.internal.service.TimerServiceTest.startTask_firstReadingItem_setsActiveSectionAndStartsSectionClock(TimerServiceTest.java:74)\n"
+      }
+    },
+    "risk": "R3",
+    "test_file": "app/src/test/java/com/pte/attempt/internal/service/TimerServiceTest.java",
+    "test_line": 66,
+    "production_file": "app/src/main/java/com/pte/attempt/internal/service/TimerService.java",
+    "production_line": 62,
+    "suggestion": "So sectionStartedAt với clock.instant() thay cho khoảng Instant.now() thực."
+  },
+  {
+    "id": "TEST-005",
+    "test": "com.pte.proctoring.internal.service.IncidentEvidenceServiceTest.standardPolicy_recordsAnAutoIncidentWithWarningAndServerOwnership",
+    "kind": "failure",
+    "runs": {
+      "unit": {
+        "message": "\nExpecting actual:\n  2026-10-25T17:43:02.989328200Z\nto be between:\n  [2026-10-25T17:44:14.766808300Z, 2026-10-25T17:44:14.766808300Z]\n",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual:\n  2026-10-25T17:43:02.989328200Z\nto be between:\n  [2026-10-25T17:44:14.766808300Z, 2026-10-25T17:44:14.766808300Z]\n\n\tat com.pte.proctoring.internal.service.IncidentEvidenceServiceTest.standardPolicy_recordsAnAutoIncidentWithWarningAndServerOwnership(IncidentEvidenceServiceTest.java:91)\n"
+      },
+      "postgres": {
+        "message": "\nExpecting actual:\n  2026-10-25T17:46:08.199761300Z\nto be between:\n  [2026-10-25T17:47:52.735456700Z, 2026-10-25T17:47:52.736455900Z]\n",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual:\n  2026-10-25T17:46:08.199761300Z\nto be between:\n  [2026-10-25T17:47:52.735456700Z, 2026-10-25T17:47:52.736455900Z]\n\n\tat com.pte.proctoring.internal.service.IncidentEvidenceServiceTest.standardPolicy_recordsAnAutoIncidentWithWarningAndServerOwnership(IncidentEvidenceServiceTest.java:91)\n"
+      }
+    },
+    "risk": "R3",
+    "test_file": "app/src/test/java/com/pte/proctoring/internal/service/IncidentEvidenceServiceTest.java",
+    "test_line": 70,
+    "production_file": "app/src/main/java/com/pte/proctoring/internal/service/IncidentEvidenceService.java",
+    "production_line": 70,
+    "suggestion": "Dùng cùng Clock cho detectedAt và assertion."
+  },
+  {
+    "id": "TEST-006",
+    "test": "com.pte.scoring.internal.service.examiner.ExaminerScoringServiceTest.acceptsInclusiveScoreBoundariesAndKeepsOtherScoresUntouched(int)[1]",
+    "kind": "error",
+    "runs": {
+      "unit": {
+        "message": "Cannot invoke \"java.time.Clock.instant()\" because \"this.clock\" is null",
+        "type": "java.lang.NullPointerException",
+        "detail": "java.lang.NullPointerException: Cannot invoke \"java.time.Clock.instant()\" because \"this.clock\" is null\n\tat com.pte.scoring.internal.service.examiner.ExaminerDirectScoreSubmitter.submit(ExaminerDirectScoreSubmitter.java:241)\n\tat com.pte.scoring.internal.service.examiner.ExaminerScoringService.submitScore(ExaminerScoringService.java:177)\n\tat com.pte.scoring.internal.service.examiner.ExaminerScoringServiceTest.acceptsInclusiveScoreBoundariesAndKeepsOtherScoresUntouched(ExaminerScoringServiceTest.java:370)\n"
+      },
+      "postgres": {
+        "message": "Cannot invoke \"java.time.Clock.instant()\" because \"this.clock\" is null",
+        "type": "java.lang.NullPointerException",
+        "detail": "java.lang.NullPointerException: Cannot invoke \"java.time.Clock.instant()\" because \"this.clock\" is null\n\tat com.pte.scoring.internal.service.examiner.ExaminerDirectScoreSubmitter.submit(ExaminerDirectScoreSubmitter.java:241)\n\tat com.pte.scoring.internal.service.examiner.ExaminerScoringService.submitScore(ExaminerScoringService.java:177)\n\tat com.pte.scoring.internal.service.examiner.ExaminerScoringServiceTest.acceptsInclusiveScoreBoundariesAndKeepsOtherScoresUntouched(ExaminerScoringServiceTest.java:370)\n"
+      }
+    },
+    "risk": "R1",
+    "test_file": "app/src/test/java/com/pte/scoring/internal/service/examiner/ExaminerScoringServiceTest.java",
+    "test_line": 366,
+    "production_file": "app/src/main/java/com/pte/scoring/internal/service/examiner/ExaminerDirectScoreSubmitter.java",
+    "production_line": 241,
+    "suggestion": "Truyền Clock khác null ở setUp của test (tham số áp chót); không khôi phục fallback production."
+  },
+  {
+    "id": "TEST-007",
+    "test": "com.pte.scoring.internal.service.examiner.ExaminerScoringServiceTest.acceptsInclusiveScoreBoundariesAndKeepsOtherScoresUntouched(int)[2]",
+    "kind": "error",
+    "runs": {
+      "unit": {
+        "message": "Cannot invoke \"java.time.Clock.instant()\" because \"this.clock\" is null",
+        "type": "java.lang.NullPointerException",
+        "detail": "java.lang.NullPointerException: Cannot invoke \"java.time.Clock.instant()\" because \"this.clock\" is null\n\tat com.pte.scoring.internal.service.examiner.ExaminerDirectScoreSubmitter.submit(ExaminerDirectScoreSubmitter.java:241)\n\tat com.pte.scoring.internal.service.examiner.ExaminerScoringService.submitScore(ExaminerScoringService.java:177)\n\tat com.pte.scoring.internal.service.examiner.ExaminerScoringServiceTest.acceptsInclusiveScoreBoundariesAndKeepsOtherScoresUntouched(ExaminerScoringServiceTest.java:370)\n"
+      },
+      "postgres": {
+        "message": "Cannot invoke \"java.time.Clock.instant()\" because \"this.clock\" is null",
+        "type": "java.lang.NullPointerException",
+        "detail": "java.lang.NullPointerException: Cannot invoke \"java.time.Clock.instant()\" because \"this.clock\" is null\n\tat com.pte.scoring.internal.service.examiner.ExaminerDirectScoreSubmitter.submit(ExaminerDirectScoreSubmitter.java:241)\n\tat com.pte.scoring.internal.service.examiner.ExaminerScoringService.submitScore(ExaminerScoringService.java:177)\n\tat com.pte.scoring.internal.service.examiner.ExaminerScoringServiceTest.acceptsInclusiveScoreBoundariesAndKeepsOtherScoresUntouched(ExaminerScoringServiceTest.java:370)\n"
+      }
+    },
+    "risk": "R1",
+    "test_file": "app/src/test/java/com/pte/scoring/internal/service/examiner/ExaminerScoringServiceTest.java",
+    "test_line": 366,
+    "production_file": "app/src/main/java/com/pte/scoring/internal/service/examiner/ExaminerDirectScoreSubmitter.java",
+    "production_line": 241,
+    "suggestion": "Truyền Clock khác null ở setUp của test (tham số áp chót); không khôi phục fallback production."
+  },
+  {
+    "id": "TEST-008",
+    "test": "com.pte.session.internal.service.ExamWorkflowServicesTest.createDraft_defaultsOfficialExamToStartedSeriesExclusion",
+    "kind": "error",
+    "runs": {
+      "unit": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n\tat com.pte.session.internal.service.draft.ExamDraftService.createDraft(ExamDraftService.java:79)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.createDraft_defaultsOfficialExamToStartedSeriesExclusion(ExamWorkflowServicesTest.java:165)\n"
+      },
+      "postgres": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n\tat com.pte.session.internal.service.draft.ExamDraftService.createDraft(ExamDraftService.java:79)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.createDraft_defaultsOfficialExamToStartedSeriesExclusion(ExamWorkflowServicesTest.java:165)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/ExamWorkflowServicesTest.java",
+    "test_line": 155,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/draft/ExamDraftService.java",
+    "production_line": 231,
+    "suggestion": "Dựng subscription startsAt/expiresAt và session window từ cùng Clock; xem stubTemplateAndSubscription:755."
+  },
+  {
+    "id": "TEST-009",
+    "test": "com.pte.session.internal.service.ExamWorkflowServicesTest.updateDraft_rescheduleKeepsSessionCode",
+    "kind": "error",
+    "runs": {
+      "unit": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n\tat com.pte.session.internal.service.draft.ExamDraftService.updateDraft(ExamDraftService.java:210)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.updateDraft_rescheduleKeepsSessionCode(ExamWorkflowServicesTest.java:283)\n"
+      },
+      "postgres": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n\tat com.pte.session.internal.service.draft.ExamDraftService.updateDraft(ExamDraftService.java:210)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.updateDraft_rescheduleKeepsSessionCode(ExamWorkflowServicesTest.java:283)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/ExamWorkflowServicesTest.java",
+    "test_line": 274,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/draft/ExamDraftService.java",
+    "production_line": 231,
+    "suggestion": "Dựng subscription startsAt/expiresAt và session window từ cùng Clock; xem stubTemplateAndSubscription:755."
+  },
+  {
+    "id": "TEST-010",
+    "test": "com.pte.session.internal.service.ExamWorkflowServicesTest.createDraft_partialSkillSelection_isRejected",
+    "kind": "failure",
+    "runs": {
+      "unit": {
+        "message": "\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.draft.ExamDraftConfigurationException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n at com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n at com.pte.session.internal.service.draft.ExamDraftService.createDraft(ExamDraftService.java:79)\n at com.pte.session.internal.service.ExamWorkflowServicesTest.lambda$createDraft_partialSkillSelection_isRejected$0(ExamWorkflowServicesTest.java:187)\n ...(86 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.draft.ExamDraftConfigurationException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n\tat com.pte.session.internal.service.draft.ExamDraftService.createDraft(ExamDraftService.java:79)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.lambda$createDraft_partialSkillSelection_isRejected$0(ExamWorkflowServicesTest.java:187)\n\t...(86 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.createDraft_partialSkillSelection_isRejected(ExamWorkflowServicesTest.java:190)\n"
+      },
+      "postgres": {
+        "message": "\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.draft.ExamDraftConfigurationException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n at com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n at com.pte.session.internal.service.draft.ExamDraftService.createDraft(ExamDraftService.java:79)\n at com.pte.session.internal.service.ExamWorkflowServicesTest.lambda$createDraft_partialSkillSelection_isRejected$0(ExamWorkflowServicesTest.java:187)\n ...(86 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.draft.ExamDraftConfigurationException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n\tat com.pte.session.internal.service.draft.ExamDraftService.createDraft(ExamDraftService.java:79)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.lambda$createDraft_partialSkillSelection_isRejected$0(ExamWorkflowServicesTest.java:187)\n\t...(86 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.createDraft_partialSkillSelection_isRejected(ExamWorkflowServicesTest.java:190)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/ExamWorkflowServicesTest.java",
+    "test_line": 182,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/draft/ExamDraftService.java",
+    "production_line": 231,
+    "suggestion": "Dựng subscription startsAt/expiresAt và session window từ cùng Clock; xem stubTemplateAndSubscription:755."
+  },
+  {
+    "id": "TEST-011",
+    "test": "com.pte.session.internal.service.ExamWorkflowServicesTest.createDraft_withRetries_isRejectedBecauseEveryStudentSitsOnce",
+    "kind": "failure",
+    "runs": {
+      "unit": {
+        "message": "\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.draft.ExamDraftConfigurationException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n at com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n at com.pte.session.internal.service.draft.ExamDraftService.createDraft(ExamDraftService.java:79)\n at com.pte.session.internal.service.ExamWorkflowServicesTest.lambda$createDraft_withRetries_isRejectedBecauseEveryStudentSitsOnce$0(ExamWorkflowServicesTest.java:214)\n ...(86 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.draft.ExamDraftConfigurationException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n\tat com.pte.session.internal.service.draft.ExamDraftService.createDraft(ExamDraftService.java:79)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.lambda$createDraft_withRetries_isRejectedBecauseEveryStudentSitsOnce$0(ExamWorkflowServicesTest.java:214)\n\t...(86 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.createDraft_withRetries_isRejectedBecauseEveryStudentSitsOnce(ExamWorkflowServicesTest.java:218)\n"
+      },
+      "postgres": {
+        "message": "\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.draft.ExamDraftConfigurationException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n at com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n at com.pte.session.internal.service.draft.ExamDraftService.createDraft(ExamDraftService.java:79)\n at com.pte.session.internal.service.ExamWorkflowServicesTest.lambda$createDraft_withRetries_isRejectedBecauseEveryStudentSitsOnce$0(ExamWorkflowServicesTest.java:214)\n ...(86 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.draft.ExamDraftConfigurationException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n\tat com.pte.session.internal.service.draft.ExamDraftService.createDraft(ExamDraftService.java:79)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.lambda$createDraft_withRetries_isRejectedBecauseEveryStudentSitsOnce$0(ExamWorkflowServicesTest.java:214)\n\t...(86 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.createDraft_withRetries_isRejectedBecauseEveryStudentSitsOnce(ExamWorkflowServicesTest.java:218)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/ExamWorkflowServicesTest.java",
+    "test_line": 211,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/draft/ExamDraftService.java",
+    "production_line": 231,
+    "suggestion": "Dựng subscription startsAt/expiresAt và session window từ cùng Clock; xem stubTemplateAndSubscription:755."
+  },
+  {
+    "id": "TEST-012",
+    "test": "com.pte.session.internal.service.ExamWorkflowServicesTest.createDraft_officialWithNonStrictLockdown_isRejected",
+    "kind": "failure",
+    "runs": {
+      "unit": {
+        "message": "\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.draft.InvalidLockdownModeException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n at com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n at com.pte.session.internal.service.draft.ExamDraftService.createDraft(ExamDraftService.java:79)\n at com.pte.session.internal.service.ExamWorkflowServicesTest.lambda$createDraft_officialWithNonStrictLockdown_isRejected$0(ExamWorkflowServicesTest.java:201)\n ...(86 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.draft.InvalidLockdownModeException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n\tat com.pte.session.internal.service.draft.ExamDraftService.createDraft(ExamDraftService.java:79)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.lambda$createDraft_officialWithNonStrictLockdown_isRejected$0(ExamWorkflowServicesTest.java:201)\n\t...(86 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.createDraft_officialWithNonStrictLockdown_isRejected(ExamWorkflowServicesTest.java:205)\n"
+      },
+      "postgres": {
+        "message": "\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.draft.InvalidLockdownModeException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n at com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n at com.pte.session.internal.service.draft.ExamDraftService.createDraft(ExamDraftService.java:79)\n at com.pte.session.internal.service.ExamWorkflowServicesTest.lambda$createDraft_officialWithNonStrictLockdown_isRejected$0(ExamWorkflowServicesTest.java:201)\n ...(86 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.draft.InvalidLockdownModeException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n\tat com.pte.session.internal.service.draft.ExamDraftService.createDraft(ExamDraftService.java:79)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.lambda$createDraft_officialWithNonStrictLockdown_isRejected$0(ExamWorkflowServicesTest.java:201)\n\t...(86 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.createDraft_officialWithNonStrictLockdown_isRejected(ExamWorkflowServicesTest.java:205)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/ExamWorkflowServicesTest.java",
+    "test_line": 198,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/draft/ExamDraftService.java",
+    "production_line": 231,
+    "suggestion": "Dựng subscription startsAt/expiresAt và session window từ cùng Clock; xem stubTemplateAndSubscription:755."
+  },
+  {
+    "id": "TEST-013",
+    "test": "com.pte.session.internal.service.ExamWorkflowServicesTest.updateDraft_legacyDraftWithoutModeOrLockdown_derivesOfficialStrictDefault",
+    "kind": "error",
+    "runs": {
+      "unit": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n\tat com.pte.session.internal.service.draft.ExamDraftService.updateDraft(ExamDraftService.java:210)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.updateDraft_legacyDraftWithoutModeOrLockdown_derivesOfficialStrictDefault(ExamWorkflowServicesTest.java:265)\n"
+      },
+      "postgres": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n\tat com.pte.session.internal.service.draft.ExamDraftService.updateDraft(ExamDraftService.java:210)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.updateDraft_legacyDraftWithoutModeOrLockdown_derivesOfficialStrictDefault(ExamWorkflowServicesTest.java:265)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/ExamWorkflowServicesTest.java",
+    "test_line": 258,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/draft/ExamDraftService.java",
+    "production_line": 231,
+    "suggestion": "Dựng subscription startsAt/expiresAt và session window từ cùng Clock; xem stubTemplateAndSubscription:755."
+  },
+  {
+    "id": "TEST-014",
+    "test": "com.pte.session.internal.service.ExamWorkflowServicesTest.updateDraft_withoutLockdown_preservesStrictAfterRetryPatch",
+    "kind": "error",
+    "runs": {
+      "unit": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n\tat com.pte.session.internal.service.draft.ExamDraftService.updateDraft(ExamDraftService.java:210)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.updateDraft_withoutLockdown_preservesStrictAfterRetryPatch(ExamWorkflowServicesTest.java:232)\n"
+      },
+      "postgres": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.draft.ExamDraftService.validateSubscriptionWindowAndCapacity(ExamDraftService.java:231)\n\tat com.pte.session.internal.service.draft.ExamDraftService.updateDraft(ExamDraftService.java:210)\n\tat com.pte.session.internal.service.ExamWorkflowServicesTest.updateDraft_withoutLockdown_preservesStrictAfterRetryPatch(ExamWorkflowServicesTest.java:232)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/ExamWorkflowServicesTest.java",
+    "test_line": 224,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/draft/ExamDraftService.java",
+    "production_line": 231,
+    "suggestion": "Dựng subscription startsAt/expiresAt và session window từ cùng Clock; xem stubTemplateAndSubscription:755."
+  },
+  {
+    "id": "TEST-015",
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_translatesDatabaseOverlapRaceToConflict",
+    "kind": "failure",
+    "runs": {
+      "unit": {
+        "message": "\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionTimeConflictException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n at com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n at com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n at com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n ...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionTimeConflictException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\t...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_translatesDatabaseOverlapRaceToConflict(SessionLifecycleServiceTest.java:251)\n"
+      },
+      "postgres": {
+        "message": "\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionTimeConflictException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n at com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n at com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n at com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n ...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionTimeConflictException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\t...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_translatesDatabaseOverlapRaceToConflict(SessionLifecycleServiceTest.java:251)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java",
+    "test_line": 237,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionSubscriptionRules.java",
+    "production_line": 53,
+    "suggestion": "Dựng subscription từ Clock dùng bởi service; Instant.now().minusSeconds(60) có thể sau thời điểm Clock đã đóng băng."
+  },
+  {
+    "id": "TEST-016",
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_delegatesToAssessmentGenerateAndPublish_usesReturnedSnapshotPublicId",
+    "kind": "error",
+    "runs": {
+      "unit": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_delegatesToAssessmentGenerateAndPublish_usesReturnedSnapshotPublicId(SessionLifecycleServiceTest.java:329)\n"
+      },
+      "postgres": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_delegatesToAssessmentGenerateAndPublish_usesReturnedSnapshotPublicId(SessionLifecycleServiceTest.java:329)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java",
+    "test_line": 316,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionSubscriptionRules.java",
+    "production_line": 53,
+    "suggestion": "Dựng subscription từ Clock dùng bởi service; Instant.now().minusSeconds(60) có thể sau thời điểm Clock đã đóng băng."
+  },
+  {
+    "id": "TEST-017",
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.changeSubscription_rejectsActualEnrollmentCountAboveNewCap",
+    "kind": "failure",
+    "runs": {
+      "unit": {
+        "message": "\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionCapacityException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n at com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n at com.pte.session.internal.service.lifecycle.SessionSubscriptionService.changeSubscription(SessionSubscriptionService.java:95)\n at com.pte.session.internal.service.SessionLifecycleService.changeSubscription(SessionLifecycleService.java:76)\n ...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionCapacityException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionService.changeSubscription(SessionSubscriptionService.java:95)\n\tat com.pte.session.internal.service.SessionLifecycleService.changeSubscription(SessionLifecycleService.java:76)\n\t...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.changeSubscription_rejectsActualEnrollmentCountAboveNewCap(SessionLifecycleServiceTest.java:397)\n"
+      },
+      "postgres": {
+        "message": "\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionCapacityException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n at com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n at com.pte.session.internal.service.lifecycle.SessionSubscriptionService.changeSubscription(SessionSubscriptionService.java:95)\n at com.pte.session.internal.service.SessionLifecycleService.changeSubscription(SessionLifecycleService.java:76)\n ...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionCapacityException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionService.changeSubscription(SessionSubscriptionService.java:95)\n\tat com.pte.session.internal.service.SessionLifecycleService.changeSubscription(SessionLifecycleService.java:76)\n\t...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.changeSubscription_rejectsActualEnrollmentCountAboveNewCap(SessionLifecycleServiceTest.java:397)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java",
+    "test_line": 385,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionSubscriptionRules.java",
+    "production_line": 53,
+    "suggestion": "Dựng subscription từ Clock dùng bởi service; Instant.now().minusSeconds(60) có thể sau thời điểm Clock đã đóng băng."
+  },
+  {
+    "id": "TEST-018",
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.patchPolicy_isRejected_whenScheduledWindowHasAlreadyStarted",
+    "kind": "failure",
+    "runs": {
+      "unit": {
+        "message": "\nExpecting code to raise a throwable.",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting code to raise a throwable.\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.patchPolicy_isRejected_whenScheduledWindowHasAlreadyStarted(SessionLifecycleServiceTest.java:531)\n"
+      },
+      "postgres": {
+        "message": "\nExpecting code to raise a throwable.",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting code to raise a throwable.\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.patchPolicy_isRejected_whenScheduledWindowHasAlreadyStarted(SessionLifecycleServiceTest.java:531)\n"
+      }
+    },
+    "risk": "R3",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java",
+    "test_line": 525,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionPolicyService.java",
+    "production_line": 54,
+    "suggestion": "Dựng opensAt = clock.instant().minusSeconds(1), giữ nguyên assertion từ chối."
+  },
+  {
+    "id": "TEST-019",
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.changeSubscription_updatesSessionAndAllEnrollmentLicenseKeys",
+    "kind": "error",
+    "runs": {
+      "unit": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionService.changeSubscription(SessionSubscriptionService.java:95)\n\tat com.pte.session.internal.service.SessionLifecycleService.changeSubscription(SessionLifecycleService.java:76)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.changeSubscription_updatesSessionAndAllEnrollmentLicenseKeys(SessionLifecycleServiceTest.java:416)\n"
+      },
+      "postgres": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionService.changeSubscription(SessionSubscriptionService.java:95)\n\tat com.pte.session.internal.service.SessionLifecycleService.changeSubscription(SessionLifecycleService.java:76)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.changeSubscription_updatesSessionAndAllEnrollmentLicenseKeys(SessionLifecycleServiceTest.java:416)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java",
+    "test_line": 403,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionSubscriptionRules.java",
+    "production_line": 53,
+    "suggestion": "Dựng subscription từ Clock dùng bởi service; Instant.now().minusSeconds(60) có thể sau thời điểm Clock đã đóng băng."
+  },
+  {
+    "id": "TEST-020",
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_rejectsWindowOutsideSubscription_asUnprocessable",
+    "kind": "failure",
+    "runs": {
+      "unit": {
+        "message": "\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionWindowOutsideSubscriptionException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n at com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n at com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n at com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n ...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionWindowOutsideSubscriptionException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\t...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_rejectsWindowOutsideSubscription_asUnprocessable(SessionLifecycleServiceTest.java:160)\n"
+      },
+      "postgres": {
+        "message": "\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionWindowOutsideSubscriptionException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n at com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n at com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n at com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n ...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionWindowOutsideSubscriptionException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\t...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_rejectsWindowOutsideSubscription_asUnprocessable(SessionLifecycleServiceTest.java:160)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java",
+    "test_line": 153,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionSubscriptionRules.java",
+    "production_line": 53,
+    "suggestion": "Dựng subscription từ Clock dùng bởi service; Instant.now().minusSeconds(60) có thể sau thời điểm Clock đã đóng băng."
+  },
+  {
+    "id": "TEST-021",
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_rejectsApplicationLevelOverlap_withConflictingSession",
+    "kind": "failure",
+    "runs": {
+      "unit": {
+        "message": "\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionTimeConflictException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n at com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n at com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n at com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n ...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionTimeConflictException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\t...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_rejectsApplicationLevelOverlap_withConflictingSession(SessionLifecycleServiceTest.java:183)\n"
+      },
+      "postgres": {
+        "message": "\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionTimeConflictException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n at com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n at com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n at com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n ...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionTimeConflictException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\t...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_rejectsApplicationLevelOverlap_withConflictingSession(SessionLifecycleServiceTest.java:183)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java",
+    "test_line": 174,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionSubscriptionRules.java",
+    "production_line": 53,
+    "suggestion": "Dựng subscription từ Clock dùng bởi service; Instant.now().minusSeconds(60) có thể sau thời điểm Clock đã đóng băng."
+  },
+  {
+    "id": "TEST-022",
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_persistsGeneratedSnapshotAndSubscriptionLicense",
+    "kind": "error",
+    "runs": {
+      "unit": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_persistsGeneratedSnapshotAndSubscriptionLicense(SessionLifecycleServiceTest.java:203)\n"
+      },
+      "postgres": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_persistsGeneratedSnapshotAndSubscriptionLicense(SessionLifecycleServiceTest.java:203)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java",
+    "test_line": 190,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionSubscriptionRules.java",
+    "production_line": 53,
+    "suggestion": "Dựng subscription từ Clock dùng bởi service; Instant.now().minusSeconds(60) có thể sau thời điểm Clock đã đóng băng."
+  },
+  {
+    "id": "TEST-023",
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_rejectsCapacityAboveSubscriptionCap_withBothValues",
+    "kind": "failure",
+    "runs": {
+      "unit": {
+        "message": "\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionCapacityException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n at com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n at com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n at com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n ...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionCapacityException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\t...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_rejectsCapacityAboveSubscriptionCap_withBothValues(SessionLifecycleServiceTest.java:168)\n"
+      },
+      "postgres": {
+        "message": "\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionCapacityException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n at com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n at com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n at com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n ...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionCapacityException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\t...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_rejectsCapacityAboveSubscriptionCap_withBothValues(SessionLifecycleServiceTest.java:168)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java",
+    "test_line": 164,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionSubscriptionRules.java",
+    "production_line": 53,
+    "suggestion": "Dựng subscription từ Clock dùng bởi service; Instant.now().minusSeconds(60) có thể sau thời điểm Clock đã đóng băng."
+  },
+  {
+    "id": "TEST-024",
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_allowsSameWindowForDifferentSubscription",
+    "kind": "error",
+    "runs": {
+      "unit": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_allowsSameWindowForDifferentSubscription(SessionLifecycleServiceTest.java:230)\n"
+      },
+      "postgres": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_allowsSameWindowForDifferentSubscription(SessionLifecycleServiceTest.java:230)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java",
+    "test_line": 216,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionSubscriptionRules.java",
+    "production_line": 53,
+    "suggestion": "Dựng subscription từ Clock dùng bởi service; Instant.now().minusSeconds(60) có thể sau thời điểm Clock đã đóng băng."
+  },
+  {
+    "id": "TEST-025",
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_setsLockdownModeToStrict_whenExamModeIsRealExam",
+    "kind": "error",
+    "runs": {
+      "unit": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_setsLockdownModeToStrict_whenExamModeIsRealExam(SessionLifecycleServiceTest.java:290)\n"
+      },
+      "postgres": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_setsLockdownModeToStrict_whenExamModeIsRealExam(SessionLifecycleServiceTest.java:290)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java",
+    "test_line": 280,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionSubscriptionRules.java",
+    "production_line": 53,
+    "suggestion": "Dựng subscription từ Clock dùng bởi service; Instant.now().minusSeconds(60) có thể sau thời điểm Clock đã đóng băng."
+  },
+  {
+    "id": "TEST-026",
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.changeSubscription_requestsSubscriptionLocksInPublicIdOrder",
+    "kind": "error",
+    "runs": {
+      "unit": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionService.changeSubscription(SessionSubscriptionService.java:95)\n\tat com.pte.session.internal.service.SessionLifecycleService.changeSubscription(SessionLifecycleService.java:76)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.changeSubscription_requestsSubscriptionLocksInPublicIdOrder(SessionLifecycleServiceTest.java:439)\n"
+      },
+      "postgres": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionService.changeSubscription(SessionSubscriptionService.java:95)\n\tat com.pte.session.internal.service.SessionLifecycleService.changeSubscription(SessionLifecycleService.java:76)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.changeSubscription_requestsSubscriptionLocksInPublicIdOrder(SessionLifecycleServiceTest.java:439)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java",
+    "test_line": 428,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionSubscriptionRules.java",
+    "production_line": 53,
+    "suggestion": "Dựng subscription từ Clock dùng bởi service; Instant.now().minusSeconds(60) có thể sau thời điểm Clock đã đóng băng."
+  },
+  {
+    "id": "TEST-027",
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_withoutExamMode_defaultsToOfficialStrict",
+    "kind": "error",
+    "runs": {
+      "unit": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_withoutExamMode_defaultsToOfficialStrict(SessionLifecycleServiceTest.java:269)\n"
+      },
+      "postgres": {
+        "message": "SESSION_SUBSCRIPTION_NOT_FOUND",
+        "type": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException",
+        "detail": "com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_withoutExamMode_defaultsToOfficialStrict(SessionLifecycleServiceTest.java:269)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java",
+    "test_line": 259,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionSubscriptionRules.java",
+    "production_line": 53,
+    "suggestion": "Dựng subscription từ Clock dùng bởi service; Instant.now().minusSeconds(60) có thể sau thời điểm Clock đã đóng băng."
+  },
+  {
+    "id": "TEST-028",
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_withTeacherOverride_nonStrictOnOfficial_rejectedBeforeSave",
+    "kind": "failure",
+    "runs": {
+      "unit": {
+        "message": "\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.draft.InvalidLockdownModeException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n at com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n at com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n at com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n ...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.draft.InvalidLockdownModeException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\t...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_withTeacherOverride_nonStrictOnOfficial_rejectedBeforeSave(SessionLifecycleServiceTest.java:310)\n"
+      },
+      "postgres": {
+        "message": "\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.draft.InvalidLockdownModeException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n at com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n at com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n at com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n ...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)",
+        "type": "java.lang.AssertionError",
+        "detail": "java.lang.AssertionError: \n\nExpecting actual throwable to be an instance of:\n  com.pte.session.internal.exception.draft.InvalidLockdownModeException\nbut was:\n  com.pte.session.internal.exception.capacity.SessionSubscriptionNotFoundException: SESSION_SUBSCRIPTION_NOT_FOUND\n\tat com.pte.session.internal.service.lifecycle.SessionSubscriptionRules.validateSubscriptionWindowAndCapacity(SessionSubscriptionRules.java:53)\n\tat com.pte.session.internal.service.lifecycle.SessionCreationService.create(SessionCreationService.java:72)\n\tat com.pte.session.internal.service.SessionLifecycleService.create(SessionLifecycleService.java:71)\n\t...(87 remaining lines not displayed - this can be changed with Assertions.setMaxStackTraceElementsDisplayed)\n\tat com.pte.session.internal.service.SessionLifecycleServiceTest.create_withTeacherOverride_nonStrictOnOfficial_rejectedBeforeSave(SessionLifecycleServiceTest.java:310)\n"
+      }
+    },
+    "risk": "R3 (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java",
+    "test_line": 300,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionSubscriptionRules.java",
+    "production_line": 53,
+    "suggestion": "Dựng subscription từ Clock dùng bởi service; Instant.now().minusSeconds(60) có thể sau thời điểm Clock đã đóng băng."
+  },
+  {
+    "id": "TEST-029",
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_generationFails_noSessionSaved",
+    "kind": "error",
+    "runs": {
+      "unit": {
+        "message": "\nUnnecessary stubbings detected.\nClean & maintainable test code requires zero unnecessary code.\nFollowing stubbings are unnecessary (click to navigate to relevant line of code):\n  1. -> at com.pte.session.internal.service.SessionLifecycleServiceTest.create_generationFails_noSessionSaved(SessionLifecycleServiceTest.java:341)\n  2. -> at com.pte.session.internal.service.SessionLifecycleServiceTest.create_generationFails_noSessionSaved(SessionLifecycleServiceTest.java:342)\nPlease remove unnecessary stubbings or use 'lenient' strictness. More info: javadoc for UnnecessaryStubbingException class.",
+        "type": "org.mockito.exceptions.misusing.UnnecessaryStubbingException",
+        "detail": "org.mockito.exceptions.misusing.UnnecessaryStubbingException: \n\nUnnecessary stubbings detected.\nClean & maintainable test code requires zero unnecessary code.\nFollowing stubbings are unnecessary (click to navigate to relevant line of code):\n  1. -> at com.pte.session.internal.service.SessionLifecycleServiceTest.create_generationFails_noSessionSaved(SessionLifecycleServiceTest.java:341)\n  2. -> at com.pte.session.internal.service.SessionLifecycleServiceTest.create_generationFails_noSessionSaved(SessionLifecycleServiceTest.java:342)\nPlease remove unnecessary stubbings or use 'lenient' strictness. More info: javadoc for UnnecessaryStubbingException class.\n\tat org.mockito.junit.jupiter.MockitoExtension.lambda$afterEach$2(MockitoExtension.java:200)\n\tat java.base/java.util.Optional.ifPresent(Optional.java:178)\n\tat org.mockito.junit.jupiter.MockitoExtension.afterEach(MockitoExtension.java:198)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+      },
+      "postgres": {
+        "message": "\nUnnecessary stubbings detected.\nClean & maintainable test code requires zero unnecessary code.\nFollowing stubbings are unnecessary (click to navigate to relevant line of code):\n  1. -> at com.pte.session.internal.service.SessionLifecycleServiceTest.create_generationFails_noSessionSaved(SessionLifecycleServiceTest.java:341)\n  2. -> at com.pte.session.internal.service.SessionLifecycleServiceTest.create_generationFails_noSessionSaved(SessionLifecycleServiceTest.java:342)\nPlease remove unnecessary stubbings or use 'lenient' strictness. More info: javadoc for UnnecessaryStubbingException class.",
+        "type": "org.mockito.exceptions.misusing.UnnecessaryStubbingException",
+        "detail": "org.mockito.exceptions.misusing.UnnecessaryStubbingException: \n\nUnnecessary stubbings detected.\nClean & maintainable test code requires zero unnecessary code.\nFollowing stubbings are unnecessary (click to navigate to relevant line of code):\n  1. -> at com.pte.session.internal.service.SessionLifecycleServiceTest.create_generationFails_noSessionSaved(SessionLifecycleServiceTest.java:341)\n  2. -> at com.pte.session.internal.service.SessionLifecycleServiceTest.create_generationFails_noSessionSaved(SessionLifecycleServiceTest.java:342)\nPlease remove unnecessary stubbings or use 'lenient' strictness. More info: javadoc for UnnecessaryStubbingException class.\n\tat org.mockito.junit.jupiter.MockitoExtension.lambda$afterEach$2(MockitoExtension.java:200)\n\tat java.base/java.util.Optional.ifPresent(Optional.java:178)\n\tat org.mockito.junit.jupiter.MockitoExtension.afterEach(MockitoExtension.java:198)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+      }
+    },
+    "risk": "R3 / Mockito (nghi nguyên nhân)",
+    "test_file": "app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java",
+    "test_line": 339,
+    "production_file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionSubscriptionRules.java",
+    "production_line": 53,
+    "suggestion": "Kiểm tra subscription fixture trước; nhánh lỗi sớm có thể khiến stub generation không dùng. Không đổi sang lenient."
+  }
+]

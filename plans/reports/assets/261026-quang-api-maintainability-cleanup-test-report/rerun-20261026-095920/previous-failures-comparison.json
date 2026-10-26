@@ -1,0 +1,234 @@
+[
+  {
+    "test": "com.pte.attempt.internal.service.AttemptLifecycleServicePlayAudioTest.playAudio_audioUrlExpired_throws",
+    "previous_risk": "R3",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.attempt.internal.service.HeartbeatServiceTest.recordHeartbeat_stampsLastSeenAt",
+    "previous_risk": "R3",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.attempt.internal.service.TimerServiceTest.startTask_enteringReadingAfterAnotherSection_startsFreshSectionClock",
+    "previous_risk": "R3",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.attempt.internal.service.TimerServiceTest.startTask_firstReadingItem_setsActiveSectionAndStartsSectionClock",
+    "previous_risk": "R3",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.proctoring.internal.service.IncidentEvidenceServiceTest.standardPolicy_recordsAnAutoIncidentWithWarningAndServerOwnership",
+    "previous_risk": "R3",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.scoring.internal.service.examiner.ExaminerScoringServiceTest.acceptsInclusiveScoreBoundariesAndKeepsOtherScoresUntouched(int)[1]",
+    "previous_risk": "R1",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.scoring.internal.service.examiner.ExaminerScoringServiceTest.acceptsInclusiveScoreBoundariesAndKeepsOtherScoresUntouched(int)[2]",
+    "previous_risk": "R1",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.ExamWorkflowServicesTest.createDraft_defaultsOfficialExamToStartedSeriesExclusion",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.ExamWorkflowServicesTest.updateDraft_rescheduleKeepsSessionCode",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.ExamWorkflowServicesTest.createDraft_partialSkillSelection_isRejected",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.ExamWorkflowServicesTest.createDraft_withRetries_isRejectedBecauseEveryStudentSitsOnce",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.ExamWorkflowServicesTest.createDraft_officialWithNonStrictLockdown_isRejected",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.ExamWorkflowServicesTest.updateDraft_legacyDraftWithoutModeOrLockdown_derivesOfficialStrictDefault",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.ExamWorkflowServicesTest.updateDraft_withoutLockdown_preservesStrictAfterRetryPatch",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_translatesDatabaseOverlapRaceToConflict",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_delegatesToAssessmentGenerateAndPublish_usesReturnedSnapshotPublicId",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.changeSubscription_rejectsActualEnrollmentCountAboveNewCap",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.patchPolicy_isRejected_whenScheduledWindowHasAlreadyStarted",
+    "previous_risk": "R3",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.changeSubscription_updatesSessionAndAllEnrollmentLicenseKeys",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_rejectsWindowOutsideSubscription_asUnprocessable",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_rejectsApplicationLevelOverlap_withConflictingSession",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_persistsGeneratedSnapshotAndSubscriptionLicense",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_rejectsCapacityAboveSubscriptionCap_withBothValues",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_allowsSameWindowForDifferentSubscription",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_setsLockdownModeToStrict_whenExamModeIsRealExam",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.changeSubscription_requestsSubscriptionLocksInPublicIdOrder",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_withoutExamMode_defaultsToOfficialStrict",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_withTeacherOverride_nonStrictOnOfficial_rejectedBeforeSave",
+    "previous_risk": "R3 (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  },
+  {
+    "test": "com.pte.session.internal.service.SessionLifecycleServiceTest.create_generationFails_noSessionSaved",
+    "previous_risk": "R3 / Mockito (nghi nguyên nhân)",
+    "runs": {
+      "unit": "PASS",
+      "postgres": "PASS"
+    }
+  }
+]

@@ -1,0 +1,57 @@
+{
+  "totals": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": [
+    {
+      "name": "com.pte.architecture.NoDirectClockAccessTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "productionCodeReadsTimeOnlyThroughTheInjectedClock",
+          "classname": "com.pte.architecture.NoDirectClockAccessTest",
+          "time": "0.424"
+        },
+        {
+          "name": "detectionIgnoresCommentsAndClockArgumentsButCatchesZoneArguments",
+          "classname": "com.pte.architecture.NoDirectClockAccessTest",
+          "time": "0.009"
+        }
+      ]
+    },
+    {
+      "name": "com.pte.architecture.PackageDensityTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "internalPackagesStaySmallEnoughToNavigate",
+          "classname": "com.pte.architecture.PackageDensityTest",
+          "time": "0.027"
+        }
+      ]
+    },
+    {
+      "name": "com.pte.architecture.SourceFileSizeTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "sourceFilesStayWithinTheLineLimit",
+          "classname": "com.pte.architecture.SourceFileSizeTest",
+          "time": "0.085"
+        }
+      ]
+    }
+  ]
+}

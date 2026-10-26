@@ -1,0 +1,718 @@
+{
+  "base": "d43c6b02ea2602e4fc02713bba25751f493fe751",
+  "head": "6df448261a4e7b76a4b32c6bd7f9534b4147d8f0",
+  "changed": [
+    "app/src/main/java/com/pte/assessment/AssessmentService.java",
+    "app/src/main/java/com/pte/assessment/ExamDefinitionService.java",
+    "app/src/main/java/com/pte/assessment/domain/ExamDefinitionItem.java",
+    "app/src/main/java/com/pte/assessment/internal/controller/BlueprintController.java",
+    "app/src/main/java/com/pte/assessment/internal/service/BlueprintService.java",
+    "app/src/main/java/com/pte/assessment/internal/service/SnapshotPromptQueryService.java",
+    "app/src/main/java/com/pte/assessment/internal/service/SnapshotPublishService.java",
+    "app/src/main/java/com/pte/assessment/internal/service/definition/ExamDefinitionAdminService.java",
+    "app/src/main/java/com/pte/attempt/internal/service/ProctorCommandService.java",
+    "app/src/main/java/com/pte/billing/BillingService.java",
+    "app/src/main/java/com/pte/billing/internal/controller/PlatformSettingController.java",
+    "app/src/main/java/com/pte/billing/internal/service/PlanService.java",
+    "app/src/main/java/com/pte/billing/internal/service/TenantApplicationService.java",
+    "app/src/main/java/com/pte/billing/internal/service/order/OrderPersistenceService.java",
+    "app/src/main/java/com/pte/billing/internal/service/order/OrderService.java",
+    "app/src/main/java/com/pte/enrollment/EnrollmentModuleService.java",
+    "app/src/main/java/com/pte/enrollment/internal/service/ClassLifecycleService.java",
+    "app/src/main/java/com/pte/enrollment/internal/service/ClassService.java",
+    "app/src/main/java/com/pte/enrollment/internal/service/ClassStudentService.java",
+    "app/src/main/java/com/pte/enrollment/internal/service/ProgramService.java",
+    "app/src/main/java/com/pte/identity/domain/User.java",
+    "app/src/main/java/com/pte/identity/internal/repository/UserRepository.java",
+    "app/src/main/java/com/pte/identity/internal/service/ExamStaffQueryService.java",
+    "app/src/main/java/com/pte/itembank/ItembankService.java",
+    "app/src/main/java/com/pte/itembank/QuestionTypeService.java",
+    "app/src/main/java/com/pte/itembank/internal/service/QuestionValidationHelper.java",
+    "app/src/main/java/com/pte/media/internal/service/CloudinaryMediaService.java",
+    "app/src/main/java/com/pte/notification/internal/listener/CommercialNotificationListener.java",
+    "app/src/main/java/com/pte/notification/internal/listener/StudentEnrollmentConflictNotificationListener.java",
+    "app/src/main/java/com/pte/notification/internal/listener/TenantApplicationInboxNotificationListener.java",
+    "app/src/main/java/com/pte/notification/internal/listener/TenantApplicationNotificationListener.java",
+    "app/src/main/java/com/pte/notification/internal/service/InboxReadService.java",
+    "app/src/main/java/com/pte/practice/internal/service/PracticeAnswerValidationService.java",
+    "app/src/main/java/com/pte/practice/internal/service/PracticeProgressService.java",
+    "app/src/main/java/com/pte/practice/internal/service/PracticeResponseService.java",
+    "app/src/main/java/com/pte/proctoring/internal/service/AttendanceCoordinatorService.java",
+    "app/src/main/java/com/pte/scoring/ScoringService.java",
+    "app/src/main/java/com/pte/scoring/internal/service/examiner/ExaminerScoringService.java",
+    "app/src/main/java/com/pte/scoring/internal/service/examiner/ExaminerWorkspaceQueryService.java",
+    "app/src/main/java/com/pte/scoring/internal/vendor/gemini/PromptImageLoader.java",
+    "app/src/main/java/com/pte/session/domain/ExamSession.java",
+    "app/src/main/java/com/pte/session/internal/service/SessionOperationGuardService.java",
+    "app/src/main/java/com/pte/session/internal/service/attendance/AttendanceQueryService.java",
+    "app/src/main/java/com/pte/session/internal/service/enrollment/EntitlementService.java",
+    "app/src/main/java/com/pte/session/internal/service/staff/ProctorMonitoringQueryService.java",
+    "app/src/main/java/com/pte/shared/web/RateLimitFilter.java",
+    "app/src/main/java/com/pte/tenancy/internal/controller/OrganizationController.java",
+    "app/src/main/java/com/pte/tenancy/internal/service/OrganizationLifecycleService.java",
+    "app/src/main/java/com/pte/tenancy/internal/service/TenantSuspensionExpirationService.java",
+    "app/src/test/java/com/pte/TestClocks.java",
+    "app/src/test/java/com/pte/assessment/AssessmentServiceTest.java",
+    "app/src/test/java/com/pte/assessment/ExamDefinitionServiceTest.java",
+    "app/src/test/java/com/pte/assessment/internal/controller/ApprovalStatusEndpointTest.java",
+    "app/src/test/java/com/pte/assessment/internal/service/BlueprintServiceTest.java",
+    "app/src/test/java/com/pte/assessment/internal/service/ExamDefinitionAdminServiceTest.java",
+    "app/src/test/java/com/pte/assessment/internal/service/SnapshotPublishServiceTest.java",
+    "app/src/test/java/com/pte/attempt/internal/policy/ManualNavigationPolicyTest.java",
+    "app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleCapabilityTest.java",
+    "app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServiceEncryptedSubmissionTest.java",
+    "app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServiceGetAllTasksTest.java",
+    "app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServiceHeartbeatTest.java",
+    "app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServiceNavigateTaskTest.java",
+    "app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServicePlayAudioTest.java",
+    "app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServiceSubmitAnswerTest.java",
+    "app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServiceSubmitAttemptTest.java",
+    "app/src/test/java/com/pte/attempt/internal/service/AttemptLifecycleServiceTest.java",
+    "app/src/test/java/com/pte/attempt/internal/service/ExamContentServiceTest.java",
+    "app/src/test/java/com/pte/attempt/internal/service/ExamItemLoaderTest.java",
+    "app/src/test/java/com/pte/attempt/internal/service/HeartbeatServiceTest.java",
+    "app/src/test/java/com/pte/attempt/internal/service/ProctorCommandServiceTest.java",
+    "app/src/test/java/com/pte/attempt/internal/service/TimerServiceTest.java",
+    "app/src/test/java/com/pte/billing/BillingServiceTest.java",
+    "app/src/test/java/com/pte/billing/internal/controller/BillingStatusEndpointTest.java",
+    "app/src/test/java/com/pte/billing/internal/controller/PlatformManagerControllerSecurityTest.java",
+    "app/src/test/java/com/pte/billing/internal/service/ArchiveLifecyclePostgresIntegrationTest.java",
+    "app/src/test/java/com/pte/billing/internal/service/LicenseCodeRevocationServiceTest.java",
+    "app/src/test/java/com/pte/billing/internal/service/PlanServiceTest.java",
+    "app/src/test/java/com/pte/billing/internal/service/TenantApplicationReviewPostgresIntegrationTest.java",
+    "app/src/test/java/com/pte/billing/internal/service/TenantApplicationServiceTest.java",
+    "app/src/test/java/com/pte/billing/internal/service/license/LicenseCodeExpirationServiceTest.java",
+    "app/src/test/java/com/pte/billing/internal/service/license/LicenseCodePersistenceServiceTest.java",
+    "app/src/test/java/com/pte/billing/internal/service/license/LicenseCodeServiceTest.java",
+    "app/src/test/java/com/pte/billing/internal/service/order/OrderExpirationServiceTest.java",
+    "app/src/test/java/com/pte/billing/internal/service/order/OrderPersistenceServiceTest.java",
+    "app/src/test/java/com/pte/billing/internal/service/order/OrderServiceTest.java",
+    "app/src/test/java/com/pte/billing/internal/service/order/PayOsWebhookServiceTest.java",
+    "app/src/test/java/com/pte/billing/internal/service/subscription/SubscriptionActivationServiceTest.java",
+    "app/src/test/java/com/pte/billing/internal/service/subscription/SubscriptionPersistenceServiceTest.java",
+    "app/src/test/java/com/pte/billing/internal/vendor/payos/PayOsClientTest.java",
+    "app/src/test/java/com/pte/enrollment/EnrollmentModuleServiceTest.java",
+    "app/src/test/java/com/pte/enrollment/internal/controller/TrainingStatusEndpointTest.java",
+    "app/src/test/java/com/pte/enrollment/internal/repository/StudentRosterRepositoryTest.java",
+    "app/src/test/java/com/pte/enrollment/internal/service/ClassServiceTest.java",
+    "app/src/test/java/com/pte/enrollment/internal/service/ClassStudentServiceTenantIsolationTest.java",
+    "app/src/test/java/com/pte/enrollment/internal/service/ProgramServiceTest.java",
+    "app/src/test/java/com/pte/identity/internal/controller/UserStatusEndpointTest.java",
+    "app/src/test/java/com/pte/itembank/ItembankFixtures.java",
+    "app/src/test/java/com/pte/itembank/ItembankServiceTest.java",
+    "app/src/test/java/com/pte/itembank/QuestionTypeServiceTest.java",
+    "app/src/test/java/com/pte/itembank/internal/controller/QuestionStatusEndpointTest.java",
+    "app/src/test/java/com/pte/itembank/internal/repository/ItembankOverviewQueriesTest.java",
+    "app/src/test/java/com/pte/itembank/internal/service/QuestionValidationHelperTest.java",
+    "app/src/test/java/com/pte/media/internal/service/CloudinaryMediaServiceTest.java",
+    "app/src/test/java/com/pte/notification/internal/controller/AnnouncementStatusEndpointTest.java",
+    "app/src/test/java/com/pte/notification/internal/listener/SessionCancelledNotificationListenerTest.java",
+    "app/src/test/java/com/pte/notification/internal/listener/SupportTicketInboxNotificationListenerTest.java",
+    "app/src/test/java/com/pte/notification/internal/messaging/consumer/EmailWorkerTest.java",
+    "app/src/test/java/com/pte/notification/internal/repository/InboxAnnouncementStorePostgresIntegrationTest.java",
+    "app/src/test/java/com/pte/notification/internal/repository/InboxDeliveryStorePostgresIntegrationTest.java",
+    "app/src/test/java/com/pte/notification/internal/repository/InboxReadStorePostgresIntegrationTest.java",
+    "app/src/test/java/com/pte/notification/internal/service/NotificationDispatchServiceTest.java",
+    "app/src/test/java/com/pte/notification/internal/service/SessionClosingSoonReminderWorkerTest.java",
+    "app/src/test/java/com/pte/practice/internal/service/PracticeEmailAuthServiceTest.java",
+    "app/src/test/java/com/pte/practice/internal/service/PracticeEntitlementServiceTest.java",
+    "app/src/test/java/com/pte/practice/internal/service/session/PracticeSessionServiceTest.java",
+    "app/src/test/java/com/pte/proctoring/internal/service/ExamIncidentCommandServiceTest.java",
+    "app/src/test/java/com/pte/proctoring/internal/service/IncidentEvidenceServiceTest.java",
+    "app/src/test/java/com/pte/proctoring/internal/service/IncidentRetentionServiceTest.java",
+    "app/src/test/java/com/pte/proctoring/internal/service/ProctorWatchServiceTest.java",
+    "app/src/test/java/com/pte/proctoring/internal/service/ViolationServiceTest.java",
+    "app/src/test/java/com/pte/reporting/internal/service/ReportPublishServiceTest.java",
+    "app/src/test/java/com/pte/scoring/ScoringServiceTest.java",
+    "app/src/test/java/com/pte/scoring/internal/service/AiScoringPipelineDatabaseTest.java",
+    "app/src/test/java/com/pte/scoring/internal/service/ExaminerAssignmentDatabaseIntegrationTest.java",
+    "app/src/test/java/com/pte/scoring/internal/service/ScoringCommandServiceTest.java",
+    "app/src/test/java/com/pte/scoring/internal/service/ScoringReviewAiDetailTest.java",
+    "app/src/test/java/com/pte/scoring/internal/service/ai/AiScoringResultPersistenceServiceTest.java",
+    "app/src/test/java/com/pte/scoring/internal/service/examiner/ExaminerAssignmentServiceTest.java",
+    "app/src/test/java/com/pte/scoring/internal/service/grading/GradingCompletionEvaluatorAssignmentCoverageTest.java",
+    "app/src/test/java/com/pte/scoring/internal/service/grading/GradingCompletionEvaluatorTest.java",
+    "app/src/test/java/com/pte/scoring/internal/service/review/ScoringReviewServiceTest.java",
+    "app/src/test/java/com/pte/scoring/internal/service/selection/ScorePublicationLockServiceTest.java",
+    "app/src/test/java/com/pte/scoring/internal/service/selection/ScoreSourceSelectionServiceTest.java",
+    "app/src/test/java/com/pte/scoring/internal/vendor/VendorHttpTest.java",
+    "app/src/test/java/com/pte/scoring/internal/vendor/azure/AzureSpeechRestClientTest.java",
+    "app/src/test/java/com/pte/scoring/internal/vendor/gemini/GeminiRestClientTest.java",
+    "app/src/test/java/com/pte/scoring/internal/vendor/openai/OpenAiCompatibleChatClientTest.java",
+    "app/src/test/java/com/pte/session/internal/controller/SessionStatusEndpointTest.java",
+    "app/src/test/java/com/pte/session/internal/service/EnrollmentConcurrencyPostgresIntegrationTest.java",
+    "app/src/test/java/com/pte/session/internal/service/ExamWorkflowServicesTest.java",
+    "app/src/test/java/com/pte/session/internal/service/SessionLifecycleServiceTest.java",
+    "app/src/test/java/com/pte/session/internal/service/enrollment/EnrollmentServiceTest.java",
+    "app/src/test/java/com/pte/session/internal/service/enrollment/EntitlementServiceTest.java",
+    "app/src/test/java/com/pte/support/internal/repository/SupportTicketRepositoryTest.java",
+    "app/src/test/java/com/pte/support/internal/service/SupportTicketEventPublicationTest.java",
+    "app/src/test/java/com/pte/tenancy/internal/controller/OrganizationSuspensionHttpContractTest.java",
+    "app/src/test/java/com/pte/tenancy/internal/service/OrganizationLifecycleServiceTest.java",
+    "app/src/test/java/com/pte/tenancy/internal/service/QuotaGrantServiceTest.java",
+    "app/src/test/java/com/pte/tenancy/internal/service/TenancyServiceTest.java"
+  ],
+  "working_tree": "",
+  "commits": [
+    "6df44826 chore(shared): remove unused rate limit filter import",
+    "f48d5858 chore(support): remove unused repository and event test imports",
+    "6fc48b79 test(reporting): use a frozen clock for report publication",
+    "b11d365c test(notification): freeze worker clocks and clean unused imports",
+    "bf56ef91 test(proctoring): use frozen clocks and remove unused imports",
+    "859c9843 refactor(practice): remove compatibility constructors and freeze test clocks",
+    "7c523c07 refactor(scoring): remove compatibility constructors and clock fallbacks",
+    "f3ebf967 refactor(session): require explicit dependencies and clocks in services and tests",
+    "6d587d60 refactor(tenancy): require injected clocks and remove lifecycle compatibility constructors",
+    "f055ba35 refactor(media): remove compatibility constructors and update upload tests",
+    "47473f20 refactor(itembank): replace compatibility constructors with explicit test fixtures",
+    "0aa8a3f5 chore(identity): remove unused domain, repository and test imports",
+    "ea7e86d9 refactor(enrollment): remove compatibility constructor and align service tests",
+    "59df8444 refactor(billing): require explicit service dependencies and freeze test clocks",
+    "c15fc644 refactor(attempt): remove proctor constructor fallback and freeze test clocks",
+    "7d06e1c2 refactor(assessment): remove compatibility constructors and wire explicit test dependencies",
+    "98317a84 test(shared): add a frozen clock fixture for service tests"
+  ],
+  "unused_import_candidates": [
+    {
+      "file": "app/src/main/java/com/pte/practice/internal/service/PracticeAnswerValidationService.java",
+      "line": 12,
+      "name": "JsonMapper"
+    }
+  ],
+  "multiple_constructor_beans": [
+    {
+      "file": "app/src/main/java/com/pte/billing/BillingTenantSuspensionImpactProvider.java",
+      "constructor_lines": [
+        32,
+        38
+      ],
+      "autowired_count": 1
+    },
+    {
+      "file": "app/src/main/java/com/pte/tenancy/internal/service/OrganizationService.java",
+      "constructor_lines": [
+        32,
+        36,
+        42
+      ],
+      "autowired_count": 1
+    },
+    {
+      "file": "app/src/main/java/com/pte/tenancy/internal/service/TenantSuspensionExpirationService.java",
+      "constructor_lines": [
+        29,
+        35
+      ],
+      "autowired_count": 1
+    },
+    {
+      "file": "app/src/main/java/com/pte/session/internal/service/draft/SessionCodeGenerator.java",
+      "constructor_lines": [
+        38,
+        41
+      ],
+      "autowired_count": 1
+    },
+    {
+      "file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionCreationService.java",
+      "constructor_lines": [
+        35,
+        45
+      ],
+      "autowired_count": 1
+    },
+    {
+      "file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionPolicyService.java",
+      "constructor_lines": [
+        32,
+        39
+      ],
+      "autowired_count": 1
+    },
+    {
+      "file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionScheduleService.java",
+      "constructor_lines": [
+        44,
+        54
+      ],
+      "autowired_count": 1
+    },
+    {
+      "file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionStateService.java",
+      "constructor_lines": [
+        34,
+        43
+      ],
+      "autowired_count": 1
+    },
+    {
+      "file": "app/src/main/java/com/pte/session/internal/service/lifecycle/SessionSubscriptionService.java",
+      "constructor_lines": [
+        37,
+        47
+      ],
+      "autowired_count": 1
+    },
+    {
+      "file": "app/src/main/java/com/pte/scoring/internal/service/ai/PracticeAiScoringService.java",
+      "constructor_lines": [
+        63,
+        69
+      ],
+      "autowired_count": 1
+    },
+    {
+      "file": "app/src/main/java/com/pte/scoring/internal/messaging/consumer/AiScoringWorker.java",
+      "constructor_lines": [
+        62,
+        74
+      ],
+      "autowired_count": 1
+    },
+    {
+      "file": "app/src/main/java/com/pte/practice/internal/mapper/PracticeSessionResponseMapper.java",
+      "constructor_lines": [
+        42,
+        49
+      ],
+      "autowired_count": 1
+    },
+    {
+      "file": "app/src/main/java/com/pte/practice/internal/service/PracticeCatalogService.java",
+      "constructor_lines": [
+        42,
+        48
+      ],
+      "autowired_count": 1
+    },
+    {
+      "file": "app/src/main/java/com/pte/itembank/internal/service/lifecycle/QuestionLifecycleService.java",
+      "constructor_lines": [
+        46,
+        57
+      ],
+      "autowired_count": 1
+    },
+    {
+      "file": "app/src/main/java/com/pte/billing/internal/service/PlatformSettingService.java",
+      "constructor_lines": [
+        41,
+        47
+      ],
+      "autowired_count": 1
+    },
+    {
+      "file": "app/src/main/java/com/pte/billing/internal/service/license/LicenseCodeGenerator.java",
+      "constructor_lines": [
+        16,
+        20
+      ],
+      "autowired_count": 0
+    },
+    {
+      "file": "app/src/main/java/com/pte/billing/internal/service/license/LicenseKeyGenerator.java",
+      "constructor_lines": [
+        22,
+        26
+      ],
+      "autowired_count": 0
+    }
+  ],
+  "system_clocks": [
+    {
+      "file": "app/src/main/java/com/pte/shared/config/ClockConfig.java",
+      "line": 12,
+      "text": "public Clock clock() { return Clock.systemUTC(); }"
+    },
+    {
+      "file": "app/src/main/java/com/pte/scoring/internal/vendor/ProviderGuard.java",
+      "line": 67,
+      "text": "return new ProviderGuard(vendor, 1, Integer.MAX_VALUE, Clock.systemUTC(), duration -> {"
+    }
+  ],
+  "spring_tests": [
+    {
+      "file": "app/src/test/java/com/pte/attempt/ExamAttemptSpecificationsTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "ExamAttemptSpecificationsTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/tenancy/internal/repository/OrganizationCountQueryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "OrganizationCountQueryTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/tenancy/internal/repository/OrganizationRepositoryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "OrganizationRepositoryTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/tenancy/internal/repository/TenancyPlatformOverviewQueriesTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "TenancyPlatformOverviewQueriesTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/support/internal/repository/SupportOverviewQueriesTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "SupportOverviewQueriesTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/support/internal/repository/SupportPlatformOverviewQueriesTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "SupportPlatformOverviewQueriesTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/support/internal/repository/SupportTicketRepositoryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "SupportTicketRepositoryTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/shared/audit/AuditHistoryReaderTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "AuditHistoryReaderTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/shared/audit/AuditLogServiceRecentTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "AuditLogServiceRecentTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/shared/idempotency/IdempotencyKeyServiceTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "IdempotencyKeyServiceTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/session/internal/repository/ExamRegistrationRepositorySlotConflictTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "ExamRegistrationRepositorySlotConflictTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/session/internal/repository/ExamSessionRepositorySessionCodeTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "ExamSessionRepositorySessionCodeTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/session/internal/repository/SessionOverviewQueriesTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "SessionOverviewQueriesTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/session/internal/service/EnrollmentConcurrencyPostgresIntegrationTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "EnrollmentConcurrencyPostgresIntegrationTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/session/internal/service/SessionGradingServiceTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "SessionGradingServiceTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/scoring/internal/repository/AnswerEvaluationTableTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "AnswerEvaluationTableTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/scoring/internal/repository/ExaminerAssignmentRepositoryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "ExaminerAssignmentRepositoryTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/scoring/internal/repository/ExaminerWorkQueueRepositoryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "ExaminerWorkQueueRepositoryTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/scoring/internal/repository/ExaminerWorkspaceReadRepositoryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "ExaminerWorkspaceReadRepositoryTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/scoring/internal/repository/ScoringOverviewQueriesTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "ScoringOverviewQueriesTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/scoring/internal/service/AiScoringPipelineDatabaseTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "AiScoringPipelineDatabaseTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/scoring/internal/service/ExaminerAssignmentDatabaseIntegrationTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "ExaminerAssignmentDatabaseIntegrationTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/reporting/internal/repository/ExamResultSpecificationsTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "ExamResultSpecificationsTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/reporting/internal/repository/ReportingOverviewQueriesTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "ReportingOverviewQueriesTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/proctoring/internal/repository/ExamIncidentRepositoryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "ExamIncidentRepositoryTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/practice/internal/repository/OtpChallengeRepositoryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "OtpChallengeRepositoryTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/media/internal/repository/MediaAssetRepositoryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "MediaAssetRepositoryTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/itembank/internal/repository/ItembankOverviewQueriesTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "ItembankOverviewQueriesTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/itembank/internal/repository/QuestionRepositoryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "QuestionRepositoryTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/identity/internal/repository/IdentityOverviewQueriesTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "IdentityOverviewQueriesTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/identity/internal/repository/IdentityPlatformOverviewQueriesTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "IdentityPlatformOverviewQueriesTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/identity/internal/repository/OrganizationMemberRepositoryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "OrganizationMemberRepositoryTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/identity/internal/repository/UserRepositoryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "UserRepositoryTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/identity/internal/service/OrganizationMemberDirectoryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "OrganizationMemberDirectoryTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/identity/internal/service/RefreshTokenOrganizationTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "RefreshTokenOrganizationTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/enrollment/internal/repository/ClassStudentRepositoryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "ClassStudentRepositoryTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/enrollment/internal/repository/EnrollmentOverviewQueriesTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "EnrollmentOverviewQueriesTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/enrollment/internal/repository/ProgramRepositoryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "ProgramRepositoryTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/enrollment/internal/repository/StudentRosterRepositoryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "StudentRosterRepositoryTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/enrollment/internal/repository/TrainingClassRepositoryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "TrainingClassRepositoryTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/billing/internal/repository/BillingOverviewQueriesTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "BillingOverviewQueriesTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/billing/internal/repository/BillingPlatformOverviewQueriesTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "BillingPlatformOverviewQueriesTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/billing/internal/repository/BillingRevenueOverviewQueriesTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "BillingRevenueOverviewQueriesTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/billing/internal/repository/OrderPaymentRepositoryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "OrderPaymentRepositoryTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/billing/internal/service/ArchiveLifecyclePostgresIntegrationTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "ArchiveLifecyclePostgresIntegrationTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/billing/internal/service/LicenseIssuePostgresIntegrationTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "LicenseIssuePostgresIntegrationTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/billing/internal/service/TenantApplicationReviewPostgresIntegrationTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "TenantApplicationReviewPostgresIntegrationTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/attempt/internal/repository/AttemptOverviewQueriesTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "AttemptOverviewQueriesTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/attempt/internal/repository/AttemptPlatformOverviewQueriesTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "AttemptPlatformOverviewQueriesTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/attempt/internal/repository/AttemptSubmittedPerMonthBoundaryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "AttemptSubmittedPerMonthBoundaryTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/attempt/internal/repository/ExamAttemptGradingExclusionTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "ExamAttemptGradingExclusionTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/attempt/internal/repository/ExamAttemptLastSeenTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "ExamAttemptLastSeenTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/attempt/internal/repository/ExamAttemptLatestStatusTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "ExamAttemptLatestStatusTest"
+    },
+    {
+      "file": "app/src/test/java/com/pte/assessment/internal/repository/ExamVersionRepositoryTest.java",
+      "annotations": [
+        "DataJpaTest"
+      ],
+      "name": "ExamVersionRepositoryTest"
+    }
+  ],
+  "allowlists": {
+    "dense-packages.allowlist": [],
+    "direct-clock-access.allowlist": [],
+    "oversized-files.allowlist": []
+  }
+}

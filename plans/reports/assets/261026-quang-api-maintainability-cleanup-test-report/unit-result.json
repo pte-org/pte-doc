@@ -1,0 +1,18 @@
+{
+  "stage": "unit",
+  "command": [
+    "mvnw.cmd",
+    "-pl",
+    "app",
+    "test"
+  ],
+  "started": "2026-10-25T17:42:25.128696+00:00",
+  "seconds": 154.51,
+  "exit_code": 1,
+  "totals": {
+    "tests": 2865,
+    "failures": 15,
+    "errors": 14,
+    "skipped": 58
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "stage": "compile",
+  "command": [
+    "mvnw.cmd",
+    "-pl",
+    "app",
+    "-q",
+    "test-compile"
+  ],
+  "started": "2026-10-25T17:41:26.760762+00:00",
+  "seconds": 22.06,
+  "exit_code": 0
+}

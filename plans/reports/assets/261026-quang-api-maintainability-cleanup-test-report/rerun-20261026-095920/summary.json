@@ -1,0 +1,97 @@
+{
+  "verdict": "PASS",
+  "results": {
+    "unit": {
+      "stage": "unit",
+      "command": [
+        "mvnw.cmd",
+        "-pl",
+        "app",
+        "test"
+      ],
+      "started": "2026-10-26T02:59:49.265311+00:00",
+      "seconds": 113.15,
+      "exit_code": 0,
+      "totals": {
+        "tests": 2865,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 58
+      }
+    },
+    "postgres": {
+      "stage": "postgres",
+      "command": [
+        "mvnw.cmd",
+        "-pl",
+        "app",
+        "test",
+        "-Dlifecycle.test.db.url=jdbc:postgresql://127.0.0.1:55439/lifecycle_test?currentSchema=migration_clean"
+      ],
+      "started": "2026-10-26T03:02:18.540634+00:00",
+      "seconds": 159.29,
+      "exit_code": 0,
+      "totals": {
+        "tests": 2865,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 16
+      }
+    }
+  },
+  "previous_failures": 29,
+  "previous_failures_pass_both_runs": 29,
+  "source_preserved": true,
+  "changed_tracked_paths": {
+    "api": [],
+    "doc": []
+  },
+  "ratchets": {
+    "unit": [
+      {
+        "name": "com.pte.architecture.NoDirectClockAccessTest",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "name": "com.pte.architecture.PackageDensityTest",
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "name": "com.pte.architecture.SourceFileSizeTest",
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    ],
+    "postgres": [
+      {
+        "name": "com.pte.architecture.NoDirectClockAccessTest",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "name": "com.pte.architecture.PackageDensityTest",
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "name": "com.pte.architecture.SourceFileSizeTest",
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    ]
+  }
+}
