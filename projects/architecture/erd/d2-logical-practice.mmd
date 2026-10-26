@@ -1,0 +1,45 @@
+---
+title: D2 Logical ERD - practice
+---
+%% Sinh bởi gen_erd.py từ V1__baseline.sql. Không sửa tay; sửa script rồi chạy lại.
+%% Nét liền = FK thật trong DB. Nét đứt = tham chiếu logic bằng UUID (không có FK).
+%% Bảng không có thuộc tính = thuộc module khác, xem file D2 tương ứng.
+%% Mọi bảng entity còn có id (bigint), created_at, updated_at, deleted (xóa mềm).
+erDiagram
+  practice_sessions {
+    uuid public_id PK
+    instant completed_at
+    instant deadline_at
+    uuid identity_public_id
+    string product_code
+    instant started_at
+    enum status "OVERVIEW | IN_PROGRESS | COMPLETED | DISCARDED | EXPIRED"
+    uuid student_public_id "ref users"
+    uuid tenant_id "tenant"
+    int time_limit_seconds
+    string title
+    long version
+  }
+  practice_responses {
+    uuid public_id PK
+    int ai_score
+    enum confidence "LOW | MEDIUM | HIGH"
+    string display_name
+    int objective_score
+    int order_index
+    long practice_session_id "ref practice_sessions"
+    enum scoring_status "NONE | SCORING | SCORED | FAILED"
+    string section
+    uuid source_question_public_id "ref questions"
+    enum status "PENDING | ANSWERED | SKIPPED"
+    long version
+    string ai_result "gom 10 cột ai_*"
+  }
+  otp_challenges {
+    uuid public_id PK
+    instant expires_at
+    long identity_id
+  }
+  users ||..o{ practice_sessions : "student_public_id"
+  practice_sessions ||..o{ practice_responses : "practice_session_id"
+  questions ||..o{ practice_responses : "source_question_public_id"
