@@ -1,0 +1,94 @@
+---
+title: D2 Logical ERD - tenancy, identity, enrollment
+---
+%% Sinh bởi gen_erd.py từ V1__baseline.sql. Không sửa tay; sửa script rồi chạy lại.
+%% Nét liền = FK thật trong DB. Nét đứt = tham chiếu logic bằng UUID (không có FK).
+%% Bảng không có thuộc tính = thuộc module khác, xem file D2 tương ứng.
+%% Mọi bảng entity còn có id (bigint), created_at, updated_at, deleted (xóa mềm).
+erDiagram
+  organizations {
+    uuid public_id PK
+    string code
+    enum facility_type "MAIN | BRANCH | TEST_CENTER"
+    string name
+    uuid reviewed_by "ref users"
+    enum status "PENDING | ACTIVE | REJECTED | SUSPENDED"
+    int student_limit
+    instant suspended_until
+    long version
+  }
+  organization_quota_grants {
+    long organization_id FK "FK organizations"
+    uuid actor_user_id "ref users"
+    int amount
+    uuid public_id PK
+  }
+  users {
+    uuid public_id PK
+    string email
+    string full_name
+    enum status "ACTIVE | SUSPENDED"
+    string student_code
+    string username UK
+  }
+  user_roles {
+    long user_id PK, FK "FK users"
+    enum role PK "PLATFORM_ADMIN | PLATFORM_MANAGER | ACADEMIC_MANAGER | ACADEMIC_STAFF | PLATFORM_AUTHOR ... (9)"
+  }
+  organization_members {
+    uuid public_id PK
+    uuid organization_id "tenant"
+    enum status "ACTIVE | SUSPENDED"
+    long user_id FK "FK users"
+  }
+  organization_member_roles {
+    long member_id PK, FK "FK organization_members"
+    enum role PK "PLATFORM_ADMIN | PLATFORM_MANAGER | ACADEMIC_MANAGER | ACADEMIC_STAFF | PLATFORM_AUTHOR ... (9)"
+  }
+  refresh_tokens {
+    uuid public_id PK
+    instant expires_at
+    uuid organization_id "tenant"
+    string token_hash UK
+    long user_id "ref users"
+  }
+  programs {
+    uuid public_id PK
+    string name
+    enum status "ACTIVE | INACTIVE | SUSPENDED"
+    long organization_id FK "FK organizations"
+  }
+  classes {
+    uuid public_id PK
+    string name
+    uuid organization_id "tenant"
+    enum status "ACTIVE | INACTIVE | SUSPENDED"
+    long program_id FK "FK programs"
+  }
+  class_students {
+    uuid public_id PK
+    uuid organization_id "tenant"
+    uuid student_public_id UK "ref users"
+    long class_id FK "FK classes"
+  }
+  class_lecturers {
+    uuid public_id PK
+    uuid assignee_public_id "ref users"
+    uuid organization_id "tenant"
+    long class_id FK "FK classes"
+  }
+  users ||..o{ organizations : "reviewed_by"
+  organizations ||--o{ organization_quota_grants : "organization_id"
+  users ||..o{ organization_quota_grants : "actor_user_id"
+  users ||--o{ user_roles : "user_id"
+  organizations ||..o{ organization_members : "organization_id"
+  users ||--o{ organization_members : "user_id"
+  organization_members ||--o{ organization_member_roles : "member_id"
+  organizations ||..o{ refresh_tokens : "organization_id"
+  users ||..o{ refresh_tokens : "user_id"
+  organizations ||--o{ programs : "organization_id"
+  programs ||--o{ classes : "program_id"
+  users ||..o{ class_students : "student_public_id"
+  classes ||--o{ class_students : "class_id"
+  users ||..o{ class_lecturers : "assignee_public_id"
+  classes ||--o{ class_lecturers : "class_id"

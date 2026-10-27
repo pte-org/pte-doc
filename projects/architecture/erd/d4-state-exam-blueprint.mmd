@@ -1,0 +1,10 @@
+---
+title: D4 ExamBlueprint
+---
+%% Nguồn: BlueprintService, SnapshotPublishService
+stateDiagram-v2
+  [*] --> DRAFT : tạo khung đề
+  DRAFT --> PENDING_APPROVAL : gửi duyệt
+  PENDING_APPROVAL --> DRAFT : từ chối
+  PENDING_APPROVAL --> PUBLISHED : sinh snapshot (SnapshotPublishService)
+  PUBLISHED --> [*]

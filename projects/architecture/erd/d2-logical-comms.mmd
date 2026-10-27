@@ -1,0 +1,102 @@
+---
+title: D2 Logical ERD - notification, support, shared
+---
+%% Sinh bởi gen_erd.py từ V1__baseline.sql. Không sửa tay; sửa script rồi chạy lại.
+%% Nét liền = FK thật trong DB. Nét đứt = tham chiếu logic bằng UUID (không có FK).
+%% Bảng không có thuộc tính = thuộc module khác, xem file D2 tương ứng.
+%% Mọi bảng entity còn có id (bigint), created_at, updated_at, deleted (xóa mềm).
+erDiagram
+  notifications {
+    uuid public_id PK
+    enum category "SYSTEM_NOTICE | MAINTENANCE | SESSION | APPLICATION | BILLING | SUPPORT"
+    enum importance "INFO | IMPORTANT"
+    enum notification_type "APPLICATION_SUBMITTED | PLATFORM_ANNOUNCEMENT | SESSION_CLOSING_SOON | SESSION_GRADING_COMPLETED | COMMERCIAL_OUTCOME_CONFIRMED ... (10)"
+    uuid target_public_id "đa hình theo target_type"
+    enum target_type "APPLICATION | ANNOUNCEMENT | SESSION | ORDER | SUBSCRIPTION ... (7)"
+    string title
+  }
+  notification_recipients {
+    uuid public_id PK
+    int attempts
+    instant completed_at
+    uuid content_public_id "ref notifications"
+    instant read_at
+    uuid recipient_user_public_id "ref users"
+    long sequence_no
+    enum status "PENDING | PROCESSING | DELIVERED | FAILED | SUPPRESSED"
+    uuid tenant_id "tenant"
+  }
+  notification_recipient_streams {
+    uuid public_id PK
+    long last_sequence
+    uuid recipient_user_public_id "ref users"
+    uuid tenant_id "tenant"
+  }
+  notification_inbox_snapshots {
+    uuid public_id PK
+    uuid recipient_user_public_id FK "FK users"
+    uuid tenant_id "tenant"
+    instant expires_at
+  }
+  notification_announcements {
+    uuid public_id PK
+    uuid author_user_public_id "ref users"
+    enum category "SYSTEM_NOTICE | MAINTENANCE | SESSION | APPLICATION | BILLING | SUPPORT"
+    uuid correction_of_public_id "ref notification_announcements"
+    enum importance "INFO | IMPORTANT"
+    instant published_at
+    uuid published_content_public_id "ref notifications"
+    string title
+    long version
+  }
+  notification_logs {
+    uuid public_id PK
+    enum notification_type "STUDENT_ENROLLED | ATTEMPT_PUBLISHED | VIOLATION_DETECTED | SESSION_CANCELLED | STUDENT_ENROLLMENT_CONFLICT ... (10)"
+    uuid recipient_user_public_id "ref users"
+    enum status "PENDING | SENT | FAILED"
+    uuid tenant_id "tenant"
+  }
+  support_ticket {
+    uuid public_id PK
+    enum category "BUG | CONTENT_COMPLAINT | GENERAL_FEEDBACK"
+    string entity_id "đa hình theo entity_type"
+    enum entity_type "EXAM_SESSION | EXAM_ATTEMPT | QUESTION"
+    enum status "OPEN | IN_PROGRESS | RESOLVED | CLOSED"
+    uuid submitter_user_public_id "ref users"
+    uuid tenant_id "tenant"
+    long version
+  }
+  support_ticket_note {
+    uuid public_id PK
+    uuid admin_public_id "ref users"
+    long ticket_id "ref support_ticket"
+    uuid ticket_public_id "ref support_ticket"
+  }
+  audit_logs {
+    uuid public_id PK
+    string action
+    uuid actor_user_id "ref users"
+    string aggregate_id "đa hình theo aggregate_type"
+    uuid request_public_id
+    uuid tenant_id "tenant"
+  }
+  idempotency_keys {
+    uuid public_id PK
+    bool completed
+    instant expires_at
+    string idempotency_key
+    uuid organization_id "tenant"
+    enum scope "ATTENDANCE | EXAMINER_COMMAND | SCORE_SELECTION | LICENSE_ISSUE | PRACTICE_SESSION_OP"
+  }
+  notifications ||..o{ notification_recipients : "content_public_id"
+  users ||..o{ notification_recipients : "recipient_user_public_id"
+  users ||..o{ notification_recipient_streams : "recipient_user_public_id"
+  users ||--o{ notification_inbox_snapshots : "recipient_user_public_id"
+  users ||..o{ notification_announcements : "author_user_public_id"
+  notifications ||..o{ notification_announcements : "published_content_public_id"
+  users ||..o{ notification_logs : "recipient_user_public_id"
+  users ||..o{ support_ticket : "submitter_user_public_id"
+  users ||..o{ support_ticket_note : "admin_public_id"
+  support_ticket ||..o{ support_ticket_note : "ticket_id"
+  support_ticket ||..o{ support_ticket_note : "ticket_public_id"
+  users ||..o{ audit_logs : "actor_user_id"

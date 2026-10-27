@@ -1,0 +1,23 @@
+{
+  "phase": "phase-11-practice-notification-support-finalize",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-25T09:00:00Z",
+  "summary": {
+    "passed": 2762,
+    "failed": 0,
+    "skipped": 58
+  },
+  "failures": [],
+  "notes": [
+    "Full app suite (clean test): 2820 tests, 0 failures, 0 errors, 58 skipped (Postgres-only, env-gated); ModuleStructureTest green. 45 @Entity classes, 52 base tables.",
+    "Changed/new tests: PracticeSessionServiceTest (idempotency through IdempotencyKeyService, key length), PracticeResponse* renames, ExamDefinitionSeedMigrationTest (now parses V1), Inbox*PostgresIntegrationTest + InboxTestSchema (load V1; not run).",
+    "Removed with the feature: 9 tests that asserted the content of retired migrations (academic ownership, platform role, question type catalog, notification/practice/support migration versions, Overview and platform-role Postgres tests, question publication migration test).",
+    "Docker gate (Postgres 17, empty DB, default profile): Flyway applied V1 (success), ddl-auto validate, app healthy, login 200 for admin@test.local and host.e2e@test.local. Re-run after the index additions.",
+    "Docker notification flow (NOTIFICATION_INBOX_ENABLED=true): create announcement, audience preview, publish, recipient PENDING to DELIVERED with sequence 1, inbox list/get/mark-read/unread-count/read-all with snapshot, announcement stats, retry-delivery: all 200.",
+    "Found by the gate: notification_inbox_snapshots has no entity so it was missing from the Hibernate-built DB; now created in 000-postgres-objects.sql and carried into V1.",
+    "Function parity: endpoint diff vs phase 1 in pte-doc/plans/reports/assets/261025-entity-consolidation-parity/ (removed endpoints are exactly the planned ones; phase 1 inventory had no practice endpoints). Client grep of old API paths is 0; remaining matches are UI routes, STOMP topics and form field names.",
+    "Not verified: env-gated Postgres tests, practice HTTP flow on Docker, production migration of an existing DB (must be dropped and recreated)."
+  ],
+  "report_path": "pte-doc/projects/plans/quang-entity-consolidation/tests/phase-11-practice-notification-support-finalize-test-report.json"
+}

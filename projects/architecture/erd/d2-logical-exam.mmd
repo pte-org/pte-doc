@@ -1,0 +1,130 @@
+---
+title: D2 Logical ERD - session, attempt, proctoring
+---
+%% Sinh bởi gen_erd.py từ V1__baseline.sql. Không sửa tay; sửa script rồi chạy lại.
+%% Nét liền = FK thật trong DB. Nét đứt = tham chiếu logic bằng UUID (không có FK).
+%% Bảng không có thuộc tính = thuộc module khác, xem file D2 tương ứng.
+%% Mọi bảng entity còn có id (bigint), created_at, updated_at, deleted (xóa mềm).
+erDiagram
+  exam_sessions {
+    uuid public_id PK
+    int capacity
+    instant closes_at
+    uuid exam_definition_public_id "ref exam_definitions"
+    int exam_definition_version
+    uuid exam_version_public_id "ref exam_versions"
+    uuid grading_frozen_by_public_id "ref users"
+    enum grading_status "FROZEN | COMPLETED"
+    string license_key
+    int max_retries_per_student
+    string name
+    instant opens_at
+    enum answer_integrity_level "STANDARD | STRICT"
+    enum lockdown_mode "NONE | STANDARD | STRICT"
+    enum replay_policy_type "UNLIMITED | LIMITED"
+    uuid publication_public_id
+    enum reuse_policy "ALLOW | EXCLUDE_STARTED_IN_SERIES | EXCLUDE_ASSIGNED_IN_SERIES | BLOCK_ON_SCHEDULE_OVERLAP"
+    string session_code UK
+    enum status "DRAFT | READY | SCHEDULED | OPEN | CLOSED | CANCELLED"
+    uuid subscription_id "ref subscriptions"
+    uuid tenant_id "tenant"
+  }
+  exam_session_selected_skills {
+    long session_id PK, FK "FK exam_sessions"
+    string skill PK
+  }
+  exam_session_audience_sources {
+    uuid public_id PK
+    uuid created_by "ref users"
+    uuid source_public_id "đa hình theo source_type"
+    enum source_type "STUDENT | CLASS | PROGRAM"
+    uuid tenant_id "tenant"
+    long session_id FK "FK exam_sessions"
+  }
+  exam_session_proctors {
+    uuid public_id PK
+    uuid proctor_public_id "ref users"
+    enum role "LEAD_PROCTOR | ASSISTANT_PROCTOR"
+    uuid tenant_id "tenant"
+    long session_id FK "FK exam_sessions"
+  }
+  exam_registrations {
+    uuid public_id PK
+    enum attendance_status "UNMARKED | PRESENT | ABSENT | LATE"
+    string identity_note
+    enum identity_status "UNVERIFIED | VERIFIED | FAILED"
+    uuid last_actor_public_id "ref users"
+    string license_key
+    uuid prior_session_public_id "ref exam_sessions"
+    instant published_at
+    enum reason "DUPLICATE_SOURCE | ALREADY_ASSIGNED | ALREADY_STARTED | SCHEDULE_OVERLAP | OUTSIDE_TENANT | CAPACITY_EXCEEDED"
+    enum status "CANDIDATE | ELIGIBLE | EXCLUDED | ENROLLED"
+    uuid student_public_id "ref users"
+    uuid tenant_id "tenant"
+    long session_id FK "FK exam_sessions"
+  }
+  exam_attempts {
+    uuid public_id PK
+    int attempt_number
+    uuid exam_definition_public_id "ref exam_definitions"
+    int exam_definition_version
+    uuid exam_version_public_id "ref exam_versions"
+    bool grading_excluded
+    string last_play_request_id
+    int max_retries_per_student
+    uuid session_public_id "ref exam_sessions"
+    instant started_at
+    enum status "CREATED | IN_PROGRESS | SUBMITTED"
+    uuid student_public_id "ref users"
+    instant submitted_at
+    uuid tenant_id "tenant"
+    long version
+  }
+  attempt_answers {
+    uuid public_id PK
+    enum confidence "LOW | MEDIUM | HIGH"
+    int item_order_index
+    uuid item_public_id "ref exam_version_items"
+    string payload
+    uuid selected_evaluation_public_id "ref answer_evaluations"
+    uuid selected_score_source_by "ref users"
+    enum status "SUBMITTED | SCORED"
+    long attempt_id FK "FK exam_attempts"
+  }
+  exam_incidents {
+    uuid public_id PK
+    uuid attempt_public_id "ref exam_attempts"
+    string client_event_id
+    instant detected_at
+    enum origin "AUTO | PROCTOR_FLAG | REPORTED"
+    uuid reporter_public_id "ref users"
+    uuid session_public_id "ref exam_sessions"
+    string status
+    uuid student_public_id "ref users"
+    uuid tenant_id "tenant"
+    string title
+    string type
+  }
+  exam_definitions ||..o{ exam_sessions : "exam_definition_public_id"
+  exam_versions ||..o{ exam_sessions : "exam_version_public_id"
+  users ||..o{ exam_sessions : "grading_frozen_by_public_id"
+  subscriptions ||..o{ exam_sessions : "subscription_id"
+  exam_sessions ||--o{ exam_session_selected_skills : "session_id"
+  users ||..o{ exam_session_audience_sources : "created_by"
+  exam_sessions ||--o{ exam_session_audience_sources : "session_id"
+  users ||..o{ exam_session_proctors : "proctor_public_id"
+  exam_sessions ||--o{ exam_session_proctors : "session_id"
+  users ||..o{ exam_registrations : "student_public_id +1"
+  exam_sessions ||..o{ exam_registrations : "prior_session_public_id"
+  exam_sessions ||--o{ exam_registrations : "session_id"
+  exam_definitions ||..o{ exam_attempts : "exam_definition_public_id"
+  exam_versions ||..o{ exam_attempts : "exam_version_public_id"
+  exam_sessions ||..o{ exam_attempts : "session_public_id"
+  users ||..o{ exam_attempts : "student_public_id"
+  exam_version_items ||..o{ attempt_answers : "item_public_id"
+  answer_evaluations ||..o{ attempt_answers : "selected_evaluation_public_id"
+  users ||..o{ attempt_answers : "selected_score_source_by"
+  exam_attempts ||--o{ attempt_answers : "attempt_id"
+  exam_attempts ||..o{ exam_incidents : "attempt_public_id"
+  users ||..o{ exam_incidents : "student_public_id +1"
+  exam_sessions ||..o{ exam_incidents : "session_public_id"

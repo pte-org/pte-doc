@@ -1,0 +1,17 @@
+{
+  "phase": "phase-06-training-program-class",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-25T00:30:00Z",
+  "summary": { "passed": 2732, "failed": 0, "skipped": 75 },
+  "failures": [],
+  "notes": [
+    "Full app suite (clean test): 2807 tests, 0 failures, 0 errors, 75 skipped (Postgres-only integration tests). Focused rerun after the quality-gate LOW fixes (javadoc links, unused imports): ClassServiceTest 29, ClassStudentServiceTenantIsolationTest 1, AssignmentServiceTest 7, TrainingClassTest 2, ModuleStructureTest 3, all green.",
+    "Tests written/changed: TrainingClassTest (+2: setProgram copies the owning organization id, tolerates a program without organization); ClassServiceTest, AssignmentServiceTest and the tenant-isolation test (renamed ClassStudentServiceTenantIsolationTest) rewired to the four split services; repository and mapper tests renamed with the entities. No test removed.",
+    "Process deviation: no failing-first (RED_READY) artifact; tests written with the implementation.",
+    "Docker gate (manual): dev DB dropped and recreated, app rebuilt with profile local-schema, healthy; 80 base tables, old tables student_classes/class_memberships/lecturer_assignments absent; 040-training.sql seeded 1 program, 2 classes, 3 placed students (plus 1 unplaced); admin@test.local and host.e2e@test.local login OK; GET classes, GET /class-memberships and GET /student-roster return the seeded data; POST assign, merge, split succeed and move rows; deactivate on a class with members returns CLASS_HAS_ACTIVE_MEMBERS.",
+    "Entities: Program, TrainingClass, ClassStudent, ClassLecturer (4, same count as before; spec counts the two child tables as child entities). Total @Entity files in app main: 72 (not recounted by Hibernate metamodel).",
+    "Not verified: lecturer assignment endpoints against Postgres (unit/H2 only); Postgres integration tests stay skipped; client packages untouched because no API shape changed."
+  ],
+  "report_path": "pte-doc/projects/plans/quang-entity-consolidation/tests/phase-06-training-program-class-test-report.json"
+}

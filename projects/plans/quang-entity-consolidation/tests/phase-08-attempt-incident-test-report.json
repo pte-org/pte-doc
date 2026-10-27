@@ -1,0 +1,24 @@
+{
+  "phase": "phase-08-attempt-incident",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-25T04:00:00Z",
+  "summary": {
+    "passed": 2755,
+    "failed": 0,
+    "skipped": 75
+  },
+  "failures": [],
+  "notes": [
+    "Full app suite (clean test): 2830 tests, 0 failures, 0 errors, 75 skipped (Postgres-only); ModuleStructureTest green.",
+    "Ported to ExamItemView/FakeExam: eight AttemptLifecycleService* tests, AttemptMapperTest, TimerServiceTest, CapabilityNegotiationServiceTest, SubmittedAnswerQueryServiceTest, AttemptSummaryQueryServiceTest, AttemptExaminerPromptQueryServiceTest, ExamItemLoaderTest (was SnapshotPinServiceTest), HeartbeatServiceTest, and the proctoring tests (ViolationService, ProctorCommandDispatch, ProctorWatchService, SecurityAuditQuery, ExamIncidentService).",
+    "New: ExamContentServiceTest, AttemptEvidenceContextServiceTest, IncidentEvidenceServiceTest, IncidentRetentionServiceTest, IncidentHistoryLogTest, ExamIncidentCommandServiceTest, ExamIncidentRepositoryTest, ExamAttemptLastSeenTest, ExamAttemptLatestStatusTest, AttemptMonitoringRosterAggregateTest, AttemptEvidenceControllerSecurityTest.",
+    "Removed with the feature: HashChainServiceTest, AttemptSecurityEventRepositoryTest, AttemptSecurityAuditServiceTest, AttemptSecurityAuditRetentionServiceTest, AttemptControllerSecurityTest (replaced by the proctoring equivalents), the pinned-snapshot-owner and another-snapshot cases.",
+    "Docker gate (manual): dev DB dropped and recreated with profile local-schema, app healthy; 65 base tables (72 before), 57 @Entity (64 before); admin@test.local and host.e2e@test.local login OK. Real flow on Postgres: seed scripts (question bank, exam generate/publish/open), start attempt, tasks, next-task, heartbeat (last_seen_at set, version untouched), plain answer on STRICT rejected, encrypted save/submit, stale item rejected, completion, submit replay, scoring ingest of 2 answers; host incident create/status/history/list, student security-violations, security-audit (found and fixed the Postgres null-cursor bug), proctor assignment, monitoring snapshot with roster aggregate, STOMP open + flag violation + force-submit NO_OP with broadcast.",
+    "Query counts on Postgres (log_statement, includes auth lookups): next-task 4, tasks 6, heartbeat 5, answers 8 (last answer 15 with scoring ingest), submit replay 5. Baseline on the old build not measured.",
+    "web: tenant-web tsc, eslint and vitest (proctor) clean; api-client tsc and src/requests vitest 590/590. Flutter: analyze shows only a pre-existing unnecessary_cast warning; host_audit and live_proctor unit and widget tests green.",
+    "Not verified: seed-local-exam-ready.ps1 preflight returns 403 on some first runs (manual preflight works; cause not found, script untouched); Postgres-only integration tests stay skipped; query-count baseline of the old code.",
+    "Process deviation: no failing-first (RED_READY) artifact; tests were written with the implementation."
+  ],
+  "report_path": "pte-doc/projects/plans/quang-entity-consolidation/tests/phase-08-attempt-incident-test-report.json"
+}

@@ -1,0 +1,24 @@
+{
+  "phase": "phase-09-scoring-answer-evaluation",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-25T05:00:00Z",
+  "summary": {
+    "passed": 2768,
+    "failed": 0,
+    "skipped": 75
+  },
+  "failures": [],
+  "notes": [
+    "Full app suite (clean test): 2843 tests, 0 failures, 0 errors, 75 skipped (Postgres-only); ModuleStructureTest green.",
+    "New: AnswerEvaluationTableTest (one table, at most one AI and one EXAMINER row per answer, draft promoted in place), ExaminerDraftCommandServiceTest, ExaminerWorkRecorderTest, ScoreSourceSelectionServiceTest (rewritten for IdempotencyKey + AuditLog + attempt-side selection), AnswerScoreSelectionServiceTest, ScoringMethodsTest, AiEvaluationWorkflowTest (replaces ScoringAnswerWorkflowTest). Test support: scoring/support EvaluationFixtures, SubmittedAnswerFixtures.",
+    "Ported: AI dispatcher/worker/persistence/pipeline (real H2 database incl. stale redispatch and two-worker races), command, ingest, eligibility, review, review-read, examiner scoring/ai-detail/workflow-query, grading cohort/evaluator, objective, practice, payload decoder tests.",
+    "Removed with the feature: ScoringMethodResolverTest; ScoreSourceAudit/receipt entity tests.",
+    "Docker gate (manual, Postgres 17, local-schema, fresh DB): app healthy; seed scripts create tenant/exam; attempt submit opens AI evaluations (scoring method from the item runtime); host score request scores objective + AI stub via RabbitMQ; cohort freeze MANUAL_EXAMINER; examiner assign/start/replay/draft/finalize, receipt lookup, history; reused request id with other body -> 409 RECEIPT_CONFLICT; with cohort switched to AI_ONLY and a real-provider AI row (SQL): source-selection preview/apply/replay/key reuse/stale version/audits, teacher score; idempotency_keys scopes EXAMINER_COMMAND and SCORE_SELECTION and audit_logs rows EXAMINER_WORK / SCORE_SOURCE_SELECTION present.",
+    "Found by tests: Hibernate-generated discriminator IN-check rejected every insert on H2 in the Spring context; fixed with @DiscriminatorFormula over a mapped source column. Found by Docker gate: 000-postgres-objects.sql still indexed the dropped examiner_answer_scores table (app failed to start); moved to answer_evaluations.",
+    "web: tenant-web tsc and eslint clean for the scoreTemplatePublicId -> examDefinitionPublicId rename.",
+    "Not verified: seed-local-exam-ready.ps1 preflight 403 on first run (stale student token; manual preflight with a fresh login works; script untouched); source-selection AI apply against a real AI provider (simulated by SQL); query counts.",
+    "Process deviation: no failing-first (RED_READY) artifact; tests were written with the implementation."
+  ],
+  "report_path": "pte-doc/projects/plans/quang-entity-consolidation/tests/phase-09-scoring-answer-evaluation-test-report.json"
+}

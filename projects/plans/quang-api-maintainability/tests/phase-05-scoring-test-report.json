@@ -1,0 +1,17 @@
+{
+  "phase": "phase-05-scoring",
+  "mode": "verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-25T20:00:00Z",
+  "summary": {
+    "passed": 2845,
+    "failed": 0,
+    "skipped": 16
+  },
+  "failures": [],
+  "notes": [
+    "Full clean suite with the Postgres test DB: 2861 tests, 0 failures, 16 skipped.",
+    "Docker: app rebuilt and healthy; end-to-end manual grading flow passed (seed, attempt, assignment commit, examiner start/draft/issue/finalize, host resolve, publish, student report).",
+    "Reviewer diffed every split file and every moved class against HEAD: no dropped logic."
+  ]
+}

@@ -1,0 +1,125 @@
+---
+title: D2 Logical ERD - itembank, assessment, media
+---
+%% Sinh bởi gen_erd.py từ V1__baseline.sql. Không sửa tay; sửa script rồi chạy lại.
+%% Nét liền = FK thật trong DB. Nét đứt = tham chiếu logic bằng UUID (không có FK).
+%% Bảng không có thuộc tính = thuộc module khác, xem file D2 tương ứng.
+%% Mọi bảng entity còn có id (bigint), created_at, updated_at, deleted (xóa mềm).
+erDiagram
+  question_types {
+    uuid public_id PK
+    bool active
+    uuid author_user_public_id "ref users"
+    string code UK
+    string display_name
+    string lifecycle_status
+    string normalized_display_name UK
+    bool scored
+    enum section "LISTENING | SPEAKING | READING | WRITING"
+    string task_type_key UK
+    string runtime_contract "gom 11 cột runtime_*"
+  }
+  questions {
+    uuid public_id PK
+    uuid author_user_public_id "ref users"
+    bool available_for_exam
+    bool available_for_practice
+    bool is_current
+    enum pool "EXAM | PRACTICE"
+    enum pte_task_type "PERSONAL_INTRODUCTION | READ_ALOUD | REPEAT_SENTENCE | DESCRIBE_IMAGE | RE_TELL_LECTURE ... (23)"
+    uuid revision_group_public_id
+    int revision_number
+    enum status "DRAFT | PENDING_APPROVAL | APPROVED | ARCHIVED"
+    uuid supersedes_public_id "ref questions"
+    string task_type_key
+    uuid tenant_id "tenant"
+    string title
+    long version
+  }
+  question_options {
+    long question_id FK "FK questions"
+    bool correct
+    int order_index
+    uuid public_id PK
+  }
+  exam_blueprints {
+    uuid public_id PK
+    uuid author_user_public_id "ref users"
+    string name
+    enum status "DRAFT | PENDING_APPROVAL | PUBLISHED"
+    uuid tenant_id "tenant"
+    long version
+  }
+  blueprint_items {
+    long blueprint_id FK "FK exam_blueprints"
+    int order_index
+    uuid question_public_id "ref questions"
+    enum section "LISTENING | SPEAKING | READING | WRITING"
+  }
+  exam_definitions {
+    uuid public_id PK
+    uuid author_user_public_id "ref users"
+    string code
+    string name
+    enum status "DRAFT | PENDING_APPROVAL | ACTIVE | RETIRED"
+    enum template_policy "STANDARD_PTE | CUSTOM"
+    int version
+  }
+  exam_definition_items {
+    long exam_definition_id FK "FK exam_definitions"
+    enum scoring_method "AI_SPEECH | AI_TEXT | OBJECTIVE | UNSCORED"
+    string section
+    int sequence
+    string task_type_key
+    string runtime_contract "gom 15 cột runtime_*"
+  }
+  exam_versions {
+    uuid public_id PK
+    uuid exam_definition_public_id "ref exam_definitions"
+    int exam_definition_version
+    long generation_seed
+    string name
+    uuid source_blueprint_public_id "ref exam_blueprints"
+    uuid tenant_id "tenant"
+    int version
+  }
+  exam_version_items {
+    long exam_version_id FK "FK exam_versions"
+    int order_index
+    enum pte_task_type "PERSONAL_INTRODUCTION | READ_ALOUD | REPEAT_SENTENCE | DESCRIBE_IMAGE | RE_TELL_LECTURE ... (23)"
+    uuid public_id PK
+    enum section "LISTENING | SPEAKING | READING | WRITING"
+    uuid source_question_public_id "ref questions"
+    string task_type_key
+    string title
+    string runtime_contract "gom 19 cột runtime_*"
+  }
+  media_objects {
+    uuid public_id PK
+    string asset_id
+    enum cloudinary_delivery_type "UPLOAD | AUTHENTICATED"
+    string cloudinary_public_id
+    uuid owner_public_id "ref users"
+    uuid practice_item_public_id "ref practice_responses"
+    uuid practice_session_public_id "ref practice_sessions"
+    string purpose
+    enum status "PENDING_UPLOAD | UPLOADED"
+    string storage_key UK
+    uuid tenant_id "tenant"
+  }
+  users ||..o{ question_types : "author_user_public_id"
+  users ||..o{ questions : "author_user_public_id"
+  questions ||..o{ questions : "supersedes_public_id"
+  questions ||--o{ question_options : "question_id"
+  users ||..o{ exam_blueprints : "author_user_public_id"
+  exam_blueprints ||--o{ blueprint_items : "blueprint_id"
+  questions ||..o{ blueprint_items : "question_public_id"
+  users ||..o{ exam_definitions : "author_user_public_id"
+  exam_definitions ||--o{ exam_definition_items : "exam_definition_id"
+  exam_definitions ||..o{ exam_versions : "exam_definition_public_id"
+  exam_blueprints ||..o{ exam_versions : "source_blueprint_public_id"
+  exam_versions ||--o{ exam_version_items : "exam_version_id"
+  questions ||..o{ exam_version_items : "source_question_public_id"
+  users ||..o{ media_objects : "owner_public_id"
+  practice_responses ||..o{ media_objects : "practice_item_public_id"
+  practice_sessions ||..o{ media_objects : "practice_session_public_id"

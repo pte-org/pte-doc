@@ -1,0 +1,43 @@
+---
+title: D1 Conceptual ERD - Tổ chức, nội dung và thi cử
+---
+%% Không có thuộc tính. Tên thực thể là khái niệm nghiệp vụ; bảng gốc xem erd-redraw-guide.md mục 5.1.
+%% Phần thương mại, luyện tập, thông báo, hỗ trợ: d1-conceptual-commerce.mmd
+erDiagram
+  ORGANIZATION ||--o{ ORGANIZATION_MEMBER : "có thành viên"
+  USER ||--o{ ORGANIZATION_MEMBER : "tham gia"
+  ORGANIZATION ||--o{ PROGRAM : "mở"
+  PROGRAM ||--o{ TRAINING_CLASS : "gồm"
+  TRAINING_CLASS }o--o{ USER : "học viên"
+
+  QUESTION_TYPE ||--o{ QUESTION : "phân loại"
+  QUESTION ||--o{ QUESTION : "bản sửa đổi"
+  MEDIA_ASSET |o--o{ QUESTION : "audio / ảnh đề"
+  EXAM_BLUEPRINT }o--o{ QUESTION : "chọn"
+  EXAM_DEFINITION ||--o{ EXAM_VERSION : "sinh"
+  EXAM_BLUEPRINT |o--o{ EXAM_VERSION : "nguồn"
+  EXAM_VERSION }o--o{ QUESTION : "chụp lại (snapshot)"
+
+  ORGANIZATION ||--o{ EXAM_SESSION : "tổ chức"
+  EXAM_SESSION }o--|| EXAM_DEFINITION : "theo mẫu"
+  EXAM_SESSION }o--o| EXAM_VERSION : "dùng đề"
+  EXAM_SESSION ||--o{ EXAM_REGISTRATION : "ghi danh"
+  USER ||--o{ EXAM_REGISTRATION : "là học viên"
+  EXAM_SESSION ||--o{ SESSION_PROCTOR : "phân giám thị"
+  USER ||--o{ SESSION_PROCTOR : "là giám thị"
+
+  EXAM_SESSION ||--o{ EXAM_ATTEMPT : "diễn ra"
+  USER ||--o{ EXAM_ATTEMPT : "làm bài"
+  EXAM_ATTEMPT ||--o{ ATTEMPT_ANSWER : "gồm"
+  ATTEMPT_ANSWER ||--o{ ANSWER_EVALUATION : "được đánh giá (AI / giám khảo)"
+  EXAM_ATTEMPT ||--o{ GRADING_ASSIGNMENT : "phân công chấm"
+  USER ||--o{ GRADING_ASSIGNMENT : "là giám khảo"
+  GRADING_ASSIGNMENT ||--o{ GRADING_ISSUE : "báo vấn đề"
+  EXAM_ATTEMPT ||--o| EXAM_RESULT : "cho kết quả"
+  EXAM_SESSION ||--o{ EXAM_INCIDENT : "phát sinh sự cố"
+  EXAM_ATTEMPT |o--o{ EXAM_INCIDENT : "liên quan bài làm"
+  USER |o--o{ EXAM_INCIDENT : "báo cáo"
+  %% Quan hệ nghiệp vụ suy ra khi người báo là giám thị được phân công trong ca.
+  %% Không phải FK: incident không lưu session_proctor_id. Sự cố tự động hoặc do
+  %% người khác báo không bắt buộc gắn với SESSION_PROCTOR; người báo cũng có thể vắng.
+  SESSION_PROCTOR |o..o{ EXAM_INCIDENT : "báo cáo trong ca thi"

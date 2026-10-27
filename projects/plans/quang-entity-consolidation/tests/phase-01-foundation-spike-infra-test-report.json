@@ -1,0 +1,21 @@
+{
+  "phase": "phase-01-foundation-spike-infra",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-24T10:00:00Z",
+  "summary": {
+    "passed": 2590,
+    "failed": 0,
+    "skipped": 77
+  },
+  "failures": [],
+  "notes": [
+    "Full app suite after quality fixes: 2667 tests, 0 failures, 0 errors, 77 skipped (pre-existing skips).",
+    "Prepared tests all green: IdempotencyKeyServiceTest 6, OtpChallengeRepositoryTest 2, MediaAssetRepositoryTest 3, AuditLogChangeRecordTest 2, JsonColumnH2SpikeTest 1, DdlAutoDefaultTest 3, ApiInventoryExportTest 1.",
+    "No weakened tests: assertions of prepared tests are unchanged. MigrationBaselineLayoutTest was removed and replaced by DdlAutoDefaultTest because the user changed the acceptance criterion on 2026-10-24 (see acceptance_criteria_changes in the tdd-ready artifact).",
+    "Existing CloudinaryMediaServiceTest and PracticeEmailAuthServiceTest changed only by identifier renames (MediaObject->MediaAsset, PracticeEmailChallenge->OtpChallenge); verified by normalising the diff.",
+    "Not covered by JUnit: dev DB gate was run manually - app healthy on Docker Postgres 17 with profile local-schema, 3 views, 23 task types, exclusion constraint and 2 triggers present, POST /api/v1/auth/login for admin@test.local succeeded. host.e2e@test.local does not exist until phase 2.",
+    "Quality-gate driven changes (2026-10-24): AuditLog change writer split out (AuditLogChangeRecordTest call shape updated, assertions identical); IdempotencyKeyServiceTest gained platform-level and incomplete-attempt cases; IdempotencyKeyRaceTest added."
+  ],
+  "report_path": "pte-doc/projects/plans/quang-entity-consolidation/tests/phase-01-foundation-spike-infra-test-report.json"
+}

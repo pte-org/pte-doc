@@ -1,0 +1,121 @@
+{
+  "mode": "gate",
+  "target": "phase-01-guardrails",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-25T16:00:00Z",
+  "summary": {
+    "blocker": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "noted": 3
+  },
+  "findings": [
+    {
+      "id": "QUAL-001",
+      "severity": "MEDIUM",
+      "rule": "TEST_RATCHET_INTEGRITY",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "SourceFileSizeTest / PackageDensityTest",
+      "evidence": "Size and density ratchets only failed on growth; a shrunk file kept its old limit and could regrow.",
+      "why_it_matters": "Size and density ratchets only failed on growth; a shrunk file kept its old limit and could regrow.",
+      "required_action": "Fail when the measurement is below the limit (lower the entry).",
+      "owner": "cook",
+      "verification": "Shared ratchet requires exact limits; probe raising ItembankService to 829 failed with \"lower ... to 828\"."
+    },
+    {
+      "id": "QUAL-002",
+      "severity": "MEDIUM",
+      "rule": "DRY_SINGLE_SOURCE",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "three architecture tests",
+      "evidence": "Each test re-implemented the compare loop, which already diverged.",
+      "why_it_matters": "Each test re-implemented the compare loop, which already diverged.",
+      "required_action": "One ratchet helper in SourceDebtAllowlist.",
+      "owner": "cook",
+      "verification": "SourceDebtAllowlist.ratchet used by all three tests."
+    },
+    {
+      "id": "QUAL-003",
+      "severity": "MEDIUM",
+      "rule": "TEST_DETECTION_ACCURACY",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "NoDirectClockAccessTest",
+      "evidence": "Matched inside comments/strings; missed now(zone), ::now, new Date(), Calendar.getInstance().",
+      "why_it_matters": "Matched inside comments/strings; missed now(zone), ::now, new Date(), Calendar.getInstance().",
+      "required_action": "Strip comments and literals; widen the pattern; exempt now(clock).",
+      "owner": "cook",
+      "verification": "Detection unit test added; probe with LocalDate.now(ZoneOffset.UTC) failed as expected."
+    },
+    {
+      "id": "QUAL-004",
+      "severity": "LOW",
+      "rule": "ROBUSTNESS_FAIL_LOUD",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "SourceDebtAllowlist.load",
+      "evidence": "Malformed or duplicate allowlist entries gave bare exceptions or silent overwrite.",
+      "why_it_matters": "Malformed or duplicate allowlist entries gave bare exceptions or silent overwrite.",
+      "required_action": "Fail with allowlist name, line and entry; reject duplicates.",
+      "owner": "cook",
+      "verification": "IllegalStateException with context."
+    },
+    {
+      "id": "QUAL-005",
+      "severity": "LOW",
+      "rule": "TEST_DETECTION_ACCURACY",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "PackageDensityTest",
+      "evidence": "\"/internal\" substring also matched internals/internal-x.",
+      "why_it_matters": "\"/internal\" substring also matched internals/internal-x.",
+      "required_action": "Whole-segment match.",
+      "owner": "cook",
+      "verification": "(\"/\" + dir + \"/\").contains(\"/internal/\")."
+    },
+    {
+      "id": "QUAL-006",
+      "severity": "LOW",
+      "rule": "DOCS_TEST_ENVIRONMENT_ASSUMPTION",
+      "status": "RESOLVED",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "SourceDebtAllowlist",
+      "evidence": "Relative source root broke IDE runs from pte-api.",
+      "why_it_matters": "Relative source root broke IDE runs from pte-api.",
+      "required_action": "Resolve from app or pte-api with a clear error.",
+      "owner": "cook",
+      "verification": "moduleRoot() fallback documented in javadoc."
+    }
+  ],
+  "noted": [
+    "PackageDensityTest exempts every non-internal package, not only @NamedInterface ones (recorded in the phase decisions).",
+    "Phase step 5 (folder-grouping rule in docs/CODING_STANDARDS_API.md vs plan.md) is deferred to the user; the rule lives in plan.md \"Quy tắc chung\" 4-5.",
+    "A clock argument under a name not ending in \"clock\" (e.g. now(c)) is flagged: fails safe."
+  ],
+  "reviewed_files": [
+    "pte-api/app/src/test/java/com/pte/architecture/SourceDebtAllowlist.java",
+    "pte-api/app/src/test/java/com/pte/architecture/NoDirectClockAccessTest.java",
+    "pte-api/app/src/test/java/com/pte/architecture/SourceFileSizeTest.java",
+    "pte-api/app/src/test/java/com/pte/architecture/PackageDensityTest.java",
+    "pte-api/app/src/test/resources/architecture/direct-clock-access.allowlist",
+    "pte-api/app/src/test/resources/architecture/oversized-files.allowlist",
+    "pte-api/app/src/test/resources/architecture/dense-packages.allowlist",
+    "pte-doc/projects/plans/quang-api-maintainability/phase-01-guardrails.md"
+  ],
+  "report_path": "pte-doc/projects/plans/quang-api-maintainability/quality/phase-01-guardrails-quality-report.json"
+}

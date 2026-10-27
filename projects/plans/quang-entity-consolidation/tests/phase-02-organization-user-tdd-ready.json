@@ -1,0 +1,19 @@
+{
+  "phase": "phase-02-organization-user",
+  "status": "RED_READY",
+  "prepared_at": "2026-10-24T12:00:00Z",
+  "test_files": [
+    "pte-api/app/src/test/java/com/pte/tenancy/domain/OrganizationLifecycleTest.java",
+    "pte-api/app/src/test/java/com/pte/tenancy/internal/repository/OrganizationRepositoryTest.java",
+    "pte-api/app/src/test/java/com/pte/identity/internal/repository/OrganizationMemberRepositoryTest.java",
+    "pte-api/app/src/test/java/com/pte/identity/internal/service/OrganizationMemberDirectoryTest.java",
+    "pte-api/app/src/test/java/com/pte/identity/internal/service/RefreshTokenOrganizationTest.java",
+    "pte-api/app/src/test/java/com/pte/identity/internal/service/AuthServiceMultiOrganizationTest.java"
+  ],
+  "expected_red_reason": "Missing implementation: com.pte.tenancy.domain.Organization merged fields/workflow (approve/reject/suspendUntil/reactivate, status PENDING default), OrganizationStatus PENDING/REJECTED, OrganizationRepository.existsBy*AndStatusNot/findByPublicIdInAndStatusAndDeletedFalse/findAllSeatLimits; com.pte.identity.domain.OrganizationMember + OrganizationMemberRepository + User.credentialHash; OrganizationMemberDirectory.requireMember; RefreshSession + RefreshTokenService.issue(User,UUID)/consume->RefreshSession; AuthService(UserRepository, OrganizationMemberRepository, PasswordEncoder, AccessTokenIssuer, RefreshTokenService, TenancyService) with AccessTokenIssuer.issue(User, OrganizationMember) and UserRepository.findByUsernameAndDeletedFalse -> Optional.",
+  "notes": [
+    "Existing tests that construct User with setTenantId/setRoles, LoginHash or PracticeIdentity (about 25 files) are migrated to the new model in the same phase; their assertions are preserved (behavior tests for retained features).",
+    "Client and seed steps are verified by commands (lint/typecheck/build, dev DB gate), not JUnit."
+  ],
+  "artifact_path": "pte-doc/projects/plans/quang-entity-consolidation/tests/phase-02-organization-user-tdd-ready.json"
+}

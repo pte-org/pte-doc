@@ -1,0 +1,18 @@
+---
+title: D4 PracticeSession
+---
+%% Nguồn: PracticeSessionStarter, PracticeSessionService, PracticeSessionStateGuard, PracticeResponseService
+stateDiagram-v2
+  [*] --> OVERVIEW : học viên tạo phiên
+  OVERVIEW --> IN_PROGRESS : begin, đặt deadline_at
+  IN_PROGRESS --> IN_PROGRESS : trả lời / bỏ qua / save-and-exit khi đã có tiến độ
+  IN_PROGRESS --> COMPLETED : không còn câu PENDING
+  IN_PROGRESS --> DISCARDED : save-and-exit khi chưa có tiến độ
+  IN_PROGRESS --> EXPIRED : thao tác tiếp theo sau deadline_at
+  COMPLETED --> [*]
+  DISCARDED --> [*]
+  EXPIRED --> [*]
+  note right of EXPIRED
+    Hết hạn kiểu lười, không có worker.
+    OVERVIEW không hết hạn vì chưa có deadline_at.
+  end note
