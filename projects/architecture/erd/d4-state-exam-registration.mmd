@@ -1,34 +1,35 @@
 ---
-title: D4 ExamRegistration (ba trục trạng thái)
+title: D4 ExamRegistration (three orthogonal regions)
 ---
-%% Nguồn: AudienceResolver, ExamPublishService, EnrollmentService,
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: AudienceResolver, ExamPublishService, EnrollmentService,
 %% AttendanceCommandService, IdentityVerificationService
-%% Enum còn giá trị CANDIDATE nhưng không đoạn code nào gán, nên không vẽ.
+%% The enum still has CANDIDATE, but no code assigns it, so it is not drawn.
+%% Mermaid needs the wrapping ExamRegistration state; it stands for the state machine and its three orthogonal regions.
 stateDiagram-v2
-  state Registration {
-    state "Ghi danh (status)" as enroll {
-      [*] --> ELIGIBLE : resolve audience (mặc định)
-      ELIGIBLE --> EXCLUDED : reuse policy / trùng lịch / vượt capacity
-      EXCLUDED --> ELIGIBLE : resolve lại
-      ELIGIBLE --> ENROLLED : publish, ghi danh thành công
-      ELIGIBLE --> EXCLUDED : publish, ghi danh thất bại
-      [*] --> ENROLLED : host ghi danh trực tiếp
-    }
+  state ExamRegistration {
+    %% region: enrollment (status)
+    state enrollChoice <<choice>>
+    [*] --> enrollChoice : / create registration
+    enrollChoice --> ELIGIBLE : [created by audience resolution]
+    enrollChoice --> ENROLLED : [created by host direct enrollment]
+    ELIGIBLE --> EXCLUDED : resolve [reuse policy violated or schedule overlap or capacity exceeded]
+    EXCLUDED --> ELIGIBLE : resolve again
+    ELIGIBLE --> ENROLLED : publish [enrollment succeeded]
+    ELIGIBLE --> EXCLUDED : publish [enrollment failed]
     --
-    state "Điểm danh (attendance_status)" as attend {
-      [*] --> UNMARKED
-      UNMARKED --> PRESENT : giám thị
-      UNMARKED --> ABSENT : giám thị
-      UNMARKED --> LATE : giám thị
-      PRESENT --> LATE : sửa
-      LATE --> PRESENT : sửa
-      PRESENT --> ABSENT : sửa
-      ABSENT --> PRESENT : sửa
-    }
+    %% region: attendance (attendance_status)
+    [*] --> UNMARKED
+    UNMARKED --> PRESENT : proctor marks attendance
+    UNMARKED --> ABSENT : proctor marks attendance
+    UNMARKED --> LATE : proctor marks attendance
+    PRESENT --> LATE : correct
+    LATE --> PRESENT : correct
+    PRESENT --> ABSENT : correct
+    ABSENT --> PRESENT : correct
     --
-    state "Danh tính (identity_status)" as ident {
-      [*] --> UNVERIFIED
-      UNVERIFIED --> VERIFIED : giám thị xác minh
-      UNVERIFIED --> FAILED : không khớp
-    }
+    %% region: identity (identity_status)
+    [*] --> UNVERIFIED
+    UNVERIFIED --> VERIFIED : proctor verifies [identity matches]
+    UNVERIFIED --> FAILED : proctor verifies [identity does not match]
   }

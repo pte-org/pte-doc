@@ -1,12 +1,13 @@
 ---
 title: D4 GradingAssignment (ExaminerWorkflowStatus)
 ---
-%% Nguồn: scoring/domain/GradingAssignment.java
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: scoring/domain/GradingAssignment.java
 stateDiagram-v2
-  [*] --> PENDING : host phân công giám khảo
-  PENDING --> IN_PROGRESS : giám khảo mở bài (start)
+  [*] --> PENDING : / host assigns an examiner
+  PENDING --> IN_PROGRESS : start [actor = examiner]
   IN_PROGRESS --> COMPLETED : finalizeGrading
   COMPLETED --> IN_PROGRESS : reopen
   note right of IN_PROGRESS
-    GradingIssue: OPEN → RESOLVED
+    GradingIssue goes OPEN to RESOLVED
   end note

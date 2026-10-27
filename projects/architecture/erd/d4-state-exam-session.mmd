@@ -1,26 +1,30 @@
 ---
-title: D4 ExamSession (status + grading_status)
+title: D4 ExamSession (status and grading_status)
 ---
-%% Nguồn: session/domain/ExamSession.java, ExamPublishService, SessionStateService,
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: session/domain/ExamSession.java, ExamDraftService, ExamPublishService, SessionStateService,
 %% SessionAutoOpenWorker, SessionAutoCloseWorker, SessionRevocationService
 stateDiagram-v2
-  [*] --> DRAFT : host tạo nháp (ExamDraftService)
-  DRAFT --> READY : prepare đề + đối tượng
-  READY --> READY : prepare lại
-  READY --> SCHEDULED : publish, ghi danh audience
-  SCHEDULED --> OPEN : tới opens_at (SessionAutoOpenWorker) / host mở
-  OPEN --> CLOSED : tới closes_at (SessionAutoCloseWorker) / host đóng
-  READY --> CANCELLED : host hủy
-  SCHEDULED --> CANCELLED : host hủy / thuê bao bị thu hồi
+  [*] --> DRAFT : / host creates a draft
+  DRAFT --> READY : prepare exam and audience
+  READY --> READY : prepare again
+  READY --> SCHEDULED : publish / register audience
+  SCHEDULED --> OPEN : when(now >= opens_at) / SessionAutoOpenWorker opens
+  SCHEDULED --> OPEN : open [actor = host]
+  OPEN --> CLOSED : when(now >= closes_at) / SessionAutoCloseWorker closes
+  OPEN --> CLOSED : close [actor = host]
+  READY --> CANCELLED : cancel [actor = host]
+  SCHEDULED --> CANCELLED : cancel [actor = host]
+  SCHEDULED --> CANCELLED : subscription revoked
   CANCELLED --> [*]
 
   state CLOSED {
     [*] --> UNFROZEN
-    UNFROZEN --> FROZEN : host chốt cách chấm (freezeGrading, một lần)
-    FROZEN --> COMPLETED : mọi bài đã chấm (completeGrading, báo một lần)
+    UNFROZEN --> FROZEN : freezeGrading [actor = host]
+    FROZEN --> COMPLETED : completeGrading [all attempts graded]
     COMPLETED --> [*]
   }
   note right of CLOSED
-    Trục phụ grading_status.
-    UNFROZEN = cột null, không phải giá trị enum.
+    Nested region for grading_status.
+    UNFROZEN means the column is null, not an enum value.
   end note
