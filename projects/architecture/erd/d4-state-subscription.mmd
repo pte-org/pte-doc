@@ -1,10 +1,11 @@
 ---
 title: D4 Subscription
 ---
-%% Nguồn: billing/domain/Subscription.java, SubscriptionExpirationService, SessionRevocationService
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: billing/domain/Subscription.java, SubscriptionExpirationService, SessionRevocationService
 stateDiagram-v2
-  [*] --> ACTIVE : kích hoạt bằng PAYMENT hoặc LICENSE_CODE
-  ACTIVE --> EXPIRED : quá expires_at (SubscriptionExpirationService)
-  ACTIVE --> CANCELLED : thu hồi, hủy các ca SCHEDULED liên quan
+  [*] --> ACTIVE : / activate via PAYMENT or LICENSE_CODE
+  ACTIVE --> EXPIRED : when(now > expires_at)
+  ACTIVE --> CANCELLED : revoke / cancel related SCHEDULED sessions
   EXPIRED --> [*]
   CANCELLED --> [*]

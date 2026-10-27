@@ -1,13 +1,14 @@
 ---
 title: D4 Order
 ---
-%% Nguồn: billing/domain/Order.java, OrderExpirationService
-%% Mọi cạnh chỉ đi ra từ PENDING. Gọi lại ở trạng thái cuối không có tác dụng (idempotent).
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: billing/domain/Order.java, OrderExpirationService
+%% Every transition leaves PENDING. Repeating a call in a final state has no effect (idempotent).
 stateDiagram-v2
-  [*] --> PENDING : tạo link PayOS
-  PENDING --> PAID : webhook thanh toán (OrderPayment)
-  PENDING --> CANCELLED : hủy
-  PENDING --> EXPIRED : quá hạn (OrderExpirationService)
+  [*] --> PENDING : / create PayOS payment link
+  PENDING --> PAID : payment webhook / record OrderPayment
+  PENDING --> CANCELLED : cancel
+  PENDING --> EXPIRED : when(order past its expiry)
   PAID --> [*]
   CANCELLED --> [*]
   EXPIRED --> [*]

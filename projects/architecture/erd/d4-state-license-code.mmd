@@ -1,12 +1,13 @@
 ---
 title: D4 LicenseCode
 ---
-%% Nguồn: billing/domain/LicenseCode.java, LicenseCodeExpirationService
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: billing/domain/LicenseCode.java, LicenseCodeExpirationService
 stateDiagram-v2
-  [*] --> ISSUED : admin phát hành
-  ISSUED --> REDEEMED : tổ chức đổi mã, tạo Subscription (linkSubscription)
-  ISSUED --> EXPIRED : quá code_expires_at
-  ISSUED --> REVOKED : thu hồi (revoke_reason)
-  REDEEMED --> REVOKED : thu hồi (revoke_reason)
+  [*] --> ISSUED : / admin issues the code
+  ISSUED --> REDEEMED : organization redeems / linkSubscription creates Subscription
+  ISSUED --> EXPIRED : when(now > code_expires_at)
+  ISSUED --> REVOKED : revoke / record revoke_reason
+  REDEEMED --> REVOKED : revoke / record revoke_reason
   EXPIRED --> [*]
   REVOKED --> [*]

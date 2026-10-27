@@ -1,0 +1,14 @@
+---
+title: D4 AiEvaluation
+---
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: scoring/domain/AiEvaluation.java, ScoringCommandService, AiScoringDispatcher, AiScoringWorker
+stateDiagram-v2
+  [*] --> PENDING : / create when the answer needs scoring
+  PENDING --> AI_SCORING : host requests scoring / markAiDispatched, dispatch_token + 1
+  PENDING --> SCORED : score [OBJECTIVE item]
+  AI_SCORING --> SCORED : worker returns result [dispatch_token matches]
+  AI_SCORING --> SCORING_FAILED : job moved to DLQ / record failure_reason
+  AI_SCORING --> AI_SCORING : host requests scoring [job stuck past timeout]
+  SCORING_FAILED --> AI_SCORING : host requests rescoring [isRescorable]
+  SCORED --> [*]

@@ -1,16 +1,17 @@
 ---
-title: D4 NotificationRecipient (hàng đợi giao inbox)
+title: D4 NotificationRecipient (inbox delivery queue)
 ---
-%% Nguồn: notification/internal/repository/InboxDeliveryStore.java, InboxDeliveryService, InboxDeliveryWorker
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: notification/internal/repository/InboxDeliveryStore.java, InboxDeliveryService, InboxDeliveryWorker
 stateDiagram-v2
-  [*] --> PENDING : fan-out nội dung tới người nhận
-  PENDING --> PROCESSING : worker claim (attempts + 1, lease_until)
-  PROCESSING --> PROCESSING : lease hết hạn, worker khác claim lại
-  PROCESSING --> DELIVERED : giao thành công
-  PROCESSING --> SUPPRESSED : không cần giao nữa
-  PROCESSING --> PENDING : lỗi tạm thời, hẹn next_attempt_at
-  PROCESSING --> FAILED : lỗi vĩnh viễn / hết lượt thử
-  PENDING --> SUPPRESSED : nhắc SESSION_CLOSING_SOON không còn hợp lệ
-  FAILED --> PENDING : admin gửi lại (attempts = 0)
+  [*] --> PENDING : / fan out content to recipients
+  PENDING --> PROCESSING : worker claims / attempts + 1, set lease_until
+  PROCESSING --> PROCESSING : another worker claims [now > lease_until]
+  PROCESSING --> DELIVERED : delivered
+  PROCESSING --> SUPPRESSED : delivery no longer needed
+  PROCESSING --> PENDING : delivery error [transient] / schedule next_attempt_at
+  PROCESSING --> FAILED : delivery error [permanent or attempts exhausted]
+  PENDING --> SUPPRESSED : when(SESSION_CLOSING_SOON reminder no longer valid)
+  FAILED --> PENDING : admin resends / attempts = 0
   DELIVERED --> [*]
   SUPPRESSED --> [*]

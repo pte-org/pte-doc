@@ -1,11 +1,12 @@
 ---
 title: D4 SupportTicket
 ---
-%% Nguồn: support/domain/SupportTicket.java
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: support/domain/SupportTicket.java
 stateDiagram-v2
-  [*] --> OPEN : host gửi phiếu
-  OPEN --> IN_PROGRESS : admin nhận xử lý
-  IN_PROGRESS --> RESOLVED : admin giải quyết
-  OPEN --> CLOSED : host rút phiếu
+  [*] --> OPEN : / host submits a ticket
+  OPEN --> IN_PROGRESS : admin takes over
+  IN_PROGRESS --> RESOLVED : admin resolves
+  OPEN --> CLOSED : host withdraws
   RESOLVED --> [*]
   CLOSED --> [*]
