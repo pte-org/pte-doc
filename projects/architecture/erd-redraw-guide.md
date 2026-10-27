@@ -37,6 +37,7 @@ erd/
   d0-domain-map.mmd              # viết tay
   d1-conceptual.mmd              # viết tay: tổ chức, nội dung, thi cử
   d1-conceptual-commerce.mmd     # viết tay: thương mại, luyện tập, thông báo, hỗ trợ
+  d1.2-conceptual-all.mmd        # bản gộp: toàn bộ hai sơ đồ D1 trên cùng một ERD
   d2-logical-<nhóm>.mmd          # sinh tự động, 7 nhóm ở mục 6
   d3-physical.md                 # sinh tự động, 52 bảng
   d4-state-<entity>.mmd          # viết tay, 16 entity ở mục 8
@@ -232,7 +233,11 @@ erDiagram
   ATTEMPT_ANSWER ||--o{ ANSWER_EVALUATION : "scored by"
   EXAM_ATTEMPT ||--o{ GRADING_ASSIGNMENT : "assigned to examiner"
   EXAM_ATTEMPT ||--o| EXAM_RESULT : produces
-  EXAM_ATTEMPT ||--o{ EXAM_INCIDENT : raises
+  EXAM_SESSION ||--o{ EXAM_INCIDENT : has_incidents
+  EXAM_ATTEMPT |o--o{ EXAM_INCIDENT : concerns_attempt
+  USER |o--o{ EXAM_INCIDENT : reports
+  %% Derived business relationship, not a stored session_proctor_id or physical FK.
+  SESSION_PROCTOR |o..o{ EXAM_INCIDENT : reports_in_session
 ```
 
 Nếu D1 có hơn khoảng 25 hộp, tách làm hai sơ đồ: "Tổ chức và thi cử" và "Thương mại và hỗ trợ".

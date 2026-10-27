@@ -1,0 +1,69 @@
+---
+title: D1.2 Conceptual ERD - Toàn bộ nghiệp vụ PTEPrep
+---
+%% Bản gộp của d1-conceptual.mmd và d1-conceptual-commerce.mmd.
+%% Giữ cùng tên thực thể để các nhóm dùng chung USER, ORGANIZATION, QUESTION và EXAM_SESSION.
+%% Đây là mô hình conceptual; nét đứt SESSION_PROCTOR - EXAM_INCIDENT là quan hệ nghiệp vụ suy ra, không phải FK.
+erDiagram
+  ORGANIZATION ||--o{ ORGANIZATION_MEMBER : "có thành viên"
+  USER ||--o{ ORGANIZATION_MEMBER : "tham gia"
+  ORGANIZATION ||--o{ PROGRAM : "mở"
+  PROGRAM ||--o{ TRAINING_CLASS : "gồm"
+  TRAINING_CLASS }o--o{ USER : "học viên"
+
+  QUESTION_TYPE ||--o{ QUESTION : "phân loại"
+  QUESTION ||--o{ QUESTION : "bản sửa đổi"
+  MEDIA_ASSET |o--o{ QUESTION : "audio / ảnh đề"
+  EXAM_BLUEPRINT }o--o{ QUESTION : "chọn"
+  EXAM_DEFINITION ||--o{ EXAM_VERSION : "sinh"
+  EXAM_BLUEPRINT |o--o{ EXAM_VERSION : "nguồn"
+  EXAM_VERSION }o--o{ QUESTION : "chụp lại (snapshot)"
+
+  ORGANIZATION ||--o{ EXAM_SESSION : "tổ chức"
+  EXAM_SESSION }o--|| EXAM_DEFINITION : "theo mẫu"
+  EXAM_SESSION }o--o| EXAM_VERSION : "dùng đề"
+  EXAM_SESSION ||--o{ EXAM_REGISTRATION : "ghi danh"
+  USER ||--o{ EXAM_REGISTRATION : "là học viên"
+  EXAM_SESSION ||--o{ SESSION_PROCTOR : "phân giám thị"
+  USER ||--o{ SESSION_PROCTOR : "là giám thị"
+
+  EXAM_SESSION ||--o{ EXAM_ATTEMPT : "diễn ra"
+  USER ||--o{ EXAM_ATTEMPT : "làm bài"
+  EXAM_ATTEMPT ||--o{ ATTEMPT_ANSWER : "gồm"
+  ATTEMPT_ANSWER ||--o{ ANSWER_EVALUATION : "được đánh giá (AI / giám khảo)"
+  EXAM_ATTEMPT ||--o{ GRADING_ASSIGNMENT : "phân công chấm"
+  USER ||--o{ GRADING_ASSIGNMENT : "là giám khảo"
+  GRADING_ASSIGNMENT ||--o{ GRADING_ISSUE : "báo vấn đề"
+  EXAM_ATTEMPT ||--o| EXAM_RESULT : "cho kết quả"
+  EXAM_SESSION ||--o{ EXAM_INCIDENT : "phát sinh sự cố"
+  EXAM_ATTEMPT |o--o{ EXAM_INCIDENT : "liên quan bài làm"
+  USER |o--o{ EXAM_INCIDENT : "báo cáo"
+  %% Quan hệ nghiệp vụ suy ra khi người báo là giám thị được phân công trong ca.
+  %% Không phải FK: incident không lưu session_proctor_id. Sự cố tự động hoặc do
+  %% người khác báo không bắt buộc gắn với SESSION_PROCTOR; người báo cũng có thể vắng.
+  SESSION_PROCTOR |o..o{ EXAM_INCIDENT : "báo cáo trong ca thi"
+
+  SERVICE_PLAN ||--o{ ORDER : "được đặt mua"
+  ORGANIZATION ||--o{ ORDER : "đặt"
+  ORDER ||--o{ ORDER_PAYMENT : "nhận webhook"
+  SERVICE_PLAN ||--o{ SUBSCRIPTION : "cấp"
+  ORGANIZATION ||--o{ SUBSCRIPTION : "sở hữu"
+  ORDER |o--o| SUBSCRIPTION : "kích hoạt (PAYMENT)"
+  SERVICE_PLAN ||--o{ LICENSE_CODE : "phát hành"
+  LICENSE_CODE |o--o| SUBSCRIPTION : "kích hoạt (LICENSE_CODE)"
+  SUBSCRIPTION ||--o{ EXAM_SESSION : "cấp quyền mở ca"
+
+  USER ||--o{ PRACTICE_SESSION : "luyện tập"
+  PRACTICE_SESSION ||--o{ PRACTICE_RESPONSE : "gồm"
+  QUESTION ||--o{ PRACTICE_RESPONSE : "chụp lại (snapshot)"
+
+  NOTIFICATION ||--o{ NOTIFICATION_RECIPIENT : "giao tới"
+  USER ||--o{ NOTIFICATION_RECIPIENT : "nhận"
+  ANNOUNCEMENT |o--o| NOTIFICATION : "phát hành thành"
+
+  ORGANIZATION ||--o{ SUPPORT_TICKET : "gửi"
+  USER ||--o{ SUPPORT_TICKET : "người gửi"
+  SUPPORT_TICKET ||--o{ SUPPORT_TICKET_NOTE : "có ghi chú"
+  SUPPORT_TICKET }o--o| EXAM_SESSION : "về ca thi"
+  SUPPORT_TICKET }o--o| EXAM_ATTEMPT : "về lượt làm bài"
+  SUPPORT_TICKET }o--o| QUESTION : "về câu hỏi"

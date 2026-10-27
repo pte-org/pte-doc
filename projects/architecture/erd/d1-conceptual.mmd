@@ -34,4 +34,10 @@ erDiagram
   USER ||--o{ GRADING_ASSIGNMENT : "là giám khảo"
   GRADING_ASSIGNMENT ||--o{ GRADING_ISSUE : "báo vấn đề"
   EXAM_ATTEMPT ||--o| EXAM_RESULT : "cho kết quả"
-  EXAM_ATTEMPT ||--o{ EXAM_INCIDENT : "phát sinh sự cố"
+  EXAM_SESSION ||--o{ EXAM_INCIDENT : "phát sinh sự cố"
+  EXAM_ATTEMPT |o--o{ EXAM_INCIDENT : "liên quan bài làm"
+  USER |o--o{ EXAM_INCIDENT : "báo cáo"
+  %% Quan hệ nghiệp vụ suy ra khi người báo là giám thị được phân công trong ca.
+  %% Không phải FK: incident không lưu session_proctor_id. Sự cố tự động hoặc do
+  %% người khác báo không bắt buộc gắn với SESSION_PROCTOR; người báo cũng có thể vắng.
+  SESSION_PROCTOR |o..o{ EXAM_INCIDENT : "báo cáo trong ca thi"
