@@ -1,0 +1,10 @@
+---
+title: D4 ExaminerEvaluation
+---
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: ExaminerEvaluation.examiner_status in scoring/domain, ScoringCommandService
+stateDiagram-v2
+  [*] --> DRAFT : / examiner saves a draft
+  DRAFT --> DRAFT : edit draft / update draft_version
+  DRAFT --> SUBMITTED : submit score / record decision_kind (CONFIRM_AI or MANUAL)
+  SUBMITTED --> [*]

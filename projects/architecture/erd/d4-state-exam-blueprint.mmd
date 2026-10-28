@@ -1,10 +1,11 @@
 ---
 title: D4 ExamBlueprint
 ---
-%% Nguồn: BlueprintService, SnapshotPublishService
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: BlueprintService, SnapshotPublishService
 stateDiagram-v2
-  [*] --> DRAFT : tạo khung đề
-  DRAFT --> PENDING_APPROVAL : gửi duyệt
-  PENDING_APPROVAL --> DRAFT : từ chối
-  PENDING_APPROVAL --> PUBLISHED : sinh snapshot (SnapshotPublishService)
+  [*] --> DRAFT : / create blueprint
+  DRAFT --> PENDING_APPROVAL : submit for approval
+  PENDING_APPROVAL --> DRAFT : reject
+  PENDING_APPROVAL --> PUBLISHED : generate snapshot / SnapshotPublishService publishes
   PUBLISHED --> [*]

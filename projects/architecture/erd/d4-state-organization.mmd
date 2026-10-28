@@ -1,12 +1,14 @@
 ---
 title: D4 Organization
 ---
-%% Nguồn: tenancy/domain/Organization.java, TenantSuspensionExpirationService
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: tenancy/domain/Organization.java, TenantSuspensionExpirationService
 stateDiagram-v2
-  [*] --> PENDING : nộp đơn đăng ký tổ chức
-  PENDING --> ACTIVE : admin duyệt
-  PENDING --> REJECTED : admin từ chối (reject_reason)
-  ACTIVE --> SUSPENDED : đình chỉ tới suspended_until
-  SUSPENDED --> SUSPENDED : gia hạn đình chỉ
-  SUSPENDED --> ACTIVE : kích hoạt lại / hết hạn đình chỉ
+  [*] --> PENDING : / submit organization application
+  PENDING --> ACTIVE : admin approves
+  PENDING --> REJECTED : admin rejects / record reject_reason
+  ACTIVE --> SUSPENDED : suspend / set suspended_until
+  SUSPENDED --> SUSPENDED : extend suspension / update suspended_until
+  SUSPENDED --> ACTIVE : reactivate
+  SUSPENDED --> ACTIVE : when(now >= suspended_until)
   REJECTED --> [*]

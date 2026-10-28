@@ -1,18 +1,20 @@
 ---
 title: D4 PracticeSession
 ---
-%% Nguồn: PracticeSessionStarter, PracticeSessionService, PracticeSessionStateGuard, PracticeResponseService
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: PracticeSessionStarter, PracticeSessionService, PracticeSessionStateGuard, PracticeResponseService
 stateDiagram-v2
-  [*] --> OVERVIEW : học viên tạo phiên
-  OVERVIEW --> IN_PROGRESS : begin, đặt deadline_at
-  IN_PROGRESS --> IN_PROGRESS : trả lời / bỏ qua / save-and-exit khi đã có tiến độ
-  IN_PROGRESS --> COMPLETED : không còn câu PENDING
-  IN_PROGRESS --> DISCARDED : save-and-exit khi chưa có tiến độ
-  IN_PROGRESS --> EXPIRED : thao tác tiếp theo sau deadline_at
+  [*] --> OVERVIEW : / student creates a session
+  OVERVIEW --> IN_PROGRESS : begin / set deadline_at
+  IN_PROGRESS --> IN_PROGRESS : answer, skip [PENDING items remain]
+  IN_PROGRESS --> IN_PROGRESS : save and exit [has progress]
+  IN_PROGRESS --> COMPLETED : answer, skip [no PENDING items remain]
+  IN_PROGRESS --> DISCARDED : save and exit [no progress]
+  IN_PROGRESS --> EXPIRED : any action [now > deadline_at]
   COMPLETED --> [*]
   DISCARDED --> [*]
   EXPIRED --> [*]
   note right of EXPIRED
-    Hết hạn kiểu lười, không có worker.
-    OVERVIEW không hết hạn vì chưa có deadline_at.
+    Lazy expiry, there is no worker.
+    OVERVIEW never expires because deadline_at is not set yet.
   end note

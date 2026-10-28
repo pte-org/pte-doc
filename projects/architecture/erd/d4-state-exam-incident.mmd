@@ -1,18 +1,19 @@
 ---
-title: D4 ExamIncident (status kiểu chuỗi, không có enum hay CHECK)
+title: D4 ExamIncident (status is a string, no enum or CHECK)
 ---
-%% Nguồn: proctoring/internal/service/ExamIncidentCommandService.java
-%% Host và platform admin có thể đặt mọi giá trị hợp lệ khi chưa CLOSED. Chỉ vẽ cạnh có nghĩa nghiệp vụ.
-%% Giám thị chỉ đặt NEW hoặc IN_PROGRESS, không đưa IN_PROGRESS về NEW.
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: proctoring/internal/service/ExamIncidentCommandService.java
+%% Host and platform admin may set any valid value before CLOSED. Only business-relevant transitions are drawn.
+%% A proctor only sets NEW or IN_PROGRESS and cannot move IN_PROGRESS back to NEW.
 stateDiagram-v2
-  [*] --> NEW : báo cáo sự cố (origin REPORTED)
-  NEW --> IN_PROGRESS : giám thị / host nhận xử lý
-  NEW --> ESCALATED : host chuyển lên platform admin
-  IN_PROGRESS --> ESCALATED : host chuyển lên platform admin
-  NEW --> RESOLVED : host / admin
-  IN_PROGRESS --> RESOLVED : host / admin
-  ESCALATED --> RESOLVED : host / admin
-  RESOLVED --> IN_PROGRESS : host / admin mở lại
-  RESOLVED --> CLOSED : host / admin
-  ESCALATED --> CLOSED : host / admin
+  [*] --> NEW : / report incident (origin = REPORTED)
+  NEW --> IN_PROGRESS : take over [actor in (proctor, host)]
+  NEW --> ESCALATED : escalate to platform admin [actor = host]
+  IN_PROGRESS --> ESCALATED : escalate to platform admin [actor = host]
+  NEW --> RESOLVED : resolve [actor in (host, admin)]
+  IN_PROGRESS --> RESOLVED : resolve [actor in (host, admin)]
+  ESCALATED --> RESOLVED : resolve [actor in (host, admin)]
+  RESOLVED --> IN_PROGRESS : reopen [actor in (host, admin)]
+  RESOLVED --> CLOSED : close [actor in (host, admin)]
+  ESCALATED --> CLOSED : close [actor in (host, admin)]
   CLOSED --> [*]

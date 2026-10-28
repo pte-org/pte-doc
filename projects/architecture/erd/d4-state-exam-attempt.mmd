@@ -1,15 +1,17 @@
 ---
 title: D4 ExamAttempt
 ---
-%% Nguồn: attempt/domain/ExamAttempt.java, AttemptStartFlow, AttemptLifecycleService
-%% grading_excluded là cờ, không phải trạng thái.
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: attempt/domain/ExamAttempt.java, AttemptStartFlow, AttemptLifecycleService
+%% grading_excluded is a flag, not a state.
 stateDiagram-v2
-  [*] --> CREATED : học viên vào ca (preflight)
-  CREATED --> IN_PROGRESS : bắt đầu làm bài (begin)
-  IN_PROGRESS --> IN_PROGRESS : trả lời / chuyển section / resume
-  IN_PROGRESS --> SUBMITTED : học viên nộp
-  IN_PROGRESS --> SUBMITTED : hết giờ / giám thị buộc nộp
+  [*] --> CREATED : / student enters the session (preflight)
+  CREATED --> IN_PROGRESS : begin
+  IN_PROGRESS --> IN_PROGRESS : answer, change section, resume
+  IN_PROGRESS --> SUBMITTED : submit [actor = student]
+  IN_PROGRESS --> SUBMITTED : when(time limit reached)
+  IN_PROGRESS --> SUBMITTED : force submit [actor = proctor]
   SUBMITTED --> [*]
   note right of SUBMITTED
-    AttemptAnswer.status: SUBMITTED → SCORED
+    AttemptAnswer.status goes SUBMITTED to SCORED
   end note

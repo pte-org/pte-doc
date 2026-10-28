@@ -1,7 +1,7 @@
 ---
-title: D0 Domain map - các luồng dữ liệu chính của pte-api/app
+title: D0 Domain map - main data flows of pte-api/app
 ---
-%% A --> B: B dùng dữ liệu của A. Nét đứt: module hạ tầng được nhiều module gọi tới.
+%% A --> B: B uses data owned by A. Dashed line: infrastructure module called by many modules.
 flowchart LR
   tenancy["tenancy<br/>Organization"] --> identity["identity<br/>User, OrganizationMember"]
   identity --> enrollment["enrollment<br/>Program, Class"]
