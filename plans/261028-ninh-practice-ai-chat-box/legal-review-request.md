@@ -19,7 +19,7 @@ Học viên hỏi trợ lý AI về tiếng Anh/PTE ngay trong màn luyện tậ
 
 **EN:** "Before you start"; (1) "Your questions and the assistant's answers are saved with your account for up to 12 months to check service quality."; (2) "The text of your questions is sent to Google to generate answers, and may be processed outside Vietnam. Your name and email are not sent."; (3) "Do not type personal information into the chat. What you type is sent to Google, and we cannot take it back from them once it is sent."; checkbox "I am at least 16 years old, or my parent or guardian agrees, and I agree to the above."; button "Agree and start".
 
-Màn này có liên kết "Đọc chính sách bảo mật đầy đủ" tới trang `/privacy` (đã làm 2026-10-29, VI/EN, đơn vị vận hành ghi là "PTE Prep", liên hệ `leninh2004@gmail.com` tạm thời). Trang gồm 10 mục; các mục ngoài chat do dev soạn theo những gì hệ thống đang làm nên cần pháp lý đọc lại. Chưa có nút rút lại đồng ý cho học viên (xem ops-runbook).
+Màn này có liên kết "Đọc chính sách bảo mật đầy đủ" tới trang `/privacy` (đã làm 2026-10-29, VI/EN, đơn vị vận hành ghi là "PTE Prep", liên hệ `leninh2004@gmail.com` tạm thời). Trang gồm 10 mục; các mục ngoài chat do dev soạn theo những gì hệ thống đang làm nên cần pháp lý đọc lại. Học viên rút lại đồng ý và tự xoá các đoạn chat được ngay trong panel (đã làm 2026-10-29, hai bước xác nhận); riêng học viên chưa mở khoá luyện tập không thấy panel nên vẫn yêu cầu qua email (xem ops-runbook).
 
 ## 3. Nguyên văn cần duyệt
 
@@ -63,7 +63,7 @@ Theo các bài phân tích Luật Bảo vệ dữ liệu cá nhân 2025 (số 91
 - *Lập luận:* mỗi tin gửi tới Google chỉ gồm lời nhắc hệ thống, tối đa 6 lượt hội thoại gần nhất, câu hỏi hiện tại và mã dạng bài. Không có tên, email, mã học viên hay mã tổ chức.
 - *Điểm yếu đã biết:* học viên có thể tự gõ thông tin cá nhân vào câu hỏi, và chữ trong câu hỏi có thể bị coi là dữ liệu cá nhân nếu truy ngược được về một người. Văn bản gốc của luật chưa được kiểm.
 - *Biện pháp giảm rủi ro đã có:* dòng thông báo và màn đồng ý bảo học viên đừng nhập thông tin cá nhân; hệ thống không gửi mã định danh; cache dùng chung không lưu câu hỏi dài hoặc có email/số điện thoại; dữ liệu lưu tối đa 12 tháng rồi ẩn danh; dùng key trả phí (Google không dùng nội dung để cải thiện sản phẩm theo điều khoản đã tra ngày 2026-10-28).
-- *Đã thêm (2026-10-29):* email và số điện thoại trong câu hỏi bị thay bằng `[email]` và `[phone]` **trước khi lưu và trước khi gửi tới Google**; học viên thấy chữ đã che trong lịch sử của mình. Chỉ bắt được hai loại này, không bắt tên hay chữ tự do; một dãy từ 8 chữ số trở lên (ví dụ danh sách năm) cũng bị che nhầm.
+- *Đã thêm (2026-10-29):* email và số điện thoại trong câu hỏi bị thay bằng `[email]` và `[phone]` **trước khi lưu và trước khi gửi tới Google**; học viên thấy chữ đã che trong lịch sử của mình. Chỉ bắt được hai loại này, không bắt tên hay chữ tự do. Số điện thoại chỉ được nhận khi viết theo kiểu thường gặp ở Việt Nam (bắt đầu bằng 0, bằng `+` hoặc `84`, hoặc có ngoặc vùng, từ 9 chữ số, các nhóm từ 3 chữ số), nên năm và ngày tháng như "2023-2024" hay "12-05-2004" không bị che nhầm; đổi lại số viết kiểu khác có thể lọt qua.
 - *Xem lại quyết định khi:* có kết luận từ luật sư hoặc cơ quan quản lý; có học viên hay tổ chức khách hàng phản đối; hệ thống bắt đầu gửi mã định danh hay dùng dữ liệu để huấn luyện; hoặc pháp lý của công ty yêu cầu.
 
 ## 5. Bảng trạng thái

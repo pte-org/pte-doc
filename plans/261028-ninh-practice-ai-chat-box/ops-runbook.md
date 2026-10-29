@@ -8,13 +8,30 @@
 | --- | --- | --- | --- |
 | Backend | `CHAT_AI_ENABLED` | `true` | Mặc định `false`: không có bean chat, ứng dụng khởi động không cần key. Đổi cờ cần khởi động lại. |
 | Backend | `CHAT_AI_GEMINI_API_KEY` | key **trả phí** | Key riêng cho chat, không dùng chung `SCORING_AI_GEMINI_API_KEY`. Key free dùng dữ liệu để cải thiện sản phẩm Google, chỉ dùng với dữ liệu thử. |
-| Backend | `CHAT_AI_MODEL` | `gemini-2.5-flash-lite` (hoặc bản ghim cùng họ) | Không có mặc định. Từ chối tên có `-latest`; chỉ nhận họ `gemini-2.5-flash-lite*` vì mô hình này tắt thinking mặc định. |
+| Backend | `CHAT_AI_MODEL` | `gemini-3.5-flash-lite` (hoặc bản ghim cùng họ); `gemini-2.5-flash-lite*` cũng được nhận | Không có mặc định. Từ chối tên có `-latest`. Chỉ nhận hai họ này vì thinking tính vào `max-tokens`: 2.5 tắt thinking mặc định, còn 3.5 bật mặc định nên client gửi `generationConfig.thinkingConfig.thinkingLevel = "minimal"` (đã thử với API thật ngày 2026-10-29: chấp nhận; `thinkingBudget: 0` bị từ chối 400). **Từ 2026-10-29 Google trả 404 cho `gemini-2.5-flash-lite` với tài khoản mới** ("no longer available to new users"), nên tài khoản mới phải dùng 3.5. |
 | Backend | `PRACTICE_STRICT_ENTITLEMENT_ENABLED` | `true` | **Bắt buộc.** Mặc định `false` làm `assertUnlocked` fail-closed: mọi student nhận 403 từ chat. |
 | Backend | `PRACTICE_WEB_ENABLED` | `true` | Đã cần cho các API practice khác. |
 | Web (`pte-practice`) | `NEXT_PUBLIC_CHAT_ENABLED` | `true` | Biến build-time: đặt khi build. Tắt thì panel ẩn hoàn toàn. |
 | Web | `NEXT_PUBLIC_API_BASE_URL` | URL backend | Đã có sẵn. |
 
 **Đường deploy Docker đã chuyển tiếp các biến này** (thêm ngày 2026-10-29, mặc định tắt): `pte-api/docker-compose.services.yml` (service backend: `CHAT_AI_ENABLED`, `CHAT_AI_GEMINI_API_KEY`, `CHAT_AI_MODEL` và các tham số `CHAT_AI_*` bên dưới), `pte-api/deploy/practice.Dockerfile` (`ARG NEXT_PUBLIC_CHAT_ENABLED`) và `pte-api/docker-compose.deploy.yml` (build arg của `web-practice`). Đặt giá trị trong file env của compose trên VPS (cùng chỗ với `PRACTICE_STRICT_ENTITLEMENT_ENABLED`); đổi biến web cần **build lại image `web-practice`**. Workflow `deploy-production.yml` của `pte-practice` lint, test, build rồi deploy qua SSH tới VPS (chạy `deploy/production.sh`, build lại `web-practice` ở **mỗi lần** push lên `main`); workflow không cần cờ này vì cờ được đọc từ file env của `pte-api` trên VPS. Vì vậy `NEXT_PUBLIC_CHAT_ENABLED` phải luôn có mặt trong file env đó: thiếu nó thì một lần deploy không liên quan cũng làm panel tắt mà không báo lỗi. Chưa kiểm bằng một lần deploy thật.
+
+### Chạy local: Gemini giả và Gemini thật
+
+Chỗ đặt key: biến `CHAT_AI_GEMINI_API_KEY` trong file env của `pte-api` (file mà `docker compose` đọc cho service `app`; compose đã có sẵn dòng `CHAT_AI_GEMINI_API_KEY: ${CHAT_AI_GEMINI_API_KEY:-}`, nên chỉ cần đặt giá trị). Khối cho local (thay `<key>` bằng key thật, không commit file env):
+
+```
+CHAT_AI_ENABLED=true
+CHAT_AI_GEMINI_API_KEY=<key>
+CHAT_AI_MODEL=gemini-3.5-flash-lite
+PRACTICE_WEB_ENABLED=true
+PRACTICE_STRICT_ENTITLEMENT_ENABLED=true
+CORS_ALLOWED_ORIGINS=http://localhost:3000,http://localhost:3001,http://localhost:3014
+```
+
+Không đặt `CHAT_AI_BASE_URL` thì backend gọi Google thật (mặc định `https://generativelanguage.googleapis.com`). Sau khi sửa file env, tạo lại container: `docker compose -f docker-compose.yml -f docker-compose.services.yml up -d --no-deps app`, rồi `docker exec pte-nginx nginx -s reload`.
+
+"Gemini giả" chỉ là một server HTTP nhỏ trên máy dev nhận cùng kiểu request `generateContent` và luôn trả một câu trả lời mẫu ("Demo answer ... fake reply") đúng định dạng JSON `{is_on_topic, markdown_content}`; không có AI nào chạy. Để dùng nó, đặt `CHAT_AI_BASE_URL=http://host.docker.internal:<cổng>` và key bất kỳ. Dùng key thật thì bỏ `CHAT_AI_BASE_URL` và tắt server giả.
 
 Thứ tự phát hành: backend (`CHAT_AI_ENABLED=true`) trước, kiểm bằng `GET /api/v1/student/chat/quota`, rồi build web với `NEXT_PUBLIC_CHAT_ENABLED=true`.
 
@@ -30,11 +47,30 @@ Thứ tự phát hành: backend (`CHAT_AI_ENABLED=true`) trước, kiểm bằng
 | `CHAT_AI_HISTORY_SIZE` | 6 | Số tin OK gần nhất gửi làm ngữ cảnh. |
 | `CHAT_AI_MAX_CONCURRENT` | 20 | Số lệnh gọi Gemini đồng thời toàn hệ thống; đầy thì trả 503, không trừ lượt. |
 | `CHAT_AI_MAX_CACHE_HITS_PER_DAY` | 100 | Trần câu trả lời từ cache mỗi student/ngày; vượt thì câu hỏi đi đường thường và tính quota. |
+| `CHAT_AI_PRICE_INPUT_PER_MILLION_USD` / `CHAT_AI_PRICE_OUTPUT_PER_MILLION_USD` | 0,10 / 0,40 | Giá mỗi 1 triệu token, chỉ dùng cho **ước tính** chi phí ở báo cáo admin. Cập nhật khi Google đổi giá của model đang ghim; hoá đơn của Google mới là số thật. Token suy nghĩ tính theo giá đầu ra. |
 | `CHAT_AI_CACHE_MAX_QUESTION_CHARS` | 300 | Câu hỏi dài hơn, hoặc có email/số điện thoại, vẫn được trả lời nhưng không bao giờ vào cache dùng chung. |
-| `CHAT_AI_RETENTION_CONTENT_MONTHS` | 12 | Câu hỏi/câu trả lời cũ hơn số tháng này (giờ Việt Nam) bị xoá chữ **và** bị gỡ mã học viên, mã phiên (thành dữ liệu ẩn danh); số liệu token giữ lại. Phiên cũ không còn tin nhắn bị xoá. |
+| `CHAT_AI_RETENTION_CONTENT_MONTHS` | 12 | Câu hỏi/câu trả lời cũ hơn số tháng này (giờ Việt Nam) bị xoá chữ **và** bị gỡ mã học viên, mã phiên (thành dữ liệu ẩn danh); số liệu token giữ lại. Phiên cũ không còn tin nhắn bị xoá, và bộ đếm lượt theo ngày (`chat_usage`, có mã học viên) cũ hơn cùng thời hạn cũng bị xoá. |
+| *(giới hạn)* | tối đa 12 | `CHAT_AI_RETENTION_CONTENT_MONTHS` lớn hơn 12 làm backend không khởi động, vì thông báo công khai hứa "tối đa 12 tháng"; chỉ được rút ngắn. |
 | `CHAT_AI_RETENTION_CACHE_DAYS` | 30 | Câu trả lời cache sống bấy nhiêu ngày rồi hết hạn; hết hạn thì bị thay bằng câu trả lời mới. |
 | `CHAT_AI_RETENTION_BATCH_SIZE` | 1000 | Số dòng xoá chữ mỗi lệnh, để tác vụ đêm không khoá bảng lâu. |
 | `CHAT_AI_RETENTION_CRON` | `0 30 3 * * *` | Giờ chạy tác vụ dọn dẹp (03:30 giờ Việt Nam mỗi đêm). Chỉ chạy khi chat đang bật. |
+
+**Lưu ý khi tắt chat:** tác vụ dọn dẹp chỉ chạy khi `CHAT_AI_ENABLED=true`. Tắt chat lâu hơn vài tháng thì dữ liệu cũ vẫn nằm đó quá thời hạn. Hoặc bật lại chat để tác vụ chạy một lần, hoặc chạy tay các lệnh trong script xoá bên dưới cho toàn bộ dòng cũ hơn thời hạn.
+
+### Báo cáo dùng và chi phí cho PM
+
+`GET /api/v1/admin/chat/usage?from=2026-10-01&to=2026-10-31` (cần token `PLATFORM_ADMIN`). Trả mỗi ngày giờ Việt Nam một dòng: `messages`, `ok`, `refused`, `failed`, `cacheHits`, `tokensIn`, `tokensOut`, `tokensThinking`, `estimatedCostUsd`. Khoảng tối đa 366 ngày. Không có thông tin về học viên hay nội dung. Trên admin web: đăng nhập bằng tài khoản platform admin, menu **System → AI chat usage** (`/admin/chat-usage`); mặc định 30 ngày gần nhất, đổi bằng bộ chọn ngày. Khi backend tắt chat (`CHAT_AI_ENABLED=false`) endpoint không tồn tại nên trang báo lỗi tải. Cũng có thể hỏi thẳng cơ sở dữ liệu:
+
+```sql
+SELECT (created_at AT TIME ZONE 'Asia/Ho_Chi_Minh')::date AS day, count(*) AS messages,
+       count(*) FILTER (WHERE status = 'FAILED') AS failed, count(*) FILTER (WHERE from_cache) AS cache_hits,
+       sum(tokens_in) AS tokens_in, sum(tokens_out + coalesce(tokens_thinking, 0)) AS tokens_out
+FROM chat_message GROUP BY 1 ORDER BY 1 DESC;
+```
+
+### Học viên tự rút lại đồng ý và xoá lịch sử
+
+Trong panel chat có hai liên kết nhỏ dưới dòng thông báo: "Rút lại đồng ý" (`DELETE /api/v1/student/chat/consent`) và "Xoá các đoạn chat của tôi" (`DELETE /api/v1/student/chat/history`), mỗi cái hỏi xác nhận một lần. Xoá lịch sử làm giống tác vụ đêm (xoá chữ, gỡ mã học viên và phiên, xoá phiên) và **không** trả lại lượt hỏi của ngày. Cả hai không kiểm tra quyền luyện tập. Học viên không thấy panel (chưa mở khoá luyện tập) vẫn dùng được script bên dưới qua yêu cầu email.
 
 ### Xoá dữ liệu theo yêu cầu của một học viên
 
@@ -57,7 +93,7 @@ Câu trả lời trong `chat_answer_cache` do AI sinh và không gắn với h�
 
 - Trước lần chat đầu tiên học viên thấy màn "Trước khi bắt đầu" với một ô tick (từ đủ 16 tuổi hoặc có đồng ý của cha mẹ/người giám hộ) và nút "Đồng ý và bắt đầu". Chưa tick thì nút bị khoá. Bản ghi gồm mã học viên, phiên bản thông báo và thời điểm.
 - Endpoint: `GET` và `POST /api/v1/student/chat/consent`. Gửi tin khi chưa đồng ý trả `403 CHAT_CONSENT_REQUIRED`, không trừ lượt, không gọi Gemini. Xem quota và phiên gần nhất không cần đồng ý.
-- **Đổi nội dung thông báo:** sửa chữ ở `common/i18n/*.ts` (mục `chat.consent`), đổi hằng `ChatConstants.CONSENT_POLICY_VERSION` (backend) và `CHAT_CONSENT_POLICY_VERSION` (web) cùng một giá trị mới, và đưa lên cùng lúc. Mọi học viên sẽ được hỏi lại. Hai giá trị lệch nhau thì học viên không đồng ý được (lỗi 400).
+- **Đổi nội dung thông báo:** sửa chữ ở `common/i18n/*.ts` (mục `chat.consent`), đổi hằng `ChatConstants.CONSENT_POLICY_VERSION` (backend) và `CHAT_CONSENT_POLICY_VERSION` (web) cùng một giá trị mới, và đưa lên cùng lúc. Mọi học viên sẽ được hỏi lại. Hai giá trị lệch nhau thì học viên không đồng ý được (lỗi 400). Có test nhắc việc này: `chat-consent-version.test.ts` ghim dấu vân tay của chữ trên màn đồng ý và hai mục chính sách (trợ lý AI, trẻ em) cạnh số phiên bản, và so với phiên bản backend khi hai repo nằm cạnh nhau. Test đỏ sau khi sửa chữ thì làm theo thông báo của nó: đổi cả hai phiên bản sang ngày hôm nay, cập nhật giá trị ghim, rồi triển khai web và backend cùng lúc.
 - Chưa có nút "rút lại đồng ý" cho học viên; hiện làm bằng script ở trên theo yêu cầu. Pháp lý quyết định có cần nút này trước khi release không.
 - Tác vụ đêm không xoá bản ghi đồng ý.
 

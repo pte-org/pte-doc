@@ -54,7 +54,7 @@ Dòng này chỉ là **thông báo**, chưa phải sự đồng ý của ngườ
 - **Ô đồng ý trước lần dùng đầu** (bảng `chat_consent`, V8): xem [ops-runbook.md](./ops-runbook.md). Chat đóng (403 `CHAT_CONSENT_REQUIRED`) cho tới khi học viên đồng ý đúng phiên bản thông báo hiện hành.
 - **Giảm rủi ro cache dùng chung:** câu hỏi dài hơn 300 ký tự hoặc có email/số điện thoại vẫn được trả lời nhưng không vào cache. Đây là lưới an toàn cho các trường hợp thường gặp, không phải bộ lọc dữ liệu cá nhân: tên và chữ tự do khác không bị phát hiện.
 
-- **Che email và số điện thoại** trong câu hỏi trước khi lưu và trước khi gửi tới Google (`ChatContactDetails`): thay bằng `[email]`, `[phone]`. Câu hỏi bị che không bao giờ vào cache dùng chung. Dữ liệu cũ (trước thay đổi này) không bị sửa lại.
+- **Che email và số điện thoại** trong câu hỏi trước khi lưu và trước khi gửi tới Google (`ChatContactDetails`): thay bằng `[email]`, `[phone]`. Câu hỏi bị che không bao giờ vào cache dùng chung. Số điện thoại chỉ được nhận khi có dạng thật, nên năm và ngày tháng không bị che nhầm. Tác vụ đêm cũng xoá bộ đếm lượt theo ngày (`chat_usage`) cũ hơn thời hạn lưu, và V8 có thêm index `chat_message(session_id)` cho việc dọn phiên. Dữ liệu cũ (trước thay đổi này) không bị sửa lại.
 
 Đã làm kèm theo:
 

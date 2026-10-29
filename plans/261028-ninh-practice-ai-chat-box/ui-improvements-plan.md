@@ -54,3 +54,15 @@ Làm theo TDD như các phase trước: viết test cho hàm thuần mới trư�
 Thay đổi cấu trúc đi kèm: `ChatLayout` tách thành vỏ kiểm cờ và `EnabledChatLayout`, nên khi `NEXT_PUBLIC_CHAT_ENABLED` tắt thì **không có hook hay request nào chạy**. Quota và `api` được nâng từ panel lên layout để nút ngoài panel biết số lượt.
 
 Kiểm tra: `vitest` 71 file / 611 test xanh, `tsc` sạch, `eslint` không lỗi mới. **Chưa kiểm bằng trình duyệt thật**: các phần chỉ thấy được khi chạy (huy hiệu, chip, nút sao chép, hiệu ứng, bẫy focus, phím tắt) cần một lượt xem tay trước khi release.
+
+## Đổi layout: cửa sổ chat pop-up nổi (2026-10-29)
+
+Yêu cầu của chủ sản phẩm: chat là một cửa sổ nhỏ bật lên (kiểu bong bóng chat) để học viên vừa chat vừa làm bài; không phải cột bên, không nhảy sang cửa sổ khác.
+
+- Nút mở là một bong bóng tròn ở góc dưới bên phải (`.chat-toggle`, `right: 24px`, trên thanh chân trang của bài nhờ `--chat-toggle-bottom`). Bấm vào thì cửa sổ bật lên (`.chat-panel`: `position: fixed`, rộng tối đa 380px, cao tối đa 520px, hiệu ứng `chat-pop` 160ms, tắt khi người dùng chọn giảm chuyển động).
+- Bài tập giữ nguyên chiều rộng, không bị đẩy ngang cả khi mở hay đóng. Trên màn rộng cửa sổ nằm ở lề phải nên thường không đè nội dung; học viên đóng hoặc mở lại bằng bong bóng, Esc, hoặc Ctrl/Cmd + phím tắt.
+- Màn hẹp (≤ 960px): cửa sổ thấp (tối đa 340px / 45% chiều cao) sát đáy, bài tập có thêm `padding-bottom` để cuộn lên trên cửa sổ. Không có lớp phủ toàn màn hình.
+- Không còn là hộp thoại modal: bỏ bẫy focus, khoá cuộn và `useNarrowScreen`. **U5 không còn áp dụng** (đã xoá `chat-focus-trap.ts`, `useNarrowScreen.ts`). Vẫn giữ: Esc đóng, focus vào ô nhập khi mở, trả focus về nút mở khi đóng.
+- Test: `chat-css.test.ts` khoá các điều này (không `grid-template-columns`, không `inset: 0`, bài không bị đẩy ngang, bong bóng tròn ở góc phải dưới, có animation `chat-pop`).
+- Đã thử bản "hộp nổi nhưng đẩy bài sang trái" và bỏ vì nó giống cột bên.
+- Lưu ý khi xem thử: server dev có thể phục vụ CSS cũ sau khi sửa; xoá `.next/dev` và khởi động lại nếu thấy layout không đổi.
