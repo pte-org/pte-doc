@@ -1,0 +1,178 @@
+{
+  "plan_id": "quang-host-exam-app-preview",
+  "phase_id": 2,
+  "name": "read-only-preview-api",
+  "goal": "API cấp đúng đề đã tạo và runtime cho host mà không tạo attempt.",
+  "status": "completed",
+  "current_step": 7,
+  "design_constraints": [
+    "Keep the existing HOST_ADMIN-owned GET /api/v1/sessions/{id}/exam-preview envelope and add only backward-compatible fields.",
+    "Resolve runtime and timing through an assessment-owned public facade/resolver so session preview never imports attempt.internal.",
+    "Preserve student timing parity, stable snapshot item identity, option order/blank indexes, signed media expiry, and answer stripping.",
+    "No preview endpoint may generate snapshots, create attempts, mutate session state, consume quota, or write outbox/notification records.",
+    "Use V9__allow_session_preview_ready_notification.sql only if Phase 4 requires a migration; do not edit dirty V7/V8 files."
+  ],
+  "quality_profile": {
+    "repository_conventions": [
+      "Spring controllers use CurrentUserContext, HOST_ADMIN authorization, service-owned transactions, and ApiResponse.",
+      "Assessment owns reusable snapshot/runtime/timing contracts; session owns tenant-owned preview orchestration.",
+      "API tests use existing MockMvc/service/contract test conventions and must assert no answer keys are serialized."
+    ],
+    "boundaries": [
+      "Only the exact API, API-client type, and Phase 2 test/report paths in quang-execution-file-manifest.md may change.",
+      "Do not change Flutter preview behavior, web notification UI, Flyway V7/V8, or unrelated dirty worktree files in this phase."
+    ],
+    "applicable_rules": [
+      "Read the complete API standards and relevant module instructions before source edits.",
+      "Keep cross-module dependencies directional and public; do not expose internal attempt DTOs or answer data.",
+      "Preserve common error response codes and tenant isolation."
+    ],
+    "allowed_exceptions": [
+      "Quality gate is skipped by Quang and must remain skipped_by_user; unit tests are required and owned by ck:test."
+    ]
+  },
+  "quality": {
+    "status": "skipped_by_user",
+    "report": "",
+    "receipt": "",
+    "remediation_cycles": 0,
+    "decision": "user_confirmed_skip"
+  },
+  "testing": {
+    "status": "passed",
+    "report": "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/tests/phase-02-read-only-preview-api-test-report.json",
+    "decision": "user_confirmed_run"
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "status": "completed",
+      "description": "Trích read-only content/timing resolver vào public assessment facade/DTO phù hợp module boundaries; student loader và session preview dùng chung. Không import attempt.internal. Timing parity theo handoff §4.",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/dto/response/ExamPreviewResponse.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/dto/response/SnapshotContentResponse.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/draft/SessionExamPreviewService.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/AssessmentService.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/dto/response/ResolvedExamItemResponse.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/internal/config/TaskTimingConfig.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/internal/service/ExamItemRuntimeResolver.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/internal/exception/content/TaskTimingNotConfiguredException.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/internal/constant/AssessmentConstants.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/config/TaskTimingConfig.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/TaskTimingCatalog.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/service/ExamItemLoader.java",
+        "D:/GitHub/pte-org/pte-doc/plans/reports/261029-quang-host-exam-app-preview-contract.md"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Regression test resolver cho cùng snapshot sinh runtime/timing bằng student hiện có; không có session import attempt.internal."
+      ]
+    },
+    {
+      "step_id": 2,
+      "description": "Mở rộng ExamPreviewResponse additive: snapshotItemPublicId, runtime/mapping metadata, resolved timing và media expiry; giữ fields cũ, options blankIndex/order; strip answers bằng DTO riêng.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/dto/response/ExamPreviewResponse.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/dto/response/SnapshotContentResponse.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/draft/SessionExamPreviewService.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/dto/response/ExamPreviewResponse.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/draft/SessionExamPreviewService.java"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Serialized contract tests chứa stable item id và timing; giữ options/blankIndex; không có answer keys."
+      ]
+    },
+    {
+      "step_id": 3,
+      "description": "Giữ GET list/detail/exam-preview hiện có HOST_ADMIN, tenant-owned; existing snapshot đủ để xem, không gate OPEN/enrollment/quota. Common error cho chưa có snapshot, nguồn timing/media thiếu; không auto generate.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/controller/SessionController.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/draft/SessionExamPreviewService.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/draft/SessionExamPreviewService.java"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Parameterized API tests H1/tenant B/student và các status trả đúng common response; write spies=0."
+      ]
+    },
+    {
+      "step_id": 4,
+      "description": "Cập nhật API-client exam preview types cùng contract mới, giữ web consumer tương thích. Adapter audio phải dùng signed URL chứ không dùng UUID media như URL.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/dto/response/ExamPreviewResponse.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/dto/response/SnapshotContentResponse.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/draft/SessionExamPreviewService.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-web/packages/api-client/src/types/scheduling/index.ts"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "API-client typecheck và existing exam-preview consumer typecheck exit 0 với DTO mới."
+      ]
+    },
+    {
+      "step_id": 5,
+      "description": "Bổ sung contract/ownership/read-only tests và resolver timing parity tests vào existing test classes hoặc file mới ghi manifest; AP01–10/AU05–06. Assert absence answer keys và các calls write=0.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/draft/SessionExamPreviewService.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/session/internal/service/draft/SessionExamPreviewServiceTest.java",
+        "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/session/internal/service/draft/HostExamPreviewReadOnlyTest.java",
+        "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/assessment/internal/service/ExamItemRuntimeResolverTest.java",
+        "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/attempt/internal/service/ExamItemLoaderTest.java",
+        "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/assessment/internal/config/TaskTimingConfigTest.java",
+        "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/attempt/internal/config/TaskTimingConfigTest.java"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "AP01–10/AU05–06 contract/tenant/read-only tests pass, prohibited service invocations=0."
+      ]
+    },
+    {
+      "step_id": 6,
+      "description": "Run API compile, focused tests + regression loader/timer tests, client typecheck; ghi DTO mẫu đã strip và exit codes trước phase app.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/draft/SessionExamPreviewService.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/reports/261029-quang-host-exam-app-preview-contract.md"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Logs compile/focused regression/typecheck có exit 0; lỗi baseline/skip được tách rõ."
+      ]
+    }
+  ]
+}

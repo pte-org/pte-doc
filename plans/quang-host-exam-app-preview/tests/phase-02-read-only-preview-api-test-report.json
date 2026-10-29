@@ -1,0 +1,50 @@
+{
+  "phase": "phase-02-read-only-preview-api",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-29T12:10:28+07:00",
+  "summary": {
+    "passed": 64,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "tests": [
+    {
+      "command": "mvnw.cmd -pl app -Dtest=ExamItemRuntimeResolverTest,ExamItemLoaderTest,TaskTimingConfigTest,SessionExamPreviewServiceTest,HostExamPreviewReadOnlyTest test",
+      "exit_code": 0,
+      "passed": 53,
+      "failed": 0
+    },
+    {
+      "command": "mvnw.cmd -pl app -Dtest=TimerServiceTest,AssessmentServiceTest test",
+      "exit_code": 0,
+      "passed": 11,
+      "failed": 0
+    },
+    {
+      "command": "pnpm --filter @pte/api-client typecheck",
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "command": "pnpm --filter tenant-web typecheck",
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "command": "pnpm --filter vendor-web typecheck",
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0
+    }
+  ],
+  "notes": [
+    "The 64 count is the total of the two Maven unit invocations; typechecks are recorded separately as passing checks.",
+    "No integration database or Flyway migration was needed in Phase 2; notification migration belongs to Phase 4.",
+    "Quality gate was skipped_by_user; no quality approval is claimed."
+  ],
+  "report_path": "plans/quang-host-exam-app-preview/tests/phase-02-read-only-preview-api-test-report.json"
+}

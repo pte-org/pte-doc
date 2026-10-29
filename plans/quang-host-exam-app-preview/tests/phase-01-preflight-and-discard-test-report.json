@@ -1,0 +1,44 @@
+{
+  "phase": "phase-01-preflight-and-discard",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-29T12:03:31.5627394+07:00",
+  "summary": {
+    "passed": 49,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "tests": [
+    {
+      "command": "flutter test test/unit/core/security/lockdown_service_test.dart",
+      "exit_code": 0,
+      "passed": 20,
+      "failed": 0
+    },
+    {
+      "command": "flutter test test/unit/features/auth/domain/exam_access_policy_test.dart",
+      "exit_code": 0,
+      "passed": 8,
+      "failed": 0
+    },
+    {
+      "command": "flutter test test/unit/features/auth/auth_bloc_test.dart",
+      "exit_code": 0,
+      "passed": 5,
+      "failed": 0
+    },
+    {
+      "command": "flutter test test/widget/app_auth_gate_test.dart",
+      "exit_code": 0,
+      "passed": 16,
+      "failed": 0
+    }
+  ],
+  "notes": [
+    "Phase 1 is preflight/discard only; no new production feature test was required.",
+    "The Flutter analyzer returned one existing warning at lib/features/exam_attempt/data/repositories/exam_attempt_repository_impl.dart:63; no Phase 1 source hunk owns that warning.",
+    "No native fullscreen or Windows executable was launched."
+  ],
+  "report_path": "plans/quang-host-exam-app-preview/tests/phase-01-preflight-and-discard-test-report.json"
+}
