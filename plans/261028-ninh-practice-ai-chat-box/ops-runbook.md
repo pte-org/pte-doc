@@ -190,7 +190,9 @@ GROUP BY student_id ORDER BY 2 DESC LIMIT 20;
 
 ## 8. Đổi prompt hoặc model
 
-Cache khoá theo (câu hỏi chuẩn hoá, ngôn ngữ, dạng bài, `ChatPrompts.VERSION`), **không** có tên model. Khi đổi system prompt, đổi model hoặc đổi cách từ chối: tăng `ChatPrompts.VERSION` (hiện `v1`, chưa có cache thật ở môi trường nào) để các câu trả lời cũ ngừng được phát lại.
+Cache khoá theo (câu hỏi chuẩn hoá, ngôn ngữ, dạng bài, đề bài đang làm nếu có, `ChatPrompts.VERSION`), **không** có tên model. Khi đổi system prompt, đổi model hoặc đổi cách từ chối: tăng `ChatPrompts.VERSION` (hiện `v3`) để các câu trả lời cũ ngừng được phát lại.
+
+Lịch sử phiên bản: `v1` bản đầu; `v2` (2026-10-29) thêm khối "Current exercise" ngữ cảnh bài tập; `v3` (2026-10-29) chống lạm dụng: AI **không viết hộ bài hoàn chỉnh** (essay, bản tóm tắt, câu trả lời nói, đáp án chọn/điền) mà chỉ đưa dàn ý, cấu trúc, cụm từ, tối đa một hai câu ví dụ và gợi ý, rồi mời học viên tự viết và gửi lại để được nhận xét; sửa bài của chính học viên vẫn luôn được. Bỏ câu "model answers, sample responses ... are allowed" ở bản trước. Không đổi chữ học viên đồng ý nên không cần tăng phiên bản đồng ý. Đây là hành vi của mô hình ngôn ngữ, không phải cổng cứng: học viên vẫn có thể kéo AI nói thêm bằng nhiều câu hỏi liên tiếp; theo dõi qua báo cáo lượt hỏi và đọc mẫu hội thoại.
 
 ## 9. Việc chưa làm ở bản này
 
