@@ -1,0 +1,38 @@
+{
+  "phase": "phase-02-be-gemini-chat-client",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-28T17:30:00Z",
+  "summary": {
+    "passed": 1045,
+    "failed": 0,
+    "skipped": 16
+  },
+  "failures": [],
+  "runs": [
+    {
+      "command": "./mvnw -pl app test -Dtest='com.pte.chat.**.*Test,ModuleStructureTest,PackageDensityTest,SourceFileSizeTest,NoDirectClockAccessTest,PracticeEntitlementServiceTest' -Dsurefire.failIfNoSpecifiedTests=false",
+      "tests": 242,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "postgres_tests_ran": ["ChatMigrationPostgresTest (10)", "ChatSchemaValidatePostgresTest (3)", "ChatModuleBoundaryTest (4)", "ChatEntityMappingTest (8)"]
+    },
+    {
+      "command": "./mvnw -pl app test -Dtest='com.pte.practice.**.*Test,com.pte.scoring.**.*Test' -Dsurefire.failIfNoSpecifiedTests=false",
+      "tests": 819,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 16,
+      "skipped_note": "AllScorersSpikeTest (11) and AzureGeminiSpikeTest (5): pre-existing live-vendor spike tests in com.pte.scoring, unrelated to chat"
+    }
+  ],
+  "weakening_check": {
+    "phase_02_files_checked": 7,
+    "phase_01_files_checked": 10,
+    "sha256_mismatches": 0,
+    "baseline_byte_identical": true,
+    "disabled_or_ignore_annotations": 0
+  },
+  "report_path": "plans/261028-ninh-practice-ai-chat-box/tests/phase-02-be-gemini-chat-client-test-report.json"
+}

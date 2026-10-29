@@ -1,0 +1,41 @@
+{
+  "phase": "phase-04-fe-chat-panel",
+  "status": "RED_READY",
+  "prepared_at": "2026-10-28T17:30:00Z",
+  "repo": "D:/FPT-FALL2026/Capstore/pte-practice",
+  "test_files": [
+    "features/chat/ChatMarkdown.test.tsx",
+    "features/chat/api.test.ts",
+    "features/chat/chat-css.test.ts",
+    "features/chat/chat-errors.test.ts",
+    "features/chat/chat-i18n.test.ts",
+    "features/chat/chat-input.test.ts",
+    "features/chat/chat-links.test.ts",
+    "features/chat/chat-quota.test.ts",
+    "features/chat/chat-session-id.test.ts",
+    "features/chat/chat-state.test.ts",
+    "features/chat/chat-task-type.test.ts",
+    "features/chat/constants.test.ts",
+    "features/chat/contracts.test.ts",
+    "features/practice/api-error-data.test.ts"
+  ],
+  "test_file_sha256": {
+    "features/chat/ChatMarkdown.test.tsx": "c145dc16cac89778c5a49a3b37f705592594bccea1002a63ab47ae77546b02c8",
+    "features/chat/api.test.ts": "d038397789a828129cb269f608c1a8a9cdaefc226c8a0651521a9c58d115070c",
+    "features/chat/chat-css.test.ts": "6750efc7958231b319806c7a5465acef43e4c8f45223e1b7ffc4acad8b40072a",
+    "features/chat/chat-errors.test.ts": "49e3987202f96459872c765694d5062c2faa4eb06fc9e156ebad099ecbe903b7",
+    "features/chat/chat-i18n.test.ts": "37818c62c1b310adefd7ae3f688fc7c06b9a8c943e5feab8d8d5635bb2b9d15f",
+    "features/chat/chat-input.test.ts": "4f8cd982eb9949435127f36aa3be5ac0098abc87f2b77a286be821872e8dd816",
+    "features/chat/chat-links.test.ts": "688b6e4f084cc57005e2fadc46e6d833cefea61c1a538eee702da776fb54016f",
+    "features/chat/chat-quota.test.ts": "136ede29fecb51b5496364ef5ccabf3f39b7e015ef771b28279ad23b2f28cd85",
+    "features/chat/chat-session-id.test.ts": "5d5ba0e0187e3f4815cdf24fec6830197008a9fc7251fba6ba460090949e0ab6",
+    "features/chat/chat-state.test.ts": "1c68dbca1ddb4a3f9cd5fef2bb54dcf60929879520d5f8f2bd72d99153191258",
+    "features/chat/chat-task-type.test.ts": "6516585a3724e1cfe5869e6cc372844824108eebfdb6ec94e64ce2d3ed99bca3",
+    "features/chat/constants.test.ts": "3aff22daa143406715296d93113592f7ce0cabfd94d72bc18cd2a2bb7a772d5f",
+    "features/chat/contracts.test.ts": "d385fce537cbcb5f6064613fe6cac8dae576a56230009124af9d17530ee6b8ad",
+    "features/practice/api-error-data.test.ts": "3d79337f4c79ffd092c98c5c0044d67a94c01277360dfcde5f4980be06dc96c8"
+  },
+  "baseline_dir": "C:/Users/NinhLe/AppData/Local/Temp/claude/D--FPT-FALL2026-Capstore/56519906-f923-4031-9e94-9dd786672c75/scratchpad/tdd-baseline/phase-04/",
+  "expected_red_reason": "Production modules/symbols do not exist yet: features/chat/{constants,contracts,api,chat-input,chat-quota,chat-session-id,chat-task-type,chat-links,chat-errors,chat-state}.ts, features/chat/ChatMarkdown.tsx (test files fail with 'Cannot find module'/'Failed to load url'); features/chat/chat.css is absent (ENOENT); LocaleDict/en/vi have no `chat` section (assertions on undefined); PracticeApiError has no `data` property and practiceRequest does not forward the error body's `data` (api-error-data.test.ts: 'expected undefined to deeply equal'). No failure is a syntax or type error in the tests; all 317 tests pass against a throwaway reference implementation kept outside the repo. Existing suite baseline: 49 files / 241 tests pass.",
+  "artifact_path": "plans/261028-ninh-practice-ai-chat-box/tests/phase-04-fe-chat-panel-tdd-ready.json"
+}

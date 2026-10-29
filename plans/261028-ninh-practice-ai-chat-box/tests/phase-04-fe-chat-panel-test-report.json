@@ -1,0 +1,20 @@
+{
+  "phase": "phase-04-fe-chat-panel",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-29T00:05:00Z",
+  "summary": {
+    "passed": 558,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "notes": [
+    "WEAKENING CHECK: SHA-256 of all 14 prepared test files match tdd-ready artifact; no hash differed. No .skip/.only/xit/xdescribe found. Prepared tests: 317 (14 files), equal to artifact count.",
+    "Full suite `npx vitest run`: 63 files / 558 tests passed, 0 failed, 0 skipped.",
+    "`npm run typecheck` (tsc --noEmit): exit 0, no errors.",
+    "`npx eslint features/chat features/practice common/i18n`: exit 0, 0 errors, 1 pre-existing warning (features/practice/renderers/SpeakingRecorder.tsx 33:14 'locale' unused; file not modified by this phase).",
+    "build: `npm run build` (Next.js 16.4.0 Turbopack) compiled successfully, ran TypeScript, generated 12/12 static pages and listed all routes, exit code 0. It printed only the warning 'Your version of Next.js is affected by a known security vulnerability. This command is continuing after the upgrade reminder.' (reference: registry.npmjs.org advisories bulk). No SecurityFatalError was observed in this run. The advisory concerns the installed next version, is an external dependency matter outside this phase, and was not acted on; no upgrade performed."
+  ],
+  "report_path": "plans/261028-ninh-practice-ai-chat-box/tests/phase-04-fe-chat-panel-test-report.json"
+}

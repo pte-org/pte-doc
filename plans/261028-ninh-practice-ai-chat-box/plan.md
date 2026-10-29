@@ -1,6 +1,6 @@
 # Plan: Chat box AI cho PTE Practice (Task 76)
 
-**Status:** In Progress  
+**Status:** Implemented — release gates pending (xem [release-checklist.md](./release-checklist.md))  
 **Date:** 2026-10-28  
 **Mode:** Hard  
 **Owner/slug:** Ninh — `261028-ninh-practice-ai-chat-box`  
@@ -20,15 +20,15 @@ Thêm chat box AI cho học viên PTE Practice: chỉ trả lời chủ đề ti
 
 ## 1. Phases Overview
 
-- [ ] **Phase 1: BE foundation** (~1–1.5 ngày) — [phase-01-be-foundation.md](./phase-01-be-foundation.md)
+- [x] **Phase 1: BE foundation** [quality: approved; testing: passed] (~1–1.5 ngày) — [phase-01-be-foundation.md](./phase-01-be-foundation.md)
   - Khung module `chat`, cấu hình `chat.ai.*` (mọi bean chat chỉ tạo khi `chat.ai.enabled=true`), migration V7 (`chat_usage`, `chat_session`, `chat_message` có cột `status`, `chat_answer_cache`), cập nhật `ModuleStructureTest`, chốt ranh giới module cho entitlement và Gemini client, hồ sơ test Postgres.
-- [ ] **Phase 2: BE Gemini chat client + system prompt** (~1–1.5 ngày) — [phase-02-be-gemini-chat-client.md](./phase-02-be-gemini-chat-client.md)
+- [x] **Phase 2: BE Gemini chat client + system prompt** [quality: approved; testing: passed] (~1–1.5 ngày) — [phase-02-be-gemini-chat-client.md](./phase-02-be-gemini-chat-client.md)
   - Client Gemini riêng cho chat (structured output `{is_on_topic, markdown_content}`, nhiều lượt, `maxOutputTokens`, không retry), system prompt có phiên bản, làm sạch/parse/validate đầu ra, unit test với fake.
-- [ ] **Phase 3: BE chat service + endpoints** (~3–4 ngày) — [phase-03-be-chat-service-endpoints.md](./phase-03-be-chat-service-endpoints.md)
+- [x] **Phase 3: BE chat service + endpoints** [quality: approved; testing: passed] (~3–4 ngày) — [phase-03-be-chat-service-endpoints.md](./phase-03-be-chat-service-endpoints.md)
   - Luồng một tin end-to-end: entitlement, validate, kiểm tra chủ phiên, khoá 1 request/user, semaphore, cache, quota UPSERT/hoàn quota, lịch sử 6 tin, lưu DB (OK/REFUSED/FAILED), 3 endpoint, ánh xạ lỗi 429/409/503, test song song trên Postgres thật.
-- [ ] **Phase 4: FE `features/chat`** (~2.5–3.5 ngày) — [phase-04-fe-chat-panel.md](./phase-04-fe-chat-panel.md)
+- [x] **Phase 4: FE `features/chat`** [quality: approved; testing: passed] (~2.5–3.5 ngày) — [phase-04-fe-chat-panel.md](./phase-04-fe-chat-panel.md)
   - Side panel đẩy nội dung (overlay trên màn nhỏ), hook quota/phiên, render markdown an toàn bằng CSS tay có phạm vi, "Đoạn chat mới", disclaimer, i18n en/vi, gắn vào màn làm bài, test.
-- [ ] **Phase 5: Verification & handoff** (~1–1.5 ngày) — [phase-05-verification-and-handoff.md](./phase-05-verification-and-handoff.md)
+- [x] **Phase 5: Verification & handoff** [quality: approved; testing: passed, live-key items pending] (~1–1.5 ngày) — [phase-05-verification-and-handoff.md](./phase-05-verification-and-handoff.md)
   - Bộ test prompt (off-topic, injection, nịnh, ngôn ngữ) với `is_on_topic` kỳ vọng rõ cho từng ca, kiểm tra tải/đồng thời, đo token thật để chốt `max-tokens`, tài liệu budget alert, handoff Privacy/ToS, release checklist.
 
 Phase 1→2→3 tuần tự (BE). Phase 4 (FE) chỉ cần hợp đồng API đã chốt ở Phase 3 nên chạy song song được với Phase 2/3 bằng mock; tách repo nên không xung đột file. Các Open Decision (a), (b), (c), (e) cần được xác nhận **trước bước 6 của Phase 1**.
@@ -84,9 +84,9 @@ Phase 1→2→3 tuần tự (BE). Phase 4 (FE) chỉ cần hợp đồng API đ�
 
 ## 4. Open Decisions (cần người dùng xác nhận)
 
-Các mục (a), (b), (c), (e) cần chốt trước bước 6 của Phase 1.
+**Đã chốt ngày 2026-10-28 (người dùng chọn đúng phương án khuyến nghị): (a) = A1, (b) = một instance, (c) = 2.5 Flash-Lite với `max-tokens` 800, (e) = Testcontainers.** Còn mở: (d) layout cuối với UI/UX Designer, (f) hai điểm cần xác nhận.
 
-**(a) Cách `chat` lấy HTTP Gemini / guard / entitlement qua ranh giới Modulith**
+**(a) Cách `chat` lấy HTTP Gemini / guard / entitlement qua ranh giới Modulith** — **ĐÃ CHỐT: A1**
 
 | Phương án | Mô tả | Công sức | Nhận xét |
 | :--- | :--- | :--- | :--- |
@@ -94,12 +94,12 @@ Các mục (a), (b), (c), (e) cần chốt trước bước 6 của Phase 1.
 | A2 | Chuyển `ProviderGuard`/`VendorHttp`/`AiProviderException`/`AiFailureReason` sang package dùng chung (named interface hoặc `shared`) rồi chat dùng lại. | L (~2–3 ngày) | Sạch về lâu dài nhưng sửa nhiều import trong `scoring`, test `ModuleStructureTest`/`PackageDensityTest` dễ vỡ; vẫn phải thêm `maxOutputTokens`, nhiều lượt, `finishReason`. |
 | A3 | `scoring` mở một service công khai ở gốc package cho chat gọi. | M–L | Làm phình API công khai của `scoring` chỉ để phục vụ chat, vẫn phải mở rộng client. |
 
-**(b) Khoá 1 request/user và semaphore: một instance hay lưu trong DB?**
+**(b) Khoá 1 request/user và semaphore: một instance hay lưu trong DB?** — **ĐÃ CHỐT: một instance, trong JVM**
 - Khuyến nghị cho bản đầu: **một instance, trong JVM** (nhẹ, đúng với 70 req/phút), ghi rõ giả định trong tài liệu vận hành và log cảnh báo khi cấu hình nhiều instance (nếu phát hiện được; cần xác minh).
 - Nếu scale ngang: chuyển sang khoá TTL trong DB (cột `in_flight_until` hoặc bảng khoá nhỏ), công sức M (~1 ngày). Không dùng advisory lock theo session vì giữ connection suốt 20 giây. Quota luôn đúng ở mọi trường hợp vì nằm trong DB.
 - Cần biết: môi trường production chạy mấy instance?
 
-**(c) Model Flash-Lite ghim, mức thinking và `max-tokens`**
+**(c) Model Flash-Lite ghim, mức thinking và `max-tokens`** — **ĐÃ CHỐT: 2.5 Flash-Lite, `max-tokens` 800** (tên model chính xác vẫn cần xác minh ngày làm; Phase 5 đo token tiếng Việt thật để chốt số cuối)
 - Khuyến nghị bắt đầu: bản **2.5 Flash-Lite ổn định** (thinking mặc định tắt) với `max-tokens` 800 (tiếng Việt tốn token hơn; ~600 chỉ đủ khi câu trả lời ngắn). Tên model chính xác và trường cấu hình thinking: **cần xác minh** trên ai.google.dev ngày làm.
 - Nếu chọn 3.x Flash-Lite: bắt buộc ghim thinking `minimal` và nâng `max-tokens` lên ~1200–1500, chi phí cao hơn (xem khoảng 105–510 USD/tháng ở NFR-01).
 - Phase 5 đo `usageMetadata` thật với bộ prompt tiếng Việt để chốt số cuối. Không dùng alias `-latest` (mặc định hiện tại của `scoring.ai.gemini.model` là `gemini-flash-lite-latest`; chat không được thừa hưởng).
@@ -110,7 +110,7 @@ Các mục (a), (b), (c), (e) cần chốt trước bước 6 của Phase 1.
 - D2: gắn ở nhánh route phiên của `StudentShell` + context truyền `taskType`. Phủ cả trạng thái loading/lỗi của view nhưng thêm một context và một lớp phụ thuộc chéo. Công sức M+.
 - Layout cuối cùng chốt với UI/UX Designer (hẹn 15 phút) trước khi làm CSS ở Phase 4.
 
-**(e) Test UPSERT: giả lập hay Testcontainers** (còn mở cho người dùng)
+**(e) Test UPSERT: giả lập hay Testcontainers** — **ĐÃ CHỐT: Testcontainers** (cần xác minh Docker ở máy dev/CI; không có Docker thì chạy `psql` thủ công là cổng bắt buộc)
 - Test hiện dùng H2 (`@DataJpaTest`, `src/test/resources/application.yml`, `create-drop`), `pom.xml` chưa có Testcontainers; H2 không hỗ trợ `ON CONFLICT ... DO UPDATE ... WHERE`. Test giả lập (H2 hoặc mock) **không chứng minh được** NFR-04.
 - **Khuyến nghị:** thêm `org.testcontainers` (postgresql + junit-jupiter, scope test) với một **hồ sơ test Postgres riêng** (Flyway bật, `ddl-auto: validate`, nạp URL qua `@DynamicPropertySource`, tách khỏi cấu hình H2 mặc định) cho test đồng thời và test migration V7. Công sức S–M (~0.5–1 ngày); cần Docker ở máy dev/CI (cần xác minh CI có Docker).
 - **Khi không có Docker:** test Testcontainers được bỏ qua trong build, nhưng **một lần chạy `psql` đồng thời thủ công, có ghi lại kết quả, là cổng BẮT BUỘC của release checklist** (Phase 5), không được "bỏ qua im lặng".
@@ -160,6 +160,9 @@ Nguồn: [research.md](./research.md) (2 researcher: codebase + thực hành bê
 - **MEDIUM — Link độc hại trong câu trả lời (F14):** Giảm thiểu: chỉ cho `href` scheme `http`/`https`/`mailto`, giữ `urlTransform` mặc định của react-markdown, link mở `noopener noreferrer`, chặn `img`.
 - **LOW — Chi phí vượt dự kiến:** Giảm thiểu: quota 20/ngày, `max-tokens`, cache, budget alert (Phase 5).
 - **LOW — Ước lượng công sức (F15):** Phase 1 ~1–1.5 ngày, Phase 3 ~3–4 ngày (tổng BE ~6–8 ngày, FE ~2.5–3.5 ngày). Giảm thiểu: chốt Open Decision (a), (b), (c), (e) trước bước 6 Phase 1; chạy Phase 4 song song bằng mock.
+- **LOW — Validate cấu hình thiếu (QUAL-001, Phase 1 quality gate):** `ChatAiPropertiesValidator` chưa kiểm timeout ≥ 1, khoảng `temperature` và trần `max-input-chars` ≤ 4000 (độ dài cột `question`). Giảm thiểu: **làm ở Phase 3** khi nối cấu hình vào client/service, kèm test validator; một giá trị `max-input-chars` > 4000 sẽ làm lệnh chèn tin thất bại sau khi đã trừ quota.
+- **LOW — Không có khoá ngoại `chat_message(session_id, student_id)` → `chat_session` (QUAL-002):** các test Phase 1 chèn `chat_message` với `session_id` ngẫu nhiên nên FK không áp dụng được. Quyền sở hữu phiên do ứng dụng đảm bảo (AD-06/AD-07). Giảm thiểu: Phase 3 có test đua IDOR trên Postgres thật; cân nhắc FK ghép nếu test Phase 3 được viết lại.
+- **LOW — Gate "không bean chat khi tắt" không áp cho JPA (QUAL-003):** entity và repository luôn được đăng ký vì V7 luôn tồn tại và `ddl-auto: validate`. Test gating ở Phase 3/5 chỉ kiểm bean không phải JPA.
 - **LOW — `session_id` trống sau "Đoạn chat mới" rồi tải lại trang (chưa gửi tin nào):** quay về phiên cũ có tin mới nhất; chấp nhận, ghi trong tài liệu.
 - **LOW — `react-markdown` ESM-only trong Vitest:** Giảm thiểu: test bằng `renderToStaticMarkup`; nếu lỗi resolve thì cấu hình `server.deps.inline`.
 
