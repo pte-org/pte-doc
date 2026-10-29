@@ -53,7 +53,7 @@ Thứ tự phát hành: backend (`CHAT_AI_ENABLED=true`) trước, kiểm bằng
 | `CHAT_AI_MAX_INPUT_CHARS` | 1000 | Độ dài tối đa một tin (không quá 4000, bằng cột `question`). |
 | `CHAT_AI_MAX_TOKENS` | 800 | `maxOutputTokens`. Chốt theo số đo thật (xem [prompt-suite](./tests/phase-05-test-report.md)). Tiếng Việt tốn token hơn tiếng Anh. |
 | `CHAT_AI_TEMPERATURE` | 0.2 | 0 đến 2. |
-| `CHAT_AI_READ_TIMEOUT_MS` / `CHAT_AI_CONNECT_TIMEOUT_MS` | 20000 / 2000 | Một lần gọi, không retry. |
+| `CHAT_AI_READ_TIMEOUT_MS` / `CHAT_AI_CONNECT_TIMEOUT_MS` | 30000 / 2000 | Một lần gọi, không retry. Nâng từ 20000 lên 30000 ngày 2026-10-29 vì `gemini-3.5-flash-lite` đôi khi trả lời lâu hơn 20 giây (hai lần quá hạn trong lúc thử). Nginx không đặt hạn đọc riêng nên dùng mặc định 60 giây, và web không đặt hạn cho request chat. |
 | `CHAT_AI_HISTORY_SIZE` | 6 | Số tin OK gần nhất gửi làm ngữ cảnh. |
 | `CHAT_AI_MAX_CONCURRENT` | 20 | Số lệnh gọi Gemini đồng thời toàn hệ thống; đầy thì trả 503, không trừ lượt. |
 | `CHAT_AI_MAX_CACHE_HITS_PER_DAY` | 100 | Trần câu trả lời từ cache mỗi student/ngày; vượt thì câu hỏi đi đường thường và tính quota. |
@@ -111,7 +111,7 @@ Khởi động lỗi nếu cấu hình sai (liệt kê hết lỗi một lần):
 
 ## 3. Giả định một instance
 
-Khoá "một request đang xử lý mỗi student" (HTTP 409) và semaphore toàn hệ thống nằm **trong bộ nhớ** của từng instance. Với N instance, giới hạn thực tế thành N request mỗi student và N × `CHAT_AI_MAX_CONCURRENT` toàn hệ thống. **Quota trong DB vẫn đúng với mọi số instance.** Khi cần scale ngang: chuyển khoá sang bảng khoá có TTL trong DB (công sức ~1 ngày); không dùng advisory lock theo session vì giữ connection tới 20 giây.
+Khoá "một request đang xử lý mỗi student" (HTTP 409) và semaphore toàn hệ thống nằm **trong bộ nhớ** của từng instance. Với N instance, giới hạn thực tế thành N request mỗi student và N × `CHAT_AI_MAX_CONCURRENT` toàn hệ thống. **Quota trong DB vẫn đúng với mọi số instance.** Khi cần scale ngang: chuyển khoá sang bảng khoá có TTL trong DB (công sức ~1 ngày); không dùng advisory lock theo session vì giữ connection tới 30 giây.
 
 ## 4. Chi phí và hạn mức
 
