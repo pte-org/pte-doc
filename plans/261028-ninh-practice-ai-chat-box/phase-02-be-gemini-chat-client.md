@@ -35,8 +35,8 @@ Một client Gemini dành riêng cho chat nhận (system prompt, lịch sử, c�
 - Kiểm thủ công một lần (key thử, dữ liệu giả) trả về đúng cấu trúc `{is_on_topic, markdown_content}` và ghi nhận token thật.
 
 ## Quality and Testing State
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after implementing this phase)
-- Testing: not started
+- Quality gate: approved after one remediation round (report: plans/261028-ninh-practice-ai-chat-box/quality/phase-02-be-gemini-chat-client-quality-report.json; receipt: plans/261028-ninh-practice-ai-chat-box/quality/phase-02-be-gemini-chat-client-receipt.json; 0 blocking, 4 NOTED). Fixed: model guard (only gemini-2.5-flash-lite*), missing finishReason, prompt length bound and scope wording, answer-length constant.
+- Testing: passed - report `plans/261028-ninh-practice-ai-chat-box/tests/phase-02-be-gemini-chat-client-test-report.json`; plus remediation tests passed (report `plans/261028-ninh-practice-ai-chat-box/tests/phase-02-be-gemini-chat-client-remediation-test-report.json`)
 
 ## Risks
 - Tên trường thinking khác nhau giữa 2.5 (ngân sách) và 3.x (mức): xác minh theo model đã ghim, không đoán.

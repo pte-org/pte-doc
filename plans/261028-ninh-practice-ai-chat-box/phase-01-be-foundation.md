@@ -44,8 +44,8 @@ Có module `chat` biên dịch được và qua kiểm tra kiến trúc, với c
 - `chat` gọi được cổng entitlement mà không vi phạm Modulith.
 
 ## Quality and Testing State
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after implementing this phase)
-- Testing: not started
+- Quality gate: approved (report: plans/261028-ninh-practice-ai-chat-box/quality/phase-01-be-foundation-quality-report.json; receipt: plans/261028-ninh-practice-ai-chat-box/quality/phase-01-be-foundation-receipt.json; 0 blocking, 2 LOW, 2 NOTED). Receipt issued with repo root `Capstore` because `pte-doc` and `pte-api` are separate git repositories.
+- Testing: passed (report: plans/261028-ninh-practice-ai-chat-box/tests/phase-01-be-foundation-test-report.json)
 
 ## Risks
 - V7 trùng số với nhánh khác: kiểm `db/migration` trên các nhánh trước khi đặt tên, đổi số khi cần.

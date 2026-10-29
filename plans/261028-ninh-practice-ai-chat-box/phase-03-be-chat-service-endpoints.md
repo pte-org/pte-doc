@@ -47,8 +47,8 @@ Student gửi một tin và nhận câu trả lời markdown kèm `remaining/lim
 - `curl` thủ công với key thử **và `practice.strict-entitlement.enabled=true`** (mặc định `false` sẽ trả 403): một tin on-topic, một tin off-topic (được hoàn lượt), quota khớp giữa response và endpoint trạng thái.
 
 ## Quality and Testing State
-- Quality gate: not evaluated (Cook runs `/ck:quality --gate` after implementing this phase)
-- Testing: not started
+- Quality gate: approved after one remediation round (report: plans/261028-ninh-practice-ai-chat-box/quality/phase-03-be-chat-service-endpoints-quality-report.json; receipt: plans/261028-ninh-practice-ai-chat-box/quality/phase-03-be-chat-service-endpoints-receipt.json; 0 blocking, 6 LOW and 2 NOTED open). Fixed: unbounded free cache hits (daily cap), control-character validation, log safety, ChatService split. Accepted debt (pinned by locked tests): unused constructor dependencies, metric gaps, partial entity return type, package cycle.
+- Testing: passed - report `plans/261028-ninh-practice-ai-chat-box/tests/phase-03-be-chat-service-endpoints-test-report.json`; plus quality-remediation tests (report `plans/261028-ninh-practice-ai-chat-box/tests/phase-03-be-chat-service-endpoints-remediation-test-report.json`: 160 new tests, 2 failing - ChatErrors cyclic-cause infinite loop, locked ChatDtoShapeTest conflicts with new @Size)
 
 ## Risks
 - Lệch nửa đêm giữa lúc trừ và lúc hoàn: hoàn theo `usage_date` đã trừ, response tính theo ngày đã trừ, có test riêng.
