@@ -77,3 +77,16 @@ Cửa sổ chat và bong bóng được làm lại theo hướng A (người dù
 - Chân cửa sổ: "Rút lại đồng ý" và "Xóa các đoạn chat của tôi" gom vào menu "Cài đặt dữ liệu" (`<details>`); hành vi và bước xác nhận không đổi.
 - Thanh cuộn mảnh. Màn hình hẹp (≤ 960px): bong bóng chỉ còn icon + số lượt, bỏ chữ.
 - Test: nhóm "chat.css compact and light style" trong `chat-css.test.ts`. Hai khoá i18n mới: `chat.subtitle`, `chat.dataSettings`.
+
+## Trang "Mức dùng chat AI" của admin, đợt làm đẹp 1 (2026-10-29)
+
+Chỉ đổi giao diện `pte-web/apps/vendor-web/features/chatUsage`, không đụng backend:
+
+- Thẻ tổng quan có dòng phụ giải thích con số (ví dụ "1/20 tin"); thẻ "Lỗi" chuyển đỏ khi trên 10%.
+- Biểu đồ cột xếp chồng theo ngày (đã trả lời, từ chối, lỗi), dùng `TrendBarChart` có sẵn trong `@pte/ui`.
+- Nút chọn nhanh khoảng ngày: 7 ngày, 30 ngày, tháng này (theo lịch giờ Việt Nam).
+- Bảng mặc định chỉ hiện các ngày có tin, có nút "Hiện tất cả các ngày".
+- Số "Từ chối" và "Lỗi" khác 0 hiện dạng nhãn màu.
+- Logic thuần nằm ở `utils/presentation.ts`, có test ở `presentation.test.ts`.
+- Chưa làm: thanh theo dõi ngân sách (cần thêm cấu hình ở backend; bỏ theo quyết định của người dùng).
+- Nhắc: giá token mặc định (0,10 / 0,40 USD mỗi triệu) là của họ 2.5; cần cập nhật `CHAT_AI_PRICE_*` theo giá thật của gemini-3.5-flash-lite.
