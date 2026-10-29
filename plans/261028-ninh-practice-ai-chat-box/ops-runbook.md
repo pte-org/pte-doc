@@ -41,7 +41,7 @@ Web gửi kèm mỗi câu hỏi trường tuỳ chọn `exercisePrompt`: nội d
 - Câu hỏi lưu trong DB vẫn chỉ là câu hỏi của học viên; đề không được lưu.
 - Cache dùng chung: khoá có thêm đề bài, nên cùng một câu hỏi bên cạnh hai đề khác nhau không dùng chung câu trả lời. `ChatPrompts.VERSION` tăng lên `v2` nên mọi câu trả lời cache cũ ngừng được dùng.
 - Đề không có chữ (bài chỉ có audio hoặc ảnh) thì không gửi gì, chat hoạt động như trước.
-- Chính sách bảo mật đã nói thêm là nội dung đề bài được gửi tới Google. Chưa tăng `CONSENT_POLICY_VERSION` vì đề bài là nội dung chung của bài tập, không phải dữ liệu cá nhân; cần pháp lý xác nhận cách làm này.
+- **Còn nợ về văn bản:** chính sách bảo mật và màn đồng ý chưa nói rằng nội dung đề bài cũng được gửi tới Google (đề là nội dung chung của bài tập, không phải dữ liệu cá nhân, và bài làm của học viên không được gửi). Mình đã thử thêm một câu vào mục "Trợ lý AI" và bài test `chat-consent-version.test.ts` chặn lại đúng như thiết kế: đổi chữ học viên đồng ý thì phải tăng `CONSENT_POLICY_VERSION` (FE và BE cùng lúc), buộc mọi người đồng ý lại. Vì pháp lý đang duyệt chữ, nên thêm câu này và tăng phiên bản **một lần cùng đợt duyệt đó** (ghi trong `legal-review-request.md`), không tăng hai lần.
 
 Thứ tự phát hành: backend (`CHAT_AI_ENABLED=true`) trước, kiểm bằng `GET /api/v1/student/chat/quota`, rồi build web với `NEXT_PUBLIC_CHAT_ENABLED=true`.
 

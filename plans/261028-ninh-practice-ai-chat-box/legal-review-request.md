@@ -90,3 +90,7 @@ Pháp lý gửi lại xác nhận hoặc bản sửa. Dev cập nhật `common/i
 - [Global Vietnam Lawyers: Legal alert về Luật 2025](https://gvlawyers.com.vn/wp-content/uploads/2025/09/EN_Legal-alert-_Law-on-PDP-2025.pdf)
 - [Toàn văn Luật 91/2025/QH15 (thuvienphapluat.vn)](https://thuvienphapluat.vn/van-ban/Bo-may-hanh-chinh/Law-91-2025-QH15-Personal-Data-Protection-665440.aspx)
 - [luatvietnam.vn: bản so sánh Luật 2025 và Nghị định 13/2023](https://luatvietnam.vn/linh-vuc-khac/da-co-ban-so-sanh-luat-bao-ve-du-lieu-ca-nhan-883-103238-article.html)
+
+## Bổ sung (2026-10-29): đề bài được gửi kèm câu hỏi
+
+Chat gửi thêm nội dung đề bài đang hiện (đề của bài tập, tối đa 1500 ký tự, không phải bài làm của học viên) cho Google cùng với câu hỏi, để trợ lý trả lời khớp đề khi câu hỏi liên quan. Văn bản hiện tại chưa nói điều này. Đề nghị: thêm vào mục "Trợ lý AI" câu "Câu hỏi, một phần hội thoại trước đó và nội dung đề bài bạn đang mở (không gồm bài làm của bạn) được gửi tới Google" (bản EN tương ứng), sau đó tăng `CONSENT_POLICY_VERSION` ở FE và BE cùng lúc, cập nhật `PINNED` trong `chat-consent-version.test.ts`.
