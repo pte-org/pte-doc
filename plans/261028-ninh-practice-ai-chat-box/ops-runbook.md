@@ -30,6 +30,36 @@ Thứ tự phát hành: backend (`CHAT_AI_ENABLED=true`) trước, kiểm bằng
 | `CHAT_AI_HISTORY_SIZE` | 6 | Số tin OK gần nhất gửi làm ngữ cảnh. |
 | `CHAT_AI_MAX_CONCURRENT` | 20 | Số lệnh gọi Gemini đồng thời toàn hệ thống; đầy thì trả 503, không trừ lượt. |
 | `CHAT_AI_MAX_CACHE_HITS_PER_DAY` | 100 | Trần câu trả lời từ cache mỗi student/ngày; vượt thì câu hỏi đi đường thường và tính quota. |
+| `CHAT_AI_CACHE_MAX_QUESTION_CHARS` | 300 | Câu hỏi dài hơn, hoặc có email/số điện thoại, vẫn được trả lời nhưng không bao giờ vào cache dùng chung. |
+| `CHAT_AI_RETENTION_CONTENT_MONTHS` | 12 | Câu hỏi/câu trả lời cũ hơn số tháng này (giờ Việt Nam) bị xoá chữ **và** bị gỡ mã học viên, mã phiên (thành dữ liệu ẩn danh); số liệu token giữ lại. Phiên cũ không còn tin nhắn bị xoá. |
+| `CHAT_AI_RETENTION_CACHE_DAYS` | 30 | Câu trả lời cache sống bấy nhiêu ngày rồi hết hạn; hết hạn thì bị thay bằng câu trả lời mới. |
+| `CHAT_AI_RETENTION_BATCH_SIZE` | 1000 | Số dòng xoá chữ mỗi lệnh, để tác vụ đêm không khoá bảng lâu. |
+| `CHAT_AI_RETENTION_CRON` | `0 30 3 * * *` | Giờ chạy tác vụ dọn dẹp (03:30 giờ Việt Nam mỗi đêm). Chỉ chạy khi chat đang bật. |
+
+### Xoá dữ liệu theo yêu cầu của một học viên
+
+Chưa có màn hình; làm bằng script có người duyệt. Mục tiêu nội bộ đề xuất 72 giờ (pháp lý xác nhận mốc bắt buộc). Thay `<student_id>` rồi chạy trong một transaction, kiểm số dòng trước khi `COMMIT`. Script xoá chữ và gỡ liên kết như tác vụ đêm, xoá phiên, và xoá bản ghi đồng ý (học viên sẽ được hỏi lại nếu quay lại dùng chat):
+
+```sql
+BEGIN;
+UPDATE chat_message SET question = '', answer = '', updated_at = now(),
+       student_id = '00000000-0000-0000-0000-000000000000', session_id = '00000000-0000-0000-0000-000000000000'
+ WHERE student_id = '<student_id>';
+DELETE FROM chat_session WHERE student_id = '<student_id>';
+DELETE FROM chat_consent WHERE student_id = '<student_id>';
+DELETE FROM chat_usage WHERE student_id = '<student_id>';
+-- kiểm số dòng bị ảnh hưởng rồi COMMIT (hoặc ROLLBACK)
+```
+
+Câu trả lời trong `chat_answer_cache` do AI sinh và không gắn với học viên nên không cần xoá theo yêu cầu.
+
+### Đồng ý quyền riêng tư (V8, bảng `chat_consent`)
+
+- Trước lần chat đầu tiên học viên thấy màn "Trước khi bắt đầu" với một ô tick (từ đủ 16 tuổi hoặc có đồng ý của cha mẹ/người giám hộ) và nút "Đồng ý và bắt đầu". Chưa tick thì nút bị khoá. Bản ghi gồm mã học viên, phiên bản thông báo và thời điểm.
+- Endpoint: `GET` và `POST /api/v1/student/chat/consent`. Gửi tin khi chưa đồng ý trả `403 CHAT_CONSENT_REQUIRED`, không trừ lượt, không gọi Gemini. Xem quota và phiên gần nhất không cần đồng ý.
+- **Đổi nội dung thông báo:** sửa chữ ở `common/i18n/*.ts` (mục `chat.consent`), đổi hằng `ChatConstants.CONSENT_POLICY_VERSION` (backend) và `CHAT_CONSENT_POLICY_VERSION` (web) cùng một giá trị mới, và đưa lên cùng lúc. Mọi học viên sẽ được hỏi lại. Hai giá trị lệch nhau thì học viên không đồng ý được (lỗi 400).
+- Chưa có nút "rút lại đồng ý" cho học viên; hiện làm bằng script ở trên theo yêu cầu. Pháp lý quyết định có cần nút này trước khi release không.
+- Tác vụ đêm không xoá bản ghi đồng ý.
 
 Khởi động lỗi nếu cấu hình sai (liệt kê hết lỗi một lần): thiếu key, model thiếu/có `-latest`, giá trị < 1, timeout < 1, `temperature` ngoài 0 đến 2, `max-input-chars` > 4000.
 
