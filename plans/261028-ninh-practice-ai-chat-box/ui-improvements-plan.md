@@ -66,3 +66,14 @@ Yêu cầu của chủ sản phẩm: chat là một cửa sổ nhỏ bật lên 
 - Test: `chat-css.test.ts` khoá các điều này (không `grid-template-columns`, không `inset: 0`, bài không bị đẩy ngang, bong bóng tròn ở góc phải dưới, có animation `chat-pop`).
 - Đã thử bản "hộp nổi nhưng đẩy bài sang trái" và bỏ vì nó giống cột bên.
 - Lưu ý khi xem thử: server dev có thể phục vụ CSS cũ sau khi sửa; xoá `.next/dev` và khởi động lại nếu thấy layout không đổi.
+
+## Kiểu giao diện "gọn và sáng" (2026-10-29)
+
+Cửa sổ chat và bong bóng được làm lại theo hướng A (người dùng chọn):
+
+- Header: avatar tròn có icon lấp lánh, tên "Trợ lý AI", dòng nhỏ "Có thể sai, hãy kiểm tra lại"; nút "Đoạn chat mới" và đóng là nút tròn chỉ có icon (có `aria-label`).
+- Tin nhắn học viên: bong bóng màu nhấn, chữ trắng; câu trả lời AI: bong bóng xám nhạt, chữ 14px, tiêu đề markdown nhỏ (15px); nút "Sao chép" nhẹ hơn.
+- Ô nhập: dạng viên thuốc, vòng focus màu nhấn thay vòng đen mặc định, tự cao lên tới khoảng 4 dòng (`field-sizing: content`); nút gửi tròn có mũi tên, mờ đi (không xám chết) khi chưa gửi được.
+- Chân cửa sổ: "Rút lại đồng ý" và "Xóa các đoạn chat của tôi" gom vào menu "Cài đặt dữ liệu" (`<details>`); hành vi và bước xác nhận không đổi.
+- Thanh cuộn mảnh. Màn hình hẹp (≤ 960px): bong bóng chỉ còn icon + số lượt, bỏ chữ.
+- Test: nhóm "chat.css compact and light style" trong `chat-css.test.ts`. Hai khoá i18n mới: `chat.subtitle`, `chat.dataSettings`.
