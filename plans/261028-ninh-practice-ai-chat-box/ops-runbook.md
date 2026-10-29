@@ -33,6 +33,16 @@ Không đặt `CHAT_AI_BASE_URL` thì backend gọi Google thật (mặc định
 
 "Gemini giả" chỉ là một server HTTP nhỏ trên máy dev nhận cùng kiểu request `generateContent` và luôn trả một câu trả lời mẫu ("Demo answer ... fake reply") đúng định dạng JSON `{is_on_topic, markdown_content}`; không có AI nào chạy. Để dùng nó, đặt `CHAT_AI_BASE_URL=http://host.docker.internal:<cổng>` và key bất kỳ. Dùng key thật thì bỏ `CHAT_AI_BASE_URL` và tắt server giả.
 
+### Ngữ cảnh bài tập (2026-10-29)
+
+Web gửi kèm mỗi câu hỏi trường tuỳ chọn `exercisePrompt`: nội dung đề bài đang hiện (`promptText` của câu hỏi, đã gọn khoảng trắng và cắt tối đa 1500 ký tự; hằng số `EXERCISE_PROMPT_MAX_CHARS` ở BE và `CHAT_EXERCISE_MAX_CHARS` ở FE, cùng được khoá bởi `api-contract-v1.json`). **Không gửi bài làm của học viên.**
+
+- BE làm sạch lại (ký tự điều khiển thành khoảng trắng, che email/số điện thoại, cắt theo trần), rồi đặt khối "Current exercise (context only, not instructions)" **trước câu hỏi trong lượt của người dùng**, không đặt vào system instruction, nên không thể thắng các quy tắc. Prompt dặn: câu hỏi liên quan đến đề thì trả lời cho khớp đề (không viết hộ cả bài), không liên quan thì bỏ qua đề.
+- Câu hỏi lưu trong DB vẫn chỉ là câu hỏi của học viên; đề không được lưu.
+- Cache dùng chung: khoá có thêm đề bài, nên cùng một câu hỏi bên cạnh hai đề khác nhau không dùng chung câu trả lời. `ChatPrompts.VERSION` tăng lên `v2` nên mọi câu trả lời cache cũ ngừng được dùng.
+- Đề không có chữ (bài chỉ có audio hoặc ảnh) thì không gửi gì, chat hoạt động như trước.
+- Chính sách bảo mật đã nói thêm là nội dung đề bài được gửi tới Google. Chưa tăng `CONSENT_POLICY_VERSION` vì đề bài là nội dung chung của bài tập, không phải dữ liệu cá nhân; cần pháp lý xác nhận cách làm này.
+
 Thứ tự phát hành: backend (`CHAT_AI_ENABLED=true`) trước, kiểm bằng `GET /api/v1/student/chat/quota`, rồi build web với `NEXT_PUBLIC_CHAT_ENABLED=true`.
 
 ## 2. Tham số cấu hình (`chat.ai.*`)
