@@ -1,0 +1,32 @@
+{
+  "phase": "phase-02-be-gemini-chat-client",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-29T00:00:00Z",
+  "summary": {
+    "passed": 23,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "scope": "Phase 2 remediation tests (shipped in the phase-03 RED artifact as remediation_tests)",
+  "runs": [
+    {
+      "command": "./mvnw -pl app test -Dtest='com.pte.chat.**.*Test,...' (full phase-03 run, 706 tests, 0 failures, 0 skipped)",
+      "classes": {
+        "ChatGeminiModelGuardTest": 9,
+        "GeminiChatClientFinishReasonTest": 6,
+        "ChatAnswerLimitTest": 4,
+        "ChatPromptsScopeTest": 4
+      },
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "weakening_check": {
+    "result": "clean",
+    "sha256_matches_phase_03_artifact": true
+  },
+  "report_path": "plans/261028-ninh-practice-ai-chat-box/tests/phase-02-be-gemini-chat-client-remediation-test-report.json"
+}
