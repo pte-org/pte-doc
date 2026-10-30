@@ -1,0 +1,173 @@
+{
+  "plan_id": "quang-host-exam-app-preview",
+  "phase_id": 4,
+  "name": "exam-ready-inbox",
+  "goal": "Thông báo chuông cho host khi bản đề sẵn sàng xem thử.",
+  "status": "completed",
+  "current_step": 7,
+  "design_constraints": [
+    "Use the existing transactional inbox pipeline and SESSION target routing; do not create a second notification transport or app-specific bell.",
+    "Emit only on the first successful DRAFT to READY generation, with the generating HOST_ADMIN as the sole tenant-scoped recipient; READY replay must not emit.",
+    "The notification event and inbox append must run BEFORE_COMMIT and remain rollback-atomic; the Flyway migration must preserve every existing notification type.",
+    "Keep notification copy stable and free of tokens, signed URLs, or volatile timestamps; preserve existing tenant/vendor notification behavior."
+  ],
+  "quality_profile": {
+    "repository_conventions": [
+      "Spring modules expose public domain events and use constructor injection; inbox listeners use BEFORE_COMMIT with InboxAppendService.",
+      "Flyway migrations are append-only under app/src/main/resources/db/migration and existing notification contracts are covered by JUnit plus optional Postgres integration suites.",
+      "The web notification bell and history consume the shared api-client union and existing SESSION target route."
+    ],
+    "boundaries": [
+      "Only the exact API, web type, focused test, migration and plan-report paths in quang-execution-file-manifest.md may change.",
+      "Do not modify the baseline migration, email notification taxonomy, shared transport, or unrelated dirty worktree files."
+    ],
+    "applicable_rules": [
+      "Validate actor membership and tenant scope before creating the sole recipient; never broadcast to students or all hosts for this event.",
+      "Use a deterministic event key and frozen event payload so retries are idempotent and cannot conflict from changing audience data.",
+      "Record missing dedicated Postgres test infrastructure as SKIPPED rather than treating a unit-only test as database proof."
+    ],
+    "allowed_exceptions": [
+      "Quality gate is skipped by Quang and must remain skipped_by_user; unit/integration tests are required and owned by ck:test."
+    ]
+  },
+  "quality": {
+    "status": "skipped_by_user",
+    "report": "",
+    "receipt": "",
+    "remediation_cycles": 0,
+    "decision": "user_confirmed_skip"
+  },
+  "testing": {
+    "status": "passed",
+    "report": "plans/quang-host-exam-app-preview/tests/phase-04-exam-ready-inbox-test-report.json",
+    "decision": "user_confirmed_run"
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "description": "Tạo session-owned ExamPreviewReadyEvent với session/tenant/snapshot/name/code/actor/time; emit chỉ DRAFT->READY thành công trong generate transaction, không emit READY replay.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/draft/ExamPublishService.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/dto/event/ExamPreviewReadyEvent.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/draft/ExamPublishService.java",
+        "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/session/internal/service/ExamWorkflowServicesTest.java"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Generate tests chứng minh event emit 1 lần DRAFT->READY, zero lần khi READY replay."
+      ]
+    },
+    {
+      "step_id": 2,
+      "description": "Add SESSION_PREVIEW_READY enum và validMapping SESSION/SESSION; constants dùng common message convention; actor active HOST_ADMIN đúng tenant là recipient, không creator field/broadcast.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/notification/InboxNotificationRequested.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/notification/domain/enums/InboxNotificationType.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/notification/internal/constant/InboxConstants.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/notification/domain/enums/InboxNotificationType.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/notification/InboxNotificationRequested.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/notification/internal/constant/InboxConstants.java"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "New enum mapping validated SESSION/SESSION; recipient actor membership verified, zero student recipients."
+      ]
+    },
+    {
+      "step_id": 3,
+      "description": "Tạo listener BEFORE_COMMIT -> MANDATORY append, stable key session:snapshot:actor, frozen audience/payload. Rollback không còn inbox; retry không conflict do nội dung volatile. Handoff §6.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/notification/InboxNotificationRequested.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/notification/domain/enums/InboxNotificationType.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/notification/internal/constant/InboxConstants.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/notification/internal/listener/ExamPreviewReadyNotificationListener.java"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Postgres transaction tests NO01–06/NO09 chứng minh single dedup item/rollback atomic, payload ổn định."
+      ]
+    },
+    {
+      "step_id": 4,
+      "description": "Bắt buộc thêm Flyway migration NEXT version sửa notifications_notification_type_check đủ old+new allowlist. Ghi tên chính xác vào file manifest/phase trước write. Không sửa V1 và không tạo preview tables.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/notification/InboxNotificationRequested.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/notification/domain/enums/InboxNotificationType.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/notification/internal/constant/InboxConstants.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/migration/V9__allow_session_preview_ready_notification.sql",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-execution-file-manifest.md"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Actual fresh+upgrade Flyway test chấp nhận SESSION_PREVIEW_READY, preserves old notification values/rows."
+      ]
+    },
+    {
+      "step_id": 5,
+      "description": "Add API-client union + rà all exhaustive consumer maps; reuse SESSION target link và common bell/history/read/unread, transport hiện có; locale copy theo thực tế server rendering, không thêm i18n keys không dùng.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-web/apps/tenant-web/features/notifications/api.ts",
+        "D:/GitHub/pte-org/pte-web/apps/tenant-web/features/notifications/components/NotificationHistoryView.tsx",
+        "D:/GitHub/pte-org/pte-web/packages/ui/src/i18n/LocaleProvider.tsx"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-web/packages/api-client/src/types/notification/index.ts",
+        "D:/GitHub/pte-org/pte-web/packages/api-client/src/requests/notification/inbox.test.ts"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Web typecheck/scoped bell-history tests pass; SESSION link/read/unread behavior unchanged; không transport thứ hai."
+      ]
+    },
+    {
+      "step_id": 6,
+      "description": "Test event replay/concurrency/rollback/actor và actual Flyway upgrade trên Postgres; bell integration/read count. NO01–09, báo SKIPPED khi thiếu test DB thay vì pass giả.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/notification/InboxNotificationRequested.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/notification/domain/enums/InboxNotificationType.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/notification/internal/constant/InboxConstants.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/notification/internal/listener/ExamPreviewReadyNotificationListenerTest.java",
+        "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/notification/internal/repository/InboxDeliveryStorePostgresIntegrationTest.java",
+        "D:/GitHub/pte-org/pte-doc/plans/reports/261029-quang-host-exam-app-preview-verification.md"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "NO01–09 evidence có actual Postgres results; absent DB là SKIPPED chứ không test success."
+      ]
+    }
+  ]
+}

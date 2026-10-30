@@ -1,0 +1,136 @@
+{
+  "plan_id": "quang-host-exam-app-preview",
+  "phase_id": 5,
+  "name": "verification-and-handoff",
+  "goal": "Xác minh end-to-end và chứng minh không phát sinh bài nộp/quota.",
+  "status": "completed",
+  "current_step": 6,
+  "quality_profile": {
+    "repository_conventions": [
+      "Verification must use the repository's documented Flutter, Maven, and pnpm commands and preserve unrelated dirty worktree changes.",
+      "Evidence must distinguish unit/widget/fixture coverage from actual Postgres, network, and Windows release checks.",
+      "Reports belong under pte-doc/plans/reports and must record exact exits, test totals, skips, and untested boundaries."
+    ],
+    "boundaries": [
+      "Do not commit, push, deploy, reset, or discard unrelated changes during handoff.",
+      "Do not claim live DB, network, or Windows proof when the required environment is unavailable.",
+      "Keep student enforcement and existing answer persistence behavior unchanged."
+    ],
+    "applicable_rules": [
+      "Run tests required by Quang; report quality gate as intentionally skipped.",
+      "Validate the plan bundle after all phase and evidence updates."
+    ],
+    "allowed_exceptions": [
+      "Quality gate is skipped by Quang and must remain skipped_by_user; unit/integration tests are required and owned by ck:test."
+    ]
+  },
+  "quality": {
+    "status": "skipped_by_user",
+    "report": "",
+    "receipt": "",
+    "remediation_cycles": 0,
+    "decision": "user_confirmed_skip"
+  },
+  "testing": {
+    "status": "passed",
+    "report": "plans/quang-host-exam-app-preview/tests/phase-05-verification-and-handoff-test-report.json",
+    "decision": "user_confirmed_run"
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "description": "Cập nhật README/AGENTS/IAM nếu cần theo feature thực tế; kiểm diff từng repo bảo toàn dirty changes. File manifest đủ tất cả source/test/migration đã chạm.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-app/README.md",
+        "D:/GitHub/pte-org/AGENTS.md"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-app/README.md",
+        "D:/GitHub/pte-org/AGENTS.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-execution-file-manifest.md"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Diff review/file manifest đối chiếu mọi changed file, không unrelated user edit mất; README/AGENTS đúng role feature."
+      ]
+    },
+    {
+      "step_id": 2,
+      "description": "Run app analyze/full tests, API compile/default suite/Postgres, web api-client/ui/tenant/vendor typecheck + lint/scoped tests. Dùng commands handoff §8 và actual scripts; thu exit/skips.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-app/test/unit/core/security/lockdown_service_test.dart",
+        "D:/GitHub/pte-org/pte-doc/plans/reports/261029-quang-host-exam-app-preview-contract.md"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/reports/261029-quang-host-exam-app-preview-verification.md"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Verification report có command/exit/test totals/skips cho API/app/web; no unrun integration claim."
+      ]
+    },
+    {
+      "step_id": 3,
+      "description": "Windows release smoke host READY + next đang ghi/audio + final exit + host logout/student login; kiểm layout đúng reference và enforcement không còn global flag. RG01–02.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-doc/plans/reports/261029-quang-host-exam-app-preview-verification.md"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/reports/261029-quang-host-exam-app-preview-verification.md"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Windows release evidence host preview READY thành công với flags mặc định, không student guard kích hoạt trên host."
+      ]
+    },
+    {
+      "step_id": 4,
+      "description": "E2E DB/network/queue/quota deltas baseline SAU creation, TRƯỚC preview; chỉ scoped records của test identity. Cho phép auth/notification writes, cấm attempt/answer/media-upload/scoring. Handoff §8, DA01–04.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-doc/plans/reports/261029-quang-host-exam-app-preview-verification.md"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/reports/261029-quang-host-exam-app-preview-verification.md"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Session-scoped DB/network/quota trước/sau preview không thay đổi attempt/answer/upload/grading; auth/inbox writes phân biệt rõ."
+      ]
+    },
+    {
+      "step_id": 5,
+      "description": "Điền toàn bộ acceptance statuses/evidence và 22 code coverage; review findings, report blockers/untested boundaries, bàn giao Quang. Không commit/push/deploy; validate plan bundle.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-doc/plans/reports/261029-quang-host-exam-app-preview-verification.md"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-doc/plans/reports/261029-quang-host-exam-app-preview-verification.md"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Acceptance rows có statuses/evidence, 22 canonical code coverage tách fixture/actual API/Windows; bundle validation exit 0."
+      ]
+    }
+  ]
+}

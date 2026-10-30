@@ -1,0 +1,82 @@
+{
+  "plan_id": "quang-task-type-instruction",
+  "goal": "Admin tạo/sửa được instruction của từng task type (kể cả task type đã runtime-locked); pte-app hiển thị instruction từ BE, fallback về text cứng.",
+  "status": "blocked",
+  "current_phase": 5,
+  "global_context": {
+    "framework": "Java 21/Spring modular monolith + Flyway; Next.js vendor-web (pnpm/turbo); Flutter/BLoC",
+    "architecture": "Instruction stored on question_types, resolved live at delivery through ExamItemRuntimeResolver",
+    "target_folder": "D:/GitHub/pte-org",
+    "constraints": [
+      "Follow each repo's AGENTS.md/CLAUDE.md and coding standards; preserve unrelated worktree changes.",
+      "Blocker before phase 1: duplicate Flyway V9 in pte-api after merging dev must be resolved.",
+      "Instruction is display metadata: editable regardless of runtime lock; plain text, max 500 chars.",
+      "Live resolution (not frozen per exam version) so edits apply to existing exams; the attempt cache keeps it stable per attempt.",
+      "pte-app keeps TaskTypeMeta.instruction as the fallback for null or blank API values.",
+      "Per-question instruction overrides are out of scope."
+    ]
+  },
+  "phases": [
+    {
+      "phase_id": 1,
+      "name": "api-instruction-storage",
+      "description": "API: column, entity, create/update DTOs, response",
+      "file": "phase-01-api-instruction-storage.json",
+      "status": "completed",
+      "depends_on": [],
+      "quality_status": "skipped_by_user",
+      "testing_status": "passed"
+    },
+    {
+      "phase_id": 2,
+      "name": "api-instruction-delivery",
+      "description": "API: deliver live instruction on attempt task and host preview items",
+      "file": "phase-02-api-instruction-delivery.json",
+      "status": "completed",
+      "depends_on": [
+        1
+      ],
+      "quality_status": "skipped_by_user",
+      "testing_status": "passed"
+    },
+    {
+      "phase_id": 3,
+      "name": "web-admin-instruction-field",
+      "description": "Web: instruction textarea in the task-type create/edit modal",
+      "file": "phase-03-web-admin-instruction-field.json",
+      "status": "completed",
+      "depends_on": [
+        1
+      ],
+      "quality_status": "skipped_by_user",
+      "testing_status": "passed"
+    },
+    {
+      "phase_id": 4,
+      "name": "app-instruction-from-api",
+      "description": "App: read instruction from API with TaskTypeMeta fallback",
+      "file": "phase-04-app-instruction-from-api.json",
+      "status": "completed",
+      "depends_on": [
+        2
+      ],
+      "quality_status": "skipped_by_user",
+      "testing_status": "passed"
+    },
+    {
+      "phase_id": 5,
+      "name": "verification-and-handoff",
+      "description": "Cross-repo tests, migration check and manual E2E",
+      "file": "phase-05-verification-and-handoff.json",
+      "status": "blocked",
+      "depends_on": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "quality_status": "skipped_by_user",
+      "testing_status": "not_started"
+    }
+  ]
+}

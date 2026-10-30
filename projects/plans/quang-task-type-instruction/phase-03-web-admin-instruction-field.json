@@ -1,0 +1,126 @@
+{
+  "plan_id": "quang-task-type-instruction",
+  "phase_id": 3,
+  "name": "web-admin-instruction-field",
+  "goal": "Admins enter the instruction when creating a task type and edit it later in vendor-web.",
+  "status": "completed",
+  "current_step": 6,
+  "design_constraints": [
+    "The instruction textarea stays editable when runtimeLocked is true.",
+    "Required non-blank on create and on edit save; 500-char limit with counter.",
+    "Labels, placeholders and errors live in questiontemplate constants.ts; no hardcoded UI strings."
+  ],
+  "quality_profile": {
+    "repository_conventions": {
+      "copy": "Feature constants + ADMIN_VI dictionary keyed by English text via useAdminCopy",
+      "components": "const arrow components, _Private prefix, @pte/ui Textarea",
+      "tests": "vitest node env, renderToStaticMarkup with @pte/ui and adminCopy mocked"
+    },
+    "boundaries": {
+      "api-client": "types only; vendor-web is the only consumer of task-type request types"
+    },
+    "applicable_rules": [
+      "docs/CODING_STANDARDS_WEB.md: component < 150 lines, file < 300 lines",
+      "no hardcoded UI strings; no magic numbers (TASK_TYPE_INSTRUCTION_MAX_LENGTH)",
+      "return types on exported functions"
+    ],
+    "allowed_exceptions": []
+  },
+  "quality": {
+    "status": "skipped_by_user",
+    "decision": "user_confirmed_skip",
+    "report": "",
+    "receipt": "",
+    "remediation_cycles": 0
+  },
+  "testing": {
+    "status": "passed",
+    "report": "2026-10-30: vendor-web vitest 13 files / 78 tests passed (7 new); api-client vitest 33 files / 626 passed; vendor-web tsc --noEmit and api-client tsc clean; eslint on changed paths clean."
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "description": "api-client types: instruction on QuestionTypeResponse (optional), CreateTaskTypeRequest (required), UpdateTaskTypeRequest (optional).",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-web/packages/api-client/src/types/questiontype/index.ts"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-web/packages/api-client/src/types/questiontype/index.ts"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-web/packages/api-client/src/types/questiontype/index.ts, D:/GitHub/pte-org/pte-web/packages/api-client/tests/unit/requests/questiontype/index.test.ts",
+      "debug_logs": [],
+      "success_criteria": [
+        "api-client typecheck exits 0"
+      ]
+    },
+    {
+      "step_id": 2,
+      "description": "Add instruction label, placeholder, helper and length-error strings to questiontemplate constants.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-web/apps/vendor-web/features/questiontemplate/constants.ts"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-web/apps/vendor-web/features/questiontemplate/constants.ts"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-web/apps/vendor-web/features/questiontemplate/constants.ts, D:/GitHub/pte-org/pte-web/apps/vendor-web/features/i18n/adminCopy.ts",
+      "debug_logs": [],
+      "success_criteria": [
+        "New keys exported from constants.ts"
+      ]
+    },
+    {
+      "step_id": 3,
+      "description": "_QuestionTypeEditorFields: add instruction to QuestionTypeFormDraft; render a multiline textarea with maxLength 500 and a counter, never disabled by runtimeLocked.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-web/apps/vendor-web/features/questiontemplate/components/_QuestionTypeEditorFields.tsx",
+        "D:/GitHub/pte-org/pte-web/apps/vendor-web/features/questiontemplate/constants.ts"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-web/apps/vendor-web/features/questiontemplate/components/_QuestionTypeEditorFields.tsx"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-web/apps/vendor-web/features/questiontemplate/components/_QuestionTypeEditorFields.tsx, D:/GitHub/pte-org/pte-web/apps/vendor-web/features/questiontemplate/components/_QuestionTypeInstructionField.tsx (new; Fields was already at the 150-line component limit)",
+      "debug_logs": [],
+      "success_criteria": [
+        "Textarea renders in create and edit modes"
+      ]
+    },
+    {
+      "step_id": 4,
+      "description": "QuestionTypeEditorModal: map type.instruction into the edit draft, empty in newDraft, trim and send it in create and update payloads, require it in the save check.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-web/apps/vendor-web/features/questiontemplate/components/QuestionTypeEditorModal.tsx",
+        "D:/GitHub/pte-org/pte-web/apps/vendor-web/features/questiontemplate/components/_QuestionTypeEditorFields.tsx",
+        "D:/GitHub/pte-org/pte-web/packages/api-client/src/types/questiontype/index.ts"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-web/apps/vendor-web/features/questiontemplate/components/QuestionTypeEditorModal.tsx"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-web/apps/vendor-web/features/questiontemplate/components/QuestionTypeEditorModal.tsx, D:/GitHub/pte-org/pte-web/apps/vendor-web/features/questiontemplate/taskTypeDraft.ts (new; draft mapping and payload builders moved out of the modal so they are unit-testable)",
+      "debug_logs": [],
+      "success_criteria": [
+        "Save is disabled while instruction is blank"
+      ]
+    },
+    {
+      "step_id": 5,
+      "description": "Tests: create payload includes instruction; editing a runtime-locked type keeps the field enabled and sends it; blank blocks save.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-web/apps/vendor-web/features/questiontemplate/components/QuestionTypeEditorModal.tsx",
+        "D:/GitHub/pte-org/pte-web/apps/vendor-web/features/questiontemplate/components/_QuestionTypeEditorFields.tsx"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-web/apps/vendor-web/features/questiontemplate/components/QuestionTypeEditorModal.test.tsx"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-web/apps/vendor-web/tests/unit/features/questiontemplate/taskTypeDraft.test.ts, D:/GitHub/pte-org/pte-web/apps/vendor-web/tests/unit/features/questiontemplate/components/QuestionTypeInstructionField.test.ts (vitest include is tests/**, node env without DOM, so the modal is covered through its pure helpers)",
+      "debug_logs": [],
+      "success_criteria": [
+        "vendor-web QuestionTypeEditorModal test exits 0"
+      ]
+    }
+  ]
+}

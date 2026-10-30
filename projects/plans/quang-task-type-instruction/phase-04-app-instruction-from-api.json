@@ -1,0 +1,169 @@
+{
+  "plan_id": "quang-task-type-instruction",
+  "phase_id": 4,
+  "name": "app-instruction-from-api",
+  "goal": "pte-app shows the API instruction, falling back to the hardcoded TaskTypeMeta text.",
+  "status": "completed",
+  "current_step": 7,
+  "design_constraints": [
+    "Order: API taskTypeInstruction (trimmed, non-blank), then TaskTypeMeta.instruction, then the existing default string.",
+    "One resolver in lib/core used by student attempt and host preview; no screen reads TaskTypeMeta instruction directly afterwards.",
+    "task_view.dart is already over 300 lines: add the field only; no unrelated refactor in this phase.",
+    "TaskTypeMeta.instruction stays as the fallback and is not deleted."
+  ],
+  "quality_profile": {
+    "repository_conventions": {
+      "strings": "AppStrings / per-feature *Strings constants",
+      "entities": "optional nullable named field to avoid churn in 8 test fixtures",
+      "tests": "flutter_test unit tests under test/unit mirroring lib"
+    },
+    "boundaries": {
+      "core/utils": "pure Dart, imports only core/constants"
+    },
+    "applicable_rules": [
+      "docs/CODING_STANDARDS_APP.md: no hardcoded user-facing strings on changed lines (literal screen fallbacks replaced by AppStrings.defaultTaskInstruction)",
+      "file size: task_view.dart already >300, field added only"
+    ],
+    "allowed_exceptions": [
+      "task_view.dart remains over 300 lines (pre-existing, out of scope per design constraint)"
+    ]
+  },
+  "quality": {
+    "status": "skipped_by_user",
+    "decision": "user_confirmed_skip",
+    "report": "",
+    "receipt": "",
+    "remediation_cycles": 0
+  },
+  "testing": {
+    "status": "passed",
+    "report": "2026-10-30: 3 target files 22/22; exam_attempt + exam_preview unit/widget 482/482; full flutter test 746 passed, 3 failed in device_check/test_mic_and_sound_screen_test.dart (unrelated; user has uncommitted lib/core/audio/volume_service.dart). flutter analyze on touched paths: 1 pre-existing warning (unnecessary_cast in exam_attempt_repository_impl.dart:63)."
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "description": "TaskView: add nullable taskTypeInstruction, parse json['taskTypeInstruction'], include in copyWith.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/domain/task_view.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/domain/task_view.dart"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/domain/task_view.dart",
+      "debug_logs": [],
+      "success_criteria": [
+        "TaskView.fromJson reads taskTypeInstruction"
+      ]
+    },
+    {
+      "step_id": 2,
+      "description": "Preview: add taskTypeInstruction to the PreviewSnapshot item entity and parse it in PreviewSnapshotModel.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/domain/entities/preview_snapshot.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/data/models/preview_snapshot_model.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/domain/entities/preview_snapshot.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/data/models/preview_snapshot_model.dart"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/domain/entities/preview_snapshot.dart, D:/GitHub/pte-org/pte-app/lib/features/exam_preview/data/models/preview_snapshot_model.dart",
+      "debug_logs": [],
+      "success_criteria": [
+        "Preview model parses taskTypeInstruction"
+      ]
+    },
+    {
+      "step_id": 3,
+      "description": "Create resolveTaskInstruction(taskType, apiInstruction, fallback) in lib/core/utils/task_instruction_resolver.dart.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-app/lib/core/constants/task_type_meta.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-app/lib/core/utils/task_instruction_resolver.dart"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-app/lib/core/utils/task_instruction_resolver.dart (signature takes the already-resolved TaskTypeMeta, not a key: custom types resolve meta through their runtime renderer), D:/GitHub/pte-org/pte-app/lib/core/constants/app_strings.dart (defaultTaskInstruction)",
+      "debug_logs": [],
+      "success_criteria": [
+        "File under 60 lines with no widget imports"
+      ]
+    },
+    {
+      "step_id": 4,
+      "description": "Use the resolver in task_view_ui_adapter.dart and preview_task_ui_model.dart.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/model/task_view_ui_adapter.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/presentation/model/preview_task_ui_model.dart",
+        "D:/GitHub/pte-org/pte-app/lib/core/utils/task_instruction_resolver.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/model/task_view_ui_adapter.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/presentation/model/preview_task_ui_model.dart"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/model/task_view_ui_adapter.dart, D:/GitHub/pte-org/pte-app/lib/features/exam_preview/presentation/model/preview_task_ui_model.dart",
+      "debug_logs": [],
+      "success_criteria": [
+        "Neither file reads TaskTypeMeta instruction directly"
+      ]
+    },
+    {
+      "step_id": 5,
+      "description": "Replace TaskTypeMeta.forTaskType(...)?.instruction in the 7 reading/listening screens with the resolver using task.taskTypeInstruction.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/listening/presentation/pages/fill_blanks_listening_screen.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/listening/presentation/pages/highlight_incorrect_words_screen.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/listening/presentation/pages/mc_listening_multiple_screen.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/reading/presentation/pages/fill_blanks_drag_drop_screen.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/reading/presentation/pages/fill_blanks_dropdown_screen.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/reading/presentation/pages/mc_reading_multiple_screen.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/reading/presentation/pages/re_order_paragraphs_screen.dart",
+        "D:/GitHub/pte-org/pte-app/lib/core/utils/task_instruction_resolver.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/listening/presentation/pages/fill_blanks_listening_screen.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/listening/presentation/pages/highlight_incorrect_words_screen.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/listening/presentation/pages/mc_listening_multiple_screen.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/reading/presentation/pages/fill_blanks_drag_drop_screen.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/reading/presentation/pages/fill_blanks_dropdown_screen.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/reading/presentation/pages/mc_reading_multiple_screen.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/reading/presentation/pages/re_order_paragraphs_screen.dart"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/listening/presentation/pages/fill_blanks_listening_screen.dart, D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/listening/presentation/pages/highlight_incorrect_words_screen.dart, D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/listening/presentation/pages/mc_listening_multiple_screen.dart, D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/reading/presentation/pages/fill_blanks_drag_drop_screen.dart, D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/reading/presentation/pages/fill_blanks_dropdown_screen.dart, D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/reading/presentation/pages/mc_reading_multiple_screen.dart, D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/reading/presentation/pages/re_order_paragraphs_screen.dart",
+      "debug_logs": [
+        {
+          "timestamp": "2026-10-30T19:53:00+07:00",
+          "error": "dart format was run on whole lib/features/exam_attempt and exam_preview, reformatting 55 files in a dirty worktree",
+          "attempted_fix": "Restored 47 files whose content equalled format(HEAD) back to HEAD; rebuilt fill_blanks_listening_screen and preview_task_ui_model as HEAD + intended edit only. listening_strings.dart (user-modified) kept formatter output; up to 2 restored files may have been user formatting-only edits."
+        }
+      ],
+      "success_criteria": [
+        "Searching lib for 'forTaskType(' followed by '?.instruction' returns no matches"
+      ]
+    },
+    {
+      "step_id": 6,
+      "description": "Tests: resolver precedence (API value, blank API value, unknown type); TaskView.fromJson and preview model parse the field.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-app/lib/core/utils/task_instruction_resolver.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/domain/task_view.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/data/models/preview_snapshot_model.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-app/test/unit/core/utils/task_instruction_resolver_test.dart",
+        "D:/GitHub/pte-org/pte-app/test/unit/features/exam_attempt/task_view_test.dart",
+        "D:/GitHub/pte-org/pte-app/test/unit/features/exam_preview/data/models/preview_snapshot_model_test.dart"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-app/test/unit/core/utils/task_instruction_resolver_test.dart, D:/GitHub/pte-org/pte-app/test/unit/features/exam_attempt/task_view_test.dart, D:/GitHub/pte-org/pte-app/test/unit/features/exam_preview/data/models/preview_snapshot_model_test.dart",
+      "debug_logs": [],
+      "success_criteria": [
+        "flutter test on the three files exits 0",
+        "dart analyze reports no issues"
+      ]
+    }
+  ]
+}
