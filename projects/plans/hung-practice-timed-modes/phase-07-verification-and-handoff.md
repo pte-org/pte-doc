@@ -21,8 +21,8 @@ kiểm được, rồi viết report và commit theo từng feat (không push/me
 - `pte-api/scripts/seed-local-practice-question-bank.ps1` (`[ValidateRange(1, 3)][int]$PerTask`)
 - `pte-api/docker-compose.yml`, `pte-api/docker-compose.services.yml`
 - `pte-api/app/src/test/java/com/pte/ModuleStructureTest.java`, `RouteContractTest.java`
-- `pte-doc/plans/reports/261024-hung-practice-timed-modes-report.md` (mới)
-- `pte-doc/plans/261024-hung-practice-timed-modes/plan.md` (checkbox, trạng thái phase)
+- `pte-doc/projects/plans/reports/261024-hung-practice-timed-modes-report.md` (mới)
+- `pte-doc/projects/plans/hung-practice-timed-modes/plan.md` (checkbox, trạng thái phase)
 - Tuỳ chọn: ghi chú FR-PRACTICE trong `pte-doc/report/report03/` (chế độ tính giờ, chọn câu, nghe lại bản ghi)
 
 ## Steps
@@ -51,7 +51,7 @@ kiểm được, rồi viết report và commit theo từng feat (không push/me
    - TC11: Progress/Home hiển thị `ProgressRing` (progress/segmented/empty) ở theme sáng và tối; vòng x/y và vòng đếm ngược trong phiên.
    - TC12: học viên khác gọi `GET .../items/{id}/recording` của TC5 → 404; ghi kết quả spike CORS (P3 bước 7).
 6. Review diff hai repo: `git diff --check`, không conflict marker, không file sinh ra ngoài phạm vi, không đụng `pte-app`.
-7. Viết report `pte-doc/plans/reports/261024-hung-practice-timed-modes-report.md`: lệnh đã chạy + kết quả,
+7. Viết report `pte-doc/projects/plans/reports/261024-hung-practice-timed-modes-report.md`: lệnh đã chạy + kết quả,
    bảng tiêu chí §7 ↔ bằng chứng, quyết định D1–D6, kết luận dữ liệu vòng Progress/Home cần Hung duyệt, **lệch spec §4**: thiếu Web Audio thì
    không ghi âm được (WAV mã hoá từ `AudioContext`), chỉ có "decode lỗi → ẩn sóng, vẫn phát" (red-team #6),
    trạng thái quyết định mở red-team #8, rủi ro còn lại.

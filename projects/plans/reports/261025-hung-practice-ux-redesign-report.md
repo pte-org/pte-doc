@@ -1,6 +1,6 @@
 # Báo cáo: Thiết kế lại UI/UX pte-practice + kiểm tra dữ liệu + race condition cơ bản
 
-Ngày: 2026-10-25 · Nhánh `hung/feat/practice-revamp` · Plan: `plans/261025-hung-practice-ux-redesign/` · **Chưa commit**
+Ngày: 2026-10-25 · Nhánh `hung/feat/practice-revamp` · Plan: `plans/hung-practice-ux-redesign/` · **Chưa commit**
 
 ## Kết quả lệnh
 | Lệnh | Kết quả |
