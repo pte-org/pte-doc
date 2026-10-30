@@ -4,7 +4,7 @@ Status: Ready
 Date: 2026-10-24
 Mode: Hard
 Test: default
-Owner/slug: Hung — `261024-hung-practice-timed-modes`
+Owner/slug: Hung — `hung-practice-timed-modes`
 Scope: `pte-api` (module `practice`, facade nhỏ ở `itembank`, `attempt`, `media`), `pte-practice`, `pte-doc`
 Related: [spec](./spec.md), [research](../reports/261024-hung-practice-timed-modes-research.md)
 
@@ -153,7 +153,7 @@ P1..P3 contract ──► P4 ──► P5 ──► P6 ──► P7
 - FE: `npm run typecheck && npm run lint && npm run test:unit` trong `pte-practice`, chạy
   `npm run dev` (cổng 3014) và đi tay bằng tài khoản `pte-center.practice01`.
 - Không push/merge/deploy trong cook nếu chưa được yêu cầu; báo cáo ở
-  `pte-doc/plans/reports/`, commit theo từng feat, không commit `.superpowers`.
+  `pte-doc/projects/plans/reports/`, commit theo từng feat, không commit `.superpowers`.
 
 ## Red-team review (2026-10-24)
 
@@ -181,5 +181,5 @@ trả lời, học viên tự bấm Nộp (như P6); tên nhánh Hung tự cập
 ## Next command
 
 ```text
-/ck:cook --hard plans/261024-hung-practice-timed-modes/plan.md
+/ck:cook --hard projects/plans/hung-practice-timed-modes/plan.md
 ```

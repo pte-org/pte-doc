@@ -10,7 +10,7 @@
 
 **Tech Stack:** Next.js 16 / React 19 / vitest / CSS thuần; Spring Boot 4 / JPA / JUnit 5 + Mockito.
 
-**Spec:** `pte-doc/plans/261025-hung-practice-ux-redesign/design.md`
+**Spec:** `pte-doc/projects/plans/hung-practice-ux-redesign/design.md`
 
 ## Global Constraints
 - **Tái sử dụng trước khi code UI (design §5):** mỗi task UI phải (1) dùng component trong `pte-practice/common/components` nếu có; (2) nếu không có, tìm trong `pte-web/packages/ui/src` và port vào `common/components` giữ nguyên tên + API props, ghi nguồn port; (3) chỉ tạo mới khi cả hai không có, đặt trong `common/components` theo phong cách API `@pte/ui`. Bước đầu tiên của mỗi task UI (6–11, 14, 16–18) là: liệt kê component cần dùng và nguồn của từng cái. Báo cáo Task 12 có bảng "dùng lại / port / tạo mới".
@@ -252,4 +252,4 @@
 - [ ] **Step 1:** BE: `./mvnw -q -pl app -am test` → EXIT 0.
 - [ ] **Step 2:** FE: `npx tsc --noEmit`, `npx eslint features common app`, `npx vitest run` → xanh.
 - [ ] **Step 3:** Playwright (tài khoản `pte-center.practice01`): ảnh 390px và 1280px × light/dark cho Đăng nhập, Trang chủ, Luyện đề, Study-Pack, Tiến trình, màn làm bài (Read Aloud + một bài Reading), kết quả, hoàn thành, xem lại. Kiểm: không cuộn ngang; học viên chưa có điểm → "—"; Thoát khi đang tải bản ghi chờ xong.
-- [ ] **Step 4:** Báo cáo `pte-doc/plans/reports/261025-hung-practice-ux-redesign-report.md` (lệnh + kết quả, ảnh, việc tồn); xoá `.playwright-mcp`. Không commit.
+- [ ] **Step 4:** Báo cáo `pte-doc/projects/plans/reports/261025-hung-practice-ux-redesign-report.md` (lệnh + kết quả, ảnh, việc tồn); xoá `.playwright-mcp`. Không commit.

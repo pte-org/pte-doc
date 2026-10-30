@@ -19,7 +19,7 @@ FR: FR-08 + mọi tiêu chí spec §9
   - TC8 Phiên cũ trước V134 vẫn mở/review được.
   - TC9 STUDENT gọi generate → 403.
 - Gates: BE full suite, `ModuleStructureTest`; FE tsc/eslint/vitest.
-- Báo cáo `pte-doc/plans/reports/261025-hung-practice-study-pack-mock-tests-report.md`: lệnh + kết quả, bảng tiêu chí §9 → bằng chứng, quyết định D1–D10, rủi ro còn lại, TC chưa chạy (nếu có, nói rõ).
+- Báo cáo `pte-doc/projects/plans/reports/261025-hung-practice-study-pack-mock-tests-report.md`: lệnh + kết quả, bảng tiêu chí §9 → bằng chứng, quyết định D1–D10, rủi ro còn lại, TC chưa chạy (nếu có, nói rõ).
 - Cập nhật `plan.md` (checkbox + trạng thái quality/testing). Xoá `pte-api/.playwright-mcp` cuối cùng.
 - **Không commit/push** khi Hung chưa bảo; khi được bảo: commit theo feat, tác giả `duckhynh`, không dòng Claude.
 
@@ -31,8 +31,8 @@ FR: FR-08 + mọi tiêu chí spec §9
 ## Related files
 
 - `pte-api/scripts/seed-local-practice-question-bank.ps1`
-- `pte-doc/plans/reports/261025-hung-practice-study-pack-mock-tests-report.md` (mới)
-- `pte-doc/plans/261025-hung-practice-study-pack-mock-tests/plan.md`
+- `pte-doc/projects/plans/reports/261025-hung-practice-study-pack-mock-tests-report.md` (mới)
+- `pte-doc/projects/plans/hung-practice-study-pack-mock-tests/plan.md`
 
 ## Steps
 

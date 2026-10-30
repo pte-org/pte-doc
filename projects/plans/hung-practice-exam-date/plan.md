@@ -4,7 +4,7 @@ Status: Completed
 Date: 2026-10-25
 Mode: Fast (2 phase, pattern quen: một bảng + GET/PUT + một modal)
 Test: default
-Owner/slug: Hung — `261025-hung-practice-exam-date`
+Owner/slug: Hung — `hung-practice-exam-date`
 Scope: `pte-api` (module `practice`), `pte-practice`
 Related: [spec](./spec.md), [brainstorm](../reports/261025-hung-practice-exam-date-brainstorm.md)
 
