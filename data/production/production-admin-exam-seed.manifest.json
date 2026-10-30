@@ -1,0 +1,22 @@
+{
+  "source": "local pte-postgres/pte",
+  "minimum_migration": "V14",
+  "admin_email": "admin@gmail.com",
+  "rows": {
+    "questions": 96,
+    "media_objects": 55,
+    "question_types": 23,
+    "exam_definitions": 7,
+    "question_options": 264,
+    "exam_definition_items": 54
+  },
+  "excluded": [
+    "local users",
+    "organizations",
+    "payments",
+    "sessions",
+    "attempts",
+    "scores"
+  ],
+  "sha256": "2cd7c45b6a0115fba69b6fdc1c87c3b595921b9ef0ad27445dc3a514afb5ddc6"
+}
