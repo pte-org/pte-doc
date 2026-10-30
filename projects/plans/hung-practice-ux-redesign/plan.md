@@ -4,7 +4,7 @@ Status: Completed
 Date: 2026-10-25
 Mode: Hard (bỏ research — đã đọc trực tiếp pte-app/pte-web làm tham chiếu; bỏ agent red-team để tiết kiệm token, đã có builder check cho design)
 Test: default (test viết kèm từng task, xem `tasks.md`)
-Owner/slug: Hung — `261025-hung-practice-ux-redesign`
+Owner/slug: Hung — `hung-practice-ux-redesign`
 Scope: `pte-practice` (chính), `pte-api` module `practice` (2 bổ sung DTO)
 Related: [design](./design.md) · [tasks chi tiết](./tasks.md)
 

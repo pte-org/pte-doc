@@ -3,7 +3,7 @@
 **Ngày:** 2026-10-25
 **Owner:** Hung
 **Repo bị ảnh hưởng:** `pte-api` (module `practice`, đọc `itembank`, `scoretemplate`), `pte-practice`
-**Phụ thuộc:** làm tiếp trên nhánh `hung/feat/practice-revamp`, sau plan `261024-hung-practice-timed-modes` (V133, engine tính giờ, recorder). Migration mới bắt đầu từ **V134**.
+**Phụ thuộc:** làm tiếp trên nhánh `hung/feat/practice-revamp`, sau plan `hung-practice-timed-modes` (V133, engine tính giờ, recorder). Migration mới bắt đầu từ **V134**.
 **Trạng thái:** Chờ duyệt
 
 Quy ước: **[Đã chốt]** là điều Hung đã quyết; **[Quyết định của Claude]** là mặc định Claude chọn, Hung đổi được khi đọc.

@@ -2,7 +2,7 @@
 
 **Status:** Completed  
 **Date:** 2026-10-26  
-**Owner/slug:** Hung — `261026-hung-practice-constants-and-launcher-redesign`  
+**Owner/slug:** Hung — `hung-practice-constants-and-launcher-redesign`  
 **Scope:** Frontend `pte-practice`  
 **Related:** [spec.md](./spec.md) · [phase-01-launcher-redesign.md](./phase-01-launcher-redesign.md) · [phase-02-constants-standardization.md](./phase-02-constants-standardization.md)  
 **Nhánh Git:** `hung/feat/practice-revamp`  

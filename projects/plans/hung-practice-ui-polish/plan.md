@@ -4,7 +4,7 @@ Status: Ready
 Date: 2026-10-25
 Mode: Hard (bỏ research: domain quen thuộc; tự rà soát thay agent review để tiết kiệm token)
 Test: default
-Owner/slug: Hung — `261025-hung-practice-ui-polish`
+Owner/slug: Hung — `hung-practice-ui-polish`
 Scope: chỉ `pte-practice` (đọc `pte-web/packages/ui/src/components/Toast.tsx` làm nguồn port)
 Related: [spec](./spec.md), [brainstorm](../reports/261025-hung-practice-ui-polish-brainstorm.md)
 

@@ -4,9 +4,9 @@ Status: Ready
 Date: 2026-10-25
 Mode: Hard
 Test: default
-Owner/slug: Hung — `261025-hung-practice-study-pack-mock-tests`
+Owner/slug: Hung — `hung-practice-study-pack-mock-tests`
 Scope: `pte-api` (module `practice`; đọc `itembank`, `scoretemplate`), `pte-practice`, `pte-doc`
-Related: [spec](./spec.md), [brainstorm](../reports/261025-hung-practice-mock-tests-brainstorm.md), plan trước [261024-hung-practice-timed-modes](../261024-hung-practice-timed-modes/plan.md)
+Related: [spec](./spec.md), [brainstorm](../reports/261025-hung-practice-mock-tests-brainstorm.md), plan trước [261024-hung-practice-timed-modes](../hung-practice-timed-modes/plan.md)
 
 ## Mục tiêu
 

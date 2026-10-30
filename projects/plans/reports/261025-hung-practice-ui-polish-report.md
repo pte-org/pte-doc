@@ -1,6 +1,6 @@
 # Báo Cáo Triển Khai: UI Polish Practice Workspace
 
-- **Mã kế hoạch:** `261025-hung-practice-ui-polish`
+- **Mã kế hoạch:** `hung-practice-ui-polish`
 - **Tác giả:** Hung Pham
 - **Ngày hoàn thành:** 2026-10-25
 - **Trạng thái:** Hoàn thành toàn diện (Phases 1, 2, 3, 4)
@@ -130,4 +130,4 @@ next upgrade --agent=security --internal-nudge-id=5eef673f-340d-4708-addc-3a8dbc
 
 ## 6. Kết luận
 
-Toàn bộ 4 phase trong kế hoạch `261025-hung-practice-ui-polish` đã được triển khai hoàn tất với chất lượng cao nhất, đáp ứng đầy đủ tất cả các yêu cầu chức năng (FR-01 đến FR-10) và tiêu chí thành công của đặc tả.
+Toàn bộ 4 phase trong kế hoạch `hung-practice-ui-polish` đã được triển khai hoàn tất với chất lượng cao nhất, đáp ứng đầy đủ tất cả các yêu cầu chức năng (FR-01 đến FR-10) và tiêu chí thành công của đặc tả.

@@ -2,7 +2,7 @@
 
 **Date:** 2026-10-26  
 **Status:** Completed  
-**Owner:** Hung — `261026-hung-practice-constants-and-launcher-redesign`  
+**Owner:** Hung — `hung-practice-constants-and-launcher-redesign`  
 **Repo:** `pte-practice` (nhánh `hung/feat/practice-revamp`)  
 **Scope:** Frontend `pte-practice`  
 
