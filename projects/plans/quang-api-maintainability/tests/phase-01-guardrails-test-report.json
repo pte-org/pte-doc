@@ -1,0 +1,19 @@
+{
+  "phase": "phase-01-guardrails",
+  "mode": "verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-25T16:00:00Z",
+  "summary": {
+    "passed": 2840,
+    "failed": 0,
+    "skipped": 16
+  },
+  "failures": [],
+  "notes": [
+    "Backend (clean test, with the dedicated Postgres test DB pte-test-pg): 2856 tests, 0 failures, 0 errors, 16 skipped (AI vendor spikes needing real keys).",
+    "New: NoDirectClockAccessTest (2 tests), SourceFileSizeTest, PackageDensityTest; shared SourceDebtAllowlist.ratchet.",
+    "Negative probes (reverted): 301-line class with Instant.now()/LocalDate.now(zone) in session/internal/exception and allowlist limits raised by 1 produced exactly the expected violations (clock, size, density, \"lower ... to N\").",
+    "Initial allowlists: 49 files / 69 direct clock reads, 23 files > 300 lines, 14 internal packages > 15 classes.",
+    "No production code changed, so no Docker gate for this phase."
+  ]
+}

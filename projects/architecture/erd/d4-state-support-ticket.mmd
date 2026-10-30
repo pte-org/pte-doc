@@ -1,0 +1,12 @@
+---
+title: D4 SupportTicket
+---
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: support/domain/SupportTicket.java
+stateDiagram-v2
+  [*] --> OPEN : / host submits a ticket
+  OPEN --> IN_PROGRESS : admin takes over
+  IN_PROGRESS --> RESOLVED : admin resolves
+  OPEN --> CLOSED : host withdraws
+  RESOLVED --> [*]
+  CLOSED --> [*]

@@ -1,0 +1,19 @@
+{
+  "phase": "phase-07-session-registration",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-25T02:30:00Z",
+  "summary": { "passed": 2739, "failed": 0, "skipped": 75 },
+  "failures": [],
+  "notes": [
+    "Full app suite (clean test): 2814 tests, 0 failures, 0 errors, 75 skipped (Postgres-only integration tests) before the final ExamSkillSelection extraction; focused rerun afterwards (session + proctoring + shared + ModuleStructureTest): 289 tests green.",
+    "Tests written or ported: AttendanceCommandServiceTest (13, rewritten: version/audit/receipt/replay/idempotency conflict/window/reason rules), IdentityVerificationServiceTest (5), AttendanceReceiptServiceTest (4, receipt from the idempotency store and history from the audit trail), ProctorAssignmentServiceTest (4, split from EnrollmentServiceTest), SessionClassSourceServiceTest (9, replaces SessionClassAssignmentServiceTest), ExamWorkflowServicesTest (ported from ExamOrchestrationServiceTest: draft, audience sources, stateless preview, publish reconcile), EnrollmentServiceTest, EntitlementServiceTest, SessionLifecycleServiceTest, SessionOverviewQueriesTest and ExamRegistrationRepositorySlotConflictTest ported to ExamRegistration.",
+    "Removed without replacement because the feature is gone: ExamFormProvisioningServiceTest, the cancelPreparing test (PREPARING removed), the enrollment-generation reset cases of the old attendance tests, bulkEnroll_onWizardExam_provisionsFormsForNewStudents, unenroll_releasesTheStudentsForm.",
+    "Regression caught by the ported tests: EnrollmentService counted enrolled seats unconditionally; capacity == null must skip the count (fixed).",
+    "Process deviation: no failing-first (RED_READY) artifact; tests were written with the implementation.",
+    "Docker gate (manual): dev DB dropped and recreated, app rebuilt with profile local-schema, healthy; 72 base tables (80 before), none of enrollments/session_attendances/exam_forms/form_assignments/exam_generation_jobs/exam_audience_members/proctor_assignments/session_class_assignments; 040/050 seeds loaded (1 scheduled session, 3 enrolled students); admin@test.local and host.e2e@test.local login OK. Verified on Postgres: roster, attendance roster summary, mark present (version 0->1), replay of the same request id (stored receipt, no new version), reused id with another intent (409), receipt lookup, stale version (409), identity verification, history from audit_logs, idempotency_keys rows completed with jsonb results; bulk enroll; class assign/unassign on a scheduled exam; draft create, CLASS source, stateless audience-preview (0 rows persisted), preflight (2 ELIGIBLE rows persisted, TEMPLATE_POOL_INSUFFICIENT), generate blocked by the empty question bank, then with the draft forced to READY by SQL: publish -> SCHEDULED with ENROLLED registrations, GET generation, cancel; session_monitoring_enrollment_membership view returns the enrolled rows.",
+    "web: api-client tsc + vitest (674 of 675; the one failure is the pre-existing 'reaches every Java response record' check for 4 student records), tenant-web tsc, eslint on touched features and vitest (540/540). Flutter: scheduling unit tests green (13).",
+    "Not verified: a real generate against a populated question bank (the local bank is empty), proctor-role attendance and proctor assignment against Postgres (no proctor account is seeded; unit tests only), exclusion constraint no_overlap_per_subscription exercised only by the seeded session, Postgres integration tests stay skipped."
+  ],
+  "report_path": "pte-doc/projects/plans/quang-entity-consolidation/tests/phase-07-session-registration-test-report.json"
+}

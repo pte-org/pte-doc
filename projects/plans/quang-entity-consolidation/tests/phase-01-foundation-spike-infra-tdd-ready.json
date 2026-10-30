@@ -1,0 +1,50 @@
+{
+  "phase": "phase-01-foundation-spike-infra",
+  "status": "RED_READY",
+  "prepared_at": "2026-10-24T09:00:00Z",
+  "test_files": [
+    "pte-api/app/src/test/java/com/pte/shared/idempotency/IdempotencyKeyServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/practice/internal/repository/OtpChallengeRepositoryTest.java",
+    "pte-api/app/src/test/java/com/pte/media/internal/repository/MediaAssetRepositoryTest.java",
+    "pte-api/app/src/test/java/com/pte/shared/audit/AuditLogChangeRecordTest.java",
+    "pte-api/app/src/test/java/com/pte/shared/audit/JsonColumnH2SpikeTest.java",
+    "pte-api/app/src/test/java/com/pte/shared/DdlAutoDefaultTest.java",
+    "pte-api/app/src/test/java/com/pte/ApiInventoryExportTest.java",
+    "pte-api/app/src/test/java/com/pte/shared/idempotency/IdempotencyKeyRaceTest.java"
+  ],
+  "expected_red_reason": "Missing implementation: com.pte.shared.idempotency.{IdempotencyKeyService,IdempotencyOutcome,domain.IdempotencyKey,domain.IdempotencyScope,internal.repository.IdempotencyKeyRepository}; com.pte.practice.internal.domain.OtpChallenge + repository.OtpChallengeRepository; com.pte.media.domain.MediaAsset + com.pte.media.internal.repository.MediaAssetRepository; AuditLogService.recordChange(...) and AuditLog.{actorRole,requestPublicId,beforeState,afterState}; db/migration holds 126 files instead of only V1__baseline.sql and db/legacy-migration does not exist. Test compilation fails with 'cannot find symbol' only for these symbols; the 4 layout tests fail at runtime on the missing files.",
+  "green_on_arrival": [
+    {
+      "test": "JsonColumnH2SpikeTest.nestedRecordListRoundTripsThroughAJsonColumn",
+      "finding": "SqlTypes.JSON without columnDefinition round-trips a nested record list on H2 create-drop (verified 2026-10-24). Phase-1 spike gate passes; AttributeConverter<String> fallback is NOT needed for phases 4/5/9/11."
+    }
+  ],
+  "notes": [
+    "Until phase-1 implementation adds the missing symbols, the whole app test source set does not compile; ck:cook must add them before running any other test.",
+    "Postgres gate (Docker postgres:17, Flyway V1, ddl-auto=validate, login admin@test.local) and the API inventory export are verified by commands, not JUnit; they are recorded in the phase notes.",
+    "Observed existing H2 DDL warnings (not caused by this phase): platform_settings.value is a reserved word and text[] columns are rejected by H2 in question_types/task_runtime_contracts; affected tables are not created in @DataJpaTest. Relevant when phases 3/4 touch PlatformSetting and QuestionType."
+  ],
+  "artifact_path": "pte-doc/projects/plans/quang-entity-consolidation/tests/phase-01-foundation-spike-infra-tdd-ready.json",
+  "acceptance_criteria_changes": [
+    {
+      "date": "2026-10-24",
+      "removed_test": "pte-api/app/src/test/java/com/pte/shared/MigrationBaselineLayoutTest.java",
+      "replaced_by": [
+        "DdlAutoDefaultTest"
+      ],
+      "justification": "User decision (2026-10-24): development uses Hibernate ddl-auto=update via profile local-schema and a single Flyway V1 is generated only in phase 11, so 'db/migration holds only V1__baseline.sql / legacy-migration holds 126' is no longer an acceptance criterion. The replacement asserts the new contract: default config still validates, local-schema profile + dev-seed files exist, admin seed stores only a BCrypt hash. Plan, spec and phase-01 were updated in the same change.",
+      "added": [
+        "ApiInventoryExportTest (phase-1 step 1 inventory exporter; asserts non-empty route set, writes JSON only when -Dinventory.out is set)"
+      ]
+    },
+    {
+      "date": "2026-10-24",
+      "changed_test": "AuditLogChangeRecordTest",
+      "justification": "ck:quality QUAL-003: recordChange moved from AuditLogService to AuditLogChangeWriter(AuditChange). Assertions unchanged; only the call shape.",
+      "added": [
+        "IdempotencyKeyRaceTest",
+        "two cases in IdempotencyKeyServiceTest"
+      ]
+    }
+  ]
+}

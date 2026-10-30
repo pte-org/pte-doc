@@ -1,6 +1,6 @@
 # 2. Test Strategy
 
-This section maps the original DOCX heading **2. Test Strategy**. It explains the levels, test types, test data, tools, risk priorities, and evidence rules used to evaluate PTE Prep.
+This section maps the original DOCX heading **2. Test Strategy**. It explains the levels, test types, test data, tools, risk priorities, and evidence rules used to evaluate PTEPrep.
 
 ## 2.1 Risk-based strategy
 
@@ -65,7 +65,7 @@ This section maps the original DOCX heading **2. Test Strategy**. It explains th
 
 ## 2.6 Defect and severity model
 
-| Severity | Meaning for PTE Prep |
+| Severity | Meaning for PTEPrep |
 |---|---|
 | Blocker | Data loss/exposure, duplicate material business result, unsafe publication, or inability to execute a critical flow. |
 | High | Core workflow or required safeguard fails with no safe workaround. |
@@ -77,3 +77,28 @@ This section maps the original DOCX heading **2. Test Strategy**. It explains th
 
 The cook pipeline uses RED/GREEN Python structural tests before each report phase. These tests verify the documentation bundle, not the production application. Product tests are specified here for later execution and must not be represented as already run.
 
+
+
+## 2.8 Practice and AI test strategy
+
+### 2.8.1 State-focused practice testing
+
+Practice testing follows the state transitions rather than only screen clicks:
+
+1. identity challenge requested -> delivered -> accepted/expired/reused/throttled;
+2. context resolved -> entitlement available/locked/revoked/unavailable;
+3. catalog item visible -> runnable/unavailable/insufficient content;
+4. session created -> active -> saved/pending -> resumed -> submitted/discarded/expired;
+5. media grant -> uploading -> bound/failed/retryable;
+6. feedback not requested -> queued -> processing -> available/unavailable/retryable failure;
+7. progress activity -> pending feedback -> completed activity, without a false score.
+
+### 2.8.2 AI evaluation boundary
+
+AI explanation cases verify correlation, access, provenance, labelling, answer preservation and failure recovery. They do not claim that a generated explanation is academically correct unless a separate approved rubric and human review result exists. Provider timeouts and duplicate callbacks are tested as integration states, not as a reason to delete the Student response.
+
+### 2.8.3 Channel isolation
+
+The same fixture question may be enabled for one, both or neither channel. The test harness must prove that practice selection reads the practice flag and exam generation reads the exam flag, while publication/readiness and task support remain required filters.
+
+The AI test oracle covers both `NFR-AI-001` (provider isolation and recovery) and `NFR-AI-002` (learner-readable, labelled explanation). It checks state, provenance and access rather than declaring a model output academically correct without an approved rubric.

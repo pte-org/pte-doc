@@ -1,0 +1,50 @@
+{
+  "phase": "phase-03-be-chat-service-endpoints",
+  "mode": "remediation-tests",
+  "verdict": "FAILED",
+  "reviewed_at": "2026-10-29T00:00:00Z",
+  "summary": {
+    "total_run": 866,
+    "baseline_existing": 706,
+    "new_tests": 160,
+    "passed": 864,
+    "failed": 2,
+    "errors": 0,
+    "skipped": 0
+  },
+  "command": "./mvnw -pl app test -Dtest='com.pte.chat.**.*Test,ModuleStructureTest,PackageDensityTest,SourceFileSizeTest,NoDirectClockAccessTest,PracticeEntitlementServiceTest' -Dsurefire.failIfNoSpecifiedTests=false",
+  "maven_log": "C:/Users/NinhLe/AppData/Local/Temp/claude/D--FPT-FALL2026-Capstore/56519906-f923-4031-9e94-9dd786672c75/scratchpad/mvn-run3.log",
+  "new_test_classes": {
+    "com.pte.chat.internal.service.ChatServiceCacheCapTest": {"tests": 12, "failures": 0},
+    "com.pte.chat.internal.service.ChatServiceCacheCapPostgresTest": {"tests": 8, "failures": 0},
+    "com.pte.chat.internal.service.session.ChatSessionServiceCacheHitsPostgresTest": {"tests": 5, "failures": 0},
+    "com.pte.chat.internal.service.ChatSendValidatorTest": {"tests": 66, "failures": 0},
+    "com.pte.chat.internal.dto.ChatMessageRequestValidationTest": {"tests": 9, "failures": 0},
+    "com.pte.chat.internal.service.ChatErrorsTest": {"tests": 10, "failures": 1},
+    "com.pte.chat.internal.service.ChatServiceLogSafetyTest": {"tests": 8, "failures": 0},
+    "com.pte.chat.internal.config.ChatPropertiesCacheCapTest": {"tests": 15, "failures": 0},
+    "com.pte.chat.internal.constant.ChatLanguageConstantsTest": {"tests": 16, "failures": 0},
+    "com.pte.chat.internal.service.session.ChatStatusSqlTest": {"tests": 11, "failures": 0}
+  },
+  "failures": [
+    {
+      "test": "com.pte.chat.internal.service.ChatErrorsTest.aCauseChainThatLoopsBackDoesNotLoopForever",
+      "assertion": "[describe() returned for a cyclic cause chain] Expecting value to be false but was true",
+      "likely_owner": "production_code",
+      "detail": "ChatErrors.describe walks `while (cause != null && cause.getCause() != null) cause = cause.getCause();` with no cycle guard, so a cause cycle A->B->A (allowed by Throwable.initCause) spins forever. Test is correct and kept; it runs describe() on a daemon thread and fails after 3 s."
+    },
+    {
+      "test": "com.pte.chat.internal.dto.ChatDtoShapeTest.theLengthOfTheMessageIsLeftToTheService",
+      "assertion": "Expecting empty but was: [\"message\"]  (ChatDtoShapeTest.java:108)",
+      "likely_owner": "locked_test_outdated",
+      "detail": "Existing LOCKED Phase 3 test asserts a 5000-char message has no bean-validation violation. The remediation added @Size(max = ChatConstants.MAX_QUESTION_CHARS = 4000) to ChatMessageRequest.message, which intentionally contradicts it. Not edited (locked); the test needs an approved update (e.g. use 4000 chars), or the @Size must be reconsidered."
+    }
+  ],
+  "locked_hash_check": {
+    "result": "MATCH",
+    "files_checked": 52,
+    "per_phase": {"phase-01": 10, "phase-02": 7, "phase-03": 35},
+    "mismatches": [],
+    "note": "Checked before the run; no existing test file was edited or deleted (only new files created)."
+  }
+}

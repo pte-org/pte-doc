@@ -76,3 +76,17 @@ Dates are intentionally represented as release-planning slots until the project 
 
 The person executing a case is responsible for actual evidence, but the Test Lead owns the summary. A product actor may participate in UAT, but a test result must identify test responsibility separately from the product role to avoid confusing permissions with verification ownership.
 
+
+
+## 3.8 Scope revision work packages
+
+| Work package | Main cases | Owner | Gate |
+|---|---|---|---|
+| WP-01 Role governance | `TC-ROLE-001` through `TC-ROLE-006` | Platform/academic workflow owner | No role can perform an action outside its scope |
+| WP-02 Identity and context | `TC-PRACTICE-001` through `TC-PRACTICE-003` | Identity owner | Invalid code, no context and ambiguous context are safe |
+| WP-03 Practice catalog/session | `TC-PRACTICE-004` through `TC-PRACTICE-008` | Practice owner | Eligible content, ownership, save/resume and submit are deterministic |
+| WP-04 Media and feedback | `TC-PRACTICE-009` through `TC-PRACTICE-012` | Practice/AI integration owner | Media and AI failures preserve answer state |
+| WP-05 Channel flags | `TC-CONTENT-003` through `TC-CONTENT-006` | Academic content owner | No cross-channel selection or frozen-content rewrite |
+| WP-06 Exam regression | Existing delivery, Proctor, Examiner and publication cases | Exam workflow owner | New practice changes do not regress organization exam behavior |
+
+D01-D03 expected policies were accepted by the user on 2026-10-22: existing Academic task families, explicit authorized organization context and quick grouped Study-Pack practice. Their cases are `Not executed`, rather than `Blocked by decision` or `Passed`. Remaining AI academic/operational or feedback ownership decisions can still block their own dependent cases.

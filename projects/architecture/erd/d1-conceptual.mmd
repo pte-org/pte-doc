@@ -1,0 +1,43 @@
+---
+title: D1 Conceptual ERD - Organization, content and exams
+---
+%% No attributes. Entity names are business concepts; for the source tables see erd-redraw-guide.md section 5.1.
+%% Commerce, practice, notification and support: d1-conceptual-commerce.mmd
+erDiagram
+  ORGANIZATION ||--o{ ORGANIZATION_MEMBER : "has member"
+  USER ||--o{ ORGANIZATION_MEMBER : "joins"
+  ORGANIZATION ||--o{ PROGRAM : "runs"
+  PROGRAM ||--o{ TRAINING_CLASS : "contains"
+  TRAINING_CLASS }o--o{ USER : "enrolls student"
+
+  QUESTION_TYPE ||--o{ QUESTION : "classifies"
+  QUESTION ||--o{ QUESTION : "revises"
+  MEDIA_ASSET |o--o{ QUESTION : "provides audio or image"
+  EXAM_BLUEPRINT }o--o{ QUESTION : "selects"
+  EXAM_DEFINITION ||--o{ EXAM_VERSION : "produces"
+  EXAM_BLUEPRINT |o--o{ EXAM_VERSION : "sources"
+  EXAM_VERSION }o--o{ QUESTION : "snapshots"
+
+  ORGANIZATION ||--o{ EXAM_SESSION : "hosts"
+  EXAM_SESSION }o--|| EXAM_DEFINITION : "follows"
+  EXAM_SESSION }o--o| EXAM_VERSION : "uses version"
+  EXAM_SESSION ||--o{ EXAM_REGISTRATION : "registers"
+  USER ||--o{ EXAM_REGISTRATION : "registers as student"
+  EXAM_SESSION ||--o{ SESSION_PROCTOR : "assigns proctor"
+  USER ||--o{ SESSION_PROCTOR : "serves as proctor"
+
+  EXAM_SESSION ||--o{ EXAM_ATTEMPT : "holds"
+  USER ||--o{ EXAM_ATTEMPT : "takes"
+  EXAM_ATTEMPT ||--o{ ATTEMPT_ANSWER : "contains"
+  ATTEMPT_ANSWER ||--o{ ANSWER_EVALUATION : "is evaluated by AI or examiner"
+  EXAM_ATTEMPT ||--o{ GRADING_ASSIGNMENT : "assigns grading"
+  USER ||--o{ GRADING_ASSIGNMENT : "grades as examiner"
+  GRADING_ASSIGNMENT ||--o{ GRADING_ISSUE : "raises issue"
+  EXAM_ATTEMPT ||--o| EXAM_RESULT : "yields result"
+  EXAM_SESSION ||--o{ EXAM_INCIDENT : "records incident"
+  EXAM_ATTEMPT |o--o{ EXAM_INCIDENT : "concerns attempt"
+  USER |o--o{ EXAM_INCIDENT : "reports"
+  %% Derived business relationship when the reporter is a proctor assigned to the session.
+  %% Not an FK: an incident does not store session_proctor_id. Automatic incidents or incidents
+  %% reported by others need no SESSION_PROCTOR; the reporter may also be absent.
+  SESSION_PROCTOR |o..o{ EXAM_INCIDENT : "reports during session"

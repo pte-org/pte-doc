@@ -1,0 +1,19 @@
+---
+title: D4 ExamIncident (status is a string, no enum or CHECK)
+---
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: proctoring/internal/service/ExamIncidentCommandService.java
+%% Host and platform admin may set any valid value before CLOSED. Only business-relevant transitions are drawn.
+%% A proctor only sets NEW or IN_PROGRESS and cannot move IN_PROGRESS back to NEW.
+stateDiagram-v2
+  [*] --> NEW : / report incident (origin = REPORTED)
+  NEW --> IN_PROGRESS : take over [actor in (proctor, host)]
+  NEW --> ESCALATED : escalate to platform admin [actor = host]
+  IN_PROGRESS --> ESCALATED : escalate to platform admin [actor = host]
+  NEW --> RESOLVED : resolve [actor in (host, admin)]
+  IN_PROGRESS --> RESOLVED : resolve [actor in (host, admin)]
+  ESCALATED --> RESOLVED : resolve [actor in (host, admin)]
+  RESOLVED --> IN_PROGRESS : reopen [actor in (host, admin)]
+  RESOLVED --> CLOSED : close [actor in (host, admin)]
+  ESCALATED --> CLOSED : close [actor in (host, admin)]
+  CLOSED --> [*]

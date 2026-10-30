@@ -7,7 +7,7 @@ This section maps the original DOCX heading **2. Installation Guides**. It is wr
 | Area | Responsible person/team | Safe boundary |
 |---|---|---|
 | Hosted application/deployment | Operations owner | Use the approved repository/workflow/secret process; do not paste secrets into documentation or commands. |
-| Platform portal access | Platform Admin | Create/approve Platform Admin/Author access under the identity policy. |
+| Platform portal access | Platform Admin | Create/approve Platform Admin, Platform Manager, Academic Manager and Academic Staff access under the identity policy. |
 | Organization onboarding | Platform Admin + Host | Registration approval precedes Host workspace/package activation. |
 | Windows exam client | Host/Student support | Install the approved client build and run device check before a timed attempt. |
 | External providers | Integration/operations owner | Configure provider credentials through the secret manager/environment process. |
@@ -62,8 +62,8 @@ The exact host size, browser matrix, provider contract, and Windows hardware mat
 8. Confirm database migrations completed and no destructive data action was requested.
 9. Record environment/build/health evidence as `EVD-OPS-*` with masked output.
 
-**Expected result:** The public edge routes to the intended web/API applications; internal services remain internal.  
-**Error/recovery:** If a service fails health, stop release handoff, inspect the failed service logs/status, and follow the rollback owner’s procedure. Do not delete database volumes as a first response.  
+**Expected result:** The public edge routes to the intended web/API applications; internal services remain internal.
+**Error/recovery:** If a service fails health, stop release handoff, inspect the failed service logs/status, and follow the rollback owner’s procedure. Do not delete database volumes as a first response.
 **Traceability:** `SD-ARCH-DEPLOY-001`, `NFR-05`–`NFR-08`, `NFR-19`, `TC-OPS-001`.
 
 ## 2.6 `STEP-INSTALL-002` — Configure an organization safely
@@ -76,8 +76,8 @@ The exact host size, browser matrix, provider contract, and Windows hardware mat
 6. Confirm the package dates/limits are visible before creating an exam.
 7. Record any payment/provider pending state with its correlation reference; do not treat a browser return as payment proof.
 
-**Expected result:** Organization workspace and package state are understandable and separate.  
-**Error/recovery:** Rejected registration, inactive package, duplicate callback, or expired license remains visible with an owner/action.  
+**Expected result:** Organization workspace and package state are understandable and separate.
+**Error/recovery:** Rejected registration, inactive package, duplicate callback, or expired license remains visible with an owner/action.
 **Traceability:** `FR-ONBOARD-002`, `FR-PACKAGE-003`–`FR-PACKAGE-005`, `TC-ACCESS-002`, `TC-PACKAGE-002`.
 
 ## 2.7 `STEP-INSTALL-003` — Verify an exam client before an exam
@@ -89,8 +89,8 @@ The exact host size, browser matrix, provider contract, and Windows hardware mat
 5. Save a safe test response only where the organization test procedure permits it.
 6. Confirm local save/sync state and remove the test attempt according to the approved data procedure.
 
-**Expected result:** Student can identify readiness before timed work; a failure does not start a misleading timer.  
-**Error/recovery:** Capture the client status/reference, correct the device or contact Host/Proctor support, and do not repeat a timed attempt without policy approval.  
+**Expected result:** Student can identify readiness before timed work; a failure does not start a misleading timer.
+**Error/recovery:** Capture the client status/reference, correct the device or contact Host/Proctor support, and do not repeat a timed attempt without policy approval.
 **Traceability:** `FR-DELIVERY-001`–`FR-DELIVERY-004`, `TC-DELIVERY-002`, `TC-DELIVERY-003`, `NFR-18`.
 
 ## 2.8 Configuration and secret-handling checklist
@@ -140,7 +140,7 @@ The Student follows the client’s visible local-save/retry status. The Host/Pro
 |---|---|---|---|
 | Login/session | Account holder/Host | Platform Admin | Safe message/reference, role, organization; never password/token. |
 | Package/payment | Host | Platform Admin/integration owner | Order/license correlation and provider state. |
-| Content/media | Platform Author | Platform Admin/media owner | Question revision, media status, error reference. |
+| Content/media | Academic Staff | Academic Manager for academic review; Platform Admin/media owner for platform support | Question revision, media status, error reference. |
 | Exam generation/conflict | Host | Platform/technical owner | Exam draft ID, validation blockers, generation state. |
 | Device/audio | Student/Proctor | Host/exam-client owner | Device-check item and client build. |
 | Answer sync | Student/Proctor | Host/technical owner | Attempt/task correlation, local/sync state, time. |
@@ -148,3 +148,19 @@ The Student follows the client’s visible local-save/retry status. The Host/Pro
 | Score/publication | Examiner/Host | Scoring/report owner | Source status, readiness blocker, publication state. |
 | Notification/provider | Host/Platform Admin | Integration owner | Correlation/status/retry state. |
 
+
+## 2.12 Student practice and AI prerequisites
+
+### 2.12.1 Practice Web prerequisites
+
+**Status: Partial/Planned.** A practice environment needs the configured Practice Web application, the shared backend API, an accessible database/infrastructure boundary, seeded approved question content, and a valid Student context/entitlement. The question revision must be published, ready and enabled for practice. An exam-only flag is not enough.
+
+The operator must verify the route and API contract from repository configuration before describing the feature as available. Do not place provider keys, email credentials, database passwords or private URLs in this guide.
+
+### 2.12.2 AI explanation prerequisites
+
+**Status: Planned/Future/TBD.** The later implementation requires an approved provider adapter, task eligibility list, rubric/prompt version, response correlation, retry policy, data-handling decision and academic review policy. A provider being configured does not prove that explanations are available or correct. When the provider is unavailable, the Student answer and activity record must remain usable.
+
+### 2.12.3 Channel-flag content preparation
+
+Academic Staff prepares a question revision and selects the intended Practice and/or Exam usage flag. Academic Manager reviews the content, media, rubric and flag choice. The question becomes selectable only after the required publication/readiness state. Later flag changes affect future selection and must not rewrite a frozen session or exam.

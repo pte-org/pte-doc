@@ -1,0 +1,127 @@
+{
+  "phase": "phase-05-verification-and-handoff",
+  "mode": "unit-and-build",
+  "verdict": "PASSED_WITH_UNVERIFIED_LIVE_BOUNDARIES",
+  "reviewed_at": "2026-10-29",
+  "quality_gate": {
+    "status": "skipped_by_user",
+    "decision": "user_confirmed_skip"
+  },
+  "summary": {
+    "app_tests_passed": 634,
+    "api_focused_tests_passed": 65,
+    "api_full_suite_tests_run": 2916,
+    "api_full_suite_failures": 1,
+    "api_full_suite_errors": 1,
+    "api_full_suite_skipped": 59,
+    "api_postgres_tests_skipped": 12,
+    "api_client_tests_passed": 624,
+    "ui_tests_passed": 298,
+    "windows_release_build": "passed",
+    "web_typechecks_passed": 4,
+    "web_lint_errors": 0
+  },
+  "tests": [
+    {
+      "command": "flutter test",
+      "exit_code": 0,
+      "passed": 634,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "command": "flutter analyze",
+      "exit_code": 1,
+      "passed": 0,
+      "failed": 0,
+      "notes": [
+        "One pre-existing unnecessary_cast warning at lib/features/exam_attempt/data/repositories/exam_attempt_repository_impl.dart:63."
+      ]
+    },
+    {
+      "command": "flutter build windows --release",
+      "exit_code": 0,
+      "artifact": "build/windows/x64/runner/Release/pte_app.exe"
+    },
+    {
+      "command": "mvnw.cmd -pl app -DskipTests compile",
+      "exit_code": 0
+    },
+    {
+      "command": "mvnw.cmd -pl app test",
+      "exit_code": 1,
+      "tests_run": 2916,
+      "failures": 1,
+      "errors": 1,
+      "skipped": 59,
+      "notes": [
+        "Initial failure was ExamPublishService at 304 lines; the separate ModuleStructureTest error was the existing assessment-attempt cycle."
+      ]
+    },
+    {
+      "command": "mvnw.cmd -pl app -Dtest=SourceFileSizeTest,ExamWorkflowServicesTest,InboxNotificationRequestedTest,ExamPreviewReadyNotificationListenerTest test",
+      "exit_code": 0,
+      "passed": 65,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "command": "mvnw.cmd -pl app -Dtest=ModuleStructureTest test",
+      "exit_code": 1,
+      "tests_run": 3,
+      "errors": 1,
+      "notes": [
+        "Existing assessment -> attempt -> assessment cycle and related boundary violations reproduced."
+      ]
+    },
+    {
+      "command": "mvnw.cmd -pl app -Dtest=InboxDeliveryStorePostgresIntegrationTest test",
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 12,
+      "notes": [
+        "INBOX_TEST_DB_URL/USER/PASSWORD unavailable; no real PostgreSQL or Flyway proof."
+      ]
+    },
+    {
+      "command": "pnpm --filter @pte/api-client test",
+      "exit_code": 0,
+      "passed": 624,
+      "failed": 0
+    },
+    {
+      "command": "pnpm --filter @pte/ui test",
+      "exit_code": 0,
+      "passed": 298,
+      "failed": 0
+    },
+    {
+      "command": "pnpm --filter @pte/api-client typecheck; pnpm --filter @pte/ui typecheck; pnpm --filter tenant-web typecheck; pnpm --filter vendor-web typecheck",
+      "exit_code": 0,
+      "passed": 4,
+      "failed": 0
+    },
+    {
+      "command": "pnpm --filter tenant-web lint; pnpm --filter vendor-web lint",
+      "exit_code": 0,
+      "failed": 0,
+      "notes": [
+        "Vendor lint emitted two existing no-img-element warnings; no lint errors."
+      ]
+    }
+  ],
+  "manual_or_live": [
+    {
+      "scope": "host READY login, audio, recording, Next/Finish, logout, student login",
+      "status": "not_run",
+      "reason": "No controlled test identity/session/media environment supplied."
+    },
+    {
+      "scope": "PostgreSQL/Flyway, network trace, quota delta",
+      "status": "skipped",
+      "reason": "Dedicated test database and controlled live environment unavailable."
+    }
+  ],
+  "report_path": "plans/reports/261029-quang-host-exam-app-preview-verification.md"
+}

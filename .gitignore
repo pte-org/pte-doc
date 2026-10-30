@@ -1,3 +1,8 @@
 # Reporting scratchpads - local only, not source artifacts
 *.csv
 .claude/
+__pycache__/
+
+# Review 2 ERD Mermaid sources stay local at the user's request.
+/plans/quang-pte-org-review2-erd/**/*.mmd
+/plans/reports/assets/261024-quang-canva-erd/*.mmd

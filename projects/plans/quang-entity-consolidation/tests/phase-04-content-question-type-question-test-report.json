@@ -1,0 +1,23 @@
+{
+  "phase": "phase-04-content-question-type-question-rubric",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-24T18:00:00Z",
+  "summary": {
+    "passed": 2727,
+    "failed": 0,
+    "skipped": 75
+  },
+  "failures": [],
+  "notes": [
+    "Full app suite (clean test): 2805 tests, 0 failures, 0 errors, 75 skipped (Postgres-only integration tests).",
+    "After quality-gate fixes: 2802 tests, 0 failures; @DynamicUpdate on QuestionType, idx_options_question, seed locks, dead registry/service surface pruned; re-verified on Docker Postgres (22 of 23 types locked by the seeded template).",
+    "Tests written for the new behaviour: TaskRuntimeProfileServiceTest and TaskRuntimeContractServiceTest rewritten for registry-only resolution (allowlist enforced, unknown version/screen not found, batch keeps unknown references as null, forged renderer rejected); QuestionTypeServiceTest +2 (recordPublishedUse stamps firstPublishedAt/runtimeLockedAt once, unknown key ignored); QuestionRepositoryTest +1 (options are a child table reloaded in authored order with stable option ids). Other itembank tests unchanged apart from the QuestionTypeDefinition->QuestionType rename.",
+    "Process deviation: no failing-first (RED_READY) artifact; tests were written with the implementation and run before the gate.",
+    "Entities removed: TaskRuntimeProfile, TaskRuntimeContract, TaskTypePublicationUsage (tables task_runtime_profiles, task_runtime_contracts, task_type_publication_usage); QuestionOption is now an embeddable (question_options child table, no entity). Rubric was already removed upstream. Dev DB built by Hibernate: 80 public base tables (83 before this phase).",
+    "Docker gate (manual): dev DB recreated, app rebuilt with profile local-schema, healthy; GET /question-types returns 23 standard types; POST /questions with 3 options persists rows in question_options with order and correctness; GET returns them in authored order; PUT replaces the option list (2 rows left); none of the three removed tables exist.",
+    "Deferred by decision: ScoreConfigFacade, repoint of the 13 scoretemplate consumers, ScoringMethod unification and moving the skill weights onto QuestionType all move to phase 5, where scoretemplate disappears (recorded in phase-04 and phase-05 files).",
+    "Not verified: score template activation end to end against Postgres (QuestionTypeService.recordPublishedUse is covered by unit tests only); client packages untouched because no API shape changed."
+  ],
+  "report_path": "pte-doc/projects/plans/quang-entity-consolidation/tests/phase-04-content-question-type-question-test-report.json"
+}

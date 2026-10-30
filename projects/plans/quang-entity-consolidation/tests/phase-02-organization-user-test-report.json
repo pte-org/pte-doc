@@ -1,0 +1,24 @@
+{
+  "phase": "phase-02-organization-user",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-24T14:00:00Z",
+  "summary": {
+    "passed": 2632,
+    "failed": 0,
+    "skipped": 77
+  },
+  "failures": [],
+  "notes": [
+    "Full app suite (clean test): 2695 tests, 0 failures, 0 errors, 77 skipped (same pre-existing skips as phase 1).",
+    "After quality-gate fixes (QUAL-001..008): full suite 2709 tests, 0 failures, 77 skipped; added tests for shared-account credential refusal, platform-account join refusal, suspended membership login/refresh/login options, e-mail collisions, exclusive-ownership rule. Docker gate re-run: healthy, both local logins 200.",
+    "Prepared RED tests all green: OrganizationLifecycleTest 4, OrganizationRepositoryTest 3, OrganizationMemberRepositoryTest 4, OrganizationMemberDirectoryTest 3, RefreshTokenOrganizationTest 3, AuthServiceMultiOrganizationTest 8. Their assertions were not weakened.",
+    "Existing tests migrated to the merged model (Tenant->Organization, tenant-scoped User->User + OrganizationMember, LoginHash->User.credentialHash, getTenantOf->isMemberOf); behaviour assertions kept, mocks/fixtures re-targeted. Cases that no longer apply were replaced: duplicate username across tenants is now a global-uniqueness test; existing-email create now joins the existing account.",
+    "Defects found by running the suite after migration and fixed in production code: enrollment repositories still traversed Organization.tenant (JPQL/derived queries) and StudentRosterRepository native SQL joined the dropped tenants table; billing referenced tenancy's non-exposed OrganizationStatus (Modulith violation) - now uses TenancyService.countPendingApplications() and Organization.isPending()/isRejected().",
+    "Dev-seed fixes: identity_student_directory and identity_staff_student_search_view rebuilt over organization_members; obsolete tenants/tenant_applications/users(tenant_id) partial indexes removed; 020-local-accounts.sql now seeds admin@test.local and host.e2e@test.local (HOST_ADMIN of ACTIVE org 'e2e') with BCrypt hash only.",
+    "Docker gate (manual, not JUnit): dev DB recreated, app rebuilt with profile local-schema, container healthy; POST /api/v1/auth/login returned 200 for admin@test.local and host.e2e@test.local; GET /api/v1/organizations 200 for both; /api/v1/users, /api/v1/platform-users and /api/v1/users/exam-staff (sort/role/status/search variants) 200. This gate found a Postgres-only defect that H2 hid: SELECT DISTINCT with ORDER BY on the joined user - findPageForExamStaff rewritten with EXISTS on roles.",
+    "Client (pte-web): tsc clean for api-client, vendor-web, tenant-web; api-client vitest 703 passed, 1 failed = contract.test.ts 'reaches every Java response record' reporting 4 unmapped student records (StudentAttemptHistoryResponse, StudentDetailResponse, StudentPerformanceResponse, StudentSkillPerformanceResponse) in the overview DTO package - pre-existing (files unchanged by this phase; previously masked by an ENOENT on TenantStatus.java), not fixed here. TenantStatus enum contract re-pointed to OrganizationStatus (4 values).",
+    "Not run: tenant-web eslint/vitest, Flutter and pte-practice suites (no changes in their API paths; grep for /api/v1/tenants and host/organizations is empty outside pte-api history)."
+  ],
+  "report_path": "pte-doc/projects/plans/quang-entity-consolidation/tests/phase-02-organization-user-test-report.json"
+}

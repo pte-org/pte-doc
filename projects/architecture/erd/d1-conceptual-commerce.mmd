@@ -1,0 +1,28 @@
+---
+title: D1 Conceptual ERD - Commerce, practice, notification, support
+---
+erDiagram
+  SERVICE_PLAN ||--o{ ORDER : "is ordered in"
+  ORGANIZATION ||--o{ ORDER : "places"
+  ORDER ||--o{ ORDER_PAYMENT : "receives webhook"
+  SERVICE_PLAN ||--o{ SUBSCRIPTION : "grants"
+  ORGANIZATION ||--o{ SUBSCRIPTION : "owns"
+  ORDER |o--o| SUBSCRIPTION : "activates (PAYMENT)"
+  SERVICE_PLAN ||--o{ LICENSE_CODE : "issues"
+  LICENSE_CODE |o--o| SUBSCRIPTION : "activates (LICENSE_CODE)"
+  SUBSCRIPTION ||--o{ EXAM_SESSION : "entitles session"
+
+  USER ||--o{ PRACTICE_SESSION : "practices"
+  PRACTICE_SESSION ||--o{ PRACTICE_RESPONSE : "contains"
+  QUESTION ||--o{ PRACTICE_RESPONSE : "snapshots"
+
+  NOTIFICATION ||--o{ NOTIFICATION_RECIPIENT : "is delivered to"
+  USER ||--o{ NOTIFICATION_RECIPIENT : "receives"
+  ANNOUNCEMENT |o--o| NOTIFICATION : "is published as"
+
+  ORGANIZATION ||--o{ SUPPORT_TICKET : "submits"
+  USER ||--o{ SUPPORT_TICKET : "submits"
+  SUPPORT_TICKET ||--o{ SUPPORT_TICKET_NOTE : "has note"
+  SUPPORT_TICKET }o--o| EXAM_SESSION : "is about session"
+  SUPPORT_TICKET }o--o| EXAM_ATTEMPT : "is about attempt"
+  SUPPORT_TICKET }o--o| QUESTION : "is about question"

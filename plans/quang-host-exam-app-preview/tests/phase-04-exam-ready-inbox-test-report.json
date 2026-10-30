@@ -1,0 +1,50 @@
+{
+  "phase": "phase-04-exam-ready-inbox",
+  "mode": "unit",
+  "verdict": "PASSED_WITH_DATABASE_SKIP",
+  "reviewed_at": "2026-10-29",
+  "summary": {
+    "api_unit_tests_passed": 63,
+    "api_unit_tests_failed": 0,
+    "api_postgres_tests_skipped": 12,
+    "web_tests_passed": 4,
+    "web_typechecks_passed": 3
+  },
+  "tests": [
+    {
+      "command": "mvnw.cmd -pl app -Dtest=ExamWorkflowServicesTest,InboxNotificationRequestedTest,ExamPreviewReadyNotificationListenerTest test",
+      "exit_code": 0,
+      "passed": 63,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "command": "mvnw.cmd -pl app -Dtest=InboxDeliveryStorePostgresIntegrationTest test",
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 12,
+      "notes": [
+        "INBOX_TEST_DB_URL was absent; the suite explicitly skipped its real PostgreSQL/Flyway tests. This is not database proof."
+      ]
+    },
+    {
+      "command": "pnpm --filter @pte/api-client test -- src/requests/notification/inbox.test.ts",
+      "exit_code": 0,
+      "passed": 4,
+      "failed": 0
+    },
+    {
+      "command": "pnpm --filter @pte/api-client typecheck && pnpm --filter tenant-web typecheck && pnpm --filter vendor-web typecheck",
+      "exit_code": 0,
+      "passed": 3,
+      "failed": 0
+    }
+  ],
+  "notes": [
+    "The generation test proves DRAFT to READY emits one ExamPreviewReadyEvent and READY replay emits none.",
+    "The listener test proves the event is tenant-scoped to the active generating HOST_ADMIN and never broadcasts to other roles.",
+    "Quality gate was skipped_by_user; no quality approval is claimed."
+  ],
+  "report_path": "plans/quang-host-exam-app-preview/tests/phase-04-exam-ready-inbox-test-report.json"
+}

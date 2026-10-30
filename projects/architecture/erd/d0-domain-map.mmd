@@ -1,0 +1,40 @@
+---
+title: D0 Domain map - main data flows of pte-api/app
+---
+%% A --> B: B uses data owned by A. Dashed line: infrastructure module called by many modules.
+flowchart LR
+  tenancy["tenancy<br/>Organization"] --> identity["identity<br/>User, OrganizationMember"]
+  identity --> enrollment["enrollment<br/>Program, Class"]
+  itembank["itembank<br/>QuestionType, Question"] --> assessment["assessment<br/>Blueprint, Definition, Version"]
+  assessment --> session["session<br/>ExamSession, Registration, Proctor"]
+  enrollment --> session
+  billing["billing<br/>Plan, Order, Subscription, License"] --> session
+  session --> attempt["attempt<br/>ExamAttempt, AttemptAnswer"]
+  attempt --> proctoring["proctoring<br/>ExamIncident"]
+  attempt --> scoring["scoring<br/>Evaluation, GradingAssignment"]
+  scoring --> reporting["reporting<br/>ExamResult"]
+  itembank --> practice["practice<br/>PracticeSession, PracticeResponse"]
+  media["media<br/>MediaAsset"] -.-> itembank
+  media -.-> attempt
+  notification["notification<br/>Notification, Announcement"] -.-> session
+  support["support<br/>SupportTicket"] -.-> session
+  shared["shared<br/>AuditLog, IdempotencyKey"] -.-> billing
+
+  classDef org fill:#dbeafe,stroke:#1d4ed8
+  classDef edu fill:#dcfce7,stroke:#15803d
+  classDef content fill:#ede9fe,stroke:#6d28d9
+  classDef exam fill:#ffedd5,stroke:#c2410c
+  classDef score fill:#fee2e2,stroke:#b91c1c
+  classDef practice fill:#fef9c3,stroke:#a16207
+  classDef billing fill:#efe2d0,stroke:#78350f
+  classDef infra fill:#f3f4f6,stroke:#4b5563
+  classDef shared fill:#ffffff,stroke:#4b5563,stroke-dasharray:4 3
+  class tenancy,identity org
+  class enrollment edu
+  class itembank,assessment content
+  class session,attempt,proctoring exam
+  class scoring,reporting score
+  class practice practice
+  class billing billing
+  class media,notification,support infra
+  class shared shared

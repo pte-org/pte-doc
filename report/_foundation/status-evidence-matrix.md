@@ -1,4 +1,4 @@
-# PTE Prep Status and Evidence Matrix
+# PTEPrep Status and Evidence Matrix
 
 **Purpose:** keep the English Report 3–6 set honest about what is implemented, partly implemented, planned, outside scope, or still undecided.
 
@@ -9,7 +9,7 @@
 | **Current** | The behavior is available in the reviewed product baseline and is supported by a source, configuration, verified interface, or executed result. | Source code/configuration plus a reproducible route, client behavior, API contract, or dated test/operation result. | Use present tense. Name the evidence record and verification date. |
 | **Partial** | A real slice exists, but the complete user journey, safeguard, channel, or integration is not yet supported. | At least one implementation/configuration/UI/API slice, plus a clear missing slice. A plan or ADR alone is not enough. | Say what works and what remains. Do not describe the whole feature as available. |
 | **Planned/Future** | An approved direction or design exists, but the reviewed baseline does not provide implementation evidence. | Approved SRS, plan, ADR, or backlog item. | Use future or planned language. Do not turn the design into a current user instruction. |
-| **Out of scope** | The capability is deliberately excluded from the current PTE Prep boundary. | Approved scope or out-of-scope decision. | State the boundary and point to the requirement or decision. |
+| **Out of scope** | The capability is deliberately excluded from the current PTEPrep boundary. | Approved scope or out-of-scope decision. | State the boundary and point to the requirement or decision. |
 | **TBD** | A decision, evidence item, contract detail, or acceptance rule is still required. | An open decision record with owner, impact, due point, and affected IDs. | Explain the current safe assumption and the decision needed. |
 
 ## Evidence record minimum
@@ -46,3 +46,16 @@ The evidence catalog is a map, not a substitute for the source. A reviewer shoul
 - If status is **Planned/Future** or **TBD**, is the owner and impact visible?
 - Are target numbers clearly labelled as targets, baselines, or acceptance thresholds?
 
+
+
+## Scope revision rule
+
+Every revised statement carries three independent dimensions:
+
+| Dimension | Allowed values | Meaning |
+|---|---|---|
+| Requirement disposition | In scope, Out of scope, Decision pending | What the product is expected to cover |
+| Implementation maturity | Current, Partial, Planned/Future, Not evidenced | What the reviewed source or runtime evidence supports |
+| Approval/evidence state | Draft, Reviewed, Approved, Runtime verified, TBD | Whether the statement has the required decision or verification |
+
+For example, AI explanation is **In scope**, **Planned/Future or Partial**, and **TBD for provider policy**. It must not be removed from the SRS merely because the current practice source does not show the final integration.

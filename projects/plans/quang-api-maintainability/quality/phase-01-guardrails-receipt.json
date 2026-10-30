@@ -1,0 +1,19 @@
+{
+  "target": "phase-01-guardrails",
+  "verdict": "APPROVED",
+  "policy_version": "1.0.0",
+  "report_path": "pte-doc/projects/plans/quang-api-maintainability/quality/phase-01-guardrails-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/test/java/com/pte/architecture/NoDirectClockAccessTest.java",
+    "pte-api/app/src/test/java/com/pte/architecture/PackageDensityTest.java",
+    "pte-api/app/src/test/java/com/pte/architecture/SourceDebtAllowlist.java",
+    "pte-api/app/src/test/java/com/pte/architecture/SourceFileSizeTest.java",
+    "pte-api/app/src/test/resources/architecture/dense-packages.allowlist",
+    "pte-api/app/src/test/resources/architecture/direct-clock-access.allowlist",
+    "pte-api/app/src/test/resources/architecture/oversized-files.allowlist",
+    "pte-doc/projects/plans/quang-api-maintainability/phase-01-guardrails.md"
+  ],
+  "source_fingerprint": "sha256:3ff8425588c5ac28db4f3d09388df9196176fae43bd484add7e4fc0a9a373993",
+  "reviewed_at": "2026-10-25T16:00:00Z",
+  "open_blocking_findings": 0
+}

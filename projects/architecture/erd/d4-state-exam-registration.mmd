@@ -1,0 +1,35 @@
+---
+title: D4 ExamRegistration (three orthogonal regions)
+---
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: AudienceResolver, ExamPublishService, EnrollmentService,
+%% AttendanceCommandService, IdentityVerificationService
+%% The enum still has CANDIDATE, but no code assigns it, so it is not drawn.
+%% Mermaid needs the wrapping ExamRegistration state; it stands for the state machine and its three orthogonal regions.
+stateDiagram-v2
+  state ExamRegistration {
+    %% region: enrollment (status)
+    state enrollChoice <<choice>>
+    [*] --> enrollChoice : / create registration
+    enrollChoice --> ELIGIBLE : [created by audience resolution]
+    enrollChoice --> ENROLLED : [created by host direct enrollment]
+    ELIGIBLE --> EXCLUDED : resolve [reuse policy violated or schedule overlap or capacity exceeded]
+    EXCLUDED --> ELIGIBLE : resolve again
+    ELIGIBLE --> ENROLLED : publish [enrollment succeeded]
+    ELIGIBLE --> EXCLUDED : publish [enrollment failed]
+    --
+    %% region: attendance (attendance_status)
+    [*] --> UNMARKED
+    UNMARKED --> PRESENT : proctor marks attendance
+    UNMARKED --> ABSENT : proctor marks attendance
+    UNMARKED --> LATE : proctor marks attendance
+    PRESENT --> LATE : correct
+    LATE --> PRESENT : correct
+    PRESENT --> ABSENT : correct
+    ABSENT --> PRESENT : correct
+    --
+    %% region: identity (identity_status)
+    [*] --> UNVERIFIED
+    UNVERIFIED --> VERIFIED : proctor verifies [identity matches]
+    UNVERIFIED --> FAILED : proctor verifies [identity does not match]
+  }

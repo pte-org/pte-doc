@@ -1,0 +1,95 @@
+{
+  "plan_id": "quang-task-type-instruction",
+  "phase_id": 5,
+  "name": "verification-and-handoff",
+  "goal": "Verify the full flow across the three repos and record the result.",
+  "status": "blocked",
+  "current_step": 4,
+  "design_constraints": [
+    "No commit or push unless the user asks.",
+    "Report every failing test with its output."
+  ],
+  "quality_profile": {
+    "repository_conventions": {},
+    "boundaries": {},
+    "applicable_rules": [],
+    "allowed_exceptions": []
+  },
+  "quality": {
+    "status": "skipped_by_user",
+    "decision": "user_confirmed_skip",
+    "report": "",
+    "receipt": "",
+    "remediation_cycles": 0
+  },
+  "testing": {
+    "status": "not_started",
+    "report": "Automated checks recorded in D:/GitHub/pte-org/pte-doc/plans/reports/261030-task-type-instruction-verification-report.md; manual E2E pending local DB reset."
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "description": "Run pte-api tests for itembank, assessment, attempt and session, and a Flyway migrate on a clean local DB.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/migration/V13__task_type_instruction.sql"
+      ],
+      "output_files": [],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-doc/plans/reports/261030-task-type-instruction-verification-report.md — 898 module tests run; all plan tests pass; 17 pre-existing unrelated failures. V13 verified on clean Postgres via psql after Flyway applied V1-V11; Flyway stops at untracked V12 (hard-coded public. schema).",
+      "debug_logs": [],
+      "success_criteria": [
+        "mvn -q test exits 0",
+        "Flyway migrate applies the new version without error"
+      ]
+    },
+    {
+      "step_id": 2,
+      "description": "Run pte-web typecheck, lint and vendor-web tests.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-web/apps/vendor-web/features/questiontemplate/components/QuestionTypeEditorModal.tsx"
+      ],
+      "output_files": [],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-doc/plans/reports/261030-task-type-instruction-verification-report.md — vendor-web 78/78, api-client 626/626, tsc clean, turbo lint 0 errors.",
+      "debug_logs": [],
+      "success_criteria": [
+        "pnpm typecheck and vendor-web tests exit 0"
+      ]
+    },
+    {
+      "step_id": 3,
+      "description": "Run pte-app flutter analyze and the exam_attempt, exam_preview and core test folders.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-app/lib/core/utils/task_instruction_resolver.dart"
+      ],
+      "output_files": [],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-doc/plans/reports/261030-task-type-instruction-verification-report.md — Feature tests 22/22, exam_attempt+exam_preview 482/482; full suite 3 unrelated device_check failures; analyze 1 pre-existing warning.",
+      "debug_logs": [],
+      "success_criteria": [
+        "flutter test exits 0",
+        "flutter analyze reports no issues"
+      ]
+    },
+    {
+      "step_id": 4,
+      "description": "Manual E2E: edit the Read Aloud instruction in vendor-web (runtime-locked), open a new attempt and a host preview in pte-app and see the new text; set it to null via DB and see the fallback text.",
+      "status": "blocked",
+      "input_files": [],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-doc/projects/plans/quang-task-type-instruction/quang-verification-notes.md"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [
+        {
+          "timestamp": "2026-10-30T20:10:00+07:00",
+          "error": "Local pte DB has pre-renumbering Flyway history (V9 preview-ready, V10 rename, V11 dedupe); a backend from this branch fails validation.",
+          "attempted_fix": "None: dropping the local database is destructive and needs user approval. Steps recorded in the verification report."
+        }
+      ],
+      "success_criteria": [
+        "Notes file records both checks as PASS"
+      ]
+    }
+  ]
+}

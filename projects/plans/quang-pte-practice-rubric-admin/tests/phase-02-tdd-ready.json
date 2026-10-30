@@ -1,0 +1,11 @@
+{
+  "phase": "phase-02-api-rubric-module-and-migration",
+  "status": "GREEN_VERIFIED",
+  "prepared_at": "2026-10-23T00:00:00+07:00",
+  "test_files": [
+    "pte-api/app/src/test/java/com/pte/rubric/internal/service/RubricDraftServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/rubric/internal/service/RubricLifecycleServiceTest.java"
+  ],
+  "verified_command": ".\\mvnw.cmd -pl app '-Dtest=RubricDraftServiceTest,RubricLifecycleServiceTest,RubricMigrationVersionTest,ModuleStructureTest' test",
+  "artifact_path": "pte-doc/projects/plans/quang-pte-practice-rubric-admin/tests/phase-02-tdd-ready.json"
+}

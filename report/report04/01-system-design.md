@@ -20,7 +20,7 @@ The production backend is designed as one Spring/Java modular-monolith applicati
 ```mermaid
 flowchart LR
     PA[Platform Admin] --> V[Platform administration portal]
-    AUTHOR[Platform Author] --> V
+    AUTHOR[Academic Staff] --> V
     HOST[Host] --> T[Organization web portal]
     PROC[Proctor] --> T
     EXAMINER[Examiner] --> T
@@ -28,7 +28,7 @@ flowchart LR
     V --> EDGE[Public edge / TLS]
     T --> EDGE
     C --> EDGE
-    EDGE --> APP[PTE Prep application\nSpring Java modular monolith]
+    EDGE --> APP[PTEPrep application\nSpring Java modular monolith]
     APP --> DB[(PostgreSQL)]
     APP --> CACHE[(Redis)]
     APP --> QUEUE[(RabbitMQ)]
@@ -38,10 +38,10 @@ flowchart LR
     APP --> MAIL[Email/notification service]
 ```
 
-**Diagram ID:** `SD-ARCH-CONTEXT-001`  
-**Caption:** PTE Prep channels, application boundary, and external services  
-**Status:** Current architecture boundary with Partial/Planned external feature slices.  
-**Evidence/source:** `EVD-FOUNDATION-003`, `EVD-FOUNDATION-004`, `EVD-FOUNDATION-006`.  
+**Diagram ID:** `SD-ARCH-CONTEXT-001`
+**Caption:** PTEPrep channels, application boundary, and external services
+**Status:** Current architecture boundary with Partial/Planned external feature slices.
+**Evidence/source:** `EVD-FOUNDATION-003`, `EVD-FOUNDATION-004`, `EVD-FOUNDATION-006`.
 **Related Report 3 IDs:** `FR-ONBOARD-001`, `FR-INTEGRATION-001`–`FR-INTEGRATION-006`, `NFR-19`.
 
 ### 1.2.1 Public and internal boundaries
@@ -76,10 +76,10 @@ flowchart TB
     App --> Mailpit
 ```
 
-**Diagram ID:** `SD-ARCH-DEPLOY-001`  
-**Caption:** Single-stack Docker Compose deployment boundary  
-**Status:** Current deployment topology; availability/capacity targets remain unverified.  
-**Evidence/source:** `pte-api/docker-compose.yml`, `pte-api/docker-compose.services.yml`, `pte-api/docker-compose.deploy.yml`, `EVD-FOUNDATION-006`.  
+**Diagram ID:** `SD-ARCH-DEPLOY-001`
+**Caption:** Single-stack Docker Compose deployment boundary
+**Status:** Current deployment topology; availability/capacity targets remain unverified.
+**Evidence/source:** `pte-api/docker-compose.yml`, `pte-api/docker-compose.services.yml`, `pte-api/docker-compose.deploy.yml`, `EVD-FOUNDATION-006`.
 **Related Report 3 IDs:** `FR-INTEGRATION-004`, `FR-HARDENING-002`, `NFR-05`–`NFR-08`, `NFR-19`.
 
 The hosted stack uses one Oracle VPS and one Docker network for the application, web clients, edge, PostgreSQL, Redis, and RabbitMQ. The deployment overlay applies restart and memory policy. A healthcheck or local Compose status is operational evidence for that environment only; it is not automatically evidence of the SRS availability target.
@@ -105,10 +105,10 @@ Each package owns one business concern and exposes a small public service/API su
 | `PKG-SUPPORT` | Support/audit access | Support tickets and controlled assistance | Support request and audit reference | Identity, tenant, audit |
 | `PKG-SHARED` | Cross-cutting shared utilities | Error/message/correlation/time abstractions | Shared contracts only | No business ownership |
 
-**Package diagram ID:** `PKG-DIAGRAM-001`  
-**Caption:** Ownership map for the modular-monolith application  
-**Status:** Current package map from source inventory with feature-specific slices classified separately.  
-**Evidence/source:** `pte-api/app/src/main/java/com/pte`, `EVD-FOUNDATION-003`.  
+**Package diagram ID:** `PKG-DIAGRAM-001`
+**Caption:** Ownership map for the modular-monolith application
+**Status:** Current package map from source inventory with feature-specific slices classified separately.
+**Evidence/source:** `pte-api/app/src/main/java/com/pte`, `EVD-FOUNDATION-003`.
 **Related Report 3 IDs:** `FR-HARDENING-002`, `FR-HARDENING-003`, `CR-AUTH-001`, `NFR-19`.
 
 ### Dependency direction
@@ -141,13 +141,15 @@ Public identifiers are lookup keys, not authorization. Repository/query methods 
 
 ### Visibility matrix
 
-| Data | Platform Admin | Platform Author | Host | Proctor | Examiner | Student |
-|---|---|---|---|---|---|---|
-| Organization registration | Platform-wide | No | Own post-approval context | No | No | No |
-| Shared content drafts/revisions | Platform-wide policy scope | Assigned draft scope | Select published only | No | No | Delivered snapshot only |
-| Student roster | Controlled support | No | Own organization | Assigned exam subset | Assigned work context | Own identity/attempt |
-| Answers/audio | Authorized operational/audit purpose | No | Own organization policy | Assigned attempt policy | Assigned answers | Own answers |
-| Scores/reports | Platform audit/support | No | Own organization | Assigned status only | Assigned score context | Own published report |
+| Data | Platform Admin | Platform Manager | Academic Manager | Academic Staff | Host | Proctor | Examiner | Student |
+|---|---|---|---|---|---|---|---|---|
+| Organization registration | Platform-wide | Assigned operational review | No | No | Own post-approval context | No | No | No |
+| Shared content drafts/revisions | Platform-wide policy scope | Operational status only | Review/approval scope | Assigned draft scope | Select published only | No | No | Delivered snapshot only |
+| Student roster | Controlled support | Operational support scope | No | No | Own organization | Assigned exam subset | Assigned work context | Own identity/attempt |
+| Answers/audio | Authorized operational/audit purpose | Authorized support only | Academic review only where approved | No | Own organization policy | Assigned attempt policy | Assigned answers | Own answers |
+| Scores/reports | Platform audit/support | Operational status only | Academic policy only | No | Own organization | Assigned status only | Assigned score context | Own published report |
+
+**Scope revision precedence:** The table above is the source-backed baseline visibility view. The revised role model adds Platform Manager for permitted operational work and Academic Manager for academic review/publication. Academic Staff remains draft/submission only. The revised action boundaries in Report 3 Section 5.9 and the foundation catalog govern new design decisions.
 
 ## 1.6 External integration design
 
@@ -159,6 +161,8 @@ The browser/client requests a short-lived signed upload/access instruction from 
 
 The application creates a provider-correlated order. The provider callback is verified and processed idempotently. Browser return is not payment proof. The billing package owns subscription/license activation; the payment adapter owns provider-specific request/response translation.
 
+A contract sale does not use the payment provider. A platform operator grants the package to one organization; billing issues a code bound to that organization and activates it in the same transaction, with an optional contract start date. Both paths create the subscription through the same activation operation.
+
 ### AI scoring
 
 The scoring package creates a correlated provider request when the task and policy allow it. A worker or asynchronous handler records pending, success, failure, retry, or review-needed status. Provider quality thresholds, final provider, and task-level Examiner review remain `TBD-AI-001`/`TBD-AI-002`. A failed provider response does not become a valid final score.
@@ -167,10 +171,10 @@ The scoring package creates a correlated provider request when the task and poli
 
 Notification consumes an approved business event/state and records delivery attempt. It does not own the report, subscription, exam, or score state. Retries are bounded and do not roll back the originating business operation.
 
-**Integration decision ID:** `ADR-INTEGRATION-001`  
-**Decision:** isolate provider contracts behind adapters and keep the business result in the owning package.  
-**Status:** Current boundary; provider-specific coverage is Partial/Planned/TBD.  
-**Evidence/source:** `EVD-FOUNDATION-003`, `EVD-FOUNDATION-005`, `EVD-FOUNDATION-007`.  
+**Integration decision ID:** `ADR-INTEGRATION-001`
+**Decision:** isolate provider contracts behind adapters and keep the business result in the owning package.
+**Status:** Current boundary; provider-specific coverage is Partial/Planned/TBD.
+**Evidence/source:** `EVD-FOUNDATION-003`, `EVD-FOUNDATION-005`, `EVD-FOUNDATION-007`.
 **Related requirements:** `FR-INTEGRATION-001`–`FR-INTEGRATION-006`, `BR-INTEGRATION-044`–`BR-INTEGRATION-048`, `NFR-19`.
 
 ## 1.7 Cross-cutting state principles
@@ -209,3 +213,41 @@ The owning package produces an audit record for a sensitive state change. The re
 | `ADR-PROCTOR-001` | Proctor events are assignment-scoped and auditable; exact synchronization remains `TBD-PROCTOR-001`. | Do not claim guaranteed live delivery timing. |
 | `ADR-SCORE-001` | Host chooses final score source after objective/AI/Examiner sources are visible; AI/provider policy TBD. | Publication readiness must block incomplete sources. |
 | `ADR-DATA-001` | Contract-based retention; exact period and jurisdiction are TBD. | Guides and operations cannot promise a universal deletion date. |
+
+
+## 1.9 Scope revision architecture
+
+### 1.9.1 Four application channels
+
+```mermaid
+flowchart LR
+    V[Platform administration web] --> A[Modular monolith application]
+    T[Organization web] --> A
+    P[Student practice web] --> A
+    W[Windows exam client] --> A
+    A --> DB[(PostgreSQL)]
+    A --> R[(Redis)]
+    A --> Q[(RabbitMQ)]
+    A --> X[External Integration Services]
+```
+
+**Diagram ID:** `SD-ARCH-CHANNEL-001`
+**Status:** Source observed for the shared backend and configured infrastructure; practice web and its complete contract are Partial/Proposed.
+**Related requirements:** `FR-PRACTICE-001` through `FR-PRACTICE-009`, `FR-DELIVERY-001`, `FR-EXAM-006`.
+
+The four user channels share business rules but do not share authorization assumptions. Platform administration is platform-wide, organization web is tenant-scoped, practice web is Student/session/entitlement-scoped, and the Windows client is assignment/attempt-scoped.
+
+### 1.9.2 Canonical responsibility split
+
+| Responsibility | Owning boundary | Design rule |
+|---|---|---|
+| Operational organization review | Platform Manager | May operate assigned operational records but cannot approve academic content |
+| Academic draft/review/publish | Academic Staff and Academic Manager | Drafting and approval are separate actions and separate audit events |
+| Practice session ownership | Practice/session boundary | Student identity, context and entitlement are checked before creation and every protected read/write |
+| Organized exam selection | Exam-generation boundary | Only approved, ready and `available_for_exam` revisions are selected |
+| Practice selection | Practice-catalog boundary | Only approved, ready and `available_for_practice` revisions are selected |
+| AI explanation | AI feedback boundary | Provider state is asynchronous/retryable and never replaces answer ownership |
+
+### 1.9.3 Proposed practice boundaries
+
+The practice design introduces a session boundary that owns `PracticeSession`, `PracticeItem`, `PracticeResponse`, `PracticeMediaBinding`, `PracticeProgressEvent`, and `AIFeedback`. These entities are proposed unless a matching source contract is cited. They must not be merged with `ExamSession`, `AttemptAnswer`, Examiner assignments or Host-published reports merely because they contain answers.

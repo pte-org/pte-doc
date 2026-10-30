@@ -1,0 +1,18 @@
+---
+title: D4 Question
+---
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: QuestionApprovalService, QuestionLifecycleService, QuestionLifecyclePolicy
+stateDiagram-v2
+  [*] --> DRAFT : / create question or revision
+  DRAFT --> PENDING_APPROVAL : author submits for approval
+  PENDING_APPROVAL --> APPROVED : academic approves
+  PENDING_APPROVAL --> DRAFT : reject / record rejection_reason
+  DRAFT --> APPROVED : academic publishes directly
+  APPROVED --> ARCHIVED : archive
+  APPROVED --> ARCHIVED : superseded by a new revision
+  DRAFT --> ARCHIVED : archive [ever_published]
+  ARCHIVED --> DRAFT : unarchive [not superseded]
+  note right of APPROVED
+    is_current marks the current revision within revision_group_public_id
+  end note

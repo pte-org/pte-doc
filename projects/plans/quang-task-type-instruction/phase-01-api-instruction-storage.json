@@ -1,0 +1,170 @@
+{
+  "plan_id": "quang-task-type-instruction",
+  "phase_id": 1,
+  "name": "api-instruction-storage",
+  "goal": "Store an editable instruction per task type in question_types and expose it on create/update/get.",
+  "status": "completed",
+  "current_step": 8,
+  "design_constraints": [
+    "Prerequisite: the duplicate Flyway V9 after merging dev is resolved first; use the next free version (V13 assumed after renumbering branch V9-V11 to V10-V12).",
+    "Instruction is display metadata: editable even when editability.runtimeFields is false (runtime-locked).",
+    "Plain text only, trimmed, max 500 chars; no client interprets HTML.",
+    "Create requires instruction; update treats null as keep-current so older callers keep working.",
+    "Existing permission rules in DynamicTaskTypeService.update stay unchanged.",
+    "Flyway (real environments) and the local-schema dev-seed must end with the same default texts copied verbatim from pte-app task_type_meta.dart."
+  ],
+  "quality_profile": {
+    "repository_conventions": {
+      "request_dto": "Java records with bare Bean Validation annotations (no message attribute), e.g. @NotBlank @Size(max = N)",
+      "response_dto": "Records; new fields appended at the end of the canonical constructor, compatibility constructors pass null",
+      "entity": "Lombok @Getter/@Setter on QuestionType, @Column(name = snake_case, length = N)",
+      "service": "DynamicTaskTypeService trims user text before persisting; constants in internal/constant/ItembankConstants",
+      "migration": "Flyway V<n>__snake_case.sql; local-schema dev-seed statements separated by @@",
+      "tests": "Plain JUnit 5 + Mockito mocks + AssertJ, no Spring context"
+    },
+    "boundaries": {
+      "module": "itembank owns question_types and its DTOs; no other module touched in this phase"
+    },
+    "applicable_rules": [
+      "docs/CODING_STANDARDS_API.md: validation at boundary via @Valid DTO annotations, not in service",
+      "docs/CODING_STANDARDS_API.md: files <= 300 lines (DynamicTaskTypeService is 270 before change)",
+      "docs/CODING_STANDARDS_API.md: no hardcoded user-facing strings in service bodies",
+      "Instruction update must sit outside the runtimeChange/isRuntimeLocked branch"
+    ],
+    "allowed_exceptions": [
+      "instruction column stays nullable in DB: custom task types created before V13 have no value; clients fall back"
+    ]
+  },
+  "quality": {
+    "status": "skipped_by_user",
+    "decision": "user_confirmed_skip",
+    "report": "",
+    "receipt": "",
+    "remediation_cycles": 0
+  },
+  "testing": {
+    "status": "passed",
+    "report": "2026-10-30: DynamicTaskTypeServiceTest 6/6, PracticeCatalogServiceTest 8/8; itembank + architecture + PracticeSessionServiceTest run 170 tests, 1 unrelated failure (PackageDensityTest: billing/internal/dto/response has 17 classes, from dev merge of PR #86). Migration texts verified verbatim against task_type_meta.dart (23/23)."
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "description": "Add Flyway migration: ALTER TABLE question_types ADD COLUMN instruction varchar(500); one UPDATE per standard task_type_key with the exact TaskTypeMeta.instruction text.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-app/lib/core/constants/task_type_meta.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/migration/V13__task_type_instruction.sql"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/migration/V13__task_type_instruction.sql",
+      "debug_logs": [],
+      "success_criteria": [
+        "Migration contains ADD COLUMN instruction varchar(500)",
+        "Every task type with a TaskTypeMeta entry has one UPDATE"
+      ]
+    },
+    {
+      "step_id": 2,
+      "description": "Seed instruction for the local-schema profile: append the same UPDATE statements after the question_types INSERTs in 010-reference-data.sql.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/dev-seed/010-reference-data.sql",
+        "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/migration/V13__task_type_instruction.sql"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/dev-seed/010-reference-data.sql"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-api/app/src/main/resources/db/dev-seed/010-reference-data.sql",
+      "debug_logs": [],
+      "success_criteria": [
+        "With profile local-schema no standard question_types row has NULL instruction"
+      ]
+    },
+    {
+      "step_id": 3,
+      "description": "Add @Column(name = \"instruction\", length = 500) String instruction with getter/setter to QuestionType.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/domain/QuestionType.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/domain/QuestionType.java"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/domain/QuestionType.java",
+      "debug_logs": [],
+      "success_criteria": [
+        "mvn -q compile exits 0"
+      ]
+    },
+    {
+      "step_id": 4,
+      "description": "CreateTaskTypeRequest: @NotBlank @Size(max = 500) String instruction. UpdateTaskTypeRequest: @Size(max = 500) String instruction (nullable).",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/dto/request/CreateTaskTypeRequest.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/dto/request/UpdateTaskTypeRequest.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/dto/request/CreateTaskTypeRequest.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/dto/request/UpdateTaskTypeRequest.java"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/dto/request/CreateTaskTypeRequest.java, D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/dto/request/UpdateTaskTypeRequest.java (update also rejects blank via @Pattern; null keeps current)",
+      "debug_logs": [],
+      "success_criteria": [
+        "Validation rejects blank create instruction and values over 500 chars"
+      ]
+    },
+    {
+      "step_id": 5,
+      "description": "DynamicTaskTypeService: set trimmed instruction on create; on update set it when non-null, outside the runtimeChange/isRuntimeLocked branch so locked types still accept it.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/internal/service/tasktype/lifecycle/DynamicTaskTypeService.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/internal/service/tasktype/lifecycle/DynamicTaskTypeService.java"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/internal/service/tasktype/lifecycle/DynamicTaskTypeService.java",
+      "debug_logs": [],
+      "success_criteria": [
+        "Updating only instruction on a runtime-locked type does not throw TaskTypeRuntimeLockedException"
+      ]
+    },
+    {
+      "step_id": 6,
+      "description": "Expose instruction in QuestionTypeResponse and QuestionTypeMapper.toResponse.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/dto/response/QuestionTypeResponse.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/internal/mapper/QuestionTypeMapper.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/dto/response/QuestionTypeResponse.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/internal/mapper/QuestionTypeMapper.java"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/dto/response/QuestionTypeResponse.java, D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/internal/mapper/QuestionTypeMapper.java",
+      "debug_logs": [],
+      "success_criteria": [
+        "GET /api/v1/task-types/{id} JSON contains instruction"
+      ]
+    },
+    {
+      "step_id": 7,
+      "description": "Tests: create stores trimmed text; blank create rejected; null update keeps old value; update succeeds on runtime-locked type; response maps instruction.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/internal/service/tasktype/lifecycle/DynamicTaskTypeService.java",
+        "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/itembank/internal/service/tasktype/lifecycle/DynamicTaskTypeServiceTest.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/itembank/internal/service/tasktype/lifecycle/DynamicTaskTypeServiceTest.java"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/itembank/internal/service/tasktype/lifecycle/DynamicTaskTypeServiceTest.java",
+      "debug_logs": [],
+      "success_criteria": [
+        "mvn -q -Dtest=DynamicTaskTypeServiceTest test exits 0"
+      ]
+    }
+  ]
+}

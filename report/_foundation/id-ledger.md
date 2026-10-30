@@ -1,6 +1,6 @@
-# PTE Prep Cross-Report Identifier Ledger
+# PTEPrep Cross-Report Identifier Ledger
 
-**Owner:** Documentation work package  
+**Owner:** Documentation work package
 **Rule:** an identifier is allocated once in this ledger and is never reused for a different meaning.
 
 ## Namespaces
@@ -41,7 +41,7 @@
 
 | ID or range | Meaning | Owner/report | Status |
 |---|---|---|---|
-| `FEAT-01`–`FEAT-12` | PTE Prep feature groups | Foundation / Report 3 | Allocated |
+| `FEAT-01`–`FEAT-12` | PTEPrep feature groups | Foundation / Report 3 | Allocated |
 | `PT-01`–`PT-23` | Complete task catalog | Foundation / Report 3 | Allocated |
 | `EVD-FOUNDATION-001`–`EVD-FOUNDATION-009` | Source, scope, architecture, and task evidence | Foundation | Allocated |
 | `TBD-RETENTION-001`–`TBD-DATA-001` | Open policy and evidence decisions | Foundation | Allocated |
@@ -78,3 +78,27 @@ The following IDs are allocated in the current English Report 3?6 bundle. Repeat
 | `TC-` | `TC-ACCESS-001`, `TC-ACCESS-002`, `TC-ACCESS-003`, `TC-ACCESS-004`, `TC-ACCESS-005`, `TC-CONTENT-001`, `TC-CONTENT-002`, `TC-DELIVERY-001`, `TC-DELIVERY-002`, `TC-DELIVERY-003`, `TC-DELIVERY-004`, `TC-DELIVERY-005`, `TC-EXAM-001`, `TC-EXAM-002`, `TC-EXAM-003`, `TC-INTEGRATION-001`, `TC-OPS-001`, `TC-PACKAGE-001`, `TC-PACKAGE-002`, `TC-PROCTOR-001`, `TC-REPORT-001`, `TC-ROSTER-001`, `TC-SCORE-001`, `TC-SCORE-002`, `TC-SCORE-003` |
 | `UC-` | `UC-ACCESS-001`, `UC-CONTENT-001`, `UC-DELIVERY-001`, `UC-EXAM-001`, `UC-INTEGRATION-001`, `UC-ONBOARD-001`, `UC-PACKAGE-001`, `UC-PROCTOR-001`, `UC-ROSTER-001`, `UC-SCORING-001`, `UC-TEMPLATE-001` |
 | `WF-` | `WF-ADMIN-CONTENT-001`, `WF-ADMIN-ONBOARD-001`, `WF-ADMIN-PACKAGE-001`, `WF-AUTHOR-DRAFT-001`, `WF-AUTHOR-TEMPLATE-001`, `WF-EXAMINER-SCORE-001`, `WF-HOST-CREATE-EXAM`, `WF-HOST-PACKAGE-001`, `WF-HOST-PUBLISH-REPORT`, `WF-HOST-ROSTER-001`, `WF-PROCTOR-MONITOR-001`, `WF-STUDENT-DEVICE-CHECK`, `WF-STUDENT-TAKE-001`, `WF-STUDENT-VIEW-001` |
+
+
+## Scope revision allocations (2026-10-22)
+
+The following IDs extend the baseline without reusing an old meaning:
+
+| Prefix | New allocations |
+|---|---|
+| `FR-` | `FR-PLATFORM-001`, `FR-ACADEMIC-001`, `FR-ACADEMIC-002`, `FR-CONTENT-006`, `FR-PRACTICE-001` through `FR-PRACTICE-009` |
+| `BR-` | `BR-ROLE-001` through `BR-ROLE-006`, `BR-PRACTICE-001` through `BR-PRACTICE-010`, `BR-CONTENT-017` through `BR-CONTENT-020` |
+| `NFR-` | `NFR-PRACTICE-001` through `NFR-PRACTICE-006`, `NFR-AI-001`, `NFR-AI-002` |
+| `DB-` | `DB-PRACTICE-SESSION`, `DB-PRACTICE-ITEM`, `DB-PRACTICE-RESPONSE`, `DB-PRACTICE-MEDIA`, `DB-AI-FEEDBACK`, `DB-CONTENT-USAGE` |
+| `SEQ-` | `SEQ-PRACTICE-LOGIN`, `SEQ-PRACTICE-SESSION`, `SEQ-PRACTICE-MEDIA`, `SEQ-AI-FEEDBACK` |
+| `TC-` | `TC-ROLE-001` through `TC-ROLE-006`, `TC-PRACTICE-001` through `TC-PRACTICE-013`, `TC-CONTENT-003` through `TC-CONTENT-006` |
+| `WF-` | `WF-PLATFORM-MANAGER-001`, `WF-ACADEMIC-STAFF-001`, `WF-ACADEMIC-MANAGER-001`, `WF-STUDENT-PRACTICE-001` through `WF-STUDENT-PRACTICE-004` |
+| `EVD-` | `EVD-REG-001`, `EVD-ROLE-001`, `EVD-PRACTICE-001`, `EVD-PRACTICE-002`, `EVD-DEPLOY-001` |
+| `TBD-` | `TBD-D01-TASK-CATALOG`, `TBD-D02-IDENTITY-CONTEXT`, `TBD-D03-STUDY-PACK`, `TBD-FEEDBACK-001`, `TBD-AI-POLICY-001`, `TBD-RETENTION-002` |
+| `IMG-` | `IMG-SCOPE-CHANNEL-001`, `IMG-SCOPE-PRACTICE-001`, `IMG-SCOPE-AI-001`, `IMG-SCOPE-ROLE-001` |
+
+## Legacy mapping
+
+The old `Platform Author` wording is superseded by **Academic Staff** in current prose. Existing `WF-AUTHOR-*` and older references remain as historical IDs and must be interpreted through this mapping rather than treated as a separate current role. Existing FR/BR/DB IDs keep their meaning; new practice and academic approval behavior uses the allocations above.
+
+The historical `WF-ADMIN-CONTENT-001` label is retained for traceability. The current workflow is `WF-ACADEMIC-MANAGER-001`; Platform Admin no longer represents the ordinary academic approval actor in the revised scope.

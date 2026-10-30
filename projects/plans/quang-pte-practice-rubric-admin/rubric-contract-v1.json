@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "rubricKey": "PTEPREP.PRACTICE-RUBRIC",
+  "channel": "PRACTICE",
+  "statusVocabulary": ["DRAFT", "PENDING_APPROVAL", "PUBLISHED", "RETIRED"],
+  "legacyStatusMapping": {"ACTIVE": "PUBLISHED"},
+  "defaultLanguage": "vi",
+  "supportedLanguages": ["vi", "en"],
+  "levels": [
+    {"key": "NOT_ASSESSABLE", "labelVi": "Chưa thể đánh giá", "labelEn": "Not assessable"},
+    {"key": "NEEDS_SUPPORT", "labelVi": "Cần hỗ trợ", "labelEn": "Needs support"},
+    {"key": "DEVELOPING", "labelVi": "Đang phát triển", "labelEn": "Developing"},
+    {"key": "EFFECTIVE", "labelVi": "Đạt yêu cầu", "labelEn": "Effective"},
+    {"key": "STRONG", "labelVi": "Tốt", "labelEn": "Strong"}
+  ],
+  "objectiveResults": ["CORRECT", "PARTIALLY_CORRECT", "INCORRECT", "NOT_ASSESSABLE"],
+  "taskMappings": [
+    {"taskTypeKey": "PERSONAL_INTRODUCTION", "scored": false, "criteria": [], "requiredEvidence": ["PROMPT"], "policy": "COACHING_ONLY"},
+    {"taskTypeKey": "READ_ALOUD", "scored": true, "criteria": ["CONTENT_COVERAGE", "PRONUNCIATION", "FLUENCY", "PROSODY"], "requiredEvidence": ["PROMPT_TEXT", "RESPONSE_AUDIO"], "audioCriteriaRequireAssessor": true},
+    {"taskTypeKey": "REPEAT_SENTENCE", "scored": true, "criteria": ["CONTENT_COVERAGE", "PRONUNCIATION", "FLUENCY", "PROSODY"], "requiredEvidence": ["SOURCE_AUDIO", "RESPONSE_AUDIO", "RESPONSE_TRANSCRIPT"], "audioCriteriaRequireAssessor": true},
+    {"taskTypeKey": "DESCRIBE_IMAGE", "scored": true, "criteria": ["TASK_FULFILMENT", "CONTENT_COVERAGE", "LANGUAGE_CONTROL", "PRONUNCIATION", "FLUENCY"], "requiredEvidence": ["IMAGE", "IMAGE_ANNOTATIONS", "RESPONSE_TRANSCRIPT", "RESPONSE_AUDIO"]},
+    {"taskTypeKey": "RE_TELL_LECTURE", "scored": true, "criteria": ["CONTENT_COVERAGE", "FAITHFULNESS", "LANGUAGE_CONTROL", "PRONUNCIATION", "FLUENCY"], "requiredEvidence": ["LECTURE_SOURCE", "RESPONSE_TRANSCRIPT", "RESPONSE_AUDIO"]},
+    {"taskTypeKey": "ANSWER_SHORT_QUESTION", "scored": true, "criteria": ["CONTENT_COVERAGE", "PRONUNCIATION", "FLUENCY"], "requiredEvidence": ["PROMPT_SOURCE", "ACCEPTED_VARIANTS", "RESPONSE_AUDIO", "RESPONSE_TRANSCRIPT"]},
+    {"taskTypeKey": "RESPOND_TO_A_SITUATION", "scored": true, "criteria": ["TASK_FULFILMENT", "REGISTER_APPROPRIATENESS", "LANGUAGE_CONTROL", "PRONUNCIATION", "FLUENCY"], "requiredEvidence": ["SITUATION_REQUIREMENTS", "RESPONSE_TRANSCRIPT", "RESPONSE_AUDIO"]},
+    {"taskTypeKey": "SUMMARIZE_GROUP_DISCUSSION", "scored": true, "criteria": ["TASK_FULFILMENT", "CONTENT_COVERAGE", "REGISTER_APPROPRIATENESS", "LANGUAGE_CONTROL", "PRONUNCIATION", "FLUENCY"], "requiredEvidence": ["DISCUSSION_SOURCE", "SPEAKER_EVIDENCE", "RESPONSE_TRANSCRIPT", "RESPONSE_AUDIO"]},
+    {"taskTypeKey": "SUMMARIZE_WRITTEN_TEXT", "scored": true, "criteria": ["SOURCE_COVERAGE", "FAITHFULNESS", "FORM", "GRAMMAR", "VOCABULARY"], "requiredEvidence": ["PASSAGE", "RESPONSE_TEXT", "FORM_RESULT"]},
+    {"taskTypeKey": "WRITE_ESSAY", "scored": true, "criteria": ["TASK_FULFILMENT", "DEVELOPMENT_SUPPORT", "ORGANIZATION_COHERENCE", "GRAMMAR", "VOCABULARY", "SPELLING", "FORM"], "requiredEvidence": ["PROMPT", "RESPONSE_TEXT", "FORM_RESULT"]},
+    {"taskTypeKey": "MC_READING_SINGLE", "scored": true, "criteria": ["ANSWER_MATCH"], "requiredEvidence": ["PASSAGE", "OPTION_SET", "ANSWER_KEY", "DETERMINISTIC_RESULT"]},
+    {"taskTypeKey": "MC_READING_MULTIPLE", "scored": true, "criteria": ["ANSWER_SET"], "requiredEvidence": ["PASSAGE", "OPTION_SET", "ANSWER_KEY", "DETERMINISTIC_RESULT"]},
+    {"taskTypeKey": "RE_ORDER_PARAGRAPHS", "scored": true, "criteria": ["SEQUENCE_RELATION"], "requiredEvidence": ["PARAGRAPH_BLOCKS", "ANSWER_ORDER", "DETERMINISTIC_RESULT"]},
+    {"taskTypeKey": "FILL_IN_THE_BLANKS_DRAG_AND_DROP", "scored": true, "criteria": ["BLANK_MATCH"], "requiredEvidence": ["PASSAGE", "BLANKS", "WORD_BANK", "ANSWER_KEY", "DETERMINISTIC_RESULT"]},
+    {"taskTypeKey": "FILL_IN_THE_BLANKS_DROPDOWN", "scored": true, "criteria": ["BLANK_MATCH"], "requiredEvidence": ["PASSAGE", "BLANK_GROUPS", "OPTION_SET", "ANSWER_KEY", "DETERMINISTIC_RESULT"]},
+    {"taskTypeKey": "SUMMARIZE_SPOKEN_TEXT", "scored": true, "criteria": ["SOURCE_COVERAGE", "FAITHFULNESS", "ORGANIZATION_COHERENCE", "GRAMMAR", "VOCABULARY", "SPELLING", "FORM"], "requiredEvidence": ["AUDIO", "LECTURE_TRANSCRIPT", "RESPONSE_TEXT", "FORM_RESULT"]},
+    {"taskTypeKey": "MC_LISTENING_SINGLE", "scored": true, "criteria": ["ANSWER_MATCH"], "requiredEvidence": ["AUDIO", "TRANSCRIPT_OR_SOURCE", "OPTION_SET", "ANSWER_KEY", "DETERMINISTIC_RESULT"]},
+    {"taskTypeKey": "MC_LISTENING_MULTIPLE", "scored": true, "criteria": ["ANSWER_SET"], "requiredEvidence": ["AUDIO", "TRANSCRIPT_OR_SOURCE", "OPTION_SET", "ANSWER_KEY", "DETERMINISTIC_RESULT"]},
+    {"taskTypeKey": "FILL_IN_THE_BLANKS_TYPE_IN", "scored": true, "criteria": ["TOKEN_MATCH"], "requiredEvidence": ["AUDIO", "PASSAGE", "BLANK_IDS", "NORMALIZATION_POLICY", "ANSWER_KEY"]},
+    {"taskTypeKey": "HIGHLIGHT_CORRECT_SUMMARY", "scored": true, "criteria": ["SUMMARY_MATCH"], "requiredEvidence": ["AUDIO", "SOURCE", "SUMMARY_OPTIONS", "ANSWER_KEY"]},
+    {"taskTypeKey": "SELECT_MISSING_WORD", "scored": true, "criteria": ["CONTEXT_MATCH"], "requiredEvidence": ["AUDIO", "SOURCE", "CANDIDATE_ENDINGS", "ANSWER_KEY"]},
+    {"taskTypeKey": "HIGHLIGHT_INCORRECT_WORDS", "scored": true, "criteria": ["TOKEN_MATCH"], "requiredEvidence": ["AUDIO", "TRANSCRIPT_TOKENS", "TOKEN_IDS", "ANSWER_KEY"]},
+    {"taskTypeKey": "WRITE_FROM_DICTATION", "scored": true, "criteria": ["TOKEN_MATCH"], "requiredEvidence": ["AUDIO", "SOURCE_TRANSCRIPT", "NORMALIZATION_POLICY", "ANSWER_KEY"]}
+  ],
+  "hash": {
+    "algorithm": "SHA-256",
+    "encoding": "UTF-8",
+    "canonicalization": "sorted-object-keys-preserve-array-order-nfc-trim-lf-omit-null-no-whitespace",
+    "testVector": {
+      "canonicalJson": "{\"a\":\"x\",\"b\":1}",
+      "sha256": "cdab067e9f3beb32d1252cfd63e492592fecbf591b0d08cadb24bb17f3864246"
+    }
+  }
+}

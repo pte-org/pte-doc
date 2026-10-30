@@ -1,0 +1,24 @@
+{
+  "phase": "phase-03-commerce",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-24T16:00:00Z",
+  "summary": {
+    "passed": 2723,
+    "failed": 0,
+    "skipped": 75
+  },
+  "failures": [],
+  "notes": [
+    "Full app suite (clean test): 2798 tests, 0 failures, 0 errors, 75 skipped (the Postgres-only integration tests, no container in this environment).",
+    "After quality-gate fixes (QUAL-001..005): 2798 tests, 0 failures; quota grants verified on Postgres as an indexed child list (one INSERT per grant).",
+    "Tests written for the new behaviour: QuotaGrantServiceTest 6 (limit raised and grant appended in one save, race -> 409, history, system actor), OrderPaymentRepositoryTest 1 (child table round trip), LicenseIssueIdempotencyTest 3 (first use stores the code id, replay, different payload -> 409), PayOsWebhookServiceTest rewritten to 6 (forged signature stores nothing and touches no order, unknown order rejected, failed payment kept as processed receipt, duplicate delivery activates once with 2 receipts). Existing LicenseCodeServiceTest/LicenseCodePersistenceServiceTest adapted to the idempotency store; assertions about eligibility, expiry and collision retry unchanged.",
+    "Process deviation: the failing-first (RED_READY) artifact was not produced for this phase; tests for each group were written together with the implementation and run before the gate.",
+    "Mechanical rename Plan->ServicePlan (class, repository, table service_plans) verified by compile plus the full suite; audit aggregate name 'Plan' and all user-facing messages are unchanged.",
+    "Docker gate (manual): dev DB recreated, app rebuilt with profile local-schema, healthy; admin@test.local and host.e2e@test.local log in (200); seeded plan, ACTIVE subscription and ISSUED code visible through the API; POST/GET quota-grants works and raises the host quota limit from 100 to 125; POST /license-codes with one Idempotency-Key returns the same code on replay and 409 LICENSE_CODE_IDEMPOTENCY_KEY_REUSED for a different payload; redeeming the seeded code returns 200 and creates a second ACTIVE subscription; exclusion constraint no_overlap_per_subscription present; 83 public base tables built by Hibernate.",
+    "Postgres-only defects found by the gate and fixed: idempotency_keys.result is jsonb so the stored receipt must be a JSON document (was a bare UUID, H2 does not validate it); dev-seed referenced tables the merged partner work removed (practice_explanation_jobs, rubric_revisions); notification inbox tables rely on DB defaults and unique indexes that only the Flyway migrations had - added to db/dev-seed/000-postgres-objects.sql (Phase 11 redesigns that module).",
+    "Not verified: PayOS order creation and a real webhook round trip (needs PayOS credentials); the Postgres integration tests LicenseIssuePostgresIntegrationTest and others stay skipped here. The two Flyway-migration-specific tests removed from LicenseIssuePostgresIntegrationTest tested the legacy license_issue_intents table.",
+    "Client (pte-web): api-client types/requests renamed to QuotaGrantResponse and /quota-grants, vendor-web licensing history drops the Action column; tsc has no errors outside generated .next/types (stale validator references to removed practice-rubrics pages, unrelated); eslint on features/licensing clean."
+  ],
+  "report_path": "pte-doc/projects/plans/quang-entity-consolidation/tests/phase-03-commerce-test-report.json"
+}

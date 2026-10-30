@@ -1,0 +1,30 @@
+---
+title: D4 ExamSession (status and grading_status)
+---
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: session/domain/ExamSession.java, ExamDraftService, ExamPublishService, SessionStateService,
+%% SessionAutoOpenWorker, SessionAutoCloseWorker, SessionRevocationService
+stateDiagram-v2
+  [*] --> DRAFT : / host creates a draft
+  DRAFT --> READY : prepare exam and audience
+  READY --> READY : prepare again
+  READY --> SCHEDULED : publish / register audience
+  SCHEDULED --> OPEN : when(now >= opens_at) / SessionAutoOpenWorker opens
+  SCHEDULED --> OPEN : open [actor = host]
+  OPEN --> CLOSED : when(now >= closes_at) / SessionAutoCloseWorker closes
+  OPEN --> CLOSED : close [actor = host]
+  READY --> CANCELLED : cancel [actor = host]
+  SCHEDULED --> CANCELLED : cancel [actor = host]
+  SCHEDULED --> CANCELLED : subscription revoked
+  CANCELLED --> [*]
+
+  state CLOSED {
+    [*] --> UNFROZEN
+    UNFROZEN --> FROZEN : freezeGrading [actor = host]
+    FROZEN --> COMPLETED : completeGrading [all attempts graded]
+    COMPLETED --> [*]
+  }
+  note right of CLOSED
+    Nested region for grading_status.
+    UNFROZEN means the column is null, not an enum value.
+  end note

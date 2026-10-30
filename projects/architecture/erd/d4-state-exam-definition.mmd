@@ -1,0 +1,17 @@
+---
+title: D4 ExamDefinition
+---
+%% UML 2.5 state machine. Transition label syntax: trigger [guard] / effect.
+%% Source: assessment/internal/service/definition/ExamDefinitionApprovalWorkflow.java
+stateDiagram-v2
+  [*] --> DRAFT : / create or copy a new version
+  DRAFT --> PENDING_APPROVAL : submit for approval
+  PENDING_APPROVAL --> DRAFT : admin approves [definition valid] / wait for activation
+  PENDING_APPROVAL --> DRAFT : admin rejects / record rejection_reason
+  DRAFT --> ACTIVE : publish, activate
+  ACTIVE --> RETIRED : another version with the same code is activated
+  RETIRED --> [*]
+  note left of DRAFT
+    Approve and reject both return to DRAFT.
+    Only rejection_reason and the audit log tell them apart.
+  end note
