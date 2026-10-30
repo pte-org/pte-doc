@@ -161,6 +161,8 @@ The browser/client requests a short-lived signed upload/access instruction from 
 
 The application creates a provider-correlated order. The provider callback is verified and processed idempotently. Browser return is not payment proof. The billing package owns subscription/license activation; the payment adapter owns provider-specific request/response translation.
 
+A contract sale does not use the payment provider. A platform operator grants the package to one organization; billing issues a code bound to that organization and activates it in the same transaction, with an optional contract start date. Both paths create the subscription through the same activation operation.
+
 ### AI scoring
 
 The scoring package creates a correlated provider request when the task and policy allow it. A worker or asynchronous handler records pending, success, failure, retry, or review-needed status. Provider quality thresholds, final provider, and task-level Examiner review remain `TBD-AI-001`/`TBD-AI-002`. A failed provider response does not become a valid final score.
