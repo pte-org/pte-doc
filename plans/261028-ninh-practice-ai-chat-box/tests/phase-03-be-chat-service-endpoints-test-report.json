@@ -1,0 +1,54 @@
+{
+  "phase": "phase-03-be-chat-service-endpoints",
+  "mode": "tdd-verify",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-29T00:00:00Z",
+  "summary": {
+    "passed": 1588,
+    "failed": 0,
+    "skipped": 16
+  },
+  "failures": [],
+  "runs": [
+    {
+      "command": "./mvnw -pl app test -Dtest='com.pte.chat.**.*Test,ModuleStructureTest,PackageDensityTest,SourceFileSizeTest,NoDirectClockAccessTest,PracticeEntitlementServiceTest' -Dsurefire.failIfNoSpecifiedTests=false",
+      "tests": 706,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "postgres_tests_ran": [
+        "ChatMigrationPostgresTest (10)",
+        "ChatSchemaValidatePostgresTest (3)",
+        "ChatAnswerCacheServicePostgresTest (13)",
+        "ChatServiceCachePostgresTest (15)",
+        "ChatServiceConcurrencyPostgresTest (10)",
+        "ChatServiceFailurePostgresTest (10)",
+        "ChatServiceFlowPostgresTest (16)",
+        "ChatQuotaRepositoryPostgresTest (37)",
+        "ChatSessionServicePostgresTest (39)"
+      ],
+      "log": "scratchpad/mvn-main.log"
+    },
+    {
+      "command": "./mvnw -pl app test -Dtest='com.pte.practice.**.*Test,com.pte.scoring.**.*Test,com.pte.shared.**.*Test' -Dsurefire.failIfNoSpecifiedTests=false",
+      "tests": 882,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 16,
+      "skipped_note": "AllScorersSpikeTest (11) and AzureGeminiSpikeTest (5): pre-existing live-vendor spike tests, unrelated to chat",
+      "log": "scratchpad/mvn-reg.log"
+    }
+  ],
+  "weakening_check": {
+    "result": "clean",
+    "phase_03_files_hashed": 35,
+    "phase_03_mismatches": 0,
+    "phase_01_files_hashed": 10,
+    "phase_01_mismatches": 0,
+    "phase_02_files_hashed": 7,
+    "phase_02_mismatches": 0,
+    "test_method_count_vs_baseline": "no drop",
+    "disabled_or_ignored_in_com_pte_chat": 0
+  },
+  "report_path": "plans/261028-ninh-practice-ai-chat-box/tests/phase-03-be-chat-service-endpoints-test-report.json"
+}

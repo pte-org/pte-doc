@@ -1,0 +1,27 @@
+{
+  "phase": "phase-02-be-gemini-chat-client",
+  "status": "RED_READY",
+  "prepared_at": "2026-10-28T16:45:00Z",
+  "repo": "pte-api",
+  "test_files": [
+    "app/src/test/java/com/pte/chat/support/FakeGeminiServer.java",
+    "app/src/test/java/com/pte/chat/internal/client/ChatOutputParserTest.java",
+    "app/src/test/java/com/pte/chat/internal/client/GeminiChatClientTest.java",
+    "app/src/test/java/com/pte/chat/internal/client/ChatAiModelTypesTest.java",
+    "app/src/test/java/com/pte/chat/internal/prompt/ChatPromptsTest.java",
+    "app/src/test/java/com/pte/chat/internal/config/ChatGeminiConfigTest.java",
+    "app/src/test/java/com/pte/chat/internal/config/ChatAiPropertiesRangeTest.java"
+  ],
+  "test_file_sha256": {
+    "app/src/test/java/com/pte/chat/support/FakeGeminiServer.java": "d6e522108260d85118e6e205f8996a96cbb60e9b3e712e44afd499dbfc88a124",
+    "app/src/test/java/com/pte/chat/internal/client/ChatOutputParserTest.java": "20db6c6b07c13b5dc29623662f7979de1a87a92107fd416925a23cc861b76a08",
+    "app/src/test/java/com/pte/chat/internal/client/GeminiChatClientTest.java": "e2efc78d179985fbbd0feab8bdd4163b8eb391e71b5e989ae89159d5f4a2891c",
+    "app/src/test/java/com/pte/chat/internal/client/ChatAiModelTypesTest.java": "1c2b45807f8e6ab7549da5d7dd233a0c51d8cf6e9fd786069e11dc7d074b1d48",
+    "app/src/test/java/com/pte/chat/internal/prompt/ChatPromptsTest.java": "73d40cc960307de23fd3476254ad4558d85386f76ab73d098b391df178ed4890",
+    "app/src/test/java/com/pte/chat/internal/config/ChatGeminiConfigTest.java": "e56877bc83b7acc176bc0fc37762e556fc0c683ca3af5484198d3bdd34b896ea",
+    "app/src/test/java/com/pte/chat/internal/config/ChatAiPropertiesRangeTest.java": "85c8a63aa263b597ddfce75b901058c76cd12e7d2e61e01f3d67efe01bad910a"
+  },
+  "baseline_dir": "C:/Users/NinhLe/AppData/Local/Temp/claude/D--FPT-FALL2026-Capstore/56519906-f923-4031-9e94-9dd786672c75/scratchpad/tdd-baseline/phase-02/",
+  "expected_red_reason": "Production symbols do not exist yet: com.pte.chat.internal.client.{ChatAiFailureReason,ChatAiUsage,ChatAiException,ChatTurn,ChatAiAnswer,ChatModelOutput,ChatOutputParser,GeminiChatClient}, com.pte.chat.internal.prompt.ChatPrompts, com.pte.chat.internal.config.ChatGeminiConfig, ChatConstants.MAX_QUESTION_CHARS (test-compile fails only with cannot-find-symbol / package-does-not-exist). Also absent: ChatAiPropertiesValidator rules for connect-timeout-ms, read-timeout-ms, temperature range and max-input-chars cap.",
+  "artifact_path": "plans/261028-ninh-practice-ai-chat-box/tests/phase-02-be-gemini-chat-client-tdd-ready.json"
+}
