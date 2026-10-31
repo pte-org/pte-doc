@@ -1,0 +1,40 @@
+{
+  "phase": "phase-03-host-preview-app",
+  "mode": "unit",
+  "verdict": "PASSED",
+  "reviewed_at": "2026-10-29",
+  "summary": {
+    "focused_tests_passed": 49,
+    "full_suite_tests_passed": 634,
+    "failed": 0,
+    "skipped": 0
+  },
+  "tests": [
+    {
+      "command": "flutter test test/unit/features/auth/domain/exam_access_policy_test.dart test/widget/app_auth_gate_test.dart test/unit/core/security/violation_retry_coordinator_test.dart test/unit/features/exam_preview/data/host_exam_preview_repository_impl_test.dart test/unit/features/exam_preview/data/preview_audio_session_test.dart test/unit/features/exam_preview/presentation/model/preview_task_ui_adapter_test.dart test/unit/features/exam_preview/presentation/cubit/host_exam_list_cubit_test.dart test/unit/features/exam_preview/presentation/cubit/host_exam_preview_cubit_test.dart test/widget/features/exam_preview/host_exam_list_screen_test.dart test/widget/features/exam_preview/host_exam_preview_screen_test.dart",
+      "exit_code": 0,
+      "passed": 49,
+      "failed": 0
+    },
+    {
+      "command": "flutter test",
+      "exit_code": 0,
+      "passed": 634,
+      "failed": 0
+    },
+    {
+      "command": "flutter analyze",
+      "exit_code": 1,
+      "passed": 0,
+      "failed": 0,
+      "notes": [
+        "Only the pre-existing unnecessary_cast warning at lib/features/exam_attempt/data/repositories/exam_attempt_repository_impl.dart:63:13 was reported; no new analyzer issue was reported in the Phase 3 files."
+      ]
+    }
+  ],
+  "notes": [
+    "The focused suite covers host routing, student enforcement coordinator lifecycle, read-only repository calls, temporary media cleanup, all 22 canonical task codes, local answer/navigation/timer behavior, and host preview widgets.",
+    "Quality gate was skipped_by_user; no quality approval is claimed."
+  ],
+  "report_path": "plans/quang-host-exam-app-preview/tests/phase-03-host-preview-app-test-report.json"
+}

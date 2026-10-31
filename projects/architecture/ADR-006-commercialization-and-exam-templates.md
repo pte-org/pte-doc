@@ -221,6 +221,12 @@ Ba điểm dễ sai ở đường B:
 
 **Ngoài phạm vi (chốt 2026-09-16):** không làm bán mã theo lô. Mã phát lẻ từng cái, không có entity lô, không có batch issue.
 
+> **Cập nhật 2026-10-30 ([plan 261029-hung-license-grant](../plans/hung-license-grant/plan.md)):** đường B nay là **Admin cấp gói**. Platform Admin hoặc Manager chọn đúng tổ chức (theo mã tổ chức hoặc MST) và nhập số hợp đồng. Hệ thống phát một mã **gắn tổ chức đó** (`bound_tenant_id`) và kích hoạt ngay trong cùng transaction, nên Host không nhập mã nữa.
+> - Gói thi có `startsAt` theo hợp đồng: mặc định nối tiếp sau gói cùng loại còn hạn, không quá 6 tháng tới. Hạn gói tính từ `startsAt`, không còn tính từ lúc redeem như điểm 1 ở trên.
+> - Gói chưa tới ngày chạy vẫn lên lịch và publish kỳ thi được, nhưng không mở được kỳ thi trước `startsAt`.
+> - Đường A (PayOS) **không** gia hạn nối tiếp: mua thêm là một làn mới chạy ngay.
+> - Endpoint redeem cũ vẫn nhận mã không gắn tổ chức để tương thích; UI Host đã bỏ lối vào.
+
 ---
 
 ## 8. Huỷ gói, hoàn tiền, thu hồi mã

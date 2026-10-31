@@ -1,0 +1,266 @@
+{
+  "plan_id": "quang-host-exam-app-preview",
+  "phase_id": 3,
+  "name": "host-preview-app",
+  "goal": "Host vào preview riêng, không lockdown và không ghi bài làm.",
+  "status": "completed",
+  "current_step": 10,
+  "design_constraints": [
+    "Host preview is an authenticated HOST_ADMIN route selected after server-backed session access; it must never use DEV_SKIP_AUTH, fake student identity, or student attempt APIs.",
+    "Host preview owns only RAM answers, local timer/navigation state, and isolated temporary recording files; no Drift answer/outbox, upload, scoring, quota, or attempt writes.",
+    "Gate native lockdown, violation retry, SyncEngine, and MediaUploadCoordinator by authenticated student context; preserve queued student data and restore normal enforcement after host logout.",
+    "Use the existing common templates/components and canonical task registry; do not treat the old dev preview as live behavior and do not alter student visual behavior.",
+    "Next is available on every preview item, Previous is preview-only, and Finish closes locally; item epoch invalidation and awaited media cleanup prevent stale callbacks."
+  ],
+  "quality_profile": {
+    "repository_conventions": [
+      "Flutter uses feature-first folders, BLoC/Cubit state, GetIt constructor injection, Material 3 common widgets, and explicit dispose/teardown.",
+      "Existing student attempt widgets remain persistence/security owners; preview gets separate repository, dispatcher, navigation, and media session.",
+      "Unit/widget tests use existing mock API/auth/security helpers and must assert no student-side write dependency is constructed."
+    ],
+    "boundaries": [
+      "Only the exact app paths and preview tests in quang-execution-file-manifest.md may change in this phase.",
+      "Do not edit shared template/component files unless a new exact path is added to the manifest; do not change API, web, notification, migration, Docker, or unrelated dirty worktree paths."
+    ],
+    "applicable_rules": [
+      "Keep role routing and server auth separate from UI-only JWT branching; recheck API success before content display.",
+      "Dispose timers, audio, recorder, temp files, and preview RAM on back/logout/401/error; student queues remain untouched.",
+      "Use common error/toast surfaces and avoid raw machine errors or release bypass flags."
+    ],
+    "allowed_exceptions": [
+      "Quality gate is skipped by Quang and must remain skipped_by_user; unit/widget tests are required and owned by ck:test."
+    ]
+  },
+  "quality": {
+    "status": "skipped_by_user",
+    "report": "",
+    "receipt": "",
+    "remediation_cycles": 0,
+    "decision": "user_confirmed_skip"
+  },
+  "testing": {
+    "status": "passed",
+    "report": "plans/quang-host-exam-app-preview/tests/phase-03-host-preview-app-test-report.json",
+    "decision": "user_confirmed_run"
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "description": "Tách canPreviewExam(HOST_ADMIN) khỏi canTakeExam(STUDENT); AppAuthGate host ưu tiên preview sau backend auth, multi-role mặc định preview, role khác denied; không DEV_SKIP_AUTH hay fake student id.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-app/lib/features/auth/domain/exam_access_policy.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/auth/presentation/bloc/auth_bloc.dart",
+        "D:/GitHub/pte-org/pte-app/lib/app.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-app/lib/main.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/auth/domain/exam_access_policy.dart",
+        "D:/GitHub/pte-org/pte-app/lib/app.dart"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Routing tests H1/S1/M1/X1 pass, host không vào student device-check hoặc attempt flow."
+      ]
+    },
+    {
+      "step_id": 2,
+      "description": "Nối session lifecycle và queue ownership: host/unauthenticated không kích hoạt native enforcement hoặc flush queue student bằng host token; dispose retry khi đổi identity, không xóa student queue. Handoff §5, AU08/SC01–02.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-app/lib/features/auth/domain/exam_access_policy.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/auth/presentation/bloc/auth_bloc.dart",
+        "D:/GitHub/pte-org/pte-app/lib/app.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-app/lib/core/di/security_module.dart",
+        "D:/GitHub/pte-org/pte-app/lib/core/security/violation_retry_coordinator.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/auth/presentation/bloc/auth_bloc.dart"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Host login với seeded student queues: không gửi bằng host token, không xóa rows; student sau logout có normal scheduling."
+      ]
+    },
+    {
+      "step_id": 3,
+      "description": "Tạo domain repository interface + API implementation + DTO adapter + DI feature; lazy resources scoped preview session. Không tham chiếu SyncEngine/outbox/attempt repository trong feature preview.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/dev/exam_ui_preview_screen.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/model/exam_task_ui_model.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/domain/task_view.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/domain/entities/host_exam_summary.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/domain/entities/preview_snapshot.dart",
+                                           "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/domain/repositories/host_exam_preview_repository.dart",
+                                           "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/data/models/host_exam_summary_model.dart",
+                                           "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/data/models/preview_snapshot_model.dart",
+                                           "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/data/repositories/host_exam_preview_repository_impl.dart",
+                                           "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/data/preview_audio_session.dart",
+                                           "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/exam_preview_module.dart"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Repository HTTP spy chỉ gọi authorized read endpoints; feature dependency graph không inject attempt/outbox/upload coordinator."
+      ]
+    },
+    {
+      "step_id": 4,
+      "description": "Host list dùng existing GET sessions; loading/empty/error, tên/mã/status/snapshot availability; chọn READY có snapshot, DRAFT disabled. Common controls, không thêm toggle login.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-app/lib/features/auth/domain/exam_access_policy.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/auth/presentation/bloc/auth_bloc.dart",
+        "D:/GitHub/pte-org/pte-app/lib/app.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/presentation/pages/host_exam_list_screen.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/presentation/cubit/host_exam_list_cubit.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/presentation/cubit/host_exam_list_state.dart"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Widget list tests loading/empty/error/DRAFT/READY pass, action availability dựa snapshotPublicId chứ không status đơn lẻ."
+      ]
+    },
+    {
+      "step_id": 5,
+      "description": "Chia pure renderer/response widgets cho preview và student; implement local text/select/multi/blank/reorder/token state. Dùng real templates; không chỉ render dev static response, không tạo dummy attempt.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/dev/exam_ui_preview_screen.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/model/exam_task_ui_model.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/domain/task_view.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/presentation/pages/host_exam_preview_screen.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/presentation/cubit/host_exam_preview_cubit.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/presentation/cubit/host_exam_preview_state.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/presentation/model/preview_task_ui_model.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/presentation/model/preview_task_ui_adapter.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/presentation/widgets/host_preview_task_dispatcher.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/presentation/widgets/preview_answer_controller.dart"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Tests 7 response families thao tác có thay đổi RAM; cùng shared templates với student, không Drift writes."
+      ]
+    },
+    {
+      "step_id": 6,
+      "description": "Implement Next/Previous/Finish local, epoch invalidation, double-click guard; timer expiry dừng response nhưng ở nguyên câu; local answers RAM key snapshot+item. Handoff §5 transition order, UI03–08.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-app/lib/core/di/security_module.dart",
+        "D:/GitHub/pte-org/pte-app/lib/core/security/lockdown_service.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/widgets/task_advance_button.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/speaking_writing/domain/audio_recorder_service.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/presentation/cubit/host_exam_preview_cubit.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/presentation/widgets/host_preview_navigation.dart"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "UI03–08 tests pass: Next mọi dạng, epoch chặn callback cũ, không auto-next khi hết giờ, cuối đề chỉ đóng preview."
+      ]
+    },
+    {
+      "step_id": 7,
+      "description": "Preview audio/recorder own temp dir và subscriptions; await stop trước next, finally delete, mic/media errors skippable; bounded URL refresh, snapshot mismatch resets; crash sweep không đụng student.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-app/lib/core/di/security_module.dart",
+        "D:/GitHub/pte-org/pte-app/lib/core/security/lockdown_service.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/widgets/task_advance_button.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/speaking_writing/domain/audio_recorder_service.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/data/preview_audio_session.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/presentation/cubit/host_exam_preview_cubit.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/presentation/widgets/preview_media_status.dart"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "DA01–02/AP08–09/UI04–05/UI09 pass: stop/delete trước rời item, bounded refresh, crash sweep chỉ preview-owned files."
+      ]
+    },
+    {
+      "step_id": 8,
+      "description": "Logout/401/back/native close dispose media/timers/RAM, rồi reset context; host->student phục hồi enforcement theo role/attempt. Không mutate session.policy.lockdownMode.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-app/lib/features/auth/domain/exam_access_policy.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/auth/presentation/bloc/auth_bloc.dart",
+        "D:/GitHub/pte-org/pte-app/lib/app.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-app/lib/app.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_preview/presentation/pages/host_exam_preview_screen.dart"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "AU02/AU07/SC01–02 pass: resources disposed khi logout/401, student enforcement trở lại không dùng dart-define."
+      ]
+    },
+    {
+      "step_id": 9,
+      "description": "Test routing, queues, lifecycle, no-persistence spies và 22 distinct renderers; extra personal introduction nếu snapshot có. Run analyze + focused/full Flutter tests, ghi ca chưa chạy.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-app/lib/core/di/security_module.dart",
+        "D:/GitHub/pte-org/pte-app/lib/core/security/lockdown_service.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/presentation/widgets/task_advance_button.dart",
+        "D:/GitHub/pte-org/pte-app/lib/features/exam_attempt/speaking_writing/domain/audio_recorder_service.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-app/test/unit/core/security/violation_retry_coordinator_test.dart",
+        "D:/GitHub/pte-org/pte-app/test/unit/features/exam_preview/data/host_exam_preview_repository_impl_test.dart",
+        "D:/GitHub/pte-org/pte-app/test/unit/features/exam_preview/data/preview_audio_session_test.dart",
+        "D:/GitHub/pte-org/pte-app/test/unit/features/exam_preview/presentation/model/preview_task_ui_adapter_test.dart",
+        "D:/GitHub/pte-org/pte-app/test/unit/features/exam_preview/presentation/cubit/host_exam_list_cubit_test.dart",
+        "D:/GitHub/pte-org/pte-app/test/unit/features/exam_preview/presentation/cubit/host_exam_preview_cubit_test.dart",
+        "D:/GitHub/pte-org/pte-app/test/widget/features/exam_preview/host_exam_list_screen_test.dart",
+        "D:/GitHub/pte-org/pte-app/test/widget/features/exam_preview/host_exam_preview_screen_test.dart",
+        "D:/GitHub/pte-org/pte-app/test/unit/features/auth/domain/exam_access_policy_test.dart",
+        "D:/GitHub/pte-org/pte-app/test/unit/features/auth/auth_bloc_test.dart",
+        "D:/GitHub/pte-org/pte-app/test/widget/app_auth_gate_test.dart",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/tests/phase-03-host-preview-app-test-report.json",
+        "D:/GitHub/pte-org/pte-doc/plans/reports/261029-quang-host-exam-app-preview-verification.md"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Coverage report liệt kê 22 distinct canonical codes, Flutter analyze/tests exit 0 hoặc ghi rõ failure/skip."
+      ]
+    }
+  ]
+}

@@ -4,7 +4,7 @@
 **Author:** hung
 **Slug:** `hung-examiner-ui-coverage`
 **Status:** Draft (post-brainstorm, pre-plan)
-**Brainstorm:** [reports/261007-hung-examiner-ui-coverage-brainstorm.md](reports/261007-hung-examiner-ui-coverage-brainstorm.md)
+**Brainstorm:** [reports/261007-hung-examiner-ui-coverage-brainstorm.md](../reports/261007-hung-examiner-ui-coverage-brainstorm.md)
 **Builds on:** [quang-examiner-assignment-score-selection/phase-03-examiner-workflow.md](../quang-examiner-assignment-score-selection/phase-03-examiner-workflow.md) (shipped)
 
 ---

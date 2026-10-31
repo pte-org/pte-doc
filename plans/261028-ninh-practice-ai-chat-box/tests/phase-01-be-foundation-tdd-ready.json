@@ -1,0 +1,32 @@
+{
+  "phase": "phase-01-be-foundation",
+  "status": "RED_READY",
+  "prepared_at": "2026-10-28T16:15:00Z",
+  "test_files": [
+    "app/src/test/java/com/pte/ModuleStructureTest.java",
+    "app/src/test/java/com/pte/chat/ChatModuleBoundaryTest.java",
+    "app/src/test/java/com/pte/chat/ChatConstantsTest.java",
+    "app/src/test/java/com/pte/chat/ChatMigrationPostgresTest.java",
+    "app/src/test/java/com/pte/chat/internal/config/ChatAiPropertiesValidatorTest.java",
+    "app/src/test/java/com/pte/chat/internal/repository/ChatEntityMappingTest.java",
+    "app/src/test/java/com/pte/chat/internal/repository/ChatSchemaValidatePostgresTest.java",
+    "app/src/test/java/com/pte/chat/support/ChatPostgres.java",
+    "app/src/test/java/com/pte/practice/PracticeEntitlementGateTest.java",
+    "app/src/test/resources/application-postgres-test.yml"
+  ],
+  "test_file_sha256": {
+    "app/src/test/java/com/pte/ModuleStructureTest.java": "cb2281f4462a932a99160185cbe3c604af9c98c1d00d6e829dfea1148ea60c83",
+    "app/src/test/java/com/pte/chat/ChatModuleBoundaryTest.java": "11a209b0c9f59b1f088e9fb5ea4a8296788e2a88d93300bf20c6bd212501a776",
+    "app/src/test/java/com/pte/chat/ChatConstantsTest.java": "ca5bfbc317585944baab85918ed6d4cc4dd00f6652848ad6c2a8c7a95afa1073",
+    "app/src/test/java/com/pte/chat/ChatMigrationPostgresTest.java": "310b05434fae1918a8fd5d58724c49e4df02edb206de170816c90151b6ccfe81",
+    "app/src/test/java/com/pte/chat/internal/config/ChatAiPropertiesValidatorTest.java": "f4983f6752cfcf8357b071e23bcb6b15151ca98c4b2c0ab2cf21fcbfcb10f445",
+    "app/src/test/java/com/pte/chat/internal/repository/ChatEntityMappingTest.java": "db3de8790f343fcb66fc405dac60f662ca4a0e0a77d0dae5c49576c0588fe3e1",
+    "app/src/test/java/com/pte/chat/internal/repository/ChatSchemaValidatePostgresTest.java": "91e0799bfea919b19683b2428e2e514582eef94022006b623d1a83ec47dd4640",
+    "app/src/test/java/com/pte/chat/support/ChatPostgres.java": "c174c1c7adcc199b1409cc8858b83cbd7865c9d0a8d77415925c95610a640129",
+    "app/src/test/java/com/pte/practice/PracticeEntitlementGateTest.java": "d307634610526b368679ccfc51c7655030afdb7f3fb671102e306b2f1a951db3",
+    "app/src/test/resources/application-postgres-test.yml": "f18ef0b158822df5ff0a2265cdf032e4967b0c8bd95817c28b368fb48e41d2f2"
+  },
+  "baseline_dir": "C:/Users/NinhLe/AppData/Local/Temp/claude/D--FPT-FALL2026-Capstore/56519906-f923-4031-9e94-9dd786672c75/scratchpad/tdd-baseline/phase-01/",
+  "expected_red_reason": "Production symbols do not exist yet: com.pte.chat.internal.constant.ChatConstants, com.pte.chat.internal.config.ChatAiProperties, com.pte.chat.internal.config.ChatAiPropertiesValidator, com.pte.chat.internal.domain.{ChatSession,ChatMessage,ChatAnswerCache}, com.pte.chat.internal.repository.{ChatSessionRepository,ChatMessageRepository,ChatAnswerCacheRepository}, com.pte.practice.PracticeEntitlementGate (test-compile fails only with cannot-find-symbol / package-does-not-exist). Also absent: module 'chat' package-info, PracticeEntitlementService implementing the gate, Flyway V7__chat_usage_and_messages.sql.",
+  "artifact_path": "plans/261028-ninh-practice-ai-chat-box/tests/phase-01-be-foundation-tdd-ready.json"
+}

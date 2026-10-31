@@ -248,6 +248,8 @@ External payment callback is validated by the configured contract and correlatio
 
 Platform Admin issues or controls license codes; Host redeems an eligible code once. The system records code, organization, package, dates, limits, and revocation state. A revoked/expired license cannot authorize a new exam.
 
+**Revision 2026-10-30:** for a contract sale, Platform Admin or Platform Manager grants the package directly to the selected organization. The grant records the contract number and an optional contract start date, and activates the package in the same step through a code bound to that organization, so the Host does not enter a code. A package whose start date is in the future can be used to schedule exams within its period, but an exam cannot open before that date.
+
 #### FR-PACKAGE-005 — Enforce package and exam capacity
 
 Before exam publication and candidate commit, the system checks active package, time window, organization limits, per-exam limit, and selected Student count. The result identifies the blocking limit.

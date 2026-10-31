@@ -1,0 +1,88 @@
+{
+  "plan_id": "quang-host-exam-app-preview",
+  "goal": "Host xem thử đúng snapshot kỳ thi trên PTE App không đổi trạng thái, không lockdown, không lưu bài làm/upload/chấm điểm; nhận thông báo chuông khi đề sẵn sàng.",
+  "status": "completed",
+  "current_phase": 6,
+  "global_context": {
+    "framework": "Java 21/Spring modular monolith; Flutter/Material 3/BLoC; Next.js tenant-web",
+    "architecture": "Read-only host preview with shared renderers and isolated local response state",
+    "target_folder": "D:/GitHub/pte-org",
+    "constraints": [
+      "Planning only; no implementation or discard executed yet.",
+      "Quang authorizes discarding only the reviewed temporary global security flag changes before coding, after backup and fresh diff verification.",
+      "HOST_ADMIN only, server-enforced tenant ownership; no pre-login toggle; no STUDENT access to host preview.",
+      "Host+student account defaults to explicit host preview; student attempts never inherit preview privileges.",
+      "Snapshot required; no generate/start/open/state change while viewing.",
+      "Answers RAM only; recording temp local only, cleaned on next/exit and crash recovery; no response cache/DB/outbox/upload/grading/quota.",
+      "Next on every preview task; preserve student behavior and real-test layout.",
+      "Reuse common inbox, auth and renderer infrastructure; no external paid integration, no deep-link setup required.",
+      "Existing exam media downloads still incur normal requests/bandwidth; do not promise zero third-party usage.",
+      "Follow AGENTS and applicable standards before code; preserve unrelated worktree changes.",
+      "New output paths proposed; implementation preflight must refine exact file inventory and conditional Flyway/client enum files.",
+      "Read quang-agent-handoff.md and quang-acceptance-matrix.md before execution; refined source facts override earlier report shorthand.",
+      "Recipient is generating actor HOST_ADMIN, not a nonexistent creator field; new notification CHECK migration required.",
+      "SnapshotContentResponse lacks timing; use shared public resolver preserving current student timing parity, no attempt.internal imports.",
+      "Refine exact output inventory including migration path in quang-execution-file-manifest.md before phase writes."
+    ]
+  },
+  "phases": [
+    {
+      "phase_id": 1,
+      "name": "preflight-and-discard",
+      "description": "Chuẩn bị và bỏ đúng flag bảo mật tạm trước khi triển khai.",
+      "file": "phase-01-preflight-and-discard.json",
+      "status": "completed",
+      "depends_on": [],
+      "quality_status": "skipped_by_user",
+      "testing_status": "passed"
+    },
+    {
+      "phase_id": 2,
+      "name": "read-only-preview-api",
+      "description": "API cấp đúng đề đã tạo và runtime cho host mà không tạo attempt.",
+      "file": "phase-02-read-only-preview-api.json",
+      "status": "completed",
+      "depends_on": [
+        1
+      ],
+      "quality_status": "skipped_by_user",
+      "testing_status": "passed"
+    },
+    {
+      "phase_id": 3,
+      "name": "host-preview-app",
+      "description": "Host vào preview riêng, không lockdown và không ghi bài làm.",
+      "file": "phase-03-host-preview-app.json",
+      "status": "completed",
+      "depends_on": [
+        2
+      ],
+      "quality_status": "skipped_by_user",
+      "testing_status": "passed"
+    },
+    {
+      "phase_id": 4,
+      "name": "exam-ready-inbox",
+      "description": "Thông báo chuông cho host khi bản đề sẵn sàng xem thử.",
+      "file": "phase-04-exam-ready-inbox.json",
+      "status": "completed",
+      "depends_on": [
+        3
+      ],
+      "quality_status": "skipped_by_user",
+      "testing_status": "passed"
+    },
+    {
+      "phase_id": 5,
+      "name": "verification-and-handoff",
+      "description": "Xác minh end-to-end và chứng minh không phát sinh bài nộp/quota.",
+      "file": "phase-05-verification-and-handoff.json",
+      "status": "completed",
+      "depends_on": [
+        4
+      ],
+      "quality_status": "skipped_by_user",
+      "testing_status": "passed"
+    }
+  ]
+}

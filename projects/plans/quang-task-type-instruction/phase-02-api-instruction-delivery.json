@@ -1,0 +1,156 @@
+{
+  "plan_id": "quang-task-type-instruction",
+  "phase_id": 2,
+  "name": "api-instruction-delivery",
+  "goal": "Deliver the current task-type instruction with every attempt task and host-preview item.",
+  "status": "completed",
+  "current_step": 7,
+  "design_constraints": [
+    "Resolve live from question_types at delivery (one batched lookup per resolve call), not frozen in exam_version_items, so admin edits reach already-published exams.",
+    "Single seam: ExamItemRuntimeResolver, shared by attempt delivery and host preview.",
+    "The attempt ExamItemView cache keeps the text stable for a cached attempt.",
+    "Field name taskTypeInstruction, nullable, additive JSON field only.",
+    "assessment imports only itembank public API (com.pte.itembank.*), never itembank.internal."
+  ],
+  "quality_profile": {
+    "repository_conventions": {
+      "records": "New fields appended last; compatibility constructors pass null",
+      "tests": "MockitoExtension strict stubs, AssertJ; WebMvc slice for JSON shape"
+    },
+    "boundaries": {
+      "assessment->itembank": "only public facade com.pte.itembank.QuestionTypeService (already a dependency)",
+      "cache": "ExamItemView is Redis JSON; old entries deserialize taskTypeInstruction=null"
+    },
+    "applicable_rules": [
+      "docs/CODING_STANDARDS_API.md: one batched query, no N+1",
+      "@Transactional(readOnly = true) on read methods",
+      "files <= 300 lines"
+    ],
+    "allowed_exceptions": [
+      "QuestionTypeService facade exceeds 5 public methods by existing design"
+    ]
+  },
+  "quality": {
+    "status": "skipped_by_user",
+    "decision": "user_confirmed_skip",
+    "report": "",
+    "receipt": "",
+    "remediation_cycles": 0
+  },
+  "testing": {
+    "status": "passed",
+    "report": "2026-10-30: ExamItemRuntimeResolverTest 3/3, ExamItemLoaderTest 20/20, SessionExamPreviewServiceTest 6/6, HostExamPreviewReadOnlyTest 1/1 (asserts JSON taskTypeInstruction), AttemptMapperTest 14/14, TaskTypeInstructionLookupTest 2/2. Module sweep itembank/assessment/attempt/session/practice/architecture: 898 run, 7 failures + 10 errors all pre-existing and unrelated (PackageDensityTest billing dto/response=17; SessionLifecycleServiceTest and ExamWorkflowServicesTest subscription rules from dev commit 3a95d6fc + uncommitted SessionSubscriptionRules edit)."
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "description": "Add QuestionTypeService.findInstructionsByTaskTypeKeys(Collection<String>) returning Map<String, String> (normalized key to instruction, blanks omitted) using one repository query.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/QuestionTypeService.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/QuestionTypeService.java"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/QuestionTypeService.java, D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/internal/service/tasktype/TaskTypeQueryService.java, D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/internal/repository/QuestionTypeRepository.java",
+      "debug_logs": [],
+      "success_criteria": [
+        "A test verifies a single repository call for N keys"
+      ]
+    },
+    {
+      "step_id": 2,
+      "description": "Add String taskTypeInstruction to ResolvedExamItemResponse.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/dto/response/ResolvedExamItemResponse.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/dto/response/ResolvedExamItemResponse.java"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/dto/response/ResolvedExamItemResponse.java",
+      "debug_logs": [],
+      "success_criteria": [
+        "mvn -q compile exits 0"
+      ]
+    },
+    {
+      "step_id": 3,
+      "description": "ExamItemRuntimeResolver: inject QuestionTypeService, fetch instructions once per resolve() for all item keys, set taskTypeInstruction per item.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/internal/service/ExamItemRuntimeResolver.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/itembank/QuestionTypeService.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/dto/response/ResolvedExamItemResponse.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/internal/service/ExamItemRuntimeResolver.java"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/assessment/internal/service/ExamItemRuntimeResolver.java",
+      "debug_logs": [],
+      "success_criteria": [
+        "Resolved items carry their task type instruction"
+      ]
+    },
+    {
+      "step_id": 4,
+      "description": "Attempt path: ExamItemView field, ExamItemLoader.toView and its test constructor, TaskView field, AttemptMapper TaskView construction.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/service/cache/ExamItemView.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/service/ExamItemLoader.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/dto/response/TaskView.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/mapper/AttemptMapper.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/service/cache/ExamItemView.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/service/ExamItemLoader.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/dto/response/TaskView.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/mapper/AttemptMapper.java"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/service/cache/ExamItemView.java, D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/service/ExamItemLoader.java, D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/dto/response/TaskView.java, D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/attempt/internal/mapper/AttemptMapper.java",
+      "debug_logs": [],
+      "success_criteria": [
+        "Attempt task JSON contains taskTypeInstruction"
+      ]
+    },
+    {
+      "step_id": 5,
+      "description": "Host preview path: ExamPreviewResponse.Item field and SessionExamPreviewService.toPreviewItem.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/dto/response/ExamPreviewResponse.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/draft/SessionExamPreviewService.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/dto/response/ExamPreviewResponse.java",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/draft/SessionExamPreviewService.java"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/dto/response/ExamPreviewResponse.java, D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/draft/SessionExamPreviewService.java",
+      "debug_logs": [],
+      "success_criteria": [
+        "Host preview item JSON contains taskTypeInstruction"
+      ]
+    },
+    {
+      "step_id": 6,
+      "description": "Tests: resolver sets instruction and leaves null when missing; loader and preview map it; batch lookup called once.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/assessment/internal/service/ExamItemRuntimeResolverTest.java",
+        "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/attempt/internal/service/ExamItemLoaderTest.java",
+        "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/session/internal/service/draft/SessionExamPreviewServiceTest.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/assessment/internal/service/ExamItemRuntimeResolverTest.java",
+        "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/attempt/internal/service/ExamItemLoaderTest.java",
+        "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/session/internal/service/draft/SessionExamPreviewServiceTest.java"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/assessment/internal/service/ExamItemRuntimeResolverTest.java, D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/attempt/internal/service/ExamItemLoaderTest.java, D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/session/internal/service/draft/SessionExamPreviewServiceTest.java, D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/session/internal/service/draft/HostExamPreviewReadOnlyTest.java, D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/itembank/internal/service/tasktype/TaskTypeInstructionLookupTest.java, D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/attempt/internal/mapper/AttemptMapperTest.java, D:/GitHub/pte-org/pte-api/app/src/test/java/com/pte/attempt/internal/service/FakeExam.java",
+      "debug_logs": [],
+      "success_criteria": [
+        "mvn -q -Dtest=ExamItemRuntimeResolverTest,ExamItemLoaderTest,SessionExamPreviewServiceTest test exits 0"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "plan_id": "quang-host-exam-app-preview",
+  "phase_id": 1,
+  "name": "preflight-and-discard",
+  "goal": "Chuẩn bị và bỏ đúng flag bảo mật tạm trước khi triển khai.",
+  "status": "completed",
+  "current_step": 7,
+  "design_constraints": [
+    "The five temporary app security-flag files are the only discard candidates; preserve every unrelated hunk and all other repositories.",
+    "Host preview authorization remains server-enforced and the existing ApiResponse, tenant, and Flutter lifecycle conventions remain intact.",
+    "No source feature implementation starts until the recoverable staged+unstaged patch is validated and the exact file manifest is recorded."
+  ],
+  "quality_profile": {
+    "repository_conventions": [
+      "Flutter uses feature-first folders, AppConfig for compile-time values, constructor injection/GetIt, and explicit resource disposal.",
+      "Spring session endpoints use CurrentUserContext, HOST_ADMIN preauthorization, service-owned transactions, and ApiResponse.",
+      "Web notification UI reuses common components and shared toast/API-client conventions; nested worktrees remain dirty and independently owned."
+    ],
+    "boundaries": [
+      "Phase 1 may modify only the declared pte-doc reports/manifest state and the reviewed pte-app flag hunks after backup.",
+      "No database, Docker, deployment, commit, push, or unrelated worktree cleanup is allowed."
+    ],
+    "applicable_rules": [
+      "Read complete APP/API/WEB coding standards before code changes.",
+      "Preserve API envelopes, role/tenant isolation, and existing student security behavior.",
+      "Use recoverable patch evidence before any destructive or discard-like operation.",
+      "Run the relevant Flutter baseline/unit checks and report exact exit boundaries."
+    ],
+    "allowed_exceptions": [
+      "The existing temporary security flag is intentionally removed because Quang explicitly authorized this exact pre-coding discard after backup.",
+      "Quality gate is skipped by Quang; the phase remains explicitly marked skipped_by_user rather than approved."
+    ]
+  },
+  "quality": {
+    "status": "skipped_by_user",
+    "report": "",
+    "receipt": "",
+    "remediation_cycles": 0,
+    "decision": "user_confirmed_skip"
+  },
+  "testing": {
+    "status": "passed",
+    "report": "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/tests/phase-01-preflight-and-discard-test-report.json",
+    "decision": "user_confirmed_run"
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "description": "Đọc đầy đủ standards và nearest session; ghi baseline HEAD/index/worktree từng repo. Chốt bảng quyết định role từ handoff §1, không code.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/AGENTS.md",
+        "D:/GitHub/pte-org/pte-app/lib/features/auth/domain/exam_access_policy.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/reports/261029-quang-host-exam-app-preview-preflight.md"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-doc/plans/reports/261029-quang-host-exam-app-preview-preflight.md",
+      "debug_logs": [],
+      "success_criteria": [
+        "Báo cáo ghi đủ HEAD/status/index cho từng repo và standards đã đọc, role table khớp handoff."
+      ]
+    },
+    {
+      "step_id": 2,
+      "description": "Sao lưu staged+unstaged binary diff của đúng 5 file flag tạm; kiểm patch và ghi recovery. Dừng restore toàn file nếu phát hiện hunks mới. Handoff §2, CL01–02.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-app/README.md",
+        "D:/GitHub/pte-org/pte-app/lib/core/config/app_config.dart",
+        "D:/GitHub/pte-org/pte-app/lib/core/di/security_module.dart",
+        "D:/GitHub/pte-org/pte-app/lib/core/security/lockdown_service.dart",
+        "D:/GitHub/pte-org/pte-app/test/unit/core/security/lockdown_service_test.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/reports/assets/261029-quang-host-exam-app-preview-preflight/pte-app-security-flag-before-discard.patch"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-doc/plans/reports/assets/261029-quang-host-exam-app-preview-preflight/pte-app-security-flag-before-discard.patch",
+      "debug_logs": [],
+      "success_criteria": [
+        "Backup file tồn tại, git apply --stat đọc được; manifest ghi đầy đủ staged/unstaged paths để phục hồi."
+      ]
+    },
+    {
+      "step_id": 3,
+      "description": "Discard chỉ flag hunks đã xác nhận sau backup; xác nhận không có global disable default và không mất thay đổi khác. Ghi rõ executable cũ chưa đổi.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-app/README.md",
+        "D:/GitHub/pte-org/pte-app/lib/core/config/app_config.dart",
+        "D:/GitHub/pte-org/pte-app/lib/core/di/security_module.dart",
+        "D:/GitHub/pte-org/pte-app/lib/core/security/lockdown_service.dart",
+        "D:/GitHub/pte-org/pte-app/test/unit/core/security/lockdown_service_test.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-app/README.md",
+        "D:/GitHub/pte-org/pte-app/lib/core/config/app_config.dart",
+        "D:/GitHub/pte-org/pte-app/lib/core/di/security_module.dart",
+        "D:/GitHub/pte-org/pte-app/lib/core/security/lockdown_service.dart",
+        "D:/GitHub/pte-org/pte-app/test/unit/core/security/lockdown_service_test.dart"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-app/README.md; D:/GitHub/pte-org/pte-app/lib/core/config/app_config.dart; D:/GitHub/pte-org/pte-app/lib/core/di/security_module.dart; D:/GitHub/pte-org/pte-app/lib/core/security/lockdown_service.dart; D:/GitHub/pte-org/pte-app/test/unit/core/security/lockdown_service_test.dart",
+      "debug_logs": [],
+      "success_criteria": [
+        "git diff HEAD của flag hunks đã loại bỏ; non-target worktree/index trước và sau không đổi."
+      ]
+    },
+    {
+      "step_id": 4,
+      "description": "Chạy mocked baseline security/auth tests, lưu exit code và lỗi có trước; không launch student native lockdown.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-app/test/unit/core/security/lockdown_service_test.dart",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/draft/SessionExamPreviewService.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/reports/261029-quang-host-exam-app-preview-preflight.md"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-doc/plans/reports/261029-quang-host-exam-app-preview-preflight.md",
+      "debug_logs": [],
+      "success_criteria": [
+        "Command logs có exit code security/auth baseline; không có native fullscreen activation trong test baseline."
+      ]
+    },
+    {
+      "step_id": 5,
+      "description": "Chốt DTO nullability, timing parity với ExamItemLoader, role/tenant read matrix và actor-recipient. Không giả định snapshot chứa timing hay ExamSession chứa createdBy. Handoff §3–6.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/pte-app/test/unit/core/security/lockdown_service_test.dart",
+        "D:/GitHub/pte-org/pte-api/app/src/main/java/com/pte/session/internal/service/draft/SessionExamPreviewService.java"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/reports/261029-quang-host-exam-app-preview-contract.md"
+      ],
+      "ai_generated_code": "D:/GitHub/pte-org/pte-doc/plans/reports/261029-quang-host-exam-app-preview-contract.md",
+      "debug_logs": [],
+      "success_criteria": [
+        "Contract artifact ghi đầy đủ field/nullability/timing source/error/recipient; đối chiếu existing endpoint signatures."
+      ]
+    },
+    {
+      "step_id": 6,
+      "description": "Lập exact file inventory trước source writes: shared resolver, app domain/data/state/DI/renderers/tests, web client types, migration NEXT version. Cập nhật phase output paths theo manifest và validate.",
+      "status": "completed",
+      "input_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-agent-handoff.md",
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-acceptance-matrix.md",
+        "D:/GitHub/pte-org/AGENTS.md",
+        "D:/GitHub/pte-org/pte-app/lib/features/auth/domain/exam_access_policy.dart"
+      ],
+      "output_files": [
+        "D:/GitHub/pte-org/pte-doc/plans/quang-host-exam-app-preview/quang-execution-file-manifest.md"
+      ],
+      "ai_generated_code": "",
+      "debug_logs": [],
+      "success_criteria": [
+        "Manifest liệt kê file cụ thể cho source/test/migration; phase output lists được cập nhật và bundle validator exit 0."
+      ]
+    }
+  ]
+}
