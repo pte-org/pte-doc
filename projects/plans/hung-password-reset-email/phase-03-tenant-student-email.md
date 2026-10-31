@@ -1,7 +1,7 @@
 # Phase 03 — tenant-web: Send password via email cho học viên
 
 **Stories:** P1 #1 (UI) · **FR:** 03, 04
-**Status:** [ ]
+**Status:** [x]
 **Depends on:** contract của Phase 01
 
 ## Overview
@@ -17,7 +17,7 @@ Thêm mục **Send password via email** vào `ActionMenu` của học viên tron
 
 ## Steps
 
-1. Thêm mục menu. `disabled` khi học viên không có email, kèm tooltip "Học viên chưa có email". Ẩn mục khi học viên SUSPENDED, giống cách "Generate password" đang xử lý.
+1. Thêm mục menu. `disabled` khi học viên không có email, kèm tooltip "Học viên chưa có email". Không ẩn khi học viên SUSPENDED: "Generate password" cũng hiện cho mọi trạng thái, nên mục mới làm giống vậy (thay đổi so với bản đầu của plan).
 2. Bấm → `ConfirmDialog` (component `@pte/ui` mà Suspend đang dùng). Nội dung nêu rõ mật khẩu hiện tại sẽ mất hiệu lực và học viên phải đổi ở lần đăng nhập đầu.
 3. Thành công → toast "Đã gửi mật khẩu tạm tới {email}". **Không** hiện mật khẩu, khác với `GeneratedCredentialsModal`.
 4. Lỗi 409 `STUDENT_ATTEMPT_IN_PROGRESS` → toast thông báo thân thiện. Áp dụng cả cho "Generate password" đang có.
@@ -33,5 +33,5 @@ Thêm mục **Send password via email** vào `ActionMenu` của học viên tron
 
 ## Quality and Testing State
 
-- Quality: not evaluated
-- Testing: not started
+- Quality: approved (gate; no receipt, Python unavailable). Browser click-through still to do
+- Testing: passed (tdd-verify; api-client 626, tenant-web 564; no DOM render tests)
