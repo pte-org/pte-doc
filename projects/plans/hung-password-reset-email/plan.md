@@ -3,7 +3,7 @@
 **Spec:** [spec.md](spec.md) · **Brainstorm:** [261031-password-reset-email-brainstorm](../reports/261031-password-reset-email-brainstorm.md)
 **Mode:** Hard (bảo mật, 4 repo, thêm bảng mới)
 **Branch:** `hung/feat/password-reset-email` (cùng tên ở pte-api, pte-web, pte-app, pte-doc)
-**Status:** Ready
+**Status:** Done (all 5 phases; see each phase for what is still unverified)
 
 ## Phases
 
@@ -12,8 +12,8 @@
 | 01 | [Credential policy: chặn khi đang thi, thu hồi phiên, cho gửi mail học viên](phase-01-credential-policy.md) | pte-api | P1 #1 (BE), P1 #4 | [x] |
 | 02 | [Forgot password: token, endpoint, mail, rate limit](phase-02-forgot-password-api.md) | pte-api | P1 #2 (BE) | [x] |
 | 03 | [tenant-web: mục Send password via email cho học viên](phase-03-tenant-student-email.md) | pte-web | P1 #1 (UI) | [x] |
-| 04 | [tenant-web + vendor-web: trang forgot/reset, nhận token mới khi đổi mật khẩu](phase-04-web-forgot-password.md) | pte-web, pte-practice | P1 #2 (UI), P1 #4 (client) | [ ] |
-| 05 | [pte-app: buộc đổi mật khẩu + hướng dẫn quên mật khẩu](phase-05-app-must-change-password.md) | pte-app | P1 #3, P2 #5 | [ ] |
+| 04 | [tenant-web + vendor-web: trang forgot/reset, nhận token mới khi đổi mật khẩu](phase-04-web-forgot-password.md) | pte-web, pte-practice | P1 #2 (UI), P1 #4 (client) | [x] |
+| 05 | [pte-app: buộc đổi mật khẩu + hướng dẫn quên mật khẩu](phase-05-app-must-change-password.md) | pte-app | P1 #3, P2 #5 | [x] |
 
 Thứ tự: 01 → 02 → (03, 04, 05 làm song song được). Phase 03–05 chỉ cần contract API của 01–02.
 

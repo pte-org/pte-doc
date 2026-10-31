@@ -1,7 +1,7 @@
 # Phase 04 — Trang Forgot/Reset password + nhận token mới khi đổi mật khẩu
 
 **Stories:** P1 #2 (UI), P1 #4 (client) · **FR:** 12, 13
-**Status:** [ ]
+**Status:** [x]
 **Depends on:** contract của Phase 01, 02
 **Repos:** pte-web (tenant-web, vendor-web, `@pte/api-client`), pte-practice
 
@@ -39,5 +39,5 @@ Làm hai trang công khai cho cả hai portal web. Đồng thời cập nhật m
 
 ## Quality and Testing State
 
-- Quality: not evaluated
-- Testing: not started
+- Quality: approved (gate; no receipt, Python unavailable). Browser click-through and Vietnamese copy still to do
+- Testing: passed (tdd-verify; api-client 633, ui 308, tenant-web 566, vendor-web 81; next build ok). 2 unrelated pte-practice chat-contract tests fail (branch mismatch with pte-api)

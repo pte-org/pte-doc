@@ -1,7 +1,7 @@
 # Phase 05 — pte-app: buộc đổi mật khẩu + hướng dẫn quên mật khẩu
 
 **Stories:** P1 #3, P2 #5 · **FR:** 15, 16
-**Status:** [ ]
+**Status:** [x]
 **Depends on:** contract của Phase 01 (`change-password` nhận `refreshToken` tuỳ chọn)
 
 ## Overview
@@ -21,7 +21,7 @@ pte-app hiện bỏ qua `mustChangePassword`. Đăng nhập với cờ này ph�
 ## Steps
 
 1. Login trả `mustChangePassword = true` → bloc phát `AuthPasswordChangeRequired`, giữ token tạm để gọi `change-password`, **không** cho vào luồng thi.
-2. `ChangePasswordPage`: mật khẩu hiện tại (điền sẵn mật khẩu vừa nhập ở màn login), mật khẩu mới, nhập lại. Validate ≥ 8 ký tự và khớp nhau.
+2. `ChangePasswordPage`: mật khẩu hiện tại (học viên gõ lại mật khẩu tạm; không điền sẵn để app không giữ mật khẩu trong bộ nhớ sau khi đăng nhập), mật khẩu mới, nhập lại. Validate ≥ 8 ký tự và khớp nhau.
 3. Thành công → giữ session → chuyển sang luồng sau đăng nhập bình thường. Lỗi 409 (đang thi) gần như không xảy ra ở đây, nhưng vẫn hiện thông báo chung.
 4. Login page: thêm dòng hướng dẫn liên hệ trung tâm, không có form.
 
@@ -37,5 +37,5 @@ pte-app hiện bỏ qua `mustChangePassword`. Đăng nhập với cờ này ph�
 
 ## Quality and Testing State
 
-- Quality: not evaluated
-- Testing: not started
+- Quality: approved (gate; no receipt, Python unavailable). Run once against a dev API before release
+- Testing: passed (tdd-verify; 18 new tests + existing auth tests; full suite 737 pass, 2 pre-existing layout failures)
