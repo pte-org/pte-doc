@@ -11,7 +11,6 @@ complete:
 
 ```text
 TASK_TYPES_CUSTOM_CREATION_ENABLED=false
-TASK_TYPES_CUSTOM_TEMPLATE_ACTIVATION_ENABLED=false
 ATTEMPT_STRICT_PRE_FLIGHT_ENABLED=false
 ATTEMPT_ALLOW_LEGACY_MISSING_MANIFEST=true
 ```
@@ -105,9 +104,9 @@ snapshot-contract event before enabling strict preflight.
 ## Enabling strict behavior
 
 Only an operator with explicit release approval may change the flags. Enable
-custom creation first, then custom activation, then strict preflight after the
+custom creation first, then strict preflight after the
 production metrics/audit review and mixed-version matrix check. If any
 historical compatibility check fails, leave strict enforcement off and repair
-through a new contract/release. Rollback is flag-only: disable custom creation,
-custom activation, and strict preflight; retain migrations, audit history and
+through a new contract/release. Rollback is flag-only: disable custom creation
+and strict preflight; retain migrations, audit history and
 published snapshots.
