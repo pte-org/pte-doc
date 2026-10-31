@@ -1,7 +1,7 @@
 # Phase 02 — Forgot password API (pte-api)
 
 **Stories:** P1 #2 (backend) · **FR:** 07–11 · **NFR:** rate limit, không lộ email, i18n mail
-**Status:** [ ]
+**Status:** [x]
 **Depends on:** Phase 01 (helper thu hồi phiên)
 
 ## Overview
@@ -55,5 +55,5 @@ Luồng tự đặt lại mật khẩu cho mọi role trừ STUDENT: yêu cầu 
 
 ## Quality and Testing State
 
-- Quality: not evaluated
-- Testing: not started
+- Quality: approved (gate found QUAL-101/102, fixed and verified; no receipt, Python unavailable)
+- Testing: passed (tdd-verify, 97 tests; full suite only the 3 pre-existing failures). Not verified: V16/V17 on real PostgreSQL, <50 ms timing

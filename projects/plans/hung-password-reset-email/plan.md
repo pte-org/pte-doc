@@ -10,7 +10,7 @@
 | # | Phase | Repo | Stories | Status |
 |---|---|---|---|---|
 | 01 | [Credential policy: chặn khi đang thi, thu hồi phiên, cho gửi mail học viên](phase-01-credential-policy.md) | pte-api | P1 #1 (BE), P1 #4 | [x] |
-| 02 | [Forgot password: token, endpoint, mail, rate limit](phase-02-forgot-password-api.md) | pte-api | P1 #2 (BE) | [ ] |
+| 02 | [Forgot password: token, endpoint, mail, rate limit](phase-02-forgot-password-api.md) | pte-api | P1 #2 (BE) | [x] |
 | 03 | [tenant-web: mục Send password via email cho học viên](phase-03-tenant-student-email.md) | pte-web | P1 #1 (UI) | [ ] |
 | 04 | [tenant-web + vendor-web: trang forgot/reset, nhận token mới khi đổi mật khẩu](phase-04-web-forgot-password.md) | pte-web, pte-practice | P1 #2 (UI), P1 #4 (client) | [ ] |
 | 05 | [pte-app: buộc đổi mật khẩu + hướng dẫn quên mật khẩu](phase-05-app-must-change-password.md) | pte-app | P1 #3, P2 #5 | [ ] |
@@ -35,7 +35,7 @@ Thứ tự: 01 → 02 → (03, 04, 05 làm song song được). Phase 03–05 ch
 - Host/Platform Admin tự đặt mật khẩu cho người khác thì bật `mustChangePassword` (Hung xác nhận).
 - Link reset lấy domain từ `app.web.tenant-url` / `app.web.admin-url`.
 - Email không unique trong `users` (chỉ có index). "Quên mật khẩu" gửi **một** mail, mỗi tài khoản đủ điều kiện có một link riêng kèm username (Hung xác nhận).
-- **Do Claude quyết định:** tài khoản có role nền tảng (Platform Admin/Manager, Academic Manager/Staff) nhận link vendor-web; các tài khoản khác nhận link tenant-web.
+- Tài khoản có role nền tảng (Platform Admin/Manager, Academic Manager/Staff) nhận link vendor-web; các tài khoản khác nhận link tenant-web.
 
 ## Risks
 
