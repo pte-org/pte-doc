@@ -34,4 +34,4 @@ Thêm mục **Send password via email** vào `ActionMenu` của học viên tron
 ## Quality and Testing State
 
 - Quality: approved (gate; no receipt, Python unavailable). Browser click-through still to do
-- Testing: passed (tdd-verify; api-client 626, tenant-web 564; no DOM render tests)
+- Testing: passed (tdd-verify; api-client 626, tenant-web 566 incl. detail-screen action; no DOM render tests)
