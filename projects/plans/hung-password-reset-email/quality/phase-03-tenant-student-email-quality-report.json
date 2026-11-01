@@ -1,0 +1,48 @@
+{
+  "mode": "gate",
+  "target": "phase-03-tenant-student-email",
+  "verdict": "APPROVED",
+  "reviewed_at": "2026-10-31T00:00:00Z",
+  "reviewed_files": [
+    "../../../../pte-web/packages/ui/src/components/Dropdown.tsx",
+    "../../../../pte-web/packages/ui/src/i18n/LocaleProvider.tsx",
+    "../../../../pte-web/packages/api-client/src/client/errorMessage.ts",
+    "../../../../pte-web/apps/tenant-web/features/studentSearch/utils/sendPasswordEmail.ts",
+    "../../../../pte-web/apps/tenant-web/features/studentSearch/constants/index.ts",
+    "../../../../pte-web/apps/tenant-web/features/studentSearch/components/SendPasswordEmailDialog.tsx",
+    "../../../../pte-web/apps/tenant-web/features/studentSearch/components/StudentSearchView.tsx"
+  ],
+  "summary": { "blocker": 0, "high": 0, "medium": 0, "low": 0, "noted": 2 },
+  "findings": [
+    {
+      "id": "QUAL-201",
+      "severity": "NOTED",
+      "rule": "FE_FILE_SIZE_LIMIT",
+      "status": "ACCEPTED_DEBT",
+      "introduced_by_current_change": false,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-web/apps/tenant-web/features/studentSearch/components/StudentSearchView.tsx",
+      "evidence": "The file was already 543 lines against the 300-line rule in pte-web/CLAUDE.md; this change adds 23 (menu item, state, strings). The new behaviour itself lives in SendPasswordEmailDialog.tsx and utils/sendPasswordEmail.ts so the view grows as little as possible.",
+      "why_it_matters": "The view keeps growing past the project's size rule.",
+      "required_action": "Out of scope here; split the view (text catalogue hook, filters, row actions) in its own change.",
+      "owner": "none"
+    },
+    {
+      "id": "QUAL-202",
+      "severity": "NOTED",
+      "rule": "FE_TEST_COVERAGE_GAP",
+      "status": "ACCEPTED_DEBT",
+      "introduced_by_current_change": true,
+      "applicable": true,
+      "confidence": "high",
+      "location": "pte-web/apps/tenant-web/features/studentSearch/components/SendPasswordEmailDialog.tsx",
+      "evidence": "tenant-web runs vitest in a node environment with no DOM or Testing Library, so the dialog and the menu item are not rendered by any test; the availability rule and the error text are covered as pure logic. Wiring is checked by tsc and eslint only.",
+      "why_it_matters": "A wiring mistake would show up only in the browser.",
+      "required_action": "Click through the student list once in a browser: the item is disabled with a tooltip for a student without email, and sends and toasts for one with email.",
+      "owner": "human"
+    }
+  ],
+  "receipt_note": "Not issued: scripts/receipt.py needs Python, which is not installed.",
+  "report_path": "plans/hung-password-reset-email/quality/phase-03-tenant-student-email-quality-report.json"
+}
