@@ -1,5 +1,5 @@
 # Plan: Rubric chấm điểm minh bạch và cấu hình được
-Status: 🟡 In Progress
+Status: ✅ Done (2026-11-05; còn tồn đọng: spike AI chưa chạy, bảng Azure chưa hiệu chỉnh, chưa kiểm trình duyệt)
 Date: 2026-11-04
 Mode: Hard
 
@@ -62,7 +62,7 @@ Nguyên tắc cốt lõi:
 | 8 | [Bộ mô phỏng (API + màn C vendor-web)](phase-08-simulator.md) | Nhập điểm tiêu chí giả định, xem vết | S4; FR-08 | 1, 2, 7 | [x] tests: 4543/0 failures/0 errors/73 skipped; vendor 287; api-client 678; ui 348; tsc vendor limited by existing generated types; quality: skipped_by_user; decision: user_confirmed_skip |
 | 9 | [Chỉnh rubric D1 + quy trình duyệt + audit](phase-09-rubric-editing-workflow.md) | Nháp/duyệt = kích hoạt/từ chối, diff xác nhận trước khi kích hoạt, audit | S5; FR-09 | 2, 7 | [x] tests: 4602/0 failures/0 errors/73 skipped; Postgres IT 4 passed; vendor 303; api-client 685; existing generated tsc error; quality: skipped_by_user; decision: user_confirmed_skip |
 | 10 | [Giám khảo chấm theo từng tiêu chí (P2, breaking, tenant-web)](phase-10-examiner-trait-scoring.md) | L8: điểm tiêu chí, fallback Azure, điểm câu tính ở server | S6 | 3, 5, 6 | [x] tests: 4641/0 failures/0 errors/73 skipped (Postgres IT chạy, V33 áp dụng 15 lần); tenant-web 649, api-client 685; tsc tenant-web chỉ còn 2 lỗi `.next/types` cũ; chưa chạy trình duyệt; ExaminerTraitSubmitIT không viết (thay bằng unit); quality: skipped_by_user; decision: user_confirmed_skip |
-| 11 | [Tài liệu, báo cáo xác minh, snapshot AGENTS](phase-11-docs-verification.md) | Đóng kế hoạch, cập nhật báo cáo đối chiếu | tất cả | 1-10 | [ ] |
+| 11 | [Tài liệu, báo cáo xác minh, snapshot AGENTS](phase-11-docs-verification.md) | Đóng kế hoạch, cập nhật báo cáo đối chiếu | tất cả | 1-10 | [x] tests: đọc lại XML toàn suite 4641/0/0/73; FE vitest vendor 303, tenant 649, practice 636; tsc chỉ lỗi `.next/types` cũ; spike AI chưa chạy; báo cáo `261105-scoring-rubric-transparency-verification.md`; quality: skipped_by_user |
 
 Story: S1 = trang luật chấm (P1); S2 = điểm tính từ rubric (P1); S3 = giải thích một lượt thi (P1); S4 = mô phỏng (P2);
 S5 = chỉnh tham số, phiên bản, gắn mẫu đề (P2); S6 = giám khảo chấm theo tiêu chí (P2).
@@ -114,7 +114,7 @@ Không có researcher riêng; kết luận dựa trên hai báo cáo đầu vào
 ## Câu hỏi mở
 
 1. **Provider `openai-compatible`**: ĐÃ CHỐT phương án B (Phase 4): không hỗ trợ task type có rubric, fail closed `AI_RUBRIC_SCORER_UNAVAILABLE`. Báo cáo: `pte-doc/plans/reports/261105-scoring-rubric-llm-stability-spike-report.md`.
-2. **Spelling của Write Essay** do LLM đếm lỗi (giữ nguyên); nếu Phase 4 thấy dao động lớn thì ghi nhận, không đổi nguồn trong đợt này.
+2. **Spelling của Write Essay**: ĐÃ CHỐT giữ LLM đếm lỗi; chưa có số liệu dao động vì spike chưa chạy (Phase 11).
 
 Các câu hỏi đã chốt (ghi để truy vết): ai xem giải thích (U1), dữ liệu hiệu chỉnh (U2), trạng thái phiên bản = approve là activate (U4),
 Read Aloud Content động theo số từ N (nêu rõ ở Phase 1 và 5), trọng số số nguyên 0-10 (MEDIUM-3), schema Gemini chốt bằng smoke ở đầu Phase 3 (MEDIUM-5).
@@ -164,3 +164,9 @@ Bản sửa đổi 2026-11-04 (sau đánh giá phản biện và quyết định
 | LOW-4 | Bỏ hành động `PATCH /exam-definitions/{id}/rubric` (ghim lại mẫu DRAFT) | Phase 9 |
 | (số migration) | Kiểm tra lại: V31 là cao nhất; V32 cho rubric; Phase 10 lấy số tiếp theo còn trống lúc làm | plan.md, Phase 2, 10 |
 | (câu hỏi mở) | Chỉ còn 2 câu hỏi mở: provider `openai-compatible` và Spelling của Write Essay | plan.md |
+
+## Kết luận rủi ro (Phase 11, 2026-11-05)
+
+- Đã đóng: cổng/Form/tỉ trọng (L1-L7, L10), ghim phiên bản và bất biến (Postgres IT 12/12), cách ly tenant/giám khảo, tính lại không gọi AI, vòng phụ thuộc module, ratchet.
+- Còn mở: độ ổn định LLM chưa đo (không key); bảng Azure -> 0-5 chưa hiệu chỉnh; dữ liệu tổng hợp không chứng minh độ chính xác; chưa kiểm trình duyệt/`next build`;
+  quality gate chỉ chạy Phase 1-2; L8 làm một phần (không có người phân xử). Chi tiết: `pte-doc/plans/reports/261105-scoring-rubric-transparency-verification.md`.

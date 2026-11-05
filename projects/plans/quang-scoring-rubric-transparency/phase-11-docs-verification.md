@@ -64,8 +64,8 @@ pnpm --filter tenant-web typecheck; pnpm --filter tenant-web lint; pnpm --filter
 
 ## Quality and Testing State
 
-- Quality: not evaluated
-- Testing: not started
+- Quality: skipped_by_user
+- Testing: passed (đọc lại XML toàn suite + FE vitest/lint/tsc; spike AI chưa chạy)
 
 ## Risks
 
