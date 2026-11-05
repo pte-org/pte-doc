@@ -1,6 +1,6 @@
 # Phase 8 — checklist và bằng chứng
 
-Quality: skipped_by_user. Không browser/install/commit/push. Toàn suite: **4543/0 failures/0 errors/73 skipped**, 514 XML; [số liệu](assets/261105-scoring-rubric-transparency-verification/phase08-surefire-summary.json), [full log](assets/261105-scoring-rubric-transparency-verification/phase08-full.log), [focused log](assets/261105-scoring-rubric-transparency-verification/phase08-focused.log).
+Quality: skipped_by_user. Không browser/install/commit/push. Toàn suite: **4543/0 failures/0 errors/73 skipped**, 514 XML; [số liệu](assets/261105-scoring-rubric-transparency-verification/phase08-surefire-summary.json).
 
 - Backend clean test-compile qua; 78 test nhắm đích qua, gồm 12 test PostgreSQL V32 và 2 test chat migration.
 - Vendor 287, api-client 678, UI 348 test qua. Typecheck api-client/UI qua. Vendor typecheck vẫn lỗi sinh cũ: `.next/types/validator.ts(62,39): error TS2307: Cannot find module ../../app/(auth)/login/page.js`. Lint vendor: 0 lỗi, 2 cảnh báo cũ.
@@ -8,7 +8,7 @@ Quality: skipped_by_user. Không browser/install/commit/push. Toàn suite: **454
 - p95 fixture service: 10.5182 ms; chưa đo HTTP/DB thật. UI chưa chạy trình duyệt. AI thật/độ ổn định 90%/Azure hiệu chỉnh chưa kiểm chứng.
 - Package/lockfile: MD5 9 tệp không đổi.
 - Lệch kỹ thuật: dùng RubricResolver.effectiveFor + repository chỉ đọc thay cho lifecycle RubricVersionService; API này không ghi DB. Đóng góp được tính ngay trong RubricScorer, FE chỉ hiển thị.
-- Sửa lỗi V32 có sẵn, được lộ ra khi Testcontainers chạy được: chỉ thêm newline sau dollar-quote; dữ liệu seed giữ nguyên. Lần full đầu đã dừng vì lỗi này, không coi là một full run hoàn tất. Lỗi nguyên văn: `Unable to parse statement in db/migration/V32__scoring_rubric_versions.sql at line 126 col 1. No value provided for placeholder: ${`. [Log gốc](assets/261105-scoring-rubric-transparency-verification/phase08-initial-full-failure.log).
+- Sửa lỗi V32 có sẵn, được lộ ra khi Testcontainers chạy được: chỉ thêm newline sau dollar-quote; dữ liệu seed giữ nguyên. Lần full đầu đã dừng vì lỗi này, không coi là một full run hoàn tất. Lỗi nguyên văn: `Unable to parse statement in db/migration/V32__scoring_rubric_versions.sql at line 126 col 1. No value provided for placeholder: ${`..
 
 ## 1. Implementation steps
 

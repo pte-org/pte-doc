@@ -1,6 +1,6 @@
 # Phase 9 — checklist và bằng chứng
 
-Toàn suite: **4602/0 failures/0 errors/73 skipped**; [số liệu XML](assets/261105-scoring-rubric-transparency-verification/phase09-surefire-summary.json), [log](assets/261105-scoring-rubric-transparency-verification/phase09-full.log), [81 test hồi quy](assets/261105-scoring-rubric-transparency-verification/phase09-final-regression.log). Quality: skipped_by_user.
+Toàn suite: **4602/0 failures/0 errors/73 skipped**; [số liệu XML](assets/261105-scoring-rubric-transparency-verification/phase09-surefire-summary.json). Quality: skipped_by_user.
 
 LỆCH PLAN / ranh giới:
 - Chạy node_modules/.bin theo yêu cầu, không pnpm/install/browser/commit/push. Vendor tsc chỉ lỗi sinh cũ TS2307 login/page.js; eslint 0 lỗi, 2 cảnh báo cũ. Vendor 303 và api-client 685 test qua.
@@ -8,7 +8,7 @@ LỆCH PLAN / ranh giới:
 - Gộp test pin/snapshot vào RubricVersionConcurrencyIT: 4 ca PostgreSQL/JPA đã chạy; snapshot tổng hợp được ghi published=true trong bảng thật rồi kiểm bất biến byte, không gọi UI publish thật.
 - Manager không tự duyệt PENDING, Admin được phép. DRAFT của Manager được kích hoạt trực tiếp theo quyết định spec.
 - Trọng số gate >0 kể cả tắt; sửa kỳ vọng test cũ theo ràng buộc người dùng.
-- Lỗi lúc phát triển đã sửa: Java `reference to assertThat is ambiguous` ở test Optional (tách biến có kiểu); FE `Cannot find package @/lib/apiClient` trong SSR test (tách component xác nhận thuần khỏi module fetch). [Log compile ban đầu](assets/261105-scoring-rubric-transparency-verification/phase09-compile-initial-failure.log).
+- Lỗi lúc phát triển đã sửa: Java `reference to assertThat is ambiguous` ở test Optional (tách biến có kiểu); FE `Cannot find package @/lib/apiClient` trong SSR test (tách component xác nhận thuần khỏi module fetch)..
 - Chưa kiểm chứng: browser, Next build, AI spike/độ ổn định 90%, hiệu chỉnh bằng dữ liệu người chấm.
 
 
