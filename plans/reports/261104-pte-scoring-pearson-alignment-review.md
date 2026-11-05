@@ -278,3 +278,35 @@ trong snapshot báo cáo nên không bị ảnh hưởng.
 - Chưa đọc: luồng chấm tham chiếu dùng OpenAI-compatible (`OpenAiCompatible*ScoringClient`, LLM tự trả `rawScore`), các stub,
   và mẫu đề do trung tâm tự tạo.
 - Không chạy test và không sửa mã. Các ví dụ số ở mục 5 được tính tay theo công thức trong mã, không phải kết quả chạy thật.
+
+---
+
+## 10. Cập nhật 2026-11-05: trạng thái xử lý
+
+Phần này được thêm sau khi hoàn tất kế hoạch `pte-doc/projects/plans/quang-scoring-rubric-transparency`. Nội dung mục 1-9 ở trên
+giữ nguyên như bản ngày 2026-11-04; xác minh chi tiết ở [261105-scoring-rubric-transparency-verification.md](261105-scoring-rubric-transparency-verification.md).
+
+| Lệch | Phase sửa | Trạng thái | Phần còn lại |
+|---|---|---|---|
+| L1 Cổng Content/Form | 3 (viết), 5 (nói), cổng nằm trong `RubricScorer` | Đã sửa: Content = 0 hoặc Form = 0 thì điểm câu = 0; cổng bật/tắt theo phiên bản rubric | - |
+| L2 Pronunciation cho DI, RL, RTS, SGD | 5 | Đã sửa: Content (Gemini) + Pronunciation + Oral Fluency (Azure -> 0-5) | Bảng Azure -> 0-5 v1 **chưa hiệu chỉnh với dữ liệu người chấm** |
+| L3 Form ba mức Essay/SST + quy tắc phụ | 1, 3 (`FormRule.bandFor`) | Đã sửa: band 0/1/2 theo số chữ, chữ hoa toàn bộ, thiếu dấu câu, chỉ gạch đầu dòng | - |
+| L4 LLM chấm Form | 3 | Đã sửa: Form do code tính, LLM không chấm Form | - |
+| L5 Tỉ trọng tiêu chí | 1, 3, 5 | Đã sửa: điểm câu = Σ(w·đạt/max)/Σw, mặc định w theo điểm tối đa Pearson; chỉnh được theo phiên bản (0-10) | Vẫn là [Suy luận] vì Pearson không công bố công thức cộng |
+| L6 Read Aloud Content riêng | 5 | Đã sửa: Content = N - lỗi (thay, bỏ, chèn), thang động theo số từ N | Phụ thuộc chất lượng nhận dạng Azure |
+| L7 Repeat Sentence | 5 | Đã sửa: Content 4 mức 0-3, Fluency chỉ tính một lần | - |
+| L8 Chấm đôi AI và người | 10 (một phần) | Giám khảo chấm theo từng tiêu chí; tiêu chí Pronunciation/Fluency có thể giữ điểm Azure; điểm câu tính ở server | Không có người phân xử thứ hai; không có nút "dùng điểm máy" cho từng tiêu chí |
+| L9 Gộp điểm giữa các câu | - | Không đổi | Pearson không quy định; giữ như mục 6 |
+| L10 Prompt theo mô tả mức (bổ sung từ spec) | 3, 5 | Đã sửa: prompt và schema dựng từ mô tả mức trong catalog, điểm nguyên trong thang, thử lại có giới hạn rồi fail closed | Độ ổn định LLM **chưa đo** (không có key) |
+
+### Đính chính mô tả hệ thống ở mục 3
+
+Các mô tả sau ở mục 3.1-3.2 không còn đúng với mã hiện tại:
+
+- Câu chấm bằng AI không còn dùng "trung bình cộng các tiêu chí 0-100". Điểm tiêu chí lưu theo thang Pearson trong
+  `answer_evaluations.criteria_scores_json` với dấu `"scale": "PEARSON_V1"` và `rubricVersion`; điểm câu do `RubricScorer` tính từ
+  tham số của phiên bản rubric đã ghim vào mẫu đề (`exam_definitions.rubric_version_public_id`).
+- Các khóa `subScores` cũ (`ORAL_FLUENCY`, `prosody`, ...) được thay bằng khóa tiêu chí Pearson; `pte-practice` đọc được cả dữ liệu cũ (0-100) và mới.
+- Giám khảo không còn nhập một điểm tổng 0-100 cho câu rubric; nhập điểm từng tiêu chí (Phase 10, migration V33).
+- Provider `openai-compatible`/`stub` không chấm task type có rubric (`AI_RUBRIC_SCORER_UNAVAILABLE`).
+- Tầng 3 (quy đổi tuyến tính 10-90) không đổi; snapshot báo cáo lên schema v2 có thêm điểm tiêu chí, phiên bản rubric và vết tính.
