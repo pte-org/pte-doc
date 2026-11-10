@@ -1,0 +1,32 @@
+{
+  "phase": "phase-01-rubric-catalog-pure-scorer",
+  "status": "RED_READY",
+  "prepared_at": "2026-11-04T14:55:48Z",
+  "test_files": [
+    "pte-api/app/src/test/java/com/pte/scoring/rubric/RubricTestSupport.java",
+    "pte-api/app/src/test/java/com/pte/scoring/rubric/RubricScorerGoldenTest.java",
+    "pte-api/app/src/test/java/com/pte/scoring/rubric/FormRuleBandTest.java",
+    "pte-api/app/src/test/java/com/pte/scoring/rubric/RubricCatalogCoverageTest.java",
+    "pte-api/app/src/test/java/com/pte/scoring/rubric/ObjectiveRuleConsistencyTest.java",
+    "pte-api/app/src/test/java/com/pte/architecture/RubricScoreSingleSourceTest.java",
+    "pte-api/app/src/test/resources/architecture/rubric-single-source.allowlist"
+  ],
+  "expected_red_reason": "Test sources do not compile: com.pte.scoring.rubric.* (public rubric API), com.pte.scoring.internal.rubric.catalog.RubricCatalogImpl and com.pte.scoring.internal.constant.RubricConstants do not exist yet. RubricScoreSingleSourceTest is independent of those symbols and passes once the module compiles.",
+  "artifact_path": "pte-doc/projects/plans/quang-scoring-rubric-transparency/tests/phase-01-rubric-catalog-pure-scorer-tdd-ready.json",
+  "compile_error_summary": {
+    "count": 36,
+    "note": "mvnw -pl app test-compile -q stops at symbol resolution; every error is a missing symbol. A scratch compile of the same tests against signature-only stubs of the contract (outside the repo) had 0 errors, so no other compile problem exists.",
+    "distinct_missing_symbols": [
+      "com.pte.scoring.rubric.EffectiveRubric",
+      "com.pte.scoring.rubric.FormRule",
+      "com.pte.scoring.rubric.RubricCatalog",
+      "com.pte.scoring.rubric.TaskRubric",
+      "com.pte.scoring.rubric.TextMetrics",
+      "com.pte.scoring.rubric.TraitScoreSet",
+      "com.pte.scoring.rubric.TraitSource",
+      "com.pte.scoring.internal.constant.RubricConstants",
+      "package com.pte.scoring.internal.rubric.catalog (RubricCatalogImpl)",
+      "(remaining contract types hidden behind these by javac: TraitScale, TraitDefinition, LevelDescriptor, FormBand, ObjectiveRule, RubricParameters, TraitContribution, ScoreTrace, RubricScorer, RubricScoreException, RubricTraits)"
+    ]
+  }
+}

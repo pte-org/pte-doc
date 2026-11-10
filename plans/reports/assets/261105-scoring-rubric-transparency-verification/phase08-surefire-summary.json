@@ -1,0 +1,93 @@
+{
+  "tests": 4543,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 73,
+  "suiteFiles": 514,
+  "skippedSuites": [
+    {
+      "suite": "com.pte.billing.internal.service.ArchiveLifecyclePostgresIntegrationTest",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 11
+    },
+    {
+      "suite": "com.pte.billing.internal.service.LicenseIssuePostgresIntegrationTest",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 10
+    },
+    {
+      "suite": "com.pte.billing.internal.service.TenantApplicationReviewPostgresIntegrationTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 3
+    },
+    {
+      "suite": "com.pte.chat.promptsuite.ChatPromptSuiteLiveTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    {
+      "suite": "com.pte.notification.internal.repository.InboxAnnouncementStorePostgresIntegrationTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    {
+      "suite": "com.pte.notification.internal.repository.InboxDeliveryStorePostgresIntegrationTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 12
+    },
+    {
+      "suite": "com.pte.notification.internal.repository.InboxReadStorePostgresIntegrationTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2
+    },
+    {
+      "suite": "com.pte.scoring.internal.vendor.AllScorersSpikeTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 12
+    },
+    {
+      "suite": "com.pte.scoring.internal.vendor.AzureGeminiSpikeTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 5
+    },
+    {
+      "suite": "com.pte.scoring.internal.vendor.RubricSchemaSmokeSpikeTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 3
+    },
+    {
+      "suite": "com.pte.scoring.internal.vendor.RubricStabilitySpikeTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 9
+    },
+    {
+      "suite": "com.pte.session.internal.service.EnrollmentConcurrencyPostgresIntegrationTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 4
+    }
+  ]
+}

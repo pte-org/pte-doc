@@ -6,11 +6,12 @@ Gốc đường dẫn: `pte-web/`
 
 ## Mục tiêu
 
-Đổi trang *License codes* thành *Cấp gói*. Thay form phát mã bằng wizard 4 bước. Danh sách có thêm cột theo hợp đồng.
+Đổi trang _License codes_ thành _Cấp gói_. Thay form phát mã bằng wizard 4 bước. Danh sách có thêm cột theo hợp đồng.
 
 ## Việc cần làm
 
 **4a. api-client (`packages/api-client/src`)**
+
 - `requests/tenant/index.ts:29`: `listTenants(client, params?: { q?: string })`, dựng query bằng `URLSearchParams` như `listAdminLicenseCodes`.
 - `requests/billing/licenseGrants.ts` (mới):
   - `previewLicenseGrant(client, body)`
@@ -23,6 +24,7 @@ Gốc đường dẫn: `pte-web/`
 - Test: `licenseGrants.test.ts` và cập nhật `endpoints.test.ts`.
 
 **4b. Wizard, toàn bộ là file mới** trong `features/commercialization/components/licenseGrant/`:
+
 - Mẫu tham khảo: `tenant-web/features/exams/components/CreateExamWizard.tsx`. Dùng `Modal` + `Stepper` + `DescriptionList` + `DateInput` + `Select` + `Textarea` của `@pte/ui`.
 - Các file:
   - `GrantLicenseWizard.tsx`
@@ -43,13 +45,15 @@ Gốc đường dẫn: `pte-web/`
 - **Xác nhận** → `grantLicense`. Idempotency-Key sinh một lần mỗi khi mở wizard và giữ trong state. Thành công thì toast, đóng wizard, invalidate danh sách mã.
 
 **4c. Sửa tối thiểu `LicenseCodesView.tsx`**
-- Nút *Create code* thành *Cấp gói*, mở `GrantLicenseWizard`.
+
+- Nút _Create code_ thành _Cấp gói_, mở `GrantLicenseWizard`.
 - Bỏ Issue Modal và Issue-success Modal cùng phần khôi phục issue-intent. Lookup, Reveal, Revoke giữ nguyên.
 - Bảng thêm cột Tổ chức, Số hợp đồng, Bắt đầu, Hết hạn.
 - **Không** tách file trong đợt này. File chỉ được ngắn đi, không dài thêm. Việc tách file ghi thành nợ kỹ thuật.
 
 **4d. Nhãn điều hướng**
-- `lib/navigationConstants.ts:7`, `packages/ui/src/i18n/LocaleProvider.tsx:936` (vi "Cấp gói") / `:1928` (en "Package grants"), `features/i18n/adminCopy.ts:199`, `LICENSE_CODES_TEXT.TITLE`. **Giữ route** `/admin/license-codes`.
+
+- `lib/navigationConstants.ts:7`, `packages/ui/src/i18n/LocaleProvider.tsx:936` (vi "Cấp gói") / `:1928` (en "License Code"), `features/i18n/adminCopy.ts:199`, `LICENSE_CODES_TEXT.TITLE`. **Giữ route** `/admin/license-codes`.
 - Mọi chuỗi mới có bản tiếng Việt trong `adminCopy.ts`.
 
 ## Design Constraints

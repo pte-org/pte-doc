@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-05",
+  "source": "pte-api/app/target/surefire-reports (522 TEST-*.xml, full run after phase 10); FE re-run in phase 11",
+  "pteApiFullSuite": {"tests": 4641, "failures": 0, "errors": 0, "skipped": 73, "xmlFiles": 522},
+  "skippedBreakdown": {
+    "scoringAiSpikes_noKeys": {"AllScorersSpikeTest": 12, "AzureGeminiSpikeTest": 5, "RubricSchemaSmokeSpikeTest": 3, "RubricStabilitySpikeTest": 9},
+    "otherPostgresIT_needsLifecycleTestDbUrl": {"ArchiveLifecyclePostgresIntegrationTest": 11, "LicenseIssuePostgresIntegrationTest": 10, "TenantApplicationReviewPostgresIntegrationTest": 3, "InboxAnnouncementStorePostgresIntegrationTest": 1, "InboxDeliveryStorePostgresIntegrationTest": 12, "InboxReadStorePostgresIntegrationTest": 2, "EnrollmentConcurrencyPostgresIntegrationTest": 4},
+    "chatLive": {"ChatPromptSuiteLiveTest": 1}
+  },
+  "rubricPostgresIT": {"RubricVersionMigrationPostgresTest": {"tests": 12, "failures": 0, "skipped": 0}},
+  "ratchets": {"PackageDensityTest": 1, "SourceFileSizeTest": 1, "NoDirectClockAccessTest": 2, "ModuleStructureTest": 3, "RubricScoreSingleSourceTest": 4, "allFailures": 0, "allowlistNonCommentEntries": 0},
+  "apiInventory": {"restEndpoints": 285, "stompDestinations": 3},
+  "migrations": {"highest": "V33__examiner_trait_scores.sql", "added": ["V32__scoring_rubric_versions.sql", "V33__examiner_trait_scores.sql"]},
+  "frontend": {
+    "vendor-web": {"vitestFiles": 50, "tests": 303, "failures": 0, "lint": "0 errors, 2 warnings (no-img-element, pre-existing questionbank)", "typecheck": "1 error in generated .next/types/validator.ts only"},
+    "tenant-web": {"vitestFiles": 54, "tests": 649, "failures": 0, "lint": "0 problems", "typecheck": "2 errors in generated .next/types/validator.ts only"},
+    "pte-practice": {"vitestFiles": 74, "tests": 636, "failures": 0, "lint": "0 errors, 2 warnings (pre-existing)", "typecheck": "0 errors"}
+  },
+  "notRun": ["Gemini/Azure spikes (no keys)", "LLM stability measurement", "Fluency monotonicity on TTS WAVs", "browser/Playwright", "next build", "ck:quality gate for phases 3-11"]
+}

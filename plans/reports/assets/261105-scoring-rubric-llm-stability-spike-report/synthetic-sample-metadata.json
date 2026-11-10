@@ -1,0 +1,604 @@
+{
+  "report": "261105-scoring-rubric-llm-stability-spike-report.md",
+  "note": "Metadata only, no answer or transcript text. Source of truth: pte-api/app/src/test/resources/scoring/rubric-spike/. AI-generated synthetic data; proves stability only, never accuracy. wordCount/sentenceCount: whitespace split and sentence-end regex, same rules as FormCheck; SyntheticDatasetTest checks every intended FORM band equals FormRule.bandFor(FormCheck.measure(answer)).",
+  "writing": [
+    {
+      "id": "swt-01",
+      "taskType": "SUMMARIZE_WRITTEN_TEXT",
+      "sourceId": "swt-urban-heat",
+      "wordCount": 45,
+      "sentenceCount": 1,
+      "allCaps": false,
+      "intendedBands": {
+        "CONTENT": 4,
+        "FORM": 1,
+        "GRAMMAR": 2,
+        "VOCABULARY": 2
+      },
+      "generationNotes": "High band. One complete sentence in the 5-75 word range covering cause, consequences and coordinated solutions in paraphrase."
+    },
+    {
+      "id": "swt-02",
+      "taskType": "SUMMARIZE_WRITTEN_TEXT",
+      "sourceId": "swt-urban-heat",
+      "wordCount": 34,
+      "sentenceCount": 2,
+      "allCaps": false,
+      "intendedBands": {
+        "CONTENT": 3,
+        "FORM": 0,
+        "GRAMMAR": 2,
+        "VOCABULARY": 2
+      },
+      "generationNotes": "Form edge case: two correct sentences instead of one, so coded Form is 0 (gate). Content is adequate but omits the targeting point."
+    },
+    {
+      "id": "swt-03",
+      "taskType": "SUMMARIZE_WRITTEN_TEXT",
+      "sourceId": "swt-urban-heat",
+      "wordCount": 38,
+      "sentenceCount": 1,
+      "allCaps": false,
+      "intendedBands": {
+        "CONTENT": 2,
+        "FORM": 1,
+        "GRAMMAR": 1,
+        "VOCABULARY": 1
+      },
+      "generationNotes": "Middle-low band. One run-on sentence stitched from verbatim excerpts with no synthesis; a broken clause boundary at the start."
+    },
+    {
+      "id": "swt-04",
+      "taskType": "SUMMARIZE_WRITTEN_TEXT",
+      "sourceId": "swt-urban-heat",
+      "wordCount": 91,
+      "sentenceCount": 1,
+      "allCaps": false,
+      "intendedBands": {
+        "CONTENT": 3,
+        "FORM": 0,
+        "GRAMMAR": 1,
+        "VOCABULARY": 2
+      },
+      "generationNotes": "Form edge case: a single sentence longer than 75 words, so Form is 0. Covers the content but leans on the source wording; the long chain of clauses strains grammar."
+    },
+    {
+      "id": "swt-05",
+      "taskType": "SUMMARIZE_WRITTEN_TEXT",
+      "sourceId": "swt-urban-heat",
+      "wordCount": 31,
+      "sentenceCount": 1,
+      "allCaps": true,
+      "intendedBands": {
+        "CONTENT": 3,
+        "FORM": 0,
+        "GRAMMAR": 2,
+        "VOCABULARY": 2
+      },
+      "generationNotes": "Form edge case: written entirely in capital letters, so Form is 0. Otherwise an adequate single-sentence summary."
+    },
+    {
+      "id": "swt-06",
+      "taskType": "SUMMARIZE_WRITTEN_TEXT",
+      "sourceId": "swt-urban-heat",
+      "wordCount": 31,
+      "sentenceCount": 1,
+      "allCaps": false,
+      "intendedBands": {
+        "CONTENT": 0,
+        "FORM": 1,
+        "GRAMMAR": 2,
+        "VOCABULARY": 2
+      },
+      "generationNotes": "Off-topic: a fluent, well-formed sentence about a different subject. Content 0 (gate) while language traits stay high."
+    },
+    {
+      "id": "swt-07",
+      "taskType": "SUMMARIZE_WRITTEN_TEXT",
+      "sourceId": "swt-urban-heat",
+      "wordCount": 4,
+      "sentenceCount": 1,
+      "allCaps": false,
+      "intendedBands": {
+        "CONTENT": 1,
+        "FORM": 0,
+        "GRAMMAR": 2,
+        "VOCABULARY": 1
+      },
+      "generationNotes": "Very short: four words, below the 5-word minimum, so Form is 0. Content is relevant but far too limited."
+    },
+    {
+      "id": "we-01",
+      "taskType": "WRITE_ESSAY",
+      "sourceId": "we-tuition",
+      "wordCount": 110,
+      "sentenceCount": 8,
+      "allCaps": false,
+      "intendedBands": {
+        "CONTENT": 2,
+        "FORM": 0,
+        "DEVELOPMENT_STRUCTURE_COHERENCE": 2,
+        "GRAMMAR": 0,
+        "GENERAL_LINGUISTIC_RANGE": 2,
+        "VOCABULARY_RANGE": 0,
+        "SPELLING": 0
+      },
+      "generationNotes": "Short essay of about 110 words (below 120, so Form 0). Addresses the prompt superficially with basic vocabulary, frequent agreement errors and repeated misspellings."
+    },
+    {
+      "id": "we-02",
+      "taskType": "WRITE_ESSAY",
+      "sourceId": "we-tuition",
+      "wordCount": 145,
+      "sentenceCount": 9,
+      "allCaps": false,
+      "intendedBands": {
+        "CONTENT": 4,
+        "FORM": 1,
+        "DEVELOPMENT_STRUCTURE_COHERENCE": 4,
+        "GRAMMAR": 1,
+        "GENERAL_LINGUISTIC_RANGE": 4,
+        "VOCABULARY_RANGE": 1,
+        "SPELLING": 1
+      },
+      "generationNotes": "Middle band essay of about 145 words (Form 1). Clear position with limited development; one agreement error and exactly one spelling error."
+    },
+    {
+      "id": "we-03",
+      "taskType": "WRITE_ESSAY",
+      "sourceId": "we-tuition",
+      "wordCount": 239,
+      "sentenceCount": 11,
+      "allCaps": false,
+      "intendedBands": {
+        "CONTENT": 6,
+        "FORM": 2,
+        "DEVELOPMENT_STRUCTURE_COHERENCE": 6,
+        "GRAMMAR": 2,
+        "GENERAL_LINGUISTIC_RANGE": 6,
+        "VOCABULARY_RANGE": 2,
+        "SPELLING": 2
+      },
+      "generationNotes": "Top band essay of about 240 words (Form 2). Introduction, two balanced body paragraphs, a nuanced position and a conclusion; no language errors."
+    },
+    {
+      "id": "we-04",
+      "taskType": "WRITE_ESSAY",
+      "sourceId": "we-tuition",
+      "wordCount": 333,
+      "sentenceCount": 16,
+      "allCaps": false,
+      "intendedBands": {
+        "CONTENT": 5,
+        "FORM": 1,
+        "DEVELOPMENT_STRUCTURE_COHERENCE": 5,
+        "GRAMMAR": 2,
+        "GENERAL_LINGUISTIC_RANGE": 5,
+        "VOCABULARY_RANGE": 2,
+        "SPELLING": 2
+      },
+      "generationNotes": "Long essay of about 330 words (301-380, so Form 1). Well organised and accurate but somewhat predictable in argument and phrasing."
+    },
+    {
+      "id": "we-05",
+      "taskType": "WRITE_ESSAY",
+      "sourceId": "we-tuition",
+      "wordCount": 207,
+      "sentenceCount": 13,
+      "allCaps": true,
+      "intendedBands": {
+        "CONTENT": 4,
+        "FORM": 0,
+        "DEVELOPMENT_STRUCTURE_COHERENCE": 4,
+        "GRAMMAR": 2,
+        "GENERAL_LINGUISTIC_RANGE": 4,
+        "VOCABULARY_RANGE": 1,
+        "SPELLING": 2
+      },
+      "generationNotes": "Form edge case: an otherwise adequate essay of about 210 words written entirely in capital letters, so Form is 0 (gate)."
+    },
+    {
+      "id": "we-06",
+      "taskType": "WRITE_ESSAY",
+      "sourceId": "we-tuition",
+      "wordCount": 206,
+      "sentenceCount": 10,
+      "allCaps": false,
+      "intendedBands": {
+        "CONTENT": 0,
+        "FORM": 2,
+        "DEVELOPMENT_STRUCTURE_COHERENCE": 4,
+        "GRAMMAR": 2,
+        "GENERAL_LINGUISTIC_RANGE": 4,
+        "VOCABULARY_RANGE": 1,
+        "SPELLING": 2
+      },
+      "generationNotes": "Off-topic: a well-structured essay of about 205 words on social media instead of tuition. Content 0 (gate) while form and language stay solid."
+    },
+    {
+      "id": "we-07",
+      "taskType": "WRITE_ESSAY",
+      "sourceId": "we-tuition",
+      "wordCount": 224,
+      "sentenceCount": 13,
+      "allCaps": false,
+      "intendedBands": {
+        "CONTENT": 2,
+        "FORM": 2,
+        "DEVELOPMENT_STRUCTURE_COHERENCE": 3,
+        "GRAMMAR": 2,
+        "GENERAL_LINGUISTIC_RANGE": 3,
+        "VOCABULARY_RANGE": 1,
+        "SPELLING": 2
+      },
+      "generationNotes": "Memorised-template edge case: about 225 words (Form 2) of generic, prompt-independent phrases that never mention tuition, fees or who pays."
+    },
+    {
+      "id": "sst-01",
+      "taskType": "SUMMARIZE_SPOKEN_TEXT",
+      "sourceId": "sst-sleep-memory",
+      "wordCount": 35,
+      "sentenceCount": 3,
+      "allCaps": false,
+      "intendedBands": {
+        "CONTENT": 3,
+        "FORM": 0,
+        "GRAMMAR": 2,
+        "VOCABULARY": 2,
+        "SPELLING": 2
+      },
+      "generationNotes": "Length edge case: about 35 words (below 40, so Form 0 and the gate zeroes the item). Accurate but compressed."
+    },
+    {
+      "id": "sst-02",
+      "taskType": "SUMMARIZE_SPOKEN_TEXT",
+      "sourceId": "sst-sleep-memory",
+      "wordCount": 44,
+      "sentenceCount": 3,
+      "allCaps": false,
+      "intendedBands": {
+        "CONTENT": 3,
+        "FORM": 1,
+        "GRAMMAR": 2,
+        "VOCABULARY": 2,
+        "SPELLING": 2
+      },
+      "generationNotes": "About 45 words (40-49, so Form 1). Main points present; the experiment and the advice on naps are omitted."
+    },
+    {
+      "id": "sst-03",
+      "taskType": "SUMMARIZE_SPOKEN_TEXT",
+      "sourceId": "sst-sleep-memory",
+      "wordCount": 59,
+      "sentenceCount": 3,
+      "allCaps": false,
+      "intendedBands": {
+        "CONTENT": 4,
+        "FORM": 2,
+        "GRAMMAR": 2,
+        "VOCABULARY": 2,
+        "SPELLING": 2
+      },
+      "generationNotes": "Top band, about 60 words (50-70, so Form 2). Covers the claim, both sleep stages and all three pieces of advice in paraphrase."
+    },
+    {
+      "id": "sst-04",
+      "taskType": "SUMMARIZE_SPOKEN_TEXT",
+      "sourceId": "sst-sleep-memory",
+      "wordCount": 80,
+      "sentenceCount": 6,
+      "allCaps": false,
+      "intendedBands": {
+        "CONTENT": 3,
+        "FORM": 1,
+        "GRAMMAR": 1,
+        "VOCABULARY": 2,
+        "SPELLING": 1
+      },
+      "generationNotes": "About 80 words (71-100, so Form 1). Good coverage with two agreement errors and exactly one spelling error."
+    },
+    {
+      "id": "sst-05",
+      "taskType": "SUMMARIZE_SPOKEN_TEXT",
+      "sourceId": "sst-sleep-memory",
+      "wordCount": 105,
+      "sentenceCount": 6,
+      "allCaps": false,
+      "intendedBands": {
+        "CONTENT": 3,
+        "FORM": 0,
+        "GRAMMAR": 2,
+        "VOCABULARY": 2,
+        "SPELLING": 2
+      },
+      "generationNotes": "Length edge case: about 105 words (above 100, so Form 0). Detailed and accurate, but the advice itself is only announced, not stated."
+    },
+    {
+      "id": "sst-06",
+      "taskType": "SUMMARIZE_SPOKEN_TEXT",
+      "sourceId": "sst-sleep-memory",
+      "wordCount": 65,
+      "sentenceCount": 8,
+      "allCaps": false,
+      "intendedBands": {
+        "CONTENT": 1,
+        "FORM": 2,
+        "GRAMMAR": 0,
+        "VOCABULARY": 1,
+        "SPELLING": 0
+      },
+      "generationNotes": "Low band, about 65 words (Form 2: punctuation present, sentences longer than three words). Disconnected excerpts without synthesis, no capitals, frequent grammar errors and several misspellings."
+    }
+  ],
+  "speaking": [
+    {
+      "id": "di-01",
+      "taskType": "DESCRIBE_IMAGE",
+      "sourceId": "di-water-chart",
+      "wordCount": 94,
+      "intendedBands": {
+        "CONTENT": 6
+      },
+      "generationNotes": "Top band: names the chart, every category with its value, the ranking, the total and a conclusion."
+    },
+    {
+      "id": "di-02",
+      "taskType": "DESCRIBE_IMAGE",
+      "sourceId": "di-water-chart",
+      "wordCount": 55,
+      "intendedBands": {
+        "CONTENT": 4
+      },
+      "generationNotes": "Middle-high band: main categories and a reasonable conclusion, but some values and the total are missing."
+    },
+    {
+      "id": "di-03",
+      "taskType": "DESCRIBE_IMAGE",
+      "sourceId": "di-water-chart",
+      "wordCount": 31,
+      "intendedBands": {
+        "CONTENT": 3
+      },
+      "generationNotes": "Middle band: identifies the topic and the largest bar but describes the rest vaguely, with no comparison or conclusion."
+    },
+    {
+      "id": "di-04",
+      "taskType": "DESCRIBE_IMAGE",
+      "sourceId": "di-water-chart",
+      "wordCount": 17,
+      "intendedBands": {
+        "CONTENT": 1
+      },
+      "generationNotes": "Low band: generic statements that could describe almost any chart; no categories or values."
+    },
+    {
+      "id": "di-05",
+      "taskType": "DESCRIBE_IMAGE",
+      "sourceId": "di-water-chart",
+      "wordCount": 29,
+      "intendedBands": {
+        "CONTENT": 0
+      },
+      "generationNotes": "Off-topic: a fluent description of something unrelated to the image."
+    },
+    {
+      "id": "rl-01",
+      "taskType": "RE_TELL_LECTURE",
+      "sourceId": "rl-pollination",
+      "wordCount": 116,
+      "intendedBands": {
+        "CONTENT": 6
+      },
+      "generationNotes": "Top band: every main point (importance, mechanism, wild bees, four threats, three remedies, yield benefit) in a coherent paraphrase."
+    },
+    {
+      "id": "rl-02",
+      "taskType": "RE_TELL_LECTURE",
+      "sourceId": "rl-pollination",
+      "wordCount": 55,
+      "intendedBands": {
+        "CONTENT": 5
+      },
+      "generationNotes": "High band: most main points with a clear structure; climate change and the yield benefit are left out."
+    },
+    {
+      "id": "rl-03",
+      "taskType": "RE_TELL_LECTURE",
+      "sourceId": "rl-pollination",
+      "wordCount": 29,
+      "intendedBands": {
+        "CONTENT": 3
+      },
+      "generationNotes": "Middle band: the topic and a few key words are present, but the mechanism and remedies are missing and ideas are listed rather than connected."
+    },
+    {
+      "id": "rl-04",
+      "taskType": "RE_TELL_LECTURE",
+      "sourceId": "rl-pollination",
+      "wordCount": 22,
+      "intendedBands": {
+        "CONTENT": 1
+      },
+      "generationNotes": "Low band: only the vaguest link to the topic; none of the lecture's points are retold."
+    },
+    {
+      "id": "rl-05",
+      "taskType": "RE_TELL_LECTURE",
+      "sourceId": "rl-pollination",
+      "wordCount": 33,
+      "intendedBands": {
+        "CONTENT": 0
+      },
+      "generationNotes": "Off-topic: a confident retelling of a different lecture."
+    },
+    {
+      "id": "rts-01",
+      "taskType": "RESPOND_TO_A_SITUATION",
+      "sourceId": "rts-lost-charger",
+      "wordCount": 115,
+      "intendedBands": {
+        "CONTENT": 6
+      },
+      "generationNotes": "Top band: apology, clear explanation, acknowledges the exam, concrete and timely solution, appropriate tone for a classmate."
+    },
+    {
+      "id": "rts-02",
+      "taskType": "RESPOND_TO_A_SITUATION",
+      "sourceId": "rts-lost-charger",
+      "wordCount": 40,
+      "intendedBands": {
+        "CONTENT": 4
+      },
+      "generationNotes": "Middle-high band: covers apology, explanation and solution, but briefly and without detail."
+    },
+    {
+      "id": "rts-03",
+      "taskType": "RESPOND_TO_A_SITUATION",
+      "sourceId": "rts-lost-charger",
+      "wordCount": 20,
+      "intendedBands": {
+        "CONTENT": 3
+      },
+      "generationNotes": "Middle band: reports the problem but offers no apology and shifts the solution to Sam."
+    },
+    {
+      "id": "rts-04",
+      "taskType": "RESPOND_TO_A_SITUATION",
+      "sourceId": "rts-lost-charger",
+      "wordCount": 15,
+      "intendedBands": {
+        "CONTENT": 1
+      },
+      "generationNotes": "Low band: mentions the charger but the response is inappropriate in tone and does not deal with the exam."
+    },
+    {
+      "id": "rts-05",
+      "taskType": "RESPOND_TO_A_SITUATION",
+      "sourceId": "rts-lost-charger",
+      "wordCount": 23,
+      "intendedBands": {
+        "CONTENT": 0
+      },
+      "generationNotes": "Off-topic: a fluent message for a completely different situation."
+    },
+    {
+      "id": "sgd-01",
+      "taskType": "SUMMARIZE_GROUP_DISCUSSION",
+      "sourceId": "sgd-four-day-week",
+      "wordCount": 88,
+      "intendedBands": {
+        "CONTENT": 6
+      },
+      "generationNotes": "Top band: every speaker's position with their main reasons, attributed correctly, plus the final compromise."
+    },
+    {
+      "id": "sgd-02",
+      "taskType": "SUMMARIZE_GROUP_DISCUSSION",
+      "sourceId": "sgd-four-day-week",
+      "wordCount": 41,
+      "intendedBands": {
+        "CONTENT": 4
+      },
+      "generationNotes": "Middle-high band: each speaker's main view is attributed, but Ben's stress concern and the final compromise are missing."
+    },
+    {
+      "id": "sgd-03",
+      "taskType": "SUMMARIZE_GROUP_DISCUSSION",
+      "sourceId": "sgd-four-day-week",
+      "wordCount": 24,
+      "intendedBands": {
+        "CONTENT": 3
+      },
+      "generationNotes": "Middle band: the topic and one reason on each side, with no attribution to speakers."
+    },
+    {
+      "id": "sgd-04",
+      "taskType": "SUMMARIZE_GROUP_DISCUSSION",
+      "sourceId": "sgd-four-day-week",
+      "wordCount": 17,
+      "intendedBands": {
+        "CONTENT": 1
+      },
+      "generationNotes": "Low band: only the broad theme of work is mentioned; no positions or reasons from the discussion."
+    },
+    {
+      "id": "sgd-05",
+      "taskType": "SUMMARIZE_GROUP_DISCUSSION",
+      "sourceId": "sgd-four-day-week",
+      "wordCount": 28,
+      "intendedBands": {
+        "CONTENT": 0
+      },
+      "generationNotes": "Off-topic: summarises a different conversation entirely."
+    }
+  ],
+  "tts": [
+    {
+      "fileName": "tts-di-01-fluent.wav",
+      "basedOnSampleId": "di-01",
+      "variant": "FLUENT"
+    },
+    {
+      "fileName": "tts-di-01-mild.wav",
+      "basedOnSampleId": "di-01",
+      "variant": "MILD_HESITATION"
+    },
+    {
+      "fileName": "tts-di-01-heavy.wav",
+      "basedOnSampleId": "di-01",
+      "variant": "HEAVY_HESITATION"
+    },
+    {
+      "fileName": "tts-rl-02-fluent.wav",
+      "basedOnSampleId": "rl-02",
+      "variant": "FLUENT"
+    },
+    {
+      "fileName": "tts-rl-02-mild.wav",
+      "basedOnSampleId": "rl-02",
+      "variant": "MILD_HESITATION"
+    },
+    {
+      "fileName": "tts-rl-02-heavy.wav",
+      "basedOnSampleId": "rl-02",
+      "variant": "HEAVY_HESITATION"
+    },
+    {
+      "fileName": "tts-rts-01-fluent.wav",
+      "basedOnSampleId": "rts-01",
+      "variant": "FLUENT"
+    },
+    {
+      "fileName": "tts-rts-01-mild.wav",
+      "basedOnSampleId": "rts-01",
+      "variant": "MILD_HESITATION"
+    },
+    {
+      "fileName": "tts-rts-01-heavy.wav",
+      "basedOnSampleId": "rts-01",
+      "variant": "HEAVY_HESITATION"
+    },
+    {
+      "fileName": "tts-sgd-02-fluent.wav",
+      "basedOnSampleId": "sgd-02",
+      "variant": "FLUENT"
+    },
+    {
+      "fileName": "tts-sgd-02-mild.wav",
+      "basedOnSampleId": "sgd-02",
+      "variant": "MILD_HESITATION"
+    },
+    {
+      "fileName": "tts-sgd-02-heavy.wav",
+      "basedOnSampleId": "sgd-02",
+      "variant": "HEAVY_HESITATION"
+    }
+  ],
+  "stabilityMeasurement": {
+    "status": "NOT_EXECUTED",
+    "reason": "no SCORING_AI_GEMINI_API_KEY on the implementing machine",
+    "gateThreshold": 0.9,
+    "maxSpread": 1,
+    "runsPerSample": 3
+  }
+}

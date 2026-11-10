@@ -1,0 +1,11 @@
+{
+  "pte-web\\package.json": "e703baa1d020f003cb520a5c2f71242c",
+  "pte-web\\pnpm-lock.yaml": "efb47b6011af42ce3ab1598edbfa81de",
+  "pte-web\\apps\\tenant-web\\package.json": "09f1f073ab593b753ee15c4636ad3174",
+  "pte-web\\apps\\vendor-web\\package.json": "0eeb8e8b2edca1e909705542e7bdef27",
+  "pte-web\\packages\\api-client\\package.json": "1e38526d1e8ec6c373a5089e64143c4a",
+  "pte-web\\packages\\config\\package.json": "dd1ce540a6b571577ab13f1acc8d0a65",
+  "pte-web\\packages\\ui\\package.json": "fd4167004696415dcea7fe6576df4ae5",
+  "pte-practice\\package.json": "f926288f5946fe96db68da24e2d132a6",
+  "pte-practice\\pnpm-lock.yaml": "9b2500d27c070e535ae36a2b9bebb2ff"
+}
