@@ -33,7 +33,7 @@ Remove-Item -Recurse -Force apps\tenant-web\.next -ErrorAction SilentlyContinue
 
 ### 2. Confirm a host account exists
 
-Use one of the seed users from `pte-api/scripts/seed-local-template-and-question-bank.ps1`, or any account that has role `HOST_ADMIN` / `HOST_STAFF`. Open `http://localhost:3000/login` and sign in.
+Use the host account created by `pte-api/scripts/seed-local-exam-ready.ps1` (or the V1 seed user `host.e2e@test.local`), or any account that has role `HOST_ADMIN` / `HOST_STAFF`. Open `http://localhost:3000/login` and sign in.
 
 Expected: `DashboardChrome` renders with the existing sidebar items (Overview, Learners, Exam Staff, …, Exams, …).
 

@@ -58753,24 +58753,24 @@ ON CONFLICT (public_id) DO UPDATE SET
 
 INSERT INTO questions (
     public_id, created_at, updated_at, deleted, pte_task_type, task_type_key, task_type_section,
-    visibility, tenant_id, status, revision_group_public_id, revision_number, supersedes_public_id,
-    is_current, version, rejection_reason, title, prompt_text, audio_prompt_ref, image_prompt_ref,
+    tenant_id, status, revision_group_public_id, revision_number, supersedes_public_id,
+    is_current, version, rejection_reason, prompt_text, audio_prompt_ref, image_prompt_ref,
     reference_answer_text, correct_answer_text, min_word_count, max_word_count
 )
 SELECT question_public_id, created_at, updated_at, deleted, pte_task_type, task_type_key,
-       task_type_section, visibility, tenant_id, status, revision_group_public_id, revision_number,
-       supersedes_public_id, is_current, version, rejection_reason, title, prompt_text,
+       task_type_section, tenant_id, status, revision_group_public_id, revision_number,
+       supersedes_public_id, is_current, version, rejection_reason, prompt_text,
        audio_prompt_ref, image_prompt_ref, reference_answer_text, correct_answer_text,
        min_word_count, max_word_count
   FROM _pte_local_seed_questions
 ON CONFLICT (public_id) DO UPDATE SET
     updated_at = EXCLUDED.updated_at, deleted = EXCLUDED.deleted,
     pte_task_type = EXCLUDED.pte_task_type, task_type_key = EXCLUDED.task_type_key,
-    task_type_section = EXCLUDED.task_type_section, visibility = EXCLUDED.visibility,
+    task_type_section = EXCLUDED.task_type_section,
     tenant_id = EXCLUDED.tenant_id, status = EXCLUDED.status,
     revision_group_public_id = EXCLUDED.revision_group_public_id, revision_number = EXCLUDED.revision_number,
     supersedes_public_id = EXCLUDED.supersedes_public_id, is_current = EXCLUDED.is_current,
-    version = EXCLUDED.version, rejection_reason = EXCLUDED.rejection_reason, title = EXCLUDED.title,
+    version = EXCLUDED.version, rejection_reason = EXCLUDED.rejection_reason,
     prompt_text = EXCLUDED.prompt_text, audio_prompt_ref = EXCLUDED.audio_prompt_ref,
     image_prompt_ref = EXCLUDED.image_prompt_ref, reference_answer_text = EXCLUDED.reference_answer_text,
     correct_answer_text = EXCLUDED.correct_answer_text, min_word_count = EXCLUDED.min_word_count,

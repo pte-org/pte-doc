@@ -1,0 +1,14 @@
+{
+  "phase": "phase-03-tenant-student-email",
+  "status": "RED_READY",
+  "prepared_at": "2026-10-31T00:00:00Z",
+  "test_files": [
+    "pte-web/packages/api-client/tests/unit/client/credentialErrorMessages.test.ts",
+    "pte-web/apps/tenant-web/tests/unit/features/studentSearch/sendPasswordEmail.test.ts"
+  ],
+  "expected_red_reason": "credentialErrorMessages.test.ts fails at the assertions: STUDENT_ATTEMPT_IN_PROGRESS and INVALID_PASSWORD_RESET_TOKEN have no catalogue entry, so the generic conflict/validation text is returned. sendPasswordEmail.test.ts fails because features/studentSearch/utils/sendPasswordEmail does not exist.",
+  "notes": [
+    "pte-web unit tests run in a node environment without a DOM or Testing Library, so the dialog and menu wiring cannot be rendered in a test; only the extracted logic and the message catalogue are covered. The wiring is checked by tsc, eslint and next build."
+  ],
+  "artifact_path": "plans/hung-password-reset-email/tests/phase-03-tenant-student-email-tdd-ready.json"
+}

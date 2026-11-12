@@ -1,0 +1,29 @@
+{
+  "target": "phase-01-rubric-catalog-pure-scorer",
+  "verdict": "APPROVED",
+  "policy_version": "1.1.0",
+  "root": "D:\\GitHub\\pte-org",
+  "report_path": "pte-doc/projects/plans/quang-scoring-rubric-transparency/quality/phase-01-rubric-catalog-pure-scorer-quality-report.json",
+  "reviewed_files": [
+    "pte-api/app/src/main/java/com/pte/scoring/internal/constant/RubricConstants.java",
+    "pte-api/app/src/main/java/com/pte/scoring/internal/rubric/catalog/ObjectiveRubrics.java",
+    "pte-api/app/src/main/java/com/pte/scoring/internal/rubric/catalog/RubricCatalogImpl.java",
+    "pte-api/app/src/main/java/com/pte/scoring/rubric/EffectiveRubric.java",
+    "pte-api/app/src/main/java/com/pte/scoring/rubric/FormBand.java",
+    "pte-api/app/src/main/java/com/pte/scoring/rubric/FormRule.java",
+    "pte-api/app/src/main/java/com/pte/scoring/rubric/RubricParameters.java",
+    "pte-api/app/src/main/java/com/pte/scoring/rubric/RubricScoreException.java",
+    "pte-api/app/src/main/java/com/pte/scoring/rubric/RubricScorer.java",
+    "pte-api/app/src/main/java/com/pte/scoring/rubric/TaskRubric.java",
+    "pte-api/app/src/main/java/com/pte/scoring/rubric/TraitScale.java",
+    "pte-api/app/src/main/java/com/pte/scoring/rubric/TraitScoreSet.java",
+    "pte-api/app/src/main/java/com/pte/scoring/rubric/package-info.java",
+    "pte-api/app/src/main/java/com/pte/shared/exception/DomainException.java",
+    "pte-api/app/src/test/java/com/pte/scoring/rubric/EffectiveRubricValidationTest.java",
+    "pte-api/app/src/test/java/com/pte/scoring/rubric/RubricScorerExactRoundingTest.java",
+    "pte-doc/projects/plans/quang-scoring-rubric-transparency/phase-01-rubric-catalog-pure-scorer.md"
+  ],
+  "source_fingerprint": "sha256:64f96e3f54feb26c44d036699b04289c8850b37de8803e592863c9277eee3f2d",
+  "reviewed_at": "2026-11-04T12:00:00Z",
+  "open_blocking_findings": 0
+}
