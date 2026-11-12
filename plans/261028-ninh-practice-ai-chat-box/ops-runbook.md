@@ -123,7 +123,7 @@ Công thức ngày = (token vào ÷ 10^6 × giá vào) + (token ra ÷ 10^6 × gi
 | Gemini 3.1 Flash-Lite (0,25 / 1,50) | ~338 USD |
 | Gemini 3.5 Flash-Lite (0,30 / 2,50) | ~510 USD |
 
-Cache hit không tốn token; lượt bị hoàn quota (off-topic, lỗi) vẫn tốn token.
+Cache hit không tốn token; lượt bị hoàn quota (lỗi provider) vẫn tốn token. Câu hỏi lạc đề (off-topic) bị trừ lượt như câu thường, không được hoàn.
 
 **Việc cho Tech Lead / PM (chưa làm):**
 - [ ] Tạo Google Cloud Project có billing, lấy key cho chat.
@@ -145,7 +145,7 @@ Micrometer (không có nội dung câu hỏi hay student id trong tag):
 | Metric | Tag | Cách đọc |
 | --- | --- | --- |
 | `chat.message.stored` | `status` (OK/REFUSED/FAILED), `from_cache` | Lưu lượng và tỉ lệ cache. |
-| `chat.quota.refunded` | `cause` (off_topic, provider_failure, store_failure, setup_failure) | **Tín hiệu lạm dụng/chi phí**: hoàn lượt thì học viên không mất lượt nhưng vẫn tốn token. Cảnh báo khi tăng bất thường. |
+| `chat.quota.refunded` | `cause` (provider_failure) | **Tín hiệu lỗi provider/chi phí**: hoàn lượt thì học viên không mất lượt nhưng vẫn tốn token. Từ 2026-11-12 câu hỏi lạc đề không còn được hoàn lượt nên không còn `cause=off_topic`. Cảnh báo khi tăng bất thường. |
 | `chat.quota.refund.failed` | | Hoàn quota thất bại (học viên mất một lượt). Trừ số này khỏi `chat.quota.refunded`: metric kia cũng đếm cả lần hoàn thất bại. |
 | `chat.provider.failed` | `reason` (TIMEOUT, RATE_LIMITED, UNAVAILABLE, TRUNCATED, ...) | Lỗi Gemini do `ChatAiException`. Lỗi RuntimeException ngoài dự kiến **không** có metric này: xem dòng FAILED trong DB. |
 | `chat.slot.rejected` | | Semaphore đầy (503). |

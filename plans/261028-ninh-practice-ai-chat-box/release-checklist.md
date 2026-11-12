@@ -47,7 +47,7 @@ Cờ web là build-time nên bước chậm nhất là build lại image `web-pr
 
 ## E. Theo dõi 48 giờ đầu
 
-- `chat.quota.refunded` theo `cause` (tăng bất thường = lạm dụng hoặc lỗi provider); `chat.quota.refund.failed` phải bằng 0.
+- `chat.quota.refunded` theo `cause` (tăng bất thường = lỗi provider; câu hỏi lạc đề bị trừ lượt, không được hoàn); `chat.quota.refund.failed` phải bằng 0.
 - Tỉ lệ dòng FAILED theo `finish_reason` (MAX_TOKENS cao: tăng `max-tokens` hoặc siết prompt).
 - `chat.slot.rejected` và `chat.inflight.rejected` (503 và 409), tỉ lệ cache hit, chi phí token theo ngày so với ước tính 105 đến 510 USD/tháng.
 - Phản hồi học viên về câu từ chối oan (hỏi đúng chủ đề tiếng Anh mà bị từ chối): sửa `ChatPrompts` và tăng `VERSION`.
