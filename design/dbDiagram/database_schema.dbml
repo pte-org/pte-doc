@@ -1,0 +1,1483 @@
+// =============================================================================
+// PTE PLATFORM DATABASE SCHEMA (DBML)
+// Auto-generated from PostgreSQL Flyway Migrations (V1 - V41)
+// For use with https://dbdiagram.io
+// =============================================================================
+
+Project PTE_Platform {
+  database_type: 'PostgreSQL'
+  Note: '''
+    # PTE Examination & Practice Platform
+    Architecture: Modular Monolith (Spring Boot / Modulith)
+    Total Active Tables: 64
+  '''
+}
+
+TableGroup Identity_and_Access {
+  users
+  user_roles
+  refresh_tokens
+  password_reset_tokens
+  organizations
+  organization_members
+  organization_member_roles
+  organization_quota_grants
+}
+
+TableGroup Enrollment_and_Academic {
+  programs
+  classes
+  class_students
+}
+
+TableGroup Item_Bank_and_Authoring {
+  questions
+  question_options
+  question_types
+  question_generation_jobs
+  question_generation_job_items
+  ai_prompt_versions
+  generation_usage_daily
+}
+
+TableGroup Assessment_Definitions_and_Blueprints {
+  exam_definitions
+  exam_definition_items
+  exam_definition_cefr_targets
+  exam_blueprints
+  blueprint_items
+  exam_versions
+  exam_version_items
+}
+
+TableGroup Exam_Scheduling_and_Registration {
+  exam_sessions
+  exam_session_proctors
+  exam_session_selected_skills
+  exam_session_audience_sources
+  exam_session_cefr_targets
+  exam_registrations
+}
+
+TableGroup Exam_Delivery_and_Attempts {
+  exam_attempts
+  attempt_answers
+  exam_incidents
+}
+
+TableGroup Scoring_and_Grading {
+  grading_assignments
+  grading_issues
+  answer_evaluations
+  exam_results
+  scoring_rubric_versions
+  scoring_rubric_activation_audits
+}
+
+TableGroup Practice_and_Learning {
+  practice_sessions
+  practice_responses
+  practice_student_profiles
+  practice_mock_tests
+  practice_mock_test_items
+  chat_usage
+  chat_usage_daily
+}
+
+TableGroup Billing_and_Commerce {
+  service_plans
+  subscriptions
+  orders
+  order_payments
+  license_codes
+  platform_settings
+}
+
+TableGroup Media_and_Assets {
+  media_objects
+}
+
+TableGroup Notifications {
+  notifications
+  notification_recipients
+  notification_recipient_streams
+  notification_logs
+  notification_announcements
+  notification_inbox_snapshots
+}
+
+TableGroup Support_Audit_and_System {
+  support_ticket
+  support_ticket_note
+  audit_logs
+  idempotency_keys
+}
+
+// =============================================================================
+// GROUP: Identity and Access
+// =============================================================================
+
+Table users {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  class_name varchar(255)
+  credential_hash varchar(255)
+  date_of_birth date
+  email varchar(255)
+  full_name varchar(255)
+  must_change_password boolean [not null]
+  phone varchar(255)
+  status varchar(255) [not null]
+  student_code varchar(255)
+  username varchar(255) [unique, not null]
+}
+
+Table user_roles {
+  user_id bigint [pk]
+  role varchar(255) [pk]
+}
+
+Table refresh_tokens {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  expires_at timestamptz [not null]
+  organization_id uuid
+  revoked boolean [not null]
+  token_hash varchar(255) [unique, not null]
+  user_id bigint [not null]
+}
+
+Table password_reset_tokens {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [not null]
+  updated_at timestamptz [not null]
+  expires_at timestamptz [not null]
+  token_hash varchar(255) [not null]
+  used_at timestamptz
+  user_id bigint [not null]
+}
+
+Table organizations {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  address varchar(255)
+  code varchar(255) [not null]
+  contact_email varchar(255)
+  contact_phone varchar(255)
+  facility_type varchar(255) [not null]
+  logo_url varchar(255)
+  name varchar(255) [not null]
+  organization_type varchar(255) [not null]
+  package_name varchar(255) [not null]
+  primary_color varchar(255)
+  province_code varchar(16)
+  province_name varchar(255)
+  reject_reason varchar(500)
+  reviewed_at timestamptz
+  reviewed_by uuid
+  status varchar(255) [not null]
+  student_limit integer [not null]
+  suspended_until timestamptz
+  tax_code varchar(64)
+  version bigint
+  ward_code varchar(16)
+  ward_name varchar(255)
+}
+
+Table organization_members {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  organization_id uuid [not null]
+  status varchar(255) [not null]
+  user_id bigint [not null]
+}
+
+Table organization_member_roles {
+  member_id bigint [pk]
+  role varchar(255) [pk]
+}
+
+Table organization_quota_grants {
+  organization_id bigint [pk]
+  actor_user_id uuid [not null]
+  amount integer [not null]
+  created_at timestamptz [not null]
+  note varchar(255)
+  package_name varchar(255) [not null]
+  public_id uuid [not null]
+}
+
+// =============================================================================
+// GROUP: Enrollment and Academic
+// =============================================================================
+
+Table programs {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  description varchar(255)
+  end_date date
+  name varchar(255) [not null]
+  start_date date
+  status varchar(255) [not null]
+  organization_id bigint [not null]
+}
+
+Table classes {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  name varchar(255) [not null]
+  organization_id uuid [not null]
+  status varchar(255) [not null]
+  program_id bigint [not null]
+}
+
+Table class_students {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  organization_id uuid [not null]
+  student_public_id uuid [unique, not null]
+  class_id bigint [not null]
+}
+
+// =============================================================================
+// GROUP: Item Bank and Authoring
+// =============================================================================
+
+Table questions {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  audio_prompt_ref uuid
+  author_user_public_id uuid
+  availability_flags_explicit boolean [not null]
+  available_for_exam boolean [not null]
+  available_for_practice boolean [not null]
+  correct_answer_text text
+  is_current boolean [not null]
+  ever_published boolean
+  image_prompt_ref uuid
+  max_word_count integer
+  min_word_count integer
+  pool varchar(16) [not null]
+  prompt_text text
+  pte_task_type varchar(255)
+  reference_answer_text text
+  rejection_reason varchar(500)
+  revision_group_public_id uuid [not null]
+  revision_number integer [not null]
+  status varchar(255) [not null]
+  supersedes_public_id uuid
+  task_type_key varchar(64) [not null]
+  task_type_section varchar(16) [not null]
+  tenant_id uuid
+  version bigint [not null]
+  cefr_level varchar(2)
+  generation_meta jsonb
+  content_hash varchar(64)
+  generation_job_public_id uuid
+  generation_item_index integer
+}
+
+Table question_options {
+  question_id bigint [not null]
+  blank_index integer
+  correct boolean [not null]
+  correct_gap_index integer
+  order_index integer [not null]
+  public_id uuid [not null]
+  text text [not null]
+}
+
+Table question_types {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  active boolean [not null]
+  author_user_public_id uuid
+  authoring_contract_key varchar(96)
+  authoring_contract_version integer
+  code varchar(64) [unique, not null]
+  display_name varchar(128) [not null]
+  display_order integer [not null]
+  first_published_at timestamptz
+  lifecycle_status varchar(16) [not null]
+  normalized_display_name varchar(128) [unique, not null]
+  requires_audio_prompt boolean [not null]
+  requires_correct_answer boolean [not null]
+  requires_image_prompt boolean [not null]
+  requires_options boolean [not null]
+  requires_prompt_text boolean [not null]
+  requires_reference_answer boolean [not null]
+  requires_single_correct_option boolean [not null]
+  requires_word_count boolean [not null]
+  runtime_answer_schema_version integer
+  runtime_behavior_key varchar(64)
+  runtime_locked_at timestamptz
+  runtime_min_app_version varchar(32)
+  runtime_profile_key varchar(96)
+  runtime_profile_version integer
+  runtime_renderer_key varchar(96)
+  runtime_required_capabilities text [not null]
+  runtime_scoring_mode varchar(16)
+  runtime_scoring_profile_key varchar(64)
+  runtime_scoring_profile_version integer
+  scored boolean [not null]
+  screen_key varchar(96)
+  section varchar(16) [not null]
+  short_name varchar(32) [not null]
+  task_type_key varchar(64) [unique, not null]
+  uses_option_order_as_correct_position boolean [not null]
+  instruction varchar(500)
+  stimulus_before_timer boolean [not null, default: false]
+  stimulus_estimate_seconds integer [not null, default: 0]
+}
+
+Table question_generation_jobs {
+  id bigint [pk]
+  public_id uuid [unique, not null]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  deleted boolean [not null, default: FALSE]
+  requested_by_user_public_id uuid [not null]
+  task_type_key varchar(64) [not null]
+  cefr_level varchar(2) [not null]
+  pool varchar(16) [not null]
+  topic_hint varchar(200)
+  requested_count integer [not null]
+  status varchar(16) [not null]
+  succeeded_count integer [not null, default: 0]
+  failed_count integer [not null, default: 0]
+  worker_id varchar(64)
+  lease_until timestamptz
+  started_at timestamptz
+  finished_at timestamptz
+  failure_code varchar(64)
+  save_questions boolean [not null, default: true]
+}
+
+Table question_generation_job_items {
+  id bigint [pk]
+  job_id bigint [not null]
+  item_index integer [not null]
+  stage varchar(24) [not null]
+  question_public_id uuid
+  failure_code varchar(64)
+  failure_note varchar(300)
+  updated_at timestamptz [not null]
+}
+
+Table ai_prompt_versions {
+  id bigint [pk]
+  public_id uuid [unique, not null]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  deleted boolean [not null, default: FALSE]
+  kind varchar(16) [not null]
+  prompt_key varchar(64) [not null]
+  version_no integer [not null]
+  status varchar(16) [not null]
+  content jsonb [not null]
+  content_hash varchar(64) [not null]
+  author_user_public_id uuid
+  updated_by_user_public_id uuid
+  approver_user_public_id uuid
+  rejection_reason varchar(1000)
+  submitted_at timestamptz
+  decided_at timestamptz
+  activated_at timestamptz
+  retired_at timestamptz
+  lock_version bigint [not null, default: 0]
+  test_passed boolean
+  tested_content_hash varchar(64)
+  test_note varchar(500)
+  tested_by_user_public_id uuid
+  tested_at timestamptz
+}
+
+Table generation_usage_daily {
+  usage_date date [pk]
+  role varchar(16) [pk]
+  model varchar(64) [pk]
+  calls integer [not null, default: 0]
+  tokens_in bigint [not null, default: 0]
+  tokens_out bigint [not null, default: 0]
+}
+
+// =============================================================================
+// GROUP: Assessment Definitions and Blueprints
+// =============================================================================
+
+Table exam_definitions {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  author_user_public_id uuid
+  code varchar(255) [not null]
+  lock_version bigint [not null]
+  name varchar(255) [not null]
+  rejection_reason varchar(1000)
+  status varchar(255) [not null]
+  template_policy varchar(16) [not null]
+  version integer [not null]
+  tenant_id uuid
+  base_definition_public_id uuid
+  sw_min_seconds integer
+  sw_max_seconds integer
+  reading_min_seconds integer
+  reading_max_seconds integer
+  listening_min_seconds integer
+  listening_max_seconds integer
+  total_max_seconds integer
+  rubric_version_public_id uuid
+}
+
+Table exam_definition_items {
+  exam_definition_id bigint [not null]
+  listening_weight numeric(5, 2) [not null]
+  max_count integer [not null]
+  min_count integer [not null]
+  overall_weight numeric(5, 2) [not null]
+  prep_seconds integer [not null]
+  reading_weight numeric(5, 2) [not null]
+  response_seconds integer [not null]
+  runtime_answer_schema_version integer
+  runtime_authoring_contract_key varchar(96)
+  runtime_authoring_contract_version integer
+  runtime_behavior_key varchar(64)
+  runtime_contract_version integer
+  runtime_min_app_version varchar(32)
+  runtime_profile_key varchar(96)
+  runtime_profile_status varchar(16)
+  runtime_profile_version integer
+  runtime_renderer_key varchar(96)
+  runtime_required_client_capabilities varchar(512)
+  runtime_scoring_mode varchar(16)
+  runtime_scoring_profile_key varchar(64)
+  runtime_scoring_profile_version integer
+  runtime_screen_key varchar(96)
+  scoring_method varchar(255) [not null]
+  section varchar(255) [not null]
+  sequence integer [not null]
+  speaking_weight numeric(5, 2) [not null]
+  task_type varchar(255)
+  task_type_key varchar(64) [not null]
+  writing_weight numeric(5, 2) [not null]
+}
+
+Table exam_definition_cefr_targets {
+  exam_definition_id bigint [pk]
+  level varchar(2) [pk]
+  percent integer [not null]
+}
+
+Table exam_blueprints {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  author_user_public_id uuid
+  name varchar(255) [not null]
+  rejection_reason varchar(255)
+  status varchar(255) [not null]
+  tenant_id uuid
+  version bigint [not null]
+}
+
+Table blueprint_items {
+  blueprint_id bigint [not null]
+  order_index integer [not null]
+  question_public_id uuid [not null]
+  section varchar(255) [not null]
+}
+
+Table exam_versions {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  exam_definition_public_id uuid [not null]
+  exam_definition_version integer [not null]
+  generation_algorithm_version varchar(32)
+  generation_seed bigint
+  name varchar(255) [not null]
+  pool_policy_fingerprint varchar(128)
+  source_blueprint_public_id uuid [not null]
+  tenant_id uuid
+  version integer [not null]
+  assembly_report text
+}
+
+Table exam_version_items {
+  exam_version_id bigint [not null]
+  audio_prompt_ref uuid
+  correct_answer_text text
+  image_prompt_ref uuid
+  max_word_count integer
+  min_word_count integer
+  options_json text
+  order_index integer [not null]
+  prompt_text text
+  pte_task_type varchar(255)
+  public_id uuid [not null]
+  reference_answer_text text
+  runtime_answer_schema_version integer
+  runtime_authoring_contract_key varchar(96)
+  runtime_authoring_contract_version integer
+  runtime_behavior_key varchar(64)
+  runtime_contract_version integer
+  runtime_mapping_status varchar(32)
+  runtime_mapping_version varchar(32)
+  runtime_min_supported_app_version varchar(32)
+  runtime_profile_key varchar(96)
+  runtime_profile_status varchar(16)
+  runtime_profile_version integer
+  runtime_renderer_key varchar(96)
+  runtime_required_client_capabilities varchar(512)
+  runtime_scoring_configuration_digest varchar(128)
+  runtime_scoring_implementation_version varchar(96)
+  runtime_scoring_mode varchar(16)
+  runtime_scoring_profile_key varchar(64)
+  runtime_scoring_profile_version integer
+  runtime_screen_key varchar(96)
+  section varchar(255) [not null]
+  source_question_public_id uuid [not null]
+  task_type_code varchar(64)
+  task_type_display_name varchar(128)
+  task_type_key varchar(64) [not null]
+  title varchar(255) [not null]
+}
+
+// =============================================================================
+// GROUP: Exam Scheduling and Registration
+// =============================================================================
+
+Table exam_sessions {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  capacity integer [not null]
+  closes_at timestamptz [not null]
+  draft_version bigint [not null]
+  exam_definition_public_id uuid
+  exam_definition_version integer
+  exam_mode varchar(16)
+  exam_version_public_id uuid
+  grading_completed_at timestamptz
+  grading_frozen_at timestamptz
+  grading_frozen_by_public_id uuid
+  grading_marking_mode varchar(24)
+  grading_preview_version varchar(128)
+  grading_status varchar(16)
+  license_key varchar(64) [not null]
+  max_retries_per_student integer [not null]
+  name varchar(255) [not null]
+  opens_at timestamptz [not null]
+  answer_integrity_level varchar(255)
+  device_check_required boolean
+  lockdown_mode varchar(255)
+  proctor_required boolean
+  replay_policy_limit integer
+  replay_policy_type varchar(255)
+  publication_locked_at timestamptz
+  publication_public_id uuid
+  reuse_policy varchar(40)
+  series_key varchar(128)
+  session_code varchar(24) [unique, not null]
+  status varchar(255) [not null]
+  subscription_id uuid [not null]
+  tenant_id uuid [not null]
+  avoid_repeated_questions boolean [not null, default: false]
+}
+
+Table exam_session_proctors {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  proctor_public_id uuid [not null]
+  role varchar(255)
+  tenant_id uuid [not null]
+  session_id bigint [not null]
+}
+
+Table exam_session_selected_skills {
+  session_id bigint [pk]
+  skill varchar(16) [pk]
+}
+
+Table exam_session_audience_sources {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  created_by uuid
+  source_public_id uuid [not null]
+  source_type varchar(16) [not null]
+  tenant_id uuid [not null]
+  session_id bigint [not null]
+}
+
+Table exam_session_cefr_targets {
+  session_id bigint [pk]
+  level varchar(2) [pk]
+  percent integer [not null]
+}
+
+Table exam_registrations {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  attendance_status varchar(32) [not null]
+  attendance_version bigint [not null]
+  identity_note varchar(1000)
+  identity_status varchar(32) [not null]
+  last_action_at timestamptz
+  last_actor_public_id uuid
+  last_actor_role varchar(32)
+  last_reason_or_note varchar(1000)
+  license_key varchar(64) [not null]
+  prior_session_name varchar(255)
+  prior_session_public_id uuid
+  prior_status varchar(16)
+  published_at timestamptz
+  reason varchar(32)
+  source_summary varchar(1000)
+  status varchar(16) [not null]
+  student_public_id uuid [not null]
+  tenant_id uuid [not null]
+  session_id bigint [not null]
+}
+
+// =============================================================================
+// GROUP: Exam Delivery and Attempts
+// =============================================================================
+
+Table exam_attempts {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  active_section varchar(255)
+  answer_integrity_level varchar(255) [not null]
+  attempt_number integer [not null]
+  capability_fingerprint varchar(2048)
+  current_order_index integer [not null, default: 0]
+  device_check_passed_at timestamptz
+  device_check_required boolean [not null]
+  exam_definition_public_id uuid [not null]
+  exam_definition_version integer
+  exam_end_time timestamptz
+  exam_mode varchar(16) [not null]
+  exam_version_public_id uuid [not null]
+  grading_excluded boolean [not null]
+  grading_exclusion_reason varchar(500)
+  last_play_allowed boolean
+  last_play_request_id varchar(255)
+  last_seen_at timestamptz
+  lockdown_mode varchar(20)
+  max_retries_per_student integer [not null, default: 0]
+  play_count integer [not null, default: 0]
+  proctor_required boolean [not null]
+  replay_policy_limit integer
+  replay_policy_type varchar(255) [not null]
+  section_started_at timestamptz
+  session_public_id uuid [not null]
+  started_at timestamptz
+  status varchar(255) [not null]
+  student_public_id uuid [not null]
+  submitted_at timestamptz
+  tenant_id uuid [not null]
+  version bigint
+}
+
+Table attempt_answers {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  confidence varchar(16)
+  expired boolean [not null]
+  item_order_index integer [not null]
+  item_public_id uuid [not null]
+  payload text
+  selected_evaluation_public_id uuid
+  selected_score_source varchar(16)
+  selected_score_source_at timestamptz
+  selected_score_source_by uuid
+  status varchar(255) [not null]
+  attempt_id bigint [not null]
+}
+
+Table exam_incidents {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  attempt_public_id uuid
+  client_event_id varchar(128)
+  client_occurred_at timestamptz
+  current_owner_name varchar(255)
+  current_owner_role varchar(32) [not null]
+  description text
+  detected_at timestamptz [not null]
+  origin varchar(16) [not null]
+  reporter_name varchar(255)
+  reporter_public_id uuid
+  reporter_role varchar(32)
+  resolution_summary text
+  session_public_id uuid [not null]
+  severity varchar(32) [not null]
+  status varchar(32) [not null]
+  student_public_id uuid
+  tenant_id uuid [not null]
+  title varchar(255) [not null]
+  type varchar(64) [not null]
+}
+
+// =============================================================================
+// GROUP: Scoring and Grading
+// =============================================================================
+
+Table grading_assignments {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  assigned_at timestamptz [not null]
+  assigned_by_public_id uuid [not null]
+  attempt_public_id uuid [not null]
+  eligible_answer_count integer [not null]
+  examiner_public_id uuid [not null]
+  finalized_at timestamptz
+  session_public_id uuid [not null]
+  started_at timestamptz
+  status varchar(16) [not null]
+  tenant_id uuid [not null]
+  work_version bigint [not null]
+}
+
+Table grading_issues {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  answer_public_id uuid
+  assignment_id bigint [not null]
+  description varchar(2000) [not null]
+  reported_at timestamptz [not null]
+  reported_by uuid [not null]
+  resolution varchar(2000)
+  resolved_at timestamptz
+  resolved_by uuid
+  status varchar(255) [not null]
+  tenant_id uuid [not null]
+  type varchar(255) [not null]
+}
+
+Table answer_evaluations {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  answer_public_id uuid [not null]
+  attempt_public_id uuid [not null]
+  lock_version bigint [not null]
+  score integer
+  scored_at timestamptz
+  session_public_id uuid [not null]
+  source varchar(16) [not null]
+  tenant_id uuid [not null]
+  ai_dispatched_at timestamptz
+  ai_model varchar(160)
+  ai_provider varchar(64)
+  ai_provider_category varchar(16)
+  ai_provider_version varchar(100)
+  criteria_scores_json text
+  detail_json text
+  dispatch_token bigint
+  exam_definition_public_id uuid
+  failure_reason varchar(40)
+  fallback boolean
+  feedback text
+  item_public_id uuid
+  scoring_method varchar(16)
+  section varchar(255)
+  status varchar(16)
+  task_type varchar(255)
+  teacher_score integer
+  teacher_scored_at timestamptz
+  transcript text
+  assignment_id bigint
+  comment varchar(2000)
+  decision_kind varchar(32)
+  draft_version bigint
+  examiner_public_id uuid
+  expected_review_version varchar(128)
+  request_fingerprint varchar(128)
+  request_public_id uuid
+  reviewed_ai_score integer
+  reviewed_ai_version varchar(128)
+  saved_at timestamptz
+  examiner_status varchar(16)
+  submitted_at timestamptz
+  carried_over_from_examiner_public_id uuid
+  rubric_version_public_id uuid
+  trait_scores_json text
+  ai_gap_reasons_json text
+}
+
+Table exam_results {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  attempt_public_id uuid [unique, not null]
+  listening_score integer
+  overall_score integer
+  publication_cohort_size integer
+  publication_public_id uuid
+  published boolean [not null]
+  published_at timestamptz
+  published_by_public_id uuid
+  reading_score integer
+  report_snapshot_json text
+  session_public_id uuid [not null]
+  snapshot_public_id uuid
+  speaking_score integer
+  student_public_id uuid [not null]
+  tenant_id uuid [not null]
+  writing_score integer
+}
+
+Table scoring_rubric_versions {
+  id bigint [pk]
+  public_id uuid [not null]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  deleted boolean [not null, default: FALSE]
+  lock_version bigint [not null, default: 0]
+  version_no integer [not null]
+  status varchar(16) [not null]
+  parameters jsonb [not null]
+  catalog_version integer [not null]
+  author_user_public_id uuid
+  approver_user_public_id uuid
+  rejection_reason varchar(1000)
+  submitted_at timestamptz
+  decided_at timestamptz
+  activated_at timestamptz
+  retired_at timestamptz
+  updated_by_user_public_id uuid
+}
+
+Table scoring_rubric_activation_audits {
+  id bigint [pk]
+  public_id uuid [not null]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  deleted boolean [not null, default: FALSE]
+  version_public_id uuid [not null]
+  previous_active_public_id uuid
+  actor_user_public_id uuid [not null]
+  activated_at timestamptz [not null]
+  diff_summary text
+  reason varchar(1000)
+}
+
+// =============================================================================
+// GROUP: Practice and Learning
+// =============================================================================
+
+Table practice_sessions {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  catalog_version varchar(32) [not null]
+  client_capabilities text
+  completed_at timestamptz
+  deadline_at timestamptz
+  discarded_at timestamptz
+  last_activity_at timestamptz
+  product_code varchar(64) [not null]
+  selected_task_types text
+  source_type varchar(16) [not null]
+  start_idempotency_key varchar(128) [not null]
+  start_request_hash varchar(64) [not null]
+  started_at timestamptz
+  status varchar(16) [not null]
+  student_public_id uuid [not null]
+  tenant_id uuid [not null]
+  time_limit_seconds integer [not null]
+  title varchar(128) [not null]
+  version bigint
+  timing_mode varchar(16)
+  question_count integer
+  kind varchar(16)
+  skill_code varchar(16)
+  mock_test_id bigint
+}
+
+Table practice_responses {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  ai_detail_json text
+  ai_feedback text
+  ai_model varchar(160)
+  ai_provider varchar(64)
+  ai_provider_version varchar(100)
+  ai_result_hash varchar(64)
+  ai_score integer
+  ai_score_status varchar(32)
+  ai_scored_at timestamptz
+  ai_sub_scores_json text
+  ai_transcript text
+  answer_schema_version integer
+  answered_at timestamptz
+  audio_prompt_ref uuid
+  confidence varchar(16)
+  contract_version integer
+  correct_answer_text text
+  display_name varchar(128) [not null]
+  image_prompt_ref uuid
+  max_word_count integer
+  min_word_count integer
+  objective_evaluated_at timestamptz
+  objective_options_json text
+  objective_score integer
+  options_json text
+  order_index integer [not null]
+  practice_session_id bigint [not null]
+  prompt_text text
+  reference_answer_text text
+  renderer_key varchar(128) [not null]
+  saved_payload text
+  scoring_attempts integer [not null]
+  scoring_dispatch_token uuid
+  scoring_dispatched_at timestamptz
+  scoring_failure_code varchar(32)
+  scoring_redispatch_count integer [not null]
+  scoring_requested_at timestamptz
+  scoring_status varchar(16) [not null]
+  section varchar(32) [not null]
+  skipped_at timestamptz
+  source_question_public_id uuid
+  status varchar(16) [not null]
+  task_code varchar(64) [not null]
+  version bigint
+  pre_listen_seconds integer
+  pre_record_seconds integer
+  response_seconds integer
+}
+
+Table practice_student_profiles {
+  id bigint [pk]
+  public_id uuid [unique, not null]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  deleted boolean [not null, default: FALSE]
+  student_public_id uuid [unique, not null]
+  tenant_id uuid [not null]
+  exam_date date
+  version bigint
+}
+
+Table practice_mock_tests {
+  id bigint [pk]
+  public_id uuid [unique, not null]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  deleted boolean [not null, default: FALSE]
+  sequence_no integer [not null]
+  title varchar(128) [not null]
+  seed bigint [not null]
+  template_public_id uuid
+  template_version integer
+  status varchar(16) [not null]
+  item_count integer [not null]
+  estimated_minutes integer [not null]
+  version bigint
+}
+
+Table practice_mock_test_items {
+  id bigint [pk]
+  mock_test_id bigint [not null]
+  question_public_id uuid [not null]
+  task_code varchar(64) [not null]
+  section varchar(32) [not null]
+  order_index integer [not null]
+}
+
+Table chat_usage {
+  id bigint [pk]
+  student_id uuid [not null]
+  usage_date date [not null]
+  used integer [not null, default: 0]
+}
+
+Table chat_usage_daily {
+  usage_date date [pk]
+  model varchar(64) [pk]
+  messages integer [not null, default: 0]
+  ok integer [not null, default: 0]
+  refused integer [not null, default: 0]
+  failed integer [not null, default: 0]
+  tokens_in bigint [not null, default: 0]
+  tokens_out bigint [not null, default: 0]
+  tokens_thinking bigint [not null, default: 0]
+  cost_usd numeric(14, 6) [not null, default: 0]
+  failed_timeout integer [not null, default: 0]
+  failed_rate_limited integer [not null, default: 0]
+  failed_auth integer [not null, default: 0]
+  failed_unavailable integer [not null, default: 0]
+  failed_truncated integer [not null, default: 0]
+  failed_other integer [not null, default: 0]
+}
+
+// =============================================================================
+// GROUP: Billing and Commerce
+// =============================================================================
+
+Table service_plans {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  currency varchar(3) [not null]
+  description varchar(255)
+  duration_days integer
+  extra_student_slots integer
+  max_students_per_session integer
+  name varchar(255) [not null]
+  price numeric(19, 2) [not null]
+  status varchar(32) [not null]
+  type varchar(32) [not null]
+  version bigint [not null]
+}
+
+Table subscriptions {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  activation_source varchar(16) [not null]
+  expires_at timestamptz [not null]
+  license_key varchar(32) [unique, not null]
+  max_students_per_session integer [not null]
+  plan_id uuid [not null]
+  starts_at timestamptz [not null]
+  status varchar(16) [not null]
+  tenant_id uuid [not null]
+}
+
+Table orders {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  amount numeric(19, 2) [not null]
+  currency varchar(3) [not null]
+  order_code bigint [unique, not null]
+  paid_at timestamptz
+  payment_link_url varchar(512)
+  plan_id uuid [not null]
+  status varchar(16) [not null]
+  tenant_id uuid [not null]
+}
+
+Table order_payments {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  processed boolean [not null]
+  raw_payload text [not null]
+  received_at timestamptz [not null]
+  order_id bigint [not null]
+}
+
+Table license_codes {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  code varchar(32) [unique, not null]
+  code_expires_at timestamptz
+  issued_at timestamptz [not null]
+  issued_by uuid [not null]
+  plan_id uuid [not null]
+  redeemed_at timestamptz
+  redeemed_by_tenant_id uuid
+  revoke_reason varchar(255)
+  status varchar(16) [not null]
+  subscription_id uuid [unique]
+  bound_tenant_id uuid
+  requested_starts_at timestamptz
+  contract_reference varchar(64)
+  note varchar(500)
+}
+
+Table platform_settings {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  description varchar(255)
+  setting_key varchar(100) [unique, not null]
+  value varchar(255) [not null]
+}
+
+// =============================================================================
+// GROUP: Media and Assets
+// =============================================================================
+
+Table media_objects {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  asset_id varchar(255)
+  audio_prompt boolean [not null, default: false]
+  cloudinary_delivery_type varchar(24) [not null]
+  cloudinary_public_id varchar(255)
+  cloudinary_resource_type varchar(255)
+  content_type varchar(255) [not null]
+  duration_seconds integer
+  owner_public_id uuid [not null]
+  practice_item_public_id uuid
+  practice_session_public_id uuid
+  purpose varchar(64)
+  secure_url text
+  size_bytes bigint
+  status varchar(255) [not null]
+  storage_key varchar(255) [unique, not null]
+  tenant_id uuid
+}
+
+// =============================================================================
+// GROUP: Notifications
+// =============================================================================
+
+Table notifications {
+  id bigint [pk]
+  created_at timestamptz [not null, default: `CURRENT_TIMESTAMP`]
+  deleted boolean [not null, default: false]
+  public_id uuid [unique, not null, default: `gen_random_uuid()`]
+  updated_at timestamptz [not null, default: `CURRENT_TIMESTAMP`]
+  body varchar(5000) [not null]
+  category varchar(32) [not null]
+  event_key varchar(255) [not null]
+  importance varchar(16) [not null]
+  notification_type varchar(48) [not null]
+  payload_hash varchar(64) [not null]
+  schema_version integer [not null]
+  target_public_id uuid [not null]
+  target_type varchar(32) [not null]
+  title varchar(150) [not null]
+}
+
+Table notification_recipients {
+  id bigint [pk]
+  created_at timestamptz [not null, default: `CURRENT_TIMESTAMP`]
+  deleted boolean [not null, default: false]
+  public_id uuid [unique, not null, default: `gen_random_uuid()`]
+  updated_at timestamptz [not null, default: `CURRENT_TIMESTAMP`]
+  attempts integer [not null, default: 0]
+  claim_token uuid
+  completed_at timestamptz
+  content_public_id uuid [not null]
+  delivered_at timestamptz
+  last_failure_code varchar(64)
+  lease_until timestamptz
+  next_attempt_at timestamptz [not null]
+  read_at timestamptz
+  recipient_user_public_id uuid [not null]
+  sequence_no bigint
+  status varchar(16) [not null, default: 'PENDING']
+  tenant_id uuid
+}
+
+Table notification_recipient_streams {
+  id bigint [pk]
+  created_at timestamptz [not null, default: `CURRENT_TIMESTAMP`]
+  deleted boolean [not null, default: false]
+  public_id uuid [unique, not null, default: `gen_random_uuid()`]
+  updated_at timestamptz [not null, default: `CURRENT_TIMESTAMP`]
+  last_sequence bigint [not null, default: 0]
+  read_revision bigint [not null, default: 0]
+  recipient_user_public_id uuid [not null]
+  tenant_id uuid
+}
+
+Table notification_logs {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  body varchar(255) [not null]
+  dedupe_key varchar(255)
+  notification_type varchar(255) [not null]
+  recipient_email varchar(255) [not null]
+  recipient_user_public_id uuid
+  sent_at timestamptz
+  status varchar(255) [not null]
+  subject varchar(255) [not null]
+  tenant_id uuid
+}
+
+Table notification_announcements {
+  id bigint [pk]
+  created_at timestamptz [not null, default: `CURRENT_TIMESTAMP`]
+  deleted boolean [not null, default: false]
+  public_id uuid [unique, not null, default: `gen_random_uuid()`]
+  updated_at timestamptz [not null, default: `CURRENT_TIMESTAMP`]
+  affected_from timestamptz
+  affected_until timestamptz
+  author_user_public_id uuid [not null]
+  body varchar(5000) [not null]
+  category varchar(32) [not null]
+  correction_of_public_id uuid
+  importance varchar(16) [not null]
+  published_at timestamptz
+  published_content_public_id uuid
+  title varchar(150) [not null]
+  version bigint [not null, default: 0]
+}
+
+Table notification_inbox_snapshots {
+  id bigint [pk]
+  public_id uuid [unique, not null, default: `gen_random_uuid()`]
+  recipient_user_public_id uuid [not null]
+  tenant_id uuid
+  upper_sequence bigint [not null]
+  read_revision bigint [not null]
+  created_at timestamptz [not null, default: `CURRENT_TIMESTAMP`]
+  expires_at timestamptz [not null]
+}
+
+// =============================================================================
+// GROUP: Support Audit and System
+// =============================================================================
+
+Table support_ticket {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  category varchar(255) [not null]
+  description varchar(2000) [not null]
+  entity_id varchar(36)
+  entity_type varchar(32)
+  status varchar(255) [not null]
+  submitter_user_public_id uuid [not null]
+  tenant_id uuid [not null]
+  version bigint [not null]
+}
+
+Table support_ticket_note {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  admin_public_id uuid [not null]
+  content text [not null]
+  ticket_id bigint [not null]
+  ticket_public_id uuid [not null]
+}
+
+Table audit_logs {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  action varchar(255) [not null]
+  actor_role varchar(255)
+  actor_user_id uuid [not null]
+  after_state jsonb
+  aggregate_id varchar(255) [not null]
+  aggregate_type varchar(255) [not null]
+  before_state jsonb
+  request_public_id uuid
+  resource_code varchar(255)
+  resource_name varchar(255)
+  summary varchar(500) [not null]
+  tenant_id uuid
+}
+
+Table idempotency_keys {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  completed boolean [not null]
+  expires_at timestamptz [not null]
+  idempotency_key varchar(128) [not null]
+  organization_id uuid [not null]
+  request_hash varchar(128) [not null]
+  result jsonb
+  scope varchar(32) [not null]
+}
+
+// =============================================================================
+// RELATIONSHIPS & FOREIGN KEYS
+// =============================================================================
+
+// --- Identity & Access Management ---
+Ref: user_roles.user_id > users.id [delete: cascade]
+Ref: refresh_tokens.user_id > users.id [delete: cascade]
+Ref: password_reset_tokens.user_id > users.id [delete: cascade]
+Ref: organization_members.user_id > users.id
+Ref: organization_members.organization_id > organizations.id
+Ref: organization_member_roles.member_id > organization_members.id [delete: cascade]
+Ref: organization_quota_grants.organization_id > organizations.id
+
+// --- Academic & Enrollment ---
+Ref: programs.organization_id > organizations.id
+Ref: classes.program_id > programs.id
+Ref: class_students.class_id > classes.id
+Ref: class_students.student_public_id > users.public_id
+
+// --- Item Bank & Questions ---
+Ref: questions.task_type_key > question_types.code
+Ref: question_options.question_id > questions.id [delete: cascade]
+Ref: question_generation_job_items.job_id > question_generation_jobs.id [delete: cascade]
+Ref: question_generation_jobs.requested_by_user_public_id > users.public_id
+Ref: questions.generation_job_public_id > question_generation_jobs.public_id
+
+// --- Assessment & Blueprints ---
+Ref: exam_definitions.rubric_version_public_id > scoring_rubric_versions.public_id
+Ref: exam_definition_items.exam_definition_id > exam_definitions.id [delete: cascade]
+Ref: exam_definition_cefr_targets.exam_definition_id > exam_definitions.id [delete: cascade]
+Ref: exam_blueprints.author_user_public_id > users.public_id
+Ref: blueprint_items.blueprint_id > exam_blueprints.id [delete: cascade]
+Ref: exam_versions.exam_definition_public_id > exam_definitions.public_id
+Ref: exam_versions.source_blueprint_public_id > exam_blueprints.public_id
+Ref: exam_version_items.exam_version_id > exam_versions.id [delete: cascade]
+Ref: exam_version_items.source_question_public_id > questions.public_id
+
+// --- Scheduling & Sessions ---
+Ref: exam_sessions.exam_definition_public_id > exam_definitions.public_id
+Ref: exam_sessions.exam_version_public_id > exam_versions.public_id
+Ref: exam_session_proctors.session_id > exam_sessions.id [delete: cascade]
+Ref: exam_session_proctors.proctor_public_id > users.public_id
+Ref: exam_session_selected_skills.session_id > exam_sessions.id [delete: cascade]
+Ref: exam_session_audience_sources.session_id > exam_sessions.id [delete: cascade]
+Ref: exam_session_cefr_targets.session_id > exam_sessions.id [delete: cascade]
+Ref: exam_registrations.session_id > exam_sessions.id [delete: cascade]
+Ref: exam_registrations.student_public_id > users.public_id
+
+// --- Attempts & Delivery ---
+Ref: exam_attempts.session_public_id > exam_sessions.public_id
+Ref: exam_attempts.exam_version_public_id > exam_versions.public_id
+Ref: exam_attempts.student_public_id > users.public_id
+Ref: attempt_answers.attempt_id > exam_attempts.id [delete: cascade]
+Ref: attempt_answers.item_public_id > exam_version_items.public_id
+Ref: exam_incidents.attempt_public_id > exam_attempts.public_id
+Ref: exam_incidents.session_public_id > exam_sessions.public_id
+Ref: exam_incidents.student_public_id > users.public_id
+
+// --- Scoring & Grading ---
+Ref: grading_assignments.attempt_public_id > exam_attempts.public_id
+Ref: grading_assignments.session_public_id > exam_sessions.public_id
+Ref: grading_assignments.examiner_public_id > users.public_id
+Ref: grading_issues.assignment_id > grading_assignments.id
+Ref: grading_issues.answer_public_id > attempt_answers.public_id
+Ref: answer_evaluations.attempt_public_id > exam_attempts.public_id
+Ref: answer_evaluations.answer_public_id > attempt_answers.public_id
+Ref: answer_evaluations.rubric_version_public_id > scoring_rubric_versions.public_id
+Ref: exam_results.attempt_public_id > exam_attempts.public_id
+Ref: exam_results.session_public_id > exam_sessions.public_id
+Ref: exam_results.student_public_id > users.public_id
+Ref: scoring_rubric_activation_audits.version_public_id > scoring_rubric_versions.public_id
+
+// --- Practice & Learning ---
+Ref: practice_sessions.student_public_id > users.public_id
+Ref: practice_sessions.mock_test_id > practice_mock_tests.id
+Ref: practice_responses.practice_session_id > practice_sessions.id [delete: cascade]
+Ref: practice_responses.source_question_public_id > questions.public_id
+Ref: practice_mock_test_items.mock_test_id > practice_mock_tests.id [delete: cascade]
+Ref: practice_mock_test_items.question_public_id > questions.public_id
+Ref: practice_student_profiles.student_public_id > users.public_id
+Ref: chat_usage.student_id > users.public_id
+
+// --- Billing & Commerce ---
+Ref: orders.plan_id > service_plans.public_id
+Ref: orders.tenant_id > organizations.public_id
+Ref: order_payments.order_id > orders.id [delete: cascade]
+Ref: subscriptions.plan_id > service_plans.public_id
+Ref: subscriptions.tenant_id > organizations.public_id
+Ref: license_codes.plan_id > service_plans.public_id
+Ref: license_codes.subscription_id > subscriptions.id
+Ref: license_codes.redeemed_by_tenant_id > organizations.public_id
+
+// --- Notifications ---
+Ref: notification_recipients.content_public_id > notifications.public_id
+Ref: notification_recipients.recipient_user_public_id > users.public_id
+Ref: notification_recipient_streams.recipient_user_public_id > users.public_id
+Ref: notification_inbox_snapshots.recipient_user_public_id > users.public_id
+Ref: notification_announcements.author_user_public_id > users.public_id
+
+// --- Support & System ---
+Ref: support_ticket.submitter_user_public_id > users.public_id
+Ref: support_ticket_note.ticket_id > support_ticket.id [delete: cascade]
+Ref: support_ticket_note.admin_public_id > users.public_id
