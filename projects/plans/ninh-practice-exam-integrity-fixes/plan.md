@@ -49,3 +49,20 @@ trước khi sửa. Kết quả đối chiếu và cách xử lý nằm ở bả
 5. Blanks kéo-thả: từ đã dùng bị mờ, kéo blank về ngân hàng trả lại từ.
 6. Vendor-web ở tiếng Việt: trang review câu hỏi hiện tiếng Việt.
 7. Examiner nhập điểm 101 / -1 / 3.5: có toast báo điểm không hợp lệ.
+
+## Kết quả thử tay (2026-11-14, Chromium, backend Docker đã rebuild)
+
+Đã xác nhận trên trình duyệt hoặc qua API với tài khoản test riêng:
+
+- Re-order: thứ tự hiển thị bị xáo trộn, mở lại phiên vẫn giữ nguyên thứ tự. API vẫn trả `orderIndex` đúng thứ tự đáp án (phần hoãn).
+- Fill in the Blanks kéo-thả: ngân hàng từ khác thứ tự đáp án. Từ đã đặt bị mờ và khóa, bấm blank đã điền thì trả từ lại. Backend trả option đã xáo trộn.
+- Write From Dictation: payload của câu chưa làm có `promptText = null`, giao diện không có transcript; sau khi nộp qua API, `itemResult.promptText` trả transcript.
+
+Chưa thử được:
+
+- Hết giờ tự nộp (1.3): chế độ tính giờ chỉ có ở mock test, cần ngân hàng câu hỏi đủ 22 dạng và audio.
+- Cổng "Start question" trên Firefox/Safari (2.1): Browser pane là Chromium.
+- Icon "đúng một phần" (2.2), trang Question Review tiếng Việt (2.4), thông báo giám khảo nhập điểm sai (2.5): chưa đăng nhập vendor-web và tenant-web, chưa có kết quả chấm một phần.
+- Hiển thị transcript sau khi nộp trên giao diện: câu nghe thiếu audio nên UI bị khóa; chỉ xác nhận ở mức API.
+
+Dữ liệu test cục bộ: [cleanup-local-test-data.sql](./cleanup-local-test-data.sql).
