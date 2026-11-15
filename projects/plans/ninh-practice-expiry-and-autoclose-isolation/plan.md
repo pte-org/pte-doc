@@ -52,3 +52,8 @@ Ghi nhận chưa sửa: `SubscriptionExpirationService` và `TenantSuspensionExp
 `SubscriptionExpirationService` và `TenantSuspensionExpirationService` không còn một `@Transactional` cho cả lô. Mỗi dòng chạy trong giao dịch riêng (`TransactionTemplate` dựng từ `PlatformTransactionManager`),
 nạp lại dòng và kiểm tra còn đến hạn rồi mới đổi trạng thái; lỗi một dòng chỉ ghi `warn`. Test mới: `SubscriptionExpirationServiceTest` (3), thêm 1 test vào `TenantSuspensionExpirationServiceTest`;
 test cũ của tenancy cập nhật thêm stub `findByPublicId`. Test billing, tenancy và `ModuleStructureTest` qua. Chưa chạy trong container thật nên việc Spring nối bean `PlatformTransactionManager` mới chỉ được xác nhận qua biên dịch.
+
+### Đã sửa tiếp: `GradingCohortService.reconcileScheduled` (2026-11-15)
+
+Nhận xét lặp lại điểm `AnswerSubmitService` (vẫn không đúng vì IDENTITY, xem trên). Điểm `reconcileScheduled` đúng: nhánh khi không có `reconciliationWorker` gọi `reconcileIfPresent` mà không có `try/catch`.
+Đã gộp cả hai nhánh vào một `try/catch (Exception)`; thêm 1 test vào `GradingCohortServiceTest` (12 test qua). Trong production worker luôn được tiêm nên nhánh này chủ yếu là dự phòng.
