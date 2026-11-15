@@ -38,3 +38,17 @@ trên 5 phương thức; `try/catch` ở worker. Fast.
 
 Kiểm chứng: test `com.pte.practice`, hai worker test và `ModuleStructureTest` qua. Chưa có test chạy thật qua proxy giao dịch trên DB (test đơn vị không thấy được rollback), nên hành vi commit
 chỉ được khóa bằng test khai báo. Chưa làm: rebuild container; commit.
+
+## Bổ sung: `OrderExpirationService` (2026-11-15)
+
+Nhận xét tiếp theo có hai điểm. Điểm về `AnswerSubmitService.submit` **không đúng**: `BaseEntity` dùng `GenerationType.IDENTITY` nên `INSERT` chạy ngay khi `save`, bên trong `try`,
+và vi phạm unique được dịch thành `DataIntegrityViolationException` tại đó; đổi sang `saveAndFlush` không thay đổi gì. Điểm về `OrderExpirationService` **đúng**: chỉ bắt `PayOsException`,
+nên `OrderException`, lỗi khóa hay khóa lạc quan ở `expireIfPending` làm dừng cả vòng cron. Đã thêm `catch (RuntimeException)` cùng `warn`, kèm một test (một đơn lỗi khóa không chặn đơn khác).
+Ghi nhận chưa sửa: `SubscriptionExpirationService` và `TenantSuspensionExpirationService` chạy cả lô trong một `@Transactional`, một dòng lỗi sẽ rollback toàn bộ lô ở mỗi chu kỳ.
+
+
+### Đã sửa tiếp (2026-11-15)
+
+`SubscriptionExpirationService` và `TenantSuspensionExpirationService` không còn một `@Transactional` cho cả lô. Mỗi dòng chạy trong giao dịch riêng (`TransactionTemplate` dựng từ `PlatformTransactionManager`),
+nạp lại dòng và kiểm tra còn đến hạn rồi mới đổi trạng thái; lỗi một dòng chỉ ghi `warn`. Test mới: `SubscriptionExpirationServiceTest` (3), thêm 1 test vào `TenantSuspensionExpirationServiceTest`;
+test cũ của tenancy cập nhật thêm stub `findByPublicId`. Test billing, tenancy và `ModuleStructureTest` qua. Chưa chạy trong container thật nên việc Spring nối bean `PlatformTransactionManager` mới chỉ được xác nhận qua biên dịch.
