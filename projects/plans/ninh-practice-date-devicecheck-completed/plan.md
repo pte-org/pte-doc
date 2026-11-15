@@ -59,3 +59,18 @@ Fast. Phase 3 chạm nhánh hiển thị phức tạp nhất của `PracticeSess
 Kiểm chứng: `pte-practice` tsc sạch, 803 test qua, eslint không lỗi (một cảnh báo `locale` không dùng đã có sẵn ở `DeviceCheckDialog`).
 
 Chưa làm: thử trên giao diện, test component cho `MicCheck` và `PracticeSessionView` (cần mock Web Audio), commit.
+
+## Test bổ sung (2026-11-15)
+
+`pte-practice` chưa có jsdom hay Testing Library, nên thay vì thêm dependency, phần logic của ba thay đổi được tách thành hàm thuần rồi test:
+
+- `session/footer-actions.ts` (`footerActions`): toàn bộ logic nút Nộp, Bỏ qua, Next, Prev của footer, thay cho chuỗi if trong `PracticeSessionView`;
+  8 test, gồm phiên COMPLETED chỉ đọc, phiên đang chạy vẫn trả lời lại được câu đã bỏ qua, câu đã chấm không bị coi là chỉ đọc.
+- `deviceCheck/one-shot-timer.ts` (`createOneShotTimer`): timer hủy được, dùng trong `MicCheck`; 4 test với fake timers
+  (chạy một lần, hủy thì không chạy, khởi động lại thay lần chờ cũ).
+- `home/exam-date.ts` (`parseManualExamDate`): đọc ngày gõ tay thành `valid`, `outOfRange` hoặc `incomplete`, thay logic trong `ExamDateLine`; 3 test.
+- `answer-checks.ts` (`recordingReviewIssue`): quyết định bản ghi nào phải vào màn xem lại (chỉ chế độ không tính giờ); 2 test.
+
+Kiểm chứng: `pte-practice` tsc sạch, 105 file và 820 test qua, eslint không lỗi (còn một cảnh báo `locale` không dùng đã có sẵn).
+
+Chưa có: test render thật cho `MicCheck`, `SpeakingRecorder`, `PracticeSessionView`, `ExamDateLine` (cần thêm `jsdom` và `@testing-library/react` vào devDependencies).
