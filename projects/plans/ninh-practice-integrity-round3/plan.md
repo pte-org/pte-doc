@@ -47,7 +47,7 @@ Fast. Rủi ro: migration Flyway không sửa lại được sau khi merge; câu
 ## Kết quả thực hiện (2026-11-15)
 
 - Phase 1: `PteTaskType.requiresReferenceAnswer()` thêm RE_TELL_LECTURE, SUMMARIZE_SPOKEN_TEXT, SUMMARIZE_GROUP_DISCUSSION;
-  migration `V42__require_reference_answer_for_ai_listening_tasks.sql`; ba dòng dev-seed đổi cờ thành `true`;
+  migration `V48__require_reference_answer_for_ai_listening_tasks.sql`; ba dòng dev-seed đổi cờ thành `true`;
   thông báo `REFERENCE_ANSWER_REQUIRED` ở editor vendor-web viết chung cho mọi dạng.
   Phát hiện thêm: `scripts/seed-local-practice-question-bank.ps1` không gửi `referenceAnswerText` cho SUMMARIZE_SPOKEN_TEXT,
   sau thay đổi này script seed sẽ bị chặn, nên đã bổ sung. Test cũ `summarizeSpokenText_withTranscript_isAccepted` giả định
