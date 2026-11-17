@@ -1,0 +1,390 @@
+// =============================================================================
+// PTE_Practice_and_ItemBank
+// =============================================================================
+
+Project PTE_Practice_and_ItemBank {
+  database_type: 'PostgreSQL'
+  Note: '''
+    Item Bank, Questions, AI Generation, Practice Sessions & Mock Tests
+  '''
+}
+
+TableGroup Item_Bank_and_Authoring {
+  questions
+  question_options
+  question_types
+  question_generation_jobs
+  question_generation_job_items
+  ai_prompt_versions
+  generation_usage_daily
+}
+
+TableGroup Practice_and_Learning {
+  practice_sessions
+  practice_responses
+  practice_student_profiles
+  practice_mock_tests
+  practice_mock_test_items
+  chat_usage
+  chat_usage_daily
+}
+
+TableGroup Media_and_Assets {
+  media_objects
+}
+
+// =============================================================================
+// TABLES
+// =============================================================================
+
+Table questions {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  audio_prompt_ref uuid
+  author_user_public_id uuid
+  availability_flags_explicit boolean [not null]
+  available_for_exam boolean [not null]
+  available_for_practice boolean [not null]
+  correct_answer_text text
+  is_current boolean [not null]
+  ever_published boolean
+  image_prompt_ref uuid
+  max_word_count integer
+  min_word_count integer
+  pool varchar(16) [not null]
+  prompt_text text
+  pte_task_type varchar(255)
+  reference_answer_text text
+  rejection_reason varchar(500)
+  revision_group_public_id uuid [not null]
+  revision_number integer [not null]
+  status varchar(255) [not null]
+  supersedes_public_id uuid
+  task_type_key varchar(64) [not null]
+  task_type_section varchar(16) [not null]
+  tenant_id uuid
+  version bigint [not null]
+  cefr_level varchar(2)
+  generation_meta jsonb
+  content_hash varchar(64)
+  generation_job_public_id uuid
+  generation_item_index integer
+}
+
+Table question_options {
+  question_id bigint [not null]
+  blank_index integer
+  correct boolean [not null]
+  correct_gap_index integer
+  order_index integer [not null]
+  public_id uuid [not null]
+  text text [not null]
+}
+
+Table question_types {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  active boolean [not null]
+  author_user_public_id uuid
+  authoring_contract_key varchar(96)
+  authoring_contract_version integer
+  code varchar(64) [unique, not null]
+  display_name varchar(128) [not null]
+  display_order integer [not null]
+  first_published_at timestamptz
+  lifecycle_status varchar(16) [not null]
+  normalized_display_name varchar(128) [unique, not null]
+  requires_audio_prompt boolean [not null]
+  requires_correct_answer boolean [not null]
+  requires_image_prompt boolean [not null]
+  requires_options boolean [not null]
+  requires_prompt_text boolean [not null]
+  requires_reference_answer boolean [not null]
+  requires_single_correct_option boolean [not null]
+  requires_word_count boolean [not null]
+  runtime_answer_schema_version integer
+  runtime_behavior_key varchar(64)
+  runtime_locked_at timestamptz
+  runtime_min_app_version varchar(32)
+  runtime_profile_key varchar(96)
+  runtime_profile_version integer
+  runtime_renderer_key varchar(96)
+  runtime_required_capabilities text [not null]
+  runtime_scoring_mode varchar(16)
+  runtime_scoring_profile_key varchar(64)
+  runtime_scoring_profile_version integer
+  scored boolean [not null]
+  screen_key varchar(96)
+  section varchar(16) [not null]
+  short_name varchar(32) [not null]
+  task_type_key varchar(64) [unique, not null]
+  uses_option_order_as_correct_position boolean [not null]
+  instruction varchar(500)
+  stimulus_before_timer boolean [not null, default: false]
+  stimulus_estimate_seconds integer [not null, default: 0]
+}
+
+Table question_generation_jobs {
+  id bigint [pk]
+  public_id uuid [unique, not null]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  deleted boolean [not null, default: FALSE]
+  requested_by_user_public_id uuid [not null]
+  task_type_key varchar(64) [not null]
+  cefr_level varchar(2) [not null]
+  pool varchar(16) [not null]
+  topic_hint varchar(200)
+  requested_count integer [not null]
+  status varchar(16) [not null]
+  succeeded_count integer [not null, default: 0]
+  failed_count integer [not null, default: 0]
+  worker_id varchar(64)
+  lease_until timestamptz
+  started_at timestamptz
+  finished_at timestamptz
+  failure_code varchar(64)
+  save_questions boolean [not null, default: true]
+}
+
+Table question_generation_job_items {
+  id bigint [pk]
+  job_id bigint [not null]
+  item_index integer [not null]
+  stage varchar(24) [not null]
+  question_public_id uuid
+  failure_code varchar(64)
+  failure_note varchar(300)
+  updated_at timestamptz [not null]
+}
+
+Table ai_prompt_versions {
+  id bigint [pk]
+  public_id uuid [unique, not null]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  deleted boolean [not null, default: FALSE]
+  kind varchar(16) [not null]
+  prompt_key varchar(64) [not null]
+  version_no integer [not null]
+  status varchar(16) [not null]
+  content jsonb [not null]
+  content_hash varchar(64) [not null]
+  author_user_public_id uuid
+  updated_by_user_public_id uuid
+  approver_user_public_id uuid
+  rejection_reason varchar(1000)
+  submitted_at timestamptz
+  decided_at timestamptz
+  activated_at timestamptz
+  retired_at timestamptz
+  lock_version bigint [not null, default: 0]
+  test_passed boolean
+  tested_content_hash varchar(64)
+  test_note varchar(500)
+  tested_by_user_public_id uuid
+  tested_at timestamptz
+}
+
+Table generation_usage_daily {
+  usage_date date [pk]
+  role varchar(16) [pk]
+  model varchar(64) [pk]
+  calls integer [not null, default: 0]
+  tokens_in bigint [not null, default: 0]
+  tokens_out bigint [not null, default: 0]
+}
+
+Table practice_sessions {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  catalog_version varchar(32) [not null]
+  client_capabilities text
+  completed_at timestamptz
+  deadline_at timestamptz
+  discarded_at timestamptz
+  last_activity_at timestamptz
+  product_code varchar(64) [not null]
+  selected_task_types text
+  source_type varchar(16) [not null]
+  start_idempotency_key varchar(128) [not null]
+  start_request_hash varchar(64) [not null]
+  started_at timestamptz
+  status varchar(16) [not null]
+  student_public_id uuid [not null]
+  tenant_id uuid [not null]
+  time_limit_seconds integer [not null]
+  title varchar(128) [not null]
+  version bigint
+  timing_mode varchar(16)
+  question_count integer
+  kind varchar(16)
+  skill_code varchar(16)
+  mock_test_id bigint
+}
+
+Table practice_responses {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  ai_detail_json text
+  ai_feedback text
+  ai_model varchar(160)
+  ai_provider varchar(64)
+  ai_provider_version varchar(100)
+  ai_result_hash varchar(64)
+  ai_score integer
+  ai_score_status varchar(32)
+  ai_scored_at timestamptz
+  ai_sub_scores_json text
+  ai_transcript text
+  answer_schema_version integer
+  answered_at timestamptz
+  audio_prompt_ref uuid
+  confidence varchar(16)
+  contract_version integer
+  correct_answer_text text
+  display_name varchar(128) [not null]
+  image_prompt_ref uuid
+  max_word_count integer
+  min_word_count integer
+  objective_evaluated_at timestamptz
+  objective_options_json text
+  objective_score integer
+  options_json text
+  order_index integer [not null]
+  practice_session_id bigint [not null]
+  prompt_text text
+  reference_answer_text text
+  renderer_key varchar(128) [not null]
+  saved_payload text
+  scoring_attempts integer [not null]
+  scoring_dispatch_token uuid
+  scoring_dispatched_at timestamptz
+  scoring_failure_code varchar(32)
+  scoring_redispatch_count integer [not null]
+  scoring_requested_at timestamptz
+  scoring_status varchar(16) [not null]
+  section varchar(32) [not null]
+  skipped_at timestamptz
+  source_question_public_id uuid
+  status varchar(16) [not null]
+  task_code varchar(64) [not null]
+  version bigint
+  pre_listen_seconds integer
+  pre_record_seconds integer
+  response_seconds integer
+}
+
+Table practice_student_profiles {
+  id bigint [pk]
+  public_id uuid [unique, not null]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  deleted boolean [not null, default: FALSE]
+  student_public_id uuid [unique, not null]
+  tenant_id uuid [not null]
+  exam_date date
+  version bigint
+}
+
+Table practice_mock_tests {
+  id bigint [pk]
+  public_id uuid [unique, not null]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  deleted boolean [not null, default: FALSE]
+  sequence_no integer [not null]
+  title varchar(128) [not null]
+  seed bigint [not null]
+  template_public_id uuid
+  template_version integer
+  status varchar(16) [not null]
+  item_count integer [not null]
+  estimated_minutes integer [not null]
+  version bigint
+}
+
+Table practice_mock_test_items {
+  id bigint [pk]
+  mock_test_id bigint [not null]
+  question_public_id uuid [not null]
+  task_code varchar(64) [not null]
+  section varchar(32) [not null]
+  order_index integer [not null]
+}
+
+Table chat_usage {
+  id bigint [pk]
+  student_id uuid [not null]
+  usage_date date [not null]
+  used integer [not null, default: 0]
+}
+
+Table chat_usage_daily {
+  usage_date date [pk]
+  model varchar(64) [pk]
+  messages integer [not null, default: 0]
+  ok integer [not null, default: 0]
+  refused integer [not null, default: 0]
+  failed integer [not null, default: 0]
+  tokens_in bigint [not null, default: 0]
+  tokens_out bigint [not null, default: 0]
+  tokens_thinking bigint [not null, default: 0]
+  cost_usd numeric(14, 6) [not null, default: 0]
+  failed_timeout integer [not null, default: 0]
+  failed_rate_limited integer [not null, default: 0]
+  failed_auth integer [not null, default: 0]
+  failed_unavailable integer [not null, default: 0]
+  failed_truncated integer [not null, default: 0]
+  failed_other integer [not null, default: 0]
+}
+
+Table media_objects {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  asset_id varchar(255)
+  audio_prompt boolean [not null, default: false]
+  cloudinary_delivery_type varchar(24) [not null]
+  cloudinary_public_id varchar(255)
+  cloudinary_resource_type varchar(255)
+  content_type varchar(255) [not null]
+  duration_seconds integer
+  owner_public_id uuid [not null]
+  practice_item_public_id uuid
+  practice_session_public_id uuid
+  purpose varchar(64)
+  secure_url text
+  size_bytes bigint
+  status varchar(255) [not null]
+  storage_key varchar(255) [unique, not null]
+  tenant_id uuid
+}
+
+// =============================================================================
+// RELATIONSHIPS
+// =============================================================================
+
+Ref: questions.task_type_key > question_types.code
+Ref: question_options.question_id > questions.id [delete: cascade]
+Ref: question_generation_job_items.job_id > question_generation_jobs.id [delete: cascade]
+Ref: questions.generation_job_public_id > question_generation_jobs.public_id
+Ref: practice_sessions.mock_test_id > practice_mock_tests.id
+Ref: practice_responses.practice_session_id > practice_sessions.id [delete: cascade]
+Ref: practice_responses.source_question_public_id > questions.public_id
+Ref: practice_mock_test_items.mock_test_id > practice_mock_tests.id [delete: cascade]
+Ref: practice_mock_test_items.question_public_id > questions.public_id

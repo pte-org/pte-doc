@@ -1,0 +1,485 @@
+// =============================================================================
+// PTE_IAM_Billing_Admin
+// =============================================================================
+
+Project PTE_IAM_Billing_Admin {
+  database_type: 'PostgreSQL'
+  Note: '''
+    Identity & Access, Academic Enrollment, Subscriptions, Billing, Support & Audit
+  '''
+}
+
+TableGroup Identity_and_Access {
+  users
+  user_roles
+  refresh_tokens
+  password_reset_tokens
+  organizations
+  organization_members
+  organization_member_roles
+  organization_quota_grants
+}
+
+TableGroup Enrollment_and_Academic {
+  programs
+  classes
+  class_students
+}
+
+TableGroup Billing_and_Commerce {
+  service_plans
+  subscriptions
+  orders
+  order_payments
+  license_codes
+  platform_settings
+}
+
+TableGroup Notifications {
+  notifications
+  notification_recipients
+  notification_recipient_streams
+  notification_logs
+  notification_announcements
+  notification_inbox_snapshots
+}
+
+TableGroup Support_Audit_and_System {
+  support_ticket
+  support_ticket_note
+  audit_logs
+  idempotency_keys
+}
+
+// =============================================================================
+// TABLES
+// =============================================================================
+
+Table users {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  class_name varchar(255)
+  credential_hash varchar(255)
+  date_of_birth date
+  email varchar(255)
+  full_name varchar(255)
+  must_change_password boolean [not null]
+  phone varchar(255)
+  status varchar(255) [not null]
+  student_code varchar(255)
+  username varchar(255) [unique, not null]
+}
+
+Table user_roles {
+  user_id bigint [pk]
+  role varchar(255) [pk]
+}
+
+Table refresh_tokens {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  expires_at timestamptz [not null]
+  organization_id uuid
+  revoked boolean [not null]
+  token_hash varchar(255) [unique, not null]
+  user_id bigint [not null]
+}
+
+Table password_reset_tokens {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [not null]
+  updated_at timestamptz [not null]
+  expires_at timestamptz [not null]
+  token_hash varchar(255) [not null]
+  used_at timestamptz
+  user_id bigint [not null]
+}
+
+Table organizations {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  address varchar(255)
+  code varchar(255) [not null]
+  contact_email varchar(255)
+  contact_phone varchar(255)
+  facility_type varchar(255) [not null]
+  logo_url varchar(255)
+  name varchar(255) [not null]
+  organization_type varchar(255) [not null]
+  package_name varchar(255) [not null]
+  primary_color varchar(255)
+  province_code varchar(16)
+  province_name varchar(255)
+  reject_reason varchar(500)
+  reviewed_at timestamptz
+  reviewed_by uuid
+  status varchar(255) [not null]
+  student_limit integer [not null]
+  suspended_until timestamptz
+  tax_code varchar(64)
+  version bigint
+  ward_code varchar(16)
+  ward_name varchar(255)
+}
+
+Table organization_members {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  organization_id uuid [not null]
+  status varchar(255) [not null]
+  user_id bigint [not null]
+}
+
+Table organization_member_roles {
+  member_id bigint [pk]
+  role varchar(255) [pk]
+}
+
+Table organization_quota_grants {
+  organization_id bigint [pk]
+  actor_user_id uuid [not null]
+  amount integer [not null]
+  created_at timestamptz [not null]
+  note varchar(255)
+  package_name varchar(255) [not null]
+  public_id uuid [not null]
+}
+
+Table programs {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  description varchar(255)
+  end_date date
+  name varchar(255) [not null]
+  start_date date
+  status varchar(255) [not null]
+  organization_id bigint [not null]
+}
+
+Table classes {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  name varchar(255) [not null]
+  organization_id uuid [not null]
+  status varchar(255) [not null]
+  program_id bigint [not null]
+}
+
+Table class_students {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  organization_id uuid [not null]
+  student_public_id uuid [unique, not null]
+  class_id bigint [not null]
+}
+
+Table service_plans {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  currency varchar(3) [not null]
+  description varchar(255)
+  duration_days integer
+  extra_student_slots integer
+  max_students_per_session integer
+  name varchar(255) [not null]
+  price numeric(19, 2) [not null]
+  status varchar(32) [not null]
+  type varchar(32) [not null]
+  version bigint [not null]
+}
+
+Table subscriptions {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  activation_source varchar(16) [not null]
+  expires_at timestamptz [not null]
+  license_key varchar(32) [unique, not null]
+  max_students_per_session integer [not null]
+  plan_id uuid [not null]
+  starts_at timestamptz [not null]
+  status varchar(16) [not null]
+  tenant_id uuid [not null]
+}
+
+Table orders {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  amount numeric(19, 2) [not null]
+  currency varchar(3) [not null]
+  order_code bigint [unique, not null]
+  paid_at timestamptz
+  payment_link_url varchar(512)
+  plan_id uuid [not null]
+  status varchar(16) [not null]
+  tenant_id uuid [not null]
+}
+
+Table order_payments {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  processed boolean [not null]
+  raw_payload text [not null]
+  received_at timestamptz [not null]
+  order_id bigint [not null]
+}
+
+Table license_codes {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  code varchar(32) [unique, not null]
+  code_expires_at timestamptz
+  issued_at timestamptz [not null]
+  issued_by uuid [not null]
+  plan_id uuid [not null]
+  redeemed_at timestamptz
+  redeemed_by_tenant_id uuid
+  revoke_reason varchar(255)
+  status varchar(16) [not null]
+  subscription_id uuid [unique]
+  bound_tenant_id uuid
+  requested_starts_at timestamptz
+  contract_reference varchar(64)
+  note varchar(500)
+}
+
+Table platform_settings {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  description varchar(255)
+  setting_key varchar(100) [unique, not null]
+  value varchar(255) [not null]
+}
+
+Table notifications {
+  id bigint [pk]
+  created_at timestamptz [not null, default: `CURRENT_TIMESTAMP`]
+  deleted boolean [not null, default: false]
+  public_id uuid [unique, not null, default: `gen_random_uuid()`]
+  updated_at timestamptz [not null, default: `CURRENT_TIMESTAMP`]
+  body varchar(5000) [not null]
+  category varchar(32) [not null]
+  event_key varchar(255) [not null]
+  importance varchar(16) [not null]
+  notification_type varchar(48) [not null]
+  payload_hash varchar(64) [not null]
+  schema_version integer [not null]
+  target_public_id uuid [not null]
+  target_type varchar(32) [not null]
+  title varchar(150) [not null]
+}
+
+Table notification_recipients {
+  id bigint [pk]
+  created_at timestamptz [not null, default: `CURRENT_TIMESTAMP`]
+  deleted boolean [not null, default: false]
+  public_id uuid [unique, not null, default: `gen_random_uuid()`]
+  updated_at timestamptz [not null, default: `CURRENT_TIMESTAMP`]
+  attempts integer [not null, default: 0]
+  claim_token uuid
+  completed_at timestamptz
+  content_public_id uuid [not null]
+  delivered_at timestamptz
+  last_failure_code varchar(64)
+  lease_until timestamptz
+  next_attempt_at timestamptz [not null]
+  read_at timestamptz
+  recipient_user_public_id uuid [not null]
+  sequence_no bigint
+  status varchar(16) [not null, default: 'PENDING']
+  tenant_id uuid
+}
+
+Table notification_recipient_streams {
+  id bigint [pk]
+  created_at timestamptz [not null, default: `CURRENT_TIMESTAMP`]
+  deleted boolean [not null, default: false]
+  public_id uuid [unique, not null, default: `gen_random_uuid()`]
+  updated_at timestamptz [not null, default: `CURRENT_TIMESTAMP`]
+  last_sequence bigint [not null, default: 0]
+  read_revision bigint [not null, default: 0]
+  recipient_user_public_id uuid [not null]
+  tenant_id uuid
+}
+
+Table notification_logs {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  body varchar(255) [not null]
+  dedupe_key varchar(255)
+  notification_type varchar(255) [not null]
+  recipient_email varchar(255) [not null]
+  recipient_user_public_id uuid
+  sent_at timestamptz
+  status varchar(255) [not null]
+  subject varchar(255) [not null]
+  tenant_id uuid
+}
+
+Table notification_announcements {
+  id bigint [pk]
+  created_at timestamptz [not null, default: `CURRENT_TIMESTAMP`]
+  deleted boolean [not null, default: false]
+  public_id uuid [unique, not null, default: `gen_random_uuid()`]
+  updated_at timestamptz [not null, default: `CURRENT_TIMESTAMP`]
+  affected_from timestamptz
+  affected_until timestamptz
+  author_user_public_id uuid [not null]
+  body varchar(5000) [not null]
+  category varchar(32) [not null]
+  correction_of_public_id uuid
+  importance varchar(16) [not null]
+  published_at timestamptz
+  published_content_public_id uuid
+  title varchar(150) [not null]
+  version bigint [not null, default: 0]
+}
+
+Table notification_inbox_snapshots {
+  id bigint [pk]
+  public_id uuid [unique, not null, default: `gen_random_uuid()`]
+  recipient_user_public_id uuid [not null]
+  tenant_id uuid
+  upper_sequence bigint [not null]
+  read_revision bigint [not null]
+  created_at timestamptz [not null, default: `CURRENT_TIMESTAMP`]
+  expires_at timestamptz [not null]
+}
+
+Table support_ticket {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  category varchar(255) [not null]
+  description varchar(2000) [not null]
+  entity_id varchar(36)
+  entity_type varchar(32)
+  status varchar(255) [not null]
+  submitter_user_public_id uuid [not null]
+  tenant_id uuid [not null]
+  version bigint [not null]
+}
+
+Table support_ticket_note {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  admin_public_id uuid [not null]
+  content text [not null]
+  ticket_id bigint [not null]
+  ticket_public_id uuid [not null]
+}
+
+Table audit_logs {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  action varchar(255) [not null]
+  actor_role varchar(255)
+  actor_user_id uuid [not null]
+  after_state jsonb
+  aggregate_id varchar(255) [not null]
+  aggregate_type varchar(255) [not null]
+  before_state jsonb
+  request_public_id uuid
+  resource_code varchar(255)
+  resource_name varchar(255)
+  summary varchar(500) [not null]
+  tenant_id uuid
+}
+
+Table idempotency_keys {
+  id bigint [pk]
+  created_at timestamptz [not null]
+  deleted boolean [not null]
+  public_id uuid [unique, not null]
+  updated_at timestamptz [not null]
+  completed boolean [not null]
+  expires_at timestamptz [not null]
+  idempotency_key varchar(128) [not null]
+  organization_id uuid [not null]
+  request_hash varchar(128) [not null]
+  result jsonb
+  scope varchar(32) [not null]
+}
+
+// =============================================================================
+// RELATIONSHIPS
+// =============================================================================
+
+Ref: user_roles.user_id > users.id [delete: cascade]
+Ref: refresh_tokens.user_id > users.id [delete: cascade]
+Ref: password_reset_tokens.user_id > users.id [delete: cascade]
+Ref: organization_members.user_id > users.id
+Ref: organization_members.organization_id > organizations.id
+Ref: organization_member_roles.member_id > organization_members.id [delete: cascade]
+Ref: organization_quota_grants.organization_id > organizations.id
+Ref: programs.organization_id > organizations.id
+Ref: classes.program_id > programs.id
+Ref: class_students.class_id > classes.id
+Ref: class_students.student_public_id > users.public_id
+Ref: orders.plan_id > service_plans.public_id
+Ref: orders.tenant_id > organizations.public_id
+Ref: order_payments.order_id > orders.id [delete: cascade]
+Ref: subscriptions.plan_id > service_plans.public_id
+Ref: subscriptions.tenant_id > organizations.public_id
+Ref: license_codes.plan_id > service_plans.public_id
+Ref: license_codes.subscription_id > subscriptions.id
+Ref: license_codes.redeemed_by_tenant_id > organizations.public_id
+Ref: notification_recipients.content_public_id > notifications.public_id
+Ref: notification_recipients.recipient_user_public_id > users.public_id
+Ref: notification_recipient_streams.recipient_user_public_id > users.public_id
+Ref: notification_inbox_snapshots.recipient_user_public_id > users.public_id
+Ref: notification_announcements.author_user_public_id > users.public_id
+Ref: support_ticket.submitter_user_public_id > users.public_id
+Ref: support_ticket_note.ticket_id > support_ticket.id [delete: cascade]
+Ref: support_ticket_note.admin_public_id > users.public_id
