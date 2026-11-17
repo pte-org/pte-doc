@@ -17,7 +17,7 @@ Status: Completed
 ## Related files
 
 - `pte-api/app/src/main/java/com/pte/itembank/domain/enums/PteTaskType.java`
-- `pte-api/app/src/main/resources/db/migration/V48__require_reference_answer_for_ai_listening_tasks.sql` (mới)
+- `pte-api/app/src/main/resources/db/migration/V52__require_reference_answer_for_ai_listening_tasks.sql` (mới)
 - `pte-api/app/src/main/resources/db/dev-seed/010-reference-data.sql`
 - `pte-api/app/src/test/java/com/pte/itembank/TaskRuntimeContractDescriptorTest.java`
 - `pte-web/apps/vendor-web/features/questionbank/constants.ts`
