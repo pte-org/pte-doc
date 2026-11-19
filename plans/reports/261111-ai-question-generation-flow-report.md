@@ -121,3 +121,32 @@ sequenceDiagram
   vô hại, chỉ khác ở nguồn gốc.
 - Nếu muốn một thay đổi trong seed áp lên DB đang chạy, cần làm qua vendor-web, hoặc thêm vào upgrader nếu là phần
   bắt buộc của code.
+
+## 6. Tạo đề theo lô (batch, plan `quang-batch-question-generation`)
+
+Bật bằng `QUESTION_GEN_BATCH_ENABLED=true` (mặc định `false`). Hợp đồng API cho FE:
+`pte-doc/projects/plans/quang-batch-question-generation/reports/fe-api-contract.md`; triển khai/rollback:
+`pte-doc/projects/runbooks/batch-question-generation-rollout.md`.
+
+```
+POST /api/v1/question-generation/batches
+  └─ QuestionGenerationBatchService.submit  [BatchRequestValidator → pg_advisory_xact_lock(SUBMIT) → 1 unit mở/người → quota cả lô]
+       └─ BatchSplitter: mỗi row chia đều theo topic → job con ≤ 10 câu; seq 0 QUEUED, còn lại PENDING; tạo hết item
+QuestionGenerationWorker.tick → JobLeaseService.claimNext  [pg_advisory_xact_lock(CLAIM)]
+  ├─ job lease hết hạn → chạy tiếp (kể cả khi đã đủ cap)
+  ├─ số lease sống ≥ maxConcurrentJobs → chờ (job ở QUEUED, không còn lỗi GENERATION_TOO_MANY_JOBS)
+  └─ job QUEUED kế tiếp: job lẻ/preview trước, rồi job con theo (created_at, batch_seq, id); khóa dòng batch trước
+GenerationJobRunner.run(child) → JobLeaseService.finish  [khóa batch → finish có guard → BatchChainingService.onChildTerminal]
+  ├─ bình thường → promoteNext (PENDING → QUEUED)
+  ├─ cancel đã yêu cầu hoặc lỗi chết (PROVIDER_AUTH / PROVIDER_UNAVAILABLE / REQUESTER_NOT_ALLOWED) → hủy job con chờ
+  └─ hết job con mở → đóng batch: COMPLETED | PARTIALLY_COMPLETED | FAILED | CANCELLED (tính lại từ item)
+BatchReconciler (@Scheduled, 5 phút) — lưới an toàn: đóng batch mở không còn job con mở, hoặc promote lại khi mất
+```
+
+- **Thứ tự khóa**: luôn khóa dòng batch trước, rồi mới tới job (claim, finish, stale-cancel, cancel) → không deadlock.
+- **Quota**: cả lô bị trừ khi submit; job hủy khi chưa từng chạy (`started_at` null) được hoàn lại (cả job lẻ hủy lúc QUEUED).
+- **Preview** (form câu hỏi, `saveQuestions=false`) không bị chặn bởi batch đang chạy và được chạy trước job con.
+- **Ảnh AI (PICTURE)**: tắt bằng `QUESTION_GEN_PICTURE_ENABLED=false` → submit PICTURE trả `GENERATION_PICTURE_DISABLED`;
+  `AUTO` sẽ thành chart thay vì picture.
+- **Xóa nháp hàng loạt**: `POST /batches/{id}/drafts/delete` dùng lại `QuestionDeletionService.deleteDraft` cho từng câu,
+  mỗi câu một transaction riêng (`BatchDraftDeleteExecutor`, REQUIRES_NEW).
