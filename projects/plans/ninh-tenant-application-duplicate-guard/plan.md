@@ -38,3 +38,9 @@ MST + email, đến lúc duyệt đơn thứ 2 mới lỗi.
 - Biến `NEXT_PUBLIC_SUPPORT_EMAIL` (mặc định `support@pte.com`) của tenant-web, hiển thị trong lỗi MST trùng (VI/EN, placeholder `{supportEmail}`).
 - Thêm `apps/tenant-web/.env.example` và `!.env.example` trong `pte-web/.gitignore` (trước đó `.env*` chặn cả file mẫu).
 - Production: đặt `NEXT_PUBLIC_SUPPORT_EMAIL` lúc build (biến NEXT_PUBLIC_ được nhúng vào bundle khi build, không đổi được khi chạy).
+
+## Bổ sung: email xác nhận đơn + sửa lỗi không gửi mail
+- Viết lại `BrandedEmailTemplate.applicationReceived` (tên tổ chức, mã tenant, các bước tiếp theo, email hỗ trợ lấy từ `SUPPORT_EMAIL` -> `notification.support-email`).
+- Lỗi phát hiện: `notification_logs.body` là varchar(255) nên email dài hơn làm lưu log fail và mail không được gửi (đơn vẫn nộp được). V55 đổi cột sang `text`, entity `columnDefinition = "text"`.
+- Hai đơn nộp trước khi sửa (`ninh-le-5`, `ninh-le2` id 9/10) không có mail xác nhận; không tự gửi lại.
+- Đã nộp thử bằng email test, mail tới Mailpit đúng, rồi dọn dữ liệu thử.
