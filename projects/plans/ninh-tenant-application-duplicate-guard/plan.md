@@ -23,6 +23,10 @@ MST + email, đến lúc duyệt đơn thứ 2 mới lỗi.
 ## Kết quả thực hiện
 - `TenantApplicationServiceTest`: 15/15 pass (thêm 2 test mới).
 - tenant-web: `tsc --noEmit` và eslint `features/auth` sạch.
+- **Bổ sung theo yêu cầu**: xóa 2 đơn PENDING trùng MST123456 ở DB local; thêm `V54__organization_tax_code_unique_while_live.sql`
+  (tự từ chối các đơn PENDING trùng MST còn sót — giữ đơn đã duyệt hoặc đơn cũ nhất — rồi thay `uq_org_tax_code_approved` bằng
+  `uq_org_tax_code_live` `WHERE status <> 'REJECTED'`). Cập nhật dev-seed, ánh xạ lỗi ràng buộc, và `submit` giờ dịch lỗi
+  unique-index thành 409 khi hai request đồng thời. V54 cao hơn V53 trên origin/dev. Đã chạy thử migration trong transaction rollback trên DB local: OK.
 - Chưa chạy test tích hợp Postgres và chưa thử trên trình duyệt với API thật.
 
 ## Giới hạn
