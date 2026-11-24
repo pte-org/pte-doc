@@ -52,3 +52,14 @@ MST + email, đến lúc duyệt đơn thứ 2 mới lỗi.
 - Chưa gửi mail duyệt thật (duyệt sẽ tạo tenant và tài khoản); đã kiểm tra bằng HTML render + test listener.
 
 - Tinh chỉnh mail duyệt: `EmailLayout.linkHint` (cách dòng gợi ý 6px, cách khối dưới 22px, `word-break:break-all`); nút dùng chung một mã xanh thương hiệu `#3359d2` với logo, link và số bước (trước đó nút dùng `#0d6fbe`; đổi này áp cho mọi mail có nút, gồm đặt lại mật khẩu). Đã xem ở khổ 390px với URL dài.
+
+## Bổ sung: email từ chối đơn
+- Viết lại `applicationRejected`: lời chào, câu mở đầu mềm hơn, khung tóm tắt (tổ chức, mã tenant, badge đỏ "Not approved"), lý do trong callout đỏ nhạt (chữ thường, đã escape, giữ xuống dòng), nút "Submit a new application" + link dự phòng, email hỗ trợ, chữ ký. Callout dùng chung hàm với callout vàng của mail duyệt (cỡ chữ 13 -> 14px cho cả hai).
+- Biến mới `HOST_REGISTER_URL` (-> `notification.register-url`), mặc định `APP_WEB_TENANT_URL` + `/register`; thêm vào `.env.example`, `.env`, compose local.
+- Chưa làm: nút chọn nhanh lý do mẫu trong popup từ chối (đề xuất riêng); lý do admin nhập vẫn hiện nguyên văn trong mail.
+
+## Chuẩn hóa biến URL (thay HOST_LOGIN_URL và HOST_REGISTER_URL)
+- Bỏ hai biến riêng; email dùng chung `APP_WEB_TENANT_URL` (biến đã có, cũng dùng cho link đặt lại mật khẩu) và tự nối `/login` (mail duyệt) và `/register` (mail từ chối). Dấu `/` cuối được bỏ. `NotificationProperties.tenantWebUrl` + `getLoginUrl()`/`getRegisterUrl()`.
+- `.env.example`, `.env`, compose local (`docker-compose.services.yml`) cập nhật; compose deploy đã truyền sẵn `APP_WEB_TENANT_URL`.
+- Mail từ chối: lý do được escape, `
+` chuẩn hóa rồi đổi thành `<br>` (không dùng `white-space: pre-line` vì Outlook desktop bỏ qua). Mail duyệt và từ chối đã dùng chung màu nút `#3359d2` và khoảng cách link 6px/22px (có test).
