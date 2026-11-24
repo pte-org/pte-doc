@@ -33,3 +33,8 @@ MST + email, đến lúc duyệt đơn thứ 2 mới lỗi.
 - Chưa có unique index nên 2 request đồng thời cùng MST vẫn có thể lọt (hiếm; bị chặn lại ở bước duyệt).
 - Đơn PENDING trùng MST đã tồn tại trong DB không bị xử lý lại; admin cần từ chối thủ công.
 - Chưa có cảnh báo trên bảng admin cho đơn nghi trùng (đề xuất tách riêng).
+
+## Bổ sung: email hỗ trợ
+- Biến `NEXT_PUBLIC_SUPPORT_EMAIL` (mặc định `support@pte.com`) của tenant-web, hiển thị trong lỗi MST trùng (VI/EN, placeholder `{supportEmail}`).
+- Thêm `apps/tenant-web/.env.example` và `!.env.example` trong `pte-web/.gitignore` (trước đó `.env*` chặn cả file mẫu).
+- Production: đặt `NEXT_PUBLIC_SUPPORT_EMAIL` lúc build (biến NEXT_PUBLIC_ được nhúng vào bundle khi build, không đổi được khi chạy).
