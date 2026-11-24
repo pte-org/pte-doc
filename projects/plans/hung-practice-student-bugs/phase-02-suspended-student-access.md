@@ -15,6 +15,7 @@ Status: Completed · Bug: "Học viên đã bị tạm ngưng vẫn xem được
 - Chặn ở controller bằng `unlockedCaller()` để không phải đổi constructor và test của năm service.
 - `/student/practice/entitlement` và `/student/practice/catalog` **không** chặn: màn hình "Đã khóa" cần hai endpoint này để hiện đúng thay vì trang lỗi.
 - Trả lỗi có sẵn `PRACTICE_NOT_ENTITLED` (403).
+- **Chưa khớp hợp đồng cũ:** `quang-pte-practice-student-web` quy định lịch sử vẫn đọc được sau khi thu hồi gói hoặc vô hiệu hoá học viên, và `assertUnlocked` chặn mọi trạng thái khác `UNLOCKED` chứ không riêng tạm ngưng. Xem R6 ở `plan.md`.
 
 ## Related files
 

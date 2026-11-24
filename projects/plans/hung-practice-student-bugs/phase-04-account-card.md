@@ -13,7 +13,7 @@ Status: Completed · Yêu cầu: thẻ tài khoản hiện e-mail học viên đ
 ## Design Constraints
 
 - `fullName` và `email` đưa vào `GET /student/practice/entitlement` (dữ liệu của chính người gọi, từ bản ghi học viên đã tải sẵn), **không** nhét vào JWT.
-- Cột `gender` nullable, không default, không backfill (V54), CHECK cho `NULL`/`MALE`/`FEMALE`.
+- Cột `gender` nullable, không default, không backfill (V57), CHECK cho `NULL`/`MALE`/`FEMALE`.
 - `PUT /student/practice/profile/avatar` là endpoint riêng, body `{gender}` bắt buộc không null. `PUT /profile` và `exam-date-api` không đổi.
 - Module avatar ở `features/practice/avatar/` tự gọi API, không dùng lại `exam-date-api`. Đổi lại là thêm một request `GET /profile` mỗi lần nạp app.
 - Lưu hỏng thì trả về lựa chọn cũ và báo lỗi; nạp hỏng thì im lặng dùng avatar mặc định.
@@ -21,14 +21,14 @@ Status: Completed · Yêu cầu: thẻ tài khoản hiện e-mail học viên đ
 
 ## Related files
 
-`pte-api`: `practice/internal/dto/response/PracticeEntitlementResponse.java` (`Student(publicId, status, fullName, email)`), `…/service/PracticeEntitlementService.java`, `practice/internal/domain/PracticeStudentProfile.java`, `…/domain/enums/PracticeAvatarGender.java` (mới), `…/dto/request/PracticeAvatarUpdateRequest.java` (mới), `…/dto/response/profile/PracticeProfileResponse.java`, `…/service/PracticeProfileService.java` (`updateAvatar`), `…/controller/PracticeProfileController.java`, `PracticeConstants.java`, `db/migration/V54__practice_student_profile_avatar.sql`.
+`pte-api`: `practice/internal/dto/response/PracticeEntitlementResponse.java` (`Student(publicId, status, fullName, email)`), `…/service/PracticeEntitlementService.java`, `practice/internal/domain/PracticeStudentProfile.java`, `…/domain/enums/PracticeAvatarGender.java` (mới), `…/dto/request/PracticeAvatarUpdateRequest.java` (mới), `…/dto/response/profile/PracticeProfileResponse.java`, `…/service/PracticeProfileService.java` (`updateAvatar`), `…/controller/PracticeProfileController.java`, `PracticeConstants.java`, `db/migration/V57__practice_student_profile_avatar.sql`.
 
 `pte-practice`: `features/practice/contracts.ts` (`PracticeStudent`), `features/shell/{StudentShell.tsx,shell-chrome.css}`, `features/practice/avatar/{avatar.ts,avatar-api.ts,StudentAvatarProvider.tsx,StudentAvatar.tsx}`, `features/settings/{AvatarSettings.tsx,StudentSettings.tsx,settings.css}`, `public/avatars/{male,female}.png`, `app/globals.css`, `common/i18n/*`.
 
 ## Steps
 
 1. Backend: thêm `fullName`/`email` vào response entitlement, gói trong record `Account` để hàm `response(...)` không phình tham số.
-2. Backend: V54 + enum + entity + response + `updateAvatar` (đọc hồ sơ, đặt đúng một field, ghi lại; xử lý đua tạo hàng đầu tiên bằng cách đọc lại) + `PUT /profile/avatar`.
+2. Backend: V57 + enum + entity + response + `updateAvatar` (đọc hồ sơ, đặt đúng một field, ghi lại; xử lý đua tạo hàng đầu tiên bằng cách đọc lại) + `PUT /profile/avatar`.
 3. Frontend: `normalizeEntitlementResponse` đọc hai field mới; thẻ tài khoản đổi sang lưới, e-mail một hàng riêng, `text-overflow: ellipsis` kèm `title`.
 4. `StudentAvatarProvider` bao shell để Cài đặt và thẻ luôn khớp nhau; `AvatarSettings` chọn Nam/Nữ; ảnh chép từ hai ảnh Hung gửi vào `public/avatars/`, cắt tròn bằng `object-fit: cover`.
 5. Viền nút: `.icon-button-danger` cho Đăng xuất; viền nút trong `studio-shell` đổi từ `transparent` sang `--line-strong`.

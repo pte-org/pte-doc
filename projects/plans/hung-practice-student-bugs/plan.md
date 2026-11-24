@@ -29,7 +29,7 @@ Hung test pte-practice bằng tay, mỗi lỗi tìm thấy được ghi thành m
 | 1 | `4fb793dc` | `b67f9ed`, `cce1f3a` |
 | 2 | `fdb05bcc` | `a056da3` |
 | 3 | `6b8ed8e7`, `75424e58` (`APP_WEB_PRACTICE_URL` ở `docker-compose.deploy.yml`) | `7034b05`, `5a9b8ad`, `1e0b6f5`, `f8bfd5c`, `77ddc3b` |
-| 4 | `c76e1d15`, `c4483bfd` (V54) | `cf17e89`, `7f199bc`, `ac27482` |
+| 4 | `c76e1d15`, `c4483bfd` (V57) | `cf17e89`, `7f199bc`, `ac27482` |
 | 5 | — | `40475df`, `d9866e8`, `18858c2`, `c1e9e81`, `1f17cf5`, `5b3a1e9` |
 
 ## Architecture decisions
@@ -46,7 +46,9 @@ Hung test pte-practice bằng tay, mỗi lỗi tìm thấy được ghi thành m
 - **R2 — Link e-mail của học viên trỏ sai.** `app.web.practice-url` mặc định `http://localhost:3014`. Môi trường deploy phải đặt `APP_WEB_PRACTICE_URL`; `docker-compose.deploy.yml` đã thêm dòng lấy từ `PRACTICE_DOMAIN` (`75424e58`), nhưng nơi nào không dùng file đó phải tự đặt.
 - **R3 — Đáp án lộ sớm.** `optionVerdicts` mang cờ đúng/sai của từng lựa chọn. Chỉ trả khi câu đã chấm, và với MOCK_TEST thì giấu cho tới khi nộp bài (xem `ninh-practice-answer-leak-backend`).
 - **R4 — Hai kiểu 401.** Mật khẩu hiện tại sai khi đổi mật khẩu cũng trả 401. Client từng coi mọi 401 là "token hết hạn" nên đá học viên ra. Đã sửa ở Phase 3; mọi chỗ mới gọi endpoint có thể trả 401 vì lý do khác phải dùng `allowRefresh: false`.
-- **R5 — Chuyển giao.** Local chạy profile `local-schema` nên Flyway tắt và cột `gender` do Hibernate tạo; V54 chỉ chạy ở môi trường dùng Flyway.
+- **R5 — Chuyển giao.** Local chạy profile `local-schema` nên Flyway tắt và cột `gender` do Hibernate tạo; V57 chỉ chạy ở môi trường dùng Flyway. Migration này ban đầu là V54 và đã đổi thành **V57** khi gộp `dev` (dev đã dùng V54 đến V56); nó chưa chạy ở đâu nên đổi số là an toàn.
+
+- **R6 — Mâu thuẫn với hợp đồng practice đã duyệt.** [`quang-pte-practice-student-web`](../quang-pte-practice-student-web/plan.md) viết: lịch sử "vẫn đọc được sau khi thu hồi gói, **vô hiệu hoá học viên** hoặc rollback" (plan.md mục 7; `phase-01-contract-matrix.md`; `phase-07`; spec FR-09), và chỉ các thao tác *ghi* mới bị chặn. Phase 2 làm ngược lại: chặn cả thao tác đọc (phiên, xem lại, ghi âm, lịch sử). Nó cũng **rộng hơn một học viên bị tạm ngưng**: `assertUnlocked` ném lỗi với mọi trạng thái khác `UNLOCKED`, nên học viên của một tổ chức hết gói hoặc vượt hạn mức cũng mất quyền xem lại lịch sử. Phase 2 theo đúng yêu cầu của bug do Hung ghi, nhưng **cần leader xác nhận** trước khi merge. Nếu giữ hợp đồng cũ cho trường hợp hết gói thì chỉ cần chặn khi `entitlement.practice.state == UNAVAILABLE` (học viên không còn active trong tổ chức) thay vì mọi trạng thái khóa.
 
 ## Kết quả thực hiện (2026-11-24)
 
