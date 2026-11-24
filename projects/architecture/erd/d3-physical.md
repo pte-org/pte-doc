@@ -608,7 +608,6 @@ Unique nhiều cột: (session_id, source_type, source_public_id)
 | `public_id` | uuid |  | UK |
 | `updated_at` | timestamp(6) with time zone |  |  |
 | `proctor_public_id` | uuid |  | ref → `users` (logic) |
-| `role` | character varying(255) | có | CHECK: LEAD_PROCTOR, ASSISTANT_PROCTOR |
 | `tenant_id` | uuid |  | ref → `organizations` (logic) |
 | `session_id` | bigint |  | FK → `exam_sessions` |
 
