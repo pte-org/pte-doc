@@ -23,10 +23,10 @@ MST + email, đến lúc duyệt đơn thứ 2 mới lỗi.
 ## Kết quả thực hiện
 - `TenantApplicationServiceTest`: 15/15 pass (thêm 2 test mới).
 - tenant-web: `tsc --noEmit` và eslint `features/auth` sạch.
-- **Bổ sung theo yêu cầu**: xóa 2 đơn PENDING trùng MST123456 ở DB local; thêm `V54__organization_tax_code_unique_while_live.sql`
+- **Bổ sung theo yêu cầu**: xóa 2 đơn PENDING trùng MST123456 ở DB local; thêm `V55__organization_tax_code_unique_while_live.sql`
   (tự từ chối các đơn PENDING trùng MST còn sót — giữ đơn đã duyệt hoặc đơn cũ nhất — rồi thay `uq_org_tax_code_approved` bằng
   `uq_org_tax_code_live` `WHERE status <> 'REJECTED'`). Cập nhật dev-seed, ánh xạ lỗi ràng buộc, và `submit` giờ dịch lỗi
-  unique-index thành 409 khi hai request đồng thời. V54 cao hơn V53 trên origin/dev. Đã chạy thử migration trong transaction rollback trên DB local: OK.
+  unique-index thành 409 khi hai request đồng thời. V55 cao hơn V54 trên origin/dev (V54 do nhánh khác dùng cho drop_proctor_assignment_role; đã đổi số khi merge dev). Đã chạy thử migration trong transaction rollback trên DB local: OK.
 - Chưa chạy test tích hợp Postgres và chưa thử trên trình duyệt với API thật.
 
 ## Giới hạn
@@ -41,7 +41,7 @@ MST + email, đến lúc duyệt đơn thứ 2 mới lỗi.
 
 ## Bổ sung: email xác nhận đơn + sửa lỗi không gửi mail
 - Viết lại `BrandedEmailTemplate.applicationReceived` (tên tổ chức, mã tenant, các bước tiếp theo, email hỗ trợ lấy từ `SUPPORT_EMAIL` -> `notification.support-email`).
-- Lỗi phát hiện: `notification_logs.body` là varchar(255) nên email dài hơn làm lưu log fail và mail không được gửi (đơn vẫn nộp được). V55 đổi cột sang `text`, entity `columnDefinition = "text"`.
+- Lỗi phát hiện: `notification_logs.body` là varchar(255) nên email dài hơn làm lưu log fail và mail không được gửi (đơn vẫn nộp được). V56 (`V56__notification_log_body_text`) đổi cột sang `text`, entity `columnDefinition = "text"`.
 - Hai đơn nộp trước khi sửa (`ninh-le-5`, `ninh-le2` id 9/10) không có mail xác nhận; không tự gửi lại.
 - Đã nộp thử bằng email test, mail tới Mailpit đúng, rồi dọn dữ liệu thử.
 
