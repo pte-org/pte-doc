@@ -44,3 +44,7 @@ Kiểm tra: tsc, eslint, vitest vendor-web 748; xem trên trình duyệt (ô tì
 - Tab "Tất cả" thêm cột "Nhóm" (badge màu theo nhóm) vì cùng một tên prompt có ở nhiều nhóm (vd. `ANSWER_SHORT_QUESTION` ở Sinh đề và Chấm điểm). Tìm kiếm khớp theo tên, mã và nhóm trên mọi nhóm.
 - `flatRail` của `TabRailCard` và `frameless` của `DataTable` (thêm ở vòng 1-2) giữ lại cho dùng sau; màn Prompt chỉ còn dùng `frameless`.
 - Kiểm tra: tsc, eslint, vitest vendor-web 748, xem trên trình duyệt.
+
+### Vòng 5: trang chi tiết prompt bị trống một cột
+- `_PromptWorkspace`: lưới 2 cột (editor + cột 22rem bên phải) luôn được vẽ, nhưng cột phải chỉ có nội dung khi có đề xuất (proposal) để duyệt hoặc để chạy thử. Khi không có thì để lại một cột trống. Nay chỉ chia 2 cột khi có nội dung cho cột phải (`hasSidePanel`), còn lại editor chiếm toàn chiều ngang.
+- Có đề xuất thì giao diện giữ nguyên. Đã xem trên trình duyệt: prompt `ANSWER_SHORT_QUESTION` (chưa có đề xuất) editor full width; chưa xem trang có đề xuất vì chưa tạo đề xuất thử.
