@@ -17,7 +17,7 @@ Hung test pte-practice bằng tay, mỗi lỗi tìm thấy được ghi thành m
 ## Phases
 
 - [x] Phase 1: Chấm và hiện đúng/sai ngay cho câu có đáp án sẵn — [phase-01-instant-feedback.md](./phase-01-instant-feedback.md) [quality: skipped_by_user; testing: skipped_by_user]
-- [x] Phase 2: Học viên bị tạm ngưng không xem được practice — [phase-02-suspended-student-access.md](./phase-02-suspended-student-access.md) [quality: skipped_by_user; testing: skipped_by_user]
+- [ ] Phase 2: ~~Học viên bị tạm ngưng không xem được practice~~ — **đã làm rồi hoàn tác (2026-11-25)**, giữ hợp đồng: lịch sử vẫn đọc được — [phase-02-suspended-student-access.md](./phase-02-suspended-student-access.md)
 - [x] Phase 3: Quên mật khẩu và đổi mật khẩu cho học viên — [phase-03-student-passwords.md](./phase-03-student-passwords.md) [quality: skipped_by_user; testing: skipped_by_user]
 - [x] Phase 4: Thẻ tài khoản — tên, e-mail, giới tính và ảnh đại diện — [phase-04-account-card.md](./phase-04-account-card.md) [quality: skipped_by_user; testing: skipped_by_user]
 - [x] Phase 5: Sửa giao diện nhỏ — trang xem lại và thanh trên — [phase-05-ui-fixes.md](./phase-05-ui-fixes.md) [quality: skipped_by_user; testing: skipped_by_user]
@@ -27,7 +27,7 @@ Hung test pte-practice bằng tay, mỗi lỗi tìm thấy được ghi thành m
 | Phase | `pte-api` | `pte-practice` |
 |---|---|---|
 | 1 | `4fb793dc` | `b67f9ed`, `cce1f3a` |
-| 2 | `fdb05bcc` | `a056da3` |
+| 2 | `fdb05bcc`, hoàn tác bởi `a4ce1b85` | `a056da3`, hoàn tác bởi `dab3ff6` |
 | 3 | `6b8ed8e7`, `75424e58` (`APP_WEB_PRACTICE_URL` ở `docker-compose.deploy.yml`) | `7034b05`, `5a9b8ad`, `1e0b6f5`, `f8bfd5c`, `77ddc3b` |
 | 4 | `c76e1d15`, `c4483bfd` (V57) | `cf17e89`, `7f199bc`, `ac27482` |
 | 5 | — | `40475df`, `d9866e8`, `18858c2`, `c1e9e81`, `1f17cf5`, `5b3a1e9` |
@@ -36,7 +36,7 @@ Hung test pte-practice bằng tay, mỗi lỗi tìm thấy được ghi thành m
 
 - **A1.** Mọi thay đổi hợp đồng API đều **chỉ cộng thêm** (field mới, endpoint mới). Không đổi tên hay xoá field nào client hiện tại đang đọc. Ngoại lệ có chủ đích: các endpoint đọc của practice trả 403 cho học viên bị tạm ngưng (Phase 2).
 - **A2.** Ảnh đại diện có endpoint ghi riêng `PUT /student/practice/profile/avatar`. `PUT /profile` coi `examDate: null` là "xoá ngày thi", nên gộp chung sẽ làm mỗi lần đổi avatar xoá mất ngày thi đã đặt. `PracticeProfileUpdateRequest` và `update()` giữ nguyên.
-- **A3.** Chặn học viên bị tạm ngưng ở **controller** (`unlockedCaller()`), không sửa năm service, để không đổi constructor và test của chúng. `/entitlement` và `/catalog` cố ý để mở để màn hình "Đã khóa" vẫn hiện được.
+- **A3.** ~~Chặn học viên bị tạm ngưng ở controller~~ — **đã bỏ** cùng Phase 2. Các endpoint đọc của practice (phiên, xem lại, ghi âm, lịch sử, tiến độ) giữ nguyên như `dev`: không kiểm tra entitlement, chỉ các endpoint ghi mới kiểm tra.
 - **A4.** Form quên/đặt lại mật khẩu của practice theo đúng form của `pte-web` (cùng trường, cùng thứ tự kiểm tra, cùng lời văn), bộ kiểm tra mật khẩu tách ra `password-rules.ts` dùng chung với form đổi mật khẩu.
 - **A5.** Cột `gender` ở `practice_student_profiles` cho phép `NULL`, không default, không backfill; học viên chưa chọn thì thấy avatar nam.
 
@@ -48,7 +48,8 @@ Hung test pte-practice bằng tay, mỗi lỗi tìm thấy được ghi thành m
 - **R4 — Hai kiểu 401.** Mật khẩu hiện tại sai khi đổi mật khẩu cũng trả 401. Client từng coi mọi 401 là "token hết hạn" nên đá học viên ra. Đã sửa ở Phase 3; mọi chỗ mới gọi endpoint có thể trả 401 vì lý do khác phải dùng `allowRefresh: false`.
 - **R5 — Chuyển giao.** Local chạy profile `local-schema` nên Flyway tắt và cột `gender` do Hibernate tạo; V57 chỉ chạy ở môi trường dùng Flyway. Migration này ban đầu là V54 và đã đổi thành **V57** khi gộp `dev` (dev đã dùng V54 đến V56); nó chưa chạy ở đâu nên đổi số là an toàn.
 
-- **R6 — Mâu thuẫn với hợp đồng practice đã duyệt.** [`quang-pte-practice-student-web`](../quang-pte-practice-student-web/plan.md) viết: lịch sử "vẫn đọc được sau khi thu hồi gói, **vô hiệu hoá học viên** hoặc rollback" (plan.md mục 7; `phase-01-contract-matrix.md`; `phase-07`; spec FR-09), và chỉ các thao tác *ghi* mới bị chặn. Phase 2 làm ngược lại: chặn cả thao tác đọc (phiên, xem lại, ghi âm, lịch sử). Nó cũng **rộng hơn một học viên bị tạm ngưng**: `assertUnlocked` ném lỗi với mọi trạng thái khác `UNLOCKED`, nên học viên của một tổ chức hết gói hoặc vượt hạn mức cũng mất quyền xem lại lịch sử. Phase 2 theo đúng yêu cầu của bug do Hung ghi, nhưng **cần leader xác nhận** trước khi merge. Nếu giữ hợp đồng cũ cho trường hợp hết gói thì chỉ cần chặn khi `entitlement.practice.state == UNAVAILABLE` (học viên không còn active trong tổ chức) thay vì mọi trạng thái khóa.
+- **R6 — Mâu thuẫn với hợp đồng practice đã duyệt: đã xử lý.** [`quang-pte-practice-student-web`](../quang-pte-practice-student-web/plan.md) (Quang, 2026-10-08) quy định lịch sử "vẫn đọc được sau khi thu hồi gói, vô hiệu hoá học viên hoặc rollback" và chỉ chặn thao tác *ghi*. Phase 2 chặn cả thao tác đọc, và vì `assertUnlocked` chặn mọi trạng thái khác `UNLOCKED` nên học viên của tổ chức hết gói hoặc vượt hạn mức cũng mất lịch sử. **Quyết định 2026-11-25 (Hung): giữ đúng như `dev`, theo cách của Quang.** Phase 2 bị hoàn tác ở cả hai repo; các endpoint đọc và ba file lịch sử của practice giống hệt `origin/dev`.
+- **R7 — Cửa sổ tối đa 15 phút còn lại.** Bug "học viên bị tạm ngưng vẫn xem được phiên và lịch sử khi còn đăng nhập" **không được sửa ở phía đọc**. Sau khi Host tạm ngưng, học viên mở sẵn trình duyệt vẫn xem được tới khi access token hết hạn (≤15 phút); refresh token đã bị thu hồi nên sau đó họ không làm mới và không đăng nhập lại được. Các thao tác ghi vẫn bị chặn ngay. Nếu sau này cần rút ngắn cửa sổ này thì chỉ nên chặn đọc khi `entitlement.practice.state == UNAVAILABLE` (học viên không còn active), không dùng `assertUnlocked`.
 
 ## Kết quả thực hiện (2026-11-24)
 

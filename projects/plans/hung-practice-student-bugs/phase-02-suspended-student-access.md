@@ -1,7 +1,9 @@
 # Phase 2: Học viên bị tạm ngưng không xem được practice
 
 Preflight: Unit tests created and run: no (skipped_by_user) · ck:quality gate: skipped_by_user
-Status: Completed · Bug: "Học viên đã bị tạm ngưng vẫn xem được đề và lịch sử luyện tập trong lúc còn đăng nhập"
+Status: **Đã hoàn tác (2026-11-25)** — không còn trong PR · Bug: "Học viên đã bị tạm ngưng vẫn xem được đề và lịch sử luyện tập trong lúc còn đăng nhập"
+
+> **Quyết định:** giữ đúng như `dev`. Hợp đồng của Quang (`quang-pte-practice-student-web`) cho phép xem lịch sử sau khi thu hồi gói hoặc vô hiệu hoá học viên, nên các endpoint đọc không bị chặn. Phần dưới ghi lại những gì đã làm trước khi hoàn tác: `fdb05bcc` đã bị `a4ce1b85` hoàn tác ở `pte-api`, `a056da3` đã bị `dab3ff6` hoàn tác ở `pte-practice`. Xem R6 và R7 ở `plan.md`.
 
 ## Requirements
 
