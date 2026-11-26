@@ -9,3 +9,9 @@ Status: done (UI only, no API change)
 - Time without seconds: utils/formatTicketTime.ts.
 - Submitter name: SupportTicketResponse.submitterName (null if the account is gone), resolved in SupportTicketService via IdentityService.findFullNames; the info card hides the row when null.
 - Not done: multi-turn replies / attachments (backend has admin notes only).
+
+## Admin (vendor-web) detail page
+- Same layout as the organization portal: PageHeader + status badge, transition button in the header ("Start handling"), 2 columns (request details + reply to the organization | request information).
+- "Admin notes" renamed "Reply to the organization" (button "Send reply", hint "Visible to the organization"); the tenant name links to /admin/tenants/{id}.
+- Shared: formatShortDateTime in @pte/ui (both portals), PageHeader.titleBadge, CopyableId.uppercase. OPEN badge is blue in both.
+- Removed _StatusPanel.tsx. Not touched: the admin ticket list still formats its date with toLocaleDateString.
