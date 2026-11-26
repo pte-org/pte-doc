@@ -10,4 +10,7 @@ Backend facts: audit_logs keeps a stable `action` code, `resource_name/code`, a 
 - Resource: two lines for every type (name / type · code); support ticket shows #ID, class/program names are lifted from the summary; exams and tickets link to their pages (classes cannot: the log has no program id).
 - Time: two lines, 4-digit year, seconds kept, tabular-nums. Search placeholder shortened.
 - Bug fixed: the Class filter sent "StudentClass" but the backend writes "TrainingClass".
-- Not done: translating the log in the admin portal (vendor-web), structured metadata in the backend.
+- Admin portal (vendor-web /admin/audit-log) now uses the same logic. The mapper moved to @pte/api-client (src/audit: labels, summary rules, describeAuditEntry, formatAuditTime); each app only adds its columns hook and links (tenant: exam, ticket; admin: ticket, tenant, application, question).
+- Added admin-specific wording: application review, license grant (contract + start date, no ids), question draft/publish, host score template. "(0 already in)" is hidden when nobody was skipped.
+- Decided not to do: structured metadata in the backend; links for class/program (the log has no program id).
+- "Unknown actor" in the admin log: the seed account seed.admin@test.local has no full name in the DB, so the platform user directory returned a null name. UserDirectoryEntryResponse.from(user) now falls back to the username (platform and host directories). A host admin of another organization is not in the platform directory, so it can still read "Unknown" in the admin log.
