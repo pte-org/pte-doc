@@ -1,7 +1,7 @@
 # Sinh đề AI: nhịp phát lại và chuyển câu trong lô
 
 **Trạng thái:** Hoàn tất (2026-11-26) · **Tác giả:** quang · **Ngày:** 2026-11-26
-**Nguồn:** [../../../plans/reports/261126-ai-generation-replay-pacing-brainstorm.md](../../../plans/reports/261126-ai-generation-replay-pacing-brainstorm.md)
+**Nguồn:** [brainstorm.md](brainstorm.md)
 **Phạm vi:** chỉ `pte-web/apps/vendor-web`, không đổi backend hay API.
 **Chuẩn bắt buộc:** `pte-web/docs/CODING_STANDARDS_WEB.md`, `pte-web/AGENTS.md`
 
@@ -38,5 +38,5 @@ pnpm exec vitest run tests/unit/features/questiongeneration tests/unit/features/
 
 ## Ngoài phạm vi
 
-- Nhãn model dự phòng và gợi ý chuyển model trong thẻ chờ, xem [261126-ai-generation-streaming-fallback-brainstorm.md](../../../plans/reports/261126-ai-generation-streaming-fallback-brainstorm.md).
+- Nhãn model dự phòng và gợi ý chuyển model trong thẻ chờ, xem [brainstorm của kế hoạch fallback](../quang-ai-generation-streaming-fallback/brainstorm.md).
 - Lưu trạng thái "đã xem" lên server.

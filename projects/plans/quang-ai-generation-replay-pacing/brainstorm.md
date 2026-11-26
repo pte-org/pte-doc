@@ -1,7 +1,7 @@
 # Sinh đề AI: nhịp phát lại và chuyển câu trong lô — Brainstorm
 
 **Ngày:** 2026-11-26 · **Phạm vi:** `pte-web/apps/vendor-web` (`features/questiongeneration`, `features/batchgeneration`). Không đổi backend hay API.
-**Liên quan:** [261126-ai-generation-streaming-fallback-brainstorm.md](261126-ai-generation-streaming-fallback-brainstorm.md)
+**Liên quan:** [brainstorm của kế hoạch fallback](../quang-ai-generation-streaming-fallback/brainstorm.md)
 
 ## 1. Vấn đề
 
