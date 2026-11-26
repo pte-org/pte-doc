@@ -22,3 +22,10 @@
 - `tenant-web/features/examoperations/errorMessage.ts`: bỏ câu tiếng Anh mặc định cứng, dùng câu chung theo ngôn ngữ.
 - Trang lỗi dùng chung (`ErrorPage`) thêm kiểu `rateLimited` (429, "Hệ thống đang bận", VI + EN). Màn Lớp học (`ClassesListView`) khi tải danh sách lỗi giờ hiện trang lỗi này, có nút "Thử lại", thay cho một dòng `Alert`.
 - Các danh sách khác (Chương trình, Học viên…) vẫn dùng `Alert`/`ErrorState` như cũ; chưa đổi.
+
+## Vòng 3: dịch thông báo lỗi theo mã (ví dụ "The selected audience is larger than this exam's capacity.")
+- Nguyên nhân: nhiều lỗi nghiệp vụ (kỳ thi, ghi danh…) API trả kèm `userMessage` tiếng Anh dành cho người dùng, và api-client hiển thị nguyên văn.
+- `api-client/src/client/userMessagesVi.ts` (mới): bản tiếng Việt của ~100 mã lỗi (danh mục có sẵn + các lỗi kỳ thi/ghi danh mà API trả bằng `userMessage`). Khi app ở tiếng Việt, bản này được ưu tiên hơn cả `userMessage` tiếng Anh; tiếng Anh giữ như cũ.
+- Cố ý không dịch tĩnh `SESSION_WINDOW_OUTSIDE_SUBSCRIPTION`, `SESSION_CAPACITY_EXCEEDS_SUBSCRIPTION`, `SESSION_SUBSCRIPTION_NOT_STARTED` (API điền ngày/số vào câu); các mã này vẫn hiện bản của server, và mã nào chưa có bản dịch cũng vậy.
+- Test mới `errorMessage.vi.test.ts` (mọi mã của danh mục tiếng Anh đều có bản Việt trừ các mã trên, không có `{}` còn sót, `userMessage` tiếng Anh bị thay đúng).
+- Chưa làm: lỗi kiểm tra nhập liệu `validation` kèm câu tiếng Anh do server tự viết (hiển thị nguyên văn như cũ).
