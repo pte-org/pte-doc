@@ -1,6 +1,6 @@
 # Phase 02: service và endpoint tạm dừng / tiếp tục
 
-**Trạng thái:** [ ] Chưa làm · **Repo:** pte-api · **Phụ thuộc:** 01
+**Trạng thái:** [x] Đã làm (2026-11-27) · **Repo:** pte-api · **Phụ thuộc:** 01
 
 ## Mục tiêu
 
@@ -8,8 +8,8 @@ API dừng, tiếp tục và hủy-khi-đang-dừng chạy đúng ở tầng DB.
 
 ## Việc cần làm
 
-- [ ] Thêm `pause` và `resume` vào `QuestionGenerationBatchService` (thành 4 public method, trong giới hạn 5). Nếu file vượt 300 dòng thì tách `BatchPauseService` vào package `batch`, giữ cùng thứ tự khóa.
-- [ ] `pause(publicId, caller)`:
+- [x] Thêm `pause` và `resume` vào `QuestionGenerationBatchService` (thành 4 public method, trong giới hạn 5). Nếu file vượt 300 dòng thì tách `BatchPauseService` vào package `batch`, giữ cùng thứ tự khóa.
+- [x] `pause(publicId, caller)`:
   1. `queries.require` (chỉ chủ lô), `batches.findByIdForUpdate`.
   2. Cập nhật có điều kiện `status IN PAUSABLE → PAUSING`, ghi `paused_at = now`.
      - Không đổi được mà lô đang `PAUSING`/`PAUSED`: trả trạng thái hiện tại (idempotent).
@@ -18,19 +18,19 @@ API dừng, tiếp tục và hủy-khi-đang-dừng chạy đúng ở tầng DB.
   4. Job `RUNNING` chuyển `PAUSING` (`jobs.markPausing`), rồi phát `GenerationPauseRequested(jobPublicId)` sau commit.
   5. Không còn job `LEASED` thì chuyển ngay `PAUSED`.
   6. Ghi audit `BATCH_PAUSED`.
-- [ ] `resume(publicId, caller)`:
+- [x] `resume(publicId, caller)`:
   - `PAUSED → RUNNING`, xóa `paused_at`, rồi `chaining.topUp(batchId)` (mở `topUp` thành package-visible hoặc thêm method `resume` trong `BatchChainingService`).
   - Lô `PAUSING`: `409 GENERATION_BATCH_NOT_RESUMABLE`. Lô `RUNNING`: idempotent. Ghi audit `BATCH_RESUMED`.
-- [ ] `cancel`: nhận thêm `PAUSING` và `PAUSED` (`requestCancel` dùng tập `CANCELLABLE`). Job `PAUSING` được chuyển `CANCELLING`, nên hủy thắng dừng (D7). Lô `PAUSED` không còn job giữ lease nên đóng `CANCELLED` ngay.
-- [ ] `BatchChainingService`:
+- [x] `cancel`: nhận thêm `PAUSING` và `PAUSED` (`requestCancel` dùng tập `CANCELLABLE`). Job `PAUSING` được chuyển `CANCELLING`, nên hủy thắng dừng (D7). Lô `PAUSED` không còn job giữ lease nên đóng `CANCELLED` ngay.
+- [x] `BatchChainingService`:
   - `topUp` trả 0 khi lô `PAUSING`/`PAUSED`.
   - `chain`/`reconcile`: lô `PAUSING` mà không còn job `LEASED` thì chuyển `PAUSED`. Không đóng lô đang dừng như lô đã xong.
-- [ ] Repository: `markPausing`, `requeueQueued(batchId)`, `pause/resume` có điều kiện, `findPausedBefore(Instant)` (để phase 04 dùng).
-- [ ] Controller `QuestionGenerationBatchController`: `POST /{publicId}/pause`, `POST /{publicId}/resume`, cùng quyền với `cancel`.
-- [ ] Hằng số trong `BatchGenerationConstants`:
+- [x] Repository: `markPausing`, `requeueQueued(batchId)`, `pause/resume` có điều kiện, `findPausedBefore(Instant)` (để phase 04 dùng).
+- [x] Controller `QuestionGenerationBatchController`: `POST /{publicId}/pause`, `POST /{publicId}/resume`, cùng quyền với `cancel`.
+- [x] Hằng số trong `BatchGenerationConstants`:
   - mã lỗi `GENERATION_BATCH_NOT_PAUSABLE`, `GENERATION_BATCH_NOT_RESUMABLE` kèm câu chữ
   - action audit `BATCH_PAUSED`, `BATCH_RESUMED` kèm summary
-- [ ] `ApiInventoryExportTest`: thêm 2 route.
+- [x] `ApiInventoryExportTest`: thêm 2 route.
 
 ## Ràng buộc thiết kế
 

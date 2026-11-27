@@ -1,6 +1,6 @@
 # Phase 04: tự hủy lô dừng quá hạn (admin cấu hình được)
 
-**Trạng thái:** [ ] Chưa làm · **Repo:** pte-api · **Phụ thuộc:** 02
+**Trạng thái:** [x] Đã làm (2026-11-27) · **Repo:** pte-api · **Phụ thuộc:** 02
 
 ## Mục tiêu
 
@@ -15,25 +15,25 @@ Các giới hạn sinh đề đang lưu dưới dạng platform setting:
 
 Hạn tự hủy đi đúng đường này:
 
-- [ ] `QuestionGenerationLimit.PAUSED_BATCH_EXPIRY_HOURS("question_generation_paused_batch_expiry_hours", 24, 0, 168, "hours", "Hours a paused generation batch is kept before it is cancelled")`.
+- [x] `QuestionGenerationLimit.PAUSED_BATCH_EXPIRY_HOURS("question_generation_paused_batch_expiry_hours", 24, 0, 168, "hours", "Hours a paused generation batch is kept before it is cancelled")`.
   - Khoảng hợp lệ 0..168 giờ (tối đa 7 ngày).
   - **0 nghĩa là không tự hủy**, theo quy tắc "0 = không giới hạn" sẵn có (`GenerationLimits.isUnlimited`).
-- [ ] `QuestionGenerationProperties.limits.pausedBatchExpiryHours`, đọc từ env `QUESTION_GEN_BATCH_PAUSED_EXPIRY_HOURS`, mặc định 24, làm giá trị dự phòng. Thêm biến vào `application.yml`, `docker-compose.services.yml` và `.env.example`; không thêm vào `.env` thật.
-- [ ] `GenerationLimits.pausedBatchExpiryHours()`.
-- [ ] Đưa giá trị vào phản hồi trạng thái AI (`AiStatusResponse` limits) và đường cập nhật giới hạn mà `AiOverviewService` đang dùng. Panel admin đọc và ghi qua đúng API hiện có, không thêm endpoint.
-- [ ] Phản hồi lô có `pauseExpiresAt` tính từ `paused_at` + hạn **lúc đọc**. Admin đổi hạn thì lô đang dừng theo hạn mới; ghi rõ điều này trong mô tả của setting. Hạn bằng 0 thì `pauseExpiresAt = null`.
+- [x] `QuestionGenerationProperties.limits.pausedBatchExpiryHours`, đọc từ env `QUESTION_GEN_BATCH_PAUSED_EXPIRY_HOURS`, mặc định 24, làm giá trị dự phòng. Thêm biến vào `application.yml`, `docker-compose.services.yml` và `.env.example`; không thêm vào `.env` thật.
+- [x] `GenerationLimits.pausedBatchExpiryHours()`.
+- [x] Đưa giá trị vào phản hồi trạng thái AI (`AiStatusResponse` limits) và đường cập nhật giới hạn mà `AiOverviewService` đang dùng. Panel admin đọc và ghi qua đúng API hiện có, không thêm endpoint.
+- [x] Phản hồi lô có `pauseExpiresAt` tính từ `paused_at` + hạn **lúc đọc**. Admin đổi hạn thì lô đang dừng theo hạn mới; ghi rõ điều này trong mô tả của setting. Hạn bằng 0 thì `pauseExpiresAt = null`.
 
 ## Job quét
 
-- [ ] `BatchPausedExpiry` (package `batch`), `@Scheduled` cùng nhịp `RECONCILE_DELAY_PROPERTY`:
+- [x] `BatchPausedExpiry` (package `batch`), `@Scheduled` cùng nhịp `RECONCILE_DELAY_PROPERTY`:
   - đọc hạn, nếu bằng 0 thì bỏ qua cả vòng
   - tìm `findPausedBefore(now - hạn)`
   - với mỗi lô, trong transaction riêng: khóa lô, kiểm tra lại `PAUSED`, rồi chạy logic hủy
   - Hàm hủy cần nhận người thực hiện là hệ thống: tách lõi của `cancel` thành method nội bộ nhận `actor`, không giả `CurrentUser`.
-- [ ] Hằng số:
+- [x] Hằng số:
   - audit `BATCH_EXPIRED_WHILE_PAUSED` kèm summary ghi hạn đang áp dụng
   - mã đóng lô `GENERATION_BATCH_PAUSE_EXPIRED`
-- [ ] Quota: không viết code hoàn. Job chưa chạy bị hủy tự rơi khỏi tổng (`NOT_REFUNDED`).
+- [x] Quota: không viết code hoàn. Job chưa chạy bị hủy tự rơi khỏi tổng (`NOT_REFUNDED`).
 
 ## Ràng buộc thiết kế
 

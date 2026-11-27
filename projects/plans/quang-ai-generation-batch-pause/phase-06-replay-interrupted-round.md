@@ -1,6 +1,6 @@
 # Phase 06: replay engine với vòng bị ngắt
 
-**Trạng thái:** [ ] Chưa làm · **Repo:** pte-web · **Phụ thuộc:** 03, 05
+**Trạng thái:** [x] Đã làm (2026-11-27) · **Repo:** pte-web · **Phụ thuộc:** 03, 05
 
 ## Mục tiêu
 
@@ -12,11 +12,11 @@ Replay engine (`features/questiongeneration/replay/`) mở vòng mới ở mỗi
 
 ## Việc cần làm
 
-- [ ] `buildScript`/`mergeSnapshot`: khi câu nhận `stage QUEUED` sau khi đã có bước trong vòng hiện tại (sự kiện phase 03 phát), đánh dấu bước write/review dở của vòng đó là `superseded` và **không** thêm bước outcome.
-- [ ] Bảng quy tắc gộp snapshot: snapshot sau khi dừng có thể đã xóa check của vòng dở. Giữ đúng quy tắc chỉ thêm (không xóa bước đã phát lại).
-- [ ] Chip và view: câu đang chờ sau khi dừng hiện "Chờ lượt"; playhead dừng ở bước cuối đã phát (I7), không tiến tới outcome.
-- [ ] Fixture `tests/fixtures/replay/pause-midway-resume.ndjson`: viết tay theo đúng thứ tự sự kiện phase 03 phát (vòng 1 dở, `stage QUEUED`, `end`, kết nối lại, snapshot, `PROMPT` vòng 2, viết xong, lưu). Ghi thêm một fixture thật nếu chạy được trên local, tối đa 3 job.
-- [ ] Đăng ký fixture trong `fixtureRegistry.ts`, chạy cùng bộ bất biến I1–I7.
+- [x] `buildScript`/`mergeSnapshot`: khi câu nhận `stage QUEUED` sau khi đã có bước trong vòng hiện tại (sự kiện phase 03 phát), đánh dấu bước write/review dở của vòng đó là `superseded` và **không** thêm bước outcome.
+- [x] Bảng quy tắc gộp snapshot: snapshot sau khi dừng có thể đã xóa check của vòng dở. Giữ đúng quy tắc chỉ thêm (không xóa bước đã phát lại).
+- [x] Chip và view: câu đang chờ sau khi dừng hiện "Chờ lượt"; playhead dừng ở bước cuối đã phát (I7), không tiến tới outcome.
+- [x] Fixture `tests/fixtures/replay/pause-midway-resume.ndjson`: viết tay theo đúng thứ tự sự kiện phase 03 phát (vòng 1 dở, `stage QUEUED`, `end`, kết nối lại, snapshot, `PROMPT` vòng 2, viết xong, lưu). Ghi thêm một fixture thật nếu chạy được trên local, tối đa 3 job.
+- [x] Đăng ký fixture trong `fixtureRegistry.ts`, chạy cùng bộ bất biến I1–I7.
 
 ## Ràng buộc thiết kế
 

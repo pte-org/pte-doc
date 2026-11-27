@@ -1,6 +1,6 @@
 # Phase 03: worker phân biệt dừng và hủy
 
-**Trạng thái:** [ ] Chưa làm · **Repo:** pte-api · **Phụ thuộc:** 01, 02
+**Trạng thái:** [x] Đã làm (2026-11-27) · **Repo:** pte-api · **Phụ thuộc:** 01, 02
 
 ## Mục tiêu
 
@@ -12,16 +12,16 @@ Job bị ngắt vì tạm dừng thì trả câu dở về hàng chờ, quay job
 
 ## Việc cần làm
 
-- [ ] `QuestionGenerationWorker.onPauseRequested(GenerationPauseRequested)`: sau commit gọi `task.cancel(true)`, giống `onCancelRequested`. Có thể gộp hai event thành một `GenerationStopRequested` nếu gọn hơn, miễn giữ được tên event hủy cho code đang dùng.
-- [ ] `LeaseState`: thêm `PAUSE_REQUESTED`. `JobLeaseService.leaseState` trả trạng thái này khi job `PAUSING`; runner kiểm tra nó trước mỗi câu (đường không ngắt, ví dụ khi job chạy ở instance khác).
-- [ ] `GenerationItemStateService.stopReason(claim)`: đọc `statusIfLeaseHeld`, trả `PAUSING`, `CANCELLING` hoặc rỗng. Hàm `cancelRequested` cũ dùng lại hàm này.
-- [ ] `ItemOutcome.PAUSED`. Trong runner: bị ngắt thì đọc `stopReason`. Kết quả là `CANCELLING` hoặc rỗng (mất lease hay lỗi khác) thì giữ hành vi cũ; là `PAUSING` thì ra `PAUSED`.
-- [ ] Nhánh `PAUSED`:
+- [x] `QuestionGenerationWorker.onPauseRequested(GenerationPauseRequested)`: sau commit gọi `task.cancel(true)`, giống `onCancelRequested`. Có thể gộp hai event thành một `GenerationStopRequested` nếu gọn hơn, miễn giữ được tên event hủy cho code đang dùng.
+- [x] `LeaseState`: thêm `PAUSE_REQUESTED`. `JobLeaseService.leaseState` trả trạng thái này khi job `PAUSING`; runner kiểm tra nó trước mỗi câu (đường không ngắt, ví dụ khi job chạy ở instance khác).
+- [x] `GenerationItemStateService.stopReason(claim)`: đọc `statusIfLeaseHeld`, trả `PAUSING`, `CANCELLING` hoặc rỗng. Hàm `cancelRequested` cũ dùng lại hàm này.
+- [x] `ItemOutcome.PAUSED`. Trong runner: bị ngắt thì đọc `stopReason`. Kết quả là `CANCELLING` hoặc rỗng (mất lease hay lỗi khác) thì giữ hành vi cũ; là `PAUSING` thì ra `PAUSED`.
+- [x] Nhánh `PAUSED`:
   - `itemState.requeueOpen(claim)`: câu chưa ở trạng thái cuối về `QUEUED`; xóa bản nháp, review, media ref và bộ đếm lời gọi của vòng dở.
   - `leases.release(claim)`: job về `PENDING`, xóa worker id và hạn lease, **giữ** `started_at` (D4).
   - Hook chaining của lô được gọi để kiểm tra chuyển `PAUSED` (phase 02).
-- [ ] Live feed: phát sự kiện cho người đang xem biết câu dở đã quay về hàng chờ. Đề xuất phát `stage QUEUED` cho câu đó rồi `end` cho job. Phase 06 dùng sự kiện này để đánh dấu vòng dở là `superseded`.
-- [ ] Media dở: nếu vòng bị ngắt đã có `audioRef`/`imageRef` nhưng câu chưa lưu thì xóa file qua dịch vụ media sẵn có, ghi log khi xóa thất bại. Còn file đang tải dở mà chưa có ref thì chấp nhận và ghi chú lại. Local và prod dùng chung tài khoản Cloudinary, nên chỉ xóa đúng ref của vòng dở.
+- [x] Live feed: phát sự kiện cho người đang xem biết câu dở đã quay về hàng chờ. Đề xuất phát `stage QUEUED` cho câu đó rồi `end` cho job. Phase 06 dùng sự kiện này để đánh dấu vòng dở là `superseded`.
+- [x] Media dở: nếu vòng bị ngắt đã có `audioRef`/`imageRef` nhưng câu chưa lưu thì xóa file qua dịch vụ media sẵn có, ghi log khi xóa thất bại. Còn file đang tải dở mà chưa có ref thì chấp nhận và ghi chú lại. Local và prod dùng chung tài khoản Cloudinary, nên chỉ xóa đúng ref của vòng dở.
 
 ## Ràng buộc thiết kế
 

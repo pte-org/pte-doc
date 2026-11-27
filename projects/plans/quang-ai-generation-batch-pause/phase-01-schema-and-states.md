@@ -1,6 +1,6 @@
 # Phase 01: schema và trạng thái
 
-**Trạng thái:** [ ] Chưa làm · **Repo:** pte-api
+**Trạng thái:** [x] Đã làm (2026-11-27) · **Repo:** pte-api
 
 ## Mục tiêu
 
@@ -8,17 +8,17 @@ Lô và job có trạng thái tạm dừng trong DB và trong enum. Chưa có h�
 
 ## Việc cần làm
 
-- [ ] Migration `V60__question_generation_batch_pause.sql`:
+- [x] Migration `V60__question_generation_batch_pause.sql`:
   - Tạo lại CHECK `status` của `question_generation_batches`, thêm `PAUSING`, `PAUSED`. CHECK của V53 là inline, nên tìm theo định nghĩa giống cách V53 làm với bảng job.
   - Thêm cột `paused_at TIMESTAMPTZ NULL`.
   - Tạo lại `uk_qgen_batches_one_open_per_requester` và `ix_qgen_batches_open` với `status IN ('QUEUED','RUNNING','CANCELLING','PAUSING','PAUSED')` (D3).
   - Thêm index một phần `ix_qgen_batches_paused_at ON (paused_at) WHERE status = 'PAUSED'` cho job tự hủy.
   - Tạo lại CHECK `status` của `question_generation_jobs`, thêm `PAUSING`.
   - Không đổi `uk_qgen_jobs_one_active_per_requester`, vì index này chỉ áp cho job lẻ (`batch_id IS NULL`).
-- [ ] `BatchStatus`: thêm `PAUSING`, `PAUSED`; thêm cả hai vào `OPEN`; thêm tập `PAUSABLE = {QUEUED, RUNNING}`, `RESUMABLE = {PAUSED}`, `CANCELLABLE = OPEN − {CANCELLING}`.
-- [ ] `JobStatus`: thêm `PAUSING`; thêm vào `OPEN`, `LEASED` và `ACTIVE`. Job đang `PAUSING` vẫn giữ lease và chiếm luồng cho tới khi nhả, nên `topUp` không được đẩy thêm job.
-- [ ] `QuestionGenerationBatch`: thêm field `pausedAt`.
-- [ ] Kiểm tra mọi chỗ `switch`/`if` trên hai enum (grep `BatchStatus.` và `JobStatus.`) để không có nhánh rơi vào mặc định sai: mapper response, `BatchStatusCalculator`, query service, live feed.
+- [x] `BatchStatus`: thêm `PAUSING`, `PAUSED`; thêm cả hai vào `OPEN`; thêm tập `PAUSABLE = {QUEUED, RUNNING}`, `RESUMABLE = {PAUSED}`, `CANCELLABLE = OPEN − {CANCELLING}`.
+- [x] `JobStatus`: thêm `PAUSING`; thêm vào `OPEN`, `LEASED` và `ACTIVE`. Job đang `PAUSING` vẫn giữ lease và chiếm luồng cho tới khi nhả, nên `topUp` không được đẩy thêm job.
+- [x] `QuestionGenerationBatch`: thêm field `pausedAt`.
+- [x] Kiểm tra mọi chỗ `switch`/`if` trên hai enum (grep `BatchStatus.` và `JobStatus.`) để không có nhánh rơi vào mặc định sai: mapper response, `BatchStatusCalculator`, query service, live feed.
 
 ## Ràng buộc thiết kế
 

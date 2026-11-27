@@ -1,6 +1,6 @@
 # Plan: tạm dừng và tiếp tục lô sinh đề AI
 
-**Tác giả:** quang · **Ngày:** 2026-11-27 · **Trạng thái:** Chưa làm
+**Tác giả:** quang · **Ngày:** 2026-11-27 · **Trạng thái:** Phase 01–06 đã làm; phase 07 còn phần kiểm tra tay trên local
 **Nguồn:** [brainstorm.md](brainstorm.md)
 
 ## Mục tiêu
@@ -48,3 +48,20 @@ Lô sinh đề có thêm **Tạm dừng** (ngắt ngay lời gọi AI đang ch�
 - Tạm dừng job lẻ.
 - Đổi cách đếm quota.
 - Tạm dừng theo lịch hoặc tự động tạm dừng khi provider lỗi.
+
+## Ghi chú khi làm (2026-11-27)
+
+- **Câu bị ngắt không được đánh `FAILED`.** Khi lời gọi AI bị ngắt, pipeline bắt exception và gọi `itemState.fail`. Giờ `fail` bỏ qua khi luồng đang bị ngắt, để runner quyết định: tạm dừng thì câu về `QUEUED`, hủy thì `CANCELLED`. Hệ quả phụ: câu bị hủy giữa chừng giờ là `CANCELLED` thay vì `FAILED`, đúng nghĩa hơn.
+- **Media dở:** pipeline đã có `finally { mediaRenderer.discard(stored) }`, nên media của câu bị ngắt được xóa sẵn. Không cần code mới cho rủi ro 2.
+- **Luồng live khi chạy lại:** `LiveJobRegistry.start` thay `LiveJob` đã kết thúc bằng một cái mới khi worker nhận lại job. Nếu không, người xem nhận snapshot cũ và `end` ngay.
+- **Replay:** `startNewRun` (khi snapshot `finished: false` đến sau `end`) đánh dấu phần viết dở là `superseded` và ghi `runBase`, để snapshot của lần chạy mới được đọc chồng lên các vòng trước. `useLiveJob` kết nối lại khi job chuyển giữa chờ và chạy.
+- **Endpoint:** đặt trong controller riêng `QuestionGenerationBatchPauseController`, để không đổi constructor của controller lô.
+- **Setting phải được seed:** đọc một platform setting chưa có dòng sẽ đánh dấu transaction ngoài là rollback (lỗi sẵn có của `BillingSettingsService.questionGenerationLimit`). V60 tạo sẵn dòng `question_generation_paused_batch_expiry_hours = 24`.
+- **V60** dùng `DROP ... IF EXISTS` để chạy được cả trên DB local dựng bằng Hibernate (`local-schema`).
+- **Dừng không dựa vào cờ interrupt (sửa sau lần thử thật, 2026-11-27).** Lần thử đầu cho thấy lời gọi AI có bị ngắt, nhưng lớp retry và fallback coi đó là provider lỗi và gọi lại model dự phòng. Một luồng còn mất cờ interrupt ở giữa, nên câu vẫn viết xong, được lưu, và job thành `COMPLETED` khoảng 16 giây sau khi bấm dừng. Cách sửa:
+  - Mỗi job đang chạy có một `GenerationStop` (package `stop`). Worker bật tín hiệu trước, rồi mới `task.cancel(true)`.
+  - Gateway kiểm tra tín hiệu trước mỗi lần thử lại, khi lời gọi lỗi và trước khi chuyển sang fallback. Lỗi do bị dừng là `GenerationStoppedException`, không phải `LlmProviderException`, nên không lớp nào gọi lại.
+  - Tín hiệu đóng luôn response đang đọc. Stream reader kiểm tra tín hiệu ở từng dòng, nên không còn chữ nào tới live view.
+  - Pipeline trả `STOPPED`. `GeneratedQuestionWriter.save` không lưu khi job `PAUSING`.
+  - Web: khi stream kết thúc giữa lúc câu đang viết, phần chữ dở hiện hết ngay (`ItemScript.halted`) thay vì gõ tiếp theo tốc độ đọc.
+  - Web, lần thử thứ hai: câu bị dừng trước khi agent viết chữ nào thì không có gì bị cắt, nên replay vẫn hiện con trỏ và chữ "Đang viết đề". Giờ khi job về chờ lượt (`PENDING`/`QUEUED`), mọi câu đang dở đều bị đánh `halted`. Khi đó `Frame.halted` ẩn con trỏ agent, chip trong panel hiện "Chờ lượt", và dòng "Đang kết nối…" không còn hiện.
