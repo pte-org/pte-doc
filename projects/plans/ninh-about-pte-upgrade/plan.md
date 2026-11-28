@@ -1,6 +1,6 @@
 # Nâng cấp trang `/about-pte` (tenant-web)
 
-Trạng thái: đã làm xong 3 đợt, chưa commit. Code ở `pte-web/apps/tenant-web/features/aboutPte/`.
+Trạng thái: đã làm xong 3 đợt; code nằm trong pte-web PR #115. Code ở `pte-web/apps/tenant-web/features/aboutPte/`.
 
 ## Quyết định
 
