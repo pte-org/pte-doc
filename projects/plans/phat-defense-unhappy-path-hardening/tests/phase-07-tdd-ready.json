@@ -1,0 +1,49 @@
+{
+  "phase": "phase-07-audit-log",
+  "status": "RED_READY",
+  "created_at": "2026-11-28",
+  "test_files": [
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/order/PayOsWebhookAuditTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/order/OrderServiceCancelAuditTest.java",
+    "pte-api/app/src/test/java/com/pte/billing/internal/service/license/LicenseCodeAuditTest.java",
+    "pte-api/app/src/test/java/com/pte/identity/internal/service/UserServiceAuditTest.java",
+    "pte-api/app/src/test/java/com/pte/scoring/internal/rubric/workflow/RubricAuditLogTest.java",
+    "pte-api/app/src/test/java/com/pte/reporting/internal/service/ReportPublishAuditTest.java",
+    "pte-api/app/src/test/java/com/pte/shared/audit/Fr09AuditCoverageTest.java"
+  ],
+  "already_audited_verified": [
+    "License issue (LicenseCodeIssuer), grant (LicenseGrantService:179), reveal (LicenseCodeService:124)",
+    "Platform setting change incl. AI switches (PlatformSettingService.recordUpdate; PlatformSettingServiceAiSwitchTest asserts toggle row and no row when unchanged)",
+    "Score source choice (ScoreSourceSelectionService.apply via AuditLogChangeWriter.record, SCORE_SELECTION audit row; existing ScoreSourceSelectionServiceTest)",
+    "Password reset / credentials emailed / own password change (UserCredentialRotation)",
+    "Rubric activation append-only table scoring_rubric_activation_audits (kept; shared row added next to it)"
+  ],
+  "tests": [
+    {"name": "PayOsWebhookAuditTest (8 cases incl. parameterized EXPIRED/CANCELLED)", "file": "PayOsWebhookAuditTest.java", "acceptance_criterion": "FR-09/NFR-06: PAID webhook = one SYSTEM-actor row ORDER_PAID, replay no second row; paid after EXPIRED/CANCELLED = ORDER_PAID_AFTER_CLOSE (not re-written on replay); no row on bad signature, amount mismatch or 5xx rollback; summary has no payload/signature", "red_reason": "test-compile: new constructor arg, BillingConstants.SYSTEM_ACTOR_USER_ID/AUDIT_ORDER_PAID/AUDIT_ORDER_PAID_AFTER_CLOSE missing"},
+    {"name": "OrderServiceCancelAuditTest (5 cases)", "file": "OrderServiceCancelAuditTest.java", "acceptance_criterion": "FR-13/FR-09: Host cancel writes ORDER_CANCELLED row for the Host; none for non-pending, foreign tenant, PayOS failure, lost sweeper race", "red_reason": "test-compile: OrderService.cancelOrder(UUID,UUID,CurrentUser) and BillingConstants.AUDIT_ORDER_CANCELLED missing"},
+    {"name": "LicenseCodeAuditTest (7 cases)", "file": "LicenseCodeAuditTest.java", "acceptance_criterion": "FR-09: redeem and revoke each write one row (caller = Host / platform admin), raw license code never in summary; none on refused redeem, failed activation, stale/missing revoke confirmation", "red_reason": "test-compile: BillingConstants.AUDIT_LICENSE_REDEEM/AUDIT_LICENSE_REVOKE missing"},
+    {"name": "UserServiceAuditTest (10 cases)", "file": "UserServiceAuditTest.java", "acceptance_criterion": "FR-09: single create row; one batch row with counts for Student import and staff import; reactivate row only when status changes; no password/username/email in any summary; no row for rejected roster, duplicate e-mail, unknown user", "red_reason": "test-compile: IdentityConstants.USER_CREATED/USER_BULK_IMPORTED/STAFF_BULK_IMPORTED/USER_REACTIVATED and *_SUMMARY formats missing"},
+    {"name": "RubricAuditLogTest (9 cases)", "file": "RubricAuditLogTest.java", "acceptance_criterion": "FR-09: rubric submit, reject, activate each write one shared audit row (activation also keeps its append-only row); none on invalid status, wrong role, missing reason, stale digest, self-approval; summary has no parameters", "red_reason": "test-compile: new ctor args on RubricVersionCommandService and RubricActivationWorkflow, RubricConstants.RUBRIC_AUDIT_* missing"},
+    {"name": "ReportPublishAuditTest (4 cases)", "file": "ReportPublishAuditTest.java", "acceptance_criterion": "FR-09: publishing writes one row (actor + tenant, cohort size, no scores/snapshot); none when blocked, when all attempts were already published (replay), or when the cohort is empty", "red_reason": "test-compile: new ReportPublishService ctor arg, ReportingConstants.AUDIT_AGGREGATE_RESULT_PUBLICATION/AUDIT_ACTION_RESULTS_PUBLISHED/RESULTS_PUBLISHED_SUMMARY missing"},
+    {"name": "Fr09AuditCoverageTest (14 dynamic tests)", "file": "Fr09AuditCoverageTest.java", "acceptance_criterion": "NFR-06: every FR-09 action owner class holds AuditLogService (AuditLogChangeWriter for score selection)", "red_reason": "runtime: 8 of 14 fail today (PayOsWebhookService, LicenseCodeRedeemer, LicenseCodeRevoker, UserAccountProvisioner, StaffBulkProvisioner, RubricVersionCommandService, RubricActivationWorkflow, ReportPublishService); 6 pass as regression guards"}
+  ],
+  "expected_new_symbols": [
+    "BillingConstants: SYSTEM_ACTOR_USER_ID (UUID), AUDIT_ORDER_PAID=\"ORDER_PAID\", AUDIT_ORDER_PAID_AFTER_CLOSE=\"ORDER_PAID_AFTER_CLOSE\", AUDIT_ORDER_CANCELLED=\"ORDER_CANCELLED\", AUDIT_LICENSE_REDEEM=\"LICENSE_REDEEM\", AUDIT_LICENSE_REVOKE=\"LICENSE_REVOKE\"",
+    "PayOsWebhookService ctor: (JsonMapper, PayOsClient, OrderRepository, ServicePlanRepository, SubscriptionActivationService, ApplicationEventPublisher, AuditLogService, Clock); audit with CurrentUser(SYSTEM_ACTOR_USER_ID, order.tenantId, [\"SYSTEM\"]), aggregate ORDER_AGGREGATE, id = order public id; PAID row also when plan is unavailable (status commits); late-payment row only when the order holds no earlier processed receipt",
+    "OrderService.cancelOrder(UUID orderPublicId, UUID tenantId, CurrentUser caller) writing AUDIT_ORDER_CANCELLED after cancelIfPending succeeds; OrderController must call it",
+    "LicenseCodeRedeemer / LicenseCodeRevoker hold AuditLogService (constructed from LicenseCodeService, whose public ctor is unchanged); redeem/revoke rows use aggregate LICENSE_CODE_AGGREGATE, id = license code public id, caller = the redeeming/revoking user; summary never has the raw code",
+    "IdentityConstants: USER_CREATED, USER_BULK_IMPORTED, STAFF_BULK_IMPORTED, USER_REACTIVATED, USER_CREATED_SUMMARY (%s = role names), USER_BULK_IMPORTED_SUMMARY and STAFF_BULK_IMPORTED_SUMMARY (args: created, skipped; created first)",
+    "UserAccountProvisioner and StaffBulkProvisioner take AuditLogService (UserService ctor unchanged); single create id = new account public id; batch rows id = tenant public id, written once per batch only when at least the batch ran (not on roster validation failure); UserService.reactivate audits only on an actual status change",
+    "RubricConstants: RUBRIC_AUDIT_AGGREGATE, RUBRIC_AUDIT_SUBMIT, RUBRIC_AUDIT_REJECT, RUBRIC_AUDIT_ACTIVATE; RubricVersionCommandService ctor appends AuditLogService after RubricActivationWorkflow; RubricActivationWorkflow ctor appends AuditLogService after PlatformTransactionManager; activation row written inside the activation transaction",
+    "ReportingConstants: AUDIT_AGGREGATE_RESULT_PUBLICATION, AUDIT_ACTION_RESULTS_PUBLISHED, RESULTS_PUBLISHED_SUMMARY (%d = cohort size); ReportPublishService ctor inserts AuditLogService between RubricTraceService and Clock; caller = new CurrentUser(actorPublicId, tenantId, roles) ; written only when at least one report was newly published",
+    "All new rows use the five-argument AuditLogService.record(caller, aggregateType, aggregateId, action, summary)"
+  ],
+  "existing_tests_needing_updates": [
+    "PayOsWebhookServiceTest.setUp (new ctor arg, pass a mock AuditLogService)",
+    "ReportPublishServiceTest.setUp and ReportPublishServiceObjectiveBlockerTest.setUp (new ctor arg)",
+    "RubricWorkflowFixture ctor calls (RubricActivationWorkflow + RubricVersionCommandService) and RubricVersionConcurrencyIT line ~66 (new AuditLogService arg; a mock is enough)",
+    "OrderServiceCancelTest calls the two-argument cancelOrder with a null AuditLogService; update to the three-argument form or keep the two-argument delegate non-auditing"
+  ],
+  "run_command": "./mvnw.cmd -pl app clean test -Dtest=PayOsWebhookAuditTest,OrderServiceCancelAuditTest,LicenseCodeAuditTest,UserServiceAuditTest,RubricAuditLogTest,ReportPublishAuditTest,Fr09AuditCoverageTest -Dsurefire.failIfNoSpecifiedTests=false",
+  "notes": "RED confirmed: test-compile fails only in the 6 new-symbol files (missing constants, constructors, cancelOrder overload; no other errors). With those 6 moved aside, Fr09AuditCoverageTest runs 14 dynamic tests, 8 fail as expected (after dropping the UserService entry, which was 15 -> 14). Behavioural tests could not execute before the symbols exist; their negative cases (no row on failure) pass trivially once compiled, positive cases drive the implementation. Score source choice, platform setting and license issue/grant/reveal audits already existed and were not re-tested beyond the structural check. Not added: audit for user suspend (not in FR-09). Pre-existing ModuleStructureTest violations (2) ignored."
+}

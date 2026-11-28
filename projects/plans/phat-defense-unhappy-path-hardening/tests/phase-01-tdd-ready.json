@@ -1,0 +1,37 @@
+{
+  "phase": "phase-01-cross-cutting-security",
+  "status": "RED_READY",
+  "created_at": "2026-11-27",
+  "test_files": [
+    "pte-api/app/src/test/java/com/pte/identity/internal/security/AccessTokenIssuerTest.java",
+    "pte-api/app/src/test/java/com/pte/identity/internal/security/PasswordChangeRequiredFilterTest.java",
+    "pte-api/app/src/test/java/com/pte/shared/security/SecurityPolicyTest.java",
+    "pte-api/app/src/test/java/com/pte/scoring/internal/rubric/workflow/RubricWorkflowPolicyTest.java",
+    "pte-api/app/src/test/java/com/pte/scoring/internal/rubric/service/RubricVersionActivationStatusTest.java"
+  ],
+  "tests": [
+    {"name": "AccessTokenIssuerTest.staffWithTemporaryPassword_getsPasswordChangeRequiredClaim", "file": "AccessTokenIssuerTest.java", "acceptance_criterion": "FR-07: non-student with mustChangePassword gets boolean claim pwd_change_required=true", "red_reason": "claim not issued (expected true)"},
+    {"name": "AccessTokenIssuerTest.staffWithoutTemporaryPassword_getsNoPasswordChangeClaim", "file": "AccessTokenIssuerTest.java", "acceptance_criterion": "FR-07: no claim when flag false", "red_reason": "passes today (regression guard)"},
+    {"name": "AccessTokenIssuerTest.studentWithMustChangePassword_isNeverBlocked_noClaim", "file": "AccessTokenIssuerTest.java", "acceptance_criterion": "FR-07 (B1): STUDENT never gets the claim", "red_reason": "passes today (regression guard for implementation)"},
+    {"name": "PasswordChangeRequiredFilterTest (6 tests)", "file": "PasswordChangeRequiredFilterTest.java", "acceptance_criterion": "FR-07: flagged token -> 403 PASSWORD_CHANGE_REQUIRED except POST /api/v1/auth/change-password and /api/v1/auth/logout; unflagged/false/unauthenticated pass", "red_reason": "test-compile fails: class PasswordChangeRequiredFilter does not exist"},
+    {"name": "SecurityPolicyTest.platformAdminAuthor_cannotReviewOrPublishOwnAcademicItem", "file": "SecurityPolicyTest.java", "acceptance_criterion": "FR-04: admin author denied", "red_reason": "admin override returns true"},
+    {"name": "SecurityPolicyTest.platformAdmin_canReviewAndPublishSomeoneElsesItem", "file": "SecurityPolicyTest.java", "acceptance_criterion": "FR-04: admin may review others' items", "red_reason": "passes today (regression guard)"},
+    {"name": "SecurityPolicyTest.legacyItemWithoutAuthor_isReviewableAndPublishableByManagerAndAdmin", "file": "SecurityPolicyTest.java", "acceptance_criterion": "FR-04/H3: null author allowed for manager and admin", "red_reason": "manager denied on null author"},
+    {"name": "SecurityPolicyTest.legacyItemWithoutAuthor_isStillDeniedToStaffAndOtherRoles", "file": "SecurityPolicyTest.java", "acceptance_criterion": "null author is not a bypass for other roles", "red_reason": "passes today (guard)"},
+    {"name": "SecurityPolicyTest.academicDraftAndGovernanceUseOwnershipAndSeparationOfDuties", "file": "SecurityPolicyTest.java", "acceptance_criterion": "FR-04/H3: existing assertion canReviewAcademic(manager,null) flipped from false to true per binding decision (not a weakening: explicit decision change)", "red_reason": "manager null author currently denied"},
+    {"name": "RubricWorkflowPolicyTest.managerCannotReviewOwnVersionInAnyStatus[DRAFT]", "file": "RubricWorkflowPolicyTest.java", "acceptance_criterion": "FR-04: self check in all statuses", "red_reason": "self check only for PENDING"},
+    {"name": "RubricWorkflowPolicyTest.adminCannotReviewOwnVersionInAnyStatus[DRAFT,PENDING]", "file": "RubricWorkflowPolicyTest.java", "acceptance_criterion": "FR-04: self check applies to admin", "red_reason": "admin exempt from self check"},
+    {"name": "RubricWorkflowPolicyTest other-author / null-author cases", "file": "RubricWorkflowPolicyTest.java", "acceptance_criterion": "others and legacy null author allowed", "red_reason": "pass today (guards)"},
+    {"name": "RubricVersionActivationStatusTest.aDraftCannotBeActivatedDirectly", "file": "RubricVersionActivationStatusTest.java", "acceptance_criterion": "FR-04: activation only from PENDING (409 RUBRIC_VERSION_STATUS_INVALID)", "red_reason": "ACTIVATABLE includes DRAFT"}
+  ],
+  "expected_new_symbols": [
+    "com.pte.identity.internal.security.PasswordChangeRequiredFilter extends OncePerRequestFilter, public constructor (tools.jackson.databind.json.JsonMapper); reads JwtAuthentication claim 'pwd_change_required' (Boolean); on true and path not in {POST /api/v1/auth/change-password, /api/v1/auth/logout} writes 403 JSON ApiResponse.error(code PASSWORD_CHANGE_REQUIRED, ...) and does not continue the chain; unauthenticated requests pass through",
+    "AccessTokenIssuer: claim 'pwd_change_required' = true only when user.isMustChangePassword() and user is not STUDENT; claim absent otherwise (suggest SecurityClaims.PWD_CHANGE_REQUIRED = \"pwd_change_required\")",
+    "Error code PASSWORD_CHANGE_REQUIRED in identity constants (response body must contain it)",
+    "SecurityPolicy.canReviewAcademic/canPublishAcademic: deny when author == caller (admin too); allow null author for ACADEMIC_MANAGER and PLATFORM_ADMIN (other roles still denied)",
+    "RubricWorkflowPolicy.reviewer: self check for all statuses and all roles (RubricVersionException FORBIDDEN RUBRIC_SELF_APPROVAL_FORBIDDEN); null author allowed",
+    "RubricVersionService.ACTIVATABLE = {PENDING} only (409 RUBRIC_VERSION_STATUS_INVALID for DRAFT)"
+  ],
+  "run_command": "./mvnw.cmd -pl app test -Dtest=SecurityPolicyTest,AccessTokenIssuerTest,PasswordChangeRequiredFilterTest,RubricWorkflowPolicyTest,RubricVersionActivationStatusTest -Dsurefire.failIfNoSpecifiedTests=false",
+  "notes": "RED confirmed for the 4 compilable classes (24 run, 8 failing, all due to missing behaviour) by running with PasswordChangeRequiredFilterTest temporarily moved aside; that file fails test-compile until PasswordChangeRequiredFilter exists. EXISTING tests that contradict FR-04 and must be updated by the implementer (justified by acceptance change, not weakening): RubricVersionServiceTest.aDraftCanBeActivatedDirectlyAndTheFirstActivationHasNoPrevious and RubricVersionServiceTest.activateRevalidatesTheCandidatesParametersBeforeRetiringTheActiveVersion/activateRejectsACandidateWhoseScalesNoLongerMatchTheCatalog (use DRAFT), RubricActivationAuditTest (manager activates own direct DRAFT edit, ~line 70). Also not covered: HTTP-level integration (Student import login then attempt start), refresh-token flag re-read, change-password reissuing token, SecurityConfig wiring; add alongside implementation."
+}

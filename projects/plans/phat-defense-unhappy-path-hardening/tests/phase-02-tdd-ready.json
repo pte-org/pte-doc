@@ -1,0 +1,51 @@
+{
+  "phase": "02-wf01-resource-preparation",
+  "status": "RED_READY",
+  "created_at": "2026-11-27",
+  "test_files": [
+    "pte-api/app/src/test/java/com/pte/assessment/internal/service/definition/ExamDefinitionApprovalFixtures.java",
+    "pte-api/app/src/test/java/com/pte/assessment/internal/service/definition/ExamDefinitionApprovalWorkflowTest.java",
+    "pte-api/app/src/test/java/com/pte/assessment/internal/service/definition/ExamDefinitionApprovalMarkTest.java",
+    "pte-api/app/src/test/java/com/pte/assessment/internal/service/HostExamTemplateServiceTest.java",
+    "pte-api/app/src/test/java/com/pte/itembank/internal/service/QuestionValidationAuthoringCountRulesTest.java",
+    "pte-api/app/src/test/java/com/pte/itembank/internal/service/lifecycle/QuestionApprovalServicePublishTest.java"
+  ],
+  "tests": [
+    {"name": "activate_draftThatWasNeverApproved_isRejectedWith409AndNothingIsSaved", "file": "ExamDefinitionApprovalWorkflowTest", "acceptance_criterion": "FR-05/RF-19: activating a DRAFT without the approval mark returns 409 with a new code (not TEMPLATE_NOT_DRAFT_CODE)", "red_reason": "activate currently succeeds for an unapproved DRAFT, no exception"},
+    {"name": "activate_retiredVersionWithoutApprovalMark_isRejectedWith409", "file": "ExamDefinitionApprovalWorkflowTest", "acceptance_criterion": "RETIRED re-activate (used by vendor-web lifecycleMoves RETIRED->ACTIVE) only works when the approval mark is present", "red_reason": "RETIRED activation currently succeeds without any mark"},
+    {"name": "approve_byAnotherReviewer_returnsTheTemplateToDraftReadyForActivation", "file": "ExamDefinitionApprovalWorkflowTest", "acceptance_criterion": "fixture guard", "red_reason": "GREEN guard (passes now, must keep passing)"},
+    {"name": "approve_byAdminWhoAuthoredTheTemplate_isDenied", "file": "ExamDefinitionApprovalWorkflowTest", "acceptance_criterion": "Self-approval of template denied incl. admin", "red_reason": "GREEN regression guard from phase 01"},
+    {"name": "activate_byAdminWhoAuthoredTheTemplate_isDenied", "file": "ExamDefinitionApprovalWorkflowTest", "acceptance_criterion": "Self-publish of template denied incl. admin", "red_reason": "GREEN regression guard from phase 01"},
+    {"name": "approve_stampsTheMarkWithTheClockAndTheReviewer", "file": "ExamDefinitionApprovalMarkTest", "acceptance_criterion": "Approve sets approvedAt (injected Clock) and approvedBy", "red_reason": "does not compile: ExamDefinition.getApprovedAt/getApprovedBy missing"},
+    {"name": "activate_approvedDraft_goesActive", "file": "ExamDefinitionApprovalMarkTest", "acceptance_criterion": "Approved DRAFT activates", "red_reason": "does not compile: setApprovedAt/setApprovedBy missing"},
+    {"name": "activate_retiredVersionThatCarriesTheMark_isAllowedAgain", "file": "ExamDefinitionApprovalMarkTest", "acceptance_criterion": "RETIRED re-activate allowed when mark present (UI uses it)", "red_reason": "does not compile: setApprovedAt missing"},
+    {"name": "replaceItems_onAnApprovedDraft_clearsTheMark", "file": "ExamDefinitionApprovalMarkTest", "acceptance_criterion": "Any edit clears the mark (ExamDefinitionCommandService.replaceItems)", "red_reason": "does not compile: approved accessors missing"},
+    {"name": "updateCefrTargets_onAnApprovedDraft_clearsTheMark", "file": "ExamDefinitionApprovalMarkTest", "acceptance_criterion": "Any edit clears the mark (updateCefrTargets); updateTimeFrame also must clear but is not covered by a test", "red_reason": "does not compile: approved accessors missing"},
+    {"name": "publish_examQuestionWithoutCefr_isRejectedAndStaysDraft", "file": "QuestionApprovalServicePublishTest", "acceptance_criterion": "FR-06: PUBLISH requires CEFR for Exam channel (CEFR_LEVEL_REQUIRED)", "red_reason": "publish currently approves without CEFR check"},
+    {"name": "publish_incompleteQuestion_isRejected / publish_byAdminWhoAuthoredTheQuestion_isDenied / publish_practiceOnlyQuestionWithoutCefr_isStillAllowed / publish_completeQuestionWithCefr_becomesApproved", "file": "QuestionApprovalServicePublishTest", "acceptance_criterion": "FR-06 guards: validation, self-approval denied for admin, practice-only not forced to have CEFR", "red_reason": "GREEN guards (pass now, must keep passing)"},
+    {"name": "mcSingle_withTwoOptions_isRejected, mcSingle_withSixOptions_isRejected, mcListeningSingle_withTwoOptions_isRejected", "file": "QuestionValidationAuthoringCountRulesTest", "acceptance_criterion": "P2: MC single needs 4-5 options (same as ChoiceValidator)", "red_reason": "QuestionValidationHelper has no option count rule"},
+    {"name": "mcMultiple_withOnlyOneCorrectOption_isRejected, mcMultiple_withFourOptions_isRejected", "file": "QuestionValidationAuthoringCountRulesTest", "acceptance_criterion": "P2: MC multiple needs 5-7 options and 2-3 correct", "red_reason": "no count rule in helper"},
+    {"name": "dropdown_withOnlyTwoBlanks_isRejected, dropdown_whenABlankHasTooFewDistractors_isRejected", "file": "QuestionValidationAuthoringCountRulesTest", "acceptance_criterion": "P2: dropdown 4-6 blanks, each 1 answer + >=3 distractors (BlankFillValidator)", "red_reason": "no blank count rule in helper"},
+    {"name": "dragDrop_withOnlyTwoGaps_isRejected", "file": "QuestionValidationAuthoringCountRulesTest", "acceptance_criterion": "P2: drag-drop 3-5 gaps", "red_reason": "no gap count rule in helper"},
+    {"name": "mcSingle_withFourOptionsAndOneCorrect_isAccepted, mcMultiple_withFiveOptionsAndTwoCorrect_isAccepted, dropdown_withFourBlanksOfOneAnswerAndThreeDistractors_isAccepted, dragDrop_withThreeGapsAndTwoExtraWords_isAccepted", "file": "QuestionValidationAuthoringCountRulesTest", "acceptance_criterion": "valid shapes still accepted", "red_reason": "GREEN guards (pass now, must keep passing)"},
+    {"name": "replaceItems_raisingMaxCountAboveTheBase_isRejected / raisingMinCount / raisingResponseSeconds / raisingPrepSeconds", "file": "HostExamTemplateServiceTest", "acceptance_criterion": "1-7: Host template cannot raise per-task-type counts or timing above the platform template (error message contains the task type)", "red_reason": "validateWithinBase only checks task type membership; raise is accepted"},
+    {"name": "replaceItems_loweringCountsAndTiming_isAccepted, activate_hostTemplateWithoutAnApprovalMark_stillGoesLive", "file": "HostExamTemplateServiceTest", "acceptance_criterion": "Lowering allowed; host activation must NOT require the platform approval mark", "red_reason": "GREEN guards (pass now, must keep passing)"}
+  ],
+  "expected_new_symbols": [
+    "ExamDefinition.approvedAt (java.time.Instant) with getApprovedAt/setApprovedAt",
+    "ExamDefinition.approvedBy (java.util.UUID) with getApprovedBy/setApprovedBy",
+    "New constants error code for not-approved activation, HTTP 409 DomainException (tests only require status CONFLICT and code != TEMPLATE_NOT_DRAFT_CODE)"
+  ],
+  "existing_tests_needing_update": [
+    "Any existing test that activates a platform ExamDefinition (DRAFT/RETIRED) via ExamDefinitionApprovalWorkflow/ExamDefinitionAdminService without setting approvedAt will need the mark; none found in the targeted run, grep for activate( on platform templates and Postgres IT before GREEN",
+    "Existing tests building MC/dropdown/drag-drop Question fixtures with non-conforming option counts and then calling QuestionValidationHelper.validate (QuestionValidationHelperTest passes today with 1-option MC but those cases expect rejection anyway); full itembank suite must be re-run when the count rules land"
+  ],
+  "run_command": "cd pte-api && ./mvnw.cmd -pl app test -Dtest=ExamDefinitionApprovalWorkflowTest,ExamDefinitionApprovalMarkTest,HostExamTemplateServiceTest,QuestionValidationAuthoringCountRulesTest,QuestionApprovalServicePublishTest,QuestionValidationHelperTest -Dsurefire.failIfNoSpecifiedTests=false",
+  "notes": [
+    "RETIRED -> ACTIVE decision: vendor-web uses it (pte-web/apps/vendor-web/features/examstudio/lifecycleMoves.ts: RETIRED: { ACTIVE: 'activate' }). Tests therefore require re-activation to keep working when the approval mark is present and to be rejected with 409 when absent (NOTED per phase red-team H2).",
+    "RED run (ExamDefinitionApprovalMarkTest moved aside because it does not compile without new symbols, then restored): 15 failures across 4 classes; all failing assertions are 'expected rejection but none thrown' or 'expected exception type not thrown', i.e. missing behavior, not test bugs. Guard tests pass, confirming fixtures are valid.",
+    "ExamDefinitionApprovalMarkTest must be compiled together once approvedAt/approvedBy exist; until then the module test compilation fails, so run the other classes by temporarily moving it aside.",
+    "Fixture file ExamDefinitionApprovalFixtures is a shared test helper (no new symbols).",
+    "Not covered by unit tests: migration backfill (Postgres IT, needs lifecycle.test.db.url), updateTimeFrame clearing the mark, QuestionCreationService calling the validator at create/update, UI."
+  ]
+}
